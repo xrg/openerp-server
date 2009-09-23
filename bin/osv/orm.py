@@ -121,6 +121,21 @@ class browse_record_list(list):
         super(browse_record_list, self).__init__(lst)
         self.context = context
 
+class browse_executer:                               
+    def __init__(self, table, name, cr, uid, id, context):
+        self._table = table                               
+        self._name = name                                 
+        self._cr = cr                                     
+        self._uid = uid                                   
+        self._id = id                                     
+        self._context = context                           
+                                                          
+    def __call__(self, *args, **argv):                    
+        function = getattr(self._table, self._name)       
+        if 'context' in function.func_code.co_varnames:   
+            argv['context'] = self._context               
+        return getattr(self._table, self._name)(self._cr, self._uid, [self._id], *args, **argv)
+                                                                                                
 
 class browse_record(object):
     def __init__(self, cr, uid, id, table, cache, context=None, list_class = None, fields_process={}):
@@ -165,7 +180,8 @@ class browse_record(object):
                 col = self._table._inherit_fields[name][2]
             elif hasattr(self._table, name):
                 if isinstance(getattr(self._table, name), (types.MethodType, types.LambdaType, types.FunctionType)):
-                    return lambda *args, **argv: getattr(self._table, name)(self._cr, self._uid, [self._id], *args, **argv)
+                    executer = browse_executer(self._table, name, self._cr, self._uid, self._id, self._context)            
+                    return executer                                                                                        
                 else:
                     return getattr(self._table, name)
             else:
