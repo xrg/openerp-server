@@ -58,7 +58,7 @@ class workflow_service(netsvc.Service):
 
     def trg_delete(self, uid, res_type, res_id, cr):
         ident = (uid,res_type,res_id)
-        instance.delete(cr, ident, context)
+        instance.delete(cr, ident)
 
     def trg_create(self, uid, res_type, res_id, cr, context={}):
         ident = (uid,res_type,res_id)
