@@ -124,16 +124,16 @@ class osv_pool(netsvc.Service):
             cr.close()
         return res
 
-    def exec_workflow_cr(self, cr, uid, obj, method, *args):
+    def exec_workflow_cr(self, cr, uid, obj, method, id, context):
         wf_service = netsvc.LocalService("workflow")
-        return wf_service.trg_validate(uid, obj, args[0], method, cr)
+        return wf_service.trg_validate(uid, obj, id, method, cr, context)
 
     @check
-    def exec_workflow(self, db, uid, obj, method, *args):
+    def exec_workflow(self, db, uid, obj, method, id, context):
         cr = pooler.get_db(db).cursor()
         try:
             try:
-                res = self.exec_workflow_cr(cr, uid, obj, method, *args)
+                res = self.exec_workflow_cr(cr, uid, obj, method, id, context)
                 cr.commit()
             except Exception:
                 cr.rollback()
