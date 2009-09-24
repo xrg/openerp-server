@@ -571,10 +571,10 @@ class objects_proxy(netsvc.Service):
         self.exportMethod(self.exec_workflow)
         self.exportMethod(self.obj_list)
 
-    def exec_workflow(self, db, uid, passwd, object, method, id):
+    def exec_workflow(self, db, uid, passwd, object, method, id, context={}):
         security.check(db, uid, passwd)
         service = netsvc.LocalService("object_proxy")
-        res = service.exec_workflow(db, uid, object, method, id)
+        res = service.exec_workflow(db, uid, object, method, id, context)
         return res
 
     def execute(self, db, uid, passwd, object, method, *args):
