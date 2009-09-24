@@ -124,7 +124,7 @@ def _execute(cr, workitem, activity, ident, stack, context):
         if workitem['state']=='active':
             _state_set(cr, workitem, activity, 'running', ident)
             if activity.get('action', False):
-                id_new = wkf_expr.execute(cr, ident, workitem, activity)
+                id_new = wkf_expr.execute(cr, ident, workitem, activity, context)
                 if not (id_new):
                     cr.execute('delete from wkf_workitem where id=%s', (workitem['id'],))
                     return False
