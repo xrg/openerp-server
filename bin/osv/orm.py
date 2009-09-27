@@ -130,12 +130,26 @@ class browse_executer:
         self._id = id                                     
         self._context = context                           
                                                           
-    def __call__(self, *args, **argv):                    
-        function = getattr(self._table, self._name)       
-        if 'context' in function.func_code.co_varnames:   
-            argv['context'] = self._context               
-        return getattr(self._table, self._name)(self._cr, self._uid, [self._id], *args, **argv)
-                                                                                                
+    def __call__(self, *args, **argv):
+        function = getattr(self._table, self._name)
+        # Check if 'context' is one of the possible parameters of the function
+        if 'context' in function.func_code.co_varnames[:function.func_code.co_argcount]:
+            argv['context'] = self._context
+            added = True
+        else:
+            added = False
+
+        try:
+            result = getattr(self._table, self._name)(self._cr, self._uid, [self._id], *args, **argv)
+        except TypeError, e:
+            if not added:
+                raise e
+            # If we got a TypeError and we had added the context, the error might be because the
+            # original call already provided a value for for 'context', which is not very usual
+            # but it might happen
+            del argv['context']
+            result = getattr(self._table, self._name)(self._cr, self._uid, [self._id], *args, **argv)
+        return result
 
 class browse_record(object):
     def __init__(self, cr, uid, id, table, cache, context=None, list_class = None, fields_process={}):
