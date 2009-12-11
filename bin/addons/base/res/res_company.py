@@ -25,7 +25,6 @@ import os
 import tools
 from tools.translate import _
 from tools.safe_eval import safe_eval as eval
-
 class multi_company_default(osv.osv):
     """
     Manage multi company default value
@@ -114,6 +113,10 @@ class res_company(osv.osv):
         """
         if not context:
             context = {}
+
+            # When migrating from 5.0, the multi_company_default table doesn't
+            # even exist. However, there is not much we can do here without
+            # bloating this code.
         proxy = self.pool.get('multi_company.default')
         args = [
             ('object_id.model', '=', object),
