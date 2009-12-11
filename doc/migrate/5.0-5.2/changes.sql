@@ -20,3 +20,4 @@ CREATE TABLE multi_company_default (
         object_id INTEGER REFERENCES ir_model(id) NOT NULL,
         expression VARCHAR(32) NOT NULL);
 
+UPDATE ir_model_data SET module = 'crm' WHERE module = 'crm_configuration';
