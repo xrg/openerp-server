@@ -3667,7 +3667,7 @@ class orm(orm_template):
         field_flag = False
         field_dict = {}
         if self._log_access:
-            cr.execute('SELECT id,write_date FROM '+self._table+' WHERE id = ANY (%s)', (map(int, ids)))
+            cr.execute('SELECT id,write_date FROM '+self._table+' WHERE id = ANY (%s)', (map(int, ids),))
             res = cr.fetchall()
             for r in res:
                 if r[1]:
