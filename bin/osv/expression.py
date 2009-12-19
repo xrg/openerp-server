@@ -268,7 +268,27 @@ class expression(object):
                         self.__exp[i] = ('id', m2m_op, self.__execute_recursive_in(cr, field._id1, field._rel, field._id2, [], operator,  field._type) or [0])
 
             elif field._type == 'many2one':
-                if operator == 'child_of':
+	        if isinstance(right, list) and len(right) and isinstance(right[0], tuple):
+		    # That's a nested expression
+		    print "nested expr: %s for field %s" % ( right, field._obj)
+		    
+		    assert(operator == 'in') # others not implemented
+		    # Note, we don't actually check access permissions for the
+		    # intermediate object yet. That wouldn't still let us read
+		    # the forbidden record, but just use its id
+		    
+		    qu1, qu2, qtables = field_obj._where_calc(cr, uid, right, context)
+		    
+		    d1, d2 = table.pool.get('ir.rule').domain_get(cr, uid, field_obj._name)
+		    if d1:
+		        qu1.append(d1)
+			qu2 += d2
+		
+		    qry = "SELECT id FROM %s WHERE %s " %( ', '.join(qtables), ' AND '.join(qu1))
+
+		    self.__exp[i] = (left,'inselect', (qry, qu2))
+		    print "Nested query now is like:", self.__exp[i]
+                elif operator == 'child_of':
 		    # TODO: pg8.4 extension
                     if isinstance(right, basestring):
                         ids2 = [x[0] for x in field_obj.name_search(cr, uid, right, [], 'like', limit=None)]
