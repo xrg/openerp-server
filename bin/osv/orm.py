@@ -3480,6 +3480,7 @@ class orm(orm_template):
         # Try-except added to filter the creation of those records whose filds are readonly.
         # Example : any dashboard which has all the fields readonly.(due to Views(database views))
         try:
+	    # Does it have to happen that early?
             cr.execute("SELECT nextval('"+self._sequence+"')")
         except:
             raise except_orm(_('UserError'),
@@ -3519,7 +3520,7 @@ class orm(orm_template):
             groups = fobj.write
             if groups:
                 edit = False
-                for group in groups:
+                for group in groups:  #TODO: put the loop inside sql
                     module = group.split(".")[0]
                     grp = group.split(".")[1]
                     cr.execute("SELECT count(*) FROM res_groups_users_rel where gid IN (SELECT res_id FROM ir_model_data WHERE name='%s' AND module='%s' AND model='%s') AND uid=%s" % \
