@@ -157,10 +157,14 @@ class expression(object):
                 qu1, qu2, qtables = table._where_calc(cr, uid, 
                         [(parent or table._parent_name, '=', placeholder(phname, phexpr) )], context)
 
-                d1, d2 = table.pool.get('ir.rule').domain_get(cr, uid, table._name)
+                d1, d2, dtables = table.pool.get('ir.rule').domain_get(cr, uid, table._name)
                 if d1:
                     qu1.append(d1)
                     qu2 += d2
+                    
+                    for dt in dtables:
+                        if dt != table._table:
+                            print "FIXME: must also use %s " % dt
                 
                 qu2 = [ ids, ] + qu2
                 qry = ''' 
@@ -389,10 +393,14 @@ class expression(object):
                     
                     qu1, qu2, qtables = field_obj._where_calc(cr, uid, right, context)
                     
-                    d1, d2 = table.pool.get('ir.rule').domain_get(cr, uid, field_obj._name)
+                    d1, d2, dtables = table.pool.get('ir.rule').domain_get(cr, uid, field_obj._name)
                     if d1:
                         qu1.append(d1)
                         qu2 += d2
+                        
+                        for dt in dtables:
+                            if dt not in qtables:
+                                qtables.append(dt)
                 
                     qry = "SELECT id FROM %s WHERE %s " %( ', '.join(qtables), ' AND '.join(qu1))
 
