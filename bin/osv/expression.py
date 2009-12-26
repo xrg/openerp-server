@@ -77,9 +77,12 @@ class expression(object):
                 elif isinstance(ids, list) and isinstance(ids[0], placeholder):
                     dwc = '= %s' % ids[0].expr
                     params = []
+                elif isinstance(ids, (int, long)):
+                    dwc = '= %s'
+                    params = [ids,]
                 else:
                     dwc = '= ANY(%s)'
-                    params = ids
+                    params = [ids,]
                 qry = 'SELECT "%s"'    \
                            '  FROM "%s"'    \
                            ' WHERE "%s" %s' % (s, f, w, dwc)
@@ -511,6 +514,9 @@ class expression(object):
 
         if operator == 'inselect':
             query = '(%s.%s in (%s))' % (table._table, left, right[0])
+            params = right[1]
+        elif operator == 'not inselect':
+            query = '(%s.%s not in (%s))' % (table._table, left, right[0])
             params = right[1]
         elif operator in ['in', 'not in']:
             params = right and right[:] or []
