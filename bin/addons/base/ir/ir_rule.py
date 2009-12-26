@@ -19,7 +19,7 @@
 #
 ##############################################################################
 
-from osv import fields,osv
+from osv import fields, osv, expression
 import time
 from operator import itemgetter
 from functools import partial
