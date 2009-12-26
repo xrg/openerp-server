@@ -636,5 +636,52 @@ class expression(object):
     def get_tables(self):
         return ['"%s"' % t._table for t in self.__all_tables]
 
+def or_join(list1, list2):
+        """ Produce an expression that will evaluate to list1 OR list2
+        
+        This is non, trivial, since the reverse Polish notation will depend
+        on the length of list1, list2
+        
+        The order of elements is *strictly* preserved, since there will
+        be parameters to these expressions, parallel to this function.
+        """
+        
+        def op_explicit(dom):
+            """Helper, add explicit and operators to elements of dom """
+            stack = []
+            assert isinstance(dom, list), type(dom)
+            in_stack = 0
+            for d in reversed(dom):
+                if d == '!':
+                    stack.append(d)
+                    # no in_stack increment
+                elif (d == '&') or (d == '|'):
+                    assert (in_stack >= 2), (in_stack, stack)
+                    in_stack -= 1
+                    stack.append(d)
+                else:
+                    assert isinstance(d, (list, tuple)), d
+                    stack.append(d)
+                    in_stack += 1
+        
+            while in_stack >= 2:
+                stack.append('&')
+                in_stack -= 1
+
+            return reversed(stack)
+        
+        if not len(list1):
+            return list2
+        if not len(list2):
+            return list1
+        
+        res = ['|']
+        for r in op_explicit(list1):
+            res.append(r)
+        for r in op_explicit(list2):
+            res.append(r)
+        print "OR-join:", res
+        return res
+
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
 
