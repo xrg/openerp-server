@@ -161,7 +161,7 @@ class ir_values(osv.osv):
                 params.append(key2[:200])
             else:
                 if key2_req and not meta:
-                    where.append('key2 is null')
+                    where.append('key2 IS NULL')
             if res_id_req and (models[-1][0]==m):
                 if res_id:
                     where.append('res_id=%s')
@@ -170,7 +170,7 @@ class ir_values(osv.osv):
                     where.append('(res_id is NULL)')
             elif res_id:
                 if (models[-1][0]==m):
-                    where.append('(res_id=%s or (res_id is null))')
+                    where.append('(res_id=%s or (res_id IS NULL))')
                     params.append(res_id)
                 else:
                     where.append('res_id=%s')
@@ -224,7 +224,7 @@ class ir_values(osv.osv):
             if type(r[2])==type({}) and 'type' in r[2]:
                 groups = r[2].get('groups_id')
                 if groups:
-                        cr.execute('SELECT COUNT(1) FROM res_groups_users_rel WHERE gid IN %s AND uid=%s',(tuple(groups), uid))
+                        cr.execute('SELECT COUNT(1) FROM res_groups_users_rel WHERE gid IN %s AND uid=%s',(tuple(groups), uid), debug=self._debug)
                         cnt = cr.fetchone()[0]
                         if cnt:
                             res2.remove(r)
