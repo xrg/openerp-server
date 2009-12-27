@@ -336,7 +336,7 @@ class ir_model_access(osv.osv):
         if not grouparr:
             return False
 
-        cr.execute("select 1 from res_groups_users_rel where uid=%s and gid IN (select res_id from ir_model_data where module=%s and name=%s)", (uid, grouparr[0], grouparr[1],))
+        cr.execute("SELECT 1 FROM res_groups_users_rel WHERE uid=%s AND gid IN(SELECT res_id FROM ir_model_data WHERE module=%s AND name=%s)", (uid, grouparr[0], grouparr[1],), debug=self._debug)
         return bool(cr.fetchone())
 
     def check_group(self, cr, uid, model, mode, group_ids):
@@ -355,17 +355,11 @@ class ir_model_access(osv.osv):
             cr.execute("SELECT perm_" + mode + " "
                    "  FROM ir_model_access a "
                    "  JOIN ir_model m ON (m.id = a.model_id) "
-                   " WHERE m.model = %s AND a.group_id = %s", (model_name, group_id)
+                   " WHERE m.model = %s AND (a.group_id = %s OR a.group_id IS NULL)"
+                   " ORDER BY a.group_id ASC", (model_name, group_id), debug=self._debug
                    )
+                   # note: ORDER BY .. ASC puts NULLS LAST (settable in pg >=8.3)
             r = cr.fetchone()
-            if r is None:
-                cr.execute("SELECT perm_" + mode + " "
-                       "  FROM ir_model_access a "
-                       "  JOIN ir_model m ON (m.id = a.model_id) "
-                       " WHERE m.model = %s AND a.group_id IS NULL", (model_name, )
-                       )
-                r = cr.fetchone()
-
             access = bool(r and r[0])
             if access:
                 return True
@@ -377,6 +371,9 @@ class ir_model_access(osv.osv):
             # User root have all accesses
             # TODO: exclude xml-rpc requests
             return True
+
+	# TODO: can we let this fn use multiple models at each time?
+	# or even, write a new one, which will also share the same cache?
 
         assert mode in ['read','write','create','unlink'], 'Invalid access mode'
 
@@ -393,26 +390,20 @@ class ir_model_access(osv.osv):
             return True
 
         # We check if a specific rule exists
-        cr.execute('SELECT MAX(CASE WHEN perm_' + mode + ' THEN 1 ELSE 0 END) '
+        cr.execute('SELECT BOOL_OR(perm_' + mode + ') '
                    '  FROM ir_model_access a '
                    '  JOIN ir_model m ON (m.id = a.model_id) '
-                   '  JOIN res_groups_users_rel gu ON (gu.gid = a.group_id) '
+                   '  LEFT JOIN res_groups_users_rel gu ON (gu.gid = a.group_id) '
                    ' WHERE m.model = %s '
-                   '   AND gu.uid = %s '
-                   , (model_name, uid,)
+                   '   AND (gu.uid = %s OR gu.uid IS NULL) '
+                   ' GROUP BY (gu.uid IS NULL) ORDER BY MIN(gu.uid) '
+                   , (model_name, uid,),
+                   debug= self._debug
                    )
+                   # GROUP BY makes sure we separate specific group rules from 
+                   # generic ones, and those groups are OR-ed together. 
+                   # ORDER tells the query to put the specific first.
         r = cr.fetchone()[0]
-
-        if r is None:
-            # there is no specific rule. We check the generic rule
-            cr.execute('SELECT MAX(CASE WHEN perm_' + mode + ' THEN 1 ELSE 0 END) '
-                       '  FROM ir_model_access a '
-                       '  JOIN ir_model m ON (m.id = a.model_id) '
-                       ' WHERE a.group_id IS NULL '
-                       '   AND m.model = %s '
-                       , (model_name,)
-                       )
-            r = cr.fetchone()[0]
 
         if not r and raise_exception:
             msgs = {
