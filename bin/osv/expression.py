@@ -680,7 +680,6 @@ def or_join(list1, list2):
             res.append(r)
         for r in op_explicit(list2):
             res.append(r)
-        print "OR-join:", res
         return res
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
