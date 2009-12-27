@@ -403,7 +403,9 @@ class ir_model_access(osv.osv):
                    # GROUP BY makes sure we separate specific group rules from 
                    # generic ones, and those groups are OR-ed together. 
                    # ORDER tells the query to put the specific first.
-        r = cr.fetchone()[0]
+        r = cr.fetchone()
+        if r:
+            r = r[0]
 
         if not r and raise_exception:
             msgs = {
