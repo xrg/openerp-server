@@ -340,6 +340,9 @@ CREATE TABLE ir_model_data (
     res_id integer, primary key(id)
 );
 
+CREATE INDEX ir_model_data_name_index ON ir_model_data (name);
+CREATE INDEX ir_model_data_module_index ON ir_model_data (module);
+
 ---------------------------------
 -- Users
 ---------------------------------
