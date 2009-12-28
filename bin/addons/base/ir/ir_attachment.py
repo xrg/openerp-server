@@ -30,7 +30,7 @@ class ir_attachment(osv.osv):
         ima = self.pool.get('ir.model.access')
         if isinstance(ids, (int, long)):
             ids = [ids]
-        cr.execute('select distinct res_model from ir_attachment where id IN %s', (tuple(ids),))
+        cr.execute('SELECT DISTINCT res_model FROM ir_attachment WHERE id = ANY (%s)', (ids,), self._debug)
         for obj in cr.fetchall():
             if obj[0]:
                 ima.check(cr, uid, obj[0], mode, context=context)
