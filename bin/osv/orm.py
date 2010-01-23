@@ -2852,20 +2852,28 @@ class orm(orm_template):
                            f == self.CONCURRENCY_CHECK_FIELD
                         or (f in self._columns and getattr(self._columns[f], '_classic_write'))
                      ] + self._inherits.values()
+        if self._debug:
+            netsvc.Logger().notifyChannel('orm', netsvc.LOG_DEBUG, '%s.read_flat: tables=%s, fields_pre= %s' %
+                (self._name, tables, fields_pre))
 
         res = []
         if len(fields_pre):
+            if len(tables) > 1:
+                table_prefix = self._table + '.'
+            else:
+                table_prefix = ''
+
             def convert_field(f):
                 f_qual = "%s.%s" % (self._table, f) # need fully-qualified references in case len(tables) > 1
                 if f in ('create_date', 'write_date'):
-                    return "date_trunc('second', %s) as %s" % (f_qual, f)
+                    return "date_trunc('second', %s%s) as %s" % (table_prefix, f, f)
                 if f == self.CONCURRENCY_CHECK_FIELD:
                     if self._log_access:
-                        return "COALESCE(%s.write_date, %s.create_date, now())::timestamp AS %s" % (self._table, self._table, f,)
+                        return "COALESCE(%swrite_date, %screate_date, now())::timestamp AS %s" % (table_prefix, table_prefix, f,)
                     return "now()::timestamp AS %s" % (f,)
                 if isinstance(self._columns[f], fields.binary) and context.get('bin_size', False):
-                    return 'length(%s) as "%s"' % (f_qual, f)
-                return f_qual
+                    return 'length(%s"%s") as "%s"' % (table_prefix, f, f)
+                return '%s"%s"' % (table_prefix, f,)
 
             fields_pre2 = map(convert_field, fields_pre)
             order_by = self._parent_order or self._order
