@@ -1298,7 +1298,7 @@ def detect_server_timezone():
         if value:
             try:
                 tz = pytz.timezone(value)
-                netsvc.Logger().notifyChannel("detect_server_timezone", netsvc.LOG_INFO,
+                netsvc.Logger().notifyChannel("detect_server_timezone", netsvc.LOG_DEBUG,
                     "Using timezone %s obtained from %s." % (tz.zone,source))
                 return value
             except pytz.UnknownTimeZoneError:
