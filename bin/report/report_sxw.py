@@ -327,6 +327,9 @@ class report_sxw(report_rml, preprocess.report):
         self.parser = parser
         self.header = header
         self.store = store
+        
+    def __repr__(self):
+        return '< report_sxw "%s" @%s w. %s >' % (self.name, self.table, self.parser)
 
     def getObjects(self, cr, uid, ids, context):
         table_obj = pooler.get_pool(cr.dbname).get(self.table)
