@@ -573,7 +573,9 @@ form: module.record_id""" % (xml_id,)
                 action_type,action_mode,action_name,view_id,target = rrres
                 if view_id:
                     cr.execute('SELECT type FROM ir_ui_view WHERE id=%s', (int(view_id),))
-                    action_mode, = cr.fetchone()
+                    action_mode, = cr.fetchone() or ( False, )
+                    if not action_mode:
+                        raise Exception("View %d specified in ir.act.window[%d] not found!" % (view_id, a_id))
                 cr.execute('SELECT view_mode FROM ir_act_window_view WHERE act_window_id=%s ORDER BY sequence LIMIT 1', (int(a_id),))
                 if cr.rowcount:
                     action_mode, = cr.fetchone()
