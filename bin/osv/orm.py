@@ -110,6 +110,15 @@ class browse_null(object):
     def __unicode__(self):
         return u''
 
+    def __conform__(self, *args):
+        """ If we find ourselves in an SQL query, we are NULL
+            This is a dirty hack and will most probable never work, 
+            since "a = NULL" is never valid.
+            Still, a failed SQL query may help more in debugging than
+            one that never reached the db.
+        """
+        import psycopg2
+        return psycopg2._psycopg.AsIs('NULL')
 
 #
 # TODO: execute an object method on browse_record_list
