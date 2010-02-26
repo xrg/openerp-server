@@ -53,7 +53,10 @@ class expression(object):
         return isinstance(element, (str, unicode)) and element in ['&', '|', '!']
 
     def _is_leaf(self, element, internal=False):
-        OPS = ('=', '!=', '<>', '<=', '<', '>', '>=', '=?', '=like', '=ilike', 'like', 'not like', 'ilike', 'not ilike', 'in', 'not in', 'child_of')
+        OPS = ('=', '!=', '<>', '<=', '<', '>', '>=', '=?', 
+                '=like', '=ilike', 'like', 'not like', 'ilike', 'not ilike', 
+                'in', 'not in',
+                'child_of', '|child_of' )
         INTERNAL_OPS = OPS + ('inselect', 'not inselect')
         return (isinstance(element, tuple) or isinstance(element, list)) \
            and len(element) == 3 \
@@ -139,7 +142,12 @@ class expression(object):
         if not self.__exp:
             return self
 
-        def _rec_get(ids, table, parent=None, left='id', prefix=''):
+        def _rec_get(ids, table, parent=None, left='id', prefix='', null_too=False):
+            """ Compute the sub-expression for a recursive field's operator, 
+                typically 'child_of'
+                
+                If null_too is specified, the expression would also stand for left = NULL
+            """
             if table._parent_store and (not table.pool._init): #and False:
 # TODO: Improve where joins are implemented for many with '.', replace by:
 # doms += ['&',(prefix+'.parent_left','<',o.parent_right),(prefix+'.parent_left','>=',o.parent_left)]
@@ -149,7 +157,11 @@ class expression(object):
                         doms.insert(0, '|')
                     doms += ['&', ('parent_left', '<', o.parent_right), ('parent_left', '>=', o.parent_left)]
                 if prefix:
+                    if null_too:
+                        return ['|', (left, '=', False), (left, 'in', table.search(cr, uid, doms, context=context))]
                     return [(left, 'in', table.search(cr, uid, doms, context=context))]
+                if null_too:
+                    doms = ['|', (left, '=', False)] + doms
                 return doms
             elif self.__mode == 'pg84':
                 # print "Recursive expand for 8.4, for %s" % table._table
@@ -182,6 +194,8 @@ class expression(object):
                 
                 # print "INSELECT %s" % qry
                 # print "args:", qu2
+                if null_too:
+                    return ['|', (left, '=', False), (left, 'inselect', (qry, qu2))]
                 return [(left, 'inselect', (qry, qu2))]
             # elif self.__mode == 'pgsql':
             #  any way  to do that in pg8.3?
@@ -191,7 +205,12 @@ class expression(object):
                         return []
                     ids2 = table.search(cr, uid, [(parent, 'in', ids)], context=context)
                     return ids + rg(ids2, table, parent)
-                return [(left, 'in', rg(ids, table, parent or table._parent_name))]
+                if null_too:
+                    res = ['|', (left, '=', False)]
+                else:
+                    res = []
+                res += [(left, 'in', rg(ids, table, parent or table._parent_name))]
+                return res
 
         self.__main_table = table
         self.__all_tables.add(table)
@@ -222,8 +241,8 @@ class expression(object):
 
             field = working_table._columns.get(fargs[0], False)
             if not field:
-                if left == 'id' and operator == 'child_of':
-                    dom = _rec_get(right, working_table)
+                if left == 'id' and (operator == 'child_of' or operator == '|child_of'):
+                    dom = _rec_get(right, working_table, null_too=(operator == '|child_of'))
                     self.__exp = self.__exp[:i] + dom + self.__exp[i+1:]
                 continue
 
@@ -257,16 +276,16 @@ class expression(object):
 
             elif field._type == 'one2many':
                 # Applying recursivity on field(one2many)
-                if operator == 'child_of':
-                    # TODO: pg8.4 extension
+                if operator == 'child_of' or operator == '|child_of':
                     if isinstance(right, basestring):
                         ids2 = [x[0] for x in field_obj.name_search(cr, uid, right, [], 'like', context=context, limit=None)]
                     else:
                         ids2 = list(right)
+                    null_too = (operator == '|child_of')
                     if field._obj != working_table._name:
-                        dom = _rec_get(ids2, field_obj, left=left, prefix=field._obj)
+                        dom = _rec_get(ids2, field_obj, left=left, prefix=field._obj, null_too=null_too)
                     else:
-                        dom = _rec_get(ids2, working_table, parent=left)
+                        dom = _rec_get(ids2, working_table, parent=left, null_too=null_too)
                     self.__exp = self.__exp[:i] + dom + self.__exp[i+1:]
 
                 else:
@@ -328,8 +347,7 @@ class expression(object):
 
             elif field._type == 'many2many':
                 #FIXME
-                if operator == 'child_of':
-		    # TODO: pg8.4 extension
+                if operator == 'child_of' or operator == '|child_of':
                     if isinstance(right, basestring):
                         ids2 = [x[0] for x in field_obj.name_search(cr, uid, right, [], 'like', context=context, limit=None)]
                     else:
@@ -342,7 +360,7 @@ class expression(object):
                         assert(not erqu) # TODO
                         return erpa
 
-                    dom = _rec_get(ids2, field_obj)
+                    dom = _rec_get(ids2, field_obj, null_too=(operator == '|child_of'))
                     ids2 = field_obj.search(cr, uid, dom, context=context)
                     self.__exp[i] = ('id', 'in', _rec_convert(ids2))
                 else:
@@ -425,8 +443,7 @@ class expression(object):
 
                     self.__exp[i] = (left,'inselect', (qry, qu2))
                     print "Nested query now is like:", self.__exp[i]
-                elif operator == 'child_of':
-		    # TODO: pg8.4 extension
+                elif operator == 'child_of' or operator == '|child_of' :
                     if isinstance(right, basestring):
                         ids2 = [x[0] for x in field_obj.name_search(cr, uid, right, [], 'like', limit=None)]
                     elif isinstance(right, (int, long)):
@@ -435,10 +452,11 @@ class expression(object):
                         ids2 = list(right)
 
                     self.__operator = 'in'
+                    null_too = (operator == '|child_of')
                     if field._obj != working_table._name:
-                        dom = _rec_get(ids2, field_obj, left=left, prefix=field._obj)
+                        dom = _rec_get(ids2, field_obj, left=left, prefix=field._obj, null_too=null_too)
                     else:
-                        dom = _rec_get(ids2, working_table, parent=left)
+                        dom = _rec_get(ids2, working_table, parent=left, null_too=null_too)
                     self.__exp = self.__exp[:i] + dom + self.__exp[i+1:]
                 else:
                     def _get_expression(field_obj,cr, uid, left, right, operator, context=None):
@@ -582,7 +600,7 @@ class expression(object):
                         query = "(%s.%s %s '%%s')" % (table._table, left, op)
                         params = right
 
-            elif (operator == 'child_of'):
+            elif (operator == 'child_of' or operator == '|child_of'):
                 raise Exception("Cannot compute %s %s %s in sql" %(left, operator, right))
             else:
                 if isinstance(right, placeholder):
