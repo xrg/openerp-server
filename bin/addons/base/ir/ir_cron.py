@@ -103,7 +103,9 @@ class ir_cron(osv.osv, netsvc.Agent):
         try:
             if not pool._init:
                 now = datetime.now()
-                cr.execute('select * from ir_cron where numbercall<>0 and active and nextcall<=now() order by priority')
+                cr.execute('SELECT * FROM ir_cron '
+                        'WHERE numbercall<>0 AND active AND nextcall<=now() '
+                        'ORDER BY priority', debug=self._debug)
                 for job in cr.dictfetchall():
                     nextcall = datetime.strptime(job['nextcall'], '%Y-%m-%d %H:%M:%S')
                     numbercall = job['numbercall']
@@ -120,12 +122,17 @@ class ir_cron(osv.osv, netsvc.Agent):
                     addsql = ''
                     if not numbercall:
                         addsql = ', active=False'
-                    cr.execute("update ir_cron set nextcall=%s, numbercall=%s"+addsql+" where id=%s", (nextcall.strftime('%Y-%m-%d %H:%M:%S'), numbercall, job['id']))
+                    cr.execute("UPDATE ir_cron "
+                                "SET nextcall=%s, numbercall=%s"+addsql+ \
+                                " WHERE id=%s", 
+                                (nextcall.strftime('%Y-%m-%d %H:%M:%S'), numbercall, job['id']),
+                                debug=self._debug)
                     cr.commit()
 
 
-            cr.execute('select min(nextcall) as min_next_call from ir_cron where numbercall<>0 and active and nextcall>=now()')
-            next_call = cr.dictfetchone()['min_next_call']  
+            cr.execute('SELECT min(nextcall) AS min_next_call FROM ir_cron '
+                        'WHERE numbercall<>0 AND active AND nextcall>=now()', debug=self._debug)
+            next_call = cr.dictfetchone()['min_next_call']
             if next_call:
                 next_call = time.mktime(time.strptime(next_call, '%Y-%m-%d %H:%M:%S'))
             else:
