@@ -93,6 +93,7 @@ class Cursor(object):
         self.__closed = False   # real initialisation value
         self.autocommit(False)
         self.__caller = tuple(stack()[2][1:3])
+        self.__prepared = []
 
     def __del__(self):
         if not self.__closed:
@@ -191,6 +192,45 @@ class Cursor(object):
         process('into')
         self.sql_log_count = 0
         self.sql_log = False
+
+    def execute_prepared(self, name, query, params=None, debug=False, datatypes=None):
+        """ Execute and return one query, through a prepared statement.
+            The name argument is required, and should be unique accross all code.
+            The query will be PREPARE'd and given this name. Then, executed.
+            Subsequent calls to the same /code/ will just re-use the prepared
+            statement under this name.
+            datatypes, if specified, will strictly define the parameter types to
+            the prepared statement.
+        """
+        assert ( (not datatypes) or len(datatypes) == len(params or []))
+        assert (name)
+        
+        if not name in self.__prepared:
+            if '%d' in query or '%f' in query:
+                log(query, netsvc.LOG_WARNING)
+                log("SQL queries cannot contain %d or %f anymore. Use only %s", netsvc.LOG_WARNING)
+                if params:
+                    query = query.replace('%d', '%s').replace('%f', '%s')
+            
+            args = ''
+            if params and len(params):
+                query = query % tuple(map(lambda x: '$%d' % (x+1) , range(len(params))))
+                if datatypes:
+                    dtt = datatypes
+                else:
+                    dtt = [ 'UNKNOWN' for x in range(len(params)) ]
+                args = '(' + ', '.join(dtt) + ')'
+        
+            qry = 'PREPARE ' + name + args + ' AS ' + query + ';'
+            
+            self.execute(qry, debug=debug)
+            self.__prepared.append(name)
+        
+        args = ''
+        if params and len(params):
+                args = [ '%s' for x in range(len(params)) ]
+                args = '(' + ', '.join(args) + ')'
+        return self.execute('EXECUTE ' +name + ' '+ args + ';', params, debug=debug)
 
     @check
     def close(self):
