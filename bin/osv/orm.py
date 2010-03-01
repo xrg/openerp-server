@@ -1333,7 +1333,8 @@ class orm_template(object):
             if user != 1:   # admin user has all roles
                 user_roles = usersobj.read(cr, user, [user], ['roles_id'])[0]['roles_id']
                 # TODO handle the case of more than one workflow for a model
-                cr.execute("""SELECT DISTINCT t.role_id
+                cr.execute_prepared('orm_view_look_dom_arch',
+                        """SELECT DISTINCT t.role_id
                                 FROM wkf
                           INNER JOIN wkf_activity a ON a.wkf_id = wkf.id
                           INNER JOIN wkf_transition t ON (t.act_to = a.id)
