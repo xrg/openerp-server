@@ -169,27 +169,32 @@ class expression(object):
                 phname = phname.replace('.', '_')
                 phexpr = '%s_rsrch.id' % phname
                 
+                ttables = ['"%s"' % table._table]
                 qu1, qu2, qtables = table._where_calc(cr, uid, 
                         [(parent or table._parent_name, '=', placeholder(phname, phexpr) )], context)
 
                 d1, d2, dtables = table.pool.get('ir.rule').domain_get(cr, uid, table._name)
                 if d1:
-                    qu1.append(d1)
+                    if isinstance(d1,list):
+                        qu1 += d1
+                    else:
+                        qu1.append(d1)
                     qu2 += d2
                     
                     for dt in dtables:
-                        if dt != table._table:
-                            print "FIXME: must also use %s " % dt
+                        if dt not in ttables:
+                            ttables.append(dt)
                 
+                ttables2 = ', '.join(ttables)
                 qu2 = [ ids, ] + qu2
                 qry = ''' 
         WITH RECURSIVE %s_rsrch(id) AS (
                 SELECT id FROM "%s" WHERE id = ANY(%%s)
-                UNION ALL SELECT "%s".id FROM "%s", %s_rsrch WHERE %s )
+                UNION ALL SELECT "%s".id FROM %s, %s_rsrch WHERE %s )
         SELECT id FROM %s_rsrch
                 ''' %( phname, 
                         table._table,
-                        table._table, table._table, phname, ' AND '.join(qu1),
+                        table._table, ttables2, phname, ' AND '.join(qu1),
                         phname)
                 
                 # print "INSELECT %s" % qry
