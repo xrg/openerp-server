@@ -24,6 +24,7 @@
 #
 
 import orm
+import logging
 import netsvc
 import pooler
 import copy
@@ -132,8 +133,7 @@ class osv_pool(netsvc.Service):
                 tb_s = "Function %s from file %s" %( __fn_name, __fn_file)
             except:
                 tb_s = "Object: %s Function: %s\n" % (object, getattr(object, method))
-            logger = Logger()
-            logger.notifyChannel('web-services', LOG_ERROR, tb_s)
+            self.logger.exception(tb_s)
             raise
 
     @check
