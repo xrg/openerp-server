@@ -353,13 +353,13 @@ class ConnectionPool(object):
                         cur = cnx.cursor(cursor_factory=psycopg1cursor)
                         if not cur.isready():
                             continue
-                        self._connections.append((cnx, True))
+                        self._connections.insert(i,(cnx, True))
 
                         result = (cnx, cur)
                     except OperationalError:
                         continue
                 else:
-                    self._connections.append((cnx, True))
+                    self._connections.insert(i,(cnx, True))
                     result = cnx
                 break
         if result:
@@ -390,7 +390,7 @@ class ConnectionPool(object):
             if cnx is connection:
                 self._connections.pop(i)
                 if cnx.closed or not cnx.status:
-                    self._connections.append((cnx, False))
+                    self._connections.insert(i,(cnx, False))
                 break
         else:
             raise PoolError('This connection does not below to the pool')
