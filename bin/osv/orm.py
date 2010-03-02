@@ -3055,7 +3055,7 @@ class orm(orm_template):
                                           for oid in ids[i:i+cr.IN_MAX]
                                           if key(oid) in context[self.CONCURRENCY_CHECK_FIELD]))
                 if sub_ids:
-                    cr.execute("SELECT count(1) FROM %s WHERE %s" % (self._table, " OR ".join([santa]*(len(sub_ids)/2))), sub_ids)
+                    cr.execute("SELECT count(1) FROM %s WHERE %s" % (self._table, " OR ".join([santa]*(len(sub_ids)/2))), sub_ids, debug=self._debug)
                     res = cr.fetchone()
                     if res and res[0]:
                         raise except_orm('ConcurrencyException', _('Records were modified in the meanwhile'))

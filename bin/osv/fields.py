@@ -90,7 +90,7 @@ class _column(object):
         pass
 
     def set(self, cr, obj, id, name, value, user=None, context=None):
-        cr.execute('update '+obj._table+' set '+name+'='+self._symbol_set[0]+' where id=%s', (self._symbol_set[1](value), id))
+        cr.execute('update '+obj._table+' set '+name+'='+self._symbol_set[0]+' where id=%s', (self._symbol_set[1](value), id), debug=obj._debug)
 
     def set_memory(self, cr, obj, id, name, value, user=None, context=None):
         raise Exception(_('Not implemented set_memory method !'))
@@ -270,9 +270,9 @@ class one2one(_column):
         self._table = obj_src.pool.get(self._obj)._table
         if act[0] == 0:
             id_new = obj.create(cr, user, act[1])
-            cr.execute('update '+obj_src._table+' set '+field+'=%s where id=%s', (id_new, id))
+            cr.execute('update '+obj_src._table+' set '+field+'=%s where id=%s', (id_new, id), debug=obj_src._debug)
         else:
-            cr.execute('select '+field+' from '+obj_src._table+' where id=%s', (act[0],))
+            cr.execute('select '+field+' from '+obj_src._table+' where id=%s', (act[0],), debug=obj_src._debug)
             id = cr.fetchone()[0]
             obj.write(cr, user, [id], act[1], context=context)
 
@@ -341,20 +341,20 @@ class many2one(_column):
             for act in values:
                 if act[0] == 0:
                     id_new = obj.create(cr, act[2])
-                    cr.execute('update '+obj_src._table+' set '+field+'=%s where id=%s', (id_new, id))
+                    cr.execute('update '+obj_src._table+' set '+field+'=%s where id=%s', (id_new, id), debug=obj_src._debug)
                 elif act[0] == 1:
                     obj.write(cr, [act[1]], act[2], context=context)
                 elif act[0] == 2:
-                    cr.execute('delete from '+self._table+' where id=%s', (act[1],))
+                    cr.execute('delete from '+self._table+' where id=%s', (act[1],), debug=obj_src._debug)
                 elif act[0] == 3 or act[0] == 5:
-                    cr.execute('update '+obj_src._table+' set '+field+'=null where id=%s', (id,))
+                    cr.execute('update '+obj_src._table+' set '+field+'=null where id=%s', (id,), debug=obj_src._debug)
                 elif act[0] == 4:
-                    cr.execute('update '+obj_src._table+' set '+field+'=%s where id=%s', (act[1], id))
+                    cr.execute('update '+obj_src._table+' set '+field+'=%s where id=%s', (act[1], id), debug=obj_src._debug)
         else:
             if values:
-                cr.execute('update '+obj_src._table+' set '+field+'=%s where id=%s', (values, id))
+                cr.execute('update '+obj_src._table+' set '+field+'=%s where id=%s', (values, id), debug=obj_src._debug)
             else:
-                cr.execute('update '+obj_src._table+' set '+field+'=null where id=%s', (id,))
+                cr.execute('update '+obj_src._table+' set '+field+'=null where id=%s', (id,), debug=obj_src._debug)
 
     def search(self, cr, obj, args, name, value, offset=0, limit=None, uid=None, context=None):
         return obj.pool.get(self._obj).search(cr, uid, args+self._domain+[('name', 'like', value)], offset, limit, context=context)
@@ -461,15 +461,15 @@ class one2many(_column):
             elif act[0] == 2:
                 obj.unlink(cr, user, [act[1]], context=context)
             elif act[0] == 3:
-                cr.execute('update '+_table+' set '+self._fields_id+'=null where id=%s', (act[1],))
+                cr.execute('update '+_table+' set '+self._fields_id+'=null where id=%s', (act[1],), debug=obj._debug)
             elif act[0] == 4:
-                cr.execute('update '+_table+' set '+self._fields_id+'=%s where id=%s', (id, act[1]))
+                cr.execute('update '+_table+' set '+self._fields_id+'=%s where id=%s', (id, act[1]), debug=obj._debug)
             elif act[0] == 5:
-                cr.execute('update '+_table+' set '+self._fields_id+'=null where '+self._fields_id+'=%s', (id,))
+                cr.execute('update '+_table+' set '+self._fields_id+'=null where '+self._fields_id+'=%s', (id,), debug=obj._debug)
             elif act[0] == 6:
                 obj.write(cr, user, act[2], {self._fields_id:id}, context=context or {})
                 ids2 = act[2] or [0]
-                cr.execute('select id from '+_table+' where '+self._fields_id+'=%s and id <> ALL (%s)', (id,ids2))
+                cr.execute('select id from '+_table+' where '+self._fields_id+'=%s and id <> ALL (%s)', (id,ids2), debug=obj._debug)
                 ids3 = map(lambda x:x[0], cr.fetchall())
                 obj.write(cr, user, ids3, {self._fields_id:False}, context=context or {})
         return result
@@ -537,7 +537,7 @@ class many2many(_column):
                'order': obj._order,
                'offset': offset,
               }
-        cr.execute(query, [tuple(ids)] + d2)
+        cr.execute(query, [tuple(ids)] + d2, debug=obj._debug)
         for r in cr.fetchall():
             res[r[1]].append(r[0])
         return res
@@ -553,17 +553,17 @@ class many2many(_column):
                 continue
             if act[0] == 0:
                 idnew = obj.create(cr, user, act[2])
-                cr.execute('insert into '+self._rel+' ('+self._id1+','+self._id2+') values (%s,%s)', (id, idnew))
+                cr.execute('insert into '+self._rel+' ('+self._id1+','+self._id2+') values (%s,%s)', (id, idnew), debug=obj._debug)
             elif act[0] == 1:
                 obj.write(cr, user, [act[1]], act[2], context=context)
             elif act[0] == 2:
                 obj.unlink(cr, user, [act[1]], context=context)
             elif act[0] == 3:
-                cr.execute('delete from '+self._rel+' where ' + self._id1 + '=%s and '+ self._id2 + '=%s', (id, act[1]))
+                cr.execute('delete from '+self._rel+' where ' + self._id1 + '=%s and '+ self._id2 + '=%s', (id, act[1]), debug=obj._debug)
             elif act[0] == 4:
-                cr.execute('insert into '+self._rel+' ('+self._id1+','+self._id2+') values (%s,%s)', (id, act[1]))
+                cr.execute('insert into '+self._rel+' ('+self._id1+','+self._id2+') values (%s,%s)', (id, act[1]), debug=obj._debug)
             elif act[0] == 5:
-                cr.execute('update '+self._rel+' set '+self._id2+'=null where '+self._id2+'=%s', (id,))
+                cr.execute('update '+self._rel+' set '+self._id2+'=null where '+self._id2+'=%s', (id,), debug=obj._debug)
             elif act[0] == 6:
 
                 d1, d2,tables = obj.pool.get('ir.rule').domain_get(cr, user, obj._name, context=context)
@@ -571,10 +571,10 @@ class many2many(_column):
                     d1 = ' and ' + ' and '.join(d1)
                 else:
                     d1 = ''
-                cr.execute('delete from '+self._rel+' where '+self._id1+'=%s AND '+self._id2+' IN (SELECT '+self._rel+'.'+self._id2+' FROM '+self._rel+', '+','.join(tables)+' WHERE '+self._rel+'.'+self._id1+'=%s AND '+self._rel+'.'+self._id2+' = '+obj._table+'.id '+ d1 +')', [id, id]+d2)
+                cr.execute('delete from '+self._rel+' where '+self._id1+'=%s AND '+self._id2+' IN (SELECT '+self._rel+'.'+self._id2+' FROM '+self._rel+', '+','.join(tables)+' WHERE '+self._rel+'.'+self._id1+'=%s AND '+self._rel+'.'+self._id2+' = '+obj._table+'.id '+ d1 +')', [id, id]+d2, debug=obj._debug)
 
                 for act_nbr in act[2]:
-                    cr.execute('insert into '+self._rel+' ('+self._id1+','+self._id2+') values (%s, %s)', (id, act_nbr))
+                    cr.execute('insert into '+self._rel+' ('+self._id1+','+self._id2+') values (%s, %s)', (id, act_nbr), debug=obj._debug)
 
     #
     # TODO: use a name_search
