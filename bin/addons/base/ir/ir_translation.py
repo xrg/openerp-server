@@ -64,32 +64,27 @@ class ir_translation(osv.osv):
 
     def _auto_init(self, cr, context={}):
         super(ir_translation, self)._auto_init(cr, context)
-        cr.execute('SELECT indexname FROM pg_indexes WHERE indexname = %s', ('ir_translation_ltns',))
-        if not cr.fetchone():
-            cr.execute('CREATE INDEX ir_translation_ltns ON ir_translation (lang, type, name, src)')
-            cr.commit()
-
         cr.execute('SELECT indexname FROM pg_indexes WHERE indexname = %s', ('ir_translation_ltn',))
         if not cr.fetchone():
             cr.execute('CREATE INDEX ir_translation_ltn ON ir_translation (lang, type, name)')
             cr.commit()
 
-        cr.execute('SELECT indexname FROM pg_indexes WHERE indexname = %s', ('ir_translation_lts',))
+        cr.execute('SELECT indexname FROM pg_indexes WHERE indexname = %s', ('ir_translation_src',))
         if not cr.fetchone():
-            cr.execute('CREATE INDEX ir_translation_lts ON ir_translation (lang, type, src)')
+            cr.execute('CREATE INDEX ir_translation_src ON ir_translation USING hash (src)')
             cr.commit()
 
     @tools.cache(skiparg=3, multi='ids')
     def _get_ids(self, cr, uid, name, tt, lang, ids):
         translations = dict.fromkeys(ids, False)
         if ids:
-            cr.execute('select res_id,value ' \
-                    'from ir_translation ' \
-                    'where lang=%s ' \
-                        'and type=%s ' \
-                        'and name=%s ' \
-                        'and res_id IN %s',
-                    (lang,tt,name,tuple(ids)))
+            cr.execute('SELECT res_id,value ' \
+                    'FROM ir_translation ' \
+                    'WHERE lang=%s ' \
+                        'AND type=%s ' \
+                        'AND name=%s ' \
+                        'AND res_id = ANY(%s)',
+                    (lang,tt,name, ids), debug=self._debug)
             for res_id, value in cr.fetchall():
                 translations[res_id] = value
         return translations
@@ -103,12 +98,12 @@ class ir_translation(osv.osv):
         self._get_source.clear_cache(cr.dbname, uid, name, tt, lang)
         self._get_ids.clear_cache(cr.dbname, uid, name, tt, lang, ids)
 
-        cr.execute('delete from ir_translation ' \
-                'where lang=%s ' \
-                    'and type=%s ' \
-                    'and name=%s ' \
-                    'and res_id IN %s',
-                (lang,tt,name,tuple(ids),))
+        cr.execute('DELETE FROM ir_translation ' \
+                'WHERE lang=%s ' \
+                    'AND type=%s ' \
+                    'AND name=%s ' \
+                    'AND res_id = ANY (%s)',
+                (lang,tt,name, ids), debug=self._debug)
         for id in ids:
             self.create(cr, uid, {
                 'lang':lang,
@@ -127,24 +122,22 @@ class ir_translation(osv.osv):
         if source:
             #if isinstance(source, unicode):
             #   source = source.encode('utf8')
-            cr.execute('select value ' \
-                    'from ir_translation ' \
-                    'where lang=%s ' \
-                        'and type=%s ' \
-                        'and name=%s ' \
-                        'and src=%s',
-                    (lang or '', tt, tools.ustr(name), source))
+            cr.execute('SELECT value ' \
+                    'FROM ir_translation ' \
+                    'WHERE lang=%s ' \
+                        'AND type=%s ' \
+                        'AND name=%s ' \
+                        'AND src=%s',
+                    (lang, tt, tools.ustr(name), source), debug=self._debug)
         else:
-            cr.execute('select value ' \
-                    'from ir_translation ' \
-                    'where lang=%s ' \
-                        'and type=%s ' \
-                        'and name=%s',
-                    (lang or '', tt, tools.ustr(name)))
+            cr.execute('SELECT value ' \
+                    'FROM ir_translation ' \
+                    'WHERE lang=%s ' \
+                        'AND type=%s ' \
+                        'AND name=%s',
+                    (lang, tt, tools.ustr(name)), debug=self._debug)
         res = cr.fetchone()
         trad = res and res[0] or ''
-        if source and not trad:
-            return source
         return trad
 
     def create(self, cursor, user, vals, context=None):
