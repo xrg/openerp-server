@@ -140,6 +140,58 @@ class ir_translation(osv.osv):
         trad = res and res[0] or ''
         return trad
 
+    def _get_multisource(self, cr, uid, name, tt, lang, src_list):
+        """ Retrieve translations for a list of sources.
+            returns a /dictionary/ of the src: val pairs
+        """
+        assert lang
+
+        cr.execute('SELECT src, value ' \
+                    'FROM ir_translation ' \
+                    'WHERE lang=%s ' \
+                        'AND type=%s ' \
+                        'AND name=%s ' \
+                        'AND src = ANY(%s)',
+                    (lang, tt, tools.ustr(name), src_list), debug=self._debug)
+        
+        res = {}
+        for row in cr.fetchall():
+            res[row[0]] = row[1]
+        
+        return res
+
+    def _get_multifield(self, cr, user, fld_list, lang, prepend=None):
+        """ return multiple (field) results, for a list of (name, type) tuples,
+            where language is constant.
+            If prepend is specified, prepend that to the name of each tuple.
+            
+            Returns a list of (name, type, trans) tuples, where the name does
+            not contain the prepend string.
+        """
+        assert(lang)
+        
+        if prepend:
+            fl2 = []
+            for name, tt in fld_list:
+                fl2.append( (prepend + name, tt) )
+            nexpr = 'substr( name, %d) as name' % (len(prepend) + 1)
+        else:
+            fl2 = fld_list
+            nexpr = 'name'
+            
+        cr.execute('SELECT ' + nexpr + ', type, value ' \
+                    'FROM ir_translation ' \
+                    'WHERE lang=%s ' \
+                       'AND  (name, type) IN %s  ;',
+                    (lang, tuple(fl2)), debug=self._debug)
+        
+        res = []
+        for row in cr.fetchall():
+            res.append(tuple(row))
+        
+        return res
+
+
     def create(self, cursor, user, vals, context=None):
         if not context:
             context = {}
