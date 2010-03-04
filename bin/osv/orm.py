@@ -1146,25 +1146,23 @@ class orm_template(object):
                     if getattr(self._columns[f], arg, None):
                         res[f][arg] = getattr(self._columns[f], arg)
 
-                res_trans = translation_obj._get_source(cr, user, self._name + ',' + f, 'field', context.get('lang', False) or 'en_US', self._columns[f].string)
-                if res_trans:
-                    res[f]['string'] = res_trans
-                help_trans = translation_obj._get_source(cr, user, self._name + ',' + f, 'help', context.get('lang', False) or 'en_US')
-                if help_trans:
-                    res[f]['help'] = help_trans
-
                 if hasattr(self._columns[f], 'selection'):
                     if isinstance(self._columns[f].selection, (tuple, list)):
                         sel = self._columns[f].selection
                         # translate each selection option
+                        sel_vals = []
                         sel2 = []
                         for (key, val) in sel:
-                            val2 = None
                             if val:
-                                val2 = translation_obj._get_source(cr, user, self._name + ',' + f, 'selection', context.get('lang', False) or 'en_US', val)
-                            sel2.append((key, val2 or val))
-                        sel = sel2
-                        res[f]['selection'] = sel
+                                sel_vals.append(val)
+                        
+                        sel_dic =  translation_obj._get_multisource(cr, user,
+                                        self._name + ',' + f, 'selection',
+                                        context.get('lang', False) or 'en_US', sel_vals)
+                        
+                        for key, val in sel:
+                            sel2.append((key, sel_dic.get(val, val)))
+                        res[f]['selection'] = sel2
                     else:
                         # call the 'dynamic selection' function
                         res[f]['selection'] = self._columns[f].selection(self, cr,
@@ -1173,6 +1171,24 @@ class orm_template(object):
                     res[f]['relation'] = self._columns[f]._obj
                     res[f]['domain'] = self._columns[f]._domain
                     res[f]['context'] = self._columns[f]._context
+        
+            # Now, collectively translate the fields' strings and help:
+            fld_list = []
+            
+            for f in res.keys():
+                if 'string' in res[f]:
+                    fld_list.append((f, 'field'))
+                if 'help' in res[f]:
+                    fld_list.append((f, 'help'))
+            
+            res_trans = translation_obj._get_multifield(cr, user, fld_list,
+                               lang=context.get('lang', False) or 'en_US',
+                               prepend=self._name+',')
+            for f, attr, val in res_trans:
+                if attr == 'field':
+                    res[f]['string'] = val
+                else:
+                    res[f][attr] = val
         else:
             #TODO : read the fields from the database
             pass
