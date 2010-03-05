@@ -192,6 +192,38 @@ class ir_translation(osv.osv):
         return res
 
 
+    def _get_multi_ids(self, cr, user, name_list, ids, ttype, lang, prepend=None):
+        """ return multiple results, for a CROSS of names and ids
+            where language and type is constant.
+            If prepend is specified, prepend that to the name of each tuple.
+            
+            name_list and ids are simple lists of strings and ints, respectively.
+            Returns a list of (name, id, trans) tuples, where the name does
+            not contain the prepend string.
+            Note: it /may/ return less than (name_list * ids) results, when
+            some translations are not available.
+        """
+        assert(lang)
+        
+        if prepend:
+            fl2 = map(lambda x: prepend + x, name_list)
+            nexpr = 'substr( name, %d) as name' % (len(prepend) + 1)
+        else:
+            fl2 = name_list
+            nexpr = 'name'
+            
+        cr.execute('SELECT ' + nexpr + ', res_id, value ' \
+                    'FROM ir_translation ' \
+                    'WHERE lang=%s AND type = %s '\
+                    ' AND name = ANY(%s) AND res_id = ANY(%s);',
+                    (lang, ttype, fl2, ids), debug=self._debug)
+        
+        res = []
+        for row in cr.fetchall():
+            res.append(tuple(row))
+        
+        return res
+
     def create(self, cursor, user, vals, context=None):
         if not context:
             context = {}
