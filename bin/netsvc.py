@@ -217,6 +217,10 @@ def init_logger():
     # add the handler to the root logger
     logger.addHandler(handler)
     logger.setLevel(int(tools.config['log_level'] or '0'))
+    
+    # By default, don't log db connections, even at debug.
+    if int(tools.config['log_level'] or '0') <= logging.DEBUG:
+        logging.getLogger('db.connection').setLevel(logging.INFO)
 
 
 class Logger(object):
@@ -273,6 +277,14 @@ class Logger(object):
             log = logging.getLogger()
         log.setLevel(logging.INFO) # make sure next msg is printed
         log.info("Log level changed to %s" % logging.getLevelName(level))
+        log.setLevel(level)
+
+    def set_logger_level(self, logger, level):
+        """ Set the logging level for a particular logger
+        """
+        log = logging.getLogger(str(logger))
+        log.setLevel(logging.INFO) # make sure next msg is printed
+        log.info("Log level for %s changed to %s" % (logger, logging.getLevelName(level)))
         log.setLevel(level)
 
     def shutdown(self):
