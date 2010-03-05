@@ -3771,8 +3771,8 @@ class orm(orm_template):
             qu1, qu2 = e.to_sql()
             qu1 = qu1 and [qu1] or []
             if self._debug:
-                logger = netsvc.Logger()
-                logger.notifyChannel('orm', netsvc.LOG_DEBUG2,"where calc of %s: qu1 = %s, qu2 = %s" % (self._table, qu1, qu2))
+                logger = logging.getLogger('orm')
+                logger.debug("where calc of %s: qu1 = %s, qu2 = %s" % (self._table, qu1, qu2))
         else:
             qu1, qu2, tables = [], [], ['"%s"' % self._table]
 
@@ -3833,8 +3833,8 @@ class orm(orm_template):
         (where_clause, where_clause_params, tables) = self._where_calc(cr, user, args, context=context)
         dom = self.pool.get('ir.rule').domain_get(cr, user, self._name, 'read', context=context)
         if self._debug:
-            logger = netsvc.Logger()
-            logger.notifyChannel('orm', netsvc.LOG_DEBUG2, "rule for %s: %s" %(self._name, dom))
+            logger = logging.getLogger('orm')
+            logger.debug("rule for %s: %s" %(self._name, dom))
         where_clause += dom[0]
         where_clause_params += dom[1]
 
