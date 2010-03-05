@@ -2964,15 +2964,30 @@ class orm(orm_template):
         else:
             res = map(lambda x: {'id': x}, ids)
 
+        tmp_ids = map(lambda x: x['id'], res)
+        tmp_fs = []
+        
         for f in fields_pre:
             if f == self.CONCURRENCY_CHECK_FIELD:
                 continue
             if self._columns[f].translate:
-                ids = [x['id'] for x in res]
-                #TODO: optimize out of this loop
-                res_trans = self.pool.get('ir.translation')._get_ids(cr, user, self._name+','+f, 'model', context.get('lang', False) or 'en_US', ids)
-                for r in res:
-                    r[f] = res_trans.get(r['id'], False) or r[f]
+                tmp_fs.append(f)
+        
+        if len(tmp_ids) and len(tmp_fs):
+            res_trans = self.pool.get('ir.translation')._get_multi_ids(cr, user, 
+                                tmp_fs, tmp_ids, ttype='model',
+                                lang=context.get('lang', False) or 'en_US',
+                                prepend=self._name+',')
+            res_rmap = {}
+            for i, r in enumerate(res):
+                res_rmap[r['id']] = i
+            for tr in res_trans:
+                # tr: (field, id, translation)
+                res[res_rmap[tr[1]]][tr[0]] = tr[2]
+
+            del res_rmap
+
+        del tmp_fs
 
         for table in self._inherits:
             col = self._inherits[table]
