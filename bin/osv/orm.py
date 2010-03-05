@@ -1594,22 +1594,21 @@ class orm_template(object):
 
         result = {'type': view_type, 'model': self._name}
 
-        ok = True
+        view_ref = context.get(view_type + '_view_ref', False)
+        if view_ref and '.' in view_ref:
+            module, view_ref = view_ref.split('.', 1)
+            cr.execute("SELECT res_id FROM ir_model_data "
+                        "WHERE model='ir.ui.view' AND module=%s "
+                        "AND name=%s", (module, view_ref), 
+                        debug=self._debug)
+            view_ref_res = cr.fetchone()
+            if view_ref_res:
+                view_id = view_ref_res[0]
+
+        ok = (cr.pgmode != 'pg84')
         model = True
         sql_res = False
         while ok:
-            view_ref = context.get(view_type + '_view_ref', False)
-            if view_ref and not view_id:
-                if '.' in view_ref:
-                    module, view_ref = view_ref.split('.', 1)
-                    cr.execute("SELECT res_id FROM ir_model_data "
-                                "WHERE model='ir.ui.view' AND module=%s "
-                                "AND name=%s", (module, view_ref), 
-                                debug=self._debug)
-                    view_ref_res = cr.fetchone()
-                    if view_ref_res:
-                        view_id = view_ref_res[0]
-
             if view_id:
                 where = (model and (" and model='%s'" % (self._name,))) or ''
                 cr.execute('SELECT arch,name,field_parent,id,type,inherit_id '
@@ -1630,8 +1629,8 @@ class orm_template(object):
             view_id = ok or sql_res[3]
             model = False
 
-        # if a view was found
         if sql_res:
+            # if a view was found in non-pg84 mode
             result['type'] = sql_res[4]
             result['view_id'] = sql_res[3]
             result['arch'] = sql_res[0]
@@ -1652,7 +1651,67 @@ class orm_template(object):
 
             result['name'] = sql_res[1]
             result['field_parent'] = sql_res[2] or False
-        else:
+
+        if cr.pgmode == 'pg84':
+
+            if view_id:
+                # If we had been asked for some particular view id, we have to
+                # recursively select the views down to the base one that view_id
+                # inherits from
+                sql_in = 'WITH RECURSIVE rcrs_view_in(id, inher, model) AS (' \
+                        'SELECT id, inherit_id, model FROM ir_ui_view ' \
+                                'WHERE id = %s' \
+                        ' UNION ALL SELECT irv.id, irv.inherit_id, irv.model ' \
+                                ' FROM ir_ui_view AS irv, rcrs_view_in AS rcv ' \
+                                ' WHERE irv.id = rcv.inher ' \
+                        ') ' \
+                        ' SELECT id FROM rcrs_view_in ' \
+                        ' WHERE inher IS NULL AND model = %s LIMIT 1'
+                sql_in_parms = (view_id, self._name)
+                
+            else:
+                sql_in = 'SELECT id FROM ir_ui_view ' \
+                        'WHERE model=%s AND type=%s AND inherit_id IS NULL '\
+                        'ORDER BY priority LIMIT 1'
+                sql_in_parms = (self._name, view_type)
+        
+            sql_out = '''WITH RECURSIVE rec_view(arch,name,field_parent,id,type,
+                                        inherit_id, priority, path)
+                  AS ( SELECT arch,name,field_parent,id,type,
+                                inherit_id, priority, ARRAY[] :: integer[] AS path
+                            FROM ir_ui_view
+                            WHERE id IN ( %s )
+                        
+                        UNION ALL SELECT v.arch,v.name,v.field_parent,v.id,v.type,
+                                v.inherit_id, v.priority, rec_view.path || v.inherit_id
+                            FROM ir_ui_view v, rec_view
+                            WHERE v.inherit_id = rec_view.id
+                     )
+                  SELECT arch, name, field_parent, id, type, inherit_id
+                      FROM rec_view ORDER BY path, priority ;
+                  ''' % sql_in
+                
+            cr.execute(sql_out, sql_in_parms, debug=self._debug)
+            last_res = [] # list of views already applied
+            
+            for res in cr.fetchall():
+                if not last_res:   # first, non-inheriting view
+                    sql_res = True
+                    result['arch'] = etree.fromstring(encode(res[0]))
+                    result['name'] = res[1]
+                    result['field_parent'] = res[2] or False
+                    result['view_id'] = res[3]
+                    view_id = res[3]
+                    result['type'] = res[4]
+                    last_res = [res[3],]
+                elif not (res[5] and res[5] in last_res):
+                    print "Cannot apply view %d because it inherits from %d, not in %s" % \
+                        (res[3], res[5], last_res)
+                else:
+                        result['arch'] = _inherit_apply(result['arch'], res[0])
+                        last_res.append(res[3])
+
+        if not sql_res:
 
             # otherwise, build some kind of default view
             if view_type == 'form':
