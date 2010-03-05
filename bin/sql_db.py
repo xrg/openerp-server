@@ -65,6 +65,7 @@ sql_counter = 0
 class Cursor(object):
     IN_MAX = 1000 # decent limit on size of IN queries - guideline = Oracle limit
     __logger = logging.getLogger('db.cursor')
+    __pgmode = None
 
     def check(f):
         @wraps(f)
@@ -94,6 +95,11 @@ class Cursor(object):
         self.autocommit(False)
         self.__caller = tuple(stack()[2][1:3])
         self.__prepared = []
+        if not self.__pgmode:
+            if self._cnx.server_version >= 80400:
+                self.__pgmode = 'pg84'
+            else:
+                self.__pgmode = 'pgsql'
 
     def __del__(self):
         if not self.__closed:
@@ -280,7 +286,14 @@ class Cursor(object):
     def __getattr__(self, name):
         if name == 'server_version':
             return self._cnx.server_version
+        elif name == 'pgmode':
+            return self.__pgmode
         return getattr(self._obj, name)
+
+    @classmethod
+    def set_pgmode(cls, pgmode):
+        cls.__pgmode = pgmode
+        cls.__logger.info("Postgres mode set to %s" % str(pgmode))
 
 
 class PsycoConnection(psycopg2.extensions.connection):
@@ -319,8 +332,7 @@ class ConnectionPool(object):
 
     def set_pool_debug(self, do_debug = True):
         self._debug_pool = do_debug
-        self._logger.notifyChannel('ConnectionPool', netsvc.LOG_INFO,
-                        "Debugging set to %s" % str(do_debug))
+        self._logger.info("Debugging set to %s" % str(do_debug))
 
     @locked
     def borrow(self, dsn):

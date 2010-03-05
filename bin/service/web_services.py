@@ -424,7 +424,7 @@ class common(_ObjectService):
             pass
         elif method in ['get_available_updates', 'get_migration_scripts',
                         'set_loglevel', 'set_obj_debug', 'set_pool_debug',
-                        'set_logger_level']:
+                        'set_logger_level', 'set_pgmode']:
             passwd = params[0]
             params = params[1:]
             security.check_super(passwd)
@@ -613,6 +613,11 @@ GNU Public Licence.
     def exp_set_logger_level(self, logger, loglevel):
         l = netsvc.Logger()
         l.set_logger_level(logger, int(loglevel))
+        return True
+
+    def exp_set_pgmode(self, pgmode):
+        assert pgmode in ['old', 'sql', 'pgsql', 'pg84', 'pg90']
+        sql_db.Cursor.set_pgmode(pgmode)
         return True
 
     def exp_set_obj_debug(self,db, obj, do_debug):

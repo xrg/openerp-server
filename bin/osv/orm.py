@@ -3848,10 +3848,7 @@ class orm(orm_template):
 
         if args:
             import expression
-            pgmode = 'pgsql'
-            if cr.server_version > 80400:
-                pgmode = 'pg84'
-            e = expression.expression(args, mode=pgmode)
+            e = expression.expression(args, mode=cr.pgmode)
             e.parse(cr, user, self, context)
             tables = e.get_tables()
             qu1, qu2 = e.to_sql()
