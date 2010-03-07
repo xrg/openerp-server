@@ -437,7 +437,7 @@ class OpenERPDispatcher:
             self.log('service', service_name)
             self.log('method', method)
             self.log('params', params)
-            auth = getattr(self, 'auth_provider', None)
+            auth = getattr(self, 'auth_proxy', None)
             result = ExportService.getService(service_name).dispatch(method, auth, params)
             self.log('result', result)
             # We shouldn't marshall None,
@@ -446,6 +446,37 @@ class OpenERPDispatcher:
             return result
         except Exception, e:
             self.log('exception', tools.exception_to_unicode(e))
+            tb = getattr(e, 'traceback', sys.exc_info())
+            tb_s = "".join(traceback.format_exception(*tb))
+            if tools.config['debug_mode']:
+                import pdb
+                pdb.post_mortem(tb[2])
+            raise OpenERPDispatcherException(e, tb_s)
+
+class OpenERPDispatcher2:
+
+    def dispatch(self, service_name, method, params):
+        _logger = logging.getLogger('rpc')
+	def log(title, msg):
+	    _logger.log(logging.DEBUG_RPC,'%s: %s' %(title, pformat(msg)))
+	
+        try:
+	    print "dispatch", service_name, method, params
+            log('service', service_name)
+            log('method', method)
+            log('params', params)
+	    print "after log"
+	    auth = getattr(self, 'auth_proxy', None)
+	    if not auth:
+	        _logger.warn("No Authentication!")
+            result = ExportService.getService(service_name).new_dispatch(method, auth, params)
+            log('result', result)
+            # We shouldn't marshall None,
+            if result == None:
+                result = False
+            return result
+        except Exception, e:
+            log('exception', tools.exception_to_unicode(e))
             tb = getattr(e, 'traceback', sys.exc_info())
             tb_s = "".join(traceback.format_exception(*tb))
             if tools.config['debug_mode']:

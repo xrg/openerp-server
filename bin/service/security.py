@@ -28,18 +28,18 @@ class ExceptionNoTb(Exception):
         super(ExceptionNoTb, self).__init__(msg)
         self.traceback = ('','','')
 
-def login(db, login, password):
+def login(db, login, password, client_address=None):
     pool = pooler.get_pool(db)
     user_obj = pool.get('res.users')
     return user_obj.login(db, login, password)
 
-def check_super(passwd):
+def check_super(passwd, client_address=None):
     if passwd == tools.config['admin_passwd']:
         return True
     else:
         raise ExceptionNoTb('AccessDenied: Invalid super administrator password.')
 
-def check(db, uid, passwd):
+def check(db, uid, passwd, client_address=None):
     pool = pooler.get_pool(db)
     user_obj = pool.get('res.users')
     return user_obj.check(db, uid, passwd)

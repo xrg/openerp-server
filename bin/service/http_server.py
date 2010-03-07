@@ -260,10 +260,10 @@ def list_http_services(protocol=None):
         raise Exception("Incorrect protocol or no http services")
 
 import SimpleXMLRPCServer
-class XMLRPCRequestHandler(netsvc.OpenERPDispatcher,FixSendError,HttpLogHandler,SimpleXMLRPCServer.SimpleXMLRPCRequestHandler):
+class xrBaseRequestHandler(FixSendError,SimpleXMLRPCServer.SimpleXMLRPCRequestHandler):
     rpc_paths = []
     protocol_version = 'HTTP/1.1'
-    _logger = logging.getLogger('xmlrpc')
+    _auth_domain = None
 
     def _dispatch(self, method, params):
         try:
@@ -278,69 +278,73 @@ class XMLRPCRequestHandler(netsvc.OpenERPDispatcher,FixSendError,HttpLogHandler,
     def finish(self):
         pass
 
+class XMLRPCRequestHandler(netsvc.OpenERPDispatcher,xrBaseRequestHandler):
     def setup(self):
         self.connection = dummyconn()
         if not len(XMLRPCRequestHandler.rpc_paths):
             XMLRPCRequestHandler.rpc_paths = map(lambda s: '/%s' % s, netsvc.ExportService._services.keys())
         pass
 
+class XMLRPCRequestHandler2_Pub(netsvc.OpenERPDispatcher2,xrBaseRequestHandler):
+    """ New-style xml-rpc dispatcher, Global methods
+        Under this protocol, the authentication will lie in the http layer.
+    """
+
+    _auth_domain = 'pub'
+    def setup(self):
+        self.connection = dummyconn()
+        #if not len(XMLRPCRequestHandler.rpc_paths):
+        #    XMLRPCRequestHandler.rpc_paths = map(lambda s: '/%s' % s, netsvc.ExportService._services.keys())
+        pass
+
+    def get_db_from_path(self, path):
+        return False
+
+class XMLRPCRequestHandler2_Root(netsvc.OpenERPDispatcher2,xrBaseRequestHandler):
+    """ New-style xml-rpc dispatcher, Admin methods
+    """
+
+    _auth_domain = 'root'
+    def setup(self):
+        self.connection = dummyconn()
+        #if not len(XMLRPCRequestHandler.rpc_paths):
+        #    XMLRPCRequestHandler.rpc_paths = map(lambda s: '/%s' % s, netsvc.ExportService._services.keys())
+        pass
+
+    def get_db_from_path(self, path):
+        return True
+
+class XMLRPCRequestHandler2_Db(netsvc.OpenERPDispatcher2,xrBaseRequestHandler):
+    """ New-style xml-rpc dispatcher, DB methods
+    """
+
+    _auth_domain = 'db'
+    def setup(self):
+        self.connection = dummyconn()
+        #if not len(XMLRPCRequestHandler.rpc_paths):
+        #    XMLRPCRequestHandler.rpc_paths = map(lambda s: '/%s' % s, netsvc.ExportService._services.keys())
+        pass
+
+    #def get_db_from_path(self, path):
+	#raise Exception
 
 def init_xmlrpc():
-    if tools.config.get('xmlrpc', False):
-        # Example of http file serving:
-        # reg_http_service(HTTPDir('/test/',HTTPHandler))
-        reg_http_service(HTTPDir('/xmlrpc/', XMLRPCRequestHandler))
-        logging.getLogger("web-services").info("Registered XML-RPC over HTTP")
-
-    if tools.config.get('xmlrpcs', False) \
-            and not tools.config.get('xmlrpc', False):
-        # only register at the secure server
-        reg_http_service(HTTPDir('/xmlrpc/', XMLRPCRequestHandler), True)
-        logging.getLogger("web-services").info("Registered XML-RPC over HTTPS only")
-
-class StaticHTTPHandler(HttpLogHandler, FixSendError, HttpOptions, HTTPHandler):
-    _logger = logging.getLogger('httpd')
-    _HTTP_OPTIONS = { 'Allow': ['OPTIONS', 'GET', 'HEAD'] }
-
-    def __init__(self,request, client_address, server):
-        HTTPHandler.__init__(self,request,client_address,server)
-        document_root = tools.config.get('static_http_document_root', False)
-        assert document_root, "Please specify static_http_document_root in configuration, or disable static-httpd!"
-        self.__basepath = document_root
-
-    def translate_path(self, path):
-        """Translate a /-separated PATH to the local filename syntax.
-
-        Components that mean special things to the local file system
-        (e.g. drive or directory names) are ignored.  (XXX They should
-        probably be diagnosed.)
-
-        """
-        # abandon query parameters
-        path = path.split('?',1)[0]
-        path = path.split('#',1)[0]
-        path = posixpath.normpath(urllib.unquote(path))
-        words = path.split('/')
-        words = filter(None, words)
-        path = self.__basepath
-        for word in words:
-            if word in (os.curdir, os.pardir): continue
-            path = os.path.join(path, word)
-        return path
-
-def init_static_http():
-    if not tools.config.get('static_http_enable', False):
+    if not tools.config.get_misc('xmlrpc','enable', True):
         return
-    
-    document_root = tools.config.get('static_http_document_root', False)
-    assert document_root, "Document root must be specified explicitly to enable static HTTP service (option --static-http-document-root)"
-    
-    base_path = tools.config.get('static_http_url_prefix', '/')
-    
-    reg_http_service(HTTPDir(base_path,StaticHTTPHandler))
-    
-    logging.getLogger("web-services").info("Registered HTTP dir %s for %s" % \
-                        (document_root, base_path))
+    reg_http_service(HTTPDir('/xmlrpc/',XMLRPCRequestHandler))
+    # Example of http file serving:
+    # reg_http_service(HTTPDir('/test/',HTTPHandler))
+    netsvc.Logger().notifyChannel("web-services", netsvc.LOG_INFO,
+            "Registered XML-RPC over HTTP")
+
+    reg_http_service(HTTPDir('/xmlrpc2/pub/',XMLRPCRequestHandler2_Pub))
+    reg_http_service(HTTPDir('/xmlrpc2/root/',XMLRPCRequestHandler2_Root,
+			OpenERPRootProvider(realm="OpenERP Admin", domain='root')))
+    reg_http_service(HTTPDir('/xmlrpc2/db/',XMLRPCRequestHandler2_Db,
+			OpenERPAuthProvider()))
+    netsvc.Logger().notifyChannel("web-services", netsvc.LOG_INFO,
+            "Registered XML-RPC 2.0 over HTTP")
+
 
 class OerpAuthProxy(AuthProxy):
     """ Require basic authentication..
@@ -355,11 +359,20 @@ class OerpAuthProxy(AuthProxy):
         self.last_auth = None
 
     def checkRequest(self,handler,path, db=False):        
-        auth_str = handler.headers.get('Authorization',False)
+        """ Check authorization of request to path.
+	    First, we must get the "db" from the path, because it could
+	    need different authorization per db.
+	    
+	    The handler could help us dissect the path, or even return
+	    True for the super user or False for an allways-allowed path.
+	    
+	    Then, we see if we have cached that authorization for this 
+	    proxy (= session)
+	 """
         try:
             if not db:
                 db = handler.get_db_from_path(path)
-        except Exception:
+        except:
             if path.startswith('/'):
                 path = path[1:]
             psp= path.split('/')
@@ -368,18 +381,40 @@ class OerpAuthProxy(AuthProxy):
             else:
                 #FIXME!
                 self.provider.log("Wrong path: %s, failing auth" %path)
-                raise AuthRejectedExc("Authorization failed. Wrong sub-path.") 
-        if self.auth_creds.get(db):
-            return True 
+                raise AuthRejectedExc("Authorization failed. Wrong sub-path.")
+
+        if db in self.auth_creds and not (self.auth_creds[db] is False):
+            return True
+        auth_str = handler.headers.get('Authorization',False)
+
         if auth_str and auth_str.startswith('Basic '):
             auth_str=auth_str[len('Basic '):]
             (user,passwd) = base64.decodestring(auth_str).split(':')
             self.provider.log("Found user=\"%s\", passwd=\"***\" for db=\"%s\"" %(user,db))
-            acd = self.provider.authenticate(db,user,passwd,handler.client_address)
-            if acd != False:
-                self.auth_creds[db] = acd
-                self.last_auth = db
+            try:
+                acd = self.provider.authenticate(db,user,passwd,handler.client_address)
+            except AuthRequiredExc:
+                # sometimes the provider.authenticate may raise, so that
+                # it asks for a specific realm. Still, apply the 5 times rule
+                if self.auth_tries > 5:
+                    raise AuthRejectedExc("Authorization failed.")
+                else:
+                    raise
+            if acd:
+                if db:
+                    # we only cache the credentials if the db is specified.
+                    # the True value gets cached, too, for the super-admin
+                    self.auth_creds[db] = acd
+                    self.last_auth=db
                 return True
+        else:    # no auth string
+            if db is False:
+                # in a special case, we ask the provider to allow us to
+                # skip authentication for the "False" db
+                acd = self.provider.authenticate(db, None, None, handler.client_address)
+                if acd:
+                    return True
+
         if self.auth_tries > 5:
             self.provider.log("Failing authorization after 5 requests w/o password")
             raise AuthRejectedExc("Authorization failed.")
@@ -388,8 +423,9 @@ class OerpAuthProxy(AuthProxy):
 
 import security
 class OpenERPAuthProvider(AuthProvider):
-    def __init__(self,realm='OpenERP User'):
+    def __init__(self,realm = 'OpenERP User', domain='db'):
         self.realm = realm
+        self.domain=domain
 
     def setupAuth(self, multi, handler):
         if not multi.sec_realms.has_key(self.realm):
@@ -405,8 +441,20 @@ class OpenERPAuthProvider(AuthProvider):
         except Exception,e:
             logging.getLogger("auth").debug("Fail auth: %s" % e )
             return False
+        return False
 
     def log(self, msg, lvl=logging.INFO):
         logging.getLogger("auth").log(lvl,msg)
+
+class OpenERPRootProvider(OpenERPAuthProvider):
+    """ Authentication provider for the OpenERP database admin
+    """
+    def authenticate(self, db, user, passwd, client_address):
+        try:
+            if user == 'root' and security.check_super(passwd, client_address):
+                return True
+        except security.TbExceptionNoTb:
+            return False
+        return False
 
 #eof

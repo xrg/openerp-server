@@ -364,6 +364,13 @@ class _ObjectService(netsvc.ExportService):
         return res
 
 class common(_ObjectService):
+    _auth_commands = { 'db': [ 'ir_set','ir_del', 'ir_get' ],
+                'pub': ['about', 'timezone_get', 'get_server_environment',
+                        'login_message','get_stats', 'check_connectivity'],
+                'root': ['get_available_updates', 'get_migration_scripts',
+                        'set_loglevel', 'set_obj_debug', 'set_pool_debug',
+                        'set_logger_level', 'set_pgmode']
+                }
     def __init__(self,name="common"):
         _ObjectService.__init__(self,name)
         self.joinGroup("web-services")
@@ -401,8 +408,19 @@ class common(_ObjectService):
         return fn(*params)
 
 
-    def new_dispatch(self,method,auth,params):
-        pass
+    def new_dispatch(self,method,auth,params, auth_domain=None):
+        print "New dispatch", auth, auth and auth.provider.domain
+        # Double check, that we have the correct authentication:
+        if not auth:
+                domain='pub'
+        else:
+                domain=auth.provider.domain
+        if method not in self._auth_commands[domain]:
+            raise Exception("Method not found: %s" % method)
+
+        fn = getattr(self, 'exp_'+method)
+        return fn(*params)
+
 
     def exp_ir_set(self, cr, uid, keys, args, name, value, replace=True, isobject=False):
         res = ir.ir_set(cr,uid, keys, args, name, value, replace, isobject)
