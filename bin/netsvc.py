@@ -119,7 +119,7 @@ class ExportService(object):
         raise Exception("stub dispatch at %s" % self.__name)
         
     def new_dispatch(self,method,auth,params):
-        raise Exception("stub dispatch at %s" % self.__name)
+        raise NotImplementedError("stub dispatch at %s" % self.__name)
 
     def abortResponse(self, error, description, origin, details):
         if not tools.config['debug_mode']:
@@ -457,18 +457,16 @@ class OpenERPDispatcher2:
 
     def dispatch(self, service_name, method, params):
         _logger = logging.getLogger('rpc')
-	def log(title, msg):
-	    _logger.log(logging.DEBUG_RPC,'%s: %s' %(title, pformat(msg)))
-	
+        def log(title, msg):
+            _logger.log(logging.DEBUG_RPC,'%s: %s' %(title, pformat(msg)))
+        
         try:
-	    print "dispatch", service_name, method, params
             log('service', service_name)
             log('method', method)
             log('params', params)
-	    print "after log"
-	    auth = getattr(self, 'auth_proxy', None)
-	    if not auth:
-	        _logger.warn("No Authentication!")
+            auth = getattr(self, 'auth_proxy', None)
+            if not auth:
+                _logger.warn("No Authentication!")
             result = ExportService.getService(service_name).new_dispatch(method, auth, params)
             log('result', result)
             # We shouldn't marshall None,
