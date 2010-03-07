@@ -56,7 +56,7 @@ class AuthProvider:
     def authenticate(self, user, passwd, client_address):
         return False
 
-    def log(self, msg):
+    def log(self, msg, lvl=None):
         print msg
 
 class BasicAuthProvider(AuthProvider):

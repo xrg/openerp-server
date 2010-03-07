@@ -390,9 +390,13 @@ class OerpAuthProxy(AuthProxy):
         if auth_str and auth_str.startswith('Basic '):
             auth_str=auth_str[len('Basic '):]
             (user,passwd) = base64.decodestring(auth_str).split(':')
-            self.provider.log("Found user=\"%s\", passwd=\"***\" for db=\"%s\"" %(user,db))
             try:
                 acd = self.provider.authenticate(db,user,passwd,handler.client_address)
+                if acd:
+                    self.provider.log("Auth user=\"%s\", db=\"%s\" from %s" %(user,db, handler.client_address), lvl=netsvc.LOG_INFO)
+                else:
+                    self.provider.log("Auth FAILED for user=\"%s\" from %s" %(user,handler.client_address), lvl=netsvc.LOG_WARNING)
+
             except AuthRequiredExc:
                 # sometimes the provider.authenticate may raise, so that
                 # it asks for a specific realm. Still, apply the 5 times rule
@@ -443,8 +447,8 @@ class OpenERPAuthProvider(AuthProvider):
             return False
         return False
 
-    def log(self, msg, lvl=logging.INFO):
-        logging.getLogger("auth").log(lvl,msg)
+    def log(self, msg, lvl=netsvc.LOG_INFO):
+        netsvc.Logger().notifyChannel("auth",lvl,msg)
 
 class OpenERPRootProvider(OpenERPAuthProvider):
     """ Authentication provider for the OpenERP database admin
@@ -453,7 +457,7 @@ class OpenERPRootProvider(OpenERPAuthProvider):
         try:
             if user == 'root' and security.check_super(passwd, client_address):
                 return True
-        except security.TbExceptionNoTb:
+        except security.ExceptionNoTb:
             return False
         return False
 
