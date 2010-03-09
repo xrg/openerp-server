@@ -41,7 +41,35 @@ from cStringIO import StringIO
 
 logging.basicConfig()
 
-class db(netsvc.ExportService):
+class baseExportService(netsvc.ExportService):
+    """ base class for the objects that implement the standardized
+        xmlrpc2 dispatch
+    """
+    _auth_commands = { 'pub': [] , 'root': [],  'db': [] }
+    
+    def new_dispatch(self, method, auth, params, auth_domain=None):
+        # Double check, that we have the correct authentication:
+        if not auth:
+                domain='pub'
+        else:
+                domain=auth.provider.domain
+        if method not in self._auth_commands[domain]:
+            raise Exception("Method not found: %s" % method)
+
+
+        fn = getattr(self, 'exp_'+method)
+        if domain == 'db':
+            return fn(cr, uid, *params)
+        else:
+            return fn(*params)
+
+class db(baseExportService):
+    _auth_commands = { 'root': [ 'create', 'get_progress', 'drop', 'dump', 
+                'restore', 'rename', 
+                'change_admin_password', 'migrate_databases' ],
+            'pub': [ 'db_exist', 'list', 'list_lang', 'server_version' ],
+            }
+            
     def __init__(self, name="db"):
         netsvc.ExportService.__init__(self, name)
         self.joinGroup("web-services")
@@ -67,8 +95,8 @@ class db(netsvc.ExportService):
         fn = getattr(self, 'exp_'+method)
         return fn(*params)
     
-    def new_dispatch(self,method,auth,params):
-        pass
+    #def new_dispatch(self,method,auth,params):
+    #    pass
     def _create_empty_database(self, name):
         db = sql_db.db_connect('template1')
         cr = db.cursor()
@@ -349,7 +377,7 @@ class db(netsvc.ExportService):
         return True
 db()
 
-class _ObjectService(netsvc.ExportService):
+class _ObjectService(baseExportService):
      "A common base class for those who have fn(db, uid, password,...) "
 
      def common_dispatch(self, method, auth, params):
@@ -364,7 +392,7 @@ class _ObjectService(netsvc.ExportService):
         return res
 
 class common(_ObjectService):
-    _auth_commands = { 'db': [ 'ir_set','ir_del', 'ir_get' ],
+    _auth_commands = { 'db-broken': [ 'ir_set','ir_del', 'ir_get' ],
                 'pub': ['about', 'timezone_get', 'get_server_environment',
                         'login_message','get_stats', 'check_connectivity'],
                 'root': ['get_available_updates', 'get_migration_scripts',
@@ -407,20 +435,27 @@ class common(_ObjectService):
         fn = getattr(self, 'exp_'+method)
         return fn(*params)
 
-
-    def new_dispatch(self,method,auth,params, auth_domain=None):
-        print "New dispatch", auth, auth and auth.provider.domain
+    def new_dispatch(self, method, auth, params, auth_domain=None):
         # Double check, that we have the correct authentication:
-        if not auth:
-                domain='pub'
+        if method == 'login':
+            if not (auth and auth.provider.domain == 'db'):
+                raise Exception("Method not found: %s" % method)
+            # By this time, an authentication should already be done at the
+            # http level
+            if not auth.last_auth:
+                return False
+            acds = auth.auth_creds[auth.last_auth]
+            assert(acds[0] == params[1])
+            assert(acds[1] == params[2])
+            assert(acds[2] == params[0])
+            assert acds[3] != False and acds[3] != None
+
+            log = logging.getLogger('web-service')
+            log.info("login from '%s' using database '%s'" % (params[1], params[0].lower()))
+            return acds[3]
+
         else:
-                domain=auth.provider.domain
-        if method not in self._auth_commands[domain]:
-            raise Exception("Method not found: %s" % method)
-
-        fn = getattr(self, 'exp_'+method)
-        return fn(*params)
-
+            return super(common, self).new_dispatch(method, auth, params, auth_domain)
 
     def exp_ir_set(self, cr, uid, keys, args, name, value, replace=True, isobject=False):
         res = ir.ir_set(cr,uid, keys, args, name, value, replace, isobject)
@@ -609,7 +644,8 @@ GNU Public Licence.
 
 common()
 
-class objects_proxy(netsvc.ExportService):
+class objects_proxy(baseExportService):
+    _auth_commands = { 'db': ['execute','exec_workflow','obj_list'] }
     def __init__(self, name="object"):
         netsvc.ExportService.__init__(self,name)
         self.joinGroup('web-services')
@@ -625,9 +661,22 @@ class objects_proxy(netsvc.ExportService):
         res = fn(db, uid, *params)
         return res
 
-    
-    def new_dispatch(self,method,auth,params):
-        pass
+    def new_dispatch(self, method, auth, params, auth_domain=None):
+        # Double check, that we have the correct authentication:
+        if not auth:
+            raise Exception("Not auth domain for object service")
+        if auth.provider.domain != 'db':
+            raise Exception("Invalid domainm for object service")
+        if method not in self._auth_commands['db']:
+            raise Exception("Method not found: %s" % method)
+
+
+        ls = netsvc.LocalService('object_proxy')
+        fn = getattr(ls, method)
+        acds = auth.auth_creds[auth.last_auth]
+        db, uid = (acds[2], acds[3])
+        res = fn(db, uid, *params)
+        return res
 
 objects_proxy()
 
@@ -643,7 +692,8 @@ objects_proxy()
 # Wizard datas: {}
 # TODO: change local request to OSE request/reply pattern
 #
-class wizard(netsvc.ExportService):
+class wizard(baseExportService):
+    _auth_commands = { 'db': ['execute','create'] }
     def __init__(self, name='wizard'):
         netsvc.ExportService.__init__(self,name)
         self.joinGroup('web-services')
@@ -662,8 +712,6 @@ class wizard(netsvc.ExportService):
         res = fn(db, uid, *params)
         return res
     
-    def new_dispatch(self,method,auth,params):
-        pass
 
     def _execute(self, db, uid, wiz_id, datas, action, context):
         self.wiz_datas[wiz_id].update(datas)
@@ -706,7 +754,8 @@ class ExceptionWithTraceback(Exception):
         self.traceback = tb
         self.args = (msg, tb)
 
-class report_spool(netsvc.ExportService):
+class report_spool(baseExportService):
+    _auth_commands = { 'db': ['report','report_get'] }
     def __init__(self, name='report'):
         netsvc.ExportService.__init__(self, name)
         self.joinGroup('web-services')
@@ -723,10 +772,6 @@ class report_spool(netsvc.ExportService):
         fn = getattr(self, 'exp_' + method)
         res = fn(db, uid, *params)
         return res
-
-    
-    def new_dispatch(self,method,auth,params):
-        pass
 
     def exp_report(self, db, uid, object, ids, datas=None, context=None):
         if not datas:

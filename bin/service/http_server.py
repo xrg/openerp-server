@@ -325,8 +325,11 @@ class XMLRPCRequestHandler2_Db(netsvc.OpenERPDispatcher2,xrBaseRequestHandler):
         #    XMLRPCRequestHandler.rpc_paths = map(lambda s: '/%s' % s, netsvc.ExportService._services.keys())
         pass
 
-    #def get_db_from_path(self, path):
-	#raise Exception
+    def get_db_from_path(self, path):
+        if path.startswith('/'):
+            path = path[1:]
+        db = path.split('/')[0]
+        return db
 
 def init_xmlrpc():
     if not tools.config.get_misc('xmlrpc','enable', True):
@@ -360,15 +363,15 @@ class OerpAuthProxy(AuthProxy):
 
     def checkRequest(self,handler,path, db=False):        
         """ Check authorization of request to path.
-	    First, we must get the "db" from the path, because it could
-	    need different authorization per db.
-	    
-	    The handler could help us dissect the path, or even return
-	    True for the super user or False for an allways-allowed path.
-	    
-	    Then, we see if we have cached that authorization for this 
-	    proxy (= session)
-	 """
+            First, we must get the "db" from the path, because it could
+            need different authorization per db.
+            
+            The handler could help us dissect the path, or even return
+            True for the super user or False for an allways-allowed path.
+            
+            Then, we see if we have cached that authorization for this 
+            proxy (= session)
+         """
         try:
             if not db:
                 db = handler.get_db_from_path(path)
