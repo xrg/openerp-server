@@ -46,7 +46,7 @@ class baseExportService(netsvc.ExportService):
         xmlrpc2 dispatch
     """
     _auth_commands = { 'pub': [] , 'root': [],  'db': [] }
-    
+
     def new_dispatch(self, method, auth, params, auth_domain=None):
         # Double check, that we have the correct authentication:
         if not auth:
@@ -56,12 +56,19 @@ class baseExportService(netsvc.ExportService):
         if method not in self._auth_commands[domain]:
             raise Exception("Method not found: %s" % method)
 
-
         fn = getattr(self, 'exp_'+method)
         if domain == 'db':
-            return fn(cr, uid, *params)
+            u, p, db, uid = auth.auth_creds[auth.last_auth]
+            cr = pooler.get_db(db).cursor()
+            try:
+                res = fn(cr, uid, *params)
+                cr.commit()
+                return res
+            finally:
+                cr.close()
         else:
             return fn(*params)
+
 
 class db(baseExportService):
     _auth_commands = { 'root': [ 'create', 'get_progress', 'drop', 'dump', 
@@ -681,6 +688,27 @@ class objects_proxy(baseExportService):
 objects_proxy()
 
 
+class dbExportDispatch:
+    """ Intermediate class for those ExportServices that call fn(db, uid, ...)
+        These classes don't need the cursor, but just the name of the db
+    """
+    def new_dispatch(self, method, auth, params, auth_domain=None):
+        # Double check, that we have the correct authentication:
+        if not auth:
+                domain='pub'
+        else:
+                domain=auth.provider.domain
+        if method not in self._auth_commands[domain]:
+            raise Exception("Method not found: %s" % method)
+
+        fn = getattr(self, 'exp_'+method)
+        if domain == 'db':
+            u, p, db, uid = auth.auth_creds[auth.last_auth]
+            res = fn(db, uid, *params)
+            return res
+        else:
+            return fn(*params)
+
 #
 # Wizard ID: 1
 #    - None = end of wizard
@@ -692,7 +720,7 @@ objects_proxy()
 # Wizard datas: {}
 # TODO: change local request to OSE request/reply pattern
 #
-class wizard(baseExportService):
+class wizard(dbExportDispatch,baseExportService):
     _auth_commands = { 'db': ['execute','create'] }
     def __init__(self, name='wizard'):
         netsvc.ExportService.__init__(self,name)
@@ -754,7 +782,7 @@ class ExceptionWithTraceback(Exception):
         self.traceback = tb
         self.args = (msg, tb)
 
-class report_spool(baseExportService):
+class report_spool(dbExportDispatch, baseExportService):
     _auth_commands = { 'db': ['report','report_get'] }
     def __init__(self, name='report'):
         netsvc.ExportService.__init__(self, name)
