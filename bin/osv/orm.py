@@ -134,9 +134,30 @@ class browse_record_list(list):
 
 
 class browse_record(object):
+    """ An object that behaves like a row of an object's table.
+        It has attributes after the columns of the corresponding object.
+        
+        If 'fields_only' is specified in the initializer, then only the
+        asked for fields will be fetched from the db. This parameter can
+        be False, which fetches all columns, True, which fetches one at a
+        time, or a list/tuple, which indicates which columns to also 
+        prefetch.
+        
+        Examples:
+            uobj = pool.get('res.users')
+            user_rec = uobj.browse(cr, uid, 104,)
+            name = user_rec.name
+        
+        If you know which columns you want, re-write as:
+            user_rec = uobj.browse(cr,uid, 104, fields_only =('name', 'email', 'signature'))
+            name = user_rec.name
+            email = user_rec.email
+            signature = user_rec.signature
+    """
     logger = netsvc.Logger()
 
-    def __init__(self, cr, uid, id, table, cache, context=None, list_class = None, fields_process={}):
+    def __init__(self, cr, uid, id, table, cache, context=None, list_class=None,
+                fields_process=None, fields_only=True):
         '''
         table : the object (inherited from orm)
         context : dictionary with an optional context
@@ -153,6 +174,7 @@ class browse_record(object):
             'osv.browse_record.' + self._table_name)
         self._context = context
         self._fields_process = fields_process
+        self._fields_only = fields_only
 
         cache.setdefault(table._name, {})
         self._data = cache[table._name]
@@ -194,13 +216,15 @@ class browse_record(object):
                     name, self))
 
             # if the field is a classic one or a many2one, we'll fetch all classic and many2one fields
-            if col._prefetch:
+            if col._prefetch and (self._fields_only is not True):
                 # gen the list of "local" (ie not inherited) fields which are classic or many2one
                 ffields = filter(lambda x: x[1]._classic_write, self._table._columns.items())
                 # gen the list of inherited fields
                 inherits = map(lambda x: (x[0], x[1][2]), self._table._inherit_fields.items())
                 # complete the field list with the inherited fields which are classic or many2one
                 ffields += filter(lambda x: x[1]._classic_write, inherits)
+                if isinstance(self._fields_only, (tuple, list)):
+                    ffields = filter(lambda f: f[0] == name or f[0] in self._fields_only, ffields)
             # otherwise we fetch only that field
             else:
                 ffields = [(name, col)]
@@ -538,7 +562,7 @@ class orm_template(object):
             self._table = self._name.replace('.', '_')
         self._debug = False
 
-    def browse(self, cr, uid, select, context=None, list_class=None, fields_process={}):
+    def browse(self, cr, uid, select, context=None, list_class=None, fields_process=None, fields_only=True):
         """
         Fetch records as objects allowing to use dot notation to browse fields and relations
 
@@ -556,9 +580,9 @@ class orm_template(object):
         # need to accepts ints and longs because ids coming from a method
         # launched by button in the interface have a type long...
         if isinstance(select, (int, long)):
-            return browse_record(cr, uid, select, self, cache, context=context, list_class=self._list_class, fields_process=fields_process)
+            return browse_record(cr, uid, select, self, cache, context=context, list_class=self._list_class, fields_process=fields_process, fields_only=fields_only)
         elif isinstance(select, list):
-            return self._list_class([browse_record(cr, uid, id, self, cache, context=context, list_class=self._list_class, fields_process=fields_process) for id in select], context)
+            return self._list_class([browse_record(cr, uid, id, self, cache, context=context, list_class=self._list_class, fields_process=fields_process, fields_only=fields_only) for id in select], context)
         else:
             return browse_null()
 
