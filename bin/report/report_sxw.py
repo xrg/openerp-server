@@ -361,7 +361,7 @@ class report_sxw(report_rml, preprocess.report):
         elif report_type=='mako2html':
             fnct = self.create_source_mako2html
         else:
-            raise 'Unknown Report Type'
+            raise NotImplementedError('Unknown Report Type: %s' % report_type)
         fnct_ret = fnct(cr, uid, ids, data, report_xml, context)
         if not fnct_ret:
             return (False,False)
