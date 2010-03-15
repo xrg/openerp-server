@@ -196,6 +196,8 @@ class browse_record(object):
         if name not in self._data[self._id]:
             # build the list of fields we will fetch
 
+            if self._table._debug:
+                self.__logger.debug("self[%d].%s w. %s" % (self._id, name, self._fields_only))
             # fetch the definition of the field which was asked for
             if name in self._table._columns:
                 col = self._table._columns[name]
@@ -209,9 +211,8 @@ class browse_record(object):
                 else:
                     return attr
             else:
-                self.logger.notifyChannel("browse_record", netsvc.LOG_WARNING,
-                    "Field '%s' does not exist in object '%s': \n%s" % (
-                        name, self, ''.join(traceback.format_exc())))
+                self.__logger.warning( "Field '%s' does not exist in object '%s': \n%s" % \
+                        ( name, self, ''.join(traceback.format_exc())))
                 raise KeyError("Field '%s' does not exist in object '%s'" % (
                     name, self))
 
@@ -303,10 +304,8 @@ class browse_record(object):
 
         if not name in self._data[self._id]:
             #how did this happen?
-            self.logger.notifyChannel("browse_record", netsvc.LOG_ERROR,
-                    "Ffields: %s, datas: %s"%(fffields, datas))
-            self.logger.notifyChannel("browse_record", netsvc.LOG_ERROR,
-                    "Data: %s, Table: %s"%(self._data[self._id], self._table))
+            self.__logger.error( "Ffields: %s, datas: %s"%(fffields, datas))
+            self.__logger.error( "Data: %s, Table: %s"%(self._data[self._id], self._table))
             raise KeyError(_('Unknown attribute %s in %s ') % (name, self))
         return self._data[self._id][name]
 
@@ -582,6 +581,9 @@ class orm_template(object):
         if isinstance(select, (int, long)):
             return browse_record(cr, uid, select, self, cache, context=context, list_class=self._list_class, fields_process=fields_process, fields_only=fields_only)
         elif isinstance(select, list):
+            # since the loop below will create data[id] for each of the ids, 
+            # the first time one of them is accessed, the whole dataset is
+            # fetched there, in one go.
             return self._list_class([browse_record(cr, uid, id, self, cache, context=context, list_class=self._list_class, fields_process=fields_process, fields_only=fields_only) for id in select], context)
         else:
             return browse_null()
