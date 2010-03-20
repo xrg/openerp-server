@@ -133,7 +133,7 @@ class osv_pool(netsvc.Service):
                     raise except_osv('Access Denied', 'Private methods (such as %s) cannot be called remotely.' % (method,))
                 res = pool.execute_cr(cr, uid, obj, method, *args, **kw)
                 if res is None:
-                    self.logger.warning('The method %s of the object %s can not return `None` !', method, obj)
+                    self.logger.warning('Method %s.%s can not return a None value (crash in XML-RPC)' % (obj, method))
                 cr.commit()
             except Exception:
                 cr.rollback()
