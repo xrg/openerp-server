@@ -175,12 +175,6 @@ class BaseHttpDaemon(threading.Thread, netsvc.Server):
                     raise
         return True
 
-    def stats(self):
-        res = "%sd: " % self._RealProto + ((self.running and "running") or  "stopped")
-        if self.server:
-	    res += ", %d threads" % (self.server.numThreads,)
-        return res
-
     def append_svc(self, service):
         if not isinstance(service, HTTPDir):
             raise Exception("Wrong class for http service")
@@ -249,6 +243,15 @@ def reg_http_service(hts, secure_only = False):
     if (not httpd) and (not httpsd):
         logging.getLogger('httpd').warning("No httpd available to register service %s" % hts.path)
     return
+
+def list_http_services(protocol=None):
+    global httpd, httpsd
+    if httpd and (protocol == 'http' or protocol == None):
+        return httpd.list_services()
+    elif httpsd and (protocol == 'https' or protocol == None):
+        return httpsd.list_services()
+    else:
+        raise Exception("Incorrect protocol or no http services")
 
 def list_http_services(protocol=None):
     global httpd, httpsd
