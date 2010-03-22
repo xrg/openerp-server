@@ -401,7 +401,8 @@ class _ObjectService(baseExportService):
 class common(_ObjectService):
     _auth_commands = { 'db-broken': [ 'ir_set','ir_del', 'ir_get' ],
                 'pub': ['about', 'timezone_get', 'get_server_environment',
-                        'login_message','get_stats', 'check_connectivity'],
+                        'login_message','get_stats', 'check_connectivity',
+                        'list_http_services'],
                 'root': ['get_available_updates', 'get_migration_scripts',
                         'set_loglevel', 'set_obj_debug', 'set_pool_debug',
                         'set_logger_level', 'set_pgmode']
