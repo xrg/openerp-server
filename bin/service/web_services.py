@@ -32,6 +32,7 @@ from tools.translate import _
 import addons
 import ir
 import netsvc
+import logging
 import pooler
 import release
 import sql_db
@@ -160,12 +161,12 @@ class db(baseExportService):
                     traceback.print_exc(file=e_str)
                     traceback_str = e_str.getvalue()
                     e_str.close()
-                    netsvc.Logger().notifyChannel('web-services', netsvc.LOG_ERROR, 'CREATE DATABASE\n%s' % (traceback_str))
+                    logging.getLogger('web-services').error('CREATE DATABASE\n%s' % (traceback_str))
                     serv.actions[id]['traceback'] = traceback_str
                     if cr:
                         cr.close()
-        logger = netsvc.Logger()
-        logger.notifyChannel("web-services", netsvc.LOG_INFO, 'CREATE DATABASE: %s' % (db_name.lower()))
+        logger = logging.getLogger('web-services')
+        logger.info('CREATE DATABASE: %s' % (db_name.lower()))
         dbi = DBInitialize()
         create_thread = threading.Thread(target=dbi,
                 args=(self, id, db_name, demo, lang, user_password))
@@ -190,7 +191,7 @@ class db(baseExportService):
 
     def exp_drop(self, db_name):
         sql_db.close_db(db_name)
-        logger = netsvc.Logger()
+        logger = logging.getLogger()
 
         db = sql_db.db_connect('template1')
         cr = db.cursor()
@@ -199,12 +200,10 @@ class db(baseExportService):
             try:
                 cr.execute('DROP DATABASE "%s"' % db_name)
             except Exception, e:
-                logger.notifyChannel("web-services", netsvc.LOG_ERROR,
-                        'DROP DB: %s failed:\n%s' % (db_name, e))
+                logger.exception('DROP DB: %s failed:' % (db_name,))
                 raise Exception("Couldn't drop database %s: %s" % (db_name, e))
             else:
-                logger.notifyChannel("web-services", netsvc.LOG_INFO,
-                    'DROP DB: %s' % (db_name))
+                logger.info('DROP DB: %s' % (db_name))
         finally:
             cr.close()
         return True
@@ -219,7 +218,7 @@ class db(baseExportService):
             os.environ['PGPASSWORD'] = ''
 
     def exp_dump(self, db_name):
-        logger = netsvc.Logger()
+        logger = logging.getLogger('web-services')
 
         self._set_pg_psw_env_var()
 
@@ -237,25 +236,22 @@ class db(baseExportService):
         data = stdout.read()
         res = stdout.close()
         if res:
-            logger.notifyChannel("web-services", netsvc.LOG_ERROR,
-                    'DUMP DB: %s failed\n%s' % (db_name, data))
-            raise Exception, "Couldn't dump database"
-        logger.notifyChannel("web-services", netsvc.LOG_INFO,
-                'DUMP DB: %s' % (db_name))
+            logger.error('DUMP DB: %s failed\n%s' % (db_name, data))
+            raise Exception("Couldn't dump database")
+        logger.info('DUMP DB: %s' % (db_name))
 
         self._unset_pg_psw_env_var()
 
         return base64.encodestring(data)
 
     def exp_restore(self, db_name, data):
-        logger = netsvc.Logger()
+        logger = logging.getLogger('web-services')
 
         self._set_pg_psw_env_var()
 
         if self.exp_db_exist(db_name):
-            logger.notifyChannel("web-services", netsvc.LOG_WARNING,
-                    'RESTORE DB: %s already exists' % (db_name,))
-            raise Exception, "Database already exists"
+            logger.warning('RESTORE DB: %s already exists' % (db_name,))
+            raise Exception("Database already exists")
 
         self._create_empty_database(db_name)
 
@@ -283,8 +279,7 @@ class db(baseExportService):
         res = stdout.close()
         if res:
             raise Exception, "Couldn't restore database"
-        logger.notifyChannel("web-services", netsvc.LOG_INFO,
-                'RESTORE DB: %s' % (db_name))
+        logger.info('RESTORE DB: %s' % (db_name))
 
         self._unset_pg_psw_env_var()
 
@@ -292,7 +287,7 @@ class db(baseExportService):
 
     def exp_rename(self, old_name, new_name):
         sql_db.close_db(old_name)
-        logger = netsvc.Logger()
+        logger = logging.getLogger('web-services')
 
         db = sql_db.db_connect('template1')
         cr = db.cursor()
@@ -301,16 +296,14 @@ class db(baseExportService):
             try:
                 cr.execute('ALTER DATABASE "%s" RENAME TO "%s"' % (old_name, new_name))
             except Exception, e:
-                logger.notifyChannel("web-services", netsvc.LOG_ERROR,
-                        'RENAME DB: %s -> %s failed:\n%s' % (old_name, new_name, e))
+                logger.error('RENAME DB: %s -> %s failed:\n%s' % (old_name, new_name, e))
                 raise Exception("Couldn't rename database %s to %s: %s" % (old_name, new_name, e))
             else:
                 fs = os.path.join(tools.config['root_path'], 'filestore')
                 if os.path.exists(os.path.join(fs, old_name)):
                     os.rename(os.path.join(fs, old_name), os.path.join(fs, new_name))
 
-                logger.notifyChannel("web-services", netsvc.LOG_INFO,
-                    'RENAME DB: %s -> %s' % (old_name, new_name))
+                logger.info('RENAME DB: %s -> %s' % (old_name, new_name))
         finally:
             cr.close()
         return True
@@ -366,10 +359,10 @@ class db(baseExportService):
         from osv.orm import except_orm
         from osv.osv import except_osv
 
-        l = netsvc.Logger()
+        l = logging.getLogger('migration')
         for db in databases:
             try:
-                l.notifyChannel('migration', netsvc.LOG_INFO, 'migrate database %s' % (db,))
+                l.info('migrate database %s' % (db,))
                 tools.config['update']['base'] = True
                 pooler.restart_pool(db, force_demo=False, update_module=True)
             except except_orm, inst:
@@ -377,9 +370,7 @@ class db(baseExportService):
             except except_osv, inst:
                 self.abortResponse(1, inst.name, inst.exc_type, inst.value)
             except Exception:
-                import traceback
-                tb_s = reduce(lambda x, y: x+y, traceback.format_exception( sys.exc_type, sys.exc_value, sys.exc_traceback))
-                l.notifyChannel('web-services', netsvc.LOG_ERROR, tb_s)
+                l.exception("Migrate database %s failed" % db)
                 raise
         return True
 db()
@@ -412,7 +403,7 @@ class common(_ObjectService):
         self.joinGroup("web-services")
 
     def dispatch(self, method, auth, params):
-        logger = netsvc.Logger()
+        logger = logging.getLogger('web-services')
         if method in [ 'ir_set','ir_del', 'ir_get' ]:
             return self.common_dispatch(method,auth,params)
         if method == 'login':
@@ -420,12 +411,12 @@ class common(_ObjectService):
             res = security.login(params[0], params[1], params[2])
             msg = res and 'successful login' or 'bad login or password'
             # TODO log the client ip address..
-            logger.notifyChannel("web-service", netsvc.LOG_INFO, "%s from '%s' using database '%s'" % (msg, params[1], params[0].lower()))
+            logger.info("%s from '%s' using database '%s'" % (msg, params[1], params[0].lower()))
             return res or False
         elif method == 'logout':
             if auth:
                 auth.logout(params[1])
-            logger.notifyChannel("web-service", netsvc.LOG_INFO,'Logout %s from database %s'%(login,db))
+            logger.info('Logout %s from database %s'%(login,db))
             return True
         elif method in ['about', 'timezone_get', 'get_server_environment',
                         'login_message','get_stats', 'check_connectivity',
@@ -518,7 +509,7 @@ GNU Public Licence.
 
 
     def exp_get_migration_scripts(self, contract_id, contract_password):
-        l = netsvc.Logger()
+        l = logging.getLogger('migration')
         import tools.maintenance as tm
         try:
             rc = tm.remote_contract(contract_id, contract_password)
@@ -527,7 +518,7 @@ GNU Public Licence.
             if rc.status != 'full':
                 raise tm.RemoteContractException('Can not get updates for a partial contract')
 
-            l.notifyChannel('migration', netsvc.LOG_INFO, 'starting migration with contract %s' % (rc.name,))
+            l.info('starting migration with contract %s' % (rc.name,))
 
             zips = rc.retrieve_updates(rc.id, addons.get_modules_with_version())
 
@@ -535,12 +526,12 @@ GNU Public Licence.
 
             backup_directory = os.path.join(tools.config['root_path'], 'backup', time.strftime('%Y-%m-%d-%H-%M'))
             if zips and not os.path.isdir(backup_directory):
-                l.notifyChannel('migration', netsvc.LOG_INFO, 'create a new backup directory to \
+                l.info('Create a new backup directory to \
                                 store the old modules: %s' % (backup_directory,))
                 os.makedirs(backup_directory)
 
             for module in zips:
-                l.notifyChannel('migration', netsvc.LOG_INFO, 'upgrade module %s' % (module,))
+                l.info('upgrade module %s' % (module,))
                 mp = addons.get_module_path(module)
                 if mp:
                     if os.path.isdir(mp):
@@ -557,7 +548,7 @@ GNU Public Licence.
                     try:
                         base64_decoded = base64.decodestring(zips[module])
                     except Exception:
-                        l.notifyChannel('migration', netsvc.LOG_ERROR, 'unable to read the module %s' % (module,))
+                        l.exception('unable to read the module %s' % (module,))
                         raise
 
                     zip_contents = StringIO(base64_decoded)
@@ -566,13 +557,13 @@ GNU Public Licence.
                         try:
                             tools.extract_zip_file(zip_contents, tools.config['addons_path'] )
                         except Exception:
-                            l.notifyChannel('migration', netsvc.LOG_ERROR, 'unable to extract the module %s' % (module, ))
+                            l.exception('unable to extract the module %s' % (module, ))
                             rmtree(module)
                             raise
                     finally:
                         zip_contents.close()
                 except Exception:
-                    l.notifyChannel('migration', netsvc.LOG_ERROR, 'restore the previous version of the module %s' % (module, ))
+                    l.exception('restore the previous version of the module %s' % (module, ))
                     nmp = os.path.join(backup_directory, module)
                     if os.path.isdir(nmp):
                         copytree(nmp, tools.config['addons_path'])
@@ -584,9 +575,7 @@ GNU Public Licence.
         except tm.RemoteContractException, e:
             self.abortResponse(1, 'Migration Error', 'warning', str(e))
         except Exception, e:
-            import traceback
-            tb_s = reduce(lambda x, y: x+y, traceback.format_exception( sys.exc_type, sys.exc_value, sys.exc_traceback))
-            l.notifyChannel('migration', netsvc.LOG_ERROR, tb_s)
+            l.exception("%s" % e)
             raise
 
     def exp_get_server_environment(self):
@@ -627,8 +616,8 @@ GNU Public Licence.
         return True
 
     def exp_set_obj_debug(self,db, obj, do_debug):
-        log = netsvc.Logger()
-        log.notifyChannel('web-services', netsvc.LOG_INFO, "setting debug for %s@%s to %s" %(obj, db, do_debug))
+        log = logging.getLogger('web-services')
+        log.info("setting debug for %s@%s to %s" %(obj, db, do_debug))
         ls = netsvc.LocalService('object_proxy')
         res = ls.set_debug(db, obj, do_debug)
         return res
@@ -832,9 +821,8 @@ class report_spool(dbExportDispatch, baseExportService):
                 
                 tb = sys.exc_info()
                 tb_s = "".join(traceback.format_exception(*tb))
-                logger = netsvc.Logger()
-                logger.notifyChannel('web-services', netsvc.LOG_ERROR,
-                        'Exception: %s\n%s' % (str(exception), tb_s))
+                logger = logging.getLogger('web-services')
+                logger.error('Exception: %s\n%s' % (exception, tb_s))
                 self._reports[id]['exception'] = ExceptionWithTraceback(tools.exception_to_unicode(exception), tb)
                 self._reports[id]['state'] = True
             cr.commit()

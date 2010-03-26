@@ -26,6 +26,7 @@
 import logging
 import select
 import socket
+import logging
 import sys
 import threading
 import traceback
@@ -111,8 +112,8 @@ class TinySocketServerThread(threading.Thread,netsvc.Server):
         self.socket.bind((self.__interface, self.__port))
         self.socket.listen(5)
         self.threads = []
-        netsvc.Logger().notifyChannel("web-services", netsvc.LOG_INFO, 
-                         "starting NET-RPC service at %s port %d" % (interface or '0.0.0.0', port,))
+        logging.getLogger('web-services').info("starting NET-RPC service at %s port %d" % \
+                        (interface or '0.0.0.0', port,))
 
     def run(self):
         try:
@@ -130,8 +131,7 @@ class TinySocketServerThread(threading.Thread,netsvc.Server):
                 if (lt > 10) and (lt % 10 == 0):
                      # Not many threads should be serving at the same time, so log
                      # their abuse.
-                     netsvc.Logger().notifyChannel("web-services", netsvc.LOG_DEBUG,
-                        "Netrpc: %d threads" % len(self.threads))
+                     logging.getLogger('web-services').debug("Netrpc: %d threads" % len(self.threads))
             self.socket.close()
         except Exception, e:
             logging.getLogger('web-services').warning("Netrpc: closing because of exception %s" % str(e))

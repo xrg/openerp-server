@@ -32,6 +32,7 @@
 """
 from websrv_lib import *
 import netsvc
+import logging
 import errno
 import threading
 import tools
@@ -146,10 +147,9 @@ class BaseHttpDaemon(threading.Thread, netsvc.Server):
             self.server = ThreadedHTTPServer((interface, port), handler)
             self.server.vdirs = []
             self.server.logRequests = True
-            self.server.timeout = self._busywait_timeout
             logging.getLogger("web-services").info(
-                "starting %s service at %s port %d" %
-                (self._RealProto, interface or '0.0.0.0', port,))
+                        "starting %s service at %s port %d" %
+                        (self._RealProto, interface or '0.0.0.0', port,))
         except Exception, e:
             logging.getLogger("httpd").exception("Error occured when starting the server daemon.")
             raise
@@ -340,16 +340,14 @@ def init_xmlrpc():
     reg_http_service(HTTPDir('/xmlrpc/',XMLRPCRequestHandler))
     # Example of http file serving:
     # reg_http_service(HTTPDir('/test/',HTTPHandler))
-    netsvc.Logger().notifyChannel("web-services", netsvc.LOG_INFO,
-            "Registered XML-RPC over HTTP")
+    logging.getLogger("web-services").info("Registered XML-RPC over HTTP")
 
     reg_http_service(HTTPDir('/xmlrpc2/pub/',XMLRPCRequestHandler2_Pub))
     reg_http_service(HTTPDir('/xmlrpc2/root/',XMLRPCRequestHandler2_Root,
-			OpenERPRootProvider(realm="OpenERP Admin", domain='root')))
+                        OpenERPRootProvider(realm="OpenERP Admin", domain='root')))
     reg_http_service(HTTPDir('/xmlrpc2/db/',XMLRPCRequestHandler2_Db,
-			OpenERPAuthProvider()))
-    netsvc.Logger().notifyChannel("web-services", netsvc.LOG_INFO,
-            "Registered XML-RPC 2.0 over HTTP")
+                        OpenERPAuthProvider()))
+    logging.getLogger("web-services").info( "Registered XML-RPC 2.0 over HTTP")
 
 class StaticHTTPHandler(HTTPHandler):
     def __init__(self,request, client_address, server):
@@ -389,8 +387,8 @@ def init_static_http():
     
     reg_http_service(HTTPDir(base_path,StaticHTTPHandler))
     
-    netsvc.Logger().notifyChannel("web-services", netsvc.LOG_INFO,
-            "Registered HTTP dir %s for %s" % (dir_path, base_path))
+    logging.getLogger("web-services").info("Registered HTTP dir %s for %s" % \
+                        (dir_path, base_path))
 
 
 class OerpAuthProxy(AuthProxy):
@@ -495,7 +493,7 @@ class OpenERPAuthProvider(AuthProvider):
         return False
 
     def log(self, msg, lvl=netsvc.LOG_INFO):
-        netsvc.Logger().notifyChannel("auth",lvl,msg)
+        logging.getLogger("auth").log(lvl,msg)
 
 class OpenERPRootProvider(OpenERPAuthProvider):
     """ Authentication provider for the OpenERP database admin
