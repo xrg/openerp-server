@@ -438,9 +438,9 @@ class OerpAuthProxy(AuthProxy):
             try:
                 acd = self.provider.authenticate(db,user,passwd,handler.client_address)
                 if acd:
-                    self.provider.log("Auth user=\"%s\", db=\"%s\" from %s" %(user,db, handler.client_address), lvl=netsvc.LOG_INFO)
+                    self.provider.log("Auth user=\"%s\", db=\"%s\" from %s" %(user,db, handler.client_address), lvl=logging.INFO)
                 else:
-                    self.provider.log("Auth FAILED for user=\"%s\" from %s" %(user,handler.client_address), lvl=netsvc.LOG_WARNING)
+                    self.provider.log("Auth FAILED for user=\"%s\" from %s" %(user,handler.client_address), lvl=logging.WARNING)
 
             except AuthRequiredExc:
                 # sometimes the provider.authenticate may raise, so that
@@ -492,7 +492,7 @@ class OpenERPAuthProvider(AuthProvider):
             return False
         return False
 
-    def log(self, msg, lvl=netsvc.LOG_INFO):
+    def log(self, msg, lvl=logging.INFO):
         logging.getLogger("auth").log(lvl,msg)
 
 class OpenERPRootProvider(OpenERPAuthProvider):
