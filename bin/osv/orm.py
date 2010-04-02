@@ -2434,6 +2434,8 @@ class orm(orm_template):
                                 cr.execute('DROP INDEX "%s_%s_index"' % (self._table, k))
                                 cr.commit()
                             if isinstance(f, fields.many2one):
+                                assert f._obj, f
+                                assert self.pool.get(f._obj), f._obj
                                 ref = self.pool.get(f._obj)._table
                                 if ref != 'ir_actions':
                                     cr.execute('SELECT confdeltype, conname FROM pg_constraint as con, pg_class as cl1, pg_class as cl2, '
@@ -2824,7 +2826,7 @@ class orm(orm_template):
                     if reset:
                         if column._classic_write:
                             query = 'UPDATE "%s" SET "%s"=NULL WHERE id=%%s' % (self._table, key)
-                            cr.execute(query, (r['id'],))
+                            cr.execute(query, (r['id'],), debug=self._debug)
                         r[key] = False
 
         if isinstance(ids, (int, long, dict)):
