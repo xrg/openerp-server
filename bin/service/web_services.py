@@ -388,7 +388,8 @@ class common(_ObjectService):
                         'login_message','get_stats', 'check_connectivity',
                         'list_http_services']:
             pass
-        elif method in ['get_available_updates', 'get_migration_scripts', 'set_loglevel', 'set_obj_debug']:
+        elif method in ['get_available_updates', 'get_migration_scripts',
+                        'set_loglevel', 'set_obj_debug', 'set_pool_debug']:
             passwd = params[0]
             params = params[1:]
             security.check_super(passwd)
@@ -565,6 +566,9 @@ GNU Public Licence.
         res = ls.set_debug(db, obj, do_debug)
         return res
 
+    def exp_set_pool_debug(self,db, do_debug):
+        sql_db._Pool.set_pool_debug(do_debug)
+        return None
 
     def exp_get_stats(self):
         import threading

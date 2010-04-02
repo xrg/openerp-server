@@ -261,6 +261,7 @@ class ConnectionPool(object):
         self._connections = []
         self._maxconn = max(maxconn, 1)
         self._lock = threading.Lock()
+        self._debug_pool = False
 
     def __repr__(self):
         used = len([1 for c, u in self._connections[:] if u])
@@ -268,7 +269,14 @@ class ConnectionPool(object):
         return "ConnectionPool(used=%d/count=%d/max=%d)" % (used, count, self._maxconn)
 
     def _debug(self, msg, *args):
-        self.__logger.log(logging.DEBUG_SQL, ('%r ' + msg), self, *args)
+        if self._debug_pool:
+            self.__logger.debug(repr(self))
+            self.__logger.debug(msg)
+
+    def set_pool_debug(self, do_debug = True):
+        self._debug_pool = do_debug
+        self._logger.notifyChannel('ConnectionPool', netsvc.LOG_INFO,
+                        "Debugging set to %s" % str(do_debug))
 
     @locked
     def borrow(self, dsn):
