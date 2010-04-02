@@ -861,7 +861,9 @@ def load_modules(db, force_demo=False, status=None, update_module=False):
         if update_module:
             cr.execute("select id,name from ir_module_module where state=%s", ('to remove',))
             for mod_id, mod_name in cr.fetchall():
-                cr.execute('select model,res_id from ir_model_data where noupdate=%s and module=%s order by id desc', (False, mod_name,))
+                cr.execute('SELECT model, res_id FROM ir_model_data '
+                        'WHERE noupdate=%s AND module=%s AND model <> \'ir.module.module\' '
+                        'ORDER BY id DESC', (False, mod_name,))
                 for rmod, rid in cr.fetchall():
                     uid = 1
                     rmod_module= pool.get(rmod)
