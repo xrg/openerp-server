@@ -107,7 +107,7 @@ class Cursor(object):
             self._close(True)
 
     @check
-    def execute(self, query, params=None):
+    def execute(self, query, params=None, debug=False):
         if '%d' in query or '%f' in query:
             self.__logger.warn(query)
             self.__logger.warn("SQL queries cannot contain %d or %f anymore. "
@@ -115,7 +115,7 @@ class Cursor(object):
             if params:
                 query = query.replace('%d', '%s').replace('%f', '%s')
 
-        if self.sql_log:
+        if self.sql_log or debug:
             now = mdt.now()
 
         try:
@@ -128,12 +128,25 @@ class Cursor(object):
             self.__logger.exception("bad query: %s", self._obj.query)
             raise
 
-        if self.sql_log:
+        if self.sql_log or debug:
             delay = mdt.now() - now
             delay = delay.seconds * 1E6 + delay.microseconds
 
-            self.__logger.log(logging.DEBUG_SQL, "query: %s", self._obj.query)
+            dstr = ''
+            if delay > 10000: # only show slow times
+                dstr = ' (%dms)' % int(delay/1000)
+            try:
+                qrystr = query % tuple(params or [])
+            except TypeError, e:
+                qrystr = query + '; params: %s' % (params,)
+            try:
+                log("Q%s: %s" % (dstr, qrystr), lvl=netsvc.LOG_DEBUG)
+            except:
+                # should't break because of logging
+                pass
             self.sql_log_count+=1
+
+        if self.sql_log:
             res_from = re_from.match(query.lower())
             if res_from:
                 self.sql_from_log.setdefault(res_from.group(1), [0, 0])

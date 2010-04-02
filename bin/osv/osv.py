@@ -102,6 +102,7 @@ class osv_pool(netsvc.Service):
         self.exportMethod(self.obj_list)
         self.exportMethod(self.exec_workflow)
         self.exportMethod(self.execute)
+        self.exportMethod(self.set_debug)
 
     def init_set(self, cr, mode):
         different = mode != self._init
@@ -186,6 +187,16 @@ class osv_pool(netsvc.Service):
         for klass in class_list:
             res.append(klass.createInstance(self, module, cr))
         return res
+
+    def set_debug(self, db, obj, do_debug=True):
+        object = pooler.get_pool(db).get(obj)
+        if not object:
+            raise except_osv('Object Error', 'Object %s doesn\'t exist' % str(obj))
+        try:
+            object._debug = do_debug
+            return True
+        except:
+            raise
 
 class osv_base(object):
     def __init__(self, pool, cr):

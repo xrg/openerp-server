@@ -408,6 +408,7 @@ class orm_template(object):
         raise NotImplementedError(_('The read_group method is not implemented on this object !'))
 
     def _field_create(self, cr, context={}):
+        # TODO: less statements, debug
         cr.execute("SELECT id FROM ir_model WHERE model=%s", (self._name,))
         if not cr.rowcount:
             cr.execute('SELECT nextval(%s)', ('ir_model_id_seq',))
@@ -425,7 +426,7 @@ class orm_template(object):
 
         cr.commit()
 
-        cr.execute("SELECT * FROM ir_model_fields WHERE model=%s", (self._name,))
+        cr.execute("SELECT * FROM ir_model_fields WHERE model=%s", (self._name,) , debug=self._debug)
         cols = {}
         for rec in cr.dictfetchall():
             cols[rec['name']] = rec
@@ -508,6 +509,7 @@ class orm_template(object):
             self._description = self._name
         if not self._table:
             self._table = self._name.replace('.', '_')
+	self._debug = False
 
     def browse(self, cr, uid, select, context=None, list_class=None, fields_process={}):
         """
@@ -1353,7 +1355,7 @@ class orm_template(object):
             elif field in fields:
                 fields[field].update(fields_def[field])
             else:
-                cr.execute('select name, model from ir_ui_view where (id=%s or inherit_id=%s) and arch like %s', (view_id, view_id, '%%%s%%' % field))
+                cr.execute('select name, model from ir_ui_view where (id=%s or inherit_id=%s) and arch like %s', (view_id, view_id, '%%%s%%' % field), debug=self._debug)
                 res = cr.fetchall()[:]
                 model = res[0][1]
                 res.insert(0, ("Can't find field '%s' in the following view parts composing the view of object model '%s':" % (field, model), None))
@@ -1545,18 +1547,14 @@ class orm_template(object):
             if view_ref and not view_id:
                 if '.' in view_ref:
                     module, view_ref = view_ref.split('.', 1)
-                    cr.execute("SELECT res_id FROM ir_model_data WHERE model='ir.ui.view' AND module=%s AND name=%s", (module, view_ref))
+                    cr.execute("SELECT res_id FROM ir_model_data WHERE model='ir.ui.view' AND module=%s AND name=%s", (module, view_ref), debug=self._debug)
                     view_ref_res = cr.fetchone()
                     if view_ref_res:
                         view_id = view_ref_res[0]
 
             if view_id:
-                query = "SELECT arch,name,field_parent,id,type,inherit_id FROM ir_ui_view WHERE id=%s"
-                params = (view_id,)
-                if model:
-                    query += " AND model=%s"
-                    params += (self._name,)
-                cr.execute(query, params)
+                where = (model and (" and model='%s'" % (self._name,))) or ''
+                cr.execute('SELECT arch,name,field_parent,id,type,inherit_id FROM ir_ui_view WHERE id=%s'+where, (view_id,), debug=self._debug)
             else:
                 cr.execute('''SELECT
                         arch,name,field_parent,id,type,inherit_id
@@ -1566,7 +1564,7 @@ class orm_template(object):
                         model=%s AND
                         type=%s AND
                         inherit_id IS NULL
-                    ORDER BY priority''', (self._name, view_type))
+                    ORDER BY priority''', (self._name, view_type), debug=self._debug)
             sql_res = cr.fetchone()
 
             if not sql_res:
@@ -1584,7 +1582,7 @@ class orm_template(object):
 
             def _inherit_apply_rec(result, inherit_id):
                 # get all views which inherit from (ie modify) this view
-                cr.execute('select arch,id from ir_ui_view where inherit_id=%s and model=%s order by priority', (inherit_id, self._name))
+                cr.execute('select arch,id from ir_ui_view where inherit_id=%s and model=%s order by priority', (inherit_id, self._name), debug=self._debug)
                 sql_inherit = cr.fetchall()
                 for (inherit, id) in sql_inherit:
                     result = _inherit_apply(result, inherit)
@@ -1765,7 +1763,7 @@ class orm_memory(orm_template):
         self.datas = {}
         self.next_id = 0
         self.check_id = 0
-        cr.execute('delete from wkf_instance where res_type=%s', (self._name,))
+        cr.execute('delete from wkf_instance where res_type=%s', (self._name,), debug=self._debug)
 
     def _check_access(self, uid, object_id, mode):
         if uid != 1 and self.datas[object_id]['internal.create_uid'] != uid:
@@ -2005,7 +2003,7 @@ class orm_memory(orm_template):
             self._check_access(uid, id, 'unlink')
             self.datas.pop(id, None)
         if len(ids):
-            cr.execute('delete from wkf_instance where res_type=%s and res_id IN %s', (self._name, tuple(ids)))
+            cr.execute('delete from wkf_instance where res_type=%s and res_id = ANY  (%s)', (self._name,ids), debug=self._debug)
         return True
 
     def perm_read(self, cr, user, ids, context=None, details=True):
@@ -2207,7 +2205,7 @@ class orm(orm_template):
                 if type(val)==tuple:
                     val = val[0]
                 if (val<>False) or (type(val)<>bool):
-                    cr.execute(update_query, (ss[1](val), key))
+                    cr.execute(update_query, (ss[1](val), key), debug=self._debug)
 
     def _check_removed_columns(self, cr, log=False):
         logger = netsvc.Logger()
@@ -2821,7 +2819,7 @@ class orm(orm_template):
                     if not model:
                         reset = True
                     else:
-                        cr.execute('SELECT count(1) FROM "%s" WHERE id=%%s' % (model._table,), (ref_id,))
+                        cr.execute('SELECT count(1) FROM "%s" WHERE id=%%s' % (model._table,), (ref_id,), debug=self._debug)
                         reset = not cr.fetchone()[0]
                     if reset:
                         if column._classic_write:
@@ -2838,6 +2836,7 @@ class orm(orm_template):
             context = {}
         if not ids:
             return []
+        ids = map(lambda x:int(x), ids)
         if fields_to_read == None:
             fields_to_read = self._columns.keys()
 
@@ -2875,12 +2874,12 @@ class orm(orm_template):
             query += " ORDER BY " + order_by
             for sub_ids in cr.split_for_in_conditions(ids):
                 if rule_clause:
-                    cr.execute(query, [tuple(sub_ids)] + rule_params)
+                    cr.execute(query, [tuple(sub_ids)] + rule_params, debug=self._debug)
                     if cr.rowcount != len(sub_ids):
                         raise except_orm(_('AccessError'),
                                 _('You try to bypass an access rule while reading (Document type: %s).') % self._description)
                 else:
-                    cr.execute(query, (tuple(sub_ids),))
+                    cr.execute(query, (tuple(sub_ids),), debug=self._debug)
                 res.extend(cr.dictfetchall())
         else:
             res = map(lambda x: {'id': x}, ids)
@@ -3688,7 +3687,7 @@ class orm(orm_template):
                     upd1.append(id)
                     if upd0 and upd1:
                         cr.execute('update "' + self._table + '" set ' + \
-                            string.join(upd0, ',') + ' where id = %s', upd1)
+                            string.join(upd0, ',') + ' WHERE id = %s', upd1, debug=self._debug)
 
             else:
                 for f in val:
@@ -3752,6 +3751,9 @@ class orm(orm_template):
             tables = e.get_tables()
             qu1, qu2 = e.to_sql()
             qu1 = qu1 and [qu1] or []
+            if self._debug:
+                logger = netsvc.Logger()
+                logger.notifyChannel('orm', netsvc.LOG_DEBUG2,"where calc of %s: qu1 = %s, qu2 = %s" % (self._table, qu1, qu2))
         else:
             qu1, qu2, tables = [], [], ['"%s"' % self._table]
 
@@ -3811,8 +3813,12 @@ class orm(orm_template):
         # compute the where, order by, limit and offset clauses
         (where_clause, where_clause_params, tables) = self._where_calc(cr, user, args, context=context)
         dom = self.pool.get('ir.rule').domain_get(cr, user, self._name, 'read', context=context)
+        if self._debug:
+            logger = netsvc.Logger()
+            logger.notifyChannel('orm', netsvc.LOG_DEBUG2, "rule for %s: %s" %(self._name, dom))
         where_clause += dom[0]
         where_clause_params += dom[1]
+
         for t in dom[2]:
             if t not in tables:
                 tables.append(t)
@@ -3843,11 +3849,11 @@ class orm(orm_template):
             where_str = ""
 
         if count:
-            cr.execute('select count(%s.id) from ' % self._table +
-                    ','.join(tables) + where_str + limit_str + offset_str, where_clause_params)
+            cr.execute('SELECT COUNT(%s.id) FROM ' % self._table +
+                    ','.join(tables) +qu1 + limit_str + offset_str, where_clause_params, debug=self._debug)
             res = cr.fetchall()
             return res[0][0]
-        cr.execute('select %s.id from ' % self._table + ','.join(tables) + where_str +' order by '+order_by+limit_str+offset_str, where_clause_params)
+        cr.execute('select %s.id from ' % self._table + ','.join(tables) + where_str +' order by '+order_by+limit_str+offset_str, where_clause_params, debug=self._debug)
         res = cr.fetchall()
         return [x[0] for x in res]
 
@@ -4051,7 +4057,7 @@ class orm(orm_template):
         if type(ids) in (int,long):
             ids = [ids]
         query = 'SELECT count(1) FROM "%s"' % (self._table)
-        cr.execute(query + "WHERE ID IN %s", (tuple(ids),))
+        cr.execute(query + "WHERE ID IN %s", (tuple(ids),), debug=self._debug)
         return cr.fetchone()[0] == len(ids)
 
     def check_recursion(self, cr, uid, ids, parent=None):
@@ -4070,12 +4076,13 @@ class orm(orm_template):
         if not parent:
             parent = self._parent_name
         ids_parent = ids[:]
-        query = 'SELECT distinct "%s" FROM "%s" WHERE id IN %%s' % (parent, self._table)
+        query = 'SELECT distinct "%s" FROM "%s" WHERE id = ANY(%%s)' % (parent, self._table)
         while ids_parent:
             ids_parent2 = []
             for i in range(0, len(ids), cr.IN_MAX):
+                # TODO: pg84 optimization
                 sub_ids_parent = ids_parent[i:i+cr.IN_MAX]
-                cr.execute(query, (tuple(sub_ids_parent),))
+                cr.execute(query, (sub_ids_parent,), debug=self._debug)
                 ids_parent2.extend(filter(None, map(lambda x: x[0], cr.fetchall())))
             ids_parent = ids_parent2
             for i in ids_parent:

@@ -388,7 +388,7 @@ class common(_ObjectService):
                         'login_message','get_stats', 'check_connectivity',
                         'list_http_services']:
             pass
-        elif method in ['get_available_updates', 'get_migration_scripts', 'set_loglevel']:
+        elif method in ['get_available_updates', 'get_migration_scripts', 'set_loglevel', 'set_obj_debug']:
             passwd = params[0]
             params = params[1:]
             security.check_super(passwd)
@@ -557,6 +557,14 @@ GNU Public Licence.
         l = netsvc.Logger()
         l.set_loglevel(int(loglevel), logger)
         return True
+
+    def exp_set_obj_debug(self,db, obj, do_debug):
+        log = netsvc.Logger()
+        log.notifyChannel('web-services', netsvc.LOG_INFO, "setting debug for %s@%s to %s" %(obj, db, do_debug))
+        ls = netsvc.LocalService('object_proxy')
+        res = ls.set_debug(db, obj, do_debug)
+        return res
+
 
     def exp_get_stats(self):
         import threading
