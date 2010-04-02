@@ -123,7 +123,9 @@ class Cursor(object):
             params = params or None
             res = self._obj.execute(query, params)
         except psycopg2.ProgrammingError, pe:
-            self.__logger.error("Programming error: %s, in query %s", pe, query)
+            self.__logger.exception("Programming error: %s, in query %s" % (pe, query))
+            self.__logger.error("bad query: %s" % query)
+            self.__logger.error("params: %s" % (params,))
             raise
         except Exception:
             self.__logger.exception("bad query: %s", self._obj.query)
@@ -207,8 +209,8 @@ class Cursor(object):
         
         if not name in self.__prepared:
             if '%d' in query or '%f' in query:
-                log(query, netsvc.LOG_WARNING)
-                log("SQL queries cannot contain %d or %f anymore. Use only %s", netsvc.LOG_WARNING)
+                self.__logger.warn(query)
+                self.__logger.warn("SQL queries cannot contain %d or %f anymore. Use only %s")
                 if params:
                     query = query.replace('%d', '%s').replace('%f', '%s')
             
