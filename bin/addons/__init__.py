@@ -772,7 +772,7 @@ def load_modules(db, force_demo=False, status=None, update_module=False):
     cr = db.cursor()
     if cr:
         cr.execute("SELECT relname FROM pg_class WHERE relkind='r' AND relname='ir_module_module'")
-        if len(cr.fetchall())==0:
+       if len(cr.fetchall())==0:
             logger.notifyChannel("init", netsvc.LOG_INFO, "init db")
             tools.init_db(cr)
             tools.config["init"]["all"] = 1
@@ -875,14 +875,10 @@ def load_modules(db, force_demo=False, status=None, update_module=False):
             # TODO: remove menu without actions of children
             #
             while True:
-                cr.execute('''delete from
-                        ir_ui_menu
-                    where
-                        (id not IN (select parent_id from ir_ui_menu where parent_id is not null))
-                    and
-                        (id not IN (select res_id from ir_values where model='ir.ui.menu'))
-                    and
-                        (id not IN (select res_id from ir_model_data where model='ir.ui.menu'))''')
+                cr.execute('''DELETE FROM ir_ui_menu
+                    WHERE (id NOT IN (SELECT parent_id FROM ir_ui_menu WHERE parent_id IS NOT NULL))
+                      AND (id NOT IN (SELECT res_id FROM ir_values WHERE model='ir.ui.menu'))
+                      AND (id NOT IN (SELECT res_id FROM ir_model_data WHERE model='ir.ui.menu'))''')
                 cr.commit()
                 if not cr.rowcount:
                     break

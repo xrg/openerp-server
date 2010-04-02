@@ -45,17 +45,13 @@ class module_category(osv.osv):
     _description = "Module Category"
 
     def _module_nbr(self,cr,uid, ids, prop, unknow_none,context):
-        cr.execute('SELECT category_id, COUNT(*) \
-                      FROM ir_module_module \
-                     WHERE category_id IN %(ids)s \
-                        OR category_id IN (SELECT id \
-                                             FROM ir_module_category \
-                                            WHERE parent_id IN %(ids)s) \
-                     GROUP BY category_id', {'ids': tuple(ids)}
-                    )
+        cr.execute('SELECT category_id, COUNT(*) FROM ir_module_module '
+                'WHERE category_id = ANY (%s) OR category_id IN '
+                '(SELECT id FROM ir_module_category WHERE parent_id = ANY  (%s ) '
+                ' GROUP BY category_id', (ids, ids), debug=self._debug )
         result = dict(cr.fetchall())
         for id in ids:
-            cr.execute('select id from ir_module_category where parent_id=%s', (id,))
+            cr.execute('SELECT id FROM ir_module_category WHERE parent_id=%s', (id,))
             childs = [c for c, in cr.fetchall()]
             result[id] = reduce(lambda x,y:x+y, [result.get(c, 0) for c in childs], result.get(id, 0))
         return result
@@ -163,7 +159,7 @@ class module(osv.osv):
         ], string='State', readonly=True),
         'demo': fields.boolean('Demo data'),
         'license': fields.selection([
-                ('GPL-2', 'GPL Version 2'),
+s                ('GPL-2', 'GPL Version 2'),
                 ('GPL-2 or any later version', 'GPL-2 or later version'),
                 ('GPL-3', 'GPL Version 3'),
                 ('GPL-3 or any later version', 'GPL-3 or later version'),
@@ -185,8 +181,8 @@ class module(osv.osv):
     _order = 'name'
 
     _sql_constraints = [
-        ('name_uniq', 'unique (name)', 'The name of the module must be unique !'),
-        ('certificate_uniq', 'unique (certificate)', 'The certificate ID of the module must be unique !')
+        ('name_uniq', 'UNIQUE (name)', 'The name of the module must be unique !'),
+        ('certificate_uniq', 'UNIQUE (certificate)', 'The certificate ID of the module must be unique !')
     ]
 
     def unlink(self, cr, uid, ids, context=None):
@@ -272,14 +268,11 @@ class module(osv.osv):
 
     def button_uninstall(self, cr, uid, ids, context={}):
         for module in self.browse(cr, uid, ids):
-            cr.execute('''select m.state,m.name
-                from
-                    ir_module_module_dependency d
-                join
-                    ir_module_module m on (d.module_id=m.id)
-                where
-                    d.name=%s and
-                    m.state not in ('uninstalled','uninstallable','to remove')''', (module.name,))
+            cr.execute('''SELECT m.state,m.name
+                FROM ir_module_module_dependency d
+                JOIN ir_module_module m ON (d.module_id=m.id)
+                WHERE d.name=%s 
+                  AND m.state NOT IN ('uninstalled','uninstallable','to remove')''', (module.name,))
             res = cr.fetchall()
             if res:
                 raise orm.except_orm(_('Error'), _('Some installed modules depend on the module you plan to Uninstall :\n %s') % '\n'.join(map(lambda x: '\t%s: %s' % (x[0], x[1]), res)))
@@ -434,14 +427,13 @@ class module(osv.osv):
         p_id = None
         while categs:
             if p_id is not None:
-                cr.execute('select id from ir_module_category where name=%s and parent_id=%s', (categs[0], p_id))
+                cr.execute('SELECT id FROM ir_module_category WHERE name=%s AND parent_id=%s', (categs[0], p_id))
             else:
-                cr.execute('select id from ir_module_category where name=%s and parent_id is NULL', (categs[0],))
+                cr.execute('SELECT id FROM ir_module_category WHERE name=%s AND parent_id IS NULL', (categs[0],))
             c_id = cr.fetchone()
             if not c_id:
-                cr.execute('select nextval(\'ir_module_category_id_seq\')')
+                cr.execute('INSERT INTO ir_module_category (name, parent_id) VALUES (%s, %s) RETURNING id', (categs[0], p_id))
                 c_id = cr.fetchone()[0]
-                cr.execute('insert into ir_module_category (id, name, parent_id) values (%s, %s, %s)', (c_id, categs[0], p_id))
             else:
                 c_id = c_id[0]
             p_id = c_id
