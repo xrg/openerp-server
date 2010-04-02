@@ -33,6 +33,7 @@
 #
 from collections import defaultdict
 import string
+import logging
 import netsvc
 import sys
 
@@ -320,7 +321,11 @@ class many2one(_column):
         for record in list(set(filter(None, res.values()))):
             try:
                 record_name = dict(obj.name_get(cr, user, [record], context))
-            except except_orm:
+            except except_orm, e:
+                log = logging.getLogger('orm')
+                log.error("Exception at %s.name_get(%s): %s" % (obj._name, record, e))
+                # what happened, really? Please add exception clauses for
+                # non-access related ones.
                 record_name = {}
                 record_name[record] = '// Access Denied //'
             names.update(record_name)
