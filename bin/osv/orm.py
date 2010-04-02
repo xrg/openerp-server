@@ -468,23 +468,22 @@ class orm_template(object):
                 id = cr.fetchone()[0]
                 vals['id'] = id
                 cr.execute("""INSERT INTO ir_model_fields (
-                    id, model_id, model, name, field_description, ttype,
-                    relation,view_load,state,select_level,relation_field
-                ) VALUES (
-                    %s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s
-                )""", (
-                    id, vals['model_id'], vals['model'], vals['name'], vals['field_description'], vals['ttype'],
+                        id, model_id, model, name, field_description, ttype,
+                        relation,view_load,state,select_level,relation_field ) 
+                    VALUES ( %s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s )""", 
+                    ( id, vals['model_id'], vals['model'], vals['name'], vals['field_description'], vals['ttype'],
                      vals['relation'], bool(vals['view_load']), 'base',
-                    vals['select_level'],vals['relation_field']
-                ))
+                    vals['select_level'],vals['relation_field'] ), 
+                    debug=self._debug)
                 if 'module' in context:
                     name1 = 'field_' + self._table + '_' + k
                     cr.execute("select name from ir_model_data where name=%s", (name1,))
                     if cr.fetchone():
                         name1 = name1 + "_" + str(id)
-                    cr.execute("INSERT INTO ir_model_data (name,date_init,date_update,module,model,res_id) VALUES (%s, now(), now(), %s, %s, %s)", \
-                        (name1, context['module'], 'ir.model.fields', id)
-                    )
+                    cr.execute("INSERT INTO ir_model_data (name,date_init,date_update,module,model,res_id)"
+                               "VALUES (%s, now(), now(), %s, %s, %s)", \
+                               (name1, context['module'], 'ir.model.fields', id),
+                               debug=self._debug )
             else:
                 for key, val in vals.items():
                     if cols[k][key] != vals[key]:
@@ -1364,7 +1363,10 @@ class orm_template(object):
             elif field in fields:
                 fields[field].update(fields_def[field])
             else:
-                cr.execute('select name, model from ir_ui_view where (id=%s or inherit_id=%s) and arch like %s', (view_id, view_id, '%%%s%%' % field), debug=self._debug)
+                cr.execute('SELECT name, model, id FROM ir_ui_view '
+                            'WHERE (id=%s OR inherit_id=%s) AND arch LIKE %s',
+                            (view_id, view_id, '%%%s%%' % field), 
+                            debug=self._debug)
                 res = cr.fetchall()[:]
                 model = res[0][1]
                 res.insert(0, ("Can't find field '%s' in the following view parts composing the view of object model '%s':" % (field, model), None))
@@ -1556,24 +1558,25 @@ class orm_template(object):
             if view_ref and not view_id:
                 if '.' in view_ref:
                     module, view_ref = view_ref.split('.', 1)
-                    cr.execute("SELECT res_id FROM ir_model_data WHERE model='ir.ui.view' AND module=%s AND name=%s", (module, view_ref), debug=self._debug)
+                    cr.execute("SELECT res_id FROM ir_model_data "
+                                "WHERE model='ir.ui.view' AND module=%s "
+                                "AND name=%s", (module, view_ref), 
+                                debug=self._debug)
                     view_ref_res = cr.fetchone()
                     if view_ref_res:
                         view_id = view_ref_res[0]
 
             if view_id:
                 where = (model and (" and model='%s'" % (self._name,))) or ''
-                cr.execute('SELECT arch,name,field_parent,id,type,inherit_id FROM ir_ui_view WHERE id=%s'+where, (view_id,), debug=self._debug)
+                cr.execute('SELECT arch,name,field_parent,id,type,inherit_id '
+                         'FROM ir_ui_view WHERE id=%s'+where, 
+                         (view_id,), debug=self._debug)
             else:
-                cr.execute('''SELECT
-                        arch,name,field_parent,id,type,inherit_id
-                    FROM
-                        ir_ui_view
-                    WHERE
-                        model=%s AND
-                        type=%s AND
-                        inherit_id IS NULL
-                    ORDER BY priority''', (self._name, view_type), debug=self._debug)
+                cr.execute('''SELECT arch,name,field_parent,id,type,inherit_id
+                    FROM ir_ui_view
+                    WHERE model=%s AND type=%s AND inherit_id IS NULL
+                    ORDER BY priority''', (self._name, view_type), 
+                    debug=self._debug)
             sql_res = cr.fetchone()
 
             if not sql_res:
@@ -1591,7 +1594,9 @@ class orm_template(object):
 
             def _inherit_apply_rec(result, inherit_id):
                 # get all views which inherit from (ie modify) this view
-                cr.execute('select arch,id from ir_ui_view where inherit_id=%s and model=%s order by priority', (inherit_id, self._name), debug=self._debug)
+                cr.execute('SELECT arch,id FROM ir_ui_view '
+                        'WHERE inherit_id=%s AND model=%s ORDER BY PRIORITY',
+                        (inherit_id, self._name), debug=self._debug)
                 sql_inherit = cr.fetchall()
                 for (inherit, id) in sql_inherit:
                     result = _inherit_apply(result, inherit)
@@ -1772,7 +1777,8 @@ class orm_memory(orm_template):
         self.datas = {}
         self.next_id = 0
         self.check_id = 0
-        cr.execute('delete from wkf_instance where res_type=%s', (self._name,), debug=self._debug)
+        cr.execute('DELETE FROM wkf_instance WHERE res_type=%s', 
+                (self._name,), debug=self._debug)
 
     def _check_access(self, uid, object_id, mode):
         if uid != 1 and self.datas[object_id]['internal.create_uid'] != uid:
@@ -2012,7 +2018,9 @@ class orm_memory(orm_template):
             self._check_access(uid, id, 'unlink')
             self.datas.pop(id, None)
         if len(ids):
-            cr.execute('delete from wkf_instance where res_type=%s and res_id = ANY  (%s)', (self._name,ids), debug=self._debug)
+            cr.execute('DELETE FROM wkf_instance '
+                       'WHERE res_type=%s AND res_id = ANY  (%s)',
+                       (self._name,ids), debug=self._debug)
         return True
 
     def perm_read(self, cr, user, ids, context=None, details=True):
