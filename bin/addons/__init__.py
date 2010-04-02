@@ -772,7 +772,7 @@ def load_modules(db, force_demo=False, status=None, update_module=False):
     cr = db.cursor()
     if cr:
         cr.execute("SELECT relname FROM pg_class WHERE relkind='r' AND relname='ir_module_module'")
-       if len(cr.fetchall())==0:
+        if len(cr.fetchall())==0:
             logger.notifyChannel("init", netsvc.LOG_INFO, "init db")
             tools.init_db(cr)
             tools.config["init"]["all"] = 1
