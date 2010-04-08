@@ -55,6 +55,7 @@ class ir_sequence(osv.osv):
         'number_increment': lambda *a: 1,
         'number_next': lambda *a: 1,
         'padding' : lambda *a : 0,
+        'weight' : lambda *a: 10,
     }
 
     def _process(self, s):
