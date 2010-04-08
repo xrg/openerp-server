@@ -148,8 +148,8 @@ class BaseHttpDaemon(threading.Thread, netsvc.Server):
             self.server.logRequests = True
             self.server.timeout = self._busywait_timeout
             logging.getLogger("web-services").info(
-                        "starting %s service at %s port %d" %
-                        (self._RealProto, interface or '0.0.0.0', port,))
+                "starting %s service at %s port %d" %
+                (self._RealProto, interface or '0.0.0.0', port,))
         except Exception, e:
             logging.getLogger("httpd").exception("Error occured when starting the server daemon.")
             raise
