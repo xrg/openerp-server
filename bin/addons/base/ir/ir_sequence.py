@@ -23,6 +23,7 @@
 import time
 from osv import fields,osv
 import pooler
+import logging
 
 class ir_sequence_type(osv.osv):
     _name = 'ir.sequence.type'
@@ -73,20 +74,59 @@ class ir_sequence(osv.osv):
             'sec': time.strftime('%S'),
         }
 
+    def _get_test(self, test, context):
+        _irs_tests = { 'code': 'code=%s', 'id': 'id=%s' }
+        if test not in _irs_tests:
+            raise Exception('The test "%s" is not valid for ir.sequence.get_id()' % test)
+        return _irs_tests[test]
+    
     def get_id(self, cr, uid, sequence_id, test='id', context=None):
-        assert test in ('code','id')
-        cr.execute('SELECT id, number_next, prefix, suffix, padding FROM ir_sequence WHERE '+test+'=%s AND active=%s FOR UPDATE NOWAIT', (sequence_id, True))
-        res = cr.dictfetchone()
-        if res:
-            cr.execute('UPDATE ir_sequence SET number_next=number_next+number_increment WHERE id=%s AND active=%s', (res['id'], True))
-            if res['number_next']:
-                return self._process(res['prefix']) + '%%0%sd' % res['padding'] % res['number_next'] + self._process(res['suffix'])
-            else:
-                return self._process(res['prefix']) + self._process(res['suffix'])
+        if not context:
+            context = {}
+        log = logging.getLogger('orm')
+        try:
+            sql_test = self._get_test(test, context)
+            cr.execute('SELECT id, number_next, prefix, suffix, padding, condition \
+                FROM ir_sequence \
+                WHERE '+sql_test+' AND active=%s ORDER BY weight DESC, length(COALESCE(condition,\'\')) DESC \
+                FOR UPDATE', (sequence_id, True), debug=self._debug)
+            for res in cr.dictfetchall():
+                if res['condition']:
+                    if self._debug:
+                        log.debug("ir_seq: %s has condition: %s" %(res['id'], res['condition']))
+                    try:
+                        bo = safe_eval(res['condition'],context)
+                        if not bo:
+                            if self._debug:
+                                log.debug('ir_seq: %d not matched' % res['id'])
+                            continue
+                    except Exception,e:
+                        # it would be normal to have exceptions, because
+                        # the domain may contain errors
+                        if self._debug:
+                            log.exception('ir_seq[%d]: Exception %s with context %s' % \
+                                                (res['id'], context, e))
+                        continue
+                    if self._debug:
+                        log.debug('ir_seq: %d matched' % res['id'])
+
+                cr.execute('UPDATE ir_sequence '
+                        'SET number_next=number_next+number_increment '
+                        'WHERE id=%s AND active=%s', 
+                        (res['id'], True),
+                        debug=self._debug)
+                if res['number_next']:
+                    return self._process(res['prefix']) + '%%0%sd' % res['padding'] % res['number_next'] + self._process(res['suffix'])
+                else:
+                    return self._process(res['prefix']) + self._process(res['suffix'])
+            
+            # end for
+        finally:
+            cr.commit()
         return False
 
-    def get(self, cr, uid, code):
-        return self.get_id(cr, uid, code, test='code')
+    def get(self, cr, uid, code, context = None):
+        return self.get_id(cr, uid, code, test='code',context=context)
 ir_sequence()
 
 
