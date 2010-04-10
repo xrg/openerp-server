@@ -769,6 +769,7 @@ def load_modules(db, force_demo=False, status=None, update_module=False):
 
     if not status:
         status = {}
+
     cr = db.cursor()
     if cr:
         cr.execute("SELECT relname FROM pg_class WHERE relkind='r' AND relname='ir_module_module'")
