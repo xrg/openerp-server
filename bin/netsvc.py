@@ -209,9 +209,9 @@ def init_logger():
         handler = logging.StreamHandler(sys.stdout)
 
     if isinstance(handler, logging.StreamHandler) and os.isatty(handler.stream.fileno()):
-        formatter = ColoredFormatter(format)
+        formatter = ColoredFormatter(format, '%Y-%m-%d %H:%M:%S')
     else:
-        formatter = logging.Formatter(format)
+        formatter = logging.Formatter(format, '%Y-%m-%d %H:%M:%S')
     handler.setFormatter(formatter)
 
     # add the handler to the root logger
