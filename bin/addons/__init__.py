@@ -136,7 +136,7 @@ class Node(Singleton):
         self.children.sort(lambda x, y: cmp(x.name, y.name))
 
     def __setattr__(self, name, value):
-        super(Singleton, self).__setattr__(name, value)
+        super(Node, self).__setattr__(name, value)
         if name in ('init', 'update', 'demo'):
             tools.config[name][self.name] = 1
             for child in self.children:
@@ -349,7 +349,8 @@ def upgrade_graph(graph, cr, module_list, force=None):
                 packages.append((module, info.get('depends', []), info))
             else:
                 logger.notifyChannel('init', netsvc.LOG_WARNING, 'module %s: not installable, skipped' % (module))
-
+    if not packages:
+        return False
     dependencies = dict([(p, deps) for p, deps, data in packages])
     current, later = set([p for p, dep, data in packages]), set()
 
