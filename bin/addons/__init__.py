@@ -792,7 +792,6 @@ def load_modules(db, force_demo=False, status=None, update_module=False):
             logger.notifyChannel('init', netsvc.LOG_CRITICAL, 'module base cannot be loaded! (hint: verify addons-path)')
             raise osv.osv.except_osv('Could not load base module', 'module base cannot be loaded! (hint: verify addons-path)')
         has_updates = load_module_graph(cr, graph, status, perform_checks=(not update_module), report=report)
-
         if update_module:
             modobj = pool.get('ir.module.module')
             states = {'installed': 'button_upgrade', 'uninstalled': 'button_install'}
