@@ -41,7 +41,7 @@ import reportlab
 from lxml import etree
 import copy
 import locale
-import traceback, sys
+import logging
 from tools.safe_eval import safe_eval as eval
 import logging
 
@@ -124,7 +124,7 @@ def _process_text(self, txt):
                     if txt and (isinstance(txt, unicode) or isinstance(txt, str)):
                         txt = unicode(txt)
                 except Exception,e:
-                    tb_s = reduce(lambda x, y: x+y, traceback.format_exception(sys.exc_type, sys.exc_value, sys.exc_traceback))
+                    logging.getLogger('report').exception("Exception at: %s" % expr)
                 if type(txt)==type('') or type(txt)==type(u''):
                     txt2 = str2xml(txt)
                     result += unicode(txt2)
