@@ -748,7 +748,7 @@ def load_module_graph(cr, graph, status=None, perform_checks=True, **kwargs):
 
         statusi += 1
 
-    cr.execute('select model from ir_model where state=%s', ('manual',))
+    cr.execute('SELECT model FROM ir_model WHERE state=%s', ('manual',))
     for model in cr.dictfetchall():
         pool.get('ir.model').instanciate(cr, 1, model['model'], {})
 
@@ -806,7 +806,7 @@ def load_modules(db, force_demo=False, status=None, update_module=False):
             mods = [k for k in tools.config['update'] if tools.config['update'][k]]
             check_module_name(cr, mods, 'installed')
 
-            cr.execute("update ir_module_module set state=%s where name=%s", ('installed', 'base'))
+            cr.execute("UPDATE ir_module_module SET state=%s WHERE name=%s", ('installed', 'base'))
 
             STATES_TO_LOAD += ['to install']
 
@@ -831,7 +831,7 @@ def load_modules(db, force_demo=False, status=None, update_module=False):
             has_updates = has_updates or r
 
         if has_updates:
-            cr.execute("""select model,name from ir_model where id NOT IN (select distinct model_id from ir_model_access)""")
+            cr.execute("""SELECT model, name FROM ir_model WHERE id NOT IN (SELECT DISTINCT model_id FROM ir_model_access)""")
             for (model, name) in cr.fetchall():
                 model_obj = pool.get(model)
                 if not isinstance(model_obj, osv.osv.osv_memory):
@@ -845,7 +845,7 @@ def load_modules(db, force_demo=False, status=None, update_module=False):
                 if isinstance(model_obj, osv.osv.osv_memory):
                     logger.notifyChannel('init', netsvc.LOG_WARNING, 'In-memory object %s (%s) should not have explicit access rules!' % (model, name))
 
-            cr.execute("SELECT model from ir_model")
+            cr.execute("SELECT model FROM ir_model")
             for (model,) in cr.fetchall():
                 obj = pool.get(model)
                 if obj:
@@ -859,7 +859,7 @@ def load_modules(db, force_demo=False, status=None, update_module=False):
 
         cr.commit()
         if update_module:
-            cr.execute("select id,name from ir_module_module where state=%s", ('to remove',))
+            cr.execute("SELECT id, name FROM ir_module_module WHERE state=%s", ('to remove',))
             for mod_id, mod_name in cr.fetchall():
                 cr.execute('SELECT model, res_id FROM ir_model_data '
                         'WHERE noupdate=%s AND module=%s AND model <> \'ir.module.module\' '
@@ -871,7 +871,7 @@ def load_modules(db, force_demo=False, status=None, update_module=False):
                         rmod_module.unlink(cr, uid, [rid])
                     else:
                         logger.notifyChannel('init', netsvc.LOG_ERROR, 'Could not locate %s to remove res=%d' % (rmod,rid))
-                cr.execute('delete from ir_model_data where noupdate=%s and module=%s', (False, mod_name,))
+                cr.execute('DELETE FROM ir_model_data WHERE noupdate=%s AND module=%s', (False, mod_name,))
                 cr.commit()
             #
             # TODO: remove menu without actions of children
@@ -887,7 +887,7 @@ def load_modules(db, force_demo=False, status=None, update_module=False):
                 else:
                     logger.notifyChannel('init', netsvc.LOG_INFO, 'removed %d unused menus' % (cr.rowcount,))
 
-            cr.execute("update ir_module_module set state=%s where state=%s", ('uninstalled', 'to remove',))
+            cr.execute("UPDATE ir_module_module SET state=%s WHERE state=%s", ('uninstalled', 'to remove',))
             cr.commit()
     finally:
         cr.close()

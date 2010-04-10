@@ -821,8 +821,8 @@ form: module.record_id""" % (xml_id,)
                     if rec.tag in self._tags:
                         try:
                             self._tags[rec.tag](self.cr, rec, n)
-                        except:
-                            self.logger.notifyChannel("init", netsvc.LOG_ERROR, '\n'+etree.tostring(rec))
+                        except Exception, e:
+                            self.logger.notifyChannel("init", netsvc.LOG_ERROR, '%s\n%s' % (e, etree.tostring(rec)))
                             self.cr.rollback()
                             raise
         return True
