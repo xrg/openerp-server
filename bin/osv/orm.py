@@ -2943,15 +2943,21 @@ class orm(orm_template):
             cols = intersect(self._inherit_fields.keys(), set(fields_to_read) - set(self._columns.keys()))
             if not cols:
                 continue
-            res2 = self.pool.get(table).read(cr, user, [x[col] for x in res], cols, context, load)
+            inh_ids = filter(None, [x[col] for x in res])
+            res2 = self.pool.get(table).read(cr, user, inh_ids , cols, context, load)
 
             res3 = {}
             for r in res2:
                 res3[r['id']] = r
                 del r['id']
 
+            res_empty = {}
+            for c in cols:
+                res_empty[c] = None
+
             for record in res:
                 if not record[col]:# if the record is deleted from _inherits table?
+                    record.update(res_empty)
                     continue
                 record.update(res3[record[col]])
                 if col not in fields_to_read:
