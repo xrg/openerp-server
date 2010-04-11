@@ -238,10 +238,12 @@ class expression(object):
                             if res_ids:
                                 operator = 'in'
                         else:
-                            if not isinstance(right, list):
-                                res_ids = [right]
+                            if isinstance(right, tuple):
+                                res_ids = list(map(int, right))
+                            elif not isinstance(right, list):
+                                res_ids = [ int(right) ]
                             else:
-                                res_ids = right
+                                res_ids = map(int, right)
                         if not res_ids:
                             if operator in ['like','ilike','in','=']:
                                 #no result found with given search criteria
