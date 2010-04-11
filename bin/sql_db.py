@@ -124,6 +124,13 @@ class Cursor(object):
 
         if self.sql_log or debug:
             now = mdt.now()
+            try:
+                # mogrify must happen before execute
+                qrystr = self._obj.mogrify(query, params or [])
+            except TypeError, e:
+                qrystr = query + '; params: %s' % (params,)
+            except Exception, e:
+                self.__logger.error("Mogrify:%s" % e)
 
         try:
             params = params or None
@@ -144,10 +151,6 @@ class Cursor(object):
             dstr = ''
             if delay > 10000: # only show slow times
                 dstr = ' (%dms)' % int(delay/1000)
-            try:
-                qrystr = query % tuple(params or [])
-            except TypeError, e:
-                qrystr = query + '; params: %s' % (params,)
             try:
                 log("Q%s: %s" % (dstr, qrystr), lvl=netsvc.LOG_DEBUG)
             except:
