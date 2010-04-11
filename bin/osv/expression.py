@@ -170,6 +170,7 @@ class expression(object):
             elif field._type == 'one2many':
                 # Applying recursivity on field(one2many)
                 if operator == 'child_of':
+                    # TODO: pg8.4 extension
                     if isinstance(right, basestring):
                         ids2 = [x[0] for x in field_obj.name_search(cr, uid, right, [], 'like', context=context, limit=None)]
                     else:
@@ -217,6 +218,7 @@ class expression(object):
             elif field._type == 'many2many':
                 #FIXME
                 if operator == 'child_of':
+		    # TODO: pg8.4 extension
                     if isinstance(right, basestring):
                         ids2 = [x[0] for x in field_obj.name_search(cr, uid, right, [], 'like', context=context, limit=None)]
                     else:
@@ -267,6 +269,7 @@ class expression(object):
 
             elif field._type == 'many2one':
                 if operator == 'child_of':
+		    # TODO: pg8.4 extension
                     if isinstance(right, basestring):
                         ids2 = [x[0] for x in field_obj.name_search(cr, uid, right, [], 'like', limit=None)]
                     elif isinstance(right, (int, long)):
@@ -419,6 +422,8 @@ class expression(object):
                         query = "(%s.%s %s '%%s')" % (table._table, left, op)
                         params = right
 
+            elif (operator == 'child_of'):
+                raise Exception("Cannot compute %s %s %s in sql" %(left, operator, right))
             else:
                 if left == 'id':
                     query = '%s.id %s %%s' % (table._table, operator)
