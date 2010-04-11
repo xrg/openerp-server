@@ -101,7 +101,8 @@ class ir_rule(osv.osv):
                 AND r.perm_""" + mode + """
                 AND (r.id IN (SELECT rule_group_id FROM rule_group_rel g_rel
                             JOIN res_groups_users_rel u_rel ON (g_rel.group_id = u_rel.gid)
-                            WHERE u_rel.uid = %s) OR r.global)""", (model_name, uid))
+                            WHERE u_rel.uid = %s) OR r.global)""", (model_name, uid),
+                                debug=self._debug)
         ids = map(lambda x: x[0], cr.fetchall())
         for rule in self.browse(cr, uid, ids):
             for group in rule.groups:
