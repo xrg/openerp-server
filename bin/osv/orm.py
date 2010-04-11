@@ -1321,7 +1321,7 @@ class orm_template(object):
                           INNER JOIN wkf_transition t ON (t.act_to = a.id)
                                WHERE wkf.osv = %s
                                  AND t.signal = %s
-                           """, (self._name, button.get('name'),))
+                           """, (self._name, button.get('name'),), debug=self._debug)
                 roles = cr.fetchall()
 
                 # draft -> valid = signal_next (role X)
@@ -1368,10 +1368,18 @@ class orm_template(object):
                             (view_id, view_id, '%%%s%%' % field), 
                             debug=self._debug)
                 res = cr.fetchall()[:]
-                model = res[0][1]
-                res.insert(0, ("Can't find field '%s' in the following view parts composing the view of object model '%s':" % (field, model), None))
-                msg = "\n * ".join([r[0] for r in res])
-                msg += "\n\nEither you wrongly customised this view, or some modules bringing those views are not compatible with your current data model"
+                
+                if res:
+                    parts = ''
+                    for r in res:
+                        parts += _('\n %s for %s (id: %d)') % tuple(r)
+                else:
+                    parts = _('\n <no view found>')
+                msg = _("Can't find field '%s' in the following view parts composing the view #%d of object model '%s':"
+                        "\n %s\n "
+                        "\nEither you wrongly customised this view, or some modules bringing those views are not compatible with your current data model.") % \
+                        (field, view_id, self._name,
+                         parts)
                 netsvc.Logger().notifyChannel('orm', netsvc.LOG_ERROR, msg)
                 raise except_orm('View error', msg)
         return arch, fields
