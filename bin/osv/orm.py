@@ -2337,7 +2337,7 @@ class orm(orm_template):
         logger.notifyChannel('orm', netsvc.LOG_INFO, "storing computed values of fields.function '%s'" % (k,))
         ss = self._columns[k]._symbol_set
         update_query = 'UPDATE "%s" SET "%s"=%s WHERE id=%%s' % (self._table, k, ss[0])
-        cr.execute('select id from '+self._table)
+        cr.execute('select id from '+self._table, debug=self._debug)
         ids_lst = map(lambda x: x[0], cr.fetchall())
         while ids_lst:
             iids = ids_lst[:40]
@@ -3039,6 +3039,15 @@ class orm(orm_template):
                 if rule_clause:
                     cr.execute(query, [tuple(sub_ids)] + rule_params, debug=self._debug)
                     if cr.rowcount != len(sub_ids):
+                        # Some "access errors" may not be due to rules, but
+                        # due to incorrectly cached data, which won't match
+                        # the result fetched again from the db.
+                        if self._debug:
+                            logger = logging.getLogger('orm')
+                            rc = cr.rowcount
+                            sd = {}.fromkeys(sub_ids)
+                            logger.debug("access error @%s  %d != %d " %(self._name, rc, len(sd)))
+                            logger.debug("len(%s) != len(%s)" % (cr.fetchall(), sd))
                         raise except_orm(_('AccessError'),
                                 _('You try to bypass an access rule while reading (Document type: %s).') % self._description)
                 else:
@@ -3890,7 +3899,9 @@ class orm(orm_template):
                             except:
                                 pass
                         cr.execute('UPDATE "' + self._table + '" SET ' + \
-                            '"'+f+'"='+self._columns[f]._symbol_set[0] + ' WHERE id = %s', (self._columns[f]._symbol_set[1](value),id))
+                            '"'+f+'"='+self._columns[f]._symbol_set[0] + ' WHERE id = %s', 
+                                (self._columns[f]._symbol_set[1](value),id),
+                                debug=self._debug)
         return True
 
     #
