@@ -38,6 +38,7 @@
 #
 #
 import calendar
+from tools.safe_eval import safe_eval
 import copy
 import datetime
 import logging
@@ -1164,7 +1165,7 @@ class orm_template(object):
                     res[f]['third_table'] = self._columns[f]._rel
                 for arg in ('string', 'readonly', 'states', 'size', 'required', 'group_operator',
                         'change_default', 'translate', 'help', 'select', 'selectable'):
-                    if getattr(self._columns[f], arg):
+                    if hasattr(self._columns[f], arg) and getattr(self._columns[f], arg):
                         res[f][arg] = getattr(self._columns[f], arg)
                 if not write_access:
                     res[f]['readonly'] = True
@@ -3129,7 +3130,9 @@ class orm(orm_template):
                 res2 = self._columns[val[0]].get(cr, self, ids, val, user, context=context, values=res)
                 for pos in val:
                     for record in res:
-                        if isinstance(res2[record['id']], str):res2[record['id']] = eval(res2[record['id']]) #TOCHECK : why got string instend of dict in python2.6
+                        if isinstance(res2[record['id']], str):
+                            res2[record['id']] = eval(res2[record['id']])
+                            #TOCHECK : why got string instend of dict in python2.6
                         record[pos] = res2[record['id']][pos]
             else:
                 for f in val:
@@ -3294,13 +3297,13 @@ class orm(orm_template):
 
 
         self.check_access_rule(cr, uid, ids, 'unlink', context=context)
-        for sub_ids in cr.split_for_in_conditions(ids):
-            cr.execute('delete from ' + self._table + ' ' \
-                       'where id IN %s', (sub_ids,))
+        cr.execute('DELETE FROM ' + self._table + ' ' \
+                       'WHERE id = ANY(%s)', (ids,), debug=self._debug)
+
         for order, object, store_ids, fields in result_store:
             if object != self._name:
                 obj =  self.pool.get(object)
-                cr.execute('select id from '+obj._table+' where id IN %s',(tuple(store_ids),))
+                cr.execute('SELECT id FROM '+obj._table+' WHERE id = ANY(%s)', (store_ids,))
                 rids = map(lambda x: x[0], cr.fetchall())
                 if rids:
                     obj._store_set_values(cr, uid, rids, fields, context)
@@ -3464,7 +3467,7 @@ class orm(orm_template):
             self.check_access_rule(cr, user, ids, 'write', context=context)
             for sub_ids in cr.split_for_in_conditions(ids):
                 cr.execute('update ' + self._table + ' set ' + ','.join(upd0) + ' ' \
-                           'where id IN %s', upd1 + [sub_ids])
+                           'where id in %s', upd1 + [sub_ids], debug=self._debug) # TODO
 
             if totranslate:
                 # TODO: optimize
@@ -3494,11 +3497,9 @@ class orm(orm_template):
         for table in self._inherits:
             col = self._inherits[table]
             nids = []
-            for sub_ids in cr.split_for_in_conditions(ids):
-                cr.execute('SELECT DISTINCT "'+col+'" FROM "'+self._table+'" ' \
-                           'WHERE id IN %s', (sub_ids,))
-                nids.extend([x[0] for x in cr.fetchall()])
-
+            cr.execute('SELECT DISTINCT "'+col+'" FROM "'+self._table+'" ' \
+                           'WHERE id = ANY(%s)', (ids,), debug=self._debug)
+            nids.extend([x[0] for x in cr.fetchall()])
             v = {}
             for val in updend:
                 if self._inherit_fields[val][0] == table:
@@ -3612,11 +3613,12 @@ class orm(orm_template):
             if c in vals:
                 avoid_table.append(t)
         for f in self._columns.keys(): # + self._inherit_fields.keys():
-            if not f in vals:
+            if (not f in vals) and (not isinstance(self._columns[f], fields.property)):
                 default.append(f)
 
         for f in self._inherit_fields.keys():
-            if (not f in vals) and (self._inherit_fields[f][0] not in avoid_table):
+            if (not f in vals) and (self._inherit_fields[f][0] not in avoid_table) \
+                    and (not isinstance(self._inherit_fields[f][2], fields.property)):
                 default.append(f)
 
         if len(default):
@@ -3705,13 +3707,14 @@ class orm(orm_template):
                 if not edit:
                     vals.pop(field)
         for field in vals:
-            if self._columns[field]._classic_write:
-                upd0 = upd0 + ',"' + field + '"'
-                upd1 = upd1 + ',' + self._columns[field]._symbol_set[0]
-                upd2.append(self._columns[field]._symbol_set[1](vals[field]))
-            else:
-                if not isinstance(self._columns[field], fields.related):
-                    upd_todo.append(field)
+            if field in self._columns:
+                if self._columns[field]._classic_write:
+                    upd0 = upd0 + ',"' + field + '"'
+                    upd1 = upd1 + ',' + self._columns[field]._symbol_set[0]
+                    upd2.append(self._columns[field]._symbol_set[1](vals[field]))
+                else:
+                    if not isinstance(self._columns[field], fields.related):
+                        upd_todo.append(field)
             if field in self._columns \
                     and hasattr(self._columns[field], 'selection') \
                     and vals[field]:
@@ -3762,7 +3765,7 @@ class orm(orm_template):
                 cr.execute('UPDATE '+self._table+' SET parent_right=parent_right+2 WHERE parent_right > %s', (pleft,))
                 cr.execute('UPDATE '+self._table+' SET parent_left=%s,parent_right=%s WHERE id=%s', (pleft+1,pleft+2,id_new))
 
-        # default element in context must be remove when call a one2many or many2many
+        # default element in context must be removed when call a one2many or many2many
         rel_context = context.copy()
         for c in context.items():
             if c[0].startswith('default_'):
@@ -3883,7 +3886,8 @@ class orm(orm_template):
                     upd1.append(id)
                     if upd0 and upd1:
                         cr.execute('UPDATE "' + self._table + '" SET ' + \
-                            string.join(upd0, ',') + ' WHERE id = %s', upd1, debug=self._debug)
+                            string.join(upd0, ',') + ' WHERE id = %s', upd1,
+                            debug=self._debug)
 
             else:
                 for f in val:
