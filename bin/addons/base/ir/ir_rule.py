@@ -25,16 +25,17 @@ from operator import itemgetter
 from functools import partial
 import tools
 from tools.safe_eval import safe_eval as eval
+import logging
 
 class ir_rule(osv.osv):
     _name = 'ir.rule'
     _MODES = ['read', 'write', 'create', 'unlink']
 
-    def _domain_force_get(self, cr, uid, ids, field_name, arg, context={}):
-        res = {}
-        for rule in self.browse(cr, uid, ids, context):
-            eval_user_data = {'user': self.pool.get('res.users').browse(cr, 1, uid),
-                            'time':time}
+    def __domain_calc(self, rule_dic, eval_data):
+        """ Calculate the domain expression for some rule.
+        @rule_dic is a dictionary with rule{'domain_force', 'operand', 'operator', 'field_name'}
+        @eval_data a dictionary with context for eval()
+        """
             res[rule.id] = eval(rule.domain_force, eval_user_data)
         return res
 
@@ -43,8 +44,32 @@ class ir_rule(osv.osv):
         for rule in self.browse(cr, uid, ids, context):
             if not rule.groups:
                 res[rule.id] = True
+        else:
+            opnd = rule_dic['operand']
+            if opnd and opnd.startswith('user.') and opnd.count('.') > 1:
+                #Need to check user.field.field1.field2(if field  is False,it will break the chain)
+                op = opnd[5:]
+                opnd = opnd[:5+len(op[:op.find('.')])] +' and '+ opnd + ' or False'
+            
+            if rule_dic['operator'] in ('in', 'child_of', '|child_of'):
+                res = safe_eval("[('%s', '%s', [%s])]" % (rule_dic['field_name'], rule_dic['operator'],
+                    safe_eval(opnd,eval_data)), eval_data)
             else:
-                res[rule.id] = False
+                res = safe_eval("[('%s', '%s', %s)]" % (rule_dic['field_name'], 
+                    rule_dic['operator'], opnd), eval_user_data)
+        if self._debug:
+            logging.getLogger('orm').debug("Domain calc: %s " % res)
+        return res
+        
+        
+    def _domain_force_get(self, cr, uid, ids, field_name, arg, context=None):
+        res = {}
+        eval_user_data = {'user': self.pool.get('res.users').browse(cr, 1, uid),
+                'time':time}
+        for rule in self.browse(cr, uid, ids, fields_only=['domain_force','operand','operator', 'field_id'], context=context):
+            rule_dic = { 'domain_force': rule.domain_force, 'operand': rule.operand, 
+                        'operator': rule.operator, 'field_name': rule.field_id.name }
+            res[rule.id] = self.__domain_calc(rule_dic, eval_user_data)
         return res
 
     def _check_model_obj(self, cr, uid, ids, context={}):
@@ -84,33 +109,53 @@ class ir_rule(osv.osv):
         for rule in self.browse(cr, uid, rule_ids):
             dom += rule.domain
         return dom
-
-    @tools.cache()
-    def _compute_domain(self, cr, uid, model_name, mode="read"):
-        if mode not in self._MODES:
-            raise ValueError('Invalid mode: %r' % (mode,))
-        group_rule = {}
-        global_rules = []
-
+        
+    def domain_get(self, cr, uid, model_name, mode='read', context=None):
+        """ Retrieve the domain for some /model_name/.
+            It will locate relevant rules (for uid != 1, aka admin), and put
+            them together into an expression.
+            
+            Returns (where_clause, clause_params, tables) so that an SQL
+            query can append the where_clause, feed it with clause_params.
+            If needed, tables will contain any tables (including one for the
+            model_name) needed in the FROM expression
+        """
         if uid == 1:
-            return None
-        cr.execute_prepared( 'ir_rule_domain_get', """SELECT r.id
-                FROM ir_rule r
-                JOIN (ir_rule_group g
+            return [], [], ['"'+self.pool.get(model_name)._table+'"']
+
+        cr.execute_prepared( 'ir_rule_domain_get_'+mode, """SELECT r.id, g.id AS group_id,
+                        imf.name AS field_name, r.domain_force, r.operand, r.operator
+                FROM ir_rule r JOIN (ir_rule_group g
                     JOIN ir_model m ON (g.model_id = m.id))
                     ON (g.id = r.rule_group)
+                    LEFT JOIN ir_model_fields imf ON ( imf.id = r.field_id )
                 WHERE m.model = %s
                 AND r.perm_""" + mode + """
                 AND (g.id IN (SELECT rule_group_id FROM group_rule_group_rel g_rel
                             JOIN res_groups_users_rel u_rel ON (g_rel.group_id = u_rel.gid)
-                            WHERE u_rel.uid = %s) OR g.global)""", (model_name, uid),
+                            WHERE u_rel.uid = %s) OR g.global)
+                ORDER BY group_id""", (model_name, uid),
                                 debug=self._debug)
-        ids = map(lambda x: x[0], cr.fetchall())
+
+        eval_user_data = {'user': self.pool.get('res.users').browse(cr, 1, uid),
+                'time':time}
+        
         dom = []
-        for rule in self.browse(cr, uid, ids):
-            dom = expression.or_join(dom, rule.domain)
+        last_gid = None
+        for r in cr.dictfetchall():
+            rdo = self.__domain_calc(r, eval_user_data)
+            # Order by is important, because it will group the ir_rule_groups together
+            if (last_gid is None) or last_gid == r['group_id']:
+                dom += rdo
+            else:
+                dom = expression.or_join(dom, rdo)
+            last_gid = r['group_id']
+        
+        if self._debug:
+            logging.getLogger('orm').debug("Resulting domain: %s" % dom)
         d1,d2,tables = self.pool.get(model_name)._where_calc(cr, uid, dom, active_test=False)
         return d1, d2, tables
+        
     domain_get = tools.cache()(domain_get)
 
     def unlink(self, cr, uid, ids, context=None):
