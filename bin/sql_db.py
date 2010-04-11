@@ -26,6 +26,7 @@ from psycopg2.extensions import ISOLATION_LEVEL_AUTOCOMMIT, ISOLATION_LEVEL_READ
 from psycopg2.psycopg1 import cursor as psycopg1cursor
 from psycopg2.pool import PoolError
 
+from psycopg2 import OperationalError
 import psycopg2.extensions
 
 psycopg2.extensions.register_type(psycopg2.extensions.UNICODE)
@@ -89,8 +90,7 @@ class Cursor(object):
         self._pool = pool
         self.dbname = dbname
         self._serialized = serialized
-        self._cnx = pool.borrow(dsn(dbname))
-        self._obj = self._cnx.cursor(cursor_factory=psycopg1cursor)
+        self._cnx, self._obj = pool.borrow(dsn(dbname), True)
         self.__closed = False   # real initialisation value
         self.autocommit(False)
         self.__caller = tuple(stack()[2][1:3])
@@ -335,24 +335,35 @@ class ConnectionPool(object):
         self._logger.info("Debugging set to %s" % str(do_debug))
 
     @locked
-    def borrow(self, dsn):
-        self._debug('Borrow connection to %r', dsn)
+    def borrow(self, dsn, do_cursor=False):
+        self._debug('Borrow connection to %s' % (dsn,))
 
-        # free leaked connections
-        for i, (cnx, _) in tools.reverse_enumerate(self._connections):
-            if getattr(cnx, 'leaked', False):
-                delattr(cnx, 'leaked')
-                self._connections.pop(i)
-                self._connections.append((cnx, False))
-                self._debug('Free leaked connection to %r', cnx.dsn)
-
+        result = None
         for i, (cnx, used) in enumerate(self._connections):
             if not used and dsn_are_equals(cnx.dsn, dsn):
-                self._connections.pop(i)
-                self._connections.append((cnx, True))
-                self._debug('Existing connection found at index %d', i)
+                self._debug('Existing connection found at index %d' % i)
 
-                return cnx
+                self._connections.pop(i)
+                if cnx.closed or not cnx.status:
+                    # something is wrong with that connection, let it out
+                    continue
+                
+                if do_cursor:
+                    try:
+                        cur = cnx.cursor(cursor_factory=psycopg1cursor)
+                        if not cur.isready():
+                            continue
+                        self._connections.append((cnx, True))
+
+                        result = (cnx, cur)
+                    except OperationalError:
+                        continue
+                else:
+                    self._connections.append((cnx, True))
+                    result = cnx
+                break
+        if result:
+            return result
 
         if len(self._connections) >= self._maxconn:
             # try to remove the oldest connection not used
@@ -367,7 +378,9 @@ class ConnectionPool(object):
 
         result = psycopg2.connect(dsn=dsn, connection_factory=PsycoConnection)
         self._connections.append((result, True))
-        self._debug('Create new connection')
+        if do_cursor:
+            cur = result.cursor(cursor_factory=psycopg1cursor)
+            return (result, cur)
         return result
 
     @locked
@@ -376,11 +389,8 @@ class ConnectionPool(object):
         for i, (cnx, used) in enumerate(self._connections):
             if cnx is connection:
                 self._connections.pop(i)
-                if keep_in_pool:
+                if cnx.closed or not cnx.status:
                     self._connections.append((cnx, False))
-                    self._debug('Put connection to %r in pool', cnx.dsn)
-                else:
-                    self._debug('Forgot connection to %r', cnx.dsn)
                 break
         else:
             raise PoolError('This connection does not below to the pool')
