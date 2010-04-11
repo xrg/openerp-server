@@ -63,24 +63,51 @@ class expression(object):
     def __execute_recursive_in(self, cr, s, f, w, ids, op, type):
         # todo: merge into parent query as sub-query
         res = []
+        qry = None
+        params = []
         if ids:
             if op in ['<','>','>=','<=']:
-                cr.execute('SELECT "%s"'    \
-                               '  FROM "%s"'    \
-                               ' WHERE "%s" %s %%s' % (s, f, w, op), (ids[0],))
-                res.extend([r[0] for r in cr.fetchall()])
+                qry = 'SELECT "%s" FROM "%s"'    \
+                          ' WHERE "%s" %s %%s' % (s, f, w, op)
+                params = [ids[0], ]
+            elif self.__mode == 'pg84' or self.__mode == 'pgsql':
+                if isinstance(ids, placeholder):
+                    dwc = '= %s' % ids.expr
+                    params = []
+                elif isinstance(ids, list) and isinstance(ids[0], placeholder):
+                    dwc = '= %s' % ids[0].expr
+                    params = []
+                else:
+                    dwc = '= ANY(%s)'
+                    params = ids
+                qry = 'SELECT "%s"'    \
+                           '  FROM "%s"'    \
+                           ' WHERE "%s" %s' % (s, f, w, dwc)
             else:
                 for i in range(0, len(ids), cr.IN_MAX):
                     subids = ids[i:i+cr.IN_MAX]
                     cr.execute('SELECT "%s"'    \
                                '  FROM "%s"'    \
-                               '  WHERE "%s" IN %%s' % (s, f, w),(tuple(subids),))
+                               ' WHERE "%s" IN (%s) ' % (s, f, w, 
+                                            ','.join(['%s']*len(subids)) ),
+                                        subids)
                     res.extend([r[0] for r in cr.fetchall()])
+                # we return early, with the bare results
+                return None, res
+
         else:
-            cr.execute('SELECT distinct("%s")'    \
-                           '  FROM "%s" where "%s" is not null'  % (s, f, s)),
+            qry = 'SELECT distinct("%s")' \
+                           '  FROM "%s" where "%s" is not null'  % (s, f, s)
+            params = []
+           
+        if self.__mode == 'pgsql' or self.__mode == 'pg84':
+            return qry, params
+        else:
+            cr.execute(qry, params)
             res.extend([r[0] for r in cr.fetchall()])
-        return res
+            return None, res
+        # unreachable code
+        return None, None
 
     def __init__(self, exp, mode='old'):
         """  Initialize an expression to be evaluated on the object storage
@@ -129,7 +156,7 @@ class expression(object):
                 
                 qu1, qu2, qtables = table._where_calc(cr, uid, 
                         [(parent or table._parent_name, '=', placeholder(phname, phexpr) )], context)
-                
+
                 d1, d2 = table.pool.get('ir.rule').domain_get(cr, uid, table._name)
                 if d1:
                     qu1.append(d1)
@@ -146,8 +173,8 @@ class expression(object):
                         table._table, table._table, phname, ' AND '.join(qu1),
                         phname)
                 
-                #print "INSELECT %s" % qry
-                #print "args:", qu2
+                # print "INSELECT %s" % qry
+                # print "args:", qu2
                 return [(left, 'inselect', (qry, qu2))]
             # elif self.__mode == 'pgsql':
             #  any way  to do that in pg8.3?
@@ -194,7 +221,7 @@ class expression(object):
                 continue
 
             field_obj = table.pool.get(field._obj)
-            if len(fargs) > 1:
+            if len(fargs) > 1: # *-*
                 if field._type == 'many2one':
                     right = field_obj.search(cr, uid, [(fargs[1], operator, right)], context=context)
                     self.__exp[i] = (fargs[0], 'in', right)
@@ -261,13 +288,36 @@ class expression(object):
                             o2m_op = 'in'
                             if operator in  ['not like','not ilike','not in','<>','!=']:
                                 o2m_op = 'not in'
-                            self.__exp[i] = ('id', o2m_op, self.__execute_recursive_in(cr, field._fields_id, field_obj._table, 'id', ids2, operator, field._type))
+                            erqu, erpa = self.__execute_recursive_in(cr, field._fields_id,
+                                                   field_obj._table, 'id', ids2, operator, field._type)
+                            if not erqu:
+                                self.__exp[i] = ('id', o2m_op, erpa )
+                            else:
+                                if o2m_op in ('in', '='):
+                                    o2m_op = 'inselect'
+                                elif o2m_op in ('not in', '!=', '<>'):
+                                    o2m_op = 'not inselect'
+                                else:
+                                    raise NotImplementedError('operator: %s' % o2m_op)
+                                self.__exp[i] = ('id', o2m_op, (erqu, erpa))
 
                     if call_null:
                         o2m_op = 'not in'
                         if operator in  ['not like','not ilike','not in','<>','!=']:
                             o2m_op = 'in'
-                        self.__exp[i] = ('id', o2m_op, self.__execute_recursive_in(cr, field._fields_id, field_obj._table, 'id', [], operator, field._type) or [0])
+
+                        erqu, erpa = self.__execute_recursive_in(cr, field._fields_id, 
+                                        field_obj._table, 'id', [], operator, field._type)
+                        if not erqu:
+                            self.__exp[i] = ('id', o2m_op, erpa )
+                        else:
+                            if o2m_op in ('in', '='):
+                                o2m_op = 'inselect'
+                            elif o2m_op in ('not in', '!=', '<>'):
+                                o2m_op = 'not inselect'
+                            else:
+                                raise NotImplementedError('operator: %s' % o2m_op)
+                            self.__exp[i] = ('id', o2m_op, (erqu, erpa))
 
             elif field._type == 'many2many':
                 #FIXME
@@ -281,7 +331,9 @@ class expression(object):
                     def _rec_convert(ids):
                         if field_obj == table:
                             return ids
-                        return self.__execute_recursive_in(cr, field._id1, field._rel, field._id2, ids, operator, field._type)
+                        erqu, erpa = self.__execute_recursive_in(cr, field._id1, field._rel, field._id2, ids, operator, field._type)
+                        assert(not erqu) # TODO
+                        return erpa
 
                     dom = _rec_get(ids2, field_obj)
                     ids2 = field_obj.search(cr, uid, dom, context=context)
@@ -314,12 +366,16 @@ class expression(object):
                             if operator in  ['not like','not ilike','not in','<>','!=']:
                                 m2m_op = 'not in'
 
-                            self.__exp[i] = ('id', m2m_op, self.__execute_recursive_in(cr, field._id1, field._rel, field._id2, res_ids, operator, field._type) or [0])
+			    erqu, erpa = self.__execute_recursive_in(cr, field._id1, field._rel, field._id2, res_ids, operator, field._type)
+			    assert(not erqu) # todo
+                            self.__exp[i] = ('id', m2m_op,  erpa)
                     if call_null_m2m:
                         m2m_op = 'not in'
                         if operator in  ['not like','not ilike','not in','<>','!=']:
                             m2m_op = 'in'
-                        self.__exp[i] = ('id', m2m_op, self.__execute_recursive_in(cr, field._id1, field._rel, field._id2, [], operator,  field._type) or [0])
+			erqu, erpa = self.__execute_recursive_in(cr, field._id1, field._rel, field._id2, [], operator,  field._type)
+			assert (not erqu) # TODO
+                        self.__exp[i] = ('id', m2m_op, erpa)
 
             elif field._type == 'many2one':
                 if isinstance(right, list) and len(right) and isinstance(right[0], tuple):
