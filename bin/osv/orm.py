@@ -2986,7 +2986,7 @@ class orm(orm_template):
                     for group in groups:
                         module = group.split(".")[0]
                         grp = group.split(".")[1]
-                        cr.execute("select count(*) from res_groups_users_rel where gid IN (select res_id from ir_model_data where name=%s and module=%s and model=%s) and uid=%s"  \
+                        cr.execute("SELECT count(*) FROM res_groups_users_rel WHERE gid IN (SELECT res_id FROM ir_model_data WHERE name='%s' AND module='%s' AND model='%s') AND uid=%s" % \
                                    (grp, module, 'res.groups', user))
                         readonly = cr.fetchall()
                         if readonly[0][0] >= 1:
@@ -3205,7 +3205,7 @@ class orm(orm_template):
                 for group in groups:
                     module = group.split(".")[0]
                     grp = group.split(".")[1]
-                    cr.execute("select count(*) from res_groups_users_rel where gid IN (select res_id from ir_model_data where name=%s and module=%s and model=%s) and uid=%s" \
+                    cr.execute("SELECT count(*) FROM res_groups_users_rel WHERE gid IN (SELECT res_id FROM ir_model_data WHERE name='%s' AND module='%s' AND model='%s') AND uid=%s" % \
                                (grp, module, 'res.groups', user))
                     readonly = cr.fetchall()
                     if readonly[0][0] >= 1:
@@ -3327,8 +3327,8 @@ class orm(orm_template):
             col = self._inherits[table]
             nids = []
             for sub_ids in cr.split_for_in_conditions(ids):
-                cr.execute('select distinct "'+col+'" from "'+self._table+'" ' \
-                           'where id IN %s', (sub_ids,))
+                cr.execute('SELECT DISTINCT "'+col+'" FROM "'+self._table+'" ' \
+                           'WHERE id IN %s', (sub_ids,))
                 nids.extend([x[0] for x in cr.fetchall()])
 
             v = {}
@@ -3380,13 +3380,13 @@ class orm(orm_template):
                         raise except_orm(_('UserError'), _('Recursivity Detected.'))
 
                     if pleft < position:
-                        cr.execute('update '+self._table+' set parent_left=parent_left+%s where parent_left>=%s', (distance, position))
-                        cr.execute('update '+self._table+' set parent_right=parent_right+%s where parent_right>=%s', (distance, position))
-                        cr.execute('update '+self._table+' set parent_left=parent_left+%s, parent_right=parent_right+%s where parent_left>=%s and parent_left<%s', (position-pleft,position-pleft, pleft, pright))
+                        cr.execute('UPDATE '+self._table+' SET parent_left=parent_left+%s WHERE parent_left >= %s', (distance, position))
+                        cr.execute('UPDATE '+self._table+' SET parent_right=parent_right+%s where parent_right >= %s', (distance, position))
+                        cr.execute('UPDATE '+self._table+' SET parent_left=parent_left+%s, parent_right=parent_right+%s WHERE parent_left >= %s AND parent_left < %s', (position-pleft,position-pleft, pleft, pright))
                     else:
-                        cr.execute('update '+self._table+' set parent_left=parent_left+%s where parent_left>=%s', (distance, position))
-                        cr.execute('update '+self._table+' set parent_right=parent_right+%s where parent_right>=%s', (distance, position))
-                        cr.execute('update '+self._table+' set parent_left=parent_left-%s, parent_right=parent_right-%s where parent_left>=%s and parent_left<%s', (pleft-position+distance,pleft-position+distance, pleft+distance, pright+distance))
+                        cr.execute('UPDATE '+self._table+' SET parent_left=parent_left+%s WHERE parent_left >= %s', (distance, position))
+                        cr.execute('UPDATE '+self._table+' SET parent_right=parent_right+%s WHERE parent_right >= %s', (distance, position))
+                        cr.execute('UPDATE '+self._table+' SET parent_left=parent_left-%s, parent_right=parent_right-%s WHERE parent_left >= %s AND parent_left < %s', (pleft-position+distance,pleft-position+distance, pleft+distance, pright+distance))
 
         result += self._store_get_values(cr, user, ids, vals.keys(), context)
         result.sort()
@@ -3522,7 +3522,7 @@ class orm(orm_template):
                 for group in groups:
                     module = group.split(".")[0]
                     grp = group.split(".")[1]
-                    cr.execute("select count(*) from res_groups_users_rel where gid IN (select res_id from ir_model_data where name='%s' and module='%s' and model='%s') and uid=%s" % \
+                    cr.execute("SELECT count(*) FROM res_groups_users_rel where gid IN (SELECT res_id FROM ir_model_data WHERE name='%s' AND module='%s' AND model='%s') AND uid=%s" % \
                                (grp, module, 'res.groups', user))
                     readonly = cr.fetchall()
                     if readonly[0][0] >= 1:
@@ -3565,7 +3565,7 @@ class orm(orm_template):
             upd0 += ',create_uid,create_date'
             upd1 += ',%s,now()'
             upd2.append(user)
-        cr.execute('insert into "'+self._table+'" (id'+upd0+") values ("+str(id_new)+upd1+')', tuple(upd2))
+        cr.execute('INSERT INTO "'+self._table+'" (id'+upd0+") VALUES ("+str(id_new)+upd1+')', tuple(upd2))
         self.check_access_rule(cr, user, [id_new], 'create', context=context)
         upd_todo.sort(lambda x, y: self._columns[x].priority-self._columns[y].priority)
 
@@ -3575,7 +3575,7 @@ class orm(orm_template):
             else:
                 parent = vals.get(self._parent_name, False)
                 if parent:
-                    cr.execute('select parent_right from '+self._table+' where '+self._parent_name+'=%s order by '+(self._parent_order or self._order), (parent,))
+                    cr.execute('SELECT parent_right FROM '+self._table+' WHERE '+self._parent_name+'=%s ORDER BY '+(self._parent_order or self._order), (parent,))
                     pleft_old = None
                     result_p = cr.fetchall()
                     for (pleft,) in result_p:
@@ -3583,15 +3583,15 @@ class orm(orm_template):
                             break
                         pleft_old = pleft
                     if not pleft_old:
-                        cr.execute('select parent_left from '+self._table+' where id=%s', (parent,))
+                        cr.execute('SELECT parent_left FROM '+self._table+' WHERE id=%s', (parent,))
                         pleft_old = cr.fetchone()[0]
                     pleft = pleft_old
                 else:
-                    cr.execute('select max(parent_right) from '+self._table)
+                    cr.execute('SELECT max(parent_right) FROM '+self._table)
                     pleft = cr.fetchone()[0] or 0
-                cr.execute('update '+self._table+' set parent_left=parent_left+2 where parent_left>%s', (pleft,))
-                cr.execute('update '+self._table+' set parent_right=parent_right+2 where parent_right>%s', (pleft,))
-                cr.execute('update '+self._table+' set parent_left=%s,parent_right=%s where id=%s', (pleft+1,pleft+2,id_new))
+                cr.execute('UPDATE '+self._table+' SET parent_left=parent_left+2 WHERE parent_left > %s', (pleft,))
+                cr.execute('UPDATE '+self._table+' SET parent_right=parent_right+2 WHERE parent_right > %s', (pleft,))
+                cr.execute('UPDATE '+self._table+' SET parent_left=%s,parent_right=%s WHERE id=%s', (pleft+1,pleft+2,id_new))
 
         # default element in context must be remove when call a one2many or many2many
         rel_context = context.copy()
@@ -3667,7 +3667,7 @@ class orm(orm_template):
         field_flag = False
         field_dict = {}
         if self._log_access:
-            cr.execute('select id,write_date from '+self._table+' where id IN %s',(tuple(ids),))
+            cr.execute('SELECT id,write_date FROM '+self._table+' WHERE id = ANY (%s)', (map(int, ids)))
             res = cr.fetchall()
             for r in res:
                 if r[1]:
@@ -3713,7 +3713,7 @@ class orm(orm_template):
                         upd1.append(self._columns[v]._symbol_set[1](value[v]))
                     upd1.append(id)
                     if upd0 and upd1:
-                        cr.execute('update "' + self._table + '" set ' + \
+                        cr.execute('UPDATE "' + self._table + '" SET ' + \
                             string.join(upd0, ',') + ' WHERE id = %s', upd1, debug=self._debug)
 
             else:
@@ -3731,8 +3731,8 @@ class orm(orm_template):
                                 value = value[0]
                             except:
                                 pass
-                        cr.execute('update "' + self._table + '" set ' + \
-                            '"'+f+'"='+self._columns[f]._symbol_set[0] + ' where id = %s', (self._columns[f]._symbol_set[1](value),id))
+                        cr.execute('UPDATE "' + self._table + '" SET ' + \
+                            '"'+f+'"='+self._columns[f]._symbol_set[0] + ' WHERE id = %s', (self._columns[f]._symbol_set[1](value),id))
         return True
 
     #
@@ -3867,8 +3867,8 @@ class orm(orm_template):
                     # add the missing join
                     self._inherits_join_calc(o, tables, where_clause)
 
-        limit_str = limit and ' limit %d' % limit or ''
-        offset_str = offset and ' offset %d' % offset or ''
+        limit_str = limit and ' LIMIT %d' % limit or ''
+        offset_str = offset and ' OFFSET %d' % offset or ''
         
         if where:
             where_str = " WHERE %s" % " AND ".join(where)
