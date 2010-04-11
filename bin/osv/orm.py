@@ -1998,6 +1998,7 @@ class orm_memory(orm_template):
                     break
                 f = True
                 for arg in result:
+		     # FIXME: use safe_eval with arg, data in context
                     if arg[1] == '=':
                         val = eval('data[arg[0]]'+'==' +' arg[2]', locals())
                     elif arg[1] in ['<','>','in','not in','<=','>=','<>']:
@@ -3774,7 +3775,10 @@ class orm(orm_template):
 
         if args:
             import expression
-            e = expression.expression(args)
+            pgmode = 'pgsql'
+            if cr.server_version > 80400:
+                pgmode = 'pg84'
+            e = expression.expression(args, mode=pgmode)
             e.parse(cr, user, self, context)
             tables = e.get_tables()
             qu1, qu2 = e.to_sql()

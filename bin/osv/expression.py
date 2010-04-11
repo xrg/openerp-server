@@ -23,6 +23,23 @@
 from tools import flatten, reverse_enumerate
 import fields
 
+class placeholder(object):
+    """ A dummy string, that will substitute the ids array in 
+        recursive queries.
+        Since this is not a string, nor int, it won't be substituted
+        in expression parsing.
+    """
+    def __init__(self, name, expr = None):
+        self.name = name
+        self.expr = expr
+
+    def __str__(self):
+        return "<placeholder %s>" % self.name
+
+    def __eq__(self, stgr):
+        if isinstance(stgr, basestring) and stgr == self.name:
+            return True
+        return False
 
 class expression(object):
     """
@@ -37,7 +54,7 @@ class expression(object):
 
     def _is_leaf(self, element, internal=False):
         OPS = ('=', '!=', '<>', '<=', '<', '>', '>=', '=?', '=like', '=ilike', 'like', 'not like', 'ilike', 'not ilike', 'in', 'not in', 'child_of')
-        INTERNAL_OPS = OPS + ('inselect',)
+        INTERNAL_OPS = OPS + ('inselect', 'not inselect')
         return (isinstance(element, tuple) or isinstance(element, list)) \
            and len(element) == 3 \
            and (((not internal) and element[1] in OPS) \
@@ -65,7 +82,13 @@ class expression(object):
             res.extend([r[0] for r in cr.fetchall()])
         return res
 
-    def __init__(self, exp):
+    def __init__(self, exp, mode='old'):
+        """  Initialize an expression to be evaluated on the object storage
+             Mode can be 'old', 'sql', 'pgsql' or 'pg84', according to if
+             a db will execute the expression.
+             At pgsql, pg84, sub-queries are allowed. At pg84, recursive ones
+             are used for 'child_of' expressions
+        """
         # check if the expression is valid
         if not reduce(lambda acc, val: acc and (self._is_operator(val) or self._is_leaf(val)), exp, True):
             raise ValueError('Bad domain expression: %r' % (exp,))
@@ -75,6 +98,7 @@ class expression(object):
         self.__joins = []
         self.__main_table = None # 'root' table. set by parse()
         self.__DUMMY_LEAF = (1, '=', 1) # a dummy leaf that must not be parsed or sql generated
+        self.__mode = mode
 
     @property
     def exp(self):
@@ -86,7 +110,7 @@ class expression(object):
             return self
 
         def _rec_get(ids, table, parent=None, left='id', prefix=''):
-            if table._parent_store and (not table.pool._init):
+            if table._parent_store and (not table.pool._init): #and False:
 # TODO: Improve where joins are implemented for many with '.', replace by:
 # doms += ['&',(prefix+'.parent_left','<',o.parent_right),(prefix+'.parent_left','>=',o.parent_left)]
                 doms = []
@@ -97,6 +121,36 @@ class expression(object):
                 if prefix:
                     return [(left, 'in', table.search(cr, uid, doms, context=context))]
                 return doms
+            elif self.__mode == 'pg84':
+                # print "Recursive expand for 8.4, for %s" % table._table
+                phname = prefix + table._table
+                phname = phname.replace('.', '_')
+                phexpr = '%s_rsrch.id' % phname
+                
+                qu1, qu2, qtables = table._where_calc(cr, uid, 
+                        [(parent or table._parent_name, '=', placeholder(phname, phexpr) )], context)
+                
+                d1, d2 = table.pool.get('ir.rule').domain_get(cr, uid, table._name)
+                if d1:
+                    qu1.append(d1)
+                    qu2 += d2
+                
+                qu2 = [ ids, ] + qu2
+                qry = ''' 
+        WITH RECURSIVE %s_rsrch(id) AS (
+                SELECT id FROM "%s" WHERE id = ANY(%%s)
+                UNION ALL SELECT "%s".id FROM "%s", %s_rsrch WHERE %s )
+        SELECT id FROM %s_rsrch
+                ''' %( phname, 
+                        table._table,
+                        table._table, table._table, phname, ' AND '.join(qu1),
+                        phname)
+                
+                #print "INSELECT %s" % qry
+                #print "args:", qu2
+                return [(left, 'inselect', (qry, qu2))]
+            # elif self.__mode == 'pgsql':
+            #  any way  to do that in pg8.3?
             else:
                 def rg(ids, table, parent):
                     if not ids:
@@ -445,7 +499,10 @@ class expression(object):
             elif (operator == 'child_of'):
                 raise Exception("Cannot compute %s %s %s in sql" %(left, operator, right))
             else:
-                if left == 'id':
+                if isinstance(right, placeholder):
+                    assert(right.expr)
+                    query = '( %s.%s %s %s)' % (table._table, left, operator, right.expr)
+                elif left == 'id':
                     query = '%s.id %s %%s' % (table._table, operator)
                     params = right
                 else:
@@ -486,7 +543,10 @@ class expression(object):
             if self._is_leaf(e, internal=True):
                 table = self.__field_tables.get(i, self.__main_table)
                 q, p = self.__leaf_to_sql(e, table)
-                params.insert(0, p)
+                if isinstance(p, (list, tuple)):
+                    params = list(p) + params
+                else:
+                    params.insert(0, p)
                 stack.append(q)
             else:
                 if e == '!':
@@ -501,7 +561,7 @@ class expression(object):
         joins = ' AND '.join(self.__joins)
         if joins:
             query = '(%s) AND (%s)' % (joins, query)
-        return (query, flatten(params))
+        return (query, params)
 
     def get_tables(self):
         return ['"%s"' % t._table for t in self.__all_tables]

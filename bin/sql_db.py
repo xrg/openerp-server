@@ -278,6 +278,8 @@ class Cursor(object):
 
     @check
     def __getattr__(self, name):
+        if name == 'server_version':
+            return self._cnx.server_version
         return getattr(self._obj, name)
 
 
