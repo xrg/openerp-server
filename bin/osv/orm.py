@@ -2367,11 +2367,19 @@ class orm(orm_template):
                         f_pg_type = f_pg_def['typname']
                         f_pg_size = f_pg_def['size']
                         f_pg_notnull = f_pg_def['attnotnull']
-                        if isinstance(f, fields.function) and not f.store and\
-                                not getattr(f, 'nodrop', False):
-                            logger.notifyChannel('orm', netsvc.LOG_INFO, 'column %s (%s) in table %s removed: converted to a function !\n' % (k, f.string, self._table))
-                            cr.execute('ALTER TABLE "%s" DROP COLUMN "%s" CASCADE'% (self._table, k))
-                            cr.commit()
+                        if isinstance(f, fields.function) and not f.store:
+                            if getattr(f, 'nodrop', False):
+                                logger.notifyChannel('orm', netsvc.LOG_INFO,
+                                        'column %s (%s) in table %s is obsolete, but data is preserved.\n' % 
+                                                (k, f.string, self._table))
+                            elif config.get_misc('debug', 'drop_guard', False):
+                                logger.notifyChannel('orm', netsvc.LOG_WARNING,
+                                        'column %s (%s) in table %s should be removed: please inspect and drop if appropriate !\n' % 
+                                                (k, f.string, self._table))
+                            else:
+                                logger.notifyChannel('orm', netsvc.LOG_INFO, 'column %s (%s) in table %s removed: converted to a function !\n' % (k, f.string, self._table))
+                                cr.execute('ALTER TABLE "%s" DROP COLUMN "%s" CASCADE'% (self._table, k))
+                                cr.commit()
                             f_obj_type = None
                         else:
                             f_obj_type = get_pg_type(f) and get_pg_type(f)[0]
