@@ -121,7 +121,20 @@ class osv_pool(netsvc.Service):
         object = pooler.get_pool(cr.dbname).get(obj)
         if not object:
             raise except_osv('Object Error', 'Object %s doesn\'t exist' % str(obj))
-        return getattr(object, method)(cr, uid, *args, **kw)
+        try:
+            return getattr(object, method)(cr, uid, *args, **kw)
+        except TypeError, e:
+            try:
+                import inspect
+                fn = getattr(object, method)
+                __fn_name = method
+                __fn_file = inspect.getfile(fn)
+                tb_s = "Function %s from file %s" %( __fn_name, __fn_file)
+            except:
+                tb_s = "Object: %s Function: %s\n" % (object, getattr(object, method))
+            logger = Logger()
+            logger.notifyChannel('web-services', LOG_ERROR, tb_s)
+            raise
 
     @check
     def execute(self, db, uid, obj, method, *args, **kw):
