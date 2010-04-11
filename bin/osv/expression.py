@@ -373,16 +373,32 @@ class expression(object):
                             if operator in  ['not like','not ilike','not in','<>','!=']:
                                 m2m_op = 'not in'
 
-			    erqu, erpa = self.__execute_recursive_in(cr, field._id1, field._rel, field._id2, res_ids, operator, field._type)
-			    assert(not erqu) # todo
-                            self.__exp[i] = ('id', m2m_op,  erpa)
+                            erqu, erpa = self.__execute_recursive_in(cr, field._id1, field._rel, field._id2, res_ids, operator, field._type)
+                            if not erqu:
+                                self.__exp[i] = ('id', m2m_op, erpa )
+                            else:
+                                if m2m_op in ('in', '='):
+                                    m2m_op = 'inselect'
+                                elif m2m_op in ('not in', '!=', '<>'):
+                                    m2m_op = 'not inselect'
+                                else:
+                                    raise NotImplementedError('operator: %s' % m2m_op)
+                                self.__exp[i] = ('id', m2m_op, (erqu, erpa))
                     if call_null_m2m:
                         m2m_op = 'not in'
                         if operator in  ['not like','not ilike','not in','<>','!=']:
                             m2m_op = 'in'
-			erqu, erpa = self.__execute_recursive_in(cr, field._id1, field._rel, field._id2, [], operator,  field._type)
-			assert (not erqu) # TODO
-                        self.__exp[i] = ('id', m2m_op, erpa)
+                        erqu, erpa = self.__execute_recursive_in(cr, field._id1, field._rel, field._id2, [], operator,  field._type)
+                        if not erqu:
+                            self.__exp[i] = ('id', m2m_op, erpa )
+                        else:
+                            if m2m_op in ('in', '='):
+                                m2m_op = 'inselect'
+                            elif m2m_op in ('not in', '!=', '<>'):
+                                m2m_op = 'not inselect'
+                            else:
+                                raise NotImplementedError('operator: %s' % m2m_op)
+                            self.__exp[i] = ('id', m2m_op, (erqu, erpa))
 
             elif field._type == 'many2one':
                 if isinstance(right, list) and len(right) and isinstance(right[0], tuple):
