@@ -141,7 +141,7 @@ class Cursor(object):
             self.__logger.error("params: %s" % (params,))
             raise
         except Exception:
-            self.__logger.exception("bad query: %s", self._obj.query)
+            self.__logger.exception("bad query: %s\nparams: %s" % (query,params))
             raise
 
         if self.sql_log or debug:
@@ -152,7 +152,7 @@ class Cursor(object):
             if delay > 10000: # only show slow times
                 dstr = ' (%dms)' % int(delay/1000)
             try:
-                log("Q%s: %s" % (dstr, qrystr), lvl=netsvc.LOG_DEBUG)
+                self.__logger.debug("Q%s: %s" % (dstr, qrystr))
             except:
                 # should't break because of logging
                 pass
