@@ -959,6 +959,7 @@ class property(function):
                     continue
                 value = value.id
             res[prop.res_id.id] = value or False
+		    # should a delete happen on a read context? or better defer it?
         return res
 
 
