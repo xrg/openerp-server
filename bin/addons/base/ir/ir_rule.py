@@ -94,50 +94,24 @@ class ir_rule(osv.osv):
 
         if uid == 1:
             return None
-        cr.execute("""SELECT r.id
+        cr.execute_prepared( 'ir_rule_domain_get', """SELECT r.id
                 FROM ir_rule r
-                JOIN ir_model m ON (r.model_id = m.id)
+                JOIN (ir_rule_group g
+                    JOIN ir_model m ON (g.model_id = m.id))
+                    ON (g.id = r.rule_group)
                 WHERE m.model = %s
                 AND r.perm_""" + mode + """
-                AND (r.id IN (SELECT rule_group_id FROM rule_group_rel g_rel
+                AND (g.id IN (SELECT rule_group_id FROM group_rule_group_rel g_rel
                             JOIN res_groups_users_rel u_rel ON (g_rel.group_id = u_rel.gid)
-                            WHERE u_rel.uid = %s) OR r.global)""", (model_name, uid),
+                            WHERE u_rel.uid = %s) OR g.global)""", (model_name, uid),
                                 debug=self._debug)
         ids = map(lambda x: x[0], cr.fetchall())
+        dom = []
         for rule in self.browse(cr, uid, ids):
-            for group in rule.groups:
-                group_rule.setdefault(group.id, []).append(rule.id)
-            if not rule.groups:
-              global_rules.append(rule.id)
-        dom = self.domain_create(cr, uid, global_rules)
-        dom += ['|'] * (len(group_rule)-1)
-        for value in group_rule.values():
-            dom += self.domain_create(cr, uid, value)
-        return dom
-
-    def clear_cache(self, cr, uid):
-        cr.execute("""SELECT DISTINCT m.model
-                        FROM ir_rule r
-                        JOIN ir_model m
-                          ON r.model_id = m.id
-                       WHERE r.global
-                          OR EXISTS (SELECT 1
-                                       FROM rule_group_rel g_rel
-                                       JOIN res_groups_users_rel u_rel
-                                         ON g_rel.group_id = u_rel.gid
-                                      WHERE g_rel.rule_group_id = r.id
-                                        AND u_rel.uid = %s)
-                    """, (uid,))
-        models = map(itemgetter(0), cr.fetchall())
-        clear = partial(self._compute_domain.clear_cache, cr.dbname, uid)
-        [clear(model, mode) for model in models for mode in self._MODES]
-
-
-    def domain_get(self, cr, uid, model_name, mode='read', context={}):
-        dom = self._compute_domain(cr, uid, model_name, mode=mode)
-        if dom:
-            return self.pool.get(model_name)._where_calc(cr, uid, dom, active_test=False)
-        return [], [], ['"'+self.pool.get(model_name)._table+'"']
+            dom = expression.or_join(dom, rule.domain)
+        d1,d2,tables = self.pool.get(model_name)._where_calc(cr, uid, dom, active_test=False)
+        return d1, d2, tables
+    domain_get = tools.cache()(domain_get)
 
     def unlink(self, cr, uid, ids, context=None):
         res = super(ir_rule, self).unlink(cr, uid, ids, context=context)
