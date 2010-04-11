@@ -416,26 +416,43 @@ class orm_template(object):
     def read_group(self, cr, uid, domain, fields, groupby, offset=0, limit=None, context=None):
         raise NotImplementedError(_('The read_group method is not implemented on this object !'))
 
-    def _field_create(self, cr, context={}):
-        # TODO: less statements, debug
-        cr.execute("SELECT id FROM ir_model WHERE model=%s", (self._name,))
+    def _field_create(self, cr, context=None):
+        if not context:
+            context = {}
+        cr.execute("SELECT id FROM ir_model WHERE model=%s", (self._name,), debug=self._debug)
         if not cr.rowcount:
-            cr.execute('SELECT nextval(%s)', ('ir_model_id_seq',))
+            cr.execute("INSERT INTO ir_model (model, name, info, state) "
+                        "VALUES (%s, %s, %s, %s)"
+                        "RETURNING id", 
+                (self._name, self._description, self.__doc__, 'base'),
+                debug=self._debug)
             model_id = cr.fetchone()[0]
-            cr.execute("INSERT INTO ir_model (id,model, name, info,state) VALUES (%s, %s, %s, %s, %s)", (model_id, self._name, self._description, self.__doc__, 'base'))
         else:
             model_id = cr.fetchone()[0]
         if 'module' in context:
             name_id = 'model_'+self._name.replace('.','_')
-            cr.execute('select * from ir_model_data where name=%s and res_id=%s and module=%s', (name_id,model_id,context['module']))
+            cr.execute('SELECT id, module FROM ir_model_data '
+                "WHERE name=%s AND model = 'ir.model' AND res_id=%s",
+                (name_id, model_id))
+
             if not cr.rowcount:
                 cr.execute("INSERT INTO ir_model_data (name,date_init,date_update,module,model,res_id) VALUES (%s, now(), now(), %s, %s, %s)", \
                     (name_id, context['module'], 'ir.model', model_id)
                 )
+            else:
+                res_md = cr.fetchone()
+                if res_md[1] != context['module'] and (not hasattr(self,'_inherit')):
+                    print "Warning: model %s moved from module %s to %s!" % \
+                        (self._name, res_md[1],context['module'])
+                    cr.execute('UPDATE ir_model_data SET date_update = now(), '
+                                ' module = %s WHERE id = %s;' ,
+                                (context['module'], res_md[0]), 
+                                debug=self._debug)
 
         cr.commit()
 
-        cr.execute("SELECT * FROM ir_model_fields WHERE model=%s", (self._name,) , debug=self._debug)
+        cr.execute("SELECT * FROM ir_model_fields WHERE model=%s", (self._name,) , 
+                        debug=self._debug)
         cols = {}
         for rec in cr.dictfetchall():
             cols[rec['name']] = rec
@@ -477,7 +494,8 @@ class orm_template(object):
                     debug=self._debug)
                 if 'module' in context:
                     name1 = 'field_' + self._table + '_' + k
-                    cr.execute("select name from ir_model_data where name=%s", (name1,))
+                    cr.execute("select name from ir_model_data where name=%s", 
+                        (name1,), debug=self._debug)
                     if cr.fetchone():
                         name1 = name1 + "_" + str(id)
                     cr.execute("INSERT INTO ir_model_data (name,date_init,date_update,module,model,res_id)"
@@ -497,7 +515,7 @@ class orm_template(object):
                                 vals['model_id'], vals['field_description'], vals['ttype'],
                                 vals['relation'], bool(vals['view_load']),
                                 vals['select_level'], bool(vals['readonly']),bool(vals['required']),bool(vals['selectable']),vals['relation_field'],vals['model'], vals['name']
-                            ))
+                            ), debug=self._debug)
                         continue
         cr.commit()
 
@@ -517,7 +535,7 @@ class orm_template(object):
             self._description = self._name
         if not self._table:
             self._table = self._name.replace('.', '_')
-	self._debug = False
+        self._debug = False
 
     def browse(self, cr, uid, select, context=None, list_class=None, fields_process={}):
         """
