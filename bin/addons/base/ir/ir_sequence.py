@@ -50,8 +50,8 @@ class ir_sequence(osv.osv):
         'number_increment': fields.integer('Increment Number', required=True),
         'padding' : fields.integer('Number padding', required=True, help="OpenERP will automatically adds some '0' on the left of the 'Next Number' to get the required padding size."),
         'company_id': fields.many2one('res.company', 'Company'),
-	'condition': fields.char('Condition', size=250, help="If set, sequence will only be used in case this python expression matches, and will precede other sequences."),
-	'weight': fields.integer('Weight',required=True, help="If two sequences match, the highest weight will be used.")
+        'condition': fields.char('Condition', size=250, help="If set, sequence will only be used in case this python expression matches, and will precede other sequences."),
+        'weight': fields.integer('Weight',required=True, help="If two sequences match, the highest weight will be used.")
     }
     _defaults = {
         'active': lambda *a: True,
@@ -59,7 +59,7 @@ class ir_sequence(osv.osv):
         'number_increment': lambda *a: 1,
         'number_next': lambda *a: 1,
         'padding' : lambda *a : 0,
-	'weight' : lambda *a: 10,
+        'weight' : lambda *a: 10,
     }
 
     def _process(self, s):
