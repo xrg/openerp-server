@@ -49,6 +49,7 @@ import time
 import traceback
 import types
 
+import logging
 import netsvc
 from lxml import etree
 from tools.config import config
