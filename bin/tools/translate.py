@@ -706,10 +706,10 @@ def trans_load_data(db_name, fileobj, fileformat, lang, strict=False, lang_name=
                 lc = locale.getdefaultlocale()[0]
                 msg = 'Unable to get information for locale %s. Information from the default locale (%s) have been used.'
                 logger.notifyChannel('i18n', netsvc.LOG_WARNING, msg % (lang, lc))
-	    try:
-		locale.setlocale(locale.LC_ALL, str(lc + '.' + encoding))
-	    except:
-		pass
+            try:
+                locale.setlocale(locale.LC_ALL, str(lc + '.' + encoding))
+            except:
+                pass
 
             if not lang_name:
                 lang_name = tools.get_languages().get(lang, lang)
@@ -734,7 +734,7 @@ def trans_load_data(db_name, fileobj, fileformat, lang, strict=False, lang_name=
                 lang_obj.create(cr, uid, lang_info)
             finally:
                 resetlocale()
-	# Here we try to reset the locale regardless.
+        # Here we try to reset the locale regardless.
         locale.setlocale(locale.LC_ALL, str(lc + '.' + encoding))
 
 
@@ -831,12 +831,12 @@ def trans_load_data(db_name, fileobj, fileformat, lang, strict=False, lang_name=
     except IOError:
         filename = '[lang: %s][format: %s]' % (iso_lang or 'new', fileformat)
         logger.notifyChannel("i18n", netsvc.LOG_ERROR, "couldn't read translation file %s" % (filename,))
-	cr.commit()
-	cr.close()
+        cr.commit()
+        cr.close()
     except:
-	cr.commit()
-	cr.close()
-	raise
+        cr.commit()
+        cr.close()
+        raise
 
 def get_locales(lang=None):
     if lang is None:
