@@ -689,6 +689,7 @@ def trans_load_data(db_name, fileobj, fileformat, lang, strict=False, lang_name=
     iso_lang = tools.get_iso_codes(lang)
     try:
         uid = 1
+        (lc, encoding) = locale.getdefaultlocale()
         cr = pooler.get_db(db_name).cursor()
         ids = lang_obj.search(cr, uid, [('code','=', lang)])
 
