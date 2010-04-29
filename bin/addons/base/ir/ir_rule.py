@@ -56,7 +56,7 @@ class ir_rule(osv.osv):
                     safe_eval(opnd,eval_data)), eval_data)
             else:
                 res = safe_eval("[('%s', '%s', %s)]" % (rule_dic['field_name'], 
-                    rule_dic['operator'], opnd), eval_user_data)
+                    rule_dic['operator'], opnd), eval_data)
         if self._debug:
             logging.getLogger('orm').debug("Domain calc: %s " % res)
         return res
