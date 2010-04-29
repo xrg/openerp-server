@@ -1542,7 +1542,7 @@ class orm_template(object):
                 return s.encode('utf8')
             return s
 
-        def _inherit_apply(src, inherit):
+        def _inherit_apply(src, inherit, base_id=0, apply_id=0):
             def _find(node, node2):
                 if node2.tag == 'xpath':
                     res = node.xpath(node2.get('expr'))
@@ -1607,7 +1607,8 @@ class orm_template(object):
                             elif pos == 'before':
                                 node.addprevious(child)
                             else:
-                                raise AttributeError(_('Unknown position in inherited view %s !') % pos)
+                                raise AttributeError(_('Unknown position "%s" in inherited view %s !') % \
+                                        (pos, apply_id))
                 else:
                     attrs = ''.join([
                         ' %s="%s"' % (attr, node2.get(attr))
@@ -1615,7 +1616,8 @@ class orm_template(object):
                         if attr != 'position'
                     ])
                     tag = "<%s%s>" % (node2.tag, attrs)
-                    raise AttributeError(_("Couldn't find tag '%s' in parent view !") % tag)
+                    raise AttributeError(_("Couldn't find tag '%s' of #%d in parent view %s!") % \
+                        (tag, apply_id, base_id))
             return src
         # End: _inherit_apply(src, inherit)
 
@@ -1669,7 +1671,7 @@ class orm_template(object):
                         (inherit_id, self._name), debug=self._debug)
                 sql_inherit = cr.fetchall()
                 for (inherit, id) in sql_inherit:
-                    result = _inherit_apply(result, inherit)
+                    result = _inherit_apply(result, inherit, inherit_id, id)
                     result = _inherit_apply_rec(result, id)
                 return result
 
@@ -1680,7 +1682,11 @@ class orm_template(object):
             result['field_parent'] = sql_res[2] or False
 
         if cr.pgmode == 'pg84':
-
+	    # Note: in the pg84 mode, we DO NOT validate that inherit views
+	    # have the same model as the base view. We only assume that inherit_id
+	    # had been set right. So, if some view inherits the wrong one, this
+	    # will show up here and not in other modes.
+	    
             if view_id:
                 # If we had been asked for some particular view id, we have to
                 # recursively select the views down to the base one that view_id
@@ -1732,10 +1738,12 @@ class orm_template(object):
                     result['type'] = res[4]
                     last_res = [res[3],]
                 elif not (res[5] and res[5] in last_res):
+                    # Fixme: logger
                     print "Cannot apply view %d because it inherits from %d, not in %s" % \
                         (res[3], res[5], last_res)
+                    # non-fatal, carry on
                 else:
-                        result['arch'] = _inherit_apply(result['arch'], res[0])
+                        result['arch'] = _inherit_apply(result['arch'], res[0], res[5], res[3])
                         last_res.append(res[3])
 
         if not sql_res:
