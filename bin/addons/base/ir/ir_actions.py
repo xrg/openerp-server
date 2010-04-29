@@ -381,8 +381,8 @@ class actions_server(osv.osv):
 
     def _select_signals(self, cr, uid, context={}):
         cr.execute("SELECT distinct w.osv, t.signal FROM wkf w, wkf_activity a, wkf_transition t \
-        WHERE w.id = a.wkf_id  AND t.act_from = a.id OR t.act_to = a.id AND t.signal!='' \
-        AND t.signal NOT IN (null, NULL)")
+        WHERE w.id = a.wkf_id  AND ( t.act_from = a.id OR t.act_to = a.id ) AND t.signal!='' \
+        AND t.signal IS NOT NULL", debug=self._debug)
         result = cr.fetchall() or []
         res = []
         for rs in result:
