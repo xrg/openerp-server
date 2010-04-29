@@ -96,7 +96,9 @@ class Cursor(object):
         self.__caller = tuple(stack()[2][1:3])
         self.__prepared = []
         if not self.__pgmode:
-            if self._cnx.server_version >= 80400:
+            if self._cnx.server_version >= 90000:
+                self.__pgmode = 'pg90'
+            elif self._cnx.server_version >= 80400:
                 self.__pgmode = 'pg84'
             else:
                 self.__pgmode = 'pgsql'

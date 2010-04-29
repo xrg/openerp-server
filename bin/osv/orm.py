@@ -1634,7 +1634,7 @@ class orm_template(object):
             if view_ref_res:
                 view_id = view_ref_res[0]
 
-        ok = (cr.pgmode != 'pg84')
+        ok = (cr.pgmode not in ('pg84', 'pg90'))
         model = True
         sql_res = False
         while ok:
@@ -1681,12 +1681,12 @@ class orm_template(object):
             result['name'] = sql_res[1]
             result['field_parent'] = sql_res[2] or False
 
-        if cr.pgmode == 'pg84':
-	    # Note: in the pg84 mode, we DO NOT validate that inherit views
-	    # have the same model as the base view. We only assume that inherit_id
-	    # had been set right. So, if some view inherits the wrong one, this
-	    # will show up here and not in other modes.
-	    
+        if cr.pgmode in ('pg84', 'pg90'):
+            # Note: in the pg84 mode, we DO NOT validate that inherit views
+            # have the same model as the base view. We only assume that inherit_id
+            # had been set right. So, if some view inherits the wrong one, this
+            # will show up here and not in other modes.
+            
             if view_id:
                 # If we had been asked for some particular view id, we have to
                 # recursively select the views down to the base one that view_id

@@ -73,7 +73,7 @@ class expression(object):
                 qry = 'SELECT "%s" FROM "%s"'    \
                           ' WHERE "%s" %s %%s' % (s, f, w, op)
                 params = [ids[0], ]
-            elif self.__mode == 'pg84' or self.__mode == 'pgsql':
+            elif self.__mode in ('pg90', 'pg84', 'pgsql'):
                 if isinstance(ids, placeholder):
                     dwc = '= %s' % ids.expr
                     params = []
@@ -106,7 +106,7 @@ class expression(object):
                            '  FROM "%s" where "%s" is not null'  % (s, f, s)
             params = []
            
-        if self.__mode == 'pgsql' or self.__mode == 'pg84':
+        if self.__mode in ('pgsql', 'pg84', 'pg90'):
             return qry, params
         else:
             cr.execute(qry, params)
@@ -117,10 +117,10 @@ class expression(object):
 
     def __init__(self, exp, mode='old'):
         """  Initialize an expression to be evaluated on the object storage
-             Mode can be 'old', 'sql', 'pgsql' or 'pg84', according to if
-             a db will execute the expression.
-             At pgsql, pg84, sub-queries are allowed. At pg84, recursive ones
-             are used for 'child_of' expressions
+             Mode can be 'old', 'sql', 'pgsql', 'pg84' or 'pg90', according 
+             to if a db will execute the expression.
+             At pgsql, pg84, pg90, sub-queries are allowed. At pg84, pg90,
+             recursive ones are used for 'child_of' expressions
         """
         # check if the expression is valid
         if not reduce(lambda acc, val: acc and (self._is_operator(val) or self._is_leaf(val)), exp, True):
@@ -163,7 +163,7 @@ class expression(object):
                 if null_too:
                     doms = ['|', (left, '=', False)] + doms
                 return doms
-            elif self.__mode == 'pg84':
+            elif self.__mode in ('pg84', 'pg90'):
                 # print "Recursive expand for 8.4, for %s" % table._table
                 phname = prefix + table._table
                 phname = phname.replace('.', '_')
