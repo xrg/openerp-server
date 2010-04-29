@@ -181,7 +181,7 @@ class browse_record(object):
         self._data = cache[table._name]
 
         if not (id and isinstance(id, (int, long,))):
-            raise BrowseRecordError(_('Wrong ID for the browse record, got %r, expected an integer.') % (id,))
+            raise BrowseRecordError(_('Wrong ID for the %s browse record, got %r, expected an integer.') % (self._table_name, id,))
 #        if not table.exists(cr, uid, id, context):
 #            raise BrowseRecordError(_('Object %s does not exists') % (self,))
 
@@ -585,6 +585,8 @@ class orm_template(object):
             # since the loop below will create data[id] for each of the ids, 
             # the first time one of them is accessed, the whole dataset is
             # fetched there, in one go.
+            if self._debug:
+                logging.getLogger('orm').debug("%s.browse(%s)" % (self._name, select))
             return self._list_class([browse_record(cr, uid, id, self, cache, context=context, list_class=self._list_class, fields_process=fields_process, fields_only=fields_only) for id in select], context)
         else:
             return browse_null()
