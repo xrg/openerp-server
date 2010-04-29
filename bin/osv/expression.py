@@ -648,28 +648,31 @@ class expression(object):
     def to_sql(self):
         stack = []
         params = []
-        for i, e in reverse_enumerate(self.__exp):
-            if self._is_leaf(e, internal=True):
-                table = self.__field_tables.get(i, self.__main_table)
-                q, p = self.__leaf_to_sql(e, table)
-                if isinstance(p, (list, tuple)):
-                    params = list(p) + params
+        try:
+            for i, e in reverse_enumerate(self.__exp):
+                if self._is_leaf(e, internal=True):
+                    table = self.__field_tables.get(i, self.__main_table)
+                    q, p = self.__leaf_to_sql(e, table)
+                    if isinstance(p, (list, tuple)):
+                        params = list(p) + params
+                    else:
+                        params.insert(0, p)
+                    stack.append(q)
                 else:
-                    params.insert(0, p)
-                stack.append(q)
-            else:
-                if e == '!':
-                    stack.append('(NOT (%s))' % (stack.pop(),))
-                else:
-                    ops = {'&': ' AND ', '|': ' OR '}
-                    q1 = stack.pop()
-                    q2 = stack.pop()
-                    stack.append('(%s %s %s)' % (q1, ops[e], q2,))
-
-        query = ' AND '.join(reversed(stack))
-        joins = ' AND '.join(self.__joins)
-        if joins:
-            query = '(%s) AND (%s)' % (joins, query)
+                    if e == '!':
+                        stack.append('(NOT (%s))' % (stack.pop(),))
+                    else:
+                        ops = {'&': ' AND ', '|': ' OR '}
+                        q1 = stack.pop()
+                        q2 = stack.pop()
+                        stack.append('(%s %s %s)' % (q1, ops[e], q2,))
+    
+            query = ' AND '.join(reversed(stack))
+            joins = ' AND '.join(self.__joins)
+            if joins:
+                query = '(%s) AND (%s)' % (joins, query)
+        except IndexError, er:
+            raise IndexError( "%s at %s. Expression: %s" %(er, self.__main_table._name, self.__exp))
         return (query, params)
 
     def get_tables(self):
