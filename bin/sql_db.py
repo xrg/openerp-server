@@ -298,6 +298,11 @@ class Cursor(object):
         cls.__pgmode = pgmode
         cls.__logger.info("Postgres mode set to %s" % str(pgmode))
 
+    @classmethod
+    def get_pgmode(cls):
+        cls.__logger.info("Postgres mode is %s" % str(cls.__pgmode))
+        return cls.__pgmode
+
 
 class PsycoConnection(psycopg2.extensions.connection):
     pass
