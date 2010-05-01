@@ -506,6 +506,20 @@ class ir_model_data(osv.osv):
         res_model, res_id = self.get_object_reference(cr, uid, module, xml_id)
         return self.pool.get(res_model).browse(cr, uid, res_id, context=context)
 
+    def get_rev_ref(self, cr, uid, model, res_id):
+        """ Reverse resolve some model.id into its symbolic name(s), if any.
+        
+        This is useful for debugging or data inspection, since it will allow
+        to immediately find if the record had been created by some xml file.
+        
+        Returns tuple like ( res_id, [module.name, ...] )
+        """
+        ids = self.search(cr, uid, [('model','=',model),('res_id','=', res_id)])
+        if not ids:
+            return ( res_id, False )
+        re = self.read(cr, uid, ids, ['module', 'name'])
+        return ( res_id, [ x['module'] + '.' + x['name'] for x in re])
+
     def _update_dummy(self,cr, uid, model, module, xml_id=False, store=True):
         if not xml_id:
             return False
