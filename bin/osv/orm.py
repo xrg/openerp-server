@@ -1428,8 +1428,22 @@ class orm_template(object):
             elif field in fields:
                 fields[field].update(fields_def[field])
             else:
-                cr.execute('SELECT name, model, id FROM ir_ui_view '
-                            'WHERE (id=%s OR inherit_id=%s) AND arch LIKE %s',
+                # we don't ask ir_model_data, but do queries in both cases, so
+                # that code looks symmetric.
+                cr.execute( "SELECT module || '.' || name FROM ir_model_data "
+                            "WHERE model = 'ir.ui.view' AND res_id = %s",
+                            (view_id,), debug=self._debug)
+                ref_res = cr.fetchone()
+                if ref_res:
+                    view_revref = ', ref "%s"' % ref_res[0]
+                else:
+                    view_revref = ''
+                
+                cr.execute('SELECT iv.name, iv.model, iv.id, '
+                           " COALESCE(md.module || '.' || md.name, '') AS ref_name "
+                           'FROM ir_ui_view AS iv LEFT JOIN ir_model_data AS md '
+                           " ON (iv.id = md.res_id AND md.model = 'ir.ui.view' )"
+                            'WHERE (iv.id=%s OR iv.inherit_id=%s) AND iv.arch LIKE %s',
                             (view_id, view_id, '%%%s%%' % field), 
                             debug=self._debug)
                 res = cr.fetchall()[:]
@@ -1437,13 +1451,13 @@ class orm_template(object):
                 if res:
                     parts = ''
                     for r in res:
-                        parts += _('\n %s for %s (id: %d)') % tuple(r)
+                        parts += _('\n %s for %s (id: %d %s)') % tuple(r)
                 else:
                     parts = _('\n <no view found>')
-                msg = _("Can't find field '%s' in the following view parts composing the view #%d of object model '%s':"
+                msg = _("Can't find field '%s' in the following view parts composing the view #%d%s of object model '%s':"
                         "\n %s\n "
                         "\nEither you wrongly customised this view, or some modules bringing those views are not compatible with your current data model.") % \
-                        (field, view_id, self._name,
+                        (field, view_id, view_revref, self._name,
                          parts)
                 netsvc.Logger().notifyChannel('orm', netsvc.LOG_ERROR, msg)
                 raise except_orm('View error', msg)
@@ -1618,8 +1632,24 @@ class orm_template(object):
                         if attr != 'position'
                     ])
                     tag = "<%s%s>" % (node2.tag, attrs)
-                    raise AttributeError(_("Couldn't find tag '%s' of #%d in parent view %s!") % \
-                        (tag, apply_id, base_id))
+                    rr_base = ''
+                    rr_apply = ''
+                    try:
+                        # Attempt to resolve the ids into ref names.
+                        imd = self.pool.get('ir.model.data')
+                        rres_base = imd.get_rev_ref(cr, user, 'ir.ui.view', base_id)
+                        if rres_base and rres_base[1]:
+                            rr_base = ', '.join(rres_base[1])
+                        
+                        rres_apply = imd.get_rev_ref(cr, user, 'ir.ui.view', apply_id)
+                        if rres_apply and rres_apply[1]:
+                            rr_apply = ', '.join(rres_apply[1])
+                    except Exception, e:
+                        logging.getLogger('orm').debug("Rev ref exception: %s" % e)
+                        # but pass, anyway..
+                    
+                    raise AttributeError(_("Couldn't find tag '%s' of #%d %s in parent view %s %s!") % \
+                        (tag, apply_id, rr_apply, base_id, rr_base))
             return src
         # End: _inherit_apply(src, inherit)
 
