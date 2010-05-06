@@ -170,6 +170,9 @@ class ir_translation(osv.osv):
         """
         assert(lang)
         
+        if not fld_list:
+            return []
+        
         if prepend:
             fl2 = []
             for name, tt in fld_list:
