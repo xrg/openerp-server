@@ -634,18 +634,20 @@ def load_module_graph(cr, graph, status=None, perform_checks=True, **kwargs):
         _load_data(cr, module_name, id_map, mode, 'demo')
 
     def load_test(cr, module_name, id_map, mode):
+        """ Load and execute install-time tests.
+
+            Normally, all that data should never be committed into the
+            db, so this fn will almost be a no-op (except that it commits
+            the cursor).
+        """
         cr.commit()
-        if not tools.config.options['test_disable']:
-            try:
-                _load_data(cr, module_name, id_map, mode, 'test')
-            except Exception, e:
-                logger.notifyChannel('ERROR', netsvc.LOG_TEST, e)
-                pass
-            finally:
-                if tools.config.options['test_commit']:
-                    cr.commit()
-                else:
-                    cr.rollback()
+        if tools.config.get_misc('debug','skip_tests',False):
+            return
+        
+        try:
+            _load_data(cr, module_name, id_map, mode, 'test')
+        finally:
+            cr.rollback()
 
     def _load_data(cr, module_name, id_map, mode, kind):
         noupdate = (kind == 'demo')
