@@ -595,14 +595,15 @@ class expression(object):
                 query = '%s.%s IS NOT NULL' % (table._table, left)
             elif (operator == '=?'):
                 op = '='
-                if (right is False or right is None):
+                import orm
+                if (right is False or right is None or isinstance(right, orm.browse_null)):
                     return ( 'TRUE',[])
                 if left in table._columns:
                         format = table._columns[left]._symbol_set[0]
                         query = '(%s.%s %s %s)' % (table._table, left, op, format)
                         params = table._columns[left]._symbol_set[1](right)
                 else:
-                        query = "(%s.%s %s '%%s')" % (table._table, left, op)
+                        query = "(%s.%s %s %%s)" % (table._table, left, op)
                         params = right
 
             elif (operator == 'child_of' or operator == '|child_of'):
