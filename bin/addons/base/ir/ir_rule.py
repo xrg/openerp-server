@@ -31,6 +31,16 @@ class ir_rule(osv.osv):
     _name = 'ir.rule'
     _MODES = ['read', 'write', 'create', 'unlink']
 
+    def _domain_force_get(self, cr, uid, ids, field_name, arg, context=None):
+        res = {}
+        eval_user_data = {'user': self.pool.get('res.users').browse(cr, 1, uid),
+                'time':time}
+        for rule in self.browse(cr, uid, ids, fields_only=['domain_force','operand','operator', 'field_id'], context=context):
+            rule_dic = { 'domain_force': rule.domain_force, 'operand': rule.operand, 
+                        'operator': rule.operator, 'field_name': rule.field_id.name }
+            res[rule.id] = self.__domain_calc(rule_dic, eval_user_data)
+        return res
+
     def __domain_calc(self, rule_dic, eval_data):
         """ Calculate the domain expression for some rule.
         @rule_dic is a dictionary with rule{'domain_force', 'operand', 'operator', 'field_name'}
@@ -62,16 +72,6 @@ class ir_rule(osv.osv):
         return res
         
         
-    def _domain_force_get(self, cr, uid, ids, field_name, arg, context=None):
-        res = {}
-        eval_user_data = {'user': self.pool.get('res.users').browse(cr, 1, uid),
-                'time':time}
-        for rule in self.browse(cr, uid, ids, fields_only=['domain_force','operand','operator', 'field_id'], context=context):
-            rule_dic = { 'domain_force': rule.domain_force, 'operand': rule.operand, 
-                        'operator': rule.operator, 'field_name': rule.field_id.name }
-            res[rule.id] = self.__domain_calc(rule_dic, eval_user_data)
-        return res
-
     def _check_model_obj(self, cr, uid, ids, context={}):
         return not any(isinstance(self.pool.get(rule.model_id.model), osv.osv_memory) for rule in self.browse(cr, uid, ids, context))
 
