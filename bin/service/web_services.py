@@ -337,6 +337,15 @@ class db(baseExportService):
                 res = []
         finally:
             cr.close()
+        allowed_res = tools.config.get_misc('databases', 'allowed')
+        if allowed_res:
+            dbs_allowed = [ x.strip() for x in allowed_res.split(' ')]
+            res_o = res
+            res = []
+            for s in res_o:
+                if s in dbs_allowed:
+                    res.append(s)
+        
         res.sort()
         return res
 
