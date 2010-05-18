@@ -94,7 +94,8 @@ class Cursor(object):
         self.__closed = False   # real initialisation value
         self.autocommit(False)
         self.__caller = tuple(stack()[2][1:3])
-        self.__prepared = []
+        if not hasattr(self._cnx,'_prepared'):
+            self._cnx._prepared = []
         if not self.__pgmode:
             if self._cnx.server_version >= 90000:
                 self.__pgmode = 'pg90'
@@ -218,7 +219,7 @@ class Cursor(object):
         assert ( (not datatypes) or len(datatypes) == len(params or []))
         assert (name)
         
-        if not name in self.__prepared:
+        if name not in self._cnx._prepared:
             if '%d' in query or '%f' in query:
                 self.__logger.warn(query)
                 self.__logger.warn("SQL queries cannot contain %d or %f anymore. Use only %s")
@@ -237,7 +238,7 @@ class Cursor(object):
             qry = 'PREPARE ' + name + args + ' AS ' + query + ';'
             
             self.execute(qry, debug=debug)
-            self.__prepared.append(name)
+            self._cnx._prepared.append(name)
         
         args = ''
         if params and len(params):
@@ -342,26 +343,35 @@ class ConnectionPool(object):
 
     def set_pool_debug(self, do_debug = True):
         self._debug_pool = do_debug
-        self._logger.info("Debugging set to %s" % str(do_debug))
+        self.__logger.info("Debugging set to %s" % str(do_debug))
 
     @locked
     def borrow(self, dsn, do_cursor=False):
         self._debug('Borrow connection to %s' % (dsn,))
 
         result = None
+        result = None
         for i, (cnx, used) in enumerate(self._connections):
             if not used and dsn_are_equals(cnx.dsn, dsn):
                 self._debug('Existing connection found at index %d' % i)
 
                 self._connections.pop(i)
+                try:
+                    pr = cnx.poll()
+                    self._debug("Poll: %d", pr)
+                except OperationalError, e:
+                    self._debug("Error in poll: %s" % e)
+                    continue
+                
                 if cnx.closed or not cnx.status:
                     # something is wrong with that connection, let it out
+                    self._debug("Troubled connection ")
                     continue
                 
                 if do_cursor:
                     try:
                         cur = cnx.cursor(cursor_factory=psycopg1cursor)
-                        if not cur.isready():
+                        if cur.closed:
                             continue
                         self._connections.insert(i,(cnx, True))
 
@@ -388,6 +398,7 @@ class ConnectionPool(object):
 
         result = psycopg2.connect(dsn=dsn, connection_factory=PsycoConnection)
         self._connections.append((result, True))
+        self._debug('Create new connection')
         if do_cursor:
             cur = result.cursor(cursor_factory=psycopg1cursor)
             return (result, cur)
@@ -399,8 +410,11 @@ class ConnectionPool(object):
         for i, (cnx, used) in enumerate(self._connections):
             if cnx is connection:
                 self._connections.pop(i)
-                if cnx.closed or not cnx.status:
+                if keep_in_pool and not (cnx.closed or not cnx.status):
                     self._connections.insert(i,(cnx, False))
+                    self._debug('Put connection to %r back in pool', cnx.dsn)
+                else:
+                    self._debug('Forgot connection to %r', cnx.dsn)
                 break
         else:
             raise PoolError('This connection does not below to the pool')
@@ -423,7 +437,7 @@ class Connection(object):
 
     def cursor(self, serialized=False):
         cursor_type = serialized and 'serialized ' or ''
-        self.__logger.log(logging.DEBUG_SQL, 'create %scursor to %r', cursor_type, self.dbname)
+        self.__logger.debug('create %scursor to %r', cursor_type, self.dbname)
         return Cursor(self._pool, self.dbname, serialized=serialized)
 
     def serialized_cursor(self):
