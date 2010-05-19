@@ -23,6 +23,7 @@
 import os, sys, imp
 from os.path import join as opj
 import itertools
+import logging
 import zipimport
 
 import osv
@@ -45,7 +46,7 @@ from cStringIO import StringIO
 import logging
 
 
-logger = netsvc.Logger()
+logger = logging.getLogger('init')
 
 _ad = os.path.abspath(opj(tools.config['root_path'], 'addons'))     # default addons path (base)
 ad_paths= map(lambda m: os.path.abspath(m.strip()),tools.config['addons_path'].split(','))
@@ -166,7 +167,7 @@ def get_module_path(module, downloaded=False):
 
     if downloaded:
         return opj(_ad, module)
-    logger.notifyChannel('init', netsvc.LOG_WARNING, 'module %s: module not found' % (module,))
+    logger.warning('module %s: module not found' % (module,))
     return False
 
 
@@ -336,14 +337,14 @@ def upgrade_graph(graph, cr, module_list, force=None):
             terp_file = get_module_resource(module, '__terp__.py')
 
         if not mod_path or not terp_file:
-            logger.notifyChannel('init', netsvc.LOG_WARNING, 'module %s: not found, skipped' % (module))
+            logger.warning('module %s: not installable' % (module))
             continue
 
         if os.path.isfile(terp_file) or zipfile.is_zipfile(mod_path+'.zip'):
             try:
                 info = eval(tools.file_open(terp_file).read())
             except:
-                logger.notifyChannel('init', netsvc.LOG_ERROR, 'module %s: eval file %s' % (module, terp_file))
+                logger.error('module %s: eval file %s' % (module, terp_file))
                 raise
             if info.get('installable', True):
                 packages.append((module, info.get('depends', []), info))
@@ -379,16 +380,16 @@ def upgrade_graph(graph, cr, module_list, force=None):
 
     for package in later:
         unmet_deps = filter(lambda p: p not in graph, dependencies[package])
-        logger.notifyChannel('init', netsvc.LOG_ERROR, 'module %s: Unmet dependencies: %s' % (package, ', '.join(unmet_deps)))
+        logger.error('module %s: Unmet dependencies: %s' % (package, ', '.join(unmet_deps)))
 
     result = len(graph) - len_graph
     if result != len(module_list):
-        logger.notifyChannel('init', netsvc.LOG_WARNING, 'Not all modules have loaded.')
+        logger.warning('Not all modules have loaded.')
     return result
 
 
 def init_module_objects(cr, module_name, obj_list):
-    logger.notifyChannel('init', netsvc.LOG_INFO, 'module %s: creating or updating database tables' % module_name)
+    logger.info('module %s: creating or updating database tables' % module_name)
     todo = []
     for obj in obj_list:
         try:
@@ -411,16 +412,10 @@ def register_class(m):
     Register module named m, if not already registered
     """
 
-    def log(e):
-        mt = isinstance(e, zipimport.ZipImportError) and 'zip ' or ''
-        msg = "Couldn't load %smodule %s" % (mt, m)
-        logger.notifyChannel('init', netsvc.LOG_CRITICAL, msg)
-        logger.notifyChannel('init', netsvc.LOG_CRITICAL, e)
-
     global loaded
     if m in loaded:
         return
-    logger.notifyChannel('init', netsvc.LOG_INFO, 'module %s: registering objects' % m)
+    logger.info('module %s: registering objects' % m)
     mod_path = get_module_path(m)
 
     try:
@@ -435,8 +430,11 @@ def register_class(m):
         else:
             zimp = zipimport.zipimporter(zip_mod_path)
             zimp.load_module(m)
+    except zipimport.ZipImportError:
+        logger.exception("Couldn't load zip module %s" % (m,))
+        raise
     except Exception, e:
-        log(e)
+        logger.exception("Couldn't load module %s" % (m,))
         raise
     else:
         loaded.append(m)
@@ -494,6 +492,8 @@ class MigrationManager(object):
         stageformat = {'pre': '[>%s]',
                        'post': '[%s>]',
                       }
+        
+        mlog = logging.getLogger('migration')
 
         if not (hasattr(pkg, 'update') or pkg.state == 'to upgrade'):
             return
@@ -570,13 +570,13 @@ class MigrationManager(object):
                         fp2.seek(0)
                         try:
                             mod = imp.load_source(name, pyfile, fp2)
-                            logger.notifyChannel('migration', netsvc.LOG_INFO, 'module %(addon)s: Running migration %(version)s %(name)s' % mergedict({'name': mod.__name__}, strfmt))
+                            mlog.info('module %(addon)s: Running migration %(version)s %(name)s' % mergedict({'name': mod.__name__}, strfmt))
                             mod.migrate(self.cr, pkg.installed_version)
                         except ImportError:
-                            logger.notifyChannel('migration', netsvc.LOG_ERROR, 'module %(addon)s: Unable to load %(stage)s-migration file %(file)s' % mergedict({'file': pyfile}, strfmt))
+                            mlog.error('module %(addon)s: Unable to load %(stage)s-migration file %(file)s' % mergedict({'file': pyfile}, strfmt))
                             raise
                         except AttributeError:
-                            logger.notifyChannel('migration', netsvc.LOG_ERROR, 'module %(addon)s: Each %(stage)s-migration file must have a "migrate(cr, installed_version)" function' % strfmt)
+                            mlog.exception('module %(addon)s: Each %(stage)s-migration file must have a "migrate(cr, installed_version)" function' % strfmt)
                         except:
                             raise
                     finally:
@@ -600,7 +600,7 @@ def load_module_graph(cr, graph, status=None, perform_checks=True, **kwargs):
 
     def load_init_update_xml(cr, m, idref, mode, kind):
         for filename in package.data.get('%s_xml' % kind, []):
-            logger.notifyChannel('init', netsvc.LOG_INFO, 'module %s: loading %s' % (m, filename))
+            logger.info('module %s: loading %s' % (m, filename))
             _, ext = os.path.splitext(filename)
             fp = tools.file_open(opj(m, filename))
             if ext == '.csv':
@@ -617,7 +617,7 @@ def load_module_graph(cr, graph, status=None, perform_checks=True, **kwargs):
     def load_demo_xml(cr, m, idref, mode):
         for xml in package.data.get('demo_xml', []):
             name, ext = os.path.splitext(xml)
-            logger.notifyChannel('init', netsvc.LOG_INFO, 'module %s: loading %s' % (m, xml))
+            logger.info('module %s: loading %s' % (m, xml))
             fp = tools.file_open(opj(m, xml))
             if ext == '.csv':
                 tools.convert_csv_import(cr, m, os.path.basename(xml), fp.read(), idref, mode=mode, noupdate=True)
@@ -682,10 +682,10 @@ def load_module_graph(cr, graph, status=None, perform_checks=True, **kwargs):
     has_updates = False
     modobj = None
 
-    logger.notifyChannel('init', netsvc.LOG_DEBUG, 'loading %d packages..' % len(graph))
+    logger.debug('loading %d packages..' % len(graph))
 
     for package in graph:
-        logger.notifyChannel('init', netsvc.LOG_INFO, 'module %s: loading objects' % package.name)
+        logger.info('module %s: loading objects' % package.name)
         migrations.migrate_module(package, 'pre')
         register_class(package.name)
         modules = pool.instanciate(package.name, cr)
@@ -777,7 +777,7 @@ def load_modules(db, force_demo=False, status=None, update_module=False):
     if cr:
         cr.execute("SELECT relname FROM pg_class WHERE relkind='r' AND relname='ir_module_module'")
         if len(cr.fetchall())==0:
-            logger.notifyChannel("init", netsvc.LOG_INFO, "init db")
+            logger.info("init db")
             tools.init_db(cr)
             tools.config["init"]["all"] = 1
             tools.config['update']['all'] = 1
@@ -798,8 +798,8 @@ def load_modules(db, force_demo=False, status=None, update_module=False):
         has_updates = load_module_graph(cr, graph, status, perform_checks=(not update_module), report=report)
         if update_module:
             modobj = pool.get('ir.module.module')
+            logger.info('updating modules list')
             states = {'installed': 'button_upgrade', 'uninstalled': 'button_install'}
-            logger.notifyChannel('init', netsvc.LOG_INFO, 'updating modules list')
             if ('base' in tools.config['init']) or ('base' in tools.config['update']):
                 modobj.update_list(cr, 1)
 
@@ -829,7 +829,7 @@ def load_modules(db, force_demo=False, status=None, update_module=False):
                 # nothing to load
                 break
 
-            logger.notifyChannel('init', netsvc.LOG_DEBUG, 'Updating graph with %d more modules' % (len(module_list)))
+            logger.debug('Updating graph with %d more modules' % (len(module_list)))
             r = load_module_graph(cr, graph, status, report=report)
             has_updates = has_updates or r
 
@@ -838,7 +838,7 @@ def load_modules(db, force_demo=False, status=None, update_module=False):
             for (model, name) in cr.fetchall():
                 model_obj = pool.get(model)
                 if not isinstance(model_obj, osv.osv.osv_memory):
-                    logger.notifyChannel('init', netsvc.LOG_WARNING, 'object %s (%s) has no access rules!' % (model, name))
+                    logger.warning('object %s (%s) has no access rules!' % (model, name))
 
             # Temporary warning while we remove access rights on osv_memory objects, as they have
             # been replaced by owner-only access rights
@@ -855,7 +855,7 @@ def load_modules(db, force_demo=False, status=None, update_module=False):
                     obj._check_removed_columns(cr, log=True)
 
         if report.get_report():
-            logger.notifyChannel('init', netsvc.LOG_INFO, report)
+            logger.info( report)
 
         for kind in ('init', 'demo', 'update'):
             tools.config[kind] = {}
@@ -873,7 +873,7 @@ def load_modules(db, force_demo=False, status=None, update_module=False):
                     if rmod_module:
                         rmod_module.unlink(cr, uid, [rid])
                     else:
-                        logger.notifyChannel('init', netsvc.LOG_ERROR, 'Could not locate %s to remove res=%d' % (rmod,rid))
+                        logger.error('Could not locate %s to remove res=%d' % (rmod,rid))
                 cr.execute('DELETE FROM ir_model_data WHERE noupdate=%s AND module=%s', (False, mod_name,))
                 cr.commit()
             #
@@ -888,7 +888,7 @@ def load_modules(db, force_demo=False, status=None, update_module=False):
                 if not cr.rowcount:
                     break
                 else:
-                    logger.notifyChannel('init', netsvc.LOG_INFO, 'removed %d unused menus' % (cr.rowcount,))
+                    logger.info( 'removed %d unused menus' % (cr.rowcount,))
 
             cr.execute("UPDATE ir_module_module SET state=%s WHERE state=%s", ('uninstalled', 'to remove',))
             cr.commit()
