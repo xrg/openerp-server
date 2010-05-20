@@ -820,6 +820,11 @@ class related(function):
             ids = filter(None, res.values())
             if ids:
                 ng = dict(obj.pool.get(self._obj).name_get(cr, 1, ids, context=context))
+                if not ng:
+                    logging.getLogger('orm').warning(
+                            "Couldn't get %s %s for field %s." % \
+                            (self._obj, ids, field_name))
+                    # just go on and have a KeyError below:
                 for r in res:
                     if res[r]:
                         res[r] = (res[r], ng[res[r]])
