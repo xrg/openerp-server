@@ -168,8 +168,12 @@ class act_window(osv.osv):
             if isinstance(s, unicode):
                 return s.encode('utf8')
             return s
-        for act in self.browse(cr, uid, ids):
-            fields_from_fields_get = self.pool.get(act.res_model).fields_get(cr, uid, context=context)
+        for act in self.browse(cr, uid, ids, fields_only=['res_model', 'search_view_id',] ):
+            assert act.res_model, act.id
+            act_model = self.pool.get(act.res_model)
+            assert act_model, 'No model %s for view #%d %s' % \
+                                (act.res_model, act.id, act.name)
+            fields_from_fields_get = act_model.fields_get(cr, uid, context=context)
             search_view_id = False
             if act.search_view_id:
                 search_view_id = act.search_view_id.id
@@ -178,7 +182,7 @@ class act_window(osv.osv):
                 if res_view:
                     search_view_id = res_view[0]
             if search_view_id:
-                field_get = self.pool.get(act.res_model).fields_view_get(cr, uid, search_view_id, 'search', context)
+                field_get = act_model.fields_view_get(cr, uid, search_view_id, 'search', context)
                 fields_from_fields_get.update(field_get['fields'])
                 field_get['fields'] = fields_from_fields_get
                 res[act.id] = str(field_get)
@@ -196,7 +200,7 @@ class act_window(osv.osv):
                         elif child.localName in ('page','group','notebook'):
                             process_child(child, new_node, doc)
 
-                form_arch = self.pool.get(act.res_model).fields_view_get(cr, uid, False, 'form', context)
+                form_arch = act_model.fields_view_get(cr, uid, False, 'form', context)
                 dom_arc = dom.minidom.parseString(encode(form_arch['arch']))
                 new_node = copy.deepcopy(dom_arc)
                 for child_node in new_node.childNodes[0].childNodes:
