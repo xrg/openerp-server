@@ -191,7 +191,9 @@ class osv_pool(netsvc.Service):
 
     # Return None if object does not exist
     def get(self, name):
-        assert isinstance(name, basestring), name
+        if not name:
+            return None
+        assert isinstance(name, basestring), repr(name)
         obj = self.obj_pool.get(name, None)
         if not obj:
             self.logger.warning("Object %s not found by pooler!", name)
