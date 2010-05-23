@@ -147,6 +147,9 @@ def ref_constructor(loader, tag_suffix, node):
 def ir_set_constructor(loader, node):
     kwargs = loader.construct_mapping(node)
     return IrSet(**kwargs)
+
+def add_constructors():
+    pass
     
 # Registers constructors for custom tags.
 # Constructors are actually defined globally: do not redefined them in another
