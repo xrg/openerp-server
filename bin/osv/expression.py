@@ -251,7 +251,8 @@ class expression(object):
                     self.__exp = self.__exp[:i] + dom + self.__exp[i+1:]
                 continue
 
-            field_obj = table.pool.get(field._obj)
+            if field._obj:
+                field_obj = table.pool.get(field._obj)
             if len(fargs) > 1: # *-*
                 if field._type == 'many2one':
                     right = field_obj.search(cr, uid, [(fargs[1], operator, right)], context=context)
