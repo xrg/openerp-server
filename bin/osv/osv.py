@@ -179,6 +179,7 @@ class osv_pool(netsvc.Service):
     # adds a new object instance to the object pool.
     # if it already existed, the instance is replaced
     def add(self, name, obj_inst):
+        assert isinstance(name, basestring)
         if name in self.obj_pool:
             del self.obj_pool[name]
         self.obj_pool[name] = obj_inst
@@ -190,7 +191,10 @@ class osv_pool(netsvc.Service):
 
     # Return None if object does not exist
     def get(self, name):
+        assert isinstance(name, basestring), name
         obj = self.obj_pool.get(name, None)
+        if not obj:
+            self.logger.warning("Object %s not found by pooler!", name)
         return obj
 
     #TODO: pass a list of modules to load
