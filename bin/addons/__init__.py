@@ -646,8 +646,18 @@ def load_module_graph(cr, graph, status=None, perform_checks=True, **kwargs):
         
         try:
             _load_data(cr, module_name, id_map, mode, 'test')
+                _load_data(cr, module_name, id_map, mode, 'test')
+        except Exception, e:
+            if tools.config.get_misc('tests', 'nonfatal', False):
+                log.warn(e)
+                pass
+            else:
+                raise
         finally:
-            cr.rollback()
+            if tools.config.get_misc('tests','rollback', True):
+                cr.rollback()
+            else:
+                cr.commit()
 
     def _load_data(cr, module_name, id_map, mode, kind):
         noupdate = (kind == 'demo')
