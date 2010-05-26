@@ -122,7 +122,7 @@ class HttpLogHandler:
     
 class MultiHandler2(HttpLogHandler, MultiHTTPHandler):
     _logger = logging.getLogger('http')
-
+    
 
 class SecureMultiHandler2(HttpLogHandler, SecureMultiHTTPHandler):
     _logger = logging.getLogger('https')
@@ -262,10 +262,11 @@ def list_http_services(protocol=None):
         raise Exception("Incorrect protocol or no http services")
 
 import SimpleXMLRPCServer
-class xrBaseRequestHandler(FixSendError,SimpleXMLRPCServer.SimpleXMLRPCRequestHandler):
+class xrBaseRequestHandler(FixSendError, HttpLogHandler, SimpleXMLRPCServer.SimpleXMLRPCRequestHandler):
     rpc_paths = []
     protocol_version = 'HTTP/1.1'
     _auth_domain = None
+    _logger = logging.getLogger('xmlrpc')
 
     def _dispatch(self, method, params):
         try:
@@ -348,7 +349,9 @@ def init_xmlrpc():
                         OpenERPAuthProvider()))
     logging.getLogger("web-services").info( "Registered XML-RPC 2.0 over HTTP")
 
-class StaticHTTPHandler(HTTPHandler):
+class StaticHTTPHandler(HttpLogHandler, HTTPHandler):
+    _logger = logging.getLogger('httpd')
+
     def __init__(self,request, client_address, server):
         HTTPHandler.__init__(self,request,client_address,server)
         dir_path = tools.config.get_misc('static-http', 'dir_path', False)
