@@ -1427,6 +1427,12 @@ class orm_template(object):
                 fields['id'] = {'readonly': True, 'type': 'integer', 'string': 'ID'}
             elif field in fields:
                 fields[field].update(fields_def[field])
+            elif view_id is False:
+                msg = _("Can't find view for field '%s' in view parts of object model '%s':"
+                        "\nPlease define some view for that model.") % \
+                        (field, self._name)
+                netsvc.Logger().notifyChannel('orm', netsvc.LOG_ERROR, msg)
+                raise except_orm('View error', msg)
             else:
                 # we don't ask ir_model_data, but do queries in both cases, so
                 # that code looks symmetric.
