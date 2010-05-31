@@ -88,6 +88,8 @@ class except_orm(Exception):
 class BrowseRecordError(Exception):
     pass
 
+_logger = logging.getLogger('orm')
+
 # Readonly python database object browser
 class browse_null(object):
 
@@ -155,7 +157,6 @@ class browse_record(object):
             email = user_rec.email
             signature = user_rec.signature
     """
-    logger = netsvc.Logger()
 
     def __init__(self, cr, uid, id, table, cache, context=None, list_class=None,
                 fields_process=None, fields_only=True):
@@ -400,8 +401,7 @@ def get_pg_type(f):
     elif isinstance(f, fields.function) and f._type == 'char':
         f_type = ('varchar', 'VARCHAR(%d)' % (f.size))
     else:
-        logger = netsvc.Logger()
-        logger.notifyChannel("init", netsvc.LOG_WARNING, '%s type not supported!' % (type(f)))
+        _logger.warning('%s type not supported!' % (type(f)))
         f_type = None
     return f_type
 
@@ -467,8 +467,8 @@ class orm_template(object):
             else:
                 res_md = cr.fetchone()
                 if res_md[1] != context['module'] and (not hasattr(self,'_inherit')):
-                    print "Warning: model %s moved from module %s to %s!" % \
-                        (self._name, res_md[1],context['module'])
+                    _logger.warning("Model %s moved from module %s to %s!" % \
+                        (self._name, res_md[1],context['module']))
                     cr.execute('UPDATE ir_model_data SET date_update = now(), '
                                 ' module = %s WHERE id = %s;' ,
                                 (context['module'], res_md[0]), 
@@ -552,8 +552,7 @@ class orm_template(object):
             name = type(self).__name__.split('.')[0]
             msg = "The class %s has to have a _name attribute" % name
 
-            logger = netsvc.Logger()
-            logger.notifyChannel('orm', netsvc.LOG_ERROR, msg )
+            _logger.error(msg)
             raise except_orm('ValueError', msg )
 
         if not self._description:
@@ -586,7 +585,7 @@ class orm_template(object):
             # the first time one of them is accessed, the whole dataset is
             # fetched there, in one go.
             if self._debug:
-                logging.getLogger('orm').debug("%s.browse(%s)" % (self._name, select))
+                _logger.debug("%s.browse(%s)" % (self._name, select))
             return self._list_class([browse_record(cr, uid, id, self, cache, context=context, list_class=self._list_class, fields_process=fields_process, fields_only=fields_only) for id in select], context)
         else:
             return browse_null()
@@ -758,7 +757,7 @@ class orm_template(object):
         if not context:
             context = {}
         fields = map(lambda x: x.split('/'), fields)
-        logger = netsvc.Logger()
+        logger = logging.getLogger('orm.import')
         ir_model_data_obj = self.pool.get('ir.model.data')
 
         def _check_db_id(self, model_name, db_id):
@@ -807,8 +806,7 @@ class orm_template(object):
                                         res_id.append(db_id)
                                     except Exception,e:
                                         warning += [tools.exception_to_unicode(e)]
-                                        logger.notifyChannel("import", netsvc.LOG_ERROR,
-                                                  tools.exception_to_unicode(e))
+                                        logger.exception("split many2many")
                                 if len(res_id):
                                     res = [(6, 0, res_id)]
                             else:
@@ -817,8 +815,7 @@ class orm_template(object):
                                     res = line[i]
                                 except Exception,e:
                                     warning += [tools.exception_to_unicode(e)]
-                                    logger.notifyChannel("import", netsvc.LOG_ERROR,
-                                              tools.exception_to_unicode(e))
+                                    logger.exception("")
                         row[field_name] = res or False
                         continue
 
@@ -878,8 +875,7 @@ class orm_template(object):
                                db_id = is_db_id
                         if is_db_id and int(db_id) != int(is_db_id):
                             warning += [_("Id is not the same than existing one: %s")%(is_db_id)]
-                            logger.notifyChannel("import", netsvc.LOG_ERROR,
-                                    _("Id is not the same than existing one: %s")%(is_db_id))
+                            logger.error(_("Id is not the same than existing one: %s")%(is_db_id))
                         continue
 
                     if field[len(prefix)] == "db_id":
@@ -889,8 +885,7 @@ class orm_template(object):
                             data_res_id = is_db_id = int(line[i])
                         except Exception,e:
                             warning += [tools.exception_to_unicode(e)]
-                            logger.notifyChannel("import", netsvc.LOG_ERROR,
-                                      tools.exception_to_unicode(e))
+                            logger.exception('')
                             continue
                         data_ids = ir_model_data_obj.search(cr, uid, [('model','=',model_name),('res_id','=',line[i])])
                         if len(data_ids):
@@ -904,8 +899,7 @@ class orm_template(object):
                             data_id = is_xml_id
                         if is_xml_id and is_xml_id!=data_id:
                             warning += [_("Id is not the same than existing one: %s")%(line[i])]
-                            logger.notifyChannel("import", netsvc.LOG_ERROR,
-                                    _("Id is not the same than existing one: %s")%(line[i]))
+                            logger.error(_("Id is not the same than existing one: %s")%(line[i]))
 
                         continue
                     if fields_def[field[len(prefix)]]['type'] == 'integer':
@@ -927,8 +921,7 @@ class orm_template(object):
                                 res = key
                                 break
                         if line[i] and not res:
-                            logger.notifyChannel("import", netsvc.LOG_WARNING,
-                                    _("key '%s' not found in selection field '%s'") % \
+                            logger.warning( _("key '%s' not found in selection field '%s'") % \
                                             (line[i], field[len(prefix)]))
 
                             warning += [_("Key/value '%s' not found in selection field '%s'")%(line[i],field[len(prefix)])]
@@ -942,8 +935,7 @@ class orm_template(object):
                             res = (res2 and res2[0][0]) or False
                             if not res:
                                 warning += [_("Relation not found: %s on '%s'")%(line[i],relation)]
-                                logger.notifyChannel("import", netsvc.LOG_WARNING,
-                                        _("Relation not found: %s on '%s'")%(line[i],relation))
+                                logger.warning( _("Relation not found: %s on '%s'")%(line[i],relation))
                     elif fields_def[field[len(prefix)]]['type']=='many2many':
                         res = []
                         if line[i]:
@@ -954,9 +946,7 @@ class orm_template(object):
                                 res3 = (res2 and res2[0][0]) or False
                                 if not res3:
                                     warning += [_("Relation not found: %s on '%s'")%(line[i],relation)]
-                                    logger.notifyChannel("import",
-                                            netsvc.LOG_WARNING,
-                                            _("Relation not found: %s on '%s'")%(line[i],relation))
+                                    logger.warning( _("Relation not found: %s on '%s'")%(line[i],relation))
                                 else:
                                     res.append(res3)
                             if len(res):
@@ -1431,7 +1421,7 @@ class orm_template(object):
                 msg = _("Can't find view for field '%s' in view parts of object model '%s':"
                         "\nPlease define some view for that model.") % \
                         (field, self._name)
-                netsvc.Logger().notifyChannel('orm', netsvc.LOG_ERROR, msg)
+                _logger.error(msg)
                 raise except_orm('View error', msg)
             else:
                 # we don't ask ir_model_data, but do queries in both cases, so
@@ -1465,7 +1455,7 @@ class orm_template(object):
                         "\nEither you wrongly customised this view, or some modules bringing those views are not compatible with your current data model.") % \
                         (field, view_id, view_revref, self._name,
                          parts)
-                netsvc.Logger().notifyChannel('orm', netsvc.LOG_ERROR, msg)
+                _logger.error(msg)
                 raise except_orm('View error', msg)
         return arch, fields
 
@@ -1651,7 +1641,7 @@ class orm_template(object):
                         if rres_apply and rres_apply[1]:
                             rr_apply = ', '.join(rres_apply[1])
                     except Exception, e:
-                        logging.getLogger('orm').debug("Rev ref exception: %s" % e)
+                        _logger.debug("Rev ref exception: %s" % e)
                         # but pass, anyway..
                     
                     raise AttributeError(_("Couldn't find tag '%s' of #%d %s in parent view %s %s!") % \
@@ -1776,9 +1766,8 @@ class orm_template(object):
                     result['type'] = res[4]
                     last_res = [res[3],]
                 elif not (res[5] and res[5] in last_res):
-                    # Fixme: logger
-                    print "Cannot apply view %d because it inherits from %d, not in %s" % \
-                        (res[3], res[5], last_res)
+                    _logger.warning("Cannot apply view %d because it inherits from %d, not in %s" % \
+                                (res[3], res[5], last_res))
                     # non-fatal, carry on
                 else:
                         result['arch'] = _inherit_apply(result['arch'], res[0], res[5], res[3])
@@ -1868,7 +1857,7 @@ class orm_template(object):
             }
         if result['type']=='form' and result['arch'].count("default_focus")>1:
                 msg = "Form View contain more than one default_focus attribute"
-                netsvc.Logger().notifyChannel('orm', netsvc.LOG_ERROR, msg)
+                _logger.error(msg)
                 raise except_orm('View Error !',msg)
         return result
 
@@ -2356,8 +2345,7 @@ class orm(orm_template):
     def _parent_store_compute(self, cr):
         if not self._parent_store:
             return
-        logger = netsvc.Logger()
-        logger.notifyChannel('orm', netsvc.LOG_INFO, 'Computing parent left and right for table %s...' % (self._table, ))
+        _logger.info('Computing parent left and right for table %s...' % (self._table, ))
         def browse_rec(root, pos=0):
 # TODO: set order
             where = self._parent_name+'='+str(root)
@@ -2382,8 +2370,7 @@ class orm(orm_template):
         return True
 
     def _update_store(self, cr, f, k):
-        logger = netsvc.Logger()
-        logger.notifyChannel('orm', netsvc.LOG_INFO, "storing computed values of fields.function '%s'" % (k,))
+        _logger.info("storing computed values of fields.function '%s'" % (k,))
         ss = self._columns[k]._symbol_set
         update_query = 'UPDATE "%s" SET "%s"=%s WHERE id=%%s' % (self._table, k, ss[0])
         cr.execute('select id from '+self._table, debug=self._debug)
@@ -2402,7 +2389,6 @@ class orm(orm_template):
                     cr.execute(update_query, (ss[1](val), key), debug=self._debug)
 
     def _check_removed_columns(self, cr, log=False):
-        logger = netsvc.Logger()
         # iterate on the database columns to drop the NOT NULL constraints
         # of fields which were required but have been removed (or will be added by another module)
         columns = [c for c in self._columns if not (isinstance(self._columns[c], fields.function) and not self._columns[c].store)]
@@ -2417,13 +2403,12 @@ class orm(orm_template):
 
         for column in cr.dictfetchall():
             if log:
-                logger.notifyChannel("orm", netsvc.LOG_DEBUG, "column %s is in the table %s but not in the corresponding object %s" % (column['attname'], self._table, self._name))
+                _logger.debug("column %s is in the table %s but not in the corresponding object %s" % (column['attname'], self._table, self._name))
             if column['attnotnull']:
                 cr.execute('ALTER TABLE "%s" ALTER COLUMN "%s" DROP NOT NULL' % (self._table, column['attname']))
 
     def _auto_init(self, cr, context={}):
         store_compute =  False
-        logger = netsvc.Logger()
         create = False
         todo_end = []
         self._field_create(cr, context=context)
@@ -2441,11 +2426,11 @@ class orm(orm_template):
                     """, (self._table, 'parent_left'))
                 if not cr.rowcount:
                     if 'parent_left' not in self._columns:
-                        logger.notifyChannel('orm', netsvc.LOG_ERROR, 'create a column parent_left on object %s: fields.integer(\'Left Parent\', select=1)' % (self._table, ))
+                        _logger.error('create a column parent_left on object %s: fields.integer(\'Left Parent\', select=1)' % (self._table, ))
                     if 'parent_right' not in self._columns:
-                        logger.notifyChannel('orm', netsvc.LOG_ERROR, 'create a column parent_right on object %s: fields.integer(\'Right Parent\', select=1)' % (self._table, ))
+                        _logger.error( 'create a column parent_right on object %s: fields.integer(\'Right Parent\', select=1)' % (self._table, ))
                     if self._columns[self._parent_name].ondelete != 'cascade':
-                        logger.notifyChannel('orm', netsvc.LOG_ERROR, "The column %s on object %s must be set as ondelete='cascade'" % (self._parent_name, self._name))
+                        _logger.error( "the columns %s on object must be set as ondelete='cascasde'" % (self._name, self._parent_name))
                     cr.execute('ALTER TABLE "%s" ADD COLUMN "parent_left" INTEGER' % (self._table,))
                     cr.execute('ALTER TABLE "%s" ADD COLUMN "parent_right" INTEGER' % (self._table,))
                     cr.commit()
@@ -2523,7 +2508,7 @@ class orm(orm_template):
                             "AND c.oid=a.attrelid " \
                             "AND a.atttypid=t.oid", (self._table, f.oldname))
                         res_old = cr.dictfetchall()
-                        logger.notifyChannel('orm', netsvc.LOG_DEBUG, 'trying to rename %s(%s) to %s'% (self._table, f.oldname, k))
+                        _logger.debug('trying to rename %s(%s) to %s'% (self._table, f.oldname, k))
                         if res_old and len(res_old)==1:
                             cr.execute('ALTER TABLE "%s" RENAME "%s" TO "%s"' % ( self._table,f.oldname, k))
                             res = res_old
@@ -2537,15 +2522,14 @@ class orm(orm_template):
                         f_pg_notnull = f_pg_def['attnotnull']
                         if isinstance(f, fields.function) and not f.store:
                             if getattr(f, 'nodrop', False):
-                                logger.notifyChannel('orm', netsvc.LOG_INFO,
-                                        'column %s (%s) in table %s is obsolete, but data is preserved.\n' % 
+                                _logger.info('column %s (%s) in table %s is obsolete, but data is preserved.\n' % 
                                                 (k, f.string, self._table))
                             elif config.get_misc('debug', 'drop_guard', False):
-                                logger.notifyChannel('orm', netsvc.LOG_WARNING,
+                                _logger.warning(
                                         'column %s (%s) in table %s should be removed: please inspect and drop if appropriate !\n' % 
                                                 (k, f.string, self._table))
                             else:
-                                logger.notifyChannel('orm', netsvc.LOG_INFO, 'column %s (%s) in table %s removed: converted to a function !\n' % (k, f.string, self._table))
+                                _logger.info('column %s (%s) in table %s removed: converted to a function !\n' % (k, f.string, self._table))
                                 cr.execute('ALTER TABLE "%s" DROP COLUMN "%s" CASCADE'% (self._table, k))
                                 cr.commit()
                             f_obj_type = None
@@ -2564,7 +2548,7 @@ class orm(orm_template):
                                 ('float8', 'float', get_pg_type(f)[1], '::'+get_pg_type(f)[1]),
                             ]
                             if f_pg_type == 'varchar' and f._type == 'char' and f_pg_size < f.size:
-                                logger.notifyChannel('orm', netsvc.LOG_INFO, "column '%s' in table '%s' changed size" % (k, self._table))
+                                _logger.info("column '%s' in table '%s' changed size" % (k, self._table))
                                 cr.execute('ALTER TABLE "%s" RENAME COLUMN "%s" TO temp_change_size' % (self._table, k))
                                 cr.execute('ALTER TABLE "%s" ADD COLUMN "%s" VARCHAR(%d)' % (self._table, k, f.size))
                                 cr.execute('UPDATE "%s" SET "%s"=temp_change_size::VARCHAR(%d)' % (self._table, k, f.size))
@@ -2574,7 +2558,7 @@ class orm(orm_template):
                                 if (f_pg_type==c[0]) and (f._type==c[1]):
                                     if f_pg_type != f_obj_type:
                                         if f_pg_type != f_obj_type:
-                                            logger.notifyChannel('orm', netsvc.LOG_INFO, "column '%s' in table '%s' changed type to %s." % (k, self._table, c[1]))
+                                            _logger.info("column '%s' in table '%s' changed type to %s." % (k, self._table, c[1]))
                                         ok = True
                                         cr.execute('ALTER TABLE "%s" RENAME COLUMN "%s" TO temp_change_size' % (self._table, k))
                                         cr.execute('ALTER TABLE "%s" ADD COLUMN "%s" %s' % (self._table, k, c[2]))
@@ -2621,7 +2605,7 @@ class orm(orm_template):
                                     cr.execute('ALTER TABLE "%s" ALTER COLUMN "%s" SET NOT NULL' % (self._table, k))
                                     cr.commit()
                                 except Exception:
-                                    logger.notifyChannel('orm', netsvc.LOG_WARNING, 'unable to set a NOT NULL constraint on column %s of the %s table !\nIf you want to have it, you should update the records and execute manually:\nALTER TABLE %s ALTER COLUMN %s SET NOT NULL' % (k, self._table, self._table, k))
+                                    _logger.warning( 'unable to set a NOT NULL constraint on column %s of the %s table !\nIf you want to have it, you should update the records and execute manually:\nALTER TABLE %s ALTER COLUMN %s SET NOT NULL' % (k, self._table, self._table, k))
                                 cr.commit()
                             elif not f.required and f_pg_notnull == 1:
                                 cr.execute('ALTER TABLE "%s" ALTER COLUMN "%s" DROP NOT NULL' % (self._table, k))
@@ -2662,7 +2646,7 @@ class orm(orm_template):
                                             cr.execute('ALTER TABLE "' + self._table + '" ADD FOREIGN KEY ("' + k + '") REFERENCES "' + ref + '" ON DELETE ' + f.ondelete)
                                             cr.commit()
                     elif len(res)>1:
-                        logger.notifyChannel('orm', netsvc.LOG_ERROR, "Programming error, column %s->%s has multiple instances !"%(self._table,k))
+                        _logger.error( "Programming error, column %s->%s has multiple instances !"%(self._table,k))
                     if not res:
                         if not isinstance(f, fields.function) or f.store:
 
@@ -2727,7 +2711,7 @@ class orm(orm_template):
                     cr.execute(query)
                     cr.commit()
                 except:
-                    logger.notifyChannel('orm', netsvc.LOG_WARNING, 'unable to add \'%s\' constraint on table %s !\n If you want to have it, you should update the records and execute manually:\n%s' % (con, self._table, query))
+                    _logger.warning( 'unable to add \'%s\' constraint on table %s !\n If you want to have it, you should update the records and execute manually:\n%s' % (con, self._table, query,))
                     cr.rollback()
 
         if create:
@@ -3055,7 +3039,7 @@ class orm(orm_template):
                         or (f in self._columns and getattr(self._columns[f], '_classic_write'))
                      ] + self._inherits.values()
         if self._debug:
-            netsvc.Logger().notifyChannel('orm', netsvc.LOG_DEBUG, '%s.read_flat: tables=%s, fields_pre= %s' %
+            _logger.debug('%s.read_flat: tables=%s, fields_pre= %s' %
                 (self._name, tables, fields_pre))
 
         res = []
@@ -3092,11 +3076,10 @@ class orm(orm_template):
                         # due to incorrectly cached data, which won't match
                         # the result fetched again from the db.
                         if self._debug:
-                            logger = logging.getLogger('orm')
                             rc = cr.rowcount
                             sd = {}.fromkeys(sub_ids)
-                            logger.debug("access error @%s  %d != %d " %(self._name, rc, len(sd)))
-                            logger.debug("len(%s) != len(%s)" % (cr.fetchall(), sd))
+                            _logger.debug("access error @%s  %d != %d " %(self._name, rc, len(sd)))
+                            _logger.debug("len(%s) != len(%s)" % (cr.fetchall(), sd))
                         raise except_orm(_('AccessError'),
                                 _('You try to bypass an access rule while reading (Document type: %s).') % self._description)
                 else:
@@ -4000,8 +3983,7 @@ class orm(orm_template):
             qu1, qu2 = e.to_sql()
             qu1 = qu1 and [qu1] or []
             if self._debug:
-                logger = logging.getLogger('orm')
-                logger.debug("where calc of %s: qu1 = %s, qu2 = %s" % (self._table, qu1, qu2))
+                _logger.debug("where calc of %s: qu1 = %s, qu2 = %s" % (self._table, qu1, qu2))
         else:
             qu1, qu2, tables = [], [], ['"%s"' % self._table]
 
@@ -4062,8 +4044,7 @@ class orm(orm_template):
         (where_clause, where_clause_params, tables) = self._where_calc(cr, user, args, context=context)
         dom = self.pool.get('ir.rule').domain_get(cr, user, self._name, 'read', context=context)
         if self._debug:
-            logger = logging.getLogger('orm')
-            logger.debug("rule for %s: %s" %(self._name, dom))
+            _logger.debug("rule for %s: %s" %(self._name, dom))
         where_clause += dom[0]
         where_clause_params += dom[1]
 
