@@ -96,7 +96,7 @@ def find_addons():
             if os.path.exists(terp):
                 yield mname, join(empath, mname)
             else:
-                print "Module %s specified, but no valid path." % mname
+                raise AttributeError("Module %s specified, but no valid path." % mname)
     except:
         pass
 
