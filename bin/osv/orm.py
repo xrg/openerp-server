@@ -1710,10 +1710,6 @@ class orm_template(object):
             result['field_parent'] = sql_res[2] or False
 
         if cr.pgmode in ('pg84', 'pg90'):
-            # Note: in the pg84 mode, we DO NOT validate that inherit views
-            # have the same model as the base view. We only assume that inherit_id
-            # had been set right. So, if some view inherits the wrong one, this
-            # will show up here and not in other modes.
             
             if view_id:
                 # If we had been asked for some particular view id, we have to
@@ -1721,32 +1717,33 @@ class orm_template(object):
                 # inherits from
                 sql_in = 'WITH RECURSIVE rcrs_view_in(id, inher, model) AS (' \
                         'SELECT id, inherit_id, model FROM ir_ui_view ' \
-                                'WHERE id = %s' \
+                                'WHERE id = %s  AND model = %s'  \
                         ' UNION ALL SELECT irv.id, irv.inherit_id, irv.model ' \
                                 ' FROM ir_ui_view AS irv, rcrs_view_in AS rcv ' \
                                 ' WHERE irv.id = rcv.inher ' \
                         ') ' \
                         ' SELECT id FROM rcrs_view_in ' \
-                        ' WHERE inher IS NULL AND model = %s LIMIT 1'
-                sql_in_parms = (view_id, self._name)
+                        ' WHERE inher IS NULL LIMIT 1'
+                sql_in_parms = (view_id, self._name, self._name)
                 
             else:
                 sql_in = 'SELECT id FROM ir_ui_view ' \
                         'WHERE model=%s AND type=%s AND inherit_id IS NULL '\
                         'ORDER BY priority LIMIT 1'
-                sql_in_parms = (self._name, view_type)
+                sql_in_parms = (self._name, view_type, self._name)
         
             sql_out = '''WITH RECURSIVE rec_view(arch,name,field_parent,id,type,
-                                        inherit_id, priority, path)
+                                        inherit_id, priority, model, path)
                   AS ( SELECT arch,name,field_parent,id,type,
-                                inherit_id, priority, ARRAY[] :: integer[] AS path
+                                inherit_id, priority, model, ARRAY[] :: integer[] AS path
                             FROM ir_ui_view
                             WHERE id IN ( %s )
                         
                         UNION ALL SELECT v.arch,v.name,v.field_parent,v.id,v.type,
-                                v.inherit_id, v.priority, rec_view.path || v.inherit_id
+                                v.inherit_id, v.priority, v.model, rec_view.path || v.inherit_id
                             FROM ir_ui_view v, rec_view
                             WHERE v.inherit_id = rec_view.id
+                              AND v.model = %%s
                      )
                   SELECT arch, name, field_parent, id, type, inherit_id
                       FROM rec_view ORDER BY path, priority ;
