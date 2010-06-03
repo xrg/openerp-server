@@ -357,8 +357,9 @@ class ConnectionPool(object):
 
                 self._connections.pop(i)
                 try:
-                    pr = cnx.poll()
-                    self._debug("Poll: %d", pr)
+                   if psycopg2.__version__ >= '2.2' :
+                        pr = cnx.poll()
+                        self._debug("Poll: %d", pr)
                 except OperationalError, e:
                     self._debug("Error in poll: %s" % e)
                     continue
@@ -371,6 +372,8 @@ class ConnectionPool(object):
                 if do_cursor:
                     try:
                         cur = cnx.cursor(cursor_factory=psycopg1cursor)
+                        if psycopg2.__version__ < '2.2' and not cur.isready():
+                            continue
                         if cur.closed:
                             continue
                         self._connections.insert(i,(cnx, True))
