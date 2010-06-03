@@ -174,6 +174,12 @@ class BaseHttpDaemon(threading.Thread, netsvc.Server):
                     raise
         return True
 
+    def stats(self):
+        res = "%sd: " % self._RealProto + ((self.running and "running") or  "stopped")
+        if self.server:
+	    res += ", %d threads" % (self.server.numThreads,)
+        return res
+
     def append_svc(self, service):
         if not isinstance(service, HTTPDir):
             raise Exception("Wrong class for http service")

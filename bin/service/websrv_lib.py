@@ -473,7 +473,7 @@ class ConnThreadingMixIn:
         if self.daemon_threads:
             t.setDaemon (1)
         t.start()
-
+    
     def _mark_start(self, thread):
         """ Mark the start of a request thread """
         pass
@@ -492,6 +492,7 @@ class ConnThreadingMixIn:
         try:
             self._mark_start(threading.currentThread())
             request, client_address = self.get_request()
+            self._mark_end(threading.currentThread())
             if self.verify_request(request, client_address):
                 try:
                     self.process_request(request, client_address)
