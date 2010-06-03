@@ -23,8 +23,10 @@ from osv import osv
 from osv import fields
 import os
 import tools
+import logging
 from tools.translate import _
 from tools.safe_eval import safe_eval as eval
+
 class multi_company_default(osv.osv):
     """
     Manage multi company default value
@@ -189,9 +191,17 @@ class res_company(osv.osv):
         return True
 
     def _get_logo(self, cr, uid, ids):
-        return open(os.path.join(
-            tools.config['root_path'], '..', 'pixmaps', 'openerp-header.png'),
-                    'rb') .read().encode('base64')
+        # Note: we do not try to access files above our root_path, because
+        # at a production system root_path/../pixmaps is arbitrary!
+        # At a developer or tar.gz setup, we'd better fix our paths.
+        
+        pixmap_path = tools.config.get_misc('paths','pixmaps', './')
+        fname = os.path.join(pixmap_path, 'openerp-header.png')
+        if os.path.isfile(fname):
+            return open(fname, 'rb') .read().encode('base64')
+        else:
+            logging.getLogger('init').warning('Cannot find default company logo at "%s"' % fname)
+            return None
 
 
     def _get_header2(self,cr,uid,ids):
