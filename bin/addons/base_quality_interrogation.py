@@ -1,3 +1,4 @@
+#!/usr/bin/python
 # -*- coding: utf-8 -*-
 ##############################################################################
 #    
@@ -49,7 +50,8 @@ def to_decode(s):
                 return s
 
 def start_server(root_path, port, netport, addons_path):
-    os.system('python2.5 %sopenerp-server.py  --pidfile=openerp.pid  --httpd-port=%s --netrpc-port=%s --addons-path=%s' %(root_path, str(port),str(netport),addons_path))
+    os.system('python %sopenerp-server.py  --pidfile=openerp.pid  --httpd-port=%s --netrpc-port=%s --addons-path=%s' %(root_path, str(port),str(netport),addons_path))
+
 def clean():
     if os.path.isfile('openerp.pid'):
         ps = open('openerp.pid')
@@ -172,7 +174,7 @@ def create_db(uri, dbname, user='admin', pwd='admin', lang='en_US'):
     login_conn = xmlrpclib.ServerProxy(uri + '/xmlrpc/common')
     db_list = execute(conn, 'list')
     if dbname in db_list:
-        drop_db(uri, dbname)
+        raise Exception("Database already exists, drop it first!")
     id = execute(conn,'create',admin_passwd, dbname, True, lang)
     wait(id,uri)    
     install_module(uri, dbname, ['base_module_quality'],user=user,pwd=pwd)
@@ -342,15 +344,18 @@ try:
     if command == 'install-translation':
         import_translate(uri, options['login'], options['pwd'], options['database'], options['translate-in'])
     clean()
+    server_thread.join()
     sys.exit(0)
 
 except xmlrpclib.Fault, e:
     print e.faultString
     clean()
+    server_thread.join()
     sys.exit(1)
 except Exception, e:
     print e
     clean()
+    server_thread.join()
     sys.exit(1)
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
