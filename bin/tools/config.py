@@ -40,12 +40,6 @@ class configmanager(object):
     def __init__(self, fname=None):
         self.options = {
             'email_from':False,
-            'xmlrpc_interface': '',    # this will bind the server to all interfaces
-            'xmlrpc_port': 8069,
-            'netrpc_interface': '',
-            'netrpc_port': 8070,
-            'xmlrpcs_interface': '',    # this will bind the server to all interfaces
-            'xmlrpcs_port': 8071,
             'db_host': False,
             'db_port': False,
             'db_name': False,
@@ -53,9 +47,6 @@ class configmanager(object):
             'db_password': False,
             'db_maxconn': 64,
             'reportgz': False,
-            'netrpc': True,
-            'xmlrpc': True,
-            'xmlrpcs': True,
             'translate_in': None,
             'translate_out': None,
             'language': None,
@@ -82,12 +73,22 @@ class configmanager(object):
             'login_message': False,
             'list_db' : True,
             'timezone' : False, # to override the default TZ
-            'test_file' : False,
-            'test_disable' : False,
-            'test_commit' : False,
-            'static_http_enable': False,
-            'static_http_document_root': None,
-            'static_http_url_prefix': None,
+            'test-disable' : False,
+            'test-commit' : False,
+        }
+
+        self.aliases = {
+            'httpd_interface': 'httpd.interface',
+            'httpd_port': 'httpd.port',
+            'httpds_interface': 'httpsd.interface',
+            'httpds_port': 'httpsd.port',
+            'httpd': 'httpd.enable',
+            'httpds': 'httpsd.enable',
+            'netrpc_interface': 'netrpcd.interface',
+            'netrpc_port': 'netrpcd.port',
+            'netrpc': 'netrpcd.enable',
+            'secure_cert_file': 'httpsd.sslcert',
+            'secure_pkey_file': 'httpsd.sslkey',
         }
 
         self.misc = {}
@@ -104,24 +105,24 @@ class configmanager(object):
         parser.add_option("-s", "--save", action="store_true", dest="save", default=False,
                           help="save configuration to ~/.openerp_serverrc")
         parser.add_option("--pidfile", dest="pidfile", help="file where the server pid will be stored")
+        
+        parser.add_option("-D", "--define", dest="defines", action="append", 
+                    help="Define an arbitrary option, like 'section.var[=value]'")
 
         group = optparse.OptionGroup(parser, "XML-RPC Configuration")
-        group.add_option("--xmlrpc-interface", dest="xmlrpc_interface", help="specify the TCP IP address for the XML-RPC protocol")
-        group.add_option("--xmlrpc-port", dest="xmlrpc_port", help="specify the TCP port for the XML-RPC protocol", type="int")
-        group.add_option("--no-xmlrpc", dest="xmlrpc", action="store_false", help="disable the XML-RPC protocol")
+        group.add_option("--httpd-interface", dest="httpd_interface", help="specify the TCP IP address for the XML-RPC protocol")
+        group.add_option("--httpd-port", dest="httpd_port", help="specify the TCP port for the HTTP protocol", type="int")
+        group.add_option("--no-httpd", dest="httpd", action="store_false", help="disable the HTTP protocol")
         parser.add_option_group(group)
 
-        title = "XML-RPC Secure Configuration"
-        if not self.has_ssl:
-            title += " (disabled as ssl is unavailable)"
-
-        group = optparse.OptionGroup(parser, title)
-        group.add_option("--xmlrpcs-interface", dest="xmlrpcs_interface", help="specify the TCP IP address for the XML-RPC Secure protocol")
-        group.add_option("--xmlrpcs-port", dest="xmlrpcs_port", help="specify the TCP port for the XML-RPC Secure protocol", type="int")
-        group.add_option("--no-xmlrpcs", dest="xmlrpcs", action="store_false", help="disable the XML-RPC Secure protocol")
-        group.add_option("--cert-file", dest="secure_cert_file", default="server.cert", help="specify the certificate file for the SSL connection")
-        group.add_option("--pkey-file", dest="secure_pkey_file", default="server.pkey", help="specify the private key file for the SSL connection")
-        parser.add_option_group(group)
+        if self.has_ssl:
+            group = optparse.OptionGroup(parser, "XML-RPC Secure Configuration")
+            group.add_option("--httpds-interface", dest="httpds_interface", help="specify the TCP IP address for the XML-RPC Secure protocol")
+            group.add_option("--httpds-port", dest="httpds_port", help="specify the TCP port for the HTTP Secure protocol", type="int")
+            group.add_option("--no-httpds", dest="httpds", action="store_false", help="disable the HTTP Secure protocol")
+            group.add_option("--cert-file", dest="secure_cert_file", default="server.cert", help="specify the certificate file for the SSL connection")
+            group.add_option("--pkey-file", dest="secure_pkey_file", default="server.pkey", help="specify the private key file for the SSL connection")
+            parser.add_option_group(group)
 
         # NET-RPC
         group = optparse.OptionGroup(parser, "NET-RPC Configuration")
@@ -129,14 +130,7 @@ class configmanager(object):
         group.add_option("--netrpc-port", dest="netrpc_port", help="specify the TCP port for the NETRPC protocol", type="int")
         group.add_option("--no-netrpc", dest="netrpc", action="store_false", help="disable the NETRPC protocol")
         parser.add_option_group(group)
-        
-        # Static HTTP
-        group = optparse.OptionGroup(parser, "Static HTTP service")
-        group.add_option("--static-http-enable", dest="static_http_enable", action="store_true", default=False, help="enable static HTTP service for serving plain HTML files")
-        group.add_option("--static-http-document-root", dest="static_http_document_root", help="specify the directory containing your static HTML files (e.g '/var/www/')")
-        group.add_option("--static-http-url-prefix", dest="static_http_url_prefix", help="specify the URL root prefix where you want web browsers to access your static HTML files (e.g '/')")
-        parser.add_option_group(group)
-        
+
         parser.add_option("-i", "--init", dest="init", help="init a module (use \"all\" for all modules)")
         parser.add_option("--without-demo", dest="without_demo",
                           help="load demo data for a module (use \"all\" for all modules)", default=False)
@@ -266,29 +260,37 @@ class configmanager(object):
         if self.options['pidfile'] in ('None', 'False'):
             self.options['pidfile'] = False
 
-        keys = ['xmlrpc_interface', 'xmlrpc_port', 'db_name', 'db_user', 'db_password', 'db_host',
+        keys = [ 'db_name', 'db_user', 'db_password', 'db_host',
                 'db_port', 'list_db', 'logfile', 'pidfile', 'smtp_port', 'cache_timeout','smtp_ssl',
-                'email_from', 'smtp_server', 'smtp_user', 'smtp_password', 
-                'netrpc_interface', 'netrpc_port', 'db_maxconn', 'import_partial', 'addons_path',
-                'netrpc', 'xmlrpc', 'syslog', 'without_demo', 'timezone',
-                'xmlrpcs_interface', 'xmlrpcs_port', 'xmlrpcs',
-                'secure_cert_file', 'secure_pkey_file',
-                'static_http_enable', 'static_http_document_root', 'static_http_url_prefix'
-                ]
+                'email_from', 'smtp_server', 'smtp_user', 'smtp_password', 'price_accuracy',
+                'db_maxconn', 'import_partial', 'addons_path',
+                'syslog', 'without_demo', 'timezone',]
 
         for arg in keys:
             if getattr(opt, arg):
                 self.options[arg] = getattr(opt, arg)
 
         keys = ['language', 'translate_out', 'translate_in', 'debug_mode',
-                'stop_after_init', 'logrotate', 'without_demo', 'netrpc', 'xmlrpc', 'syslog',
-                'list_db', 'server_actions_allow_code', 'xmlrpcs', 
-                'test_file', 'test_disable', 'test_commit'
-                ]
+                'stop_after_init', 'logrotate', 'without_demo', 'syslog',
+                'list_db', 'server_actions_allow_code']
 
         for arg in keys:
             if getattr(opt, arg) is not None:
                 self.options[arg] = getattr(opt, arg)
+
+        for key in self.aliases:
+            if getattr(opt, key) is not None:
+                sec, arg = self.aliases[key].split('.',1)
+                self.misc.setdefault(sec,{})[arg] = getattr(opt, key)
+
+        for dval in opt.defines or []:
+            if '=' in dval:
+                key, val = dval.split('=',1)
+            else:
+                key = dval
+                val = True
+            sec, arg = key.split('.',1)
+            self.misc.setdefault(sec,{})[arg] = val
 
         if opt.assert_exit_level:
             self.options['assert_exit_level'] = self._LOGLEVELS[opt.assert_exit_level]
@@ -420,7 +422,8 @@ class configmanager(object):
         loglevelnames = dict(zip(self._LOGLEVELS.values(), self._LOGLEVELS.keys()))
         p.add_section('options')
         for opt in self.options.keys():
-            if opt in ('version', 'language', 'translate_out', 'translate_in', 'init', 'update'):
+            if opt in ('version', 'language', 'translate_out', 'translate_in',
+                        'stop_after_init', 'init', 'update'):
                 continue
             if opt in ('log_level', 'assert_exit_level'):
                 p.set('options', opt, loglevelnames.get(self.options[opt], self.options[opt]))
@@ -428,6 +431,7 @@ class configmanager(object):
                 p.set('options', opt, self.options[opt])
 
         for sec in self.misc.keys():
+            p.add_section(sec)
             for opt in self.misc[sec].keys():
                 p.set(sec,opt,self.misc[sec][opt])
 
@@ -463,4 +467,6 @@ config = configmanager()
 # when it starts, to allow doing 'import tools.config' from
 # other python executables without parsing *their* args.
 config.parse_config()
+
+# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
 
