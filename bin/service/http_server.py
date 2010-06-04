@@ -341,19 +341,22 @@ class XMLRPCRequestHandler2_Db(netsvc.OpenERPDispatcher2,xrBaseRequestHandler):
         return db
 
 def init_xmlrpc():
-    if not tools.config.get_misc('xmlrpc','enable', True):
-        return
-    reg_http_service(HTTPDir('/xmlrpc/',XMLRPCRequestHandler))
-    # Example of http file serving:
-    # reg_http_service(HTTPDir('/test/',HTTPHandler))
-    logging.getLogger("web-services").info("Registered XML-RPC over HTTP")
+    if tools.config.get_misc('xmlrpc','enable', True):
+	sso = tools.config.get_misc('xmlrpc','ssl_require', False)
+        reg_http_service(HTTPDir('/xmlrpc/',XMLRPCRequestHandler), secure_only=sso)
+        logging.getLogger("web-services").info("Registered XML-RPC over HTTP")
 
-    reg_http_service(HTTPDir('/xmlrpc2/pub/',XMLRPCRequestHandler2_Pub))
-    reg_http_service(HTTPDir('/xmlrpc2/root/',XMLRPCRequestHandler2_Root,
-                        OpenERPRootProvider(realm="OpenERP Admin", domain='root')))
-    reg_http_service(HTTPDir('/xmlrpc2/db/',XMLRPCRequestHandler2_Db,
-                        OpenERPAuthProvider()))
-    logging.getLogger("web-services").info( "Registered XML-RPC 2.0 over HTTP")
+    if tools.config.get_misc('xmlrpc2','enable', True):
+        sso = tools.config.get_misc('xmlrpc2','ssl_require', False)
+        reg_http_service(HTTPDir('/xmlrpc2/pub/',XMLRPCRequestHandler2_Pub), 
+                        secure_only=sso)
+        reg_http_service(HTTPDir('/xmlrpc2/root/',XMLRPCRequestHandler2_Root,
+                            OpenERPRootProvider(realm="OpenERP Admin", domain='root')),
+                        secure_only=sso)
+        reg_http_service(HTTPDir('/xmlrpc2/db/',XMLRPCRequestHandler2_Db,
+                            OpenERPAuthProvider()), 
+                        secure_only=sso)
+        logging.getLogger("web-services").info( "Registered XML-RPC 2.0 over HTTP")
 
 class StaticHTTPHandler(HttpLogHandler, HTTPHandler):
     _logger = logging.getLogger('httpd')
