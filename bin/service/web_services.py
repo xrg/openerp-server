@@ -196,14 +196,14 @@ class db(baseExportService):
         db = sql_db.db_connect('template1')
         cr = db.cursor()
         cr.autocommit(True) # avoid transaction block
+        if tools.config.get_misc('debug', 'drop_guard', False):
+            raise Exception("Not dropping database %s because guard is set!" % db_name)
         try:
-            try:
-                cr.execute('DROP DATABASE "%s"' % db_name)
-            except Exception, e:
-                logger.exception('DROP DB: %s failed:' % (db_name,))
-                raise Exception("Couldn't drop database %s: %s" % (db_name, e))
-            else:
-                logger.info('DROP DB: %s' % (db_name))
+            cr.execute('DROP DATABASE "%s"' % db_name)
+            logger.info('DROP DB: %s' % (db_name))
+        except Exception, e:
+            logger.exception('DROP DB: %s failed:' % (db_name,))
+            raise Exception("Couldn't drop database %s: %s" % (db_name, e))
         finally:
             cr.close()
         return True
