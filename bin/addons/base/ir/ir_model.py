@@ -90,6 +90,10 @@ class ir_model(osv.osv):
     _constraints = [
         (_check_model_name, 'The Object name must start with x_ and not contain any special character !', ['model']),
     ]
+    
+    _sql_constraints = [
+            ('model_uniq', 'UNIQUE(model)', 'Object must be unique'),
+    ]
 
     # overridden to allow searching both on model name (model field)
     # and model description (name field)
@@ -477,7 +481,6 @@ class ir_model_data(osv.osv):
     }
     _sql_constraints = [
         ('module_name_uniq', 'unique(name, module)', 'You cannot have multiple records with the same id for the same module'),
-        ('model_uniq', 'UNIQUE(model)', 'Object must be unique'),
     ]
 
     def __init__(self, pool, cr):
