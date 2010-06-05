@@ -171,7 +171,7 @@ class act_window(osv.osv):
         for act in self.browse(cr, uid, ids, fields_only=['res_model', 'search_view_id',] ):
             assert act.res_model, act.id
             act_model = self.pool.get(act.res_model)
-            assert act_model, 'No model %s for view #%d %s' % \
+            assert act_model, 'No model %s for action #%d %s' % \
                                 (act.res_model, act.id, act.name)
             fields_from_fields_get = act_model.fields_get(cr, uid, context=context)
             search_view_id = False
