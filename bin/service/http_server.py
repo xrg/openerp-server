@@ -342,7 +342,7 @@ class XMLRPCRequestHandler2_Db(netsvc.OpenERPDispatcher2,xrBaseRequestHandler):
 
 def init_xmlrpc():
     if tools.config.get_misc('xmlrpc','enable', True):
-	sso = tools.config.get_misc('xmlrpc','ssl_require', False)
+        sso = tools.config.get_misc('xmlrpc','ssl_require', False)
         reg_http_service(HTTPDir('/xmlrpc/',XMLRPCRequestHandler), secure_only=sso)
         logging.getLogger("web-services").info("Registered XML-RPC over HTTP")
 
@@ -414,7 +414,7 @@ class OerpAuthProxy(AuthProxy):
         self.auth_tries = 0
         self.last_auth = None
 
-    def checkRequest(self,handler,path, db=False):        
+    def checkRequest(self,handler,path='/', db=False):
         """ Check authorization of request to path.
             First, we must get the "db" from the path, because it could
             need different authorization per db.
