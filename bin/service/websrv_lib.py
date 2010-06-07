@@ -434,7 +434,13 @@ class SecureMultiHTTPHandler(MultiHTTPHandler):
                                 ssl_version=ssl.PROTOCOL_SSLv23)
             self.rfile = self.connection.makefile('rb', self.rbufsize)
             self.wfile = self.connection.makefile('wb', self.wbufsize)
-            self.log_message("Secure %s connection from %s",self.connection.cipher(),self.client_address)
+            ciph_str = 'N/A'
+            addr_str = '?'
+            if self.connection.cipher():
+                ciph_str = self.connection.cipher()[0]
+            if self.client_address:
+                addr_str = '%s:%s' % self.client_address
+            self.log_message("Secure %s connection from %s",ciph_str,addr_str)
         except Exception:
             self.request.shutdown(socket.SHUT_RDWR)
             raise

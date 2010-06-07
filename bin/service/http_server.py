@@ -448,10 +448,14 @@ class OerpAuthProxy(AuthProxy):
             (user,passwd) = base64.decodestring(auth_str).split(':')
             try:
                 acd = self.provider.authenticate(db,user,passwd,handler.client_address)
-                if acd:
-                    self.provider.log("Auth user=\"%s\", db=\"%s\" from %s" %(user,db, handler.client_address), lvl=logging.INFO)
+                if handler.client_address:
+                    addr_str = "%s:%s" % handler.client_address
                 else:
-                    self.provider.log("Auth FAILED for user=\"%s\" from %s" %(user,handler.client_address), lvl=logging.WARNING)
+                    addr_str = '?'
+                if acd:
+                    self.provider.log("Auth user=\"%s@%s\" from %s" %(user, db, addr_str), lvl=logging.INFO)
+                else:
+                    self.provider.log("Auth FAILED for user=\"%s@%s\" from %s" %(user, db, addr_str), lvl=logging.WARNING)
 
             except AuthRequiredExc:
                 # sometimes the provider.authenticate may raise, so that
