@@ -31,6 +31,7 @@ import time
 import pickle
 import base64
 import socket
+import subprocess
 
 admin_passwd = 'admin'
 waittime = 10
@@ -49,17 +50,58 @@ def to_decode(s):
             except UnicodeError:
                 return s
 
-def start_server(root_path, port, netport, addons_path):
-    os.system('python %sopenerp-server.py  --pidfile=openerp.pid  --httpd-port=%s --netrpc-port=%s --addons-path=%s' %(root_path, str(port),str(netport),addons_path))
+class server_thread(threading.Thread):
+    
+    def __init__(self, root_path, port, netport, addons_path, pyver=None, timed=False):
+        threading.Thread.__init__(self)
+        self.root_path = root_path
+        self.port = port
+        # self.addons_path = addons_path
+        self.args = [ 'python%s' %(pyver or ''), '%sopenerp-server.py' % root_path,
+                    '--httpd-port=%s' % port ,
+                    '--netrpc-port=%s' % netport,
+                    '--addons-path=%s' % addons_path ]
+        if timed:
+            self.args.insert(0, 'time')
+        self.proc = None
+        self.is_running = False
+        self.is_ready = False
+        # self.is_terminating = False
+        
+    def stop(self):
+        if (not self.is_running) and (not self.proc):
+            time.sleep(2)
 
-def clean():
-    if os.path.isfile('openerp.pid'):
-        ps = open('openerp.pid')
-        if ps:
-            pid = int(ps.read())
-            ps.close()
-            if pid:
-                os.kill(pid,9)
+        if not self.proc :
+            print "Program has not started"
+        elif self.proc.returncode is not None:
+            print "Program is not running"
+        else:
+            print "Terminating.",
+            self.proc.terminate()
+            print ".."
+            
+            # TODO: kill if not terminate right.
+        
+    def run(self):
+        try:
+            print "will run:", ' '.join(self.args)
+            self.proc = subprocess.Popen(self.args, shell=False, cwd=None)
+            self.is_running = True
+            print "run: ", self.proc.pid
+        
+            while self.proc.returncode is None:
+                self.proc.poll()
+                print "Server running",
+                time.sleep(1)
+                print ".."
+                self.is_ready = True # TODO
+            
+            self.is_ready = False
+            print "Finished server with:", self.proc.returncode
+        finally:
+            self.is_running = False
+        
 
 def execute(connector, method, *args):
     global wait_count
@@ -327,10 +369,11 @@ if opt.translate_in:
 
 uri = 'http://localhost:' + str(options['port'])
 
-server_thread = threading.Thread(target=start_server,
-                args=(options['root-path'], options['port'],options['netport'], options['addons-path']))
+server = server_thread(root_path=options['root-path'], port=options['port'],
+                        netport=options['netport'], addons_path=options['addons-path'])
+
 try:
-    server_thread.start()
+    server.start()
     if command == 'create-db':
         create_db(uri, options['database'], options['login'], options['pwd'])
     if command == 'drop-db':
@@ -343,19 +386,20 @@ try:
         check_quality(uri, options['login'], options['pwd'], options['database'], options['modules'], options['quality-logs'])
     if command == 'install-translation':
         import_translate(uri, options['login'], options['pwd'], options['database'], options['translate-in'])
-    clean()
-    server_thread.join()
+
+    server.stop()
+    server.join()
     sys.exit(0)
 
 except xmlrpclib.Fault, e:
     print e.faultString
-    clean()
-    server_thread.join()
+    server.stop()
+    server.join()
     sys.exit(1)
 except Exception, e:
     print e
-    clean()
-    server_thread.join()
+    server.stop()
+    server.join()
     sys.exit(1)
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
