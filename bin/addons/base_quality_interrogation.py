@@ -32,11 +32,10 @@ import pickle
 import base64
 import socket
 import subprocess
+import select
+import re
 
 admin_passwd = 'admin'
-waittime = 10
-wait_count = 0
-wait_limit = 12
 
 def to_decode(s):
     try:
@@ -52,6 +51,16 @@ def to_decode(s):
 
 class server_thread(threading.Thread):
     
+    def regparser(self, section, regex, funct):
+        self.__parsers.setdefault(section, []).append( (regex, funct) )
+
+    def setRunning(self, section, level, line):
+        print "Server is ready!"
+        self.is_ready = True
+        
+    def setListening(self, section, level, mobj):
+        print "Server listens %s at %s:%s" % mobj.group(1, 2, 3)
+
     def __init__(self, root_path, port, netport, addons_path, pyver=None, timed=False):
         threading.Thread.__init__(self)
         self.root_path = root_path
@@ -68,6 +77,17 @@ class server_thread(threading.Thread):
         self.is_ready = False
         # self.is_terminating = False
         
+        # Regular expressions:
+        self.linere = re.compile(r'\[(.*)\] ([A-Z]+):([\w\.-]+):(.*)$')
+        
+        self.__parsers = {}
+        self.regparser('web-services', 
+                'the server is running, waiting for connections...', 
+                self.setRunning)
+        self.regparser('web-services',
+                re.compile(r'starting (.+) service at ([0-9\.]+) port ([0-9]+)'),
+                self.setListening)
+
     def stop(self):
         if (not self.is_running) and (not self.proc):
             time.sleep(2)
@@ -86,41 +106,72 @@ class server_thread(threading.Thread):
     def run(self):
         try:
             print "will run:", ' '.join(self.args)
-            self.proc = subprocess.Popen(self.args, shell=False, cwd=None)
+            self.proc = subprocess.Popen(self.args, shell=False, cwd=None, 
+                stdout=subprocess.PIPE, stderr=subprocess.PIPE)
             self.is_running = True
             print "run: ", self.proc.pid
+            pob = select.poll()
+            pob.register(self.proc.stdout)
+            pob.register(self.proc.stderr)
+            fdd = { self.proc.stdout.fileno(): self.proc.stdout ,
+                    self.proc.stderr.fileno(): self.proc.stderr }
         
-            while self.proc.returncode is None:
+            while True:
                 self.proc.poll()
-                print "Server running",
-                time.sleep(1)
-                print ".."
-                self.is_ready = True # TODO
-            
+                if self.proc.returncode is not None:
+                    break
+                # Now, see if we have output:
+                p = pob.poll(10000)
+                for fd, event in p:
+                    if event == select.POLLIN:
+                        r = fdd[fd].readline()
+                        if r.endswith("\n"):
+                            r = r[:-1]
+                        if not r:
+                            continue
+                        m = self.linere.match(r)
+                        if m:
+                            for regex, funct in self.__parsers.get(m.group(3),[]):
+                                if isinstance(regex, basestring):
+                                    if regex == m.group(4):
+                                        funct(m.group(3), m.group(2), m.group(4))
+                                else:  # elif isinstance(regex, re.RegexObject):
+                                    mm = regex.match(m.group(4))
+                                    if mm:
+                                        funct(m.group(3), m.group(3), mm)
+                   
+                        # now, print the line at stdout
+                        print r
+
             self.is_ready = False
             print "Finished server with:", self.proc.returncode
         finally:
             self.is_running = False
         
+    def start_full(self):
+        """ start and wait until server is up, ready to serve
+        """
+        self.start()
+        time.sleep(1)
+        t = 0
+        while not self.is_ready:
+            if not self.is_running:
+                raise Exception("Server cannot start")
+            if t > 120:
+                self.stop()
+                raise Exception("Server took too long to start")
+            time.sleep(1)
+            t += 1
+        return True
 
 def execute(connector, method, *args):
-    global wait_count
+    global server
     res = False
-    try:
-        res = getattr(connector,method)(*args)
-    except socket.error,e:
-        if e.args[0] == 111:
-            if wait_count > wait_limit:
-                print "Server is taking too long to start, it has exceeded the maximum limit of %d seconds."%(wait_limit)
-                clean()
-                sys.exit(1)
-            print 'Please wait %d sec to start server....'%(waittime)
-            wait_count += 1
-            time.sleep(waittime)
-            res = execute(connector, method, *args)
-        else:
-            raise e
-    wait_count = 0
+    if not server.is_ready:
+        print "Server not ready, cannot execute %s" % method
+        return False
+
+    res = getattr(connector,method)(*args)
     return res
 
 def login(uri, dbname, user, pwd):
@@ -196,8 +247,7 @@ def check_quality(uri, user, pwd, dbname, modules, quality_logs):
         return True
     else:
         print 'Login Failed...'
-        clean()
-        sys.exit(1)
+        return False
 
 
 
@@ -373,7 +423,7 @@ server = server_thread(root_path=options['root-path'], port=options['port'],
                         netport=options['netport'], addons_path=options['addons-path'])
 
 try:
-    server.start()
+    server.start_full()
     if command == 'create-db':
         create_db(uri, options['database'], options['login'], options['pwd'])
     if command == 'drop-db':
