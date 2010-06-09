@@ -60,6 +60,7 @@ class server_thread(threading.Thread):
         
     def setListening(self, section, level, mobj):
         print "Server listens %s at %s:%s" % mobj.group(1, 2, 3)
+        self._lports[mobj.group(1)] = mobj.group(3)
 
     def __init__(self, root_path, port, netport, addons_path, pyver=None, timed=False):
         threading.Thread.__init__(self)
@@ -75,6 +76,7 @@ class server_thread(threading.Thread):
         self.proc = None
         self.is_running = False
         self.is_ready = False
+        self._lports = {}
         # self.is_terminating = False
         
         # Regular expressions:
@@ -162,6 +164,8 @@ class server_thread(threading.Thread):
                 raise Exception("Server took too long to start")
             time.sleep(1)
             t += 1
+        if self._lports.get('HTTP') != self.port:
+            print "WARNING: server does not listen HTTP at port %s" % self.port
         return True
 
 def execute(connector, method, *args):
