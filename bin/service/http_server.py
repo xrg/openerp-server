@@ -247,7 +247,8 @@ def reg_http_service(hts, secure_only = False):
 
     if (not httpd) and (not httpsd):
         logging.getLogger('httpd').warning("No httpd available to register service %s" % hts.path)
-    return
+        return False
+    return True
 
 def list_http_services(protocol=None):
     global httpd, httpsd
@@ -343,20 +344,20 @@ class XMLRPCRequestHandler2_Db(netsvc.OpenERPDispatcher2,xrBaseRequestHandler):
 def init_xmlrpc():
     if tools.config.get_misc('xmlrpc','enable', True):
         sso = tools.config.get_misc('xmlrpc','ssl_require', False)
-        reg_http_service(HTTPDir('/xmlrpc/',XMLRPCRequestHandler), secure_only=sso)
-        logging.getLogger("web-services").info("Registered XML-RPC over HTTP")
+        if reg_http_service(HTTPDir('/xmlrpc/',XMLRPCRequestHandler), secure_only=sso):
+            logging.getLogger("web-services").info("Registered XML-RPC over HTTP")
 
     if tools.config.get_misc('xmlrpc2','enable', True):
         sso = tools.config.get_misc('xmlrpc2','ssl_require', False)
-        reg_http_service(HTTPDir('/xmlrpc2/pub/',XMLRPCRequestHandler2_Pub), 
-                        secure_only=sso)
-        reg_http_service(HTTPDir('/xmlrpc2/root/',XMLRPCRequestHandler2_Root,
+        if reg_http_service(HTTPDir('/xmlrpc2/pub/',XMLRPCRequestHandler2_Pub), 
+                        secure_only=sso) \
+            and reg_http_service(HTTPDir('/xmlrpc2/root/',XMLRPCRequestHandler2_Root,
                             OpenERPRootProvider(realm="OpenERP Admin", domain='root')),
-                        secure_only=sso)
-        reg_http_service(HTTPDir('/xmlrpc2/db/',XMLRPCRequestHandler2_Db,
+                        secure_only=sso) \
+            and reg_http_service(HTTPDir('/xmlrpc2/db/',XMLRPCRequestHandler2_Db,
                             OpenERPAuthProvider()), 
-                        secure_only=sso)
-        logging.getLogger("web-services").info( "Registered XML-RPC 2.0 over HTTP")
+                        secure_only=sso):
+            logging.getLogger("web-services").info( "Registered XML-RPC 2.0 over HTTP")
 
 class StaticHTTPHandler(HttpLogHandler, HTTPHandler):
     _logger = logging.getLogger('httpd')
@@ -396,9 +397,8 @@ def init_static_http():
     
     base_path = tools.config.get_misc('static-http', 'base_path', '/')
     
-    reg_http_service(HTTPDir(base_path,StaticHTTPHandler))
-    
-    logging.getLogger("web-services").info("Registered HTTP dir %s for %s" % \
+    if reg_http_service(HTTPDir(base_path,StaticHTTPHandler)):
+	logging.getLogger("web-services").info("Registered HTTP dir %s for %s" % \
                         (dir_path, base_path))
 
 
