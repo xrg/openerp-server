@@ -254,6 +254,13 @@ def check_quality(uri, user, pwd, dbname, modules, quality_logs):
         print 'Login Failed...'
         return False
 
+def get_ostimes(uri):
+    try:
+        conn = xmlrpclib.ServerProxy(uri + '/xmlrpc/common')
+        ost = execute(conn,'get_os_time', admin_passwd)
+        return ost
+    except Exception, e:
+        print "exception:", e
 
 
 def wait(id,url=''):
@@ -431,6 +438,9 @@ server = server_thread(root_path=options['root-path'], port=options['port'],
 
 try:
     server.start_full()
+    ost =  get_ostimes(uri) or [None, None]
+    print "Server started at: User: %.3f, Sys: %.3f" % (ost[0], ost[1])
+
     if command == 'create-db':
         create_db(uri, options['database'], options['login'], options['pwd'])
     if command == 'drop-db':
@@ -443,6 +453,9 @@ try:
         check_quality(uri, options['login'], options['pwd'], options['database'], options['modules'], options['quality-logs'])
     if command == 'install-translation':
         import_translate(uri, options['login'], options['pwd'], options['database'], options['translate-in'])
+
+    ost =  get_ostimes(uri) or [None, None]
+    print "Server ending at: User: %.3f, Sys: %.3f" % (ost[0], ost[1])
 
     server.stop()
     server.join()
