@@ -165,7 +165,7 @@ class server_thread(threading.Thread):
                 raise Exception("Server took too long to start")
             time.sleep(1)
             t += 1
-        if self._lports.get('HTTP') != self.port:
+        if self._lports.get('HTTP') != str(self.port):
             print "WARNING: server does not listen HTTP at port %s" % self.port
         return True
 
@@ -273,7 +273,7 @@ def create_db(uri, dbname, user='admin', pwd='admin', lang='en_US'):
     if dbname in db_list:
         raise Exception("Database already exists, drop it first!")
     id = execute(conn,'create',admin_passwd, dbname, True, lang)
-    wait(id,uri)    
+    wait(id,uri)
     install_module(uri, dbname, ['base_module_quality'],user=user,pwd=pwd)
     return True
 
@@ -406,7 +406,7 @@ options = {
     'database': opt.db_name or 'terp',
     'modules' : opt.modules or [],
     'login' : opt.login or 'admin',
-    'pwd' : opt.pwd or '',
+    'pwd' : opt.pwd or 'admin',
     'extra-addons':opt.extra_addons or []
 }
 
