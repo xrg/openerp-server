@@ -405,7 +405,8 @@ class common(_ObjectService):
                         'list_http_services'],
                 'root': ['get_available_updates', 'get_migration_scripts',
                         'set_loglevel', 'set_obj_debug', 'set_pool_debug',
-                        'set_logger_level', 'set_pgmode']
+                        'set_logger_level', 'get_pgmode', 'set_pgmode',
+                        'get_os_time']
                 }
     def __init__(self,name="common"):
         _ObjectService.__init__(self,name)
@@ -427,13 +428,9 @@ class common(_ObjectService):
                 auth.logout(params[1])
             logger.info('Logout %s from database %s'%(login,db))
             return True
-        elif method in ['about', 'timezone_get', 'get_server_environment',
-                        'login_message','get_stats', 'check_connectivity',
-                        'list_http_services']:
+        elif method in self._auth_commands['pub']:
             pass
-        elif method in ['get_available_updates', 'get_migration_scripts',
-                        'set_loglevel', 'set_obj_debug', 'set_pool_debug',
-                        'set_logger_level', 'set_pgmode', 'get_pgmode']:
+        elif method in self._auth_commands['root']:
             passwd = params[0]
             params = params[1:]
             security.check_super(passwd)
@@ -655,6 +652,9 @@ GNU Public Licence.
 
     def exp_check_connectivity(self):
         return bool(sql_db.db_connect('template1'))
+        
+    def exp_get_os_time(self):
+        return os.times()
 
 common()
 
