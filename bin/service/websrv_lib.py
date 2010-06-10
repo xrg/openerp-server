@@ -456,6 +456,9 @@ class SecureMultiHTTPHandler(MultiHTTPHandler):
             pass
 
 import threading
+
+socket_error = socket.error # keep a reference
+
 class ConnThreadingMixIn:
     """Mix-in class to handle each _connection_ in a new thread.
 
@@ -495,19 +498,19 @@ class ConnThreadingMixIn:
         readable before this function was called, so there should be
         no risk of blocking in get_request().
         """
+        ct = threading and threading.currentThread()
         try:
-            self._mark_start(threading.currentThread())
+            self._mark_start(ct)
             request, client_address = self.get_request()
-            self._mark_end(threading.currentThread())
-            if self.verify_request(request, client_address):
-                try:
-                    self.process_request(request, client_address)
-                except Exception:
-                    self.handle_error(request, client_address)
-                    self.close_request(request)
-        except socket.error:
+        except socket_error:
+            self._mark_end(ct)
             return
-        finally:
-            self._mark_end(threading.currentThread())
+        if self.verify_request(request, client_address):
+            try:
+                self.process_request(request, client_address)
+            except:
+                self.handle_error(request, client_address)
+                self.close_request(request)
+        self._mark_end(ct)
 
 #eof
