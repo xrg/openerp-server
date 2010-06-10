@@ -287,6 +287,8 @@ def drop_db(uri, dbname):
 def make_links(uri, uid, dbname, source, destination, module, user, pwd):
     if module in ('base','quality_integration_server'):
         return True
+    # FIXME: obsolete in 6.0! Better, use the multiple addons paths
+    # feature and not affect our filesystem.
     if os.path.islink(destination + '/' + module):
         os.unlink(destination + '/' + module)                
     for path in source:
