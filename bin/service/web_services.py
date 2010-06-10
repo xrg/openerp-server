@@ -655,6 +655,9 @@ GNU Public Licence.
         
     def exp_get_os_time(self):
         return os.times()
+        
+    def exp_get_os_time(self):
+        return os.times()
 
 common()
 
