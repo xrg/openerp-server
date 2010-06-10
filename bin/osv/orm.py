@@ -654,6 +654,8 @@ class orm_template(object):
                             r = check_type(self._columns[f[i]]._type)
                         elif f[i] in self._inherit_fields:
                             r = check_type(self._inherit_fields[f[i]][2]._type)
+                        if isinstance(r, browse_null):
+                            r = ''
                         data[fpos] = r
                         break
                     if isinstance(r, (browse_record_list, list)):
@@ -690,6 +692,8 @@ class orm_template(object):
                     if isinstance(r, browse_record):
                         r = self.pool.get(r._table_name).name_get(cr, uid, [r.id], context=context)
                         r = r and r[0] and r[0][1] or ''
+                    if isinstance(r, browse_null):
+                        r = ''
                     data[fpos] = tools.ustr(r or '')
         return [data] + lines
 
