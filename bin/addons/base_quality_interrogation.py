@@ -296,6 +296,7 @@ def drop_db(uri, dbname):
     return True
 
 def make_links(uri, uid, dbname, source, destination, module, user, pwd):
+    raise DeprecationWarning
     if module in ('base','quality_integration_server'):
         return True
     # FIXME: obsolete in 6.0! Better, use the multiple addons paths
@@ -315,29 +316,46 @@ def make_links(uri, uid, dbname, source, destination, module, user, pwd):
                     make_links(uri, uid, dbname, source, destination, dep_data['name'], user, pwd)
     return False
 
-def install_module(uri, dbname, modules, addons='', extra_addons='',  user='admin', pwd='admin'):
+def install_module(uri, dbname, modules, user='admin', pwd='admin'):
     uid = login(uri, dbname, user, pwd)
-    if extra_addons:
-        extra_addons = extra_addons.split(',')
-    if uid:
-        if addons and extra_addons:
-            for module in modules:
-                make_links(uri, uid, dbname, extra_addons, addons, module, user, pwd)
-
+    if not uid:
+        raise Exception('cannot login')
+    
+    # what buttons to press at each state:
+    form_presses = { 'init': 'start', 'next': 'start', 'start': 'end' }
+    if True:
         obj_conn = xmlrpclib.ServerProxy(uri + '/xmlrpc/object')
         wizard_conn = xmlrpclib.ServerProxy(uri + '/xmlrpc/wizard')
         module_ids = execute(obj_conn, 'execute', dbname, uid, pwd, 'ir.module.module', 'search', [('name','in',modules)])
+        if not module_ids:
+	    raise Exception("Cannot find any modules to install!")
         execute(obj_conn, 'execute', dbname, uid, pwd, 'ir.module.module', 'button_install', module_ids)
         wiz_id = execute(wizard_conn, 'create', dbname, uid, pwd, 'module.upgrade.simple')
         state = 'init'
         datas = {}
         #while state!='menu':
+        i = 0
+        
         while state!='end':
             res = execute(wizard_conn, 'execute', dbname, uid, pwd, wiz_id, datas, state, {})
-            if state == 'init':
-                state = 'start'
-            elif state == 'start':
-                state = 'end'
+            i += 1
+            if i > 100:
+                raise RuntimeError("Too many wizard steps")
+            
+            next_state = 'end'
+            if res['type'] == 'form':
+                if state in form_presses:
+                    next_state = form_presses[state]
+                pos_states = [ x[0] for x in res['state'] ]
+                if next_state in pos_states:
+                    print "Pressing button for %s state" % next_state
+                    state = next_state
+                else:
+                    print "State %s not found in %s, forcing end" % (next_state, pos_states)
+                    state = 'end'
+            else:
+                print "State:", state, " Res:", res
+        print "Wizard ended in %d steps" % i
     return True
 
 def upgrade_module(uri, dbname, modules, user='admin', pwd='admin'):
@@ -370,13 +388,13 @@ Basic Commands:
     start-server         Start Server
     create-db            Create new database
     drop-db              Drop database
-    install-module       Install module
-    upgrade-module       Upgrade module
-    install-translation  Install translation file
-    check-quality        Calculate quality and dump quality result into quality_log.pck using pickle
+    install-module [<m> ...]   Install module
+    upgrade-module [<m> ...]   Upgrade module
+    install-translation        Install translation file
+    check-quality  [<m ...]    Calculate quality and dump quality result into quality_log.pck using pickle
 """
 parser = optparse.OptionParser(usage)
-parser.add_option("--modules", dest="modules",
+parser.add_option("--modules", dest="modules", action="append",
                      help="specify modules to install or check quality")
 parser.add_option("--addons-path", dest="addons_path", help="specify the addons path")
 parser.add_option("--quality-logs", dest="quality_logs", help="specify the path of quality logs files which has to stores")
@@ -392,7 +410,7 @@ parser.add_option("--extra-addons", dest="extra_addons",
                      help="specify extra_addons and trunkCommunity modules path ")
 
 (opt, args) = parser.parse_args()
-if len(args) != 1:
+if len(args) < 1:
     parser.error("incorrect number of arguments")
 command = args[0]
 if command not in ('start-server','create-db','drop-db','install-module','upgrade-module','check-quality','install-translation'):
@@ -403,7 +421,11 @@ def die(cond, msg):
         print msg
         sys.exit(1)
 
-die(opt.modules and (not opt.db_name),
+lmodules = opt.modules or []
+if command in ('install-module', 'upgrade-module', 'check-quality'):
+    lmodules += args[1:]
+
+die(lmodules and (not opt.db_name),
         "the modules option cannot be used without the database (-d) option")
 
 die(opt.translate_in and (not opt.db_name),
@@ -417,13 +439,12 @@ options = {
     'port' : opt.port or 8069,
     'netport':opt.netport or 8070,
     'database': opt.db_name or 'terp',
-    'modules' : opt.modules or [],
+    'modules' : lmodules,
     'login' : opt.login or 'admin',
     'pwd' : opt.pwd or 'admin',
     'extra-addons':opt.extra_addons or []
 }
 
-options['modules'] = opt.modules and map(lambda m: m.strip(), opt.modules.split(',')) or []
 # Hint:i18n-import=purchase:ar_AR.po+sale:fr_FR.po,nl_BE.po
 if opt.translate_in:
     translate = opt.translate_in
@@ -449,8 +470,8 @@ try:
         create_db(uri, options['database'], options['login'], options['pwd'])
     if command == 'drop-db':
         drop_db(uri, options['database'])
-    if command == 'install-module':
-        install_module(uri, options['database'], options['modules'],options['addons-path'],options['extra-addons'],options['login'], options['pwd'])
+    if command == 'install-module' or (command == 'create-db' and lmodules):
+        install_module(uri, options['database'], options['modules'], options['login'], options['pwd'])
     if command == 'upgrade-module':
         upgrade_module(uri, options['database'], options['modules'], options['login'], options['pwd'])
     if command == 'check-quality':
