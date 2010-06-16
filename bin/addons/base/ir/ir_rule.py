@@ -33,20 +33,23 @@ class ir_rule(osv.osv):
 
     def _domain_force_get(self, cr, uid, ids, field_name, arg, context=None):
         res = {}
-        eval_user_data = {'user': self.pool.get('res.users').browse(cr, 1, uid),
-                'time':time}
-        for rule in self.browse(cr, uid, ids, fields_only=['domain_force','operand','operator', 'field_id'], context=context):
-            rule_dic = { 'domain_force': rule.domain_force, 'operand': rule.operand, 
-                        'operator': rule.operator, 'field_name': rule.field_id.name }
+        eval_user_data = { 'user': self.pool.get('res.users').browse(cr, 1, uid),
+                'time':time }
+        # is the context useful here?
+        for rule in self.browse(cr, uid, ids, fields_only=['domain_force',], context=context):
+            rule_dic = { 'domain_force': rule.domain_force }
             res[rule.id] = self.__domain_calc(rule_dic, eval_user_data)
         return res
-
+    
     def __domain_calc(self, rule_dic, eval_data):
         """ Calculate the domain expression for some rule.
         @rule_dic is a dictionary with rule{'domain_force', 'operand', 'operator', 'field_name'}
         @eval_data a dictionary with context for eval()
         """
-            res[rule.id] = eval(rule.domain_force, eval_user_data)
+        res = eval(rule_dic['domain_force'], eval_data)
+
+        if self._debug:
+            logging.getLogger('orm').debug("Domain calc: %s " % res)
         return res
 
     def _get_value(self, cr, uid, ids, field_name, arg, context={}):
@@ -54,23 +57,10 @@ class ir_rule(osv.osv):
         for rule in self.browse(cr, uid, ids, context):
             if not rule.groups:
                 res[rule.id] = True
-        else:
-            opnd = rule_dic['operand']
-            if opnd and opnd.startswith('user.') and opnd.count('.') > 1:
-                #Need to check user.field.field1.field2(if field  is False,it will break the chain)
-                op = opnd[5:]
-                opnd = opnd[:5+len(op[:op.find('.')])] +' and '+ opnd + ' or False'
-            
-            if rule_dic['operator'] in ('in', 'child_of', '|child_of'):
-                res = safe_eval("[('%s', '%s', [%s])]" % (rule_dic['field_name'], rule_dic['operator'],
-                    safe_eval(opnd,eval_data)), eval_data)
             else:
-                res = safe_eval("[('%s', '%s', %s)]" % (rule_dic['field_name'], 
-                    rule_dic['operator'], opnd), eval_data)
-        if self._debug:
-            logging.getLogger('orm').debug("Domain calc: %s " % res)
+                res[rule.id] = False
         return res
-        
+
         
     def _check_model_obj(self, cr, uid, ids, context={}):
         return not any(isinstance(self.pool.get(rule.model_id.model), osv.osv_memory) for rule in self.browse(cr, uid, ids, context))
@@ -78,7 +68,9 @@ class ir_rule(osv.osv):
     _columns = {
         'name': fields.char('Name', size=128, select=1),
         'model_id': fields.many2one('ir.model', 'Object',select=1, required=True),
-        'global': fields.function(_get_value, method=True, string='Global', type='boolean', store=True, help="If no group is specified the rule is global and applied to everyone"),
+        'global': fields.function(_get_value, method=True, string='Global', 
+                type='boolean', store=True, 
+                help="If no group is specified the rule is global and applied to everyone"),
         'groups': fields.many2many('res.groups', 'rule_group_rel', 'rule_group_id', 'group_id', 'Groups'),
         'domain_force': fields.char('Domain', size=250),
         'domain': fields.function(_domain_force_get, method=True, string='Domain', type='char', size=250),
@@ -104,24 +96,18 @@ class ir_rule(osv.osv):
         (_check_model_obj, 'Rules are not supported for osv_memory objects !', ['model_id'])
     ]
 
-    def domain_create(self, cr, uid, rule_ids):
-        dom = ['&'] * (len(rule_ids)-1)
-        for rule in self.browse(cr, uid, rule_ids):
-            dom += rule.domain
-        return dom
-        
-    def domain_get(self, cr, uid, model_name, mode='read', context=None):
+    @ tools.cache()
+    def _compute_domain(self, cr, uid, model_name, mode="read"):
         """ Retrieve the domain for some /model_name/.
             It will locate relevant rules (for uid != 1, aka admin), and put
             them together into an expression.
             
-            Returns (where_clause, clause_params, tables) so that an SQL
-            query can append the where_clause, feed it with clause_params.
-            If needed, tables will contain any tables (including one for the
-            model_name) needed in the FROM expression
+            Returns domain, in list, or None.
         """
+        if mode not in self._MODES:
+            raise ValueError('Invalid mode: %r' % (mode,))
         if uid == 1:
-            return [], [], ['"'+self.pool.get(model_name)._table+'"']
+            return None
 
         cr.execute_prepared( 'ir_rule_domain_get_'+mode, """SELECT r.id, g.id AS group_id,
                         imf.name AS field_name, r.domain_force, r.operand, r.operator
@@ -153,10 +139,37 @@ class ir_rule(osv.osv):
         
         if self._debug:
             logging.getLogger('orm').debug("Resulting domain: %s" % dom)
-        d1,d2,tables = self.pool.get(model_name)._where_calc(cr, uid, dom, active_test=False)
-        return d1, d2, tables
         
-    domain_get = tools.cache()(domain_get)
+        return dom
+
+    def clear_cache(self, cr, uid):
+        cr.execute("""SELECT DISTINCT m.model
+                        FROM ir_rule r
+                        JOIN ir_model m
+                          ON r.model_id = m.id
+                       WHERE r.global
+                          OR EXISTS (SELECT 1
+                                       FROM rule_group_rel g_rel
+                                       JOIN res_groups_users_rel u_rel
+                                         ON g_rel.group_id = u_rel.gid
+                                      WHERE g_rel.rule_group_id = r.id
+                                        AND u_rel.uid = %s)
+                    """, (uid,))
+        models = map(itemgetter(0), cr.fetchall())
+        clear = partial(self._compute_domain.clear_cache, cr.dbname, uid)
+        [clear(model, mode) for model in models for mode in self._MODES]
+
+    def domain_get(self, cr, uid, model_name, mode='read', context=None):
+        """
+            Returns (where_clause, clause_params, tables) so that an SQL
+            query can append the where_clause, feed it with clause_params.
+            If needed, tables will contain any tables (including one for the
+            model_name) needed in the FROM expression
+        """
+        dom = self._compute_domain(cr, uid, model_name, mode=mode)
+        if dom:
+            return self.pool.get(model_name)._where_calc(cr, uid, dom, active_test=False)
+        return [], [], ['"'+self.pool.get(model_name)._table+'"']
 
     def unlink(self, cr, uid, ids, context=None):
         res = super(ir_rule, self).unlink(cr, uid, ids, context=context)
