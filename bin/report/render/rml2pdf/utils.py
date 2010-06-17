@@ -66,7 +66,7 @@ def _child_get(node, self=None, tagname=None):
                         except GeneratorExit:
                             continue
                         except Exception, e:
-                            logging.getLogger('report').exception(e)
+                            logging.getLogger('report').exception()
                             continue
                     if n.get('rml_tag'):
                         try:
@@ -78,7 +78,7 @@ def _child_get(node, self=None, tagname=None):
                         except GeneratorExit:
                             yield n
                         except Exception, e:
-                            logging.getLogger('report').exception(e)
+                            logging.getLogger('report').exception()
                             yield n
                     else:
                         yield n
@@ -89,7 +89,7 @@ def _child_get(node, self=None, tagname=None):
             except GeneratorExit:
                 continue
             except Exception, e:
-                logging.getLogger('report').exception(e)
+                logging.getLogger('report').exception()
                 continue
         if self and self.localcontext and n.get('rml_tag'):
             try:
@@ -102,7 +102,7 @@ def _child_get(node, self=None, tagname=None):
             except GeneratorExit:
                 pass
             except Exception, e:
-                logging.getLogger('report').exception(e)
+                logging.getLogger('report').exception()
                 pass
         if (tagname is None) or (n.tag==tagname):
             yield n
