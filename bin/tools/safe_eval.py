@@ -266,4 +266,17 @@ def safe_eval(expr, globals_dict=None, locals_dict=None, mode="eval", nocopy=Fal
     )
     return eval(test_expr(expr,_SAFE_OPCODES, mode=mode), globals_dict, locals_dict)
 
+import logging
+import traceback
+
+def safe_evalD(expr, *args, **kwargs):
+    try:
+        return safe_eval(expr,*args, **kwargs)
+    except Exception, e:
+        log = logging.getLogger('eval')
+        log.exception('safe_eval "%s"' % (expr))
+        trace = 'Caller Trace:\n' + ''.join(traceback.format_stack(limit=5)[:-1])
+        log.warning(trace)
+        raise
+
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
