@@ -48,6 +48,62 @@ def to_decode(s):
                 return s.decode('ascii')
             except UnicodeError:
                 return s
+# --- cut here
+import logging
+import types
+
+def xmlescape(sstr):
+    return sstr.replace('<','&lt;').replace('>','&gt;').replace('&','&amp;')
+
+class XMLStreamHandler(logging.FileHandler):
+    """ An xml-like logging handler, writting stream into a file.
+    
+    Note that we don't use any xml dom class here, because we want
+    our output to be immediately streamed into a file. Upon any 
+    crash of the script, the partial xml will be useful.
+    """
+    def __init__(self, filename, encoding='UTF-8'):
+        logging.FileHandler.__init__(self, filename, mode='w', 
+                encoding=encoding, delay=False)
+        # now, open the file and write xml prolog
+        self.formatter = XMLFormatter()
+        self.stream.write('<?xml version="1.0", encoding="%s" ?>\n<log>' % encoding)
+        
+    def close(self):
+        # write xml epilogue
+        self.stream.write('</log>\n')
+        logging.FileHandler.close(self)
+
+    # Note: we need not re-implement emit, because a special formatter
+    # will be used
+
+class XMLFormatter(logging.Formatter):
+    """ A special formatter that will output all fields in an xml-like
+    struct """
+    
+    def format(self, record):
+        """ Put everything in xml format """
+        
+        s = '<rec name="%s" level="%s" time="%s" >' % \
+            (record.name, record.levelno, record.created)
+
+        if False and (record.filename or record.module or record.lineno):
+            s += '<code filename="%s" module="%s" line="%s" />' % \
+                    (record.filename, record.module, record.lineno)
+
+
+        if record.exc_info and not record.exc_text:
+                record.exc_text = self.formatException(record.exc_info)
+
+        if record.exc_text:
+            s+= '<exception>%s</exception>' % xmlescape(record.exc_text)
+
+        s+= xmlescape(record.getMessage())
+        s+= '</rec>'
+
+        return s.decode('utf-8')
+
+# --- cut here
 
 class server_thread(threading.Thread):
     
@@ -55,11 +111,11 @@ class server_thread(threading.Thread):
         self.__parsers.setdefault(section, []).append( (regex, funct) )
 
     def setRunning(self, section, level, line):
-        print "Server is ready!"
+        self.log.info("Server is ready!")
         self.is_ready = True
         
     def setListening(self, section, level, mobj):
-        print "Server listens %s at %s:%s" % mobj.group(1, 2, 3)
+        self.log("Server listens %s at %s:%s" % mobj.group(1, 2, 3))
         self._lports[mobj.group(1)] = mobj.group(3)
 
 
@@ -83,6 +139,10 @@ class server_thread(threading.Thread):
         # Regular expressions:
         self.linere = re.compile(r'\[(.*)\] ([A-Z]+):([\w\.-]+):(.*)$')
         
+        self.log = logging.getLogger('srv.thread')
+        self.log_sout = logging.getLogger('server.stdout')
+        self.log_serr = logging.getLogger('server.stderr')
+
         self.__parsers = {}
         self.regparser('web-services', 
                 'the server is running, waiting for connections...', 
@@ -96,23 +156,23 @@ class server_thread(threading.Thread):
             time.sleep(2)
 
         if not self.proc :
-            print "Program has not started"
+            self.log.error("Program has not started")
         elif self.proc.returncode is not None:
-            print "Program is not running"
+            self.log.warning("Program is not running")
         else:
-            print "Terminating.",
+            self.log.info("Terminating..")
             self.proc.terminate()
-            print ".."
+            self.log.info('Terminated.')
             
             # TODO: kill if not terminate right.
         
     def run(self):
         try:
-            print "will run:", ' '.join(self.args)
+            self.log.info("will run: %s", ' '.join(self.args))
             self.proc = subprocess.Popen(self.args, shell=False, cwd=None, 
                 stdout=subprocess.PIPE, stderr=subprocess.PIPE)
             self.is_running = True
-            print "run: ", self.proc.pid
+            self.log.info("server running at pid: %d", self.proc.pid)
             pob = select.poll()
             pob.register(self.proc.stdout)
             pob.register(self.proc.stderr)
@@ -144,10 +204,14 @@ class server_thread(threading.Thread):
                                         funct(m.group(3), m.group(3), mm)
                    
                         # now, print the line at stdout
-                        print r
+                        if fdd[fd] is self.proc.stdout:
+                            olog = self.log_sout
+                        else:
+                            olog = self.log_serr
+                        olog.info(r)
 
             self.is_ready = False
-            print "Finished server with:", self.proc.returncode
+            self.log.info("Finished server with: %d", self.proc.returncode)
         finally:
             self.is_running = False
         
@@ -166,7 +230,7 @@ class server_thread(threading.Thread):
             time.sleep(1)
             t += 1
         if self._lports.get('HTTP') != str(self.port):
-            print "WARNING: server does not listen HTTP at port %s" % self.port
+            self.log.warning("server does not listen HTTP at port %s" % self.port)
         return True
 
 def execute(connector, method, *args):
@@ -445,6 +509,18 @@ options = {
     'extra-addons':opt.extra_addons or []
 }
 
+import logging
+def init_log():
+    log = logging.getLogger()
+    log.setLevel(logging.DEBUG)
+    hnd = XMLStreamHandler('test.log')
+    log.addHandler(hnd)
+    log.addHandler(logging.StreamHandler())
+    
+init_log()
+
+logger = logging.getLogger('bqi')
+
 # Hint:i18n-import=purchase:ar_AR.po+sale:fr_FR.po,nl_BE.po
 if opt.translate_in:
     translate = opt.translate_in
@@ -461,10 +537,11 @@ uri = 'http://localhost:' + str(options['port'])
 server = server_thread(root_path=options['root-path'], port=options['port'],
                         netport=options['netport'], addons_path=options['addons-path'])
 
+logger.info('start of script')
 try:
     server.start_full()
     ost =  get_ostimes(uri)
-    print "Server started at: User: %.3f, Sys: %.3f" % (ost[0], ost[1])
+    logger.info("Server started at: User: %.3f, Sys: %.3f" % (ost[0], ost[1]))
 
     if command == 'create-db':
         create_db(uri, options['database'], options['login'], options['pwd'])
@@ -480,21 +557,22 @@ try:
         import_translate(uri, options['login'], options['pwd'], options['database'], options['translate-in'])
 
     ost =  get_ostimes(uri, ost)
-    print "Server ending at: User: %.3f, Sys: %.3f" % (ost[0], ost[1])
+    logger.info("Server ending at: User: %.3f, Sys: %.3f" % (ost[0], ost[1]))
 
     server.stop()
     server.join()
     sys.exit(0)
 
 except xmlrpclib.Fault, e:
-    print e.faultString
+    logger.exception('xmlrpc')
     server.stop()
     server.join()
     sys.exit(1)
 except Exception, e:
-    print e
+    logger.exception('')
     server.stop()
     server.join()
     sys.exit(1)
 
+logger.info('end of script')
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
