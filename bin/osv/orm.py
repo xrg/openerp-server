@@ -568,6 +568,8 @@ class orm_template(object):
         :param cr: database cursor
         :param user: current user id
         :param select: id or list of ids
+                        can also be expression, like [(...), ...],
+                        or [True,] for all records
         :param context: context arguments, like lang, time zone
         :rtype: object or list of objects requested
 
@@ -586,6 +588,18 @@ class orm_template(object):
             # fetched there, in one go.
             if self._debug:
                 _logger.debug("%s.browse(%s)" % (self._name, select))
+            
+            # tuple-in-list means expression.
+            # TODO: this quick hack must be re-written to end up in one
+            # real query, as one would expect.
+            if len(select) and \
+                ( isinstance(select[0], tuple) or select[0] is True):
+                if select[0] is True:
+                    select = []
+                select = self.search(cr, uid, select, context=context)
+                if self._debug:
+                    _logger.debug('%s.browse_search( %s...)' % (self._name, select[:5]))
+            
             return self._list_class([browse_record(cr, uid, id, self, cache, context=context, list_class=self._list_class, fields_process=fields_process, fields_only=fields_only) for id in select], context)
         else:
             return browse_null()
