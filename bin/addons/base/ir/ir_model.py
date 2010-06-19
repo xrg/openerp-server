@@ -168,8 +168,7 @@ class ir_model_grid(osv.osv):
             result=[result]
 
         for res in result:
-            rules = acc_obj.search(cr, uid, [('model_id', '=', res['id'])])
-            rules_br = acc_obj.browse(cr, uid, rules, context=context)
+            rules_br = acc_obj.browse(cr, uid, [('model_id', '=', res['id'])], context=context)
             for g in allgr:
                 res['group_'+str(g)] = ''
             for rule in rules_br:
@@ -217,8 +216,7 @@ class ir_model_grid(osv.osv):
 
     def fields_get(self, cr, uid, fields=None, context=None):
         result = super(ir_model_grid, self).fields_get(cr, uid, fields, context)
-        groups = self.pool.get('res.groups').search(cr, uid, [])
-        groups_br = self.pool.get('res.groups').browse(cr, uid, groups)
+        groups_br = self.pool.get('res.groups').browse(cr, uid, [True,])
         result['group_0'] = {'string': 'All Users','type': 'char','size': 7}
         for group in groups_br:
             result['group_%d'%group.id] = {'string': '%s'%group.name,'type': 'char','size': 7}
