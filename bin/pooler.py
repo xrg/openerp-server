@@ -32,6 +32,11 @@ def get_db_and_pool(db_name, force_demo=False, status=None, update_module=False,
     else:
         import addons
         import osv.osv
+        import logging
+        
+        log = logging.getLogger('pooler')
+        log.info("Starting pooler of database: %s" % db_name)
+        
         pool = osv.osv.osv_pool()
         pool_dic[db_name] = pool
         
@@ -39,6 +44,7 @@ def get_db_and_pool(db_name, force_demo=False, status=None, update_module=False,
             addons.load_modules(db, force_demo, status, update_module)
         except Exception, e:
             del pool_dic[db_name]
+            log.exception("Could not load modules for %s" % db_name)
             raise
 
         cr = db.cursor()
@@ -52,6 +58,7 @@ def get_db_and_pool(db_name, force_demo=False, status=None, update_module=False,
         report.interface.register_all(db)
         if pooljobs:
             pool.get('ir.cron')._poolJobs(db.dbname)
+        log.info('Successfuly loaded database \"%s\"' % db_name)
     return db, pool
 
 
