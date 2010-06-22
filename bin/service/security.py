@@ -29,6 +29,8 @@ class ExceptionNoTb(Exception):
         self.traceback = ('','','')
 
 def login(db, login, password, client_address=None):
+    if db is False:
+        raise Exception("Cannot authenticate against False db!")
     pool = pooler.get_pool(db)
     user_obj = pool.get('res.users')
     return user_obj.login(db, login, password)
