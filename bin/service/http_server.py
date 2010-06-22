@@ -487,7 +487,7 @@ class OerpAuthProxy(AuthProxy):
 
 import security
 class OpenERPAuthProvider(AuthProvider):
-    def __init__(self,realm = 'OpenERP User', domain='db'):
+    def __init__(self,realm='OpenERP User', domain='db'):
         self.realm = realm
         self.domain=domain
 
