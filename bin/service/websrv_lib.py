@@ -480,7 +480,7 @@ class ConnThreadingMixIn:
             return
         t = threading.Thread(name=self._get_next_name(), target=self._handle_request2)
         if self.daemon_threads:
-            t.setDaemon (1)
+            t.daemon = True
         t.start()
     
     def _mark_start(self, thread):

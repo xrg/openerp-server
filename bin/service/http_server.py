@@ -65,6 +65,7 @@ class ThreadedHTTPServer(ConnThreadingMixIn, SimpleXMLRPCDispatcher, HTTPServer)
     allow_none = False
     allow_reuse_address = 1
     _send_traceback_header = False
+    daemon_threads = True
     i = 0
 
     def __init__(self, addr, requestHandler,
@@ -208,6 +209,7 @@ class HttpDaemon(BaseHttpDaemon):
     def __init__(self, interface, port):
         super(HttpDaemon, self).__init__(interface, port,
                                          handler=MultiHandler2)
+	self.daemon = True
 
 class HttpSDaemon(BaseHttpDaemon):
     _RealProto = 'HTTPS'
