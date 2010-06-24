@@ -105,6 +105,7 @@ class TinySocketServerThread(threading.Thread,netsvc.Server):
     def __init__(self, interface, port, secure=False):
         threading.Thread.__init__(self, name="Net-RPC socket")
         netsvc.Server.__init__(self)
+        self.daemon = True
         self.__port = port
         self.__interface = interface
         self.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -126,6 +127,7 @@ class TinySocketServerThread(threading.Thread,netsvc.Server):
                 (clientsocket, address) = self.socket.accept()
                 ct = TinySocketClientThread(clientsocket, self.threads)
                 clientsocket = None
+                ct.daemon = True
                 self.threads.append(ct)
                 ct.start()
                 lt = len(self.threads)
