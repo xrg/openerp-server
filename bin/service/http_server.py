@@ -359,7 +359,7 @@ def init_xmlrpc():
                         secure_only=sso):
             logging.getLogger("web-services").info( "Registered XML-RPC 2.0 over HTTP")
 
-class StaticHTTPHandler(HttpLogHandler, HTTPHandler):
+class StaticHTTPHandler(HttpLogHandler, FixSendError, HTTPHandler):
     _logger = logging.getLogger('httpd')
 
     def __init__(self,request, client_address, server):
