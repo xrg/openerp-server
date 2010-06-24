@@ -431,7 +431,7 @@ class OerpAuthProxy(AuthProxy):
         try:
             if not db:
                 db = handler.get_db_from_path(path)
-        except:
+        except Exception:
             if path.startswith('/'):
                 path = path[1:]
             psp= path.split('/')
