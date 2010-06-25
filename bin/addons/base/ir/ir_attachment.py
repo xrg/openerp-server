@@ -123,6 +123,10 @@ class ir_attachment(osv.osv):
     _defaults = {
         'type': 'binary',
     }
+    
+    _defaults = {
+        'type': 'binary',
+    }
 
     def _auto_init(self, cr, context=None):
         super(ir_attachment, self)._auto_init(cr, context)
