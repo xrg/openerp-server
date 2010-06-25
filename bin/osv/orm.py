@@ -3083,22 +3083,22 @@ class orm(orm_template):
             if rule_clause:
                 query += " AND " + (' OR '.join(rule_clause))
             query += " ORDER BY " + order_by
-            for sub_ids in cr.split_for_in_conditions(ids):
+            if True:
                 if rule_clause:
-                    cr.execute(query, [tuple(sub_ids)] + rule_params, debug=self._debug)
-                    if cr.rowcount != len(sub_ids):
+                    cr.execute(query, [ids,] + d2, debug=self._debug)
+                    if cr.rowcount != len(ids):
                         # Some "access errors" may not be due to rules, but
                         # due to incorrectly cached data, which won't match
                         # the result fetched again from the db.
                         if self._debug:
                             rc = cr.rowcount
-                            sd = {}.fromkeys(sub_ids)
+                            sd = {}.fromkeys(ids)
                             _logger.debug("access error @%s  %d != %d " %(self._name, rc, len(sd)))
                             _logger.debug("len(%s) != len(%s)" % (cr.fetchall(), sd))
                         raise except_orm(_('AccessError'),
                                 _('You try to bypass an access rule while reading (Document type: %s).') % self._description)
                 else:
-                    cr.execute(query, (tuple(sub_ids),), debug=self._debug)
+                    cr.execute(query, (ids,), debug=self._debug)
                 res.extend(cr.dictfetchall())
         else:
             res = map(lambda x: {'id': x}, ids)
