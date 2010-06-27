@@ -427,7 +427,7 @@ class Server:
             for thr in threading.enumerate()[1:]:
                 dt = tend - time.time()
                 if dt <= 0.0: dt = 0.01
-                if thr.is_alive()
+                if thr.is_alive():
                     thr.join(dt)
 
         except KeyboardInterrupt:
