@@ -424,7 +424,9 @@ class Server:
                     srv.join(dt)
 
             # also, wait for stray threads
-            for thr in threading.enumerate()[1:]:
+            for thr in threading.enumerate():
+                if thr == threading.currentThread():
+                    continue
                 dt = tend - time.time()
                 if dt <= 0.0: dt = 0.01
                 if thr.is_alive():
@@ -442,8 +444,9 @@ class Server:
                 cls.__logger.debug('Server has not stopped: %s', repr(srv))
                 num_s += 1
 
-        for thr in threading.enumerate()[1:]:
-            # [1:] always exclude the main thread!
+        for thr in threading.enumerate():
+            if thr == threading.currentThread():
+                continue
             cls.__logger.debug('Thread is still alive: %s', repr(thr))
 
         cls.__logger.debug('After join: %d services remaining, %d threads', num_s, 
