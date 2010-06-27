@@ -121,13 +121,14 @@ class TinySocketServerThread(threading.Thread,netsvc.Server):
         try:
             self.running = True
             while self.running:
-                fd_sets = select.select([self.socket], [], [], self._busywait_timeout)
+                timeout = self.socket.gettimeout() or 2
+                fd_sets = select.select([self.socket], [], [], timeout)
                 if not fd_sets[0]:
                     continue
                 (clientsocket, address) = self.socket.accept()
                 ct = TinySocketClientThread(clientsocket, self.threads)
                 clientsocket = None
-                ct.daemon = True
+                # ct.daemon = True
                 self.threads.append(ct)
                 ct.start()
                 lt = len(self.threads)
@@ -146,6 +147,11 @@ class TinySocketServerThread(threading.Thread,netsvc.Server):
         for t in self.threads:
             t.stop()
         self._close_socket()
+        
+    def join(self, timeout=None):
+        for t in self.threads:
+            t.join(timeout)
+        Thread.join(self, timeout)
 
     def stats(self):
         res = "Net-RPC: " + ( (self.running and "running") or  "stopped")
