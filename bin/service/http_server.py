@@ -75,8 +75,8 @@ class ThreadedHTTPServer(ConnThreadingMixIn, SimpleXMLRPCDispatcher, HTTPServer)
         SimpleXMLRPCDispatcher.__init__(self, allow_none, encoding)
         HTTPServer.__init__(self, addr, requestHandler)
         
-        self.numThreads = 0
-        self.__threadno = 0
+        self._threads = []
+        self.__handlers = []
 
         # [Bug #1222790] If possible, set close-on-exec flag; if a
         # method spawns a subprocess, the subprocess shouldn't have
@@ -85,6 +85,7 @@ class ThreadedHTTPServer(ConnThreadingMixIn, SimpleXMLRPCDispatcher, HTTPServer)
             flags = fcntl.fcntl(self.fileno(), fcntl.F_GETFD)
             flags |= fcntl.FD_CLOEXEC
             fcntl.fcntl(self.fileno(), fcntl.F_SETFD, flags)
+        self.socket.settimeout(2)
 
     def handle_error(self, request, client_address):
         """ Override the error handler
@@ -93,10 +94,26 @@ class ThreadedHTTPServer(ConnThreadingMixIn, SimpleXMLRPCDispatcher, HTTPServer)
         logging.getLogger("init").exception("Server error in request from %s:" % (client_address,))
 
     def _mark_start(self, thread):
-        self.numThreads += 1
+        self._threads.append(thread)
 
     def _mark_end(self, thread):
-        self.numThreads -= 1
+        self._threads.remove(thread)
+    
+    def stop(self):
+        self.socket.close()
+        for hnd in self.__handlers:
+            hnd.close_connection=1
+            hnd.finish()
+
+    def regHandler(self, handler):
+        """Register a handler instance, so that we can keep count """
+        self.__handlers.append(handler)
+
+    def unregHandler(self, handler):
+        try:
+            self.__handlers.remove(handler)
+        except Exception:
+            pass
 
 
     def _get_next_name(self):
@@ -124,15 +141,32 @@ class HttpLogHandler:
 class MultiHandler2(HttpLogHandler, MultiHTTPHandler):
     _logger = logging.getLogger('http')
     
+    def setup(self):
+        self.server.regHandler(self)
+        return MultiHTTPHandler.setup(self)
+
+    def finish(self):
+        res = MultiHTTPHandler.finish(self)
+        self.server.unregHandler(self)
+        return res
 
 class SecureMultiHandler2(HttpLogHandler, SecureMultiHTTPHandler):
     _logger = logging.getLogger('https')
 
     def getcert_fnames(self):
         tc = tools.config
-        fcert = tc.get('secure_cert_file', 'server.cert')
-        fkey = tc.get('secure_pkey_file', 'server.key')
+        fcert = tc.get_misc('httpsd','sslcert', 'ssl/server.cert')
+        fkey = tc.get_misc('httpsd','sslkey', 'ssl/server.key')
         return (fcert,fkey)
+
+    def setup(self):
+        self.server.regHandler(self)
+        return SecureMultiHTTPHandler.setup(self)
+
+    def finish(self):
+        res = SecureMultiHTTPHandler.finish(self)
+        self.server.unregHandler(self)
+        return res
 
 class BaseHttpDaemon(threading.Thread, netsvc.Server):
     _RealProto = '??'
@@ -164,6 +198,12 @@ class BaseHttpDaemon(threading.Thread, netsvc.Server):
     def stop(self):
         self.running = False
         self._close_socket()
+        self.server.stop()
+
+    def join(self, timeout=None):
+        for thr in self.server._threads:
+            thr.join(timeout)
+        threading.Thread.join(self, timeout)
 
     def run(self):
         self.running = True
@@ -178,7 +218,7 @@ class BaseHttpDaemon(threading.Thread, netsvc.Server):
     def stats(self):
         res = "%sd: " % self._RealProto + ((self.running and "running") or  "stopped")
         if self.server:
-	    res += ", %d threads" % (self.server.numThreads,)
+            res += ", %d threads" % (len(self.server._threads),)
         return res
 
     def append_svc(self, service):
@@ -202,7 +242,6 @@ class BaseHttpDaemon(threading.Thread, netsvc.Server):
             ret.append( ( svc.path, str(svc.handler)) )
         
         return ret
-    
 
 class HttpDaemon(BaseHttpDaemon):
     _RealProto = 'HTTP'
@@ -227,13 +266,13 @@ httpsd = None
 
 def init_servers():
     global httpd, httpsd
-    if tools.config.get('xmlrpc'):
-        httpd = HttpDaemon(tools.config.get('xmlrpc_interface', ''),
-                           int(tools.config.get('xmlrpc_port', 8069)))
+    if tools.config.get_misc('httpd','enable', True):
+        httpd = HttpDaemon(tools.config.get_misc('httpd','interface', ''), \
+            int(tools.config.get_misc('httpd','port', tools.config.get('port',8069))))
 
-    if tools.config.get('xmlrpcs'):
-        httpsd = HttpSDaemon(tools.config.get('xmlrpcs_interface', ''),
-                             int(tools.config.get('xmlrpcs_port', 8071)))
+    if tools.config.get_misc('httpsd','enable', False):
+        httpsd = HttpSDaemon(tools.config.get_misc('httpsd','interface', ''), \
+            int(tools.config.get_misc('httpsd','port', 8071)))
 
 def reg_http_service(hts, secure_only = False):
     """ Register some handler to httpd.
