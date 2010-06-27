@@ -151,7 +151,7 @@ class TinySocketServerThread(threading.Thread,netsvc.Server):
     def join(self, timeout=None):
         for t in self.threads:
             t.join(timeout)
-        Thread.join(self, timeout)
+        threading.Thread.join(self, timeout)
 
     def stats(self):
         res = "Net-RPC: " + ( (self.running and "running") or  "stopped")
