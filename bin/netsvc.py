@@ -369,6 +369,13 @@ class Server:
     def stop(self):
         self.__logger.debug("called stub Server.stop")
 
+    def join(self, timeout=None):
+        raise RuntimeError("Server.join() method called! Should have been the Thread one.")
+
+    def is_alive(self):
+        # shouldn't ever reach here, either
+        return False
+
     def stats(self):
         """ This function should return statistics about the server """
         return "%s: No statistics" % str(self.__class__)
@@ -383,18 +390,59 @@ class Server:
         cls.__is_started = True
 
     @classmethod
-    def quitAll(cls):
+    def quitAll(cls, deta=10.0):
+        """ Try to gently stop all services.
+        
+        @param deta Float seconds we are allowed to wait for services to end
+                If not specified, defaults to 10sec.
+        """
         if not cls.__is_started:
             return
         cls.__logger.info("Stopping %d services" % len(cls.__servers))
-        for thr in cls.__starter_threads:
-            if not thr.finished.is_set():
-                thr.cancel()
-            cls.__starter_threads.remove(thr)
-
+        tnow = time.time()
         for srv in cls.__servers:
             srv.stop()
+        
+        tend = tnow + (deta or 10.0)
+        # now, check again that servers have stopped:
+        num_s = 0
+        for srv in cls.__servers:
+            if srv.is_alive():
+                num_s += 1
+        cls.__logger.debug('Have to wait for %d services, %d threads', num_s, 
+                threading.activeCount()-1)
+        
+        try:
+            for srv in cls.__servers:
+                # the first thread will take up all of the time available, the
+                # next ones will hardly have any time. This is still OK, because
+                # we have already called all threads to stop and we expect that
+                # all will be doing so in the meanwhile.
+                dt = tend - time.time()
+                if dt <= 0.0: dt = 0.01
+                if srv.is_alive():
+                    srv.join(dt)
+        except KeyboardInterrupt:
+            # we can catch that now, because we are not going to delay any
+            # more after this loop.
+            cls.__logger.info('Join interrupted by second signal, immediate shutdown!')
+            pass
+
+        num_s = 0
+        for srv in cls.__servers:
+            if srv.is_alive():
+                cls.__logger.debug('Server has not stopped: %s', repr(srv))
+                num_s += 1
+
+        for thr in threading.enumerate()[1:]:
+            # [1:] always exclude the main thread!
+            cls.__logger.debug('Thread is still alive: %s', repr(thr))
+
+        cls.__logger.debug('After join: %d services remaining, %d threads', num_s, 
+                threading.activeCount()-1 )
+
         cls.__is_started = False
+        return num_s or (threading.activeCount()-1)
 
     @classmethod
     def allStats(cls):

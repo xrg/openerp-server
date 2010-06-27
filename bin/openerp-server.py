@@ -112,6 +112,8 @@ if not ( tools.config["stop_after_init"] or \
     import service.netrpc_server
     service.netrpc_server.init_servers()
 
+openerp_isrunning = tools.misc.TSValue(True)
+
 if tools.config['db_name']:
     for dbname in tools.config['db_name'].split(','):
         db,pool = pooler.get_db_and_pool(dbname, update_module=tools.config['init'] or tools.config['update'], pooljobs=False)
@@ -164,7 +166,7 @@ if tools.config["stop_after_init"]:
 
 LST_SIGNALS = ['SIGINT', 'SIGTERM']
 if os.name == 'posix':
-    LST_SIGNALS.extend(['SIGUSR1','SIGQUIT'])
+    LST_SIGNALS.extend(['SIGQUIT'])
 
 
 SIGNALS = dict(
@@ -176,15 +178,17 @@ def handler(signum, _):
     :param signum: the signal number
     :param _: 
     """
-    netsvc.Agent.quit()
-    netsvc.Server.quitAll()
-    if tools.config['pidfile']:
-        os.unlink(tools.config['pidfile'])
-    # FIXME
-    #logger.notifyChannel('shutdown', netsvc.LOG_INFO, 
-    #                     "Shutdown Server! - %s" % ( SIGNALS[signum], ))
-    #logger.shutdown()
-    sys.exit(0)
+    global openerp_isrunning
+    server_logger.info("Signal received, trying to shutdown: %s", 
+        SIGNALS.get(signum, str(signum)))
+    
+    if not openerp_isrunning.value:
+        # this happens if one signal already has flipped the value
+        # second signal should immediately cause server to exit.
+        raise KeyboardInterrupt
+    
+    openerp_isrunning.value = False
+    return
 
 for signum in SIGNALS:
     signal.signal(signum, handler)
@@ -199,7 +203,25 @@ if tools.config['pidfile']:
 netsvc.Server.startAll()
 logging.getLogger("web-services").info('the server is running, waiting for connections...')
 
-while True:
-    time.sleep(60)
+try:
+    openerp_isrunning.waitFor(False)
+except:
+    # catch *all exceptions*
+    pass
+
+server_logger.info("Shutting down Server!")
+netsvc.Agent.quit()
+nrem = netsvc.Server.quitAll()
+server_logger.debug("Server is finished!")
+if tools.config['pidfile']:
+    os.unlink(tools.config['pidfile'])
+logging.shutdown()
+
+if nrem:
+    # print "Remaining %s, hard exit!" % nrem
+    os._exit(0)
+else:
+    # print "Going for sys exit!"
+    sys.exit(0)
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
