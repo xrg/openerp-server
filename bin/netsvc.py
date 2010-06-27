@@ -422,6 +422,14 @@ class Server:
                 if dt <= 0.0: dt = 0.01
                 if srv.is_alive():
                     srv.join(dt)
+
+            # also, wait for stray threads
+            for thr in threading.enumerate()[1:]:
+                dt = tend - time.time()
+                if dt <= 0.0: dt = 0.01
+                if thr.is_alive()
+                    thr.join(dt)
+
         except KeyboardInterrupt:
             # we can catch that now, because we are not going to delay any
             # more after this loop.
