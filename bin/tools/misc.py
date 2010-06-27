@@ -1401,5 +1401,42 @@ def upload_data(email, data, type='SURVEY'):
     a = upload_data_thread(email, data, type)
     a.start()
     return True
+
+class TSValue(object):
+    """ A threading-safe variable, with notify functionality.
+    
+    This class merely holds one value at a variable, but makes sure
+    writting or reading it is thread safe. It also provides a function
+    that will keep a thread waiting for some value 
+    """
+    
+    def __init__(self, value=None):
+        self.__cond = threading.Condition()
+        self.__cond.acquire()
+        self.__value = value
+        self.__cond.release()
+        
+    def __getattr__(self, name):
+        if name != 'value':
+            return object.__getattr__(self, name)
+        self.__cond.acquire()
+        res = self.__value
+        self.__cond.release()
+        return res
+
+    def __setattr__(self, name, value):
+        if name != 'value':
+            return object.__setattr__(self, name, value)
+        self.__cond.acquire()
+        self.__value = value
+        self.__cond.notifyAll()
+        self.__cond.release()
+        
+    def waitFor(self, value):
+        self.__cond.acquire()
+        while self.__value != value:
+            self.__cond.wait(300)
+        self.__cond.release()
+
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
 
