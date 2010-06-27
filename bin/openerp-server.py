@@ -37,6 +37,7 @@ import sys
 import os
 import signal
 import pwd
+import logging
 
 import release
 __author__ = release.author
@@ -48,27 +49,25 @@ if pwd.getpwuid(os.getuid())[0] == 'root' :
     sys.stderr.write("Attempted to run OpenERP server as root. This is not good, aborting.\n")
     sys.exit(1)
 
-#----------------------------------------------------------
-# get logger
-#----------------------------------------------------------
+# This import causes netsvc to initialize itself, including logging.
 import netsvc
-logger = netsvc.Logger()
 
 #-----------------------------------------------------------------------
 # import the tools module so that the commandline parameters are parsed
 #-----------------------------------------------------------------------
 import tools
 
-logger.notifyChannel("server", netsvc.LOG_INFO, "version - %s" % release.version )
+server_logger = logging.getLogger('server')
+server_logger.info("version - %s" % release.version )
 for name, value in [('addons_path', tools.config['addons_path']),
                     ('database hostname', tools.config['db_host'] or 'localhost'),
                     ('database port', tools.config['db_port'] or '5432'),
                     ('database user', tools.config['db_user'])]:
-    logger.notifyChannel("server", netsvc.LOG_INFO, "%s - %s" % ( name, value ))
+    server_logger.info("%s - %s" % ( name, value ))
 
 # Don't allow if the connection to PostgreSQL done by postgres user
 if tools.config['db_user'] == 'postgres':
-    logger.notifyChannel("server", netsvc.LOG_ERROR, "%s" % ("Attempted to connect database with postgres user. This is a security flaws, aborting."))
+    server_logger.error("Attempted to connect database with postgres user. This is a security flaw, aborting.")
     sys.exit(1)
 
 import time
@@ -76,7 +75,7 @@ import time
 #----------------------------------------------------------
 # init net service
 #----------------------------------------------------------
-logger.notifyChannel("objects", netsvc.LOG_INFO, 'initialising distributed objects services')
+logging.getLogger("objects").info('initialising distributed objects services')
 
 #---------------------------------------------------------------
 # connect to the database and initialize it with base if needed
@@ -124,6 +123,7 @@ if tools.config['db_name']:
             cr.rollback()
         pool.get('ir.cron')._poolJobs(db.dbname)
 
+init_logger = logging.getLogger('init')
 #----------------------------------------------------------
 # translation stuff
 #----------------------------------------------------------
@@ -134,16 +134,15 @@ if tools.config["translate_out"]:
         msg = "language %s" % (tools.config["language"],)
     else:
         msg = "new language"
-    logger.notifyChannel("init", netsvc.LOG_INFO, 
-                         'writing translation file for %s to %s' % (msg, 
-                                                                    tools.config["translate_out"]))
+    init_logger.info('writing translation file for %s to %s' % (msg, 
+                                        tools.config["translate_out"]))
 
     fileformat = os.path.splitext(tools.config["translate_out"])[-1][1:].lower()
     buf = file(tools.config["translate_out"], "w")
     tools.trans_export(tools.config["language"], tools.config["translate_modules"], buf, fileformat)
     buf.close()
 
-    logger.notifyChannel("init", netsvc.LOG_INFO, 'translation file written successfully')
+    init_logger.info('translation file written successfully')
     sys.exit(0)
 
 if tools.config["translate_in"]:
@@ -181,9 +180,10 @@ def handler(signum, _):
     netsvc.Server.quitAll()
     if tools.config['pidfile']:
         os.unlink(tools.config['pidfile'])
-    logger.notifyChannel('shutdown', netsvc.LOG_INFO, 
-                         "Shutdown Server! - %s" % ( SIGNALS[signum], ))
-    logger.shutdown()
+    # FIXME
+    #logger.notifyChannel('shutdown', netsvc.LOG_INFO, 
+    #                     "Shutdown Server! - %s" % ( SIGNALS[signum], ))
+    #logger.shutdown()
     sys.exit(0)
 
 for signum in SIGNALS:
@@ -197,9 +197,7 @@ if tools.config['pidfile']:
 
 
 netsvc.Server.startAll()
-
-logger.notifyChannel("web-services", netsvc.LOG_INFO, 
-                     'the server is running, waiting for connections...')
+logging.getLogger("web-services").info('the server is running, waiting for connections...')
 
 while True:
     time.sleep(60)

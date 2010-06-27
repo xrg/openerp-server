@@ -287,9 +287,6 @@ class Logger(object):
         log.info("Log level for %s changed to %s" % (logger, logging.getLevelName(level)))
         log.setLevel(level)
 
-    def shutdown(self):
-        logging.shutdown()
-
 import tools
 init_logger()
 
