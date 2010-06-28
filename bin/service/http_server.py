@@ -77,6 +77,7 @@ class ThreadedHTTPServer(ConnThreadingMixIn, SimpleXMLRPCDispatcher, HTTPServer)
         
         self._threads = []
         self.__handlers = []
+        self.__threadno = 0
 
         # [Bug #1222790] If possible, set close-on-exec flag; if a
         # method spawns a subprocess, the subprocess shouldn't have
@@ -114,6 +115,10 @@ class ThreadedHTTPServer(ConnThreadingMixIn, SimpleXMLRPCDispatcher, HTTPServer)
             self.__handlers.remove(handler)
         except Exception:
             pass
+
+    def _get_next_name(self):
+        self.__threadno += 1
+        return 'http-client-%d' % self.__threadno
 
 
     def _get_next_name(self):
