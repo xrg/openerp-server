@@ -678,7 +678,7 @@ class YamlInterpreter(object):
         self._log_assert_failure(logging.WARNING, "You have an empty block in your tests.")
         
 
-    def process(self, yaml_string):
+    def process(self, yaml_string, fatal=False):
         """
         Processes a Yaml string. Custom tags are interpreted by 'process_' instance methods.
         """
@@ -691,6 +691,8 @@ class YamlInterpreter(object):
                 self._process_node(node)
             except YamlImportException, e:
                 self.logger.exception(e)
+                if fatal:
+                    raise
             except Exception, e:
                 self.logger.exception(e)
                 raise
@@ -748,13 +750,13 @@ class YamlInterpreter(object):
             is_preceded_by_comment = False
         return is_preceded_by_comment
 
-def yaml_import(cr, module, yamlfile, idref=None, mode='init', noupdate=False, report=None, filename=None):
+def yaml_import(cr, module, yamlfile, idref=None, mode='init', noupdate=False, report=None, filename=None, fatal=False):
     if idref is None:
         idref = {}
     yaml_string = yamlfile.read()
     fname = filename or yamlfile.name
     yaml_interpreter = YamlInterpreter(cr, module, idref, mode, filename=fname, noupdate=noupdate)
-    yaml_interpreter.process(yaml_string)
+    yaml_interpreter.process(yaml_string, fatal=fatal)
 
 # keeps convention of convert.py
 convert_yaml_import = yaml_import
