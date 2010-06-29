@@ -14,7 +14,7 @@ import yaml
 # YAML import needs both safe and unsafe eval, but let's
 # default to /safe/.
 unsafe_eval = eval
-from tools.safe_eval import safe_eval as eval
+from tools.safe_eval import safe_evalD as eval
 
 logger_channel = 'tests'
 
