@@ -83,7 +83,9 @@ class ir_translation(osv.osv):
                     'WHERE lang=%s ' \
                         'AND type=%s ' \
                         'AND name=%s ' \
-                        'AND res_id = ANY(%s)',
+                        'AND res_id = ANY(%s) ' \
+                        # "AND value IS NOT NULL AND value <> '' "
+                        ,
                     (lang,tt,name, ids), debug=self._debug)
             for res_id, value in cr.fetchall():
                 translations[res_id] = value
@@ -127,14 +129,16 @@ class ir_translation(osv.osv):
                     'WHERE lang=%s ' \
                         'AND type=%s ' \
                         'AND name=%s ' \
-                        'AND src=%s',
+                        'AND src=%s ' \
+                        "AND value IS NOT NULL AND value <> '' ",
                     (lang, tt, tools.ustr(name), source), debug=self._debug)
         else:
             cr.execute('SELECT value ' \
                     'FROM ir_translation ' \
                     'WHERE lang=%s ' \
                         'AND type=%s ' \
-                        'AND name=%s',
+                        'AND name=%s ' \
+                        "AND value IS NOT NULL AND value <> '' ",
                     (lang, tt, tools.ustr(name)), debug=self._debug)
         res = cr.fetchone()
         trad = res and res[0] or ''
@@ -151,7 +155,8 @@ class ir_translation(osv.osv):
                     'WHERE lang=%s ' \
                         'AND type=%s ' \
                         'AND name=%s ' \
-                        'AND src = ANY(%s)',
+                        'AND src = ANY(%s) ' \
+                        "AND value IS NOT NULL AND value <> '' ",
                     (lang, tt, tools.ustr(name), src_list), debug=self._debug)
         
         res = {}
@@ -185,7 +190,8 @@ class ir_translation(osv.osv):
         cr.execute('SELECT ' + nexpr + ', type, value ' \
                     'FROM ir_translation ' \
                     'WHERE lang=%s ' \
-                       'AND  (name, type) IN %s  ;',
+                       'AND  (name, type) IN %s ' \
+                       "AND value IS NOT NULL AND value <> '' ",
                     (lang, tuple(fl2)), debug=self._debug)
         
         res = []
@@ -218,7 +224,8 @@ class ir_translation(osv.osv):
         cr.execute('SELECT ' + nexpr + ', res_id, value ' \
                     'FROM ir_translation ' \
                     'WHERE lang=%s AND type = %s '\
-                    ' AND name = ANY(%s) AND res_id = ANY(%s);',
+                    ' AND name = ANY(%s) AND res_id = ANY(%s) '
+                    "AND value IS NOT NULL AND value <> '' ",
                     (lang, ttype, fl2, ids), debug=self._debug)
         
         res = []

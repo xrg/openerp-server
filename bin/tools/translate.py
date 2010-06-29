@@ -165,7 +165,7 @@ class TinyPoFile(object):
 
     def __iter__(self):
         self.buffer.seek(0)
-        self.lines = self._get_lines()
+        self.lines = self._get_lines() 
         self.lines_count = len(self.lines);
 
         self.first = True
@@ -173,7 +173,7 @@ class TinyPoFile(object):
         return self
 
     def _get_lines(self):
-        lines = self.buffer.readlines()
+        lines = self.buffer.readlines()  # why not stream?
         # remove the BOM (Byte Order Mark):
         if len(lines):
             lines[0] = unicode(lines[0], 'utf8').lstrip(unicode( codecs.BOM_UTF8, "utf8"))
@@ -770,6 +770,9 @@ def trans_load_data(db_name, fileobj, fileformat, lang, strict=False, lang_name=
                     continue
                 dic[f[i]] = row[i]
 
+            # This would skip untranslated terms:
+            # if not dic.get('value',False):
+            #     continue
             try:
                 dic['res_id'] = int(dic['res_id'])
             except:
