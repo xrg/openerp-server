@@ -22,6 +22,7 @@
 import os
 import base64
 import random
+import logging
 from operator import attrgetter
 
 from osv import osv, fields
@@ -40,7 +41,7 @@ class res_config_configurable(osv.osv_memory):
     their view inherit from the related res_config_view_base view.
     '''
     _name = 'res.config'
-    logger = netsvc.Logger()
+    logger = logging.getLogger('res_config.actions')
 
     def get_current_progress(self, cr, uid, context=None):
         '''Return a description the current progress of configuration:
@@ -74,8 +75,7 @@ class res_config_configurable(osv.osv_memory):
 
     def _next_action(self, cr, uid):
         todos = self.pool.get('ir.actions.todo')
-        self.logger.notifyChannel('actions', netsvc.LOG_INFO,
-                                  'getting next %s' % todos)
+        self.logger.debug('getting next %s' % todos)
         active_todos = todos.search(cr, uid, [('state','=','open')],
                                     limit=1)
         dont_skip_todo = True
@@ -113,11 +113,9 @@ class res_config_configurable(osv.osv_memory):
         previous_todo.write({'state':state})
 
     def _next(self, cr, uid):
-        self.logger.notifyChannel('actions', netsvc.LOG_INFO,
-                                  'getting next operation')
+        self.logger.debug('getting next operation')
         next = self._next_action(cr, uid)
-        self.logger.notifyChannel('actions', netsvc.LOG_INFO,
-                                  'next action is %s' % next)
+        self.logger.debug('next action is %s' % next)
         if next:
             action = next.action_id
             return {
@@ -128,9 +126,7 @@ class res_config_configurable(osv.osv_memory):
                 'type': action.type,
                 'target': action.target,
             }
-        self.logger.notifyChannel(
-            'actions', netsvc.LOG_INFO,
-            'all configuration actions have been executed')
+        self.logger.info('all configuration actions have been executed')
 
         current_user_menu = self.pool.get('res.users')\
             .browse(cr, uid, uid).menu_id
@@ -315,6 +311,7 @@ class res_config_installer(osv.osv_memory):
     """
     _name = 'res.config.installer'
     _inherit = 'res.config'
+    logger = logging.getLogger('res_config.installer')
 
     _install_if = {}
 
@@ -410,9 +407,7 @@ class res_config_installer(osv.osv_memory):
         modules = self.pool.get('ir.module.module')
         to_install = list(self.modules_to_install(
             cr, uid, ids, context=context))
-        self.logger.notifyChannel(
-            'installer', netsvc.LOG_INFO,
-            'Selecting addons %s to install'%to_install)
+        self.logger.info('Selecting addons %s to install'%to_install)
         modules.state_update(
             cr, uid,
             modules.search(cr, uid, [('name','in',to_install)]),
@@ -453,8 +448,7 @@ class ir_actions_configuration_wizard(osv.osv_memory):
         }
 
     def execute(self, cr, uid, ids, context=None):
-        self.logger.notifyChannel(
-            'configuration', netsvc.LOG_WARNING, DEPRECATION_MESSAGE)
+        logging.getLogger('res_config.configuration').warning(DEPRECATION_MESSAGE)
 
 ir_actions_configuration_wizard()
 
