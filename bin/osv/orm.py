@@ -3075,12 +3075,18 @@ class orm(orm_template):
                 if isinstance(self._columns[f], fields.binary) and context.get('bin_size', False):
                     return 'length(%s"%s") as "%s"' % (table_prefix, f, f)
                 return '%s"%s"' % (table_prefix, f,)
+                
+            def quote_tbl(tst):
+                if tst.startswith('"'):
+                    return tst
+                else:
+                    return "%s" % tst
 
             fields_pre2 = map(convert_field, fields_pre)
             order_by = self._parent_order or self._order
-            select_fields = ','.join(fields_pre2 + [self._table + '.id'])
-            query = 'SELECT %s FROM %s WHERE %s.id IN %%s' % (select_fields, ','.join(tables), self._table)
-            if rule_clause:
+            select_fields = ','.join(fields_pre2 + [table_prefix+'id'])
+            tables = ', '.join(set(map(quote_tbl, tables)))
+            query = 'SELECT %s FROM %s WHERE %sid = ANY(%%s)' % (select_fields, tables, table_prefix)
                 query += " AND " + (' OR '.join(rule_clause))
             query += " ORDER BY " + order_by
             if True:
