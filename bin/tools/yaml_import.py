@@ -748,11 +748,12 @@ class YamlInterpreter(object):
             is_preceded_by_comment = False
         return is_preceded_by_comment
 
-def yaml_import(cr, module, yamlfile, idref=None, mode='init', noupdate=False, report=None):
+def yaml_import(cr, module, yamlfile, idref=None, mode='init', noupdate=False, report=None, filename=None):
     if idref is None:
         idref = {}
     yaml_string = yamlfile.read()
-    yaml_interpreter = YamlInterpreter(cr, module, idref, mode, filename=yamlfile.name, noupdate=noupdate)
+    fname = filename or yamlfile.name
+    yaml_interpreter = YamlInterpreter(cr, module, idref, mode, filename=fname, noupdate=noupdate)
     yaml_interpreter.process(yaml_string)
 
 # keeps convention of convert.py
