@@ -261,7 +261,7 @@ form: module.record_id""" % (xml_id,)
         if d_id:
             try:
                 ids.append(self.id_get(cr, d_model, d_id))
-            except:
+            except Exception:
                 # d_id cannot be found. doesn't matter in this case
                 pass
         if ids:
@@ -538,7 +538,7 @@ form: module.record_id""" % (xml_id,)
                     xml_id = idx==len(m_l)-1 and rec.get('id','').encode('utf8')
                     try:
                         self.pool.get('ir.model.data')._update_dummy(cr, self.uid, 'ir.ui.menu', self.module, xml_id, idx==len(m_l)-1)
-                    except:
+                    except Exception:
                         self.logger.notifyChannel('init', netsvc.LOG_ERROR, "module: %s xml_id: %s" % (self.module, xml_id))
                 else:
                     # the menuitem does't exist but we are in branch (not a leaf)
@@ -551,7 +551,7 @@ form: module.record_id""" % (xml_id,)
                 values['name'] = rec.get('name')
             try:
                 res = [ self.id_get(cr, 'ir.ui.menu', rec.get('id','')) ]
-            except:
+            except Exception:
                 res = None
 
         if rec.get('action'):
@@ -898,7 +898,7 @@ def convert_csv_import(cr, module, fname, csvcontent, idref=None, mode='init',
             continue
         try:
             datas.append(map(lambda x: misc.ustr(x), line))
-        except:
+        except Exception:
             logger = netsvc.Logger()
             logger.notifyChannel("init", netsvc.LOG_ERROR, "Cannot import the line: %s" % line)
     pool.get(model).import_data(cr, uid, fields, datas,mode, module, noupdate, filename=fname_partial)
