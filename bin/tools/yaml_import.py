@@ -103,7 +103,7 @@ class TestReport(object):
             success += self._report[severity][True]
             failure += self._report[severity][False]
         res.append("total\t%s\t%s" % (success, failure))
-        res.append("end of report (%s assertion(s) checked)" % success + failure)
+        res.append("end of report (%s assertion(s) checked)" % (success + failure))
         return "\n".join(res)
 
 class RecordDictWrapper(dict):
@@ -596,16 +596,19 @@ class YamlInterpreter(object):
 
     def process_delete(self, node):
         assert getattr(node, 'model'), "Attribute %s of delete tag is empty !" % ('model',)
-        if self.pool.get(node.model):
-            if len(node.search):
-                ids = self.pool.get(node.model).search(self.cr, self.uid, eval(node.search, self.eval_context))
+        mod_obj = self.pool.get(node.model)
+        if mod_obj:
+            if node.search and len(node.search):
+                ids = mod_obj.search(self.cr, self.uid, eval(node.search, self.eval_context))
             else:
                 ids = [self.get_id(node.id)]
+            if mod_obj._debug:
+                self.logger.debug("Asking to unlink from %s ids: %r", node.model, ids)
             if len(ids):
-                self.pool.get(node.model).unlink(self.cr, self.uid, ids)
+                mod_obj.unlink(self.cr, self.uid, ids)
                 self.pool.get('ir.model.data')._unlink(self.cr, self.uid, node.model, ids)
         else:
-            self.logger.log(logging.TEST, "Record not deleted.")
+            self.logger.log(logging.TEST, "Record not deleted. No model %s" % node.model)
     
     def process_url(self, node):
         self.validate_xml_id(node.id)
