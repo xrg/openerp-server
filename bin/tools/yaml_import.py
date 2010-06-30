@@ -173,7 +173,12 @@ class YamlInterpreter(object):
                 module = self.module
                 checked_xml_id = xml_id
             ir_id = self.pool.get('ir.model.data')._get_id(self.cr, self.uid, module, checked_xml_id)
-            obj = self.pool.get('ir.model.data').read(self.cr, self.uid, ir_id, ['res_id'])
+            if ir_id:
+                obj = self.pool.get('ir.model.data').read(self.cr, self.uid, ir_id, ['res_id'])
+            else:
+                obj= {}
+            if not obj.get('res_id', False):
+                raise IndexError('Cannot locate id: %s.%s' % (module, checked_xml_id))
             id = int(obj['res_id'])
             self.id_map[xml_id] = id
         return id
