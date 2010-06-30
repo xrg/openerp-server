@@ -50,7 +50,6 @@ import time
 import traceback
 import types
 
-import logging
 import netsvc
 from lxml import etree
 from tools.config import config
@@ -3702,11 +3701,13 @@ class orm(orm_template):
         try:
 	    # Does it have to happen that early?
             cr.execute("SELECT nextval('"+self._sequence+"')")
-        except:
+        except Exception:
+	    _logger.exception('Get nextval for %s', self._sequence)
             raise except_orm(_('UserError'),
                         _('You cannot perform this operation. New Record Creation is not allowed for this object as this object is for reporting purpose.'))
 
         id_new = cr.fetchone()[0]
+        assert id_new, "New id: %r" % id_new
         for table in tocreate:
             if self._inherits[table] in vals:
                 del vals[self._inherits[table]]
