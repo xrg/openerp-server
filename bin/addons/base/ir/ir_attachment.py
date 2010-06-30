@@ -76,7 +76,7 @@ class ir_attachment(osv.osv):
         return super(ir_attachment, self).unlink(cr, uid, ids, context)
 
     def create(self, cr, uid, values, context=None):
-        if 'res_model' in values and values['res_model'] != '':
+        if values.get('res_model', '') != '':
             self.pool.get('ir.model.access').check(cr, uid, values['res_model'], 'create', context=context)
         return super(ir_attachment, self).create(cr, uid, values, context)
 
