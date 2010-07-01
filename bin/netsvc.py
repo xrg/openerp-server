@@ -400,6 +400,11 @@ class Server:
             return
         cls.__logger.info("Stopping %d services" % len(cls.__servers))
         tnow = time.time()
+        for thr in cls.__starter_threads:
+            if not thr.finished.is_set():
+                thr.cancel()
+            cls.__starter_threads.remove(thr)
+
         for srv in cls.__servers:
             srv.stop()
         
