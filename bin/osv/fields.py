@@ -143,6 +143,39 @@ class _column(object):
         raise Exception(_('Not implemented %s.%s.search_memory method !')%(obj._name, name))
 
 
+    def __copy_data_template(self, cr, uid, obj, id, fields, f, data, context):
+        """ Sample function for copying the data of this column.
+        If some column needs to override the conventional copying of
+        its data, it should define a copy_data() like this function.
+        
+        @param obj The parent orm object
+        @param id  The id of the record in the parent orm object
+        @param fields The dictionary of fields, as returned by 
+                orm.fields_get()
+        @param f The name of the field, useful to index the fields param
+        @param data The current data of the object. It may be the data of
+                the source object (for the later fields) or the copied data
+                for the fields that have been already computed
+        @return The raw value, or None, if this field should not be set.
+        
+        Note: please respect the pythonic need to bind the function to an
+        object. Functions outside this object are permitted on the constructor
+        of the field, thus binding is not implied. For convenience, instead
+        of calling the constructor with the function argument, please call
+        it with the string name of the function, if it requires binding:
+        @code
+            def my_copy_fn(cr, uid, ...): pass
+            _columns={ 'sfield': fields.char('aaa', copy_data=my_copy_fn) }
+                # OK, because my_copy_fn is unbound
+            
+            def copy_fn(self, cr, uid): pass
+            _columns={ 'sfield': fields.char('aaa', copy_data=copy_fn) }
+              # Wrong: copy_fn should have been bound
+            _columns={ 'sfield': fields.char('aaa', copy_data='copy_fn') }
+              # OK, the string will be bound.
+        """
+        return None
+
 # ---------------------------------------------------------
 # Simple fields
 # ---------------------------------------------------------
@@ -328,6 +361,9 @@ class one2one(_column):
         _column.__init__(self, string=string, **args)
         self._obj = obj
 
+        if 'copy_data' not in args:
+            self.copy_data = self.shallow_copy
+
     def set(self, cr, obj_src, id, field, act, user=None, context=None):
         if not context:
             context = {}
@@ -344,6 +380,21 @@ class one2one(_column):
     def search(self, cr, obj, args, name, value, offset=0, limit=None, uid=None, context=None):
         return obj.pool.get(self._obj).search(cr, uid, args+self._domain+[('name', 'like', value)], offset, limit, context=context)
 
+    def shallow_copy(self, cr, uid, obj, id, fields, f, data, context):
+        res = []
+        rel = obj.pool.get(fields[f]['relation'])
+        if data[f]:
+            # duplicate following the order of the ids
+            # because we'll rely on it later for copying
+            # translations in copy_translation()!
+            data[f].sort()
+            for rel_id in data[f]:
+                # the lines are first duplicated using the wrong (old)
+                # parent but then are reassigned to the correct one thanks
+                # to the (0, 0, ...)
+                d = rel.copy_data(cr, uid, rel_id, context=context)
+                res.append((0, 0, d))
+        return res
 
 class many2one(_column):
     _classic_read = False
@@ -432,6 +483,9 @@ class one2many(_column):
         self._limit = limit
         #one2many can't be used as condition for defaults
         assert(self.change_default != True)
+
+        if 'copy_data' not in args:
+            self.copy_data = self.shallow_copy
 
     def get_memory(self, cr, obj, ids, name, user=None, offset=0, context=None, values=None):
         if context is None:
@@ -539,6 +593,22 @@ class one2many(_column):
     def search(self, cr, obj, args, name, value, offset=0, limit=None, uid=None, operator='like', context=None):
         return obj.pool.get(self._obj).name_search(cr, uid, value, self._domain, operator, context=context,limit=limit)
 
+    def shallow_copy(self, cr, uid, obj, id, fields, f, data, context):
+        res = []
+        rel = obj.pool.get(fields[f]['relation'])
+        if data[f]:
+            # duplicate following the order of the ids
+            # because we'll rely on it later for copying
+            # translations in copy_translation()!
+            data[f].sort()
+            for rel_id in data[f]:
+                # the lines are first duplicated using the wrong (old)
+                # parent but then are reassigned to the correct one thanks
+                # to the (0, 0, ...)
+                d = rel.copy_data(cr, uid, rel_id, context=context)
+                res.append((0, 0, d))
+        return res
+
 
 #
 # Values: (0, 0,  { fields })    create
@@ -564,6 +634,9 @@ class many2many(_column):
         self._id1 = id1
         self._id2 = id2
         self._limit = limit
+        
+        if 'copy_data' not in args:
+            self.copy_data = self.shallow_copy
 
     def get(self, cr, obj, ids, name, user=None, offset=0, context=None, values=None):
         if not context:
@@ -688,6 +761,9 @@ class many2many(_column):
                 raise _('Not Implemented')
             elif act[0] == 6:
                 obj.datas[id][name] = act[2]
+
+    def shallow_copy(self, cr, uid, obj, id, fields, f, data, context):
+        return [(6, 0, data[f])]
 
 
 def get_nice_size(a):

@@ -4716,8 +4716,17 @@ class orm(orm_template):
             if self._log_access and f in ('create_date', 'create_uid', 'write_date', 'write_uid'):
                 del data[f]
 
+            copy_fn = fields[f].get('copy_data', False)
             if f in default:
                 data[f] = default[f]
+            elif copy_fn:
+                if isinstance(copy_fn, basestring):
+                    copy_fn = getattr(fields[f], copy_fn)
+                res = copy_fn(cr, uid, self, id, fields, f, data, context)
+                if res is not None:
+                    data[f] = res
+                else:
+                    del data[f]
             elif ftype == 'function':
                 del data[f]
             elif ftype == 'many2one':
@@ -4725,23 +4734,9 @@ class orm(orm_template):
                     data[f] = data[f] and data[f][0]
                 except:
                     pass
-            elif ftype in ('one2many', 'one2one'):
-                res = []
-                rel = self.pool.get(fields[f]['relation'])
-                if data[f]:
-                    # duplicate following the order of the ids
-                    # because we'll rely on it later for copying
-                    # translations in copy_translation()!
-                    data[f].sort()
-                    for rel_id in data[f]:
-                        # the lines are first duplicated using the wrong (old)
-                        # parent but then are reassigned to the correct one thanks
-                        # to the (0, 0, ...)
-                        d = rel.copy_data(cr, uid, rel_id, context=context)
-                        res.append((0, 0, d))
-                data[f] = res
-            elif ftype == 'many2many':
-                data[f] = [(6, 0, data[f])]
+            elif ftype in ('one2many', 'one2one', 'many2many'):
+                # These fields should always define a copy_data()
+                raise NotImplementedError('missing copy_data()')
 
         del data['id']
 
