@@ -115,6 +115,8 @@ class HTTPHandler(SimpleHTTPRequestHandler):
         pass
 
     def finish(self):
+        if self.request:
+            self.request.close()
         pass
 
     def setup(self):
@@ -358,12 +360,45 @@ class MultiHTTPHandler(FixSendError, HttpOptions, BaseHTTPRequestHandler):
         self.command, self.path, self.version = command, path, version
         return True
 
+    def _greadline(self):
+        """ Graceful readline, that detects a closed handler.
+        
+            Since the self.rfile is a dup()'ed handler of the socket,
+            it would not automatically close when the socket does.
+            So, we need to set a timeout and take care that we don't
+            miss anything.
+        """
+
+        self.request.settimeout(1.0)
+        ret = ''
+        while True:
+            try:
+                self.request.fileno() # will throw when socket closes
+                ret = self.rfile.readline()
+                break
+            except socket.timeout:
+                pass
+            except AttributeError:
+                # the _sock attr of rfile may dissapear, if it's closed
+                return None
+            except socket.error, err:
+                if err.errno == 9:
+                    self.rfile.close()
+                    self.wfile.close()
+                    return None
+                else:
+                    raise
+
+        # return to blocking mode, because next operations will not
+        # handle timeouts
+        self.request.setblocking(True)
+        return ret
+
     def handle_one_request(self):
         """Handle a single HTTP request.
            Dispatch to the correct handler.
         """
-        self.request.setblocking(True)
-        self.raw_requestline = self.rfile.readline()
+        self.raw_requestline = self._greadline()
         if not self.raw_requestline:
             self.close_connection = 1
             # self.log_message("no requestline, connection closed?")
