@@ -57,6 +57,8 @@ import netsvc
 #-----------------------------------------------------------------------
 import tools
 
+openerp_isrunning = tools.misc.TSValue(False)
+
 server_logger = logging.getLogger('server')
 server_logger.info("version - %s" % release.version )
 for name, value in [('addons_path', tools.config['addons_path']),
@@ -71,98 +73,6 @@ if tools.config['db_user'] == 'postgres':
     sys.exit(1)
 
 import time
-
-#----------------------------------------------------------
-# init net service
-#----------------------------------------------------------
-logging.getLogger("objects").info('initialising distributed objects services')
-
-#---------------------------------------------------------------
-# connect to the database and initialize it with base if needed
-#---------------------------------------------------------------
-import pooler
-
-#----------------------------------------------------------
-# import basic modules
-#----------------------------------------------------------
-import osv
-import workflow
-import report
-import service
-
-#----------------------------------------------------------
-# import addons
-#----------------------------------------------------------
-
-import addons
-
-#----------------------------------------------------------
-# Load and update databases if requested
-#----------------------------------------------------------
-
-import service.http_server
-
-if not ( tools.config["stop_after_init"] or \
-    tools.config["translate_in"] or \
-    tools.config["translate_out"] ):
-    service.http_server.init_servers()
-    service.http_server.init_xmlrpc()
-    service.http_server.init_static_http()
-
-    import service.netrpc_server
-    service.netrpc_server.init_servers()
-
-openerp_isrunning = tools.misc.TSValue(True)
-
-if tools.config['db_name']:
-    for dbname in tools.config['db_name'].split(','):
-        db,pool = pooler.get_db_and_pool(dbname, update_module=tools.config['init'] or tools.config['update'], pooljobs=False)
-        if tools.config["test_file"]:
-            logger.notifyChannel("init", netsvc.LOG_INFO, 
-                 'loading test file %s' % (tools.config["test_file"],))
-            cr = db.cursor()
-            tools.convert_yaml_import(cr, 'base', file(tools.config["test_file"]), {}, 'test', True)
-            cr.rollback()
-        pool.get('ir.cron')._poolJobs(db.dbname)
-
-init_logger = logging.getLogger('init')
-#----------------------------------------------------------
-# translation stuff
-#----------------------------------------------------------
-if tools.config["translate_out"]:
-    import csv
-
-    if tools.config["language"]:
-        msg = "language %s" % (tools.config["language"],)
-    else:
-        msg = "new language"
-    init_logger.info('writing translation file for %s to %s' % (msg, 
-                                        tools.config["translate_out"]))
-
-    fileformat = os.path.splitext(tools.config["translate_out"])[-1][1:].lower()
-    buf = file(tools.config["translate_out"], "w")
-    tools.trans_export(tools.config["language"], tools.config["translate_modules"], buf, fileformat)
-    buf.close()
-
-    init_logger.info('translation file written successfully')
-    sys.exit(0)
-
-if tools.config["translate_in"]:
-    tools.trans_load(tools.config["db_name"], 
-                     tools.config["translate_in"], 
-                     tools.config["language"])
-    sys.exit(0)
-
-#----------------------------------------------------------------------------------
-# if we don't want the server to continue to run after initialization, we quit here
-#----------------------------------------------------------------------------------
-if tools.config["stop_after_init"]:
-    sys.exit(0)
-
-
-#----------------------------------------------------------
-# Launch Servers
-#----------------------------------------------------------
 
 LST_SIGNALS = ['SIGINT', 'SIGTERM']
 if os.name == 'posix':
@@ -215,6 +125,97 @@ for signum in SIGNALS:
 
 signal.signal(signal.SIGUSR1, sigusr1_handler)
 
+#----------------------------------------------------------
+# init net service
+#----------------------------------------------------------
+logging.getLogger("objects").info('initialising distributed objects services')
+
+#---------------------------------------------------------------
+# connect to the database and initialize it with base if needed
+#---------------------------------------------------------------
+import pooler
+
+#----------------------------------------------------------
+# import basic modules
+#----------------------------------------------------------
+import osv
+import workflow
+import report
+import service
+
+#----------------------------------------------------------
+# import addons
+#----------------------------------------------------------
+
+import addons
+
+#----------------------------------------------------------
+# Load and update databases if requested
+#----------------------------------------------------------
+
+import service.http_server
+
+if not ( tools.config["stop_after_init"] or \
+    tools.config["translate_in"] or \
+    tools.config["translate_out"] ):
+    service.http_server.init_servers()
+    service.http_server.init_xmlrpc()
+    service.http_server.init_static_http()
+
+    import service.netrpc_server
+    service.netrpc_server.init_servers()
+
+openerp_isrunning.value = True
+
+if tools.config['db_name']:
+    for dbname in tools.config['db_name'].split(','):
+        db,pool = pooler.get_db_and_pool(dbname, update_module=tools.config['init'] or tools.config['update'], pooljobs=False)
+        if tools.config["test_file"]:
+            logger.notifyChannel("init", netsvc.LOG_INFO, 
+                 'loading test file %s' % (tools.config["test_file"],))
+            cr = db.cursor()
+            tools.convert_yaml_import(cr, 'base', file(tools.config["test_file"]), {}, 'test', True)
+            cr.rollback()
+        pool.get('ir.cron')._poolJobs(db.dbname)
+
+init_logger = logging.getLogger('init')
+#----------------------------------------------------------
+# translation stuff
+#----------------------------------------------------------
+if tools.config["translate_out"]:
+    import csv
+
+    if tools.config["language"]:
+        msg = "language %s" % (tools.config["language"],)
+    else:
+        msg = "new language"
+    init_logger.info('writing translation file for %s to %s' % (msg, 
+                                        tools.config["translate_out"]))
+
+    fileformat = os.path.splitext(tools.config["translate_out"])[-1][1:].lower()
+    buf = file(tools.config["translate_out"], "w")
+    tools.trans_export(tools.config["language"], tools.config["translate_modules"], buf, fileformat)
+    buf.close()
+
+    init_logger.info('translation file written successfully')
+    sys.exit(0)
+
+if tools.config["translate_in"]:
+    tools.trans_load(tools.config["db_name"], 
+                     tools.config["translate_in"], 
+                     tools.config["language"])
+    sys.exit(0)
+
+#----------------------------------------------------------------------------------
+# if we don't want the server to continue to run after initialization, we quit here
+#----------------------------------------------------------------------------------
+if tools.config["stop_after_init"]:
+    sys.exit(0)
+
+
+#----------------------------------------------------------
+# Launch Servers
+#----------------------------------------------------------
 
 if tools.config['pidfile']:
     fd = open(tools.config['pidfile'], 'w')
