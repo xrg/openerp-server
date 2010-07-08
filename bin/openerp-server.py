@@ -190,8 +190,31 @@ def handler(signum, _):
     openerp_isrunning.value = False
     return
 
+def sigusr1_handler(signum, _):
+    global openerp_isrunning
+    try:
+        if openerp_isrunning:
+            server_logger.info("Server is running normally")
+        else:
+            server_logger.info("Server is not in running state")
+        
+        
+        stats = netsvc.Server.allStats()
+        server_logger.info(stats)
+        
+        import threading
+        
+        for thr in threading.enumerate():
+            server_logger.debug('Thread found: %s', repr(thr))
+    except Exception, e:
+        print "Exception!", e
+        pass
+    
 for signum in SIGNALS:
     signal.signal(signum, handler)
+
+signal.signal(signal.SIGUSR1, sigusr1_handler)
+
 
 if tools.config['pidfile']:
     fd = open(tools.config['pidfile'], 'w')
