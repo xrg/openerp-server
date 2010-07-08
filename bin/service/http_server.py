@@ -98,11 +98,15 @@ class ThreadedHTTPServer(ConnThreadingMixIn, SimpleXMLRPCDispatcher, HTTPServer)
         self._threads.append(thread)
 
     def _mark_end(self, thread):
-        self._threads.remove(thread)
+        try:
+            self._threads.remove(thread)
+        except ValueError: pass
     
     def stop(self):
         self.socket.close()
-        for hnd in self.__handlers:
+        h = self.__handlers[:]  # copy the list
+        self.socket = None
+        for hnd in h:
             hnd.close_connection=1
             hnd.finish()
 
@@ -113,8 +117,7 @@ class ThreadedHTTPServer(ConnThreadingMixIn, SimpleXMLRPCDispatcher, HTTPServer)
     def unregHandler(self, handler):
         try:
             self.__handlers.remove(handler)
-        except Exception:
-            pass
+        except ValueError: pass
 
     def _get_next_name(self):
         self.__threadno += 1
@@ -253,7 +256,7 @@ class HttpDaemon(BaseHttpDaemon):
     def __init__(self, interface, port):
         super(HttpDaemon, self).__init__(interface, port,
                                          handler=MultiHandler2)
-	self.daemon = True
+        self.daemon = True
 
 class HttpSDaemon(BaseHttpDaemon):
     _RealProto = 'HTTPS'
@@ -261,6 +264,8 @@ class HttpSDaemon(BaseHttpDaemon):
         try:
             super(HttpSDaemon, self).__init__(interface, port,
                                               handler=SecureMultiHandler2)
+            self.daemon = True
+
         except SSLError, e:
             logging.getLogger('httpsd').exception( \
                         "Can not load the certificate and/or the private key files")

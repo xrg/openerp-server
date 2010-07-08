@@ -295,6 +295,11 @@ class MultiHTTPHandler(FixSendError, HttpOptions, BaseHTTPRequestHandler):
         if hasattr(fore, '_flush'):
             fore._flush()
 
+    def finish(self):
+        if self.request:
+            self.request.close()
+        self.close_connection = 1
+        BaseHTTPRequestHandler.finish(self)
 
     def parse_rawline(self):
         """Parse a request (internal).
@@ -380,6 +385,7 @@ class MultiHTTPHandler(FixSendError, HttpOptions, BaseHTTPRequestHandler):
                 pass
             except AttributeError:
                 # the _sock attr of rfile may dissapear, if it's closed
+                self.request.close()
                 return None
             except socket.error, err:
                 if err.errno == 9:
@@ -514,7 +520,7 @@ class ConnThreadingMixIn:
         if not threading: # happens while quitting python
             return
         n = self._get_next_name()
-        t = threading.Thread(name=n, target = self._handle_request2)
+        t = threading.Thread(name=n, target=self._handle_request2)
         if self.daemon_threads:
             t.daemon = True
         t.start()
@@ -534,19 +540,24 @@ class ConnThreadingMixIn:
         readable before this function was called, so there should be
         no risk of blocking in get_request().
         """
+        if not self.socket:
+            return
         ct = threading and threading.currentThread()
         try:
             self._mark_start(ct)
             request, client_address = self.get_request()
-        except socket_error:
+        except (socket_error, socket.timeout):
             self._mark_end(ct)
             return
         if self.verify_request(request, client_address):
             try:
                 self.process_request(request, client_address)
-            except Exception:
-                self.handle_error(request, client_address)
-                self.close_request(request)
+            except Exception, e:
+                try:
+                    self.handle_error(request, client_address)
+                    self.close_request(request)
+                except Exception:
+                    pass
         self._mark_end(ct)
 
 #eof

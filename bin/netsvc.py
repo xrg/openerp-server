@@ -467,6 +467,12 @@ class Server:
         return '\n'.join(res)
 
     def _close_socket(self):
+	# FIXME: this code may be in the wrong place, it should only
+	# apply to socket servers, not this class.
+        if not hasattr(self, 'socket'):
+            return
+        if not isinstance(self.socket, socket.socket):
+            return
         if os.name != 'nt':
             try:
                 self.socket.shutdown(getattr(socket, 'SHUT_RDWR', 2))
