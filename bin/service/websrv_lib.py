@@ -30,9 +30,16 @@
 
 import socket
 import base64
+import errno
 import SocketServer
 from BaseHTTPServer import *
 from SimpleHTTPServer import SimpleHTTPRequestHandler
+
+try:
+    from ssl import SSLError
+except ImportError:
+    class SSLError(socket.error):
+        pass
 
 class AuthRequiredExc(Exception):
     def __init__(self,atype,realm):
@@ -383,6 +390,14 @@ class MultiHTTPHandler(FixSendError, HttpOptions, BaseHTTPRequestHandler):
                 break
             except socket.timeout:
                 pass
+            except SSLError, err:
+                if err.errno == errno.ETIMEDOUT:
+                    pass
+                elif 'timed out' in err.args[0]:
+                    # sadly, the SSLError does not have some code or errno
+                    pass
+                else:
+                    raise
             except AttributeError:
                 # the _sock attr of rfile may dissapear, if it's closed
                 self.request.close()
@@ -393,6 +408,7 @@ class MultiHTTPHandler(FixSendError, HttpOptions, BaseHTTPRequestHandler):
                     self.wfile.close()
                     return None
                 else:
+                    print type(err)
                     raise
 
         # return to blocking mode, because next operations will not
