@@ -75,7 +75,7 @@ class TinySocketClientThread(threading.Thread, netsvc.OpenERPDispatcher):
                 break
             except netsvc.OpenERPDispatcherException, e:
                 try:
-                    new_e = Exception(tools.exception_to_unicode(e.exception)) # avoid problems of pickeling
+                    new_e = Exception(e.compat_string()) # avoid problems of pickeling
                     logging.getLogger('web-services').debug("netrpc: rpc-dispatching exception", exc_info=True)
                     ts.mysend(new_e, exception=True, traceback=e.traceback)
                 except Exception:

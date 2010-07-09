@@ -66,7 +66,10 @@ class Service(object):
 
     def abortResponse(self, error, description, origin, details):
         if not tools.config['debug_mode']:
-            raise Exception("%s -- %s\n\n%s"%(origin, description, details))
+            tb = sys.exc_info()
+            tb_s = "".join(traceback.format_exception(*tb))
+            raise OpenERPDispatcherException(description, origin=origin, 
+                    details=details, faultCode=error, traceback=tb_s)
         else:
             raise
 
@@ -123,7 +126,10 @@ class ExportService(object):
 
     def abortResponse(self, error, description, origin, details):
         if not tools.config['debug_mode']:
-            raise Exception("%s -- %s\n\n%s"%(origin, description, details))
+            tb = sys.exc_info()
+            tb_s = "".join(traceback.format_exception(*tb))
+            raise OpenERPDispatcherException(description, origin=origin, 
+                    details=details, faultCode=error, traceback=tb_s)
         else:
             raise
 
@@ -488,9 +494,40 @@ class Server:
         self.socket.close()
 
 class OpenERPDispatcherException(Exception):
-    def __init__(self, exception, traceback):
-        self.exception = exception
+    def __init__(self, description, origin='exception', details='', traceback=None, faultCode=1):
+        """ Dispatcher exception, data should be transferred accross xml-rpc
+        @param description the main text of the exception
+        @param origin  a keyword, like 'exception', 'warning' etc.
+        @param details A more detailed string
+        @param traceback pythonic traceback
+        @param faultCode xml-rpc style fault code
+        """
+        self.args = (description, details, origin)
         self.traceback = traceback
+        self.faultCode = faultCode
+
+    def get_faultCode(self):
+        return int(self.faultCode) or 1
+   
+    def get_faultString(self):
+        """Get the fault string in xml-rpc2 format
+        """
+        ret = "X-Exception: %s" % (tools.ustr(self.args[0]))
+        ret += '\nX-ExcOrigin: %s' % self.args[2]
+        if self.args[1]:
+            ret += '\nX-ExcDetails: %s' % (tools.ustr(self.args[1]))
+        if self.traceback:
+            ret += "\nX-Traceback: %s" % ('\n\t'.join(self.traceback.split('\n')))
+        return ret
+
+    def compat_string(self):
+        """Get the string that v5, xml-rpc1 exceptions would need
+        """
+        if self.args[2] == 'exception':
+            return '%s\%s' % (tools.ustr(self.args[0]), tools.ustr(self.args[1]))
+        else:
+            return "%s -- %s\n\n%s" % (self.args[2], tools.ustr(self.args[0]), 
+                    tools.ustr(self.args[1]))
 
 class OpenERPDispatcher:
     def log(self, title, msg):
@@ -511,6 +548,8 @@ class OpenERPDispatcher:
             if result == None:
                 result = False
             return result
+        except OpenERPDispatcherException:
+            raise
         except Exception, e:
             self.log('exception', tools.exception_to_unicode(e))
             tb = getattr(e, 'traceback', sys.exc_info())
@@ -518,7 +557,11 @@ class OpenERPDispatcher:
             if tools.config['debug_mode']:
                 import pdb
                 pdb.post_mortem(tb[2])
-            raise OpenERPDispatcherException(e, tb_s)
+            # TODO meaningful FaultCodes ..
+            details = ''
+            if len(e.args) > 1:
+                details = e.args[1]
+            raise OpenERPDispatcherException(e.args[0], details=details, traceback=tb_s)
 
 class OpenERPDispatcher2:
 
@@ -540,6 +583,8 @@ class OpenERPDispatcher2:
             if result == None:
                 result = False
             return result
+        except OpenERPDispatcherException:
+            raise
         except Exception, e:
             log('exception', tools.exception_to_unicode(e))
             tb = getattr(e, 'traceback', sys.exc_info())
@@ -547,6 +592,9 @@ class OpenERPDispatcher2:
             if tools.config['debug_mode']:
                 import pdb
                 pdb.post_mortem(tb[2])
-            raise OpenERPDispatcherException(e, tb_s)
+            details = ''
+            if len(e.args) > 1:
+                details = e.args[1]
+            raise OpenERPDispatcherException(e.args[0], details=details, traceback=tb_s)
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

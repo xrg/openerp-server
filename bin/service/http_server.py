@@ -327,11 +327,12 @@ class xrBaseRequestHandler(FixSendError, HttpLogHandler, SimpleXMLRPCServer.Simp
     _logger = logging.getLogger('xmlrpc')
 
     def _dispatch(self, method, params):
+        # used *only* in xmlrpc2
         try:
             service_name = self.path.split("/")[-1]
             return self.dispatch(service_name, method, params)
         except netsvc.OpenERPDispatcherException, e:
-            raise xmlrpclib.Fault(tools.exception_to_unicode(e.exception), e.traceback)
+            raise xmlrpclib.Fault(e.get_faultCode(), e.get_faultString())
 
     def handle(self):
         pass
@@ -345,6 +346,13 @@ class XMLRPCRequestHandler(netsvc.OpenERPDispatcher,xrBaseRequestHandler):
         if not len(XMLRPCRequestHandler.rpc_paths):
             XMLRPCRequestHandler.rpc_paths = map(lambda s: '/%s' % s, netsvc.ExportService._services.keys())
         pass
+
+    def _dispatch(self, method, params):
+        try:
+            service_name = self.path.split("/")[-1]
+            return self.dispatch(service_name, method, params)
+        except netsvc.OpenERPDispatcherException, e:
+            raise xmlrpclib.Fault(e.compat_string(), e.traceback)
 
 class XMLRPCRequestHandler2_Pub(netsvc.OpenERPDispatcher2,xrBaseRequestHandler):
     """ New-style xml-rpc dispatcher, Global methods
