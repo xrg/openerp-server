@@ -42,5 +42,11 @@ author_email = 'info@tiny.be'
 support_email = 'support@openerp.com'
 license = 'GPL-3'
 
+# Keywords of features that this server supports
+# Please, respect line breaks, so that VCS can merge lines with
+# different options, from branches.
+server_options = [ 'base6.0',
+        ]
+
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
 

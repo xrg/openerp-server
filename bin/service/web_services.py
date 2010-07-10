@@ -402,7 +402,7 @@ class common(_ObjectService):
     _auth_commands = { 'db-broken': [ 'ir_set','ir_del', 'ir_get' ],
                 'pub': ['about', 'timezone_get', 'get_server_environment',
                         'login_message','get_stats', 'check_connectivity',
-                        'list_http_services'],
+                        'list_http_services', 'get_options'],
                 'root': ['get_available_updates', 'get_migration_scripts',
                         'set_loglevel', 'set_obj_debug', 'set_pool_debug',
                         'set_logger_level', 'get_pgmode', 'set_pgmode',
@@ -658,6 +658,18 @@ GNU Public Licence.
         
     def exp_get_os_time(self):
         return os.times()
+
+    def exp_get_options(self, module=None):
+        """Return a list of options, keywords, that the server supports.
+
+        Apart from the server version, which should be a linear number,
+        some server branches may support extra API functionality. By this
+        call, the server can advertise these extensions to compatible
+        clients.
+        """
+        if module:
+            raise NotImplementedError('No module-specific options yet')
+        return release.server_options
 
 common()
 
