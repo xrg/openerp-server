@@ -46,6 +46,9 @@ license = 'GPL-3'
 # Please, respect line breaks, so that VCS can merge lines with
 # different options, from branches.
 server_options = [ 'base6.0',
+        'static-http', 'http-options', 'multi-http',
+        'engine-pg84',
+        'search-browse',
         ]
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
