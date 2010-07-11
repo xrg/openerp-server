@@ -1,0 +1,24 @@
+-
+    Testing that some domain expressions work
+-
+    !python {model: res.partner.address }: |
+        ids = self.search(cr, uid, [('partner_id','=','Agrolait')])
+        assert len(ids) >= 1, ids
+-
+    Trying the "in" operator, for scalar value
+-
+    !python {model: res.partner.address }: |
+        ids = self.search(cr, uid, [('partner_id','in','Agrolait')])
+        assert len(ids) >= 1, ids
+-
+    Trying the "in" operator for list value
+-
+    !python {model: res.partner.address }: |
+        ids = self.search(cr, uid, [('partner_id','in',['Agrolait','ASUStek'])])
+        assert len(ids) >= 1, ids
+-
+    Trying the nested query (pg84 extension)
+-
+    !python {model: res.partner.address }: |
+        ids = self.search(cr, uid, [('partner_id','in',[('name','in',['Agrolait','ASUStek'])])])
+        assert len(ids) >= 1, ids
