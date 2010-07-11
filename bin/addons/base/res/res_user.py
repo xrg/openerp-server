@@ -44,11 +44,6 @@ class groups(osv.osv):
         ('name_uniq', 'unique (name)', 'The name of the group must be unique !')
     ]
 
-    def copy(self, cr, uid, id, default=None, context={}):
-        group_name = self.read(cr, uid, [id], ['name'])[0]['name']
-        default.update({'name': group_name +' (copy)'})
-        return super(groups, self).copy(cr, uid, id, default, context)
-
     def write(self, cr, uid, ids, vals, context=None):
         if 'name' in vals:
             if vals['name'].startswith('-'):
@@ -74,10 +69,10 @@ class groups(osv.osv):
                 aid.write({'groups_id': [(4, gid)]})
         return gid
 
-    def copy(self, cr, uid, id, default={}, context={}, done_list=[], local=False):
-        group = self.browse(cr, uid, id, context=context)
-        default = default.copy()
+    def copy(self, cr, uid, id, default=None, context=None, done_list=[], local=False):
+        default = (default and default.copy()) or {}
         if not 'name' in default:
+            group = self.browse(cr, uid, id, context=context)
             default['name'] = group['name']
         default['name'] = default['name'] + _(' (copy)')
         return super(groups, self).copy(cr, uid, id, default, context=context)
@@ -516,7 +511,8 @@ class config_users(osv.osv_memory):
             }
 config_users()
 
-class groups2(osv.osv): ##FIXME: Is there a reason to inherit this object ?
+class groups2(osv.osv): 
+    # Class appended here, to workaround order of instantiation.
     _inherit = 'res.groups'
     _columns = {
         'users': fields.many2many('res.users', 'res_groups_users_rel', 'gid', 'uid', 'Users'),
