@@ -465,36 +465,37 @@ class expression(object):
                         dom = _rec_get(ids2, working_table, parent=left, null_too=null_too)
                     self.__exp = self.__exp[:i] + dom + self.__exp[i+1:]
                 else:
-                    def _get_expression(field_obj,cr, uid, left, right, operator, context=None):
-                        if context is None:
-                            context = {}
+                    do_name = False
+                    op2 = operator
+                    
+                    if isinstance(right, basestring):
+                            # and not isinstance(field, fields.related):
+                        do_name = True
+                        if operator == 'in':
+                            op2 = '='
+                        elif operator == 'not in':
+                            op2 = '!='
+                        else:
+                            op2 = operator
+                    elif isinstance(right, (list, tuple)) and operator in ('in', 'not in'):
+                        do_name = True
+                        for r in right:
+                            if not isinstance(r, basestring):
+                                do_name = False
+                                break
+                        if do_name and isinstance(right, tuple):
+                                right = list(right)
+
+                    if do_name:
                         c = context.copy()
                         c['active_test'] = False
-                        dict_op = {'not in':'!=','in':'='}
-                        if isinstance(right,tuple):
-                            right = list(right)
-                        if (not isinstance(right,list)) and operator in ['not in','in']:
-                            operator = dict_op[operator]
-                            
-                        res_ids = field_obj.name_search(cr, uid, right, [], operator, limit=None, context=c)
+                        res_ids = field_obj.name_search(cr, uid, right, [], op2, limit=None, context=c)
                         if not res_ids:
-                             return ('id','=',0)
+                            self.__exp[i] = ('id','=',0)
                         else:
                             right = map(lambda x: x[0], res_ids)
-                            return (left, 'in', right)
+                            self.__exp[i] = (left, 'in', right)
 
-                    m2o_str = False
-                    if isinstance(right, basestring): # and not isinstance(field, fields.related):
-                        m2o_str = True
-                    elif isinstance(right, list) or isinstance(right, tuple):
-                        m2o_str = True
-                        for ele in right:
-                            if not isinstance(ele, basestring): 
-                                m2o_str = False
-                                break
-
-                    if m2o_str:
-                        self.__exp[i] = _get_expression(field_obj,cr, uid, left, right, operator, context=context)
             else:
                 # other field type
                 # add the time part to datetime field when it's not there:
