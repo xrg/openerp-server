@@ -1260,7 +1260,7 @@ class orm_template(object):
             if node.get('groups'):
                 groups = node.get('groups').split(',')
                 access_pool = self.pool.get('ir.model.access')
-                can_see = any(access_pool.check_groups(cr, user, group) for group in groups)
+                can_see = access_pool.check_groups(cr, user, groups)
                 if not can_see:
                     node.set('invisible', '1')
                     if 'attrs' in node.attrib:
@@ -3202,21 +3202,7 @@ class orm(orm_template):
                     continue
                 groups = fobj.read
                 if groups:
-                    edit = False
-                    for group in groups:
-                        module = group.split(".")[0]
-                        grp = group.split(".")[1]
-                        cr.execute("SELECT count(*) FROM res_groups_users_rel WHERE gid IN (SELECT res_id FROM ir_model_data WHERE name='%s' AND module='%s' AND model='%s') AND uid=%s" % \
-                                   (grp, module, 'res.groups', user))
-                        readonly = cr.fetchall()
-                        if readonly[0][0] >= 1:
-                            edit = True
-                            break
-                        elif readonly[0][0] == 0:
-                            edit = False
-                        else:
-                            edit = False
-
+                    edit = self.pool.get('ir.model.access').check_groups(cr, uid, groups)
                     if not edit:
                         if type(vals[field]) == type([]):
                             vals[field] = []
@@ -3421,21 +3407,7 @@ class orm(orm_template):
             groups = fobj.write
 
             if groups:
-                edit = False
-                for group in groups:
-                    module = group.split(".")[0]
-                    grp = group.split(".")[1]
-                    cr.execute("SELECT count(*) FROM res_groups_users_rel WHERE gid IN (SELECT res_id FROM ir_model_data WHERE name='%s' AND module='%s' AND model='%s') AND uid=%s" % \
-                               (grp, module, 'res.groups', user))
-                    readonly = cr.fetchall()
-                    if readonly[0][0] >= 1:
-                        edit = True
-                        break
-                    elif readonly[0][0] == 0:
-                        edit = False
-                    else:
-                        edit = False
-
+                edit = self.pool.get('ir.model.access').check_groups(cr, uid, groups)
                 if not edit:
                     vals.pop(field)
 
@@ -3740,21 +3712,7 @@ class orm(orm_template):
                 continue
             groups = fobj.write
             if groups:
-                edit = False
-                for group in groups:  #TODO: put the loop inside sql
-                    module = group.split(".")[0]
-                    grp = group.split(".")[1]
-                    cr.execute("SELECT count(*) FROM res_groups_users_rel where gid IN (SELECT res_id FROM ir_model_data WHERE name='%s' AND module='%s' AND model='%s') AND uid=%s" % \
-                               (grp, module, 'res.groups', user))
-                    readonly = cr.fetchall()
-                    if readonly[0][0] >= 1:
-                        edit = True
-                        break
-                    elif readonly[0][0] == 0:
-                        edit = False
-                    else:
-                        edit = False
-
+                edit = self.pool.get('ir.model.access').check_groups(cr, uid, groups)
                 if not edit:
                     vals.pop(field)
         for field in vals:

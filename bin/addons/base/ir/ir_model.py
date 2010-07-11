@@ -333,13 +333,39 @@ class ir_model_access(osv.osv):
     }
 
     def check_groups(self, cr, uid, group):
+        """ check if uid belongs in 'group'
+        
+            @param group Group specification. Can be:
+                - string like 'model.name' for ir.model.data
+                - list of ['model.name',...] strings
+                - gid ? (TODO)
+        
+            @return True or False
+        """
+        if isinstance(group, basestring):
+            return self._check_groups2(cr, uid, group)
+        elif isinstance(group, list):
+            for g in group:
+                # crude way, may be saved by cache..
+                if self._check_groups2(cr, uid, g):
+                    return True
+            return False
+        else:
+            raise NotImplementedError()
+
+    @tools.cache(timeout=10.0) # TODO find a way to clear the cache
+    def _check_groups2(self, cr, uid, group):
         res = False
         grouparr  = group.split('.')
         if not grouparr:
             return False
 
-        cr.execute("SELECT 1 FROM res_groups_users_rel WHERE uid=%s AND gid IN(SELECT res_id FROM ir_model_data WHERE module=%s AND name=%s)", (uid, grouparr[0], grouparr[1],), debug=self._debug)
-        return bool(cr.fetchone())
+        cr.execute("SELECT EXISTS (SELECT 1 FROM res_groups_users_rel AS ur, ir_model_data AS imd " \
+                " WHERE ur.uid=%s AND ur.gid = imd.res_id " \
+                " AND imd.model = 'res.groups' " \
+                " AND imd.module=%s AND imd.name=%s )", \
+                (uid, grouparr[0], grouparr[1],), debug=self._debug)
+        return bool(cr.fetchone()[0])
 
     def check_group(self, cr, uid, model, mode, group_ids):
         """ Check if a specific group has the access mode to the specified model"""
