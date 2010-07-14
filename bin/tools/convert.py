@@ -817,6 +817,19 @@ form: module.record_id""" % (xml_id,)
             self.logger.notifyChannel("init", netsvc.LOG_WARNING, "The tag <terp/> is deprecated, use <openerp/>")
 
         for n in de.findall('./data'):
+            if n.get('with-modules'):
+                need_modules = [ x.strip() for x in n.get('with-modules').split(',')]
+                need_modules = filter(bool, need_modules) # no empty entries
+                if need_modules:
+                    mod_obj = self.pool.get('ir.module.module')
+                    mids = mod_obj.search(self.cr, self.uid, [('name','in', need_modules),
+                                                        ('state','in', ('installed', 'to upgrade'))])
+                    if len(mids) < len(need_modules):
+                        self.logger.notifyChannel("init", netsvc.LOG_WARNING, 
+                            "Record at module %s skipped, because not all of %s module(s) are installed" % \
+                            (self.module, ', '.join(need_modules)))
+                        continue
+
             for rec in n:
                     if rec.tag in self._tags:
                         try:
