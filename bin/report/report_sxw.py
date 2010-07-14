@@ -169,7 +169,10 @@ class rml_parse(object):
             'lang' : user.company_id.partner_id.lang,
             'translate' : self._translate,
             'setHtmlImage' : self.set_html_image,
-            'time' : time
+            'time' : time,
+            'reduce': reduce,
+            'filter': filter,
+            'sum': sum,
         }
         self.localcontext.update(context)
         self.rml_header = user.company_id.rml_header
