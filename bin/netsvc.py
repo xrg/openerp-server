@@ -512,12 +512,16 @@ class OpenERPDispatcherException(Exception):
     def get_faultString(self):
         """Get the fault string in xml-rpc2 format
         """
-        ret = "X-Exception: %s" % (tools.ustr(self.args[0]))
+        def pretty_string(src, newlines='\n\t'):
+            usrc = tools.ustr(src)
+            return newlines.join(usrc.split('\n'))
+
+        ret = "X-Exception: %s" % (pretty_string(self.args[0], newlines=' '),)
         ret += '\nX-ExcOrigin: %s' % self.args[2]
         if self.args[1]:
-            ret += '\nX-ExcDetails: %s' % (tools.ustr(self.args[1]))
+            ret += '\nX-ExcDetails: %s' % (pretty_string(self.args[1]),)
         if self.traceback:
-            ret += "\nX-Traceback: %s" % ('\n\t'.join(self.traceback.split('\n')))
+            ret += "\nX-Traceback: %s" % (pretty_string(self.traceback),)
         return ret
 
     def compat_string(self):
