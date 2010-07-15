@@ -115,7 +115,7 @@ class server_thread(threading.Thread):
         self.is_ready = True
         
     def setListening(self, section, level, mobj):
-        self.log("Server listens %s at %s:%s" % mobj.group(1, 2, 3))
+        self.log.info("Server listens %s at %s:%s" % mobj.group(1, 2, 3))
         self._lports[mobj.group(1)] = mobj.group(3)
 
 
