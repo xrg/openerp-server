@@ -3090,6 +3090,7 @@ class orm(orm_template):
             query += " ORDER BY " + order_by
             if True:
                 if rule_clause:
+                    ids = list(set(ids)) # eliminate duplicates
                     cr.execute(query, [ids,] + d2, debug=self._debug)
                     if cr.rowcount != len(ids):
                         # Some "access errors" may not be due to rules, but
