@@ -214,7 +214,7 @@ class osv_pool(netsvc.Service):
         try:
             object._debug = do_debug
             return True
-        except:
+        except Exception:
             raise
 
 class osv_base(object):
