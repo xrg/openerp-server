@@ -711,8 +711,16 @@ class cache(object):
         self.lasttime = time.time()
         self.cache = {}
         self.fun = None
+        self._debug = False
+        self.__logger = None
         cache.__caches.append(self)
 
+    def debug(self, *args, **kwargs):
+        if not self._debug:
+            return
+        if not self.__logger:
+            self.__logger = logging.getLogger('tools.cache')
+        self.__logger.debug(*args, **kwargs)
 
     def _generate_keys(self, dbname, kwargs2):
         """
@@ -758,6 +766,7 @@ class cache(object):
             kwargs2 = self._unify_args(*args, **kwargs)
             keys_to_del = [key for key, _ in self._generate_keys(dbname, kwargs2) if key in self.cache.keys()]
 
+        self.debug("Clearing cache for: %s, %s", repr(self.fun), repr(keys_to_del))
         for key in keys_to_del:
             self.cache.pop(key)
 
@@ -778,6 +787,8 @@ class cache(object):
             self.fun_default_values = dict(zip(self.fun_arg_names[-len(argspec[3]):], argspec[3]))
 
         def cached_result(self2, cr, *args, **kwargs):
+            if hasattr(self2, '_debug'):
+                self._debug = self2._debug
             if time.time()-int(self.timeout) > self.lasttime:
                 self.lasttime = time.time()
                 t = time.time()-int(self.timeout)
@@ -799,6 +810,7 @@ class cache(object):
                 if self.multi:
                     kwargs2[self.multi] = notincache.keys()
 
+                self.debug("Must call %s for keys: %s", repr(fn), repr(kwargs2))
                 result2 = fn(self2, cr, *args[:self.skiparg-2], **kwargs2)
                 if not self.multi:
                     key = notincache[None]
@@ -809,6 +821,8 @@ class cache(object):
                         key = notincache[id]
                         self.cache[key] = (result2[id], time.time())
                     result.update(result2)
+            else:
+                self.debug("Got all results for %s from cache: %s", repr(fn), repr(result))
 
             if not self.multi:
                 return result[None]
