@@ -674,15 +674,23 @@ GNU Public Licence.
 common()
 
 class objects_proxy(baseExportService):
-    _auth_commands = { 'db': ['execute','exec_workflow','obj_list'] }
+    _auth_commands = { 'db': ['execute','exec_workflow',], 'root': ['obj_list',] }
     def __init__(self, name="object"):
         netsvc.ExportService.__init__(self,name)
         self.joinGroup('web-services')
 
     def dispatch(self, method, auth, params):
+        if method in self._auth_commands['root']:
+            passwd = params[0]
+            params = params[1:]
+            security.check_super(passwd)
+            ls = netsvc.LocalService('object_proxy')
+            fn = getattr(ls, method)
+            res = fn(*params)
+            return res
         (db, uid, passwd ) = params[0:3]
         params = params[3:]
-        if method not in ['execute','exec_workflow','obj_list']:
+        if method not in ['execute','exec_workflow', 'obj_list']:
             raise KeyError("Method not supported %s" % method)
         security.check(db,uid,passwd)
         ls = netsvc.LocalService('object_proxy')
@@ -694,14 +702,19 @@ class objects_proxy(baseExportService):
         # Double check, that we have the correct authentication:
         if not auth:
             raise Exception("Not auth domain for object service")
-        if auth.provider.domain != 'db':
-            raise Exception("Invalid domainm for object service")
-        if method not in self._auth_commands['db']:
-            raise Exception("Method not found: %s" % method)
+        if auth.provider.domain not in self._auth_commands:
+            raise Exception("Invalid domain for object service")
 
+        if method not in self._auth_commands[auth.provider.domain]:
+            raise Exception("Method not found: %s" % method)
 
         ls = netsvc.LocalService('object_proxy')
         fn = getattr(ls, method)
+
+        if auth.provider.domain == 'root':
+            res = fn(*params)
+            return res
+
         acds = auth.auth_creds[auth.last_auth]
         db, uid = (acds[2], acds[3])
         res = fn(db, uid, *params)
