@@ -199,6 +199,50 @@ class browse_record(object):
 
             if self._table._debug:
                 self.__logger.debug("self[%d].%s w. %s" % (self._id, name, self._fields_only))
+            
+            # Virtual members have precedence over any local ones
+            if self._table._vtable and name in self._table._vtable:
+                if self._table._debug:
+                    self.__logger.debug("%s.%s is virtual, fetching for %s", 
+                            self._table._name, name, self._id)
+                if '_vptr' not in self._data[self._id]:
+                    ids_v = filter(lambda id: '_vptr' not in self._data[id], self._data.keys())
+                    vptrs = self._table.read(self._cr, self._uid, ids_v, ['_vptr'],
+                            context=self._context, load="_classic_write")
+                    for data in vptrs:
+                        if len(str(data['id']).split('-')) > 1:
+                            data['id'] = int(str(data['id']).split('-')[0])
+                        if '_vptr' not in data:
+                            continue
+                        # assert len(data) == 2, data  # should only have id, _vptr
+                        self._data[data['id']]['_vptr'] = data['_vptr']
+                if '_vptr' not in self._data[self._id]:
+                    self.__logger.warning("%s.%s is virtual, but no _vptr for #%s!", 
+                            self._table._name, name, self._id)
+                elif self._data[self._id]['_vptr']:
+                    vobj = self._table.pool.get(self._data[self._id]['_vptr'])
+                    if self._debug:
+                        self.__logger.debug("%s[%s].%s dispatching to %s..", 
+                            self._table._name,self._id, name, vobj._name)
+                    # .. and this is where it all happens. We call a browse object
+                    # on the class that should handle this virtual member. We try
+                    # to preserve as much (cache, fields etc) as possible from the
+                    # current browse object. Perhaps it also calls our fetched
+                    # fields again..
+                    # The id has to be translated. _we currently only search for_
+                    # _a single id_ . We use the search-browse feature, hoping for
+                    # some future optimisation.
+                    bro = vobj.browse(self._cr, self._uid, [(vobj._inherits[self._table._name],'=', self._id) ],
+                                context=self._context, fields_process=self._fields_process,
+                                fields_only=self._fields_only)
+                    # bro must now be a browse_list instance..
+                    
+                    assert len(bro) == 1, "Virtual object %s[%s=%s] has %s instances " % \
+                            (vobj._name, self._table._name, self._id, len(bro))
+                    return getattr(bro[0], name)
+                    
+                # else fetch the old way..
+
             # fetch the definition of the field which was asked for
             if name in self._table._columns:
                 col = self._table._columns[name]
@@ -233,6 +277,10 @@ class browse_record(object):
             ids = filter(lambda id: name not in self._data[id], self._data.keys())
             # read the data
             fffields = map(lambda x: x[0], ffields)
+            if self._table._vtable:
+                fffields.append('_vptr')
+            if self._table._debug:
+                self.__logger.debug("Reading ids: %r/ %r", ids, self._data.keys())
             datas = self._table.read(self._cr, self._uid, ids, fffields, context=self._context, load="_classic_write")
             if self._fields_process:
                 lang = self._context.get('lang', 'en_US') or 'en_US'
@@ -422,6 +470,7 @@ class orm_template(object):
     _table = None
     _invalids = set()
     _log_create = False
+    _virtuals = None
 
     CONCURRENCY_CHECK_FIELD = '__last_update'
     def log(self, cr, uid, id, message, secondary=False, context=None):
@@ -559,8 +608,38 @@ class orm_template(object):
         if not self._table:
             self._table = self._name.replace('.', '_')
         self._debug = False
+        
+        # code for virtual functions:
+        self._vtable = False
+        if not self._virtuals:
+            self._virtuals = []
+        for key, ffn in self.__class__.__dict__.items():
+            # try to discover the '_virtual' attribute in this class
+            # functions (note: an attribute wouldn't work for other
+            # data types.
+            if not callable(ffn):
+                continue
+            if hasattr(ffn, '_virtual') and ffn._virtual:
+                self._virtuals.append(key)
 
-    def browse(self, cr, uid, select, context=None, list_class=None, fields_process=None, fields_only=True):
+        if self._virtuals:
+            self._vtable = set(self._virtuals)
+            
+            # temp:
+            self._debug = True
+
+        if self._vtable and self._inherits:
+            for pinh in self._inherits:
+                pclass = self.pool.get(pinh)
+                if pclass._vtable is False:
+                    pclass._vtable = set()
+                pclass._vtable.update(self._vtable)
+                
+                # temp: turn on debugging
+                pclass._debug = True
+
+    def browse(self, cr, uid, select, context=None, list_class=None, 
+                fields_process=None, fields_only=True, cache=None):
         """
         Fetch records as objects allowing to use dot notation to browse fields and relations
 
@@ -572,11 +651,15 @@ class orm_template(object):
         :param context: context arguments, like lang, time zone
         :rtype: object or list of objects requested
 
+        :param cache The parent's cache. Pleas ONLY use it when the caller is
+            itself a browse object, and within a single transaction. If unsure,
+            just don't use!
         """
         if not context:
             context = {}
         self._list_class = list_class or browse_record_list
-        cache = {}
+        if cache is None:
+            cache = {}
         # need to accepts ints and longs because ids coming from a method
         # launched by button in the interface have a type long...
         if isinstance(select, (int, long)):
@@ -1994,6 +2077,9 @@ class orm_memory(orm_template):
                 r = {'id': id}
                 for f in fields_to_read:
                     record = self.datas.get(id)
+                    if f == '_vptr':
+                        r[f] = record.get(f, None)
+                        continue
                     if record:
                         self._check_access(user, id, 'read')
                         r[f] = record.get(f, False)
@@ -2017,7 +2103,9 @@ class orm_memory(orm_template):
         vals2 = {}
         upd_todo = []
         for field in vals:
-            if self._columns[field]._classic_write:
+            if field == '_vptr':
+                vals2[field] = vals[field]
+            elif self._columns[field]._classic_write:
                 vals2[field] = vals[field]
             else:
                 upd_todo.append(field)
@@ -2045,7 +2133,9 @@ class orm_memory(orm_template):
         vals2 = {}
         upd_todo = []
         for field in vals:
-            if self._columns[field]._classic_write:
+            if field == '_vptr':
+                vals2[field] = vals[field]
+            elif self._columns[field]._classic_write:
                 vals2[field] = vals[field]
             else:
                 upd_todo.append(field)
@@ -2407,6 +2497,8 @@ class orm(orm_template):
         # of fields which were required but have been removed (or will be added by another module)
         columns = [c for c in self._columns if not (isinstance(self._columns[c], fields.function) and not self._columns[c].store)]
         columns += ('id', 'write_uid', 'write_date', 'create_uid', 'create_date') # openerp access columns
+        if self._vtable:
+            columns.append('_vptr')
         cr.execute("SELECT a.attname, a.attnotnull"
                    "  FROM pg_class c, pg_attribute a"
                    " WHERE c.relname=%s"
@@ -2467,13 +2559,23 @@ class orm(orm_template):
                         cr.execute('ALTER TABLE "%s" ADD COLUMN "%s" %s' % (self._table, k, logs[k]))
                         cr.commit()
 
+            if self._vtable:
+                    cr.execute(""" SELECT c.relname
+                          FROM pg_class c, pg_attribute a
+                         WHERE c.relname=%s AND a.attname='_vptr' AND c.oid=a.attrelid
+                        """, (self._table,))
+                    if not cr.rowcount:
+                        cr.execute('ALTER TABLE "%s" ADD COLUMN "_vptr" VARCHAR(64)' % \
+                            (self._table,), debug=self._debug)
+                        cr.commit()
+
             self._check_removed_columns(cr, log=False)
 
             # iterate on the "object columns"
             todo_update_store = []
             update_custom_fields = context.get('update_custom_fields', False)
             for k in self._columns:
-                if k in ('id', 'write_uid', 'write_date', 'create_uid', 'create_date'):
+                if k in ('id', 'write_uid', 'write_date', 'create_uid', 'create_date', '_vptr'):
                     continue
                     #raise _('Can not define a column %s. Reserved keyword !') % (k,)
                 #Not Updating Custom fields
@@ -2710,6 +2812,13 @@ class orm(orm_template):
             for order,f,k in todo_update_store:
                 todo_end.append((order, self._update_store, (f, k)))
 
+            for inh in self._inherits:
+                pclass = self.pool.get(inh)
+                cr.execute('UPDATE "%(a)s" SET _vptr = \'%(self)s\' ' \
+                            ' FROM "%(b)s" WHERE "%(a)s".id = "%(b)s"."%(i)s" AND "%(a)s"._vptr IS NULL ' % \
+                                {'a': pclass._table, 'b': self._table,
+                                'i': self._inherits[inh], 'self': self._name },
+                            debug=True)
         else:
             cr.execute("SELECT relname FROM pg_class WHERE relkind IN ('r','v') AND relname=%s", (self._table,))
             create = not bool(cr.fetchone())
@@ -2998,11 +3107,15 @@ class orm(orm_template):
         self.pool.get('ir.model.access').check(cr, user, self._name, 'read', context=context)
         if not fields:
             fields = self._columns.keys() + self._inherit_fields.keys()
+            if self._vtable:
+                fields.append('_vptr')
         if isinstance(ids, (int, long)):
             select = [ids]
         else:
             select = ids
         select = map(lambda x: isinstance(x,dict) and x['id'] or x, select)
+        if self._debug:
+            _logger.debug("%s.read(%r, fields=%r)", self._name, select, fields)
         result = self._read_flat(cr, user, select, fields, context, load)
 
         for r in result:
@@ -3041,6 +3154,8 @@ class orm(orm_template):
         ids = map(lambda x:int(x), ids)
         if fields_to_read == None:
             fields_to_read = self._columns.keys()
+            if self._vtable:
+                fields_to_read.append('_vptr')
 
         # Construct a clause for the security rules.
         # 'tables' hold the list of tables necessary for the SELECT including the ir.rule clauses,
@@ -3050,10 +3165,11 @@ class orm(orm_template):
         # all inherited fields + all non inherited fields for which the attribute whose name is in load is True
         fields_pre = [f for f in fields_to_read if
                            f == self.CONCURRENCY_CHECK_FIELD
+                           or f == '_vptr'
                         or (f in self._columns and getattr(self._columns[f], '_classic_write'))
                      ] + self._inherits.values()
         if self._debug:
-            _logger.debug('%s.read_flat: tables=%s, fields_pre= %s' %
+            _logger.debug('%s.read_flat: tables=%s, fields_pre=%s' %
                 (self._name, tables, fields_pre))
 
         res = []
@@ -3071,6 +3187,8 @@ class orm(orm_template):
                     if self._log_access:
                         return "COALESCE(%swrite_date, %screate_date, now())::timestamp AS %s" % (table_prefix, table_prefix, f,)
                     return "now()::timestamp AS %s" % (f,)
+                if f == '_vptr':
+                    return '%s_vptr' % table_prefix
                 if isinstance(self._columns[f], fields.binary) and context.get('bin_size', False):
                     return 'length(%s"%s") as "%s"' % (table_prefix, f, f)
                 return '%s"%s"' % (table_prefix, f,)
@@ -3113,7 +3231,7 @@ class orm(orm_template):
         tmp_fs = []
         
         for f in fields_pre:
-            if f == self.CONCURRENCY_CHECK_FIELD:
+            if f == self.CONCURRENCY_CHECK_FIELD or f == '_vptr':
                 continue
             if self._columns[f].translate:
                 tmp_fs.append(f)
@@ -3332,6 +3450,8 @@ class orm(orm_template):
             wf_service.trg_delete(uid, self._name, oid, cr)
 
 
+        # Shall we also remove the inherited records in python, here?
+
         self.check_access_rule(cr, uid, ids, 'unlink', context=context)
         cr.execute('DELETE FROM ' + self._table + ' ' \
                        'WHERE id = ANY(%s)', (ids,), debug=self._debug)
@@ -3399,6 +3519,8 @@ class orm(orm_template):
         readonly = None
         for field in vals.copy():
             fobj = None
+            if field == '_vptr':
+                continue
             if field in self._columns:
                 fobj = self._columns[field]
             else:
@@ -3451,7 +3573,10 @@ class orm(orm_template):
         direct = []
         totranslate = context.get('lang', False) and (context['lang'] != 'en_US')
         for field in vals:
-            if field in self._columns:
+            if field == '_vptr':
+                upd0.append('_vptr=%s')
+                upd1.append(vals[field])
+            elif field in self._columns:
                 if self._columns[field]._classic_write and not (hasattr(self._columns[field], '_fnct_inv')):
                     if (not totranslate) or not self._columns[field].translate:
                         upd0.append('"'+field+'"='+self._columns[field]._symbol_set[0])
@@ -3526,6 +3651,13 @@ class orm(orm_template):
             for val in updend:
                 if self._inherit_fields[val][0] == table:
                     v[val] = vals[val]
+
+            # we update the parent object, if the column has been written to.
+            # note that the old table._vptr will still hold a wrong ref
+            # to this record
+            if col in self.vals and self.pool.get(table)._vtable:
+                v['_vptr'] = self._name
+
             self.pool.get(table).write(cr, user, nids, v, context)
 
         self._validate(cr, user, ids, context)
@@ -3658,9 +3790,14 @@ class orm(orm_template):
                 tocreate[v] = {}
             else:
                 tocreate[v] = {'id' : vals[self._inherits[v]]}
+            if self.pool.get(v)._vtable:
+                tocreate[v]['_vptr'] = self._name
+
         (upd0, upd1, upd2) = ('', '', [])
         upd_todo = []
         for v in vals.keys():
+            if v == '_vptr':
+                continue
             if v in self._inherit_fields:
                 (table, col, col_detail) = self._inherit_fields[v]
                 tocreate[table][v] = vals[v]
@@ -3705,6 +3842,8 @@ class orm(orm_template):
         #End
         for field in vals.copy():
             fobj = None
+            if field == '_vptr':
+                continue
             if field in self._columns:
                 fobj = self._columns[field]
             else:
@@ -3717,6 +3856,11 @@ class orm(orm_template):
                 if not edit:
                     vals.pop(field)
         for field in vals:
+            if field == '_vptr':
+                upd0 += ', _vptr'
+                upd1 += ', %s'
+                upd2.append(vals[field])
+                continue
             if field in self._columns:
                 if self._columns[field]._classic_write:
                     upd0 = upd0 + ',"' + field + '"'
@@ -4203,6 +4347,7 @@ class orm(orm_template):
         for parent_column in ['parent_left', 'parent_right']:
             data.pop(parent_column, None)
 
+        # TODO: shall we also copy inherited children, from virtual table?
         for v in self._inherits:
             del data[self._inherits[v]]
         return data

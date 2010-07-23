@@ -76,3 +76,18 @@ except ImportError:
         return partial(update_wrapper, wrapped=wrapped,
                        assigned=assigned, updated=updated)
 
+def virtual(f):
+    """Virtual decorator for function.
+       It will merely add a _virtual attribute to the function, marking
+       it for the _vtable.
+       
+       Write your orm code like:
+           class aaa(osv.osv):
+               @virtual
+               def funct(self,...):
+                   pass
+    """
+    f._virtual = True
+    return f
+
+#eof

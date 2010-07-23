@@ -1,0 +1,116 @@
+=========================
+ORM Inheritance and API
+=========================
+
+Introduction
+-------------
+
+The current situation is that data models all "inherit" from osv.osv 
+(in python terms). They all have just one instance per database.
+
+Osv objects can "_inherit" others, which means that some inheritance will 
+be /calculated/ upon their instantiation. That inheritance, will try to
+stack those osv objects on top of their parent ones:
+    class obj1(osv.osv):
+	_name = "object.one"
+    obj1()
+    
+    class obj2(osv.osv):
+	_inherit = 'object.one'
+    obj2()
+    
+    class obj3(osv.osv):
+	_inherit = 'object.one'
+    obj3()
+    
+There, obj3() is the actual instance of the 'object.one' pool member. Any 
+methods defined in obj3 will override any methods of obj1, or obj2. Of 
+course, they may reference them using the super() keyword.
+
+The next interesting inheritance mechanism is the instance inheritance, 
+with "_inherits" from a parent table. Example:
+    class obja1(osv.osv):
+	_name = "object.two"
+
+    class obja_ext(osv.osv):
+	_name = "object.three"
+	_inherits = { 'object.two': 'base_id' }
+	
+Where column object.three.base_id will reference the object.two.id and
+thus an instance of object.three data will point to an instance (db row)
+of object.two data, too.
+
+The first paradigm allows for stacked classes (linear inheritance), while
+the second one allows for instances with supplementary data (like Postgres
+inherited tables).
+
+What we are missing is the paradigm of C++ (or even python), where classes
+can inherit one another and choose to re-implement their methods (but in
+a non-linear way).
+
+NOTE: the standard way of python just won't work, because our objects are
+the /osv/ ones (one per data model), rather than data ones (one per data row).
+
+Usage scenario
+---------------
+
+We want to have 3 pieces of data. Say:
+    class tax_simple(osv.osv):
+        _name = 'tax.simple'
+        def compute_tax(self, ...): return amount * percent
+        
+    class tax_log(osv.osv):
+        _name = 'tax.log'
+        _inherits = { 'tax.simple': 'tax_id' }
+        def compute_tax(self, ...): return log(amount) * tax_ratio
+        
+    class tax_minpc(osv.osv):
+        _name = 'tax.minpc'
+        _inherits = { 'tax.simple': 'tax_id' }
+        def compute_tax(self, ...): return max(tax_minimum, amount * percent)
+
+Say, now, that we want to populate the taxes table with one value for
+each of those classes. We will have:
+
+Table tax_simple:
+    id;	name;		percent
+    1;	"Simple";	0.25
+    2;	"Log";		NULL
+    3;	"Minpc";	0.20
+
+Table tax_log:
+    id;	tax_id;	tax_ratio
+    22;	2;	0.34
+    
+Table tax_minpc:
+    id; tax_id;	tax_minimum
+    33;	3;	1.2
+
+Then, we want to browse the base table, and manage to calculate the tax
+conditionally, with virtual inheritance:
+    (t1, t2, t3 ) = tax_simple.browse(..., [1, 2, 3])
+    
+    assert t1.compute_tax() == tax_simple.compute_tax(.., [1])[0]
+    assert t2.compute_tax() == tax_log.compute_tax(.., [22])[0]
+    assert t3.compute_tax() == tax_minpc.compute_tax(.., [33])[0]
+
+Note, that all three compute_tax() are visible (not obstructed by the
+inheritance), but are used just depending on the row of tax_simple.
+
+
+Requirements
+-------------
+This mechanism MUST be simple to write (in the classes that implement it).
+It MUST be transparent to the end developer.
+It must be fast (not add too much overhead to each virtual function call).
+It COULD do any python magic, but in a way that the module developer won't
+have to worry about it.
+
+It MUST work for browse objects (because they carry a row id, anyway), but
+not NEED to work for plain osv instances (with an /id/ argument).
+
+
+Implementation
+---------------
+
+....
