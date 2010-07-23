@@ -3655,7 +3655,7 @@ class orm(orm_template):
             # we update the parent object, if the column has been written to.
             # note that the old table._vptr will still hold a wrong ref
             # to this record
-            if col in self.vals and self.pool.get(table)._vtable:
+            if col in vals and self.pool.get(table)._vtable:
                 v['_vptr'] = self._name
 
             self.pool.get(table).write(cr, user, nids, v, context)
