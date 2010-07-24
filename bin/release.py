@@ -48,7 +48,8 @@ license = 'GPL-3'
 server_options = [ 'base6.0',
         'static-http', 'http-options', 'multi-http',
         'engine-pg84',
-        'search-browse',
+        'search-browse', 'virtual-fns',
+        'root-obj_list',
         ]
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
