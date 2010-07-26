@@ -227,6 +227,12 @@ class BaseHttpDaemon(threading.Thread, netsvc.Server):
     def stats(self):
         res = "%sd: " % self._RealProto + ((self.running and "running") or  "stopped")
         if self.server:
+	    res += ", %d threads" % (self.server.numThreads,)
+        return res
+
+    def stats(self):
+        res = "%sd: " % self._RealProto + ((self.running and "running") or  "stopped")
+        if self.server:
             res += ", %d threads" % (len(self.server._threads),)
         return res
 
