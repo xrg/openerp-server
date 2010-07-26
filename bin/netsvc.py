@@ -122,6 +122,9 @@ class ExportService(object):
         raise Exception("stub dispatch at %s" % self.__name)
         
     def new_dispatch(self,method,auth,params):
+        raise Exception("stub dispatch at %s" % self.__name)
+        
+    def new_dispatch(self,method,auth,params):
         raise NotImplementedError("stub dispatch at %s" % self.__name)
 
     def abortResponse(self, error, description, origin, details):
@@ -390,7 +393,6 @@ class Server:
 
 
     __logger = logging.getLogger('server')
-
     def __init__(self):
         Server.__servers.append(self)
         if Server.__is_started:
