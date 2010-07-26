@@ -103,8 +103,8 @@ class db(baseExportService):
         fn = getattr(self, 'exp_'+method)
         return fn(*params)
     
-    #def new_dispatch(self,method,auth,params):
-    #    pass
+    def new_dispatch(self,method,auth,params):
+        pass
     def _create_empty_database(self, name):
         db = sql_db.db_connect('template1')
         cr = db.cursor()
@@ -212,6 +212,12 @@ class db(baseExportService):
         if os.name == 'nt' and not os.environ.get('PGPASSWORD', ''):
             os.environ['PGPASSWORD'] = tools.config['db_password']
             self._pg_psw_env_var_is_set = True
+
+    def _unset_pg_psw_env_var(self):
+        if os.name == 'nt' and self._pg_psw_env_var_is_set:
+            os.environ['PGPASSWORD'] = ''
+
+    def exp_dump(self, db_name):
 
     def _unset_pg_psw_env_var(self):
         if os.name == 'nt' and self._pg_psw_env_var_is_set:
@@ -380,6 +386,8 @@ class db(baseExportService):
                 self.abortResponse(1, inst.name, inst.exc_type, inst.value)
             except Exception:
                 l.exception("Migrate database %s failed" % db)
+                raise
+        return True
                 raise
         return True
 db()
