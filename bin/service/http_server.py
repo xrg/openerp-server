@@ -581,8 +581,8 @@ def init_static_http():
     
     reg_http_service(HTTPDir(base_path,StaticHTTPHandler))
     
-    netsvc.Logger().notifyChannel("web-services", netsvc.LOG_INFO,
-            "Registered HTTP dir %s for %s" % (dir_path, base_path))
+    logging.getLogger("web-services").info("Registered HTTP dir %s for %s" % \
+                        (dir_path, base_path))
 
 class OerpAuthProxy(AuthProxy):
     """ Require basic authentication..
