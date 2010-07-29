@@ -97,8 +97,8 @@ def find_addons():
                 yield mname, join(empath, mname)
             else:
                 raise AttributeError("Module %s specified, but no valid path." % mname)
-    except:
-        pass
+    except Exception:
+        raise
 
 def data_files():
     '''Build list of data files to be installed'''
