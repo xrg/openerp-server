@@ -143,6 +143,12 @@ def data_files():
                     files.extend(((res, map(lambda fil: join(root, fil),
                                             innerfiles)),))
 
+    files.append((join(openerp_site_packages,'pixmaps'),
+            [ join('pixmaps', fil) for fil in
+                [ 'openerp-header.bmp', 'openerp-header.png', 'openerp.ico',
+                    'openerp-icon.ico', 'openerp-icon.png', 'openerp-intro.bmp',
+                    'openerp.png', 'openerp-slogan.bmp' ] ] ) )
+
     return files
 
 if not os.getenv('NO_CHECK_MODULES') :
