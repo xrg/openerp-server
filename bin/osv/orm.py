@@ -2370,11 +2370,11 @@ class orm(orm_template):
             tables, where_clause = self._inherits_join_calc(groupby,tables,where_clause)
 
         if len(where_clause):
-            where_clause = ' where '+string.join(where_clause, ' and ')
+            where_clause = ' WHERE '+string.join(where_clause, ' AND ')
         else:
             where_clause = ''
-        limit_str = limit and ' limit %d' % limit or ''
-        offset_str = offset and ' offset %d' % offset or ''
+        limit_str = limit and ' LIMIT %d' % limit or ''
+        offset_str = offset and ' OFFSET %d' % offset or ''
 
         fget = self.fields_get(cr, uid, fields)
         float_int_fields = filter(lambda x: fget[x]['type'] in ('float','integer'), fields)
@@ -2383,10 +2383,17 @@ class orm(orm_template):
         flist = ''
         group_by = groupby
         if groupby:
+            ftbl = ''
+            if groupby in self._columns:
+                ftbl = '"%s".' % self._table
+            elif groupby in self._inherit_fields:
+                ftbl = '"%s".' % self.pool.get(self._inherit_fields[groupby][0])._table
+            
             if fget.get(groupby,False) and fget[groupby]['type'] in ('date','datetime'):
-                flist = "to_char(%s,'yyyy-mm') as %s "%(groupby,groupby)
-                groupby = "to_char(%s,'yyyy-mm')"%(groupby)
+                flist = "to_char(%s%s,'yyyy-mm') as %s " % ( ftbl, groupby,groupby)
+                groupby = "to_char(%s%s,'yyyy-mm')"%(ftbl, groupby)
             else:
+                groupby = ftbl+groupby
                 flist = groupby
 
 
@@ -2398,13 +2405,18 @@ class orm(orm_template):
                 operator = fget[f].get('group_operator','sum')
                 if flist:
                     flist += ','
-                flist += operator+'('+f+') as '+f
+                ftbl = ''
+                if f in self._columns:
+                    ftbl = '"%s".' % self._table
+                elif f in self._inherit_fields:
+                    ftbl = '"%s".' % self.pool.get(self._inherit_fields[f][0])._table
+                flist += operator+'('+ftbl+f+') AS '+f
 
         if groupby:
-            gb = ' group by '+groupby
+            gb = ' GROUP BY '+groupby
         else:
             gb = ''
-        cr.execute('select min(%s.id) as id,' % self._table + flist + ' from ' + ','.join(tables) + where_clause + gb + limit_str + offset_str, where_params, debug=self._debug)
+        cr.execute('SELECT MIN(%s.id) AS id,' % self._table + flist + ' FROM ' + ','.join(tables) + where_clause + gb + limit_str + offset_str, where_params, debug=self._debug)
         alldata = {}
         groupby = group_by
         for r in cr.dictfetchall():
