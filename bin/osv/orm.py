@@ -627,6 +627,7 @@ class orm_template(object):
             
             # temp:
             self._debug = True
+            _logger.debug("Object %s is virtual", self._name)
 
         if self._vtable and self._inherits:
             for pinh in self._inherits:
@@ -637,6 +638,7 @@ class orm_template(object):
                 
                 # temp: turn on debugging
                 pclass._debug = True
+                _logger.debug("Object %s is virtual because of %s", pclass._name, self._name)
 
     def browse(self, cr, uid, select, context=None, list_class=None, 
                 fields_process=None, fields_only=True, cache=None):
@@ -2814,6 +2816,8 @@ class orm(orm_template):
 
             for inh in self._inherits:
                 pclass = self.pool.get(inh)
+                if not pclass._vtable:
+                    continue
                 cr.execute('UPDATE "%(a)s" SET _vptr = \'%(self)s\' ' \
                             ' FROM "%(b)s" WHERE "%(a)s".id = "%(b)s"."%(i)s" AND "%(a)s"._vptr IS NULL ' % \
                                 {'a': pclass._table, 'b': self._table,
