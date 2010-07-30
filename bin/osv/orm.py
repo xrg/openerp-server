@@ -2350,6 +2350,10 @@ class orm(orm_template):
         if not fields:
             fields = self._columns.keys()
 
+        if self._debug:
+            _logger.debug("%s.read_group(%r, fields=%r, groupby=%r)", 
+                    self._name, select, fields, groupby)
+
         (where_clause, where_params, tables) = self._where_calc(cr, uid, domain, context=context)
         dom = self.pool.get('ir.rule').domain_get(cr, uid, self._name, 'read', context=context)
         where_clause = where_clause + dom[0]
@@ -2400,7 +2404,7 @@ class orm(orm_template):
             gb = ' group by '+groupby
         else:
             gb = ''
-        cr.execute('select min(%s.id) as id,' % self._table + flist + ' from ' + ','.join(tables) + where_clause + gb + limit_str + offset_str, where_params)
+        cr.execute('select min(%s.id) as id,' % self._table + flist + ' from ' + ','.join(tables) + where_clause + gb + limit_str + offset_str, where_params, debug=self._debug)
         alldata = {}
         groupby = group_by
         for r in cr.dictfetchall():
