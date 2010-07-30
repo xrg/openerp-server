@@ -2352,7 +2352,7 @@ class orm(orm_template):
 
         if self._debug:
             _logger.debug("%s.read_group(%r, fields=%r, groupby=%r)", 
-                    self._name, select, fields, groupby)
+                    self._name, domain, fields, groupby)
 
         (where_clause, where_params, tables) = self._where_calc(cr, uid, domain, context=context)
         dom = self.pool.get('ir.rule').domain_get(cr, uid, self._name, 'read', context=context)
