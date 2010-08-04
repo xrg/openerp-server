@@ -384,7 +384,11 @@ def upgrade_graph(graph, cr, module_list, force=None):
 
     result = len(graph) - len_graph
     if result != len(module_list):
-        logger.warning('Not all modules have loaded.')
+        logger.warning('Not all modules have loaded. %d/%d', result, len(module_list))
+        mmods = filter( lambda p: p not in graph, module_list)
+        logger.info("Missing modules: %s", ', '.join(mmods))
+    else:
+        logger.info("Successfully loaded all %d modules", result)
     return result
 
 
