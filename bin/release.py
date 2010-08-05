@@ -47,6 +47,7 @@ license = 'GPL-3'
 # different options, from branches.
 server_options = [ 'base6.0',
         'static-http', 'http-options', 'multi-http',
+        'xmlrpc-gzip',
         'engine-pg84',
         'search-browse', 'virtual-fns',
         'root-obj_list',

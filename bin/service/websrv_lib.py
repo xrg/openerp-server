@@ -31,6 +31,7 @@
 import socket
 import base64
 import errno
+import os
 import SocketServer
 from BaseHTTPServer import *
 from SimpleHTTPServer import SimpleHTTPRequestHandler
@@ -159,6 +160,73 @@ class dummyconn:
 
 def _quote_html(html):
     return html.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
+
+class BoundStream(object):
+    """Wraps around a stream, reads a determined length of data
+    """
+    
+    def __init__(self, stream, length, chunk_size=None):
+        self._stream = stream
+        self._rem_length = length
+        self._fpos = 0L
+        self._lbuf = ''    # a mini-buffer of last data
+        assert isinstance(length, (int, long))
+        assert length >= 0, length
+        self._chunk_size = chunk_size
+
+    def read(self, size=-1):
+        # Special case for gzip: allow to re-read a few of the
+        # last bytes, if it seeks negative
+        if self._fpos < 0 and self._lbuf:
+            if (0 - self._fpos) > len(self._lbuf):
+                raise EOFError("Cannot re-read at %d" % self._fpos)
+            data = self._lbuf[self._fpos:]
+            if size >= 0:
+                data = data[:size]
+            # print "Read %r:%d at pos %d" % (data, size, self._fpos)
+            self._fpos += len(data)
+            assert self._fpos <= 0
+            return data
+        if not self._stream or self._fpos != 0L:
+            raise IOError(errno.EBADF, "read() without stream")
+        
+        if self._rem_length == 0:
+            return ''
+        elif self._rem_length < 0:
+            raise EOFError()
+
+        rsize = self._rem_length
+        if size > 0 and size < rsize:
+            rsize = size
+        if self._chunk_size and self._chunk_size < rsize:
+            rsize = self._chunk_size
+        
+        data = self._stream.read(rsize)
+        self._rem_length -= len(data)
+        if len(data) > 32:
+            self._lbuf = data[-32:]
+        else:
+            self._lbuf += data
+            self._lbuf = self._lbuf[-32:]
+
+        return data
+
+    def tell(self):
+        return self._fpos
+    
+    def seek(self, pos, whence=os.SEEK_SET):
+        """ Dummy seek to some pos. 
+        It does nothing, in fact, but merely fool the gzip code
+        """
+        if whence == os.SEEK_SET:
+            self._fpos = pos
+        elif whence == os.SEEK_CUR:
+            self._fpos += pos
+        elif whence == os.SEEK_END:
+            if self._rem_length:
+                self._fpos = 1000000 + pos
+            else:
+                self._fpos = pos
 
 class FixSendError:
     #error_message_format = """ """

@@ -41,6 +41,7 @@ import os
 import select
 import socket
 import xmlrpclib
+import StringIO
 import logging
 
 from SimpleXMLRPCServer import SimpleXMLRPCDispatcher
@@ -320,6 +321,8 @@ def list_http_services(protocol=None):
         raise Exception("Incorrect protocol or no http services")
 
 import SimpleXMLRPCServer
+import gzip
+
 class xrBaseRequestHandler(FixSendError, HttpLogHandler, SimpleXMLRPCServer.SimpleXMLRPCRequestHandler):
     rpc_paths = []
     protocol_version = 'HTTP/1.1'
@@ -339,6 +342,84 @@ class xrBaseRequestHandler(FixSendError, HttpLogHandler, SimpleXMLRPCServer.Simp
 
     def finish(self):
         pass
+
+    def do_POST(self):
+        """Handles the HTTP POST request.
+
+        Mostly copied from SimpleXMLRPCRequestHandler.
+        """
+
+        # Check that the path is legal
+        if not self.is_rpc_path_valid():
+            self.report_404()
+            return
+
+        try:
+            # Get arguments by reading body of request.
+            # We read this in chunks to avoid straining
+            # socket.read(); around the 10 or 15Mb mark, some platforms
+            # begin to have problems (bug #792570).
+            max_chunk_size = 10*1024*1024
+            clen = int(self.headers["content-length"])
+            rbuffer = BoundStream(self.rfile, clen, chunk_size=max_chunk_size)
+            data = ''
+            if self.headers.get('content-encoding',False) == 'gzip':
+                rbuffer = gzip.GzipFile(mode='rb', fileobj=rbuffer)
+
+            try:
+                while True:
+                    chunk = rbuffer.read()
+                    if not chunk:
+                        break
+                    data += chunk
+            except EOFError:
+                pass
+
+            # In previous versions of SimpleXMLRPCServer, _dispatch
+            # could be overridden in this class, instead of in
+            # SimpleXMLRPCDispatcher. To maintain backwards compatibility,
+            # check to see if a subclass implements _dispatch and dispatch
+            # using that method if present.
+            response = self.server._marshaled_dispatch(
+                    data, getattr(self, '_dispatch', None)
+                )
+
+        except Exception, e: # This should only happen if the module is buggy
+            # internal error, report as HTTP server error
+            self.send_response(500)
+
+            # Send information about the exception if requested
+            if hasattr(self.server, '_send_traceback_header') and \
+                    self.server._send_traceback_header:
+                import traceback
+                self.send_header("X-exception", str(e))
+                self.send_header("X-traceback", traceback.format_exc())
+
+            self.end_headers()
+        else:
+            # got a valid XML RPC response
+            self.send_response(200)
+            self.send_header("Content-type", "text/xml")
+            
+            if response \
+                    and 'gzip' in self.headers.get('Accept-Encoding', '').split(',') \
+                    and len(response) > 512:
+                buffer = StringIO.StringIO()
+                output = gzip.GzipFile(mode='wb', fileobj=buffer)
+                if isinstance(response, (str, unicode)):
+                    output.write(response)
+                else:
+                    for buf in response:
+                        output.write(buf)
+                output.close()
+                buffer.seek(0)
+                response = buffer.getvalue()
+                self.send_header('Content-Encoding', 'gzip')
+
+            self.send_header("Content-length", str(len(response)))
+            self.end_headers()
+            self.wfile.write(response)
+            self.wfile.flush()
 
 class XMLRPCRequestHandler(netsvc.OpenERPDispatcher,xrBaseRequestHandler):
     def setup(self):
