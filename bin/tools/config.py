@@ -404,6 +404,13 @@ class configmanager(object):
             for sec in p.sections():
                 if sec == 'options':
                     continue
+                if sec == 'logging_levels':
+                    for (name, value) in p.items(sec):
+                        if not value:
+                            continue
+                        level = self._LOGLEVELS.get(value.lower()) or int(value)
+                        logging.getLogger(name).setLevel(level)
+                    continue
                 if not self.misc.has_key(sec):
                     self.misc[sec]= {}
                 for (name, value) in p.items(sec):

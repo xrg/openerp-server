@@ -276,22 +276,63 @@ class Logger(object):
             # better ignore the exception and carry on..
             pass
 
-    def set_loglevel(self, level, logger=None):
+    def __set_loglevel(self, level, logger=None):
+        """Set the level of some logger.
+        If the logger doesn't exist, create it (better, because this
+        call may be earlier than the first message to the log).
+        """
+        cre = ''
         if logger is not None:
+            if logger not in logging.root.manager.loggerDict:
+                cre = ' (created)'
             log = logging.getLogger(str(logger))
         else:
             log = logging.getLogger()
+
+        try:
+            level = int(level)
+        except ValueError:
+            lv = logging._levelNames.get(level.upper(),False)
+            if lv and isinstance(lv, int):
+                level = lv
+            else:
+                raise ValueError("No logging level %s" % level)
         log.setLevel(logging.INFO) # make sure next msg is printed
-        log.info("Log level changed to %s" % logging.getLevelName(level))
+        log.info("Log level changed to %s%s" % (logging.getLevelName(level), cre))
         log.setLevel(level)
+
+    def set_loglevel(self, level, logger=None):
+        if isinstance(level, dict):
+            for log, lev in level:
+                self.__set_loglevel(lev, log or None)
+        else:
+            return self.__set_loglevel(level, logger)
 
     def set_logger_level(self, logger, level):
         """ Set the logging level for a particular logger
         """
-        log = logging.getLogger(str(logger))
-        log.setLevel(logging.INFO) # make sure next msg is printed
-        log.info("Log level for %s changed to %s" % (logger, logging.getLevelName(level)))
-        log.setLevel(level)
+        return self.__set_loglevel(level, logger)
+
+    def get_loglevel(self,logger=None):
+        """Get the logging level of some logger.
+        If that logger just inherits it's parent level, return False
+        """
+        if logger == '*':
+            # Special case! we can query all loggers in detail..
+            ret = {}
+            for log in logging.root.manager.loggerDict.values():
+                if not isinstance(log, logging.Logger):
+                    continue
+                ret[log.name] = log.level or False
+            return ret
+        elif logger is not None:
+            if logger not in logging.root.manager.loggerDict:
+                raise KeyError("No logger %s" % logger)
+            log = logging.getLogger(str(logger))
+        else:
+            log = logging.getLogger()
+        
+        return log.level or False
 
 import tools
 init_logger()

@@ -406,6 +406,7 @@ class common(_ObjectService):
                 'root': ['get_available_updates', 'get_migration_scripts',
                         'set_loglevel', 'set_obj_debug', 'set_pool_debug',
                         'set_logger_level', 'get_pgmode', 'set_pgmode',
+                        'get_loglevel',
                         'get_os_time']
                 }
     def __init__(self,name="common"):
@@ -613,13 +614,17 @@ GNU Public Licence.
 
     def exp_set_loglevel(self, loglevel, logger=None):
         l = netsvc.Logger()
-        l.set_loglevel(int(loglevel), logger)
+        l.set_loglevel(loglevel, logger)
         return True
 
     def exp_set_logger_level(self, logger, loglevel):
         l = netsvc.Logger()
-        l.set_logger_level(logger, int(loglevel))
+        l.set_logger_level(logger, loglevel)
         return True
+
+    def exp_get_loglevel(self, logger=None):
+        l = netsvc.Logger()
+        return l.get_loglevel(logger)
 
     def exp_get_pgmode(self):
         return sql_db.Cursor.get_pgmode()
