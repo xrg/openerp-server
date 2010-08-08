@@ -94,13 +94,13 @@ class _column(object):
         cr.execute('update '+obj._table+' set '+name+'='+self._symbol_set[0]+' where id=%s', (self._symbol_set[1](value), id), debug=obj._debug)
 
     def set_memory(self, cr, obj, id, name, value, user=None, context=None):
-        raise Exception(_('Not implemented set_memory method !'))
+        raise Exception(_('Not implemented %s.%s.set_memory method !') %(obj._name, name))
 
     def get_memory(self, cr, obj, ids, name, user=None, context=None, values=None):
-        raise Exception(_('Not implemented get_memory method !'))
+        raise Exception(_('Not implemented %s.%s.get_memory method !')%(obj._name, name))
 
     def get(self, cr, obj, ids, name, user=None, offset=0, context=None, values=None):
-        raise Exception(_('undefined get method !'))
+        raise Exception(_('undefined %s.%s.get method !')%(obj._name, name))
 
     def search(self, cr, obj, args, name, value, offset=0, limit=None, uid=None, context=None):
         ids = obj.search(cr, uid, args+self._domain+[(name, 'ilike', value)], offset, limit, context=context)
@@ -108,7 +108,7 @@ class _column(object):
         return [x[name] for x in res]
 
     def search_memory(self, cr, obj, args, name, value, offset=0, limit=None, uid=None, context=None):
-        raise Exception(_('Not implemented search_memory method !'))
+        raise Exception(_('Not implemented %s.%s.search_memory method !')%(obj._name, name))
 
 
 # ---------------------------------------------------------
