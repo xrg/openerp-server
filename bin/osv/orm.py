@@ -582,6 +582,8 @@ class orm_template(object):
                     _logger.debug("Field %s.%s found in db", self._name, k)
                 for key, val in vals.items():
                     if cols[k][key] != vals[key]:
+                        if self._debug:
+                            _logger.debug("Column %s[%s] differs: %r != %r", k, key, cols[k][key], vals[key])
                         cr.execute('UPDATE ir_model_fields SET field_description=%s WHERE model=%s AND name=%s', (vals['field_description'], vals['model'], vals['name']))
                         cr.commit()
                         cr.execute("""UPDATE ir_model_fields SET
