@@ -285,6 +285,8 @@ def get_modules():
             return name
 
         def is_really_module(name):
+            if name.startswith('.'):
+                return False
             name = opj(dir, name)
             return os.path.isdir(name) or zipfile.is_zipfile(name)
         return map(clean, filter(is_really_module, os.listdir(dir)))
