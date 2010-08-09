@@ -449,7 +449,18 @@ class MultiHTTPHandler(FixSendError, HttpOptions, BaseHTTPRequestHandler):
             miss anything.
         """
 
-        self.request.settimeout(1.0)
+        try:
+            self.request.settimeout(1.0)
+        except socket.error, err:
+            if err == errno.EBADF:
+                try:
+                    self.rfile.close()
+                    self.wfile.close()
+                except Exception:
+                    pass
+                return None
+            raise
+
         ret = ''
         while True:
             try:
