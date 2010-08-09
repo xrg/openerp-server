@@ -100,7 +100,7 @@ class _column(object):
         raise Exception(_('Not implemented %s.%s.get_memory method !')%(obj._name, name))
 
     def get(self, cr, obj, ids, name, user=None, offset=0, context=None, values=None):
-        raise Exception(_('undefined %s.%s.get method !')%(obj._name, name))
+        raise Exception(_('undefined %s.%s.get method ! (%s)')%(obj._name, name, type(self)))
 
     def search(self, cr, obj, args, name, value, offset=0, limit=None, uid=None, context=None):
         ids = obj.search(cr, uid, args+self._domain+[(name, 'ilike', value)], offset, limit, context=context)

@@ -2492,7 +2492,7 @@ class orm(orm_template):
         return True
 
     def _update_store(self, cr, f, k):
-        _logger.info("storing computed values of fields.function '%s'" % (k,))
+        _logger.info("storing computed values of field '%s.%s'" % (self._name, k,))
         ss = self._columns[k]._symbol_set
         update_query = 'UPDATE "%s" SET "%s"=%s WHERE id=%%s' % (self._table, k, ss[0])
         cr.execute('select id from '+self._table, debug=self._debug)
