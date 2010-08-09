@@ -540,11 +540,11 @@ class orm_template(object):
                 'field_description': f.string.replace("'", " "),
                 'ttype': f._type,
                 'relation': f._obj or '',
-                'view_load': (f.view_load and 1) or 0,
+                'view_load': bool(f.view_load),
                 'select_level': tools.ustr(f.select or 0),
-                'readonly':(f.readonly and 1) or 0,
-                'required':(f.required and 1) or 0,
-                'selectable' : (f.selectable and 1) or 0,
+                'readonly': bool(f.readonly),
+                'required': bool(f.required),
+                'selectable' : bool(f.selectable),
                 'relation_field': (f._type=='one2many' and isinstance(f,fields.one2many)) and f._fields_id or '',
             }
             # When its a custom field,it does not contain f.select
