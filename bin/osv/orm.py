@@ -2531,10 +2531,12 @@ class orm(orm_template):
             if column['attnotnull']:
                 cr.execute('ALTER TABLE "%s" ALTER COLUMN "%s" DROP NOT NULL' % (self._table, column['attname']))
 
-    def _auto_init(self, cr, context={}):
+    def _auto_init(self, cr, context=None):
         store_compute =  False
         create = False
         todo_end = []
+        if context is None:
+            context = {}
         self._field_create(cr, context=context)
         if getattr(self, '_auto', True):
             cr.execute("SELECT relname FROM pg_class WHERE relkind IN ('r','v') AND relname=%s" ,( self._table,))
