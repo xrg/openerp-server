@@ -502,6 +502,9 @@ class orm_template(object):
             model_id = cr.fetchone()[0]
         else:
             model_id = cr.fetchone()[0]
+        if self._debug:
+            _logger.debug("Field create for %s.%s", context.get('module','<module>'), self._name)
+    
         if 'module' in context:
             name_id = 'model_'+self._name.replace('.','_')
             cr.execute('SELECT id, module FROM ir_model_data '
@@ -510,8 +513,7 @@ class orm_template(object):
 
             if not cr.rowcount:
                 cr.execute("INSERT INTO ir_model_data (name,date_init,date_update,module,model,res_id) VALUES (%s, now(), now(), %s, %s, %s)", \
-                    (name_id, context['module'], 'ir.model', model_id)
-                )
+                    (name_id, context['module'], 'ir.model', model_id), debug=self._debug)
             else:
                 res_md = cr.fetchone()
                 if res_md[1] != context['module'] and (not hasattr(self,'_inherit')):
@@ -576,9 +578,11 @@ class orm_template(object):
                                (name1, context['module'], 'ir.model.fields', id),
                                debug=self._debug )
             else:
+                if self._debug:
+                    _logger.debug("Field %s.%s found in db", self._name, k)
                 for key, val in vals.items():
                     if cols[k][key] != vals[key]:
-                        cr.execute('update ir_model_fields set field_description=%s where model=%s and name=%s', (vals['field_description'], vals['model'], vals['name']))
+                        cr.execute('UPDATE ir_model_fields SET field_description=%s WHERE model=%s AND name=%s', (vals['field_description'], vals['model'], vals['name']))
                         cr.commit()
                         cr.execute("""UPDATE ir_model_fields SET
                             model_id=%s, field_description=%s, ttype=%s, relation=%s,
@@ -587,8 +591,9 @@ class orm_template(object):
                             model=%s AND name=%s""", (
                                 vals['model_id'], vals['field_description'], vals['ttype'],
                                 vals['relation'], bool(vals['view_load']),
-                                vals['select_level'], bool(vals['readonly']),bool(vals['required']),bool(vals['selectable']),vals['relation_field'],vals['model'], vals['name']
-                            ), debug=self._debug)
+                                vals['select_level'], bool(vals['readonly']),bool(vals['required']),bool(vals['selectable']),vals['relation_field'],
+                                vals['model'], vals['name'] ),
+                                debug=self._debug)
                         continue
         cr.commit()
 
@@ -607,7 +612,7 @@ class orm_template(object):
             self._description = self._name
         if not self._table:
             self._table = self._name.replace('.', '_')
-        self._debug = False
+        self._debug = config.get_misc('logging_orm', self._name, False)
         
         # code for virtual functions:
         self._vtable = False
@@ -2541,8 +2546,8 @@ class orm(orm_template):
         if getattr(self, '_auto', True):
             cr.execute("SELECT relname FROM pg_class WHERE relkind IN ('r','v') AND relname=%s" ,( self._table,))
             if not cr.rowcount:
-                cr.execute('CREATE TABLE "%s" (id SERIAL NOT NULL, PRIMARY KEY(id)) WITHOUT OIDS' % (self._table,))
-                cr.execute("COMMENT ON TABLE \"%s\" IS '%s'" % (self._table, self._description.replace("'","''")))
+                cr.execute('CREATE TABLE "%s" (id SERIAL NOT NULL, PRIMARY KEY(id)) WITHOUT OIDS' % (self._table,), debug=self._debug)
+                cr.execute("COMMENT ON TABLE \"%s\" IS '%s'" % (self._table, self._description.replace("'","''")), debug=self._debug)
                 create = True
             cr.commit()
             if self._parent_store:
@@ -2557,8 +2562,8 @@ class orm(orm_template):
                         _logger.error( 'create a column parent_right on object %s: fields.integer(\'Right Parent\', select=1)' % (self._table, ))
                     if self._columns[self._parent_name].ondelete != 'cascade':
                         _logger.error( "the columns %s on object must be set as ondelete='cascasde'" % (self._name, self._parent_name))
-                    cr.execute('ALTER TABLE "%s" ADD COLUMN "parent_left" INTEGER' % (self._table,))
-                    cr.execute('ALTER TABLE "%s" ADD COLUMN "parent_right" INTEGER' % (self._table,))
+                    cr.execute('ALTER TABLE "%s" ADD COLUMN "parent_left" INTEGER' % (self._table,), debug=self._debug)
+                    cr.execute('ALTER TABLE "%s" ADD COLUMN "parent_right" INTEGER' % (self._table,), debug=self._debug)
                     cr.commit()
                     store_compute = True
 
@@ -2576,14 +2581,14 @@ class orm(orm_template):
                          WHERE c.relname=%s AND a.attname=%s AND c.oid=a.attrelid
                         """, (self._table, k))
                     if not cr.rowcount:
-                        cr.execute('ALTER TABLE "%s" ADD COLUMN "%s" %s' % (self._table, k, logs[k]))
+                        cr.execute('ALTER TABLE "%s" ADD COLUMN "%s" %s' % (self._table, k, logs[k]), debug=self._debug)
                         cr.commit()
 
             if self._vtable:
                     cr.execute(""" SELECT c.relname
                           FROM pg_class c, pg_attribute a
                          WHERE c.relname=%s AND a.attname='_vptr' AND c.oid=a.attrelid
-                        """, (self._table,))
+                        """, (self._table,), debug=self._debug)
                     if not cr.rowcount:
                         cr.execute('ALTER TABLE "%s" ADD COLUMN "_vptr" VARCHAR(64)' % \
                             (self._table,), debug=self._debug)
@@ -2615,18 +2620,18 @@ class orm(orm_template):
                         cr.execute("SELECT count(1) as c FROM pg_class c,pg_attribute a WHERE c.relname=%s AND a.attname=%s AND c.oid=a.attrelid", (f._obj, f._fields_id))
                         res = cr.fetchone()[0]
                         if not res:
-                            cr.execute('ALTER TABLE "%s" ADD FOREIGN KEY (%s) REFERENCES "%s" ON DELETE SET NULL' % (self._obj, f._fields_id, f._table))
+                            cr.execute('ALTER TABLE "%s" ADD FOREIGN KEY (%s) REFERENCES "%s" ON DELETE SET NULL' % (self._obj, f._fields_id, f._table), debug=self._debug)
                 elif isinstance(f, fields.many2many):
-                    cr.execute("SELECT relname FROM pg_class WHERE relkind IN ('r','v') AND relname=%s", (f._rel,))
+                    cr.execute("SELECT relname FROM pg_class WHERE relkind IN ('r','v') AND relname=%s", (f._rel,), debug=self._debug)
                     if not cr.dictfetchall():
                         if not self.pool.get(f._obj):
                             raise except_orm('Programming Error', ('There is no reference available for %s') % (f._obj,))
                         ref = self.pool.get(f._obj)._table
 #                        ref = f._obj.replace('.', '_')
-                        cr.execute('CREATE TABLE "%s" ("%s" INTEGER NOT NULL REFERENCES "%s" ON DELETE CASCADE, "%s" INTEGER NOT NULL REFERENCES "%s" ON DELETE CASCADE) WITH OIDS' % (f._rel, f._id1, self._table, f._id2, ref))
-                        cr.execute('CREATE INDEX "%s_%s_index" ON "%s" ("%s")' % (f._rel, f._id1, f._rel, f._id1))
-                        cr.execute('CREATE INDEX "%s_%s_index" ON "%s" ("%s")' % (f._rel, f._id2, f._rel, f._id2))
-                        cr.execute("COMMENT ON TABLE \"%s\" IS 'RELATION BETWEEN %s AND %s'" % (f._rel, self._table, ref))
+                        cr.execute('CREATE TABLE "%s" ("%s" INTEGER NOT NULL REFERENCES "%s" ON DELETE CASCADE, "%s" INTEGER NOT NULL REFERENCES "%s" ON DELETE CASCADE) WITH OIDS' % (f._rel, f._id1, self._table, f._id2, ref), debug=self._debug)
+                        cr.execute('CREATE INDEX "%s_%s_index" ON "%s" ("%s")' % (f._rel, f._id1, f._rel, f._id1), debug=self._debug)
+                        cr.execute('CREATE INDEX "%s_%s_index" ON "%s" ("%s")' % (f._rel, f._id2, f._rel, f._id2), debug=self._debug)
+                        cr.execute("COMMENT ON TABLE \"%s\" IS 'RELATION BETWEEN %s AND %s'" % (f._rel, self._table, ref), debug=self._debug)
                         cr.commit()
                 else:
                     cr.execute("SELECT c.relname,a.attname,a.attlen,a.atttypmod,a.attnotnull,a.atthasdef,t.typname,CASE WHEN a.attlen=-1 THEN a.atttypmod-4 ELSE a.attlen END as size " \
@@ -2646,7 +2651,7 @@ class orm(orm_template):
                         res_old = cr.dictfetchall()
                         _logger.debug('trying to rename %s(%s) to %s'% (self._table, f.oldname, k))
                         if res_old and len(res_old)==1:
-                            cr.execute('ALTER TABLE "%s" RENAME "%s" TO "%s"' % ( self._table,f.oldname, k))
+                            cr.execute('ALTER TABLE "%s" RENAME "%s" TO "%s"' % ( self._table,f.oldname, k), debug=self._debug)
                             res = res_old
                             res[0]['attname'] = k
 
@@ -2666,7 +2671,7 @@ class orm(orm_template):
                                                 (k, f.string, self._table))
                             else:
                                 _logger.info('column %s (%s) in table %s removed: converted to a function !\n' % (k, f.string, self._table))
-                                cr.execute('ALTER TABLE "%s" DROP COLUMN "%s" CASCADE'% (self._table, k))
+                                cr.execute('ALTER TABLE "%s" DROP COLUMN "%s" CASCADE'% (self._table, k), debug=self._debug)
                                 cr.commit()
                             f_obj_type = None
                         else:
@@ -2685,10 +2690,10 @@ class orm(orm_template):
                             ]
                             if f_pg_type == 'varchar' and f._type == 'char' and f_pg_size < f.size:
                                 _logger.info("column '%s' in table '%s' changed size" % (k, self._table))
-                                cr.execute('ALTER TABLE "%s" RENAME COLUMN "%s" TO temp_change_size' % (self._table, k))
-                                cr.execute('ALTER TABLE "%s" ADD COLUMN "%s" VARCHAR(%d)' % (self._table, k, f.size))
-                                cr.execute('UPDATE "%s" SET "%s"=temp_change_size::VARCHAR(%d)' % (self._table, k, f.size))
-                                cr.execute('ALTER TABLE "%s" DROP COLUMN temp_change_size CASCADE' % (self._table,))
+                                cr.execute('ALTER TABLE "%s" RENAME COLUMN "%s" TO temp_change_size' % (self._table, k), debug=self._debug)
+                                cr.execute('ALTER TABLE "%s" ADD COLUMN "%s" VARCHAR(%d)' % (self._table, k, f.size), debug=self._debug)
+                                cr.execute('UPDATE "%s" SET "%s"=temp_change_size::VARCHAR(%d)' % (self._table, k, f.size), debug=self._debug)
+                                cr.execute('ALTER TABLE "%s" DROP COLUMN temp_change_size CASCADE' % (self._table,), debug=self._debug)
                                 cr.commit()
                             for c in casts:
                                 if (f_pg_type==c[0]) and (f._type==c[1]):
@@ -2696,10 +2701,10 @@ class orm(orm_template):
                                         if f_pg_type != f_obj_type:
                                             _logger.info("column '%s' in table '%s' changed type to %s." % (k, self._table, c[1]))
                                         ok = True
-                                        cr.execute('ALTER TABLE "%s" RENAME COLUMN "%s" TO temp_change_size' % (self._table, k))
-                                        cr.execute('ALTER TABLE "%s" ADD COLUMN "%s" %s' % (self._table, k, c[2]))
-                                        cr.execute(('UPDATE "%s" SET "%s"=temp_change_size'+c[3]) % (self._table, k))
-                                        cr.execute('ALTER TABLE "%s" DROP COLUMN temp_change_size CASCADE' % (self._table,))
+                                        cr.execute('ALTER TABLE "%s" RENAME COLUMN "%s" TO temp_change_size' % (self._table, k), debug=self._debug)
+                                        cr.execute('ALTER TABLE "%s" ADD COLUMN "%s" %s' % (self._table, k, c[2]), debug=self._debug)
+                                        cr.execute('UPDATE "%s" SET "%s"=temp_change_size%s' % (self._table, k, c[3]), debug=self._debug)
+                                        cr.execute('ALTER TABLE "%s" DROP COLUMN temp_change_size CASCADE' % (self._table,), debug=self._debug)
                                         cr.commit()
                                     break
 
@@ -2717,10 +2722,10 @@ class orm(orm_template):
                                         i+=1
                                     logger.notifyChannel('orm', netsvc.LOG_WARNING, "column '%s' in table '%s' has changed type (DB=%s, def=%s), data moved to table %s !" % (k, self._table, f_pg_type, f._type, newname))
                                     if f_pg_notnull:
-                                        cr.execute('ALTER TABLE "%s" ALTER COLUMN "%s" DROP NOT NULL' % (self._table, k))
-                                    cr.execute('ALTER TABLE "%s" RENAME COLUMN "%s" TO "%s"' % (self._table, k, newname))
-                                    cr.execute('ALTER TABLE "%s" ADD COLUMN "%s" %s' % (self._table, k, get_pg_type(f)[1]))
-                                    cr.execute("COMMENT ON COLUMN %s.%s IS '%s'" % (self._table, k, f.string.replace("'","''")))
+                                        cr.execute('ALTER TABLE "%s" ALTER COLUMN "%s" DROP NOT NULL' % (self._table, k), debug=self._debug)
+                                    cr.execute('ALTER TABLE "%s" RENAME COLUMN "%s" TO "%s"' % (self._table, k, newname), debug=self._debug)
+                                    cr.execute('ALTER TABLE "%s" ADD COLUMN "%s" %s' % (self._table, k, get_pg_type(f)[1]), debug=self._debug)
+                                    cr.execute("COMMENT ON COLUMN %s.%s IS '%s'" % (self._table, k, f.string.replace("'","''")), debug=self._debug)
 
                             # if the field is required and hasn't got a NOT NULL constraint
                             if f.required and f_pg_notnull == 0:
@@ -2734,26 +2739,26 @@ class orm(orm_template):
                                     if (default is not None):
                                         ss = self._columns[k]._symbol_set
                                         query = 'UPDATE "%s" SET "%s"=%s WHERE "%s" is NULL' % (self._table, k, ss[0], k)
-                                        cr.execute(query, (ss[1](default),))
+                                        cr.execute(query, (ss[1](default),), debug=self._debug)
                                 # add the NOT NULL constraint
                                 cr.commit()
                                 try:
-                                    cr.execute('ALTER TABLE "%s" ALTER COLUMN "%s" SET NOT NULL' % (self._table, k))
+                                    cr.execute('ALTER TABLE "%s" ALTER COLUMN "%s" SET NOT NULL' % (self._table, k), debug=self._debug)
                                     cr.commit()
                                 except Exception:
                                     _logger.warning( 'unable to set a NOT NULL constraint on column %s of the %s table !\nIf you want to have it, you should update the records and execute manually:\nALTER TABLE %s ALTER COLUMN %s SET NOT NULL' % (k, self._table, self._table, k))
                                 cr.commit()
                             elif not f.required and f_pg_notnull == 1:
-                                cr.execute('ALTER TABLE "%s" ALTER COLUMN "%s" DROP NOT NULL' % (self._table, k))
+                                cr.execute('ALTER TABLE "%s" ALTER COLUMN "%s" DROP NOT NULL' % (self._table, k), debug=self._debug)
                                 cr.commit()
                             indexname = '%s_%s_index' % (self._table, k)
-                            cr.execute("SELECT indexname FROM pg_indexes WHERE indexname = %s and tablename = %s", (indexname, self._table))
+                            cr.execute("SELECT indexname FROM pg_indexes WHERE indexname = %s and tablename = %s", (indexname, self._table), debug=self._debug)
                             res2 = cr.dictfetchall()
                             if not res2 and f.select:
-                                cr.execute('CREATE INDEX "%s_%s_index" ON "%s" ("%s")' % (self._table, k, self._table, k))
+                                cr.execute('CREATE INDEX "%s_%s_index" ON "%s" ("%s")' % (self._table, k, self._table, k), debug=self._debug)
                                 cr.commit()
                             if res2 and not f.select:
-                                cr.execute('DROP INDEX "%s_%s_index"' % (self._table, k))
+                                cr.execute('DROP INDEX "%s_%s_index"' % (self._table, k), debug=self._debug)
                                 cr.commit()
                             if isinstance(f, fields.many2one):
                                 assert f._obj, f
@@ -2778,8 +2783,8 @@ class orm(orm_template):
                                     res2 = cr.dictfetchall()
                                     if res2:
                                         if res2[0]['confdeltype'] != POSTGRES_CONFDELTYPES.get(f.ondelete.upper(), 'a'):
-                                            cr.execute('ALTER TABLE "' + self._table + '" DROP CONSTRAINT "' + res2[0]['conname'] + '"')
-                                            cr.execute('ALTER TABLE "' + self._table + '" ADD FOREIGN KEY ("' + k + '") REFERENCES "' + ref + '" ON DELETE ' + f.ondelete)
+                                            cr.execute('ALTER TABLE "' + self._table + '" DROP CONSTRAINT "' + res2[0]['conname'] + '"', debug=self._debug)
+                                            cr.execute('ALTER TABLE "' + self._table + '" ADD FOREIGN KEY ("' + k + '") REFERENCES "' + ref + '" ON DELETE ' + f.ondelete, debug=self._debug)
                                             cr.commit()
                     elif len(res)>1:
                         _logger.error( "Programming error, column %s->%s has multiple instances !"%(self._table,k))
@@ -2787,8 +2792,8 @@ class orm(orm_template):
                         if not isinstance(f, fields.function) or f.store:
 
                             # add the missing field
-                            cr.execute('ALTER TABLE "%s" ADD COLUMN "%s" %s' % (self._table, k, get_pg_type(f)[1]))
-                            cr.execute("COMMENT ON COLUMN %s.%s IS '%s'" % (self._table, k, f.string.replace("'","''")))
+                            cr.execute('ALTER TABLE "%s" ADD COLUMN "%s" %s' % (self._table, k, get_pg_type(f)[1]), debug=self._debug)
+                            cr.execute("COMMENT ON COLUMN %s.%s IS '%s'" % (self._table, k, f.string.replace("'","''")), debug=self._debug)
 
                             # initialize it
                             if not create and k in self._defaults:
@@ -2799,7 +2804,7 @@ class orm(orm_template):
 
                                 ss = self._columns[k]._symbol_set
                                 query = 'UPDATE "%s" SET "%s"=%s' % (self._table, k, ss[0])
-                                cr.execute(query, (ss[1](default),))
+                                cr.execute(query, (ss[1](default),), debug=self._debug)
                                 cr.commit()
                                 logger.notifyChannel('orm', netsvc.LOG_DEBUG, 'setting default value of new column %s of table %s'% (k, self._table))
                             elif not create:
@@ -2819,13 +2824,13 @@ class orm(orm_template):
 #                                ref = f._obj.replace('.', '_')
                                 # ir_actions is inherited so foreign key doesn't work on it
                                 if ref != 'ir_actions':
-                                    cr.execute('ALTER TABLE "%s" ADD FOREIGN KEY ("%s") REFERENCES "%s" ON DELETE %s' % (self._table, k, ref, f.ondelete))
+                                    cr.execute('ALTER TABLE "%s" ADD FOREIGN KEY ("%s") REFERENCES "%s" ON DELETE %s' % (self._table, k, ref, f.ondelete), debug=self._debug)
                             if f.select:
-                                cr.execute('CREATE INDEX "%s_%s_index" ON "%s" ("%s")' % (self._table, k, self._table, k))
+                                cr.execute('CREATE INDEX "%s_%s_index" ON "%s" ("%s")' % (self._table, k, self._table, k), debug=self._debug)
                             if f.required:
                                 try:
                                     cr.commit()
-                                    cr.execute('ALTER TABLE "%s" ALTER COLUMN "%s" SET NOT NULL' % (self._table, k))
+                                    cr.execute('ALTER TABLE "%s" ALTER COLUMN "%s" SET NOT NULL' % (self._table, k), debug=self._debug)
                                 except Exception:
                                     logger.notifyChannel('orm', netsvc.LOG_WARNING, 'WARNING: unable to set column %s of table %s not null !\nTry to re-run: openerp-server.py --update=module\nIf it doesn\'t work, update records and execute manually:\nALTER TABLE %s ALTER COLUMN %s SET NOT NULL' % (k, self._table, self._table, k))
                             cr.commit()
