@@ -594,7 +594,7 @@ class orm_template(object):
                                 vals['select_level'], bool(vals['readonly']),bool(vals['required']),bool(vals['selectable']),vals['relation_field'],
                                 vals['model'], vals['name'] ),
                                 debug=self._debug)
-                        continue
+                        break
         cr.commit()
 
     def _auto_init(self, cr, context={}):
