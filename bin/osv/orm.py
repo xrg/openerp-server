@@ -545,6 +545,7 @@ class orm_template(object):
                 'readonly': bool(f.readonly),
                 'required': bool(f.required),
                 'selectable' : bool(f.selectable),
+                'translate': bool(f.translate),
                 'relation_field': (f._type=='one2many' and isinstance(f,fields.one2many)) and f._fields_id or '',
             }
             # When its a custom field,it does not contain f.select
@@ -561,11 +562,11 @@ class orm_template(object):
                 vals['id'] = id
                 cr.execute("""INSERT INTO ir_model_fields (
                         id, model_id, model, name, field_description, ttype,
-                        relation,view_load,state,select_level,relation_field ) 
-                    VALUES ( %s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s )""", 
+                        relation,view_load,state,select_level,relation_field, translate ) 
+                    VALUES ( %s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s )""", 
                     ( id, vals['model_id'], vals['model'], vals['name'], vals['field_description'], vals['ttype'],
                      vals['relation'], bool(vals['view_load']), 'base',
-                    vals['select_level'],vals['relation_field'] ), 
+                    vals['select_level'],vals['relation_field'], vals['translate']), 
                     debug=self._debug)
                 if 'module' in context:
                     name1 = 'field_' + self._table + '_' + k
@@ -586,14 +587,15 @@ class orm_template(object):
                             _logger.debug("Column %s[%s] differs: %r != %r", k, key, cols[k][key], vals[key])
                         cr.execute('UPDATE ir_model_fields SET field_description=%s WHERE model=%s AND name=%s', (vals['field_description'], vals['model'], vals['name']))
                         cr.commit()
-                        cr.execute("""UPDATE ir_model_fields SET
-                            model_id=%s, field_description=%s, ttype=%s, relation=%s,
-                            view_load=%s, select_level=%s, readonly=%s ,required=%s, selectable=%s, relation_field=%s
-                        WHERE
-                            model=%s AND name=%s""", (
-                                vals['model_id'], vals['field_description'], vals['ttype'],
-                                vals['relation'], bool(vals['view_load']),
-                                vals['select_level'], bool(vals['readonly']),bool(vals['required']),bool(vals['selectable']),vals['relation_field'],
+                        cr.execute("UPDATE ir_model_fields SET "
+                            "model_id=%s, field_description=%s, ttype=%s, relation=%s, "
+                            "view_load=%s, select_level=%s, readonly=%s ,required=%s,  "
+                            "selectable=%s, relation_field=%s, translate=%s "
+                            " WHERE model=%s AND name=%s", 
+                            ( vals['model_id'], vals['field_description'], vals['ttype'],
+                                vals['relation'], 
+                                bool(vals['view_load']), vals['select_level'], bool(vals['readonly']),bool(vals['required']),
+                                bool(vals['selectable']),vals['relation_field'], vals['translate'],
                                 vals['model'], vals['name'] ),
                                 debug=self._debug)
                         break
