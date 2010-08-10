@@ -171,8 +171,7 @@ class browse_record(object):
         self._id = id
         self._table = table
         self._table_name = self._table._name
-        self.__logger = logging.getLogger(
-            'osv.browse_record.' + self._table_name)
+        self.__logger = logging.getLogger('orm.browse_record')
         self._context = context
         self._fields_process = fields_process
         self._fields_only = fields_only
