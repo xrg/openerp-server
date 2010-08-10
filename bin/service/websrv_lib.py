@@ -484,7 +484,18 @@ class MultiHTTPHandler(FixSendError, HttpOptions, BaseHTTPRequestHandler):
 
         # return to blocking mode, because next operations will not
         # handle timeouts
-        self.request.setblocking(True)
+        try:
+            self.request.setblocking(True)
+        except socket.error, err:
+            if err == errno.EBADF:
+                try:
+                    self.rfile.close()
+                    self.wfile.close()
+                except Exception:
+                    pass
+            else:
+                raise
+
         return ret
 
     def handle_one_request(self):
