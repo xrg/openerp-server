@@ -134,6 +134,7 @@ class Cursor(object):
                 qrystr = query + '; params: %s' % (params,)
             except Exception, e:
                 self.__logger.error("Mogrify:%s" % e)
+                self.__logger.debug("Query: %r", query)
 
         try:
             params = params or None
