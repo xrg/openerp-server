@@ -494,8 +494,8 @@ class orm_template(object):
         cr.execute("SELECT id FROM ir_model WHERE model=%s", (self._name,), debug=self._debug)
         if not cr.rowcount:
             cr.execute("INSERT INTO ir_model (model, name, info, state) "
-                        "VALUES (%s, %s, %s, %s)"
-                        "RETURNING id", 
+                        "VALUES (%s, %s, %s, %s) "
+                        "RETURNING id",
                 (self._name, self._description, self.__doc__, 'base'),
                 debug=self._debug)
             model_id = cr.fetchone()[0]
@@ -506,22 +506,19 @@ class orm_template(object):
     
         if 'module' in context:
             name_id = 'model_'+self._name.replace('.','_')
-            cr.execute('SELECT id, module FROM ir_model_data '
-                "WHERE name=%s AND model = 'ir.model' AND res_id=%s",
-                (name_id, model_id))
+            cr.execute('SELECT id FROM ir_model_data '
+                "WHERE name=%s AND model = 'ir.model' AND res_id=%s "
+                " AND module=%s",
+                (name_id, model_id, context['module']))
 
+            # We do allow multiple modules to have references to the same model
+            # through ir.model.data . This, however, would never break those
+            # who belong to an earlier module, which now doesn't contain that
+            # model. Almost harmless, because the reference will point to the 
+            # right model (BUT may behave different at next db installation!).
             if not cr.rowcount:
                 cr.execute("INSERT INTO ir_model_data (name,date_init,date_update,module,model,res_id) VALUES (%s, now(), now(), %s, %s, %s)", \
                     (name_id, context['module'], 'ir.model', model_id), debug=self._debug)
-            else:
-                res_md = cr.fetchone()
-                if res_md[1] != context['module'] and (not hasattr(self,'_inherit')):
-                    _logger.warning("Model %s moved from module %s to %s!" % \
-                        (self._name, res_md[1],context['module']))
-                    cr.execute('UPDATE ir_model_data SET date_update = now(), '
-                                ' module = %s WHERE id = %s;' ,
-                                (context['module'], res_md[0]), 
-                                debug=self._debug)
 
         cr.commit()
 
