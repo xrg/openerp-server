@@ -795,7 +795,10 @@ form: module.record_id""" % (xml_id,)
     def id_get(self, cr, model, id_str):
         if id_str in self.idref:
             return self.idref[id_str]
-        return self.model_id_get(cr, model, id_str)[1]
+        mid = self.model_id_get(cr, model, id_str)
+        if not mid:
+            raise KeyError("Id %s not found in db" %(id_str, ))
+        return mid[1]
 
     def model_id_get(self, cr, model, id_str):
         model_data_obj = self.pool.get('ir.model.data')
