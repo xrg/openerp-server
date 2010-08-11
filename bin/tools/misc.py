@@ -1275,11 +1275,11 @@ def detect_server_timezone():
     """
     import time
     import netsvc
+    log = logging.getLogger('detect_server_timezone')
     try:
         import pytz
     except:
-        netsvc.Logger().notifyChannel("detect_server_timezone", netsvc.LOG_WARNING,
-            "Python pytz module is not available. Timezone will be set to UTC by default.")
+        log.warning("Python pytz module is not available. Timezone will be set to UTC by default.")
         return 'UTC'
 
     # Option 1: the configuration option (did not exist before, so no backwards compatibility issue)
@@ -1312,15 +1312,12 @@ def detect_server_timezone():
         if value:
             try:
                 tz = pytz.timezone(value)
-                netsvc.Logger().notifyChannel("detect_server_timezone", netsvc.LOG_DEBUG,
-                    "Using timezone %s obtained from %s." % (tz.zone,source))
+                log.info("Using timezone %s obtained from %s.", tz.zone,source)
                 return value
             except pytz.UnknownTimeZoneError:
-                netsvc.Logger().notifyChannel("detect_server_timezone", netsvc.LOG_WARNING,
-                    "The timezone specified in %s (%s) is invalid, ignoring it." % (source,value))
+                log.warning("The timezone specified in %s (%s) is invalid, ignoring it.", source,value)
 
-    netsvc.Logger().notifyChannel("detect_server_timezone", netsvc.LOG_WARNING,
-        "No valid timezone could be detected, using default UTC timezone. You can specify it explicitly with option 'timezone' in the server configuration.")
+    log.warning("No valid timezone could be detected, using default UTC timezone. You can specify it explicitly with option 'timezone' in the server configuration.")
     return 'UTC'
 
 def get_server_timezone():
