@@ -342,7 +342,7 @@ class browse_record(object):
                                 ref_obj, ref_id = data[n].split(',')
                                 ref_id = long(ref_id)
                                 obj = self._table.pool.get(ref_obj)
-                                compids = False
+                                # compids = False
                                 new_data[n] = browse_record(self._cr, self._uid, ref_id, obj, self._cache, context=self._context, list_class=self._list_class, fields_process=self._fields_process)
                         else:
                             new_data[n] = browse_null()
@@ -2274,7 +2274,7 @@ class orm_memory(orm_template):
                     break
                 f = True
                 for arg in result:
-		     # FIXME: use safe_eval with arg, data in context
+                     # FIXME: use safe_eval with arg, data in context
                     if arg[1] == '=':
                         val = eval('data[arg[0]]'+'==' +' arg[2]', locals())
                     elif arg[1] in ['<','>','in','not in','<=','>=','<>']:
@@ -3337,7 +3337,6 @@ class orm(orm_template):
                             record[f] = res2[record['id']]
                         else:
                             record[f] = []
-        readonly = None
         for vals in res:
             for field in vals.copy():
                 fobj = None
@@ -3348,7 +3347,7 @@ class orm(orm_template):
                     continue
                 groups = fobj.read
                 if groups:
-                    edit = self.pool.get('ir.model.access').check_groups(cr, uid, groups)
+                    edit = self.pool.get('ir.model.access').check_groups(cr, user, groups)
                     if not edit:
                         if type(vals[field]) == type([]):
                             vals[field] = []
@@ -3557,7 +3556,7 @@ class orm(orm_template):
             groups = fobj.write
 
             if groups:
-                edit = self.pool.get('ir.model.access').check_groups(cr, uid, groups)
+                edit = self.pool.get('ir.model.access').check_groups(cr, user, groups)
                 if not edit:
                     vals.pop(field)
 
@@ -3836,10 +3835,10 @@ class orm(orm_template):
         # Try-except added to filter the creation of those records whose filds are readonly.
         # Example : any dashboard which has all the fields readonly.(due to Views(database views))
         try:
-	    # Does it have to happen that early?
+            # TODO: Does it have to happen that early?
             cr.execute("SELECT nextval('"+self._sequence+"')")
         except Exception:
-	    _logger.exception('Get nextval for %s', self._sequence)
+            _logger.exception('Get nextval for %s', self._sequence)
             raise except_orm(_('UserError'),
                         _('You cannot perform this operation. New Record Creation is not allowed for this object as this object is for reporting purpose.'))
 
@@ -3879,7 +3878,7 @@ class orm(orm_template):
                 continue
             groups = fobj.write
             if groups:
-                edit = self.pool.get('ir.model.access').check_groups(cr, uid, groups)
+                edit = self.pool.get('ir.model.access').check_groups(cr, user, groups)
                 if not edit:
                     vals.pop(field)
         for field in vals:
