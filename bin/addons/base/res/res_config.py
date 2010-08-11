@@ -75,7 +75,6 @@ class res_config_configurable(osv.osv_memory):
 
     def _next_action(self, cr, uid):
         todos = self.pool.get('ir.actions.todo')
-        self.logger.debug('getting next %s' % todos)
         active_todos = todos.search(cr, uid, [('state','=','open')],
                                     limit=1)
         dont_skip_todo = True
@@ -113,9 +112,7 @@ class res_config_configurable(osv.osv_memory):
         previous_todo.write({'state':state})
 
     def _next(self, cr, uid):
-        self.logger.debug('getting next operation')
         next = self._next_action(cr, uid)
-        self.logger.debug('next action is %s' % next)
         if next:
             action = next.action_id
             return {
@@ -126,7 +123,7 @@ class res_config_configurable(osv.osv_memory):
                 'type': action.type,
                 'target': action.target,
             }
-        self.logger.info('all configuration actions have been executed')
+        self.logger.info('All configuration actions have been executed.')
 
         current_user_menu = self.pool.get('res.users')\
             .browse(cr, uid, uid).menu_id
@@ -135,7 +132,6 @@ class res_config_configurable(osv.osv_memory):
             .read(cr, uid, current_user_menu.id)
 
     def start(self, cr, uid, ids, context=None):
-        print 'Start'
         ids2 = self.pool.get('ir.actions.todo').search(cr, uid, [], context=context)
         for todo in self.pool.get('ir.actions.todo').browse(cr, uid, ids2, context=context):
             if (todo.restart=='always') or (todo.restart=='onskip' and (todo.state in ('skip','cancel'))):
