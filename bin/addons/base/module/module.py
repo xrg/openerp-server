@@ -417,10 +417,10 @@ s                ('GPL-2', 'GPL Version 2'),
         for d in depends:
             ids = web_module_pool.search(cr, uid, [('module','=',d)])
             if len(ids) > 0:
-                cr.execute("Select id from ir_module_web_dependency where module_id=%s and web_module_id=%s and name=%s", (id, ids[0], d))
+                cr.execute("SELECT id FROM ir_module_web_dependency WHERE module_id=%s AND web_module_id=%s and name=%s", (id, ids[0], d))
                 res = cr.fetchone()
                 if not res:
-                    cr.execute('INSERT INTO ir_module_web_dependency (module_id, web_module_id, name) values (%s, %s, %s)', (id, ids[0], d))
+                    cr.execute('INSERT INTO ir_module_web_dependency (module_id, web_module_id, name) VALUES (%s, %s, %s)', (id, ids[0], d))
 
     def _update_category(self, cr, uid, id, category='Uncategorized'):
         categs = category.split('/')
