@@ -228,7 +228,7 @@ class db(baseExportService):
 
         self._set_pg_psw_env_var()
 
-        cmd = ['pg_dump', '--format=c', '--no-owner']
+        cmd = ['pg_dump', '--format=c', '--no-owner' , '-w']
         if tools.config['db_user']:
             cmd.append('--username=' + tools.config['db_user'])
         if tools.config['db_host']:
@@ -261,7 +261,7 @@ class db(baseExportService):
 
         self._create_empty_database(db_name)
 
-        cmd = ['pg_restore', '--no-owner']
+        cmd = ['pg_restore', '--no-owner', '-w']
         if tools.config['db_user']:
             cmd.append('--username=' + tools.config['db_user'])
         if tools.config['db_host']:
