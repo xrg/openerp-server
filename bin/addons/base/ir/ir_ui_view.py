@@ -182,7 +182,11 @@ class view(osv.osv):
         for node in nodes_name:
             results[str(node[0])] = result[node[0]]
             results[str(node[0])]['name'] = node[1]
-        return {'nodes': results, 'transitions': tres, 'label' : labels, 'blank_nodes': blank_nodes}
+        return {'nodes': results,
+                'transitions': tres,
+                'label' : labels,
+                'blank_nodes': blank_nodes,
+                'node_parent_field': _Model_Field,}
 view()
 
 class view_sc(osv.osv):
@@ -205,7 +209,7 @@ class view_sc(osv.osv):
         'user_id': lambda obj, cr, uid, context: uid,
     }
     _sql_constraints = [
-        ('shortcut_unique', 'unique(res_id, user_id)', 'Shortcut for this menu already exists!'),
+        ('shortcut_unique', 'unique(res_id, resource, user_id)', 'Shortcut for this menu already exists!'),
     ]
         
 view_sc()
