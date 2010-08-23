@@ -743,7 +743,7 @@ class related(function):
         self._field_get2(cr, uid, obj, context)
         i = len(self._arg)-1
         sarg = name
-        while i>0:
+        while i>0: # TODO: reduce queries (for pg84?)
             if type(sarg) in [type([]), type( (1,) )]:
                 where = [(self._arg[i], 'in', sarg)]
             else:
