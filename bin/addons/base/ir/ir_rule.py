@@ -52,7 +52,7 @@ class ir_rule(osv.osv):
             logging.getLogger('orm').debug("Domain calc: %s " % res)
         return res
 
-    def _get_value(self, cr, uid, ids, field_name, arg, context={}):
+    def _get_value(self, cr, uid, ids, field_name, arg, context=None):
         res = {}
         for rule in self.browse(cr, uid, ids, context):
             if not rule.groups:
@@ -108,23 +108,23 @@ class ir_rule(osv.osv):
             raise ValueError('Invalid mode: %r' % (mode,))
         if uid == 1:
             return None
-
-        cr.execute_prepared( 'ir_rule_domain_get_'+mode, """SELECT r.id, g.id AS group_id,
-                        imf.name AS field_name, r.domain_force, r.operand, r.operator
-                FROM ir_rule r JOIN (ir_rule_group g
-                    JOIN ir_model m ON (g.model_id = m.id))
-                    ON (g.id = r.rule_group)
-                    LEFT JOIN ir_model_fields imf ON ( imf.id = r.field_id )
+        
+        cr.execute_prepared( 'ir_rule_domain_get_'+mode, """SELECT r.id, r.domain_force,
+                g_rel.group_id
+                FROM ir_rule r
+                    JOIN ir_model m ON (r.model_id = m.id)
+                    LEFT JOIN (rule_group_rel g_rel 
+                                JOIN res_groups_users_rel u_rel 
+                                    ON (g_rel.group_id = u_rel.gid AND u_rel.uid = %s))
+                           ON (g_rel.rule_group_id = r.id)
                 WHERE m.model = %s
                 AND r.perm_""" + mode + """
-                AND (g.id IN (SELECT rule_group_id FROM group_rule_group_rel g_rel
-                            JOIN res_groups_users_rel u_rel ON (g_rel.group_id = u_rel.gid)
-                            WHERE u_rel.uid = %s) OR g.global)
-                ORDER BY group_id""", (model_name, uid),
+                AND (g_rel.group_id IS NOT NULL OR r.global)
+                ORDER BY group_id, length(domain_force) """, (uid, model_name),
                                 debug=self._debug)
 
         eval_user_data = {'user': self.pool.get('res.users').browse(cr, 1, uid),
-                'time':time}
+                'time':time }   #context?
         
         dom = []
         last_gid = None

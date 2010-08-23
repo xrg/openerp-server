@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 #
 # Copyright P. Christeas <p_christ@hol.gr> 2008-2010
-# A part of the code comes from the ganeti project:  http://www.mail-archive.com/ganeti-devel@googlegroups.com/msg00713.html#
+#
 #
 # WARNING: This program as such is intended to be used by professional
 # programmers who take the whole responsability of assessing all potential
@@ -17,7 +17,7 @@
 # This program is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
+# GNU Lesser General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
 # along with this program; if not, write to the Free Software
@@ -30,9 +30,17 @@
 
 import socket
 import base64
+import errno
+import os
 import SocketServer
 from BaseHTTPServer import *
 from SimpleHTTPServer import SimpleHTTPRequestHandler
+
+try:
+    from ssl import SSLError
+except ImportError:
+    class SSLError(socket.error):
+        pass
 
 class AuthRequiredExc(Exception):
     def __init__(self,atype,realm):

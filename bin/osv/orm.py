@@ -349,7 +349,7 @@ class browse_record(object):
                     else:
                         new_data[n] = data[n]
                 self._data[data['id']].update(new_data)
-
+        
         if not name in self._data[self._id]:
             #how did this happen?
             self.__logger.error( "Ffields: %s, datas: %s"%(fffields, datas))
@@ -1423,7 +1423,12 @@ class orm_template(object):
                             dom = []
                             if column._domain and not isinstance(column._domain, basestring):
                                 dom = column._domain
-                            dom += eval(node.get('domain','[]'), {'uid':user, 'time':time})
+                            try:
+                                dom += eval(node.get('domain','[]'), {'uid':user, 'time':time})
+                            except Exception, e:
+                                _logger.error("Exception %s For domain %s" %(e, node.get('domain')))
+                                raise
+
                             search_context = dict(context)
                             if column._context and not isinstance(column._context, basestring):
                                 search_context.update(column._context)
@@ -1759,7 +1764,7 @@ class orm_template(object):
         result = {'type': view_type, 'model': self._name}
 
         view_ref = context.get(view_type + '_view_ref', False)
-        if view_ref and '.' in view_ref:
+        if view_ref and (not view_id) and '.' in view_ref:
             module, view_ref = view_ref.split('.', 1)
             cr.execute("SELECT res_id FROM ir_model_data "
                         "WHERE model='ir.ui.view' AND module=%s "
@@ -1774,10 +1779,12 @@ class orm_template(object):
         sql_res = False
         while ok:
             if view_id:
-                where = (model and (" and model='%s'" % (self._name,))) or ''
-                cr.execute('SELECT arch,name,field_parent,id,type,inherit_id '
-                         'FROM ir_ui_view WHERE id=%s'+where, 
-                         (view_id,), debug=self._debug)
+                query = "SELECT arch,name,field_parent,id,type,inherit_id FROM ir_ui_view WHERE id=%s"
+                params = (view_id,)
+                if model:
+                    query += " AND model=%s"
+                    params += (self._name,)
+                cr.execute(query, params, debug=self._debug)
             else:
                 cr.execute('''SELECT arch,name,field_parent,id,type,inherit_id
                     FROM ir_ui_view
@@ -2720,7 +2727,7 @@ class orm(orm_template):
                                         if not cr.fetchone()[0]:
                                             break
                                         i+=1
-                                    logger.notifyChannel('orm', netsvc.LOG_WARNING, "column '%s' in table '%s' has changed type (DB=%s, def=%s), data moved to table %s !" % (k, self._table, f_pg_type, f._type, newname))
+                                    _logger.warning("column '%s' in table '%s' has changed type (DB=%s, def=%s), data moved to table %s !" % (k, self._table, f_pg_type, f._type, newname))
                                     if f_pg_notnull:
                                         cr.execute('ALTER TABLE "%s" ALTER COLUMN "%s" DROP NOT NULL' % (self._table, k), debug=self._debug)
                                     cr.execute('ALTER TABLE "%s" RENAME COLUMN "%s" TO "%s"' % (self._table, k, newname), debug=self._debug)
@@ -2806,9 +2813,9 @@ class orm(orm_template):
                                 query = 'UPDATE "%s" SET "%s"=%s' % (self._table, k, ss[0])
                                 cr.execute(query, (ss[1](default),), debug=self._debug)
                                 cr.commit()
-                                logger.notifyChannel('orm', netsvc.LOG_DEBUG, 'setting default value of new column %s of table %s'% (k, self._table))
+                                _logger.debug('setting default value of new column %s of table %s'% (k, self._table))
                             elif not create:
-                                logger.notifyChannel('orm', netsvc.LOG_DEBUG, 'creating new column %s of table %s'% (k, self._table))
+                                _logger.debug('creating new column %s of table %s'% (k, self._table))
 
                             if isinstance(f, fields.function):
                                 order = 10
@@ -2832,7 +2839,7 @@ class orm(orm_template):
                                     cr.commit()
                                     cr.execute('ALTER TABLE "%s" ALTER COLUMN "%s" SET NOT NULL' % (self._table, k), debug=self._debug)
                                 except Exception:
-                                    logger.notifyChannel('orm', netsvc.LOG_WARNING, 'WARNING: unable to set column %s of table %s not null !\nTry to re-run: openerp-server.py --update=module\nIf it doesn\'t work, update records and execute manually:\nALTER TABLE %s ALTER COLUMN %s SET NOT NULL' % (k, self._table, self._table, k))
+                                    _logger.warning('WARNING: unable to set column %s of table %s not null !\nTry to re-run: openerp-server.py --update=module\nIf it doesn\'t work, update records and execute manually:\nALTER TABLE %s ALTER COLUMN %s SET NOT NULL' % (k, self._table, self._table, k))
                             cr.commit()
             for order,f,k in todo_update_store:
                 todo_end.append((order, self._update_store, (f, k)))
@@ -2860,8 +2867,8 @@ class orm(orm_template):
                 try:
                     cr.execute(query)
                     cr.commit()
-                except:
-                    _logger.warning( 'unable to add \'%s\' constraint on table %s !\n If you want to have it, you should update the records and execute manually:\n%s' % (con, self._table, query,))
+                except Exception:
+                    _logger.warning('unable to add \'%s\' constraint on table %s !\n If you want to have it, you should update the records and execute manually:\n%s' % (con, self._table, query), exc_info=True)
                     cr.rollback()
 
         if create:
@@ -3207,7 +3214,6 @@ class orm(orm_template):
                 table_prefix = ''
 
             def convert_field(f):
-                f_qual = "%s.%s" % (self._table, f) # need fully-qualified references in case len(tables) > 1
                 if f in ('create_date', 'write_date'):
                     return "date_trunc('second', %s%s) as %s" % (table_prefix, f, f)
                 if f == self.CONCURRENCY_CHECK_FIELD:
@@ -3231,12 +3237,13 @@ class orm(orm_template):
             select_fields = ','.join(fields_pre2 + [table_prefix+'id'])
             tables = ', '.join(set(map(quote_tbl, tables)))
             query = 'SELECT %s FROM %s WHERE %sid = ANY(%%s)' % (select_fields, tables, table_prefix)
+            if rule_clause:
                 query += " AND " + (' OR '.join(rule_clause))
             query += " ORDER BY " + order_by
             if True:
                 if rule_clause:
                     ids = list(set(ids)) # eliminate duplicates
-                    cr.execute(query, [ids,] + d2, debug=self._debug)
+                    cr.execute(query, [ids,] + rule_params, debug=self._debug)
                     if cr.rowcount != len(ids):
                         # Some "access errors" may not be due to rules, but
                         # due to incorrectly cached data, which won't match
@@ -3383,14 +3390,14 @@ class orm(orm_template):
         if not ids:
             return []
         fields = ''
-        uniq = isinstance(ids, (int, long))
-        if uniq:
-            ids = [ids]
-        fields = 'id'
         if self._log_access:
-            fields += ', create_uid, create_date, write_uid, write_date'
-        query = 'SELECT %s FROM "%s" WHERE id IN %%s' % (fields, self._table)
-        cr.execute(query, (tuple(ids),))
+            fields = ', u.create_uid, u.create_date, u.write_uid, u.write_date'
+        if isinstance(ids, (int, long)):
+            uniq = True
+        elif isinstance(ids, (list,tuple)):
+            ids = map(int, ids)
+            uniq = False
+        cr.execute('SELECT u.id'+fields+' FROM "'+self._table+'" u WHERE u.id = ANY (%s)', (ids,) )
         res = cr.dictfetchall()
         for r in res:
             for key in r:
@@ -3722,7 +3729,7 @@ class orm(orm_template):
                         if not parent_val:
                             position = 1
                         else:
-                            cr.execute('select parent_left from '+self._table+' where id=%s', (parent_val,))
+                            cr.execute('SELECT parent_left FROM '+self._table+' WHERE id=%s', (parent_val,))
                             position = cr.fetchone()[0]+1
 
                     if pleft < position <= pright:
@@ -3917,7 +3924,7 @@ class orm(orm_template):
             upd0 += ',create_uid,create_date'
             upd1 += ',%s,now()'
             upd2.append(user)
-        cr.execute('INSERT INTO "'+self._table+'" (id'+upd0+") VALUES ("+str(id_new)+upd1+')', tuple(upd2))
+        cr.execute('INSERT INTO "'+self._table+'" (id'+upd0+") VALUES ("+str(id_new)+upd1+')', tuple(upd2), debug=self._debug)
         self.check_access_rule(cr, user, [id_new], 'create', context=context)
         upd_todo.sort(lambda x, y: self._columns[x].priority-self._columns[y].priority)
 
@@ -4198,7 +4205,6 @@ class orm(orm_template):
             _logger.debug("rule for %s: %s" %(self._name, dom))
         where_clause += dom[0]
         where_clause_params += dom[1]
-
         for t in dom[2]:
             if t not in tables:
                 tables.append(t)
@@ -4230,10 +4236,12 @@ class orm(orm_template):
 
         if count:
             cr.execute('SELECT COUNT(%s.id) FROM ' % self._table +
-                    ','.join(tables) +qu1 + limit_str + offset_str, where_clause_params, debug=self._debug)
+                    ','.join(tables) + where_str + limit_str + offset_str, where_clause_params, debug=self._debug)
             res = cr.fetchall()
             return res[0][0]
-        cr.execute('select %s.id from ' % self._table + ','.join(tables) + where_str +' order by '+order_by+limit_str+offset_str, where_clause_params, debug=self._debug)
+        cr.execute('SELECT %s.id FROM ' % self._table + ','.join(tables) + \
+                where_str + ' ORDER BY ' + order_by + limit_str + offset_str, 
+                where_clause_params, debug=self._debug)
         res = cr.fetchall()
         return [x[0] for x in res]
 
@@ -4438,7 +4446,7 @@ class orm(orm_template):
         if type(ids) in (int,long):
             ids = [ids]
         query = 'SELECT count(1) FROM "%s"' % (self._table)
-        cr.execute(query + "WHERE ID IN %s", (tuple(ids),), debug=self._debug)
+        cr.execute(query + "WHERE ID = ANY(%s)", (ids,), debug=self._debug)
         return cr.fetchone()[0] == len(ids)
 
     def check_recursion(self, cr, uid, ids, parent=None):
@@ -4457,13 +4465,14 @@ class orm(orm_template):
         if not parent:
             parent = self._parent_name
         ids_parent = ids[:]
-        query = 'SELECT distinct "%s" FROM "%s" WHERE id = ANY(%%s)' % (parent, self._table)
-        while ids_parent:
+        while len(ids_parent):
             ids_parent2 = []
             for i in range(0, len(ids), cr.IN_MAX):
                 # TODO: pg84 optimization
                 sub_ids_parent = ids_parent[i:i+cr.IN_MAX]
-                cr.execute(query, (sub_ids_parent,), debug=self._debug)
+                cr.execute('SELECT distinct "'+parent+'"'+
+                    ' FROM "'+self._table+'" ' \
+                    'WHERE id = ANY(%s)',(sub_ids_parent,), debug=self._debug)
                 ids_parent2.extend(filter(None, map(lambda x: x[0], cr.fetchall())))
             ids_parent = ids_parent2
             for i in ids_parent:

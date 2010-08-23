@@ -339,8 +339,8 @@ class ConnectionPool(object):
 
     def _debug(self, msg, *args):
         if self._debug_pool:
-            self.__logger.debug(repr(self))
-            self.__logger.debug(msg)
+            msg = '%r ' + msg
+            self.__logger.debug(msg, self, *args)
 
     def set_pool_debug(self, do_debug = True):
         self._debug_pool = do_debug
@@ -348,14 +348,19 @@ class ConnectionPool(object):
 
     @locked
     def borrow(self, dsn, do_cursor=False):
-        self._debug('Borrow connection to %s' % (dsn,))
+        self._debug('Borrow connection to %r', dsn)
 
-        result = None
+        # free leaked connections
+        for i, (cnx, _) in tools.reverse_enumerate(self._connections):
+            if getattr(cnx, 'leaked', False):
+                delattr(cnx, 'leaked')
+                self._connections.pop(i)
+                self._connections.append((cnx, False))
+                self._debug('Free leaked connection to %r', cnx.dsn)
+
         result = None
         for i, (cnx, used) in enumerate(self._connections):
             if not used and dsn_are_equals(cnx.dsn, dsn):
-                self._debug('Existing connection found at index %d' % i)
-
                 self._connections.pop(i)
                 try:
                    if psycopg2.__version__ >= '2.2' :
@@ -370,6 +375,7 @@ class ConnectionPool(object):
                     self._debug("Troubled connection ")
                     continue
                 
+                self._debug('Existing connection found at index %d', i)
                 if do_cursor:
                     try:
                         cur = cnx.cursor(cursor_factory=psycopg1cursor)
@@ -441,7 +447,7 @@ class Connection(object):
 
     def cursor(self, serialized=False):
         cursor_type = serialized and 'serialized ' or ''
-        self.__logger.debug('create %scursor to %r', cursor_type, self.dbname)
+        self.__logger.log(logging.DEBUG_SQL, 'create %scursor to %r', cursor_type, self.dbname)
         return Cursor(self._pool, self.dbname, serialized=serialized)
 
     def serialized_cursor(self):

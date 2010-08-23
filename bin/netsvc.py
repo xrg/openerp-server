@@ -122,9 +122,6 @@ class ExportService(object):
         raise Exception("stub dispatch at %s" % self.__name)
         
     def new_dispatch(self,method,auth,params):
-        raise Exception("stub dispatch at %s" % self.__name)
-        
-    def new_dispatch(self,method,auth,params):
         raise NotImplementedError("stub dispatch at %s" % self.__name)
 
     def abortResponse(self, error, description, origin, details):
@@ -180,7 +177,6 @@ class ColoredFormatter(logging.Formatter):
 
 
 def init_logger():
-    import os
     from tools.translate import resetlocale
     resetlocale()
 
@@ -210,7 +206,7 @@ def init_logger():
                 handler = logging.handlers.WatchedFileHandler(logf)
             else:
                 handler = logging.handlers.FileHandler(logf)
-        except Exception, ex:
+        except Exception:
             sys.stderr.write("ERROR: couldn't create the logfile directory. Logging to the standard output.\n")
             handler = logging.StreamHandler(sys.stdout)
     else:
@@ -226,10 +222,6 @@ def init_logger():
     # add the handler to the root logger
     logger.addHandler(handler)
     logger.setLevel(int(tools.config['log_level'] or '0'))
-    
-    # By default, don't log db connections, even at debug.
-    if int(tools.config['log_level'] or '0') <= logging.DEBUG:
-        logging.getLogger('db.connection').setLevel(logging.INFO)
 
 
 class Logger(object):
@@ -271,7 +263,7 @@ class Logger(object):
                     level_method('[%02d]: %s' % (idx+1, s,))
             elif result:
                 level_method(result[0])
-        except IOError,e:
+        except IOError:
             # TODO: perhaps reset the logger streams?
             #if logrotate closes our files, we end up here..
             pass
@@ -389,10 +381,10 @@ class Server:
     # but instead we want a form of polling/busy_wait pattern, where
     # _server_timeout should be used as the default timeout for
     # all I/O blocking operations
-    _busywait_timeout = 0.5
-
+    _busywait_timeout = 2.0
 
     __logger = logging.getLogger('server')
+
     def __init__(self):
         Server.__servers.append(self)
         if Server.__is_started:
@@ -516,8 +508,8 @@ class Server:
         return '\n'.join(res)
 
     def _close_socket(self):
-	# FIXME: this code may be in the wrong place, it should only
-	# apply to socket servers, not this class.
+        # FIXME: this code may be in the wrong place, it should only
+        # apply to socket servers, not this class.
         if not hasattr(self, 'socket'):
             return
         if not isinstance(self.socket, socket.socket):

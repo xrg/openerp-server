@@ -527,7 +527,7 @@ class many2many(_column):
         else: d1 = ''
         query = 'SELECT %(rel)s.%(id2)s, %(rel)s.%(id1)s \
                    FROM %(rel)s, %(tbl)s \
-                  WHERE %(rel)s.%(id1)s in %%s \
+                  WHERE %(rel)s.%(id1)s = ANY(%%s) \
                     AND %(rel)s.%(id2)s = %(tbl)s.id \
                  %(d1)s  \
                  %(limit)s \
@@ -542,7 +542,7 @@ class many2many(_column):
                'order': obj._order,
                'offset': offset,
               }
-        cr.execute(query, [tuple(ids)] + d2, debug=obj._debug)
+        cr.execute(query, [ids,] + d2, debug=obj._debug)
         for r in cr.fetchall():
             res[r[1]].append(r[0])
         return res
@@ -964,7 +964,6 @@ class property(function):
                     continue
                 value = value.id
             res[prop.res_id.id] = value or False
-		    # should a delete happen on a read context? or better defer it?
         return res
 
 

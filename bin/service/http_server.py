@@ -42,7 +42,6 @@ import select
 import socket
 import xmlrpclib
 import StringIO
-import logging
 
 from SimpleXMLRPCServer import SimpleXMLRPCDispatcher
 
@@ -124,10 +123,6 @@ class ThreadedHTTPServer(ConnThreadingMixIn, SimpleXMLRPCDispatcher, HTTPServer)
         self.__threadno += 1
         return 'http-client-%d' % self.__threadno
 
-
-    def _get_next_name(self):
-        self.__threadno += 1
-        return 'http-client-%d' % self.__threadno
 class HttpLogHandler:
     """ helper class for uniform log handling
     Please define self._logger at each class that is derived from this
@@ -227,12 +222,6 @@ class BaseHttpDaemon(threading.Thread, netsvc.Server):
     def stats(self):
         res = "%sd: " % self._RealProto + ((self.running and "running") or  "stopped")
         if self.server:
-	    res += ", %d threads" % (self.server.numThreads,)
-        return res
-
-    def stats(self):
-        res = "%sd: " % self._RealProto + ((self.running and "running") or  "stopped")
-        if self.server:
             res += ", %d threads" % (len(self.server._threads),)
         return res
 
@@ -257,6 +246,7 @@ class BaseHttpDaemon(threading.Thread, netsvc.Server):
             ret.append( ( svc.path, str(svc.handler)) )
         
         return ret
+
 
 class HttpDaemon(BaseHttpDaemon):
     _RealProto = 'HTTP'
@@ -307,15 +297,6 @@ def reg_http_service(hts, secure_only = False):
         logging.getLogger('httpd').warning("No httpd available to register service %s" % hts.path)
         return False
     return True
-
-def list_http_services(protocol=None):
-    global httpd, httpsd
-    if httpd and (protocol == 'http' or protocol == None):
-        return httpd.list_services()
-    elif httpsd and (protocol == 'https' or protocol == None):
-        return httpsd.list_services()
-    else:
-        raise Exception("Incorrect protocol or no http services")
 
 def list_http_services(protocol=None):
     global httpd, httpsd
@@ -545,50 +526,9 @@ def init_static_http():
     base_path = tools.config.get_misc('static-http', 'base_path', '/')
     
     if reg_http_service(HTTPDir(base_path,StaticHTTPHandler)):
-	logging.getLogger("web-services").info("Registered HTTP dir %s for %s" % \
+        logging.getLogger("web-services").info("Registered HTTP dir %s for %s" % \
                         (dir_path, base_path))
 
-
-class StaticHTTPHandler(HTTPHandler):
-    def __init__(self,request, client_address, server):
-        HTTPHandler.__init__(self,request,client_address,server)
-        dir_path = tools.config.get_misc('static-http', 'dir_path', False)
-        assert dir_path, "Please specify static-http/dir_path in config, or disable static-httpd!"
-        self.__basepath = dir_path
-
-    def translate_path(self, path):
-        """Translate a /-separated PATH to the local filename syntax.
-
-        Components that mean special things to the local file system
-        (e.g. drive or directory names) are ignored.  (XXX They should
-        probably be diagnosed.)
-
-        """
-        # abandon query parameters
-        path = path.split('?',1)[0]
-        path = path.split('#',1)[0]
-        path = posixpath.normpath(urllib.unquote(path))
-        words = path.split('/')
-        words = filter(None, words)
-        path = self.__basepath
-        for word in words:
-            if word in (os.curdir, os.pardir): continue
-            path = os.path.join(path, word)
-        return path
-
-def init_static_http():
-    if not tools.config.get_misc('static-http','enable', False):
-        return
-    
-    dir_path = tools.config.get_misc('static-http', 'dir_path', False)
-    assert dir_path
-    
-    base_path = tools.config.get_misc('static-http', 'base_path', '/')
-    
-    reg_http_service(HTTPDir(base_path,StaticHTTPHandler))
-    
-    logging.getLogger("web-services").info("Registered HTTP dir %s for %s" % \
-                        (dir_path, base_path))
 
 class OerpAuthProxy(AuthProxy):
     """ Require basic authentication..

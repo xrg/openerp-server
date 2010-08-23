@@ -26,7 +26,6 @@
 import logging
 import select
 import socket
-import logging
 import sys
 import threading
 import traceback
@@ -121,7 +120,7 @@ class TinySocketServerThread(threading.Thread,netsvc.Server):
         try:
             self.running = True
             while self.running:
-                timeout = self.socket.gettimeout() or 2
+                timeout = self.socket.gettimeout() or self._busywait_timeout
                 fd_sets = select.select([self.socket], [], [], timeout)
                 if not fd_sets[0]:
                     continue
@@ -171,7 +170,6 @@ netrpcd = None
 
 def init_servers():
     global netrpcd
-    if tools.config.get('netrpc', False):
-        netrpcd = TinySocketServerThread(
-            tools.config.get('netrpc_interface', ''), 
-            int(tools.config.get('netrpc_port', 8070)))
+    if tools.config.get_misc('netrpcd','enable', True):
+        netrpcd = TinySocketServerThread(tools.config.get_misc('netrpcd','interface', ''), \
+            int(tools.config.get_misc('netrpcd','port', 8070)))

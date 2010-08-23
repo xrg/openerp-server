@@ -23,7 +23,6 @@
 import time
 from osv import fields,osv
 from tools.safe_eval import safe_eval
-import pooler
 import logging
 
 class ir_sequence_type(osv.osv):
@@ -125,7 +124,8 @@ class ir_sequence(osv.osv):
             
             # end for
         finally:
-            cr.commit()
+            # cr.commit()
+            pass
         return False
 
     def get(self, cr, uid, code, context = None):

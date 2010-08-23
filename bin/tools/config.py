@@ -73,6 +73,7 @@ class configmanager(object):
             'login_message': False,
             'list_db' : True,
             'timezone' : False, # to override the default TZ
+            'test-file' : False,
             'test-disable' : False,
             'test-commit' : False,
         }
@@ -90,7 +91,7 @@ class configmanager(object):
             'secure_cert_file': 'httpsd.sslcert',
             'secure_pkey_file': 'httpsd.sslkey',
         }
-
+        
         self.misc = {}
         self.config_file = fname
         self.has_ssl = check_ssl()
@@ -115,16 +116,18 @@ class configmanager(object):
         group.add_option("--no-httpd", dest="httpd", action="store_false", help="disable the HTTP protocol")
         parser.add_option_group(group)
 
-        if self.has_ssl:
-            group = optparse.OptionGroup(parser, "XML-RPC Secure Configuration")
-            group.add_option("--httpds-interface", dest="httpds_interface", help="specify the TCP IP address for the XML-RPC Secure protocol")
-            group.add_option("--httpds-port", dest="httpds_port", help="specify the TCP port for the HTTP Secure protocol", type="int")
-            group.add_option("--no-httpds", dest="httpds", action="store_false", help="disable the HTTP Secure protocol")
-            group.add_option("--cert-file", dest="secure_cert_file", default="server.cert", help="specify the certificate file for the SSL connection")
-            group.add_option("--pkey-file", dest="secure_pkey_file", default="server.pkey", help="specify the private key file for the SSL connection")
-            parser.add_option_group(group)
+        title = "HTTP Secure Configuration"
+        if not self.has_ssl:
+            title += " (disabled as ssl is unavailable)"
 
-        # NET-RPC
+        group = optparse.OptionGroup(parser, title)
+        group.add_option("--httpds-interface", dest="httpds_interface", help="specify the TCP IP address for the XML-RPC Secure protocol")
+        group.add_option("--httpds-port", dest="httpds_port", help="specify the TCP port for the HTTP Secure protocol", type="int")
+        group.add_option("--no-httpds", dest="httpds", action="store_false", help="disable the HTTP Secure protocol")
+        group.add_option("--cert-file", dest="secure_cert_file", default="server.cert", help="specify the certificate file for the SSL connection")
+        group.add_option("--pkey-file", dest="secure_pkey_file", default="server.pkey", help="specify the private key file for the SSL connection")
+        parser.add_option_group(group)
+
         group = optparse.OptionGroup(parser, "NET-RPC Configuration")
         group.add_option("--netrpc-interface", dest="netrpc_interface", help="specify the TCP IP address for the NETRPC protocol")
         group.add_option("--netrpc-port", dest="netrpc_port", help="specify the TCP port for the NETRPC protocol", type="int")
@@ -262,7 +265,7 @@ class configmanager(object):
 
         keys = [ 'db_name', 'db_user', 'db_password', 'db_host',
                 'db_port', 'list_db', 'logfile', 'pidfile', 'smtp_port', 'cache_timeout','smtp_ssl',
-                'email_from', 'smtp_server', 'smtp_user', 'smtp_password', 'price_accuracy',
+                'email_from', 'smtp_server', 'smtp_user', 'smtp_password',
                 'db_maxconn', 'import_partial', 'addons_path',
                 'syslog', 'without_demo', 'timezone',]
 
@@ -309,7 +312,11 @@ class configmanager(object):
 
         self.options['init'] = opt.init and dict.fromkeys(opt.init.split(','), 1) or {}
         self.options["demo"] = not opt.without_demo and self.options['init'] or {}
+        self.options["test-file"] =  opt.test_file
+        self.options["test-disable"] =  opt.test_disable
+        self.options["test-commit"] =  opt.test_commit
         self.options['update'] = opt.update and dict.fromkeys(opt.update.split(','), 1) or {}
+
         self.options['translate_modules'] = opt.translate_modules and map(lambda m: m.strip(), opt.translate_modules.split(',')) or ['all']
         self.options['translate_modules'].sort()
 
@@ -474,6 +481,4 @@ config = configmanager()
 # when it starts, to allow doing 'import tools.config' from
 # other python executables without parsing *their* args.
 config.parse_config()
-
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
 

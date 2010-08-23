@@ -94,9 +94,7 @@ class expression(object):
                     subids = ids[i:i+cr.IN_MAX]
                     cr.execute('SELECT "%s"'    \
                                '  FROM "%s"'    \
-                               ' WHERE "%s" IN (%s) ' % (s, f, w, 
-                                            ','.join(['%s']*len(subids)) ),
-                                        subids)
+                               ' WHERE "%s" = ANY(%%s) ' % (s, f, w), (subids,) )
                     res.extend([r[0] for r in cr.fetchall()])
                 # we return early, with the bare results
                 return None, res
@@ -253,7 +251,7 @@ class expression(object):
 
             if field._obj:
                 field_obj = table.pool.get(field._obj)
-            if len(fargs) > 1: # *-*
+            if len(fargs) > 1: # TODO pg84 reduce
                 if field._type == 'many2one':
                     right = field_obj.search(cr, uid, [(fargs[1], operator, right)], context=context)
                     self.__exp[i] = (fargs[0], 'in', right)

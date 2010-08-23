@@ -167,18 +167,18 @@ if not ( tools.config["stop_after_init"] or \
 
 openerp_isrunning.value = True
 
+init_logger = logging.getLogger('init')
+
 if tools.config['db_name']:
     for dbname in tools.config['db_name'].split(','):
         db,pool = pooler.get_db_and_pool(dbname, update_module=tools.config['init'] or tools.config['update'], pooljobs=False)
-        if tools.config["test_file"]:
-            logger.notifyChannel("init", netsvc.LOG_INFO, 
-                 'loading test file %s' % (tools.config["test_file"],))
+        if tools.config["test-file"]:
+            init_logger.info('loading test file %s' % (tools.config["test-file"],))
             cr = db.cursor()
-            tools.convert_yaml_import(cr, 'base', file(tools.config["test_file"]), {}, 'test', True)
+            tools.convert_yaml_import(cr, 'base', file(tools.config["test-file"]), {}, 'test', True)
             cr.rollback()
         pool.get('ir.cron')._poolJobs(db.dbname)
 
-init_logger = logging.getLogger('init')
 #----------------------------------------------------------
 # translation stuff
 #----------------------------------------------------------

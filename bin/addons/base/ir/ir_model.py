@@ -194,7 +194,7 @@ class ir_model_grid(osv.osv):
     # access rights
     #
     def write(self, cr, uid, ids, vals, context=None):
-        vals_new = vals.copy()
+        # vals_new = vals.copy()
         acc_obj = self.pool.get('ir.model.access')
         for grid in self.browse(cr, uid, ids, context=context):
             model_id = grid.id
@@ -355,7 +355,6 @@ class ir_model_access(osv.osv):
 
     @tools.cache(timeout=10.0) # TODO find a way to clear the cache
     def _check_groups2(self, cr, uid, group):
-        res = False
         grouparr  = group.split('.')
         if not grouparr:
             return False
@@ -400,8 +399,8 @@ class ir_model_access(osv.osv):
             # TODO: exclude xml-rpc requests
             return True
 
-	# TODO: can we let this fn use multiple models at each time?
-	# or even, write a new one, which will also share the same cache?
+        # TODO: can we let this fn use multiple models at each time?
+        # or even, write a new one, which will also share the same cache?
 
         assert mode in ['read','write','create','unlink'], 'Invalid access mode'
 
@@ -522,18 +521,6 @@ class ir_model_data(osv.osv):
         # the sql constraints ensure us we have only one result
         return ids[0]
 
-    @tools.cache()
-    def get_object_reference(self, cr, uid, module, xml_id):
-        """Returns (model, res_id) corresponding to a given module and xml_id (cached) or raise ValueError if not found"""
-        data_id = self._get_id(cr, uid, module, xml_id)
-        res = self.read(cr, uid, data_id, ['model', 'res_id'])
-        return (res['model'], res['res_id'])
-
-    def get_object(self, cr, uid, module, xml_id, context=None):
-        """Returns a browsable record for the given module name and xml_id or raise ValueError if not found"""
-        res_model, res_id = self.get_object_reference(cr, uid, module, xml_id)
-        return self.pool.get(res_model).browse(cr, uid, res_id, context=context)
-
     def get_rev_ref(self, cr, uid, model, res_id):
         """ Reverse resolve some model.id into its symbolic name(s), if any.
         
@@ -547,6 +534,18 @@ class ir_model_data(osv.osv):
             return ( res_id, False )
         re = self.read(cr, uid, ids, ['module', 'name'])
         return ( res_id, [ x['module'] + '.' + x['name'] for x in re])
+
+    @tools.cache()
+    def get_object_reference(self, cr, uid, module, xml_id):
+        """Returns (model, res_id) corresponding to a given module and xml_id (cached) or raise ValueError if not found"""
+        data_id = self._get_id(cr, uid, module, xml_id)
+        res = self.read(cr, uid, data_id, ['model', 'res_id'])
+        return (res['model'], res['res_id'])
+
+    def get_object(self, cr, uid, module, xml_id, context=None):
+        """Returns a browsable record for the given module name and xml_id or raise ValueError if not found"""
+        res_model, res_id = self.get_object_reference(cr, uid, module, xml_id)
+        return self.pool.get(res_model).browse(cr, uid, res_id, context=context)
 
     def _update_dummy(self,cr, uid, model, module, xml_id=False, store=True):
         if not xml_id:

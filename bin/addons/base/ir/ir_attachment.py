@@ -20,8 +20,7 @@
 ##############################################################################
 
 from osv import fields,osv
-from osv.orm import except_orm
-import tools
+# from osv.orm import except_orm
 
 class ir_attachment(osv.osv):
     def check(self, cr, uid, ids, mode, context=None):
@@ -123,17 +122,6 @@ class ir_attachment(osv.osv):
     _defaults = {
         'type': 'binary',
     }
-    
-    _defaults = {
-        'type': 'binary',
-    }
-
-    def _auto_init(self, cr, context=None):
-        super(ir_attachment, self)._auto_init(cr, context)
-        cr.execute('SELECT indexname FROM pg_indexes WHERE indexname = %s', ('ir_attachment_res_idx',))
-        if not cr.fetchone():
-            cr.execute('CREATE INDEX ir_attachment_res_idx ON ir_attachment (res_model, res_id)')
-            cr.commit()
 
     def _auto_init(self, cr, context=None):
         super(ir_attachment, self)._auto_init(cr, context)

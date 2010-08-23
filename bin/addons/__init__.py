@@ -33,8 +33,6 @@ from tools.safe_eval import safe_eval as eval
 import pooler
 
 
-import netsvc
-
 import zipfile
 import release
 
@@ -42,9 +40,6 @@ import re
 import base64
 from zipfile import PyZipFile, ZIP_DEFLATED
 from cStringIO import StringIO
-
-import logging
-
 
 logger = logging.getLogger('init')
 
@@ -318,7 +313,7 @@ def get_modules_with_version():
         try:
             info = load_information_from_description_file(module)
             res[module] = "%s.%s" % (release.major_version, info['version'])
-        except Exception, e:
+        except Exception:
             continue
     return res
 
@@ -335,11 +330,12 @@ def upgrade_graph(graph, cr, module_list, force=None):
     for module in module_list:
         mod_path = get_module_path(module)
         terp_file = get_module_resource(module, '__openerp__.py')
-        if not (terp_file and os.path.isfile(terp_file)):
+        if not terp_file or not os.path.isfile(terp_file):
             terp_file = get_module_resource(module, '__terp__.py')
 
         if not mod_path or not terp_file:
             logger.warning('module %s: not installable' % (module))
+            cr.execute("update ir_module_module set state=%s where name=%s", ('uninstallable', module))
             continue
 
         if os.path.isfile(terp_file) or zipfile.is_zipfile(mod_path+'.zip'):
@@ -351,7 +347,7 @@ def upgrade_graph(graph, cr, module_list, force=None):
             if info.get('installable', True):
                 packages.append((module, info.get('depends', []), info))
             else:
-                logger.notifyChannel('init', netsvc.LOG_WARNING, 'module %s: not installable, skipped' % (module))
+                logger.warning('module %s: not installable, skipped' % (module))
     if not packages:
         return False
     dependencies = dict([(p, deps) for p, deps, data in packages])
@@ -400,7 +396,7 @@ def init_module_objects(cr, module_name, obj_list):
     for obj in obj_list:
         try:
             result = obj._auto_init(cr, {'module': module_name})
-        except Exception, e:
+        except Exception:
             raise
         if result:
             todo += result
@@ -439,7 +435,7 @@ def register_class(m):
     except zipimport.ZipImportError:
         logger.exception("Couldn't load zip module %s" % (m,))
         raise
-    except Exception, e:
+    except Exception:
         logger.exception("Couldn't load module %s" % (m,))
         raise
     else:
@@ -647,11 +643,10 @@ def load_module_graph(cr, graph, status=None, perform_checks=True, **kwargs):
             the cursor).
         """
         cr.commit()
-        if tools.config.get_misc('debug','skip_tests',False):
+        if not tools.config.get_misc('tests','enable',True):
             return
         
         try:
-            _load_data(cr, module_name, id_map, mode, 'test')
                 _load_data(cr, module_name, id_map, mode, 'test')
         except Exception, e:
             if tools.config.get_misc('tests', 'nonfatal', False):
@@ -671,7 +666,7 @@ def load_module_graph(cr, graph, status=None, perform_checks=True, **kwargs):
             _, ext = os.path.splitext(filename)
             log.info("module %s: loading %s", module_name, filename)
             pathname = os.path.join(module_name, filename)
-            file = tools.file_open(pathname)
+            fp = tools.file_open(pathname)
             # TODO manage .csv file with noupdate == (kind == 'init')
             if ext == '.sql':
                 process_sql_file(cr, file)
@@ -679,10 +674,10 @@ def load_module_graph(cr, graph, status=None, perform_checks=True, **kwargs):
                 noupdate = (kind == 'init')
                 tools.convert_csv_import(cr, module_name, pathname, fp.read(), id_map, mode, noupdate)
             elif ext == '.yml':
-                tools.convert_yaml_import(cr, module_name, file, id_map, mode, noupdate)
+                tools.convert_yaml_import(cr, module_name, fp, id_map, mode, noupdate)
             else:
-                tools.convert_xml_import(cr, module_name, file, id_map, mode, noupdate)
-            file.close()
+                tools.convert_xml_import(cr, module_name, fp, id_map, mode, noupdate)
+            fp.close()
 
     # **kwargs is passed directly to convert_xml_import
     if not status:
@@ -784,7 +779,7 @@ def load_modules(db, force_demo=False, status=None, update_module=False):
             if id:
                 getattr(modobj, states[state])(cr, 1, id)
             elif mod != 'all':
-                logger.notifyChannel('init', netsvc.LOG_WARNING, 'module %s: invalid module name!' % (mod))
+                logger.warning('module %s: invalid module name!' % (mod))
 
     if not status:
         status = {}
@@ -809,13 +804,14 @@ def load_modules(db, force_demo=False, status=None, update_module=False):
         STATES_TO_LOAD = ['installed', 'to upgrade', 'uninstallable']
         graph = create_graph(cr, ['base'], force)
         if not graph:
-            logger.notifyChannel('init', netsvc.LOG_CRITICAL, 'module base cannot be loaded! (hint: verify addons-path)')
+            logger.critical('module base cannot be loaded! (hint: verify addons-path)')
             raise osv.osv.except_osv('Could not load base module', 'module base cannot be loaded! (hint: verify addons-path)')
         has_updates = load_module_graph(cr, graph, status, perform_checks=(not update_module), report=report)
+
         if update_module:
             modobj = pool.get('ir.module.module')
-            logger.info('updating modules list')
             states = {'installed': 'button_upgrade', 'uninstalled': 'button_install'}
+            logger.info('updating modules list')
             if ('base' in tools.config['init']) or ('base' in tools.config['update']):
                 modobj.update_list(cr, 1)
 
@@ -834,7 +830,7 @@ def load_modules(db, force_demo=False, status=None, update_module=False):
             loop_guardrail += 1
             if loop_guardrail > 100:
                 raise ValueError('Possible recursive module tree detected, aborting.')
-            cr.execute("SELECT name from ir_module_module WHERE state IN %s" ,(tuple(STATES_TO_LOAD),))
+            cr.execute("SELECT name FROM ir_module_module WHERE state IN %s" ,(tuple(STATES_TO_LOAD),))
 
             module_list = [name for (name,) in cr.fetchall() if name not in graph]
             if not module_list:
@@ -850,7 +846,7 @@ def load_modules(db, force_demo=False, status=None, update_module=False):
             has_updates = has_updates or r
 
         if has_updates:
-            cr.execute("""SELECT model, name FROM ir_model WHERE id NOT IN (SELECT DISTINCT model_id FROM ir_model_access)""")
+            cr.execute("""SELECT model, name FROM ir_model WHERE id NOT IN (SELECT model_id FROM ir_model_access)""")
             for (model, name) in cr.fetchall():
                 model_obj = pool.get(model)
                 if not isinstance(model_obj, osv.osv.osv_memory):
@@ -862,7 +858,7 @@ def load_modules(db, force_demo=False, status=None, update_module=False):
             for (model, name) in cr.fetchall():
                 model_obj = pool.get(model)
                 if isinstance(model_obj, osv.osv.osv_memory):
-                    logger.notifyChannel('init', netsvc.LOG_WARNING, 'In-memory object %s (%s) should not have explicit access rules!' % (model, name))
+                    logger.warning('In-memory object %s (%s) should not have explicit access rules!' % (model, name))
 
             cr.execute("SELECT model FROM ir_model")
             for (model,) in cr.fetchall():

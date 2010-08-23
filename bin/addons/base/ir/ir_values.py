@@ -167,7 +167,7 @@ class ir_values(osv.osv):
                     where.append('res_id=%s')
                     params.append(res_id)
                 else:
-                    where.append('(res_id is NULL)')
+                    where.append('(res_id IS NULL)')
             elif res_id:
                 if (models[-1][0]==m):
                     where.append('(res_id=%s or (res_id IS NULL))')
@@ -179,7 +179,7 @@ class ir_values(osv.osv):
             where.append('(user_id=%s or (user_id IS NULL))')
             params.append(uid)
             clause = ' and '.join(where)
-            cr.execute('select id,name,value,object,meta, key from ir_values where ' + clause, params)
+            cr.execute('SELECT id,name,value,object,meta, key FROM ir_values WHERE ' + clause, params, debug=self._debug)
             result = cr.fetchall()
             if result:
                 break
@@ -205,7 +205,7 @@ class ir_values(osv.osv):
                         pos+=1
                 try:
                     datas = self.pool.get(model).read(cr, uid, [id], fields, context)
-                except except_orm, e:
+                except except_orm:
                     return False
                 datas= datas and datas[0] or None
                 if not datas:
@@ -224,7 +224,7 @@ class ir_values(osv.osv):
             if type(r[2])==type({}) and 'type' in r[2]:
                 groups = r[2].get('groups_id')
                 if groups:
-                        cr.execute('SELECT COUNT(1) FROM res_groups_users_rel WHERE gid IN %s AND uid=%s',(tuple(groups), uid), debug=self._debug)
+                        cr.execute('SELECT COUNT(1) FROM res_groups_users_rel WHERE gid = ANY(%s) AND uid=%s',(groups, uid), debug=self._debug)
                         cnt = cr.fetchone()[0]
                         if cnt:
                             res2.remove(r)
