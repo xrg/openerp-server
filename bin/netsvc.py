@@ -111,7 +111,7 @@ class ExportService(object):
     def __init__(self, name, audience=''):
         ExportService._services[name] = self
         self.__name = name
-        self._logger.debug("Exported service registered: %s" % name)
+        self._logger.debug("Registered an exported service: %s" % name)
 
     def joinGroup(self, name):
         ExportService._groups.setdefault(name, {})[self.__name] = self
