@@ -151,6 +151,25 @@ options = {
     }
 }
 
+install_requires = None
+if not os.getenv('NO_INSTALL_REQS'):
+    install_requires = ['lxml',
+                        'mako',
+                        'python-dateutil',
+                        'psycopg2',
+                        'pychart',
+                        'pytz',
+                        'reportlab',
+                        'pyyaml',
+                        'egenix-mx-base']
+      # Others just needed by some addons, may be skipped at lean
+      # installation..
+    if not os.getenv('NO_INSTALL_EXTRA_REQS'):
+        install_requires += ['pydot', 'sqlalchemy', 'django',
+                        'pywebdav' 'cx_Oracle', 'mysqldb',
+                        'feedparser', 'bsddb3', 'caldav', ],
+
+
 setup(name             = name,
       version          = version,
       description      = description,
@@ -176,24 +195,7 @@ setup(name             = name,
           }
       ],
       options = options,
-      install_requires = ['lxml',
-                          'mako',
-                          'python-dateutil',
-                          'psycopg2',
-                          'pychart',
-                          'pydot',
-                          'pytz',
-                          'reportlab',
-                          'caldav',
-                          'pyyaml',
-                          'sqlalchemy',
-                          'django',
-                          'pywebdav'
-                          'cx_Oracle',
-                          'mysqldb',
-                          'feedparser',
-                          'bsddb3',
-                          'egenix-mx-base'],
+      install_requires = install_requires,
       extras_require={
           'SSL' : ['pyopenssl'],
       }
