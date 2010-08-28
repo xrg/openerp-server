@@ -49,6 +49,7 @@ import string
 import time
 import traceback
 import types
+from psycopg2 import DatabaseError, IntegrityError, _psycopg
 
 import netsvc
 from lxml import etree
@@ -120,8 +121,7 @@ class browse_null(object):
             Still, a failed SQL query may help more in debugging than
             one that never reached the db.
         """
-        import psycopg2
-        return psycopg2._psycopg.AsIs('NULL')
+        return _psycopg.AsIs('NULL')
 
 #
 # TODO: execute an object method on browse_record_list
@@ -1121,10 +1121,9 @@ class orm_template(object):
                      current_module, res, xml_id=data_id, mode=mode,
                      noupdate=noupdate, res_id=res_id, context=context)
             except Exception, e:
-                import psycopg2
                 import osv
                 cr.rollback()
-                if isinstance(e,psycopg2.IntegrityError):
+                if isinstance(e, IntegrityError):
                     msg= _('Insertion Failed! ')
                     for key in self.pool._sql_error.keys():
                         if key in e[0]:
@@ -2737,14 +2736,14 @@ class orm(orm_template):
                         f_pg_notnull = f_pg_def['attnotnull']
                         if isinstance(f, fields.function) and not f.store:
                             if getattr(f, 'nodrop', False):
-                                _logger.info('column %s (%s) in table %s is obsolete, but data is preserved.\n' % 
+                                _logger.info('column %s (%s) in table %s is obsolete, but data is preserved.' % 
                                                 (k, f.string, self._table))
                             elif config.get_misc('debug', 'drop_guard', False):
-                                _logger.warning(
-                                        'column %s (%s) in table %s should be removed: please inspect and drop if appropriate !\n' % 
+                                _logger.warning(('column %s (%s) in table %s should be removed:' \
+                                                'please inspect and drop if appropriate !') % 
                                                 (k, f.string, self._table))
                             else:
-                                _logger.info('column %s (%s) in table %s removed: converted to a function !\n' % (k, f.string, self._table))
+                                _logger.info('column %s (%s) in table %s removed: converted to a function !' % (k, f.string, self._table))
                                 cr.execute('ALTER TABLE "%s" DROP COLUMN "%s" CASCADE'% (self._table, k), debug=self._debug)
                                 cr.commit()
                             f_obj_type = None
@@ -2819,8 +2818,11 @@ class orm(orm_template):
                                 try:
                                     cr.execute('ALTER TABLE "%s" ALTER COLUMN "%s" SET NOT NULL' % (self._table, k), debug=self._debug)
                                     cr.commit()
-                                except Exception:
-                                    _logger.warning( 'unable to set a NOT NULL constraint on column %s of the %s table !\nIf you want to have it, you should update the records and execute manually:\nALTER TABLE %s ALTER COLUMN %s SET NOT NULL' % (k, self._table, self._table, k))
+                                except DatabaseError, e:
+                                    _logger.warning('Unable to set a NOT NULL constraint on table.column %s.%s !'
+                                            '\n%s\nIf you want to have it, you should update the records and execute manually:'
+                                            '\nALTER TABLE %s ALTER COLUMN %s SET NOT NULL',
+                                            self._table, k, e, self._table, k)
                                 cr.commit()
                             elif not f.required and f_pg_notnull == 1:
                                 cr.execute('ALTER TABLE "%s" ALTER COLUMN "%s" DROP NOT NULL' % (self._table, k), debug=self._debug)
