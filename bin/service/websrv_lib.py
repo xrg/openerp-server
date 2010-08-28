@@ -452,7 +452,7 @@ class MultiHTTPHandler(FixSendError, HttpOptions, BaseHTTPRequestHandler):
         try:
             self.request.settimeout(1.0)
         except socket.error, err:
-            if err == errno.EBADF:
+            if err.errno == errno.EBADF:
                 try:
                     self.rfile.close()
                     self.wfile.close()
@@ -482,7 +482,7 @@ class MultiHTTPHandler(FixSendError, HttpOptions, BaseHTTPRequestHandler):
                 self.request.close()
                 return None
             except socket.error, err:
-                if err.errno == 9:
+                if err.errno == errno.EBADF:
                     self.rfile.close()
                     self.wfile.close()
                     return None
@@ -495,7 +495,7 @@ class MultiHTTPHandler(FixSendError, HttpOptions, BaseHTTPRequestHandler):
         try:
             self.request.setblocking(True)
         except socket.error, err:
-            if err == errno.EBADF:
+            if err.errno == errno.EBADF:
                 try:
                     self.rfile.close()
                     self.wfile.close()
