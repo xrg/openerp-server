@@ -747,7 +747,7 @@ class YamlInterpreter(object):
     def _log(self, node, is_preceded_by_comment):
         if is_comment(node):
             is_preceded_by_comment = True
-            self.logger.log(logging.TEST, node)
+            self.logger.log(logging.TEST, node.rstrip())
         elif not is_preceded_by_comment:
             if isinstance(node, types.DictionaryType):
                 msg = "Creating %s\n with %s"
