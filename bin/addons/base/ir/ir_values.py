@@ -226,7 +226,7 @@ class ir_values(osv.osv):
                 if groups:
                         cr.execute('SELECT COUNT(1) FROM res_groups_users_rel WHERE gid = ANY(%s) AND uid=%s',(groups, uid), debug=self._debug)
                         cnt = cr.fetchone()[0]
-                        if cnt:
+                        if not cnt:
                             res2.remove(r)
                         if r[1] == 'Menuitem' and not res2:
                             raise osv.except_osv('Error !','You do not have the permission to perform this operation !!!')
