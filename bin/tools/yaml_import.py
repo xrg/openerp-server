@@ -10,6 +10,7 @@ import misc
 from config import config
 import yaml_tag
 import yaml
+from osv.osv import except_osv
 
 # YAML import needs both safe and unsafe eval, but let's
 # default to /safe/.
@@ -388,6 +389,9 @@ class YamlInterpreter(object):
         except AssertionError, e:
             self._log_assert_failure(python.severity, 'AssertionError in Python code %s: %s', python.name, e)
             return
+        except except_osv, eo:
+            self.logger.debug('Exception during evaluation of !python block in yaml_file %s.', self.filename, exc_info=True)
+            raise YamlImportAbortion(eo.value)
         except Exception, e:
             self.logger.debug('Exception during evaluation of !python block in yaml_file %s.', self.filename, exc_info=True)
             raise YamlImportAbortion(e)
