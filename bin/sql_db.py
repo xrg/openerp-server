@@ -117,7 +117,12 @@ class Cursor(object):
             self._close(True)
 
     @check
-    def execute(self, query, params=None, debug=False):
+    def execute(self, query, params=None, debug=False, log_exceptions=True):
+        """ Execute some SQL command
+            @param debug   Verbosely log the query being sent (not results, yet)
+            @param log_exceptions ignored, left there mainly for API compatibility with trunk
+        """
+            
         if '%d' in query or '%f' in query:
             self.__logger.warn(query)
             self.__logger.warn("SQL queries cannot contain %d or %f anymore. "
