@@ -356,7 +356,10 @@ class MultiHTTPHandler(FixSendError, HttpOptions, BaseHTTPRequestHandler):
                 self.log_exception("Could not run %s", mname)
             else:
                 self.log_error("Could not run %s: %s", mname, e)
-            self.send_error(500, "Internal error")
+            try:
+                self.send_error(500, "Internal error")
+            except Exception:
+                self.log_message("cannot send 500 internal error, connection closed?")
             # may not work if method has already sent data
             fore.close_connection = 1
             self.close_connection = 1
@@ -470,7 +473,8 @@ class MultiHTTPHandler(FixSendError, HttpOptions, BaseHTTPRequestHandler):
             except socket.timeout:
                 pass
             except SSLError, err:
-                if err.errno == errno.ETIMEDOUT:
+                if err.errno in (errno.ETIMEDOUT, errno.ECONNRESET, 
+                                errno.ECONNABORTED):
                     pass
                 elif 'timed out' in err.args[0]:
                     # sadly, the SSLError does not have some code or errno
@@ -543,8 +547,14 @@ class MultiHTTPHandler(FixSendError, HttpOptions, BaseHTTPRequestHandler):
             hnd.rfile = self.rfile
             hnd.wfile = self.wfile
             self.rlpath = self.raw_requestline
-            self._handle_one_foreign(hnd,npath, vdir.auth_provider)
-            # print "Handled, closing = ", self.close_connection
+            try:
+                self._handle_one_foreign(hnd,npath, vdir.auth_provider)
+            except IOError, e:
+                if e.errno == errno.EPIPE:
+                    self.log_message("Could not complete request %s," \
+                            "client closed connection", self.rlpath)
+                else:
+                    raise
             return
         # if no match:
         self.send_error(404, "Path not found: %s" % self.path)
