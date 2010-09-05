@@ -35,6 +35,12 @@ import time
 import release
 from pprint import pformat
 import warnings
+import types
+
+try:
+    from inspect import currentframe
+except ImportError:
+    def currentframe(): return None
 
 class Service(object):
     """ Base class for *Local* services
@@ -175,16 +181,92 @@ class ColoredFormatter(logging.Formatter):
     def format(self, record):
         fg_color, bg_color = LEVEL_COLOR_MAPPING[record.levelno]
         record.levelname = COLOR_PATTERN % (30 + fg_color, 40 + bg_color, record.levelname)
+        if getattr(record, 'dbname', False):
+            record.at_dbname = '@%s' % record.dbname
+        else:
+            record.at_dbname = ''
         return logging.Formatter.format(self, record)
+
+
+class Logger_db(logging.Logger):
+    """ Replacement functions for logging.Logger
+    
+        copied from pythonic 'logging' module
+    """
+    def findCaller(self):
+        """
+        Find the stack frame of the caller so that we can note the source
+        file name, line number and function name.
+        """
+        f = currentframe()
+        #On some versions of IronPython, currentframe() returns None if
+        #IronPython isn't run with -X:Frames.
+        if f is not None:
+            f = f.f_back.f_back
+        rv = "(unknown file)", 0, "(unknown function)", None
+        while hasattr(f, "f_code"):
+            co = f.f_code
+            filename = os.path.normcase(co.co_filename)
+            if filename == logging._srcfile:
+                f = f.f_back
+                continue
+            dbname = None
+            recu = 0
+            df = f
+            while (not dbname) and df and (recu < 8):
+                # Go up to 8 frames up, searching for local variables
+                # that could tell us the db name
+                dbname = df.f_locals.get('dbname', None)
+                if dbname is None:
+                    dbname = df.f_locals.get('db_name', None)
+                if dbname is None:
+                    cr = f.f_locals.get('cr')
+                    if cr:
+                        dbname = getattr(cr, 'dbname', None)
+                recu += 1
+                df = df.f_back
+
+            rv = (filename, f.f_lineno, co.co_name, dbname)
+            break
+        return rv
+
+    def _log(self, level, msg, args, exc_info=None, extra=None):
+        """
+        Low-level logging routine which creates a LogRecord and then calls
+        all the handlers of this logger to handle the record.
+        """
+        if logging._srcfile:
+            #IronPython doesn't track Python frames, so findCaller throws an
+            #exception. We trap it here so that IronPython can use logging.
+            try:
+                fn, lno, func, dbname = self.findCaller()
+            except ValueError:
+                fn, lno, func, dbname = "(unknown file)", 0, "(unknown function)"
+        else:
+            fn, lno, func, dbname = "(unknown file)", 0, "(unknown function)"
+        if exc_info:
+            if type(exc_info) != types.TupleType:
+                exc_info = sys.exc_info()
+        if dbname:
+            if extra:
+                extra = extra.copy()
+            else:
+                extra = {}
+            extra['dbname'] = dbname
+        record = self.makeRecord(self.name, level, fn, lno, msg, args, exc_info, func, extra)
+        self.handle(record)
 
 
 def init_logger():
     from tools.translate import resetlocale
     resetlocale()
 
+    if tools.config.get_misc('debug', 'log_dbname', False):
+        logging.setLoggerClass(Logger_db)
+
     logger = logging.getLogger()
     # create a format for log messages and dates
-    format = '[%(asctime)s] %(levelname)s:%(name)s:%(message)s'
+    format = '[%(asctime)s] %(levelname)s:%(name)s%(at_dbname)s:%(message)s'
 
     if tools.config['syslog']:
         # SysLog Handler
