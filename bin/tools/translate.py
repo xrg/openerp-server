@@ -130,27 +130,63 @@ def translate(cr, name, source_type, lang, source=None):
 class GettextAlias(object):
     def __call__(self, source):
         try:
-            frame = inspect.stack()[1][0]
-        except:
+            # we only need 2 frames, not all stack()
+            frame = inspect.currentframe()
+            if frame is None:
+                return source
+            frame = frame.f_back # need to find one frame back..
+            if not frame:
+                return source
+        except Exception, e:
             return source
 
+        own_cr = False
         cr = frame.f_locals.get('cr')
         try:
-            lang = (frame.f_locals.get('context') or {}).get('lang', False)
-            if not (cr and lang):
-                args = frame.f_locals.get('args',False)
-                if args:
-                    lang = args[-1].get('lang',False)
-                    if frame.f_globals.get('pooler',False):
-                        cr = pooler.get_db(frame.f_globals['pooler'].pool_dic.keys()[0]).cursor()
-            if not (lang and cr):
+            ctx = frame.f_locals.get('context', False)
+            if ctx is False:
+                kwargs = frame.f_locals.get('kwargs', False)
+                if kwargs is False:
+                    args = frame.f_locals.get('args',False)
+                    if args and isinstance(args, (list, tuple)) \
+                            and isinstance(args[-1], dict):
+                        ctx = args[-1]
+                    else:
+                        ctx = {}
+                elif isinstance(kwargs, dict):
+                    ctx = kwargs.get('context', {})
+                else:
+                    ctx = {}
+
+            lang = ctx.get('lang', False)
+            if not lang:
                 return source
-        except:
+            if (not cr) and frame.f_globals.get('pooler',False):
+                cr = pooler.get_db(frame.f_globals['pooler'].pool_dic.keys()[0]).cursor()
+                own_cr = True
+            if not cr:
+                return source
+        except Exception, e:
             return source
 
-        cr.execute('select value from ir_translation where lang=%s and type IN (%s,%s) and src=%s', (lang, 'code','sql_constraint', source))
-        res_trans = cr.fetchone()
-        return res_trans and res_trans[0] or source
+        if hasattr(cr, 'execute'):
+            try:
+                # TODO: try to match the frame's filename, line_no,
+                # but in a "least distance" sense
+                
+                cr.execute("SELECT value FROM ir_translation " \
+                            "WHERE lang=%s and type IN (%s,%s) AND src=%s "
+                            "AND value IS NOT NULL AND value != '' ",
+                            (lang, 'code','sql_constraint', source))
+                res_trans = cr.fetchone()
+                return res_trans and res_trans[0] or source
+            finally:
+                try:
+                    if own_cr:
+                        cr.close()
+                except Exception: pass
+        else:
+            return source
 _ = GettextAlias()
 
 
