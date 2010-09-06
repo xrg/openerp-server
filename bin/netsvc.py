@@ -177,15 +177,19 @@ LEVEL_COLOR_MAPPING = {
     logging.CRITICAL: (WHITE, RED),
 }
 
-class ColoredFormatter(logging.Formatter):
+class DBFormatter(logging.Formatter):
     def format(self, record):
-        fg_color, bg_color = LEVEL_COLOR_MAPPING[record.levelno]
-        record.levelname = COLOR_PATTERN % (30 + fg_color, 40 + bg_color, record.levelname)
         if getattr(record, 'dbname', False):
             record.at_dbname = '@%s' % record.dbname
         else:
             record.at_dbname = ''
         return logging.Formatter.format(self, record)
+
+class ColoredFormatter(DBFormatter):
+    def format(self, record):
+        fg_color, bg_color = LEVEL_COLOR_MAPPING[record.levelno]
+        record.levelname = COLOR_PATTERN % (30 + fg_color, 40 + bg_color, record.levelname)
+        return DBFormatter.format(self, record)
 
 
 class Logger_db(logging.Logger):
@@ -300,7 +304,7 @@ def init_logger():
     if isinstance(handler, logging.StreamHandler) and os.isatty(handler.stream.fileno()):
         formatter = ColoredFormatter(format, '%Y-%m-%d %H:%M:%S')
     else:
-        formatter = logging.Formatter(format, '%Y-%m-%d %H:%M:%S')
+        formatter = DBFormatter(format, '%Y-%m-%d %H:%M:%S')
     handler.setFormatter(formatter)
 
     # add the handler to the root logger
