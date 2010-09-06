@@ -5,6 +5,7 @@
 #, fuzzy
 msgid ""
 msgstr ""
+"#-#-#-#-#  .merge_file_dEyBe2 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
 "#-#-#-#-#  .merge_file_NuiA3B (OpenERP Server 5.0.0)  #-#-#-#-#\n"
 "#-#-#-#-#  .merge_file_IyyF68 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
 "#-#-#-#-#  .merge_file_ayGksB (OpenERP Server 5.0.0)  #-#-#-#-#\n"
@@ -106,6 +107,18 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Launchpad-Export-Date: 2010-09-04 04:43+0000\n"
+"X-Generator: Launchpad (build Unknown)\n"
+"#-#-#-#-#  .merge_file_yniFRO (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Project-Id-Version: OpenERP Server 5.0.0\n"
+"Report-Msgid-Bugs-To: support@openerp.com\n"
+"POT-Creation-Date: 2009-12-18 08:39+0000\n"
+"PO-Revision-Date: 2010-09-05 08:24+0000\n"
+"Last-Translator: Fabien (Open ERP) <fp@tinyerp.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2010-09-06 04:59+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #. module: base
@@ -7866,143 +7879,14 @@ msgstr "Масова розсилка повідомлень"
 msgid "SMS - Gateway: clickatell"
 msgstr "SMS шлюз: clickatell"
 
-#~ msgid ""
-#~ "Some installed modules depends on the module you plan to desinstall :\n"
-#~ " %s"
-#~ msgstr ""
-#~ "Деякі встановлені модулі залежать від модуля який Ви хочете "
-#~ "деінсталювати :\n"
-#~ " %s"
+#~ msgid "The unlink method is not implemented on this object !"
+#~ msgstr "Метод unlink не реалізований у цьому об'єкті!"
 
-#~ msgid ""
-#~ "Make the rule global, otherwise it needs to be put on a group or user"
-#~ msgstr ""
-#~ "Зробіть правило глобальним, інакше його необхідно застосувати до групи "
-#~ "або користувача"
+#~ msgid "The read method is not implemented on this object !"
+#~ msgstr "Метод read не реалізований у цьому об'єкті!"
 
-#~ msgid "IT sector"
-#~ msgstr "Сфера IT"
-
-#~ msgid "The search method is not implemented on this object !"
-#~ msgstr "Метод search не реалізований у цьому об'єкті!"
-
-#~ msgid "Titles"
-#~ msgstr "Заголовки"
-
-#~ msgid "Bad query."
-#~ msgstr "Неправильний запит."
-
-#~ msgid "Suppliers Partners"
-#~ msgstr "Партнери-постачальники"
-
-#~ msgid "undefined get method !"
-#~ msgstr "невизначений метод get!"
-
-#~ msgid "Telecom sector"
-#~ msgstr "Телекомунікації"
-
-#~ msgid "The value \"%s\" for the field \"%s\" is not in the selection"
-#~ msgstr "Значення \"%s\" для поля \"%s\" немає у виборі"
-
-#~ msgid "ValidateError"
-#~ msgstr "ValidateError"
-
-#~ msgid "Unknown position in inherited view %s !"
-#~ msgstr "Невідома позиція в успадкованому виді %s!"
-
-#~ msgid "File Content"
-#~ msgstr "Вміст Файлу"
-
-#~ msgid "This method does not exist anymore"
-#~ msgstr "Цього метода вже не існує"
-
-#~ msgid "Number too large '%d', can not translate it"
-#~ msgstr "Номер надто великий '%d', неможливо створити його"
-
-#~ msgid "Bad file format"
-#~ msgstr "Неправильний формат файлу"
-
-#~ msgid "Customers Partners"
-#~ msgstr "Партнери-клієнти"
-
-#~ msgid "Not implemented get_memory method !"
-#~ msgstr "Метод get_memory не реалізовано!"
-
-#~ msgid "You cannot perform this operation."
-#~ msgstr "Ви не можете виконати цю операцію."
-
-#~ msgid "Partner Functions"
-#~ msgstr "Функції партнера"
-
-#~ msgid "The copy method is not implemented on this object !"
-#~ msgstr "Метод copy не реалізований у цьому об'єкті!"
-
-#~ msgid "The name_search method is not implemented on this object !"
-#~ msgstr "Метод name_search не реалізований у цьому об'єкті!"
-
-#~ msgid "Records were modified in the meanwhile"
-#~ msgstr "Записи тим часом були змінені"
-
-#~ msgid "Addresses"
-#~ msgstr "Адреси"
-
-#~ msgid "Macedonia"
-#~ msgstr "Македонія"
-
-#~ msgid "Not Implemented"
-#~ msgstr "Не реалізовано"
-
-#~ msgid "The name_get method is not implemented on this object !"
-#~ msgstr "Метод name_get не реалізований у цьому об'єкті!"
-
-#~ msgid "Couldn't find tag '%s' in parent view !"
-#~ msgstr "Неможливо знайти теґ '%s' у батьківському виді!"
-
-#~ msgid "The write method is not implemented on this object !"
-#~ msgstr "Метод write не реалізований у цьому об'єкті!"
-
-#~ msgid "Grant Access To Menus"
-#~ msgstr "Надати Доступ до Меню"
-
-#~ msgid ""
-#~ "You try to install a module that depends on the module: %s.\n"
-#~ "But this module is not available in your system."
-#~ msgstr ""
-#~ "Ви намагаєтеся встановити модуль залежний від модуля: %s.\n"
-#~ "Але цей модуль недоступний у Вашій системі."
-
-#~ msgid "The create method is not implemented on this object !"
-#~ msgstr "Метод create не реалізований у цьому об'єкті!"
-
-#~ msgid "Can not define a column %s. Reserved keyword !"
-#~ msgstr "Не можна визначити колонку %s. Зарезервоване ключове слово!"
-
-#~ msgid "Please check that all your lines have %d columns."
-#~ msgstr "Перевірте, чи всі рядки мають %d колонок."
-
-#~ msgid "Main Company"
-#~ msgstr "Головна компанія"
-
-#~ msgid "HR sector"
-#~ msgstr "Працевлаштування"
-
-#~ msgid "Others Partners"
-#~ msgstr "Інші партнери"
-
-#~ msgid "The perm_read method is not implemented on this object !"
-#~ msgstr "Метод perm_read не реалізований у цьому об'єкті!"
-
-#~ msgid "Not implemented set_memory method !"
-#~ msgstr "Метод set_memory не реалізовано!"
-
-#~ msgid "Not implemented search_memory method !"
-#~ msgstr "Метод search_memory не реалізовано!"
-
-#~ msgid "Attached Model"
-#~ msgstr "Приєднана Модель"
-
-#~ msgid "Attached ID"
-#~ msgstr "Приєднане ID"
+#~ msgid "You try to bypass an access rule (Document type: %s)."
+#~ msgstr "Ви намагаєтеся знехтувати правилами доступу (Тип документу: %s)."
 
 #~ msgid ""
 #~ "The sum of the data (2nd field) is null.\n"
@@ -8011,11 +7895,140 @@ msgstr "SMS шлюз: clickatell"
 #~ "Сума даних рівна нулю (2-е поле).\n"
 #~ "Неможливо намалювати кільцеву діаграму !"
 
-#~ msgid "You try to bypass an access rule (Document type: %s)."
-#~ msgstr "Ви намагаєтеся знехтувати правилами доступу (Тип документу: %s)."
+#~ msgid "Attached ID"
+#~ msgstr "Приєднане ID"
 
-#~ msgid "The read method is not implemented on this object !"
-#~ msgstr "Метод read не реалізований у цьому об'єкті!"
+#~ msgid "Attached Model"
+#~ msgstr "Приєднана Модель"
 
-#~ msgid "The unlink method is not implemented on this object !"
-#~ msgstr "Метод unlink не реалізований у цьому об'єкті!"
+#~ msgid "Not implemented search_memory method !"
+#~ msgstr "Метод search_memory не реалізовано!"
+
+#~ msgid "Not implemented set_memory method !"
+#~ msgstr "Метод set_memory не реалізовано!"
+
+#~ msgid "The perm_read method is not implemented on this object !"
+#~ msgstr "Метод perm_read не реалізований у цьому об'єкті!"
+
+#~ msgid "Others Partners"
+#~ msgstr "Інші партнери"
+
+#~ msgid "HR sector"
+#~ msgstr "Працевлаштування"
+
+#~ msgid "Main Company"
+#~ msgstr "Головна компанія"
+
+#~ msgid "Please check that all your lines have %d columns."
+#~ msgstr "Перевірте, чи всі рядки мають %d колонок."
+
+#~ msgid "Can not define a column %s. Reserved keyword !"
+#~ msgstr "Не можна визначити колонку %s. Зарезервоване ключове слово!"
+
+#~ msgid "The create method is not implemented on this object !"
+#~ msgstr "Метод create не реалізований у цьому об'єкті!"
+
+#~ msgid ""
+#~ "You try to install a module that depends on the module: %s.\n"
+#~ "But this module is not available in your system."
+#~ msgstr ""
+#~ "Ви намагаєтеся встановити модуль залежний від модуля: %s.\n"
+#~ "Але цей модуль недоступний у Вашій системі."
+
+#~ msgid "Grant Access To Menus"
+#~ msgstr "Надати Доступ до Меню"
+
+#~ msgid "The write method is not implemented on this object !"
+#~ msgstr "Метод write не реалізований у цьому об'єкті!"
+
+#~ msgid "Couldn't find tag '%s' in parent view !"
+#~ msgstr "Неможливо знайти теґ '%s' у батьківському виді!"
+
+#~ msgid "The name_get method is not implemented on this object !"
+#~ msgstr "Метод name_get не реалізований у цьому об'єкті!"
+
+#~ msgid "Not Implemented"
+#~ msgstr "Не реалізовано"
+
+#~ msgid "Macedonia"
+#~ msgstr "Македонія"
+
+#~ msgid "Addresses"
+#~ msgstr "Адреси"
+
+#~ msgid "Records were modified in the meanwhile"
+#~ msgstr "Записи тим часом були змінені"
+
+#~ msgid "The name_search method is not implemented on this object !"
+#~ msgstr "Метод name_search не реалізований у цьому об'єкті!"
+
+#~ msgid "The copy method is not implemented on this object !"
+#~ msgstr "Метод copy не реалізований у цьому об'єкті!"
+
+#~ msgid "Partner Functions"
+#~ msgstr "Функції партнера"
+
+#~ msgid "You cannot perform this operation."
+#~ msgstr "Ви не можете виконати цю операцію."
+
+#~ msgid "Not implemented get_memory method !"
+#~ msgstr "Метод get_memory не реалізовано!"
+
+#~ msgid "Customers Partners"
+#~ msgstr "Партнери-клієнти"
+
+#~ msgid "Bad file format"
+#~ msgstr "Неправильний формат файлу"
+
+#~ msgid "Number too large '%d', can not translate it"
+#~ msgstr "Номер надто великий '%d', неможливо створити його"
+
+#~ msgid "This method does not exist anymore"
+#~ msgstr "Цього метода вже не існує"
+
+#~ msgid "File Content"
+#~ msgstr "Вміст Файлу"
+
+#~ msgid "Unknown position in inherited view %s !"
+#~ msgstr "Невідома позиція в успадкованому виді %s!"
+
+#~ msgid "ValidateError"
+#~ msgstr "ValidateError"
+
+#~ msgid "The value \"%s\" for the field \"%s\" is not in the selection"
+#~ msgstr "Значення \"%s\" для поля \"%s\" немає у виборі"
+
+#~ msgid "Telecom sector"
+#~ msgstr "Телекомунікації"
+
+#~ msgid "undefined get method !"
+#~ msgstr "невизначений метод get!"
+
+#~ msgid "Suppliers Partners"
+#~ msgstr "Партнери-постачальники"
+
+#~ msgid "Bad query."
+#~ msgstr "Неправильний запит."
+
+#~ msgid "Titles"
+#~ msgstr "Заголовки"
+
+#~ msgid "The search method is not implemented on this object !"
+#~ msgstr "Метод search не реалізований у цьому об'єкті!"
+
+#~ msgid "IT sector"
+#~ msgstr "Сфера IT"
+
+#~ msgid ""
+#~ "Make the rule global, otherwise it needs to be put on a group or user"
+#~ msgstr ""
+#~ "Зробіть правило глобальним, інакше його необхідно застосувати до групи "
+#~ "або користувача"
+
+#~ msgid ""
+#~ "Some installed modules depends on the module you plan to desinstall :\n"
+#~ " %s"
+#~ msgstr ""
+#~ "Деякі встановлені модулі залежать від модуля який Ви хочете "
+#~ "деінсталювати :\n"
+#~ " %s"
