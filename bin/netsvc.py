@@ -191,6 +191,18 @@ class ColoredFormatter(DBFormatter):
         record.levelname = COLOR_PATTERN % (30 + fg_color, 40 + bg_color, record.levelname)
         return DBFormatter.format(self, record)
 
+class Logger_compat(logging.Logger):
+    """ Backwards compatible logger. Works also for non-ported code
+    
+        In case we want to run the new-style server with old-style addons,
+        we might encounter "self.logger.notifyChannel(...)" calls, on a
+        ported logger. Then, use this class to workaround, until modules
+        are fixed.
+    """
+    def notifyChannel(self, name, level, msg):
+        warnings.warn("You tried to call notifyChannel on a logger object.",
+                      DeprecationWarning, stacklevel=2)
+        Logger().notifyChannel(name, level, msg)
 
 class Logger_db(logging.Logger):
     """ Replacement functions for logging.Logger
@@ -265,7 +277,9 @@ def init_logger():
     from tools.translate import resetlocale
     resetlocale()
 
-    if tools.config.get_misc('debug', 'log_dbname', False):
+    if tools.config.get_misc('debug', 'compat_logger', False):
+        logging.setLoggerClass(Logger_compat)
+    elif tools.config.get_misc('debug', 'log_dbname', False):
         logging.setLoggerClass(Logger_db)
 
     logger = logging.getLogger()
@@ -651,7 +665,10 @@ class OpenERPDispatcherException(Exception):
         """Get the string that v5, xml-rpc1 exceptions would need
         """
         if self.args[2] == 'exception':
-            return '%s\%s' % (tools.ustr(self.args[0]), tools.ustr(self.args[1]))
+            ret = tools.ustr(self.args[0])
+            if self.args[1]:
+                ret += '\n' + tools.ustr(self.args[1])
+            return ret
         else:
             return "%s -- %s\n\n%s" % (self.args[2], tools.ustr(self.args[0]), 
                     tools.ustr(self.args[1]))
