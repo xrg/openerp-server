@@ -51,7 +51,7 @@ class module_category(osv.osv):
                 ' GROUP BY category_id', (ids, ids), debug=self._debug )
         result = dict(cr.fetchall())
         for id in ids:
-            cr.execute('SELECT id FROM ir_module_category WHERE parent_id=%s', (id,))
+            cr.execute('SELECT id FROM ir_module_category WHERE parent_id=%s', (id,), debug=self._debug)
             childs = [c for c, in cr.fetchall()]
             result[id] = reduce(lambda x,y:x+y, [result.get(c, 0) for c in childs], result.get(id, 0))
         return result
@@ -75,7 +75,7 @@ class module(osv.osv):
             info = addons.load_information_from_description_file(name)
             if 'version' in info:
                 info['version'] = release.major_version + '.' + info['version']
-        except:
+        except Exception:
             pass
         return info
 
@@ -272,7 +272,7 @@ class module(osv.osv):
                 FROM ir_module_module_dependency d
                 JOIN ir_module_module m ON (d.module_id=m.id)
                 WHERE d.name=%s 
-                  AND m.state NOT IN ('uninstalled','uninstallable','to remove')''', (module.name,))
+                  AND m.state NOT IN ('uninstalled','uninstallable','to remove')''', (module.name,), debug=self._debug)
             res = cr.fetchall()
             if res:
                 raise orm.except_orm(_('Error'), _('Some installed modules depend on the module you plan to Uninstall :\n %s') % '\n'.join(map(lambda x: '\t%s: %s' % (x[0], x[1]), res)))
@@ -332,42 +332,88 @@ class module(osv.osv):
             'contributors': ', '.join(terp.get('contributors', [])) or False,
             'website': terp.get('website', ''),
             'license': terp.get('license', 'GPL-2'),
-            'certificate': terp.get('certificate') or None,
+            'certificate': terp.get('certificate') or False,
         }
 
     # update the list of available packages
-    def update_list(self, cr, uid, context={}):
+    def update_list(self, cr, uid, context=None):
+        if context is None:
+            context = {}
+        log = logging.getLogger('init')
         res = [0, 0] # [update, add]
 
-        # iterate through installed modules and mark them as being so
-        for mod_name in addons.get_modules():
-            ids = self.search(cr, uid, [('name','=',mod_name)])
+        all_mod_ids = self.search(cr, uid, [], context=context)
+        known_module_names = addons.get_modules()
+        
+        for old_mod in self.browse(cr, uid, all_mod_ids, context=context):
+            if old_mod.name in known_module_names:
+                known_module_names.remove(old_mod.name)
+
+                terp = self.get_module_info(old_mod.name)
+                if not terp or not terp.get('installable', True):
+                    if old_mod.state != 'uninstallable':
+                        self.write(cr, uid, old_mod.id, {'state': 'uninstallable'})
+                    continue
+                
+                values = self.get_values_from_terp(terp)
+                new_values = { }
+                
+                for key in values:
+                    if getattr(old_mod, key) != values[key]:
+                        new_values[key] = values[key]
+                
+                if new_values:
+                    self.write(cr, uid, old_mod.id, new_values)
+                
+                old_depends = [ x.name for x in old_mod.dependencies_id ]
+                old_depends.sort()
+                new_depends = terp.get('depends', [])
+                new_depends.sort()
+                if old_depends != new_depends:
+                    cr.execute('DELETE FROM ir_module_module_dependency '
+                                'WHERE module_id = %s', (old_mod.id,), debug=self._debug)
+                    self._update_dependencies(cr, uid, old_mod.id, new_depends)
+
+                # Web dependencies:
+                old_depends = [ x.name for x in old_mod.web_dependencies_id ]
+                old_depends.sort()
+                new_depends = terp.get('web_depends', [])
+                new_depends.sort()
+                if old_depends != new_depends:
+                    cr.execute('DELETE FROM ir_module_web_dependency '
+                                'WHERE module_id = %s', (old_mod.id,), debug=self._debug)
+                    log.debug("Web dependencies update for module %s..", old_mod.name)
+                    self._update_web_dependencies(cr, uid, old_mod.id, new_depends)
+        
+                self._update_category(cr, uid, old_mod.id, terp.get('category', 'Uncategorized'),
+                                old_cat=old_mod.category_id)
+
+            else:
+                # This module is no longer in the file tree
+                if old_mod.state != 'uninstallable':
+                    self.write(cr, uid, old_mod.id, {'state': 'uninstallable'})
+                # TODO: clear dependencies or even module data, RFC
+
+        # Now, we are left with names of modules that are not in the db,
+        # the new modules:
+
+        for mod_name in known_module_names:
             terp = self.get_module_info(mod_name)
             values = self.get_values_from_terp(terp)
 
-            if ids:
-                id = ids[0]
-                mod = self.browse(cr, uid, id)
-                if terp.get('installable', True) and mod.state == 'uninstallable':
-                    self.write(cr, uid, id, {'state': 'uninstalled'})
-                if parse_version(terp.get('version', '')) > parse_version(mod.latest_version or ''):
-                    self.write(cr, uid, id, {'url': ''})
-                    res[0] += 1
-                self.write(cr, uid, id, values)
-                cr.execute('DELETE FROM ir_module_module_dependency WHERE module_id = %s', (id,))
-            else:
-                mod_path = addons.get_module_path(mod_name)
-                if not mod_path:
-                    continue
-                if not terp or not terp.get('installable', True):
-                    continue
+            mod_path = addons.get_module_path(mod_name)
+            # Addons shouldn't ever tell us names of non-existing modules
+            assert mod_path, "No module path for %s" % mod_name
+            if not terp or not terp.get('installable', True):
+                continue
 
-                ids = self.search(cr, uid, [('name','=',mod_name)])
-                id = self.create(cr, uid, dict(name=mod_name, state='uninstalled', **values))
-                res[1] += 1
+            values['state'] = 'uninstalled'
+            values['name'] = mod_name
+            id = self.create(cr, uid, values, context=context)
+            res[1] += 1
             self._update_dependencies(cr, uid, id, terp.get('depends', []))
             self._update_web_dependencies(cr, uid, id, terp.get('web_depends', []))
-            self._update_category(cr, uid, id, terp.get('category', 'Uncategorized'))
+            self._update_category(cr, uid, id, terp.get('category', 'Uncategorized'), old_cat=False)
 
         return res
 
@@ -396,7 +442,7 @@ class module(osv.osv):
             terp = self.get_module_info(mod.name)
             self.write(cr, uid, mod.id, self.get_values_from_terp(terp))
             cr.execute('DELETE FROM ir_module_module_dependency ' \
-                    'WHERE module_id = %s', (mod.id,))
+                    'WHERE module_id = %s', (mod.id,), debug=self._debug)
             self._update_dependencies(cr, uid, mod.id, terp.get('depends',
                 []))
             self._update_category(cr, uid, mod.id, terp.get('category',
@@ -408,31 +454,44 @@ class module(osv.osv):
 
     def _update_dependencies(self, cr, uid, id, depends=[]):
         for d in depends:
-            cr.execute('INSERT INTO ir_module_module_dependency (module_id, name) values (%s, %s)', (id, d))
+            cr.execute('INSERT INTO ir_module_module_dependency (module_id, name) values (%s, %s)', (id, d), debug=self._debug)
 
     def _update_web_dependencies(self, cr, uid, id, depends=[]):
         web_module_pool = self.pool.get('ir.module.web')
+        # FIXME: optimize
         res = False
         
         for d in depends:
             ids = web_module_pool.search(cr, uid, [('module','=',d)])
             if len(ids) > 0:
-                cr.execute("SELECT id FROM ir_module_web_dependency WHERE module_id=%s AND web_module_id=%s and name=%s", (id, ids[0], d))
+                cr.execute("SELECT id FROM ir_module_web_dependency WHERE module_id=%s AND web_module_id=%s and name=%s", (id, ids[0], d), debug=self._debug)
                 res = cr.fetchone()
                 if not res:
-                    cr.execute('INSERT INTO ir_module_web_dependency (module_id, web_module_id, name) VALUES (%s, %s, %s)', (id, ids[0], d))
+                    cr.execute('INSERT INTO ir_module_web_dependency (module_id, web_module_id, name) VALUES (%s, %s, %s)', (id, ids[0], d), debug=self._debug)
 
-    def _update_category(self, cr, uid, id, category='Uncategorized'):
+    def _update_category(self, cr, uid, id, category='Uncategorized', old_cat=None):
+        if old_cat is None:
+            old_cat = self.browse(cr, uid, id).category_id
         categs = category.split('/')
+       
+        if old_cat:
+            old_ids = []
+            while old_cat:
+                old_ids.insert(0, old_cat.name)
+                old_cat = old_cat.parent_id
+                
+            if old_ids == categs:
+                return
+                
         p_id = None
         while categs:
             if p_id is not None:
-                cr.execute('SELECT id FROM ir_module_category WHERE name=%s AND parent_id=%s', (categs[0], p_id))
+                cr.execute('SELECT id FROM ir_module_category WHERE name=%s AND parent_id=%s', (categs[0], p_id), debug=self._debug)
             else:
-                cr.execute('SELECT id FROM ir_module_category WHERE name=%s AND parent_id IS NULL', (categs[0],))
+                cr.execute('SELECT id FROM ir_module_category WHERE name=%s AND parent_id IS NULL', (categs[0],), debug=self._debug)
             c_id = cr.fetchone()
             if not c_id:
-                cr.execute('INSERT INTO ir_module_category (name, parent_id) VALUES (%s, %s) RETURNING id', (categs[0], p_id))
+                cr.execute('INSERT INTO ir_module_category (name, parent_id) VALUES (%s, %s) RETURNING id', (categs[0], p_id), debug=self._debug)
                 c_id = cr.fetchone()[0]
             else:
                 c_id = c_id[0]
@@ -548,4 +607,3 @@ class module_dependency(osv.osv):
     }
 module_dependency()
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
-
