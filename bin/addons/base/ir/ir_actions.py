@@ -26,6 +26,7 @@ import time
 from tools.config import config
 from tools.translate import _
 import netsvc
+import logging
 import re
 import copy
 import sys
@@ -135,7 +136,7 @@ class act_window(osv.osv):
     _table = 'ir_act_window'
     _sequence = 'ir_actions_id_seq'
 
-    def _check_model(self, cr, uid, ids, context={}):
+    def _check_model(self, cr, uid, ids, context=None):
         for action in self.browse(cr, uid, ids, context):
             if not self.pool.get(action.res_model):
                 return False
@@ -146,7 +147,7 @@ class act_window(osv.osv):
         (_check_model, 'Invalid model name in the action definition.', ['res_model','src_model'])
     ]
 
-    def _views_get_fnc(self, cr, uid, ids, name, arg, context={}):
+    def _views_get_fnc(self, cr, uid, ids, name, arg, context=None):
         res={}
         for act in self.browse(cr, uid, ids):
             res[act.id]=[(view.view_id.id, view.view_mode) for view in act.view_ids]
@@ -162,13 +163,13 @@ class act_window(osv.osv):
                     res[act.id].append((False, t))
         return res
 
-    def _search_view(self, cr, uid, ids, name, arg, context={}):
+    def _search_view(self, cr, uid, ids, name, arg, context=None):
         res = {}
         def encode(s):
             if isinstance(s, unicode):
                 return s.encode('utf8')
             return s
-        for act in self.browse(cr, uid, ids, fields_only=['res_model', 'search_view_id',] ):
+        for act in self.browse(cr, uid, ids, fields_only=['res_model', 'search_view_id',], context=context):
             assert act.res_model, act.id
             act_model = self.pool.get(act.res_model)
             assert act_model, 'No model %s for action #%d %s' % \
@@ -178,18 +179,22 @@ class act_window(osv.osv):
             if act.search_view_id:
                 search_view_id = act.search_view_id.id
             else:
-                res_view = self.pool.get('ir.ui.view').search(cr, uid, [('model','=',act.res_model),('type','=','search'),('inherit_id','=',False)])
+                res_view = self.pool.get('ir.ui.view').search(cr, uid, 
+                        [('model','=',act.res_model),('type','=','search'),
+                        ('inherit_id','=',False)], context=context)
                 if res_view:
                     search_view_id = res_view[0]
             if search_view_id:
-                field_get = act_model.fields_view_get(cr, uid, search_view_id, 'search', context)
+                field_get = act_model.fields_view_get(cr, uid, search_view_id, 
+                            'search', context)
                 fields_from_fields_get.update(field_get['fields'])
                 field_get['fields'] = fields_from_fields_get
                 res[act.id] = str(field_get)
             else:
                 def process_child(node, new_node, doc):
                     for child in node.childNodes:
-                        if child.localName=='field' and child.hasAttribute('select') and child.getAttribute('select')=='1':
+                        if child.localName=='field' and child.hasAttribute('select') \
+                                and child.getAttribute('select')=='1':
                             if child.childNodes:
                                 fld = doc.createElement('field')
                                 for attr in child.attributes.keys():
@@ -213,7 +218,7 @@ class act_window(osv.osv):
                 res[act.id] = str(form_arch)
         return res
 
-    def _get_help_status(self, cr, uid, ids, name, arg, context={}):
+    def _get_help_status(self, cr, uid, ids, name, arg, context=None):
         activate_tips = self.pool.get('res.users').browse(cr, uid, uid).menu_tips
         if activate_tips:
             cr.execute(""" SELECT action.id,
@@ -270,7 +275,7 @@ class act_window(osv.osv):
         'auto_refresh': lambda *a: 0,
         'auto_search':lambda *a: True
     }
-    def _auto_init(self, cr, context={}):
+    def _auto_init(self, cr, context=None):
         super(act_window, self)._auto_init(cr, context)
         cr.execute('SELECT indexname FROM pg_indexes WHERE indexname = \'act_window_action_uid_index\'')
         if not cr.fetchone():
@@ -340,7 +345,7 @@ class act_url(osv.osv):
     }
 act_url()
 
-def model_get(self, cr, uid, context={}):
+def model_get(self, cr, uid, context=None):
     wkf_pool = self.pool.get('workflow')
     ids = wkf_pool.search(cr, uid, [])
     osvs = wkf_pool.read(cr, uid, ids, ['osv'])
@@ -385,7 +390,7 @@ server_object_lines()
 #
 class actions_server(osv.osv):
 
-    def _select_signals(self, cr, uid, context={}):
+    def _select_signals(self, cr, uid, context=None):
         cr.execute("SELECT distinct w.osv, t.signal FROM wkf w, wkf_activity a, wkf_transition t \
         WHERE w.id = a.wkf_id  AND ( t.act_from = a.id OR t.act_to = a.id ) AND t.signal!='' \
         AND t.signal IS NOT NULL", debug=self._debug)
@@ -397,13 +402,13 @@ class actions_server(osv.osv):
                 res.append(line)
         return res
 
-    def _select_objects(self, cr, uid, context={}):
+    def _select_objects(self, cr, uid, context=None):
         model_pool = self.pool.get('ir.model')
         ids = model_pool.search(cr, uid, [('name','not ilike','.')])
         res = model_pool.read(cr, uid, ids, ['model', 'name'])
         return [(r['model'], r['name']) for r in res] +  [('','')]
 
-    def change_object(self, cr, uid, ids, copy_object, state, context={}):
+    def change_object(self, cr, uid, ids, copy_object, state, context=None):
         if state == 'object_copy':
             model_pool = self.pool.get('ir.model')
             model = copy_object.split(',')[0]
@@ -474,7 +479,7 @@ class actions_server(osv.osv):
     }
 
     def get_email(self, cr, uid, action, context):
-        logger = netsvc.Logger()
+        logger = logging.getLogger('Workflow')
         obj_pool = self.pool.get(action.model_id.model)
         id = context.get('active_id')
         obj = obj_pool.browse(cr, uid, id)
@@ -490,12 +495,12 @@ class actions_server(osv.osv):
             try:
                 obj = getattr(obj, field)
             except Exception,e :
-                logger.notifyChannel('Workflow', netsvc.LOG_ERROR, 'Failed to parse : %s' % (field))
+                logger.exception('Failed to parse: %s',field)
 
         return obj
 
     def get_mobile(self, cr, uid, action, context):
-        logger = netsvc.Logger()
+        logger = logging.getLogger('Workflow')
         obj_pool = self.pool.get(action.model_id.model)
         id = context.get('active_id')
         obj = obj_pool.browse(cr, uid, id)
@@ -511,12 +516,11 @@ class actions_server(osv.osv):
             try:
                 obj = getattr(obj, field)
             except Exception,e :
-                logger.notifyChannel('Workflow', netsvc.LOG_ERROR, 'Failed to parse : %s' % (field))
+                logger.exception('Failed to parse: %s', field)
 
         return obj
 
     def merge_message(self, cr, uid, keystr, action, context):
-        logger = netsvc.Logger()
         def merge(match):
             obj_pool = self.pool.get(action.model_id.model)
             id = context.get('active_id')
@@ -539,8 +543,8 @@ class actions_server(osv.osv):
     #   False : Finnished correctly
     #   ACTION_ID : Action to launch
 
-    def run(self, cr, uid, ids, context={}):
-        logger = netsvc.Logger()
+    def run(self, cr, uid, ids, context=None):
+        logger = logging.getLogger(self._name)
         for action in self.browse(cr, uid, ids, context):
             obj_pool = self.pool.get(action.model_id.model)
             obj = obj_pool.browse(cr, uid, context['active_id'], context=context)
@@ -578,11 +582,9 @@ class actions_server(osv.osv):
                     if 'action' in localdict:
                         return localdict['action']
                 else:
-                    netsvc.Logger().notifyChannel(
-                        self._name, netsvc.LOG_ERROR,
-                        "%s is a `code` server action, but "
-                        "it isn't allowed in this configuration.\n\n"
-                        "See server options to enable it"%action)
+                    logger.error("Server action %s of state code, "
+                            "but these are restricted by the server's configuration options.",
+                            action)
 
             if action.state == 'email':
                 user = config['email_from']
@@ -593,18 +595,19 @@ class actions_server(osv.osv):
                     pass
 
                 if not address:
-                    logger.notifyChannel('email', netsvc.LOG_INFO, 'Partner Email address not Specified!')
+                    logger.info('Partner Email address not Specified!')
                     continue
                 if not user:
+                    logger.info('Email-From address not Specified at server!')
                     raise osv.except_osv(_('Error'), _("Please specify server option --email-from !"))
 
                 subject = self.merge_message(cr, uid, action.subject, action, context)
                 body = self.merge_message(cr, uid, action.message, action, context)
 
                 if tools.email_send(user, [address], subject, body, debug=False, subtype='html') == True:
-                    logger.notifyChannel('email', netsvc.LOG_INFO, 'Email successfully send to : %s' % (address))
+                    logger.info('Email successfully send to: %s', address)
                 else:
-                    logger.notifyChannel('email', netsvc.LOG_ERROR, 'Failed to send email to : %s' % (address))
+                    logger.warning('Failed to send email to: %s', address)
 
             if action.state == 'trigger':
                 wf_service = netsvc.LocalService("workflow")
@@ -618,7 +621,7 @@ class actions_server(osv.osv):
                 #TODO: set the user and password from the system
                 # for the sms gateway user / password
                 # USE smsclient module from extra-addons
-                logger.notifyChannel('sms', netsvc.LOG_ERROR, 'SMS Facility has not been implemented yet. Use smsclient module!')
+                logger.warning('SMS Facility has not been implemented yet. Use smsclient module!')
 
             if action.state == 'other':
                 res = []
