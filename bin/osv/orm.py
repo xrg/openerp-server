@@ -3081,7 +3081,10 @@ class orm(orm_template):
                     cr.execute(sql_action['query'])
                     cr.commit()
                 except Exception:
-                    _logger.warning('unable to add \'%s\' constraint on table %s !\n If you want to have it, you should update the records and execute manually:\n%s' % (con, self._table, query), exc_info=True)
+                    _logger.warning('unable to add \'%s\' constraint on table %s !\n'\
+                        'If you want to have it, you should update the '
+                        'records and execute manually:\n%s',
+                        con, self._table, sql_action['query'], exc_info=True)
                     cr.rollback()
 
         if create:
