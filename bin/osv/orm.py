@@ -1835,6 +1835,10 @@ class orm_template(object):
         result = {'type': view_type, 'model': self._name}
 
         view_ref = context.get(view_type + '_view_ref', False)
+        if self._debug:
+            logging.getLogger('orm').debug("Getting %s view %r for %s.", 
+                    view_type, view_id or view_ref, self._name)
+
         if view_ref and (not view_id) and '.' in view_ref:
             module, view_ref = view_ref.split('.', 1)
             cr.execute("SELECT res_id FROM ir_model_data "
