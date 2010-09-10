@@ -649,6 +649,12 @@ GNU Public Licence.
         import threading
         res = "OpenERP server: %d threads\n" % threading.active_count()
         res += netsvc.Server.allStats()
+        try:
+            import gc
+            if gc.isenabled():
+                res += "\nPython GC enabled: %d:%d:%d objs." % \
+                    gc.get_count()
+        except ImportError: pass
         return res
 
     def exp_list_http_services(self):
