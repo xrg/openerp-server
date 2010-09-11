@@ -3555,9 +3555,11 @@ class orm(orm_template):
         for r in res:
             for key in r:
                 r[key] = r[key] or False
-                if key in ('write_uid', 'create_uid', 'uid') and details:
-                    if r[key]:
+                if key in ('write_uid', 'create_uid', 'uid') and details and r[key]:
+                    try:
                         r[key] = self.pool.get('res.users').name_get(cr, user, [r[key]])[0]
+                    except Exception:
+                        pass # Leave the numeric uid there
         if uniq:
             return res[ids[0]]
         return res
