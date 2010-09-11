@@ -70,6 +70,28 @@ POSTGRES_CONFDELTYPES = {
     'SET DEFAULT': 'd',
 }
 
+
+# This controls the "fields_only" feature. The purpose of the feature is to
+# optimize the set of fields fetched each time a browse() is used.
+# Some tables are bloated with dozens of fields, which are rarely used by
+# the browse objects (sometimes, when browsing, we merely need the 'name'
+# column), so it would be a waste of resources to fetch them all the time.
+#
+# There are 4 modes:
+#     False:    Was the default before this feature, will prefetch all the
+#               fields of the table
+#     True:     The default in pg84 for some time, will only prefetch the
+#               field that was asked in the browse()
+#     [f1, f2..]:  Will prefetch the fields of the list/tuple, is used for
+#               manually tuning the optimization
+#     'auto':   Will use the _column_stats{} of the table to select the
+#               most popular fields (AUTO_SELECT_COLS) to prefetch
+FIELDS_ONLY_DEFAULT = 'auto'
+
+AUTO_SELECT_COLS = 4 # Columns of table to prefetch by default
+
+# not used yet AUTO_SELECT_WRAP = 1000000 # prevent integer overflow, wrap at that num.
+
 def last_day_of_current_month():
     today = datetime.date.today()
     last_day = str(calendar.monthrange(today.year, today.month)[1])
@@ -157,7 +179,7 @@ class browse_record(object):
     """
 
     def __init__(self, cr, uid, id, table, cache, context=None, list_class=None,
-                fields_process=None, fields_only=True):
+                fields_process=None, fields_only=FIELDS_ONLY_DEFAULT):
         '''
         table : the object (inherited from orm)
         context : dictionary with an optional context
@@ -267,14 +289,32 @@ class browse_record(object):
                 inherits = map(lambda x: (x[0], x[1][2]), self._table._inherit_fields.items())
                 # complete the field list with the inherited fields which are classic or many2one
                 fields_to_fetch += filter(lambda x: x[1]._classic_write, inherits)
+                # also, filter out the fields that we have already fetched
+                fields_to_fetch = filter(lambda f: f[0] not in self._data[self._id], fields_to_fetch)
                 if isinstance(self._fields_only, (tuple, list)):
                     fields_to_fetch = filter(lambda f: f[0] == name or f[0] in self._fields_only, fields_to_fetch)
+                elif self._fields_only == 'auto':
+                    stat_fields = [ (ff[0], self._table._column_stats.get(ff[0],0)) \
+                                    for ff in fields_to_fetch ]
+                    stat_fields.sort(key=lambda sf: sf[1], reverse=True)
+                    
+                    # Filter out ones that are seldom used:
+                    thres = stat_fields[0][1] / AUTO_SELECT_COLS
+                    stat_fields = filter(lambda sf: sf[1] > thres, stat_fields)
+                    # print "Stats for %s are: %s " % (self._table._name,\
+                    #     ', '.join([ '%s: %s' % x for x in stat_fields ] ))
+                    
+                    stat_field_names = [ x[0] for x in stat_fields[:AUTO_SELECT_COLS]]
+                    fields_to_fetch = filter(lambda f: f[0] == name or f[0] in stat_field_names, fields_to_fetch)
+                    # print "Auto selecting columns %s of %s for table %s" % \
+                    #     ( [x[0] for x in fields_to_fetch], stat_field_names, self._table._name)
             # otherwise we fetch only that field
             else:
                 fields_to_fetch = [(name, col)]
             ids = filter(lambda id: name not in self._data[id], self._data.keys())
             # read the results
             field_names = map(lambda x: x[0], fields_to_fetch)
+
             if self._table._vtable:
                 field_names.append('_vptr')
             if self._table._debug:
@@ -348,6 +388,16 @@ class browse_record(object):
             self.__logger.error( "Ffields: %s, datas: %s"%(field_names, field_values))
             self.__logger.error( "Data: %s, Table: %s"%(self._data[self._id], self._table))
             raise KeyError(_('Unknown attribute %s in %s ') % (name, self))
+
+        # update the columns stats
+        if True: # not "for f in field_names:", it would falsely prefer the "popular" ones
+            # We advance the counter of fetches for the column we have been
+            # asked to browse. It is better to advance by 1, since many single
+            # fetches of the name is the ones we need to optimize (as opposed
+            # to using len(ids) which would prefer the list browses).
+            self._table._column_stats.setdefault(name,0)
+            self._table._column_stats[name] += 1
+
         return self._data[self._id][name]
 
     def __getattr__(self, name):
@@ -607,6 +657,10 @@ class orm_template(object):
             self._table = self._name.replace('.', '_')
         self._debug = config.get_misc('logging_orm', self._name, False)
         
+        # Stats is number of fetches per column. key is the column name, as
+        # in self._column.keys()
+        self._column_stats = {}
+        
         # code for virtual functions:
         self._vtable = False
         if not self._virtuals:
@@ -639,7 +693,7 @@ class orm_template(object):
                 _logger.debug("Object %s is virtual because of %s", pclass._name, self._name)
 
     def browse(self, cr, uid, select, context=None, list_class=None, 
-                fields_process=None, fields_only=True, cache=None):
+                fields_process=None, fields_only=FIELDS_ONLY_DEFAULT, cache=None):
         """
         Fetch records as objects allowing to use dot notation to browse fields and relations
 

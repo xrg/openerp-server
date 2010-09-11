@@ -293,7 +293,7 @@ class osv(osv_base, orm.orm):
                 parent_class = pool.get(parent_name).__class__
                 assert pool.get(parent_name), "parent class %s does not exist in module %s !" % (parent_name, module)
                 nattr = {}
-                for s in ('_columns', '_defaults', '_inherits', '_constraints', '_sql_constraints', '_virtuals'):
+                for s in ('_columns', '_defaults', '_inherits', '_constraints', '_sql_constraints', '_virtuals', '_column_stats'):
                     new = copy.copy(getattr(pool.get(parent_name), s))
                     if hasattr(new, 'update'):
                         new.update(cls.__dict__.get(s, {}))
