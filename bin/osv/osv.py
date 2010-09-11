@@ -33,7 +33,7 @@ import traceback
 import logging
 from psycopg2 import IntegrityError, errorcodes
 from tools.func import wraps
-
+from tools.translate import _
 
 module_list = []
 module_class_list = {}
@@ -65,12 +65,12 @@ class osv_pool(netsvc.Service):
             except IntegrityError, inst:
                 for key in self._sql_error.keys():
                     if key in inst[0]:
-                        self.abortResponse(1, 'Constraint Error', 'warning', self._sql_error[key])
+                        self.abortResponse(1, _('Constraint Error'), 'warning', _(self._sql_error[key]))
                 if inst.pgcode == errorcodes.NOT_NULL_VIOLATION:
                     msg = inst.pgerror + '\n'
-                    msg += 'The operation cannot be completed, probably due to the following:\n' \
+                    msg += _('The operation cannot be completed, probably due to the following:\n' \
                           '- deletion: you may be trying to delete a record while other records still reference it\n' \
-                          '- creation/update: a mandatory field is not correctly set'
+                          '- creation/update: a mandatory field is not correctly set' )
                     self.logger.debug("IntegrityError", exc_info=False)
                     try:
                         if '"public".' in inst.pgerror:
@@ -80,12 +80,12 @@ class osv_pool(netsvc.Service):
                             model_obj = self.get(model)
                             if model_obj:
                                 model_name = model_obj._description or model_obj._name
-                            msg += '\n\n[object with reference: %s - %s]' % (model_name, model)
+                            msg += _('\n\n[object with reference: %s - %s]') % (model_name, model)
                     except Exception:
                         pass
-                    self.abortResponse(1, 'Integrity Error', 'warning', msg)
+                    self.abortResponse(1, _('Integrity Error'), 'warning', msg)
                 else:
-                    self.abortResponse(1, 'Integrity Error', 'warning', inst[0])
+                    self.abortResponse(1, _('Integrity Error'), 'warning', inst[0])
             except Exception, e:
                 self.logger.exception("Uncaught exception")
                 raise

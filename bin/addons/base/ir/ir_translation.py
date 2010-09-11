@@ -119,11 +119,25 @@ class ir_translation(osv.osv):
 
     @tools.cache(skiparg=3)
     def _get_source(self, cr, uid, name, tt, lang, source=None):
+        """
+        Returns the translation for the given combination of name, type, language
+        and source. All values passed to this method should be unicode (not byte strings),
+        especially ``source``.
+
+        :param name: identification of the term to translate, such as field name
+        :param type: type of term to translate (see ``type`` field on ir.translation)
+        :param lang: language code of the desired translation
+        :param source: optional source term to translate (should be unicode)
+        :rtype: unicode
+        :return: the request translation, or an empty unicode string if no translation was
+                 found and `source` was not passed
+        """
+        # FIXME: should assert that `source` is unicode and fix all callers to always pass unicode
+        # so we can remove the string encoding/decoding.
+
         if not lang:
-            return ''
+            return u''
         if source:
-            #if isinstance(source, unicode):
-            #   source = source.encode('utf8')
             cr.execute('SELECT value ' \
                     'FROM ir_translation ' \
                     'WHERE lang=%s ' \
@@ -141,7 +155,7 @@ class ir_translation(osv.osv):
                         "AND value IS NOT NULL AND value <> '' ",
                     (lang, tt, tools.ustr(name)), debug=self._debug)
         res = cr.fetchone()
-        trad = res and res[0] or ''
+        trad = res and res[0] or u''
         return trad
 
     def _get_multisource(self, cr, uid, name, tt, lang, src_list):

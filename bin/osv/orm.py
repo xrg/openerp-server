@@ -592,7 +592,7 @@ class orm_template(object):
                 if context.get('field_name','') == k:
                     vals['select_level'] = context.get('select','0')
                 #setting value to let the problem NOT occur next time
-                else:
+                elif k in cols:
                     vals['select_level'] = cols[k]['select_level']
 
             if k not in cols:
@@ -1578,13 +1578,13 @@ class orm_template(object):
         # translate view
         if ('lang' in context) and not result:
             if node.get('string'):
-                trans = self.pool.get('ir.translation')._get_source(cr, user, self._name, 'view', context['lang'], node.get('string').encode('utf8'))
+                trans = self.pool.get('ir.translation')._get_source(cr, user, self._name, 'view', context['lang'], node.get('string'))
                 if not trans and ('base_model_name' in context):
-                    trans = self.pool.get('ir.translation')._get_source(cr, user, context['base_model_name'], 'view', context['lang'], node.get('string').encode('utf8'))
+                    trans = self.pool.get('ir.translation')._get_source(cr, user, context['base_model_name'], 'view', context['lang'], node.get('string'))
                 if trans:
                     node.set('string', trans)
             if node.get('sum'):
-                trans = self.pool.get('ir.translation')._get_source(cr, user, self._name, 'view', context['lang'], node.get('sum').encode('utf8'))
+                trans = self.pool.get('ir.translation')._get_source(cr, user, self._name, 'view', context['lang'], node.get('sum'))
                 if trans:
                     node.set('sum', trans)
 
@@ -2074,6 +2074,7 @@ class orm_template(object):
             resprint = ir_values_obj.get(cr, user, 'action',
                     'client_print_multi', [(self._name, False)], False,
                     context)
+            resaction = []
             resaction = ir_values_obj.get(cr, user, 'action',
                     'client_action_multi', [(self._name, False)], False,
                     context)
@@ -2095,10 +2096,6 @@ class orm_template(object):
                 'action': resaction,
                 'relate': resrelate
             }
-        if result['type']=='form' and result['arch'].count("default_focus")>1:
-            msg = "Form View contain more than one default_focus attribute"
-            _logger.error(msg)
-            raise except_orm('View Error !',msg)
         return result
 
     _view_look_dom_arch = __view_look_dom_arch
@@ -2526,7 +2523,9 @@ class orm(orm_template):
     _sql_constraints = []
     _table = None
     _protected = ['read','write','create','default_get','perm_read','unlink','fields_get','fields_view_get','search','name_get','distinct_field_get','name_search','copy','import_data','search_count', 'exists']
-
+    __logger = logging.getLogger('orm')
+    __schema = NotImplemented   # please don't use this logger
+    
     def read_group(self, cr, uid, domain, fields, groupby, offset=0, limit=None, context=None):
         """
         Get the list of records in list view grouped by the given ``groupby`` fields
@@ -2758,9 +2757,11 @@ class orm(orm_template):
 
         for column in cr.dictfetchall():
             if log:
-                _logger.debug("column %s is in the table %s but not in the corresponding object %s" % (column['attname'], self._table, self._name))
+                self.__logger.debug("column %s is in the table %s but not in the corresponding object %s",
+                                    column['attname'], self._table, self._name)
             if column['attnotnull']:
-                cr.execute('ALTER TABLE "%s" ALTER COLUMN "%s" DROP NOT NULL' % (self._table, column['attname']))
+                cr.execute('ALTER TABLE "%s" ALTER COLUMN "%s" DROP NOT NULL' % \
+                            (self._table, column['attname']), debug=self._debug)
 
     def _auto_init(self, cr, context=None):
         store_compute =  False
@@ -3463,7 +3464,7 @@ class orm(orm_template):
                     field_val = False
                     if f in self._columns.keys():
                         ftype = self._columns[f]._type
-                    elif key in self._inherit_fields.keys():
+                    elif f in self._inherit_fields.keys():
                         ftype = self._inherit_fields[f][2]._type
                     else:
                         continue
