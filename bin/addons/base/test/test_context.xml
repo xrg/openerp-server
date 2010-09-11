@@ -6,7 +6,7 @@
 <!--            model="res.currency"-->
 <!--            id="INR"-->
 <!--            string="Indian rupee rate in 2009">-->
-<!--            <!-- date specified in data element's context -->-->
+<!--            < ! - date specified in data element's context -->
 <!--            <test expr="str(rate)">65.8287</test>-->
 <!--        </assert>-->
         <assert 

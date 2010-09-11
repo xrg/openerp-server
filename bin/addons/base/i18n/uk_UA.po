@@ -3078,7 +3078,7 @@ msgstr ""
 #. module: base
 #: code:addons/osv/orm.py:0
 #, python-format
-msgid "You try to write on an record that doesn\'t exist ' \\n"
+msgid "You try to write on an record that doesn't exist ' \\n"
 "                                        '(Document type: %s)."
 msgstr ""
 
