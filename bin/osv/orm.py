@@ -301,13 +301,16 @@ class browse_record(object):
                     # Filter out ones that are seldom used:
                     thres = stat_fields[0][1] / AUTO_SELECT_COLS
                     stat_fields = filter(lambda sf: sf[1] > thres, stat_fields)
-                    # print "Stats for %s are: %s " % (self._table._name,\
-                    #     ', '.join([ '%s: %s' % x for x in stat_fields ] ))
+                    if self._table._debug:
+                        self.__logger.debug("Stats for %s are: %s " ,
+                                self._table._name,
+                                ', '.join([ '%s: %s' % x for x in stat_fields ] ))
                     
                     stat_field_names = [ x[0] for x in stat_fields[:AUTO_SELECT_COLS]]
                     fields_to_fetch = filter(lambda f: f[0] == name or f[0] in stat_field_names, fields_to_fetch)
-                    # print "Auto selecting columns %s of %s for table %s" % \
-                    #     ( [x[0] for x in fields_to_fetch], stat_field_names, self._table._name)
+                    if self._table._debug:
+                        self.__logger.debug("Auto selecting columns %s of %s for table %s",
+                                [x[0] for x in fields_to_fetch], stat_field_names, self._table._name)
             # otherwise we fetch only that field
             else:
                 fields_to_fetch = [(name, col)]
@@ -320,6 +323,8 @@ class browse_record(object):
             if self._table._debug:
                 self.__logger.debug("Reading ids: %r/ %r", ids, self._data.keys())
             field_values = self._table.read(self._cr, self._uid, ids, field_names, context=self._context, load="_classic_write")
+            # if self._table._debug: # too much now, please enable if really needed
+            #     self.__logger.debug("Got result %r", field_values)
             if self._fields_process:
                 lang = self._context.get('lang', 'en_US') or 'en_US'
                 lang_obj_ids = self.pool.get('res.lang').search(self._cr, self._uid,[('code','=',lang)])
