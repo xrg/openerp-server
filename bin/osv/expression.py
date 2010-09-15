@@ -496,6 +496,7 @@ class expression(object):
             else:
                 # other field type
                 # add the time part to datetime field when it's not there:
+                # TODO: handle integer epoch
                 if field._type == 'datetime' and self.__exp[i][2] and len(self.__exp[i][2]) == 10:
 
                     self.__exp[i] = list(self.__exp[i])
