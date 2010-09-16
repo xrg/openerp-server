@@ -2593,25 +2593,33 @@ class orm(orm_template):
         limit_str = limit and ' LIMIT %d' % limit or ''
         offset_str = offset and ' OFFSET %d' % offset or ''
 
+        assert not groupby or groupby in fields, "Fields in 'groupby' must appear in the list of fields to read (perhaps it's missing in the list view?)"
+
         fget = self.fields_get(cr, uid, fields)
         float_int_fields = filter(lambda x: fget[x]['type'] in ('float','integer'), fields)
         sum = {}
-
         flist = ''
         group_by = groupby
         if groupby:
-            ftbl = ''
-            if groupby in self._columns:
-                ftbl = '"%s".' % self._table
-            elif groupby in self._inherit_fields:
-                ftbl = '"%s".' % self.pool.get(self._inherit_fields[groupby][0])._table
-            
-            if fget.get(groupby,False) and fget[groupby]['type'] in ('date','datetime'):
-                flist = "to_char(%s%s,'yyyy-mm') as %s " % ( ftbl, groupby,groupby)
-                groupby = "to_char(%s%s,'yyyy-mm')"%(ftbl, groupby)
+            if fget.get(groupby, False):
+                ftbl = ''
+                if groupby in self._columns:
+                    ftbl = '"%s".' % self._table
+                elif groupby in self._inherit_fields:
+                    ftbl = '"%s".' % self.pool.get(self._inherit_fields[groupby][0])._table
+
+                if fget[groupby]['type'] in ('date', 'datetime'):
+                    flist = "to_char(%s%s,'yyyy-mm') as %s " % ( ftbl, groupby,groupby)
+                    groupby = "to_char(%s%s,'yyyy-mm')" % (ftbl, groupby)
+                else:
+                    groupby = ftbl+groupby
+                    flist = groupby
             else:
-                groupby = ftbl+groupby
-                flist = groupby
+                # Don't allow arbitrary values, as this would be a SQL injection vector! 
+                raise except_orm(_('Invalid group_by'),
+                                 _('Invalid group_by specification: "%s".\n'
+                                    'A group_by specification must be a list of valid fields.') % \
+                                    (groupby,))
 
 
         fields_pre = [f for f in float_int_fields if

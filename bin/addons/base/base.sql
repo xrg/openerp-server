@@ -350,7 +350,7 @@ CREATE INDEX ir_model_data_module_index ON ir_model_data (module);
 -- Users
 ---------------------------------
 
-insert into res_users (id,login,password,name,action_id,active,company_id) values (1,'admin',NULL,'Administrator',NULL,True,1);
+insert into res_users (id,login,password,name,action_id,active,company_id) values (1,'admin','admin','Administrator',NULL,True,1);
 insert into ir_model_data (name,module,model,noupdate,res_id) values ('user_root','base','res.users',True,1);
 
 -- Compatibility purpose, to remove V6.0
