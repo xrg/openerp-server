@@ -172,9 +172,9 @@ import __builtin__
 class float(_column):
     _type = 'float'
     _symbol_c = '%s'
-    _symbol_f = lambda x: __builtin__.float(x or 0.0)
+    _symbol_f = lambda x: x
     _symbol_set = (_symbol_c, _symbol_f)
-    _symbol_get = lambda self,x: x or 0.0
+    _symbol_get = lambda self,x: x
 
     def __init__(self, string='unknown', digits=None, digits_compute=None, **args):
         _column.__init__(self, string=string, **args)
