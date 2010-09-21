@@ -66,7 +66,7 @@ class osv_pool(netsvc.Service):
                 for key in self._sql_error.keys():
                     if key in inst[0]:
                         self.abortResponse(1, _('Constraint Error'), 'warning', _(self._sql_error[key]))
-                if inst.pgcode == errorcodes.NOT_NULL_VIOLATION:
+                if inst.pgcode in (errorcodes.NOT_NULL_VIOLATION, errorcodes.FOREIGN_KEY_VIOLATION, errorcodes.RESTRICT_VIOLATION):
                     msg = inst.pgerror + '\n'
                     msg += _('The operation cannot be completed, probably due to the following:\n' \
                           '- deletion: you may be trying to delete a record while other records still reference it\n' \
