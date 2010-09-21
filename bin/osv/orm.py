@@ -2159,10 +2159,10 @@ class orm_template(object):
 
     def _search(self, cr, user, args, offset=0, limit=None, order=None, context=None, count=False, access_rights_uid=None):
         """
-        Private implementation of search() method, allowing specifying the uid to use for the access right check. 
+        Private implementation of search() method, allowing specifying the uid to use for the access right check.
         This is useful for example when filling in the selection list for a drop-down and avoiding access rights errors,
         by specifying ``access_rights_uid=1`` to bypass access rights check, but not ir.rules!
-        
+
         :param access_rights_uid: optional user ID to use when checking access rights
                                   (not for ir.rules, this is only for ir.model.access)
         """
@@ -2191,7 +2191,7 @@ class orm_template(object):
 
     def name_search(self, cr, user, name='', args=None, operator='ilike', context=None, limit=100):
         """
-        Search for records and their display names according to a search domain. 
+        Search for records and their display names according to a search domain.
 
         :param cr: database cursor
         :param user: current user id
@@ -2574,7 +2574,7 @@ class orm(orm_template):
             previous_tables = list(tables)
             if self._apply_ir_rules(cr, uid, where_clause, where_clause_params, tables, 'read', model_name=inherited_model, context=context):
                 # if some rules were applied, need to add the missing JOIN for them to make sense, passing the previous
-                # list of table in case the inherited table was not in the list before (as that means the corresponding 
+                # list of table in case the inherited table was not in the list before (as that means the corresponding
                 # JOIN(s) was(were) not present)
                 self._inherits_join_add(inherited_model, previous_tables, where_clause)
                 tables = list(set(tables).union(set(previous_tables)))
@@ -2615,7 +2615,7 @@ class orm(orm_template):
                     groupby = ftbl+groupby
                     flist = groupby
             else:
-                # Don't allow arbitrary values, as this would be a SQL injection vector! 
+                # Don't allow arbitrary values, as this would be a SQL injection vector!
                 raise except_orm(_('Invalid group_by'),
                                  _('Invalid group_by specification: "%s".\n'
                                     'A group_by specification must be a list of valid fields.') % \
@@ -2652,8 +2652,9 @@ class orm(orm_template):
         if groupby and fget[groupby]['type'] == 'many2one':
             data_ids = self.search(cr, uid, [('id', 'in', alldata.keys())], order=groupby, context=context)
             data_read = self.read(cr, uid, data_ids, groupby and [groupby] or ['id'], context=context)
-            # restore order of the search as read() uses the default _order:
-            data = [data_read[id] for id in data_ids]
+            # restore order of the search as read() uses the default _order (this is only for groups, so the size of data_read shoud be small):
+            data_read.sort(lambda x,y: cmp(data_ids.index(x['id']), data_ids.index(y['id'])))
+            data = data_read
         else:
             data = self.read(cr, uid, alldata.keys(), groupby and [groupby] or ['id'], context=context)
             if groupby:
@@ -2705,7 +2706,7 @@ class orm(orm_template):
         :param where_clause: current list of WHERE clause params
         :return: (tables, where_clause, qualified_field) where ``tables`` and ``where_clause`` are the updated
                  versions of the parameters, and ``qualified_field`` is the qualified name of ``field``
-                 in the form ``table.field``, to be referenced in queries. 
+                 in the form ``table.field``, to be referenced in queries.
         """
         current_table = self
         while field in current_table._inherit_fields and not field in current_table._columns:
@@ -3376,19 +3377,20 @@ class orm(orm_template):
                     column = self._inherit_fields[key][2]
                 else:
                     continue
-                if v and column._type == 'reference':
-                    model_name, ref_id = v.split(',', 1)
-                    model = self.pool.get(model_name)
-                    if not model:
-                        reset = True
-                    else:
-                        cr.execute('SELECT count(1) FROM "%s" WHERE id=%%s' % (model._table,), (ref_id,), debug=self._debug)
-                        reset = not cr.fetchone()[0]
-                    if reset:
-                        if column._classic_write:
-                            query = 'UPDATE "%s" SET "%s"=NULL WHERE id=%%s' % (self._table, key)
-                            cr.execute(query, (r['id'],), debug=self._debug)
-                        r[key] = False
+# TODO: removed this, it's too slow
+#                if v and column._type == 'reference':
+#                    model_name, ref_id = v.split(',', 1)
+#                    model = self.pool.get(model_name)
+#                    if not model:
+#                        reset = True
+#                    else:
+#                        cr.execute('SELECT count(1) FROM "%s" WHERE id=%%s' % (model._table,), (ref_id,))
+#                        reset = not cr.fetchone()[0]
+#                    if reset:
+#                        if column._classic_write:
+#                            query = 'UPDATE "%s" SET "%s"=NULL WHERE id=%%s' % (self._table, key)
+#                            cr.execute(query, (r['id'],))
+#                        r[key] = False
 
         if isinstance(ids, (int, long, dict)):
             return result and result[0] or False
@@ -4302,13 +4304,13 @@ class orm(orm_template):
         :param args: the domain to compute
         :type args: list
         :param active_test: whether the default filtering of records with ``active``
-                            field set to ``False`` should be applied. 
+                            field set to ``False`` should be applied.
         :return: tuple with 3 elements: (where_clause, where_clause_params, tables) where
                  ``where_clause`` contains a list of where clause elements (to be joined with 'AND'),
                  ``where_clause_params`` is a list of parameters to be passed to the db layer
                  for the where_clause expansion, and ``tables`` is the list of double-quoted
-                 table names that need to be included in the FROM clause. 
-        :rtype: tuple 
+                 table names that need to be included in the FROM clause.
+        :rtype: tuple
         """
         if not context:
             context = {}
@@ -4355,7 +4357,7 @@ class orm(orm_template):
                           in ``where_clause``
            :param model_name: optional name of the model whose ir.rules should be applied (default:``self._name``)
                               This could be useful for inheritance for example, but there is no provision to include
-                              the appropriate JOIN for linking the current model to the one referenced in model_name. 
+                              the appropriate JOIN for linking the current model to the one referenced in model_name.
            :return: True if additional clauses where applied.
         """
         added_clause, added_params, added_tables  = self.pool.get('ir.rule').domain_get(cr, uid, model_name or self._name, mode, context=context)
@@ -4445,11 +4447,11 @@ class orm(orm_template):
 
     def _search(self, cr, user, args, offset=0, limit=None, order=None, context=None, count=False, access_rights_uid=None):
         """
-        Private implementation of search() method, allowing specifying the uid to use for the access right check. 
+        Private implementation of search() method, allowing specifying the uid to use for the access right check.
         This is useful for example when filling in the selection list for a drop-down and avoiding access rights errors,
         by specifying ``access_rights_uid=1`` to bypass access rights check, but not ir.rules!
         This is ok at the security level because this method is private and not callable through XML-RPC.
-        
+
         :param access_rights_uid: optional user ID to use when checking access rights
                                   (not for ir.rules, this is only for ir.model.access)
         """
