@@ -452,7 +452,7 @@ class Agent(object):
     """
     __tasks = []
     __tasks_by_db = {}
-    _logger = Logger()
+    _logger = logging.getLogger('netsvc.agent')
 
     @classmethod
     def setAlarm(cls, function, timestamp, db_name, *args, **kwargs):
@@ -463,6 +463,7 @@ class Agent(object):
     @classmethod
     def cancel(cls, db_name):
         """Cancel all tasks for a given database. If None is passed, all tasks are cancelled"""
+        cls._logger.debug("Cancel timers for %s db", db_name or 'all')
         if db_name is None:
             cls.__tasks, cls.__tasks_by_db = [], {}
         else:
@@ -477,23 +478,64 @@ class Agent(object):
     @classmethod
     def runner(cls):
         """Neverending function (intended to be ran in a dedicated thread) that
-           checks every 60 seconds tasks to run.
+           checks every 60 seconds tasks to run. TODO: make configurable
         """
-        current_thread = threading.currentThread()
+        def pretty_args(args, kwargs, trunc=None):
+            """ Format the arguments like we would write them at python
+                Truncate at {trunc} chars
+            """
+            oout = []
+            olen = 0
+            if args:
+                for arg in args:
+                    try:
+                        ostr = repr(arg)
+                    except Exception:
+                        ostr = '<???>'
+                    if trunc and (olen >= trunc):
+                        break
+                    oout.append(ostr)
+                    olen += len(ostr) + 2
+            
+            if kwargs:
+                for kw, val in kwargs.items():
+                    if trunc and (olen >= trunc):
+                        break
+                    try:
+                        ostr = "%s=%r" %(kw, val)
+                    except Exception:
+                        ostr = "%s=??" % kw
+                    oout.append(ostr)
+                    olen += len(ostr) + 2
+
+            if trunc and (olen >= trunc):
+                oout += '...'
+        
+            return ', '.join(oout)
+
         while True:
             while cls.__tasks and cls.__tasks[0][0] < time.time():
                 task = heapq.heappop(cls.__tasks)
                 timestamp, dbname, function, args, kwargs = task
+                # dbname will be picked by the logger's stack inspection
                 cls.__tasks_by_db[dbname].remove(task)
                 if not timestamp:
                     # null timestamp -> cancelled task
                     continue
-                current_thread.dbname = dbname   # hack hack
-                cls._logger.notifyChannel('timers', LOG_DEBUG, "Run %s.%s(*%r, **%r)" % (function.im_class.__name__, function.func_name, args, kwargs))
-                delattr(current_thread, 'dbname')
-                threading.Thread(target=function, args=args, kwargs=kwargs).start()
+                cls._logger.debug("Run %s.%s(%s)",
+                                function.im_class.__name__, function.func_name,
+                                pretty_args(args, kwargs, 120))
+                thr = threading.Thread(target=function, args=args, kwargs=kwargs)
+                thr.daemon = True
+                thr.start()
                 time.sleep(1)
-            time.sleep(60)
+                thr = None
+            wtime = 120.0
+            if cls.__tasks:
+                wtime = cls.__tasks[0][0] - time.time()
+                wtime = max(min(wtime, 1.0), 120.0)
+            cls._logger.debug("sleeping for %f seconds", wtime)
+            time.sleep(wtime)
 
 threading.Thread(target=Agent.runner).start()
 
