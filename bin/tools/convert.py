@@ -25,23 +25,23 @@ import logging
 import os.path
 import pickle
 import re
-import sys
+# import sys
 
 # for eval context:
 import time
 import release
 try:
     import pytz
-except:
+except ImportError:
     logging.getLogger("init").warning('could not find pytz library, please install it')
     class pytzclass(object):
         all_timezones=[]
-    pytz=pytzclass()
+    pytz = pytzclass()
 
 
 from datetime import datetime, timedelta
 from lxml import etree
-import ir
+# import ir
 import misc
 import netsvc
 import osv
@@ -323,7 +323,7 @@ form: module.record_id""" % (xml_id,)
         if rec.get('groups'):
             g_names = rec.get('groups','').split(',')
             groups_value = []
-            groups_obj = self.pool.get('res.groups')
+            # groups_obj = self.pool.get('res.groups')
             for group in g_names:
                 if group.startswith('-'):
                     group_id = self.id_get(cr, 'res.groups', group[1:])
@@ -338,7 +338,7 @@ form: module.record_id""" % (xml_id,)
 
         if not rec.get('menu') or eval(rec.get('menu','False')):
             keyword = str(rec.get('keyword', 'client_print_multi'))
-            keys = [('action',keyword),('res_model',res['model'])]
+            keys = [('action',keyword),('res_model',res['model'])] # RFC: so what?
             value = 'ir.actions.report.xml,'+str(id)
             replace = rec.get('replace', True)
             self.pool.get('ir.model.data').ir_set(cr, self.uid, 'action', keyword, res['name'], [res['model']], value, replace=replace, isobject=True, xml_id=xml_id)
@@ -368,7 +368,7 @@ form: module.record_id""" % (xml_id,)
         if rec.get('groups'):
             g_names = rec.get('groups','').split(',')
             groups_value = []
-            groups_obj = self.pool.get('res.groups')
+            # groups_obj = self.pool.get('res.groups')
             for group in g_names:
                 if group.startswith('-'):
                     group_id = self.id_get(cr, 'res.groups', group[1:])
@@ -638,7 +638,7 @@ form: module.record_id""" % (xml_id,)
         if rec.get('groups'):
             g_names = rec.get('groups','').split(',')
             groups_value = []
-            groups_obj = self.pool.get('res.groups')
+            # groups_obj = self.pool.get('res.groups')
             for group in g_names:
                 if group.startswith('-'):
                     group_id = self.id_get(cr, 'res.groups', group[1:])
@@ -967,7 +967,8 @@ def convert_xml_import(cr, module, xmlfile, idref=None, mode='init', noupdate=Fa
         etree.parse(os.path.join(config['root_path'],'import_xml.rng' )))
     try:
         relaxng.assert_(doc)
-    except Exception, e:
+        # TODO: perhaps explicitly catch only RelaxNG exceptions
+    except Exception:
         logger = logging.getLogger('init')
         logger.error('The XML file does not fit the required schema !\n%s', \
                 misc.ustr(relaxng.error_log.last_error))

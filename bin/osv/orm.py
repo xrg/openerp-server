@@ -38,7 +38,7 @@
 #
 #
 import calendar
-from tools.safe_eval import safe_eval
+# from tools.safe_eval import safe_eval
 import copy
 import datetime
 import logging
@@ -1512,7 +1512,7 @@ class orm_template(object):
                     'fields': xfields
                 }
                 attrs = {'views': views}
-                view = False
+                # view = False
                 fields = views.get('field',False) and views['field'].get('fields',False)
             if node.get('name'):
                 attrs = {}
@@ -2597,7 +2597,7 @@ class orm(orm_template):
 
         fget = self.fields_get(cr, uid, fields)
         float_int_fields = filter(lambda x: fget[x]['type'] in ('float','integer'), fields)
-        sum = {}
+        # sum = {}
         flist = ''
         group_by = groupby
         if groupby:
@@ -2627,7 +2627,7 @@ class orm(orm_template):
                 or (f in self._columns and getattr(self._columns[f], '_classic_write'))]
         for f in fields_pre:
             if f not in ['id','sequence']:
-                operator = fget[f].get('group_operator','sum')
+                oper = fget[f].get('group_operator','sum')
                 if flist:
                     flist += ','
                 ftbl = ''
@@ -2635,7 +2635,7 @@ class orm(orm_template):
                     ftbl = '"%s".' % self._table
                 elif f in self._inherit_fields:
                     ftbl = '"%s".' % self.pool.get(self._inherit_fields[f][0])._table
-                flist += operator+'('+ftbl+f+') AS '+f
+                flist += '%s(%s%s) AS %s' % (oper, ftbl, f, f)
 
         if groupby:
             gb = ' GROUP BY '+groupby
@@ -3765,7 +3765,6 @@ class orm(orm_template):
             + For a reference field, use a string with the model name, a comma, and the target object id (example: ``'product.product, 5'``)
 
         """
-        readonly = None
         for field in vals.copy():
             fobj = None
             if field == '_vptr':

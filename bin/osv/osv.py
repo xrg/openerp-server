@@ -28,9 +28,8 @@ import logging
 import netsvc
 import pooler
 import copy
-import sys
-import traceback
-import logging
+# import sys
+# import traceback
 from psycopg2 import IntegrityError, errorcodes
 from tools.func import wraps
 from tools.translate import _
@@ -86,7 +85,7 @@ class osv_pool(netsvc.Service):
                     self.abortResponse(1, _('Integrity Error'), 'warning', msg)
                 else:
                     self.abortResponse(1, _('Integrity Error'), 'warning', inst[0])
-            except Exception, e:
+            except Exception:
                 self.logger.exception("Uncaught exception")
                 raise
 
@@ -128,14 +127,14 @@ class osv_pool(netsvc.Service):
             raise except_osv('Object Error', 'Object %s doesn\'t exist' % str(obj))
         try:
             return getattr(object, method)(cr, uid, *args, **kw)
-        except TypeError, e:
+        except TypeError:
             try:
                 import inspect
                 fn = getattr(object, method)
                 __fn_name = method
                 __fn_file = inspect.getfile(fn)
                 tb_s = "Function %s from file %s" %( __fn_name, __fn_file)
-            except:
+            except Exception:
                 tb_s = "Object: %s Function: %s\n" % (object, getattr(object, method))
             self.logger.exception(tb_s)
             raise
