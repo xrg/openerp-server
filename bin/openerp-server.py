@@ -217,6 +217,26 @@ if tools.config["stop_after_init"]:
 # Launch Servers
 #----------------------------------------------------------
 
+
+
+import threading
+import traceback
+def dumpstacks(signum, _):
+    # code from http://stackoverflow.com/questions/132058/getting-stack-trace-from-a-running-python-application#answer-2569696
+
+    id2name = dict([(th.ident, th.name) for th in threading.enumerate()])
+    code = []
+    for threadId, stack in sys._current_frames().items():
+        code.append("\n# Thread: %s(%d)" % (id2name[threadId], threadId))
+        for filename, lineno, name, line in traceback.extract_stack(stack):
+            code.append('File: "%s", line %d, in %s' % (filename, lineno, name))
+            if line:
+                code.append("  %s" % (line.strip()))
+
+    logger.notifyChannel("dumpstacks", netsvc.LOG_INFO, "\n".join(code))
+
+if os.name == 'posix':
+    signal.signal(signal.SIGQUIT, dumpstacks)
 if tools.config['pidfile']:
     fd = open(tools.config['pidfile'], 'w')
     pidtext = "%d" % (os.getpid())
