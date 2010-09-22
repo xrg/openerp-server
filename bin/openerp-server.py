@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 ##############################################################################
-#    
+#
 #    OpenERP, Open Source Management Solution
 #    Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>).
 #
@@ -16,7 +16,7 @@
 #    GNU Affero General Public License for more details.
 #
 #    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.     
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
 
@@ -27,17 +27,19 @@ OpenERP is an ERP+CRM program for small and medium businesses.
 The whole source code is distributed under the terms of the
 GNU Public Licence.
 
-(c) 2003-TODAY, Fabien Pinckaers - Tiny sprl
+(c) 2003-TODAY, Fabien Pinckaers - OpenERP s.a.
 """
 
 #----------------------------------------------------------
 # python imports
 #----------------------------------------------------------
-import sys
 import os
 import signal
 import pwd
 import logging
+import sys
+import threading
+import traceback
 
 import release
 __author__ = release.author
@@ -60,12 +62,12 @@ import tools
 openerp_isrunning = tools.misc.TSValue(False)
 
 server_logger = logging.getLogger('server')
-server_logger.info("version - %s" % release.version )
+server_logger.info("OpenERP version - %s" % release.version )
 for name, value in [('addons_path', tools.config['addons_path']),
                     ('database hostname', tools.config['db_host'] or 'localhost'),
                     ('database port', tools.config['db_port'] or '5432'),
                     ('database user', tools.config['db_user'])]:
-    server_logger.info("%s - %s" % ( name, value ))
+    server_logger.info("%s - %s", name, value )
 
 # Don't allow if the connection to PostgreSQL done by postgres user
 if tools.config['db_user'] == 'postgres':
@@ -219,9 +221,7 @@ if tools.config["stop_after_init"]:
 
 
 
-import threading
-import traceback
-def dumpstacks(signum, _):
+def dumpstacks(signum, frame):
     # code from http://stackoverflow.com/questions/132058/getting-stack-trace-from-a-running-python-application#answer-2569696
 
     id2name = dict([(th.ident, th.name) for th in threading.enumerate()])
@@ -233,7 +233,7 @@ def dumpstacks(signum, _):
             if line:
                 code.append("  %s" % (line.strip()))
 
-    logger.notifyChannel("dumpstacks", netsvc.LOG_INFO, "\n".join(code))
+    logging.getLogger('dumpstacks').info("\n".join(code))
 
 if os.name == 'posix':
     signal.signal(signal.SIGQUIT, dumpstacks)
@@ -242,7 +242,6 @@ if tools.config['pidfile']:
     pidtext = "%d" % (os.getpid())
     fd.write(pidtext)
     fd.close()
-
 
 netsvc.Server.startAll()
 logging.getLogger("web-services").info('the server is running, waiting for connections...')

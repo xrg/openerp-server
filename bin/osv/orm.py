@@ -2659,10 +2659,12 @@ class orm(orm_template):
             del r['id']
         if groupby and fget[groupby]['type'] == 'many2one':
             data_ids = self.search(cr, uid, [('id', 'in', alldata.keys())], order=groupby, context=context)
-            data_read = self.read(cr, uid, data_ids, groupby and [groupby] or ['id'], context=context)
+            # the IDS of the records that has groupby field value = False or ''
+            # should be added too
+            data_ids += filter(lambda x:x not in data_ids, alldata.keys())
+            data = self.read(cr, uid, data_ids, groupby and [groupby] or ['id'], context=context)
             # restore order of the search as read() uses the default _order (this is only for groups, so the size of data_read shoud be small):
-            data_read.sort(lambda x,y: cmp(data_ids.index(x['id']), data_ids.index(y['id'])))
-            data = data_read
+            data.sort(lambda x,y: cmp(data_ids.index(x['id']), data_ids.index(y['id'])))
         else:
             data = self.read(cr, uid, alldata.keys(), groupby and [groupby] or ['id'], context=context)
             if groupby:

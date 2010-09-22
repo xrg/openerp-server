@@ -216,9 +216,6 @@ class configmanager(object):
 
         security = optparse.OptionGroup(parser, 'Security-related options')
         security.add_option('--no-database-list', action="store_false", dest='list_db', help="disable the ability to return the list of databases")
-        security.add_option('--enable-code-actions', action='store_true',
-                            dest='server_actions_allow_code', default=False,
-                            help='Enables server actions of state "code". Warning, this is a security risk.')
         parser.add_option_group(security)
 
     def parse_config(self):
@@ -277,7 +274,7 @@ class configmanager(object):
 
         keys = ['language', 'translate_out', 'translate_in', 'debug_mode', 'smtp_ssl',
                 'stop_after_init', 'logrotate', 'without_demo', 'syslog',
-                'list_db', 'server_actions_allow_code', 'test_report_directory' ]
+                'list_db', 'test_report_directory' ]
 
         for arg in keys:
             if getattr(opt, arg) is not None:
