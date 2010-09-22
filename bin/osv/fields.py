@@ -34,7 +34,7 @@
 from collections import defaultdict
 import string
 import logging
-import netsvc
+import warnings
 import sys
 
 from psycopg2 import Binary
@@ -42,6 +42,7 @@ import warnings
 
 import tools
 from tools.translate import _
+import __builtin__
 
 def _symbol_set(symb):
     if symb == None or symb == False:
@@ -49,6 +50,34 @@ def _symbol_set(symb):
     elif isinstance(symb, unicode):
         return symb.encode('utf-8')
     return str(symb)
+
+
+def _symbol_set_float(symb):
+    if symb == None or symb == False:
+        return None
+    elif symb is '':
+        warnings.warn("You passed empty string as value to a float",
+                      DeprecationWarning, stacklevel=4)
+        return None
+    return __builtin__.float(symb)
+
+def _symbol_set_integer(symb):
+    if symb == None or symb == False:
+        return None
+    elif symb is '':
+        warnings.warn("You passed empty string as value to an integer",
+                      DeprecationWarning, stacklevel=4)
+        return None
+    return int(symb)
+
+def _symbol_set_long(symb):
+    if symb == None or symb == False:
+        return None
+    elif symb is '':
+        warnings.warn("You passed empty string as value to a long integer",
+                      DeprecationWarning, stacklevel=4)
+        return None
+    return long(symb)
 
 
 class _column(object):
@@ -123,14 +152,14 @@ class boolean(_column):
 class integer_big(_column):
     _type = 'integer_big'
     _symbol_c = '%s'
-    _symbol_f = lambda x: int(x or 0)
+    _symbol_f = _symbol_set_long
     _symbol_set = (_symbol_c, _symbol_f)
     _symbol_get = lambda self,x: x or 0
 
 class integer(_column):
     _type = 'integer'
     _symbol_c = '%s'
-    _symbol_f = lambda x: int(x or 0)
+    _symbol_f = _symbol_set_integer
     _symbol_set = (_symbol_c, _symbol_f)
     _symbol_get = lambda self,x: x or 0
 
@@ -167,14 +196,12 @@ class char(_column):
 class text(_column):
     _type = 'text'
 
-import __builtin__
-
 class float(_column):
     _type = 'float'
     _symbol_c = '%s'
-    _symbol_f = lambda x: x
+    _symbol_f = _symbol_set_float
     _symbol_set = (_symbol_c, _symbol_f)
-    _symbol_get = lambda self,x: x
+    _symbol_get = None
 
     def __init__(self, string='unknown', digits=None, digits_compute=None, **args):
         _column.__init__(self, string=string, **args)
