@@ -3826,6 +3826,9 @@ class orm(orm_template):
                 cr.execute(query, (tuple(ids),))
             parents_changed = map(operator.itemgetter(0), cr.fetchall())
 
+        if self._debug:
+            _logger.debug('%s.write(#%s, %r)', self._name, ids, vals)
+
         upd0 = []
         upd1 = []
         upd_todo = []
