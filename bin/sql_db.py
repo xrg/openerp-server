@@ -51,11 +51,11 @@ psycopg2.extensions.register_type(psycopg2.extensions.new_type((700, 701, 1700,)
 
 
 import tools
-from tools.func import wraps
+from tools.func import wraps, frame_codeinfo
 from datetime import datetime as mdt
 from datetime import timedelta
 import threading
-from inspect import stack
+from inspect import currentframe
 
 import re
 re_from = re.compile('.* from "?([a-zA-Z_0-9]+)"? .*$');
@@ -93,7 +93,7 @@ class Cursor(object):
         self._cnx, self._obj = pool.borrow(dsn(dbname), True)
         self.__closed = False   # real initialisation value
         self.autocommit(False)
-        self.__caller = tuple(stack()[2][1:3])
+        self.__caller = frame_codeinfo(currentframe(),2)
         if not hasattr(self._cnx,'_prepared'):
             self._cnx._prepared = []
         if not self.__pgmode:

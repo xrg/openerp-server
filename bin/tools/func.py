@@ -90,4 +90,25 @@ def virtual(f):
     f._virtual = True
     return f
 
+from inspect import getsourcefile
+
+def frame_codeinfo(fframe, back=0):
+    """ Return a (filename, line) pair for a previous frame .
+        @return (filename, lineno) where lineno is either int or string==''
+    """
+    
+    try:
+        if not fframe:
+            return ("<unknown>", '')
+        for i in range(back):
+            fframe = fframe.f_back
+        try:
+            fname = getsourcefile(fframe)
+        except TypeError:
+            fname = '<builtin>'
+        lineno = fframe.f_lineno or ''
+        return (fname, lineno)
+    except Exception:
+        return ("<unknown>", '')
+
 #eof
