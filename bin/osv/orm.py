@@ -2296,6 +2296,9 @@ class orm_template(object):
                 missing_defaults.append(field)
 
         if len(missing_defaults):
+            #if self._debug:
+            #    _logger.debug("Have to add missing defaults for %s: %s", 
+            #                    self._name, ','.join(missing_defaults))
             # override defaults with the provided values, never allow the other way around
             defaults = self.default_get(cr, uid, missing_defaults, context)
             for dv in defaults:
@@ -2303,6 +2306,9 @@ class orm_template(object):
                 if dv in self._columns and self._columns[dv]._type == 'many2many' \
                         and defaults[dv] and isinstance(defaults[dv][0], (int, long)):
                     defaults[dv] = [(6, 0, defaults[dv])]
+            #if self._debug:
+            #    _logger.debug("Missing defaults for %s: %r", 
+            #                    self._name, defaults)
             defaults.update(values)
             values = defaults
         return values
