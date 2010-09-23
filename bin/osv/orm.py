@@ -276,10 +276,8 @@ class browse_record(object):
                 else:
                     return attr
             else:
-                self.__logger.warning( "Field '%s' does not exist in object '%s': \n%s" % \
-                        ( name, self, ''.join(traceback.format_exc())))
-                raise KeyError("Field '%s' does not exist in object '%s'" % (
-                    name, self))
+                self.__logger.warning( "Field '%s' does not exist in object '%s'.", name, self._table_name )
+                raise KeyError("Field '%s' does not exist in object '%s'" % ( name, self._table_name))
 
             # if the field is a classic one or a many2one, we'll fetch all classic and many2one fields
             if col._prefetch and (self._fields_only is not True):
