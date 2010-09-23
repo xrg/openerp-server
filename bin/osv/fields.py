@@ -45,7 +45,7 @@ from tools.translate import _
 import __builtin__
 
 def _symbol_set(symb):
-    if symb == None or symb == False:
+    if symb is None or symb is False:
         return None
     elif isinstance(symb, unicode):
         return symb.encode('utf-8')
@@ -53,7 +53,7 @@ def _symbol_set(symb):
 
 
 def _symbol_set_float(symb):
-    if symb == None or symb == False:
+    if symb is None or symb is False:
         return None
     elif symb is '':
         warnings.warn("You passed empty string as value to a float",
@@ -62,7 +62,7 @@ def _symbol_set_float(symb):
     return __builtin__.float(symb)
 
 def _symbol_set_integer(symb):
-    if symb == None or symb == False:
+    if symb is None or symb is False:
         return None
     elif symb is '':
         warnings.warn("You passed empty string as value to an integer",
@@ -71,7 +71,7 @@ def _symbol_set_integer(symb):
     return int(symb)
 
 def _symbol_set_long(symb):
-    if symb == None or symb == False:
+    if symb is None or symb is False:
         return None
     elif symb is '':
         warnings.warn("You passed empty string as value to a long integer",
