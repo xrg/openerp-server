@@ -542,7 +542,7 @@ class Agent(object):
                                 function.im_class.__name__, function.func_name,
                                 pretty_args(args, kwargs, 120))
                 thr = threading.Thread(target=function, args=args, kwargs=kwargs)
-                task_thread.setDaemon(True)
+                thr.setDaemon(True)
                 thr.start()
                 time.sleep(1)
                 thr = None
