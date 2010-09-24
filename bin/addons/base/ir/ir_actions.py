@@ -762,7 +762,7 @@ act_window_close()
 TODO_STATES = [('open', 'To Do'),
                ('done', 'Done'),
                ('skip','Skipped'),
-               ('cancel','Cancel')]
+               ('cancel','Cancelled')]
 
 class ir_actions_todo(osv.osv):
     _name = 'ir.actions.todo'
@@ -778,9 +778,9 @@ class ir_actions_todo(osv.osv):
         'note':fields.text('Text', translate=True),
     }
     _defaults={
-        'state': lambda *a: 'open',
-        'sequence': lambda *a: 10,
-        'restart': lambda *a: 'always',
+        'state': 'open',
+        'sequence': 10,
+        'restart': 'onskip',
     }
     _order="sequence,id"
 
