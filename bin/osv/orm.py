@@ -2975,7 +2975,7 @@ class orm(orm_template):
                                 if not ok:
                                     i = 0
                                     while True:
-                                        newname = self._table + '_moved' + str(i)
+                                        newname = k + '_moved' + str(i)
                                         cr.execute("SELECT count(1) FROM pg_class c,pg_attribute a " \
                                             "WHERE c.relname=%s " \
                                             "AND a.attname=%s " \
