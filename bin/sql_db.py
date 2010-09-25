@@ -28,6 +28,7 @@ from psycopg2.pool import PoolError
 
 from psycopg2 import OperationalError
 import psycopg2.extensions
+import warnings
 
 psycopg2.extensions.register_type(psycopg2.extensions.UNICODE)
 
@@ -72,7 +73,7 @@ class Cursor(object):
         @wraps(f)
         def wrapper(self, *args, **kwargs):
             if self.__closed:
-                raise psycopg2.ProgrammingError('Unable to use the cursor after having closed it')
+                raise psycopg2.OperationalError('Unable to use the cursor after having closed it')
             return f(self, *args, **kwargs)
         return wrapper
 
@@ -166,7 +167,7 @@ class Cursor(object):
                 dstr = ' (%dms)' % int(delay/1000)
             try:
                 self.__logger.debug("Q%s: %s" % (dstr, qrystr))
-            except:
+            except Exception:
                 # should't break because of logging
                 pass
             self.sql_log_count+=1
@@ -465,10 +466,12 @@ class Connection(object):
     def __nonzero__(self):
         """Check if connection is possible"""
         try:
+            warnings.warn("You use an expensive function to test a connection.",
+                      DeprecationWarning, stacklevel=1)
             cr = self.cursor()
             cr.close()
             return True
-        except:
+        except Exception:
             return False
 
 
