@@ -297,7 +297,7 @@ def load_information_from_description_file(module):
     """
     for filename in ['__openerp__.py', '__terp__.py']:
         description_file = get_module_resource(module, filename)
-        if os.path.isfile(description_file):
+        if description_file and os.path.isfile(description_file):
             return eval(tools.file_open(description_file).read())
 
     #TODO: refactor the logger in this file to follow the logging guidelines
