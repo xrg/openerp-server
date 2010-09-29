@@ -5,6 +5,7 @@
 #, fuzzy
 msgid ""
 msgstr ""
+"#-#-#-#-#  .merge_file_kmST9K (OpenERP Server 5.0.4)  #-#-#-#-#\n"
 "#-#-#-#-#  .merge_file_adONOL (OpenERP Server 5.0.4)  #-#-#-#-#\n"
 "#-#-#-#-#  .merge_file_fVVexV (OpenERP Server 5.0.4)  #-#-#-#-#\n"
 "#-#-#-#-#  .merge_file_AiDqlG (OpenERP Server 5.0.4)  #-#-#-#-#\n"
@@ -106,6 +107,18 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Launchpad-Export-Date: 2010-09-09 04:44+0000\n"
+"X-Generator: Launchpad (build Unknown)\n"
+"#-#-#-#-#  .merge_file_bFiY2y (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"Project-Id-Version: OpenERP Server 5.0.4\n"
+"Report-Msgid-Bugs-To: support@openerp.com\n"
+"POT-Creation-Date: 2009-12-18 08:39+0000\n"
+"PO-Revision-Date: 2010-09-09 18:09+0000\n"
+"Last-Translator: Anup (OpenERP) <ach@tinyerp.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2010-09-29 04:47+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #. module: base
@@ -7953,819 +7966,318 @@ msgstr "批量发送SMS"
 msgid "SMS - Gateway: clickatell"
 msgstr "短信网关：clickatell"
 
-#~ msgid "Partner Functions"
-#~ msgstr "业务伙伴职能"
+#~ msgid "Main Company"
+#~ msgstr "母公司"
 
-#~ msgid "Directory name must be unique!"
-#~ msgstr "目录名必须唯一！"
+#~ msgid "No journal for ending writing has been defined for the fiscal year"
+#~ msgstr "未定义结束会计年度分录的日记帐"
 
-#~ msgid "No Default Credit Account !"
-#~ msgstr "无默认贷方科目！"
+#~ msgid "Product quantity"
+#~ msgstr "产品数量"
 
-#~ msgid "No grid avaible !"
-#~ msgstr "无可用的交货格子！"
+#~ msgid "Account move line \"%s\" is not valid"
+#~ msgstr "会计分录\\\"%s\\\"行无效"
 
-#~ msgid "March"
-#~ msgstr "三月"
+#~ msgid "The Bank type %s of the bank account: %s is not supported"
+#~ msgstr "不支持银行类型%s（银行账户%s）"
 
-#~ msgid "This version of the module is already exist on the server"
-#~ msgstr "此模块版本在服务器已经存在！"
-
-#~ msgid "Could not cancel purchase order !"
-#~ msgstr "无法取消采购订单！"
-
-#~ msgid "Could not cancel this sale order !"
-#~ msgstr "无法取消该销售订单！"
-
-#~ msgid "Object %s does not exists"
-#~ msgstr "对象%s不存在"
-
-#~ msgid "The Total Should be Between %s and %s"
-#~ msgstr "合计应该在%s和%s之间"
-
-#~ msgid "Please put a name and a code before saving the model !"
-#~ msgstr "保存模式之前，请输入名称和编码！"
-
-#~ msgid "Operation is Already Cancelled  !"
-#~ msgstr "操作已取消！"
+#~ msgid "The unlink method is not implemented on this object !"
+#~ msgstr "此对象尚未实现“unlink”方法！"
 
 #~ msgid ""
-#~ "You must define a reply-to address in order to mail the participant. You "
-#~ "can do this in the Mailing tab of your event. Note that this is also the "
-#~ "place where you can configure your event to not send emails automaticly "
-#~ "while registering"
+#~ "\"\"\n"
+#~ "This test checks if the module classes are raising exception when calling "
+#~ "basic methods or not.\n"
+#~ "\"\""
+#~ msgstr "\"\""
+
+#~ msgid "Result (/10)"
+#~ msgstr "结果(/10)"
+
+#~ msgid "You can not delete posted movement: \"%s\"!"
+#~ msgstr "不能删除已过帐的凭证明细项：\"%s\"！"
+
+#~ msgid ""
+#~ "There is no income account defined ' "
+#~ "\\n                                        'for this product: \"%s\" (id:%"
+#~ "d)"
+#~ msgstr "该产品：\"%s\"(id:%d) \"\\n\" 未定义收入科目"
+
+#~ msgid "No payment mode or payment type code invalid."
+#~ msgstr "无付款方式或付款类型代码无效"
+
+#~ msgid "June"
+#~ msgstr "六月"
+
+#~ msgid "The read method is not implemented on this object !"
+#~ msgstr "该对象的“read”方法尚未实现！"
+
+#~ msgid "You try to bypass an access rule (Document type: %s)."
+#~ msgstr "您尝试跳过访问规则（文档类型：%s）。"
+
+#~ msgid ""
+#~ "The sum of the data (2nd field) is null.\n"
+#~ "We can't draw a pie chart !"
 #~ msgstr ""
-#~ "为能够发电邮给参加者您必须指定回复地址。您在事件的电邮选页卡可完成上述操"
-#~ "作。\r\n"
-#~ "在这儿您也可以设定事件登录的时候不自动发电邮的行为。"
+#~ "这些数据的总和（第二个字段）为空。\n"
+#~ "我们无法绘制饼图！"
 
-#~ msgid "Attention!"
-#~ msgstr "注意！"
+#~ msgid "Attached ID"
+#~ msgstr "附件编号"
 
-#~ msgid " Type of ul: "
-#~ msgstr " 货运单位类型： "
+#~ msgid "Attached Model"
+#~ msgstr "附加的模型"
 
-#~ msgid "Insertion Failed!"
-#~ msgstr "插入失败！"
+#~ msgid "Not implemented search_memory method !"
+#~ msgstr "尚未实现“search_memory”方法！"
 
-#~ msgid "You can not deactivate an account that contains account moves."
-#~ msgstr "您不能使已包含分录的科目无效。"
+#~ msgid "Not implemented set_memory method !"
+#~ msgstr "尚未实现“set_memory”方法!"
 
-#~ msgid "Invoice cannot be created from Packing."
-#~ msgstr "不可根据分拣单创建发票"
+#~ msgid "The perm_read method is not implemented on this object !"
+#~ msgstr "该对象尚未实现“perm_read”方法！"
 
-#~ msgid "The old fiscal year does not have any entry to reconcile!"
-#~ msgstr "老会计年度没有可对帐的分录！"
+#~ msgid "Others Partners"
+#~ msgstr "其他业务伙伴"
 
-#~ msgid ""
-#~ "You cannot enter an attendance ' \\n                            'date "
-#~ "outside the current timesheet dates!"
-#~ msgstr "您不能输入现有工作时间表日期之外的出勤记录！"
+#~ msgid "HR sector"
+#~ msgstr "人力资源部门"
 
-#~ msgid "No period found !"
-#~ msgstr "未找到时间段！"
+#~ msgid "Please check that all your lines have %d columns."
+#~ msgstr "请确保所有行都有 %d 列。"
 
-#~ msgid "No Period found on Invoice!"
-#~ msgstr "发票无指定时间段！"
+#~ msgid "Recursivity Detected."
+#~ msgstr "检测到循环。"
 
-#~ msgid "Unable to find a valid period !"
-#~ msgstr "无法找到有效的时间段！"
+#~ msgid "Can not define a column %s. Reserved keyword !"
+#~ msgstr "不能定义名为 %s 的列，因为这个名字是保留的关键字。"
 
-#~ msgid "You do not permissions to write on the server side."
-#~ msgstr "您未被授权在服务器端写入"
+#~ msgid "The create method is not implemented on this object !"
+#~ msgstr "该对象尚未实现“create”方法！"
 
 #~ msgid ""
-#~ "No bank name defined\n"
-#~ "' \\n\t\t\t\t\t'for the bank account: %s\n"
-#~ "' \\n\t\t\t\t\t'on the partner: %s\n"
-#~ "' \\n\t\t\t\t\t'on line: %s"
-#~ msgstr ""
-#~ "未定义银行名称\n"
-#~ "' \\n\t\t\t\t\t'相关银行账户： %s\n"
-#~ "' \\n\t\t\t\t\t'相关业务伙伴： %s\n"
-#~ "' \\n\t\t\t\t\t'行号： %s"
+#~ "You try to install a module that depends on the module: %s.\n"
+#~ "But this module is not available in your system."
+#~ msgstr "您试图安装的一个模块依赖模块： %s，但您的系统中该模块不可用。"
 
-#~ msgid ""
-#~ "You selected a quantity of %d Units.\n"
-#~ "But it's not compatible with the selected packaging.\n"
-#~ "Here is a proposition of quantities according to the packaging: "
-#~ msgstr ""
-#~ "您已指定%d单位数量。\n"
-#~ "但该数量不符合选定的包装。\n"
-#~ "以下是数量符合包装的方案： "
+#~ msgid "Grant Access To Menus"
+#~ msgstr "授予菜单访问权"
 
-#~ msgid ""
-#~ "Can not create an automatic sequence for this piece !\n"
-#~ "\n"
-#~ "Put a sequence in the journal definition for automatic numbering or "
-#~ "create a sequence manually for this piece."
-#~ msgstr ""
-#~ "无法自动创建该分录的序号。\n"
-#~ "\n"
-#~ "为自动编号，请在日记账设定中建一个序列或者手动创建一个序列。"
+#~ msgid "Error occurred while validating the field(s) %s: %s"
+#~ msgstr "验证字段 %s 时发生错误：%s"
 
-#~ msgid "Closing of states cancelled, please check the box !"
-#~ msgstr "已取消状态关闭过程，请在复选框里打勾！"
+#~ msgid "The write method is not implemented on this object !"
+#~ msgstr "该对象尚未实现“write”方法！"
 
-#~ msgid "Could not cancel sale order !"
-#~ msgstr "不能取消销售订单！"
+#~ msgid "Wrong ID for the browse record, got %r, expected an integer."
+#~ msgstr "%r 错误的浏览记录标识符，其应该为一个整数。"
 
-#~ msgid ""
-#~ "You can not do this modification on a reconciled entry ! Please note that "
-#~ "you can just change some non important fields !"
-#~ msgstr ""
-#~ "您不能在已对帐的分录做此修改！\r\n"
-#~ "您只能修改一些非重要字段！"
+#~ msgid "Couldn't find tag '%s' in parent view !"
+#~ msgstr "未在上级视图中找到标签 '%s'！"
 
-#~ msgid "Bank Journal "
-#~ msgstr "银行日记账 "
+#~ msgid "The name_get method is not implemented on this object !"
+#~ msgstr "该对象尚未实现“name_get”方法！"
 
-#~ msgid ""
-#~ "Please fill in the partner and pricelist field '\n"
-#~ "                        'in the analytic account:\n"
-#~ "%s"
-#~ msgstr ""
-#~ "请在分析科目%s\n"
-#~ "填写业务伙伴和价格表字段"
-
-#~ msgid "The exists method is not implemented on this object !"
-#~ msgstr "该对象尚未实现“exists”方法 !"
-
-#~ msgid "Please select at least two inventories."
-#~ msgstr "请选择至少2个盘存"
-
-#~ msgid "WARNING:audittrail is not part of the pool"
-#~ msgstr "警报：audittrail 不在 pool 里"
-
-#~ msgid "Can not export module that is not installed!"
-#~ msgstr "不能导出尚未安装的模块。"
-
-#~ msgid "Speed Test"
-#~ msgstr "速度测试"
-
-#~ msgid "No analytic plan defined !"
-#~ msgstr "未定义分析计划"
-
-#~ msgid "Futur Stock"
-#~ msgstr "预计库存"
-
-#~ msgid "You can not create new moves."
-#~ msgstr "你不能创建新的调拨"
-
-#~ msgid "Task '%s' closed"
-#~ msgstr "任务'%s'已关闭"
-
-#~ msgid ""
-#~ "There is no expense account define ' \\n                                "
-#~ "'for this product: \"%s\" (id:%d)"
-#~ msgstr "未定义该产品“%s“（标识符：%d）的成本科目"
-
-#~ msgid "Other Pricelist"
-#~ msgstr "其他价格表"
-
-#~ msgid "Efficient"
-#~ msgstr "有效率的"
-
-#~ msgid "The order state have to be draft to add delivery lines."
-#~ msgstr "订单状态应该是草稿再能加上交货明细"
-
-#~ msgid "Field name"
-#~ msgstr "字段名称"
-
-#~ msgid "The opening journal must not have any entry in the new fiscal year !"
-#~ msgstr "启用日记账不应有新会计年度的分录。"
-
-#~ msgid "Futur P&L"
-#~ msgstr "计划益损"
-
-#~ msgid "Taxes missing !"
-#~ msgstr "缺少税目！"
-
-#~ msgid ""
-#~ "Please verify that the total difference of the sheet is lower than %.2f !"
-#~ msgstr "请确认工作表的总差低于%.2f！"
-
-#~ msgid "No IBAN for the company bank account."
-#~ msgstr "公司银行账户无IBAN帐号"
-
-#~ msgid "At least one line has no product !"
-#~ msgstr "至少一条无产品!"
-
-#~ msgid ""
-#~ "There is no stock output account defined ' "
-#~ "\\n                                        'for this product: \"%s\" (id: "
-#~ "%d)"
-#~ msgstr "未定义该产品“%s“（标识符：%d）库存输出科目"
-
-#~ msgid "No Records Found for Report!"
-#~ msgstr "未找到该报表所需记录"
-
-#~ msgid "This method can be called with multiple ids"
-#~ msgstr "这方法可被成倍的标识符调用"
-
-#~ msgid "You can not sign out from an other date than today"
-#~ msgstr "您必须用今天的日期退出登录"
-
-#~ msgid "Please provide a partner for the sale."
-#~ msgstr "请提供销售订单的业务伙伴。"
-
-#~ msgid "Invoices"
-#~ msgstr "发票"
-
-#~ msgid ""
-#~ "Please verify the price of the invoice !\n"
-#~ "The real total does not match the computed total."
-#~ msgstr ""
-#~ "请验证发票金额！\n"
-#~ "实际合计金额与计算金额不符。"
-
-#~ msgid "cancel"
-#~ msgstr "取消"
-
-#~ msgid "Case"
-#~ msgstr "案例"
-
-#~ msgid ""
-#~ "Please configure Default Expanse account for Product purchase, "
-#~ "`property_account_expense_categ`"
-#~ msgstr ""
-#~ "请为产品采购配置默认成本科目，\r\n"
-#~ "`property_account_expense_categ`"
-
-#~ msgid "Object Test"
-#~ msgstr "对象测试"
-
-#~ msgid "Return lines"
-#~ msgstr "退回明细"
-
-#~ msgid "Warning! Not enough demo data"
-#~ msgstr "警报！示范数据不足"
-
-#~ msgid "Unable to start The Open ERP server without backups"
-#~ msgstr "缺少备份情况下无法启动Open ERP服务器"
-
-#~ msgid "Directory name contains special characters!"
-#~ msgstr "目录名包含特殊字符！"
-
-#~ msgid ""
-#~ "You try to write on an record that doesn't exist ' "
-#~ "\\n                                        '(Document type: %s)."
-#~ msgstr "您试图写入一个不存在的记录'\\n'（文档类型：%s）。"
-
-#~ msgid "You are not authorized to write module repositories"
-#~ msgstr "您未被授权写入模块软件库"
-
-#~ msgid "You must first cancel all packing attached to this purchase order."
-#~ msgstr "您必须先取消该采购订单所有附加的分拣单。"
-
-#~ msgid "A partner is already existing with the same name."
-#~ msgstr "已经存在有该名称的业务伙伴"
-
-#~ msgid ""
-#~ "Please put a partner on the picking list if you want to generate invoice."
-#~ msgstr "如果想生成发票，请在分拣单填写一家业务伙伴。"
-
-#~ msgid "Operation Done"
-#~ msgstr "操作完成"
-
-#~ msgid "There is no expense account defined for this product: \"%s\" (id:%d)"
-#~ msgstr "未定义此产品“%s“（标识：%d）的费用科目"
-
-#~ msgid "End of Fiscal Year Entry"
-#~ msgstr "会计年尾分录"
-
-#~ msgid "Task '%s' cancelled"
-#~ msgstr "任务‘%s‘已取消"
-
-#~ msgid ""
-#~ "Please provide another source document.\n"
-#~ "This one does not exist !"
-#~ msgstr "该单据不存在，请提供另外的来源单据！"
-
-#~ msgid ""
-#~ "No bank specified on invoice:\n"
-#~ "%s"
-#~ msgstr ""
-#~ "发票上未指定银行：\n"
-#~ "%s"
-
-#~ msgid "Global taxes defined, but are not in invoice lines !"
-#~ msgstr "已定义全球税目， 但未在发票明细中出现！"
-
-#~ msgid "not implemented"
+#~ msgid "Not Implemented"
 #~ msgstr "尚未实现"
 
-#~ msgid "User Error"
+#~ msgid "Macedonia"
+#~ msgstr "马其顿"
+
+#~ msgid "Addresses"
+#~ msgstr "地址"
+
+#~ msgid "Records were modified in the meanwhile"
+#~ msgstr "记录也同时被修改"
+
+#~ msgid "The name_search method is not implemented on this object !"
+#~ msgstr "该对象尚未实现“name_search“方法！"
+
+#~ msgid "UserError"
 #~ msgstr "用户错误"
 
-#~ msgid ""
-#~ "The Payment Term of Supplier does not have Payment Term Lines"
-#~ "(Computation) defined !"
-#~ msgstr "该供应商的 付款方式未定义（计算）付款方式明细！"
+#~ msgid "The copy method is not implemented on this object !"
+#~ msgstr "该对象尚未实现“copy”方法！"
 
-#~ msgid "Data Insufficient!"
-#~ msgstr "数据不足！"
+#~ msgid "You cannot perform this operation."
+#~ msgstr "您无法执行此项操作。"
 
-#~ msgid "No cost unit defined for this employee !"
-#~ msgstr "为该员工未定义成本单位！"
+#~ msgid "Not implemented get_memory method !"
+#~ msgstr "该对象尚未实现“get_memory“方法！"
 
-#~ msgid "The \"use_control\" module is not uninstallable"
-#~ msgstr "无法安装“use_control”模块"
+#~ msgid "Bad file format"
+#~ msgstr "无效的文件格式"
 
-#~ msgid "Record found after total record!"
-#~ msgstr "发现在总计记录后的记录!"
+#~ msgid "Number too large '%d', can not translate it"
+#~ msgstr "数字“%d”太大，不能转换"
 
-#~ msgid "BNK"
-#~ msgstr "银行"
+#~ msgid "This method does not exist anymore"
+#~ msgstr "该方法不存在"
 
-#~ msgid "Permission Denied !"
-#~ msgstr "权限被拒绝！"
+#~ msgid "File Content"
+#~ msgstr "文件内容"
 
-#~ msgid "You must enter a period length that cannot be 0 or below !"
-#~ msgstr "您必须输入的时间长度不能为0或以下!"
+#~ msgid "Unknown position in inherited view %s !"
+#~ msgstr "在继承视图 %s 中包含未知位置！"
 
-#~ msgid "Product name"
-#~ msgstr "产品名称"
+#~ msgid "ValidateError"
+#~ msgstr "验证错误"
 
-#~ msgid "Wed"
-#~ msgstr "周三"
+#~ msgid "Error ! You can not create recursive associated members."
+#~ msgstr "错误！您不能创建循环的关联成员。"
 
-#~ msgid "Insufficient Data!"
-#~ msgstr "数据不足！"
+#~ msgid "The value \"%s\" for the field \"%s\" is not in the selection"
+#~ msgstr "字段 %s 的值 %s 不在选择之内"
 
-#~ msgid "Invoice is already created."
-#~ msgstr "发票已创建"
+#~ msgid "Telecom sector"
+#~ msgstr "电信部门"
 
-#~ msgid "Please fill a Balance product in the wizard"
-#~ msgstr "请在向导输入一个余额产品"
+#~ msgid "undefined get method !"
+#~ msgstr "未定义“get”方法！"
 
-#~ msgid "Product uom"
-#~ msgstr "产品计量单位"
+#~ msgid "Suppliers Partners"
+#~ msgstr "供应商"
 
-#~ msgid "Standard Encoding"
-#~ msgstr "标准记账"
+#~ msgid "Bad query."
+#~ msgstr "无效的查询。"
 
-#~ msgid "No grid matching for this carrier !"
-#~ msgstr "无与该承运人相配的格子"
+#~ msgid "Titles"
+#~ msgstr "称谓"
 
-#~ msgid "Activation of your subscription"
-#~ msgstr "激活您的订购"
+#~ msgid "The search method is not implemented on this object !"
+#~ msgstr "该对象尚未实现“search”方法！"
 
-#~ msgid "This feature is only available for location of type \"Amazon\""
-#~ msgstr "此功能只有类型为“Amazon“的货位可用"
-
-#~ msgid "Unable to change tax !"
-#~ msgstr "无法更改税目!"
+#~ msgid "IT sector"
+#~ msgstr "信息技术部门"
 
 #~ msgid ""
-#~ "All emails have been successfully sent to Partners:.\n"
+#~ "Could not resolve product category, ' "
+#~ "\\n                                    'you have defined cyclic "
+#~ "categories ' \\n                                    'of products!"
+#~ msgstr "无法决定产品类别, '\\n '您定义的产品类别包括循环的类别！'\\n '"
+
+#~ msgid "Workcenter name"
+#~ msgstr "工作中心名称"
+
+#~ msgid "Feed back About Workflow of Module"
+#~ msgstr "关于该模块的工作流程反馈"
+
+#~ msgid "Product Quantity"
+#~ msgstr "产品数量"
+
+#~ msgid "from stock: products assigned."
+#~ msgstr "来自库存：产品已分配"
+
+#~ msgid "Futur Deliveries"
+#~ msgstr "计划交货"
+
+#~ msgid "File Name"
+#~ msgstr "文件名"
+
+#~ msgid "Invoice is not created"
+#~ msgstr "没有创建发票"
+
+#~ msgid "September"
+#~ msgstr "九月"
+
+#~ msgid "Unit Product Price"
+#~ msgstr "产品单价"
+
+#~ msgid "Couldn't send mail because your email address is not configured!"
+#~ msgstr "不能发送邮件因为您的邮件地址没有配置！"
+
+#~ msgid "Received Qty"
+#~ msgstr "已接收数量"
+
+#~ msgid ""
+#~ "The production is in \"%s\" state. You can not change the production "
+#~ "quantity anymore"
+#~ msgstr "产品状态为 \"%s\"，您不能再更改产品数量"
+
+#~ msgid "Products: "
+#~ msgstr "产品列表： "
+
+#~ msgid "UnknownError"
+#~ msgstr "未知错误"
+
+#~ msgid "P&L Qty"
+#~ msgstr "益损数量"
+
+#~ msgid "No production sequence defined"
+#~ msgstr "无生产序列定义"
+
+#~ msgid "Product Cost Structure"
+#~ msgstr "产品成本构成"
+
+#~ msgid "A sign-out must be right after a sign-in !"
+#~ msgstr "签入时间必须在签出之后！"
+
+#~ msgid "Error, no partner !"
+#~ msgstr "错误，无业务伙伴！"
+
+#~ msgid "Message !"
+#~ msgstr "消息！"
+
+#~ msgid "You have to provide an account for the write off entry !"
+#~ msgstr "您必须指定一个坏账准备科目"
+
+#~ msgid "Error!"
+#~ msgstr "错误！"
+
+#~ msgid ""
+#~ "You can not escalate this case.\n"
+#~ "You are already at the top level."
+#~ msgstr "您不能提升已在最高层次的案例。"
+
+#~ msgid "Key/value '%s' not found in selection field '%s'"
+#~ msgstr "键/值对 '%s' 并未包含在选定的字段 '%s' 中"
+
+#~ msgid "Can't connect instance %s"
+#~ msgstr "无法连接实例 %s"
+
+#~ msgid "You need to choose a model"
+#~ msgstr "您需要选择一个模型"
+
+#~ msgid "No enough data"
+#~ msgstr "没有足够的数据"
+
+#~ msgid "Module Name"
+#~ msgstr "模块名称"
+
+#~ msgid "Bad account!"
+#~ msgstr "无效科目！"
+
+#~ msgid ""
+#~ "\n"
+#~ "\n"
+#~ "Mail sent to following Partners successfully, !\n"
 #~ "\n"
 #~ msgstr ""
-#~ "给业务伙伴所有电子邮件已发送成功：\n"
+#~ "\n"
+#~ "\n"
+#~ "如下业务伙伴的邮件已发送成功！\n"
 #~ "\n"
 
-#~ msgid "Unable to reconcile entry \"%s\": %.2f"
-#~ msgstr "无法对帐分录“%s“：%.2f"
+#~ msgid "No bank account for the company."
+#~ msgstr "此公司没有银行帐号。"
 
-#~ msgid "You can not remove a lot line !"
-#~ msgstr "您不能删除批次明细!"
+#~ msgid "You can't modify this order. It has already been paid"
+#~ msgstr "您不能修改此订单，它已经付款。"
 
-#~ msgid "Merging is only allowed on draft inventories."
-#~ msgstr "只允许合并草搞盘存"
+#~ msgid "unable to find a server"
+#~ msgstr "无法找到服务器"
 
-#~ msgid ""
-#~ "No period defined for this date !\n"
-#~ "Please create a fiscal year."
-#~ msgstr ""
-#~ "未定义该日期的期间！\n"
-#~ "请创建一个会计年度。"
+#~ msgid "Method Test"
+#~ msgstr "方法测试"
 
-#~ msgid "Some entries are already reconciled !"
-#~ msgstr "一些分录已经对账完成！"
+#~ msgid "Please fill in the Address field in the Partner: %s."
+#~ msgstr "请填写业务伙伴 %s 的地址字段"
 
-#~ msgid "SUBTOTAL"
-#~ msgstr "小计"
+#~ msgid "You can not add/modify entries in a closed journal."
+#~ msgstr "在已结帐的日记帐中您不能加/改分录了。"
 
-#~ msgid "Delivered Qty"
-#~ msgstr "已交货数量"
-
-#~ msgid "Unable to delete non uninstalled instances"
-#~ msgstr "无法删除未安装的实例"
-
-#~ msgid "Packing Information !"
-#~ msgstr "分拣信息！"
-
-#~ msgid "You have to select a partner in the repair form !"
-#~ msgstr "在维修表单您必须选定一个业务伙伴！"
-
-#~ msgid "This image has been created by the synchronization wizard"
-#~ msgstr "该影像已由同步向导创建"
-
-#~ msgid "Invoice state"
-#~ msgstr "发票状态"
-
-#~ msgid "You can not delete this case. You should better cancel it."
-#~ msgstr "您不能删除此案例。您最好取消它。"
-
-#~ msgid "You can not change the tax, you should remove and recreate lines !"
-#~ msgstr "您不能更改此税目，请移除并重新创建分录！"
-
-#~ msgid "Cannot delete invoice(s) that are already opened or paid !"
-#~ msgstr "无法删除已开据的或已付款的发票！"
-
-#~ msgid "Cannot delete an order line which is %s !"
-#~ msgstr "无法删除销售订单明细%s！"
-
-#~ msgid ""
-#~ "There is no expense account define ' "
-#~ "\\n                                    'for this product: \"%s\" (id:%d)"
-#~ msgstr "未定义此产品“%s“（标识：%d）的费用科目"
-
-#~ msgid ""
-#~ "You cannot delete an indicator history record. You may have to delete the "
-#~ "concerned Indicator!"
-#~ msgstr "您不能删除已标记历史记录。您可能要先删除关联的标记！"
-
-#~ msgid ""
-#~ "You cannot enter an attendance ' \\n                        'date outside "
-#~ "the current timesheet dates!"
-#~ msgstr "您不能输入现有工作时间记录表日期之外的出勤记录！"
-
-#~ msgid "You can not modify an invoiced analytic line!"
-#~ msgstr "您不能修改已开发票的分析明细！"
-
-#~ msgid "Create line failed !"
-#~ msgstr "创建明细失败！"
-
-#~ msgid "No sequence defined in the journal !"
-#~ msgstr "未定义日记账的序列！"
-
-#~ msgid "Result (/1)"
-#~ msgstr "结果（/１）"
-
-#~ msgid "You can not create this kind of document"
-#~ msgstr "您不能创建此类型的文档!"
-
-#~ msgid "Couldn't find bill of material for product"
-#~ msgstr "无法找到产品的物料清单"
-
-#~ msgid ""
-#~ "You have to define a Default Debit Account for your Financial Journals!\n"
-#~ msgstr "您必须设定财务日记账的默认借方科目！\n"
-
-#~ msgid "No Partner Defined !"
-#~ msgstr "未定义业务伙伴！"
-
-#~ msgid "The sign-out date must be in the past"
-#~ msgstr "签出必须在过去的某个时间"
-
-#~ msgid "Login failed!"
-#~ msgstr "登录失败！"
-
-#~ msgid ""
-#~ "Language with code \"%s\" is not defined in your system !\n"
-#~ "Define it through the Administration menu."
-#~ msgstr ""
-#~ "在您的系统有“%s“编码的语言未定义！\n"
-#~ "请通过管理菜单设定它。"
-
-#~ msgid ""
-#~ "Couldn't send mail because the contact for this task (%s) has no email "
-#~ "address!"
-#~ msgstr "无法发送邮件因为任务 %s 的联系人信息不包含电子邮件地址！"
-
-#~ msgid "Alert for ' + product_info.name +' !"
-#~ msgstr "'product_info.name +'的警报！"
-
-#~ msgid "1"
-#~ msgstr "1"
-
-#~ msgid "PEP-8 Test"
-#~ msgstr "PEP-8测试"
-
-#~ msgid ""
-#~ "You have to select a customer in the sale form !\n"
-#~ "Please set one customer before choosing a product."
-#~ msgstr ""
-#~ "您在销售订单必须选定一个客户！\n"
-#~ "请先指定一个客户然后选择产品。"
-
-#~ msgid "Analytic Entries"
-#~ msgstr "分析分录"
-
-#~ msgid ""
-#~ "You can not cancel this holiday request. first You have to make its case "
-#~ "in draft state."
-#~ msgstr "您不能取消该假日申请，您应先把它置于草稿状态。"
-
-#~ msgid "No action found"
-#~ msgstr "找不到动作"
-
-#~ msgid "The date of your account move is not in the defined period !"
-#~ msgstr "分录日期不在定义期间内！"
-
-#~ msgid "October"
-#~ msgstr "十月"
-
-#~ msgid "August"
-#~ msgstr "八月"
-
-#~ msgid "No Customer Defined !"
-#~ msgstr "未定义客户！"
-
-#~ msgid "You have to define an analytic journal on the '%s' journal!"
-#~ msgstr "你必须为“%s“日记账定义一本分析日记账！"
-
-#~ msgid "The module does not contain the __terp__.py file"
-#~ msgstr "模块不包含__terp__.py文档"
-
-#~ msgid "Configuration of the DNS servers"
-#~ msgstr "DNS服务器配置"
-
-#~ msgid "Configuration of the incremental backup servers"
-#~ msgstr "增量备份服务器配置"
-
-#~ msgid "The Buyer \"%s\" has no Invoice Address."
-#~ msgstr "买方“%s“没有发票地址。"
-
-#~ msgid "You are not authorized to create module repositories"
-#~ msgstr "您未被授权创建模块软件库"
-
-#~ msgid "You are not authorized to copy module repositories"
-#~ msgstr "您未被授权复制模块软件库"
-
-#~ msgid "You are not authorized to unlink module repositories"
-#~ msgstr "您未被授权解链模块软件库"
-
-#~ msgid ""
-#~ "You must provide ' \\n\t\t\t\t\t\t'a Clearing Number\n"
-#~ "' \\n\t\t\t\t\t\t'for the partner bank: %s\n"
-#~ "' \\n\t\t\t\t\t\t'on line %s"
-#~ msgstr ""
-#~ "您应该提供 ' \\n\t\t\t\t\t\t'一个结算号\n"
-#~ "' \\n\t\t\t\t\t\t'为业务伙伴银行： %s\n"
-#~ "' \\n\t\t\t\t\t\t'在行 %s"
-
-#~ msgid "No product in this location."
-#~ msgstr "该货位没有产品"
-
-#~ msgid ""
-#~ "You tried to sign with a date anterior to another event !\n"
-#~ "Try to contact the administrator to correct attendances."
-#~ msgstr ""
-#~ "您试图登录其他事件之前的日期！\n"
-#~ "为修正出席请联系统管理员。"
-
-#~ msgid "No Workflow define"
-#~ msgstr "未定义工作流"
-
-#~ msgid "Wrong Source Document !"
-#~ msgstr "不正确的来源单据！"
-
-#~ msgid ""
-#~ "No analytic journal available for this employee.\n"
-#~ "Define an employee for the selected user and assign an analytic journal."
-#~ msgstr ""
-#~ "此员工无分析日记账可用。\n"
-#~ "请为选定的用户定义一个员工然后指定分析日记账。"
-
-#~ msgid "You must first cancel all invoices attached to this purchase order."
-#~ msgstr "您必须先取消此采购订单附加的所有发票。"
-
-#~ msgid "Checking your Promotional Code"
-#~ msgstr "正在检查您的促销编码"
-
-#~ msgid "Production Order Cannot start in [%s] state"
-#~ msgstr "生产单不能在［%s］状态开始"
-
-#~ msgid "Open"
-#~ msgstr "未结"
-
-#~ msgid "No partner !"
-#~ msgstr "无业务伙伴！"
-
-#~ msgid "File name must be unique!"
-#~ msgstr "文档名称必不能重复！"
-
-#~ msgid "The carrier %s (id: %d) has no delivery grid!"
-#~ msgstr "运送者%s（标识：%d）无交货格子！"
-
-#~ msgid "Value Error"
-#~ msgstr "值错误"
-
-#~ msgid "Product supplier"
-#~ msgstr "产品供应商"
-
-#~ msgid ""
-#~ "You must provide ' \\n\t\t\t\t\t\t\t'a bank number \n"
-#~ "' \\n\t\t\t\t\t\t\t'for the partner bank: %s\n"
-#~ "' \\n\t\t\t\t\t\t\t'on line: %s"
-#~ msgstr ""
-#~ "您应该提供'\\n\t\t\t\t\t\t\t'一个银行帐号 \n"
-#~ "' \\n\t\t\t\t\t\t\t'业务伙伴银行：%s\n"
-#~ "' \\n\t\t\t\t\t\t\t'在行：%s"
-
-#~ msgid "Configuration of the server"
-#~ msgstr "服务器配置"
-
-#~ msgid "Balance product needed"
-#~ msgstr "所需余额产品"
-
-#~ msgid "Missed Address !"
-#~ msgstr "遗漏地址！"
-
-#~ msgid ""
-#~ "Selected Move lines does not have any account move enties in draft state"
-#~ msgstr "在选定行中无草稿状态的分录"
-
-#~ msgid ""
-#~ "No fiscal year defined for this date !\n"
-#~ "Please create one."
-#~ msgstr ""
-#~ "此日期未经会计年度定义！\n"
-#~ "\"请创建一个。"
-
-#~ msgid "Please select one and only one inventory !"
-#~ msgstr "请只选定一个盘存"
-
-#~ msgid "Please verify that an account is defined in the journal."
-#~ msgstr "请确认日记账中已定义科目。"
-
-#~ msgid "Please create an invoice for this sale."
-#~ msgstr "请为此销售单创建发票。"
-
-#~ msgid "January"
-#~ msgstr "一月"
-
-#~ msgid "No Data Available"
-#~ msgstr "无数据可用"
-
-#~ msgid "Unable to create invoice (partner has no address)."
-#~ msgstr "无法创建发票（业务伙伴无地址）"
-
-#~ msgid "Missing info: Test Instance"
-#~ msgstr "缺少信息：测试实例"
-
-#~ msgid "No line matched this order in the choosed delivery grids !"
-#~ msgstr "选定交货框架中无相配此销售订单的行！"
-
-#~ msgid "Registration of your account"
-#~ msgstr "账户注册"
-
-#~ msgid ""
-#~ "The account move (%s) for centralisation ' "
-#~ "\\n                                        'has been confirmed!"
-#~ msgstr "将集中分录（%s）已确认！"
-
-#~ msgid ""
-#~ "You can't delete this server because it acts as backup for other servers."
-#~ msgstr "因为此服务器是他服务器的备份，您不能删除它。"
-
-#~ msgid ""
-#~ "You cannot make an advance on a sale order that is defined as 'Automatic "
-#~ "Invoice after delivery'."
-#~ msgstr "不能创建预付款发漂为定义“发货后自动发票”的销售订单。"
-
-#~ msgid "Date not in a defined fiscal year"
-#~ msgstr "日期不在任何已定义的会计年度内"
-
-#~ msgid ""
-#~ "No journal defined on the related employee.\n"
-#~ "Fill in the timesheet tab of the employee form."
-#~ msgstr ""
-#~ "未定义相关员工日记账。\n"
-#~ "请填好员工表格的工作时间记录表。"
-
-#~ msgid "A partner is already defined on this lead."
-#~ msgstr "此索线已定义业务伙伴"
-
-#~ msgid "Product Margins"
-#~ msgstr "产品毛利"
-
-#~ msgid "The account is not defined to be reconciled !"
-#~ msgstr "科目未设定为可对帐！"
-
-#~ msgid ""
-#~ "There is no journal defined '\\n                            'on the "
-#~ "product category: \"%s\" (id: %d)"
-#~ msgstr "产品类别：“%s“（识别码：%d）未定义日记账"
-
-#~ msgid ""
-#~ "No bank defined\n"
-#~ "' \\n\t\t\t\t\t'for the bank account: %s\n"
-#~ "' \\n\t\t\t\t\t'on the partner: %s\n"
-#~ "' \\n\t\t\t\t\t'on line: %s"
-#~ msgstr ""
-#~ "未定义银行\n"
-#~ "' \\n\t\t\t\t\t'银行帐户：%s\n"
-#~ "' \\n\t\t\t\t\t'业务伙伴：%s\n"
-#~ "' \\n\t\t\t\t\t'行：%s"
-
-#~ msgid "Unable to create your control center user"
-#~ msgstr "无法创建您控制中心的用户"
-
-#~ msgid "The journal must have centralised counterpart"
-#~ msgstr "该日记账必须有集中的对方"
-
-#~ msgid "The region should be in "
-#~ msgstr "该地区应该在 "
-
-#~ msgid "Cannot delete a point of sale which is already confirmed !"
-#~ msgstr "无法删除已确认的销售终端"
-
-#~ msgid ""
-#~ "There is no receivable account defined for this "
-#~ "journal:'\\n                    ' \"%s\" (id:%d)"
-#~ msgstr "未定义此日记账“%s”(识别码:%d)的应收账款科目"
-
-#~ msgid "Missing info: Subscription"
-#~ msgstr "缺少信息： 签署预订"
-
-#~ msgid "Invalid Region"
-#~ msgstr "地区无效"
-
-#~ msgid "You can not modify/delete a journal with entries for this period !"
-#~ msgstr "您不能修改/删除有此期间分录的日记账！"
-
-#~ msgid "Date to must be set between %s and %s"
-#~ msgstr "必须在%s至%s之间设置日期"
-
-#~ msgid ""
-#~ "No E-Mail ID Found for your Company address or missing reply address in "
-#~ "section!"
-#~ msgstr "无您公司地址的电子邮件识别码或章节缺少回复地址!"
-
-#~ msgid "Connection to WWW.Auction-in-Europe.com failed !"
-#~ msgstr "连接到www.auction-in-europe.com失败！"
-
-#~ msgid "Your journal must have a default credit and debit account."
-#~ msgstr "您的日记帐必须有默认贷方和借方科目。"
-
-#~ msgid "No Analytic Journal !"
-#~ msgstr "无分析日记账！"
-
-#~ msgid ""
-#~ "You can not do this modification on a confirmed entry ! Please note that "
-#~ "you can just change some non important fields !"
-#~ msgstr ""
-#~ "您不能修改该已确认记录的字段！\r\n"
-#~ "您只能修改一些非重要字段！"
-
-#~ msgid "invalid mode for test_state"
-#~ msgstr "无效测试状态模式"
-
-#~ msgid ""
-#~ "You have to define a Default Credit Account for your Financial Journals!\n"
-#~ msgstr "您需要设定财务日记账的默认贷方科目！\n"
-
-#~ msgid "The properties account payable account receivable"
-#~ msgstr "应付账款和应收账款属性"
-
-#~ msgid "A model having this name and code already exists !"
-#~ msgstr "有该名称和代码的模块已经存在！"
-
-#~ msgid "TOTAL"
-#~ msgstr "总计"
-
-#~ msgid "Created by the synchronization wizard"
-#~ msgstr "由同步向导创建"
-
-#~ msgid "SAJ"
-#~ msgstr "SAJ"
-
-#~ msgid ""
-#~ "You did not installed the opportunities tracking when you configured the "
-#~ "crm_configuration module.' \\n                  '\n"
-#~ "I can not convert the lead to an opportunity, you must create a section "
-#~ "with the code 'oppor'."
-#~ msgstr ""
-#~ "您在配置crm_configuration模块时未安装商机跟踪。'\\n'\n"
-#~ "我无法将索线转换为商机，您必须创建一个章节含有'oppor'代码。"
-
-#~ msgid "Eff. Hours"
-#~ msgstr "有效小时数"
-
-#~ msgid "You can not set negative Duration."
-#~ msgstr "您无法设定负性期限。"
-
-#~ msgid "Too much total record found!"
-#~ msgstr "读取太多总计记录"
-
-#~ msgid "The General Budget '%s' has no Accounts!"
-#~ msgstr "总预算’%s‘未设定科目！"
-
-#~ msgid "You can not sign in from an other date than today"
-#~ msgstr "你只能用今天的日期登入系统"
-
-#~ msgid "No partner has a VAT Number asociated with him."
-#~ msgstr "无指定增值税编码的业务伙伴"
-
-#~ msgid ""
-#~ "You must assign a partner to this lead before converting to opportunity.\n"
-#~ "' \\n                  'You can use the convert to partner button."
-#~ msgstr ""
-#~ "你必须在线索转换为商机前指定一名业务伙伴。\n"
-#~ "'\\n'您可以使用转换为为业务伙伴按钮。"
+#~ msgid "You can not use this general account in this journal !"
+#~ msgstr "在此日记帐您不能用该总账科目！"
 
 #~ msgid ""
 #~ "''\n"
@@ -8784,315 +8296,816 @@ msgstr "短信网关：clickatell"
 #~ "\n"
 #~ "(c) 2003-今天，Fabien Pinckaers - Tiny sprl"
 
-#~ msgid "You can not use this general account in this journal !"
-#~ msgstr "在此日记帐您不能用该总账科目！"
+#~ msgid ""
+#~ "You must assign a partner to this lead before converting to opportunity.\n"
+#~ "' \\n                  'You can use the convert to partner button."
+#~ msgstr ""
+#~ "你必须在线索转换为商机前指定一名业务伙伴。\n"
+#~ "'\\n'您可以使用转换为为业务伙伴按钮。"
 
-#~ msgid "You can not add/modify entries in a closed journal."
-#~ msgstr "在已结帐的日记帐中您不能加/改分录了。"
+#~ msgid "No partner has a VAT Number asociated with him."
+#~ msgstr "无指定增值税编码的业务伙伴"
 
-#~ msgid "Please fill in the Address field in the Partner: %s."
-#~ msgstr "请填写业务伙伴 %s 的地址字段"
+#~ msgid "You can not sign in from an other date than today"
+#~ msgstr "你只能用今天的日期登入系统"
 
-#~ msgid "Method Test"
-#~ msgstr "方法测试"
+#~ msgid "The General Budget '%s' has no Accounts!"
+#~ msgstr "总预算’%s‘未设定科目！"
 
-#~ msgid "unable to find a server"
-#~ msgstr "无法找到服务器"
+#~ msgid "Too much total record found!"
+#~ msgstr "读取太多总计记录"
 
-#~ msgid "You can't modify this order. It has already been paid"
-#~ msgstr "您不能修改此订单，它已经付款。"
+#~ msgid "You can not set negative Duration."
+#~ msgstr "您无法设定负性期限。"
 
-#~ msgid "No bank account for the company."
-#~ msgstr "此公司没有银行帐号。"
+#~ msgid "Eff. Hours"
+#~ msgstr "有效小时数"
 
 #~ msgid ""
-#~ "\n"
-#~ "\n"
-#~ "Mail sent to following Partners successfully, !\n"
+#~ "You did not installed the opportunities tracking when you configured the "
+#~ "crm_configuration module.' \\n                  '\n"
+#~ "I can not convert the lead to an opportunity, you must create a section "
+#~ "with the code 'oppor'."
+#~ msgstr ""
+#~ "您在配置crm_configuration模块时未安装商机跟踪。'\\n'\n"
+#~ "我无法将索线转换为商机，您必须创建一个章节含有'oppor'代码。"
+
+#~ msgid "SAJ"
+#~ msgstr "SAJ"
+
+#~ msgid "Created by the synchronization wizard"
+#~ msgstr "由同步向导创建"
+
+#~ msgid "TOTAL"
+#~ msgstr "总计"
+
+#~ msgid "A model having this name and code already exists !"
+#~ msgstr "有该名称和代码的模块已经存在！"
+
+#~ msgid "The properties account payable account receivable"
+#~ msgstr "应付账款和应收账款属性"
+
+#~ msgid ""
+#~ "You have to define a Default Credit Account for your Financial Journals!\n"
+#~ msgstr "您需要设定财务日记账的默认贷方科目！\n"
+
+#~ msgid "invalid mode for test_state"
+#~ msgstr "无效测试状态模式"
+
+#~ msgid ""
+#~ "You can not do this modification on a confirmed entry ! Please note that "
+#~ "you can just change some non important fields !"
+#~ msgstr ""
+#~ "您不能修改该已确认记录的字段！\r\n"
+#~ "您只能修改一些非重要字段！"
+
+#~ msgid "No Analytic Journal !"
+#~ msgstr "无分析日记账！"
+
+#~ msgid "Your journal must have a default credit and debit account."
+#~ msgstr "您的日记帐必须有默认贷方和借方科目。"
+
+#~ msgid "Connection to WWW.Auction-in-Europe.com failed !"
+#~ msgstr "连接到www.auction-in-europe.com失败！"
+
+#~ msgid ""
+#~ "No E-Mail ID Found for your Company address or missing reply address in "
+#~ "section!"
+#~ msgstr "无您公司地址的电子邮件识别码或章节缺少回复地址!"
+
+#~ msgid "Date to must be set between %s and %s"
+#~ msgstr "必须在%s至%s之间设置日期"
+
+#~ msgid "You can not modify/delete a journal with entries for this period !"
+#~ msgstr "您不能修改/删除有此期间分录的日记账！"
+
+#~ msgid "Invalid Region"
+#~ msgstr "地区无效"
+
+#~ msgid "Missing info: Subscription"
+#~ msgstr "缺少信息： 签署预订"
+
+#~ msgid ""
+#~ "There is no receivable account defined for this "
+#~ "journal:'\\n                    ' \"%s\" (id:%d)"
+#~ msgstr "未定义此日记账“%s”(识别码:%d)的应收账款科目"
+
+#~ msgid "Cannot delete a point of sale which is already confirmed !"
+#~ msgstr "无法删除已确认的销售终端"
+
+#~ msgid "The region should be in "
+#~ msgstr "该地区应该在 "
+
+#~ msgid "The journal must have centralised counterpart"
+#~ msgstr "该日记账必须有集中的对方"
+
+#~ msgid "Unable to create your control center user"
+#~ msgstr "无法创建您控制中心的用户"
+
+#~ msgid ""
+#~ "No bank defined\n"
+#~ "' \\n\t\t\t\t\t'for the bank account: %s\n"
+#~ "' \\n\t\t\t\t\t'on the partner: %s\n"
+#~ "' \\n\t\t\t\t\t'on line: %s"
+#~ msgstr ""
+#~ "未定义银行\n"
+#~ "' \\n\t\t\t\t\t'银行帐户：%s\n"
+#~ "' \\n\t\t\t\t\t'业务伙伴：%s\n"
+#~ "' \\n\t\t\t\t\t'行：%s"
+
+#~ msgid ""
+#~ "There is no journal defined '\\n                            'on the "
+#~ "product category: \"%s\" (id: %d)"
+#~ msgstr "产品类别：“%s“（识别码：%d）未定义日记账"
+
+#~ msgid "The account is not defined to be reconciled !"
+#~ msgstr "科目未设定为可对帐！"
+
+#~ msgid "Product Margins"
+#~ msgstr "产品毛利"
+
+#~ msgid "A partner is already defined on this lead."
+#~ msgstr "此索线已定义业务伙伴"
+
+#~ msgid ""
+#~ "No journal defined on the related employee.\n"
+#~ "Fill in the timesheet tab of the employee form."
+#~ msgstr ""
+#~ "未定义相关员工日记账。\n"
+#~ "请填好员工表格的工作时间记录表。"
+
+#~ msgid "Date not in a defined fiscal year"
+#~ msgstr "日期不在任何已定义的会计年度内"
+
+#~ msgid ""
+#~ "You cannot make an advance on a sale order that is defined as 'Automatic "
+#~ "Invoice after delivery'."
+#~ msgstr "不能创建预付款发漂为定义“发货后自动发票”的销售订单。"
+
+#~ msgid ""
+#~ "You can't delete this server because it acts as backup for other servers."
+#~ msgstr "因为此服务器是他服务器的备份，您不能删除它。"
+
+#~ msgid ""
+#~ "The account move (%s) for centralisation ' "
+#~ "\\n                                        'has been confirmed!"
+#~ msgstr "将集中分录（%s）已确认！"
+
+#~ msgid "Registration of your account"
+#~ msgstr "账户注册"
+
+#~ msgid "No line matched this order in the choosed delivery grids !"
+#~ msgstr "选定交货框架中无相配此销售订单的行！"
+
+#~ msgid "Missing info: Test Instance"
+#~ msgstr "缺少信息：测试实例"
+
+#~ msgid "Unable to create invoice (partner has no address)."
+#~ msgstr "无法创建发票（业务伙伴无地址）"
+
+#~ msgid "No Data Available"
+#~ msgstr "无数据可用"
+
+#~ msgid "January"
+#~ msgstr "一月"
+
+#~ msgid "Please create an invoice for this sale."
+#~ msgstr "请为此销售单创建发票。"
+
+#~ msgid "Please verify that an account is defined in the journal."
+#~ msgstr "请确认日记账中已定义科目。"
+
+#~ msgid "Please select one and only one inventory !"
+#~ msgstr "请只选定一个盘存"
+
+#~ msgid ""
+#~ "No fiscal year defined for this date !\n"
+#~ "Please create one."
+#~ msgstr ""
+#~ "此日期未经会计年度定义！\n"
+#~ "\"请创建一个。"
+
+#~ msgid ""
+#~ "Selected Move lines does not have any account move enties in draft state"
+#~ msgstr "在选定行中无草稿状态的分录"
+
+#~ msgid "Missed Address !"
+#~ msgstr "遗漏地址！"
+
+#~ msgid "Balance product needed"
+#~ msgstr "所需余额产品"
+
+#~ msgid "Configuration of the server"
+#~ msgstr "服务器配置"
+
+#~ msgid ""
+#~ "You must provide ' \\n\t\t\t\t\t\t\t'a bank number \n"
+#~ "' \\n\t\t\t\t\t\t\t'for the partner bank: %s\n"
+#~ "' \\n\t\t\t\t\t\t\t'on line: %s"
+#~ msgstr ""
+#~ "您应该提供'\\n\t\t\t\t\t\t\t'一个银行帐号 \n"
+#~ "' \\n\t\t\t\t\t\t\t'业务伙伴银行：%s\n"
+#~ "' \\n\t\t\t\t\t\t\t'在行：%s"
+
+#~ msgid "Product supplier"
+#~ msgstr "产品供应商"
+
+#~ msgid "Value Error"
+#~ msgstr "值错误"
+
+#~ msgid "The carrier %s (id: %d) has no delivery grid!"
+#~ msgstr "运送者%s（标识：%d）无交货格子！"
+
+#~ msgid "File name must be unique!"
+#~ msgstr "文档名称必不能重复！"
+
+#~ msgid "No partner !"
+#~ msgstr "无业务伙伴！"
+
+#~ msgid "Open"
+#~ msgstr "未结"
+
+#~ msgid "Production Order Cannot start in [%s] state"
+#~ msgstr "生产单不能在［%s］状态开始"
+
+#~ msgid "Checking your Promotional Code"
+#~ msgstr "正在检查您的促销编码"
+
+#~ msgid "You must first cancel all invoices attached to this purchase order."
+#~ msgstr "您必须先取消此采购订单附加的所有发票。"
+
+#~ msgid ""
+#~ "No analytic journal available for this employee.\n"
+#~ "Define an employee for the selected user and assign an analytic journal."
+#~ msgstr ""
+#~ "此员工无分析日记账可用。\n"
+#~ "请为选定的用户定义一个员工然后指定分析日记账。"
+
+#~ msgid "Wrong Source Document !"
+#~ msgstr "不正确的来源单据！"
+
+#~ msgid "No Workflow define"
+#~ msgstr "未定义工作流"
+
+#~ msgid ""
+#~ "You tried to sign with a date anterior to another event !\n"
+#~ "Try to contact the administrator to correct attendances."
+#~ msgstr ""
+#~ "您试图登录其他事件之前的日期！\n"
+#~ "为修正出席请联系统管理员。"
+
+#~ msgid "No product in this location."
+#~ msgstr "该货位没有产品"
+
+#~ msgid ""
+#~ "You must provide ' \\n\t\t\t\t\t\t'a Clearing Number\n"
+#~ "' \\n\t\t\t\t\t\t'for the partner bank: %s\n"
+#~ "' \\n\t\t\t\t\t\t'on line %s"
+#~ msgstr ""
+#~ "您应该提供 ' \\n\t\t\t\t\t\t'一个结算号\n"
+#~ "' \\n\t\t\t\t\t\t'为业务伙伴银行： %s\n"
+#~ "' \\n\t\t\t\t\t\t'在行 %s"
+
+#~ msgid "You are not authorized to unlink module repositories"
+#~ msgstr "您未被授权解链模块软件库"
+
+#~ msgid "You are not authorized to copy module repositories"
+#~ msgstr "您未被授权复制模块软件库"
+
+#~ msgid "You are not authorized to create module repositories"
+#~ msgstr "您未被授权创建模块软件库"
+
+#~ msgid "The Buyer \"%s\" has no Invoice Address."
+#~ msgstr "买方“%s“没有发票地址。"
+
+#~ msgid "Configuration of the incremental backup servers"
+#~ msgstr "增量备份服务器配置"
+
+#~ msgid "Configuration of the DNS servers"
+#~ msgstr "DNS服务器配置"
+
+#~ msgid "The module does not contain the __terp__.py file"
+#~ msgstr "模块不包含__terp__.py文档"
+
+#~ msgid "You have to define an analytic journal on the '%s' journal!"
+#~ msgstr "你必须为“%s“日记账定义一本分析日记账！"
+
+#~ msgid "No Customer Defined !"
+#~ msgstr "未定义客户！"
+
+#~ msgid "August"
+#~ msgstr "八月"
+
+#~ msgid "October"
+#~ msgstr "十月"
+
+#~ msgid "The date of your account move is not in the defined period !"
+#~ msgstr "分录日期不在定义期间内！"
+
+#~ msgid "No action found"
+#~ msgstr "找不到动作"
+
+#~ msgid ""
+#~ "You can not cancel this holiday request. first You have to make its case "
+#~ "in draft state."
+#~ msgstr "您不能取消该假日申请，您应先把它置于草稿状态。"
+
+#~ msgid "Analytic Entries"
+#~ msgstr "分析分录"
+
+#~ msgid ""
+#~ "You have to select a customer in the sale form !\n"
+#~ "Please set one customer before choosing a product."
+#~ msgstr ""
+#~ "您在销售订单必须选定一个客户！\n"
+#~ "请先指定一个客户然后选择产品。"
+
+#~ msgid "PEP-8 Test"
+#~ msgstr "PEP-8测试"
+
+#~ msgid "1"
+#~ msgstr "1"
+
+#~ msgid "Alert for ' + product_info.name +' !"
+#~ msgstr "'product_info.name +'的警报！"
+
+#~ msgid ""
+#~ "Couldn't send mail because the contact for this task (%s) has no email "
+#~ "address!"
+#~ msgstr "无法发送邮件因为任务 %s 的联系人信息不包含电子邮件地址！"
+
+#~ msgid ""
+#~ "Language with code \"%s\" is not defined in your system !\n"
+#~ "Define it through the Administration menu."
+#~ msgstr ""
+#~ "在您的系统有“%s“编码的语言未定义！\n"
+#~ "请通过管理菜单设定它。"
+
+#~ msgid "Login failed!"
+#~ msgstr "登录失败！"
+
+#~ msgid "The sign-out date must be in the past"
+#~ msgstr "签出必须在过去的某个时间"
+
+#~ msgid "No Partner Defined !"
+#~ msgstr "未定义业务伙伴！"
+
+#~ msgid ""
+#~ "You have to define a Default Debit Account for your Financial Journals!\n"
+#~ msgstr "您必须设定财务日记账的默认借方科目！\n"
+
+#~ msgid "Couldn't find bill of material for product"
+#~ msgstr "无法找到产品的物料清单"
+
+#~ msgid "You can not create this kind of document"
+#~ msgstr "您不能创建此类型的文档!"
+
+#~ msgid "Result (/1)"
+#~ msgstr "结果（/１）"
+
+#~ msgid "No sequence defined in the journal !"
+#~ msgstr "未定义日记账的序列！"
+
+#~ msgid "Create line failed !"
+#~ msgstr "创建明细失败！"
+
+#~ msgid "You can not modify an invoiced analytic line!"
+#~ msgstr "您不能修改已开发票的分析明细！"
+
+#~ msgid ""
+#~ "You cannot enter an attendance ' \\n                        'date outside "
+#~ "the current timesheet dates!"
+#~ msgstr "您不能输入现有工作时间记录表日期之外的出勤记录！"
+
+#~ msgid ""
+#~ "You cannot delete an indicator history record. You may have to delete the "
+#~ "concerned Indicator!"
+#~ msgstr "您不能删除已标记历史记录。您可能要先删除关联的标记！"
+
+#~ msgid ""
+#~ "There is no expense account define ' "
+#~ "\\n                                    'for this product: \"%s\" (id:%d)"
+#~ msgstr "未定义此产品“%s“（标识：%d）的费用科目"
+
+#~ msgid "Cannot delete an order line which is %s !"
+#~ msgstr "无法删除销售订单明细%s！"
+
+#~ msgid "Cannot delete invoice(s) that are already opened or paid !"
+#~ msgstr "无法删除已开据的或已付款的发票！"
+
+#~ msgid "You can not change the tax, you should remove and recreate lines !"
+#~ msgstr "您不能更改此税目，请移除并重新创建分录！"
+
+#~ msgid "You can not delete this case. You should better cancel it."
+#~ msgstr "您不能删除此案例。您最好取消它。"
+
+#~ msgid "Invoice state"
+#~ msgstr "发票状态"
+
+#~ msgid "This image has been created by the synchronization wizard"
+#~ msgstr "该影像已由同步向导创建"
+
+#~ msgid "You have to select a partner in the repair form !"
+#~ msgstr "在维修表单您必须选定一个业务伙伴！"
+
+#~ msgid "Packing Information !"
+#~ msgstr "分拣信息！"
+
+#~ msgid "Unable to delete non uninstalled instances"
+#~ msgstr "无法删除未安装的实例"
+
+#~ msgid "Delivered Qty"
+#~ msgstr "已交货数量"
+
+#~ msgid "SUBTOTAL"
+#~ msgstr "小计"
+
+#~ msgid "Some entries are already reconciled !"
+#~ msgstr "一些分录已经对账完成！"
+
+#~ msgid ""
+#~ "No period defined for this date !\n"
+#~ "Please create a fiscal year."
+#~ msgstr ""
+#~ "未定义该日期的期间！\n"
+#~ "请创建一个会计年度。"
+
+#~ msgid "Merging is only allowed on draft inventories."
+#~ msgstr "只允许合并草搞盘存"
+
+#~ msgid "You can not remove a lot line !"
+#~ msgstr "您不能删除批次明细!"
+
+#~ msgid "Unable to reconcile entry \"%s\": %.2f"
+#~ msgstr "无法对帐分录“%s“：%.2f"
+
+#~ msgid ""
+#~ "All emails have been successfully sent to Partners:.\n"
 #~ "\n"
 #~ msgstr ""
-#~ "\n"
-#~ "\n"
-#~ "如下业务伙伴的邮件已发送成功！\n"
+#~ "给业务伙伴所有电子邮件已发送成功：\n"
 #~ "\n"
 
-#~ msgid "Bad account!"
-#~ msgstr "无效科目！"
+#~ msgid "Unable to change tax !"
+#~ msgstr "无法更改税目!"
 
-#~ msgid "Module Name"
-#~ msgstr "模块名称"
+#~ msgid "This feature is only available for location of type \"Amazon\""
+#~ msgstr "此功能只有类型为“Amazon“的货位可用"
 
-#~ msgid "No enough data"
-#~ msgstr "没有足够的数据"
+#~ msgid "Activation of your subscription"
+#~ msgstr "激活您的订购"
 
-#~ msgid "You need to choose a model"
-#~ msgstr "您需要选择一个模型"
+#~ msgid "No grid matching for this carrier !"
+#~ msgstr "无与该承运人相配的格子"
 
-#~ msgid "Can't connect instance %s"
-#~ msgstr "无法连接实例 %s"
+#~ msgid "Standard Encoding"
+#~ msgstr "标准记账"
 
-#~ msgid "Key/value '%s' not found in selection field '%s'"
-#~ msgstr "键/值对 '%s' 并未包含在选定的字段 '%s' 中"
+#~ msgid "Product uom"
+#~ msgstr "产品计量单位"
 
-#~ msgid ""
-#~ "You can not escalate this case.\n"
-#~ "You are already at the top level."
-#~ msgstr "您不能提升已在最高层次的案例。"
+#~ msgid "Please fill a Balance product in the wizard"
+#~ msgstr "请在向导输入一个余额产品"
 
-#~ msgid "Error!"
-#~ msgstr "错误！"
+#~ msgid "Invoice is already created."
+#~ msgstr "发票已创建"
 
-#~ msgid "You have to provide an account for the write off entry !"
-#~ msgstr "您必须指定一个坏账准备科目"
+#~ msgid "Insufficient Data!"
+#~ msgstr "数据不足！"
 
-#~ msgid "Message !"
-#~ msgstr "消息！"
+#~ msgid "Wed"
+#~ msgstr "周三"
 
-#~ msgid "Error, no partner !"
-#~ msgstr "错误，无业务伙伴！"
+#~ msgid "Product name"
+#~ msgstr "产品名称"
 
-#~ msgid "A sign-out must be right after a sign-in !"
-#~ msgstr "签入时间必须在签出之后！"
+#~ msgid "You must enter a period length that cannot be 0 or below !"
+#~ msgstr "您必须输入的时间长度不能为0或以下!"
 
-#~ msgid "Product Cost Structure"
-#~ msgstr "产品成本构成"
+#~ msgid "Permission Denied !"
+#~ msgstr "权限被拒绝！"
 
-#~ msgid "No production sequence defined"
-#~ msgstr "无生产序列定义"
+#~ msgid "BNK"
+#~ msgstr "银行"
 
-#~ msgid "P&L Qty"
-#~ msgstr "益损数量"
+#~ msgid "Record found after total record!"
+#~ msgstr "发现在总计记录后的记录!"
 
-#~ msgid "UnknownError"
-#~ msgstr "未知错误"
+#~ msgid "The \"use_control\" module is not uninstallable"
+#~ msgstr "无法安装“use_control”模块"
 
-#~ msgid "Products: "
-#~ msgstr "产品列表： "
+#~ msgid "No cost unit defined for this employee !"
+#~ msgstr "为该员工未定义成本单位！"
 
-#~ msgid ""
-#~ "The production is in \"%s\" state. You can not change the production "
-#~ "quantity anymore"
-#~ msgstr "产品状态为 \"%s\"，您不能再更改产品数量"
-
-#~ msgid "Received Qty"
-#~ msgstr "已接收数量"
-
-#~ msgid "Couldn't send mail because your email address is not configured!"
-#~ msgstr "不能发送邮件因为您的邮件地址没有配置！"
-
-#~ msgid "Unit Product Price"
-#~ msgstr "产品单价"
-
-#~ msgid "September"
-#~ msgstr "九月"
-
-#~ msgid "Invoice is not created"
-#~ msgstr "没有创建发票"
-
-#~ msgid "File Name"
-#~ msgstr "文件名"
-
-#~ msgid "Futur Deliveries"
-#~ msgstr "计划交货"
-
-#~ msgid "from stock: products assigned."
-#~ msgstr "来自库存：产品已分配"
-
-#~ msgid "Product Quantity"
-#~ msgstr "产品数量"
-
-#~ msgid "Feed back About Workflow of Module"
-#~ msgstr "关于该模块的工作流程反馈"
-
-#~ msgid "Workcenter name"
-#~ msgstr "工作中心名称"
+#~ msgid "Data Insufficient!"
+#~ msgstr "数据不足！"
 
 #~ msgid ""
-#~ "Could not resolve product category, ' "
-#~ "\\n                                    'you have defined cyclic "
-#~ "categories ' \\n                                    'of products!"
-#~ msgstr "无法决定产品类别, '\\n '您定义的产品类别包括循环的类别！'\\n '"
+#~ "The Payment Term of Supplier does not have Payment Term Lines"
+#~ "(Computation) defined !"
+#~ msgstr "该供应商的 付款方式未定义（计算）付款方式明细！"
 
-#~ msgid "IT sector"
-#~ msgstr "信息技术部门"
-
-#~ msgid "The search method is not implemented on this object !"
-#~ msgstr "该对象尚未实现“search”方法！"
-
-#~ msgid "Titles"
-#~ msgstr "称谓"
-
-#~ msgid "Bad query."
-#~ msgstr "无效的查询。"
-
-#~ msgid "Suppliers Partners"
-#~ msgstr "供应商"
-
-#~ msgid "undefined get method !"
-#~ msgstr "未定义“get”方法！"
-
-#~ msgid "Telecom sector"
-#~ msgstr "电信部门"
-
-#~ msgid "The value \"%s\" for the field \"%s\" is not in the selection"
-#~ msgstr "字段 %s 的值 %s 不在选择之内"
-
-#~ msgid "Error ! You can not create recursive associated members."
-#~ msgstr "错误！您不能创建循环的关联成员。"
-
-#~ msgid "ValidateError"
-#~ msgstr "验证错误"
-
-#~ msgid "Unknown position in inherited view %s !"
-#~ msgstr "在继承视图 %s 中包含未知位置！"
-
-#~ msgid "File Content"
-#~ msgstr "文件内容"
-
-#~ msgid "This method does not exist anymore"
-#~ msgstr "该方法不存在"
-
-#~ msgid "Number too large '%d', can not translate it"
-#~ msgstr "数字“%d”太大，不能转换"
-
-#~ msgid "Bad file format"
-#~ msgstr "无效的文件格式"
-
-#~ msgid "Not implemented get_memory method !"
-#~ msgstr "该对象尚未实现“get_memory“方法！"
-
-#~ msgid "You cannot perform this operation."
-#~ msgstr "您无法执行此项操作。"
-
-#~ msgid "The copy method is not implemented on this object !"
-#~ msgstr "该对象尚未实现“copy”方法！"
-
-#~ msgid "UserError"
+#~ msgid "User Error"
 #~ msgstr "用户错误"
 
-#~ msgid "The name_search method is not implemented on this object !"
-#~ msgstr "该对象尚未实现“name_search“方法！"
-
-#~ msgid "Records were modified in the meanwhile"
-#~ msgstr "记录也同时被修改"
-
-#~ msgid "Addresses"
-#~ msgstr "地址"
-
-#~ msgid "Macedonia"
-#~ msgstr "马其顿"
-
-#~ msgid "Not Implemented"
+#~ msgid "not implemented"
 #~ msgstr "尚未实现"
 
-#~ msgid "The name_get method is not implemented on this object !"
-#~ msgstr "该对象尚未实现“name_get”方法！"
-
-#~ msgid "Couldn't find tag '%s' in parent view !"
-#~ msgstr "未在上级视图中找到标签 '%s'！"
-
-#~ msgid "Wrong ID for the browse record, got %r, expected an integer."
-#~ msgstr "%r 错误的浏览记录标识符，其应该为一个整数。"
-
-#~ msgid "The write method is not implemented on this object !"
-#~ msgstr "该对象尚未实现“write”方法！"
-
-#~ msgid "Error occurred while validating the field(s) %s: %s"
-#~ msgstr "验证字段 %s 时发生错误：%s"
-
-#~ msgid "Grant Access To Menus"
-#~ msgstr "授予菜单访问权"
+#~ msgid "Global taxes defined, but are not in invoice lines !"
+#~ msgstr "已定义全球税目， 但未在发票明细中出现！"
 
 #~ msgid ""
-#~ "You try to install a module that depends on the module: %s.\n"
-#~ "But this module is not available in your system."
-#~ msgstr "您试图安装的一个模块依赖模块： %s，但您的系统中该模块不可用。"
-
-#~ msgid "The create method is not implemented on this object !"
-#~ msgstr "该对象尚未实现“create”方法！"
-
-#~ msgid "Can not define a column %s. Reserved keyword !"
-#~ msgstr "不能定义名为 %s 的列，因为这个名字是保留的关键字。"
-
-#~ msgid "Recursivity Detected."
-#~ msgstr "检测到循环。"
-
-#~ msgid "Please check that all your lines have %d columns."
-#~ msgstr "请确保所有行都有 %d 列。"
-
-#~ msgid "HR sector"
-#~ msgstr "人力资源部门"
-
-#~ msgid "Others Partners"
-#~ msgstr "其他业务伙伴"
-
-#~ msgid "The perm_read method is not implemented on this object !"
-#~ msgstr "该对象尚未实现“perm_read”方法！"
-
-#~ msgid "Not implemented set_memory method !"
-#~ msgstr "尚未实现“set_memory”方法!"
-
-#~ msgid "Not implemented search_memory method !"
-#~ msgstr "尚未实现“search_memory”方法！"
-
-#~ msgid "Attached Model"
-#~ msgstr "附加的模型"
-
-#~ msgid "Attached ID"
-#~ msgstr "附件编号"
-
-#~ msgid ""
-#~ "The sum of the data (2nd field) is null.\n"
-#~ "We can't draw a pie chart !"
+#~ "No bank specified on invoice:\n"
+#~ "%s"
 #~ msgstr ""
-#~ "这些数据的总和（第二个字段）为空。\n"
-#~ "我们无法绘制饼图！"
-
-#~ msgid "You try to bypass an access rule (Document type: %s)."
-#~ msgstr "您尝试跳过访问规则（文档类型：%s）。"
-
-#~ msgid "The read method is not implemented on this object !"
-#~ msgstr "该对象的“read”方法尚未实现！"
-
-#~ msgid "June"
-#~ msgstr "六月"
-
-#~ msgid "No payment mode or payment type code invalid."
-#~ msgstr "无付款方式或付款类型代码无效"
+#~ "发票上未指定银行：\n"
+#~ "%s"
 
 #~ msgid ""
-#~ "There is no income account defined ' "
-#~ "\\n                                        'for this product: \"%s\" (id:%"
-#~ "d)"
-#~ msgstr "该产品：\"%s\"(id:%d) \"\\n\" 未定义收入科目"
+#~ "Please provide another source document.\n"
+#~ "This one does not exist !"
+#~ msgstr "该单据不存在，请提供另外的来源单据！"
 
-#~ msgid "You can not delete posted movement: \"%s\"!"
-#~ msgstr "不能删除已过帐的凭证明细项：\"%s\"！"
+#~ msgid "Task '%s' cancelled"
+#~ msgstr "任务‘%s‘已取消"
 
-#~ msgid "Result (/10)"
-#~ msgstr "结果(/10)"
+#~ msgid "End of Fiscal Year Entry"
+#~ msgstr "会计年尾分录"
+
+#~ msgid "There is no expense account defined for this product: \"%s\" (id:%d)"
+#~ msgstr "未定义此产品“%s“（标识：%d）的费用科目"
+
+#~ msgid "Operation Done"
+#~ msgstr "操作完成"
 
 #~ msgid ""
-#~ "\"\"\n"
-#~ "This test checks if the module classes are raising exception when calling "
-#~ "basic methods or not.\n"
-#~ "\"\""
-#~ msgstr "\"\""
+#~ "Please put a partner on the picking list if you want to generate invoice."
+#~ msgstr "如果想生成发票，请在分拣单填写一家业务伙伴。"
 
-#~ msgid "The unlink method is not implemented on this object !"
-#~ msgstr "此对象尚未实现“unlink”方法！"
+#~ msgid "A partner is already existing with the same name."
+#~ msgstr "已经存在有该名称的业务伙伴"
 
-#~ msgid "The Bank type %s of the bank account: %s is not supported"
-#~ msgstr "不支持银行类型%s（银行账户%s）"
+#~ msgid "You must first cancel all packing attached to this purchase order."
+#~ msgstr "您必须先取消该采购订单所有附加的分拣单。"
 
-#~ msgid "Account move line \"%s\" is not valid"
-#~ msgstr "会计分录\\\"%s\\\"行无效"
+#~ msgid "You are not authorized to write module repositories"
+#~ msgstr "您未被授权写入模块软件库"
 
-#~ msgid "Product quantity"
-#~ msgstr "产品数量"
+#~ msgid ""
+#~ "You try to write on an record that doesn't exist ' "
+#~ "\\n                                        '(Document type: %s)."
+#~ msgstr "您试图写入一个不存在的记录'\\n'（文档类型：%s）。"
 
-#~ msgid "No journal for ending writing has been defined for the fiscal year"
-#~ msgstr "未定义结束会计年度分录的日记帐"
+#~ msgid "Directory name contains special characters!"
+#~ msgstr "目录名包含特殊字符！"
 
-#~ msgid "Main Company"
-#~ msgstr "母公司"
+#~ msgid "Unable to start The Open ERP server without backups"
+#~ msgstr "缺少备份情况下无法启动Open ERP服务器"
+
+#~ msgid "Warning! Not enough demo data"
+#~ msgstr "警报！示范数据不足"
+
+#~ msgid "Return lines"
+#~ msgstr "退回明细"
+
+#~ msgid "Object Test"
+#~ msgstr "对象测试"
+
+#~ msgid ""
+#~ "Please configure Default Expanse account for Product purchase, "
+#~ "`property_account_expense_categ`"
+#~ msgstr ""
+#~ "请为产品采购配置默认成本科目，\r\n"
+#~ "`property_account_expense_categ`"
+
+#~ msgid "Case"
+#~ msgstr "案例"
+
+#~ msgid "cancel"
+#~ msgstr "取消"
+
+#~ msgid ""
+#~ "Please verify the price of the invoice !\n"
+#~ "The real total does not match the computed total."
+#~ msgstr ""
+#~ "请验证发票金额！\n"
+#~ "实际合计金额与计算金额不符。"
+
+#~ msgid "Invoices"
+#~ msgstr "发票"
+
+#~ msgid "Please provide a partner for the sale."
+#~ msgstr "请提供销售订单的业务伙伴。"
+
+#~ msgid "You can not sign out from an other date than today"
+#~ msgstr "您必须用今天的日期退出登录"
+
+#~ msgid "This method can be called with multiple ids"
+#~ msgstr "这方法可被成倍的标识符调用"
+
+#~ msgid "No Records Found for Report!"
+#~ msgstr "未找到该报表所需记录"
+
+#~ msgid ""
+#~ "There is no stock output account defined ' "
+#~ "\\n                                        'for this product: \"%s\" (id: "
+#~ "%d)"
+#~ msgstr "未定义该产品“%s“（标识符：%d）库存输出科目"
+
+#~ msgid "At least one line has no product !"
+#~ msgstr "至少一条无产品!"
+
+#~ msgid "No IBAN for the company bank account."
+#~ msgstr "公司银行账户无IBAN帐号"
+
+#~ msgid ""
+#~ "Please verify that the total difference of the sheet is lower than %.2f !"
+#~ msgstr "请确认工作表的总差低于%.2f！"
+
+#~ msgid "Taxes missing !"
+#~ msgstr "缺少税目！"
+
+#~ msgid "Futur P&L"
+#~ msgstr "计划益损"
+
+#~ msgid "The opening journal must not have any entry in the new fiscal year !"
+#~ msgstr "启用日记账不应有新会计年度的分录。"
+
+#~ msgid "Field name"
+#~ msgstr "字段名称"
+
+#~ msgid "The order state have to be draft to add delivery lines."
+#~ msgstr "订单状态应该是草稿再能加上交货明细"
+
+#~ msgid "Efficient"
+#~ msgstr "有效率的"
+
+#~ msgid "Other Pricelist"
+#~ msgstr "其他价格表"
+
+#~ msgid ""
+#~ "There is no expense account define ' \\n                                "
+#~ "'for this product: \"%s\" (id:%d)"
+#~ msgstr "未定义该产品“%s“（标识符：%d）的成本科目"
+
+#~ msgid "Task '%s' closed"
+#~ msgstr "任务'%s'已关闭"
+
+#~ msgid "You can not create new moves."
+#~ msgstr "你不能创建新的调拨"
+
+#~ msgid "Futur Stock"
+#~ msgstr "预计库存"
+
+#~ msgid "No analytic plan defined !"
+#~ msgstr "未定义分析计划"
+
+#~ msgid "Speed Test"
+#~ msgstr "速度测试"
+
+#~ msgid "Can not export module that is not installed!"
+#~ msgstr "不能导出尚未安装的模块。"
+
+#~ msgid "WARNING:audittrail is not part of the pool"
+#~ msgstr "警报：audittrail 不在 pool 里"
+
+#~ msgid "Please select at least two inventories."
+#~ msgstr "请选择至少2个盘存"
+
+#~ msgid "The exists method is not implemented on this object !"
+#~ msgstr "该对象尚未实现“exists”方法 !"
+
+#~ msgid ""
+#~ "Please fill in the partner and pricelist field '\n"
+#~ "                        'in the analytic account:\n"
+#~ "%s"
+#~ msgstr ""
+#~ "请在分析科目%s\n"
+#~ "填写业务伙伴和价格表字段"
+
+#~ msgid "Bank Journal "
+#~ msgstr "银行日记账 "
+
+#~ msgid ""
+#~ "You can not do this modification on a reconciled entry ! Please note that "
+#~ "you can just change some non important fields !"
+#~ msgstr ""
+#~ "您不能在已对帐的分录做此修改！\r\n"
+#~ "您只能修改一些非重要字段！"
+
+#~ msgid "Could not cancel sale order !"
+#~ msgstr "不能取消销售订单！"
+
+#~ msgid "Closing of states cancelled, please check the box !"
+#~ msgstr "已取消状态关闭过程，请在复选框里打勾！"
+
+#~ msgid ""
+#~ "Can not create an automatic sequence for this piece !\n"
+#~ "\n"
+#~ "Put a sequence in the journal definition for automatic numbering or "
+#~ "create a sequence manually for this piece."
+#~ msgstr ""
+#~ "无法自动创建该分录的序号。\n"
+#~ "\n"
+#~ "为自动编号，请在日记账设定中建一个序列或者手动创建一个序列。"
+
+#~ msgid ""
+#~ "You selected a quantity of %d Units.\n"
+#~ "But it's not compatible with the selected packaging.\n"
+#~ "Here is a proposition of quantities according to the packaging: "
+#~ msgstr ""
+#~ "您已指定%d单位数量。\n"
+#~ "但该数量不符合选定的包装。\n"
+#~ "以下是数量符合包装的方案： "
+
+#~ msgid ""
+#~ "No bank name defined\n"
+#~ "' \\n\t\t\t\t\t'for the bank account: %s\n"
+#~ "' \\n\t\t\t\t\t'on the partner: %s\n"
+#~ "' \\n\t\t\t\t\t'on line: %s"
+#~ msgstr ""
+#~ "未定义银行名称\n"
+#~ "' \\n\t\t\t\t\t'相关银行账户： %s\n"
+#~ "' \\n\t\t\t\t\t'相关业务伙伴： %s\n"
+#~ "' \\n\t\t\t\t\t'行号： %s"
+
+#~ msgid "You do not permissions to write on the server side."
+#~ msgstr "您未被授权在服务器端写入"
+
+#~ msgid "Unable to find a valid period !"
+#~ msgstr "无法找到有效的时间段！"
+
+#~ msgid "No Period found on Invoice!"
+#~ msgstr "发票无指定时间段！"
+
+#~ msgid "No period found !"
+#~ msgstr "未找到时间段！"
+
+#~ msgid ""
+#~ "You cannot enter an attendance ' \\n                            'date "
+#~ "outside the current timesheet dates!"
+#~ msgstr "您不能输入现有工作时间表日期之外的出勤记录！"
+
+#~ msgid "The old fiscal year does not have any entry to reconcile!"
+#~ msgstr "老会计年度没有可对帐的分录！"
+
+#~ msgid "Invoice cannot be created from Packing."
+#~ msgstr "不可根据分拣单创建发票"
+
+#~ msgid "You can not deactivate an account that contains account moves."
+#~ msgstr "您不能使已包含分录的科目无效。"
+
+#~ msgid "Insertion Failed!"
+#~ msgstr "插入失败！"
+
+#~ msgid " Type of ul: "
+#~ msgstr " 货运单位类型： "
+
+#~ msgid "Attention!"
+#~ msgstr "注意！"
+
+#~ msgid ""
+#~ "You must define a reply-to address in order to mail the participant. You "
+#~ "can do this in the Mailing tab of your event. Note that this is also the "
+#~ "place where you can configure your event to not send emails automaticly "
+#~ "while registering"
+#~ msgstr ""
+#~ "为能够发电邮给参加者您必须指定回复地址。您在事件的电邮选页卡可完成上述操"
+#~ "作。\r\n"
+#~ "在这儿您也可以设定事件登录的时候不自动发电邮的行为。"
+
+#~ msgid "Operation is Already Cancelled  !"
+#~ msgstr "操作已取消！"
+
+#~ msgid "Please put a name and a code before saving the model !"
+#~ msgstr "保存模式之前，请输入名称和编码！"
+
+#~ msgid "The Total Should be Between %s and %s"
+#~ msgstr "合计应该在%s和%s之间"
+
+#~ msgid "Object %s does not exists"
+#~ msgstr "对象%s不存在"
+
+#~ msgid "Could not cancel this sale order !"
+#~ msgstr "无法取消该销售订单！"
+
+#~ msgid "Could not cancel purchase order !"
+#~ msgstr "无法取消采购订单！"
+
+#~ msgid "This version of the module is already exist on the server"
+#~ msgstr "此模块版本在服务器已经存在！"
+
+#~ msgid "March"
+#~ msgstr "三月"
+
+#~ msgid "No grid avaible !"
+#~ msgstr "无可用的交货格子！"
+
+#~ msgid "No Default Credit Account !"
+#~ msgstr "无默认贷方科目！"
+
+#~ msgid "Directory name must be unique!"
+#~ msgstr "目录名必须唯一！"
+
+#~ msgid "Partner Functions"
+#~ msgstr "业务伙伴职能"
