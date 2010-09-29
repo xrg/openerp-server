@@ -370,17 +370,6 @@ class module(osv.osv):
                     cr.execute('DELETE FROM ir_module_module_dependency '
                                 'WHERE module_id = %s', (old_mod.id,), debug=self._debug)
                     self._update_dependencies(cr, uid, old_mod.id, new_depends)
-
-                # Web dependencies:
-                old_depends = [ x.name for x in old_mod.web_dependencies_id ]
-                old_depends.sort()
-                new_depends = terp.get('web_depends', [])
-                new_depends.sort()
-                if old_depends != new_depends:
-                    cr.execute('DELETE FROM ir_module_web_dependency '
-                                'WHERE module_id = %s', (old_mod.id,), debug=self._debug)
-                    log.debug("Web dependencies update for module %s..", old_mod.name)
-                    self._update_web_dependencies(cr, uid, old_mod.id, new_depends)
         
                 self._update_category(cr, uid, old_mod.id, terp.get('category', 'Uncategorized'),
                                 old_cat=old_mod.category_id)
