@@ -68,13 +68,14 @@ class ThreadedHTTPServer(ConnThreadingMixIn, SimpleXMLRPCDispatcher, HTTPServer)
     daemon_threads = True
     i = 0
 
-    def __init__(self, addr, requestHandler,
+    def __init__(self, addr, requestHandler, proto='http',
                  logRequests=True, allow_none=False, encoding=None, bind_and_activate=True):
         self.logRequests = logRequests
 
         SimpleXMLRPCDispatcher.__init__(self, allow_none, encoding)
         HTTPServer.__init__(self, addr, requestHandler)
         
+        self.proto = proto
         self._threads = []
         self.__handlers = []
         self.__threadno = 0
@@ -182,7 +183,7 @@ class BaseHttpDaemon(threading.Thread, netsvc.Server):
         self.__interface = interface
 
         try:
-            self.server = ThreadedHTTPServer((interface, port), handler)
+            self.server = ThreadedHTTPServer((interface, port), handler, proto=self._RealProto)
             self.server.vdirs = []
             self.server.logRequests = True
             logging.getLogger("web-services").info(
