@@ -43,6 +43,7 @@ import copy
 import locale
 import logging
 from tools.safe_eval import safe_eval as eval
+from tools import ustr
 import logging
 
 _regex = re.compile('\[\[(.+?)\]\]')
@@ -121,19 +122,19 @@ def _process_text(self, txt):
                 try:
                     expr = sps.pop(0)
                     txt = eval(expr,self.localcontext)
-                    if txt and (isinstance(txt, unicode) or isinstance(txt, str)):
-                        txt = unicode(txt)
+                    if txt and (isinstance(txt, basestring)):
+                        txt = ustr(txt)
                 except Exception,e:
                     logging.getLogger('report').exception("Exception at: %s" % expr)
                 if type(txt)==type('') or type(txt)==type(u''):
                     txt2 = str2xml(txt)
-                    result += unicode(txt2)
+                    result += ustr(txt2)
                 elif (txt is not None) and (txt is not False):
-                    result += unicode(txt)
+                    result += ustr(txt)
         return result
 
 def text_get(node):
-    return ''.join([unicode(n.text) for n in node])
+    return ''.join([ustr(n.text) for n in node])
 
 units = [
     (re.compile('^(-?[0-9\.]+)\s*in$'), reportlab.lib.units.inch),
