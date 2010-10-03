@@ -5,6 +5,7 @@
 #, fuzzy
 msgid ""
 msgstr ""
+"#-#-#-#-#  .merge_file_oTydK1 (OpenERP Server 5.0.4)  #-#-#-#-#\n"
 "#-#-#-#-#  .merge_file_HnToWT (OpenERP Server 5.0.4)  #-#-#-#-#\n"
 "Project-Id-Version: OpenERP Server 5.0.4\n"
 "Report-Msgid-Bugs-To: support@openerp.com\n"
@@ -28,6 +29,18 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Launchpad-Export-Date: 2010-09-29 04:43+0000\n"
+"X-Generator: Launchpad (build Unknown)\n"
+"#-#-#-#-#  .merge_file_Arwl4o (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"Project-Id-Version: OpenERP Server 5.0.4\n"
+"Report-Msgid-Bugs-To: support@openerp.com\n"
+"POT-Creation-Date: 2009-12-18 08:39+0000\n"
+"PO-Revision-Date: 2010-09-29 08:01+0000\n"
+"Last-Translator: OpenERP Administrators <Unknown>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2010-09-30 04:37+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #. module: base
@@ -839,13 +852,8 @@ msgstr "Déclencher sur"
 
 #. module: base
 #: field:ir.actions.server,wkf_model_id:0
-#, fuzzy
 msgid "Workflow On"
-msgstr ""
-"#-#-#-#-#  .merge_file_HnToWT (OpenERP Server 5.0.4)  #-#-#-#-#\n"
-"Diagramme de flux actif\n"
-"#-#-#-#-#  .merge_file_cT78VF (OpenERP Server 5.0.4)  #-#-#-#-#\n"
-"Flux métier sur objet"
+msgstr "Flux métier sur objet"
 
 #. module: base
 #: field:ir.actions.server,write_id:0
@@ -1642,13 +1650,8 @@ msgstr "Méta-Données"
 
 #. module: base
 #: field:ir.values,meta_unpickle:0
-#, fuzzy
 msgid "Metadata"
-msgstr ""
-"#-#-#-#-#  .merge_file_HnToWT (OpenERP Server 5.0.4)  #-#-#-#-#\n"
-"Métadonnées\n"
-"#-#-#-#-#  .merge_file_cT78VF (OpenERP Server 5.0.4)  #-#-#-#-#\n"
-"Méta-données"
+msgstr "Méta-données"
 
 #. module: base
 #: field:ir.values,object:0
@@ -2388,13 +2391,8 @@ msgstr "Sous-flux"
 #. module: base
 #: field:workflow.activity,wkf_id:0 field:workflow.instance,wkf_id:0
 #: view:workflow:0
-#, fuzzy
 msgid "Workflow"
-msgstr ""
-"#-#-#-#-#  .merge_file_HnToWT (OpenERP Server 5.0.4)  #-#-#-#-#\n"
-"Processus\n"
-"#-#-#-#-#  .merge_file_cT78VF (OpenERP Server 5.0.4)  #-#-#-#-#\n"
-"Flux métier"
+msgstr "Flux métier"
 
 #. module: base
 #: field:workflow.instance,uid:0
@@ -3341,7 +3339,6 @@ msgstr "Étiquettes"
 
 #. module: base
 #: model:ir.actions.todo,note:base.config_wizard_simple_view
-#, fuzzy
 msgid ""
 "Choose between the \"Simplified Interface\" or the extended one.\n"
 "If you are testing or using OpenERP for the first time, we suggest you to "
@@ -3351,16 +3348,6 @@ msgid ""
 "understand. You will be able to switch to the extended view later.\n"
 "            "
 msgstr ""
-"#-#-#-#-#  .merge_file_HnToWT (OpenERP Server 5.0.4)  #-#-#-#-#\n"
-"Choisir entre \"Interface Simplifée\" et \"Interface Étendue\".\n"
-"Si vous testez ou utilisez OpenERP pour la première fois, nous vous "
-"suggerons d'utiliser\n"
-"l'interface simplifiée, qui a moins d'option et de champ mais qui sera plus "
-"facile a \n"
-"comprendre. Vous pourrez basculer ultérieurement dans la vue étendu plus "
-"tard.\n"
-"            \n"
-"#-#-#-#-#  .merge_file_cT78VF (OpenERP Server 5.0.4)  #-#-#-#-#\n"
 "Choisissez entre \"Interface Simplifée\" et \"Interface Étendue\".\n"
 "Si vous testez ou utilisez OpenERP pour la première fois, nous vous "
 "suggérons d'utiliser l'interface simplifiée, qui a moins d'options et de "
@@ -8006,79 +7993,65 @@ msgstr "Envoyer des SMS en masse"
 msgid "SMS - Gateway: clickatell"
 msgstr "Passerelle SMS: clickatell"
 
-#~ msgid "Others Partners"
-#~ msgstr "Autres partenaires"
+#~ msgid "Default multi company"
+#~ msgstr "Multi société par défaut"
 
-#~ msgid "Grant Access To Menus"
-#~ msgstr "Droits d'accès aux menus"
+#~ msgid "Name it to easily find a record"
+#~ msgstr "Nommer le facilement pour trouver l'enregistrement"
 
-#~ msgid "Macedonia"
-#~ msgstr "Macédoine"
+#~ msgid "Default Company"
+#~ msgstr "Société par défaut"
 
-#~ msgid "Error ! You can not create recursive associated members."
-#~ msgstr ""
-#~ "Erreur ! Vous ne pouvez pas créer des membres associés de manière "
-#~ "récursive."
+#~ msgid "List of Company"
+#~ msgstr "Liste des sociétés"
 
-#~ msgid "Html from html"
-#~ msgstr "De Html à html"
+#~ msgid "Object affect by this rules"
+#~ msgstr "Objet affecté par cette règle"
 
-#~ msgid "Titles"
-#~ msgstr "Titres"
+#~ msgid "Expression"
+#~ msgstr "Expression"
 
-#~ msgid "The unlink method is not implemented on this object !"
-#~ msgstr "La méthode \"unlink\" n'est pas implémentée dans cet objet !"
+#~ msgid "Company where the user is connected"
+#~ msgstr "Société ou l'utilisateur sera connecté"
 
-#~ msgid "The read method is not implemented on this object !"
-#~ msgstr "La méthode \"read\" n'est pas implémentée dans cet objet !"
+#~ msgid "Company to store the current record"
+#~ msgstr "Société physique ou sera stocké cet enregistrement"
 
-#~ msgid "Attached ID"
-#~ msgstr "ID lié"
+#~ msgid "IT sector"
+#~ msgstr "Secteur IT"
 
-#~ msgid "Attached Model"
-#~ msgstr "Modèle lié"
+#~ msgid "undefined get method !"
+#~ msgstr "Méthode 'get' non définie !"
 
-#~ msgid "Main Company"
-#~ msgstr "Société mère"
+#~ msgid "The value \"%s\" for the field \"%s\" is not in the selection"
+#~ msgstr "La valeur \"%s\" pour le champ \"%s\" n'est pas dans la sélection"
 
-#~ msgid ""
-#~ "You try to install a module that depends on the module: %s.\n"
-#~ "But this module is not available in your system."
-#~ msgstr ""
-#~ "Vous essayez d'installer un module qui dépend du module: %s\n"
-#~ "Mais ce module n'est pas disponible sur votre système."
+#~ msgid "Unknown position in inherited view %s !"
+#~ msgstr "Position inconnue dans la vue héritée %s !"
 
-#~ msgid "Error occurred while validating the field(s) %s: %s"
-#~ msgstr "Une erreur est apparue lors de la validation du/des champ(s) %s: %s"
+#~ msgid "Addresses"
+#~ msgstr "Adresses"
 
-#~ msgid "Wrong ID for the browse record, got %r, expected an integer."
-#~ msgstr ""
-#~ "Mauvais ID pour le parcours de l'enregistrement : %r reçu alors qu'on "
-#~ "attend un entier."
+#~ msgid "Not Implemented"
+#~ msgstr "Non implémenté"
 
-#~ msgid "UserError"
-#~ msgstr "Erreur utilisateur"
+#~ msgid "The name_get method is not implemented on this object !"
+#~ msgstr "La méthode 'name_get' n'est pas implémentée sur cet objet !"
 
-#~ msgid "Partner Functions"
-#~ msgstr "Fonctions de partenaire"
+#~ msgid "Couldn't find tag '%s' in parent view !"
+#~ msgstr "Balise '%s' non trouvée dans la vue parente !"
 
-#~ msgid "Customers Partners"
-#~ msgstr "Partenaires clients"
+#~ msgid "Recursivity Detected."
+#~ msgstr "Récursivité détectée"
 
-#~ msgid "File Content"
-#~ msgstr "Contenu du fichier"
+#~ msgid "Please check that all your lines have %d columns."
+#~ msgstr "Merci de vérifier que toutes vos lignes ont %d colonnes"
 
-#~ msgid "ValidateError"
-#~ msgstr "Erreur de validation"
+#~ msgid "HR sector"
+#~ msgstr "Secteur RH"
 
-#~ msgid "Telecom sector"
-#~ msgstr "Secteur des télécoms"
-
-#~ msgid "Suppliers Partners"
-#~ msgstr "Partenaires fournisseurs"
-
-#~ msgid "The search method is not implemented on this object !"
-#~ msgstr "La méthode \"search\" n'est pas implémentée dans cet objet !"
+#~ msgid "Not implemented set_memory method !"
+#~ msgstr "Méthode 'set_memory' pas implémentée !"
 
 #~ msgid ""
 #~ "The sum of the data (2nd field) is null.\n"
@@ -8087,62 +8060,76 @@ msgstr "Passerelle SMS: clickatell"
 #~ "La somme des données (2ème champ) est nulle.\n"
 #~ "Impossible de dessiner un graphique en camembert !"
 
-#~ msgid "Not implemented set_memory method !"
-#~ msgstr "Méthode 'set_memory' pas implémentée !"
+#~ msgid "The search method is not implemented on this object !"
+#~ msgstr "La méthode \"search\" n'est pas implémentée dans cet objet !"
 
-#~ msgid "HR sector"
-#~ msgstr "Secteur RH"
+#~ msgid "Suppliers Partners"
+#~ msgstr "Partenaires fournisseurs"
 
-#~ msgid "Please check that all your lines have %d columns."
-#~ msgstr "Merci de vérifier que toutes vos lignes ont %d colonnes"
+#~ msgid "Telecom sector"
+#~ msgstr "Secteur des télécoms"
 
-#~ msgid "Recursivity Detected."
-#~ msgstr "Récursivité détectée"
+#~ msgid "ValidateError"
+#~ msgstr "Erreur de validation"
 
-#~ msgid "Couldn't find tag '%s' in parent view !"
-#~ msgstr "Balise '%s' non trouvée dans la vue parente !"
+#~ msgid "File Content"
+#~ msgstr "Contenu du fichier"
 
-#~ msgid "The name_get method is not implemented on this object !"
-#~ msgstr "La méthode 'name_get' n'est pas implémentée sur cet objet !"
+#~ msgid "Customers Partners"
+#~ msgstr "Partenaires clients"
 
-#~ msgid "Not Implemented"
-#~ msgstr "Non implémenté"
+#~ msgid "Partner Functions"
+#~ msgstr "Fonctions de partenaire"
 
-#~ msgid "Addresses"
-#~ msgstr "Adresses"
+#~ msgid "UserError"
+#~ msgstr "Erreur utilisateur"
 
-#~ msgid "Unknown position in inherited view %s !"
-#~ msgstr "Position inconnue dans la vue héritée %s !"
+#~ msgid "Wrong ID for the browse record, got %r, expected an integer."
+#~ msgstr ""
+#~ "Mauvais ID pour le parcours de l'enregistrement : %r reçu alors qu'on "
+#~ "attend un entier."
 
-#~ msgid "The value \"%s\" for the field \"%s\" is not in the selection"
-#~ msgstr "La valeur \"%s\" pour le champ \"%s\" n'est pas dans la sélection"
+#~ msgid "Error occurred while validating the field(s) %s: %s"
+#~ msgstr "Une erreur est apparue lors de la validation du/des champ(s) %s: %s"
 
-#~ msgid "undefined get method !"
-#~ msgstr "Méthode 'get' non définie !"
+#~ msgid ""
+#~ "You try to install a module that depends on the module: %s.\n"
+#~ "But this module is not available in your system."
+#~ msgstr ""
+#~ "Vous essayez d'installer un module qui dépend du module: %s\n"
+#~ "Mais ce module n'est pas disponible sur votre système."
 
-#~ msgid "IT sector"
-#~ msgstr "Secteur IT"
+#~ msgid "Main Company"
+#~ msgstr "Société mère"
 
-#~ msgid "Company to store the current record"
-#~ msgstr "Société physique ou sera stocké cet enregistrement"
+#~ msgid "Attached Model"
+#~ msgstr "Modèle lié"
 
-#~ msgid "Company where the user is connected"
-#~ msgstr "Société ou l'utilisateur sera connecté"
+#~ msgid "Attached ID"
+#~ msgstr "ID lié"
 
-#~ msgid "Expression"
-#~ msgstr "Expression"
+#~ msgid "The read method is not implemented on this object !"
+#~ msgstr "La méthode \"read\" n'est pas implémentée dans cet objet !"
 
-#~ msgid "Object affect by this rules"
-#~ msgstr "Objet affecté par cette règle"
+#~ msgid "The unlink method is not implemented on this object !"
+#~ msgstr "La méthode \"unlink\" n'est pas implémentée dans cet objet !"
 
-#~ msgid "List of Company"
-#~ msgstr "Liste des sociétés"
+#~ msgid "Titles"
+#~ msgstr "Titres"
 
-#~ msgid "Default Company"
-#~ msgstr "Société par défaut"
+#~ msgid "Html from html"
+#~ msgstr "De Html à html"
 
-#~ msgid "Name it to easily find a record"
-#~ msgstr "Nommer le facilement pour trouver l'enregistrement"
+#~ msgid "Error ! You can not create recursive associated members."
+#~ msgstr ""
+#~ "Erreur ! Vous ne pouvez pas créer des membres associés de manière "
+#~ "récursive."
 
-#~ msgid "Default multi company"
-#~ msgstr "Multi société par défaut"
+#~ msgid "Macedonia"
+#~ msgstr "Macédoine"
+
+#~ msgid "Grant Access To Menus"
+#~ msgstr "Droits d'accès aux menus"
+
+#~ msgid "Others Partners"
+#~ msgstr "Autres partenaires"
