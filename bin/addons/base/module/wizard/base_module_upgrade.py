@@ -20,8 +20,6 @@
 ##############################################################################
 
 import pooler
-import os
-import tools
 import wizard
 from osv import osv, fields
 
@@ -40,7 +38,7 @@ class base_module_upgrade(osv.osv_memory):
          @param self: The object pointer.
          @param cr: A database cursor
          @param uid: ID of the user currently logged in
-         @param context: A standard dictionary 
+         @param context: A standard dictionary
          @return: New arch of view.
         """
         res = super(base_module_upgrade, self).fields_view_get(cr, uid, view_id=view_id, view_type=view_type, context=context, toolbar=toolbar,submenu=False)
@@ -51,7 +49,7 @@ class base_module_upgrade(osv.osv_memory):
 
         ids = self.get_module_list(cr, uid, context=context)
         if not ids:
-            res['arch'] = '''<form string="System update done">
+            res['arch'] = '''<form string="Apply Scheduled Upgrades">
                                 <separator string="System update completed" colspan="4"/>
                                 <label align="0.0" string="The selected modules have been updated / installed !" colspan="4"/>
                                 <label align="0.0" string="We suggest to reload the menu tab to see the new menus (Ctrl+T then Ctrl+R)." colspan="4"/>
@@ -99,7 +97,7 @@ class base_module_upgrade(osv.osv_memory):
             raise osv.except_osv('Unmet dependency !', 'Following modules are uninstalled or unknown. \n\n'+'\n'.join(unmet_packages))
         mod_obj.download(cr, uid, ids, context=context)
         cr.commit()
-        db, pool = pooler.restart_pool(cr.dbname, update_module=True)
+        _, pool = pooler.restart_pool(cr.dbname, update_module=True)
 
         id2 = data_obj._get_id(cr, uid, 'base', 'view_base_module_upgrade_install')
         if id2:

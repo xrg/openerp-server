@@ -168,8 +168,11 @@ class expression(object):
                 phexpr = '%s_rsrch.id' % phname
                 
                 ttables = ['"%s"' % table._table]
-                qu1, qu2, qtables = table._where_calc(cr, uid, 
+                dqry = table._where_calc(cr, uid, 
                         [(parent or table._parent_name, '=', placeholder(phname, phexpr) )], context)
+                qu1, qu2, qtables = dqry.where_clause, dqry.where_clause_params, dqry.tables
+                if dqry.joins:
+                    raise NotImplementedError  # FIXME
 
                 d1, d2, dtables = table.pool.get('ir.rule').domain_get(cr, uid, table._name)
                 if d1:

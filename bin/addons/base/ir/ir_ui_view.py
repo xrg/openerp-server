@@ -54,7 +54,7 @@ class view(osv.osv):
     _columns = {
         'name': fields.char('View Name',size=64,  required=True),
         'model': fields.char('Object', size=64, required=True),
-        'priority': fields.integer('Priority', required=True),
+        'priority': fields.integer('Sequence', required=True),
         'type': fields.selection((
             ('tree','Tree'),
             ('form','Form'),
@@ -211,7 +211,7 @@ class view_sc(osv.osv):
     _sql_constraints = [
         ('shortcut_unique', 'unique(res_id, resource, user_id)', 'Shortcut for this menu already exists!'),
     ]
-        
+
 view_sc()
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
