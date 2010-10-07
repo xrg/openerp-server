@@ -4343,10 +4343,14 @@ class orm(orm_template):
 
            :param query: the current query object
         """
-        def apply_rule(added_clause, added_params, added_tables):
+        def apply_rule(added_clause, added_params, added_tables, parent_model=None, child_object=None):
             if added_clause:
                 if self._debug:
                     _logger.debug("Add clause to %s: %r", self._name, added_clause)
+                if parent_model and child_object:
+                    # as inherited rules are being applied, we need to add the missing JOIN
+                    # to reach the parent table (if it was not JOINed yet in the query)
+                    child_object._inherits_join_add(parent_model, query)
                 query.where_clause += added_clause
                 query.where_clause_params += added_params
                 for table in added_tables:
@@ -4359,13 +4363,10 @@ class orm(orm_template):
         rule_obj = self.pool.get('ir.rule')
         apply_rule(*rule_obj.domain_get(cr, uid, self._name, mode, context=context))
 
-        # apply ir.rules from the parents (through _inherits), adding the appropriate JOINs if needed
+        # apply ir.rules from the parents (through _inherits)
         for inherited_model in self._inherits:
-            if apply_rule(*rule_obj.domain_get(cr, uid, inherited_model, mode, context=context)):
-                # if some rules were applied, need to add the missing JOIN for them to make sense, passing the previous
-                # list of table in case the inherited table was not in the list before (as that means the corresponding
-                # JOIN(s) was(were) not present)
-                self._inherits_join_add(inherited_model, query)
+            kwargs = dict(parent_model=inherited_model, child_object=self) #workaround for python2.5
+            apply_rule(*rule_obj.domain_get(cr, uid, inherited_model, mode, context=context), **kwargs)
 
     def _generate_m2o_order_by(self, order_field, query):
         """

@@ -370,7 +370,7 @@ class Logger(object):
             # TODO: perhaps reset the logger streams?
             #if logrotate closes our files, we end up here..
             pass
-        except:
+        except Exception:
             # better ignore the exception and carry on..
             pass
 
