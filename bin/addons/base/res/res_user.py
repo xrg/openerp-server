@@ -20,7 +20,7 @@
 ##############################################################################
 
 from osv import fields,osv
-from osv.orm import browse_record
+from osv.orm import browse_record, orm_deprecated
 import tools
 from functools import partial
 import pytz
@@ -82,7 +82,12 @@ class groups(osv.osv):
 
 groups()
 
-class roles(osv.osv):
+class roles(orm_deprecated, osv.osv):
+    """ DEPRECATED: user roles.
+    
+        Kept here just for API compatibility with older installations. Please update
+        your ORM objects!
+    """
     _name = "res.roles"
     _columns = {
         'name': fields.char('Role Name', size=64, required=True),
@@ -95,17 +100,9 @@ class roles(osv.osv):
             help="The workflow transitions associated with this role"),
     }
     def check(self, cr, uid, ids, role_id):
-        """Verifies that the role with id ``role_id`` is granted directly or indirectly to a
-           user that possesses the roles with ids ``ids``. Indirectly means that one of the
-           roles with id in ``ids`` is an ancestor role of the role with id ``role_id``.
+        """ Check must never work again, because it would allow wrong access.
         """
-        if role_id in ids:
-            return True
-        cr.execute('select parent_id from res_roles where id=%s', (role_id,))
-        roles = cr.fetchone()[0]
-        if roles:
-            return self.check(cr, uid, ids, roles)
-        return False
+        raise osv.except_osv("Model error", "You are accessing a deprecated model!")
 roles()
 
 def _lang_get(self, cr, uid, context=None):
@@ -236,7 +233,6 @@ class users(osv.osv):
         'action_id': fields.many2one('ir.actions.actions', 'Home Action', help="If specified, this action will be opened at logon for this user, in addition to the standard menu."),
         'menu_id': fields.many2one('ir.actions.actions', 'Menu Action', help="If specified, the action will replace the standard menu for this user."),
         'groups_id': fields.many2many('res.groups', 'res_groups_users_rel', 'uid', 'gid', 'Groups'),
-        'roles_id': fields.many2many('res.roles', 'res_roles_users_rel', 'uid', 'rid', 'Roles'),
 
         # Special behavior for this field: res.company.search() will only return the companies
         # available to the current user (should be the user's companies?), when the user_preference
