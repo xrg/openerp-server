@@ -9105,10 +9105,6 @@ msgstr ""
 #~ msgstr "该供应商的 付款方式未定义（计算）付款方式明细！"
 
 #, python-format
-#~ msgid "User Error"
-#~ msgstr "用户错误"
-
-#, python-format
 #~ msgid "not implemented"
 #~ msgstr "尚未实现"
 
