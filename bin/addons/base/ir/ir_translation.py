@@ -137,7 +137,7 @@ class ir_translation(osv.osv):
         # so we can remove the string encoding/decoding.
         if not lang:
             return u''
-        if isinstance(ttypes, basestring):
+        if isinstance(types, basestring):
             types = [types,]
         else:
             types = list(types)
