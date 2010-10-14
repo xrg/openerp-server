@@ -470,7 +470,7 @@ form: module.record_id""" % (xml_id,)
         res = {
             'name': name,
             'type': type,
-            'view_id': view_id,
+            'view_id': view_id or None,
             'domain': domain,
             'context': context,
             'res_model': res_model,
@@ -478,8 +478,8 @@ form: module.record_id""" % (xml_id,)
             'view_type': view_type,
             'view_mode': view_mode,
             'usage': usage,
-            'limit': limit,
-            'auto_refresh': auto_refresh,
+            'limit': limit or None,
+            'auto_refresh': auto_refresh or None,
         }
 
         if rec.get('groups'):
