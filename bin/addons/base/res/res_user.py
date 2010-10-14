@@ -96,8 +96,6 @@ class roles(orm_deprecated, osv.osv):
         'child_id': fields.one2many('res.roles', 'parent_id', 'Children'),
         'users': fields.many2many('res.users', 'res_roles_users_rel', 'rid', 'uid', 'Users'),
         'description': fields.text('Description', help="Description of this role and where it is relevant in workflows and processes"),
-        'workflow_transition_ids': fields.one2many('workflow.transition', 'role_id', 'Workflow Transitions',
-            help="The workflow transitions associated with this role"),
     }
     def check(self, cr, uid, ids, role_id):
         """ Check must never work again, because it would allow wrong access.
