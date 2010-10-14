@@ -45,11 +45,13 @@ import release
 __author__ = release.author
 __version__ = release.version
 
-# We DON't log this using the standard logger, because we might mess
-# with the logfile's permissions. Just do a quick exit here.
-if pwd.getpwuid(os.getuid())[0] == 'root' :
-    sys.stderr.write("Attempted to run OpenERP server as root. This is not good, aborting.\n")
-    sys.exit(1)
+if os.name == 'posix':
+    import pwd
+    # We DON't log this using the standard logger, because we might mess
+    # with the logfile's permissions. Just do a quick exit here.
+    if pwd.getpwuid(os.getuid())[0] == 'root' :
+        sys.stderr.write("Attempted to run OpenERP server as root. This is not good, aborting.\n")
+        sys.exit(1)
 
 # This import causes netsvc to initialize itself, including logging.
 import netsvc

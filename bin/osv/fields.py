@@ -31,7 +31,7 @@
 #   required
 #   size
 #
-from collections import defaultdict
+import datetime as DT
 import string
 import logging
 import warnings
@@ -217,14 +217,42 @@ class float(_column):
 
 class date(_column):
     _type = 'date'
+    @staticmethod
+    def today(*args):
+        """ Returns the current date in a format fit for being a
+        default value to a ``date`` field.
 
+        This method should be provided as is to the _defaults dict, it
+        should not be called.
+        """
+        return DT.date.today().strftime(
+            tools.DEFAULT_SERVER_DATE_FORMAT)
 
 class datetime(_column):
     _type = 'datetime'
+    @staticmethod
+    def now(*args):
+        """ Returns the current datetime in a format fit for being a
+        default value to a ``datetime`` field.
 
+        This method should be provided as is to the _defaults dict, it
+        should not be called.
+        """
+        return DT.datetime.now().strftime(
+            tools.DEFAULT_SERVER_DATETIME_FORMAT)
 
 class time(_column):
     _type = 'time'
+    @staticmethod
+    def now( *args):
+        """ Returns the current time in a format fit for being a
+        default value to a ``time`` field.
+
+        This method should be proivided as is to the _defaults dict,
+        it should not be called.
+        """
+        return DT.datetime.now().strftime(
+            tools.DEFAULT_SERVER_TIME_FORMAT)
 
 class binary(_column):
     _type = 'binary'
@@ -452,11 +480,14 @@ class one2many(_column):
         if not values:
             values = {}
 
-        res = defaultdict(list)
+        res = {}
+        for id in ids:
+            res[id] = []
 
         ids2 = obj.pool.get(self._obj).search(cr, user, self._domain + [(self._fields_id, 'in', ids)], limit=self._limit, context=context)
         for r in obj.pool.get(self._obj)._read_flat(cr, user, ids2, [self._fields_id], context=context, load='_classic_write'):
-            res[r[self._fields_id]].append(r['id'])
+            if r[self._fields_id] in res:
+                res[r[self._fields_id]].append(r['id'])
         return res
 
     def set(self, cr, obj, id, field, values, user=None, context=None):

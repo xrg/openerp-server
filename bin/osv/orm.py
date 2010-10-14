@@ -3901,7 +3901,8 @@ class orm(orm_template):
             if col in vals and self.pool.get(table)._vtable:
                 v['_vptr'] = self._name
 
-            self.pool.get(table).write(cr, user, nids, v, context)
+            if v:
+                self.pool.get(table).write(cr, user, nids, v, context)
 
         self._validate(cr, user, ids, context)
 

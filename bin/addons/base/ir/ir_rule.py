@@ -34,7 +34,7 @@ class ir_rule(osv.osv):
     def _domain_force_get(self, cr, uid, ids, field_name, arg, context=None):
         res = {}
         eval_user_data = { 'user': self.pool.get('res.users').browse(cr, 1, uid),
-                'time':time }
+                          'time':time}
         # is the context useful here?
         for rule in self.browse(cr, uid, ids, fields_only=['domain_force',], context=context):
             rule_dic = { 'domain_force': rule.domain_force }

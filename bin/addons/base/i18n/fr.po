@@ -5,6 +5,7 @@
 #, fuzzy
 msgid ""
 msgstr ""
+"#-#-#-#-#  .merge_file_uqhfdT (OpenERP Server 5.0.4)  #-#-#-#-#\n"
 "#-#-#-#-#  .merge_file_lurS2F (OpenERP Server 5.0.4)  #-#-#-#-#\n"
 "#-#-#-#-#  .merge_file_xAcGIT (OpenERP Server 5.0.4)  #-#-#-#-#\n"
 "#-#-#-#-#  .merge_file_oTydK1 (OpenERP Server 5.0.4)  #-#-#-#-#\n"
@@ -67,6 +68,18 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Launchpad-Export-Date: 2010-09-30 04:37+0000\n"
+"X-Generator: Launchpad (build Unknown)\n"
+"#-#-#-#-#  .merge_file_rGXHgV (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"Project-Id-Version: OpenERP Server 5.0.4\n"
+"Report-Msgid-Bugs-To: support@openerp.com\n"
+"POT-Creation-Date: 2009-12-18 08:39+0000\n"
+"PO-Revision-Date: 2010-10-12 07:54+0000\n"
+"Last-Translator: Anup (OpenERP) <ach@tinyerp.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2010-10-13 04:56+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #. module: base
@@ -422,13 +435,13 @@ msgstr ""
 #: code:addons/base/res/res_lang.py:0
 #, python-format
 msgid "Base Language 'en_US' can not be deleted !"
-msgstr ""
+msgstr "Langue de base 'en_US' ne peut pas être supprimée !"
 
 #. module: base
 #: code:addons/base/res/res_lang.py:0
 #, python-format
 msgid "User Error"
-msgstr ""
+msgstr "Erreur Utilisateur"
 
 #. module: base
 #: code:addons/base/res/res_lang.py:0
@@ -437,12 +450,16 @@ msgid ""
 "You cannot delete the language which is Active !\n"
 "Please de-activate the language first."
 msgstr ""
+"Vous ne pouvez pas supprimer une langue qui est Active !\n"
+"Veuillez désactiver cette langue."
 
 #. module: base
 #: code:addons/base/res/res_lang.py:0
 #, python-format
 msgid "You cannot delete the language which is User's Preferred Language !"
 msgstr ""
+"Vous ne pouvez pas supprimer une langue qui est utilisée par un des "
+"utilisateurs !"
 
 #. module: base
 #: code:addons/base/res/res_user.py:0
@@ -469,42 +486,57 @@ msgstr ""
 
 #. module: base
 #: code:addons/osv/osv.py:0
-#, python-format
+#, fuzzy, python-format
 msgid ""
 "\n"
 "\n"
 "[object with reference: %s - %s]"
 msgstr ""
+"#-#-#-#-#  .merge_file_uqhfdT (OpenERP Server 5.0.4)  #-#-#-#-#\n"
 "\n"
 "\n"
-"[Objet avec de référence: %s - %s]"
+"[Objet avec de référence: %s - %s]\n"
+"#-#-#-#-#  .merge_file_rGXHgV (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"\n"
+"\n"
+"[objet ayant pour référence : %s - %s]"
 
 #. module: base
 #: code:addons/osv/osv.py:0
 #, python-format
 msgid "Constraint Error"
-msgstr ""
+msgstr "Erreur de contrainte"
 
 #. module: base
 #: code:addons/osv/osv.py:0
-#, python-format
+#, fuzzy, python-format
 msgid "Integrity Error"
-msgstr "Défaut d'intégrité"
+msgstr ""
+"#-#-#-#-#  .merge_file_uqhfdT (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"Défaut d'intégrité\n"
+"#-#-#-#-#  .merge_file_rGXHgV (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"Erreur d'intégrité"
 
 #. module: base
 #: code:addons/osv/osv.py:0
-#, python-format
+#, fuzzy, python-format
 msgid ""
 "The operation cannot be completed, probably due to the following:\n"
 "- deletion: you may be trying to delete a record while other records still "
 "reference it\n"
 "- creation/update: a mandatory field is not correctly set"
 msgstr ""
+"#-#-#-#-#  .merge_file_uqhfdT (OpenERP Server 5.0.4)  #-#-#-#-#\n"
 "L'opération ne peut être mené, sans doute pour les raisons suivantes: \n"
 "-suppression: vous pouvez essayer de supprimer un enregistrement alors que "
 "d'autres documents de référence, il reste \n"
 "-création / mise à jour: un champ obligatoire n'est pas correctement "
-"configurée"
+"configurée\n"
+"#-#-#-#-#  .merge_file_rGXHgV (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"L'opération n'a pas pu être terminée, probablement à la suite d'une :\n"
+"- suppression : vous avez essayer de supprimer un enregistrement auquel "
+"d'autres enregistrements font référence\n"
+"- création/modification : un champ requis n'a pas été correctement rempli"
 
 #. module: base
 #: constraint:ir.actions.act_window:0
@@ -6785,66 +6817,68 @@ msgstr "Ou"
 #: sql_constraint:ir.model.data:0
 msgid "You cannot have multiple records with the same id for the same module !"
 msgstr ""
+"Vous ne pouvez pas avoir plusieurs enregistrements avec le même identifiant "
+"pour le même module !"
 
 #. module: base
 #: sql_constraint:ir.model.fields:0
 msgid "Size of the field can never be less than 1 !"
-msgstr ""
+msgstr "La taille du champ ne doit jamais être inférieure à 1 !"
 
 #. module: base
 #: sql_constraint:ir.module.module:0
 msgid "The certificate ID of the module must be unique !"
-msgstr ""
+msgstr "L'ID du certificat pour un module doit être unique !"
 
 #. module: base
 #: sql_constraint:ir.module.module:0 sql_constraint:ir.module.web:0
 msgid "The name of the module must be unique !"
-msgstr ""
+msgstr "Le nom d'un module doit être unique !"
 
 #. module: base
 #: sql_constraint:ir.ui.view_sc:0
 msgid "Shortcut for this menu already exists!"
-msgstr ""
+msgstr "Un raccourci pour ce menu existe déjà !"
 
 #. module: base
 #: sql_constraint:maintenance.contract:0
 msgid "Your maintenance contract is already subscribed in the system !"
-msgstr ""
+msgstr "Votre contrat de maintenance est déjà enregistré dans le système !"
 
 #. module: base
 #: sql_constraint:res.country:0
 msgid "The code of the country must be unique !"
-msgstr ""
+msgstr "Le code du pays doit être unique !"
 
 #. module: base
 #: sql_constraint:res.country:0
 msgid "The name of the country must be unique !"
-msgstr ""
+msgstr "Le nom du pays doit être unique !"
 
 #. module: base
 #: sql_constraint:res.groups:0
 msgid "The name of the group must be unique !"
-msgstr ""
+msgstr "Le nom du groupe doit être unique !"
 
 #. module: base
 #: sql_constraint:res.lang:0
 msgid "The code of the language must be unique !"
-msgstr ""
+msgstr "Le code de la langue doit être unique"
 
 #. module: base
 #: sql_constraint:res.lang:0
 msgid "The name of the language must be unique !"
-msgstr ""
+msgstr "Le nom de la langue doit être unique !"
 
 #. module: base
 #: sql_constraint:res.partner:0
 msgid "The name of the Partner must be unique !"
-msgstr ""
+msgstr "Le nom du Partenaire doit être unique !"
 
 #. module: base
 #: sql_constraint:res.partner.function:0
 msgid "The Code of the Partner Function must be unique !"
-msgstr ""
+msgstr "Le Code de la Fonction du Partenaire doit être unique !"
 
 #. module: base
 #: sql_constraint:res.user:0
@@ -8056,104 +8090,40 @@ msgstr "Envoyer des SMS en masse"
 msgid "SMS - Gateway: clickatell"
 msgstr "Passerelle SMS: clickatell"
 
-#~ msgid "Default multi company"
-#~ msgstr "Multi société par défaut"
+#~ msgid "Others Partners"
+#~ msgstr "Autres partenaires"
 
-#~ msgid "Name it to easily find a record"
-#~ msgstr "Nommer le facilement pour trouver l'enregistrement"
+#~ msgid "Grant Access To Menus"
+#~ msgstr "Droits d'accès aux menus"
 
-#~ msgid "Default Company"
-#~ msgstr "Société par défaut"
+#~ msgid "Macedonia"
+#~ msgstr "Macédoine"
 
-#~ msgid "List of Company"
-#~ msgstr "Liste des sociétés"
-
-#~ msgid "Object affect by this rules"
-#~ msgstr "Objet affecté par cette règle"
-
-#~ msgid "Expression"
-#~ msgstr "Expression"
-
-#~ msgid "Company where the user is connected"
-#~ msgstr "Société ou l'utilisateur sera connecté"
-
-#~ msgid "Company to store the current record"
-#~ msgstr "Société physique ou sera stocké cet enregistrement"
-
-#~ msgid "IT sector"
-#~ msgstr "Secteur IT"
-
-#~ msgid "undefined get method !"
-#~ msgstr "Méthode 'get' non définie !"
-
-#~ msgid "The value \"%s\" for the field \"%s\" is not in the selection"
-#~ msgstr "La valeur \"%s\" pour le champ \"%s\" n'est pas dans la sélection"
-
-#~ msgid "Unknown position in inherited view %s !"
-#~ msgstr "Position inconnue dans la vue héritée %s !"
-
-#~ msgid "Addresses"
-#~ msgstr "Adresses"
-
-#~ msgid "Not Implemented"
-#~ msgstr "Non implémenté"
-
-#~ msgid "The name_get method is not implemented on this object !"
-#~ msgstr "La méthode 'name_get' n'est pas implémentée sur cet objet !"
-
-#~ msgid "Couldn't find tag '%s' in parent view !"
-#~ msgstr "Balise '%s' non trouvée dans la vue parente !"
-
-#~ msgid "Recursivity Detected."
-#~ msgstr "Récursivité détectée"
-
-#~ msgid "Please check that all your lines have %d columns."
-#~ msgstr "Merci de vérifier que toutes vos lignes ont %d colonnes"
-
-#~ msgid "HR sector"
-#~ msgstr "Secteur RH"
-
-#~ msgid "Not implemented set_memory method !"
-#~ msgstr "Méthode 'set_memory' pas implémentée !"
-
-#~ msgid ""
-#~ "The sum of the data (2nd field) is null.\n"
-#~ "We can't draw a pie chart !"
+#~ msgid "Error ! You can not create recursive associated members."
 #~ msgstr ""
-#~ "La somme des données (2ème champ) est nulle.\n"
-#~ "Impossible de dessiner un graphique en camembert !"
+#~ "Erreur ! Vous ne pouvez pas créer des membres associés de manière "
+#~ "récursive."
 
-#~ msgid "The search method is not implemented on this object !"
-#~ msgstr "La méthode \"search\" n'est pas implémentée dans cet objet !"
+#~ msgid "Html from html"
+#~ msgstr "De Html à html"
 
-#~ msgid "Suppliers Partners"
-#~ msgstr "Partenaires fournisseurs"
+#~ msgid "Titles"
+#~ msgstr "Titres"
 
-#~ msgid "Telecom sector"
-#~ msgstr "Secteur des télécoms"
+#~ msgid "The unlink method is not implemented on this object !"
+#~ msgstr "La méthode \"unlink\" n'est pas implémentée dans cet objet !"
 
-#~ msgid "ValidateError"
-#~ msgstr "Erreur de validation"
+#~ msgid "The read method is not implemented on this object !"
+#~ msgstr "La méthode \"read\" n'est pas implémentée dans cet objet !"
 
-#~ msgid "File Content"
-#~ msgstr "Contenu du fichier"
+#~ msgid "Attached ID"
+#~ msgstr "ID lié"
 
-#~ msgid "Customers Partners"
-#~ msgstr "Partenaires clients"
+#~ msgid "Attached Model"
+#~ msgstr "Modèle lié"
 
-#~ msgid "Partner Functions"
-#~ msgstr "Fonctions de partenaire"
-
-#~ msgid "UserError"
-#~ msgstr "Erreur utilisateur"
-
-#~ msgid "Wrong ID for the browse record, got %r, expected an integer."
-#~ msgstr ""
-#~ "Mauvais ID pour le parcours de l'enregistrement : %r reçu alors qu'on "
-#~ "attend un entier."
-
-#~ msgid "Error occurred while validating the field(s) %s: %s"
-#~ msgstr "Une erreur est apparue lors de la validation du/des champ(s) %s: %s"
+#~ msgid "Main Company"
+#~ msgstr "Société mère"
 
 #~ msgid ""
 #~ "You try to install a module that depends on the module: %s.\n"
@@ -8162,37 +8132,101 @@ msgstr "Passerelle SMS: clickatell"
 #~ "Vous essayez d'installer un module qui dépend du module: %s\n"
 #~ "Mais ce module n'est pas disponible sur votre système."
 
-#~ msgid "Main Company"
-#~ msgstr "Société mère"
+#~ msgid "Error occurred while validating the field(s) %s: %s"
+#~ msgstr "Une erreur est apparue lors de la validation du/des champ(s) %s: %s"
 
-#~ msgid "Attached Model"
-#~ msgstr "Modèle lié"
-
-#~ msgid "Attached ID"
-#~ msgstr "ID lié"
-
-#~ msgid "The read method is not implemented on this object !"
-#~ msgstr "La méthode \"read\" n'est pas implémentée dans cet objet !"
-
-#~ msgid "The unlink method is not implemented on this object !"
-#~ msgstr "La méthode \"unlink\" n'est pas implémentée dans cet objet !"
-
-#~ msgid "Titles"
-#~ msgstr "Titres"
-
-#~ msgid "Html from html"
-#~ msgstr "De Html à html"
-
-#~ msgid "Error ! You can not create recursive associated members."
+#~ msgid "Wrong ID for the browse record, got %r, expected an integer."
 #~ msgstr ""
-#~ "Erreur ! Vous ne pouvez pas créer des membres associés de manière "
-#~ "récursive."
+#~ "Mauvais ID pour le parcours de l'enregistrement : %r reçu alors qu'on "
+#~ "attend un entier."
 
-#~ msgid "Macedonia"
-#~ msgstr "Macédoine"
+#~ msgid "UserError"
+#~ msgstr "Erreur utilisateur"
 
-#~ msgid "Grant Access To Menus"
-#~ msgstr "Droits d'accès aux menus"
+#~ msgid "Partner Functions"
+#~ msgstr "Fonctions de partenaire"
 
-#~ msgid "Others Partners"
-#~ msgstr "Autres partenaires"
+#~ msgid "Customers Partners"
+#~ msgstr "Partenaires clients"
+
+#~ msgid "File Content"
+#~ msgstr "Contenu du fichier"
+
+#~ msgid "ValidateError"
+#~ msgstr "Erreur de validation"
+
+#~ msgid "Telecom sector"
+#~ msgstr "Secteur des télécoms"
+
+#~ msgid "Suppliers Partners"
+#~ msgstr "Partenaires fournisseurs"
+
+#~ msgid "The search method is not implemented on this object !"
+#~ msgstr "La méthode \"search\" n'est pas implémentée dans cet objet !"
+
+#~ msgid ""
+#~ "The sum of the data (2nd field) is null.\n"
+#~ "We can't draw a pie chart !"
+#~ msgstr ""
+#~ "La somme des données (2ème champ) est nulle.\n"
+#~ "Impossible de dessiner un graphique en camembert !"
+
+#~ msgid "Not implemented set_memory method !"
+#~ msgstr "Méthode 'set_memory' pas implémentée !"
+
+#~ msgid "HR sector"
+#~ msgstr "Secteur RH"
+
+#~ msgid "Please check that all your lines have %d columns."
+#~ msgstr "Merci de vérifier que toutes vos lignes ont %d colonnes"
+
+#~ msgid "Recursivity Detected."
+#~ msgstr "Récursivité détectée"
+
+#~ msgid "Couldn't find tag '%s' in parent view !"
+#~ msgstr "Balise '%s' non trouvée dans la vue parente !"
+
+#~ msgid "The name_get method is not implemented on this object !"
+#~ msgstr "La méthode 'name_get' n'est pas implémentée sur cet objet !"
+
+#~ msgid "Not Implemented"
+#~ msgstr "Non implémenté"
+
+#~ msgid "Addresses"
+#~ msgstr "Adresses"
+
+#~ msgid "Unknown position in inherited view %s !"
+#~ msgstr "Position inconnue dans la vue héritée %s !"
+
+#~ msgid "The value \"%s\" for the field \"%s\" is not in the selection"
+#~ msgstr "La valeur \"%s\" pour le champ \"%s\" n'est pas dans la sélection"
+
+#~ msgid "undefined get method !"
+#~ msgstr "Méthode 'get' non définie !"
+
+#~ msgid "IT sector"
+#~ msgstr "Secteur IT"
+
+#~ msgid "Company to store the current record"
+#~ msgstr "Société physique ou sera stocké cet enregistrement"
+
+#~ msgid "Company where the user is connected"
+#~ msgstr "Société ou l'utilisateur sera connecté"
+
+#~ msgid "Expression"
+#~ msgstr "Expression"
+
+#~ msgid "Object affect by this rules"
+#~ msgstr "Objet affecté par cette règle"
+
+#~ msgid "List of Company"
+#~ msgstr "Liste des sociétés"
+
+#~ msgid "Default Company"
+#~ msgstr "Société par défaut"
+
+#~ msgid "Name it to easily find a record"
+#~ msgstr "Nommer le facilement pour trouver l'enregistrement"
+
+#~ msgid "Default multi company"
+#~ msgstr "Multi société par défaut"
