@@ -524,9 +524,7 @@ class Agent(object):
         
             return ', '.join(oout)
 
-        while True:
-            if not cls._alive:
-                break
+        while cls._alive:
             cls._lock.acquire()
             while cls.__tasks and cls.__tasks[0][0] < time.time():
                 task = heapq.heappop(cls.__tasks)
