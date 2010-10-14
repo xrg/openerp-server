@@ -2525,7 +2525,8 @@ class orm_memory(orm_template):
                 'create_date': create_date,
                 'write_uid': False,
                 'write_date': False,
-                'id': id
+                'id': id,
+                'xmlid' : False,
             })
         return result
 
@@ -3575,12 +3576,8 @@ class orm(orm_template):
 
     def perm_read(self, cr, user, ids, context=None, details=True):
         """
-        Read the permission for record of the given ids
+        Returns some metadata about the given records.
 
-        :param cr: database cursor
-        :param user: current user id
-        :param ids: id or list of ids
-        :param context: context arguments, like lang, time zone
         :param details: if True, \*_uid fields are replaced with the name of the user
         :return: list of ownership dictionaries for each requested record
         :rtype: list of dictionaries with the following keys:
@@ -3590,7 +3587,7 @@ class orm(orm_template):
                     * create_date: date when the record was created
                     * write_uid: last user who changed the record
                     * write_date: date of the last change to the record
-
+                    * xmlid: XML ID to use to refer to this record (if there is one), in format ``module.name``
         """
         if not context:
             context = {}
@@ -3612,6 +3609,8 @@ class orm(orm_template):
                 if key in ('write_uid', 'create_uid', 'uid') and details and r[key]:
                     try:
                         r[key] = self.pool.get('res.users').name_get(cr, user, [r[key]])[0]
+                        r['xmlid'] = ("%(module)s.%(name)s" % r) if r['name'] else False
+                        del r['name'], r['module']
                     except Exception:
                         pass # Leave the numeric uid there
         if uniq:

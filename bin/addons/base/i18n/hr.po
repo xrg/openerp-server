@@ -5,6 +5,7 @@
 #, fuzzy
 msgid ""
 msgstr ""
+"#-#-#-#-#  .merge_file_70YeKj (OpenERP Server 5.0.4)  #-#-#-#-#\n"
 "#-#-#-#-#  .merge_file_3hEbFh (OpenERP Server 5.0.4)  #-#-#-#-#\n"
 "#-#-#-#-#  .merge_file_a1eEVe (OpenERP Server 5.0.4)  #-#-#-#-#\n"
 "#-#-#-#-#  .merge_file_aPAQXh (OpenERP Server 5.0.4)  #-#-#-#-#\n"
@@ -171,6 +172,19 @@ msgstr ""
 "X-Launchpad-Export-Date: 2010-09-29 04:45+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "Language: hr\n"
+"#-#-#-#-#  .merge_file_NoZmpc (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"Project-Id-Version: OpenERP Server 5.0.4\n"
+"Report-Msgid-Bugs-To: support@openerp.com\n"
+"POT-Creation-Date: 2009-12-18 08:39+0000\n"
+"PO-Revision-Date: 2010-09-09 07:03+0000\n"
+"Last-Translator: nafterburner <nafterburner@gmail.com>\n"
+"Language-Team: openerp-translators\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2010-09-29 04:45+0000\n"
+"X-Generator: Launchpad (build Unknown)\n"
+"Language: hr\n"
 
 #. module: base
 #: code:addons/base/ir/ir_actions.py:0 code:addons/base/ir/ir_model.py:0
@@ -204,6 +218,14 @@ msgstr ""
 #, python-format
 msgid ""
 "\"%s\" contains too many dots. XML ids should not contain dots ! These are "
+"used to refer to other modules data, as in module.reference_id"
+msgstr ""
+
+#. module: base
+#: code:addons/base/ir/ir_model.py:0
+#, python-format
+msgid ""
+"'%s' contains too many dots. XML ids should not contain dots ! These are "
 "used to refer to other modules data, as in module.reference_id"
 msgstr ""
 
@@ -8017,14 +8039,14 @@ msgstr ""
 msgid "SMS - Gateway: clickatell"
 msgstr "SMS - Gateway: clickatell"
 
-#~ msgid "Error ! You can not create recursive associated members."
-#~ msgstr "Greška ! Ne možete kreirati rekurzivno pridružene članove."
-
-#~ msgid "Addresses"
-#~ msgstr "Adrese"
+#~ msgid "Recursivity Detected."
+#~ msgstr "Otkrivena je rekurzivnost"
 
 #~ msgid "Error occurred while validating the field(s) %s: %s"
 #~ msgstr "Dogodila se greška pri provjeri polja %s: %s"
 
-#~ msgid "Recursivity Detected."
-#~ msgstr "Otkrivena je rekurzivnost"
+#~ msgid "Addresses"
+#~ msgstr "Adrese"
+
+#~ msgid "Error ! You can not create recursive associated members."
+#~ msgstr "Greška ! Ne možete kreirati rekurzivno pridružene članove."
