@@ -5,6 +5,7 @@
 #, fuzzy
 msgid ""
 msgstr ""
+"#-#-#-#-#  .merge_file_pkeemx (OpenERP Server 5.0.0)  #-#-#-#-#\n"
 "#-#-#-#-#  .merge_file_qwDL5a (OpenERP Server 5.0.0)  #-#-#-#-#\n"
 "#-#-#-#-#  .merge_file_iGTLWX (OpenERP Server 5.0.0)  #-#-#-#-#\n"
 "#-#-#-#-#  .merge_file_g5Tlk0 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
@@ -148,6 +149,18 @@ msgstr ""
 "X-Launchpad-Export-Date: 2010-09-29 04:46+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "#-#-#-#-#  .merge_file_AXHz6y (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Project-Id-Version: OpenERP Server 5.0.0\n"
+"Report-Msgid-Bugs-To: support@openerp.com\n"
+"POT-Creation-Date: 2009-12-18 08:39+0000\n"
+"PO-Revision-Date: 2010-09-29 08:22+0000\n"
+"Last-Translator: OpenERP Administrators <Unknown>\n"
+"Language-Team: <>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2010-09-30 04:37+0000\n"
+"X-Generator: Launchpad (build Unknown)\n"
+"#-#-#-#-#  .merge_file_RhS9pG (OpenERP Server 5.0.0)  #-#-#-#-#\n"
 "Project-Id-Version: OpenERP Server 5.0.0\n"
 "Report-Msgid-Bugs-To: support@openerp.com\n"
 "POT-Creation-Date: 2009-12-18 08:39+0000\n"
@@ -469,6 +482,32 @@ msgid ""
 "No rate found \n"
 "' \\n                    'for the currency: %s \n"
 "' \\n                    'at the date: %s"
+msgstr ""
+
+#. module: base
+#: code:addons/base/res/res_lang.py:0
+#, python-format
+msgid "Base Language 'en_US' can not be deleted !"
+msgstr ""
+
+#. module: base
+#: code:addons/base/res/res_lang.py:0
+#, python-format
+msgid "User Error"
+msgstr ""
+
+#. module: base
+#: code:addons/base/res/res_lang.py:0
+#, python-format
+msgid ""
+"You cannot delete the language which is Active !\n"
+"Please de-activate the language first."
+msgstr ""
+
+#. module: base
+#: code:addons/base/res/res_lang.py:0
+#, python-format
+msgid "You cannot delete the language which is User's Preferred Language !"
 msgstr ""
 
 #. module: base

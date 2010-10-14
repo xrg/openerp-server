@@ -25,7 +25,8 @@ import tools
 TRANSLATION_TYPE = [
     ('field', 'Field'),
     ('model', 'Object'),
-    ('rml', 'RML'),
+    ('rml', 'RML  (deprecated - use Report)'), # Pending deprecation - to be replaced by report!
+    ('report', 'Report/Template'),
     ('selection', 'Selection'),
     ('view', 'View'),
     ('wizard_button', 'Wizard Button'),
@@ -118,14 +119,14 @@ class ir_translation(osv.osv):
         return len(ids)
 
     @tools.cache(skiparg=3)
-    def _get_source(self, cr, uid, name, tt, lang, source=None):
+    def _get_source(self, cr, uid, name, types, lang, source=None):
         """
         Returns the translation for the given combination of name, type, language
         and source. All values passed to this method should be unicode (not byte strings),
         especially ``source``.
 
         :param name: identification of the term to translate, such as field name
-        :param type: type of term to translate (see ``type`` field on ir.translation)
+        :param types: single string defining type of term to translate (see ``type`` field on ir.translation), or sequence of allowed types (strings)
         :param lang: language code of the desired translation
         :param source: optional source term to translate (should be unicode)
         :rtype: unicode
@@ -134,26 +135,29 @@ class ir_translation(osv.osv):
         """
         # FIXME: should assert that `source` is unicode and fix all callers to always pass unicode
         # so we can remove the string encoding/decoding.
-
         if not lang:
             return u''
+        if isinstance(ttypes, basestring):
+            types = [types,]
+        else:
+            types = list(types)
         if source:
             cr.execute('SELECT value ' \
                     'FROM ir_translation ' \
                     'WHERE lang=%s ' \
-                        'AND type=%s ' \
+                        'AND type = ANY(%s) ' \
                         'AND name=%s ' \
                         'AND src=%s ' \
                         "AND value IS NOT NULL AND value <> '' ",
-                    (lang, tt, tools.ustr(name), source), debug=self._debug)
+                    (lang, types, tools.ustr(name), source), debug=self._debug)
         else:
             cr.execute('SELECT value ' \
                     'FROM ir_translation ' \
                     'WHERE lang=%s ' \
-                        'AND type=%s ' \
+                        'AND type = ANY(%s) ' \
                         'AND name=%s ' \
                         "AND value IS NOT NULL AND value <> '' ",
-                    (lang, tt, tools.ustr(name)), debug=self._debug)
+                    (lang, types, tools.ustr(name)), debug=self._debug)
         res = cr.fetchone()
         trad = res and res[0] or u''
         return trad

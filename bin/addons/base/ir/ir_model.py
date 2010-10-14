@@ -264,7 +264,6 @@ class ir_model_access(osv.osv):
         grouparr  = group.split('.')
         if not grouparr:
             return False
-
         cr.execute("SELECT EXISTS (SELECT 1 FROM res_groups_users_rel AS ur, ir_model_data AS imd " \
                 " WHERE ur.uid=%s AND ur.gid = imd.res_id " \
                 " AND imd.model = 'res.groups' " \

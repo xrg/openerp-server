@@ -5,6 +5,7 @@
 #, fuzzy
 msgid ""
 msgstr ""
+"#-#-#-#-#  .merge_file_3hEbFh (OpenERP Server 5.0.4)  #-#-#-#-#\n"
 "#-#-#-#-#  .merge_file_a1eEVe (OpenERP Server 5.0.4)  #-#-#-#-#\n"
 "#-#-#-#-#  .merge_file_aPAQXh (OpenERP Server 5.0.4)  #-#-#-#-#\n"
 "#-#-#-#-#  .merge_file_WEFCy2 (OpenERP Server 5.0.4)  #-#-#-#-#\n"
@@ -145,6 +146,19 @@ msgstr ""
 "X-Generator: Launchpad (build Unknown)\n"
 "Language: hr\n"
 "#-#-#-#-#  .merge_file_HjOtq1 (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"Project-Id-Version: OpenERP Server 5.0.4\n"
+"Report-Msgid-Bugs-To: support@openerp.com\n"
+"POT-Creation-Date: 2009-12-18 08:39+0000\n"
+"PO-Revision-Date: 2010-09-09 07:03+0000\n"
+"Last-Translator: nafterburner <nafterburner@gmail.com>\n"
+"Language-Team: openerp-translators\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2010-09-29 04:45+0000\n"
+"X-Generator: Launchpad (build Unknown)\n"
+"Language: hr\n"
+"#-#-#-#-#  .merge_file_hkSJMp (OpenERP Server 5.0.4)  #-#-#-#-#\n"
 "Project-Id-Version: OpenERP Server 5.0.4\n"
 "Report-Msgid-Bugs-To: support@openerp.com\n"
 "POT-Creation-Date: 2009-12-18 08:39+0000\n"
@@ -473,6 +487,32 @@ msgid ""
 "No rate found \n"
 "' \\n                    'for the currency: %s \n"
 "' \\n                    'at the date: %s"
+msgstr ""
+
+#. module: base
+#: code:addons/base/res/res_lang.py:0
+#, python-format
+msgid "Base Language 'en_US' can not be deleted !"
+msgstr ""
+
+#. module: base
+#: code:addons/base/res/res_lang.py:0
+#, python-format
+msgid "User Error"
+msgstr ""
+
+#. module: base
+#: code:addons/base/res/res_lang.py:0
+#, python-format
+msgid ""
+"You cannot delete the language which is Active !\n"
+"Please de-activate the language first."
+msgstr ""
+
+#. module: base
+#: code:addons/base/res/res_lang.py:0
+#, python-format
+msgid "You cannot delete the language which is User's Preferred Language !"
 msgstr ""
 
 #. module: base
@@ -7977,14 +8017,14 @@ msgstr ""
 msgid "SMS - Gateway: clickatell"
 msgstr "SMS - Gateway: clickatell"
 
-#~ msgid "Recursivity Detected."
-#~ msgstr "Otkrivena je rekurzivnost"
-
-#~ msgid "Error occurred while validating the field(s) %s: %s"
-#~ msgstr "Dogodila se greška pri provjeri polja %s: %s"
+#~ msgid "Error ! You can not create recursive associated members."
+#~ msgstr "Greška ! Ne možete kreirati rekurzivno pridružene članove."
 
 #~ msgid "Addresses"
 #~ msgstr "Adrese"
 
-#~ msgid "Error ! You can not create recursive associated members."
-#~ msgstr "Greška ! Ne možete kreirati rekurzivno pridružene članove."
+#~ msgid "Error occurred while validating the field(s) %s: %s"
+#~ msgstr "Dogodila se greška pri provjeri polja %s: %s"
+
+#~ msgid "Recursivity Detected."
+#~ msgstr "Otkrivena je rekurzivnost"
