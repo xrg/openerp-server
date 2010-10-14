@@ -4665,5 +4665,41 @@ class orm(orm_template):
             result[record['res_id']] = '%(module)s.%(name)s' % record
         return result
 
+class orm_deprecated(object):
+    """ Mix-in for deprecated models.
+    Add this class as the first baseclass for your object, so that deprecation
+    warnings are issued against using this ORM model.
+    Example:
+        class my_old_class(orm.orm_deprecated, osv.osv):
+            def __init__(...):
+                ...
+    """
+    def __init__(self, *args, **kwargs):
+        self.__depr_warned = False
+        super(orm_deprecated, self).__init__(*args, **kwargs)
+
+    def __issue_depr(self):
+        if self._debug or not self.__depr_warned:
+            warnings.warn("You are using deprecated class %s. Please port your code!" % \
+                            self._name,
+                      DeprecationWarning, stacklevel=3)
+            self.__depr_warned = True
+
+    def read(self, *args, **kwargs):
+        self.__issue_depr()
+        super(orm_deprecated, self).read(*args, **kwargs)
+    def write(self, *args, **kwargs):
+        self.__issue_depr()
+        super(orm_deprecated, self).read(*args, **kwargs)
+    def copy(self, *args, **kwargs):
+        self.__issue_depr()
+        super(orm_deprecated, self).read(*args, **kwargs)
+    def search(self, *args, **kwargs):
+        self.__issue_depr()
+        super(orm_deprecated, self).read(*args, **kwargs)
+    def unlink(self, *args, **kwargs):
+        self.__issue_depr()
+        super(orm_deprecated, self).read(*args, **kwargs)
+
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
 
