@@ -220,6 +220,17 @@ class db(baseExportService):
     def exp_dump(self, db_name):
         logger = logging.getLogger('web-services')
 
+        if tools.config.get_misc('databases', 'dump_guard', False):
+            logger.error("Prevented dump of database %s, because guard is set!", db_name)
+            raise Exception("Not dropping database %s because guard is set!" % db_name)
+        
+        allowed_res = tools.config.get_misc('databases', 'allowed')
+        if allowed_res:
+            dbs_allowed = [ x.strip() for x in allowed_res.split(' ')]
+            if not db_name in dbs_allowed:
+                logger.critical("Asked to dump illegal database: %s", db_name)
+                raise Exception("Database %s is not allowed to be dumped!" % db_name)
+
         self._set_pg_psw_env_var()
 
         cmd = ['pg_dump', '--format=c', '--no-owner' , '-w']
@@ -288,6 +299,19 @@ class db(baseExportService):
     def exp_rename(self, old_name, new_name):
         sql_db.close_db(old_name)
         logger = logging.getLogger('web-services')
+
+        allowed_res = tools.config.get_misc('databases', 'allowed')
+        if allowed_res:
+            # When we have a restricted set of database names, renaming must
+            # be totally forbiden. That is, we both don't want some known db
+            # to be renamed into an arbitrary name, nor one arbitrary db to
+            # be renamed into a known name. The old/new names of the databases
+            # are neither expected to be present at the config file.
+            # So, just tell the admin that he has to temporarily change the
+            # conf file.
+            logger.error("Renaming databases is not allowed. "\
+                "Please turn off the databases.allowed setting at the conf file.")
+            raise Exception("Database renaming is forbiden because the names are restricted")
 
         db = sql_db.db_connect('template1')
         cr = db.cursor()
