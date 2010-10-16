@@ -520,13 +520,19 @@ class orm_template(object):
 
     CONCURRENCY_CHECK_FIELD = '__last_update'
     def log(self, cr, uid, id, message, secondary=False, context=None):
-        return self.pool.get('res.log').create(cr, uid, {
-            'name': message,
-            'res_model': self._name,
-            'secondary': secondary,
-            'res_id': id},
-                context=context
-        )
+        try:
+            return self.pool.get('res.log').create(cr, uid, {
+                'name': message,
+                'res_model': self._name,
+                'secondary': secondary,
+                'res_id': id},
+                    context=context
+            )
+        except psycopg2.ProgrammingError:
+            # our cursor is screwed, hopeless
+            raise
+        except Exception, e:
+            _logger.warning("Could not create res.log line: %s", message, exc_info=True)
 
     def view_init(self, cr , uid , fields_list, context=None):
         """Override this method to do specific things when a view on the object is opened."""
