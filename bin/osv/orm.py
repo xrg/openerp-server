@@ -42,12 +42,13 @@ import calendar
 import copy
 import datetime
 import logging
+import warnings
 import operator
 import pickle
 import re
 import time
-import traceback
 import types
+import psycopg2
 from psycopg2 import DatabaseError, IntegrityError, _psycopg
 
 import netsvc
@@ -531,7 +532,7 @@ class orm_template(object):
         except psycopg2.ProgrammingError:
             # our cursor is screwed, hopeless
             raise
-        except Exception, e:
+        except Exception:
             _logger.warning("Could not create res.log line: %s", message, exc_info=True)
 
     def view_init(self, cr , uid , fields_list, context=None):
