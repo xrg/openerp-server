@@ -358,8 +358,8 @@ class YamlInterpreter(object):
             value = None
         return value
 
-    def process_eval(self, node):
-        return eval(node.expression, self.eval_context)
+    def process_eval(self, node, context=None):
+        return eval(node.expression, context or self.eval_context)
 
     def _eval_field(self, model, field_name, expression):
         # TODO this should be refactored as something like model.get_field() in bin/osv
@@ -459,25 +459,27 @@ class YamlInterpreter(object):
         wf_service = netsvc.LocalService("workflow")
         wf_service.trg_validate(uid, workflow.model, id, workflow.action, self.cr)
     
-    def _eval_params(self, model, params):
+    def _eval_params(self, model, params, context=None):
         args = []
+        if context is None:
+            context = self.eval_context
         for i, param in enumerate(params):
             if isinstance(param, types.ListType):
-                value = self._eval_params(model, param)
+                value = self._eval_params(model, param, context=context)
             elif is_ref(param):
                 value = self.process_ref(param)
             elif is_eval(param):
-                value = self.process_eval(param)
+                value = self.process_eval(param, context=context)
             elif isinstance(param, types.DictionaryType): # supports XML syntax
                 param_model = self.get_model(param.get('model', model))
                 if 'search' in param:
-                    q = eval(param['search'], self.eval_context)
+                    q = eval(param['search'], context)
                     ids = param_model.search(self.cr, self.uid, q)
                     value = self._get_first_result(ids)
                 elif 'eval' in param:
                     local_context = {'obj': lambda x: param_model.browse(self.cr, self.uid, x, self.context)}
                     local_context.update(self.id_map)
-                    value = eval(param['eval'], self.eval_context, local_context)
+                    value = eval(param['eval'], context, local_context)
                 else:
                     raise YamlImportException('You must provide either a !ref or at least a "eval" or a "search" to function parameter #%d.' % i)
             else:
@@ -492,9 +494,9 @@ class YamlInterpreter(object):
         model = self.get_model(function.model)
         context = self.get_context(function, self.eval_context)
         if function.eval:
-            args = self.process_eval(function.eval)
+            args = self.process_eval(function.eval, context=context)
         else:
-            args = self._eval_params(function.model, params)
+            args = self._eval_params(function.model, params, context=context)
         method = function.name
         getattr(model, method)(self.cr, self.uid, *args)
     
