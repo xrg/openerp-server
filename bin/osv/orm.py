@@ -1620,8 +1620,9 @@ class orm_template(object):
                   INNER JOIN wkf_transition t ON (t.act_to = a.id)
                        WHERE wkf.osv = %s
                          AND t.signal = %s
+                         AND t.group_id is NOT NULL
                   """, (self._name, button.get('name'),), debug=self._debug)
-            group_ids = [x[0] for x in cr.fetchall()]
+            group_ids = [x[0] for x in cr.fetchall() if x[0]]
             can_click = not group_ids or bool(set(user_groups).intersection(group_ids))
             button.set('readonly', str(int(not can_click)))
         return node
@@ -2076,7 +2077,6 @@ class orm_template(object):
             resprint = ir_values_obj.get(cr, user, 'action',
                     'client_print_multi', [(self._name, False)], False,
                     context)
-            resaction = []
             resaction = ir_values_obj.get(cr, user, 'action',
                     'client_action_multi', [(self._name, False)], False,
                     context)
@@ -3534,7 +3534,9 @@ class orm(orm_template):
                         if isinstance(res2[record['id']], str):
                             res2[record['id']] = eval(res2[record['id']])
                             #TOCHECK : why got string instend of dict in python2.6
-                        record[pos] = res2[record['id']][pos]
+                        multi_fields = res2.get(record['id'],{})
+                        if multi_fields:
+                            record[pos] = multi_fields.get(pos,[])
             else:
                 for f in val:
                     res2 = self._columns[f].get(cr, self, ids, f, user, context=context, values=res)
