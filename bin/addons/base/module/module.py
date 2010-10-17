@@ -342,6 +342,13 @@ class module(osv.osv):
         all_mod_ids = self.search(cr, uid, [], context=context)
         known_module_names = addons.get_modules()
         
+        def ifustr(var):
+            """ Auto-convert all strings to unicode"""
+            if isinstance(var, basestring):
+                return tools.ustr(var)
+            else:
+                return var
+        
         for old_mod in self.browse(cr, uid, all_mod_ids, context=context):
             if old_mod.name in known_module_names:
                 known_module_names.remove(old_mod.name)
@@ -356,8 +363,8 @@ class module(osv.osv):
                 new_values = { }
                 
                 for key in values:
-                    if getattr(old_mod, key) != values[key]:
-                        new_values[key] = values[key]
+                    if getattr(old_mod, key) != ifustr(values[key]):
+                        new_values[key] = ifustr(values[key])
                 
                 if new_values:
                     self.write(cr, uid, old_mod.id, new_values)
