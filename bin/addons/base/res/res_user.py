@@ -214,7 +214,7 @@ class users(osv.osv):
         return True
 
     _columns = {
-        'name': fields.char('Name', size=64, required=True, select=True,
+        'name': fields.char('User Name', size=64, required=True, select=True,
                             help="The new user's real name, used for searching"
                                  " and most listings"),
         'login': fields.char('Login', size=64, required=True,
@@ -322,8 +322,16 @@ class users(osv.osv):
 
     def _get_group(self,cr, uid, context=None):
         dataobj = self.pool.get('ir.model.data')
-        dummy,group_id = dataobj.get_object_reference(cr, 1, 'base', 'group_user')
-        return [group_id]
+        result = []
+        try:
+            dummy,group_id = dataobj.get_object_reference(cr, 1, 'base', 'group_user')
+            result.append(group_id)
+            dummy,group_id = dataobj.get_object_reference(cr, 1, 'base', 'group_partner_manager')
+            result.append(group_id)
+        except ValueError:
+            # If these groups does not exists anymore
+            pass
+        return result
 
     _defaults = {
         'password' : lambda *a : '',
