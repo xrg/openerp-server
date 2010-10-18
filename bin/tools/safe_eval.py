@@ -280,6 +280,10 @@ def safe_evalD(expr, *args, **kwargs):
         log.exception('safe_eval "%s"' % (expr))
         trace = 'Caller Trace:\n' + ''.join(traceback.format_stack(limit=5)[:-1])
         log.warning(trace)
+        if len(args) > 0 and isinstance(args[0], dict):
+            log.debug('Globals: %r', args[0].keys())
+        if len(args) > 1 and isinstance(args[1], dict):
+            log.debug('Locals: %r', args[1].keys())
         raise
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
