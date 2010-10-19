@@ -560,20 +560,24 @@ class module(osv.osv):
         The toplevel directory of the zipped content is called 'web',
         its final naming has to be managed by the client
         """
-        modules = self.browse(cr, uid,
-            self.search(cr, uid, [('name', 'in', names)], context=context),
-                              context=context)
-        if not modules: return []
-        self.__logger.info('Sending web content of modules %s '
-                           'to web client', names)
-        return [
-            {'name': module.name,
-             'depends': list(self._web_dependencies(
-                 cr, uid, module, context=context)),
-             'content': addons.zip_directory(
-                 addons.get_module_resource(module.name, 'web'))}
-            for module in modules
-        ]
+        mod_ids = self.search(cr, uid, [('name', 'in', names)], context=context)
+        if not mod_ids:
+            return []
+        res = []
+        for module in self.browse(cr, uid, mod_ids, context=context):
+            web_dir = addons.get_module_resource(module.name, 'web')
+            if not web_dir:
+                continue
+            res.append( {'name': module.name,
+                    'depends': list(self._web_dependencies(
+                            cr, uid, module, context=context)),
+                    'content': addons.zip_directory(web_dir)
+                        })
+
+        self.__logger.debug('Sending web content of modules %s to web client', 
+                    [ r['name'] for r in res])
+        return res
+
 
 module()
 
