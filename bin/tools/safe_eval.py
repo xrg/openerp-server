@@ -35,9 +35,8 @@ condition/math builtins.
 from opcode import HAVE_ARGUMENT, opmap, opname
 from types import CodeType
 import logging
-import os
 
-__all__ = ['test_expr', 'literal_eval', 'safe_eval', 'const_eval', 'ext_eval' ]
+__all__ = ['test_expr', 'literal_eval', 'safe_eval', 'const_eval' ]
 
 _CONST_OPCODES = set(opmap[x] for x in [
     'POP_TOP', 'ROT_TWO', 'ROT_THREE', 'ROT_FOUR', 'DUP_TOP','POP_BLOCK','SETUP_LOOP',
@@ -276,7 +275,7 @@ import traceback
 def safe_evalD(expr, *args, **kwargs):
     try:
         return safe_eval(expr,*args, **kwargs)
-    except Exception, e:
+    except Exception:
         log = logging.getLogger('eval')
         log.exception('safe_eval "%s"' % (expr))
         trace = 'Caller Trace:\n' + ''.join(traceback.format_stack(limit=5)[:-1])
