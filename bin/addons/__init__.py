@@ -269,7 +269,7 @@ def get_module_resource(module, *args):
     if not a:
         return False
     res = opj(a, *args)
-    if os.path.isfile(res):
+    if os.path.exists(res):
         return res
     elif zipfile.is_zipfile( a +'.zip') :
         zip = zipfile.ZipFile( a + ".zip")
