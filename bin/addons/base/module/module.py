@@ -227,7 +227,7 @@ class module(osv.osv):
                 raise Exception('Unable to find %r in path' % (binary,))
 
 
-    def state_update(self, cr, uid, ids, newstate, states_to_update, context={}, level=100):
+    def state_update(self, cr, uid, ids, newstate, states_to_update, context=None, level=100):
         if level<1:
             raise orm.except_orm(_('Error'), _('Recursion error in modules dependencies !'))
         demo = False
@@ -247,7 +247,13 @@ class module(osv.osv):
             try:
                 self._check_external_dependencies(terp)
             except Exception, e:
-                raise orm.except_orm(_('Error'), _('Unable %s the module "%s" because an external dependencie is not met: %s' % (newstate, module.name, e.args[0])))
+                if newstate == 'to install':
+                    msg = _('Unable to install the module "%s" because an external dependencie is not met: %s')
+                elif newstate == 'to upgrade':
+                    msg = _('Unable to upgrade the module "%s" because an external dependencie is not met: %s')
+                else:
+                    msg = _('Unable to process the module "%s" because an external dependencie is not met: %s')
+                raise orm.except_orm(_('Error'), msg % (module.name, e.args[0]))
             if not module.dependencies_id:
                 mdemo = module.demo
             if module.state in states_to_update:
