@@ -474,18 +474,21 @@ class ir_model_data(osv.osv):
         action_id = False
 
         if xml_id:
-            cr.execute('select id,res_id from ir_model_data where module=%s and name=%s', (module,xml_id))
+            cr.execute('SELECT id, res_id, model, '
+                    'EXISTS(SELECT id FROM ' + model_obj._table +
+                    '       WHERE id=ir_model_data.res_id AND %s = ir_model_data.model) AS is_valid '
+                    'FROM ir_model_data '
+                    'WHERE module=%s AND name=%s',
+                    (model, module, xml_id), debug=self._debug)
             results = cr.fetchall()
-            for action_id2,res_id2 in results:
-                cr.execute('select id from '+model_obj._table+' where id=%s', (res_id2,))
-                result3 = cr.fetchone()
-                if not result3:
+            for action_id2,res_id2,model2,is_valid2 in results:
+                if res_id2 and is_valid2:
+                    res_id,action_id = res_id2, action_id2
+                else:
                     self._get_id.clear_cache(cr.dbname, uid, module, xml_id)
                     self.get_object_reference.clear_cache(cr.dbname, uid, module, xml_id)
-                    cr.execute('delete from ir_model_data where id=%s', (action_id2,))
+                    cr.execute('DELETE FROM ir_model_data WHERE id=%s', (action_id2,), debug=self._debug)
                     res_id = False
-                else:
-                    res_id,action_id = res_id2,action_id2
 
         if action_id and res_id:
             model_obj.write(cr, uid, [res_id], values, context=context)
@@ -535,6 +538,11 @@ class ir_model_data(osv.osv):
                                 'res_id': inherit_id,
                                 'noupdate': noupdate,
                                 },context=context)
+                            # Debugger's note: if you get an integrity error at
+                            # the above line, it means that the inherited (base)
+                            # object is already there (leftover record) with
+                            # an entry = xml_id+'_'+table at ir_model_data,
+                            # which has to be manually cleared from the db.
         if xml_id:
             if res_id:
                 self.loads[(module, xml_id)] = (model, res_id)
