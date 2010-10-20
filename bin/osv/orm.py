@@ -4422,7 +4422,10 @@ class orm(orm_template):
                 if order_field.startswith('"') and order_field.endswith('"'):
                     order_field = order_field[1:-1]
                 order_direction = order_split[1].strip() if len(order_split) == 2 else ''
-                if order_field in self._columns:
+                if order_field in ('id', 'create_date', 'create_uid', 'write_date', 'write_uid', '_vptr'):
+                    # builtin columns first
+                    order_by_clause = '"%s"."%s"' % (self._table, order_field)
+                elif order_field in self._columns:
                     order_column = self._columns[order_field]
                     if order_column._classic_read:
                         order_by_clause = '"%s"."%s"' % (self._table, order_field)
