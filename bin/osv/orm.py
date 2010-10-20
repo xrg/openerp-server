@@ -615,7 +615,7 @@ class orm_template(object):
                         relation,view_load,state,select_level,relation_field, translate ) 
                     VALUES ( %s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s )""", 
                     ( id, vals['model_id'], vals['model'], vals['name'], vals['field_description'], vals['ttype'],
-                     vals['relation'], bool(vals['view_load']), 'base',
+                     vals['relation'], vals['view_load'], 'base',
                     vals['select_level'],vals['relation_field'], vals['translate']), 
                     debug=self._debug)
                 if 'module' in context:
@@ -644,10 +644,11 @@ class orm_template(object):
                             " WHERE model=%s AND name=%s", 
                             ( vals['model_id'], vals['field_description'], vals['ttype'],
                                 vals['relation'], 
-                                bool(vals['view_load']), vals['select_level'], bool(vals['readonly']),bool(vals['required']),
-                                bool(vals['selectable']),vals['relation_field'], vals['translate'],
+                                vals['view_load'], vals['select_level'], vals['readonly'],vals['required'],
+                                vals['selectable'],vals['relation_field'], vals['translate'],
                                 vals['model'], vals['name'] ),
                                 debug=self._debug)
+                        # Don't check any more attributes, we're up-to-date now.
                         break
         cr.commit()
 
