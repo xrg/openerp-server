@@ -4411,12 +4411,16 @@ class orm(orm_template):
         :raise" except_orm in case order_spec is malformed
         """
         order_by_clause = self._order
+        if self._debug:
+            _logger.debug('Generate order from %s and %s', self._order, order_spec)
         if order_spec:
             order_by_elements = []
             self._check_qorder(order_spec)
             for order_part in order_spec.split(','):
                 order_split = order_part.strip().split(' ')
                 order_field = order_split[0].strip()
+                if order_field.startswith('"') and order_field.endswith('"'):
+                    order_field = order_field[1:-1]
                 order_direction = order_split[1].strip() if len(order_split) == 2 else ''
                 if order_field in self._columns:
                     order_column = self._columns[order_field]
@@ -4435,7 +4439,11 @@ class orm(orm_template):
                         order_by_clause = self._generate_m2o_order_by(order_field, query)
                     else:
                         continue # ignore non-readable or "non-joignable" fields
+                else:
+                    raise except_orm(_('Error!'), _('Object model does not support order by "%s"!') % order_field)
                 order_by_elements.append("%s %s" % (order_by_clause, order_direction))
+                if self._debug:
+                    _logger.debug("Order for %s: %r", self._name, order_by_elements[-1])
             order_by_clause = ",".join(order_by_elements)
 
         return order_by_clause and (' ORDER BY %s ' % order_by_clause) or ''
