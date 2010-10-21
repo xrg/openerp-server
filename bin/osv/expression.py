@@ -41,6 +41,14 @@ class placeholder(object):
             return True
         return False
 
+class ExpressionError(ValueError):
+    """Error at expression evaluation.
+    
+        This exception will always mean that the expression has a syntax
+        error
+    """
+    pass
+
 class expression(object):
     """
     parse a domain expression
@@ -122,7 +130,7 @@ class expression(object):
         """
         # check if the expression is valid
         if not reduce(lambda acc, val: acc and (self._is_operator(val) or self._is_leaf(val)), exp, True):
-            raise ValueError('Bad domain expression: %r' % (exp,))
+            raise ExpressionError('Bad domain expression: %r' % (exp,))
         self.__exp = exp
         self.__field_tables = {}  # used to store the table to use for the sql generation. key = index of the leaf
         self.__all_tables = set()
@@ -610,7 +618,7 @@ class expression(object):
                         params = right
 
             elif (operator == 'child_of' or operator == '|child_of'):
-                raise Exception("Cannot compute %s %s %s in sql" %(left, operator, right))
+                raise ExpressionError("Cannot compute %s %s %s in sql" %(left, operator, right))
             else:
                 if isinstance(right, placeholder):
                     assert(right.expr)
