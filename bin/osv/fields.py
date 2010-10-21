@@ -576,7 +576,7 @@ class many2many(_column):
             where_c = ' AND ' + where_c
 
         if offset or self._limit:
-            order_by = ' ORDER BY "%s".%s' %(obj._table, obj._order)
+            order_by = ' ORDER BY "%s".%s' %(obj._table, obj._order.split(',')[0])
         else:
             order_by = ''
 

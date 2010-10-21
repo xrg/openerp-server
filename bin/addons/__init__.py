@@ -274,9 +274,9 @@ def get_module_resource(module, *args):
     elif zipfile.is_zipfile( a +'.zip') :
         zip = zipfile.ZipFile( a + ".zip")
         files = ['/'.join(f.split('/')[1:]) for f in zip.namelist()]
-        res = '/'.join(args)
-        if res in files:
-            return opj(a, res)
+        resource_path = '/'.join(args)
+        if resource_path in files:
+            return opj(a, resource_path)
     return False
 
 
