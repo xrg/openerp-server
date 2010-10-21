@@ -235,7 +235,7 @@ class module(osv.osv):
             mdemo = False
             for dep in module.dependencies_id:
                 if dep.state == 'unknown':
-                    raise orm.except_orm(_('Error'), _("You try to install the module '%s' that depends on the module:'%s'.\nBut this module is not available in your system.") % (module.name, dep.name,))
+                    raise orm.except_orm(_('Error'), _("You try to install module '%s' that depends on module '%s'.\nBut the latter module is not available in your system.") % (module.name, dep.name,))
                 ids2 = self.search(cr, uid, [('name','=',dep.name)])
                 if dep.state != newstate:
                     mdemo = self.state_update(cr, uid, ids2, newstate, states_to_update, context, level-1,) or mdemo
@@ -248,11 +248,11 @@ class module(osv.osv):
                 self._check_external_dependencies(terp)
             except Exception, e:
                 if newstate == 'to install':
-                    msg = _('Unable to install the module "%s" because an external dependencie is not met: %s')
+                    msg = _('Unable to install module "%s" because an external dependency is not met: %s')
                 elif newstate == 'to upgrade':
-                    msg = _('Unable to upgrade the module "%s" because an external dependencie is not met: %s')
+                    msg = _('Unable to upgrade module "%s" because an external dependency is not met: %s')
                 else:
-                    msg = _('Unable to process the module "%s" because an external dependencie is not met: %s')
+                    msg = _('Unable to process module "%s" because an external dependency is not met: %s')
                 raise orm.except_orm(_('Error'), msg % (module.name, e.args[0]))
             if not module.dependencies_id:
                 mdemo = module.demo

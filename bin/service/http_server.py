@@ -412,9 +412,7 @@ class xrBaseRequestHandler(FixSendError, HttpLogHandler, SimpleXMLRPCServer.Simp
 class XMLRPCRequestHandler(netsvc.OpenERPDispatcher,xrBaseRequestHandler):
     def setup(self):
         self.connection = dummyconn()
-        if not len(XMLRPCRequestHandler.rpc_paths):
-            XMLRPCRequestHandler.rpc_paths = map(lambda s: '/%s' % s, netsvc.ExportService._services.keys())
-        pass
+        self.rpc_paths = map(lambda s: '/%s' % s, netsvc.ExportService._services.keys())
 
     def _dispatch(self, method, params):
         try:
