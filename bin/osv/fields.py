@@ -568,21 +568,29 @@ class many2many(_column):
         if offset:
             warnings.warn("Specifying offset at a many2many.get() may produce unpredictable results.",
                       DeprecationWarning, stacklevel=2)
-        limit_str = self._limit is not None and ' limit %d' % self._limit or ''
         obj = obj.pool.get(self._obj)
         wquery = obj._where_calc(cr, user, self._domain, context=context)
         obj._apply_ir_rules(cr, user, wquery, 'read', context=context)
         from_c, where_c, where_params = wquery.get_sql()
         if where_c:
             where_c = ' AND ' + where_c
-        
+
+        if offset or self._limit:
+            order_by = ' ORDER BY "%s".%s' %(obj._table, obj._order)
+        else:
+            order_by = ''
+
+        limit_str = ''
+        if self._limit is not None:
+            limit_str = ' LIMIT %d' % self._limit
+
         query = 'SELECT %(rel)s.%(id2)s, %(rel)s.%(id1)s \
                    FROM %(rel)s, %(from_c)s \
                   WHERE %(rel)s.%(id1)s = ANY(%%s) \
                     AND %(rel)s.%(id2)s = %(tbl)s.id \
                  %(where_c)s  \
+                 %(order_by)s \
                  %(limit)s \
-                  /* ORDER BY ... */ \
                  OFFSET %(offset)d' \
             % {'rel': self._rel,
                'from_c': from_c,
@@ -591,6 +599,7 @@ class many2many(_column):
                'id2': self._id2,
                'where_c': where_c,
                'limit': limit_str,
+               'order_by': order_by,
                'offset': offset,
               }
         cr.execute(query, [ids,] + where_params, debug=obj._debug)
