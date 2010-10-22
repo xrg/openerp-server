@@ -471,7 +471,7 @@ class MultiHTTPHandler(FixSendError, HttpOptions, BaseHTTPRequestHandler):
         try:
             self.request.settimeout(1.0)
         except socket.error, err:
-            if err.errno == errno.EBADF:
+            if err.errno in (errno.EBADF, errno.ECONNABORTED, errno.ECONNRESET):
                 try:
                     self.rfile.close()
                     self.wfile.close()
@@ -502,12 +502,11 @@ class MultiHTTPHandler(FixSendError, HttpOptions, BaseHTTPRequestHandler):
                 self.request.close()
                 return None
             except socket.error, err:
-                if err.errno == errno.EBADF:
+                if err.errno in (errno.EBADF, errno.ECONNABORTED, errno.ECONNRESET):
                     self.rfile.close()
                     self.wfile.close()
                     return None
                 else:
-                    print type(err)
                     raise
 
         # return to blocking mode, because next operations will not
@@ -515,7 +514,7 @@ class MultiHTTPHandler(FixSendError, HttpOptions, BaseHTTPRequestHandler):
         try:
             self.request.setblocking(True)
         except socket.error, err:
-            if err.errno == errno.EBADF:
+            if err.errno in (errno.EBADF, errno.ECONNABORTED, errno.ECONNRESET):
                 try:
                     self.rfile.close()
                     self.wfile.close()
