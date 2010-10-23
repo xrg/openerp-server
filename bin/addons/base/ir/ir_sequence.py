@@ -33,7 +33,7 @@ class ir_sequence_type(osv.osv):
     }
 ir_sequence_type()
 
-def _code_get(self, cr, uid, context={}):
+def _code_get(self, cr, uid, context=None):
     cr.execute('select code, name from ir_sequence_type')
     return cr.fetchall()
 
@@ -53,12 +53,12 @@ class ir_sequence(osv.osv):
         'weight': fields.integer('Weight',required=True, help="If two sequences match, the highest weight will be used.")
     }
     _defaults = {
-        'active': lambda *a: True,
+        'active': True,
         'company_id': lambda s,cr,uid,c: s.pool.get('res.company')._company_default_get(cr, uid, 'ir.sequence', context=c),
-        'number_increment': lambda *a: 1,
-        'number_next': lambda *a: 1,
-        'padding' : lambda *a : 0,
-        'weight' : lambda *a: 10,
+        'number_increment': 1,
+        'number_next': 1,
+        'padding': 0,
+        'weight': 10,
     }
 
     def _process(self, s):

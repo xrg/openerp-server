@@ -27,7 +27,7 @@ import tools
 import os
 import logging
 
-def _check_xml(self, cr, uid, ids, context={}):
+def _check_xml(self, cr, uid, ids, context=None):
     logger = logging.getLogger('init')
     for view in self.browse(cr, uid, ids, context):
         eview = etree.fromstring(view.arch.encode('utf8'))
@@ -43,8 +43,8 @@ def _check_xml(self, cr, uid, ids, context={}):
 class view_custom(osv.osv):
     _name = 'ir.ui.view.custom'
     _columns = {
-        'ref_id': fields.many2one('ir.ui.view', 'Original View'),
-        'user_id': fields.many2one('res.users', 'User'),
+        'ref_id': fields.many2one('ir.ui.view', 'Original View', select=True),
+        'user_id': fields.many2one('res.users', 'User', select=True),
         'arch': fields.text('View Architecture', required=True),
     }
 view_custom()
@@ -79,7 +79,7 @@ class view(osv.osv):
         (_check_xml, 'Invalid XML for View Architecture!', ['arch'])
     ]
 
-    def read(self, cr, uid, ids, fields=None, context={}, load='_classic_read'):
+    def read(self, cr, uid, ids, fields=None, context=None, load='_classic_read'):
 
         if not isinstance(ids, (list, tuple)):
             ids = [ids]
@@ -88,7 +88,7 @@ class view(osv.osv):
 
         for rs in result:
             if rs.get('model') == 'board.board':
-                cr.execute("select id,arch,ref_id from ir_ui_view_custom where user_id=%s and ref_id=%s", (uid, rs['id']))
+                cr.execute("SELECT id, arch, ref_id FROM ir_ui_view_custom WHERE user_id=%s AND ref_id=%s", (uid, rs['id']))
                 oview = cr.dictfetchall()
                 if oview:
                     rs['arch'] = oview[0]['arch']
@@ -96,7 +96,7 @@ class view(osv.osv):
 
         return result
 
-    def write(self, cr, uid, ids, vals, context={}):
+    def write(self, cr, uid, ids, vals, context=None):
 
         if not isinstance(ids, (list, tuple)):
             ids = [ids]
@@ -110,15 +110,15 @@ class view(osv.osv):
             result = super(view, self).write(cr, uid, ids, vals, context)
 
             if not vids:
-                self.pool.get('ir.ui.view.custom').create(cr, uid, vals2)
+                self.pool.get('ir.ui.view.custom').create(cr, uid, vals2, context=context)
             else:
-                self.pool.get('ir.ui.view.custom').write(cr, uid, vids, vals2)
+                self.pool.get('ir.ui.view.custom').write(cr, uid, vids, vals2, context=context)
 
             return result
 
         return super(view, self).write(cr, uid, ids, vals, context)
 
-    def graph_get(self, cr, uid, id, model, node_obj, conn_obj, src_node, des_node,label,scale,context={}):
+    def graph_get(self, cr, uid, id, model, node_obj, conn_obj, src_node, des_node,label,scale,context=None):
         if not label:
             label = []
         nodes=[]
@@ -194,17 +194,17 @@ class view_sc(osv.osv):
         'name': fields.char('Shortcut Name', size=64, required=True),
         'res_id': fields.many2one('ir.ui.menu','Resource Ref.', ondelete='cascade'),
         'sequence': fields.integer('Sequence'),
-        'user_id': fields.many2one('res.users', 'User Ref.', required=True, ondelete='cascade'),
+        'user_id': fields.many2one('res.users', 'User Ref.', required=True, ondelete='cascade', select=True),
         'resource': fields.char('Resource Name', size=64, required=True)
     }
 
-    def get_sc(self, cr, uid, user_id, model='ir.ui.menu', context={}):
+    def get_sc(self, cr, uid, user_id, model='ir.ui.menu', context=None):
         ids = self.search(cr, uid, [('user_id','=',user_id),('resource','=',model)], context=context)
         return self.read(cr, uid, ids, ['res_id','name'], context=context)
 
     _order = 'sequence'
     _defaults = {
-        'resource': lambda *a: 'ir.ui.menu',
+        'resource': 'ir.ui.menu',
         'user_id': lambda obj, cr, uid, context: uid,
     }
     _sql_constraints = [

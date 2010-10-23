@@ -42,7 +42,7 @@ class actions(osv.osv):
         'usage': fields.char('Action Usage', size=32),
     }
     _defaults = {
-        'usage': lambda *a: False,
+        'usage': False,
     }
 actions()
 
@@ -84,6 +84,8 @@ class report_xml(osv.osv):
         cr.execute("SELECT * FROM ir_act_report_xml WHERE auto=%s ORDER BY id", (True,))
         result = cr.dictfetchall()
         svcs = netsvc.Service._services
+        # FIXME: there is a conflict if a newer module tries to upgrade with
+        # a report moving from "auto" to a non-auto code.
         for r in result:
             if svcs.has_key('report.'+r['report_name']):
                 continue
@@ -129,13 +131,13 @@ class report_xml(osv.osv):
 
     }
     _defaults = {
-        'type': lambda *a: 'ir.actions.report.xml',
-        'multi': lambda *a: False,
-        'auto': lambda *a: True,
-        'header': lambda *a: True,
-        'report_sxw_content': lambda *a: False,
-        'report_type': lambda *a: 'pdf',
-        'attachment': lambda *a: False,
+        'type': 'ir.actions.report.xml',
+        'multi': False,
+        'auto': True,
+        'header': True,
+        'report_sxw_content': False,
+        'report_type': 'pdf',
+        'attachment': False,
     }
 
 report_xml()
@@ -269,14 +271,14 @@ class act_window(osv.osv):
     }
 
     _defaults = {
-        'type': lambda *a: 'ir.actions.act_window',
-        'view_type': lambda *a: 'form',
-        'view_mode': lambda *a: 'tree,form',
-        'context': lambda *a: '{}',
-        'limit': lambda *a: 80,
-        'target': lambda *a: 'current',
-        'auto_refresh': lambda *a: 0,
-        'auto_search':lambda *a: True,
+        'type': 'ir.actions.act_window',
+        'view_type': 'form',
+        'view_mode': 'tree,form',
+        'context': '{}',
+        'limit': 80,
+        'target': 'current',
+        'auto_refresh': 0,
+        'auto_search': True,
         'multi': False,
     }
 
@@ -300,7 +302,7 @@ class act_window_view(osv.osv):
             help="If set to true, the action will not be displayed on the right toolbar of a form view."),
     }
     _defaults = {
-        'multi': lambda *a: False,
+        'multi': False,
     }
     _order = 'sequence'
 act_window_view()
@@ -319,8 +321,8 @@ class act_wizard(osv.osv):
         'model': fields.char('Object', size=64),
     }
     _defaults = {
-        'type': lambda *a: 'ir.actions.wizard',
-        'multi': lambda *a: False,
+        'type': 'ir.actions.wizard',
+        'multi': False,
     }
 act_wizard()
 
@@ -339,8 +341,8 @@ class act_url(osv.osv):
         )
     }
     _defaults = {
-        'type': lambda *a: 'ir.actions.act_url',
-        'target': lambda *a: 'new'
+        'type': 'ir.actions.act_url',
+        'target': 'new'
     }
 act_url()
 
@@ -380,7 +382,7 @@ class server_object_lines(osv.osv):
         ], 'Type', required=True, size=32, change_default=True),
     }
     _defaults = {
-        'type': lambda *a: 'equation',
+        'type': 'equation',
     }
 server_object_lines()
 
@@ -463,11 +465,11 @@ class actions_server(osv.osv):
         'copy_object': fields.reference('Copy Of', selection=_select_objects, size=256),
     }
     _defaults = {
-        'state': lambda *a: 'dummy',
-        'condition': lambda *a: 'True',
-        'type': lambda *a: 'ir.actions.server',
-        'sequence': lambda *a: 5,
-        'code': lambda *a: """# You can use the following variables
+        'state': 'dummy',
+        'condition': 'True',
+        'type': 'ir.actions.server',
+        'sequence': 5,
+        'code': """# You can use the following variables
 #    - object or obj
 #    - time
 #    - cr
@@ -752,7 +754,7 @@ class act_window_close(osv.osv):
     _inherit = 'ir.actions.actions'
     _table = 'ir_actions'
     _defaults = {
-        'type': lambda *a: 'ir.actions.act_window_close',
+        'type': 'ir.actions.act_window_close',
     }
 act_window_close()
 

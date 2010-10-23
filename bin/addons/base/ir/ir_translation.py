@@ -63,7 +63,7 @@ class ir_translation(osv.osv):
         'value': fields.text('Translation Value'),
     }
 
-    def _auto_init(self, cr, context={}):
+    def _auto_init(self, cr, context=None):
         super(ir_translation, self)._auto_init(cr, context)
         cr.execute('SELECT indexname FROM pg_indexes WHERE indexname = %s', ('ir_translation_ltn',))
         if not cr.fetchone():

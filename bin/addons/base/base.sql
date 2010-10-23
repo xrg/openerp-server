@@ -118,7 +118,7 @@ CREATE TABLE ir_ui_view (
     primary key(id)
 );
 
-CREATE INDEX ir_ui_view_model_type_idx ON ir_ui_view(model,type);
+CREATE INDEX ir_ui_view_model_type_idx ON ir_ui_view(model,"type");
 
 CREATE TABLE ir_ui_menu (
     id serial NOT NULL,
