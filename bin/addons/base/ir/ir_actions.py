@@ -229,8 +229,8 @@ class act_window(osv.osv):
                 res[act.id] = str(form_arch)
         return res
 
-    def _get_help_status(self, cr, uid, ids, name, arg, context={}):
-        activate_tips = self.pool.get('res.users').browse(cr, uid, uid).menu_tips
+    def _get_help_status(self, cr, uid, ids, name, arg, context=None):
+        activate_tips = self.pool.get('res.users').browse(cr, uid, uid, context=context).menu_tips
         return dict([(id, activate_tips) for id in ids])
 
     _columns = {
@@ -392,7 +392,7 @@ server_object_lines()
 class actions_server(osv.osv):
 
     def _select_signals(self, cr, uid, context=None):
-        cr.execute("SELECT distinct w.osv, t.signal FROM wkf w, wkf_activity a, wkf_transition t \
+        cr.execute_prepared('actions_server_sel_signals', "SELECT distinct w.osv, t.signal FROM wkf w, wkf_activity a, wkf_transition t \
         WHERE w.id = a.wkf_id  AND ( t.act_from = a.id OR t.act_to = a.id ) AND t.signal!='' \
         AND t.signal IS NOT NULL", debug=self._debug)
         result = cr.fetchall() or []

@@ -264,7 +264,8 @@ class ir_model_access(osv.osv):
         grouparr  = group.split('.')
         if not grouparr:
             return False
-        cr.execute("SELECT EXISTS (SELECT 1 FROM res_groups_users_rel AS ur, ir_model_data AS imd " \
+        cr.execute_prepared('ima_check_groups2', 
+                "SELECT EXISTS (SELECT 1 FROM res_groups_users_rel AS ur, ir_model_data AS imd " \
                 " WHERE ur.uid=%s AND ur.gid = imd.res_id " \
                 " AND imd.model = 'res.groups' " \
                 " AND imd.module=%s AND imd.name=%s )", \
@@ -284,7 +285,8 @@ class ir_model_access(osv.osv):
         if isinstance(group_ids, (int, long)):
             group_ids = [group_ids]
         for group_id in group_ids:
-            cr.execute("SELECT perm_" + mode + " "
+            cr.execute_prepared('ima_check_group1_'+mode, 
+                   "SELECT perm_" + mode + " "
                    "  FROM ir_model_access a "
                    "  JOIN ir_model m ON (m.id = a.model_id) "
                    " WHERE m.model = %s AND (a.group_id = %s OR a.group_id IS NULL)"
@@ -312,17 +314,20 @@ class ir_model_access(osv.osv):
         if isinstance(model, browse_record):
             assert model._table_name == 'ir.model', 'Invalid model object'
             model_name = model.name
+            model_obj = model._table
+            assert model_obj, "No ORM object for %r" % model
         else:
             model_name = model
+            model_obj = self.pool.get(model_name)
 
         # osv_memory objects can be read by everyone, as they only return
         # results that belong to the current user (except for superuser)
-        model_obj = self.pool.get(model_name)
         if isinstance(model_obj, osv.osv_memory):
             return True
 
         # We check if a specific rule exists
-        cr.execute('SELECT BOOL_OR(perm_' + mode + ') '
+        cr.execute_prepared('ima_group_check_' + mode,
+                   'SELECT BOOL_OR(perm_' + mode + ') '
                    '  FROM ir_model_access a '
                    '  JOIN ir_model m ON (m.id = a.model_id) '
                    '  LEFT JOIN res_groups_users_rel gu ON (gu.gid = a.group_id) '
@@ -330,7 +335,7 @@ class ir_model_access(osv.osv):
                    '   AND (gu.uid = %s OR gu.uid IS NULL) '
                    ' GROUP BY (gu.uid IS NULL) ORDER BY MIN(gu.uid) '
                    , (model_name, uid,),
-                   debug= self._debug
+                   debug= (model_obj and model_obj._debug) or self._debug
                    )
                    # GROUP BY makes sure we separate specific group rules from 
                    # generic ones, and those groups are OR-ed together. 
