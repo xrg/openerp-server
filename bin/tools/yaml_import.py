@@ -309,7 +309,7 @@ class YamlInterpreter(object):
         else:
             self.validate_xml_id(record.id)
             if self.isnoupdate(record) and self.mode != 'init':
-                id = self.pool.get('ir.model.data')._update_dummy(self.cr, self.uid, record.model, self.module, record.id)
+                id = self.pool.get('ir.model.data')._update_dummy(self.cr, 1, record.model, self.module, record.id)
                 # check if the resource already existed at the last update
                 if id:
                     self.id_map[record] = int(id)
@@ -321,7 +321,7 @@ class YamlInterpreter(object):
             record_dict = self._create_record(model, fields)
             #context = self.get_context(record, self.eval_context)
             context = record.context #TOFIX: record.context like {'withoutemployee':True} should pass from self.eval_context. example: test_project.yml in project module
-            id = self.pool.get('ir.model.data')._update(self.cr, self.uid, record.model, \
+            id = self.pool.get('ir.model.data')._update(self.cr, 1, record.model, \
                     self.module, record_dict, record.id, noupdate=self.isnoupdate(record), mode=self.mode, context=context)
             if model._debug:
                 self.logger.debug("RECORD_DICT %s: #%r %s" % ( record.id, id, record_dict))
@@ -581,7 +581,7 @@ class YamlInterpreter(object):
 
         self._set_group_values(node, values)
         
-        pid = self.pool.get('ir.model.data')._update(self.cr, self.uid, \
+        pid = self.pool.get('ir.model.data')._update(self.cr, 1, \
                 'ir.ui.menu', self.module, values, node.id, mode=self.mode, \
                 noupdate=self.isnoupdate(node), res_id=res and res[0] or False)
 
@@ -592,7 +592,7 @@ class YamlInterpreter(object):
             action_type = node.type or 'act_window'
             action_id = self.get_id(node.action)
             action = "ir.actions.%s,%d" % (action_type, action_id)
-            self.pool.get('ir.model.data').ir_set(self.cr, self.uid, 'action', \
+            self.pool.get('ir.model.data').ir_set(self.cr, 1, 'action', \
                     'tree_but_open', 'Menuitem', [('ir.ui.menu', int(parent_id))], action, True, True, xml_id=node.id)
 
     def process_act_window(self, node):
@@ -626,7 +626,7 @@ class YamlInterpreter(object):
 
         if node.target:
             values['target'] = node.target
-        id = self.pool.get('ir.model.data')._update(self.cr, self.uid, \
+        id = self.pool.get('ir.model.data')._update(self.cr, 1, \
                 'ir.actions.act_window', self.module, values, node.id, mode=self.mode)
         self.id_map[node.id] = int(id)
 
@@ -634,7 +634,7 @@ class YamlInterpreter(object):
             keyword = 'client_action_relate'
             value = 'ir.actions.act_window,%s' % id
             replace = node.replace or True
-            self.pool.get('ir.model.data').ir_set(self.cr, self.uid, 'action', keyword, \
+            self.pool.get('ir.model.data').ir_set(self.cr, 1, 'action', keyword, \
                     node.id, [node.src_model], value, replace=replace, noupdate=self.isnoupdate(node), isobject=True, xml_id=node.id)
         # TODO add remove ir.model.data
 
@@ -650,7 +650,7 @@ class YamlInterpreter(object):
                 self.logger.debug("Asking to unlink from %s ids: %r", node.model, ids)
             if len(ids):
                 mod_obj.unlink(self.cr, self.uid, ids)
-                self.pool.get('ir.model.data')._unlink(self.cr, self.uid, node.model, ids)
+                self.pool.get('ir.model.data')._unlink(self.cr, 1, node.model, ids)
         else:
             self.logger.log(logging.TEST, "Record not deleted. No model %s" % node.model)
     
@@ -659,7 +659,7 @@ class YamlInterpreter(object):
 
         res = {'name': node.name, 'url': node.url, 'target': node.target}
 
-        id = self.pool.get('ir.model.data')._update(self.cr, self.uid, \
+        id = self.pool.get('ir.model.data')._update(self.cr, 1, \
                 "ir.actions.url", self.module, res, node.id, mode=self.mode)
         self.id_map[node.id] = int(id)
         # ir_set
@@ -667,7 +667,7 @@ class YamlInterpreter(object):
             keyword = node.keyword or 'client_action_multi'
             value = 'ir.actions.url,%s' % id
             replace = node.replace or True
-            self.pool.get('ir.model.data').ir_set(self.cr, self.uid, 'action', \
+            self.pool.get('ir.model.data').ir_set(self.cr, 1, 'action', \
                     keyword, node.url, ["ir.actions.url"], value, replace=replace, \
                     noupdate=self.isnoupdate(node), isobject=True, xml_id=node.id)
     
@@ -682,7 +682,7 @@ class YamlInterpreter(object):
             else:
                 value = expression
             res[fieldname] = value
-        self.pool.get('ir.model.data').ir_set(self.cr, self.uid, res['key'], res['key2'], \
+        self.pool.get('ir.model.data').ir_set(self.cr, 1, res['key'], res['key2'], \
                 res['name'], res['models'], res['value'], replace=res.get('replace',True), \
                 isobject=res.get('isobject', False), meta=res.get('meta',None))
 
@@ -707,7 +707,7 @@ class YamlInterpreter(object):
 
         self._set_group_values(node, values)
 
-        id = self.pool.get('ir.model.data')._update(self.cr, self.uid, "ir.actions.report.xml", \
+        id = self.pool.get('ir.model.data')._update(self.cr, 1, "ir.actions.report.xml", \
                 self.module, values, xml_id, noupdate=self.isnoupdate(node), mode=self.mode)
         self.id_map[xml_id] = int(id)
 
@@ -715,7 +715,7 @@ class YamlInterpreter(object):
             keyword = node.keyword or 'client_print_multi'
             value = 'ir.actions.report.xml,%s' % id
             replace = node.replace or True
-            self.pool.get('ir.model.data').ir_set(self.cr, self.uid, 'action', \
+            self.pool.get('ir.model.data').ir_set(self.cr, 1, 'action', \
                     keyword, values['name'], [values['model']], value, replace=replace, isobject=True, xml_id=xml_id)
             
     def process_none(self):
