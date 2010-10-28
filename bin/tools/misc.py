@@ -1137,7 +1137,8 @@ def debug(what):
             --log-level=debug
 
     """
-    import netsvc
+    warnings.warn("The tools.debug() method is deprecated, please use logging.",
+                      DeprecationWarning, stacklevel=2)
     from inspect import stack
     import re
     from pprint import pformat
@@ -1147,7 +1148,7 @@ def debug(what):
     what = pformat(what)
     if param != what:
         what = "%s = %s" % (param, what)
-    netsvc.Logger().notifyChannel(st[3], netsvc.LOG_DEBUG, what)
+    logging.getLogger(st[3]).debug(what)
 
 
 icons = map(lambda x: (x,x), ['STOCK_ABOUT', 'STOCK_ADD', 'STOCK_APPLY', 'STOCK_BOLD',
