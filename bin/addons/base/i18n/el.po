@@ -1,92 +1,6 @@
-# #-#-#-#-#  .merge_file_Zw0fJ4 (OpenERP Server 5.0.0)  #-#-#-#-#
-# #-#-#-#-#  .merge_file_AKs9UT (OpenERP Server 5.0.0)  #-#-#-#-#
-# #-#-#-#-#  .merge_file_wxqzuO (OpenERP Server 5.0.0)  #-#-#-#-#
-# #-#-#-#-#  .merge_file_D2cogU (OpenERP Server 5.0.0)  #-#-#-#-#
-# #-#-#-#-#  .merge_file_gVU25q (OpenERP Server 5.0.0)  #-#-#-#-#
-# #-#-#-#-#  .merge_file_ujdSpS (OpenERP Server 5.0.0)  #-#-#-#-#
-# #-#-#-#-#  .merge_file_Rie6SU (OpenERP Server 5.0.0)  #-#-#-#-#
 # This file contains the translation of the following modules:
 # 	* base
 #
-# #-#-#-#-#  .merge_file_S3oAwd (OpenERP Server 5.0.0)  #-#-#-#-#
-# This file contains the translation of the following modules:
-# 	* base
-#
-# #-#-#-#-#  .merge_file_Pqp1cg (OpenERP Server 5.0.0)  #-#-#-#-#
-# This file contains the translation of the following modules:
-# 	* base
-#
-# #-#-#-#-#  .merge_file_rD3y9C (OpenERP Server 5.0.0)  #-#-#-#-#
-# This file contains the translation of the following modules:
-# 	* base
-#
-# #-#-#-#-#  .merge_file_z4qMJn (OpenERP Server 5.0.0)  #-#-#-#-#
-# #-#-#-#-#  .merge_file_UTex48 (OpenERP Server 5.0.0)  #-#-#-#-#
-# #-#-#-#-#  .merge_file_ujdSpS (OpenERP Server 5.0.0)  #-#-#-#-#
-# #-#-#-#-#  .merge_file_Rie6SU (OpenERP Server 5.0.0)  #-#-#-#-#
-# This file contains the translation of the following modules:
-# 	* base
-#
-# #-#-#-#-#  .merge_file_S3oAwd (OpenERP Server 5.0.0)  #-#-#-#-#
-# This file contains the translation of the following modules:
-# 	* base
-#
-# #-#-#-#-#  .merge_file_Pqp1cg (OpenERP Server 5.0.0)  #-#-#-#-#
-# This file contains the translation of the following modules:
-# 	* base
-#
-# #-#-#-#-#  .merge_file_AAH5RP (OpenERP Server 5.0.0)  #-#-#-#-#
-# This file contains the translation of the following modules:
-# 	* base
-#
-# #-#-#-#-#  .merge_file_XxM9zy (OpenERP Server 5.0.0)  #-#-#-#-#
-# This file contains the translation of the following modules:
-# 	* base
-#
-# #-#-#-#-#  .merge_file_amHvdo (OpenERP Server 5.0.0)  #-#-#-#-#
-# This file contains the translation of the following modules:
-# 	* base
-#
-# #-#-#-#-#  .merge_file_XlakHD (OpenERP Server 5.0.0)  #-#-#-#-#
-# #-#-#-#-#  .merge_file_D2cogU (OpenERP Server 5.0.0)  #-#-#-#-#
-# #-#-#-#-#  .merge_file_gVU25q (OpenERP Server 5.0.0)  #-#-#-#-#
-# #-#-#-#-#  .merge_file_ujdSpS (OpenERP Server 5.0.0)  #-#-#-#-#
-# #-#-#-#-#  .merge_file_Rie6SU (OpenERP Server 5.0.0)  #-#-#-#-#
-# This file contains the translation of the following modules:
-# 	* base
-#
-# #-#-#-#-#  .merge_file_S3oAwd (OpenERP Server 5.0.0)  #-#-#-#-#
-# This file contains the translation of the following modules:
-# 	* base
-#
-# #-#-#-#-#  .merge_file_Pqp1cg (OpenERP Server 5.0.0)  #-#-#-#-#
-# This file contains the translation of the following modules:
-# 	* base
-#
-# #-#-#-#-#  .merge_file_rD3y9C (OpenERP Server 5.0.0)  #-#-#-#-#
-# This file contains the translation of the following modules:
-# 	* base
-#
-# #-#-#-#-#  .merge_file_z4qMJn (OpenERP Server 5.0.0)  #-#-#-#-#
-# #-#-#-#-#  .merge_file_UTex48 (OpenERP Server 5.0.0)  #-#-#-#-#
-# #-#-#-#-#  .merge_file_ujdSpS (OpenERP Server 5.0.0)  #-#-#-#-#
-# #-#-#-#-#  .merge_file_Rie6SU (OpenERP Server 5.0.0)  #-#-#-#-#
-# This file contains the translation of the following modules:
-# 	* base
-#
-# #-#-#-#-#  .merge_file_S3oAwd (OpenERP Server 5.0.0)  #-#-#-#-#
-# This file contains the translation of the following modules:
-# 	* base
-#
-# #-#-#-#-#  .merge_file_Pqp1cg (OpenERP Server 5.0.0)  #-#-#-#-#
-# This file contains the translation of the following modules:
-# 	* base
-#
-# #-#-#-#-#  .merge_file_AAH5RP (OpenERP Server 5.0.0)  #-#-#-#-#
-# This file contains the translation of the following modules:
-# 	* base
-#
-# P. Christeas <p_christ@hol.gr>, 2009.
 # P. Christeas <p_christ@hol.gr>, 2009, 2010.
 msgid ""
 msgstr ""
@@ -299,7 +213,7 @@ msgstr "Τα ειδικά πεδία πρέπει να έχουν όνομα π�
 #: code:addons/base/ir/ir_model.py:0
 #, python-format
 msgid "Model %s Does not Exist !"
-msgstr "Το μοντέλο % δεν υπάρχει!"
+msgstr "Το μοντέλο %s δεν υπάρχει!"
 
 #. module: base
 #: code:addons/base/ir/ir_model.py:0
@@ -664,7 +578,7 @@ msgid ""
 "\n"
 "\n"
 "This addon is already installed on your system"
-msgstr "Το άρθρωμα αυτό είναι ήδη εγκατεστημένο."
+msgstr "\n\nΤο άρθρωμα αυτό είναι ήδη εγκατεστημένο."
 
 #. module: base
 #: code:addons/base/res/res_config.py:0
@@ -4768,7 +4682,7 @@ msgstr ""
 "προτείνουμε\n"
 "την απλοποιημένη μορφή, η οποία έχει λιγότερες επιλογές αλλά είναι "
 "ευκολότερη στην\n"
-"κατανόηση. Μπορείτε να επιτρέψετε την εκτεταμένη αργότερα.\n"
+"κατανόηση. Μπορείτε να επιτρέψετε την εκτεταμένη αργότερα."
 
 #. module: base
 #: model:ir.actions.todo,note:base.config_wizard_step_user
@@ -4779,7 +4693,7 @@ msgid ""
 "            "
 msgstr ""
 "Δημιουργία Χρηστών.\n"
-"Μπορείτε να χωρίσετε τους χρήστες σε ομάδες δικαιωμάτων.\n"
+"Μπορείτε να χωρίσετε τους χρήστες σε ομάδες δικαιωμάτων.\n    "
 
 #. module: base
 #: model:ir.actions.url,name:base.open_module_web_list
