@@ -23,6 +23,7 @@ from osv import fields,osv
 from lxml import etree
 from tools import graph
 from tools.safe_eval import safe_eval as eval
+from tools.translate import _
 import tools
 import os
 import logging
@@ -74,9 +75,16 @@ class view(osv.osv):
         'arch': '<?xml version="1.0"?>\n<tree string="My view">\n\t<field name="name"/>\n</tree>',
         'priority': 16
     }
+    def _invalid_xml_message(self, cr, uid, ids, context=None):
+        """ Only print the message, through a callable
+        We want this msg to come through a callable, so that the
+        translation engine will not repeat it for each view registered
+        """
+        return _('Invalid XML for View Architecture!'), ()
+
     _order = "priority"
     _constraints = [
-        (_check_xml, 'Invalid XML for View Architecture!', ['arch'])
+        (_check_xml, _invalid_xml_message , ['arch'])
     ]
 
     def read(self, cr, uid, ids, fields=None, context=None, load='_classic_read'):
