@@ -79,7 +79,8 @@ class ir_translation(osv.osv):
     def _get_ids(self, cr, uid, name, tt, lang, ids):
         translations = dict.fromkeys(ids, False)
         if ids:
-            cr.execute('SELECT res_id,value ' \
+            cr.execute_prepared('ir_trans_get_ids',
+                    'SELECT res_id,value ' \
                     'FROM ir_translation ' \
                     'WHERE lang=%s ' \
                         'AND type=%s ' \
@@ -142,7 +143,8 @@ class ir_translation(osv.osv):
         else:
             types = list(types)
         if source:
-            cr.execute('SELECT value ' \
+            cr.execute_prepared('ir_trans_get_src1',
+                    'SELECT value ' \
                     'FROM ir_translation ' \
                     'WHERE lang=%s ' \
                         'AND type = ANY(%s) ' \
@@ -151,7 +153,8 @@ class ir_translation(osv.osv):
                         "AND value IS NOT NULL AND value <> '' ",
                     (lang, types, tools.ustr(name), source), debug=self._debug)
         else:
-            cr.execute('SELECT value ' \
+            cr.execute_prepared('ir_trans_get_src2',
+                    'SELECT value ' \
                     'FROM ir_translation ' \
                     'WHERE lang=%s ' \
                         'AND type = ANY(%s) ' \
@@ -168,7 +171,8 @@ class ir_translation(osv.osv):
         """
         assert lang
 
-        cr.execute('SELECT src, value ' \
+        cr.execute_prepared('ir_trans_get_msrc',
+                    'SELECT src, value ' \
                     'FROM ir_translation ' \
                     'WHERE lang=%s ' \
                         'AND type=%s ' \
@@ -200,17 +204,17 @@ class ir_translation(osv.osv):
             fl2 = []
             for name, tt in fld_list:
                 fl2.append( (prepend + name, tt) )
-            nexpr = 'substr( name, %d) as name' % (len(prepend) + 1)
+            nlen = (len(prepend) + 1)
         else:
             fl2 = fld_list
-            nexpr = 'name'
+            nlen = 1
             
-        cr.execute('SELECT ' + nexpr + ', type, value ' \
+        cr.execute('SELECT substr(name, %s) as name, type, value ' \
                     'FROM ir_translation ' \
                     'WHERE lang=%s ' \
                        'AND  (name, type) IN %s ' \
                        "AND value IS NOT NULL AND value <> '' ",
-                    (lang, tuple(fl2)), debug=self._debug)
+                    (nlen, lang, tuple(fl2)), debug=self._debug)
         
         res = []
         for row in cr.fetchall():
@@ -234,17 +238,19 @@ class ir_translation(osv.osv):
         
         if prepend:
             fl2 = map(lambda x: prepend + x, name_list)
-            nexpr = 'substr( name, %d) as name' % (len(prepend) + 1)
+            nlen = (len(prepend) + 1)
         else:
             fl2 = name_list
+            nlen = 1
             nexpr = 'name'
             
-        cr.execute('SELECT ' + nexpr + ', res_id, value ' \
+        cr.execute_prepared('ir_trans_get_mids',
+                    'SELECT substr(name, %s) as name, res_id, value ' \
                     'FROM ir_translation ' \
                     'WHERE lang=%s AND type = %s '\
                     ' AND name = ANY(%s) AND res_id = ANY(%s) '
                     "AND value IS NOT NULL AND value <> '' ",
-                    (lang, ttype, fl2, ids), debug=self._debug)
+                    (nlen, lang, ttype, fl2, ids), debug=self._debug)
         
         res = []
         for row in cr.fetchall():
