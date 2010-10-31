@@ -1477,6 +1477,9 @@ class orm_template(object):
         return False
 
     def __view_look_dom(self, cr, user, node, view_id, context=None):
+        """Examine the DOM of a view and find the fields, attributes
+           @return a dict of fields, with their attributes.
+        """
         if not context:
             context = {}
         result = False
@@ -1484,8 +1487,8 @@ class orm_template(object):
         childs = True
 
         def encode(s):
-            if isinstance(s, unicode):
-                return s.encode('utf8')
+            #if isinstance(s, unicode):
+            #    return s.encode('utf8')
             return s
 
         # return True if node can be displayed to current user
@@ -1522,14 +1525,17 @@ class orm_template(object):
                 }
                 attrs = {'views': views}
                 fields = views.get('field',False) and views['field'].get('fields',False)
-            if node.get('name'):
+            node_name = node.get('name')
+            if node_name:
                 attrs = {}
                 try:
-                    if node.get('name') in self._columns:
-                        column = self._columns[node.get('name')]
+                    if node_name in self._columns:
+                        column = self._columns[node_name]
+                    elif node_name in self._inherit_fields:
+                        column = self._inherit_fields[node_name][2]
                     else:
-                        column = self._inherit_fields[node.get('name')][2]
-                except:
+                        column = False
+                except Exception:
                     column = False
 
                 if column:
@@ -1548,7 +1554,7 @@ class orm_template(object):
                                 'fields': xfields
                             }
                     attrs = {'views': views}
-                    if node.get('widget') and node.get('widget') == 'selection':
+                    if node.get('widget') == 'selection':
                         # Prepare the cached selection list for the client. This needs to be
                         # done even when the field is invisible to the current user, because
                         # other events could need to change its value to any of the selectable ones
@@ -1573,7 +1579,7 @@ class orm_template(object):
                         attrs['selection'] = relation._name_search(cr, user, '', dom, context=search_context, limit=None, name_get_uid=1)
                         if (node.get('required') and not int(node.get('required'))) or not column.required:
                             attrs['selection'].append((False,''))
-                fields[node.get('name')] = attrs
+                fields[node_name] = attrs
 
         elif node.tag in ('form', 'tree'):
             result = self.view_header_get(cr, user, False, node.tag, context)
@@ -1786,8 +1792,8 @@ class orm_template(object):
             context = {}
 
         def encode(s):
-            if isinstance(s, unicode):
-                return s.encode('utf8')
+            #if isinstance(s, unicode):
+            #    return s.encode('utf8')
             return s
 
         def _inherit_apply(src, inherit, base_id=0, apply_id=0):
