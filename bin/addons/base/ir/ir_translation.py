@@ -67,7 +67,7 @@ class ir_translation(osv.osv):
         super(ir_translation, self)._auto_init(cr, context)
         cr.execute('SELECT indexname FROM pg_indexes WHERE indexname = %s', ('ir_translation_ltn',))
         if not cr.fetchone():
-            cr.execute('CREATE INDEX ir_translation_ltn ON ir_translation (lang, type, name)')
+            cr.execute('CREATE INDEX ir_translation_ltnr ON ir_translation (lang, type, name, res_id)')
             cr.commit()
 
         cr.execute('SELECT indexname FROM pg_indexes WHERE indexname = %s', ('ir_translation_src',))
