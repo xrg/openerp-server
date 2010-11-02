@@ -331,6 +331,12 @@ class MultiHTTPHandler(FixSendError, HttpOptions, BaseHTTPRequestHandler):
         fore.raw_requestline = "%s %s %s\n" % (self.command, path, self.version)
         if not fore.parse_request(): # An error code has been sent, just exit
             return
+        if fore.headers.status:
+            self.log_error("Parse error at headers: %s", fore.headers.status)
+            self.close_connection = 1
+            self.send_error(400,"Parse error at HTTP headers")
+            return
+
         self.request_version = fore.request_version
         if auth_provider and auth_provider.realm:
             try:
@@ -567,7 +573,7 @@ class MultiHTTPHandler(FixSendError, HttpOptions, BaseHTTPRequestHandler):
             except IOError, e:
                 if e.errno == errno.EPIPE:
                     self.log_message("Could not complete request %s," \
-                            "client closed connection", self.rlpath)
+                            "client closed connection", self.rlpath.rstrip())
                 else:
                     raise
             return
