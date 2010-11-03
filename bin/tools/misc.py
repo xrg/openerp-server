@@ -34,6 +34,7 @@ import socket
 import sys
 import threading
 import time
+import warnings
 import zipfile
 from datetime import datetime
 from email.MIMEText import MIMEText
@@ -430,7 +431,7 @@ def _email_send(smtp_from, smtp_to_list, message, openobject_id=None, ssl=False,
             from mailbox import Maildir
             maildir_path = smtp_server[8:]
             mdir = Maildir(maildir_path,factory=None, create = True)
-            mdir.add(msg.as_string(True))
+            mdir.add(message.as_string(True))
             return True
 
         oldstderr = smtplib.stderr
