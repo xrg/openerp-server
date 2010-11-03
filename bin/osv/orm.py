@@ -2844,13 +2844,22 @@ class orm(orm_template):
             # iterate on the "object columns"
             todo_update_store = []
             update_custom_fields = context.get('update_custom_fields', False)
+
+            cr.execute("SELECT c.relname,a.attname,a.attlen,a.atttypmod,a.attnotnull,a.atthasdef,t.typname,CASE WHEN a.attlen=-1 THEN a.atttypmod-4 ELSE a.attlen END as size " \
+               "FROM pg_class c,pg_attribute a,pg_type t " \
+               "WHERE c.relname=%s " \
+               "AND c.oid=a.attrelid " \
+               "AND a.atttypid=t.oid", (self._table,))
+            col_data = dict(map(lambda x: (x['attname'], x),cr.dictfetchall()))
+
+
             for k in self._columns:
                 if k in ('id', 'write_uid', 'write_date', 'create_uid', 'create_date', '_vptr'):
                     continue
-                    #raise _('Can not define a column %s. Reserved keyword !') % (k,)
                 #Not Updating Custom fields
                 if k.startswith('x_') and not update_custom_fields:
                     continue
+
                 f = self._columns[k]
 
                 if isinstance(f, fields.one2many):
@@ -2879,13 +2888,8 @@ class orm(orm_template):
                         cr.execute("COMMENT ON TABLE \"%s\" IS 'RELATION BETWEEN %s AND %s'" % (f._rel, self._table, ref), debug=self._debug)
                         cr.commit()
                 else:
-                    cr.execute("SELECT c.relname,a.attname,a.attlen,a.atttypmod,a.attnotnull,a.atthasdef,t.typname,CASE WHEN a.attlen=-1 THEN a.atttypmod-4 ELSE a.attlen END as size " \
-                               "FROM pg_class c,pg_attribute a,pg_type t " \
-                               "WHERE c.relname=%s " \
-                               "AND a.attname=%s " \
-                               "AND c.oid=a.attrelid " \
-                               "AND a.atttypid=t.oid", (self._table, k))
-                    res = cr.dictfetchall()
+                    res = col_data.get(k, [])
+                    res = res and [res] or []
                     if not res and hasattr(f,'oldname'):
                         cr.execute("SELECT c.relname,a.attname,a.attlen,a.atttypmod,a.attnotnull,a.atthasdef,t.typname,CASE WHEN a.attlen=-1 THEN a.atttypmod-4 ELSE a.attlen END as size " \
                             "FROM pg_class c,pg_attribute a,pg_type t " \
@@ -3446,7 +3450,8 @@ class orm(orm_template):
                             _logger.debug("access error @%s  %d != %d " %(self._name, rc, len(sd)))
                             _logger.debug("len(%s) != len(%s)" % (cr.fetchall(), sd))
                         raise except_orm(_('AccessError'),
-                                _('You try to bypass an access rule while reading (Document type: %s).') % self._description)
+                                         _('Operation prohibited by access rules, or performed on an already deleted document (Operation: read, Document type: %s).')
+                                         % (self._description,))
                 else:
                     cr.execute(query, (ids,), debug=self._debug)
                 res.extend(cr.dictfetchall())
@@ -3641,8 +3646,8 @@ class orm(orm_template):
                            [sub_ids] + where_params)
                 if cr.rowcount != len(sub_ids):
                     raise except_orm(_('AccessError'),
-                                     _('Operation prohibited by access rules (Operation: %s, Document type: %s).')
-                                     % (operation, self._name))
+                                     _('Operation prohibited by access rules, or performed on an already deleted document (Operation: %s, Document type: %s).')
+                                     % (operation, self._description))
 
     def unlink(self, cr, uid, ids, context=None):
         """
@@ -3848,6 +3853,9 @@ class orm(orm_template):
             for sub_ids in cr.split_for_in_conditions(ids):
                 cr.execute('update ' + self._table + ' set ' + ','.join(upd0) + ' ' \
                            'where id in %s', upd1 + [sub_ids], debug=self._debug) # TODO
+                if cr.rowcount != len(sub_ids):
+                    raise except_orm(_('AccessError'),
+                                     _('One of the records you are trying to modify has already been deleted (Document type: %s).') % self._description)
 
             if totranslate:
                 # TODO: optimize
