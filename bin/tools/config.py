@@ -391,10 +391,18 @@ class configmanager(object):
             os.chmod(filename, stat.S_IRUSR + stat.S_IWUSR)
 
     def _check_addons_path(self, option, opt, value, parser):
-        res = os.path.abspath(os.path.expanduser(value))
-        if not os.path.exists(res):
-            raise optparse.OptionValueError("option %s: no such directory: %r" % (opt, value))
-        setattr(parser.values, option.dest, res)
+        """ Check the cmdline addons paths.
+        
+        Unlike the code in addons/__init__.py, where addons paths may be missing,
+        command-line suplied paths must all be valid directories.
+        """
+        paths = []
+        for res in map(str.strip, value.split(',')):
+            res = os.path.abspath(os.path.expanduser(res))
+            if not os.path.isdir(res):
+                raise optparse.OptionValueError("option %s: no such directory: %r" % (opt, res))
+            paths.append(res)
+        setattr(parser.values, option.dest, ','.join(paths))
 
     def load(self):
         p = ConfigParser.ConfigParser()
