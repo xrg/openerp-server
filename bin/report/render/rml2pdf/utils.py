@@ -36,16 +36,15 @@
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-import re
-import reportlab
-from lxml import etree
 import copy
 import locale
 import logging
+import re
+import reportlab
+
 import tools
 from tools.safe_eval import safe_eval as eval
 from tools import ustr
-import logging
 
 _regex = re.compile('\[\[(.+?)\]\]')
 
@@ -118,18 +117,19 @@ def _process_text(self, txt):
         sps = _regex.split(txt)
         while sps:
             # This is a simple text to translate
-            result += unicode(self.localcontext.get('translate', lambda x:x)(sps.pop(0)))
+            to_translate = tools.ustr(sps.pop(0))
+            result += tools.ustr(self.localcontext.get('translate', lambda x:x)(to_translate))
             if sps:
                 try:
+                    txt = None
                     expr = sps.pop(0)
-                    txt = eval(expr,self.localcontext)
+                    txt = eval(expr, self.localcontext)
                     if txt and (isinstance(txt, basestring)):
                         txt = ustr(txt)
-                except Exception,e:
+                except Exception:
                     logging.getLogger('report').exception("Exception at: %s" % expr)
-                if type(txt)==type('') or type(txt)==type(u''):
-                    txt2 = str2xml(txt)
-                    result += ustr(txt2)
+                if isinstance(txt, basestring):
+                    result += str2xml(txt)
                 elif (txt is not None) and (txt is not False):
                     result += ustr(txt)
         return result
