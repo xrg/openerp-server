@@ -52,6 +52,7 @@ class res_partner_category(osv.osv):
         return dict(res)
 
     def _check_recursion(self, cr, uid, ids):
+        # TODO: move to orm
         level = 100
         while len(ids):
             cr.execute('select distinct parent_id from res_partner_category where id IN %s',(tuple(ids),))
@@ -68,15 +69,16 @@ class res_partner_category(osv.osv):
         'parent_id': fields.many2one('res.partner.category', 'Parent Category', select=True),
         'complete_name': fields.function(_name_get_fnc, method=True, type="char", string='Full Name'),
         'child_ids': fields.one2many('res.partner.category', 'parent_id', 'Child Categories'),
-        'active' : fields.boolean('Active', help="The active field allows you to hide the category without removing it."),
+        'active' : fields.boolean('Active', required=True, help="The active field allows you to hide the category without removing it."),
     }
     _constraints = [
         (_check_recursion, 'Error ! You can not create recursive categories.', ['parent_id'])
     ]
     _defaults = {
-        'active' : lambda *a: 1,
+        'active': True,
     }
     _order = 'parent_id,name'
+
 res_partner_category()
 
 class res_partner_title(osv.osv):
@@ -87,6 +89,7 @@ class res_partner_title(osv.osv):
         'domain': fields.selection([('partner','Partner'),('contact','Contact')], 'Domain', required=True, size=24)
     }
     _order = 'name'
+
 res_partner_title()
 
 def _lang_get(self, cr, uid, context={}):
@@ -106,10 +109,10 @@ class res_partner(osv.osv):
         'title': fields.many2one('res.partner.title','Partner Form'),
         'parent_id': fields.many2one('res.partner','Parent Partner', select=2),
         'child_ids': fields.one2many('res.partner', 'parent_id', 'Partner Ref.'),
-        'ref': fields.char('Reference', size=64),
+        'ref': fields.char('Reference', size=64, select=True),
         'lang': fields.selection(_lang_get, 'Language', size=5, help="If the selected language is loaded in the system, all documents related to this partner will be printed in this language. If not, it will be english."),
         'user_id': fields.many2one('res.users', 'Salesman', help='The internal user that is in charge of communicating with this partner if any.'),
-        'vat': fields.char('VAT',size=32 ,help="Value Added Tax number. Check the box if the partner is subjected to the VAT. Used by the VAT legal statement."),
+        'vat': fields.char('VAT', size=32, help="Value Added Tax number. Check the box if the partner is subjected to the VAT. Used by the VAT legal statement."),
         'bank_ids': fields.one2many('res.partner.bank', 'partner_id', 'Banks'),
         'website': fields.char('Website',size=64, help="Website of Partner"),
         'comment': fields.text('Notes'),
@@ -118,7 +121,7 @@ class res_partner(osv.osv):
         'events': fields.one2many('res.partner.event', 'partner_id', 'Events'),
         'credit_limit': fields.float(string='Credit Limit'),
         'ean13': fields.char('EAN13', size=13),
-        'active': fields.boolean('Active'),
+        'active': fields.boolean('Active', select=True, required=True),
         'customer': fields.boolean('Customer', help="Check this box if the partner is a customer."),
         'supplier': fields.boolean('Supplier', help="Check this box if the partner is a supplier. If it's not checked, purchase people will not see it when encoding a purchase order."),
         'city': fields.related('address', 'city', type='char', string='City'),
@@ -136,12 +139,16 @@ class res_partner(osv.osv):
         return []
 
     _defaults = {
-        'active': lambda *a: 1,
-        'customer': lambda *a: 1,
+        'active': True,
+        'customer': True,
         'category_id': _default_category,
         'company_id': lambda s,cr,uid,c: s.pool.get('res.company')._company_default_get(cr, uid, 'res.partner', context=c),
     }
-    def copy(self, cr, uid, id, default={}, context={}):
+
+    def copy(self, cr, uid, id, default=None, context=None):
+        if default is None:
+            default = {}
+        # todo: exploit copy-cols
         name = self.read(cr, uid, [id], ['name'])[0]['name']
         default.update({'name': name+ _(' (copy)'), 'events':[]})
         return super(res_partner, self).copy(cr, uid, id, default, context)
@@ -167,10 +174,10 @@ class res_partner(osv.osv):
 
 #   _constraints = [(_check_ean_key, 'Error: Invalid ean code', ['ean13'])]
 
-    def name_get(self, cr, uid, ids, context={}):
+    def name_get(self, cr, uid, ids, context=None):
         if not len(ids):
             return []
-        if context.get('show_ref', False):
+        if context and context.get('show_ref', False):
             rec_name = 'ref'
         else:
             rec_name = 'name'
@@ -213,7 +220,7 @@ class res_partner(osv.osv):
         return True
 
     def address_get(self, cr, uid, ids, adr_pref=['default']):
-        cr.execute('select type,id from res_partner_address where partner_id IN %s',(tuple(ids),))
+        cr.execute('SELECT type,id FROM res_partner_address WHERE partner_id = ANY(%s)',(list(ids),))
         res = cr.fetchall()
         adr = dict(res)
         # get the id of the (first) default address if there is one,
@@ -232,12 +239,12 @@ class res_partner(osv.osv):
             return True
 
         # compute the next number ref
-        cr.execute("select ref from res_partner where ref is not null order by char_length(ref) desc, ref desc limit 1")
+        cr.execute("SELECT ref FROM res_partner WHERE ref IS NOT NULL ORDER BY char_length(ref) DESC, ref DESC LIMIT 1")
         res = cr.dictfetchall()
         ref = res and res[0]['ref'] or '0'
         try:
             nextref = int(ref)+1
-        except:
+        except ValueError:
             raise osv.except_osv(_('Warning'), _("Couldn't generate the next id because some partners have an alphabetic id !"))
 
         # update the current partner
@@ -250,6 +257,7 @@ class res_partner(osv.osv):
         if (not context.get('category_id', False)):
             return False
         return _('Partners: ')+self.pool.get('res.partner.category').browse(cr, uid, context['category_id'], context).name
+
     def main_partner(self, cr, uid):
         ''' Return the id of the main partner
         '''
@@ -283,18 +291,21 @@ class res_partner_address(osv.osv):
         'birthdate': fields.char('Birthdate', size=64),
         'is_customer_add': fields.related('partner_id', 'customer', type='boolean', string='Customer'),
         'is_supplier_add': fields.related('partner_id', 'supplier', type='boolean', string='Supplier'),
-        'active': fields.boolean('Active', help="Uncheck the active field to hide the contact."),
+        'active': fields.boolean('Active', required=True, select=True, 
+                    help="Uncheck the active field to hide the contact."),
 #        'company_id': fields.related('partner_id','company_id',type='many2one',relation='res.company',string='Company', store=True),
         'company_id': fields.many2one('res.company', 'Company',select=1),
     }
     _defaults = {
-        'active': lambda *a: 1,
+        'active': True,
         'company_id': lambda s,cr,uid,c: s.pool.get('res.company')._company_default_get(cr, uid, 'res.partner.address', context=c),
     }
 
-    def name_get(self, cr, user, ids, context={}):
+    def name_get(self, cr, user, ids, context=None):
         if not len(ids):
             return []
+        if context is None:
+            context = {}
         res = []
         for r in self.read(cr, user, ids, ['name','zip','country_id', 'city','partner_id', 'street']):
             if context.get('contact_display', 'contact')=='partner' and r['partner_id']:
