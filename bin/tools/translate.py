@@ -179,7 +179,7 @@ class GettextAlias(object):
                 else:
                     ctx = {}
 
-            lang = ctx.get('lang', False)
+            lang = ctx and ctx.get('lang', False)
             if not lang:
                 return source
             if (not cr) and frame.f_globals.get('pooler',False):
