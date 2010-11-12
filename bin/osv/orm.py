@@ -1512,7 +1512,7 @@ class orm_template(object):
             context = {}
         result = False
         fields = {}
-        childs = True
+        children = True
 
         def encode(s):
             #if isinstance(s, unicode):
@@ -1569,7 +1569,7 @@ class orm_template(object):
                 if column:
                     relation = self.pool.get(column._obj)
 
-                    childs = False
+                    children = False
                     views = {}
                     for f in node:
                         if f.tag in ('form', 'tree', 'graph'):
@@ -1636,7 +1636,7 @@ class orm_template(object):
                     node.set('sum', trans)
 
         for f in node:
-            if childs or (node.tag == 'field' and f.tag in ('filter','separator')):
+            if children or (node.tag == 'field' and f.tag in ('filter','separator')):
                 fields.update(self.__view_look_dom(cr, user, f, view_id, context))
 
         return fields
@@ -1683,7 +1683,7 @@ class orm_template(object):
             fields = self.fields_get(cr, user, fields_def.keys(), context)
         for field in fields_def:
             if field == 'id':
-                # sometime, the view may containt the (invisible) field 'id' needed for a domain (when 2 objects have cross references)
+                # sometime, the view may contain the (invisible) field 'id' needed for a domain (when 2 objects have cross references)
                 fields['id'] = {'readonly': True, 'type': 'integer', 'string': 'ID'}
             elif field in fields:
                 fields[field].update(fields_def[field])
@@ -2753,8 +2753,7 @@ class orm(orm_template):
                 where += ' order by '+self._parent_order
             cr.execute('SELECT id FROM '+self._table+' WHERE '+where)
             pos2 = pos + 1
-            childs = cr.fetchall()
-            for id in childs:
+            for id in cr.fetchall():
                 pos2 = browse_rec(id[0], pos2)
             cr.execute('update '+self._table+' set parent_left=%s, parent_right=%s where id=%s', (pos,pos2,root))
             return pos2+1
@@ -4602,9 +4601,9 @@ class orm(orm_template):
                 old_record, new_record  = self.read(cr, uid, [old_id, new_id], [field_name], context=context)
                 # here we rely on the order of the ids to match the translations
                 # as foreseen in copy_data()
-                old_childs = sorted(old_record[field_name])
-                new_childs = sorted(new_record[field_name])
-                for (old_child, new_child) in zip(old_childs, new_childs):
+                old_children = sorted(old_record[field_name])
+                new_children = sorted(new_record[field_name])
+                for (old_child, new_child) in zip(old_children, new_children):
                     # recursive copy of translations here
                     target_obj.copy_translations(cr, uid, old_child, new_child, context=context)
             # and for translatable fields we keep them for copy

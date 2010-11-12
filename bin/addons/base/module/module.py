@@ -48,8 +48,8 @@ class module_category(osv.osv):
         result = dict(cr.fetchall())
         for id in ids:
             cr.execute('SELECT id FROM ir_module_category WHERE parent_id=%s', (id,), debug=self._debug)
-            childs = [c for c, in cr.fetchall()]
-            result[id] = reduce(lambda x,y:x+y, [result.get(c, 0) for c in childs], result.get(id, 0))
+            result[id] = sum([result.get(c, 0) for (c,) in cr.fetchall()],
+                             result.get(id, 0))
         return result
 
     _columns = {
