@@ -288,6 +288,10 @@ class configmanager(object):
         for dval in opt.defines or []:
             if '=' in dval:
                 key, val = dval.split('=',1)
+                if val in ('True', 'true'):
+                    val = True
+                if val in ('False', 'false'):
+                    val = False
             else:
                 key = dval
                 val = True
