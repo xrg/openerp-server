@@ -4678,11 +4678,28 @@ class orm(orm_template):
 
         if not parent:
             parent = self._parent_name
+        if isinstance(ids, (long, int)):
+            ids = [ids,]
         ids_parent = ids[:]
+        if cr.pgmode in ('pg84', 'pg90'):
+            # Recursive search, all inside postgres. The first part will fetch all
+            # ids, the others will fetch parents, until some path contains the
+            # id two times. Then, cycle -> True and not recurse further.
+            cr.execute("""WITH RECURSIVE %(t)s_crsrc(parent_id, path, cycle) AS
+            ( SELECT "%(t)s"."%(p)s" AS parent_id, ARRAY[id], False
+                FROM "%(t)s"  WHERE id = ANY(%%s)
+             UNION ALL SELECT "%(t)s"."%(p)s" AS parent_id, path || id, id = ANY(path)
+                FROM "%(t)s", %(t)s_crsrc
+                WHERE "%(t)s".id = %(t)s_crsrc.parent_id
+                  AND %(t)s_crsrc.cycle = False)
+            SELECT 1 from %(t)s_crsrc WHERE cycle = True; """ %  \
+                { 't':self._table, 'p': parent},
+                (ids[:],), debug=True)
+            res = cr.fetchone()
+            return not (res and res[0])
         while len(ids_parent):
             ids_parent2 = []
             for i in range(0, len(ids), cr.IN_MAX):
-                # TODO: pg84 optimization
                 sub_ids_parent = ids_parent[i:i+cr.IN_MAX]
                 cr.execute('SELECT distinct "'+parent+'"'+
                     ' FROM "'+self._table+'" ' \
