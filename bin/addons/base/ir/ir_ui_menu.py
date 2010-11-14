@@ -255,16 +255,7 @@ class ir_ui_menu(osv.osv):
         return {'type': {'icon_pict': 'picture'}, 'value': {'icon_pict': ('stock', (icon,'ICON_SIZE_MENU'))}}
 
     def _check_recursion(self, cr, uid, ids):
-        level = 100
-        while len(ids):
-            cr.execute('select distinct parent_id from ir_ui_menu where id IN %s',(tuple(ids),))
-            ids = filter(None, map(lambda x:x[0], cr.fetchall()))
-            if not level:
-                return False
-            level -= 1
-        return True
-    
-    
+        return super(ir_ui_menu, self)._check_recursion(cr, uid, ids)
 
     _columns = {
         'name': fields.char('Menu', size=64, required=True, translate=True),
@@ -288,7 +279,7 @@ class ir_ui_menu(osv.osv):
                 ('ir.actions.server', 'ir.actions.server'),
             ]),
     }
-    
+
     def _rec_message(self, cr, uid, ids, context=None):
         return _('Error ! You can not create recursive Menu.')
 

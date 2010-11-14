@@ -52,15 +52,7 @@ class res_partner_category(osv.osv):
         return dict(res)
 
     def _check_recursion(self, cr, uid, ids):
-        # TODO: move to orm
-        level = 100
-        while len(ids):
-            cr.execute('select distinct parent_id from res_partner_category where id IN %s',(tuple(ids),))
-            ids = filter(None, map(lambda x:x[0], cr.fetchall()))
-            if not level:
-                return False
-            level -= 1
-        return True
+        return osv.osv._check_recursion(self, cr, uid, ids)
 
     _description='Partner Categories'
     _name = 'res.partner.category'
