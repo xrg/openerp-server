@@ -186,7 +186,9 @@ class browse_record(object):
         table : the object (inherited from orm)
         context : dictionary with an optional context
         '''
-        if not context:
+        if fields_process is None:
+            fields_process = {}
+        if context is None:
             context = {}
         self._list_class = list_class or browse_record_list
         self._cr = cr
@@ -546,7 +548,7 @@ class orm_template(object):
         raise NotImplementedError(_('The read_group method is not implemented on this object !'))
 
     def _field_create(self, cr, context=None):
-        if not context:
+        if context is None:
             context = {}
         cr.execute("SELECT id FROM ir_model WHERE model=%s", (self._name,), debug=self._debug)
         if not cr.rowcount:
@@ -655,8 +657,8 @@ class orm_template(object):
                         break
         cr.commit()
 
-    def _auto_init(self, cr, context={}):
-        self._field_create(cr, context)
+    def _auto_init(self, cr, context=None):
+        self._field_create(cr, context=context)
 
     def __init__(self, cr):
         if not self._name and not hasattr(self, '_inherit'):
@@ -724,8 +726,6 @@ class orm_template(object):
             itself a browse object, and within a single transaction. If unsure,
             just don't use!
         """
-        if not context:
-            context = {}
         self._list_class = list_class or browse_record_list
         if cache is None:
             cache = {}
@@ -751,7 +751,7 @@ class orm_template(object):
                 if self._debug:
                     _logger.debug('%s.browse_search( %s...)' % (self._name, select[:5]))
             
-            return self._list_class([browse_record(cr, uid, id, self, cache, context=context, list_class=self._list_class, fields_process=fields_process, fields_only=fields_only) for id in select], context)
+            return self._list_class([browse_record(cr, uid, id, self, cache, context=context, list_class=self._list_class, fields_process=fields_process, fields_only=fields_only) for id in select], context=context)
         else:
             return browse_null()
 
@@ -1780,14 +1780,14 @@ class orm_template(object):
 
         return arch
 
-    def __get_default_search_view(self, cr, uid, context={}):
+    def __get_default_search_view(self, cr, uid, context=None):
 
         def encode(s):
             if isinstance(s, unicode):
                 return s.encode('utf8')
             return s
 
-        view = self.fields_view_get(cr, uid, False, 'form', context)
+        view = self.fields_view_get(cr, uid, False, 'form', context=context)
 
         root = etree.fromstring(encode(view['arch']))
         res = etree.XML("""<search string="%s"></search>""" % root.get("string", ""))
@@ -2814,6 +2814,8 @@ class orm(orm_template):
                             (self._table, column['attname']), debug=self._debug)
 
     def _auto_init(self, cr, context=None):
+        if context is None:
+            context = {}
         store_compute =  False
         create = False
         todo_end = []
