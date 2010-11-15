@@ -216,6 +216,8 @@ class TinyPoFile(object):
     def __init__(self, buffer):
         self.logger = logging.getLogger('i18n')
         self.buffer = buffer
+        self.re_unquote = re.compile(r"(\\.)")
+        self.re_unquote_repls = {'n': '\n', } # 't': '\t', 'r': '\r'
 
     def warn(self, msg):
         self.logger.warning(msg)
@@ -243,9 +245,9 @@ class TinyPoFile(object):
 
     def next(self):
         def unquote(str):
-            return str[1:-1].replace("\\n", "\n") \
-                            .replace('\\"', '"') \
-                            .replace("\\\\", "\\")
+            def d_repl(mo):
+                return self.re_unquote_repls.get(mo.group(1)[1], mo.group(1)[1])
+            return self.re_unquote.sub(d_repl, str[1:-1])
 
         type = name = res_id = source = trad = None
 
