@@ -682,6 +682,15 @@ def trans_generate(lang, modules, dbname=None):
                 except (IOError, etree.XMLSyntaxError):
                     logger.exception("couldn't export translation for report %s %s %s", name, report_type, fname)
 
+        for field_name,field_def in obj._table._columns.items():
+            if field_def.translate:
+                name = model + "," + field_name
+                try:
+                    trad = getattr(obj, field_name) or ''
+                except:
+                    trad = ''
+                push_translation(module, 'model', name, xml_name, encode(trad))
+
         # End of data for ir.model.data query results
 
     cr.execute(query_models, query_param)
@@ -710,15 +719,6 @@ def trans_generate(lang, modules, dbname=None):
 
         for constraint in getattr(model_obj, '_sql_constraints', []):
             push_constraint_msg(module, 'sql_constraint', model, constraint[2])
-
-        for field_name,field_def in model_obj._columns.items():
-            if field_def.translate:
-                name = model + "," + field_name
-                try:
-                    trad = getattr(obj, field_name) or ''
-                except:
-                    trad = ''
-                push_translation(module, 'model', name, xml_name, encode(trad))
 
     # parse source code for _() calls
     def get_module_from_path(path, mod_paths=None):
