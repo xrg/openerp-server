@@ -536,13 +536,21 @@ def trans_generate(lang, modules, dbname=None):
 
     query = 'SELECT name, model, res_id, module'    \
             '  FROM ir_model_data'
+            
+    query_models = """SELECT m.id, m.model, imd.module 
+            FROM ir_model AS m, ir_model_data AS imd 
+            WHERE m.id = imd.res_id AND imd.model = 'ir.model' """
+
     if 'all_installed' in modules:
         query += ' WHERE module IN ( SELECT name FROM ir_module_module WHERE state = \'installed\') '
+        query_models += " AND imd.module in ( SELECT name FROM ir_module_module WHERE state = 'installed') "
     query_param = None
     if 'all' not in modules:
         query += ' WHERE module IN %s'
+        query_models += ' AND imd.module in %s'
         query_param = (tuple(modules),)
     query += ' ORDER BY module, model, name'
+    query_models += ' ORDER BY module, model'
 
     cr.execute(query, query_param)
 
@@ -674,17 +682,33 @@ def trans_generate(lang, modules, dbname=None):
                 except (IOError, etree.XMLSyntaxError):
                     logger.exception("couldn't export translation for report %s %s %s", name, report_type, fname)
 
-        model_obj = pool.get(model)
-        def push_constraint_msg(module, term_type, model, msg):
-            # Check presence of __call__ directly instead of using
-            # callable() because it will be deprecated as of Python 3.0
-            if not hasattr(msg, '__call__'):
-                push_translation(module, term_type, model, 0, encode(msg))
+        # End of data for ir.model.data query results
 
-        for constraint in model_obj._constraints:
+    cr.execute(query_models, query_param)
+
+    def push_constraint_msg(module, term_type, model, msg):
+        # Check presence of __call__ directly instead of using
+        # callable() because it will be deprecated as of Python 3.0
+        if not hasattr(msg, '__call__'):
+            push_translation(module, term_type, model, 0, encode(msg))
+
+    for (model_id, model, module) in cr.fetchall():
+        module = encode(module)
+        model = encode(model)
+
+        model_obj = pool.get(model)
+
+        if not model_obj:
+            logger.error("Unable to find object %r", model)
+            continue
+
+        if model_obj._debug:
+            logger.debug("Scanning model %s for translations", model)
+
+        for constraint in getattr(model_obj, '_constraints', []):
             push_constraint_msg(module, 'constraint', model, constraint[1])
 
-        for constraint in model_obj._sql_constraints:
+        for constraint in getattr(model_obj, '_sql_constraints', []):
             push_constraint_msg(module, 'sql_constraint', model, constraint[2])
 
         for field_name,field_def in model_obj._columns.items():
