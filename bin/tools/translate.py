@@ -773,7 +773,7 @@ def trans_generate(lang, modules, dbname=None):
             for i in ite:
                 src = i.group(1)
                 if src.startswith('""'):
-                    assert src.endswith('""')
+                    assert src.endswith('""'), "Incorrect usage of _(..) function (should contain only literal strings!) in file %s near: %s" % (frelativepath, src[:30])
                     src = src[2:-2]
                 else:
                     src = join_dquotes.sub(r'\1', src)
@@ -785,7 +785,7 @@ def trans_generate(lang, modules, dbname=None):
             for i in ite:
                 src = i.group(1)
                 if src.startswith("''"):
-                    assert src.endswith("''")
+                    assert src.endswith("''"), "Incorrect usage of _(..) function (should contain only literal strings!) in file %s near: %s" % (frelativepath, src[:30])
                     src = src[2:-2]
                 else:
                     src = join_quotes.sub(r'\1', src)
