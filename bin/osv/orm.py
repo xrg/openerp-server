@@ -2826,7 +2826,8 @@ class orm(orm_template):
             cr.execute("SELECT relname FROM pg_class WHERE relkind IN ('r','v') AND relname=%s" ,( self._table,))
             if not cr.rowcount:
                 cr.execute('CREATE TABLE "%s" (id SERIAL NOT NULL, PRIMARY KEY(id)) WITHOUT OIDS' % (self._table,), debug=self._debug)
-                cr.execute("COMMENT ON TABLE \"%s\" IS '%s'" % (self._table, self._description.replace("'","''")), debug=self._debug)
+                cr.execute("COMMENT ON TABLE \"%s\" IS %%s" % (self._table),
+                            (self._description,), debug=self._debug)
                 create = True
             cr.commit()
             if self._parent_store:
@@ -3008,7 +3009,8 @@ class orm(orm_template):
                                         cr.execute('ALTER TABLE "%s" ALTER COLUMN "%s" DROP NOT NULL' % (self._table, k), debug=self._debug)
                                     cr.execute('ALTER TABLE "%s" RENAME COLUMN "%s" TO "%s"' % (self._table, k, newname), debug=self._debug)
                                     cr.execute('ALTER TABLE "%s" ADD COLUMN "%s" %s' % (self._table, k, get_pg_type(f)[1]), debug=self._debug)
-                                    cr.execute("COMMENT ON COLUMN %s.%s IS '%s'" % (self._table, k, f.string.replace("'","''")), debug=self._debug)
+                                    cr.execute("COMMENT ON COLUMN %s.%s IS %%s" % \
+                                                (self._table, k), (f.string,), debug=self._debug)
 
                             # if the field is required and hasn't got a NOT NULL constraint
                             if f.required and f_pg_notnull == 0:
@@ -3078,8 +3080,10 @@ class orm(orm_template):
                                     res2 = cr.dictfetchall()
                                     if res2:
                                         if res2[0]['confdeltype'] != POSTGRES_CONFDELTYPES.get(f.ondelete.upper(), 'a'):
-                                            cr.execute('ALTER TABLE "' + self._table + '" DROP CONSTRAINT "' + res2[0]['conname'] + '"', debug=self._debug)
-                                            cr.execute('ALTER TABLE "' + self._table + '" ADD FOREIGN KEY ("' + k + '") REFERENCES "' + ref + '" ON DELETE ' + f.ondelete, debug=self._debug)
+                                            conname = str(res2[0]['conname'])
+                                            cr.execute('ALTER TABLE "%s" DROP CONSTRAINT "%s"' % (self._table, conname), debug=self._debug)
+                                            cr.execute('ALTER TABLE "%s" ADD FOREIGN KEY ("%s") REFERENCES "%s" ON DELETE %s' % \
+                                                    (self._table,k,ref,f.ondelete), debug=self._debug)
                                             cr.commit()
                     elif len(res)>1:
                         _logger.error( "Programming error, column %s->%s has multiple instances !"%(self._table,k))
@@ -3087,8 +3091,10 @@ class orm(orm_template):
                         if not isinstance(f, fields.function) or f.store:
 
                             # add the missing field
-                            cr.execute('ALTER TABLE "%s" ADD COLUMN "%s" %s' % (self._table, k, get_pg_type(f)[1]), debug=self._debug)
-                            cr.execute("COMMENT ON COLUMN %s.%s IS '%s'" % (self._table, k, f.string.replace("'","''")), debug=self._debug)
+                            cr.execute('ALTER TABLE "%s" ADD COLUMN "%s" %s' % \
+                                        (self._table, k, get_pg_type(f)[1]), debug=self._debug)
+                            cr.execute("COMMENT ON COLUMN %s.%s IS %%s" % \
+                                        (self._table, k), (f.string,), debug=self._debug)
 
                             # initialize it
                             if not create and k in self._defaults:
