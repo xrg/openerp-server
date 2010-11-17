@@ -356,6 +356,14 @@ class configmanager(object):
             #if self.options['db_host']:
             #    self._generate_pgpassfile()
 
+
+        if self.misc.get('logging_levels', False):
+            for (name, value) in self.misc['logging_levels'].items():
+                if not value:
+                    continue
+                level = self._LOGLEVELS.get(value.lower()) or int(value)
+                logging.getLogger(name).setLevel(level)
+
         if opt.save:
             self.save()
 
@@ -421,13 +429,6 @@ class configmanager(object):
             #parse the other sections, as well
             for sec in p.sections():
                 if sec == 'options':
-                    continue
-                if sec == 'logging_levels':
-                    for (name, value) in p.items(sec):
-                        if not value:
-                            continue
-                        level = self._LOGLEVELS.get(value.lower()) or int(value)
-                        logging.getLogger(name).setLevel(level)
                     continue
                 if not self.misc.has_key(sec):
                     self.misc[sec]= {}
