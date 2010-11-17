@@ -69,7 +69,6 @@ class configmanager(object):
             'syslog' : False,
             'log_level': logging.INFO,
             'assert_exit_level': logging.ERROR, # level above which a failed assert will be raised
-            'cache_timeout': 100000,
             'login_message': False,
             'list_db' : True,
             'timezone' : False, # to override the default TZ
@@ -80,6 +79,7 @@ class configmanager(object):
         }
 
         self.aliases = {
+            'cache_timeout': 'cache.timeout',
             'httpd_interface': 'httpd.interface',
             'httpd_port': 'httpd.port',
             'httpds_interface': 'httpsd.interface',

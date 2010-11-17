@@ -696,20 +696,26 @@ class cache(object):
 
     __caches = []
 
-    def __init__(self, timeout=None, skiparg=2, multi=None, size=8192):
-        assert skiparg >= 2 # at least self and cr
-        if timeout is None:
-            self.timeout = config['cache_timeout']
-        else:
-            self.timeout = timeout
+    def __init__(self, timeout=None, skiparg=2, multi=None, size=None):
+        assert skiparg >= 2 , "at least self and cr must be skipped in cache"
         self.skiparg = skiparg
         self.multi = multi
-        self.lasttime = time.time()
-        self.cache = LRU(size)      # TODO take size from config
         self.fun = None
         self._debug = False
         self.__logger = None
-        cache.__caches.append(self)
+        if config.get_misc('cache', 'enable', True):
+            cache.__caches.append(self)
+            self.lasttime = time.time()
+            size = size or config.get_misc('cache', 'size', 8192)
+            self.cache = LRU(size)
+            if timeout is None:
+                self.timeout = int(config.get_misc('cache','timeout', 100000))
+            else:
+                self.timeout = timeout
+        else:
+            self.lasttime = None
+            self.cache = None # will break attempts to use it.
+            self.timeout = 10
 
     def debug(self, *args, **kwargs):
         if not self._debug:
@@ -771,7 +777,14 @@ class cache(object):
         for c in cls.__caches:
             c.clear(dbname)
 
+    def clear_cache_stub(self, dbname, *args, **kwargs):
+        pass
+
     def __call__(self, fn):
+        if self.cache is None:
+            fn.clear_cache = self.clear_cache_stub
+            return fn
+
         if self.fun is not None:
             raise Exception("Can not use a cache instance on more than one function")
         self.fun = fn
