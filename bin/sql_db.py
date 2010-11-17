@@ -336,11 +336,13 @@ class ConnectionPool(object):
         return _locked
 
 
-    def __init__(self, maxconn=64):
+    def __init__(self, maxconn=64, pgmode=None):
         self._connections = []
         self._maxconn = max(maxconn, 1)
         self._lock = threading.Lock()
         self._debug_pool = False
+        if pgmode: # not None or False
+            Cursor.set_pgmode(pgmode)
 
     def __repr__(self):
         used = len([1 for c, u in self._connections[:] if u])
@@ -492,7 +494,8 @@ def dsn_are_equals(first, second):
     return key(first) == key(second)
 
 
-_Pool = ConnectionPool(int(tools.config['db_maxconn']))
+_Pool = ConnectionPool(int(tools.config['db_maxconn']), 
+                tools.config.get_misc('postgres','mode', False))
 
 def db_connect(db_name):
     return Connection(_Pool, db_name)
