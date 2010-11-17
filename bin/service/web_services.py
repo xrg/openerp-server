@@ -430,7 +430,7 @@ class common(_ObjectService):
                 'root': ['get_available_updates', 'get_migration_scripts',
                         'set_loglevel', 'set_obj_debug', 'set_pool_debug',
                         'set_logger_level', 'get_pgmode', 'set_pgmode',
-                        'get_loglevel',
+                        'get_loglevel', 'get_sqlcount',
                         'get_os_time']
                 }
     def __init__(self,name="common"):
@@ -690,6 +690,12 @@ GNU Public Licence.
         
     def exp_get_os_time(self):
         return os.times()
+
+    def exp_get_sqlcount(self):
+        logger = logging.getLogger('db.cursor')
+        if not logger.isEnabledFor(logging.DEBUG_SQL):
+            logger.warning("Counters of SQL will not be reliable unless DEBUG_SQL is set at the server's config.")
+        return sql_db.sql_counter
 
     def exp_get_options(self, module=None):
         """Return a list of options, keywords, that the server supports.
