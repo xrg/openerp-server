@@ -2548,7 +2548,7 @@ class orm_memory(orm_template):
             self.datas.pop(id, None)
         if len(ids):
             cr.execute('DELETE FROM wkf_instance '
-                       'WHERE res_type=%s AND res_id = ANY  (%s)',
+                       'WHERE res_type=%s AND res_id = ANY (%s)',
                        (self._name,ids), debug=self._debug)
         return True
 
@@ -3260,8 +3260,8 @@ class orm(orm_template):
 
         # Load manual fields
 
-        cr.execute("SELECT id FROM ir_model_fields WHERE name=%s AND model=%s", ('state', 'ir.model.fields'))
-        if cr.fetchone():
+        # cr.execute("SELECT id FROM ir_model_fields WHERE name=%s AND model=%s", ('state', 'ir.model.fields'))
+        if True:
             cr.execute('SELECT * FROM ir_model_fields WHERE model=%s AND state=%s', (self._name, 'manual'))
             for field in cr.dictfetchall():
                 if field['name'] in self._columns:
