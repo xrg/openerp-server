@@ -611,17 +611,16 @@ class orm_template(object):
                     vals['select_level'] = cols[k]['select_level']
 
             if k not in cols:
-                cr.execute('select nextval(%s)', ('ir_model_fields_id_seq',))
+                cr.execute("""INSERT INTO ir_model_fields (
+                        model_id, model, name, field_description, ttype,
+                        relation,view_load,state,select_level,relation_field, translate ) 
+                    VALUES ( %s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s ) RETURNING id""", 
+                    ( vals['model_id'], vals['model'], vals['name'], vals['field_description'], vals['ttype'],
+                     vals['relation'], vals['view_load'], 'base',
+                    vals['select_level'],vals['relation_field'], vals['translate']),
+                    debug=self._debug)
                 id = cr.fetchone()[0]
                 vals['id'] = id
-                cr.execute("""INSERT INTO ir_model_fields (
-                        id, model_id, model, name, field_description, ttype,
-                        relation,view_load,state,select_level,relation_field, translate ) 
-                    VALUES ( %s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s )""", 
-                    ( id, vals['model_id'], vals['model'], vals['name'], vals['field_description'], vals['ttype'],
-                     vals['relation'], vals['view_load'], 'base',
-                    vals['select_level'],vals['relation_field'], vals['translate']), 
-                    debug=self._debug)
                 if 'module' in context:
                     name1 = 'field_' + self._table + '_' + k
                     cr.execute("select name from ir_model_data where name=%s", 
@@ -639,8 +638,8 @@ class orm_template(object):
                     if cols[k][key] != vals[key]:
                         if self._debug:
                             _logger.debug("Column %s[%s] differs: %r != %r", k, key, cols[k][key], vals[key])
-                        cr.execute('UPDATE ir_model_fields SET field_description=%s WHERE model=%s AND name=%s', (vals['field_description'], vals['model'], vals['name']))
-                        cr.commit()
+                        # cr.execute('UPDATE ir_model_fields SET field_description=%s WHERE model=%s AND name=%s', (vals['field_description'], vals['model'], vals['name']))
+                        # cr.commit()
                         cr.execute("UPDATE ir_model_fields SET "
                             "model_id=%s, field_description=%s, ttype=%s, relation=%s, "
                             "view_load=%s, select_level=%s, readonly=%s ,required=%s,  "
@@ -2362,6 +2361,7 @@ class orm_memory(orm_template):
         self.datas = {}
         self.next_id = 0
         self.check_id = 0
+        # Do we need that? can't be groupped outside ?
         cr.execute('DELETE FROM wkf_instance WHERE res_type=%s', 
                 (self._name,), debug=self._debug)
 
@@ -4038,7 +4038,7 @@ class orm(orm_template):
             if self.pool.get(v)._vtable:
                 tocreate[v]['_vptr'] = self._name
 
-        (upd0, upd1, upd2) = ('', '', [])
+        (upd0, upd1, upd2) = ([], [], [])
         upd_todo = []
         for v in vals.keys():
             if v == '_vptr':
@@ -4051,18 +4051,10 @@ class orm(orm_template):
                 if (v not in self._inherit_fields) and (v not in self._columns):
                     del vals[v]
 
-        # Try-except added to filter the creation of those records whose filds are readonly.
+        # We here assume that the model is a real table. If not, the end of this block
+        # will raise an SQL exception and rollback the intermediate steps. Hopefully.
         # Example : any dashboard which has all the fields readonly.(due to Views(database views))
-        try:
-            # TODO: Does it have to happen that early?
-            cr.execute("SELECT nextval('"+self._sequence+"')")
-        except Exception:
-            _logger.exception('Get nextval for %s', self._sequence)
-            raise except_orm(_('UserError'),
-                        _('You cannot perform this operation. New Record Creation is not allowed for this object as this object is for reporting purpose.'))
 
-        id_new = cr.fetchone()[0]
-        assert id_new, "New id: %r" % id_new
         for table in tocreate:
             if self._inherits[table] in vals:
                 del vals[self._inherits[table]]
@@ -4074,8 +4066,8 @@ class orm(orm_template):
             else:
                 self.pool.get(table).write(cr, user, [record_id], tocreate[table], context=context)
 
-            upd0 += ','+self._inherits[table]
-            upd1 += ',%s'
+            upd0.append(self._inherits[table])
+            upd1.append('%s')
             upd2.append(record_id)
 
         #Start : Set bool fields to be False if they are not touched(to make search more powerful)
@@ -4102,14 +4094,14 @@ class orm(orm_template):
                     vals.pop(field)
         for field in vals:
             if field == '_vptr':
-                upd0 += ', _vptr'
-                upd1 += ', %s'
+                upd0.append('_vptr')
+                upd1.append('%s')
                 upd2.append(vals[field])
                 continue
             if field in self._columns:
                 if self._columns[field]._classic_write:
-                    upd0 = upd0 + ',"' + field + '"'
-                    upd1 = upd1 + ',' + self._columns[field]._symbol_set[0]
+                    upd0.append('"' + field + '"')
+                    upd1.append(self._columns[field]._symbol_set[0])
                     upd2.append(self._columns[field]._symbol_set[1](vals[field]))
                 else:
                     if not isinstance(self._columns[field], fields.related):
@@ -4133,10 +4125,12 @@ class orm(orm_template):
                         _('The value "%s" for the field "%s" is not in the selection') \
                                 % (vals[field], field))
         if self._log_access:
-            upd0 += ',create_uid,create_date'
-            upd1 += ',%s,now()'
+            upd0 += ['create_uid', 'create_date']
+            upd1 += ['%s', 'now()']
             upd2.append(user)
-        cr.execute('INSERT INTO "'+self._table+'" (id'+upd0+") VALUES ("+str(id_new)+upd1+')', tuple(upd2), debug=self._debug)
+        cr.execute('INSERT INTO "%s" (%s) VALUES (%s) RETURNING id' % \
+                    (self._table, ', '.join(upd0), ','.join(upd1)), tuple(upd2), debug=self._debug)
+        id_new = cr.fetchone()[0]
         self.check_access_rule(cr, user, [id_new], 'create', context=context)
         upd_todo.sort(lambda x, y: self._columns[x].priority-self._columns[y].priority)
 
