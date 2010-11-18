@@ -430,7 +430,8 @@ class common(_ObjectService):
                 'root': ['get_available_updates', 'get_migration_scripts',
                         'set_loglevel', 'set_obj_debug', 'set_pool_debug',
                         'set_logger_level', 'get_pgmode', 'set_pgmode',
-                        'get_loglevel', 'get_sqlcount',
+                        'get_loglevel', 'get_sqlcount', 'get_sql_stats',
+                        'reset_sql_stats',
                         'get_os_time']
                 }
     def __init__(self,name="common"):
@@ -696,6 +697,25 @@ GNU Public Licence.
         if not logger.isEnabledFor(logging.DEBUG_SQL):
             logger.warning("Counters of SQL will not be reliable unless DEBUG_SQL is set at the server's config.")
         return sql_db.sql_counter
+
+    def exp_get_sql_stats(self):
+        """Retrieve the sql statistics from the pool.
+        
+        Unfortunately, XML-RPC won't allow tuple indexes, so we have to 
+        rearrange the dict.
+        """
+        ret = {}
+        for skey, val in sql_db._Pool.sql_stats.items():
+            sk0 = skey[0]
+            if not isinstance(skey[0], str):
+                sk0 = str(skey[0])
+            ret.setdefault(sk0,{})
+            ret[sk0][skey[1]] = val
+        return ret
+
+    def exp_reset_sql_stats(self):
+        sql_db._Pool.sql_stats = {}
+        return True
 
     def exp_get_options(self, module=None):
         """Return a list of options, keywords, that the server supports.
