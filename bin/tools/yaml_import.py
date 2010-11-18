@@ -177,7 +177,7 @@ class YamlInterpreter(object):
                 checked_xml_id = xml_id
             ir_id = self.pool.get('ir.model.data')._get_id(self.cr, self.uid, module, checked_xml_id)
             if ir_id:
-                obj = self.pool.get('ir.model.data').read(self.cr, self.uid, ir_id, ['res_id'])
+                obj = self.pool.get('ir.model.data').read(self.cr, self.uid, ir_id, ['res_id']) or {}
             else:
                 obj= {}
             if not obj.get('res_id', False):
