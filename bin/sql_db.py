@@ -59,10 +59,59 @@ import threading
 from inspect import currentframe
 
 import re
-re_from = re.compile('.* from "?([a-zA-Z_0-9]+)"? .*$');
-re_into = re.compile('.* into "?([a-zA-Z_0-9]+)"? .*$');
+
+re_queries = [
+        ('select', re.compile(r'select .*\s+from\s+"?([a-z_0-9]+)"?[\s,]', re.I|re.DOTALL)),
+        ('select', re.compile(r'select .*\s+from\s+"?([a-z_0-9]+)"?$', re.I|re.DOTALL)),
+        ('select', re.compile(r'select nextval\(\s?\'([a-z_0-9]+)_id_seq?\'\s?\)', re.I)),
+        ('execute', re.compile(r'execute\s+"?([a-z_0-9]+)"?', re.I)),
+        #('prepare', re.compile(r'prepare.*as\sselect.*\s+from\s+"?([a-z_0-9]+)"?\s', re.I|re.DOTALL)),
+        ('prepare', re.compile(r'prepare\s+"?([a-z_0-9]+)"?[\s\(]', re.I)),
+        ('update', re.compile(r'update\s+"?([a-z_0-9]+)"?\s', re.I)),
+        ('delete', re.compile(r'delete from\s+"?([a-z_0-9]+)"?\s', re.I)),
+        ('insert', re.compile(r'insert into\s+"?([a-z_0-9]+)"?\s*\(', re.I)),
+        ('alter', re.compile(r'alter table\s+"?([a-z_0-9]+)"?\s', re.I)),
+        ('comment', re.compile(r'comment on column\s+"?([a-z_0-9]+)"?\.', re.I)),
+        ('comment', re.compile(r'comment on table\s+"?([a-z_0-9]+)"?\s', re.I)),
+        ('create', re.compile('create (?:database|table|view)\s+"?([a-z_0-9]+)"?[\s\(]', re.I)),
+        ('create', re.compile('create index .*\son\s+"?([a-z_0-9]+)"?[\s\(]', re.I)),
+        ('drop db', re.compile(r'drop database "?([a-z_0-9]+)"?', re.I)),
+        ('select', re.compile(r'with recursive.*?\sas\s+\(\s*select\s.*?\s+from\s+"?([a-z_0-9]+)"?', re.I|re.DOTALL)),
+        ('select', re.compile(r'select (nextval)\(%s\)', re.I)),
+    ]
 
 sql_counter = 0
+
+def print_stats(stats, logger):
+    """ Print the statistics at the stats dict 
+    """
+    all_sum = [0, 0]
+    sum_tbl = {}
+    sum_kind = {}
+    for table, kind in stats:
+        st = stats[(table, kind)]
+        logger.debug("Operations: %s ON %s: %s/%s", kind.upper(), table,
+                        st[0], timedelta(microseconds=st[1]))
+        
+        sum_tbl.setdefault(table, [0,0])
+        sum_tbl[table][0] += st[0]
+        sum_tbl[table][1] += st[1]
+        sum_kind.setdefault(kind, [0,0])
+        sum_kind[kind][0] += st[0]
+        sum_kind[kind][1] += st[1]
+        all_sum[0] += st[0]
+        all_sum[1] += st[1]
+        
+    for table, st in sum_tbl.items():
+        logger.debug("Sum of ops ON %s: %s/%s", table,
+                        st[0], timedelta(microseconds=st[1]))
+
+    for kind, st in sum_kind.items():
+        logger.debug("Sum of %s ops: %s/%s", kind.upper(),
+                        st[0], timedelta(microseconds=st[1]))
+
+    logger.debug("Sum of all ops: %s/%s",
+                        all_sum[0], timedelta(microseconds=all_sum[1]))
 
 class Cursor(object):
     IN_MAX = 1000 # decent limit on size of IN queries - guideline = Oracle limit
@@ -78,8 +127,9 @@ class Cursor(object):
         return wrapper
 
     def __init__(self, pool, dbname, serialized=False):
-        self.sql_from_log = {}
-        self.sql_into_log = {}
+        self.sql_stats_log = {}
+        # stats log will be a dictionary of 
+        # { (table, kind-of-qry): (num, delay, {queries?: num}) }
 
         # default log level determined at cursor creation, could be
         # overridden later for debugging purposes
@@ -117,19 +167,17 @@ class Cursor(object):
             self.__logger.warn(msg, *self.__caller)
             self._close(True)
 
-    @check
-    def execute(self, query, params=None, debug=False, log_exceptions=True):
+    def execute(self, query, params=None, debug=False, log_exceptions=True, _fast=False):
         """ Execute some SQL command
             @param debug   Verbosely log the query being sent (not results, yet)
             @param log_exceptions ignored, left there mainly for API compatibility with trunk
         """
             
-        if '%d' in query or '%f' in query:
-            self.__logger.warn(query)
-            self.__logger.warn("SQL queries cannot contain %d or %f anymore. "
-                               "Use only %s")
-            if params:
-                query = query.replace('%d', '%s').replace('%f', '%s')
+        if params and not _fast:
+            query = query.replace('%d','%s').replace('%f','%s')
+
+        if self.__closed:
+            raise psycopg2.OperationalError('Unable to use the cursor after having closed it')
 
         if self.sql_log or debug:
             now = mdt.now()
@@ -142,6 +190,7 @@ class Cursor(object):
                 self.__logger.error("Mogrify:%s" % e)
                 self.__logger.debug("Query: %r", query)
 
+        # The core of query execution
         try:
             params = params or None
             res = self._obj.execute(query, params)
@@ -173,16 +222,18 @@ class Cursor(object):
             self.sql_log_count+=1
 
         if self.sql_log:
-            res_from = re_from.match(query.lower())
-            if res_from:
-                self.sql_from_log.setdefault(res_from.group(1), [0, 0])
-                self.sql_from_log[res_from.group(1)][0] += 1
-                self.sql_from_log[res_from.group(1)][1] += delay
-            res_into = re_into.match(query.lower())
-            if res_into:
-                self.sql_into_log.setdefault(res_into.group(1), [0, 0])
-                self.sql_into_log[res_into.group(1)][0] += 1
-                self.sql_into_log[res_into.group(1)][1] += delay
+            qry2 = query.strip()
+            for kind, rex in re_queries:
+                res_m = rex.match(qry2)
+                if res_m:
+                    skey = (res_m.group(1), kind)
+                    self.sql_stats_log.setdefault(skey, [0, 0, {}])
+                    self.sql_stats_log[skey][0] += 1
+                    self.sql_stats_log[skey][1] += delay
+                    break
+            else:
+                if len(query) < 2000: # skip sth big like base.sql
+                    self.__logger.warning("Stray query: %r", query)
         return res
 
 
@@ -196,25 +247,18 @@ class Cursor(object):
         sql_counter += self.sql_log_count
         if not self.sql_log:
             return
-        def process(type):
-            sqllogs = {'from':self.sql_from_log, 'into':self.sql_into_log}
-            sum = 0
-            if sqllogs[type]:
-                sqllogitems = sqllogs[type].items()
-                sqllogitems.sort(key=lambda k: k[1][1])
-                self.__logger.log(logging.DEBUG_SQL, "SQL LOG %s:", type)
-                for r in sqllogitems:
-                    delay = timedelta(microseconds=r[1][1])
-                    self.__logger.log(logging.DEBUG_SQL, "table: %s: %s/%s",
-                                        r[0], delay, r[1][0])
-                    sum+= r[1][1]
-                sqllogs[type].clear()
-            sum = timedelta(microseconds=sum)
-            self.__logger.log(logging.DEBUG_SQL, "SUM %s:%s/%d [%d]",
-                                type, sum, self.sql_log_count, sql_counter)
-            sqllogs[type].clear()
-        process('from')
-        process('into')
+
+        self.__logger.debug("SQL Sums for current cursor:")
+        print_stats(self.sql_stats_log, self.__logger)
+        
+        # Merge stats at pool stats
+        for skey in self.sql_stats_log:
+            if skey in self._pool.sql_stats:
+                self._pool.sql_stats[skey][0] += self.sql_stats_log[skey][0]
+                self._pool.sql_stats[skey][1] += self.sql_stats_log[skey][1]
+            else:
+                self._pool.sql_stats[skey] = self.sql_stats_log[skey]
+        self.sql_stats_log = {}
         self.sql_log_count = 0
         self.sql_log = False
 
@@ -248,14 +292,14 @@ class Cursor(object):
         
             qry = 'PREPARE ' + name + args + ' AS ' + query + ';'
             
-            self.execute(qry, debug=debug)
+            self.execute(qry, debug=debug, _fast=True)
             self._cnx._prepared.append(name)
         
         args = ''
         if params and len(params):
                 args = [ '%s' for x in range(len(params)) ]
                 args = '(' + ', '.join(args) + ')'
-        return self.execute('EXECUTE ' +name + ' '+ args + ';', params, debug=debug)
+        return self.execute('EXECUTE ' +name + ' '+ args + ';', params, debug=debug, _fast=True)
 
     @check
     def close(self):
@@ -341,8 +385,13 @@ class ConnectionPool(object):
         self._maxconn = max(maxconn, 1)
         self._lock = threading.Lock()
         self._debug_pool = False
+        self.sql_stats = {}
         if pgmode: # not None or False
             Cursor.set_pgmode(pgmode)
+
+    def __del__(self):
+        if self.sql_stats:
+            self.print_all_stats()
 
     def __repr__(self):
         used = len([1 for c, u in self._connections[:] if u])
@@ -449,6 +498,10 @@ class ConnectionPool(object):
                 cnx.close()
                 self._connections.pop(i)
 
+    def print_all_stats(self):
+        logger = logging.getLogger('db.cursor') # shall be the same..
+        logger.debug("Statistics for the sql pool:")
+        print_stats(self.sql_stats, logger)
 
 class Connection(object):
     __logger = logging.getLogger('db.connection')
