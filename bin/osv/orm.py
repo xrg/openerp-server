@@ -3265,6 +3265,8 @@ class orm(orm_template):
                     self.pool._store_function[object].sort(lambda x,y: cmp(x[4],y[4]))
 
         for (key, _, msg) in self._sql_constraints:
+            if self._debug:
+                _logger.debug("Installing sql error \"%s\" for %s", key, self._name)
             self.pool._sql_error[self._table+'_'+key] = msg
 
         # Load manual fields
