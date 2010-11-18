@@ -327,11 +327,13 @@ class browse_record(object):
             # if self._table._debug: # too much now, please enable if really needed
             #     self.__logger.debug("Got result %r", field_values)
             if self._fields_process:
-                lang = self._context.get('lang', 'en_US') or 'en_US'
-                lang_obj_ids = self.pool.get('res.lang').search(self._cr, self._uid, [('code','=',lang)])
-                if not lang_obj_ids:
-                    raise Exception(_('Language with code "%s" is not defined in your system !\nDefine it through the Administration menu.') % (lang,))
-                lang_obj = self.pool.get('res.lang').browse(self._cr, self._uid, lang_obj_ids[0])
+                lang_obj = None
+                if self._context.get('lang', False):
+                    lang = self._context['lang']
+                    lang_obj_ids = self.pool.get('res.lang').search(self._cr, self._uid, [('code','=',lang)])
+                    if not lang_obj_ids:
+                        raise Exception(_('Language with code "%s" is not defined in your system !\nDefine it through the Administration menu.') % (lang,))
+                    lang_obj = self.pool.get('res.lang').browse(self._cr, self._uid, lang_obj_ids[0])
 
                 for field_name, field_column in fields_to_fetch:
                     if field_column._type in self._fields_process:
@@ -1258,7 +1260,7 @@ class orm_template(object):
 
     def _validate(self, cr, uid, ids, context=None):
         context = context or {}
-        lng = context.get('lang', False) or 'en_US'
+        lng = context.get('lang', False)
         trans = self.pool.get('ir.translation')
         error_msgs = []
         for constraint in self._constraints:
@@ -1275,6 +1277,8 @@ class orm_template(object):
                         translated_msg = tmp_msg % params
                     else:
                         translated_msg = tmp_msg
+                elif not lng:
+                    translated_msg = msg
                 else:
                     translated_msg = trans._get_source(cr, uid, self._name, 'constraint', lng, source=msg) or msg
                 error_msgs.append(
@@ -1458,9 +1462,12 @@ class orm_template(object):
                             if val:
                                 sel_vals.append(val)
                         
-                        sel_dic =  translation_obj._get_multisource(cr, user,
+                        if context.get('lang', False):
+                            sel_dic =  translation_obj._get_multisource(cr, user,
                                         self._name + ',' + f, 'selection',
-                                        context.get('lang', False) or 'en_US', sel_vals)
+                                        context['lang'], sel_vals)
+                        else:
+                            sel_dic = {}
                         
                         for key, val in sel:
                             sel2.append((key, sel_dic.get(val, val)))
@@ -1483,14 +1490,14 @@ class orm_template(object):
                 if 'help' in res[f]:
                     fld_list.append((f, 'help'))
             
-            res_trans = translation_obj._get_multifield(cr, user, fld_list,
-                               lang=context.get('lang', False) or 'en_US',
-                               prepend=self._name+',')
-            for f, attr, val in res_trans:
-                if attr == 'field':
-                    res[f]['string'] = val
-                else:
-                    res[f][attr] = val
+            if context.get('lang', False):
+                res_trans = translation_obj._get_multifield(cr, user, fld_list,
+                               lang=context['lang'], prepend=self._name+',')
+                for f, attr, val in res_trans:
+                    if attr == 'field':
+                        res[f]['string'] = val
+                    else:
+                        res[f][attr] = val
         else:
             #TODO : read the fields from the database
             pass
@@ -3492,10 +3499,10 @@ class orm(orm_template):
             if self._columns[f].translate:
                 tmp_fs.append(f)
         
-        if len(tmp_ids) and len(tmp_fs):
+        if len(tmp_ids) and len(tmp_fs) and context.get('lang', False):
             res_trans = self.pool.get('ir.translation')._get_multi_ids(cr, user, 
                                 tmp_fs, tmp_ids, ttype='model',
-                                lang=context.get('lang', False) or 'en_US',
+                                lang=context['lang'],
                                 prepend=self._name+',')
             res_rmap = {}
             for i, r in enumerate(res):

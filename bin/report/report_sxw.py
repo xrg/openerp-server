@@ -82,8 +82,10 @@ class _float_format(float, _format):
         digits = 2
         if hasattr(self,'_field') and getattr(self._field, 'digits', None):
             digits = self._field.digits[1]
-        if hasattr(self, 'lang_obj'):
+        if getattr(self, 'lang_obj', False):
             return self.lang_obj.format('%.' + str(digits) + 'f', self.name, True)
+        else:
+            return ('%.' + str(digits) + 'f') % self.name
         return self.val
 
 class _int_format(int, _format):
@@ -92,7 +94,7 @@ class _int_format(int, _format):
         self.val = value and str(value) or str(0)
 
     def __str__(self):
-        if hasattr(self,'lang_obj'):
+        if getattr(self,'lang_obj', False):
             return self.lang_obj.format('%.d', self.name, True)
         return self.val
 
@@ -105,7 +107,10 @@ class _date_format(str, _format):
         if self.val:
             if getattr(self,'name', None):
                 date = datetime.strptime(self.name, DT_FORMAT)
-                return date.strftime(str(self.lang_obj.date_format))
+                if getattr(self, 'lang_obj', False):
+                    return date.strftime(str(self.lang_obj.date_format))
+                else:
+                    return date.strftime(tools.DEFAULT_SERVER_DATE_FORMAT)
         return self.val
 
 class _dttime_format(str, _format):
@@ -115,9 +120,13 @@ class _dttime_format(str, _format):
 
     def __str__(self):
         if self.val and getattr(self,'name', None):
-            return datetime.strptime(self.name, DHM_FORMAT)\
+            if getattr(self, 'lang_obj', False):
+                return datetime.strptime(self.name, DHM_FORMAT)\
                    .strftime("%s %s"%(str(self.lang_obj.date_format),
                                       str(self.lang_obj.time_format)))
+            else:
+                return datetime.strptime(self.name, DHM_FORMAT)\
+                   .strftime(tools.DEFAULT_SERVER_DATETIME_FORMAT)
         return self.val
 
 
