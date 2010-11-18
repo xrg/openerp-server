@@ -605,17 +605,24 @@ class ir_model_data(osv.osv):
         if not modules:
             return True
         modules = list(modules)
-        module_in = ",".join(["%s"] * len(modules))
-        cr.execute('select id,name,model,res_id,module from ir_model_data where module IN (' + module_in + ') and noupdate=%s', modules + [False])
+        cr.execute('SELECT id, name, model, res_id, module '
+                    'FROM ir_model_data '
+                    'WHERE module = ANY(%s) AND noupdate=%s',
+                    (modules, False), debug=self._debug)
         wkf_todo = []
         for (id, name, model, res_id,module) in cr.fetchall():
             if (module,name) not in self.loads:
                 self.unlink_mark[(model,res_id)] = id
                 if model=='workflow.activity':
-                    cr.execute('select res_type,res_id from wkf_instance where id IN (select inst_id from wkf_workitem where act_id=%s)', (res_id,))
+                    cr.execute('SELECT res_type, res_id FROM wkf_instance '
+                                'WHERE id IN (SELECT inst_id FROM wkf_workitem WHERE act_id=%s)',
+                                (res_id,), debug=self._debug)
                     wkf_todo.extend(cr.fetchall())
-                    cr.execute("update wkf_transition set condition='True', group_id=NULL, signal=NULL,act_to=act_from,act_from=%s where act_to=%s", (res_id,res_id))
-                    cr.execute("delete from wkf_transition where act_to=%s", (res_id,))
+                    cr.execute("UPDATE wkf_transition "
+                            "SET condition='True', group_id=NULL, signal=NULL, "
+                            "    act_to=act_from, act_from=%s "
+                            "WHERE act_to=%s", (res_id,res_id), debug=self._debug)
+                    cr.execute("DELETE FROM wkf_transition WHERE act_to=%s", (res_id,), debug=self._debug)
 
         for model,id in wkf_todo:
             wf_service = netsvc.LocalService("workflow")
