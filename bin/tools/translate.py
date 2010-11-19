@@ -534,23 +534,30 @@ def trans_generate(lang, modules, dbname=None):
     l = pool.obj_pool.items()
     l.sort()
 
-    query = 'SELECT name, model, res_id, module'    \
-            '  FROM ir_model_data'
-            
-    query_models = """SELECT m.id, m.model, imd.module 
-            FROM ir_model AS m, ir_model_data AS imd 
-            WHERE m.id = imd.res_id AND imd.model = 'ir.model' """
 
-    if 'all_installed' in modules:
-        query += ' WHERE module IN ( SELECT name FROM ir_module_module WHERE state = \'installed\') '
-        query_models += " AND imd.module in ( SELECT name FROM ir_module_module WHERE state = 'installed') "
+    query = 'SELECT name, model, res_id, module' \
+            ' FROM ir_model_data WHERE %s ORDER BY module, model, name'
+    query_models = """SELECT * FROM 
+            ( SELECT DISTINCT ON(m.model) m.id, m.model, imd.module 
+            FROM ir_model AS m, ir_model_data AS imd 
+            WHERE m.id = imd.res_id AND imd.model = 'ir.model'
+            ORDER BY m.model, imd.id) AS foo
+             WHERE %s
+             ORDER BY module, model
+            """
+
     query_param = None
-    if 'all' not in modules:
-        query += ' WHERE module IN %s'
-        query_models += ' AND imd.module in %s'
+    if 'all_installed' in modules:
+        query_patch = ' module IN ( SELECT name FROM ir_module_module WHERE state = \'installed\') '
+    elif 'all' not in modules:
+        query_patch = ' module IN %s'
         query_param = (tuple(modules),)
-    query += ' ORDER BY module, model, name'
-    query_models += ' ORDER BY module, model'
+    else:
+        query_patch = ''
+
+    query = query % query_patch
+    query_models = query_models % query_patch
+
 
     cr.execute(query, query_param)
 
