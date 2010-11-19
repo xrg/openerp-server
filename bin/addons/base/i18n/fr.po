@@ -2,123 +2,18 @@
 # This file contains the translation of the following modules:
 # 	* base
 #
-#, fuzzy
 msgid ""
 msgstr ""
-"#-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_i1Lme8 (OpenERP Server 5.0.4)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_1a1FSN (OpenERP Server 5.0.4)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_uqhfdT (OpenERP Server 5.0.4)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_lurS2F (OpenERP Server 5.0.4)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_xAcGIT (OpenERP Server 5.0.4)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_oTydK1 (OpenERP Server 5.0.4)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_HnToWT (OpenERP Server 5.0.4)  #-#-#-#-#\n"
-"Project-Id-Version: OpenERP Server 5.0.4\n"
-"Report-Msgid-Bugs-To: support@openerp.com\n"
-"POT-Creation-Date: 2009-12-18 08:39+0000\n"
-"PO-Revision-Date: 2010-09-03 07:19+0000\n"
-"Last-Translator: Quentin THEURET <quentin@theuret.net>\n"
-"Language-Team: \n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-09-04 04:43+0000\n"
-"X-Generator: Launchpad (build Unknown)\n"
-"#-#-#-#-#  .merge_file_cT78VF (OpenERP Server 5.0.4)  #-#-#-#-#\n"
-"Project-Id-Version: OpenERP Server 5.0.4\n"
-"Report-Msgid-Bugs-To: support@openerp.com\n"
-"POT-Creation-Date: 2009-12-18 08:39+0000\n"
-"PO-Revision-Date: 2010-09-16 19:03+0000\n"
-"Last-Translator: Olivier Dony (OpenERP) <Unknown>\n"
-"Language-Team: \n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-09-29 04:43+0000\n"
-"X-Generator: Launchpad (build Unknown)\n"
-"#-#-#-#-#  .merge_file_Arwl4o (OpenERP Server 5.0.4)  #-#-#-#-#\n"
-"Project-Id-Version: OpenERP Server 5.0.4\n"
-"Report-Msgid-Bugs-To: support@openerp.com\n"
-"POT-Creation-Date: 2009-12-18 08:39+0000\n"
-"PO-Revision-Date: 2010-09-29 08:01+0000\n"
-"Last-Translator: OpenERP Administrators <Unknown>\n"
-"Language-Team: \n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-09-30 04:37+0000\n"
-"X-Generator: Launchpad (build Unknown)\n"
-"#-#-#-#-#  .merge_file_hB5fq1 (OpenERP Server 5.0.4)  #-#-#-#-#\n"
-"Project-Id-Version: OpenERP Server 5.0.4\n"
-"Report-Msgid-Bugs-To: support@openerp.com\n"
-"POT-Creation-Date: 2009-12-18 08:39+0000\n"
-"PO-Revision-Date: 2010-09-29 08:01+0000\n"
-"Last-Translator: OpenERP Administrators <Unknown>\n"
-"Language-Team: \n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-09-30 04:37+0000\n"
-"X-Generator: Launchpad (build Unknown)\n"
-"#-#-#-#-#  .merge_file_twn9py (OpenERP Server 5.0.4)  #-#-#-#-#\n"
-"Project-Id-Version: OpenERP Server 5.0.4\n"
-"Report-Msgid-Bugs-To: support@openerp.com\n"
-"POT-Creation-Date: 2009-12-18 08:39+0000\n"
-"PO-Revision-Date: 2010-09-29 08:01+0000\n"
-"Last-Translator: OpenERP Administrators <Unknown>\n"
-"Language-Team: \n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-09-30 04:37+0000\n"
-"X-Generator: Launchpad (build Unknown)\n"
-"#-#-#-#-#  .merge_file_rGXHgV (OpenERP Server 5.0.4)  #-#-#-#-#\n"
-"Project-Id-Version: OpenERP Server 5.0.4\n"
-"Report-Msgid-Bugs-To: support@openerp.com\n"
-"POT-Creation-Date: 2009-12-18 08:39+0000\n"
-"PO-Revision-Date: 2010-10-12 07:54+0000\n"
-"Last-Translator: Anup (OpenERP) <ach@tinyerp.com>\n"
-"Language-Team: \n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-10-13 04:56+0000\n"
-"X-Generator: Launchpad (build Unknown)\n"
-"#-#-#-#-#  .merge_file_CasN29 (OpenERP Server 5.0.4)  #-#-#-#-#\n"
-"Project-Id-Version: OpenERP Server 5.0.4\n"
-"Report-Msgid-Bugs-To: support@openerp.com\n"
-"POT-Creation-Date: 2009-12-18 08:39+0000\n"
-"PO-Revision-Date: 2010-10-13 07:43+0000\n"
-"Last-Translator: Anup (OpenERP) <ach@tinyerp.com>\n"
-"Language-Team: \n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-10-14 04:44+0000\n"
-"X-Generator: Launchpad (build Unknown)\n"
-"#-#-#-#-#  .merge_file_8l3jKm (OpenERP Server 5.0.4)  #-#-#-#-#\n"
-"Project-Id-Version: OpenERP Server 5.0.4\n"
-"Report-Msgid-Bugs-To: support@openerp.com\n"
-"POT-Creation-Date: 2009-12-18 08:39+0000\n"
-"PO-Revision-Date: 2010-10-13 07:43+0000\n"
-"Last-Translator: Anup (OpenERP) <ach@tinyerp.com>\n"
-"Language-Team: \n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-10-14 04:44+0000\n"
-"X-Generator: Launchpad (build Unknown)\n"
-"#-#-#-#-#  .merge_file_47q2SR (OpenERP Server 5.0.4)  #-#-#-#-#\n"
 "Project-Id-Version: OpenERP Server 5.0.4\n"
 "Report-Msgid-Bugs-To: support@openerp.com\n"
 "POT-Creation-Date: 2010-10-18 17:46+0000\n"
-"PO-Revision-Date: 2010-10-20 07:13+0000\n"
-"Last-Translator: Quentin THEURET <quentin@theuret.net>\n"
+"PO-Revision-Date: 2010-11-17 07:14+0000\n"
+"Last-Translator: OpenERP Administrators <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-10-21 05:01+0000\n"
+"X-Launchpad-Export-Date: 2010-11-18 04:45+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #. module: base
@@ -142,7 +37,6 @@ msgstr "Veuillez spécifier une action à lancer !"
 msgid "Please specify server option --email-from !"
 msgstr ""
 
-#. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #. module: base
 #: code:addons/base/ir/ir_actions.py:0
 #, python-format
@@ -189,7 +83,6 @@ msgstr "Erreur d'accès"
 msgid "Custom fields must have a name that starts with 'x_' !"
 msgstr "Les champs personnalisés doivent avoir un nom commençant par 'x_' !"
 
-#. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #. module: base
 #: code:addons/base/ir/ir_model.py:0
 #, python-format
@@ -211,14 +104,12 @@ msgid ""
 "['name'],'field_state':'manual','select':vals.get('select_level','0"
 msgstr ""
 
-#. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #. module: base
 #: code:addons/base/ir/ir_model.py:0
 #, python-format
 msgid "Password empty !"
 msgstr "Mot de passe vide !"
 
-#. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #. module: base
 #: code:addons/base/ir/ir_model.py:0
 #, python-format
@@ -243,7 +134,6 @@ msgstr "Vous ne pouvez pas supprimer ce document ! (%s)"
 msgid "You can not read this document! (%s)"
 msgstr "Vous ne pouvez pas lire ce document ! (%s)"
 
-#. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #. module: base
 #: code:addons/base/ir/ir_model.py:0
 #, python-format
@@ -268,49 +158,42 @@ msgstr "Vous ne pouvez pas écrire dans ce document ! (%s)"
 msgid "You cannot remove the field '%s' !"
 msgstr ""
 
-#. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #. module: base
 #: code:addons/base/ir/ir_report_custom.py:0
 #, python-format
 msgid "Bar charts need at least two fields"
 msgstr "Les graphiques en barres ont besoin d'au moins deux champs"
 
-#. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #. module: base
 #: code:addons/base/ir/ir_report_custom.py:0
 #, python-format
 msgid "Enter at least one field !"
 msgstr "Entrez au moins un champ !"
 
-#. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #. module: base
 #: code:addons/base/ir/ir_report_custom.py:0
 #, python-format
 msgid "Field %d should be a figure"
 msgstr "Le champ %d doit être un nombre"
 
-#. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #. module: base
 #: code:addons/base/ir/ir_report_custom.py:0
 #, python-format
 msgid "Invalid operation"
 msgstr "Opération non valide"
 
-#. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #. module: base
 #: code:addons/base/ir/ir_report_custom.py:0
 #, python-format
 msgid "Pie charts need exactly two fields"
 msgstr "Les graphiques en camembert ont besoin d'exactement deux champs"
 
-#. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #. module: base
 #: code:addons/base/ir/ir_report_custom.py:0
 #, python-format
 msgid "Second field should be figures"
 msgstr "Le second champ doit contenir des chiffres"
 
-#. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #. module: base
 #: code:addons/base/ir/ir_report_custom.py:0
 #, python-format
@@ -319,7 +202,6 @@ msgstr ""
 "Les arbres peuvent uniquement être utilisés dans les rapports de type "
 "\"tableau\""
 
-#. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #. module: base
 #: code:addons/base/ir/ir_report_custom.py:0
 #, python-format
@@ -385,7 +267,6 @@ msgstr ""
 "désinstaller  :\n"
 " %s"
 
-#. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #. module: base
 #: code:addons/base/module/module.py:0
 #, python-format
@@ -561,12 +442,15 @@ msgstr "Avertissement"
 
 #. module: base
 #: code:addons/base/res/res_config.py:0
-#, python-format
+#, fuzzy, python-format
 msgid ""
 "\n"
 "\n"
 "This addon is already installed on your system"
 msgstr ""
+"\n"
+"\n"
+"Ce module est déjà installé sur votre système"
 
 #. module: base
 #: code:addons/base/res/res_config.py:0
@@ -644,7 +528,7 @@ msgstr ""
 #: code:addons/base/res/res_user.py:0
 #, python-format
 msgid "%s (copy)"
-msgstr ""
+msgstr "%s (copie)"
 
 #. module: base
 #: code:addons/base/res/res_user.py:0
@@ -705,7 +589,6 @@ msgstr ""
 "interne pour les ressources créées par OpenERP (mises à jour, installation "
 "de module, ...)"
 
-#. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #. module: base
 #: code:addons/osv/osv.py:0
 #, python-format
@@ -718,21 +601,18 @@ msgstr ""
 "\n"
 "[objet ayant pour référence : %s - %s]"
 
-#. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #. module: base
 #: code:addons/osv/osv.py:0
 #, python-format
 msgid "Constraint Error"
 msgstr "Erreur de contrainte"
 
-#. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #. module: base
 #: code:addons/osv/osv.py:0
 #, python-format
 msgid "Integrity Error"
 msgstr "Erreur d'intégrité"
 
-#. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #. module: base
 #: code:addons/osv/osv.py:0
 #, python-format
@@ -780,14 +660,12 @@ msgstr "XML non valide pour l'architecture de la vue"
 msgid "Error! You can not create recursive companies."
 msgstr "Erreur ! Vous ne pouvez pas créer de sociétés récursives"
 
-#. #-#-#-#-#  .merge_file_47q2SR (OpenERP Server 5.0.4)  #-#-#-#-#
 #. module: base
 #: constraint:res.partner:0
 msgid "Error ! You can not create recursive associated members."
 msgstr ""
 "Erreur ! Vous ne pouvez pas créer des membres associés de manière récursive."
 
-#. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #. module: base
 #: constraint:res.partner:0
 msgid "The VAT doesn't seem to be correct."
@@ -803,7 +681,6 @@ msgstr "Erreur ! Vous ne pouvez pas créer de catégories récursives"
 msgid "The chosen company is not in the allowed companies for this user"
 msgstr ""
 
-#. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #. module: base
 #: constraint:res.users:0
 msgid "This user can not connect using this company !"
@@ -1127,7 +1004,6 @@ msgstr "Séquence"
 msgid "View"
 msgstr "Vue"
 
-#. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #. module: base
 #: field:ir.actions.configuration.wizard,item_id:0
 msgid "Next Configuration Wizard"
@@ -1151,13 +1027,11 @@ msgstr "Progression de la Configuration"
 msgid "On multiple doc."
 msgstr "Sur de multiples enregistrements"
 
-#. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #. module: base
 #: field:ir.actions.report.custom,name:0 field:ir.report.custom,name:0
 msgid "Report Name"
 msgstr "Nom du rapport"
 
-#. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #. module: base
 #: field:ir.actions.report.custom,report_id:0
 msgid "Report Ref."
@@ -1181,7 +1055,6 @@ msgstr "Préfixe de sauvegarde des pièces jointes"
 msgid "Reload from Attachment"
 msgstr "Recharger depuis la pièce jointe"
 
-#. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #. module: base
 #: field:ir.actions.report.xml,auto:0
 msgid "Automatic XSL:RML"
@@ -1220,7 +1093,6 @@ msgstr "Nom"
 msgid "Report file"
 msgstr ""
 
-#. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #. module: base
 #: field:ir.actions.report.xml,report_name:0
 msgid "Internal Name"
@@ -1236,7 +1108,6 @@ msgstr ""
 msgid "Main report file path"
 msgstr ""
 
-#. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #. module: base
 #: field:ir.actions.report.xml,report_rml:0
 msgid "RML path"
@@ -1392,7 +1263,6 @@ msgstr "ID d'écriture"
 msgid "Active"
 msgstr "Actif"
 
-#. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #. module: base
 #: field:ir.actions.todo,end_date:0
 msgid "End Date"
@@ -1408,13 +1278,11 @@ msgstr "Texte"
 msgid "Restart"
 msgstr ""
 
-#. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #. module: base
 #: field:ir.actions.todo,start_date:0
 msgid "Start Date"
 msgstr "Date de début"
 
-#. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #. module: base
 #: field:ir.actions.todo,start_on:0
 msgid "Start On"
@@ -1476,7 +1344,6 @@ msgstr "Créateur"
 msgid "Data"
 msgstr "Données"
 
-#. #-#-#-#-#  .merge_file_47q2SR (OpenERP Server 5.0.4)  #-#-#-#-#
 #. module: base
 #: field:ir.attachment,datas:0
 msgid "File Content"
@@ -1877,8 +1744,12 @@ msgstr "Certificat Qualité"
 
 #. module: base
 #: field:ir.module.module,contributors:0
+#, fuzzy
 msgid "Contributors"
 msgstr ""
+"#-#-#-#-#  .merge_file_XyNbut (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_Pz0sVY (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"Contributeurs"
 
 #. module: base
 #: field:ir.module.module,demo:0
@@ -3759,7 +3630,7 @@ msgstr "Garder à 0 si l'action doit apparaître sur toutes les ressources."
 #. module: base
 #: help:multi_company.default,company_dest_id:0
 msgid "Company to store the current record"
-msgstr "Société physique ou sera stocké cet enregistrement"
+msgstr "Société pour laquelle est fait cet enregistrement"
 
 #. #-#-#-#-#  .merge_file_47q2SR (OpenERP Server 5.0.4)  #-#-#-#-#
 #. module: base
@@ -3869,7 +3740,7 @@ msgid ""
 "The ISO country code in two chars.\n"
 "You can use this field for quick search."
 msgstr ""
-"Le code ISO du pays en deux caractères.\n"
+"Le code ISO du pays, sur deux caractères.\n"
 "Vous pouvez utiliser ce champ pour effectuer une recherche rapide."
 
 #. module: base
@@ -3909,7 +3780,7 @@ msgstr ""
 #. module: base
 #: help:res.lang,iso_code:0
 msgid "This ISO code is the name of po files to use for translations"
-msgstr "Ce code ISO est le nom des fichiers po utiliser pour les traductions"
+msgstr "Ce code ISO est le nom des fichiers po utilisés pour les traductions"
 
 #. module: base
 #: help:res.log,name:0
@@ -4393,8 +4264,12 @@ msgstr ""
 #. module: base
 #: model:ir.actions.act_window,name:base.action_view_base_module_upgrade
 #: model:ir.model,name:base.model_base_module_upgrade
+#, fuzzy
 msgid "Module Upgrade"
 msgstr ""
+"#-#-#-#-#  .merge_file_XyNbut (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_Pz0sVY (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"Mise à jour de module"
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_view_base_module_upgrade_install
@@ -4679,8 +4554,12 @@ msgstr "Accepté les liens dans les requêtes"
 #. module: base
 #: model:ir.actions.act_window,name:base.res_request_link-act
 #: model:ir.ui.menu,name:base.menu_res_request_link_act
+#, fuzzy
 msgid "Request Reference Types"
 msgstr ""
+"#-#-#-#-#  .merge_file_XyNbut (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_Pz0sVY (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"Types de référence des requêtes"
 
 #. module: base
 #: model:ir.actions.act_window,name:base.res_widget_act_window
@@ -4786,13 +4665,21 @@ msgstr "Mettre à jour la liste des modules"
 
 #. module: base
 #: model:ir.model,name:base.model_base_language_export
+#, fuzzy
 msgid "base.language.export"
 msgstr ""
+"#-#-#-#-#  .merge_file_XyNbut (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_Pz0sVY (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"base.language.export"
 
 #. module: base
 #: model:ir.model,name:base.model_base_language_import
+#, fuzzy
 msgid "Language Import"
 msgstr ""
+"#-#-#-#-#  .merge_file_XyNbut (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_Pz0sVY (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"Importation de langue"
 
 #. module: base
 #: model:ir.model,name:base.model_base_language_install
@@ -5066,8 +4953,12 @@ msgstr ""
 
 #. module: base
 #: model:ir.model,name:base.model_res_config_users
+#, fuzzy
 msgid "res.config.users"
 msgstr ""
+"#-#-#-#-#  .merge_file_XyNbut (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_Pz0sVY (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"res.config.users"
 
 #. module: base
 #: model:ir.model,name:base.model_res_config_view
@@ -5287,8 +5178,12 @@ msgstr ""
 
 #. module: base
 #: model:ir.ui.menu,name:base.menu_base_action_rule
+#, fuzzy
 msgid "Automated Actions"
 msgstr ""
+"#-#-#-#-#  .merge_file_XyNbut (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_Pz0sVY (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"Actions automatisées"
 
 #. module: base
 #: model:ir.ui.menu,name:base.menu_base_config
@@ -5364,8 +5259,12 @@ msgstr ""
 
 #. module: base
 #: model:ir.ui.menu,name:base.menu_hr_dasboard
+#, fuzzy
 msgid "Dashboard"
 msgstr ""
+"#-#-#-#-#  .merge_file_XyNbut (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_Pz0sVY (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"Tableau de bord"
 
 #. module: base
 #: model:ir.ui.menu,name:base.menu_hr_manager
@@ -5374,8 +5273,12 @@ msgstr ""
 
 #. module: base
 #: model:ir.ui.menu,name:base.menu_hr_project
+#, fuzzy
 msgid "Human Resources Dashboard"
 msgstr ""
+"#-#-#-#-#  .merge_file_XyNbut (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_Pz0sVY (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"Tableau de bord ressources humaines"
 
 #. module: base
 #: model:ir.ui.menu,name:base.menu_localisation
@@ -5432,8 +5335,12 @@ msgstr ""
 
 #. module: base
 #: model:ir.ui.menu,name:base.menu_purchase_root
+#, fuzzy
 msgid "Purchases"
 msgstr ""
+"#-#-#-#-#  .merge_file_XyNbut (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_Pz0sVY (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"Achats"
 
 #. module: base
 #: model:ir.ui.menu,name:base.menu_security view:ir.actions.act_window:0
@@ -6852,8 +6759,10 @@ msgstr ""
 
 #. module: base
 #: model:res.partner.category,name:base.res_partner_category_miscellaneoussuppliers0
+#, fuzzy
 msgid "Miscellaneous Suppliers"
 msgstr ""
+"Fournisseurs divers"
 
 #. module: base
 #: model:res.partner.category,name:base.res_partner_category_retailers0
@@ -6862,8 +6771,10 @@ msgstr ""
 
 #. module: base
 #: model:res.partner.category,name:base.res_partner_category_woodsuppliers0
+#, fuzzy
 msgid "Wood Suppliers"
 msgstr ""
+"Fournisseurs de bois"
 
 #. module: base
 #: model:res.partner.title,name:base.res_partner_title_ltd
@@ -7049,8 +6960,10 @@ msgstr "Chinois (CN) / 简体中文"
 
 #. module: base
 #: selection:base.language.install,lang:0
+#, fuzzy
 msgid "Chinese (HK)"
 msgstr ""
+"Chinois (Hong Kong)"
 
 #. module: base
 #: selection:base.language.install,lang:0
@@ -7398,25 +7311,21 @@ msgstr "Gantt"
 msgid "Graph"
 msgstr "Graphe"
 
-#. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #. module: base
 #: selection:ir.actions.report.xml,report_type:0
 msgid "HTML from HTML"
 msgstr "HTML to HTML"
 
-#. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #. module: base
 #: selection:ir.actions.report.xml,report_type:0
 msgid "HTML from HTML(Mako)"
 msgstr "HTML to HTML (Mako)"
 
-#. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #. module: base
 #: selection:ir.actions.report.xml,report_type:0
 msgid "html"
 msgstr "html"
 
-#. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #. module: base
 #: selection:ir.actions.report.xml,report_type:0
 msgid "odt"
@@ -7770,8 +7679,12 @@ msgstr ""
 
 #. module: base
 #: selection:ir.property,type:0
+#, fuzzy
 msgid "DateTime"
 msgstr ""
+"#-#-#-#-#  .merge_file_XyNbut (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_Pz0sVY (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"Horodatage"
 
 #. module: base
 #: selection:ir.property,type:0
@@ -8529,8 +8442,12 @@ msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
+#, fuzzy
 msgid "terp-camera_test"
 msgstr ""
+"#-#-#-#-#  .merge_file_XyNbut (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_Pz0sVY (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"terp-camera_test"
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
@@ -8564,8 +8481,12 @@ msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
+#, fuzzy
 msgid "terp-emblem-important"
 msgstr ""
+"#-#-#-#-#  .merge_file_XyNbut (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_Pz0sVY (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"terp-emblem-important"
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
@@ -8589,8 +8510,12 @@ msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
+#, fuzzy
 msgid "terp-folder-yellow"
 msgstr ""
+"#-#-#-#-#  .merge_file_XyNbut (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_Pz0sVY (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"terp-folder-yellow"
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
@@ -8644,8 +8569,12 @@ msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
+#, fuzzy
 msgid "terp-gtk-jump-to-ltr"
 msgstr ""
+"#-#-#-#-#  .merge_file_XyNbut (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_Pz0sVY (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"terp-gtk-jump-to-ltr"
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
@@ -8774,8 +8703,12 @@ msgstr "terp-stock"
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
+#, fuzzy
 msgid "terp-stock_align_left_24"
 msgstr ""
+"#-#-#-#-#  .merge_file_XyNbut (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_Pz0sVY (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"terp-stock_align_left_24"
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
@@ -8784,8 +8717,12 @@ msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
+#, fuzzy
 msgid "terp-stock_format-default"
 msgstr ""
+"#-#-#-#-#  .merge_file_XyNbut (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_Pz0sVY (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"terp-stock_format-default"
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
@@ -9129,8 +9066,12 @@ msgstr ""
 
 #. module: base
 #: view:base.language.export:0
+#, fuzzy
 msgid "https://help.launchpad.net/Translations"
 msgstr ""
+"#-#-#-#-#  .merge_file_XyNbut (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_Pz0sVY (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"https://help.launchpad.net/Translations"
 
 #. module: base
 #: view:base.language.export:0 view:wizard.module.lang.export:0
@@ -9414,8 +9355,12 @@ msgstr "Rapport XML"
 
 #. module: base
 #: view:ir.actions.report.xml:0
+#, fuzzy
 msgid "XML Report"
 msgstr ""
+"#-#-#-#-#  .merge_file_XyNbut (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_Pz0sVY (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"Rapport XML"
 
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #. module: base
@@ -10287,7 +10232,7 @@ msgstr "%d - Jour dans le mois comme un nombre décimal [01,31]."
 #. module: base
 #: view:res.lang:0
 msgid "%j - Day of the year as a decimal number [001,366]."
-msgstr "%j - Jour de l'année comme un nombre décimal [001,366]."
+msgstr "%j - Numéro du Jour dans l'année [001,366]."
 
 #. module: base
 #: view:res.lang:0
@@ -10297,7 +10242,7 @@ msgstr "%m - Mois comme un nombre décimal [01,12]."
 #. module: base
 #: view:res.lang:0
 msgid "%p - Equivalent of either AM or PM."
-msgstr "%p - Soit AM soit à PM."
+msgstr "%p - AM ou PM"
 
 #. module: base
 #: view:res.lang:0
@@ -10312,7 +10257,7 @@ msgstr "%x - Représentation de date appropriée"
 #. module: base
 #: view:res.lang:0
 msgid "%y - Year without century as a decimal number [00,99]."
-msgstr "%y - Année dans le siècle comme un nombre décimal [00,99]."
+msgstr "%y - Année dans le siècle [00,99]."
 
 #. module: base
 #: view:res.lang:0
@@ -10500,8 +10445,12 @@ msgstr "Répondre"
 
 #. module: base
 #: view:res.request:0
+#, fuzzy
 msgid "Request Date"
 msgstr ""
+"#-#-#-#-#  .merge_file_XyNbut (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_Pz0sVY (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"Date de la requête"
 
 #. module: base
 #: view:res.request:0

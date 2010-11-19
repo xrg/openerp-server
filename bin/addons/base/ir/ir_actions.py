@@ -500,7 +500,7 @@ class actions_server(osv.osv):
         for field in fields:
             try:
                 obj = getattr(obj, field)
-            except Exception,e :
+            except Exception:
                 logger.exception('Failed to parse: %s',field)
 
         return obj
@@ -521,7 +521,7 @@ class actions_server(osv.osv):
         for field in fields:
             try:
                 obj = getattr(obj, field)
-            except Exception,e :
+            except Exception:
                 logger.exception('Failed to parse: %s', field)
 
         return obj
