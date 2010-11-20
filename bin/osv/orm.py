@@ -2799,6 +2799,51 @@ class orm(orm_template):
                 if (val<>False) or (type(val)<>bool):
                     cr.execute(update_query, (ss[1](val), key), debug=self._debug)
 
+    def force_update_store(self, cr, uid, ids=False, column=False, context=None):
+        """ Externally visible call to update the stored fields
+        
+        This will allow the administrator (only) to re-compute the stored fields
+        if we suspect that something has gone wrong. If you are using this function
+        too often, you already have some trouble with the server!
+        
+        @param ids  list of ids to update (NOT implemented, yet)
+        @param column  empty (for all columns), list or string of column to update
+        """
+        if uid != 1:
+            raise except_orm(_('AccessError'),
+                            _('Forced update of the stored fields is only permitted to the admin user!'))
+        assert not ids, "force_update_store cannot be called for specific fields, yet"
+        update_custom_fields = context and context.get('update_custom_fields', False)
+        if not column:
+            cols = self._columns.keys()
+        elif isinstance(column, basestring):
+            cols = [column,]
+        else:
+            cols = column
+
+        cols2 = []
+        
+        for k in cols:
+            if k in ('id', 'write_uid', 'write_date', 'create_uid', 'create_date', '_vptr'):
+                continue
+            #Not Updating Custom fields
+            if k.startswith('x_') and not update_custom_fields:
+                continue
+
+            f = self._columns[k] # KeyError: does column refer to existing _columns?
+            if not isinstance(f, fields.function):
+                continue
+            if not f.store:
+                continue
+            cols2.append((k, f))
+
+        if self._debug:
+            _logger.debug("%s.force_update_store: columns: %s", self._name, 
+                            ', '.join([ c[0] for c in cols2]))
+        for k, f in cols2:
+            self._update_store(cr, f, k)
+        return True
+
     def _check_removed_columns(self, cr, log=False):
         # iterate on the database columns to drop the NOT NULL constraints
         # of fields which were required but have been removed (or will be added by another module)
