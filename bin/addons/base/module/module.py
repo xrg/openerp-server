@@ -115,7 +115,12 @@ class module(osv.osv):
             except KeyError, e:
                 self.__logger.warning(
                             'Data not found for reference %s[%s:%s.%s]', data_id.model,
-                            data_id.res_id, data_id.model, data_id.name, exc_info=True)
+                            data_id.res_id, data_id.model, data_id.name)
+                pass
+            except AttributeError, e:
+                self.__logger.warning(
+                            'Data not found for reference %s[%s:%s.%s] %s', data_id.model,
+                            data_id.res_id, data_id.model, data_id.name, str(e))
                 pass
             except Exception, e:
                 self.__logger.warning('Unknown error while browsing %s[%s]',
