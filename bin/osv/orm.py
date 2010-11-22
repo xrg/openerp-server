@@ -4752,7 +4752,7 @@ class orm(orm_template):
                   AND %(t)s_crsrc.cycle = False)
             SELECT 1 from %(t)s_crsrc WHERE cycle = True; """ %  \
                 { 't':self._table, 'p': parent},
-                (ids[:],), debug=True)
+                (ids[:],), debug=self._debug)
             res = cr.fetchone()
             return not (res and res[0])
         while len(ids_parent):
