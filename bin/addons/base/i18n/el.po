@@ -12,17 +12,18 @@ msgstr ""
 "Project-Id-Version: OpenERP Server 5.0.0\n"
 "Report-Msgid-Bugs-To: support@openerp.com\n"
 "POT-Creation-Date: 2010-10-18 17:46+0000\n"
-"PO-Revision-Date: 2010-11-12 06:39+0000\n"
-"Last-Translator: Dimitris Andavoglou <dimitrisand@gmail.com>\n"
-"Language-Team: nls@hellug.gr <nls@hellug.gr>\n"
+"PO-Revision-Date: 2010-11-23 01:00+0200\n"
+"Last-Translator: P. Christeas <p_christ@hol.gr>\n"
+"Language-Team: Greek <openerp@lists.hellug.gr>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Launchpad-Export-Date: 2010-11-13 04:55+0000\n"
-"X-Generator: Launchpad (build Unknown)\n"
+"X-Generator: Lokalize 1.0\n"
 "X-Poedit-Country: GREECE\n"
 "X-Poedit-Language: Greek\n"
 "X-Poedit-SourceCharset: utf-8\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: base
 #: code:addons/base/ir/ir_actions.py:0 code:addons/base/ir/ir_model.py:0
@@ -5181,9 +5182,8 @@ msgstr "Ρυθμίσεις"
 
 #. module: base
 #: model:ir.ui.menu,name:base.menu_base_config_mail
-#, fuzzy
 msgid "Mail"
-msgstr "E-Mail"
+msgstr "Ταχυδρομείο"
 
 #. module: base
 #: model:ir.ui.menu,name:base.menu_base_config_plugins
@@ -9382,12 +9382,8 @@ msgstr "Άλλη Παραμετροποίηση"
 
 #. module: base
 #: view:ir.actions.report.xml:0
-#, fuzzy
 msgid "RML Report"
-msgstr ""
-"#-#-#-#-#  .merge_file_UIdw14 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"Αναφορές\n"
-"#-#-#-#-#  .merge_file_IJStut (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+msgstr "Αναφορά RML"
 
 #. module: base
 #: view:ir.actions.report.xml:0
@@ -9570,12 +9566,8 @@ msgstr "Ομαδοποίηση Ανά..."
 
 #. module: base
 #: view:ir.attachment:0
-#, fuzzy
 msgid "Month"
-msgstr ""
-"#-#-#-#-#  .merge_file_UIdw14 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"Μήνες\n"
-"#-#-#-#-#  .merge_file_IJStut (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+msgstr "Μήνας"
 
 #. module: base
 #: view:ir.attachment:0
@@ -9595,12 +9587,8 @@ msgstr "Ενέργεια προς Εκκίνηση"
 
 #. module: base
 #: view:ir.cron:0
-#, fuzzy
 msgid "Execution"
-msgstr ""
-"#-#-#-#-#  .merge_file_UIdw14 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"Ενέργεια\n"
-"#-#-#-#-#  .merge_file_IJStut (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+msgstr "Εκτέλεση"
 
 #. module: base
 #: view:ir.cron:0
@@ -9665,18 +9653,13 @@ msgstr "Κατάσταση"
 
 #. module: base
 #: view:ir.model.access:0 view:ir.rule:0
-#, fuzzy
 msgid "Full Access"
-msgstr ""
-"#-#-#-#-#  .merge_file_UIdw14 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"Πρόσβαση\n"
-"#-#-#-#-#  .merge_file_IJStut (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+msgstr "Πλήρης πρόσβαση"
 
 #. module: base
 #: view:ir.model.data:0
-#, fuzzy
 msgid "Module Data"
-msgstr "Άρθρωμα"
+msgstr "Δεδομένα Αρθρώματος"
 
 #. module: base
 #: view:ir.model.data:0
@@ -9689,12 +9672,8 @@ msgstr ""
 
 #. module: base
 #: view:ir.module.module:0
-#, fuzzy
 msgid "Author Website"
-msgstr ""
-"#-#-#-#-#  .merge_file_UIdw14 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"Ιστοσελίδα\n"
-"#-#-#-#-#  .merge_file_IJStut (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+msgstr "Ιστοσελίδα Δημιουργού"
 
 #. module: base
 #: view:ir.module.module:0
@@ -9748,12 +9727,8 @@ msgstr "Προγραμματισμός εγκατάστασης"
 
 #. module: base
 #: view:ir.module.module:0
-#, fuzzy
 msgid "Search modules"
-msgstr ""
-"#-#-#-#-#  .merge_file_UIdw14 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"Νέα Αρθρώματα\n"
-"#-#-#-#-#  .merge_file_IJStut (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+msgstr "Αναζήτηση στα Αρθρώματα"
 
 #. module: base
 #: view:ir.module.module:0
@@ -9795,12 +9770,8 @@ msgstr ""
 
 #. module: base
 #: view:ir.property:0
-#, fuzzy
 msgid "Generic"
-msgstr ""
-"#-#-#-#-#  .merge_file_UIdw14 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"Γενικά\n"
-"#-#-#-#-#  .merge_file_IJStut (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+msgstr "Γενικό"
 
 #. module: base
 #: view:ir.property:0
@@ -10024,12 +9995,8 @@ msgstr ""
 
 #. module: base
 #: view:ir.translation:0
-#, fuzzy
 msgid "Translation"
-msgstr ""
-"#-#-#-#-#  .merge_file_UIdw14 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"Μεταφράσεις\n"
-"#-#-#-#-#  .merge_file_IJStut (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+msgstr "Μετάφραση"
 
 #. module: base
 #: view:ir.translation:0
@@ -10513,12 +10480,8 @@ msgstr "Υπόμνημα μορφών ώρας και ημερ/νίας"
 
 #. module: base
 #: view:res.lang:0
-#, fuzzy
 msgid "Update Terms"
-msgstr ""
-"#-#-#-#-#  .merge_file_UIdw14 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"Ημερ/νία Ανανέωσης\n"
-"#-#-#-#-#  .merge_file_IJStut (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+msgstr "Ανανέωση όρων"
 
 #. module: base
 #: view:res.log:0
@@ -10527,12 +10490,8 @@ msgstr ""
 
 #. module: base
 #: view:res.log:0
-#, fuzzy
 msgid "Unread"
-msgstr ""
-"#-#-#-#-#  .merge_file_UIdw14 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"Grenada\n"
-"#-#-#-#-#  .merge_file_IJStut (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+msgstr "Μη αναγνωσμένο"
 
 #. module: base
 #: view:res.partner:0
@@ -10583,12 +10542,8 @@ msgstr "Document Link"
 
 #. module: base
 #: view:res.partner.event:0
-#, fuzzy
 msgid "Event"
-msgstr ""
-"#-#-#-#-#  .merge_file_UIdw14 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"Συμβάντα\n"
-"#-#-#-#-#  .merge_file_IJStut (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+msgstr "Συμβάν"
 
 #. module: base
 #: view:res.partner.event:0
@@ -10617,12 +10572,8 @@ msgstr "Όρος Πληρωμής"
 
 #. module: base
 #: view:res.request:0
-#, fuzzy
 msgid "Current"
-msgstr ""
-"#-#-#-#-#  .merge_file_UIdw14 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"Νόμισμα\n"
-"#-#-#-#-#  .merge_file_IJStut (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+msgstr "Τρέχον"
 
 #. #-#-#-#-#  .merge_file_UIdw14 (OpenERP Server 5.0.0)  #-#-#-#-#
 #. module: base
@@ -10642,12 +10593,8 @@ msgstr "Απάντηση"
 
 #. module: base
 #: view:res.request:0
-#, fuzzy
 msgid "Request Date"
-msgstr ""
-"#-#-#-#-#  .merge_file_UIdw14 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"Αίτηση\n"
-"#-#-#-#-#  .merge_file_IJStut (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+msgstr "Ημερομηνία Αίτησης"
 
 #. module: base
 #: view:res.request:0
@@ -10656,12 +10603,8 @@ msgstr "Αποστολή"
 
 #. module: base
 #: view:res.request:0
-#, fuzzy
 msgid "Waiting"
-msgstr ""
-"#-#-#-#-#  .merge_file_UIdw14 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"σε αναμονή\n"
-"#-#-#-#-#  .merge_file_IJStut (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+msgstr "Σε αναμονή"
 
 #. module: base
 #: view:res.request.history:0
@@ -10702,12 +10645,8 @@ msgstr ""
 
 #. module: base
 #: view:res.users:0
-#, fuzzy
 msgid "Default Filters"
-msgstr ""
-"#-#-#-#-#  .merge_file_UIdw14 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"Προεπιλεγμένη Τιμή\n"
-"#-#-#-#-#  .merge_file_IJStut (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+msgstr "Προεπιλεγμένα Φίλτρα"
 
 #. #-#-#-#-#  .merge_file_UIdw14 (OpenERP Server 5.0.0)  #-#-#-#-#
 #. module: base
@@ -10757,22 +10696,15 @@ msgstr ""
 
 #. module: base
 #: view:res.users:0
-#, fuzzy
 msgid "You must logout and login again after changing your password."
 msgstr ""
-"#-#-#-#-#  .merge_file_UIdw14 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"Για να αλλαχθεί το συνθηματικό σας θα πρέπει να αποσυνδεθείτε και να "
-"επανασυνδεθείτε στο σύστημα.\n"
-"#-#-#-#-#  .merge_file_IJStut (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Μετά από την αλλαγή του συνθηματικού σας θα πρέπει να αποσυνδεθείτε και να "
+"επανασυνδεθείτε στο σύστημα."
 
 #. module: base
 #: view:res.widget:0
-#, fuzzy
 msgid "Search Widget"
 msgstr ""
-"#-#-#-#-#  .merge_file_UIdw14 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"Προβολή Αναζήτησης\n"
-"#-#-#-#-#  .merge_file_IJStut (OpenERP Server 5.0.0)  #-#-#-#-#\n"
 
 #. module: base
 #: view:res.widget:0
@@ -10871,12 +10803,8 @@ msgstr "Επεξεργαστής  Ροής"
 
 #. module: base
 #: view:workflow.activity:0
-#, fuzzy
 msgid "Conditions"
-msgstr ""
-"#-#-#-#-#  .merge_file_UIdw14 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"Συνθήκη\n"
-"#-#-#-#-#  .merge_file_IJStut (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+msgstr "Συνθήκες"
 
 #. #-#-#-#-#  .merge_file_UIdw14 (OpenERP Server 5.0.0)  #-#-#-#-#
 #. module: base
