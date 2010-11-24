@@ -158,7 +158,7 @@ class GettextAlias(object):
             frame = frame.f_back # need to find one frame back..
             if not frame:
                 return source
-        except Exception, e:
+        except Exception:
             return source
 
         own_cr = False
@@ -187,7 +187,7 @@ class GettextAlias(object):
                 own_cr = True
             if not cr:
                 return source
-        except Exception, e:
+        except Exception:
             return source
 
         if hasattr(cr, 'execute'):
@@ -216,32 +216,39 @@ class TinyPoFile(object):
     def __init__(self, buffer):
         self.logger = logging.getLogger('i18n')
         self.buffer = buffer
+        self.first = True
+        self.last = False
         self.re_unquote = re.compile(r"(\\.)")
         self.re_unquote_repls = {'n': '\n', } # 't': '\t', 'r': '\r'
+        self.line_num = 0    # same as csv.reader's
 
     def warn(self, msg):
         self.logger.warning(msg)
 
     def __iter__(self):
         self.buffer.seek(0)
-        self.lines = self._get_lines() 
-        self.lines_count = len(self.lines);
+        self.line_num = 0
 
         self.first = True
         self.tnrs= []
         return self
 
-    def _get_lines(self):
-        lines = self.buffer.readlines()  # why not stream?
-        # remove the BOM (Byte Order Mark):
-        if len(lines):
-            lines[0] = unicode(lines[0], 'utf8').lstrip(unicode( codecs.BOM_UTF8, "utf8"))
+    def _get_line(self):
+        try:
+            line = self.buffer.next()
+            # remove the BOM (Byte Order Mark):
+            if line and self.line_num == 0:
+                line = unicode(line, 'utf8').lstrip(unicode( codecs.BOM_UTF8, "utf8"))
 
-        lines.append('') # ensure that the file ends with at least an empty line
-        return lines
-
-    def cur_line(self):
-        return (self.lines_count - len(self.lines))
+            self.line_num += 1
+            return line.strip()
+        except StopIteration:
+            # ensure that the file ends with at least one empty line
+            if not self.last:
+                self.last = True
+                return ''
+            else:
+                raise
 
     def next(self):
         def unquote(str):
@@ -258,9 +265,7 @@ class TinyPoFile(object):
             line = None
             fuzzy = False
             while (not line):
-                if 0 == len(self.lines):
-                    raise StopIteration()
-                line = self.lines.pop(0).strip()
+                line = self._get_line()
             while line.startswith('#'):
                 if line.startswith('#~ '):
                     break
@@ -272,42 +277,40 @@ class TinyPoFile(object):
                         tmp_tnrs.append( line[2:].strip().split(':',2) )
                 elif line.startswith('#,') and (line[2:].strip() == 'fuzzy'):
                     fuzzy = True
-                line = self.lines.pop(0).strip()
+                line = self._get_line()
             while not line:
                 # allow empty lines between comments and msgid
-                line = self.lines.pop(0).strip()
+                line = self._get_line()
             if line.startswith('#~ '):
-                while line.startswith('#~ ') or not line.strip():
-                    if 0 == len(self.lines):
-                        raise StopIteration()
-                    line = self.lines.pop(0)
+                while line.startswith('#~ ') or not line:
+                    line = self._get_line()
                 # This has been a deprecated entry, don't return anything
                 return self.next()
 
             if not line.startswith('msgid'):
                 raise Exception("malformed file: bad line: %s" % line)
             source = unquote(line[6:])
-            line = self.lines.pop(0).strip()
+            line = self._get_line()
             if not source and self.first:
                 # if the source is "" and it's the first msgid, it's the special
                 # msgstr with the informations about the traduction and the
                 # traductor; we skip it
                 self.tnrs = []
                 while line:
-                    line = self.lines.pop(0).strip()
+                    line = self._get_line()
                 return self.next()
 
             while not line.startswith('msgstr'):
                 if not line:
-                    raise Exception('malformed file at %d'% self.cur_line())
+                    raise Exception('malformed file at %d'% self.line_num)
                 source += unquote(line)
-                line = self.lines.pop(0).strip()
+                line = self._get_line()
 
             trad = unquote(line[7:])
-            line = self.lines.pop(0).strip()
+            line = self._get_line()
             while line:
                 trad += unquote(line)
-                line = self.lines.pop(0).strip()
+                line = self._get_line()
 
             if tmp_tnrs and not fuzzy:
                 type, name, res_id = tmp_tnrs.pop(0)
@@ -319,7 +322,7 @@ class TinyPoFile(object):
         if name is None:
             if not fuzzy:
                 self.warn('Missing "#:" formated comment at line %d for the following source:\n\t%s', 
-                        self.cur_line(), source[:30])
+                        self.line_num, source[:30])
             return self.next()
         return type, name, res_id, source, trad
 
@@ -865,7 +868,7 @@ def trans_load_data(db_name, fileobj, fileformat, lang, strict=False, lang_name=
                 logger.warning(msg, lang, lc)
             try:
                 locale.setlocale(locale.LC_ALL, str(lc + '.' + encoding))
-            except:
+            except locale.Error:
                 pass
 
             if not lang_name:
@@ -900,9 +903,7 @@ def trans_load_data(db_name, fileobj, fileformat, lang, strict=False, lang_name=
         if fileformat == 'csv':
             reader = csv.reader(fileobj, quotechar='"', delimiter=',')
             # read the first line of the file (it contains columns titles)
-            for row in reader:
-                f = row
-                break
+            f = reader.next()
         elif fileformat == 'po':
             reader = TinyPoFile(fileobj)
             f = ['type', 'name', 'res_id', 'src', 'value']
@@ -922,26 +923,37 @@ def trans_load_data(db_name, fileobj, fileformat, lang, strict=False, lang_name=
             # {'lang': ..., 'type': ..., 'name': ..., 'res_id': ...,
             #  'src': ..., 'value': ...}
             dic = {'lang': lang}
-            for i in range(len(f)):
-                if f[i] in ('module',):
+            dic_module = False
+            for i, fld in enumerate(f):
+                if fld in ('module',):
                     continue
-                dic[f[i]] = row[i]
+                dic[fld] = row[i]
 
-            # This would skip untranslated terms:
-            # if not dic.get('value',False):
-            #     continue
+            # This would skip terms that fail to specify a res_id
+            if not dic.get('res_id', False):
+                 continue
             try:
                 dic['res_id'] = int(dic['res_id'])
-            except:
-                model_data_ids = model_data_obj.search(cr, uid, [
-                    ('model', '=', dic['name'].split(',')[0]),
-                    ('module', '=', dic['res_id'].split('.', 1)[0]),
-                    ('name', '=', dic['res_id'].split('.', 1)[1]),
-                    ])
-                if model_data_ids:
-                    dic['res_id'] = model_data_obj.browse(cr, uid,
-                            model_data_ids[0]).res_id
-                else:
+            except ValueError:
+                try:
+                    tmodel = dic['name'].split(',')[0]
+                    if '.' in dic['res_id']:
+                        tmodule, tname = dic['res_id'].split('.', 1)
+                    else:
+                        tmodule = dic_module
+                        tname = dic['res_id']
+                    model_data_ids = model_data_obj.search(cr, uid, [
+                        ('model', '=', tmodel),
+                        ('module', '=', tmodule),
+                        ('name', '=', tname),
+                        ])
+                    if model_data_ids:
+                        dic['res_id'] = model_data_obj.browse(cr, uid, model_data_ids[0]).res_id
+                    else:
+                        dic['res_id'] = False
+                except Exception:
+                    logger.warning("Could not locate resource for %s, please fix the po file.",
+                                    dic['res_id'], exc_info=True)
                     dic['res_id'] = False
 
             if dic['type'] == 'model' and not strict:
