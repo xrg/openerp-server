@@ -942,13 +942,13 @@ def trans_load_data(db_name, fileobj, fileformat, lang, strict=False, lang_name=
                     else:
                         tmodule = dic_module
                         tname = dic['res_id']
-                    model_data_ids = model_data_obj.search(cr, uid, [
+                    model_data_res = model_data_obj.search_read(cr, uid, [
                         ('model', '=', tmodel),
                         ('module', '=', tmodule),
                         ('name', '=', tname),
-                        ])
-                    if model_data_ids:
-                        dic['res_id'] = model_data_obj.browse(cr, uid, model_data_ids[0]).res_id
+                        ], fields=['res_id'])
+                    if model_data_res:
+                        dic['res_id'] = model_data_res[0]['res_id']
                     else:
                         dic['res_id'] = False
                 except Exception:
