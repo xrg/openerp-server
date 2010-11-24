@@ -458,9 +458,11 @@ class ir_model_data(osv.osv):
     @tools.cache()
     def get_object_reference(self, cr, uid, module, xml_id):
         """Returns (model, res_id) corresponding to a given module and xml_id (cached) or raise ValueError if not found"""
-        data_id = self._get_id(cr, uid, module, xml_id)
-        res = self.read(cr, uid, data_id, ['model', 'res_id'])
-        return (res['model'], res['res_id'])
+        res = self.search_read(cr, uid, [('module','=',module), ('name','=', xml_id)],
+                                fields=['model', 'res_id'])
+        if not res:
+            raise ValueError('No references to %s.%s' % (module, xml_id))
+        return (res[0]['model'], res[0]['res_id'])
 
     def get_object(self, cr, uid, module, xml_id, context=None):
         """Returns a browsable record for the given module name and xml_id or raise ValueError if not found"""
@@ -471,9 +473,10 @@ class ir_model_data(osv.osv):
         if not xml_id:
             return False
         try:
-            id = self.read(cr, uid, [self._get_id(cr, uid, module, xml_id)], ['res_id'])[0]['res_id']
+            id = self.search_read(cr, uid, [('module','=', module),('name','=',xml_id)],
+                                    fields=['res_id'])[0]['res_id']
             self.loads[(module,xml_id)] = (model,id)
-        except:
+        except Exception:
             id = False
         return id
 
