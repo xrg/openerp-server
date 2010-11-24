@@ -3680,10 +3680,10 @@ class orm(orm_template):
                 if key in ('write_uid', 'create_uid', 'uid') and details and r[key]:
                     try:
                         r[key] = self.pool.get('res.users').name_get(cr, user, [r[key]])[0]
-                        r['xmlid'] = ("%(module)s.%(name)s" % r) if r['name'] else False
-                        del r['name'], r['module']
                     except Exception:
                         pass # Leave the numeric uid there
+                    r['xmlid'] = ("%(module)s.%(name)s" % r) if r['name'] else False
+                    del r['name'], r['module']
         if uniq:
             return res[ids[0]]
         return res
