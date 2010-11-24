@@ -225,7 +225,7 @@ class Cursor(object):
             except Exception:
                 # should't break because of logging
                 pass
-            self.sql_log_count+=1
+            self.sql_log_count += 1
 
         if self.sql_log:
             qry2 = query.strip()
