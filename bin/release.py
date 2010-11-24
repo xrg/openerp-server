@@ -48,6 +48,7 @@ server_options = [ 'base6.0',
         'xmlrpc-gzip',
         'engine-pg84',
         'search-browse', 'virtual-fns',
+        'search-read',
         'root-obj_list',
         ]
 

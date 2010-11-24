@@ -1257,6 +1257,24 @@ class orm_template(object):
         """
         raise NotImplementedError(_('The read method is not implemented on this object !'))
 
+    def search_read(self, cr, user, domain, offset=0, limit=None, order=None, fields=None, context=None, load='_classic_read'):
+        """
+        Read records of the given search criteria and return the specified fields
+
+        :param cr: database cursor
+        :param user: current user id
+        :param ids: id or list of the ids of the records to read
+        :param fields: optional list of field names to return (default: all fields would be returned)
+        :type fields: list (example ['field_name_1', ...])
+        :param context: optional context dictionary. See read()
+        :return: list of dictionaries((dictionary per record asked)) with requested field values
+        :rtype: [{‘name_of_the_field’: value, ...}, ...]
+        :raise AccessError: * if user has no read rights on the requested object
+                            * if user tries to bypass access rules for read on the requested object
+
+        """
+        raise NotImplementedError(_('The search_read method is not implemented on this object !'))
+
     def get_invalid_fields(self, cr, uid):
         return list(self._invalids)
 
@@ -3457,12 +3475,55 @@ class orm(orm_template):
             return result and result[0] or False
         return result
 
+    def search_read(self, cr, user, domain, offset=0, limit=None, order=None,
+                    fields=None, context=None, load='_classic_read'):
+        """ Perform search and read in one query.
+        @param order can accept the empty string '', meaning "no order"
+        See orm_template.search_read().
+        """
+        if context is None:
+            context = {}
+        self.pool.get('ir.model.access').check(cr, user, self._name, 'read', context=context)
+        if not fields:
+            fields = self._columns.keys() + self._inherit_fields.keys()
+            if self._vtable:
+                fields.append('_vptr')
+
+        query = self._where_calc(cr, user, domain, context=context)
+        # Not needed so far, because _read_flat consults ir.rule.domain_get()
+        # self._apply_ir_rules(cr, user, query, 'read', context=context)
+        query.order_by = self._generate_order_by(order, query)
+        query.limit = limit
+        query.offset = offset
+
+        if self._debug:
+            _logger.debug("%s.search_read(%s, fields=%r)", self._name, query, fields)
+        result = self._read_flat(cr, user, query, fields_to_read=fields,
+                                context=context, load=load)
+
+        for r in result:
+            for key, v in r.items():
+                if v is None:
+                    r[key] = False
+
+        return result
+
     def _read_flat(self, cr, user, ids, fields_to_read, context=None, load='_classic_read'):
+        """ Perform the SQL query for reading data
+          @param ids can be a list of integers, *or* a tuple of (query, order, limit, offset)
+                    for search_read
+        """
         if not context:
             context = {}
         if not ids:
             return []
-        ids = map(lambda x:int(x), ids)
+        s_query = None
+        if isinstance(ids, (list, tuple)):
+            ids = map(lambda x:int(x), ids)
+        elif isinstance(ids, Query):
+            s_query = ids
+            ids = None
+
         if fields_to_read == None:
             fields_to_read = self._columns.keys()
             if self._vtable:
@@ -3484,7 +3545,7 @@ class orm(orm_template):
                 (self._name, tables, fields_pre))
 
         res = []
-        if len(fields_pre):
+        if s_query or len(fields_pre):
             if len(tables) > 1:
                 table_prefix = self._table + '.'
             else:
@@ -3499,6 +3560,8 @@ class orm(orm_template):
                     return "now()::timestamp AS %s" % (f,)
                 if f == '_vptr':
                     return '%s_vptr' % table_prefix
+                if f == 'id':
+                    return table_prefix + 'id'
                 if isinstance(self._columns[f], fields.binary) and context.get('bin_size', False):
                     return 'length(%s"%s") as "%s"' % (table_prefix, f, f)
                 return '%s"%s"' % (table_prefix, f,)
@@ -3509,41 +3572,75 @@ class orm(orm_template):
                 else:
                     return "%s" % tst
 
+            if 'id' not in fields_pre:
+                fields_pre.insert(0, 'id')
             fields_pre2 = map(convert_field, fields_pre)
             order_by = self._parent_order or self._order
-            select_fields = ','.join(fields_pre2 + [table_prefix+'id'])
-            tables = ', '.join(set(map(quote_tbl, tables)))
-            query = 'SELECT %s FROM %s WHERE %sid = ANY(%%s)' % (select_fields, tables, table_prefix)
-            if rule_clause:
-                query += " AND " + (' OR '.join(rule_clause))
-            query += " ORDER BY " + order_by
-            if True:
-                if rule_clause:
-                    ids = list(set(ids)) # eliminate duplicates
-                    cr.execute(query, [ids,] + rule_params, debug=self._debug)
-                    if cr.rowcount != len(ids):
-                        # Some "access errors" may not be due to rules, but
-                        # due to incorrectly cached data, which won't match
-                        # the result fetched again from the db.
-                        if self._debug:
-                            rc = cr.rowcount
-                            sd = {}.fromkeys(ids)
-                            _logger.debug("access error @%s  %d != %d " %(self._name, rc, len(sd)))
-                            _logger.debug("len(%s) != len(%s)" % (cr.fetchall(), sd))
-                        raise except_orm(_('AccessError'),
-                                         _('Operation prohibited by access rules, or performed on an already deleted document (Operation: read, Document type: %s).')
-                                         % (self._description,))
-                else:
-                    cr.execute(query, (ids,), debug=self._debug)
-                res.extend(cr.dictfetchall())
-        else:
-            res = map(lambda x: {'id': x}, ids)
+            select_fields = ','.join(fields_pre2)
+            tables = map(quote_tbl, tables)
+            params = []
+            if s_query:
+                for tbl in s_query.tables:
+                    if tbl in tables:
+                        tables.remove(tbl)
+                qfrom, qwhere, qargs = s_query.get_sql()
+                tables.append(qfrom)
+                tables = ', '.join(set(tables))
+                query = 'SELECT %s FROM %s WHERE %s' % \
+                            (select_fields, tables, qwhere)
+                params += qargs
 
-        tmp_ids = map(lambda x: x['id'], res)
+                if s_query.order_by or s_query.order_by is  '':
+                    order_by = s_query.order_by
+            else:
+                tables = ', '.join(set(tables))
+                query = 'SELECT %s FROM %s WHERE %sid = ANY(%%s)' % \
+                            (select_fields, tables, table_prefix)
+                params += [ids,]
+                
+                if order_by:
+                    order_by = 'ORDER BY ' + order_by
+
+            if rule_clause:
+                query += " AND (" + (' OR '.join(rule_clause)) + ") "
+                params += rule_params
+
+            if order_by:  # could be '' == no order
+                query += order_by
+            if s_query and s_query.offset:
+                query += " OFFSET %s"
+                params.append(s_query.offset)
+            if s_query and s_query.limit:
+                query += " LIMIT %s"
+                params.append(s_query.limit)
+                
+            # Perform the big read of the table, fetch the data!
+            cr.execute(query, params, debug=self._debug)
+
+            if ids is not None and rule_clause:
+                ids = list(set(ids)) # eliminate duplicates
+                if cr.rowcount != len(ids):
+                    # Some "access errors" may not be due to rules, but
+                    # due to incorrectly cached data, which won't match
+                    # the result fetched again from the db.
+                    if self._debug:
+                        rc = cr.rowcount
+                        sd = {}.fromkeys(ids)
+                        _logger.debug("access error @%s  %d != %d " %(self._name, rc, len(sd)))
+                        _logger.debug("len(%s) != len(%s)" % (cr.fetchall(), sd))
+                    raise except_orm(_('AccessError'),
+                                        _('Operation prohibited by access rules, or performed on an already deleted document (Operation: read, Document type: %s).')
+                                        % (self._description,))
+            res.extend(cr.dictfetchall())
+        else:
+            # can only happen w/o s_query
+            res = [{'id': x} for x in ids]
+
+        tmp_ids = [x['id'] for x in res]
         tmp_fs = []
         
         for f in fields_pre:
-            if f == self.CONCURRENCY_CHECK_FIELD or f == '_vptr':
+            if f in ('id', self.CONCURRENCY_CHECK_FIELD, '_vptr'):
                 continue
             if self._columns[f].translate:
                 tmp_fs.append(f)
@@ -3624,6 +3721,9 @@ class orm(orm_template):
                             record[f] = res2[record['id']]
                         else:
                             record[f] = []
+
+        ima_obj = self.pool.get('ir.model.access')
+        no_perm = "=No Permission=" # TODO translate, outside of this fn
         for vals in res:
             for field in vals.copy():
                 fobj = None
@@ -3634,14 +3734,14 @@ class orm(orm_template):
                     continue
                 groups = fobj.read
                 if groups:
-                    edit = self.pool.get('ir.model.access').check_groups(cr, user, groups)
+                    edit = ima_obj.check_groups(cr, user, groups)
                     if not edit:
                         if type(vals[field]) == type([]):
                             vals[field] = []
                         elif type(vals[field]) == type(0.0):
                             vals[field] = 0
                         elif type(vals[field]) == type(''):
-                            vals[field] = '=No Permission='
+                            vals[field] = no_perm
                         else:
                             vals[field] = False
         return res
