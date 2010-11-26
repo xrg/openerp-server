@@ -3682,8 +3682,8 @@ class orm(orm_template):
                         r[key] = self.pool.get('res.users').name_get(cr, user, [r[key]])[0]
                     except Exception:
                         pass # Leave the numeric uid there
-                    r['xmlid'] = ("%(module)s.%(name)s" % r) if r['name'] else False
-                    del r['name'], r['module']
+            r['xmlid'] = ("%(module)s.%(name)s" % r) if r['name'] else False
+            del r['name'], r['module']
         if uniq:
             return res[ids[0]]
         return res
