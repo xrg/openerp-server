@@ -1197,6 +1197,8 @@ class orm_template(object):
                             msg = self.pool._sql_error[key]
                             if hasattr(msg, '__call__'):
                                 msg = msg(cr, uid, [res_id,], context=context)
+                            else:
+                                msg = _(msg)
                             break
                     return (-1, res, 'Line ' + str(counter) +' : ' + msg, '' )
                 if isinstance(e, osv.orm.except_orm ):
@@ -1271,8 +1273,6 @@ class orm_template(object):
                 # callable() because it will be deprecated as of Python 3.0
                 if hasattr(msg, '__call__'):
                     tmp_msg = msg(self, cr, uid, ids, context=context)
-                    # Why translate something that has been generated dynamically?
-                    # tmp_msg = trans._get_source(cr, uid, self._name, 'constraint', lng, source=txt_msg) or txt_msg
                     if isinstance(tmp_msg, tuple):
                         tmp_msg, params = tmp_msg
                         translated_msg = tmp_msg % params
@@ -2638,7 +2638,7 @@ class orm(orm_template):
         fget = self.fields_get(cr, uid, fields)
         float_int_fields = filter(lambda x: fget[x]['type'] in ('float','integer'), fields)
         flist = ''
-        group_by = groupby
+        group_count = group_by = groupby
         if groupby:
             if fget.get(groupby):
                 ftbl = ''
@@ -2682,7 +2682,12 @@ class orm(orm_template):
         where_clause = where_clause and ' WHERE ' + where_clause
         limit_str = limit and ' LIMIT %d' % limit or ''
         offset_str = offset and ' OFFSET %d' % offset or ''
-        cr.execute('SELECT min(%s.id) AS id,' % self._table + flist + ' FROM ' + from_clause + where_clause + gb + limit_str + offset_str, where_clause_params, debug=self._debug)
+        if len(groupby_list) < 2 and context.get('group_by_no_leaf'):
+            group_count = '_'
+        cr.execute('SELECT min(%s.id) AS id, count(%s.id) AS  %s_count, ' % \
+                    (self._table, self._table, group_count) + \
+                    flist + ' FROM ' + from_clause + where_clause + gb + \
+                    limit_str + offset_str, where_clause_params, debug=self._debug)
         alldata = {}
         groupby = group_by
         for r in cr.dictfetchall():
@@ -3540,7 +3545,6 @@ class orm(orm_template):
 
         tmp_ids = map(lambda x: x['id'], res)
         tmp_fs = []
-        
         for f in fields_pre:
             if f == self.CONCURRENCY_CHECK_FIELD or f == '_vptr':
                 continue
@@ -3838,7 +3842,7 @@ class orm(orm_template):
                 continue
             if field in self._columns:
                 fobj = self._columns[field]
-            else:
+            elif field in self._inherit_fields:
                 fobj = self._inherit_fields[field][2]
             if not fobj:
                 continue
@@ -4717,7 +4721,8 @@ class orm(orm_template):
     def check_recursion(self, cr, uid, ids, parent=None):
         warnings.warn("You are using deprecated %s.check_recursion(). Please use the '_check_recursion()' instead!" % \
                         self._name, DeprecationWarning, stacklevel=3)
-        assert ' ' not in (parent or '')
+        assert parent is None or parent in self._columns or parent in self._inherit_fields,\
+                    "The 'parent' parameter passed to check_recursion() must be None or a valid field name"
         return self._check_recursion(cr, uid, ids, parent)
 
     def _check_recursion(self, cr, uid, ids, parent=None):

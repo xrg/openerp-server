@@ -11,14 +11,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenERP Server 5.0.0\n"
 "Report-Msgid-Bugs-To: support@openerp.com\n"
-"POT-Creation-Date: 2010-10-18 17:46+0000\n"
-"PO-Revision-Date: 2010-11-23 01:00+0200\n"
+"POT-Creation-Date: 2010-11-18 16:11+0000\n"
+"PO-Revision-Date: 2010-11-26 19:54+0200\n"
 "Last-Translator: P. Christeas <p_christ@hol.gr>\n"
 "Language-Team: Greek <openerp@lists.hellug.gr>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-11-13 04:55+0000\n"
+"X-Launchpad-Export-Date: 2010-11-26 04:48+0000\n"
 "X-Generator: Lokalize 1.0\n"
 "X-Poedit-Country: GREECE\n"
 "X-Poedit-Language: Greek\n"
@@ -1772,8 +1772,12 @@ msgstr "Πιστοποιητικό Ποιότητας"
 
 #. module: base
 #: field:ir.module.module,contributors:0
+#, fuzzy
 msgid "Contributors"
 msgstr ""
+"#-#-#-#-#  .merge_file_0ys7a9 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_ipiHe6 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Συντελεστές"
 
 #. module: base
 #: field:ir.module.module,demo:0
@@ -2954,8 +2958,12 @@ msgstr "Περιεχόμενο"
 
 #. module: base
 #: field:res.widget.user,widget_id:0
+#, fuzzy
 msgid "Widget"
 msgstr ""
+"#-#-#-#-#  .merge_file_0ys7a9 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_ipiHe6 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Μικροεφαρμογή"
 
 #. module: base
 #: field:wizard.ir.model.menu.create,name:0
@@ -3134,7 +3142,7 @@ msgstr ""
 #: help:ir.actions.act_window,domain:0
 msgid ""
 "Optional domain filtering of the destination data, as a Python expression"
-msgstr ""
+msgstr "Προαιρετικό φίλτρο των δεδομένων, σε μορφή έκφρασης Python."
 
 #. module: base
 #: help:ir.actions.act_window,help:0
@@ -3167,6 +3175,8 @@ msgstr ""
 msgid ""
 "Optional model name of the objects on which this action should be visible"
 msgstr ""
+"Προαιρετικό πρότυπο όνομα μοντέλου δεδομένων, για τα οποία θα εμφανίζεται η "
+"ενέργεια."
 
 #. module: base
 #: help:ir.actions.act_window,view_mode:0
@@ -3665,6 +3675,8 @@ msgid ""
 "Sets the language for the user's user interface, when UI translations are "
 "available"
 msgstr ""
+"Ορίζει τη γλώσσα για την διεπαφή χρήστη του χρήστη, όταν είναι διαθέσιμες οι "
+"αντίστοιχες μεταφράσεις."
 
 #. module: base
 #: help:res.config.users,context_tz:0 help:res.users,context_tz:0
@@ -4543,12 +4555,8 @@ msgstr "Αποδεκτοί Σύνδεσμοι στις Αιτήσεις"
 #. module: base
 #: model:ir.actions.act_window,name:base.res_request_link-act
 #: model:ir.ui.menu,name:base.menu_res_request_link_act
-#, fuzzy
 msgid "Request Reference Types"
-msgstr ""
-"#-#-#-#-#  .merge_file_UIdw14 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"Τύποι Ιεράρχησης\n"
-"#-#-#-#-#  .merge_file_IJStut (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+msgstr "Αίτημα τύπων αναφοράς"
 
 #. module: base
 #: model:ir.actions.act_window,name:base.res_widget_act_window
@@ -6847,12 +6855,8 @@ msgstr ""
 
 #. module: base
 #: model:res.widget,title:base.openerp_twitter_favorites
-#, fuzzy
 msgid "OpenERP Favorites"
-msgstr ""
-"#-#-#-#-#  .merge_file_UIdw14 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"Συνεργάτες OpenERP\n"
-"#-#-#-#-#  .merge_file_IJStut (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+msgstr "Αγαπημένα του OpenERP"
 
 #. module: base
 #: report:ir.module.reference.graph:0 rml:ir.module.reference:0
@@ -6990,7 +6994,7 @@ msgstr "Chinese (CN) / 简体中文"
 #: selection:base.language.install,lang:0
 #: selection:module.lang.install,init,lang:0
 msgid "Chinese (HK)"
-msgstr ""
+msgstr "Κινέζικα(ΗΚ)"
 
 #. module: base
 #: selection:base.language.install,lang:0
@@ -9040,7 +9044,7 @@ msgstr ""
 #. module: base
 #: sql_constraint:res.lang:0
 msgid "The name of the language must be unique !"
-msgstr ""
+msgstr "Το όνομα της γλώσσας πρέπει να είναι μοναδικό!"
 
 #. module: base
 #: sql_constraint:res.partner:0
@@ -9607,22 +9611,13 @@ msgstr "Κανονισμοί Προσβάσεων"
 
 #. module: base
 #: view:ir.model:0
-#, fuzzy
 msgid "Create a Menu"
-msgstr ""
-"#-#-#-#-#  .merge_file_UIdw14 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"Δημιουργία Μενού\n"
-"#-#-#-#-#  .merge_file_IJStut (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"Δημμιουργία Μενού"
+msgstr "Δημιουργία Μενού"
 
 #. module: base
 #: view:ir.model:0
-#, fuzzy
 msgid "Custom"
-msgstr ""
-"#-#-#-#-#  .merge_file_UIdw14 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"Πελάτης\n"
-"#-#-#-#-#  .merge_file_IJStut (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+msgstr "Προσαρμοσμένο"
 
 #. module: base
 #: view:ir.model:0
@@ -9818,12 +9813,8 @@ msgstr ""
 
 #. module: base
 #: view:ir.rule:0
-#, fuzzy
 msgid "Combination of rules"
-msgstr ""
-"#-#-#-#-#  .merge_file_UIdw14 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"Πρόοδος Ρυθμίσεων\n"
-"#-#-#-#-#  .merge_file_IJStut (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+msgstr "Συνδυασμός κανόνων"
 
 #. module: base
 #: view:ir.rule:0
@@ -9892,21 +9883,13 @@ msgstr "Ο κανόνας πληροίται αν τουλάχιστον ένα 
 
 #. module: base
 #: view:ir.sequence:0
-#, fuzzy
 msgid "Current Year with Century: %(year)s"
-msgstr ""
-"#-#-#-#-#  .merge_file_UIdw14 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"Έτος με τον αιώνα: %(year)s\n"
-"#-#-#-#-#  .merge_file_IJStut (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+msgstr "Έτος με τον αιώνα: %(year)s"
 
 #. module: base
 #: view:ir.sequence:0
-#, fuzzy
 msgid "Current Year without Century: %(y)s"
-msgstr ""
-"#-#-#-#-#  .merge_file_UIdw14 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"Χρονολογία χωρίς τον αιώνα: %(y)s\n"
-"#-#-#-#-#  .merge_file_IJStut (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+msgstr "Έτος χωρίς τον αιώνα: %(y)s"
 
 #. module: base
 #: view:ir.sequence:0
@@ -9977,21 +9960,13 @@ msgstr "Τύπος Ιεράρχησης"
 
 #. module: base
 #: view:ir.sequence.type:0
-#, fuzzy
 msgid "Sequences Type"
-msgstr ""
-"#-#-#-#-#  .merge_file_UIdw14 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"Τύπος Ιεράρχησης\n"
-"#-#-#-#-#  .merge_file_IJStut (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+msgstr "Τύπος Ακολουθιών"
 
 #. module: base
 #: view:ir.translation:0
-#, fuzzy
 msgid "Source Term"
-msgstr ""
-"#-#-#-#-#  .merge_file_UIdw14 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"Πηγή\n"
-"#-#-#-#-#  .merge_file_IJStut (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+msgstr "Πηγή"
 
 #. module: base
 #: view:ir.translation:0
@@ -10021,12 +9996,8 @@ msgstr "Προχωρημένο"
 
 #. module: base
 #: view:ir.ui.view:0
-#, fuzzy
 msgid "Architecture"
-msgstr ""
-"#-#-#-#-#  .merge_file_UIdw14 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"Δομή προβολής\n"
-"#-#-#-#-#  .merge_file_IJStut (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+msgstr "Δομή προβολής"
 
 #. module: base
 #: view:ir.ui.view:0
@@ -10053,10 +10024,7 @@ msgstr "Επιλογή Ενέργειας"
 #: view:ir.values:0
 #, fuzzy
 msgid "Client Actions"
-msgstr ""
-"#-#-#-#-#  .merge_file_UIdw14 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"Δημιουργία Ενέργειας\n"
-"#-#-#-#-#  .merge_file_IJStut (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+msgstr "Ενέργειες Πελάτη"
 
 #. module: base
 #: view:ir.values:0
@@ -10095,13 +10063,8 @@ msgstr "Το Συβόλαιο Συντήρησης προστέθηκε!"
 
 #. module: base
 #: view:maintenance.contract.wizard:0
-#, fuzzy
 msgid "_Cancel"
-msgstr ""
-"#-#-#-#-#  .merge_file_UIdw14 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"_Άκυρο\n"
-"#-#-#-#-#  .merge_file_IJStut (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"_Cancel"
+msgstr "_Άκυρο"
 
 #. module: base
 #: view:maintenance.contract.wizard:0
@@ -10197,13 +10160,8 @@ msgstr "Επόμενο"
 
 #. module: base
 #: view:res.config:0 view:res.config.installer:0 view:res.users:0
-#, fuzzy
 msgid "Skip"
-msgstr ""
-"#-#-#-#-#  .merge_file_UIdw14 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"Παράβλεψε\n"
-"#-#-#-#-#  .merge_file_IJStut (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"Skip"
+msgstr "Παράβλεψε"
 
 #. module: base
 #: view:res.config:0 view:res.config.installer:0
@@ -10227,12 +10185,8 @@ msgstr ""
 
 #. module: base
 #: view:res.config.installer:0
-#, fuzzy
 msgid "Install Modules"
-msgstr ""
-"#-#-#-#-#  .merge_file_UIdw14 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"Εγκατεστημένα Αρθρώματα\n"
-"#-#-#-#-#  .merge_file_IJStut (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+msgstr "Εγκατάσταση Αρθρωμάτων"
 
 #. module: base
 #: view:res.config.users:0
@@ -10636,12 +10590,8 @@ msgstr "Προσθήκη Χρήστη"
 
 #. module: base
 #: view:res.users:0
-#, fuzzy
 msgid "Current Activity"
-msgstr ""
-"#-#-#-#-#  .merge_file_UIdw14 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"Πηγή Δράσης\n"
-"#-#-#-#-#  .merge_file_IJStut (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+msgstr "Τρέχουσα Δραστηριότητα"
 
 #. module: base
 #: view:res.users:0
@@ -10656,12 +10606,8 @@ msgstr "Ορισμός Νέων Χρηστών"
 
 #. module: base
 #: view:res.users:0
-#, fuzzy
 msgid "Email & Signature"
-msgstr ""
-"#-#-#-#-#  .merge_file_UIdw14 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"Υπογραφή\n"
-"#-#-#-#-#  .merge_file_IJStut (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+msgstr "Email & Υπογραφή"
 
 #. #-#-#-#-#  .merge_file_UIdw14 (OpenERP Server 5.0.0)  #-#-#-#-#
 #. module: base
@@ -11065,6 +11011,533 @@ msgstr "Η διαδικασία αυτή μπορεί να πάρει μερικ
 #: wizard_view:module.upgrade,next:0
 msgid "Your system will be upgraded."
 msgstr "Το σύστημα θα αναβαθμιστεί"
+
+#. module: base
+#: selection:base.language.install,lang:0
+msgid "Spanish (VE) / Español (VE)"
+msgstr "Ισπανικά (VE) / Español (VE)"
+
+#. module: base
+#: selection:base.language.install,lang:0
+msgid "Inuktitut / ᐃᓄᒃᑎᑐᑦ"
+msgstr "Inuktitut / ᐃᓄᒃᑎᑐᑦ"
+
+#. module: base
+#: model:res.partner.title,name:base.res_partner_title_sir
+msgid "Mister"
+msgstr "Κύριος"
+
+#. module: base
+#: model:res.partner.title,name:base.res_partner_title_pvt_ltd
+msgid "Corporation"
+msgstr "Εταιρεία"
+
+#. module: base
+#: selection:base.language.install,lang:0
+msgid "Albanian / Shqip"
+msgstr "Αλβανικά / Shqip"
+
+#. module: base
+#: selection:base.language.install,lang:0
+msgid "Spanish (UY) / Español (UY)"
+msgstr "Ισπανικά (UY) / Español (UY)"
+
+#. module: base
+#: selection:base.language.install,lang:0
+msgid "Spanish (GT) / Español (GT)"
+msgstr "Ισπανικά(GT)/Español (GT)"
+
+#. module: base
+#: selection:base.language.install,lang:0
+msgid "Sinhalese / සිංහල"
+msgstr "Σινχαλικά / සිංහල"
+
+#. module: base
+#: model:ir.actions.act_window,help:base.open_module_tree
+msgid ""
+"List all certified modules available to configure your OpenERP. Modules that "
+"are installed are flagged as such. You can search for a specific module "
+"using the name or the description of the module. You do not need to install "
+"modules one by one, you can install many at the same time by clicking on the "
+"schedule button in this list. Then, apply the schedule upgrade from Action "
+"menu once for all the ones you have scheduled for installation."
+msgstr ""
+
+#. module: base
+#: selection:base.language.install,lang:0
+msgid "Serbian / српски језик"
+msgstr "Σερβικά / српски језик"
+
+#. module: base
+#: selection:base.language.install,lang:0
+msgid "Korean (KP) / 한국어 (KP)"
+msgstr "Κορεάτικη (ΚΡ) / 한국어 (KP)"
+
+#. module: base
+#: model:ir.actions.act_window,help:base.action_ui_view
+msgid ""
+"Views allows you to personalize each view of OpenERP. You can add new "
+"fields, move fields, rename them or delete the ones that you do not need."
+msgstr ""
+
+#. module: base
+#: selection:base.language.install,lang:0
+msgid "Spanish (CL) / Español (CL)"
+msgstr "Ισπανική (CL) / Español (CL)"
+
+#. module: base
+#: selection:base.language.install,lang:0
+msgid "Portugese (BR) / Português (BR)"
+msgstr "Πορτογαλέζικη (BR) / Português (BR)"
+
+#. module: base
+#: model:ir.ui.menu,name:base.menu_email_gateway_form
+msgid "Messages"
+msgstr "Μηνύματα"
+
+#. module: base
+#: model:ir.actions.act_window,help:base.action_country
+msgid ""
+"Display and manage the list of all countries that can be assigned to your "
+"partner records. You can create or delete countries to make sure the ones "
+"you are working on will be maintained."
+msgstr ""
+
+#. module: base
+#: selection:base.language.install,lang:0
+msgid "Korean (KR) / 한국어 (KR)"
+msgstr "Κορεάτικη (KR) / 한국어 (KR)"
+
+#. module: base
+#: constraint:ir.cron:0
+msgid "Invalid arguments"
+msgstr ""
+
+#. module: base
+#: model:res.partner.title,shortcut:base.res_partner_title_miss
+msgid "Mss."
+msgstr ""
+
+#. module: base
+#: model:ir.actions.act_window,help:base.action_partner_title_contact
+msgid ""
+"Manage the contact titles you want to have available in your system and the "
+"way you want to print them in letters and other documents. Some example: "
+"Mr., Mrs. "
+msgstr ""
+
+#. module: base
+#: selection:base.language.install,lang:0
+msgid "Spanish (DO) / Español (DO)"
+msgstr ""
+
+#. module: base
+#: selection:base.language.install,lang:0
+msgid "Finnish / Suomi"
+msgstr ""
+
+#. module: base
+#: selection:base.language.install,lang:0
+msgid "Portugese / Português"
+msgstr ""
+
+#. module: base
+#: selection:base.language.install,lang:0
+msgid "Urdu / اردو"
+msgstr ""
+
+#. module: base
+#: view:base.language.import:0
+msgid ""
+"If you need another language than the official ones available, you can "
+"import a language pack from here. Other OpenERP languages than the official "
+"ones can be found on launchpad."
+msgstr ""
+
+#. module: base
+#: code:addons/base/res/res_user.py:0
+#, python-format
+msgid "\"email_from\" needs to be set to send welcome mails to users"
+msgstr ""
+
+#. module: base
+#: selection:base.language.install,lang:0
+msgid "Spanish (HN) / Español (HN)"
+msgstr ""
+
+#. module: base
+#: selection:base.language.install,lang:0
+msgid "Hindi / हिंदी"
+msgstr ""
+
+#. module: base
+#: selection:base.language.install,lang:0
+msgid "Spanish (PR) / Español (PR)"
+msgstr ""
+
+#. module: base
+#: selection:base.language.install,lang:0
+msgid "Abkhazian / аҧсуа"
+msgstr ""
+
+#. module: base
+#: selection:base.language.install,lang:0
+msgid "Spanish (PY) / Español (PY)"
+msgstr ""
+
+#. module: base
+#: selection:base.language.install,lang:0
+msgid "Ukrainian / українська"
+msgstr ""
+
+#. module: base
+#: selection:base.language.install,lang:0
+msgid "Spanish (PA) / Español (PA)"
+msgstr ""
+
+#. module: base
+#: model:ir.actions.act_window,help:base.action_res_groups
+msgid ""
+"A group is a set of functional areas that will be assigned to the user in "
+"order to give them access and rights to specific applications and tasks in "
+"the system. You can create custom groups or edit the ones existing by "
+"default in order to customize the view of the menu that users will be able "
+"to see. Whether they can have a read, write, create and delete access right "
+"can be managed from here."
+msgstr ""
+
+#. module: base
+#: selection:base.language.install,lang:0
+msgid "Japanese / 日本語"
+msgstr ""
+
+#. module: base
+#: selection:base.language.install,lang:0
+msgid "Spanish (BO) / Español (BO)"
+msgstr ""
+
+#. module: base
+#: selection:base.language.install,lang:0
+msgid "Gujarati / ગુજરાતી"
+msgstr ""
+
+#. module: base
+#: code:addons/base/module/module.py:0
+#, python-format
+msgid ""
+"Unable to process module \"%s\" because an external dependency is not met: %s"
+msgstr ""
+
+#. module: base
+#: selection:base.language.install,lang:0
+msgid "Latvian / latviešu valoda"
+msgstr ""
+
+#. module: base
+#: sql_constraint:ir.rule:0
+msgid "Rule must have at least one checked access right !"
+msgstr ""
+
+#. module: base
+#: model:res.partner.title,name:base.res_partner_title_ltd
+msgid "Limited Company"
+msgstr ""
+
+#. module: base
+#: selection:base.language.install,lang:0
+msgid "Spanish (MX) / Español (MX)"
+msgstr ""
+
+#. module: base
+#: model:ir.actions.act_window,help:base.action_country_state
+msgid ""
+"If you are working on the American market, you can manage the different "
+"federal states you are working on from here. Each state is attached to one "
+"country."
+msgstr ""
+
+#. module: base
+#: model:ir.actions.act_window,help:base.res_partner_canal-act
+msgid ""
+"Track from where is coming your leads and opportunities by creating specific "
+"channels that will be maintained at the creation of a document in the "
+"system. Some examples of channels can be: Website, Phone Call, Reseller, etc."
+msgstr ""
+
+#. module: base
+#: selection:base.language.install,lang:0
+msgid "Spanish (PE) / Español (PE)"
+msgstr ""
+
+#. module: base
+#: model:ir.actions.act_window,help:base.action_partner_address_form
+msgid ""
+"Customers (also called Partners in other areas of the system) helps you "
+"manage your address book of companies whether they are prospects, customers "
+"and/or suppliers. The partner form allows you to track and record all the "
+"necessary information to interact with your partners from the company "
+"address to their contacts as well as pricelists, and much more. If you "
+"installed the CRM, with the history tab, you can track all the interactions "
+"with a partner such as opportunities, emails, or sales orders issued."
+msgstr ""
+
+#. module: base
+#: code:addons/base/module/module.py:0
+#, python-format
+msgid ""
+"Unable to upgrade module \"%s\" because an external dependency is not met: %s"
+msgstr ""
+
+#. module: base
+#: code:addons/base/res/res_user.py:0
+#, python-format
+msgid ""
+"Please keep in mind that documents currently displayed may not be relevant "
+"after switching to another company. If you have unsaved changes, please make "
+"sure to save and close all forms before switching to a different company. "
+"(You can click on Cancel in the User Preferences now)"
+msgstr ""
+
+#. module: base
+#: selection:base.language.install,lang:0
+msgid "Spanish (EC) / Español (EC)"
+msgstr ""
+
+#. module: base
+#: selection:base.language.install,lang:0
+msgid "Flemish (BE) / Vlaams (BE)"
+msgstr ""
+
+#. module: base
+#: selection:base.language.install,lang:0
+msgid "Vietnamese / Tiếng Việt"
+msgstr ""
+
+#. module: base
+#: model:ir.model,name:base.model_osv_memory_autovacuum
+msgid "osv_memory.autovacuum"
+msgstr ""
+
+#. module: base
+#: code:addons/base/ir/ir_model.py:0
+#, python-format
+msgid "Model %s does not exist!"
+msgstr ""
+
+#. module: base
+#: selection:base.language.install,lang:0
+msgid "Telugu / తెలుగు"
+msgstr ""
+
+#. module: base
+#: selection:base.language.install,lang:0
+msgid "Spanish (CO) / Español (CO)"
+msgstr ""
+
+#. module: base
+#: model:ir.actions.act_window,help:base.action_partner_title_partner
+msgid ""
+"Manage the partner titles you want to have available in your system. The "
+"partner titles is the legal status of the company: Private Limited, SA, etc."
+msgstr ""
+
+#. module: base
+#: selection:base.language.install,lang:0
+msgid "Mongolian / монгол"
+msgstr ""
+
+#. module: base
+#: selection:base.language.install,lang:0
+msgid "Spanish (CR) / Español (CR)"
+msgstr ""
+
+#. module: base
+#: code:addons/base/res/res_currency.py:0
+#, python-format
+msgid ""
+"No rate found \n"
+"for the currency: %s \n"
+"at the date: %s"
+msgstr ""
+
+#. module: base
+#: model:ir.actions.act_window,help:base.action_res_bank_form
+msgid "Manage bank records you want to be used in the system."
+msgstr ""
+
+#. module: base
+#: code:addons/base/module/module.py:0
+#, python-format
+msgid ""
+"Unable to install module \"%s\" because an external dependency is not met: %s"
+msgstr ""
+
+#. module: base
+#: model:ir.actions.act_window,help:base.action_res_users
+msgid ""
+"Create and manage users that will connect to the system. Users can be "
+"deactivated should there be a period of time during which they will/should "
+"not connect to the system. You can assign them groups in order to give them "
+"specific access to the applications they need to use in the system."
+msgstr ""
+
+#. module: base
+#: model:res.partner.title,shortcut:base.res_partner_title_ltd
+msgid "Ltd."
+msgstr ""
+
+#. module: base
+#: selection:base.language.install,lang:0
+msgid "Spanish (NI) / Español (NI)"
+msgstr ""
+
+#. module: base
+#: code:addons/base/module/module.py:0
+#, python-format
+msgid ""
+"You try to install module '%s' that depends on module '%s'.\n"
+"But the latter module is not available in your system."
+msgstr ""
+
+#. module: base
+#: model:ir.actions.act_window,help:base.action_partner_supplier_form
+msgid ""
+"With the Suppliers menu, you have access to all informations regarding your "
+"suppliers, including an history to track event (crm) and his accounting "
+"properties."
+msgstr ""
+
+#. module: base
+#: selection:base.language.install,lang:0
+msgid "Norwegian Bokmål / Norsk bokmål"
+msgstr ""
+
+#. module: base
+#: selection:base.language.install,lang:0
+msgid "Occitan (FR, post 1500) / Occitan"
+msgstr ""
+
+#. module: base
+#: selection:base.language.install,lang:0
+msgid "Malayalam / മലയാളം"
+msgstr ""
+
+#. module: base
+#: model:ir.actions.act_window,help:base.action_res_company_form
+msgid ""
+"Create and manage the companies that will be managed by OpenERP from here. "
+"Shops or subsidiaries can be created and maintained from here."
+msgstr ""
+
+#. module: base
+#: model:ir.actions.act_window,help:base.action_partner_form
+msgid ""
+"The Address book manages your customers list. The form for customer allows "
+"you to record detailed on your customers (address, contacts, pricelist, "
+"account, etc.). With the history tab, you can follow all moves transactions "
+"related to a customer, like sales order, claims."
+msgstr ""
+
+#. module: base
+#: model:res.partner.title,shortcut:base.res_partner_title_sir
+msgid "Sr."
+msgstr ""
+
+#. module: base
+#: selection:base.language.install,lang:0
+msgid "Romanian / română"
+msgstr ""
+
+#. module: base
+#: model:ir.actions.act_window,help:base.grant_menu_access
+msgid ""
+"Manage and customize the items available and displayed in your OpenERP "
+"system menu. You can delete an item by clicking on the box at the beginning "
+"of each line and then delete it through the button that appeared. Items can "
+"be assigned to specific groups in order to make them accessible to some "
+"users within the system."
+msgstr ""
+
+#. module: base
+#: selection:base.language.install,lang:0
+msgid "Bulgarian / български език"
+msgstr ""
+
+#. module: base
+#: model:ir.actions.act_window,help:base.action_partner_category_form
+msgid ""
+"Manage the partner categories in order to better classify them for tracking "
+"and analysis purposes. A partner may belong to several categories and "
+"categories have a hierarchy structure: a partner belonging to a category "
+"also belong to his parent category."
+msgstr ""
+
+#. module: base
+#: selection:base.language.install,lang:0
+msgid "Spanish (SV) / Español (SV)"
+msgstr ""
+
+#. module: base
+#: model:ir.model,name:base.model_res_groups
+msgid "Access Groups"
+msgstr ""
+
+#. module: base
+#: code:addons/base/res/res_user.py:0
+#, python-format
+msgid "Company Switch Warning"
+msgstr ""
+
+#. module: base
+#: code:addons/base/module/wizard/base_module_upgrade.py:0
+#, python-format
+msgid "Unmet dependency !"
+msgstr ""
+
+#. module: base
+#: code:addons/base/module/wizard/base_module_upgrade.py:0
+#, python-format
+msgid "Following modules are not installed or unknown: %s"
+msgstr "Τα παρακάτω αθρώματα δεν είναι εγκατεστημένα ή είναι άγνωστα:%s"
+
+#. module: base
+#: code:addons/base/ir/ir_model.py:0
+#, python-format
+msgid "Invalid search criterions"
+msgstr "Λάθος κριτήρια αναζήτησης"
+
+#. module: base
+#: code:addons/base/ir/ir_model.py:0
+#, python-format
+msgid "The osv_memory field can only be compared with = and != operator."
+msgstr ""
+
+#. module: base
+#: code:addons/base/ir/ir_values.py:0
+#, python-format
+msgid "You do not have the permission to perform this operation !!!"
+msgstr ""
+"Δεν έχεις τα απαραίτητα δικαιώματα για την εκτέλεση αυτής της λειτουργίας !!!"
+
+#. module: base
+#: code:addons/base/res/ir_property.py:0
+#, python-format
+msgid "Invalid type"
+msgstr "Λάθος τύπος"
+
+#. module: base
+#: code:addons/__init__.py:0
+#, python-format
+msgid "Could not load base module"
+msgstr "Δεν μπορεί να φορτωθεί το βασικό άρθρωμα"
+
+#. module: base
+#: code:addons/__init__.py:0
+#, python-format
+msgid "module base cannot be loaded! (hint: verify addons-path)"
+msgstr ""
+"βασικό άρθρωμα δεν μπορεί να φορτωθεί!(σημ.επιβεβαιώστε την διαδρομή των "
+"προθέτων)"
 
 #~ msgid "UserError"
 #~ msgstr "UserError"

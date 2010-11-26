@@ -19,25 +19,24 @@
 #
 ##############################################################################
 
+import addons
 import base64
+import ir
+import locale
 import logging
+import netsvc
 import os
+import platform
+import pooler
+import release
 import security
+import sql_db
+import sys
 import thread
 import threading
 import time
-import sys
-import platform
-from tools.translate import _
-import addons
-import ir
-import netsvc
-import logging
-import pooler
-import release
-import sql_db
 import tools
-import locale
+from tools.translate import _
 from cStringIO import StringIO
 
 logging.basicConfig()
