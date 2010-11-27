@@ -35,6 +35,7 @@ import base64
 from reportlab.platypus.doctemplate import ActionFlowable
 from tools.safe_eval import safe_eval as eval
 from reportlab.lib.units import inch,cm,mm
+from reportlab.pdfbase import pdfmetrics
 
 try:
     from cStringIO import StringIO
@@ -486,10 +487,20 @@ class _rml_canvas(object):
 
     def setFont(self, node):
         fname = node.get('name')
+        if fname not in pdfmetrics.getRegisteredFontNames()\
+             or fname not in pdfmetrics.standardFonts:
+                # let reportlab attempt to find it
+                try:
+                    pdfmetrics.getFont(fname)
+                except Exception:
+                    logging.getLogger('report.fonts').\
+                        debug('Could not locate font %s, substituting default: %s',
+                                 fname, self.canvas._fontname)
+                    fontname = self.canvas._fontname
         try:
             return self.canvas.setFont(fname, utils.unit_get(node.get('size')))
         except KeyError, e:
-            raise KeyError('Font "%s" is not registered in the engine' % fname)
+            raise KeyError('Font "%s" cannot be used in the PDF engine' % fname)
 
     def render(self, node):
         tags = {

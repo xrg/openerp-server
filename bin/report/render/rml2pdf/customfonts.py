@@ -20,11 +20,13 @@
 #
 ##############################################################################
 
-from reportlab import rl_config
-from tools import config
 import glob
 import os
 import logging
+import platform
+
+from reportlab import rl_config
+from tools import config
 
 """This module allows the mapping of some system-available TTF fonts to
 the reportlab engine.
@@ -65,9 +67,28 @@ TTFSearchPath_Linux = (
             '/usr/share/fonts/TTF/*', # at Mandriva/Mageia
             )
 
+TTFSearchPath_Windows = ( 
+            'c:/winnt/fonts',
+            'c:/windows/fonts'
+            )
+
+TTFSearchPath_Darwin = ( 
+            #mac os X - from
+            #http://developer.apple.com/technotes/tn/tn2024.html
+            '~/Library/Fonts',
+            '/Library/Fonts',
+            '/Network/Library/Fonts',
+            '/System/Library/Fonts',
+            )
+
+TTFSearchPathMap = {
+    'Darwin': TTFSearchPath_Darwin,
+    'Windows': TTFSearchPath_Windows,
+    'Linux': TTFSearchPath_Linux,
+}
 
 # ----- The code below is less distro-specific, please avoid editing! -------
-__foundFonts = []
+__foundFonts = None
 
 def FindCustomFonts():
     """Fill the __foundFonts list with those filenames, whose fonts
@@ -81,16 +102,13 @@ def FindCustomFonts():
     log = logging.getLogger('report.fonts')
     global __foundFonts
     searchpath = []
+    __foundFonts = {}
 
     if config.get_misc('ttfonts', 'search_path', False):
         searchpath += map(str.strip, config.get_misc('ttfonts', 'search_path').split(','))
 
-    if os.name == 'nt':
-        pass # TODO
-    elif os.uname()[0] == 'Linux':
-        searchpath += TTFSearchPath_Linux
-    else:
-        pass # TODO for MacOSX, Unix etc.
+    local_plat = platform.system()
+    searchpath += TTFSearchPathMap.get(local_plat, [])
     
     if config.get_misc('ttfonts', 'use_default_path', True):
         # Append the original search path of reportlab (at the end)
@@ -103,13 +121,14 @@ def FindCustomFonts():
             if os.path.isdir(abp):
                 dirpath.append(abp)
         
-    for k, (name, font, fname, mode) in enumerate(CustomTTFonts):
+    for name, font, fname, mode in CustomTTFonts:
         if fname in __foundFonts:
             continue
         for d in dirpath:
-            if os.path.exists(os.path.join(d, fname)):
-                log.debug("Found font %s in %s as %s", fname, d, name)
-                __foundFonts.append(fname)
+            afn = os.path.join(d, fname)
+            if os.path.exists(afn):
+                log.debug("Found font %s at %s", fname, afn)
+                __foundFonts[fname] = afn
                 break
 
     # print "Found fonts:", __foundFonts
@@ -124,11 +143,13 @@ def SetCustomFonts(rmldoc):
         avoid system-wide processing (cache it, instead).
     """
     global __foundFonts
-    if not len(__foundFonts):
+    if __foundFonts is None:
         FindCustomFonts()
     for name, font, fname, mode in CustomTTFonts:
-        if os.path.isabs(fname) or fname in __foundFonts:
+        if os.path.isabs(fname) and os.path.exists(fname):
             rmldoc.setTTFontMapping(name, font, fname, mode)
+        elif fname in __foundFonts:
+            rmldoc.setTTFontMapping(name, font, __foundFonts[fname], mode)
     return True
 
 #eof

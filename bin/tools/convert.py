@@ -64,7 +64,7 @@ class ConvertError(Exception):
         return 'Exception:\n\t%s\nUsing file:\n%s' % (self.orig, self.d)
 
 def _ref(self, cr):
-    return lambda x: self.id_get(cr, False, x)
+    return lambda x: self.id_get(cr, x)
 
 def _obj(pool, cr, uid, model_str, context=None):
     model = pool.get(model_str)
@@ -141,7 +141,7 @@ def _eval_xml(self, node, pool, cr, uid, idref, context=None):
                 m = re.findall('[^%]%\((.*?)\)[ds]', s)
                 for id in m:
                     if not id in idref:
-                        idref[id]=self.id_get(cr, False, id)
+                        idref[id]=self.id_get(cr, id)
                 return s % idref
             _fix_multiple_roots(node)
             return '<?xml version="1.0"?>\n'\
@@ -179,7 +179,7 @@ def _eval_xml(self, node, pool, cr, uid, idref, context=None):
         args = []
         a_eval = node.get('eval','')
         if a_eval:
-            idref['ref'] = lambda x: self.id_get(cr, False, x)
+            idref['ref'] = lambda x: self.id_get(cr, x)
             args = unsafe_eval(a_eval, idref)
         for n in node:
             return_val = _eval_xml(self,n, pool, cr, uid, idref, context)
@@ -264,7 +264,7 @@ class xml_import(object):
     def get_uid(self, cr, uid, data_node, node):
         node_uid = node.get('uid','') or (len(data_node) and data_node.get('uid',''))
         if node_uid:
-            return self.id_get(cr, None, node_uid)
+            return self.id_get(cr, node_uid)
         return uid
 
     def _test_xml_id(self, xml_id):
@@ -292,7 +292,7 @@ form: module.record_id""" % (xml_id,)
             ids = self.pool.get(d_model).search(cr, self.uid, unsafe_eval(d_search, idref))
         if d_id:
             try:
-                ids.append(self.id_get(cr, d_model, d_id))
+                ids.append(self.id_get(cr, d_id))
             except Exception:
                 # d_id cannot be found. doesn't matter in this case
                 pass
@@ -337,10 +337,10 @@ form: module.record_id""" % (xml_id,)
             # groups_obj = self.pool.get('res.groups')
             for group in g_names:
                 if group.startswith('-'):
-                    group_id = self.id_get(cr, 'res.groups', group[1:])
+                    group_id = self.id_get(cr, group[1:])
                     groups_value.append((3, group_id))
                 else:
-                    group_id = self.id_get(cr, 'res.groups', group)
+                    group_id = self.id_get(cr, group)
                     groups_value.append((4, group_id))
             res['groups_id'] = groups_value
 
@@ -382,10 +382,10 @@ form: module.record_id""" % (xml_id,)
             # groups_obj = self.pool.get('res.groups')
             for group in g_names:
                 if group.startswith('-'):
-                    group_id = self.id_get(cr, 'res.groups', group[1:])
+                    group_id = self.id_get(cr, group[1:])
                     groups_value.append((3, group_id))
                 else:
-                    group_id = self.id_get(cr, 'res.groups', group)
+                    group_id = self.id_get(cr, group)
                     groups_value.append((4, group_id))
             res['groups_id'] = groups_value
 
@@ -430,8 +430,8 @@ form: module.record_id""" % (xml_id,)
         self._test_xml_id(xml_id)
         type = rec.get('type','').encode('utf-8') or 'ir.actions.act_window'
         view_id = False
-        if rec.get('view'):
-            view_id = self.id_get(cr, 'ir.actions.act_window', rec.get('view','').encode('utf-8'))
+        if rec.get('view_id'):
+            view_id = self.id_get(cr, rec.get('view_id','').encode('utf-8'))
         domain = rec.get('domain','').encode('utf-8') or '{}'
         res_model = rec.get('res_model','').encode('utf-8')
         src_model = rec.get('src_model','').encode('utf-8')
@@ -446,7 +446,7 @@ form: module.record_id""" % (xml_id,)
         active_id = str("active_id") # for further reference in client/bin/tools/__init__.py
 
         def ref(str_id):
-            return self.id_get(cr, None, str_id)
+            return self.id_get(cr, str_id)
 
         # Include all locals() in eval_context, for backwards compatibility
         eval_context = {
@@ -497,10 +497,10 @@ form: module.record_id""" % (xml_id,)
             groups_value = []
             for group in g_names:
                 if group.startswith('-'):
-                    group_id = self.id_get(cr, 'res.groups', group[1:])
+                    group_id = self.id_get(cr, group[1:])
                     groups_value.append((3, group_id))
                 else:
-                    group_id = self.id_get(cr, 'res.groups', group)
+                    group_id = self.id_get(cr, group)
                     groups_value.append((4, group_id))
             res['groups_id'] = groups_value
 
@@ -535,7 +535,7 @@ form: module.record_id""" % (xml_id,)
         model = str(rec.get('model',''))
         w_ref = rec.get('ref','')
         if w_ref:
-            id = self.id_get(cr, model, w_ref)
+            id = self.id_get(cr, w_ref)
         else:
             number_children = len(rec)
             assert number_children > 0,\
@@ -587,7 +587,7 @@ form: module.record_id""" % (xml_id,)
             # The parent attribute was specified, if non-empty determine its ID, otherwise
             # explicitly make a top-level menu
             if rec.get('parent'):
-                menu_parent_id = self.id_get(cr, 'ir.ui.menu', rec.get('parent',''))
+                menu_parent_id = self.id_get(cr, rec.get('parent',''))
             else:
                 # we get here with <menuitem parent="">, explicit clear of parent, or
                 # if no parent attribute at all but menu name is not a menu path
@@ -596,7 +596,7 @@ form: module.record_id""" % (xml_id,)
             if rec.get('name'):
                 values['name'] = rec.get('name')
             try:
-                res = [ self.id_get(cr, 'ir.ui.menu', rec.get('id','')) ]
+                res = [ self.id_get(cr, rec.get('id','')) ]
             except Exception:
                 res = None
 
@@ -611,7 +611,7 @@ form: module.record_id""" % (xml_id,)
             }
             values['icon'] = icons.get(a_type,'STOCK_NEW')
             if a_type=='act_window':
-                a_id = self.id_get(cr, 'ir.actions.%s'% a_type, a_action)
+                a_id = self.id_get(cr, a_action)
                 cr.execute('select view_type,view_mode,name,view_id,target from ir_act_window where id=%s', (int(a_id),))
                 rrres = cr.fetchone()
                 assert rrres, "No window action defined for this id %s !\n" \
@@ -638,7 +638,7 @@ form: module.record_id""" % (xml_id,)
                 if not values.get('name', False):
                     values['name'] = action_name
             elif a_type=='wizard':
-                a_id = self.id_get(cr, 'ir.actions.%s'% a_type, a_action)
+                a_id = self.id_get(cr, a_action)
                 cr.execute('select name from ir_act_wizard where id=%s', (int(a_id),))
                 resw = cr.fetchone()
                 if (not values.get('name', False)) and resw:
@@ -658,10 +658,10 @@ form: module.record_id""" % (xml_id,)
             # groups_obj = self.pool.get('res.groups')
             for group in g_names:
                 if group.startswith('-'):
-                    group_id = self.id_get(cr, 'res.groups', group[1:])
+                    group_id = self.id_get(cr, group[1:])
                     groups_value.append((3, group_id))
                 else:
-                    group_id = self.id_get(cr, 'res.groups', group)
+                    group_id = self.id_get(cr, group)
                     groups_value.append((4, group_id))
             values['groups_id'] = groups_value
 
@@ -675,7 +675,7 @@ form: module.record_id""" % (xml_id,)
         if rec.get('action') and pid:
             a_action = rec.get('action').encode('utf8')
             a_type = rec.get('type','').encode('utf8') or 'act_window'
-            a_id = self.id_get(cr, 'ir.actions.%s' % a_type, a_action)
+            a_id = self.id_get(cr, a_action)
             action = "ir.actions.%s,%d" % (a_type, a_id)
             self.pool.get('ir.model.data').ir_set(cr, self.uid, 'action', 'tree_but_open', 'Menuitem', [('ir.ui.menu', int(pid))], action, True, True, xml_id=rec_id)
         return ('ir.ui.menu', pid)
@@ -703,7 +703,7 @@ form: module.record_id""" % (xml_id,)
         context = self.get_context(data_node, rec, eval_dict)
         uid = self.get_uid(cr, self.uid, data_node, rec)
         if rec_id:
-            ids = [self.id_get(cr, rec_model, rec_id)]
+            ids = [self.id_get(cr, rec_id)]
         elif rec_src:
             q = unsafe_eval(rec_src, eval_dict)
             ids = self.pool.get(rec_model).search(cr, uid, q, context=context)
@@ -825,10 +825,10 @@ form: module.record_id""" % (xml_id,)
                 else:
                     if f_name in model._columns \
                               and model._columns[f_name]._type == 'reference':
-                        val = self.model_id_get(cr, f_model, f_ref)
+                        val = self.model_id_get(cr, f_ref)
                         f_val = val[0] + ',' + str(val[1])
                     else:
-                        f_val = self.id_get(cr, f_model, f_ref)
+                        f_val = self.id_get(cr, f_ref)
             else:
                 f_val = _eval_xml(self,field, self.pool, cr, self.uid, self.idref)
                 if model._columns.has_key(f_name):
@@ -843,15 +843,15 @@ form: module.record_id""" % (xml_id,)
             cr.commit()
         return rec_model, id
 
-    def id_get(self, cr, model, id_str):
+    def id_get(self, cr, id_str):
         if id_str in self.idref:
             return self.idref[id_str]
-        mid = self.model_id_get(cr, model, id_str)
+        mid = self.model_id_get(cr, id_str)
         if not mid:
             raise KeyError("Id %s not found in db" %(id_str, ))
         return mid[1]
 
-    def model_id_get(self, cr, model, id_str):
+    def model_id_get(self, cr, id_str):
         model_data_obj = self.pool.get('ir.model.data')
         mod = self.module
         if '.' in id_str:
