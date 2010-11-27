@@ -529,13 +529,13 @@ class module(osv.osv):
                 # the language derivative, like "en_UK", and then the generic,
                 # like "en".
                 if (not f) and '_' in iso_lang:
-                    f = addons.get_module_resource(mod.name, 'i18n', iso_lang.split('_')[0] + '.po')
                     iso_lang = iso_lang.split('_')[0]
+                    f = addons.get_module_resource(mod.name, 'i18n', iso_lang + '.po')
                 if f:
                     logger.info('module %s: loading translation file for language %s', mod.name, iso_lang)
                     tools.trans_load(cr.dbname, f, lang, verbose=False, context=context)
-                else:
-                    logger.warning('module %s: no translation for language %s', mod.name, iso_lang)
+                elif lang != 'en_US':
+                    logger.warning('module %s: no translation for language %s', mod.name, lang)
 
     def check(self, cr, uid, ids, context=None):
         logger = logging.getLogger('init')
