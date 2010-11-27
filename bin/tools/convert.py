@@ -32,6 +32,7 @@ import time
 import release
 try:
     import pytz
+    _hush_pyflakes = [ pytz,]
 except ImportError:
     logging.getLogger("init").warning('could not find pytz library, please install it')
     class pytzclass(object):
@@ -349,7 +350,7 @@ form: module.record_id""" % (xml_id,)
 
         if not rec.get('menu') or eval(rec.get('menu','False')):
             keyword = str(rec.get('keyword', 'client_print_multi'))
-            keys = [('action',keyword),('res_model',res['model'])] # RFC: so what?
+            # keys = [('action',keyword),('res_model',res['model'])]
             value = 'ir.actions.report.xml,'+str(id)
             replace = rec.get('replace', True)
             self.pool.get('ir.model.data').ir_set(cr, self.uid, 'action', keyword, res['name'], [res['model']], value, replace=replace, isobject=True, xml_id=xml_id)
@@ -883,7 +884,8 @@ form: module.record_id""" % (xml_id,)
                     if rec.tag in self._tags:
                         try:
                             self._tags[rec.tag](self.cr, rec, n)
-                        except Exception, e:
+                        except Exception:
+                            self.__logger.debug("Tag exception:", exc_info=True)
                             self.__logger.error('Parse error in %s:%d: \n%s',
                                                 rec.getroottree().docinfo.URL,
                                                 rec.sourceline,

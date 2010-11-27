@@ -47,6 +47,7 @@ from itertools import islice, izip
 from which import which
 if sys.version_info[:2] < (2, 4):
     from threadinglocal import local
+    _hush_pyflakes = [local,]
 else:
     from threading import local
 
@@ -347,6 +348,7 @@ def html2plaintext(html, body_id=None, encoding='utf-8'):
     try:
         from lxml.html.soupparser import fromstring
         kwargs = {}
+        _hush_pyflakes += [fromstring,]
     except ImportError:
         _logger.debug('tools.misc.html2plaintext: cannot use BeautifulSoup, fallback to lxml.etree.HTMLParser')
         from lxml.etree import fromstring, HTMLParser
@@ -933,9 +935,13 @@ if not hasattr(__builtin__, 'any'):
     del any
 
 def get_iso_codes(lang):
-    if lang.find('_') != -1:
-        if lang.split('_')[0] == lang.split('_')[1].lower():
-            lang = lang.split('_')[0]
+    """Simplify the language codes
+    For en_US it will return the same, but for fr_FR will return "fr"
+    """
+    if '_' in lang:
+        en, us = lang.split('_',1)
+        if en == us.lower():
+            lang = en
     return lang
 
 def get_languages():
@@ -1222,6 +1228,7 @@ def detect_ip_addr():
 
         try:
             import fcntl
+            _hush_pyflakes += [ fcntl, ]
         except ImportError:
             fcntl = None
 
