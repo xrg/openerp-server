@@ -34,7 +34,7 @@ from lxml import etree
 import base64
 from reportlab.platypus.doctemplate import ActionFlowable
 from tools.safe_eval import safe_eval as eval
-from reportlab.lib.units import inch,cm,mm
+from reportlab.pdfbase import pdfmetrics
 
 try:
     from cStringIO import StringIO
@@ -73,7 +73,7 @@ class NumberedCanvas(canvas.Canvas):
             while not self.pages.get(key,False):
                 key = key + 1
         self.setFont("Helvetica", 8)
-        self.drawRightString((self._pagesize[0]-35), (self._pagesize[1]-43),
+        self.drawRightString((self._pagesize[0]-30), (self._pagesize[1]-40),
             "Page %(this)i of %(total)i" % {
                'this': self._pageNumber+1,
                'total': self.pages.get(key,False),
@@ -214,7 +214,6 @@ class _rml_doc(object):
 
     def docinit(self, els):
         from reportlab.lib.fonts import addMapping
-        from reportlab.pdfbase import pdfmetrics
         from reportlab.pdfbase.ttfonts import TTFont
 
         for node in els:
@@ -229,7 +228,6 @@ class _rml_doc(object):
 
     def setTTFontMapping(self,face, fontname, filename, mode='all'):
         from reportlab.lib.fonts import addMapping
-        from reportlab.pdfbase import pdfmetrics
         from reportlab.pdfbase.ttfonts import TTFont
 
         pdfmetrics.registerFont(TTFont(fontname, filename ))
@@ -486,10 +484,20 @@ class _rml_canvas(object):
 
     def setFont(self, node):
         fname = node.get('name')
+        if fname not in pdfmetrics.getRegisteredFontNames()\
+             or fname not in pdfmetrics.standardFonts:
+                # let reportlab attempt to find it
+                try:
+                    pdfmetrics.getFont(fname)
+                except Exception:
+                    logging.getLogger('report.fonts').\
+                        debug('Could not locate font %s, substituting default: %s',
+                                 fname, self.canvas._fontname)
+                    fname = self.canvas._fontname
         try:
             return self.canvas.setFont(fname, utils.unit_get(node.get('size')))
-        except KeyError, e:
-            raise KeyError('Font "%s" is not registered in the engine' % fname)
+        except KeyError:
+            raise KeyError('Font "%s" cannot be used in the PDF engine' % fname)
 
     def render(self, node):
         tags = {
@@ -687,9 +695,9 @@ class _rml_flowable(object):
                 from reportlab.graphics.barcode import code39
                 from reportlab.graphics.barcode import code93
                 from reportlab.graphics.barcode import common
-                from reportlab.graphics.barcode import fourstate
+                # from reportlab.graphics.barcode import fourstate
                 from reportlab.graphics.barcode import usps
-            except Exception, e:
+            except ImportError:
                 return None
             args = utils.attr_get(node, [], {'ratio':'float','xdim':'unit','height':'unit','checksum':'int','quiet':'int','width':'unit','stop':'bool','bearers':'int','barWidth':'float','barHeight':'float'})
             codes = {

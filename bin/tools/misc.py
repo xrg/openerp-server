@@ -47,6 +47,7 @@ from itertools import islice, izip
 from which import which
 if sys.version_info[:2] < (2, 4):
     from threadinglocal import local
+    _hush_pyflakes = [local,]
 else:
     from threading import local
 
@@ -76,20 +77,19 @@ def init_db(cr):
         p_id = None
         while categs:
             if p_id is not None:
-                cr.execute('select id \
-                           from ir_module_category \
-                           where name=%s and parent_id=%s', (categs[0], p_id))
+                cr.execute('SELECT id \
+                           FROM ir_module_category \
+                           WHERE name=%s AND parent_id=%s', (categs[0], p_id))
             else:
-                cr.execute('select id \
-                           from ir_module_category \
-                           where name=%s and parent_id is NULL', (categs[0],))
+                cr.execute('SELECT id \
+                           FROM ir_module_category \
+                           WHERE name=%s AND parent_id IS NULL', (categs[0],))
             c_id = cr.fetchone()
             if not c_id:
-                cr.execute('select nextval(\'ir_module_category_id_seq\')')
+                cr.execute('INSERT INTO ir_module_category \
+                        (name, parent_id) \
+                        VALUES (%s, %s) RETURNING id', (categs[0], p_id))
                 c_id = cr.fetchone()[0]
-                cr.execute('insert into ir_module_category \
-                        (id, name, parent_id) \
-                        values (%s, %s, %s)', (c_id, categs[0], p_id))
             else:
                 c_id = c_id[0]
             p_id = c_id
@@ -104,23 +104,23 @@ def init_db(cr):
                 state = 'uninstalled'
         else:
             state = 'uninstallable'
-        cr.execute('select nextval(\'ir_module_module_id_seq\')')
-        id = cr.fetchone()[0]
-        cr.execute('insert into ir_module_module \
-                (id, author, website, name, shortdesc, description, \
-                    category_id, state, certificate, web) \
-                values (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)', (
-            id, info.get('author', ''),
+        cr.execute('INSERT INTO ir_module_module \
+                (author, website, name, shortdesc, description, \
+                    category_id, state, certificate, web, license) \
+                VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s) RETURNING id', (
+            info.get('author', ''),
             info.get('website', ''), i, info.get('name', False),
             info.get('description', ''), p_id, state, info.get('certificate') or None,
-            info.get('web') or False))
-        cr.execute('insert into ir_model_data \
-            (name,model,module, res_id, noupdate) values (%s,%s,%s,%s,%s)', (
+            info.get('web') or False,
+            info.get('license') or 'AGPL-3'))
+        id = cr.fetchone()[0]
+        cr.execute('INSERT INTO ir_model_data \
+            (name,model,module, res_id, noupdate) VALUES (%s,%s,%s,%s,%s)', (
                 'module_meta_information', 'ir.module.module', i, id, True))
         dependencies = info.get('depends', [])
         for d in dependencies:
-            cr.execute('insert into ir_module_module_dependency \
-                    (module_id,name) values (%s, %s)', (id, d))
+            cr.execute('INSERT INTO ir_module_module_dependency \
+                    (module_id,name) VALUES (%s, %s)', (id, d))
         cr.commit()
 
 def find_in_path(name):
@@ -348,6 +348,7 @@ def html2plaintext(html, body_id=None, encoding='utf-8'):
     try:
         from lxml.html.soupparser import fromstring
         kwargs = {}
+        _hush_pyflakes += [fromstring,]
     except ImportError:
         _logger.debug('tools.misc.html2plaintext: cannot use BeautifulSoup, fallback to lxml.etree.HTMLParser')
         from lxml.etree import fromstring, HTMLParser
@@ -934,9 +935,13 @@ if not hasattr(__builtin__, 'any'):
     del any
 
 def get_iso_codes(lang):
-    if lang.find('_') != -1:
-        if lang.split('_')[0] == lang.split('_')[1].lower():
-            lang = lang.split('_')[0]
+    """Simplify the language codes
+    For en_US it will return the same, but for fr_FR will return "fr"
+    """
+    if '_' in lang:
+        en, us = lang.split('_',1)
+        if en == us.lower():
+            lang = en
     return lang
 
 def get_languages():
@@ -1223,6 +1228,7 @@ def detect_ip_addr():
 
         try:
             import fcntl
+            _hush_pyflakes += [ fcntl, ]
         except ImportError:
             fcntl = None
 

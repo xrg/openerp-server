@@ -260,6 +260,8 @@ class TinyPoFile(object):
 
         if self.tnrs:
             type, name, res_id, source, trad = self.tnrs.pop(0)
+            if not res_id:
+                res_id = '0'
         else:
             tmp_tnrs = []
             line = None
@@ -761,7 +763,7 @@ def trans_generate(lang, modules, dbname=None):
     else :
         path_list = [root_path,] + apaths
 
-    logger.debug("Scanning modules at paths: %s",' '.join(path_list))
+    logger.debug("Scanning modules at paths: %s", ' '.join(path_list))
 
     mod_paths = []
     join_dquotes = re.compile(r'([^\\])"[\s\\]*"', re.DOTALL)
@@ -933,7 +935,7 @@ def trans_load_data(db_name, fileobj, fileformat, lang, strict=False, lang_name=
             if not dic.get('res_id', False):
                  continue
             try:
-                dic['res_id'] = int(dic['res_id'])
+                dic['res_id'] = dic['res_id'] and int(dic['res_id']) or 0
             except ValueError:
                 try:
                     tmodel = dic['name'].split(',')[0]

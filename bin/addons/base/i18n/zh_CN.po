@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: OpenERP Server 5.0.4\n"
 "Report-Msgid-Bugs-To: support@openerp.com\n"
 "POT-Creation-Date: 2010-11-18 16:11+0000\n"
-"PO-Revision-Date: 2010-11-24 03:48+0000\n"
-"Last-Translator: likaiyuan <Unknown>\n"
+"PO-Revision-Date: 2010-11-25 07:18+0000\n"
+"Last-Translator: Jeff Wang <wjfonhand@hotmail.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-11-24 04:58+0000\n"
+"X-Launchpad-Export-Date: 2010-11-26 04:49+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #. module: base
@@ -34,9 +34,12 @@ msgstr "请指定要启动的动作！"
 
 #. module: base
 #: code:addons/base/ir/ir_actions.py:0
-#, python-format
+#, fuzzy, python-format
 msgid "Please specify server option --email-from !"
 msgstr ""
+"#-#-#-#-#  .merge_file_CUmHnc (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_Wv2Z1d (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"请指定服务器选项,email from!"
 
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #. module: base
@@ -317,11 +320,14 @@ msgstr ""
 
 #. module: base
 #: code:addons/base/module/module.py:0
-#, python-format
+#, fuzzy, python-format
 msgid ""
 "You Can Not Load Translation For language Due To Invalid Language/Country "
 "Code"
 msgstr ""
+"#-#-#-#-#  .merge_file_CUmHnc (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_Wv2Z1d (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"语言/国家代码不匹配，无法载入该语言的翻译"
 
 #. module: base
 #: code:addons/base/module/module.py:0
@@ -500,9 +506,12 @@ msgstr ""
 
 #. module: base
 #: code:addons/base/res/res_lang.py:0
-#, python-format
+#, fuzzy, python-format
 msgid "You cannot delete the language which is User's Preferred Language !"
 msgstr ""
+"#-#-#-#-#  .merge_file_CUmHnc (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_Wv2Z1d (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"不能删除用户的首先语言."
 
 #. module: base
 #: code:addons/base/res/res_user.py:0
@@ -543,9 +552,12 @@ msgstr "不能删除根用户！"
 
 #. module: base
 #: code:addons/base/res/res_user.py:0
-#, python-format
+#, fuzzy, python-format
 msgid "Make sure you have no users linked with the group(s)!"
 msgstr ""
+"#-#-#-#-#  .merge_file_CUmHnc (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_Wv2Z1d (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"确定这个组中没有用户！"
 
 #. module: base
 #: code:addons/base/res/res_user.py:0
@@ -751,8 +763,12 @@ msgstr "语言代码(如：en__US)"
 
 #. module: base
 #: field:base.language.import,name:0
+#, fuzzy
 msgid "Language Name"
 msgstr ""
+"#-#-#-#-#  .merge_file_CUmHnc (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_Wv2Z1d (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"语言名"
 
 #. module: base
 #: field:base.language.install,overwrite:0
@@ -803,8 +819,12 @@ msgstr "自动刷新"
 
 #. module: base
 #: field:ir.actions.act_window,auto_search:0
+#, fuzzy
 msgid "Auto Search"
 msgstr ""
+"#-#-#-#-#  .merge_file_CUmHnc (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_Wv2Z1d (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"自动搜索"
 
 #. module: base
 #: field:ir.actions.act_window,context:0 field:ir.filters,context:0
@@ -1087,8 +1107,12 @@ msgstr "名称"
 
 #. module: base
 #: field:ir.actions.report.xml,report_file:0
+#, fuzzy
 msgid "Report file"
 msgstr ""
+"#-#-#-#-#  .merge_file_CUmHnc (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_Wv2Z1d (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"报表文件"
 
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #. module: base
@@ -2009,8 +2033,12 @@ msgstr ""
 
 #. module: base
 #: field:ir.rule,perm_read:0
+#, fuzzy
 msgid "Apply For Read"
 msgstr ""
+"#-#-#-#-#  .merge_file_CUmHnc (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_Wv2Z1d (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"读请求.."
 
 #. module: base
 #: field:ir.rule,perm_unlink:0
@@ -2419,8 +2447,12 @@ msgstr ""
 #. module: base
 #: field:res.config.users,email:0 field:res.partner,email:0
 #: field:res.users,email:0
+#, fuzzy
 msgid "E-mail"
 msgstr ""
+"#-#-#-#-#  .merge_file_CUmHnc (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_Wv2Z1d (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"电子邮件"
 
 #. module: base
 #: field:res.config.users,menu_id:0 field:res.users,menu_id:0
@@ -3185,8 +3217,12 @@ msgstr ""
 
 #. module: base
 #: help:ir.actions.act_window,res_model:0
+#, fuzzy
 msgid "Model name of the object to open in the view window"
 msgstr ""
+"#-#-#-#-#  .merge_file_CUmHnc (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_Wv2Z1d (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"模型对象的名称打开视图窗口"
 
 #. module: base
 #: help:ir.actions.act_window,src_model:0
@@ -3409,13 +3445,21 @@ msgstr "如果设为真，那么向导不会显示于表单右侧的工具栏上
 
 #. module: base
 #: help:ir.attachment,type:0
+#, fuzzy
 msgid "Binary File or external URL"
 msgstr ""
+"#-#-#-#-#  .merge_file_CUmHnc (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_Wv2Z1d (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"二进制文件或外部URL"
 
 #. module: base
 #: help:ir.cron,args:0
+#, fuzzy
 msgid "Arguments to be passed to the method. e.g. (uid,)"
 msgstr ""
+"#-#-#-#-#  .merge_file_CUmHnc (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_Wv2Z1d (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"参数传送给方法,如(uid,)"
 
 #. module: base
 #: help:ir.cron,doall:0
@@ -3438,10 +3482,14 @@ msgstr ""
 
 #. module: base
 #: help:ir.cron,model:0
+#, fuzzy
 msgid ""
 "Name of object whose function will be called when this scheduler will run. e."
 "g. 'res.partener'"
 msgstr ""
+"#-#-#-#-#  .merge_file_CUmHnc (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_Wv2Z1d (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"作业运行时需要调用的方法所在的对象名 如res.partner"
 
 #. module: base
 #: help:ir.cron,nextcall:0
@@ -3450,10 +3498,14 @@ msgstr ""
 
 #. module: base
 #: help:ir.cron,numbercall:0
+#, fuzzy
 msgid ""
 "Number of time the function is called,\n"
 "a negative number indicates no limit"
 msgstr ""
+"#-#-#-#-#  .merge_file_CUmHnc (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_Wv2Z1d (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"函数执行次数（负数表示没有限制）"
 
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #. module: base
@@ -3508,8 +3560,12 @@ msgstr ""
 
 #. module: base
 #: help:ir.rule,global:0
+#, fuzzy
 msgid "If no group is specified the rule is global and applied to everyone"
 msgstr ""
+"#-#-#-#-#  .merge_file_CUmHnc (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_Wv2Z1d (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"如果不指定组，规则是全局的并应用于每个用户."
 
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #. module: base
@@ -3521,13 +3577,21 @@ msgstr "当设置后, 系统会优先使用这个python表达式来做为序号.
 
 #. module: base
 #: help:ir.sequence,number_increment:0
+#, fuzzy
 msgid "The next number of the sequence will be incremented by this number"
 msgstr ""
+"#-#-#-#-#  .merge_file_CUmHnc (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_Wv2Z1d (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"下一序号将以此数增加."
 
 #. module: base
 #: help:ir.sequence,number_next:0
+#, fuzzy
 msgid "Next number of this sequence"
 msgstr ""
+"#-#-#-#-#  .merge_file_CUmHnc (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_Wv2Z1d (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"下一个序列号码"
 
 #. module: base
 #: help:ir.sequence,padding:0
@@ -3608,8 +3672,12 @@ msgstr ""
 
 #. module: base
 #: help:multi_company.default,company_id:0
+#, fuzzy
 msgid "Company where the user is connected"
 msgstr ""
+"#-#-#-#-#  .merge_file_CUmHnc (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_Wv2Z1d (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"用户所属的公司"
 
 #. module: base
 #: help:multi_company.default,expression:0
@@ -3688,8 +3756,12 @@ msgstr ""
 
 #. module: base
 #: help:res.config.users,menu_id:0 help:res.users,menu_id:0
+#, fuzzy
 msgid "If specified, the action will replace the standard menu for this user."
 msgstr ""
+"#-#-#-#-#  .merge_file_CUmHnc (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_Wv2Z1d (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"如果指定，这个动作将为此用户更换标准菜单."
 
 #. module: base
 #: help:res.config.users,menu_tips:0 help:res.users,menu_tips:0
@@ -3710,8 +3782,12 @@ msgstr "如果您不想让该用户连接到本系统的话请保持为空。"
 
 #. module: base
 #: help:res.config.users,view:0 help:res.users,view:0
+#, fuzzy
 msgid "Choose between the simplified interface and the extended one"
 msgstr ""
+"#-#-#-#-#  .merge_file_CUmHnc (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_Wv2Z1d (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"在简单界面和扩展界面选择其一."
 
 #. module: base
 #: help:res.country,code:0
@@ -3761,8 +3837,12 @@ msgstr ".PO 文件翻译使用的 ISO 国家代码"
 
 #. module: base
 #: help:res.log,name:0
+#, fuzzy
 msgid "The logging message."
 msgstr ""
+"#-#-#-#-#  .merge_file_CUmHnc (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_Wv2Z1d (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"日志信息"
 
 #. module: base
 #: help:res.log,read:0
@@ -3824,8 +3904,12 @@ msgstr "增值税编号，如该业务伙伴适用于增值税，请选择。用
 
 #. module: base
 #: help:res.partner,website:0
+#, fuzzy
 msgid "Website of Partner"
 msgstr ""
+"#-#-#-#-#  .merge_file_CUmHnc (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_Wv2Z1d (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"伙伴网站"
 
 #. module: base
 #: help:res.partner.address,active:0
@@ -4027,8 +4111,12 @@ msgstr "您的技术服务协议"
 #. module: base
 #: model:ir.actions.act_window,name:base.action_model_data
 #: model:ir.ui.menu,name:base.ir_model_data_menu view:ir.model.data:0
+#, fuzzy
 msgid "Object Identifiers"
 msgstr ""
+"#-#-#-#-#  .merge_file_CUmHnc (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_Wv2Z1d (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"对象标识符"
 
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #. module: base
@@ -4226,8 +4314,12 @@ msgstr "未翻译术语"
 #: model:ir.actions.act_window,name:base.action_view_base_import_language
 #: model:ir.ui.menu,name:base.menu_view_base_import_language
 #: view:base.language.import:0
+#, fuzzy
 msgid "Import Translation"
 msgstr ""
+"#-#-#-#-#  .merge_file_CUmHnc (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_Wv2Z1d (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"导入翻译"
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_view_base_language_install
@@ -4247,8 +4339,12 @@ msgstr "模块导入"
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_view_base_module_update
+#, fuzzy
 msgid "Module Update"
 msgstr ""
+"#-#-#-#-#  .merge_file_CUmHnc (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_Wv2Z1d (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"模块更新"
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_view_base_module_upgrade
@@ -4258,8 +4354,12 @@ msgstr "模块升级"
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_view_base_module_upgrade_install
+#, fuzzy
 msgid "Module Upgrade Install"
 msgstr ""
+"#-#-#-#-#  .merge_file_CUmHnc (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_Wv2Z1d (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"模块安装升级"
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_view_base_module_upgrade_window
@@ -4272,8 +4372,12 @@ msgstr "执行已安排的升级"
 #. module: base
 #: model:ir.actions.act_window,name:base.action_view_partner_clear_ids
 #: model:ir.model,name:base.model_partner_clear_ids view:partner.clear.ids:0
+#, fuzzy
 msgid "Clear IDs"
 msgstr ""
+"#-#-#-#-#  .merge_file_CUmHnc (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_Wv2Z1d (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"清除 ID"
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_view_partner_wizard_ean_check
@@ -4285,8 +4389,12 @@ msgstr ""
 #: model:ir.actions.act_window,name:base.action_wizard_lang_export
 #: model:ir.ui.menu,name:base.menu_wizard_lang_export
 #: view:base.language.export:0
+#, fuzzy
 msgid "Export Translation"
 msgstr ""
+"#-#-#-#-#  .merge_file_CUmHnc (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_Wv2Z1d (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"导出翻译"
 
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #. module: base
@@ -4306,8 +4414,12 @@ msgstr "重新同步术语"
 #: model:ir.actions.act_window,name:base.action_wizard_update_translations
 #: model:ir.ui.menu,name:base.menu_wizard_update_translations
 #: view:base.update.translations:0
+#, fuzzy
 msgid "Synchronize Translations"
 msgstr ""
+"#-#-#-#-#  .merge_file_CUmHnc (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_Wv2Z1d (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"同步翻译"
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_workflow_form
@@ -4441,8 +4553,12 @@ msgstr "序号"
 #. module: base
 #: model:ir.actions.act_window,name:base.ir_sequence_type
 #: model:ir.ui.menu,name:base.menu_ir_sequence_type
+#, fuzzy
 msgid "Sequence Codes"
 msgstr ""
+"#-#-#-#-#  .merge_file_CUmHnc (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_Wv2Z1d (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"序列编码"
 
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #. module: base
@@ -4692,8 +4808,12 @@ msgstr ""
 #. module: base
 #: model:ir.model,name:base.model_base_module_import
 #: model:ir.ui.menu,name:base.menu_view_base_module_import
+#, fuzzy
 msgid "Import Module"
 msgstr ""
+"#-#-#-#-#  .merge_file_CUmHnc (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_Wv2Z1d (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"导入模块"
 
 #. module: base
 #: model:ir.model,name:base.model_base_module_update
@@ -5322,8 +5442,12 @@ msgstr ""
 
 #. module: base
 #: model:ir.ui.menu,name:base.menu_project_management_time_tracking
+#, fuzzy
 msgid "Time Tracking"
 msgstr ""
+"#-#-#-#-#  .merge_file_CUmHnc (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_Wv2Z1d (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"时间估计"
 
 #. module: base
 #: model:ir.ui.menu,name:base.menu_purchase_root
@@ -7496,8 +7620,12 @@ msgstr "此窗口"
 #. module: base
 #: selection:ir.attachment,type:0 selection:ir.property,type:0
 #: view:ir.attachment:0
+#, fuzzy
 msgid "Binary"
 msgstr ""
+"#-#-#-#-#  .merge_file_CUmHnc (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_Wv2Z1d (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"二进制"
 
 #. module: base
 #: selection:ir.cron,interval_type:0
@@ -7707,8 +7835,12 @@ msgstr ""
 
 #. module: base
 #: selection:ir.property,type:0
+#, fuzzy
 msgid "Integer Big"
 msgstr ""
+"#-#-#-#-#  .merge_file_CUmHnc (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_Wv2Z1d (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"长整型"
 
 #. module: base
 #: selection:ir.property,type:0
@@ -8451,8 +8583,12 @@ msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
+#, fuzzy
 msgid "terp-camera_test"
 msgstr ""
+"#-#-#-#-#  .merge_file_CUmHnc (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_Wv2Z1d (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"terp-camera_test"
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
@@ -8708,8 +8844,12 @@ msgstr "terp-stock"
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
+#, fuzzy
 msgid "terp-stock_align_left_24"
 msgstr ""
+"#-#-#-#-#  .merge_file_CUmHnc (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_Wv2Z1d (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"terp-stock_align_left_24"
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
@@ -8718,8 +8858,12 @@ msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
+#, fuzzy
 msgid "terp-stock_format-default"
 msgstr ""
+"#-#-#-#-#  .merge_file_CUmHnc (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_Wv2Z1d (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"terp-stock_format-default"
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
@@ -8800,8 +8944,12 @@ msgstr ""
 #. module: base
 #: selection:res.config.users,view:0 selection:res.config.view,view:0
 #: selection:res.users,view:0
+#, fuzzy
 msgid "Simplified"
 msgstr ""
+"#-#-#-#-#  .merge_file_CUmHnc (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_Wv2Z1d (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"简化界面"
 
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #. module: base
@@ -8940,8 +9088,12 @@ msgstr ""
 
 #. module: base
 #: sql_constraint:ir.model.fields:0
+#, fuzzy
 msgid "Size of the field can never be less than 1 !"
 msgstr ""
+"#-#-#-#-#  .merge_file_CUmHnc (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_Wv2Z1d (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"字段的长度不小于1"
 
 #. module: base
 #: sql_constraint:ir.module.module:0
@@ -8969,13 +9121,21 @@ msgstr ""
 
 #. module: base
 #: sql_constraint:res.country:0
+#, fuzzy
 msgid "The code of the country must be unique !"
 msgstr ""
+"#-#-#-#-#  .merge_file_CUmHnc (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_Wv2Z1d (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"国家代码须唯一"
 
 #. module: base
 #: sql_constraint:res.country:0
+#, fuzzy
 msgid "The name of the country must be unique !"
 msgstr ""
+"#-#-#-#-#  .merge_file_CUmHnc (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_Wv2Z1d (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"国家名必须唯一"
 
 #. module: base
 #: sql_constraint:res.groups:0
@@ -8984,8 +9144,12 @@ msgstr ""
 
 #. module: base
 #: sql_constraint:res.lang:0
+#, fuzzy
 msgid "The code of the language must be unique !"
 msgstr ""
+"#-#-#-#-#  .merge_file_CUmHnc (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_Wv2Z1d (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"语言代码必须唯一"
 
 #. module: base
 #: sql_constraint:res.lang:0
@@ -9014,8 +9178,12 @@ msgstr "用户名必须唯一！"
 
 #. module: base
 #: view:base.language.export:0
+#, fuzzy
 msgid "Export Translations"
 msgstr ""
+"#-#-#-#-#  .merge_file_CUmHnc (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_Wv2Z1d (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"导出翻译"
 
 #. module: base
 #: view:base.language.export:0 view:wizard.module.lang.export:0
@@ -9037,8 +9205,12 @@ msgstr ""
 
 #. module: base
 #: view:base.language.export:0
+#, fuzzy
 msgid "To browse official translations, you can start with these links:"
 msgstr ""
+"#-#-#-#-#  .merge_file_CUmHnc (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_Wv2Z1d (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"浏览官方的翻译，从这些连接开始:"
 
 #. module: base
 #: view:base.language.export:0
@@ -9104,10 +9276,14 @@ msgstr ""
 
 #. module: base
 #: view:base.language.import:0
+#, fuzzy
 msgid ""
 "When using CSV format, please also check that the first line of your file is "
 "one of the following:"
 msgstr ""
+"#-#-#-#-#  .merge_file_CUmHnc (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_Wv2Z1d (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"如果用CSV格式文件导入，请确定文件首行如下："
 
 #. module: base
 #: view:base.language.import:0
@@ -9133,10 +9309,14 @@ msgstr ""
 
 #. module: base
 #: view:base.language.install:0 view:base.module.import:0
+#, fuzzy
 msgid ""
 "Please be patient, this operation may take a few minutes (depending on the "
 "number of modules currently installed)..."
 msgstr ""
+"#-#-#-#-#  .merge_file_CUmHnc (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_Wv2Z1d (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"请耐心等待,这些操作将花费一些时间.(取决于当前安装模块数量)..."
 
 #. module: base
 #: view:base.language.install:0
@@ -9164,8 +9344,7 @@ msgstr ""
 #: view:base.module.configuration:0
 #, fuzzy
 msgid "System Configuration Done"
-msgstr ""
-"系统配置完成"
+msgstr "系统配置完成"
 
 #. module: base
 #: view:base.module.configuration:0
@@ -9176,13 +9355,16 @@ msgstr ""
 #: view:base.module.import:0
 #, fuzzy
 msgid "Module file successfully imported!"
-msgstr ""
-"模块文件成功导入"
+msgstr "模块文件成功导入"
 
 #. module: base
 #: view:base.module.import:0 view:base.module.update:0
+#, fuzzy
 msgid "Open Modules"
 msgstr ""
+"#-#-#-#-#  .merge_file_CUmHnc (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_Wv2Z1d (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"打开模块"
 
 #. module: base
 #: view:base.module.import:0
@@ -9204,20 +9386,32 @@ msgstr ""
 
 #. module: base
 #: view:base.module.update:0
+#, fuzzy
 msgid "Module update result"
 msgstr ""
+"#-#-#-#-#  .merge_file_CUmHnc (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_Wv2Z1d (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"模块更新结果"
 
 #. module: base
 #: view:base.module.update:0
+#, fuzzy
 msgid "Please be patient, as this operation may take a few seconds..."
 msgstr ""
+"#-#-#-#-#  .merge_file_CUmHnc (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_Wv2Z1d (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"稍等一下，此操作需要些时间"
 
 #. module: base
 #: view:base.module.update:0
+#, fuzzy
 msgid ""
 "This wizard will scan all module repositories on the server side to detect "
 "newly added modules as well as any change to existing modules."
 msgstr ""
+"#-#-#-#-#  .merge_file_CUmHnc (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_Wv2Z1d (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"此向导会检查服务器上新增的或已修改的模块"
 
 #. module: base
 #: view:base.module.update:0 view:base.update.translations:0
@@ -9243,8 +9437,12 @@ msgstr "开始设置"
 
 #. module: base
 #: view:base.module.upgrade:0
+#, fuzzy
 msgid "Start update"
 msgstr ""
+"#-#-#-#-#  .merge_file_CUmHnc (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_Wv2Z1d (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"开始更新"
 
 #. module: base
 #: view:base.module.upgrade:0
@@ -9255,28 +9453,29 @@ msgstr ""
 #: view:base.module.upgrade:0
 #, fuzzy
 msgid "System update completed"
-msgstr ""
-"系统更新完成"
+msgstr "系统更新完成"
 
 #. module: base
 #: view:base.module.upgrade:0
 #, fuzzy
 msgid "The selected modules have been updated / installed !"
-msgstr ""
-"选择的模块将被更新/安装"
+msgstr "选择的模块将被更新/安装"
 
 #. module: base
 #: view:base.module.upgrade:0
+#, fuzzy
 msgid ""
 "We suggest to reload the menu tab to see the new menus (Ctrl+T then Ctrl+R)."
 msgstr ""
+"#-#-#-#-#  .merge_file_CUmHnc (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_Wv2Z1d (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"我们提议重载菜单来查看新菜单（Ctrl+T then Ctrl+R）"
 
 #. module: base
 #: view:base.module.upgrade:0
 #, fuzzy
 msgid "Your system will be updated."
-msgstr ""
-"你的系统将会被更新。"
+msgstr "你的系统将会被更新。"
 
 #. module: base
 #: view:base.update.translations:0
@@ -9390,8 +9589,7 @@ msgstr ""
 msgid ""
 "Access all the fields related to the current object using expressions, i.e. "
 "object.partner_id.name "
-msgstr ""
-"用表达式访问对象的所有字段，如object.partner_id.name "
+msgstr "用表达式访问对象的所有字段，如object.partner_id.name "
 
 #. module: base
 #: view:ir.actions.server:0
@@ -9489,13 +9687,16 @@ msgstr ""
 #: view:ir.actions.todo:0
 #, fuzzy
 msgid "Search Actions"
-msgstr ""
-"搜索 动作"
+msgstr "搜索 动作"
 
 #. module: base
 #: view:ir.actions.todo:0
+#, fuzzy
 msgid "Set as Todo"
 msgstr ""
+"#-#-#-#-#  .merge_file_CUmHnc (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_Wv2Z1d (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"作为待办事项"
 
 #. module: base
 #: view:ir.actions.todo:0
@@ -9522,8 +9723,12 @@ msgstr ""
 #: view:ir.model.data:0 view:ir.model.fields:0 view:ir.module.module:0
 #: view:ir.rule:0 view:ir.ui.view:0 view:ir.values:0 view:res.partner:0
 #: view:res.partner.address:0 view:workflow.activity:0
+#, fuzzy
 msgid "Group By..."
 msgstr ""
+"#-#-#-#-#  .merge_file_CUmHnc (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_Wv2Z1d (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"分组于"
 
 #. module: base
 #: view:ir.attachment:0
@@ -9582,8 +9787,12 @@ msgstr "域说明"
 
 #. module: base
 #: view:ir.model:0
+#, fuzzy
 msgid "In Memory"
 msgstr ""
+"#-#-#-#-#  .merge_file_CUmHnc (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_Wv2Z1d (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"在内存里"
 
 #. module: base
 #: view:ir.model:0
@@ -9614,8 +9823,7 @@ msgstr ""
 #: view:ir.module.module:0
 #, fuzzy
 msgid "Author Website"
-msgstr ""
-"作者网站"
+msgstr "作者网站"
 
 #. module: base
 #: view:ir.module.module:0
@@ -9669,8 +9877,12 @@ msgstr "排定安装"
 
 #. module: base
 #: view:ir.module.module:0
+#, fuzzy
 msgid "Search modules"
 msgstr ""
+"#-#-#-#-#  .merge_file_CUmHnc (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_Wv2Z1d (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"搜索模块"
 
 #. module: base
 #: view:ir.module.module:0
@@ -9686,15 +9898,13 @@ msgstr "模块库"
 #: view:ir.property:0
 #, fuzzy
 msgid "Field Information"
-msgstr ""
-"字段内容"
+msgstr "字段内容"
 
 #. module: base
 #: view:ir.property:0
 #, fuzzy
 msgid "Generic"
-msgstr ""
-"常规"
+msgstr "常规"
 
 #. module: base
 #: view:ir.property:0
@@ -9728,8 +9938,7 @@ msgstr ""
 #, fuzzy
 msgid ""
 "2. Group-specific rules are combined together with a logical AND operator"
-msgstr ""
-"多个组规则采用AND逻辑最终起作用"
+msgstr "多个组规则采用AND逻辑最终起作用"
 
 #. module: base
 #: view:ir.rule:0
@@ -9742,22 +9951,25 @@ msgstr ""
 #: view:ir.rule:0
 #, fuzzy
 msgid "Combination of rules"
-msgstr ""
-"组合的规则"
+msgstr "组合的规则"
 
 #. module: base
 #: view:ir.rule:0
 #, fuzzy
 msgid "Domain Setup"
-msgstr ""
-"筛选条件设置"
+msgstr "筛选条件设置"
 
 #. module: base
 #: view:ir.rule:0
+#, fuzzy
 msgid ""
 "Example: GLOBAL_RULE_1 AND GLOBAL_RULE_2 AND ( (GROUP_A_RULE_1 AND "
 "GROUP_A_RULE_2) OR (GROUP_B_RULE_1 AND GROUP_B_RULE_2) )"
 msgstr ""
+"#-#-#-#-#  .merge_file_CUmHnc (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_Wv2Z1d (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"例如：Example: GLOBAL_RULE_1 AND GLOBAL_RULE_2 AND ( (GROUP_A_RULE_1 AND "
+"GROUP_A_RULE_2) OR (GROUP_B_RULE_1 AND GROUP_B_RULE_2) )"
 
 #. module: base
 #: view:ir.rule:0 view:res.partner:0
@@ -9796,15 +10008,18 @@ msgstr "测试"
 
 #. module: base
 #: view:ir.sequence:0
+#, fuzzy
 msgid "Current Year with Century: %(year)s"
 msgstr ""
+"#-#-#-#-#  .merge_file_CUmHnc (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_Wv2Z1d (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"含世纪的年份"
 
 #. module: base
 #: view:ir.sequence:0
 #, fuzzy
 msgid "Current Year without Century: %(y)s"
-msgstr ""
-"没有世纪的年份%(y)s"
+msgstr "没有世纪的年份%(y)s"
 
 #. module: base
 #: view:ir.sequence:0
@@ -9873,8 +10088,12 @@ msgstr "序号类型"
 
 #. module: base
 #: view:ir.sequence.type:0
+#, fuzzy
 msgid "Sequences Type"
 msgstr ""
+"#-#-#-#-#  .merge_file_CUmHnc (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_Wv2Z1d (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"序列类型"
 
 #. module: base
 #: view:ir.translation:0
@@ -9895,8 +10114,7 @@ msgstr "未翻译的"
 #: view:ir.ui.menu:0
 #, fuzzy
 msgid "Full Path"
-msgstr ""
-"完整路径"
+msgstr "完整路径"
 
 #. module: base
 #: view:ir.ui.view:0
@@ -9925,8 +10143,12 @@ msgstr "要启动的动作"
 
 #. module: base
 #: view:ir.values:0
+#, fuzzy
 msgid "Client Actions"
 msgstr ""
+"#-#-#-#-#  .merge_file_CUmHnc (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_Wv2Z1d (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"客户端动作"
 
 #. module: base
 #: view:ir.values:0
@@ -9997,8 +10219,7 @@ msgstr ""
 #: view:partner.clear.ids:0
 #, fuzzy
 msgid "Want to Clear Ids ? "
-msgstr ""
-"要清除Ids吗？ "
+msgstr "要清除Ids吗？ "
 
 #. module: base
 #: view:partner.sms.send:0 wizard_view:res.partner.sms_send,init:0
@@ -10543,8 +10764,12 @@ msgstr "角色由工作流提供，用于定义可用的动作。"
 
 #. module: base
 #: view:res.users:0
+#, fuzzy
 msgid "You must logout and login again after changing your password."
 msgstr ""
+"#-#-#-#-#  .merge_file_CUmHnc (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_Wv2Z1d (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"更改密码后,你需要登出再登入"
 
 #. module: base
 #: view:res.widget:0
@@ -10951,30 +11176,50 @@ msgstr "Serbian / српски језик"
 
 #. module: base
 #: selection:base.language.install,lang:0
+#, fuzzy
 msgid "Korean (KP) / 한국어 (KP)"
 msgstr ""
+"#-#-#-#-#  .merge_file_CUmHnc (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_Wv2Z1d (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"Korean (KP) / 한국어 (KP)"
 
 #. module: base
 #: model:ir.actions.act_window,help:base.action_ui_view
+#, fuzzy
 msgid ""
 "Views allows you to personalize each view of OpenERP. You can add new "
 "fields, move fields, rename them or delete the ones that you do not need."
 msgstr ""
+"#-#-#-#-#  .merge_file_CUmHnc (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_Wv2Z1d (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"您可以自定义OpenERP中的任意一个视图。可以添加字段、移动字段、重命名或删除字段"
 
 #. module: base
 #: selection:base.language.install,lang:0
+#, fuzzy
 msgid "Spanish (CL) / Español (CL)"
 msgstr ""
+"#-#-#-#-#  .merge_file_CUmHnc (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_Wv2Z1d (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"Spanish (CL) / Español (CL)"
 
 #. module: base
 #: selection:base.language.install,lang:0
+#, fuzzy
 msgid "Portugese (BR) / Português (BR)"
 msgstr ""
+"#-#-#-#-#  .merge_file_CUmHnc (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_Wv2Z1d (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"Portugese (BR) / Português (BR)"
 
 #. module: base
 #: model:ir.ui.menu,name:base.menu_email_gateway_form
+#, fuzzy
 msgid "Messages"
 msgstr ""
+"#-#-#-#-#  .merge_file_CUmHnc (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_Wv2Z1d (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"信件"
 
 #. module: base
 #: model:ir.actions.act_window,help:base.action_country
@@ -11243,15 +11488,22 @@ msgstr ""
 
 #. module: base
 #: model:ir.actions.act_window,help:base.action_res_bank_form
+#, fuzzy
 msgid "Manage bank records you want to be used in the system."
 msgstr ""
+"#-#-#-#-#  .merge_file_CUmHnc (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_Wv2Z1d (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"你想用于管理银行记录在系统中."
 
 #. module: base
 #: code:addons/base/module/module.py:0
-#, python-format
+#, fuzzy, python-format
 msgid ""
 "Unable to install module \"%s\" because an external dependency is not met: %s"
 msgstr ""
+"#-#-#-#-#  .merge_file_CUmHnc (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_Wv2Z1d (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"不能按照模块“%s”，因为找到一个外表的依赖:%s"
 
 #. module: base
 #: model:ir.actions.act_window,help:base.action_res_users
@@ -11274,19 +11526,26 @@ msgstr ""
 
 #. module: base
 #: code:addons/base/module/module.py:0
-#, python-format
+#, fuzzy, python-format
 msgid ""
 "You try to install module '%s' that depends on module '%s'.\n"
 "But the latter module is not available in your system."
 msgstr ""
+"#-#-#-#-#  .merge_file_CUmHnc (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_Wv2Z1d (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"你要安装的模块'%s'依赖于‘%s’,但后者在你系统中不可用."
 
 #. module: base
 #: model:ir.actions.act_window,help:base.action_partner_supplier_form
+#, fuzzy
 msgid ""
 "With the Suppliers menu, you have access to all informations regarding your "
 "suppliers, including an history to track event (crm) and his accounting "
 "properties."
 msgstr ""
+"#-#-#-#-#  .merge_file_CUmHnc (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_Wv2Z1d (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"在供应商菜单,你能查看关于供应商的所有信息,包括历史事件(crm)和会计内容."
 
 #. module: base
 #: selection:base.language.install,lang:0
@@ -11371,51 +11630,75 @@ msgstr ""
 
 #. module: base
 #: code:addons/base/module/wizard/base_module_upgrade.py:0
-#, python-format
+#, fuzzy, python-format
 msgid "Unmet dependency !"
 msgstr ""
+"#-#-#-#-#  .merge_file_CUmHnc (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_Wv2Z1d (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"未满足依赖."
 
 #. module: base
 #: code:addons/base/module/wizard/base_module_upgrade.py:0
-#, python-format
+#, fuzzy, python-format
 msgid "Following modules are not installed or unknown: %s"
 msgstr ""
+"#-#-#-#-#  .merge_file_CUmHnc (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_Wv2Z1d (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"一下模块不能安装或未知:'%s'"
 
 #. module: base
 #: code:addons/base/ir/ir_model.py:0
-#, python-format
+#, fuzzy, python-format
 msgid "Invalid search criterions"
 msgstr ""
+"#-#-#-#-#  .merge_file_CUmHnc (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_Wv2Z1d (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"无效搜索规则"
 
 #. module: base
 #: code:addons/base/ir/ir_model.py:0
-#, python-format
+#, fuzzy, python-format
 msgid "The osv_memory field can only be compared with = and != operator."
 msgstr ""
+"#-#-#-#-#  .merge_file_CUmHnc (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_Wv2Z1d (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"osv_memory 字段仅用 = 和 != 操作符作比较."
 
 #. module: base
 #: code:addons/base/ir/ir_values.py:0
-#, python-format
+#, fuzzy, python-format
 msgid "You do not have the permission to perform this operation !!!"
 msgstr ""
+"#-#-#-#-#  .merge_file_CUmHnc (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_Wv2Z1d (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"你不允许进行这操作"
 
 #. module: base
 #: code:addons/base/res/ir_property.py:0
-#, python-format
+#, fuzzy, python-format
 msgid "Invalid type"
 msgstr ""
+"#-#-#-#-#  .merge_file_CUmHnc (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_Wv2Z1d (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"无效类型"
 
 #. module: base
 #: code:addons/__init__.py:0
-#, python-format
+#, fuzzy, python-format
 msgid "Could not load base module"
 msgstr ""
+"#-#-#-#-#  .merge_file_CUmHnc (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_Wv2Z1d (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"不能载入基本模块"
 
 #. module: base
 #: code:addons/__init__.py:0
-#, python-format
+#, fuzzy, python-format
 msgid "module base cannot be loaded! (hint: verify addons-path)"
 msgstr ""
+"#-#-#-#-#  .merge_file_CUmHnc (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_Wv2Z1d (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"模块库不能装载!(提示:检查addons路径)"
 
 #~ msgid "Partner Functions"
 #~ msgstr "业务伙伴职能"

@@ -21,7 +21,6 @@
 ##############################################################################
 import imp
 import logging
-import os
 import re
 import urllib
 import zipimport
@@ -53,7 +52,7 @@ class module_category(osv.osv):
         return result
 
     _columns = {
-        'name': fields.char("Name", size=128, required=True),
+        'name': fields.char("Name", size=128, required=True, select=True),
         'parent_id': fields.many2one('ir.module.category', 'Parent Category', select=True),
         'child_ids': fields.one2many('ir.module.category', 'parent_id', 'Child Categories'),
         'module_nr': fields.function(_module_nbr, method=True, string='Number of Modules', type='integer')
@@ -92,26 +91,34 @@ class module(osv.osv):
         mlist = self.browse(cr, uid, ids, context=context)
         mnames = {}
         for m in mlist:
-            mnames[m.name] = m.id
+            # skip uninstalled modules below,
+            # no data to find anyway
+            if m.state in ('installed', 'to upgrade', 'to remove'):
+                mnames[m.name] = m.id
             res[m.id] = {
                 'menus_by_module':[],
                 'reports_by_module':[],
                 'views_by_module': []
             }
+
+        if not mnames:
+            return res
+
         view_id = model_data_obj.search(cr,uid,[('module','in', mnames.keys()),
             ('model','in',('ir.ui.view','ir.actions.report.xml','ir.ui.menu'))])
         for data_id in model_data_obj.browse(cr,uid,view_id,context):
             # We use try except, because views or menus may not exist
             try:
                 key = data_id.model
+                res_mod_dic = res[mnames[data_id.module]]
                 if key=='ir.ui.view':
                     v = view_obj.browse(cr,uid,data_id.res_id)
                     aa = v.inherit_id and '* INHERIT ' or ''
-                    res[mnames[data_id.module]]['views_by_module'].append(aa + v.name + '('+v.type+')')
+                    res_mod_dic['views_by_module'].append(aa + v.name + '('+v.type+')')
                 elif key=='ir.actions.report.xml':
-                    res[mnames[data_id.module]]['reports_by_module'].append(report_obj.browse(cr,uid,data_id.res_id).name)
+                    res_mod_dic['reports_by_module'].append(report_obj.browse(cr,uid,data_id.res_id).name)
                 elif key=='ir.ui.menu':
-                    res[mnames[data_id.module]]['menus_by_module'].append(menu_obj.browse(cr,uid,data_id.res_id).complete_name)
+                    res_mod_dic['menus_by_module'].append(menu_obj.browse(cr,uid,data_id.res_id).complete_name)
             except KeyError, e:
                 self.__logger.warning(
                             'Data not found for reference %s[%s:%s.%s]', data_id.model,
@@ -342,7 +349,7 @@ class module(osv.osv):
             'maintainer': terp.get('maintainer', False),
             'contributors': ', '.join(terp.get('contributors', [])) or False,
             'website': terp.get('website', ''),
-            'license': terp.get('license', 'GPL-2'),
+            'license': terp.get('license', 'AGPL-3'),
             'certificate': terp.get('certificate') or False,
             'web': terp.get('web') or False,
         }
@@ -351,7 +358,6 @@ class module(osv.osv):
     def update_list(self, cr, uid, context=None):
         if context is None:
             context = {}
-        log = logging.getLogger('init')
         res = [0, 0] # [update, add]
 
         all_mod_ids = self.search(cr, uid, [], context=context)
@@ -523,13 +529,13 @@ class module(osv.osv):
                 # the language derivative, like "en_UK", and then the generic,
                 # like "en".
                 if (not f) and '_' in iso_lang:
-                    f = addons.get_module_resource(mod.name, 'i18n', iso_lang.split('_')[0] + '.po')
                     iso_lang = iso_lang.split('_')[0]
+                    f = addons.get_module_resource(mod.name, 'i18n', iso_lang + '.po')
                 if f:
                     logger.info('module %s: loading translation file for language %s', mod.name, iso_lang)
                     tools.trans_load(cr.dbname, f, lang, verbose=False, context=context)
-                else:
-                    logger.warning('module %s: no translation for language %s', mod.name, iso_lang)
+                elif lang != 'en_US':
+                    logger.warning('module %s: no translation for language %s', mod.name, lang)
 
     def check(self, cr, uid, ids, context=None):
         logger = logging.getLogger('init')
