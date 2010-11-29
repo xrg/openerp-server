@@ -28,3 +28,31 @@
     !python {model: ir.ui.menu }: |
         ids = self.search(cr, uid, [('sequence','in',[1, 2, 10, 20])])
         assert len(ids) >= 1, ids
+-
+    I will test an one2many operator with empty search list
+-
+    !python {model: res.partner}: |
+        ids = self.search(cr, uid, [('address', 'in', [])])
+        assert len(ids) == 0, "Ids should be empty, it is: " % ids
+-
+    I will test an one2many operator with False
+-
+    !python {model: res.partner}: |
+        ids = self.search(cr, uid, [('address', '=', False)])
+        assert len(ids) > 0, "Should find partners with empty address"
+        for b in self.browse(cr, uid, ids):
+            assert not b.address, "Address of partner %d should be empty" % b.id
+-
+   Testing a many2many operator with empty search list
+-
+    !python {model: res.partner}: |
+        ids = self.search(cr, uid, [('category_id', 'in', [])])
+        assert len(ids) == 0, "Ids should be empty, it is: " % ids
+-
+    And a many2many operator with False
+-
+    !python {model: res.partner}: |
+        ids = self.search(cr, uid, [('category_id', '=', False)])
+        assert len(ids) > 0, "Should find partners with empty category"
+        for b in self.browse(cr, uid, ids):
+            assert not b.category_id, "Categories of partner %d should be empty" % b.id
