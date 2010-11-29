@@ -102,7 +102,8 @@ class expression(object):
                     subids = ids[i:i+cr.IN_MAX]
                     cr.execute('SELECT "%s"'    \
                                '  FROM "%s"'    \
-                               ' WHERE "%s" = ANY(%%s) ' % (s, f, w), (subids,) )
+                               ' WHERE "%s" = ANY(%%s) ' % (s, f, w), (subids,),
+                               debug=self._debug)
                     res.extend([r[0] for r in cr.fetchall()])
                 # we return early, with the bare results
                 return None, res
@@ -115,13 +116,13 @@ class expression(object):
         if self.__mode in ('pgsql', 'pg84', 'pg90'):
             return qry, params
         else:
-            cr.execute(qry, params)
+            cr.execute(qry, params, debug=self._debug)
             res.extend([r[0] for r in cr.fetchall()])
             return None, res
         # unreachable code
         return None, None
 
-    def __init__(self, exp, mode='old'):
+    def __init__(self, exp, mode='old', debug=False):
         """  Initialize an expression to be evaluated on the object storage
              Mode can be 'old', 'sql', 'pgsql', 'pg84' or 'pg90', according 
              to if a db will execute the expression.
@@ -138,6 +139,7 @@ class expression(object):
         self.__main_table = None # 'root' table. set by parse()
         self.__DUMMY_LEAF = (1, '=', 1) # a dummy leaf that must not be parsed or sql generated
         self.__mode = mode
+        self._debug = debug
 
     @property
     def exp(self):
