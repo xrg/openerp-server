@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: OpenERP Server 5.0.0\n"
 "Report-Msgid-Bugs-To: support@openerp.com\n"
 "POT-Creation-Date: 2010-11-30 10:41:55+0000\n"
-"PO-Revision-Date: 2010-11-30 13:06+0200\n"
+"PO-Revision-Date: 2010-11-30 13:16+0200\n"
 "Last-Translator: P. Christeas <p_christ@hol.gr>\n"
 "Language-Team: Greek <openerp@lists.hellug.gr>\n"
 "MIME-Version: 1.0\n"
@@ -3951,7 +3951,7 @@ msgstr "Δημιουργία Ενέργειας"
 #. module: base
 #: model:ir.model,name:base.model_base_language_export
 msgid "base.language.export"
-msgstr ""
+msgstr "base.language.export"
 
 #. module: base
 #: model:ir.model,name:base.model_base_language_import
@@ -3966,7 +3966,7 @@ msgstr "Εγκατάσταση Γλώσσας"
 #. module: base
 #: model:ir.model,name:base.model_base_module_configuration
 msgid "base.module.configuration"
-msgstr ""
+msgstr "base.module.configuration"
 
 #. module: base
 #: model:ir.model,name:base.model_base_module_import
@@ -3982,7 +3982,7 @@ msgstr "Ενημέρωση Αρθρώματος"
 #. module: base
 #: model:ir.model,name:base.model_base_update_translations
 msgid "base.update.translations"
-msgstr ""
+msgstr "base.update.translations"
 
 #. module: base
 #: model:ir.model,name:base.model_ir_actions_act_window
@@ -4141,7 +4141,7 @@ msgstr "ir.values"
 #. module: base
 #: model:ir.model,name:base.model_ir_wizard_screen
 msgid "ir.wizard.screen"
-msgstr ""
+msgstr "ir.wizard.screen"
 
 #. module: base
 #: model:ir.model,name:base.model_maintenance_contract
@@ -4167,7 +4167,7 @@ msgstr "Προκαθορισμένη πολλαπλή εταιρεία"
 #. module: base
 #: model:ir.model,name:base.model_osv_memory_autovacuum
 msgid "osv_memory.autovacuum"
-msgstr ""
+msgstr "osv_memory.autovacuum"
 
 #. module: base
 #: model:ir.model,name:base.model_partner_sms_send view:partner.sms.send:0
@@ -4177,17 +4177,17 @@ msgstr "Αποστολή SMS"
 #. module: base
 #: model:ir.model,name:base.model_partner_wizard_ean_check
 msgid "Ean Check"
-msgstr ""
+msgstr "Έλεγχος EAN"
 
 #. module: base
 #: model:ir.model,name:base.model_res_config
 msgid "res.config"
-msgstr ""
+msgstr "res.config"
 
 #. module: base
 #: model:ir.model,name:base.model_res_config_installer
 msgid "res.config.installer"
-msgstr ""
+msgstr "res.config.installer"
 
 #. module: base
 #: model:ir.model,name:base.model_res_config_users
@@ -4212,12 +4212,12 @@ msgstr "Ισοτιμία Νομίσματος"
 #. module: base
 #: model:ir.model,name:base.model_res_groups
 msgid "Access Groups"
-msgstr ""
+msgstr "Ομάδες Πρόσβασης"
 
 #. module: base
 #: model:ir.model,name:base.model_res_log
 msgid "res.log"
-msgstr ""
+msgstr "res.log"
 
 #. module: base
 #: model:ir.model,name:base.model_res_partner_address
@@ -4279,12 +4279,12 @@ msgstr "res.users"
 #. module: base
 #: model:ir.model,name:base.model_res_widget
 msgid "res.widget"
-msgstr ""
+msgstr "res.widget"
 
 #. module: base
 #: model:ir.model,name:base.model_res_widget_user
 msgid "res.widget.user"
-msgstr ""
+msgstr "res.widget.user"
 
 #. module: base
 #: model:ir.model,name:base.model_res_widget_wizard
@@ -4349,7 +4349,7 @@ msgstr "Συντήρηση"
 #. module: base
 #: model:ir.ui.menu,name:base.marketing_menu
 msgid "Marketing"
-msgstr ""
+msgstr "Μάρκετινγκ"
 
 #. module: base
 #: model:ir.ui.menu,name:base.menu_address_book
@@ -5991,27 +5991,27 @@ msgstr "Δίδα"
 #. module: base
 #: model:res.partner.title,shortcut:base.res_partner_title_sir
 msgid "M."
-msgstr ""
+msgstr "Κ."
 
 #. module: base
 #: model:res.widget,title:base.albertnan_twitter_widget
 msgid "Albert Cervera Areny's tweets"
-msgstr ""
+msgstr "Albert Cervera Areny's tweets"
 
 #. module: base
 #: model:res.widget,title:base.matrixise_twitter_widget
 msgid "Stéphane Wirtel's tweets"
-msgstr ""
+msgstr "Stéphane Wirtel's tweets"
 
 #. module: base
 #: model:res.widget,title:base.nhomar_twitter_widget
 msgid "Nhomar Hernandez's tweets"
-msgstr ""
+msgstr "Nhomar Hernandez's tweets"
 
 #. module: base
 #: model:res.widget,title:base.odony_twitter_widget
 msgid "Olivier Dony's tweets"
-msgstr ""
+msgstr "Olivier Dony's tweets"
 
 #. module: base
 #: model:res.widget,title:base.openerp_favorites_twitter_widget
@@ -6021,7 +6021,7 @@ msgstr "Αγαπημένα του OpenERP"
 #. module: base
 #: model:res.widget,title:base.rvalyi_twitter_widget
 msgid "Raphaël Valyi's tweets"
-msgstr ""
+msgstr "Tweets για την Ruby on Rails"
 
 #. module: base
 #: report:ir.module.reference.graph:0
@@ -6111,7 +6111,7 @@ msgstr "πάρε"
 #. module: base
 #: selection:base.language.install,lang:0
 msgid "Abkhazian / аҧсуа"
-msgstr ""
+msgstr "Αμπχάζια / аҧсуа"
 
 #. module: base
 #: selection:base.language.install,lang:0
@@ -6131,7 +6131,7 @@ msgstr "Bosnian / bosanski jezik"
 #. module: base
 #: selection:base.language.install,lang:0
 msgid "Bulgarian / български език"
-msgstr ""
+msgstr "Βουλγάρικα / български език"
 
 #. module: base
 #: selection:base.language.install,lang:0
@@ -6201,7 +6201,7 @@ msgstr "Φιλανδικά / Suomi"
 #. module: base
 #: selection:base.language.install,lang:0
 msgid "Flemish (BE) / Vlaams (BE)"
-msgstr ""
+msgstr "Φλαμανδικά (BE) / Vlaams (BE)"
 
 #. module: base
 #: selection:base.language.install,lang:0
@@ -6221,7 +6221,7 @@ msgstr "French / Français"
 #. module: base
 #: selection:base.language.install,lang:0
 msgid "Galician / Galego"
-msgstr ""
+msgstr "Γαλικιανά / Galego"
 
 #. module: base
 #: selection:base.language.install,lang:0
@@ -6236,12 +6236,12 @@ msgstr "Greek / Ελληνικά"
 #. module: base
 #: selection:base.language.install,lang:0
 msgid "Gujarati / ગુજરાતી"
-msgstr ""
+msgstr "Gujarati / ગુજરાતી"
 
 #. module: base
 #: selection:base.language.install,lang:0
 msgid "Hindi / हिंदी"
-msgstr ""
+msgstr "Ινδικά / हिंदी"
 
 #. module: base
 #: selection:base.language.install,lang:0
@@ -6266,7 +6266,7 @@ msgstr "Italian / Italiano"
 #. module: base
 #: selection:base.language.install,lang:0
 msgid "Japanese / 日本語"
-msgstr ""
+msgstr "Ιαπωνικά / 日本語"
 
 #. module: base
 #: selection:base.language.install,lang:0
@@ -6286,7 +6286,7 @@ msgstr "Κορεάτικη (KR) / 한국어 (KR)"
 #. module: base
 #: selection:base.language.install,lang:0
 msgid "Latvian / latviešu valoda"
-msgstr ""
+msgstr "Latvian / latviešu valoda"
 
 #. module: base
 #: selection:base.language.install,lang:0
@@ -6296,27 +6296,27 @@ msgstr "Lithuanian / Lietuvių kalba"
 #. module: base
 #: selection:base.language.install,lang:0
 msgid "Malayalam / മലയാളം"
-msgstr ""
+msgstr "Malayalam / മലയാളം"
 
 #. module: base
 #: selection:base.language.install,lang:0
 msgid "Mongolian / монгол"
-msgstr ""
+msgstr "Mongolian / монгол"
 
 #. module: base
 #: selection:base.language.install,lang:0
 msgid "Norwegian Bokmål / Norsk bokmål"
-msgstr ""
+msgstr "Νορβηγικά Bokmål / Norsk bokmål"
 
 #. module: base
 #: selection:base.language.install,lang:0
 msgid "Occitan (FR, post 1500) / Occitan"
-msgstr ""
+msgstr "Occitan (FR, post 1500) / Occitan"
 
 #. module: base
 #: selection:base.language.install,lang:0
 msgid "Persian / فارس"
-msgstr ""
+msgstr "Περσικά / فارس"
 
 #. module: base
 #: selection:base.language.install,lang:0
@@ -6336,7 +6336,7 @@ msgstr "Πορτογαλικά / Português"
 #. module: base
 #: selection:base.language.install,lang:0
 msgid "Romanian / română"
-msgstr ""
+msgstr "Ρουμάνικα / română"
 
 #. module: base
 #: selection:base.language.install,lang:0
@@ -6356,7 +6356,7 @@ msgstr "Σινχαλικά / සිංහල"
 #. module: base
 #: selection:base.language.install,lang:0
 msgid "Slovak / Slovenský jazyk"
-msgstr ""
+msgstr "Slovak / Slovenský jazyk"
 
 #. module: base
 #: selection:base.language.install,lang:0
@@ -6371,7 +6371,7 @@ msgstr "Spanish (AR) / Español (AR)"
 #. module: base
 #: selection:base.language.install,lang:0
 msgid "Spanish (BO) / Español (BO)"
-msgstr ""
+msgstr "Ισπανικά (BO) / Español (BO)"
 
 #. module: base
 #: selection:base.language.install,lang:0
@@ -6381,12 +6381,12 @@ msgstr "Ισπανική (CL) / Español (CL)"
 #. module: base
 #: selection:base.language.install,lang:0
 msgid "Spanish (CO) / Español (CO)"
-msgstr ""
+msgstr "Ισπανικά (CO) / Español (CO)"
 
 #. module: base
 #: selection:base.language.install,lang:0
 msgid "Spanish (CR) / Español (CR)"
-msgstr ""
+msgstr "Ισπανικά (CR) / Español (CR)"
 
 #. module: base
 #: selection:base.language.install,lang:0
@@ -6396,7 +6396,7 @@ msgstr "Ισπανικά (DO) / Español (DO)"
 #. module: base
 #: selection:base.language.install,lang:0
 msgid "Spanish (EC) / Español (EC)"
-msgstr ""
+msgstr "Ισπανικά (EC) / Español (EC)"
 
 #. module: base
 #: selection:base.language.install,lang:0
@@ -6406,42 +6406,42 @@ msgstr "Ισπανικά(GT)/Español (GT)"
 #. module: base
 #: selection:base.language.install,lang:0
 msgid "Spanish (HN) / Español (HN)"
-msgstr ""
+msgstr "Ισπανικά (HN) / Español (HN)"
 
 #. module: base
 #: selection:base.language.install,lang:0
 msgid "Spanish (MX) / Español (MX)"
-msgstr ""
+msgstr "Μεξικάνικα (MX) / Español (MX)"
 
 #. module: base
 #: selection:base.language.install,lang:0
 msgid "Spanish (NI) / Español (NI)"
-msgstr ""
+msgstr "Ισπανικά (NI) / Español (NI)"
 
 #. module: base
 #: selection:base.language.install,lang:0
 msgid "Spanish (PA) / Español (PA)"
-msgstr ""
+msgstr "Ισπανικά (PA) / Español (PA)"
 
 #. module: base
 #: selection:base.language.install,lang:0
 msgid "Spanish (PE) / Español (PE)"
-msgstr ""
+msgstr "Ισπανικά (PE) / Español (PE)"
 
 #. module: base
 #: selection:base.language.install,lang:0
 msgid "Spanish (PR) / Español (PR)"
-msgstr ""
+msgstr "Spanish (PR) / Español (PR)"
 
 #. module: base
 #: selection:base.language.install,lang:0
 msgid "Spanish (PY) / Español (PY)"
-msgstr ""
+msgstr "Ισπανικά (PY) / Español (PY)"
 
 #. module: base
 #: selection:base.language.install,lang:0
 msgid "Spanish (SV) / Español (SV)"
-msgstr ""
+msgstr "Ισπανικά (SV) / Español (SV)"
 
 #. module: base
 #: selection:base.language.install,lang:0
@@ -6481,7 +6481,7 @@ msgstr "Turkish / Türkçe"
 #. module: base
 #: selection:base.language.install,lang:0
 msgid "Ukrainian / українська"
-msgstr ""
+msgstr "Ουκρανικά / українська"
 
 #. module: base
 #: selection:base.language.install,lang:0
@@ -6491,7 +6491,7 @@ msgstr "Urdu / اردو"
 #. module: base
 #: selection:base.language.install,lang:0
 msgid "Vietnamese / Tiếng Việt"
-msgstr ""
+msgstr "Vietnamese / Tiếng Việt"
 
 #. module: base
 #: selection:base.language.install,state:0
@@ -6704,7 +6704,7 @@ msgstr "Ειδικό Πεδίο"
 #. module: base
 #: selection:ir.module.module,license:0
 msgid "Affero GPL-3"
-msgstr ""
+msgstr "Affero GPL-3"
 
 #. module: base
 #: selection:ir.module.module,license:0
@@ -6884,7 +6884,7 @@ msgstr "Αναζήτηση"
 #. module: base
 #: selection:ir.ui.view,type:0
 msgid "mdx"
-msgstr ""
+msgstr "mdx"
 
 #. module: base
 #: selection:ir.values,key:0 selection:res.partner.address,type:0
@@ -7420,7 +7420,7 @@ msgstr "Επιλογή ομάδων"
 #. module: base
 #: view:ir.actions.act_window:0
 msgid "View Ordering"
-msgstr ""
+msgstr "Ιεράρχηση Προβολών"
 
 #. module: base
 #: view:ir.actions.configuration.wizard:0
@@ -7435,7 +7435,7 @@ msgstr "Επόμενο Βήμα Ρυθμίσεων"
 #. module: base
 #: view:ir.actions.report.xml:0
 msgid "Miscellaneous"
-msgstr ""
+msgstr "Διάφορα"
 
 #. module: base
 #: view:ir.actions.report.xml:0
@@ -7555,7 +7555,7 @@ msgstr "Ρύθμιση Βημάτων Αυτόματου Οδηγού"
 #. module: base
 #: view:ir.actions.todo:0
 msgid "Launch"
-msgstr ""
+msgstr "Εκκίνηση"
 
 #. module: base
 #: view:ir.actions.todo:0
@@ -7573,8 +7573,9 @@ msgstr ""
 
 #. module: base
 #: view:ir.actions.todo:0
+#, fuzzy
 msgid "Todo"
-msgstr ""
+msgstr "Για ενέργεια"
 
 #. module: base
 #: view:ir.attachment:0
@@ -7657,7 +7658,7 @@ msgstr "Περιγραφή Πεδίων"
 #. module: base
 #: view:ir.model:0
 msgid "In Memory"
-msgstr ""
+msgstr "Στη Μνήμη"
 
 #. module: base
 #: view:ir.model:0
@@ -7928,7 +7929,7 @@ msgstr "Δομή προβολής"
 #. module: base
 #: view:ir.ui.view:0
 msgid "Extra Info"
-msgstr ""
+msgstr "Επιπλέον Πληροφορίες"
 
 #. module: base
 #: view:ir.values:0
@@ -7994,7 +7995,7 @@ msgstr "_Validate"
 #. module: base
 #: view:partner.clear.ids:0
 msgid "Clear Ids"
-msgstr ""
+msgstr "Εκκαθάριση ID"
 
 #. module: base
 #: view:partner.clear.ids:0
@@ -8014,7 +8015,7 @@ msgstr "SMS - Gateway: clickatell"
 #. module: base
 #: view:partner.wizard.ean.check:0
 msgid "Correct EAN13"
-msgstr ""
+msgstr "Διόρθωση EAN13"
 
 #. module: base
 #: view:partner.wizard.ean.check:0
@@ -8113,12 +8114,12 @@ msgstr ""
 #. module: base
 #: view:res.currency:0
 msgid "Miscelleanous"
-msgstr ""
+msgstr "Διάφορα"
 
 #. module: base
 #: view:res.currency:0
 msgid "Price Accuracy"
-msgstr ""
+msgstr "Ακρίβεια Υπολογισμού"
 
 #. module: base
 #: view:res.lang:0
