@@ -544,7 +544,7 @@ class orm_template(object):
         """Override this method to do specific things when a view on the object is opened."""
         pass
 
-    def read_group(self, cr, uid, domain, fields, groupby, offset=0, limit=None, context=None):
+    def read_group(self, cr, uid, domain, fields, groupby, offset=0, limit=None, context=None, orderby=False):
         raise NotImplementedError(_('The read_group method is not implemented on this object !'))
 
     def _field_create(self, cr, context=None):
@@ -2590,7 +2590,7 @@ class orm(orm_template):
     __logger = logging.getLogger('orm')
     __schema = NotImplemented   # please don't use this logger
     
-    def read_group(self, cr, uid, domain, fields, groupby, offset=0, limit=None, context=None):
+    def read_group(self, cr, uid, domain, fields, groupby, offset=0, limit=None, context=None, orderby=False):
         """
         Get the list of records in list view grouped by the given ``groupby`` fields
 
@@ -2603,6 +2603,9 @@ class orm(orm_template):
         :param offset: optional number of records to skip
         :param limit: optional max number of records to return
         :param context: context arguments, like lang, time zone
+        :param order: optional ``order by`` specification, for overriding the natural
+                      sort ordering of the groups, see also :py:meth:`~osv.osv.osv.search`
+                      (supported only for many2one fields currently)
         :return: list of dictionaries(one dictionary for each record) containing:
 
                     * the values of fields grouped by the fields in ``groupby`` argument
@@ -2696,14 +2699,17 @@ class orm(orm_template):
             alldata[r['id']] = r
             del r['id']
         if groupby and fget[groupby]['type'] == 'many2one':
-            data_ids = self.search(cr, uid, [('id', 'in', alldata.keys())], order=groupby, context=context)
+            data_ids = self.search(cr, uid, [('id', 'in', alldata.keys())],
+                                    order=orderby or groupby, context=context)
             # the IDS of the records that has groupby field value = False or ''
             # should be added too
             data_ids += filter(lambda x:x not in data_ids, alldata.keys())
             data = self.read(cr, uid, data_ids, groupby and [groupby] or ['id'], context=context)
-            # restore order of the search as read() uses the default _order (this is only for groups, so the size of data_read shoud be small):
+            # restore order of the search as read() uses the default _order 
+            # (this is only for groups, so the size of data_read shoud be small):
             data.sort(lambda x,y: cmp(data_ids.index(x['id']), data_ids.index(y['id'])))
         else:
+            #FIXME: handle orderby param for non-m2o too!
             data = self.read(cr, uid, alldata.keys(), groupby and [groupby] or ['id'], context=context)
             if groupby:
                 data.sort(lambda x,y:cmp(x[groupby],y[groupby]))
