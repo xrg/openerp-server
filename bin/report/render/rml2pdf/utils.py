@@ -95,12 +95,13 @@ def _child_get(node, self=None, tagname=None):
                 continue
         if self and self.localcontext and n.get('rml_tag'):
             try:
-                (tag,attr) = eval(n.get('rml_tag'),{}, self.localcontext)
-                n2 = copy.deepcopy(n)
-                n2.tag = tag
-                n2.attrib.update(attr or {})
-                yield n2
-                tagname = ''
+                (tag,attr) = eval(n.get('rml_tag'),{}, self.localcontext) or (False, False)
+                if tag is not False:
+                    n2 = copy.deepcopy(n)
+                    n2.tag = tag
+                    n2.attrib.update(attr or {})
+                    yield n2
+                    tagname = ''
             except GeneratorExit:
                 pass
             except Exception, e:
