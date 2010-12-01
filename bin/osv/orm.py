@@ -2442,6 +2442,11 @@ class orm_memory(orm_template):
                 upd_todo.append(field)
         for object_id in ids:
             self._check_access(user, object_id, mode='write')
+            if object_id not in self.datas:
+                raise except_orm(_("ID not found!"),
+                        _("Id #%d of %s object not found, you may need to repeat the operation!") % \
+                            (object_id, self._name))
+                        # This advice suggests that orm_memory actions are repeatable
             self.datas[object_id].update(vals2)
             self.datas[object_id]['internal.date_access'] = time.time()
             for field in upd_todo:
