@@ -3679,15 +3679,24 @@ class orm(orm_template):
             context = {}
         if not ids:
             return []
-        fields = ''
+        fields = ['id']
         if self._log_access:
-            fields = ', u.create_uid, u.create_date, u.write_uid, u.write_date'
+            fields += ['create_uid', 'create_date', 'write_uid', 'write_date']
         if isinstance(ids, (int, long)):
             uniq = True
+            ids = [ids,]
         elif isinstance(ids, (list,tuple)):
             ids = map(int, ids)
             uniq = False
-        cr.execute('SELECT u.id'+fields+' FROM "'+self._table+'" u WHERE u.id = ANY (%s)', (ids,) )
+            
+        fields_str = ",".join('"%s".%s'%(self._table, f) for f in fields)
+        query = '''SELECT %(fields)s, imd.module, imd.name
+                   FROM "%(table)s" LEFT JOIN ir_model_data imd
+                       ON ( imd.model = '%(model)s' AND imd.res_id = %(table)s.id)
+                   WHERE "%(table)s".id = ANY(%%s) ''' % \
+                    { 'fields': fields_str, 'table': self._table, 'model': self._name }
+
+        cr.execute(query, (ids,), debug=self._debug)
         res = cr.dictfetchall()
         for r in res:
             for key in r:
