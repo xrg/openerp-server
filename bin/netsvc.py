@@ -186,6 +186,22 @@ class DBFormatter(logging.Formatter):
             record.at_dbname = ''
         return logging.Formatter.format(self, record)
 
+    def formatException(self, ei):
+        """ A little better formatter of exceptions, that will tolerate
+            locale-encoded strings (or utf8)
+        """
+        from locale import getpreferredencoding
+        res = logging.Formatter.formatException(self, ei)
+        if isinstance(res, unicode):
+            return res
+
+        for enc in (getpreferredencoding(), 'utf-8'):
+            try:
+                return unicode(res, 'utf-8')
+            except UnicodeEncodeError:
+                pass
+        return res
+
 class ColoredFormatter(DBFormatter):
     def format(self, record):
         fg_color, bg_color = LEVEL_COLOR_MAPPING[record.levelno]
@@ -339,8 +355,9 @@ class Logger(object):
                       "the standard `logging` module instead",
                       PendingDeprecationWarning, stacklevel=2)
         from service.web_services import common
+        from tools.misc import ustr
 
-        log = logging.getLogger(tools.ustr(name))
+        log = logging.getLogger(ustr(name))
 
         if level in [LOG_DEBUG_RPC, LOG_TEST] and not hasattr(log, level):
             fct = lambda msg, *args, **kwargs: log.log(getattr(logging, level.upper()), msg, *args, **kwargs)
