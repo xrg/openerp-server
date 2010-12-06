@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: OpenERP Server 5.0.0\n"
 "Report-Msgid-Bugs-To: support@openerp.com\n"
 "POT-Creation-Date: 2010-11-30 10:41:55+0000\n"
-"PO-Revision-Date: 2010-11-30 13:16+0200\n"
+"PO-Revision-Date: 2010-12-02 22:32+0200\n"
 "Last-Translator: P. Christeas <p_christ@hol.gr>\n"
 "Language-Team: Greek <openerp@lists.hellug.gr>\n"
 "MIME-Version: 1.0\n"
@@ -462,12 +462,10 @@ msgstr ""
 
 #. module: base
 #: code:addons/base/res/res_user.py:0
-#, fuzzy, python-format
+#, python-format
 msgid "\"email_from\" needs to be set to send welcome mails to users"
 msgstr ""
-"#-#-#-#-#  .merge_file_erE8Ee (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_iAaRpg (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"Πρέπει να ρυθμισθεί το \"email_from\" για να στέλνονται μηνύματα "
+"Όταν ρυθμισθεί το \"email_from\" θα στέλνονται μηνύματα "
 "καλωσορίσματος στους χρήστες"
 
 #. module: base
@@ -2912,15 +2910,12 @@ msgstr "Επανάληψη ανά χ"
 
 #. module: base
 #: help:ir.cron,model:0
-#, fuzzy
 msgid ""
 "Name of object whose function will be called when this scheduler will run. e."
 "g. 'res.partner'"
 msgstr ""
-"#-#-#-#-#  .merge_file_tNflwt (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_nfOTYj (OpenERP Server 5.0.0)  #-#-#-#-#\n"
 "Όνομα του αντικειμένου του οποίου η λειτουργία θα κληθεί όταν θα εκτελεστεί "
-"αυτός το πρόγραμμα. π.χ. 'res.partener'"
+"αυτός το πρόγραμμα. π.χ. 'res.partner'"
 
 #. module: base
 #: help:ir.cron,nextcall:0
@@ -7161,17 +7156,14 @@ msgstr ""
 
 #. module: base
 #: view:base.language.import:0
-#, fuzzy
 msgid ""
 "If you need another language than the official ones available, you can "
 "import a language pack from here. Other OpenERP languages than the official "
 "ones can be found on launchpad."
 msgstr ""
-"#-#-#-#-#  .merge_file_erE8Ee (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_iAaRpg (OpenERP Server 5.0.0)  #-#-#-#-#\n"
 "Αν χρειάζεστε άλλη γλώσσα εκτός από τις επίσημα διαθέσιμες, μπορείτε να "
 "εισάγετε ένα πακέτο γλώσσας από εδώ. Άλλες γλώσσες για το OpenERP πέρα από "
-"τις επίσημες μπορούν να βρεθούν στο launchpad."
+"τις επίσημες μπορούν να βρεθούν στο διαδίκτυο."
 
 #. module: base
 #: view:base.language.import:0
@@ -7677,12 +7669,8 @@ msgstr "Πλήρης πρόσβαση"
 
 #. module: base
 #: view:ir.model.data:0
-#, fuzzy
 msgid "Updatable"
-msgstr ""
-"#-#-#-#-#  .merge_file_UIdw14 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"Χωρίς ενημέρωση\n"
-"#-#-#-#-#  .merge_file_IJStut (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+msgstr "Να ενημερώνεται"
 
 #. module: base
 #: view:ir.module.module:0
@@ -7773,13 +7761,9 @@ msgstr ""
 
 #. module: base
 #: view:ir.rule:0
-#, fuzzy
 msgid ""
 "2. Group-specific rules are combined together with a logical AND operator"
-msgstr ""
-"#-#-#-#-#  .merge_file_tNflwt (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_nfOTYj (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"Κανόνες εξειδικευμένοι κατά ομάδα συνδυάζονται με έναν λογικό τελεστή AND"
+msgstr "2. Οι κανόνες ομάδας συνδυάζονται με έναν λογικό τελεστή AND"
 
 #. module: base
 #: view:ir.rule:0
@@ -7814,12 +7798,8 @@ msgstr "Γενικά"
 
 #. module: base
 #: view:ir.rule:0
-#, fuzzy
 msgid "Groups (no group = global)"
-msgstr ""
-"#-#-#-#-#  .merge_file_tNflwt (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_nfOTYj (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"Ομάδες (καμμία ομάδα = καθολική)"
+msgstr "Ομάδες (καμία ομάδα = κοινόχρηστο)"
 
 #. module: base
 #: view:ir.rule:0
@@ -8436,13 +8416,8 @@ msgstr "Τρέχουσα Δραστηριότητα"
 
 #. module: base
 #: view:res.users:0
-#, fuzzy
 msgid "Default Filters"
-msgstr ""
-"#-#-#-#-#  .merge_file_erE8Ee (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"Προεπιλεγμένα Φίλτρα\n"
-"#-#-#-#-#  .merge_file_iAaRpg (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"Προεπιλεγμένα φίλτρα"
+msgstr "Προεπιλεγμένα Φίλτρα"
 
 #. module: base
 #: view:res.users:0
