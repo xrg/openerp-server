@@ -730,11 +730,11 @@ class YamlInterpreter(object):
             try:
                 self._process_node(node)
             except YamlImportException, e:
-                self.logger.exception(e)
+                self.logger.exception(misc.ustr(e))
                 if fatal:
                     raise
             except Exception, e:
-                self.logger.exception(e)
+                self.logger.exception(misc.ustr(e))
                 raise
     
     def _process_node(self, node):
