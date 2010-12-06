@@ -860,12 +860,12 @@ def get_encodings(hint_encoding='utf-8'):
         yield hint_encoding
         if hint_encoding.lower() in fallbacks:
             yield fallbacks[hint_encoding.lower()]
-
+    
     # some defaults (also taking care of pure ASCII)
-    for charset in ['utf8','latin1']:
+    for charset in ['utf-8','latin1']:
         if not (hint_encoding) or (charset.lower() != hint_encoding.lower()):
             yield charset
-
+    
     from locale import getpreferredencoding
     prefenc = getpreferredencoding()
     if prefenc and prefenc.lower() != 'utf-8':
