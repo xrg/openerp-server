@@ -918,6 +918,14 @@ class _report_spool_job(threading.Thread):
                 self.exception = ExceptionWithTraceback(tools.exception_to_unicode(e), tb)
             self.state = True
             return
+        except KeyboardInterrupt, e:
+            logger = logging.getLogger('web-services')
+            logger.exception('Interrupt of report: %r' % self)
+            self.exception = e
+            self.state = True
+            # we don't need to raise higher, because we already printed the tb
+            # and are exiting the thread loop.
+            return
         finally:
             if self.cr:
                 self.cr.close()
@@ -931,6 +939,7 @@ class _report_spool_job(threading.Thread):
         So far there is no genuinely good way to stop the thread (is there?), 
         so we can at least kill the cursor, so that the rest of the job borks.
         """
+        self.must_stop = True
         if self.cr:
             self.cr.rollback()
             self.cr.close()
