@@ -163,6 +163,8 @@ class YamlInterpreter(object):
             self.logger.log(logging.ERROR, 'id: %s is to long (max: 64)', id)
 
     def get_id(self, xml_id):
+        if xml_id is False:
+            return False
         if not xml_id:
             raise YamlImportException("The xml_id should be a non empty string.")
         if isinstance(xml_id, types.IntType):
