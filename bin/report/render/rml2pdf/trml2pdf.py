@@ -288,7 +288,7 @@ class _rml_doc(object):
         el = self.etree.findall('stylesheet')
         self.styles = _rml_styles(el,self.localcontext)
 
-        el = self.etree.findall('images')
+        el = self.etree.findall('.//images')
         if el:
             self.images.update( self._images(el[0]) )
         el = self.etree.findall('template')
@@ -782,7 +782,7 @@ class _rml_flowable(object):
                 if node.get('name'):
                     if node.get('name') in self.doc.images:
                         self._logger.debug("Image %s read ", node.get('name'))
-                        image_data = self.doc.images[node.get('name')].read()
+                        image_data = self.doc.images[node.get('name')]
                     else:
                         self._logger.warning("Image %s not defined", node.get('name'))
                         return False
