@@ -6,14 +6,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenERP Server 5.0.4\n"
 "Report-Msgid-Bugs-To: support@openerp.com\n"
-"POT-Creation-Date: 2010-11-27 03:19+0000\n"
-"PO-Revision-Date: 2010-11-29 11:14+0000\n"
-"Last-Translator: Numérigraphe <Unknown>\n"
+"POT-Creation-Date: 2010-12-03 15:43+0000\n"
+"PO-Revision-Date: 2010-12-05 11:06+0000\n"
+"Last-Translator: lolivier <olivier.lenoir@free.fr>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-11-30 04:47+0000\n"
+"X-Launchpad-Export-Date: 2010-12-07 04:56+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #. module: base
@@ -156,8 +156,7 @@ msgstr "Vous ne pouvez pas écrire dans ce document ! (%s)"
 #: code:addons/base/ir/ir_model.py:0
 #, python-format
 msgid "You cannot remove the field '%s' !"
-msgstr ""
-"Vous ne pouvez pas supprimer le champ '%s' !"
+msgstr "Vous ne pouvez pas supprimer le champ '%s' !"
 
 #. module: base
 #: code:addons/base/ir/ir_report_custom.py:0
@@ -663,12 +662,8 @@ msgstr ""
 
 #. module: base
 #: constraint:ir.rule:0
-#, fuzzy
 msgid "Rules are not supported for osv_memory objects !"
-msgstr ""
-"#-#-#-#-#  .merge_file_WYjTqn (OpenERP Server 5.0.4)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_6WwxWq (OpenERP Server 5.0.4)  #-#-#-#-#\n"
-"Les règles ne sont pas supportées par les objets osv_memory !"
+msgstr "Les règles ne sont pas compatibles avec les objets osv_memory !"
 
 #. module: base
 #: constraint:ir.ui.menu:0
@@ -1065,7 +1060,7 @@ msgstr "Assistant suivant"
 #: field:res.config,progress:0 field:res.config.installer,progress:0
 #: field:res.config.users,progress:0 field:res.config.view,progress:0
 msgid "Configuration Progress"
-msgstr "Progression de la Configuration"
+msgstr "Avancement de la configuration"
 
 #. module: base
 #: field:ir.actions.report.custom,multi:0 field:ir.actions.report.xml,multi:0
@@ -3256,10 +3251,15 @@ msgstr ""
 
 #. module: base
 #: help:ir.actions.act_window,help:0
+#, fuzzy
 msgid ""
 "Optional help text for the users with a description of the target view, such "
 "as its usage and purpose."
 msgstr ""
+"#-#-#-#-#  .merge_file_stLmjU (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_HIFIzm (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"Texte d'aide optionnel pour les utilisateurs avec une description de la vue "
+"visée, comme son utilisation et son contenu."
 
 #. module: base
 #: help:ir.actions.act_window,limit:0
@@ -3969,8 +3969,12 @@ msgstr ""
 
 #. module: base
 #: help:res.config.users,login:0 help:res.users,login:0
+#, fuzzy
 msgid "Used to log into the system"
 msgstr ""
+"#-#-#-#-#  .merge_file_stLmjU (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_HIFIzm (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"Utilisé pour se connecter au système"
 
 #. module: base
 #: help:res.config.users,menu_id:0 help:res.users,menu_id:0
@@ -7401,8 +7405,12 @@ msgstr "Monsieur"
 
 #. module: base
 #: model:res.partner.title,shortcut:base.res_partner_title_ltd
+#, fuzzy
 msgid "ltd"
 msgstr ""
+"#-#-#-#-#  .merge_file_stLmjU (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_HIFIzm (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"Ets"
 
 #. module: base
 #: model:res.partner.title,shortcut:base.res_partner_title_madam
@@ -7415,13 +7423,21 @@ msgstr ""
 
 #. module: base
 #: model:res.partner.title,shortcut:base.res_partner_title_miss
+#, fuzzy
 msgid "Mss"
 msgstr ""
+"#-#-#-#-#  .merge_file_stLmjU (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_HIFIzm (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"Mme"
 
 #. module: base
 #: model:res.partner.title,shortcut:base.res_partner_title_sir
+#, fuzzy
 msgid "M."
 msgstr ""
+"#-#-#-#-#  .merge_file_stLmjU (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_HIFIzm (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"M."
 
 #. module: base
 #: model:res.widget,title:base.openerp_twitter_favorites
@@ -8020,12 +8036,8 @@ msgstr "Enregistrer l'objet"
 
 #. module: base
 #: selection:ir.actions.todo,restart:0
-#, fuzzy
 msgid "Always"
-msgstr ""
-"#-#-#-#-#  .merge_file_JIEKs3 (OpenERP Server 5.0.4)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_PE7OcV (OpenERP Server 5.0.4)  #-#-#-#-#\n"
-"toujours"
+msgstr "Toujours"
 
 #. module: base
 #: selection:ir.actions.todo,restart:0
@@ -8038,8 +8050,12 @@ msgstr ""
 
 #. module: base
 #: selection:ir.actions.todo,restart:0
+#, fuzzy
 msgid "On Skip"
 msgstr ""
+"#-#-#-#-#  .merge_file_stLmjU (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_HIFIzm (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"En cas d'évitement"
 
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #. module: base
@@ -9486,12 +9502,8 @@ msgstr "Validé"
 #. module: base
 #: selection:res.config.users,view:0 selection:res.config.view,view:0
 #: selection:res.users,view:0
-#, fuzzy
 msgid "Extended"
-msgstr ""
-"#-#-#-#-#  .merge_file_JIEKs3 (OpenERP Server 5.0.4)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_PE7OcV (OpenERP Server 5.0.4)  #-#-#-#-#\n"
-"Etendu"
+msgstr "Étendue"
 
 #. module: base
 #: selection:res.config.users,view:0 selection:res.config.view,view:0
@@ -10430,12 +10442,8 @@ msgstr ""
 #: view:ir.model.data:0 view:ir.model.fields:0 view:ir.module.module:0
 #: view:ir.rule:0 view:ir.ui.view:0 view:ir.values:0 view:res.partner:0
 #: view:res.partner.address:0 view:workflow.activity:0
-#, fuzzy
 msgid "Group By..."
-msgstr ""
-"#-#-#-#-#  .merge_file_JIEKs3 (OpenERP Server 5.0.4)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_PE7OcV (OpenERP Server 5.0.4)  #-#-#-#-#\n"
-"Groupé par"
+msgstr "Grouper par..."
 
 #. module: base
 #: view:ir.attachment:0
@@ -12120,6 +12128,7 @@ msgstr ""
 
 #. module: base
 #: model:ir.actions.act_window,help:base.open_module_tree
+#, fuzzy
 msgid ""
 "List all certified modules available to configure your OpenERP. Modules that "
 "are installed are flagged as such. You can search for a specific module "
@@ -12128,6 +12137,15 @@ msgid ""
 "schedule button in this list. Then, apply the schedule upgrade from Action "
 "menu once for all the ones you have scheduled for installation."
 msgstr ""
+"#-#-#-#-#  .merge_file_stLmjU (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_HIFIzm (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"Liste tous les modules certifiés disponibles pour configurer votre OpenERP. "
+"Les modules qui sont installés sont marqués ainsi. Vous pouvez rechercher un "
+"module spécifique en utilisant le nom ou la description du module. Vous ne "
+"devez pas installer les modules un par un, vous pouvez en installer "
+"plusieurs en même temps en cliquant sur le bouton 'Planifier' dans la liste. "
+"Ensuite, lancer la mise à jour planifiée depuis le menu Action une fois pour "
+"tous les modules dont vous avez planifié l'installation."
 
 #. module: base
 #: selection:base.language.install,lang:0
@@ -12149,10 +12167,16 @@ msgstr ""
 
 #. module: base
 #: model:ir.actions.act_window,help:base.action_ui_view
+#, fuzzy
 msgid ""
 "Views allows you to personalize each view of OpenERP. You can add new "
 "fields, move fields, rename them or delete the ones that you do not need."
 msgstr ""
+"#-#-#-#-#  .merge_file_stLmjU (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_HIFIzm (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"Vues vous permettant de personnaler chaque vue d'OpenERP. Vous pouvez "
+"ajouter de nouveaux champs, déplacer, renommer ou supprimer ceux dont vous "
+"n'avez pas besoin."
 
 #. module: base
 #: selection:base.language.install,lang:0
@@ -12206,12 +12230,8 @@ msgstr ""
 
 #. module: base
 #: constraint:ir.cron:0
-#, fuzzy
 msgid "Invalid arguments"
-msgstr ""
-"#-#-#-#-#  .merge_file_JIEKs3 (OpenERP Server 5.0.4)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_PE7OcV (OpenERP Server 5.0.4)  #-#-#-#-#\n"
-"Paramètres non valides"
+msgstr "Arguments non valides"
 
 #. module: base
 #: model:res.partner.title,shortcut:base.res_partner_title_miss
@@ -12224,11 +12244,17 @@ msgstr ""
 
 #. module: base
 #: model:ir.actions.act_window,help:base.action_partner_title_contact
+#, fuzzy
 msgid ""
 "Manage the contact titles you want to have available in your system and the "
 "way you want to print them in letters and other documents. Some example: "
 "Mr., Mrs. "
 msgstr ""
+"#-#-#-#-#  .merge_file_stLmjU (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_HIFIzm (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"Gère les titres des contacts dont vous voulez qu'ils soient disponibles dans "
+"le systèle et comment vous voulez qu'ils soient imprimés sur les lettres et "
+"autres documents. Quelques exemples : M.; Mme. "
 
 #. module: base
 #: selection:base.language.install,lang:0
@@ -12440,11 +12466,16 @@ msgstr ""
 
 #. module: base
 #: model:ir.actions.act_window,help:base.action_country_state
+#, fuzzy
 msgid ""
 "If you are working on the American market, you can manage the different "
 "federal states you are working on from here. Each state is attached to one "
 "country."
 msgstr ""
+"#-#-#-#-#  .merge_file_stLmjU (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_HIFIzm (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"Si vous travaillez sur le marché américain, vous pouvez gérer les différents "
+"états fédéraux avec lesquels vous travaillez. Chaque état est lié à un pays."
 
 #. module: base
 #: model:ir.actions.act_window,help:base.res_partner_canal-act
@@ -12561,10 +12592,16 @@ msgstr ""
 
 #. module: base
 #: model:ir.actions.act_window,help:base.action_partner_title_partner
+#, fuzzy
 msgid ""
 "Manage the partner titles you want to have available in your system. The "
 "partner titles is the legal status of the company: Private Limited, SA, etc."
 msgstr ""
+"#-#-#-#-#  .merge_file_stLmjU (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_HIFIzm (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"Gerer les titres des partenaires qui seront disponibles dans votre système. "
+"Les titres de partenaires sont les status légaux des sociétés: SARL, SAS, "
+"SA, etc."
 
 #. module: base
 #: selection:base.language.install,lang:0
@@ -12740,6 +12777,7 @@ msgstr ""
 
 #. module: base
 #: model:ir.actions.act_window,help:base.grant_menu_access
+#, fuzzy
 msgid ""
 "Manage and customize the items available and displayed in your OpenERP "
 "system menu. You can delete an item by clicking on the box at the beginning "
@@ -12747,6 +12785,13 @@ msgid ""
 "be assigned to specific groups in order to make them accessible to some "
 "users within the system."
 msgstr ""
+"#-#-#-#-#  .merge_file_stLmjU (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_HIFIzm (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"Gère et personnalise les éléments disponibles et affichés dans les menus "
+"d'OpenERP. Vous pouvez supprimer un élément en cliquant sur la case à cocher "
+"au début de chaque ligne et en cliquant sur le bouton de suppression qui "
+"apparaît alors. Les éléments peuvent être attachés à un groupe spécifique "
+"dans le but de les rendre accessible qu'à quelques utilisateurs du système."
 
 #. module: base
 #: selection:base.language.install,lang:0
@@ -12822,9 +12867,12 @@ msgstr ""
 
 #. module: base
 #: code:addons/base/ir/ir_model.py:0
-#, python-format
+#, fuzzy, python-format
 msgid "The osv_memory field can only be compared with = and != operator."
 msgstr ""
+"#-#-#-#-#  .merge_file_stLmjU (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_HIFIzm (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"Le champ osv_memory peut seulement être comparé avec les opérateurs = et !=."
 
 #. module: base
 #: code:addons/base/ir/ir_values.py:0
@@ -12899,9 +12947,68 @@ msgstr ""
 
 #. module: base
 #: code:addons/base/res/res_user.py:0
-#, python-format
+#, fuzzy, python-format
 msgid ""
 "Group(s) cannot be deleted, because some user(s) still belong to them: %s !"
+msgstr ""
+"#-#-#-#-#  .merge_file_stLmjU (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_HIFIzm (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"Le(s) group(s) ne peuvent être supprimer à cause des utilisateurs qui y sont "
+"liés: %s !"
+
+#. module: base
+#: model:res.widget,title:base.matrixise_twitter_widget
+msgid "Stéphane Wirtel's tweets"
+msgstr "Tweets de Stéphane Wirtel"
+
+#. module: base
+#: selection:base.language.install,lang:0
+msgid "Serbian (Latin) / srpski"
+msgstr "Serbe (Latin) / srpski"
+
+#. module: base
+#: view:res.widget.wizard:0
+msgid "Add"
+msgstr "Ajouter"
+
+#. module: base
+#: view:res.widget.wizard:0
+msgid "Widget Wizard"
+msgstr ""
+
+#. module: base
+#: model:res.widget,title:base.rvalyi_twitter_widget
+msgid "Raphaël Valyi's tweets"
+msgstr "Tweets de Raphaël Valyi"
+
+#. module: base
+#: model:res.widget,title:base.odony_twitter_widget
+msgid "Olivier Dony's tweets"
+msgstr "Tweets d'Oliver Dony"
+
+#. module: base
+#: model:ir.model,name:base.model_res_widget_wizard
+msgid "Add a widget for User"
+msgstr ""
+
+#. module: base
+#: selection:base.language.install,lang:0
+msgid "Serbian (Cyrillic) / српски"
+msgstr "Serbe (Cyrilique) / српски"
+
+#. module: base
+#: model:res.widget,title:base.albertnan_twitter_widget
+msgid "Albert Cervera Areny's tweets"
+msgstr "Tweets d'Albert Cervera Areny"
+
+#. module: base
+#: model:res.widget,title:base.nhomar_twitter_widget
+msgid "Nhomar Hernandez's tweets"
+msgstr ""
+
+#. module: base
+#: model:ir.actions.act_window,name:base.action_res_widget_wizard
+msgid "Homepage Widgets Management"
 msgstr ""
 
 #~ msgid "List of Company"
