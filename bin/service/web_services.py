@@ -919,9 +919,10 @@ class _report_spool_job(threading.Thread):
             self.state = True
             return
         except KeyboardInterrupt, e:
+            tb = sys.exc_info()
             logger = logging.getLogger('web-services')
             logger.exception('Interrupt of report: %r' % self)
-            self.exception = e
+            self.exception = ExceptionWithTraceback('KeyboardInterrupt of report: %r' % self, tb)
             self.state = True
             # we don't need to raise higher, because we already printed the tb
             # and are exiting the thread loop.
@@ -1049,6 +1050,10 @@ class report_spool(dbExportDispatch, baseExportService):
         
             @return True if stopped, False if alredy finished,
                     Exception('Timeout') if cannot stop
+            
+            Note that after a "report_stop" request, the caller shall
+            do one more "report_get" to fetch the exception and free
+            the job object.
         """
         if report_id in self._reports:
             report = self._reports[report_id]
@@ -1059,9 +1064,6 @@ class report_spool(dbExportDispatch, baseExportService):
                     if report.is_alive():
                         raise Exception('Timeout')
                     
-                    self.id_protect.acquire()
-                    del self._reports[report_id]
-                    self.id_protect.release()
                     return True
                 else:
                     return False
