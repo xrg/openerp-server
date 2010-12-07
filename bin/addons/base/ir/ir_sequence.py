@@ -88,10 +88,16 @@ class ir_sequence(osv.osv):
         log = logging.getLogger('orm')
         try:
             sql_test = self._get_test(test, context)
-            cr.execute('SELECT id, number_next, prefix, suffix, padding, condition \
-                FROM ir_sequence \
-                WHERE '+sql_test+' AND active=%s ORDER BY weight DESC, length(COALESCE(condition,\'\')) DESC \
-                FOR UPDATE', (sequence_id, True), debug=self._debug)
+            cr.execute("""SELECT id, number_next, prefix, suffix, padding, condition
+                FROM ir_sequence
+                WHERE """ + sql_test + """
+                  AND active=%s
+                  AND (company_id IS NULL OR
+                       company_id IN ( SELECT company_id
+                                         FROM res_users
+                                        WHERE id = %s ) )
+                ORDER BY company_id, weight DESC, length(COALESCE(condition,'')) DESC
+                FOR UPDATE """, (sequence_id, True, uid), debug=self._debug)
             for res in cr.dictfetchall():
                 if res['condition']:
                     if self._debug:
