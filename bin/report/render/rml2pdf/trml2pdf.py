@@ -148,6 +148,13 @@ class _rml_styles(object,):
                 for name in variable.findall('name'):
                     self.names[ name.get('id')] = name.get('value')
 
+    def tick(self):
+        """Inform upstream that the process is running, cancel it if needed
+        """
+        ct = threading.currentThread()
+        if ct and getattr(ct, 'must_stop', False):
+            raise KeyboardInterrupt
+
     def _para_style_update(self, node):
         data = {}
         for attr in ['textColor', 'backColor', 'bulletColor', 'borderColor']:
