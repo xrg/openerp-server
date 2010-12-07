@@ -29,6 +29,7 @@ from reportlab import platypus
 import utils
 import color
 import os
+import threading
 import logging
 from lxml import etree
 import base64
@@ -233,6 +234,13 @@ class _rml_doc(object):
         self.images = images
         self.path = path
         self.title = title
+
+    def tick(self):
+        """Inform upstream that the process is running, cancel it if needed
+        """
+        ct = threading.currentThread()
+        if ct and getattr(ct, 'must_stop', False):
+            raise KeyboardInterrupt
 
     def docinit(self, els):
         from reportlab.lib.fonts import addMapping
@@ -557,6 +565,7 @@ class _rml_canvas(object):
             'image': self._image
         }
         for n in utils._child_get(node, self):
+            self.doc.tick()
             if n.tag in tags:
                 tags[n.tag](n)
 
@@ -841,6 +850,7 @@ class _rml_flowable(object):
         def process_story(node_story):
             sub_story = []
             for node in utils._child_get(node_story, self):
+                self.doc.tick()
                 if node.tag == etree.Comment:
                     node.text = ''
                     continue
@@ -930,6 +940,7 @@ class _rml_template(object):
         r = _rml_flowable(self.doc,self.localcontext, images=self.images, path=self.path, title=self.title)
         story_cnt = 0
         for node_story in node_stories:
+            self.doc.tick()
             if story_cnt > 0:
                 fis.append(platypus.PageBreak())
             fis += r.render(node_story)
