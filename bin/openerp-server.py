@@ -116,6 +116,9 @@ def sigusr1_handler(signum, _):
         stats = netsvc.Server.allStats()
         server_logger.info(stats)
         
+        stats = netsvc.ExportService.allStats()
+        server_logger.info(stats)
+        
         import threading
         
         for thr in threading.enumerate():

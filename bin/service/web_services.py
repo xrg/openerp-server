@@ -451,7 +451,7 @@ class common(_ObjectService):
         elif method == 'logout':
             if auth:
                 auth.logout(params[1])
-            logger.info('Logout %s from database %s'%(login,db))
+            logger.info('Logout %s from database %s'%(params[1],db))
             return True
         elif method in self._auth_commands['pub']:
             pass
@@ -673,6 +673,8 @@ GNU Public Licence.
         import threading
         res = "OpenERP server: %d threads\n" % threading.active_count()
         res += netsvc.Server.allStats()
+        res += "\n"
+        res += netsvc.ExportService.allStats()
         try:
             import gc
             if gc.isenabled():

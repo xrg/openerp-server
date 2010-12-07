@@ -142,6 +142,30 @@ class ExportService(object):
         else:
             raise
 
+    def stats(self, _pre_msg='No statistics'):
+        """ This function should return statistics about the service.
+            @param _pre_msg helps when a child class wants to just display
+                    a simple message
+        """
+        return "%s (%s.%s): %s" % (self.__name, 
+                    self.__class__.__module__, self.__class__.__name__,
+                    _pre_msg)
+
+    @classmethod
+    def allStats(cls):
+        """ Return a newline-delimited string of all services stats
+        
+            Remember that the purpose of this is to inspect what the
+            server is doing at each moment.
+        """
+        res = []
+        for srv in cls._services.values():
+            st = srv.stats()
+            if not st:
+                continue
+            res.append(st)
+        return '\n'.join(res)
+
 LOG_NOTSET = 'notset'
 LOG_DEBUG_SQL = 'debug_sql'
 LOG_DEBUG_RPC = 'debug_rpc'
