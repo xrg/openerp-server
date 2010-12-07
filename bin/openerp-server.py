@@ -79,8 +79,8 @@ if tools.config['db_user'] == 'postgres':
 import time
 
 LST_SIGNALS = ['SIGINT', 'SIGTERM']
-if os.name == 'posix':
-    LST_SIGNALS.extend(['SIGQUIT'])
+# if os.name == 'posix':
+#     LST_SIGNALS.extend(['SIGQUIT'])
 
 
 SIGNALS = dict(
