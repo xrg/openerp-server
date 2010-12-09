@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: OpenERP Server 5.0.0\n"
 "Report-Msgid-Bugs-To: support@openerp.com\n"
 "POT-Creation-Date: 2010-12-03 15:43+0000\n"
-"PO-Revision-Date: 2010-12-07 23:59+0200\n"
+"PO-Revision-Date: 2010-12-08 11:59+0200\n"
 "Last-Translator: P. Christeas <p_christ@hol.gr>\n"
 "Language-Team: Greek <openerp@lists.hellug.gr>\n"
 "MIME-Version: 1.0\n"
@@ -1495,7 +1495,7 @@ msgstr "Συνεισφορά από"
 #. module: base
 #: field:ir.module.module,demo:0
 msgid "Demo data"
-msgstr "Demo δεδομένα"
+msgstr "Δοκιμαστικά δεδομένα"
 
 #. module: base
 #: field:ir.module.module,dependencies_id:0 view:ir.module.module:0
@@ -4841,7 +4841,7 @@ msgstr "Cocos (Keeling) Islands"
 #. module: base
 #: model:res.country,name:base.cd
 msgid "Congo, The Democratic Republic of the"
-msgstr "Congo, The Democratic Republic of the"
+msgstr "Κονγκό, Λαϊκή Δημοκρατία"
 
 #. module: base
 #: model:res.country,name:base.cf
@@ -6800,7 +6800,7 @@ msgstr "Προς αναβάθμιση"
 #. module: base
 #: selection:ir.module.module.dependency,state:0
 msgid "Uninstallable"
-msgstr "Uninstallable"
+msgstr "Δεν εγκαθίσταται"
 
 #. module: base
 #: selection:ir.module.module.dependency,state:0
@@ -7281,16 +7281,13 @@ msgstr ""
 
 #. module: base
 #: view:base.language.install:0
-#, fuzzy
 msgid ""
 "This wizard helps you add a new language to your OpenERP system. After "
 "loading a new language it becomes available as default interface language "
 "for users and partners."
 msgstr ""
-"#-#-#-#-#  .merge_file_tNflwt (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_nfOTYj (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"Αυτός ο οδηγός σας βοηθάει να προσθέσετε μια νέα γλώσσα στο OpenERP σύστημά "
-"σας. Μετά τη φόρτωση μια νέα γλώσσα γίνεται διαθέσιμη ως η προεπιλεγμένη "
+"Αυτός ο οδηγός σας βοηθάει να προσθέσετε μια νέα γλώσσα στο OpenERP σας. "
+"Μετά τη φόρτωση μια νέα γλώσσα γίνεται διαθέσιμη ως η προεπιλεγμένη "
 "γλώσσα διεπαφής για χρήστες και συνεργάτες."
 
 #. module: base
@@ -7337,17 +7334,14 @@ msgstr "Επιλέξτε πακέτο αρθρώματος για εισαγωγ
 
 #. module: base
 #: view:base.module.import:0
-#, fuzzy
 msgid ""
 "This wizard helps you add a new language to you OpenERP system. After "
 "loading a new language it becomes available as default interface language "
 "for users and partners."
 msgstr ""
-"#-#-#-#-#  .merge_file_JdaAjy (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_gsP1MZ (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"Αυτός ο οδηγός σας βοηθά να προσθέσετε μια νέα γλώσσα για το σύστημα του "
-"OpenERP. Μετά τη φόρτωση μιας νέας γλώσσας είναι διαθέσιμη, ως προεπιλεγμένη "
-"γλώσσα περιβάλλοντος για τους χρήστες και τους συνεργάτες."
+"Αυτός ο οδηγός σας βοηθάει να προσθέσετε μια νέα γλώσσα στο OpenERP σας. "
+"Μετά τη φόρτωση μια νέα γλώσσα γίνεται διαθέσιμη ως η προεπιλεγμένη "
+"γλώσσα διεπαφής για χρήστες και συνεργάτες."
 
 #. module: base
 #: view:base.module.update:0
@@ -7370,9 +7364,8 @@ msgid ""
 "This wizard will scan all module repositories on the server side to detect "
 "newly added modules as well as any change to existing modules."
 msgstr ""
-"Αυτός ο οδηγός θα ανιχνεύσει όλα τα αποθετήρια ενότητήτων στον διακομιστή "
-"για την ανίχνευση ενοτήτων που προστέθηκαν πρόσφατα καθώς και οποιαδήποτε "
-"μεταβολή στα υφιστάμενα πρόσθετα."
+"Αυτός ο οδηγός θα ανιχνεύσει όλα τα αποθετήρια αρθρωμάτων στον διακομιστή "
+"για την ανίχνευση νέων ή αναβαθμισμένων αρθρωμάτων."
 
 #. module: base
 #: view:base.module.update:0 view:base.update.translations:0
@@ -7791,7 +7784,7 @@ msgstr "Αναζήτηση στα Αρθρώματα"
 #. module: base
 #: view:ir.module.module:0
 msgid "Uninstall (beta)"
-msgstr "Uninstall (beta)"
+msgstr "Απεγκατάσταση (beta)"
 
 #. module: base
 #: view:ir.property:0
