@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: OpenERP Server 5.0.0\n"
 "Report-Msgid-Bugs-To: support@openerp.com\n"
 "POT-Creation-Date: 2010-12-03 15:43+0000\n"
-"PO-Revision-Date: 2010-12-06 12:35+0000\n"
-"Last-Translator: Magnus Brandt, Aspirix AB <Unknown>\n"
+"PO-Revision-Date: 2010-12-09 07:57+0000\n"
+"Last-Translator: OpenERP Administrators <Unknown>\n"
 "Language-Team: <>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-12-07 04:57+0000\n"
+"X-Launchpad-Export-Date: 2010-12-10 05:01+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #. module: base
@@ -137,9 +137,12 @@ msgstr ""
 
 #. module: base
 #: code:addons/base/ir/ir_model.py:0
-#, python-format
+#, fuzzy, python-format
 msgid "You can not write in this document! (%s)"
 msgstr ""
+"#-#-#-#-#  .merge_file_Uw7Qmz (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_PYpwey (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Du kan inte skriva i detta dokument! (%s)"
 
 #. module: base
 #: code:addons/base/ir/ir_report_custom.py:0
@@ -209,11 +212,15 @@ msgstr ""
 
 #. module: base
 #: code:addons/base/module/module.py:0
-#, python-format
+#, fuzzy, python-format
 msgid ""
 "Can not create the module file:\n"
 " %s"
 msgstr ""
+"#-#-#-#-#  .merge_file_Uw7Qmz (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_PYpwey (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Kan inte skapa modulfilen:\n"
+" %s"
 
 #. module: base
 #: code:addons/base/module/module.py:0
@@ -1250,8 +1257,12 @@ msgstr ""
 
 #. module: base
 #: field:ir.model.access,perm_read:0
+#, fuzzy
 msgid "Read Access"
 msgstr ""
+"#-#-#-#-#  .merge_file_Uw7Qmz (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_PYpwey (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Lästillgång"
 
 #. module: base
 #: field:ir.model.access,perm_unlink:0
@@ -1542,8 +1553,12 @@ msgstr "Frekvens"
 #. module: base
 #: field:ir.report.custom,menu_id:0 field:ir.ui.menu,name:0
 #: model:ir.actions.act_window,name:base.action_menu_admin view:ir.ui.menu:0
+#, fuzzy
 msgid "Menu"
 msgstr ""
+"#-#-#-#-#  .merge_file_Uw7Qmz (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_PYpwey (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Meny"
 
 #. module: base
 #: field:ir.report.custom,print_format:0
@@ -2205,8 +2220,12 @@ msgstr ""
 
 #. module: base
 #: field:res.partner,category_id:0 view:res.partner:0
+#, fuzzy
 msgid "Categories"
 msgstr ""
+"#-#-#-#-#  .merge_file_Uw7Qmz (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_PYpwey (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Kategorier"
 
 #. module: base
 #: field:res.partner,child_ids:0 field:res.request,ref_partner_id:0
@@ -3633,8 +3652,12 @@ msgstr ""
 #. module: base
 #: model:ir.actions.wizard,name:base.res_partner_send_sms_wizard
 #: wizard_button:res.partner.sms_send,init,send:0
+#, fuzzy
 msgid "Send SMS"
 msgstr ""
+"#-#-#-#-#  .merge_file_Uw7Qmz (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_PYpwey (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Skicka SMS"
 
 #. module: base
 #: model:ir.actions.wizard,name:base.wizard_base_module_import
@@ -5093,8 +5116,12 @@ msgstr "Portugal"
 
 #. module: base
 #: model:res.country,name:base.pw
+#, fuzzy
 msgid "Palau"
 msgstr ""
+"#-#-#-#-#  .merge_file_Uw7Qmz (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_PYpwey (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Palau"
 
 #. module: base
 #: model:res.country,name:base.py
@@ -6919,8 +6946,12 @@ msgstr ""
 
 #. module: base
 #: selection:module.lang.install,init,lang:0
+#, fuzzy
 msgid "French (BE) / Français (BE)"
 msgstr ""
+"#-#-#-#-#  .merge_file_Uw7Qmz (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_PYpwey (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Franska (BE) / Français (BE)"
 
 #. module: base
 #: selection:module.lang.install,init,lang:0
@@ -7472,8 +7503,12 @@ msgstr ""
 
 #. module: base
 #: view:ir.cron:0
+#, fuzzy
 msgid "Technical Data"
 msgstr ""
+"#-#-#-#-#  .merge_file_Uw7Qmz (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_PYpwey (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Teknisk data"
 
 #. module: base
 #: view:ir.model:0 view:res.groups:0
@@ -8578,8 +8613,12 @@ msgstr "Övrig Konfiguration"
 
 #. module: base
 #: selection:ir.property,type:0
+#, fuzzy
 msgid "DateTime"
 msgstr ""
+"#-#-#-#-#  .merge_file_Uw7Qmz (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_PYpwey (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"DatumTid"
 
 #. module: base
 #: selection:base.language.install,lang:0
@@ -8624,8 +8663,12 @@ msgstr "Ägare"
 
 #. module: base
 #: field:ir.ui.menu,web_icon_data:0
+#, fuzzy
 msgid "Web Icons"
 msgstr ""
+"#-#-#-#-#  .merge_file_Uw7Qmz (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_PYpwey (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Webbikoner"
 
 #. module: base
 #: view:ir.translation:0
@@ -8639,8 +8682,12 @@ msgstr ""
 
 #. module: base
 #: model:res.partner.category,name:base.res_partner_category_miscellaneoussuppliers0
+#, fuzzy
 msgid "Miscellaneous Suppliers"
 msgstr ""
+"#-#-#-#-#  .merge_file_Uw7Qmz (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_PYpwey (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Diverse leverantörer"
 
 #. module: base
 #: help:ir.actions.act_window,src_model:0
@@ -8740,8 +8787,12 @@ msgstr "Spanska (UY) / Español (UY)"
 
 #. module: base
 #: selection:ir.module.module,license:0
+#, fuzzy
 msgid "Other OSI Approved Licence"
 msgstr ""
+"#-#-#-#-#  .merge_file_Uw7Qmz (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_PYpwey (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Övrig OSI godkänd licens"
 
 #. module: base
 #: help:res.config.users,context_lang:0 help:res.users,context_lang:0

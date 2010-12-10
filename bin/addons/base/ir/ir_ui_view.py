@@ -48,13 +48,19 @@ class view_custom(osv.osv):
         'user_id': fields.many2one('res.users', 'User', select=True),
         'arch': fields.text('View Architecture', required=True),
     }
+
+    def _auto_init(self, cr, context=None):
+        super(view_custom, self)._auto_init(cr, context)
+        cr.execute('SELECT indexname FROM pg_indexes WHERE indexname = \'ir_ui_view_custom_user_id_ref_id\'')
+        if not cr.fetchone():
+            cr.execute('CREATE INDEX ir_ui_view_custom_user_id_ref_id ON ir_ui_view_custom (user_id, ref_id)')
 view_custom()
 
 class view(osv.osv):
     _name = 'ir.ui.view'
     _columns = {
         'name': fields.char('View Name',size=64,  required=True),
-        'model': fields.char('Object', size=64, required=True),
+        'model': fields.char('Object', size=64, required=True, select=True),
         'priority': fields.integer('Sequence', required=True),
         'type': fields.selection((
             ('tree','Tree'),
@@ -64,9 +70,9 @@ class view(osv.osv):
             ('calendar', 'Calendar'),
             ('diagram','Diagram'),
             ('gantt', 'Gantt'),
-            ('search','Search')), 'View Type', required=True),
+            ('search','Search')), 'View Type', required=True, select=True),
         'arch': fields.text('View Architecture', required=True),
-        'inherit_id': fields.many2one('ir.ui.view', 'Inherited View', ondelete='cascade', select=1),
+        'inherit_id': fields.many2one('ir.ui.view', 'Inherited View', ondelete='cascade', select=True),
         'field_parent': fields.char('Child Field',size=64),
         'xml_id': fields.function(osv.osv.get_xml_id, type='char', size=128, string="XML ID",
                                   method=True, help="ID of the view defined in xml file"),
@@ -203,8 +209,14 @@ class view_sc(osv.osv):
         'res_id': fields.many2one('ir.ui.menu','Resource Ref.', ondelete='cascade'),
         'sequence': fields.integer('Sequence'),
         'user_id': fields.many2one('res.users', 'User Ref.', required=True, ondelete='cascade', select=True),
-        'resource': fields.char('Resource Name', size=64, required=True)
+        'resource': fields.char('Resource Name', size=64, required=True, select=True)
     }
+
+    def _auto_init(self, cr, context=None):
+        super(view_sc, self)._auto_init(cr, context)
+        cr.execute('SELECT indexname FROM pg_indexes WHERE indexname = \'ir_ui_view_sc_user_id_resource\'')
+        if not cr.fetchone():
+            cr.execute('CREATE INDEX ir_ui_view_sc_user_id_resource ON ir_ui_view_sc (user_id, resource)')
 
     def get_sc(self, cr, uid, user_id, model='ir.ui.menu', context=None):
         ids = self.search(cr, uid, [('user_id','=',user_id),('resource','=',model)], context=context)

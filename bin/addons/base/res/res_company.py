@@ -189,9 +189,6 @@ class res_company(osv.osv):
         except:
             return False
 
-    def _check_recursion(self, cr, uid, ids):
-        return super(res_company, self)._check_recursion(cr, uid, ids)
-
     def _get_logo(self, cr, uid, ids):
         # Note: we do not try to access files above our root_path, because
         # at a production system root_path/../pixmaps is arbitrary!
@@ -286,7 +283,7 @@ class res_company(osv.osv):
     }
 
     _constraints = [
-        (_check_recursion, 'Error! You can not create recursive companies.', ['parent_id'])
+        (osv.osv._check_recursion, 'Error! You can not create recursive companies.', ['parent_id'])
     ]
 
 res_company()

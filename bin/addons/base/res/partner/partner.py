@@ -51,9 +51,6 @@ class res_partner_category(osv.osv):
         res = self.name_get(cr, uid, ids, context=context)
         return dict(res)
 
-    def _check_recursion(self, cr, uid, ids):
-        return osv.osv._check_recursion(self, cr, uid, ids)
-
     _description='Partner Categories'
     _name = 'res.partner.category'
     _columns = {
@@ -64,7 +61,7 @@ class res_partner_category(osv.osv):
         'active' : fields.boolean('Active', required=True, help="The active field allows you to hide the category without removing it."),
     }
     _constraints = [
-        (_check_recursion, 'Error ! You can not create recursive categories.', ['parent_id'])
+        (osv.osv._check_recursion, 'Error ! You can not create recursive categories.', ['parent_id'])
     ]
     _defaults = {
         'active': True,
@@ -148,7 +145,7 @@ class res_partner(osv.osv):
     def do_share(self, cr, uid, ids, *args):
         return True
 
-    def _check_ean_key(self, cr, uid, ids):
+    def _check_ean_key(self, cr, uid, ids, context=None):
         for partner_o in pooler.get_pool(cr.dbname).get('res.partner').read(cr, uid, ids, ['ean13',]):
             thisean=partner_o['ean13']
             if thisean and thisean!='':
