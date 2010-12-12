@@ -88,7 +88,8 @@ class view(osv.osv):
         """
         return _('Invalid XML for View Architecture!'), ()
 
-    _order = "priority"
+    _order = "priority,name"
+    
     _constraints = [
         (_check_xml, _invalid_xml_message , ['arch'])
     ]
@@ -222,7 +223,7 @@ class view_sc(osv.osv):
         ids = self.search(cr, uid, [('user_id','=',user_id),('resource','=',model)], context=context)
         return self.read(cr, uid, ids, ['res_id','name'], context=context)
 
-    _order = 'sequence'
+    _order = 'sequence,name'
     _defaults = {
         'resource': 'ir.ui.menu',
         'user_id': lambda obj, cr, uid, context: uid,
