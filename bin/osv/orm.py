@@ -450,7 +450,9 @@ class browse_record(object):
 def get_pg_type(f):
     '''
     returns a tuple
-    (type returned by postgres when the column was created, type expression to create the column)
+    ( type returned by postgres when the column was created, 
+      type expression to create the column,
+      size of the column for char types)
     '''
 
     type_dict = {
@@ -465,14 +467,14 @@ def get_pg_type(f):
             fields.many2one: 'int4',
             }
     if type(f) in type_dict:
-        f_type = (type_dict[type(f)], type_dict[type(f)])
+        f_type = (type_dict[type(f)], type_dict[type(f)], f.size)
     elif isinstance(f, fields.float):
         if f.digits:
-            f_type = ('numeric', 'NUMERIC')
+            f_type = ('numeric', 'NUMERIC', None)
         else:
-            f_type = ('float8', 'DOUBLE PRECISION')
+            f_type = ('float8', 'DOUBLE PRECISION', None)
     elif isinstance(f, (fields.char, fields.reference)):
-        f_type = ('varchar', 'VARCHAR(%d)' % (f.size,))
+        f_type = ('varchar', 'VARCHAR(%d)' % (f.size,), f.size)
     elif isinstance(f, fields.selection):
         if isinstance(f.selection, list) and isinstance(f.selection[0][0], (str, unicode)):
             f_size = reduce(lambda x, y: max(x, len(y[0])), f.selection, f.size or 16)
@@ -482,21 +484,21 @@ def get_pg_type(f):
             f_size = getattr(f, 'size', None) or 16
 
         if f_size == -1:
-            f_type = ('int4', 'INTEGER')
+            f_type = ('int4', 'INTEGER', None)
         else:
-            f_type = ('varchar', 'VARCHAR(%d)' % f_size)
+            f_type = ('varchar', 'VARCHAR(%d)' % f_size, f_size)
     elif isinstance(f, fields.function) and eval('fields.'+(f._type), globals()) in type_dict:
         t = eval('fields.'+(f._type), globals())
-        f_type = (type_dict[t], type_dict[t])
+        f_type = (type_dict[t], type_dict[t], None)
     elif isinstance(f, fields.function) and f._type == 'float':
         if f.digits:
-            f_type = ('numeric', 'NUMERIC')
+            f_type = ('numeric', 'NUMERIC', None)
         else:
-            f_type = ('float8', 'DOUBLE PRECISION')
+            f_type = ('float8', 'DOUBLE PRECISION', None)
     elif isinstance(f, fields.function) and f._type == 'selection':
-        f_type = ('text', 'text')
+        f_type = ('text', 'text', None)
     elif isinstance(f, fields.function) and f._type == 'char':
-        f_type = ('varchar', 'VARCHAR(%d)' % (f.size))
+        f_type = ('varchar', 'VARCHAR(%d)' % (f.size), f.size)
     else:
         _logger.warning('%s type not supported!' % (type(f)))
         f_type = None
@@ -3037,37 +3039,62 @@ class orm(orm_template):
                                 cr.execute('ALTER TABLE "%s" DROP COLUMN "%s" CASCADE'% (self._table, k), debug=self._debug)
                                 cr.commit()
                             f_obj_type = None
+                            f_obj_ctype = None
+                            f_obj_size = None
                         else:
-                            f_obj_type = get_pg_type(f) and get_pg_type(f)[0]
+                            f_obj_type, f_obj_ctype, f_obj_size = (get_pg_type(f) or (False, False, None))
+                            if not f_obj_size:
+                                f_obj_size = f.size
 
                         if f_obj_type:
                             ok = False
                             casts = [
-                                ('text', 'char', 'VARCHAR(%d)' % (f.size or 0,), '::VARCHAR(%d)'%(f.size or 0,)),
-                                ('varchar', 'text', 'TEXT', ''),
-                                ('int4', 'float', get_pg_type(f)[1], '::'+get_pg_type(f)[1]),
-                                ('date', 'datetime', 'TIMESTAMP', '::TIMESTAMP'),
-                                ('timestamp', 'date', 'date', '::date'),
-                                ('numeric', 'float', get_pg_type(f)[1], '::'+get_pg_type(f)[1]),
-                                ('float8', 'float', get_pg_type(f)[1], '::'+get_pg_type(f)[1]),
+                                ('text', 'char', 'VARCHAR(%d)' % (f_obj_size or 16,)),
+                                ('varchar', 'char', 'VARCHAR(%d)' % (f_obj_size or 16,)),
+                                ('varchar', 'text', 'TEXT'),
+                                ('int4', 'float', f_obj_ctype),
+                                ('date', 'datetime', 'TIMESTAMP'),
+                                ('timestamp', 'date', 'date'),
+                                ('numeric', 'float', f_obj_ctype),
+                                ('float8', 'float', f_obj_ctype),
+                                (f_obj_type, 'selection', f_obj_ctype),
                             ]
-                            if f_pg_type == 'varchar' and f._type == 'char' and f_pg_size < f.size:
-                                _logger.info("column '%s' in table '%s' changed size" % (k, self._table))
-                                cr.execute('ALTER TABLE "%s" RENAME COLUMN "%s" TO temp_change_size' % (self._table, k), debug=self._debug)
-                                cr.execute('ALTER TABLE "%s" ADD COLUMN "%s" VARCHAR(%d)' % (self._table, k, f.size), debug=self._debug)
-                                cr.execute('UPDATE "%s" SET "%s"=temp_change_size::VARCHAR(%d)' % (self._table, k, f.size), debug=self._debug)
-                                cr.execute('ALTER TABLE "%s" DROP COLUMN temp_change_size CASCADE' % (self._table,), debug=self._debug)
-                                cr.commit()
+                            
+                            # Examine if type & size of columns match
                             for c in casts:
                                 if (f_pg_type==c[0]) and (f._type==c[1]):
-                                    if f_pg_type != f_obj_type:
-                                        if f_pg_type != f_obj_type:
-                                            _logger.info("column '%s' in table '%s' changed type to %s." % (k, self._table, c[1]))
+                                    need_change = False
+                                    if (f_pg_type != f_obj_type):
+                                        _logger.info("column '%s' in table '%s' changed type to %s.",
+                                                        k, self._table, c[0])
+                                        need_change = True
+                                    elif f_obj_type in ('char', 'varchar') and f_obj_size:
+                                        if (f_pg_size < f_obj_size):
+                                            _logger.info("column '%s' in table '%s' increased %s size to %d.",
+                                                        k, self._table, c[0], f_obj_size)
+                                            need_change = True
+                                        elif (f_pg_size > f_obj_size) \
+                                                and not getattr(self, '_inherit', False):
+                                            # A special case, on multiple inheritance we shall
+                                            # not reduce size of columns, because conflicting
+                                            # declarations may have 2 different sizes.
+                                            cr.execute('SELECT true FROM "%s" WHERE length("%s") > %%s' % \
+                                                        (self._table, k), (f_obj_size,), debug=self._debug)
+                                            if cr.fetchone():
+                                                _logger.warning("column '%s' in table '%s' should reduce %s size to %d," \
+                                                            " but longer data exist. Please inspect and cleanup the data manually.",
+                                                        k, self._table, c[0], f_obj_size)
+                                            else:
+                                                _logger.info("column '%s' in table '%s' reduced %s size to %d.",
+                                                        k, self._table, c[0], f_obj_size)
+                                                need_change = True
+                                    if need_change:
                                         ok = True
-                                        cr.execute('ALTER TABLE "%s" RENAME COLUMN "%s" TO temp_change_size' % (self._table, k), debug=self._debug)
-                                        cr.execute('ALTER TABLE "%s" ADD COLUMN "%s" %s' % (self._table, k, c[2]), debug=self._debug)
-                                        cr.execute('UPDATE "%s" SET "%s"=temp_change_size%s' % (self._table, k, c[3]), debug=self._debug)
-                                        cr.execute('ALTER TABLE "%s" DROP COLUMN temp_change_size CASCADE' % (self._table,), debug=self._debug)
+                                        # Postgres promises to be able to alter a column's
+                                        # type (including size) in one command. 
+                                        # See sql-altertable.html, valid at least since v8.0
+                                        cr.execute('ALTER TABLE "%s" ALTER COLUMN "%s" TYPE %s' % \
+                                                    (self._table, k, c[2]), debug=self._debug)
                                         cr.commit()
                                     break
 
