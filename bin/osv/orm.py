@@ -1913,6 +1913,7 @@ class orm_template(object):
                             elif pos == 'after':
                                 if sib is None:
                                     node.addnext(child)
+                                    node = child
                                 else:
                                     sib.addprevious(child)
                             elif pos == 'before':
@@ -2910,8 +2911,14 @@ class orm(orm_template):
                 if not cr.rowcount:
                     if 'parent_left' not in self._columns:
                         _logger.error('create a column parent_left on object %s: fields.integer(\'Left Parent\', select=1)' % (self._table, ))
+                    elif not self._columns['parent_left'].select:
+                        _logger.error('parent_left column on object %s must be indexed! Add select=1 to the field definition)',
+                                            self._table)
                     if 'parent_right' not in self._columns:
                         _logger.error( 'create a column parent_right on object %s: fields.integer(\'Right Parent\', select=1)' % (self._table, ))
+                    elif not self._columns['parent_right'].select:
+                        _logger.error('parent_right column on object %s must be indexed! Add select=1 to the field definition)',
+                                            self._table)
                     if self._columns[self._parent_name].ondelete != 'cascade':
                         _logger.error( "the columns %s on object must be set as ondelete='cascasde'" % (self._name, self._parent_name))
                     cr.execute('ALTER TABLE "%s" ADD COLUMN "parent_left" INTEGER' % (self._table,), debug=self._debug)
@@ -4484,7 +4491,11 @@ class orm(orm_template):
             order_field_column = self._columns[order_field]
 
         assert order_field_column._type == 'many2one', 'Invalid field passed to _generate_m2o_order_by()'
-        assert order_field_column._classic_write or getattr(order_field_column, 'store', False), "Many2one function/related fields must be stored to be used as ordering fields"
+        if not order_field_column._classic_write and not getattr(order_field_column, 'store', False):
+            logging.getLogger('orm.search').debug("Many2one function/related fields must be stored " \
+                                                  "to be used as ordering fields! Ignoring sorting for %s.%s",
+                                                  self._name, order_field)
+            return
 
         # figure out the applicable order_by for the m2o
         dest_model = self.pool.get(order_field_column._obj)
@@ -4522,32 +4533,35 @@ class orm(orm_template):
                 if order_field.startswith('"') and order_field.endswith('"'):
                     order_field = order_field[1:-1]
                 order_direction = order_split[1].strip() if len(order_split) == 2 else ''
+                inner_clause = None
                 if order_field in ('id', 'create_date', 'create_uid', 'write_date', 'write_uid', '_vptr'):
                     # builtin columns first
                     order_by_clause = '"%s"."%s"' % (self._table, order_field)
                 elif order_field in self._columns:
                     order_column = self._columns[order_field]
                     if order_column._classic_read:
-                        order_by_clause = '"%s"."%s"' % (self._table, order_field)
+                        inner_clause = '"%s"."%s"' % (self._table, order_field)
                     elif order_column._type == 'many2one':
-                        order_by_clause = self._generate_m2o_order_by(order_field, query)
+                        inner_clause = self._generate_m2o_order_by(order_field, query)
                     else:
                         continue # ignore non-readable or "non-joignable" fields
                 elif order_field in self._inherit_fields:
                     parent_obj = self.pool.get(self._inherit_fields[order_field][0])
                     order_column = parent_obj._columns[order_field]
                     if order_column._classic_read:
-                        order_by_clause = self._inherits_join_calc(order_field, query)
+                        inner_clause = self._inherits_join_calc(order_field, query)
                     elif order_column._type == 'many2one':
-                        order_by_clause = self._generate_m2o_order_by(order_field, query)
+                        inner_clause = self._generate_m2o_order_by(order_field, query)
                     else:
                         continue # ignore non-readable or "non-joignable" fields
                 else:
                     raise except_orm(_('Error!'), _('Object model does not support order by "%s"!') % order_field)
-                order_by_elements.append("%s %s" % (order_by_clause, order_direction))
-                if self._debug:
-                    _logger.debug("Order for %s: %r", self._name, order_by_elements[-1])
-            order_by_clause = ",".join(order_by_elements)
+                if inner_clause:
+                    order_by_elements.append("%s %s" % (inner_clause, order_direction))
+                    if self._debug:
+                        _logger.debug("Order for %s: %r", self._name, order_by_elements[-1])
+            if order_by_elements:
+                order_by_clause = ",".join(order_by_elements)
 
         return order_by_clause and (' ORDER BY %s ' % order_by_clause) or ''
 
