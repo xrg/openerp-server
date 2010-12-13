@@ -2898,19 +2898,29 @@ class orm(orm_template):
             context = {}
         self._field_create(cr, context=context)
         if getattr(self, '_auto', True):
-            cr.execute("SELECT relname FROM pg_class WHERE relkind IN ('r','v') AND relname=%s" ,( self._table,))
+            # We only query and get the columns of a table once.
+            # If there is no columns, there must be no table, either.
+            cr.execute("""SELECT c.relname,
+                    a.attname, a.attlen, a.atttypmod, a.attnotnull,
+                    a.atthasdef, t.typname,
+                    CASE WHEN a.attlen=-1 THEN a.atttypmod-4 ELSE a.attlen END as size
+                FROM pg_class c, pg_attribute a LEFT JOIN pg_type t ON (a.atttypid=t.oid)
+                WHERE c.relname=%s AND relkind IN ('r','v')
+                  AND c.oid=a.attrelid """, (self._table,), debug=self._debug)
+            
             if not cr.rowcount:
                 cr.execute('CREATE TABLE "%s" (id SERIAL NOT NULL, PRIMARY KEY(id)) WITHOUT OIDS' % (self._table,), debug=self._debug)
                 cr.execute("COMMENT ON TABLE \"%s\" IS %%s" % (self._table),
                             (self._description,), debug=self._debug)
                 create = True
+                col_data = { 'id': True }
+                # True in col_data means we just created that column and is ok
+            else:
+                col_data = dict(map(lambda x: (x['attname'], x),cr.dictfetchall()))
+
             cr.commit()
             if self._parent_store:
-                cr.execute("""SELECT c.relname
-                    FROM pg_class c, pg_attribute a
-                    WHERE c.relname=%s AND a.attname=%s AND c.oid=a.attrelid
-                    """, (self._table, 'parent_left'))
-                if not cr.rowcount:
+                if 'parent_left' not in col_data:
                     if 'parent_left' not in self._columns:
                         _logger.error('create a column parent_left on object %s: fields.integer(\'Left Parent\', select=1)' % (self._table, ))
                     elif not self._columns['parent_left'].select:
@@ -2925,6 +2935,8 @@ class orm(orm_template):
                         _logger.error( "the columns %s on object must be set as ondelete='cascasde'" % (self._name, self._parent_name))
                     cr.execute('ALTER TABLE "%s" ADD COLUMN "parent_left" INTEGER' % (self._table,), debug=self._debug)
                     cr.execute('ALTER TABLE "%s" ADD COLUMN "parent_right" INTEGER' % (self._table,), debug=self._debug)
+                    col_data['parent_left'] = True
+                    col_data['parent_right'] = True
                     cr.commit()
                     store_compute = True
 
@@ -2936,23 +2948,16 @@ class orm(orm_template):
                     'write_date': 'TIMESTAMP'
                 }
                 for k in logs:
-                    cr.execute("""
-                        SELECT c.relname
-                          FROM pg_class c, pg_attribute a
-                         WHERE c.relname=%s AND a.attname=%s AND c.oid=a.attrelid
-                        """, (self._table, k))
-                    if not cr.rowcount:
+                    if k not in col_data:
                         cr.execute('ALTER TABLE "%s" ADD COLUMN "%s" %s' % (self._table, k, logs[k]), debug=self._debug)
+                        col_data[k] = True
                         cr.commit()
 
             if self._vtable:
-                    cr.execute(""" SELECT c.relname
-                          FROM pg_class c, pg_attribute a
-                         WHERE c.relname=%s AND a.attname='_vptr' AND c.oid=a.attrelid
-                        """, (self._table,), debug=self._debug)
-                    if not cr.rowcount:
+                    if '_vptr' not in col_data:
                         cr.execute('ALTER TABLE "%s" ADD COLUMN "_vptr" VARCHAR(64)' % \
                             (self._table,), debug=self._debug)
+                        col_data[k] = True
                         cr.commit()
 
             self._check_removed_columns(cr, log=False)
@@ -2960,14 +2965,6 @@ class orm(orm_template):
             # iterate on the "object columns"
             todo_update_store = []
             update_custom_fields = context.get('update_custom_fields', False)
-
-            cr.execute("SELECT c.relname,a.attname,a.attlen,a.atttypmod,a.attnotnull,a.atthasdef,t.typname,CASE WHEN a.attlen=-1 THEN a.atttypmod-4 ELSE a.attlen END as size " \
-               "FROM pg_class c,pg_attribute a,pg_type t " \
-               "WHERE c.relname=%s " \
-               "AND c.oid=a.attrelid " \
-               "AND a.atttypid=t.oid", (self._table,))
-            col_data = dict(map(lambda x: (x['attname'], x),cr.dictfetchall()))
-
 
             for k in self._columns:
                 if k in ('id', 'write_uid', 'write_date', 'create_uid', 'create_date', '_vptr'):
@@ -2979,18 +2976,18 @@ class orm(orm_template):
                 f = self._columns[k]
 
                 if isinstance(f, fields.one2many):
-                    cr.execute("SELECT relname FROM pg_class WHERE relkind='r' AND relname=%s", (f._obj,))
-
                     if self.pool.get(f._obj):
                         if f._fields_id not in self.pool.get(f._obj)._columns.keys():
                             if not self.pool.get(f._obj)._inherits or (f._fields_id not in self.pool.get(f._obj)._inherit_fields.keys()):
                                 raise except_orm('Programming Error', ("There is no reference field '%s' found for '%s'") % (f._fields_id,f._obj,))
 
-                    if cr.fetchone():
-                        cr.execute("SELECT count(1) as c FROM pg_class c,pg_attribute a WHERE c.relname=%s AND a.attname=%s AND c.oid=a.attrelid", (f._obj, f._fields_id))
-                        res = cr.fetchone()[0]
-                        if not res:
-                            cr.execute('ALTER TABLE "%s" ADD FOREIGN KEY (%s) REFERENCES "%s" ON DELETE SET NULL' % (self._obj, f._fields_id, f._table), debug=self._debug)
+                    cr.execute("""SELECT relname, a.attname 
+                            FROM pg_class c LEFT JOIN pg_attribute a 
+                                    ON ( a.attname=%s AND c.oid=a.attrelid)
+                            WHERE c.relname=%s""", (f._fields_id, f._obj))
+                    res = cr.fetchone()
+                    if res and not res[1]:
+                        cr.execute('ALTER TABLE "%s" ADD FOREIGN KEY (%s) REFERENCES "%s" ON DELETE SET NULL' % (self._obj, f._fields_id, f._table), debug=self._debug)
                 elif isinstance(f, fields.many2many):
                     cr.execute("SELECT relname FROM pg_class WHERE relkind IN ('r','v') AND relname=%s", (f._rel,), debug=self._debug)
                     if not cr.dictfetchall():
@@ -3005,24 +3002,16 @@ class orm(orm_template):
                         cr.commit()
                 else:
                     res = col_data.get(k, [])
-                    res = res and [res] or []
-                    if not res and hasattr(f,'oldname'):
-                        cr.execute("SELECT c.relname,a.attname,a.attlen,a.atttypmod,a.attnotnull,a.atthasdef,t.typname,CASE WHEN a.attlen=-1 THEN a.atttypmod-4 ELSE a.attlen END as size " \
-                            "FROM pg_class c,pg_attribute a,pg_type t " \
-                            "WHERE c.relname=%s " \
-                            "AND a.attname=%s " \
-                            "AND c.oid=a.attrelid " \
-                            "AND a.atttypid=t.oid", (self._table, f.oldname))
-                        res_old = cr.dictfetchall()
+                    if not res and hasattr(f,'oldname') \
+                            and f.oldname in col_data:
                         _logger.debug('trying to rename %s(%s) to %s'% (self._table, f.oldname, k))
-                        if res_old and len(res_old)==1:
-                            cr.execute('ALTER TABLE "%s" RENAME "%s" TO "%s"' % ( self._table,f.oldname, k), debug=self._debug)
-                            res = res_old
-                            res[0]['attname'] = k
+                        cr.execute('ALTER TABLE "%s" RENAME "%s" TO "%s"' % ( self._table,f.oldname, k), debug=self._debug)
+                        res = col_data[f.oldname]
+                        res['attname'] = k
 
 
-                    if len(res)==1:
-                        f_pg_def = res[0]
+                    if res and (res is not True):
+                        f_pg_def = res
                         f_pg_type = f_pg_def['typname']
                         f_pg_size = f_pg_def['size']
                         f_pg_notnull = f_pg_def['attnotnull']
@@ -3103,11 +3092,7 @@ class orm(orm_template):
                                     i = 0
                                     while True:
                                         newname = k + '_moved' + str(i)
-                                        cr.execute("SELECT count(1) FROM pg_class c,pg_attribute a " \
-                                            "WHERE c.relname=%s " \
-                                            "AND a.attname=%s " \
-                                            "AND c.oid=a.attrelid ", (self._table, newname))
-                                        if not cr.fetchone()[0]:
+                                        if newname not in col_data:
                                             break
                                         i+=1
                                     _logger.warning("column '%s' in table '%s' has changed type (DB=%s, def=%s), data moved to table %s !" % (k, self._table, f_pg_type, f._type, newname))
@@ -3191,8 +3176,6 @@ class orm(orm_template):
                                             cr.execute('ALTER TABLE "%s" ADD FOREIGN KEY ("%s") REFERENCES "%s" ON DELETE %s' % \
                                                     (self._table,k,ref,f.ondelete), debug=self._debug)
                                             cr.commit()
-                    elif len(res)>1:
-                        _logger.error( "Programming error, column %s->%s has multiple instances !"%(self._table,k))
                     if not res:
                         if not isinstance(f, fields.function) or f.store:
 
