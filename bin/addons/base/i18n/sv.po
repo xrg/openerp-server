@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: OpenERP Server 5.0.0\n"
 "Report-Msgid-Bugs-To: support@openerp.com\n"
 "POT-Creation-Date: 2010-12-03 15:43+0000\n"
-"PO-Revision-Date: 2010-12-09 07:57+0000\n"
-"Last-Translator: OpenERP Administrators <Unknown>\n"
+"PO-Revision-Date: 2010-12-13 15:14+0000\n"
+"Last-Translator: Andreas Berg <Unknown>\n"
 "Language-Team: <>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-12-10 05:01+0000\n"
+"X-Launchpad-Export-Date: 2010-12-14 04:53+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #. module: base
@@ -587,8 +587,12 @@ msgstr ""
 #. module: base
 #: field:ir.actions.act_window,menus:0
 #: field:ir.module.module,menus_by_module:0 view:res.groups:0
+#, fuzzy
 msgid "Menus"
 msgstr ""
+"#-#-#-#-#  .merge_file_YXLxsr (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_xbbHTK (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Menyer"
 
 #. module: base
 #: field:ir.actions.act_window,name:0 field:ir.actions.act_window_close,name:0
@@ -1753,8 +1757,12 @@ msgstr ""
 
 #. module: base
 #: field:ir.sequence,suffix:0
+#, fuzzy
 msgid "Suffix"
 msgstr ""
+"#-#-#-#-#  .merge_file_YXLxsr (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_xbbHTK (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Suffix"
 
 #. module: base
 #: field:ir.sequence,weight:0
@@ -2024,13 +2032,21 @@ msgstr ""
 
 #. module: base
 #: field:res.company,rml_footer1:0
+#, fuzzy
 msgid "Report Footer 1"
 msgstr ""
+"#-#-#-#-#  .merge_file_YXLxsr (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_xbbHTK (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Rapportfot 1"
 
 #. module: base
 #: field:res.company,rml_footer2:0
+#, fuzzy
 msgid "Report Footer 2"
 msgstr ""
+"#-#-#-#-#  .merge_file_YXLxsr (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_xbbHTK (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Rapportfot 2"
 
 #. module: base
 #: field:res.company,rml_header:0
@@ -2215,8 +2231,12 @@ msgstr "Kontakter"
 
 #. module: base
 #: field:res.partner,bank_ids:0 view:res.bank:0
+#, fuzzy
 msgid "Banks"
 msgstr ""
+"#-#-#-#-#  .merge_file_YXLxsr (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_xbbHTK (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Banker"
 
 #. module: base
 #: field:res.partner,category_id:0 view:res.partner:0
@@ -2572,8 +2592,12 @@ msgstr "Signatur"
 
 #. module: base
 #: field:wizard.ir.model.menu.create,name:0
+#, fuzzy
 msgid "Menu Name"
 msgstr ""
+"#-#-#-#-#  .merge_file_YXLxsr (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_xbbHTK (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Menynamn"
 
 #. module: base
 #: field:wizard.ir.model.menu.create.line,wizard_id:0 view:ir.actions.wizard:0
@@ -2613,8 +2637,12 @@ msgstr ""
 #: model:ir.actions.act_window,name:base.action_module_open_categ
 #: model:ir.actions.act_window,name:base.open_module_tree
 #: model:ir.ui.menu,name:base.menu_module_tree view:ir.module.module:0
+#, fuzzy
 msgid "Modules"
 msgstr ""
+"#-#-#-#-#  .merge_file_YXLxsr (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_xbbHTK (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Moduler"
 
 #. module: base
 #: field:workflow,activities:0
@@ -2625,8 +2653,12 @@ msgstr ""
 
 #. module: base
 #: field:workflow,on_create:0
+#, fuzzy
 msgid "On Create"
 msgstr ""
+"#-#-#-#-#  .merge_file_YXLxsr (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_xbbHTK (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Vid skapande"
 
 #. module: base
 #: field:workflow.activity,action:0
@@ -2740,13 +2772,21 @@ msgstr "Arbetsmaterial"
 
 #. module: base
 #: field:workflow.workitem,act_id:0 view:workflow.activity:0
+#, fuzzy
 msgid "Activity"
 msgstr ""
+"#-#-#-#-#  .merge_file_YXLxsr (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_xbbHTK (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Aktivitet"
 
 #. module: base
 #: field:workflow.workitem,inst_id:0
+#, fuzzy
 msgid "Instance"
 msgstr ""
+"#-#-#-#-#  .merge_file_YXLxsr (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_xbbHTK (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Instans"
 
 #. module: base
 #: help:ir.actions.act_window,auto_refresh:0
@@ -2776,10 +2816,15 @@ msgstr ""
 
 #. module: base
 #: help:ir.actions.report.xml,attachment_use:0
+#, fuzzy
 msgid ""
 "If you check this, then the second time the user prints with same attachment "
 "name, it returns the previous report."
 msgstr ""
+"#-#-#-#-#  .merge_file_YXLxsr (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_xbbHTK (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Om du markerar detta kommer föregående rapport returneras när användaren "
+"skriver ut andra gången med samma bilagenamn."
 
 #. module: base
 #: help:ir.actions.report.xml,header:0
@@ -2794,8 +2839,12 @@ msgstr ""
 
 #. module: base
 #: help:ir.actions.server,action_id:0
+#, fuzzy
 msgid "Select the Action Window, Report, Wizard to be executed."
 msgstr ""
+"#-#-#-#-#  .merge_file_YXLxsr (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_xbbHTK (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Välj händelse, rapport, eller guide som ska köras"
 
 #. module: base
 #: help:ir.actions.server,code:0
@@ -4044,8 +4093,12 @@ msgstr ""
 
 #. module: base
 #: model:ir.model,name:base.model_workflow_instance
+#, fuzzy
 msgid "workflow.instance"
 msgstr ""
+"#-#-#-#-#  .merge_file_YXLxsr (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_xbbHTK (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"workflow.instance"
 
 #. module: base
 #: model:ir.model,name:base.model_workflow_transition
@@ -4054,8 +4107,12 @@ msgstr ""
 
 #. module: base
 #: model:ir.model,name:base.model_workflow_triggers
+#, fuzzy
 msgid "workflow.triggers"
 msgstr ""
+"#-#-#-#-#  .merge_file_YXLxsr (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_xbbHTK (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"workflow.triggers"
 
 #. module: base
 #: model:ir.model,name:base.model_workflow_workitem
@@ -4182,8 +4239,12 @@ msgstr "Användargränssnitt"
 
 #. module: base
 #: model:ir.ui.menu,name:base.next_id_4
+#, fuzzy
 msgid "Low Level Objects"
 msgstr ""
+"#-#-#-#-#  .merge_file_YXLxsr (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_xbbHTK (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Lågnivåobjekt"
 
 #. module: base
 #: model:ir.ui.menu,name:base.next_id_9
@@ -4389,8 +4450,12 @@ msgstr ""
 
 #. module: base
 #: model:res.country,name:base.cd
+#, fuzzy
 msgid "Congo, The Democratic Republic of the"
 msgstr ""
+"#-#-#-#-#  .merge_file_YXLxsr (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_xbbHTK (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Demokratiska republiken Kongo"
 
 #. module: base
 #: model:res.country,name:base.cf
@@ -4399,8 +4464,12 @@ msgstr ""
 
 #. module: base
 #: model:res.country,name:base.cg
+#, fuzzy
 msgid "Congo"
 msgstr ""
+"#-#-#-#-#  .merge_file_YXLxsr (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_xbbHTK (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Kongo"
 
 #. module: base
 #: model:res.country,name:base.ch
@@ -5628,8 +5697,12 @@ msgstr ""
 
 #. module: base
 #: rml:ir.module.reference:0
+#, fuzzy
 msgid "Menu :"
 msgstr ""
+"#-#-#-#-#  .merge_file_YXLxsr (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_xbbHTK (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Meny:"
 
 #. module: base
 #: rml:ir.module.reference:0
@@ -5766,8 +5839,12 @@ msgstr ""
 
 #. module: base
 #: selection:ir.actions.server,state:0 selection:workflow.activity,kind:0
+#, fuzzy
 msgid "Dummy"
 msgstr ""
+"#-#-#-#-#  .merge_file_YXLxsr (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_xbbHTK (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Test"
 
 #. module: base
 #: selection:ir.actions.server,state:0
@@ -6844,8 +6921,12 @@ msgstr ""
 
 #. module: base
 #: selection:maintenance.contract.wizard,state:0
+#, fuzzy
 msgid "Validated"
 msgstr ""
+"#-#-#-#-#  .merge_file_YXLxsr (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_xbbHTK (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Validerad"
 
 #. module: base
 #: selection:module.lang.install,init,lang:0
@@ -7522,8 +7603,12 @@ msgstr ""
 
 #. module: base
 #: view:ir.model:0
+#, fuzzy
 msgid "Create a Menu"
 msgstr ""
+"#-#-#-#-#  .merge_file_YXLxsr (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_xbbHTK (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Skapa en meny"
 
 #. module: base
 #: view:ir.model:0
@@ -7564,8 +7649,12 @@ msgstr ""
 
 #. module: base
 #: view:ir.module.module:0
+#, fuzzy
 msgid "Cancel Uninstall"
 msgstr ""
+"#-#-#-#-#  .merge_file_YXLxsr (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_xbbHTK (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Avbryt avinstallation"
 
 #. module: base
 #: view:ir.module.module:0
@@ -7578,8 +7667,12 @@ msgstr ""
 
 #. module: base
 #: view:ir.module.module:0
+#, fuzzy
 msgid "Created Menus"
 msgstr ""
+"#-#-#-#-#  .merge_file_YXLxsr (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_xbbHTK (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Skapade menyer"
 
 #. module: base
 #: view:ir.module.module:0
@@ -8338,8 +8431,12 @@ msgstr ""
 
 #. module: base
 #: view:workflow.transition:0
+#, fuzzy
 msgid "Transition"
 msgstr ""
+"#-#-#-#-#  .merge_file_YXLxsr (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_xbbHTK (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Övergång"
 
 #. module: base
 #: view:workflow.workitem:0
@@ -8415,8 +8512,12 @@ msgstr ""
 
 #. module: base
 #: wizard_field:module.module.update,update,add:0
+#, fuzzy
 msgid "Number of modules added"
 msgstr ""
+"#-#-#-#-#  .merge_file_YXLxsr (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_xbbHTK (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Antal tillagda moduler"
 
 #. module: base
 #: wizard_field:module.module.update,update,update:0
@@ -8432,8 +8533,12 @@ msgstr ""
 #. module: base
 #: wizard_field:module.upgrade,next,module_info:0
 #: wizard_view:module.upgrade,next:0
+#, fuzzy
 msgid "Modules to update"
 msgstr ""
+"#-#-#-#-#  .merge_file_YXLxsr (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_xbbHTK (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Moduler att uppdatera"
 
 #. module: base
 #: wizard_field:res.partner.sms_send,init,app_id:0
@@ -8442,8 +8547,12 @@ msgstr ""
 
 #. module: base
 #: wizard_field:res.partner.sms_send,init,text:0
+#, fuzzy
 msgid "SMS Message"
 msgstr ""
+"#-#-#-#-#  .merge_file_YXLxsr (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_xbbHTK (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"SMS meddelande"
 
 #. module: base
 #: wizard_field:res.partner.spam_send,init,from:0
@@ -8459,8 +8568,12 @@ msgstr "Välj händelsetyp"
 #. module: base
 #: wizard_field:server.action.create,step_1,report:0
 #: wizard_view:server.action.create,step_1:0
+#, fuzzy
 msgid "Select Report"
 msgstr ""
+"#-#-#-#-#  .merge_file_YXLxsr (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_xbbHTK (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Välj rapport"
 
 #. module: base
 #: wizard_view:base.module.import,import:0
@@ -8475,8 +8588,12 @@ msgstr ""
 
 #. module: base
 #: wizard_view:base.module.import,init:0
+#, fuzzy
 msgid "Module Import"
 msgstr ""
+"#-#-#-#-#  .merge_file_YXLxsr (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_xbbHTK (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Modulimport"
 
 #. module: base
 #: wizard_view:base.module.import,init:0
@@ -8733,8 +8850,12 @@ msgstr ""
 
 #. module: base
 #: model:ir.model,name:base.model_base_language_import
+#, fuzzy
 msgid "Language Import"
 msgstr ""
+"#-#-#-#-#  .merge_file_YXLxsr (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_xbbHTK (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Språkimport"
 
 #. module: base
 #: model:ir.model,name:base.model_res_config_users
@@ -8763,9 +8884,13 @@ msgstr "XML rapport"
 
 #. module: base
 #: help:ir.actions.act_window,domain:0
+#, fuzzy
 msgid ""
 "Optional domain filtering of the destination data, as a Python expression"
 msgstr ""
+"#-#-#-#-#  .merge_file_YXLxsr (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_xbbHTK (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Valfri domänfiltrering av slutdatan, i form av ett python uttryck"
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_view_base_module_upgrade
@@ -8796,10 +8921,15 @@ msgstr ""
 
 #. module: base
 #: help:res.config.users,context_lang:0 help:res.users,context_lang:0
+#, fuzzy
 msgid ""
 "Sets the language for the user's user interface, when UI translations are "
 "available"
 msgstr ""
+"#-#-#-#-#  .merge_file_YXLxsr (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_xbbHTK (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Väljer språket för användarens användargränssnitt när översatta "
+"användargränssnitt finns tillgängliga."
 
 #. module: base
 #: model:ir.actions.act_window,name:base.res_request_link-act
@@ -8814,8 +8944,12 @@ msgstr ""
 
 #. module: base
 #: field:ir.module.module,contributors:0
+#, fuzzy
 msgid "Contributors"
 msgstr ""
+"#-#-#-#-#  .merge_file_YXLxsr (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_xbbHTK (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Bidragsgivare"
 
 #. module: base
 #: selection:ir.property,type:0
@@ -8834,11 +8968,17 @@ msgstr "Kinesiska (HK)"
 
 #. module: base
 #: view:base.language.export:0
+#, fuzzy
 msgid ""
 "To improve or expand the official translations, you should use directly "
 "Lauchpad's web interface (Rosetta). If you need to perform mass translation, "
 "Launchpad also allows uploading full .po files at once"
 msgstr ""
+"#-#-#-#-#  .merge_file_YXLxsr (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_xbbHTK (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"För att förbättra eller utvidga officiella översättningar så bör du arbeta "
+"direkt mot Launchpad's webgränssnitt (Rosetta). Om du behöver genomföra "
+"massöversättningar så tillåter Launchpad direkt uppladdning av .po filer."
 
 #. module: base
 #: selection:base.language.install,lang:0
@@ -8875,9 +9015,12 @@ msgstr "Inköp"
 
 #. module: base
 #: code:addons/base/module/wizard/base_update_translations.py:0
-#, python-format
+#, fuzzy, python-format
 msgid "No language with code \"%s\" exists"
 msgstr ""
+"#-#-#-#-#  .merge_file_YXLxsr (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_xbbHTK (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Inget språk med koden %s existerar"
 
 #. module: base
 #: view:wizard.ir.model.menu.create:0
@@ -9133,8 +9276,12 @@ msgstr ""
 #. module: base
 #: model:ir.actions.act_window,name:base.ir_property_form
 #: model:ir.ui.menu,name:base.menu_ir_property_form_all
+#, fuzzy
 msgid "Configuration Parameters"
 msgstr ""
+"#-#-#-#-#  .merge_file_YXLxsr (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_xbbHTK (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Konfigurationsparametrar"
 
 #. module: base
 #: constraint:ir.cron:0
@@ -9192,10 +9339,15 @@ msgstr "Huvudföretag"
 
 #. module: base
 #: view:base.language.import:0
+#, fuzzy
 msgid ""
 "Please double-check that the file encoding is set to UTF-8 (sometimes called "
 "Unicode) when the translator exports it."
 msgstr ""
+"#-#-#-#-#  .merge_file_YXLxsr (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_xbbHTK (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Vänligen kontrollera att filens teckenkodning är satt till UTF-8 (ibland "
+"kallad unicode) när översättaren exporterar den."
 
 #. module: base
 #: selection:base.language.install,lang:0
@@ -9414,8 +9566,12 @@ msgstr ""
 
 #. module: base
 #: view:base.module.configuration:0
+#, fuzzy
 msgid "System Configuration Done"
 msgstr ""
+"#-#-#-#-#  .merge_file_YXLxsr (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_xbbHTK (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Systemkonfigureringen är klar"
 
 #. module: base
 #: view:ir.property:0
@@ -9681,8 +9837,12 @@ msgstr "Projekt"
 
 #. module: base
 #: view:base.module.import:0
+#, fuzzy
 msgid "Module file successfully imported!"
 msgstr ""
+"#-#-#-#-#  .merge_file_YXLxsr (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_xbbHTK (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Modulfilen blev importerad!"
 
 #. module: base
 #: selection:ir.actions.todo,state:0
@@ -9774,8 +9934,12 @@ msgstr ""
 
 #. module: base
 #: help:res.config.users,company_id:0 help:res.users,company_id:0
+#, fuzzy
 msgid "The company this user is currently working for."
 msgstr ""
+"#-#-#-#-#  .merge_file_YXLxsr (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_xbbHTK (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Företaget som användaren arbetar för."
 
 #. module: base
 #: selection:base.language.install,lang:0
@@ -10451,8 +10615,12 @@ msgstr "Ladda"
 
 #. module: base
 #: help:res.config.users,name:0 help:res.users,name:0
+#, fuzzy
 msgid "The new user's real name, used for searching and most listings"
 msgstr ""
+"#-#-#-#-#  .merge_file_YXLxsr (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_xbbHTK (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Användarens riktiga namn, används vid sökningar och de flesta listningar"
 
 #. module: base
 #: model:ir.model,name:base.model_res_config
@@ -10576,11 +10744,15 @@ msgstr ""
 
 #. module: base
 #: code:addons/base/module/module.py:0
-#, python-format
+#, fuzzy, python-format
 msgid ""
 "You try to install module '%s' that depends on module '%s'.\n"
 "But the latter module is not available in your system."
 msgstr ""
+"#-#-#-#-#  .merge_file_YXLxsr (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_xbbHTK (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Du försökte att installera modulen '%s' som beror på modulen '%s'.\n"
+"Men den senare är inte tillgänglig på ditt system."
 
 #. module: base
 #: view:base.language.import:0

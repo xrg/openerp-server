@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: OpenERP Server 5.0.0\n"
 "Report-Msgid-Bugs-To: support@openerp.com\n"
 "POT-Creation-Date: 2010-12-03 15:43+0000\n"
-"PO-Revision-Date: 2010-12-10 18:05+0200\n"
+"PO-Revision-Date: 2010-12-16 01:09+0200\n"
 "Last-Translator: P. Christeas <p_christ@hol.gr>\n"
 "Language-Team: Greek <openerp@lists.hellug.gr>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-12-09 04:49+0000\n"
+"X-Launchpad-Export-Date: 2010-12-14 04:52+0000\n"
 "X-Generator: Lokalize 1.0\n"
 "X-Poedit-Country: GREECE\n"
 "X-Poedit-Language: Greek\n"
@@ -376,7 +376,7 @@ msgstr "Τα παρακάτω αθρώματα δεν είναι εγκατεσ�
 #: code:addons/base/module/wizard/base_module_upgrade.py:0
 #, python-format
 msgid "Unmet dependency !"
-msgstr ""
+msgstr "Ανεκπλήρωτες εξαρτήσεις!"
 
 #. module: base
 #: code:addons/base/module/wizard/base_update_translations.py:0
@@ -507,7 +507,7 @@ msgstr "Ο αρχικός χρήστης δεν μπορεί να διαγραφ
 #: code:addons/base/res/res_user.py:0
 #, python-format
 msgid "Company Switch Warning"
-msgstr ""
+msgstr "Προειδοποίηση αλλαγής εταιρίας"
 
 #. module: base
 #: code:addons/base/res/res_user.py:0
@@ -2176,7 +2176,7 @@ msgstr "Translatable"
 #. module: base
 #: field:res.log,context:0 view:ir.filters:0
 msgid "Context"
-msgstr ""
+msgstr "Περιβάλλον"
 
 #. module: base
 #: field:res.log,create_date:0 field:res.request,create_date:0
@@ -2185,13 +2185,8 @@ msgstr "Ημερ/νία Δημιουργίας"
 
 #. module: base
 #: field:res.log,read:0 view:res.log:0
-#, fuzzy
 msgid "Read"
-msgstr ""
-"#-#-#-#-#  .merge_file_Ex5g4M (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"Ανάγνωση\n"
-"#-#-#-#-#  .merge_file_lMWKuI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"Αναγνωσμένα"
+msgstr "Ανάγνωση"
 
 #. module: base
 #: field:res.log,secondary:0
@@ -3125,13 +3120,10 @@ msgstr ""
 
 #. module: base
 #: help:res.config.users,context_tz:0 help:res.users,context_tz:0
-#, fuzzy
 msgid ""
 "The user's timezone, used to perform timezone conversions between the server "
 "and the client."
 msgstr ""
-"#-#-#-#-#  .merge_file_JdaAjy (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_gsP1MZ (OpenERP Server 5.0.0)  #-#-#-#-#\n"
 "Η ζώνη ώρας του χρήστη, που χρησιμοποιείται για μετατροπές ζώνης ώρας μεταξύ "
 "του διακομιστή και του πελάτη."
 
@@ -3147,7 +3139,7 @@ msgstr ""
 #. module: base
 #: help:res.config.users,login:0 help:res.users,login:0
 msgid "Used to log into the system"
-msgstr ""
+msgstr "Χρησιμοποιείται για είσοδο στο σύστημα"
 
 #. module: base
 #: help:res.config.users,menu_id:0 help:res.users,menu_id:0
@@ -3229,13 +3221,8 @@ msgstr ""
 
 #. module: base
 #: help:res.log,name:0
-#, fuzzy
 msgid "The logging message."
-msgstr ""
-"#-#-#-#-#  .merge_file_Ex5g4M (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"Το μήνυμα στο ιστορικό.\n"
-"#-#-#-#-#  .merge_file_lMWKuI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"Το μήνυμα σύνδεσης."
+msgstr "Το μήνυμα σύνδεσης."
 
 #. module: base
 #: help:res.log,read:0
@@ -3263,13 +3250,8 @@ msgstr "Κάντε κλικ εδώ αν ο Συνεργάτης είναι Πε�
 
 #. module: base
 #: help:res.partner,employee:0
-#, fuzzy
 msgid "Check this box if the partner is an Employee."
-msgstr ""
-"#-#-#-#-#  .merge_file_Ex5g4M (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"Κάντε κλικ εδώ αν ο Συνεργάτης είναι Υπάλληλος\n"
-"#-#-#-#-#  .merge_file_lMWKuI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"Επιλέξτε αυτό το πεδίο αν ο συνεργάτης είναι Εργαζόμενος."
+msgstr "Επιλέξτε αυτό το πεδίο αν ο συνεργάτης είναι Εργαζόμενος."
 
 #. module: base
 #: help:res.partner,lang:0
@@ -3472,15 +3454,26 @@ msgstr ""
 
 #. module: base
 #: model:ir.actions.act_window,help:base.action_res_bank_form
+#, fuzzy
 msgid "Manage bank records you want to be used in the system."
 msgstr ""
+"#-#-#-#-#  .merge_file_v2hkkx (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_ssBxAO (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Διαχειριστείτε τους τραπεζικούς λογαριασμούς που θέλετε να χρησιμοποιηθούν "
+"στο σύστημα."
 
 #. module: base
 #: model:ir.actions.act_window,help:base.action_res_company_form
+#, fuzzy
 msgid ""
 "Create and manage the companies that will be managed by OpenERP from here. "
 "Shops or subsidiaries can be created and maintained from here."
 msgstr ""
+"#-#-#-#-#  .merge_file_v2hkkx (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_ssBxAO (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Δημιουργία και διαχείριση των εταιρειών που θα διαχειρίζεται το OpenERP από "
+"εδώ. Καταστήματα ή οι θυγατρικές μπορούν να δημιουργηθούν και να "
+"διαχειριστούν από εδώ."
 
 #. module: base
 #: model:ir.actions.act_window,help:base.action_res_groups
@@ -4563,13 +4556,8 @@ msgstr "Προϊόντα"
 
 #. module: base
 #: model:ir.ui.menu,name:base.menu_project_long_term
-#, fuzzy
 msgid "Long Term Planning"
-msgstr ""
-"#-#-#-#-#  .merge_file_Ex5g4M (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"Μακροπρόθεσμος Σχεδιασμός\n"
-"#-#-#-#-#  .merge_file_lMWKuI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"Μακροπρόθεσμος σχεδιασμός"
+msgstr "Μακροπρόθεσμος Σχεδιασμός"
 
 #. module: base
 #: model:ir.ui.menu,name:base.menu_project_management_time_tracking
@@ -6035,7 +6023,7 @@ msgstr "Κύριος"
 #. module: base
 #: model:res.partner.title,shortcut:base.res_partner_title_ltd
 msgid "ltd"
-msgstr "ΕΠΕ"
+msgstr "Ε.Π.Ε."
 
 #. module: base
 #: model:res.partner.title,shortcut:base.res_partner_title_madam
@@ -6344,13 +6332,8 @@ msgstr "Κορεάτικη (KR) / 한국어 (KR)"
 
 #. module: base
 #: selection:base.language.install,lang:0
-#, fuzzy
 msgid "Latvian / latviešu valoda"
-msgstr ""
-"#-#-#-#-#  .merge_file_Ex5g4M (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"Latvian / latviešu valoda\n"
-"#-#-#-#-#  .merge_file_lMWKuI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"Λετονικά / latviešu valoda"
+msgstr "Λετονικά / latviešu valoda"
 
 #. module: base
 #: selection:base.language.install,lang:0
@@ -6474,13 +6457,8 @@ msgstr "Ισπανικά (HN) / Español (HN)"
 
 #. module: base
 #: selection:base.language.install,lang:0
-#, fuzzy
 msgid "Spanish (MX) / Español (MX)"
-msgstr ""
-"#-#-#-#-#  .merge_file_Ex5g4M (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"Μεξικάνικα (MX) / Español (MX)\n"
-"#-#-#-#-#  .merge_file_lMWKuI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"Ισπανικά (MX) / Español (MX)"
+msgstr "Ισπανικά (MX) / Español (MX)"
 
 #. module: base
 #: selection:base.language.install,lang:0
@@ -7372,8 +7350,12 @@ msgstr ""
 
 #. module: base
 #: view:base.module.update:0
+#, fuzzy
 msgid "Click on Update below to start the process..."
 msgstr ""
+"#-#-#-#-#  .merge_file_v2hkkx (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_ssBxAO (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Κάντε κλικ στο Ενημέρωση παρακάτω, για να ξεκινήσει η διαδικασία ..."
 
 #. module: base
 #: view:base.module.update:0

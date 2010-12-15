@@ -28,8 +28,6 @@ import logging
 import netsvc
 import pooler
 import copy
-# import sys
-# import traceback
 from psycopg2 import IntegrityError, errorcodes
 from tools.func import wraps
 from tools.translate import translate
@@ -46,7 +44,13 @@ class except_osv(Exception):
         self.args = (exc_type, name)
 
 
-class osv_pool(netsvc.Service):
+class object_proxy(netsvc.Service):
+    def __init__(self):
+        self.logger = logging.getLogger('web-services')
+        netsvc.Service.__init__(self, 'object_proxy', audience='')
+        self.exportMethod(self.exec_workflow)
+        self.exportMethod(self.execute)
+        self.exportMethod(self.set_debug)
 
     def check(f):
         @wraps(f)
@@ -124,10 +128,11 @@ class osv_pool(netsvc.Service):
             except except_osv, inst:
                 self.abortResponse(1, inst.name, inst.exc_type, inst.value)
             except IntegrityError, inst:
-                for key in self._sql_error.keys():
+                osv_pool = pooler.get_pool(dbname)
+                for key in osv_pool._sql_error.keys():
                     if key in inst[0]:
                         self.abortResponse(1, _('Constraint Error'), 'warning',
-                                        tr(self._sql_error[key], 'sql_constraint') or inst[0])
+                                        tr(osv_pool._sql_error[key], 'sql_constraint') or inst[0])
                 if inst.pgcode in (errorcodes.NOT_NULL_VIOLATION, errorcodes.FOREIGN_KEY_VIOLATION, errorcodes.RESTRICT_VIOLATION):
                     msg = inst.pgerror + '\n'
                     msg += _('The operation cannot be completed, probably due to the following:\n' \
@@ -139,7 +144,7 @@ class osv_pool(netsvc.Service):
                             context = inst.pgerror.split('"public".')[1]
                             model_name = table = context.split('"')[1]
                             model = table.replace("_",".")
-                            model_obj = self.get(model)
+                            model_obj = osv_pool.get(model)
                             if model_obj:
                                 model_name = model_obj._description or model_obj._name
                             msg += _('\n\n[object with reference: %s - %s]') % (model_name, model)
@@ -154,35 +159,6 @@ class osv_pool(netsvc.Service):
 
         return wrapper
 
-
-    def __init__(self):
-        self._ready = False
-        self.obj_pool = {}
-        self.module_object_list = {}
-        self.created = []
-        self._sql_error = {}
-        self._store_function = {}
-        self._init = True
-        self._init_parent = {}
-        self.logger = logging.getLogger("web-services")
-        netsvc.Service.__init__(self, 'object_proxy', audience='')
-        self.exportMethod(self.obj_list)
-        self.exportMethod(self.exec_workflow)
-        self.exportMethod(self.execute)
-        self.exportMethod(self.set_debug)
-
-    def init_set(self, cr, mode):
-        different = mode != self._init
-        if different:
-            if mode:
-                self._init_parent = {}
-            if not mode:
-                for o in self._init_parent:
-                    self.get(o)._parent_store_compute(cr)
-            self._init = mode
-
-        self._ready = True
-        return different
 
     def execute_cr(self, cr, uid, obj, method, *args, **kw):
         object = pooler.get_pool(cr.dbname).get(obj)
@@ -204,13 +180,12 @@ class osv_pool(netsvc.Service):
 
     @check
     def execute(self, db, uid, obj, method, *args, **kw):
-        db, pool = pooler.get_db_and_pool(db)
-        cr = db.cursor()
+        cr = pooler.get_db(db).cursor()
         try:
             try:
                 if method.startswith('_'):
                     raise except_osv('Access Denied', 'Private methods (such as %s) cannot be called remotely.' % (method,))
-                res = pool.execute_cr(cr, uid, obj, method, *args, **kw)
+                res = self.execute_cr(cr, uid, obj, method, *args, **kw)
                 if res is None:
                     self.logger.warning('Method %s.%s can not return a None value (crash in XML-RPC)' % (obj, method))
                 cr.commit()
@@ -238,6 +213,34 @@ class osv_pool(netsvc.Service):
         finally:
             cr.close()
         return res
+
+object_proxy()
+
+class osv_pool(object):
+    def __init__(self):
+        self._ready = False
+        self.obj_pool = {}
+        self.module_object_list = {}
+        self.created = []
+        self._sql_error = {}
+        self._store_function = {}
+        self._init = True
+        self._init_parent = {}
+        self.logger = logging.getLogger("pool")
+
+    def init_set(self, cr, mode):
+        different = mode != self._init
+        if different:
+            if mode:
+                self._init_parent = {}
+            if not mode:
+                for o in self._init_parent:
+                    self.get(o)._parent_store_compute(cr)
+            self._init = mode
+
+        self._ready = True
+        return different
+
 
     def obj_list(self):
         return self.obj_pool.keys()
