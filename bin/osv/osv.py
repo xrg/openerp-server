@@ -214,6 +214,16 @@ class object_proxy(netsvc.Service):
             cr.close()
         return res
 
+    def set_debug(self, db, obj, do_debug=True):
+        object = pooler.get_pool(db).get(obj)
+        if not object:
+            raise except_osv('Object Error', 'Object %s doesn\'t exist' % str(obj))
+        try:
+            object._debug = do_debug
+            return True
+        except Exception:
+            raise
+
 object_proxy()
 
 class osv_pool(object):
@@ -275,16 +285,6 @@ class osv_pool(object):
         for klass in class_list:
             res.append(klass.createInstance(self, module, cr))
         return res
-
-    def set_debug(self, db, obj, do_debug=True):
-        object = pooler.get_pool(db).get(obj)
-        if not object:
-            raise except_osv('Object Error', 'Object %s doesn\'t exist' % str(obj))
-        try:
-            object._debug = do_debug
-            return True
-        except Exception:
-            raise
 
 class osv_base(object):
     def __init__(self, pool, cr):
