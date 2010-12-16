@@ -56,3 +56,15 @@
         assert len(ids) > 0, "Should find partners with empty category"
         for b in self.browse(cr, uid, ids):
             assert not b.category_id, "Categories of partner %d should be empty" % b.id
+-
+  Test operator on translatable values
+-
+  !python {model: ir.actions.act_window}: |
+      ids = self.search(cr, uid, [('name', '=', 'Users')])
+      assert len(ids) >= 1, "should have found at least 1 action"
+-
+  Test operator on translatable values 2
+-
+  !python {model: ir.actions.act_window}: |
+      ids = self.search(cr, uid, [('name', 'in', ['Users', 'Menu' ])])
+      assert len(ids) >= 2, "should have found at least 2 actions"
