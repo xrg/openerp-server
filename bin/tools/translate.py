@@ -183,8 +183,10 @@ class GettextAlias(object):
             if not lang:
                 return source
             if (not cr) and frame.f_globals.get('pooler',False):
-                cr = pooler.get_db(frame.f_globals['pooler'].pool_dic.keys()[0]).cursor()
-                own_cr = True
+                db = frame.f_locals.get('dbname') or frame.f_locals.get('db')
+                if db and isinstance(db, basestring):
+                    cr = pooler.get_db(db).cursor()
+                    own_cr = True
             if not cr:
                 return source
         except Exception:
