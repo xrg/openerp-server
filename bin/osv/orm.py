@@ -1640,7 +1640,9 @@ class orm_template(object):
         if ('lang' in context) and not result:
             if node.get('string'):
                 trans = self.pool.get('ir.translation')._get_source(cr, user, self._name, 'view', context['lang'], node.get('string'))
-                if not trans and ('base_model_name' in context):
+                if trans == node.get('string') and ('base_model_name' in context):
+                    # If translation is same as source, perhaps we'd have more luck with the alternative model name
+                    # (in case we are in a mixed situation, such as an inherited view where parent_view.model != model
                     trans = self.pool.get('ir.translation')._get_source(cr, user, context['base_model_name'], 'view', context['lang'], node.get('string'))
                 if trans:
                     node.set('string', trans)
@@ -1953,6 +1955,7 @@ class orm_template(object):
 
         result = {'type': view_type, 'model': self._name}
 
+        parent_view_model = None
         view_ref = context.get(view_type + '_view_ref', False)
         if self._debug:
             logging.getLogger('orm').debug("Getting %s view %r for %s.", 
@@ -1973,14 +1976,14 @@ class orm_template(object):
         sql_res = False
         while ok:
             if view_id:
-                query = "SELECT arch,name,field_parent,id,type,inherit_id FROM ir_ui_view WHERE id=%s"
+                query = "SELECT arch,name,field_parent,id,type,inherit_id,model FROM ir_ui_view WHERE id=%s"
                 params = (view_id,)
                 if model:
                     query += " AND model=%s"
                     params += (self._name,)
                 cr.execute(query, params, debug=self._debug)
             else:
-                cr.execute('''SELECT arch,name,field_parent,id,type,inherit_id
+                cr.execute('''SELECT arch,name,field_parent,id,type,inherit_id, model
                     FROM ir_ui_view
                     WHERE model=%s AND type=%s AND inherit_id IS NULL
                     ORDER BY priority''', (self._name, view_type), 
@@ -1993,6 +1996,7 @@ class orm_template(object):
             ok = sql_res[5]
             view_id = ok or sql_res[3]
             model = False
+            parent_view_model = sql_res[6]
 
         if sql_res:
             # if a view was found in non-pg84 mode
@@ -2053,7 +2057,7 @@ class orm_template(object):
                             WHERE v.inherit_id = rec_view.id
                               AND v.model = %%s
                      )
-                  SELECT arch, name, field_parent, id, type, inherit_id
+                  SELECT arch, name, field_parent, id, type, inherit_id, model
                       FROM rec_view ORDER BY path, priority ;
                   ''' % sql_in
                 
@@ -2070,6 +2074,7 @@ class orm_template(object):
                     view_id = res[3]
                     result['type'] = res[4]
                     last_res = [res[3],]
+                    parent_view_model = res[6]
                 elif not (res[5] and res[5] in last_res):
                     _logger.warning("Cannot apply view %d because it inherits from %d, not in %s" % \
                                 (res[3], res[5], last_res))
@@ -2114,7 +2119,12 @@ class orm_template(object):
             result['field_parent'] = False
             result['view_id'] = 0
 
-        xarch, xfields = self.__view_look_dom_arch(cr, user, result['arch'], view_id, context=context)
+        if parent_view_model != self._name:
+            ctx = context.copy()
+            ctx['base_model_name'] = parent_view_model
+        else:
+            ctx = context
+        xarch, xfields = self.__view_look_dom_arch(cr, user, result['arch'], view_id, context=ctx)
         result['arch'] = xarch
         result['fields'] = xfields
 

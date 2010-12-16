@@ -51,6 +51,7 @@ class object_proxy(netsvc.Service):
         self.exportMethod(self.exec_workflow)
         self.exportMethod(self.execute)
         self.exportMethod(self.set_debug)
+        self.exportMethod(self.obj_list)
 
     def check(f):
         @wraps(f)
@@ -223,6 +224,9 @@ class object_proxy(netsvc.Service):
             return True
         except Exception:
             raise
+
+    def obj_list(self):
+        return []
 
 object_proxy()
 
