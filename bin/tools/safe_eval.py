@@ -38,6 +38,8 @@ import logging
 
 __all__ = ['test_expr', 'literal_eval', 'safe_eval', 'const_eval' ]
 
+_ALLOWED_MODULES = ['_strptime']
+
 _CONST_OPCODES = set(opmap[x] for x in [
     'POP_TOP', 'ROT_TWO', 'ROT_THREE', 'ROT_FOUR', 'DUP_TOP','POP_BLOCK','SETUP_LOOP',
     'BUILD_LIST', 'BUILD_MAP', 'BUILD_TUPLE',
@@ -206,7 +208,10 @@ except ImportError:
             node_or_string = node_or_string.body
         return _convert(node_or_string)
 
-
+def _import(name, globals={}, locals={}, fromlist=[], level=-1):
+    if name in _ALLOWED_MODULES:
+        return __import__(name, globals, locals, level)
+    raise ImportError(name)
 
 def safe_eval(expr, globals_dict=None, locals_dict=None, mode="eval", nocopy=False):
     """safe_eval(expression[, globals[, locals[, mode[, nocopy]]]]) -> result
@@ -252,6 +257,7 @@ def safe_eval(expr, globals_dict=None, locals_dict=None, mode="eval", nocopy=Fal
 
     globals_dict.update(
             __builtins__ = {
+                '__import__': _import,
                 'True': True,
                 'False': False,
                 'None': None,

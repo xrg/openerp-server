@@ -6,14 +6,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenERP Server 5.0.0\n"
 "Report-Msgid-Bugs-To: support@openerp.com\n"
-"POT-Creation-Date: 2010-12-20 17:37:27+0000\n"
-"PO-Revision-Date: 2010-12-16 01:09+0200\n"
+"POT-Creation-Date: 2010-12-16 15:02+0000\n"
+"PO-Revision-Date: 2010-12-20 21:28+0200\n"
 "Last-Translator: P. Christeas <p_christ@hol.gr>\n"
 "Language-Team: Greek <openerp@lists.hellug.gr>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-12-14 04:52+0000\n"
+"X-Launchpad-Export-Date: 2010-12-19 04:44+0000\n"
 "X-Generator: Lokalize 1.0\n"
 "X-Poedit-Country: GREECE\n"
 "X-Poedit-Language: Greek\n"
@@ -275,8 +275,8 @@ msgid ""
 "You try to upgrade a module that depends on the module: %s.\n"
 "But this module is not available in your system."
 msgstr ""
-"Προσπαθείτε να αναβαθμίσετε ένα άρθρωμα το οποίο εξαρτάται από το άρθρωμα: %"
-"s.\n"
+"Προσπαθείτε να αναβαθμίσετε ένα άρθρωμα το οποίο εξαρτάται από το άρθρωμα: "
+"%s.\n"
 "Αυτό όμως δεν είναι διαθέσιμο στο σύστημά σας."
 
 #. module: base
@@ -287,8 +287,8 @@ msgid ""
 "text editor. The file encoding is UTF-8."
 msgstr ""
 "Αποθηκεύστε αυτό το έγγραφο σε αρχείο  %s και επεξεργαστείτε το με "
-"επεξεργαστή κειμένου ή άλλο πρόγραμμα. Η κωδικοποίηση του αρχείου είναι UTF-"
-"8."
+"επεξεργαστή κειμένου ή άλλο πρόγραμμα. Η κωδικοποίηση του αρχείου είναι "
+"UTF-8."
 
 #. module: base
 #: code:addons/base/module/wizard/base_export_language.py:0
@@ -3171,7 +3171,7 @@ msgstr "Αφήστε το κενό αν δεν επιθυμείτε ο χρήσ�
 #. module: base
 #: help:res.config.users,view:0 help:res.users,view:0
 msgid "Choose between the simplified interface and the extended one"
-msgstr ""
+msgstr "Επιλέξτε μεταξύ του απλοποιημένου ή του επεκταμένου μενού"
 
 #. module: base
 #: help:res.country,code:0
@@ -3459,11 +3459,8 @@ msgstr ""
 
 #. module: base
 #: model:ir.actions.act_window,help:base.action_res_bank_form
-#, fuzzy
 msgid "Manage bank records you want to be used in the system."
 msgstr ""
-"#-#-#-#-#  .merge_file_v2hkkx (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_ssBxAO (OpenERP Server 5.0.0)  #-#-#-#-#\n"
 "Διαχειριστείτε τους τραπεζικούς λογαριασμούς που θέλετε να χρησιμοποιηθούν "
 "στο σύστημα."
 
@@ -3732,9 +3729,8 @@ msgstr "Συμβόλαιο Συντήρησης"
 #. module: base
 #: model:ir.actions.act_window,name:base.action_publisher_warranty_contract_form
 #: model:ir.ui.menu,name:base.menu_publisher_warranty_contract
-#, fuzzy
 msgid "Contracts"
-msgstr "Επαφές"
+msgstr "Συμβάσεις"
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_res_company_tree
@@ -4021,8 +4017,13 @@ msgstr "base.module.configuration"
 #. module: base
 #: model:ir.model,name:base.model_base_module_import
 #: model:ir.ui.menu,name:base.menu_view_base_module_import
+#, fuzzy
 msgid "Import Module"
-msgstr "Εισαγωγή Αρθρώματος"
+msgstr ""
+"#-#-#-#-#  .merge_file_ijAAXi (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Εισαγωγή Αρθρώματος\n"
+"#-#-#-#-#  .merge_file_rGwmT9 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Εισαγωγή αρθρώματος"
 
 #. module: base
 #: model:ir.model,name:base.model_base_module_update
@@ -4483,9 +4484,8 @@ msgstr "Υποψήφιοι Πελάτες και ευκαιρίες"
 
 #. module: base
 #: model:ir.ui.menu,name:base.menu_crm_config_opportunity
-#, fuzzy
 msgid "Opportunities"
-msgstr "Υποψήφιοι Πελάτες και ευκαιρίες"
+msgstr "Ευκαιρίες"
 
 #. module: base
 #: model:ir.ui.menu,name:base.menu_custom
@@ -6013,9 +6013,8 @@ msgstr "Προμηθευτές Ξύλου"
 
 #. module: base
 #: model:res.partner.title,name:base.res_partner_title_ltd
-#, fuzzy
 msgid "Limited Company"
-msgstr "Λίστα εταιρείας"
+msgstr "Εταιρία Περιορισμένης Ευθύνης"
 
 #. module: base
 #: model:res.partner.title,name:base.res_partner_title_madam
@@ -6052,10 +6051,7 @@ msgstr "Κα."
 #: model:res.partner.title,shortcut:base.res_partner_title_miss
 #, fuzzy
 msgid "Mss."
-msgstr ""
-"#-#-#-#-#  .merge_file_tNflwt (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_nfOTYj (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"Κυρίες"
+msgstr "Δίδα."
 
 #. module: base
 #: model:res.partner.title,shortcut:base.res_partner_title_pvt_ltd
@@ -7010,9 +7006,8 @@ msgstr "Πρόχειρα"
 
 #. module: base
 #: selection:publisher_warranty.contract.wizard,state:0
-#, fuzzy
 msgid "Finished"
-msgstr "Πεδίο"
+msgstr "Ολοκληρώθηκε"
 
 #. module: base
 #: selection:res.config.users,view:0 selection:res.config.view,view:0
@@ -7121,9 +7116,8 @@ msgstr "Or"
 
 #. module: base
 #: sql_constraint:ir.config_parameter:0
-#, fuzzy
 msgid "Key must be unique."
-msgstr "Το αντικείμενο πρέπει να είναι μοναδικό!"
+msgstr "Το κλειδί πρέπει να είναι μοναδικό."
 
 #. module: base
 #: sql_constraint:ir.model.data:0
@@ -7276,8 +7270,8 @@ msgid ""
 "Please double-check that the file encoding is set to UTF-8 (sometimes called "
 "Unicode) when the translator exports it."
 msgstr ""
-"Παρακαλούμε επιβεβαιώστε ότι η κωδικοποίηση του αρχείου έχει ορισθεί σε UTF-"
-"8 (αποκαλούμενο και Unicode) όταν ο μεταφραστής το εξάγει."
+"Παρακαλούμε επιβεβαιώστε ότι η κωδικοποίηση του αρχείου έχει ορισθεί σε "
+"UTF-8 (αποκαλούμενο και Unicode) όταν ο μεταφραστής το εξάγει."
 
 #. module: base
 #: view:base.language.import:0
@@ -7468,7 +7462,7 @@ msgstr "Η ενημέρωση συστήματος ολοκληρώθηκε"
 #. module: base
 #: view:base.module.upgrade:0
 msgid "The selected modules have been updated / installed !"
-msgstr "Επιτυχής εγκατάσταση / αναβάθμιση!"
+msgstr "Τα επιλεγμένα αρθρώματα έχουν ενημερωθεί / εγκατασταθεί !"
 
 #. module: base
 #: view:base.module.upgrade:0
@@ -8231,9 +8225,8 @@ msgstr "Προσθήκη Χρήστη"
 
 #. module: base
 #: view:res.config.users:0
-#, fuzzy
 msgid "Create User"
-msgstr "Δημιουργία Χρηστών"
+msgstr "Δημιουργία Χρήστη"
 
 #. module: base
 #: view:res.config.users:0
@@ -8254,9 +8247,8 @@ msgstr ""
 
 #. module: base
 #: view:res.config.users:0
-#, fuzzy
 msgid "New User"
-msgstr "Χρήστης"
+msgstr "Νέος χρήστης"
 
 #. module: base
 #: view:res.config.view:0
@@ -8704,6 +8696,36 @@ msgstr "Επιλογή Τύπου Ενέργειας"
 #: wizard_view:server.action.create,step_1:0
 msgid "Select Report"
 msgstr "Επιλογή Αναφοράς"
+
+#. module: base
+#: field:res.partner.category,parent_left:0
+msgid "Left parent"
+msgstr ""
+
+#. module: base
+#: code:addons/base/res/res_config.py:0
+#, python-format
+msgid ""
+"Your database is now fully configured.\n"
+"\n"
+"Click 'Continue' and enjoy your OpenERP experience..."
+msgstr ""
+"Η βάση δεδομένων σας είναι τώρα πλήρως διαμορφωμένη.\n"
+"\n"
+"Κάντε κλικ στο κουμπί «Συνέχεια» και απολαύστε την OpenERP εμπειρία σας ..."
+
+#. module: base
+#: code:addons/base/res/res_config.py:0
+#, python-format
+msgid "Click 'Continue' to configure the next addon..."
+msgstr ""
+"Κάντε κλικ στο κουμπί \"Συνέχεια\" για να διαμορφώσετε το επόμενο "
+"πρόσθετο ..."
+
+#. module: base
+#: field:res.partner.category,parent_right:0
+msgid "Right parent"
+msgstr ""
 
 #~ msgid "Please specify server option --smtp-from !"
 #~ msgstr "Παρακαλώ καθορίστε την επιλογή διακομιστή --smtp-from !"
