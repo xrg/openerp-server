@@ -541,19 +541,19 @@ class expression(object):
                              '  SELECT id'              \
                              '    FROM "' + working_table._table + '"'       \
                              '   WHERE "' + left + '" ' + operator + ' ' +" (" + instr + "))"
+                        right = list(right)
                     else:
                         query1 += '     AND value ' + operator + instr +   \
                              ') UNION ('                \
                              '  SELECT id'              \
                              '    FROM "' + working_table._table + '"'       \
                              '   WHERE "' + left + '" ' + operator + instr + ")"
+                        right = [right,]
 
                     query2 = [working_table._name + ',' + left,
                               context.get('lang', False) or 'en_US',
                               'model',
-                              right,
-                              right,
-                             ]
+                             ] + right + right
 
                     self.__exp[i] = ('id', 'inselect', (query1, query2))
 
