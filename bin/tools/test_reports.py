@@ -57,10 +57,10 @@ def try_report(cr, uid, rname, ids, data=None, context=None, our_module=None):
         raise RuntimeError("Result of %s.create() should be a (data,format) tuple, now it is a %s" % \
                                 (rname, type(res)))
     (res_data, res_format) = res
-   
+
     if not res_data:
         raise ValueError("Report %s produced an empty result!" % rname)
-    
+
     if tools.config['test_report_directory']:
         file(os.path.join(tools.config['test_report_directory'], rname+ '.'+res_format), 'wb+').write(res_data)
 
@@ -68,7 +68,7 @@ def try_report(cr, uid, rname, ids, data=None, context=None, our_module=None):
     if res_format == 'pdf':
         if res_data[:5] != '%PDF-':
             raise ValueError("Report %s produced a non-pdf header, %r" % (rname, res_data[:10]))
-    
+
         res_text = False
         try:
             fd, rfname = tempfile.mkstemp(suffix=res_format)
@@ -95,25 +95,25 @@ def try_report(cr, uid, rname, ids, data=None, context=None, our_module=None):
 
     log.log(netsvc.logging.TEST, "  + Report %s produced correctly.", rname)
     return True
-    
-def try_report_action(cr, uid, action_id, active_model=None, active_ids=None, 
+
+def try_report_action(cr, uid, action_id, active_model=None, active_ids=None,
                 wiz_data=None, wiz_buttons=None,
                 context=None, our_module=None):
     """Take an ir.action.act_window and follow it until a report is produced
-    
-        @param action_id the integer id of an action, or a reference to xml id
+
+        :param action_id: the integer id of an action, or a reference to xml id
                 of the act_window (can search [our_module.]+xml_id
-        @param active_model, active_ids call the action as if it had been launched
+        :param active_model, active_ids: call the action as if it had been launched
                 from that model+ids (tree/form view action)
-        @param wiz_data a dictionary of values to use in the wizard, if needed.
-                They will override (or complete) the default values of the 
+        :param wiz_data: a dictionary of values to use in the wizard, if needed.
+                They will override (or complete) the default values of the
                 wizard form.
-        @param wiz_buttons a list of button names, or button icon strings, which
+        :param wiz_buttons: a list of button names, or button icon strings, which
                 should be preferred to press during the wizard.
                 Eg. 'OK' or 'gtk-print'
-        @param our_module the name of the calling module (string), like 'account'
+        :param our_module: the name of the calling module (string), like 'account'
     """
- 
+
     if not our_module and isinstance(action_id, basestring):
         if '.' in action_id:
             our_module = action_id.split('.', 1)[0]
@@ -132,13 +132,13 @@ def try_report_action(cr, uid, action_id, active_model=None, active_ids=None,
 
     def log_test(msg, *args):
         log.log(netsvc.logging.TEST, "  - " + msg, *args)
-    
+
     datas = {}
     if active_model:
         datas['model'] = active_model
     if active_ids:
         datas['ids'] = active_ids
-    
+
     if not wiz_buttons:
         wiz_buttons = []
 
@@ -156,7 +156,7 @@ def try_report_action(cr, uid, action_id, active_model=None, active_ids=None,
         act_model = 'ir.action.act_window'     # assume that
         act_id = action_id
         act_xmlid = '<%s>' % act_id
-    
+
     def _exec_action(action, datas, context):
         # taken from client/modules/action/main.py:84 _exec_action()
         if isinstance(action, bool) or 'type' not in action:
@@ -183,9 +183,9 @@ def try_report_action(cr, uid, action_id, active_model=None, active_ids=None,
 
             assert datas['res_model'], "Cannot use the view without a model"
             # Here, we have a view that we need to emulate
-            log_test("will emulate a %s view: %s#%s", 
+            log_test("will emulate a %s view: %s#%s",
                         action['view_type'], datas['res_model'], view_id or '?')
-            
+
             view_res = pool.get(datas['res_model']).fields_view_get(cr, uid, view_id, action['view_type'], context)
             assert view_res and view_res.get('arch'), "Did not return any arch for the view"
             view_data = {}
@@ -196,7 +196,7 @@ def try_report_action(cr, uid, action_id, active_model=None, active_ids=None,
             if wiz_data:
                 view_data.update(wiz_data)
             log.debug("View data is: %r", view_data)
-            
+
             action_name = action.get('name')
             try:
                 from xml.dom import minidom
@@ -205,7 +205,7 @@ def try_report_action(cr, uid, action_id, active_model=None, active_ids=None,
                 dom_doc = minidom.parseString(view_res['arch'])
                 if not action_name:
                     action_name = dom_doc.documentElement.getAttribute('name')
-                
+
                 for button in dom_doc.getElementsByTagName('button'):
                     button_weight = 0
                     if button.getAttribute('special') == 'cancel':
@@ -221,7 +221,7 @@ def try_report_action(cr, uid, action_id, active_model=None, active_ids=None,
                     elif button.getAttribute('icon') in wiz_buttons:
                         button_weight += 10
                     string = button.getAttribute('string') or '?%s' % len(buttons)
-                    
+
                     buttons.append( { 'name': button.getAttribute('name'),
                                 'string': string,
                                 'type': button.getAttribute('type'),
@@ -230,18 +230,18 @@ def try_report_action(cr, uid, action_id, active_model=None, active_ids=None,
             except Exception, e:
                 log.warning("Cannot resolve the view arch and locate the buttons!", exc_info=True)
                 raise AssertionError(e.args[0])
-            
+
             if not datas['res_id']:
                 # it is probably an orm_memory object, we need to create
                 # an instance
                 datas['res_id'] = pool.get(datas['res_model']).create(cr, uid, view_data, context)
-        
+
             if not buttons:
                 raise AssertionError("view form doesn't have any buttons to press!")
-            
+
             buttons.sort(key=lambda b: b['weight'])
             log.debug('Buttons are: %s', ', '.join([ '%s: %d' % (b['string'], b['weight']) for b in buttons]))
-            
+
             res = None
             while buttons and not res:
                 b = buttons.pop()
@@ -258,7 +258,7 @@ def try_report_action(cr, uid, action_id, active_model=None, active_ids=None,
                     res = fn(cr, uid, [datas['res_id'],], context)
                     break
                 else:
-                    log.warning("in the \"%s\" form, the \"%s\" button has unknown type %s", 
+                    log.warning("in the \"%s\" form, the \"%s\" button has unknown type %s",
                         action_name, b['string'], b['type'])
             return res
         #elif action['type']=='ir.actions.server':
@@ -275,6 +275,7 @@ def try_report_action(cr, uid, action_id, active_model=None, active_ids=None,
                 #win=datas['window']
                 #del datas['window']
             #wizard.execute(action['wiz_name'], datas, parent=win, context=context)
+
 
         #elif action['type']=='ir.actions.report.custom':
             #if 'window' in datas:

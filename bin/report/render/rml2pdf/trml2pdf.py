@@ -752,7 +752,7 @@ class _rml_flowable(object):
                 # from reportlab.graphics.barcode import fourstate
                 from reportlab.graphics.barcode import usps
                 from reportlab.graphics.barcode import createBarcodeDrawing
-                
+
             except ImportError:
                 self._logger.warning("Cannot use barcode renderers:", exc_info=True)
                 return None
