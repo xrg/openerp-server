@@ -28,6 +28,7 @@ import locale
 import os
 import re
 import logging
+import shutil
 import tarfile
 import tempfile
 from os.path import join
@@ -466,13 +467,14 @@ def trans_export(lang, modules, buffer, format, dbname=None):
             tar = tarfile.open(fileobj=buffer, mode='w|gz')
             tar.add(tmpdir, '')
             tar.close()
+            shutil.rmtree(tmpdir)
 
         else:
             raise Exception(_('Bad file format'))
 
     newlang = not bool(lang)
-    if newlang:
-        lang = 'en_US'
+    #if newlang:
+    #    lang = 'en_US'
     trans = trans_generate(lang, modules, dbname)
     if newlang and format!='csv':
         for trx in trans:
@@ -577,9 +579,9 @@ def trans_generate(lang, modules, dbname=None):
 
     _to_translate = []
     def push_translation(module, type, name, id, source):
-        tuple = (module, source, name, id, type)
-        if source and tuple not in _to_translate:
-            _to_translate.append(tuple)
+        tup = (module, source, name, id, type)
+        if source and (tup not in _to_translate):
+            _to_translate.append(tup)
 
     def encode(s):
         if isinstance(s, unicode):
