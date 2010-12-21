@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: OpenERP Server 5.0.0\n"
 "Report-Msgid-Bugs-To: support@openerp.com\n"
 "POT-Creation-Date: 2010-12-16 15:02+0000\n"
-"PO-Revision-Date: 2010-12-20 21:28+0200\n"
+"PO-Revision-Date: 2010-12-21 21:32+0200\n"
 "Last-Translator: P. Christeas <p_christ@hol.gr>\n"
 "Language-Team: Greek <openerp@lists.hellug.gr>\n"
 "MIME-Version: 1.0\n"
@@ -704,7 +704,7 @@ msgstr "Αυτόματη Αναζήτηση"
 #. module: base
 #: field:ir.actions.act_window,context:0 field:ir.filters,context:0
 msgid "Context Value"
-msgstr "Context Value"
+msgstr "Τιμή Περιβάλλοντος"
 
 #. module: base
 #: field:ir.actions.act_window,display_menu_tip:0
@@ -3594,13 +3594,8 @@ msgstr "Συνημμένα"
 #. module: base
 #: model:ir.actions.act_window,name:base.action_config_simple_view_form
 #: view:res.config.view:0
-#, fuzzy
 msgid "Configure Your Interface"
-msgstr ""
-"#-#-#-#-#  .merge_file_JdaAjy (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"Παραμετροποίηση Χρηστικής Διεπιφάνειας\n"
-"#-#-#-#-#  .merge_file_gsP1MZ (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"Διαμορφώστε τη διεπαφή σας"
+msgstr "Επιλέξτε το περιβάλλον"
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_config_user_form
@@ -7013,13 +7008,13 @@ msgstr "Ολοκληρώθηκε"
 #: selection:res.config.users,view:0 selection:res.config.view,view:0
 #: selection:res.users,view:0
 msgid "Extended"
-msgstr "Εκτεταμένη"
+msgstr "Εκτεταμένο"
 
 #. module: base
 #: selection:res.config.users,view:0 selection:res.config.view,view:0
 #: selection:res.users,view:0
 msgid "Simplified"
-msgstr "Απλοποιημένη"
+msgstr "Απλοποιημένο"
 
 #. module: base
 #: selection:res.lang,direction:0
