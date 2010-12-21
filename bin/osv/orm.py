@@ -527,7 +527,7 @@ class orm_template(object):
     _description = None
     _inherits = {}
     _table = None
-    _invalids = set()
+    _invalids = set() # FIXME: why persistent?
     _log_create = False
     _virtuals = None
 
@@ -2426,37 +2426,39 @@ class orm_memory(orm_template):
         return True
 
     def read(self, cr, user, ids, fields_to_read=None, context=None, load='_classic_read'):
-        if not context:
+        if context is None:
             context = {}
         if not fields_to_read:
             fields_to_read = self._columns.keys()
+        if self._debug:
+            _logger.debug("%s.read(%r, fields=%r)", self._name, ids, fields_to_read)
         result = []
+        ids_orig = ids
         if self.datas:
-            ids_orig = ids
             if isinstance(ids, (int, long)):
                 ids = [ids]
             for id in ids:
+                if not id in self.datas:
+                    continue
                 r = {'id': id}
+                record = self.datas[id]
                 for f in fields_to_read:
-                    record = self.datas.get(id)
                     if f == '_vptr':
                         r[f] = record.get(f, None)
                         continue
-                    if record:
-                        self._check_access(user, id, 'read')
-                        r[f] = record.get(f, False)
-                        if r[f] and isinstance(self._columns[f], fields.binary) and context.get('bin_size', False):
-                            r[f] = len(r[f])
+                    self._check_access(user, id, 'read')
+                    r[f] = record.get(f, False)
+                    if r[f] and isinstance(self._columns[f], fields.binary) and context.get('bin_size', False):
+                        r[f] = len(r[f])
                 result.append(r)
-                if id in self.datas:
-                    self.datas[id]['internal.date_access'] = time.time()
+                self.datas[id]['internal.date_access'] = time.time()
             fields_post = filter(lambda x: x in self._columns and not getattr(self._columns[x], load), fields_to_read)
             for f in fields_post:
                 res2 = self._columns[f].get_memory(cr, self, ids, f, user, context=context, values=result)
                 for record in result:
                     record[f] = res2[record['id']]
-            if isinstance(ids_orig, (int, long)):
-                return result[0]
+        if isinstance(ids_orig, (int, long)):
+            return result and result[0] or False
         return result
 
     def write(self, cr, user, ids, vals, context=None):
@@ -2468,9 +2470,20 @@ class orm_memory(orm_template):
             if field == '_vptr':
                 vals2[field] = vals[field]
             elif self._columns[field]._classic_write:
+                if self._columns[field].required \
+                    and ( (vals[field] is False  \
+                            and self._columns[field]._type != 'boolean')
+                        or vals[field] is None ):
+                    raise except_orm(_("Integrity Error!"),
+                        _("Empty value at required %s column of %s is not permitted!") % \
+                            (self._columns[field].string, self._description )) # TODO: translate!
                 vals2[field] = vals[field]
             else:
                 upd_todo.append(field)
+
+        if self._debug:
+            _logger.debug('%s.write(#%s, %r)', self._name, ids, vals)
+
         for object_id in ids:
             self._check_access(user, object_id, mode='write')
             if object_id not in self.datas:
@@ -2482,14 +2495,14 @@ class orm_memory(orm_template):
             self.datas[object_id]['internal.date_access'] = time.time()
             for field in upd_todo:
                 self._columns[field].set_memory(cr, self, object_id, field, vals[field], user, context)
-        self._validate(cr, user, [object_id], context)
+        self._validate(cr, user, [object_id], context) # FIXME
         wf_service = netsvc.LocalService("workflow")
         wf_service.trg_write(user, self._name, object_id, cr)
         return object_id
 
     def create(self, cr, user, vals, context=None):
         self.vaccum(cr, user)
-        self.next_id += 1
+        self.next_id += 1   # We advance even if we fail, just like Postgres does
         id_new = self.next_id
 
         vals = self._add_missing_default_values(cr, user, vals, context)
@@ -2503,13 +2516,23 @@ class orm_memory(orm_template):
                 vals2[field] = vals[field]
             else:
                 upd_todo.append(field)
+
+        for field, column in self._columns.items():
+            if column._classic_write and column.required \
+                and ( vals.get(field, None) is None
+                    or (vals.get(field) is False  \
+                        and column._type != 'boolean') ):
+                raise except_orm(_("Integrity Error!"),
+                    _("Empty value at required %s column of %s is not permitted!") % \
+                        ( column.string, self._description )) # TODO: translate!
+
         self.datas[id_new] = vals2
         self.datas[id_new]['internal.date_access'] = time.time()
         self.datas[id_new]['internal.create_uid'] = user
 
         for field in upd_todo:
             self._columns[field].set_memory(cr, self, id_new, field, vals[field], user, context)
-        self._validate(cr, user, [id_new], context)
+        self._validate(cr, user, [id_new], context) # FIXME
         if self._log_create and not (context and context.get('no_store_function', False)):
             message = self._description + \
                 " '" + \
