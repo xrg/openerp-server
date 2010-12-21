@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: OpenERP Server 5.0.0\n"
 "Report-Msgid-Bugs-To: support@openerp.com\n"
 "POT-Creation-Date: 2010-12-16 15:02+0000\n"
-"PO-Revision-Date: 2010-12-18 08:18+0000\n"
-"Last-Translator: OpenERP Administrators <Unknown>\n"
+"PO-Revision-Date: 2010-12-21 07:58+0000\n"
+"Last-Translator: Anders Eriksson, Aspirix AB <ae@mobilasystem.se>\n"
 "Language-Team: <>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-12-19 04:45+0000\n"
+"X-Launchpad-Export-Date: 2010-12-21 13:27+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #. module: base
@@ -677,8 +677,12 @@ msgstr ""
 
 #. module: base
 #: field:ir.actions.act_window,view_mode:0 field:res.config.view,view:0
+#, fuzzy
 msgid "View Mode"
 msgstr ""
+"#-#-#-#-#  .merge_file_EiefvT (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_ssZMfU (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Visningsläge"
 
 #. module: base
 #: field:ir.actions.act_window,view_type:0
@@ -728,8 +732,12 @@ msgstr ""
 
 #. module: base
 #: field:ir.actions.configuration.wizard,name:0
+#, fuzzy
 msgid "Next Wizard"
 msgstr ""
+"#-#-#-#-#  .merge_file_EiefvT (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_ssZMfU (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Nästa wizard"
 
 #. module: base
 #: field:ir.actions.configuration.wizard,progress:0
@@ -858,8 +866,12 @@ msgstr ""
 
 #. module: base
 #: field:ir.actions.server,action_id:0 selection:ir.actions.server,state:0
+#, fuzzy
 msgid "Client Action"
 msgstr ""
+"#-#-#-#-#  .merge_file_EiefvT (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_ssZMfU (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Klientaktivitet"
 
 #. module: base
 #: field:ir.actions.server,child_ids:0
@@ -949,8 +961,12 @@ msgstr "Ämne"
 
 #. module: base
 #: field:ir.actions.server,trigger_name:0
+#, fuzzy
 msgid "Trigger Name"
 msgstr ""
+"#-#-#-#-#  .merge_file_EiefvT (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_ssZMfU (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Triggernamn"
 
 #. module: base
 #: field:ir.actions.server,trigger_obj_id:0
@@ -1019,8 +1035,12 @@ msgstr ""
 
 #. module: base
 #: field:ir.actions.url,url:0
+#, fuzzy
 msgid "Action URL"
 msgstr ""
+"#-#-#-#-#  .merge_file_EiefvT (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_ssZMfU (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Händelse URL"
 
 #. module: base
 #: field:ir.actions.wizard,multi:0
@@ -1841,13 +1861,21 @@ msgstr ""
 
 #. module: base
 #: field:ir.ui.view.custom,ref_id:0
+#, fuzzy
 msgid "Original View"
 msgstr ""
+"#-#-#-#-#  .merge_file_EiefvT (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_ssZMfU (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Orginalvy"
 
 #. module: base
 #: field:ir.ui.view_sc,name:0
+#, fuzzy
 msgid "Shortcut Name"
 msgstr ""
+"#-#-#-#-#  .merge_file_EiefvT (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_ssZMfU (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Genvägsnamn"
 
 #. module: base
 #: field:ir.ui.view_sc,res_id:0
@@ -1867,8 +1895,12 @@ msgstr "Användarreferens"
 #. module: base
 #: field:ir.values,key2:0 field:res.partner.event.type,name:0
 #: view:res.partner.event.type:0
+#, fuzzy
 msgid "Event Type"
 msgstr ""
+"#-#-#-#-#  .merge_file_EiefvT (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_ssZMfU (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Händelsetyp"
 
 #. module: base
 #: field:ir.values,meta:0
@@ -2148,8 +2180,12 @@ msgstr ""
 #: field:res.groups,model_access:0
 #: model:ir.ui.menu,name:base.menu_security_access view:ir.model.access:0
 #: view:res.groups:0
+#, fuzzy
 msgid "Access Controls"
 msgstr ""
+"#-#-#-#-#  .merge_file_EiefvT (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_ssZMfU (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Behörighetskontroller"
 
 #. module: base
 #: field:res.groups,name:0
@@ -2395,8 +2431,12 @@ msgstr "Kategorinamn"
 #: model:ir.ui.menu,name:base.menu_base_partner
 #: model:ir.ui.menu,name:base.menu_partner_form view:res.partner:0
 #: view:res.partner.category:0
+#, fuzzy
 msgid "Partners"
 msgstr ""
+"#-#-#-#-#  .merge_file_EiefvT (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_ssZMfU (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Partners"
 
 #. module: base
 #: field:res.partner.event,canal_id:0 view:res.partner.canal:0
@@ -2667,8 +2707,12 @@ msgstr ""
 
 #. module: base
 #: field:workflow.activity,action_id:0 view:ir.actions.server:0
+#, fuzzy
 msgid "Server Action"
 msgstr ""
+"#-#-#-#-#  .merge_file_EiefvT (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_ssZMfU (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Serveraktivitet"
 
 #. module: base
 #: field:workflow.activity,flow_start:0
@@ -2732,8 +2776,12 @@ msgstr "Användarid"
 
 #. module: base
 #: field:workflow.transition,act_from:0
+#, fuzzy
 msgid "Source Activity"
 msgstr ""
+"#-#-#-#-#  .merge_file_EiefvT (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_ssZMfU (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Källaktivitet"
 
 #. module: base
 #: field:workflow.transition,act_to:0
@@ -2752,8 +2800,12 @@ msgstr ""
 
 #. module: base
 #: field:workflow.transition,trigger_expr_id:0
+#, fuzzy
 msgid "Trigger Expression"
 msgstr ""
+"#-#-#-#-#  .merge_file_EiefvT (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_ssZMfU (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Trigger uttryck"
 
 #. module: base
 #: field:workflow.transition,trigger_model:0
@@ -2795,8 +2847,12 @@ msgstr ""
 
 #. module: base
 #: help:ir.actions.act_window,limit:0
+#, fuzzy
 msgid "Default limit for the list view"
 msgstr ""
+"#-#-#-#-#  .merge_file_EiefvT (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_ssZMfU (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Standardgräns för listvyn"
 
 #. module: base
 #: help:ir.actions.act_window.view,multi:0
@@ -3369,8 +3425,12 @@ msgstr ""
 #. module: base
 #: model:ir.actions.act_window,name:base.action_partner_title_contact
 #: model:ir.ui.menu,name:base.menu_partner_title_contact
+#, fuzzy
 msgid "Contact Titles"
 msgstr ""
+"#-#-#-#-#  .merge_file_EiefvT (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_ssZMfU (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Kontakttitlar"
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_partner_title_partner
@@ -5744,8 +5804,12 @@ msgstr "Aktuellt fönster"
 
 #. module: base
 #: selection:ir.actions.act_window,target:0 selection:ir.actions.url,target:0
+#, fuzzy
 msgid "New Window"
 msgstr ""
+"#-#-#-#-#  .merge_file_EiefvT (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_ssZMfU (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Nytt fönster"
 
 #. module: base
 #: selection:ir.actions.act_window,view_type:0
@@ -6092,8 +6156,12 @@ msgstr ""
 #. module: base
 #: selection:ir.module.module,state:0
 #: selection:ir.module.module.dependency,state:0
+#, fuzzy
 msgid "To be removed"
 msgstr ""
+"#-#-#-#-#  .merge_file_EiefvT (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_ssZMfU (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Kommer att tas bort"
 
 #. module: base
 #: selection:ir.module.module,state:0
@@ -6278,8 +6346,12 @@ msgstr ""
 
 #. module: base
 #: selection:ir.server.object.lines,type:0
+#, fuzzy
 msgid "Formula"
 msgstr ""
+"#-#-#-#-#  .merge_file_EiefvT (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_ssZMfU (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Formel"
 
 #. module: base
 #: selection:ir.translation,type:0 view:wizard.module.lang.export:0
@@ -7511,8 +7583,12 @@ msgstr ""
 
 #. module: base
 #: view:ir.actions.server:0
+#, fuzzy
 msgid "Field Mappings"
 msgstr ""
+"#-#-#-#-#  .merge_file_EiefvT (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_ssZMfU (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Fältmappning"
 
 #. module: base
 #: view:ir.actions.server:0
@@ -7569,8 +7645,12 @@ msgstr ""
 
 #. module: base
 #: view:ir.attachment:0
+#, fuzzy
 msgid "Attachment"
 msgstr ""
+"#-#-#-#-#  .merge_file_EiefvT (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_ssZMfU (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Bilaga"
 
 #. module: base
 #: view:ir.attachment:0
@@ -7860,8 +7940,12 @@ msgstr ""
 
 #. module: base
 #: view:ir.values:0
+#, fuzzy
 msgid "Action To Launch"
 msgstr ""
+"#-#-#-#-#  .merge_file_EiefvT (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_ssZMfU (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Händelse som skall startas"
 
 #. module: base
 #: view:ir.values:0
@@ -8209,8 +8293,12 @@ msgstr ""
 
 #. module: base
 #: view:res.partner.address:0
+#, fuzzy
 msgid "Search Contact"
 msgstr ""
+"#-#-#-#-#  .merge_file_EiefvT (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_ssZMfU (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Sök kontakt"
 
 #. module: base
 #: view:res.partner.bank:0
@@ -8257,8 +8345,12 @@ msgstr ""
 
 #. module: base
 #: view:res.request:0
+#, fuzzy
 msgid "References"
 msgstr ""
+"#-#-#-#-#  .merge_file_EiefvT (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_ssZMfU (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Referenser"
 
 #. module: base
 #: view:res.request:0
@@ -8525,8 +8617,12 @@ msgstr ""
 
 #. module: base
 #: wizard_field:module.module.update,update,update:0
+#, fuzzy
 msgid "Number of modules updated"
 msgstr ""
+"#-#-#-#-#  .merge_file_EiefvT (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_ssZMfU (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Antal uppdaterade moduler"
 
 #. module: base
 #: wizard_field:module.upgrade,next,module_download:0
@@ -9004,13 +9100,21 @@ msgstr ""
 
 #. module: base
 #: view:res.request:0
+#, fuzzy
 msgid "Request Date"
 msgstr ""
+"#-#-#-#-#  .merge_file_EiefvT (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_ssZMfU (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Begärt datum"
 
 #. module: base
 #: model:ir.ui.menu,name:base.menu_hr_dasboard
+#, fuzzy
 msgid "Dashboard"
 msgstr ""
+"#-#-#-#-#  .merge_file_EiefvT (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_ssZMfU (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Dashboard"
 
 #. module: base
 #: model:ir.ui.menu,name:base.menu_purchase_root
@@ -9052,8 +9156,12 @@ msgstr ""
 
 #. module: base
 #: selection:ir.property,type:0
+#, fuzzy
 msgid "Float"
 msgstr ""
+"#-#-#-#-#  .merge_file_EiefvT (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_ssZMfU (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Flyttal"
 
 #. module: base
 #: help:res.log,secondary:0
@@ -9104,8 +9212,12 @@ msgstr ""
 #. module: base
 #: model:ir.actions.act_window,name:base.res_widget_act_window
 #: model:ir.ui.menu,name:base.menu_res_widget_act_window
+#, fuzzy
 msgid "Homepage Widgets"
 msgstr ""
+"#-#-#-#-#  .merge_file_EiefvT (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_ssZMfU (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Hemside widgets"
 
 #. module: base
 #: field:ir.attachment,res_model:0
@@ -9130,8 +9242,12 @@ msgstr "Fullständig sökväg"
 
 #. module: base
 #: view:ir.ui.view:0
+#, fuzzy
 msgid "Advanced"
 msgstr ""
+"#-#-#-#-#  .merge_file_EiefvT (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_ssZMfU (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Avancerad"
 
 #. module: base
 #: view:ir.actions.server:0
@@ -9153,8 +9269,12 @@ msgstr ""
 #. module: base
 #: model:ir.actions.act_window,name:base.res_log_act_window
 #: model:ir.ui.menu,name:base.menu_res_log_act_window view:res.log:0
+#, fuzzy
 msgid "Logs"
 msgstr ""
+"#-#-#-#-#  .merge_file_EiefvT (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_ssZMfU (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Loggar"
 
 #. module: base
 #: selection:base.language.install,lang:0
@@ -9170,8 +9290,12 @@ msgstr ""
 
 #. module: base
 #: view:workflow.activity:0
+#, fuzzy
 msgid "Workflow Activity"
 msgstr ""
+"#-#-#-#-#  .merge_file_EiefvT (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_ssZMfU (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Arbetsflödeaktivitet"
 
 #. module: base
 #: view:ir.rule:0
@@ -9201,8 +9325,12 @@ msgstr ""
 
 #. module: base
 #: view:workflow:0
+#, fuzzy
 msgid "Workflow Editor"
 msgstr ""
+"#-#-#-#-#  .merge_file_EiefvT (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_ssZMfU (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Arbetsflöderedigerare"
 
 #. module: base
 #: view:ir.rule:0
@@ -9227,21 +9355,34 @@ msgstr ""
 
 #. module: base
 #: view:base.language.export:0
+#, fuzzy
 msgid "Export Translations"
 msgstr ""
+"#-#-#-#-#  .merge_file_EiefvT (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_ssZMfU (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Exportera översättningar"
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_view_partner_clear_ids
 #: model:ir.model,name:base.model_partner_clear_ids view:partner.clear.ids:0
+#, fuzzy
 msgid "Clear IDs"
 msgstr ""
+"#-#-#-#-#  .merge_file_EiefvT (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_ssZMfU (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Rensa ID:n"
 
 #. module: base
 #: help:ir.cron,model:0
+#, fuzzy
 msgid ""
 "Name of object whose function will be called when this scheduler will run. e."
 "g. 'res.partener'"
 msgstr ""
+"#-#-#-#-#  .merge_file_EiefvT (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_ssZMfU (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Namnet på objektet vars funktion kommer att anropas när schemaläggaren körs "
+"t.ex. \"res.partner\""
 
 #. module: base
 #: model:ir.ui.menu,name:base.menu_email_gateway_form
@@ -9256,16 +9397,26 @@ msgstr "Fel!"
 
 #. module: base
 #: help:multi_company.default,company_id:0
+#, fuzzy
 msgid "Company where the user is connected"
 msgstr ""
+"#-#-#-#-#  .merge_file_EiefvT (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_ssZMfU (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Företag där användaren är kopplad"
 
 #. module: base
 #: model:ir.actions.act_window,help:base.action_country
+#, fuzzy
 msgid ""
 "Display and manage the list of all countries that can be assigned to your "
 "partner records. You can create or delete countries to make sure the ones "
 "you are working on will be maintained."
 msgstr ""
+"#-#-#-#-#  .merge_file_EiefvT (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_ssZMfU (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Visa och hantera listan av alla länder som kan bli tilldelade dina partners "
+"uppgifter. Du kan skapa eller ta bort länder så att du är säker på att de "
+"som du jobbar på kommer att underhållas."
 
 #. module: base
 #: selection:base.language.install,lang:0
@@ -9319,14 +9470,22 @@ msgstr ""
 
 #. module: base
 #: model:res.partner.category,name:base.res_partner_category_17
+#, fuzzy
 msgid "HR sector"
 msgstr ""
+"#-#-#-#-#  .merge_file_EiefvT (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_ssZMfU (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Personalsektorn"
 
 #. module: base
 #: selection:res.config.users,view:0 selection:res.config.view,view:0
 #: selection:res.users,view:0
+#, fuzzy
 msgid "Extended"
 msgstr ""
+"#-#-#-#-#  .merge_file_EiefvT (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_ssZMfU (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Utökat"
 
 #. module: base
 #: model:ir.actions.act_window,help:base.action_partner_title_contact
@@ -11343,8 +11502,12 @@ msgstr ""
 
 #. module: base
 #: view:res.lang:0
+#, fuzzy
 msgid "%Y - Year with century."
 msgstr ""
+"#-#-#-#-#  .merge_file_EiefvT (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_ssZMfU (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"%Y - Är med århundrade"
 
 #. module: base
 #: view:publisher_warranty.contract.wizard:0
@@ -11369,8 +11532,12 @@ msgstr ""
 
 #. module: base
 #: view:res.lang:0
+#, fuzzy
 msgid "%y - Year without century [00,99]."
 msgstr ""
+"#-#-#-#-#  .merge_file_EiefvT (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_ssZMfU (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"%y - År utan århundrade [00,99]."
 
 #. module: base
 #: model:res.partner.title,shortcut:base.res_partner_title_miss
@@ -11379,8 +11546,12 @@ msgstr ""
 
 #. module: base
 #: selection:publisher_warranty.contract,state:0
+#, fuzzy
 msgid "Canceled"
 msgstr ""
+"#-#-#-#-#  .merge_file_EiefvT (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_ssZMfU (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Avbruten"
 
 #. module: base
 #: view:res.lang:0

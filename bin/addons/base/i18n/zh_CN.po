@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: OpenERP Server 5.0.4\n"
 "Report-Msgid-Bugs-To: support@openerp.com\n"
 "POT-Creation-Date: 2010-12-16 15:02+0000\n"
-"PO-Revision-Date: 2010-12-16 08:19+0000\n"
+"PO-Revision-Date: 2010-12-20 09:53+0000\n"
 "Last-Translator: Wei \"oldrev\" Li <oldrev@gmail.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-12-17 04:54+0000\n"
+"X-Launchpad-Export-Date: 2010-12-21 13:27+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #. module: base
@@ -466,9 +466,12 @@ msgstr ""
 
 #. module: base
 #: code:addons/base/res/res_config.py:0
-#, python-format
+#, fuzzy, python-format
 msgid "Couldn't find previous ir.actions.todo"
 msgstr ""
+"#-#-#-#-#  .merge_file_kSajBY (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_S7mdM0 (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"找不到上一个 ir.actions.todo"
 
 #. module: base
 #: code:addons/base/res/res_currency.py:0
@@ -3535,8 +3538,12 @@ msgstr ""
 
 #. module: base
 #: help:ir.cron,interval_number:0
+#, fuzzy
 msgid "Repeat every x."
 msgstr ""
+"#-#-#-#-#  .merge_file_kSajBY (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_S7mdM0 (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"重复每次 x."
 
 #. module: base
 #: help:ir.cron,model:0
@@ -3551,8 +3558,12 @@ msgstr ""
 
 #. module: base
 #: help:ir.cron,nextcall:0
+#, fuzzy
 msgid "Next planned execution date for this scheduler"
 msgstr ""
+"#-#-#-#-#  .merge_file_kSajBY (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_S7mdM0 (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"该计划任务的下次执行时间"
 
 #. module: base
 #: help:ir.cron,numbercall:0
@@ -3699,8 +3710,12 @@ msgstr ""
 
 #. module: base
 #: help:ir.ui.view,xml_id:0
+#, fuzzy
 msgid "ID of the view defined in xml file"
 msgstr ""
+"#-#-#-#-#  .merge_file_kSajBY (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_S7mdM0 (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"定义在 XML 文件里的视图标识符"
 
 #. module: base
 #: help:ir.values,action_id:0
@@ -4031,8 +4046,12 @@ msgstr ""
 
 #. module: base
 #: help:workflow.transition,condition:0
+#, fuzzy
 msgid "Expression to be satisfied if we want the transition done."
 msgstr ""
+"#-#-#-#-#  .merge_file_kSajBY (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_S7mdM0 (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"如果转换想完成的话必须满足表达式的条件"
 
 #. module: base
 #: help:workflow.transition,group_id:0
@@ -4386,8 +4405,12 @@ msgstr "所有术语"
 #. module: base
 #: model:ir.actions.act_window,name:base.action_translation
 #: model:ir.ui.menu,name:base.menu_action_translation
+#, fuzzy
 msgid "Translation Terms"
 msgstr ""
+"#-#-#-#-#  .merge_file_kSajBY (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_S7mdM0 (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"翻译术语列表"
 
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #. module: base
@@ -5444,8 +5467,12 @@ msgstr "多公司"
 
 #. module: base
 #: model:ir.ui.menu,name:base.menu_custom_reports
+#, fuzzy
 msgid "Custom Reports"
 msgstr ""
+"#-#-#-#-#  .merge_file_kSajBY (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_S7mdM0 (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"自定义报表"
 
 #. module: base
 #: model:ir.ui.menu,name:base.menu_emails
@@ -9213,8 +9240,12 @@ msgstr "或（or）"
 
 #. module: base
 #: sql_constraint:ir.model.data:0
+#, fuzzy
 msgid "You cannot have multiple records with the same id for the same module !"
 msgstr ""
+"#-#-#-#-#  .merge_file_kSajBY (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_S7mdM0 (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"同一个模块中的多条记录不能有相同的标识符！"
 
 #. module: base
 #: sql_constraint:ir.model.fields:0
@@ -10398,8 +10429,12 @@ msgstr "所属公司"
 
 #. module: base
 #: view:partner.clear.ids:0
+#, fuzzy
 msgid "Clear Ids"
 msgstr ""
+"#-#-#-#-#  .merge_file_kSajBY (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_S7mdM0 (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"清空标识符列表"
 
 #. module: base
 #: view:partner.clear.ids:0
@@ -11556,13 +11591,21 @@ msgstr ""
 
 #. module: base
 #: selection:base.language.install,lang:0
+#, fuzzy
 msgid "Japanese / 日本語"
 msgstr ""
+"#-#-#-#-#  .merge_file_kSajBY (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_S7mdM0 (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"日语 / 日本語"
 
 #. module: base
 #: selection:base.language.install,lang:0
+#, fuzzy
 msgid "Spanish (BO) / Español (BO)"
 msgstr ""
+"#-#-#-#-#  .merge_file_kSajBY (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_S7mdM0 (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"西班牙语 (BO) / Español (BO)"
 
 #. module: base
 #: selection:base.language.install,lang:0
@@ -11984,13 +12027,21 @@ msgstr ""
 
 #. module: base
 #: model:res.widget,title:base.rvalyi_twitter_widget
+#, fuzzy
 msgid "Raphaël Valyi's tweets"
 msgstr ""
+"#-#-#-#-#  .merge_file_kSajBY (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_S7mdM0 (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"Raphaël Valyi 的推"
 
 #. module: base
 #: model:res.widget,title:base.odony_twitter_widget
+#, fuzzy
 msgid "Olivier Dony's tweets"
 msgstr ""
+"#-#-#-#-#  .merge_file_kSajBY (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_S7mdM0 (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"Olivier Dony 的推"
 
 #. module: base
 #: field:ir.ui.menu,web_icon_hover:0
@@ -12041,8 +12092,12 @@ msgstr ""
 
 #. module: base
 #: model:ir.ui.menu,name:base.menu_crm_config_opportunity
+#, fuzzy
 msgid "Opportunities"
 msgstr ""
+"#-#-#-#-#  .merge_file_kSajBY (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_S7mdM0 (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"商机列表"
 
 #. module: base
 #: model:ir.model,name:base.model_ir_config_parameter
@@ -12052,8 +12107,12 @@ msgstr ""
 #. module: base
 #: model:ir.actions.act_window,name:base.action_publisher_warranty_contract_form
 #: model:ir.ui.menu,name:base.menu_publisher_warranty_contract
+#, fuzzy
 msgid "Contracts"
 msgstr ""
+"#-#-#-#-#  .merge_file_kSajBY (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_S7mdM0 (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"合同列表"
 
 #. module: base
 #: code:addons/base/publisher_warranty/publisher_warranty.py:0
@@ -12063,8 +12122,12 @@ msgstr ""
 
 #. module: base
 #: view:res.lang:0
+#, fuzzy
 msgid "%Y - Year with century."
 msgstr ""
+"#-#-#-#-#  .merge_file_kSajBY (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_S7mdM0 (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"%Y - 4位数的年份"
 
 #. module: base
 #: view:publisher_warranty.contract.wizard:0
@@ -12089,18 +12152,30 @@ msgstr ""
 
 #. module: base
 #: view:res.lang:0
+#, fuzzy
 msgid "%y - Year without century [00,99]."
 msgstr ""
+"#-#-#-#-#  .merge_file_kSajBY (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_S7mdM0 (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"%y - 两位数年份"
 
 #. module: base
 #: selection:publisher_warranty.contract,state:0
+#, fuzzy
 msgid "Canceled"
 msgstr ""
+"#-#-#-#-#  .merge_file_kSajBY (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_S7mdM0 (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"已取消"
 
 #. module: base
 #: view:res.lang:0
+#, fuzzy
 msgid "%d - Day of the month [01,31]."
 msgstr ""
+"#-#-#-#-#  .merge_file_kSajBY (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_S7mdM0 (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"%d - 一月里的天数"
 
 #. module: base
 #: view:publisher_warranty.contract:0
@@ -12109,17 +12184,26 @@ msgstr ""
 
 #. module: base
 #: sql_constraint:ir.config_parameter:0
+#, fuzzy
 msgid "Key must be unique."
 msgstr ""
+"#-#-#-#-#  .merge_file_kSajBY (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_S7mdM0 (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"键值必须唯一。"
 
 #. module: base
 #: code:addons/base/res/res_config.py:0
-#, python-format
+#, fuzzy, python-format
 msgid ""
 "Your database is now fully configured.\n"
 "\n"
 "Click 'Continue' and enjoy your OpenERP experience..."
 msgstr ""
+"#-#-#-#-#  .merge_file_kSajBY (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_S7mdM0 (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"您的帐套已经全部配置完毕。\n"
+"\n"
+"请单击“继续”按钮开始享受您的 OpenERP 体验..."
 
 #. module: base
 #: selection:base.language.install,lang:0
@@ -12128,19 +12212,30 @@ msgstr ""
 
 #. module: base
 #: code:addons/base/publisher_warranty/publisher_warranty.py:0
-#, python-format
+#, fuzzy, python-format
 msgid "That contract is already registered in the system."
 msgstr ""
+"#-#-#-#-#  .merge_file_kSajBY (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_S7mdM0 (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"该合同已经注册到系统中了。"
 
 #. module: base
 #: view:res.lang:0
+#, fuzzy
 msgid "%M - Minute [00,59]."
 msgstr ""
+"#-#-#-#-#  .merge_file_kSajBY (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_S7mdM0 (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"%M - 分钟 [00, 59]"
 
 #. module: base
 #: view:res.lang:0
+#, fuzzy
 msgid "%w - Weekday number [0(Sunday),6]."
 msgstr ""
+"#-#-#-#-#  .merge_file_kSajBY (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_S7mdM0 (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"%w - 星期 [0(周日),6]."
 
 #. module: base
 #: model:ir.model,name:base.model_publisher_warranty_contract
@@ -12154,13 +12249,21 @@ msgstr ""
 
 #. module: base
 #: view:res.lang:0
+#, fuzzy
 msgid "%S - Seconds [00,61]."
 msgstr ""
+"#-#-#-#-#  .merge_file_kSajBY (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_S7mdM0 (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"%S - 秒 [00,61]."
 
 #. module: base
 #: view:res.config.users:0
+#, fuzzy
 msgid "Create User"
 msgstr ""
+"#-#-#-#-#  .merge_file_kSajBY (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_S7mdM0 (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"创建用户"
 
 #. module: base
 #: field:publisher_warranty.contract,name:0
@@ -12185,23 +12288,39 @@ msgstr ""
 
 #. module: base
 #: field:res.log,create_date:0
+#, fuzzy
 msgid "Creation Date"
 msgstr ""
+"#-#-#-#-#  .merge_file_kSajBY (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_S7mdM0 (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"创建日期"
 
 #. module: base
 #: view:res.lang:0
+#, fuzzy
 msgid "%H - Hour (24-hour clock) [00,23]."
 msgstr ""
+"#-#-#-#-#  .merge_file_kSajBY (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_S7mdM0 (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"%H - 小时（24小时格式） [00,23]."
 
 #. module: base
 #: view:res.lang:0
+#, fuzzy
 msgid "%I - Hour (12-hour clock) [01,12]."
 msgstr ""
+"#-#-#-#-#  .merge_file_kSajBY (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_S7mdM0 (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"%I - 小时（12小时格式）[01,12]."
 
 #. module: base
 #: selection:publisher_warranty.contract.wizard,state:0
+#, fuzzy
 msgid "Finished"
 msgstr ""
+"#-#-#-#-#  .merge_file_kSajBY (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_S7mdM0 (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"已完成"
 
 #. module: base
 #: code:addons/base/res/res_config.py:0
