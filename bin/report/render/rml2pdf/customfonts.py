@@ -56,26 +56,26 @@ CustomTTFonts = [ ('Helvetica',"DejaVu Sans", "DejaVuSans.ttf", 'normal'),
         ('Courier',"FreeMono BoldOblique", "FreeMonoBoldOblique.ttf", 'bolditalic'),]
 
 
-TTFSearchPath_Linux = ( 
+TTFSearchPath_Linux = [
             '/usr/share/fonts/truetype', # SuSE
             '/usr/share/fonts/dejavu', '/usr/share/fonts/liberation', # Fedora, RHEL
             '/usr/share/fonts/truetype/*', # Ubuntu,
             '/usr/share/fonts/TTF/*', # at Mandriva/Mageia
-            )
+            ]
 
-TTFSearchPath_Windows = ( 
+TTFSearchPath_Windows = [
             'c:/winnt/fonts',
             'c:/windows/fonts'
-            )
+            ]
 
-TTFSearchPath_Darwin = ( 
+TTFSearchPath_Darwin = [
             #mac os X - from
             #http://developer.apple.com/technotes/tn/tn2024.html
             '~/Library/Fonts',
             '/Library/Fonts',
             '/Network/Library/Fonts',
             '/System/Library/Fonts',
-            )
+            ]
 
 TTFSearchPathMap = {
     'Darwin': TTFSearchPath_Darwin,
