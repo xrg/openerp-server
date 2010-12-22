@@ -1686,6 +1686,9 @@ class orm_template(object):
         return node
 
     def __view_look_dom_arch(self, cr, user, node, view_id, context=None):
+        if self._debug:
+            _logger.debug('%s.view_look_dom_arch(.., view_id=%r, {lang=%s}', 
+                            self._name, view_id, context and context.get('lang',None))
         fields_def = self.__view_look_dom(cr, user, node, view_id, context=context)
         node = self._disable_workflow_buttons(cr, user, node)
         arch = etree.tostring(node, encoding="utf-8").replace('\t', '')
