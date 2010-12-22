@@ -29,7 +29,10 @@ import netsvc
 import tools
 import logging
 import pooler
-from tools.safe_eval import safe_eval
+try:
+    from tools.safe_eval import safe_evalD as safe_eval
+except ImportError:
+    from tools.safe_eval import safe_eval
 from subprocess import Popen, PIPE
 import os
 import tempfile
