@@ -97,7 +97,11 @@ def _fix_multiple_roots(node):
     ignored later when parsing.
     """
 
-    if len(node) > 1:
+    num_nodes = 0
+    for n in node:
+        if n.tag is not etree.Comment:
+            num_nodes += 1
+    if num_nodes > 1:
         data_node = etree.Element("data")
         for child in node:
             data_node.append(child)
