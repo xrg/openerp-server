@@ -419,6 +419,8 @@ class browse_record(object):
         try:
             return self[name]
         except KeyError, e:
+            if self._table._debug:
+                _logger.debug("%r[%s]: KeyError ", self, name, exc_info=True)
             raise AttributeError(e)
 
     def __contains__(self, name):
