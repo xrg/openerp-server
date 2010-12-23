@@ -1,32 +1,8 @@
 -
-    Testing that some domain expressions work
--
-    !python {model: res.partner.address }: |
-        ids = self.search(cr, uid, [('partner_id','=','Agrolait')])
-        assert len(ids) >= 1, ids
--
-    Trying the "in" operator, for scalar value
--
-    !python {model: res.partner.address }: |
-        ids = self.search(cr, uid, [('partner_id','in','Agrolait')])
-        assert len(ids) >= 1, ids
--
-    Trying the "in" operator for list value
--
-    !python {model: res.partner.address }: |
-        ids = self.search(cr, uid, [('partner_id','in',['Agrolait','ASUStek'])])
-        assert len(ids) >= 1, ids
--
     Trying the nested query (pg84 extension)
 -
     !python {model: res.partner.address }: |
         ids = self.search(cr, uid, [('partner_id','in',[('name','in',['Agrolait','ASUStek'])])])
-        assert len(ids) >= 1, ids
--
-    I will test that we can use "in" operator for plain fields.
--
-    !python {model: ir.ui.menu }: |
-        ids = self.search(cr, uid, [('sequence','in',[1, 2, 10, 20])])
         assert len(ids) >= 1, ids
 -
     I will test an one2many operator with empty search list
