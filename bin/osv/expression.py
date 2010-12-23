@@ -265,12 +265,18 @@ class expression(object):
             if len(fargs) > 1: # TODO pg84 reduce
                 if field._type == 'many2one':
                     right = field_obj.search(cr, uid, [(fargs[1], operator, right)], context=context)
-                    self.__exp[i] = (fargs[0], 'in', right)
+                    if right == []:
+                        self.__exp[i] = ( 'id', '=', 0 )
+                    else:
+                        self.__exp[i] = (fargs[0], 'in', right)
                 # Making search easier when there is a left operand as field.o2m or field.m2m
                 if field._type in ['many2many','one2many']:
                     right = field_obj.search(cr, uid, [(fargs[1], operator, right)], context=context)
                     right1 = table.search(cr, uid, [(fargs[0],'in', right)], context=context)
-                    self.__exp[i] = ('id', 'in', right1)
+                    if right1 == []:
+                        self.__exp[i] = ( 'id', '=', 0 )
+                    else:
+                        self.__exp[i] = ('id', 'in', right1)
                 
                 if not isinstance(field,fields.property):
                     continue
@@ -477,7 +483,6 @@ class expression(object):
                 else:
                     do_name = False
                     op2 = operator
-                    
                     if isinstance(right, basestring):
                             # and not isinstance(field, fields.related):
                         do_name = True
@@ -487,6 +492,13 @@ class expression(object):
                             op2 = '!='
                         else:
                             op2 = operator
+                    elif right == []:
+                        do_name = False
+                        if operator in ('not in', '!=', '<>'):
+                            # (many2one not in []) should return all records
+                            self.__exp[i] = self.__DUMMY_LEAF
+                        else:
+                            self.__exp[i] = ('id','=',0)
                     elif isinstance(right, (list, tuple)) and operator in ('in', 'not in'):
                         do_name = True
                         for r in right:
