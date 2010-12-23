@@ -75,7 +75,7 @@ class _format(object):
         self.lang_obj = lang_obj
 
 class _float_format(float, _format):
-    def __init__(self,value):
+    def __init__(self, value):
         super(_float_format, self).__init__()
         self.val = value
 
@@ -85,9 +85,14 @@ class _float_format(float, _format):
             digits = self._field.digits[1]
         if getattr(self, 'lang_obj', False):
             return self.lang_obj.format('%.' + str(digits) + 'f', self.name, True)
-        else:
+        elif getattr(self, 'name', False):
             return ('%.' + str(digits) + 'f') % self.name
-        return self.val
+        elif isinstance(self.val, basestring):
+            return self.val
+        else:
+            # if there is no number, "0.0" is not appropriate. We'd better
+            # return an empty string to indicate NULL data
+            return ''
 
 class _int_format(int, _format):
     def __init__(self,value):
@@ -302,6 +307,9 @@ class rml_parse(object):
                 digits = self.get_digits(value)
 
         if isinstance(value, (str, unicode)) and not value:
+            return ''
+
+        if value is None:
             return ''
 
         if not self.lang_dict_called:
