@@ -1,8 +1,4 @@
 # Translation of OpenERP Server.
-# This file contains the translation of the following modules:
-# 	* base
-#
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: OpenERP Server 5.0.0\n"
@@ -3060,7 +3056,6 @@ msgid "Make the rule global, otherwise it needs to be put on a group"
 msgstr ""
 
 #. #-#-#-#-#  .merge_file_STOQLg (OpenERP Server 5.0.0)  #-#-#-#-#
-#. module: base
 #: help:ir.rule.group,rules:0
 msgid "The rule is satisfied if at least one test is True"
 msgstr "Regeln är uppfyllt om minst ett test är sant"
@@ -3952,7 +3947,6 @@ msgid "ir.rule"
 msgstr "ir.rule"
 
 #. #-#-#-#-#  .merge_file_STOQLg (OpenERP Server 5.0.0)  #-#-#-#-#
-#. module: base
 #: model:ir.model,name:base.model_ir_rule_group
 msgid "ir.rule.group"
 msgstr "ir.rule.group"
@@ -11757,6 +11751,31 @@ msgstr ""
 #. module: base
 #: view:res.lang:0
 msgid "%j - Day of the year [001,366]."
+msgstr ""
+
+#. module: base
+#: model:res.company,overdue_msg:base.main_company
+msgid ""
+"Please note that the following payments are now due. If your "
+"payment                         has been sent, kindly forward your payment "
+"details. If payment will be                         delayed further, please "
+"contact us to discuss.                         \n"
+"Would your payment have been carried out after this mail was sent, please "
+"consider the present one as void."
+msgstr ""
+
+#. module: base
+#: model:ir.model,name:base.model_maintenance_contract
+msgid "maintenance.contract"
+msgstr ""
+
+#. module: base
+#: code:addons/base/res/res_config.py:0
+#, python-format
+msgid ""
+"\n"
+"\n"
+"This addon is already installed on your system"
 msgstr ""
 
 #~ msgid "The unlink method is not implemented on this object !"

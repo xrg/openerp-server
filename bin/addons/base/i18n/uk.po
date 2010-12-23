@@ -1,8 +1,4 @@
 # Translation of OpenERP Server.
-# This file contains the translation of the following modules:
-# 	* base
-#
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: OpenERP Server 5.0.0\n"
@@ -1498,6 +1494,7 @@ msgstr "Оператор"
 msgid "Global"
 msgstr "Глобальне"
 
+#. #-#-#-#-#  .merge_file_K20R0K (OpenERP Server 5.0.0)  #-#-#-#-#
 #. module: base
 #: field:ir.rule.group,rules:0
 msgid "Tests"
@@ -2655,11 +2652,13 @@ msgid ""
 "- The last parenthesis must match the extension of the module."
 msgstr ""
 
+#. #-#-#-#-#  .merge_file_K20R0K (OpenERP Server 5.0.0)  #-#-#-#-#
 #. module: base
 #: help:ir.rule.group,global:0
 msgid "Make the rule global, otherwise it needs to be put on a group"
 msgstr "Зробіть правило загальним чи призначте його групі"
 
+#. #-#-#-#-#  .merge_file_K20R0K (OpenERP Server 5.0.0)  #-#-#-#-#
 #. module: base
 #: help:ir.rule.group,rules:0
 msgid "The rule is satisfied if at least one test is True"
@@ -3490,6 +3489,7 @@ msgstr "ir.report.custom.fields"
 msgid "ir.rule"
 msgstr "ir.rule"
 
+#. #-#-#-#-#  .merge_file_K20R0K (OpenERP Server 5.0.0)  #-#-#-#-#
 #. module: base
 #: model:ir.model,name:base.model_ir_rule_group
 msgid "ir.rule.group"
@@ -7017,6 +7017,7 @@ msgstr "Просте встановлення галузі"
 msgid "Test"
 msgstr "Тест"
 
+#. #-#-#-#-#  .merge_file_K20R0K (OpenERP Server 5.0.0)  #-#-#-#-#
 #. module: base
 #: view:ir.rule.group:0
 msgid "Multiple rules on same objects are joined using operator OR"
@@ -7027,6 +7028,7 @@ msgstr "Декілька правил для однакових об'єктів 
 msgid "Record rules"
 msgstr "Правила запису"
 
+#. #-#-#-#-#  .merge_file_K20R0K (OpenERP Server 5.0.0)  #-#-#-#-#
 #. module: base
 #: view:ir.rule.group:0
 msgid "The rule is satisfied if all test are True (AND)"
@@ -10631,6 +10633,46 @@ msgstr ""
 msgid "Context"
 msgstr ""
 
+#. module: base
+#: model:res.partner.title,shortcut:base.res_partner_title_sir
+msgid "M."
+msgstr ""
+
+#. module: base
+#: model:res.company,overdue_msg:base.main_company
+msgid ""
+"Please note that the following payments are now due. If your "
+"payment                         has been sent, kindly forward your payment "
+"details. If payment will be                         delayed further, please "
+"contact us to discuss.                         \n"
+"Would your payment have been carried out after this mail was sent, please "
+"consider the present one as void."
+msgstr ""
+
+#. module: base
+#: model:ir.model,name:base.model_maintenance_contract
+msgid "maintenance.contract"
+msgstr ""
+
+#. module: base
+#: code:addons/base/res/res_config.py:0
+#, python-format
+msgid ""
+"\n"
+"\n"
+"This addon is already installed on your system"
+msgstr ""
+
+#. module: base
+#: model:res.partner.title,shortcut:base.res_partner_title_miss
+msgid "Mss"
+msgstr ""
+
+#. module: base
+#: model:res.partner.title,shortcut:base.res_partner_title_ltd
+msgid "ltd"
+msgstr ""
+
 #~ msgid "The unlink method is not implemented on this object !"
 #~ msgstr "Метод unlink не реалізований у цьому об'єкті!"
 
@@ -10784,3 +10826,6 @@ msgstr ""
 #~ "Деякі встановлені модулі залежать від модуля який Ви хочете "
 #~ "деінсталювати :\n"
 #~ " %s"
+
+#~ msgid "Module Repository"
+#~ msgstr "Репозитарій модулів"

@@ -1,9 +1,5 @@
 # Japanese translation for openobject-server
 # Copyright (c) 2009 Rosetta Contributors and Canonical Ltd 2009
-# This file is distributed under the same license as the openobject-server package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2009.
-#
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: openobject-server\n"
@@ -1483,6 +1479,7 @@ msgstr ""
 msgid "Global"
 msgstr ""
 
+#. #-#-#-#-#  .merge_file_ow8hVa (openobject-server)  #-#-#-#-#
 #. module: base
 #: field:ir.rule.group,rules:0
 msgid "Tests"
@@ -2627,6 +2624,7 @@ msgstr ""
 msgid "Make the rule global, otherwise it needs to be put on a group"
 msgstr ""
 
+#. #-#-#-#-#  .merge_file_ow8hVa (openobject-server)  #-#-#-#-#
 #. module: base
 #: help:ir.rule.group,rules:0
 msgid "The rule is satisfied if at least one test is True"
@@ -10593,4 +10591,44 @@ msgstr ""
 #. module: base
 #: view:ir.filters:0 field:res.log,context:0
 msgid "Context"
+msgstr ""
+
+#. module: base
+#: model:res.partner.title,shortcut:base.res_partner_title_sir
+msgid "M."
+msgstr ""
+
+#. module: base
+#: model:res.company,overdue_msg:base.main_company
+msgid ""
+"Please note that the following payments are now due. If your "
+"payment                         has been sent, kindly forward your payment "
+"details. If payment will be                         delayed further, please "
+"contact us to discuss.                         \n"
+"Would your payment have been carried out after this mail was sent, please "
+"consider the present one as void."
+msgstr ""
+
+#. module: base
+#: model:ir.model,name:base.model_maintenance_contract
+msgid "maintenance.contract"
+msgstr ""
+
+#. module: base
+#: code:addons/base/res/res_config.py:0
+#, python-format
+msgid ""
+"\n"
+"\n"
+"This addon is already installed on your system"
+msgstr ""
+
+#. module: base
+#: model:res.partner.title,shortcut:base.res_partner_title_miss
+msgid "Mss"
+msgstr ""
+
+#. module: base
+#: model:res.partner.title,shortcut:base.res_partner_title_ltd
+msgid "ltd"
 msgstr ""

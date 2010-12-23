@@ -1,19 +1,17 @@
 # This file contains the translation of the following modules:
-# 	* base
-#
-# P. Christeas <p_christ@hol.gr>, 2009, 2010.
+# P. Christeas <p_christ@hol.gr>, 2010.
 msgid ""
 msgstr ""
 "Project-Id-Version: OpenERP Server 5.0.0\n"
 "Report-Msgid-Bugs-To: support@openerp.com\n"
-"POT-Creation-Date: 2010-12-16 15:02+0000\n"
-"PO-Revision-Date: 2010-12-21 21:32+0200\n"
+"POT-Creation-Date: 2010-12-21 19:43+0000\n"
+"PO-Revision-Date: 2010-12-23 19:37+0200\n"
 "Last-Translator: P. Christeas <p_christ@hol.gr>\n"
 "Language-Team: Greek <openerp@lists.hellug.gr>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-12-19 04:44+0000\n"
+"X-Launchpad-Export-Date: 2010-12-23 04:54+0000\n"
 "X-Generator: Lokalize 1.0\n"
 "X-Poedit-Country: GREECE\n"
 "X-Poedit-Language: Greek\n"
@@ -4012,13 +4010,8 @@ msgstr "base.module.configuration"
 #. module: base
 #: model:ir.model,name:base.model_base_module_import
 #: model:ir.ui.menu,name:base.menu_view_base_module_import
-#, fuzzy
 msgid "Import Module"
-msgstr ""
-"#-#-#-#-#  .merge_file_ijAAXi (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"Εισαγωγή Αρθρώματος\n"
-"#-#-#-#-#  .merge_file_rGwmT9 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"Εισαγωγή αρθρώματος"
+msgstr "Εισαγωγή Αρθρώματος"
 
 #. module: base
 #: model:ir.model,name:base.model_base_module_update
@@ -8722,6 +8715,17 @@ msgstr ""
 msgid "Right parent"
 msgstr ""
 
+#. module: base
+#: model:res.company,overdue_msg:base.main_company
+msgid ""
+"Please note that the following payments are now due. If your "
+"payment                         has been sent, kindly forward your payment "
+"details. If payment will be                         delayed further, please "
+"contact us to discuss.                         \n"
+"Would your payment have been carried out after this mail was sent, please "
+"consider the present one as void."
+msgstr ""
+
 #~ msgid "Please specify server option --smtp-from !"
 #~ msgstr "Παρακαλώ καθορίστε την επιλογή διακομιστή --smtp-from !"
 
@@ -8796,8 +8800,13 @@ msgstr ""
 #~ "'\\n 'για το νόμισμα: %s \n"
 #~ "'\\n 'την ημερομηνία: %s"
 
+#, fuzzy
 #~ msgid "Make sure you have no users linked with the group(s)!"
-#~ msgstr "Βεβαιωθείτε ότι οι ομάδες δεν περιέχουν χρήστες!"
+#~ msgstr ""
+#~ "#-#-#-#-#  .merge_file_9KeTkY (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+#~ "Βεβαιωθείτε ότι οι ομάδες δεν περιέχουν χρήστες!\n"
+#~ "#-#-#-#-#  .merge_file_qTZQzc (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+#~ "Βεβαιωθείτε ότι δεν έχετε χρήστες συνδεδεμένους με αυτή την ομάδα(ες)!"
 
 #~ msgid "Integrity Error"
 #~ msgstr "Σφάλμα ακεραιότητας!"
@@ -8919,8 +8928,13 @@ msgstr ""
 #~ msgid "Operator"
 #~ msgstr "Τελεστής"
 
+#, fuzzy
 #~ msgid "Tests"
-#~ msgstr "Τεστ"
+#~ msgstr ""
+#~ "#-#-#-#-#  .merge_file_9KeTkY (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+#~ "Τεστ\n"
+#~ "#-#-#-#-#  .merge_file_qTZQzc (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+#~ "Tests"
 
 #~ msgid "Sequence Code"
 #~ msgstr "Κωδικός Ιεράρχησης"
@@ -10353,3 +10367,976 @@ msgstr ""
 
 #~ msgid "This error occurs on database %s"
 #~ msgstr "Αυτό το λάθος εμφανίζεται στην βάση %s"
+
+#~ msgid "No journal for ending writing has been defined for the fiscal year"
+#~ msgstr ""
+#~ "Δεν έχει καθοριστεί ημερομηνία τέλους εγγραφών για την διαχειριστική χρήση"
+
+#~ msgid "Product quantity"
+#~ msgstr "Ποσ. προϊόντος"
+
+#~ msgid "Account move line \"%s\" is not valid"
+#~ msgstr "Η κίνηση λογαριασμού στην γραμμή \"%s\" δεν είναι έγκυρη"
+
+#~ msgid "You can not delete posted movement: \"%s\"!"
+#~ msgstr "Δεν μπορείτε να διαγράψετε κινήσεις που έχουν αποθηκευθεί: \"%s\"!"
+
+#~ msgid "You can not use this general account in this journal !"
+#~ msgstr ""
+#~ "Δεν μπορείτε να χρησιμοποιήσετε αυτόν τον γενικό λογαριασμό σε αυτό το "
+#~ "ημερολόγιο!"
+
+#~ msgid "You can not add/modify entries in a closed journal."
+#~ msgstr ""
+#~ "Δεν μπορείτε να προσθέσετε/τροποποιήσετε εγγραφές σε ένα κλειστό "
+#~ "ημερολόγιο."
+
+#~ msgid "June"
+#~ msgstr "Ιουνίου"
+
+#~ msgid "Workcenter name"
+#~ msgstr "Όνομα κέντρου εργασίας"
+
+#~ msgid "Product Quantity"
+#~ msgstr "Ποσότητα Προϊόντος"
+
+#~ msgid "You can not sign in from an other date than today"
+#~ msgstr ""
+#~ "Δεν μπορέιτε να προσέλθετε για εργασία σε άλλη ημερ/νία από τη σημερινή"
+
+#~ msgid "from stock: products assigned."
+#~ msgstr "απο απόθεμα: ανατεθημένα προϊόντα."
+
+#~ msgid "Invoice is not created"
+#~ msgstr "Το τιμολόγιο δεν δημιουργήθηκε"
+
+#~ msgid "File Name"
+#~ msgstr "Όνομα αρχείου"
+
+#~ msgid "Futur Deliveries"
+#~ msgstr "Μελλοντικές Παραδόσεις"
+
+#~ msgid "TOTAL"
+#~ msgstr "ΣΥΝΟΛΟ"
+
+#~ msgid "A model having this name and code already exists !"
+#~ msgstr "Ένα μοντέλο που έχει αυτό το όνομα και κωδικό υπάρχει ήδη!"
+
+#~ msgid "You try to bypass an access rule (Document type: %s)."
+#~ msgstr "Υπάρχουν κανόνες πρόσβασης για έγγραφα %s."
+
+#~ msgid "invalid mode for test_state"
+#~ msgstr "άκυρη κατάσταση για test_state"
+
+#~ msgid "September"
+#~ msgstr "Σεπτεμβρίου"
+
+#~ msgid ""
+#~ "You can not do this modification on a confirmed entry ! Please note that "
+#~ "you can just change some non important fields !"
+#~ msgstr ""
+#~ "Δεν μπορείτε να τροποποίησετε σε μιά επιβεβαιωμένη εγγραφή! Παρακαλώ "
+#~ "σημειώστε ότι μπορείτε απλά να αλλάξετε κάποια μή σημαντικά πεδία!"
+
+#~ msgid ""
+#~ "\n"
+#~ "\n"
+#~ "Mail sent to following Partners successfully, !\n"
+#~ "\n"
+#~ msgstr ""
+#~ "\n"
+#~ "\n"
+#~ "Το Mail στάλθηκε στους παρακάτω Συνεργάτες με επιτυχία, !\n"
+#~ "\n"
+
+#~ msgid "Your journal must have a default credit and debit account."
+#~ msgstr ""
+#~ "Το ημερολόγιο σας πρέπει να έχει έναν προκαθορισμένο λογαριασμό χρέωσης "
+#~ "και πίστωσης."
+
+#~ msgid "Bad account!"
+#~ msgstr "Λάθος λογαριασμός!"
+
+#~ msgid "Received Qty"
+#~ msgstr "Παραληφθήσα Ποσ."
+
+#~ msgid "Couldn't send mail because your email address is not configured!"
+#~ msgstr ""
+#~ "Δεν έχετε ρυθμίσει τη διεύθυνση email  σας! Αδύνατη η αποστολή μηνύματος."
+
+#~ msgid "No Analytic Journal !"
+#~ msgstr "Δεν ορίστηκε Αναλυτικό Ημερολόγιο!"
+
+#~ msgid "Unit Product Price"
+#~ msgstr "Τιμή Μονάδας Προϊόντος"
+
+#~ msgid ""
+#~ "The production is in \"%s\" state. You can not change the production "
+#~ "quantity anymore"
+#~ msgstr ""
+#~ "Η παραγωγή είναι σε κατάσταση \"%s\". Δεν μπορείτε να αλλάξετε την "
+#~ "ποσότητα παραγωγής άλλο"
+
+#~ msgid "You can't modify this order. It has already been paid"
+#~ msgstr ""
+#~ "Δεν μπορείτε να τροποποιήσετε αυτήν την εντολή. Έχει ήδη γίνει η πληρωμή"
+
+#~ msgid "Date to must be set between %s and %s"
+#~ msgstr "Η \"ημερομηνία σε\" πρέπει να οριστεί ανάμεσα στην %s και την %s"
+
+#~ msgid "Products: "
+#~ msgstr "Προϊόντα: "
+
+#~ msgid "You can not modify/delete a journal with entries for this period !"
+#~ msgstr ""
+#~ "Αδύνατη η τροποποίηση/διαγραφή ημερολογίου με εγγραφές σε αυτή την "
+#~ "περίοδο!"
+
+#~ msgid "No production sequence defined"
+#~ msgstr "Δεν έχει οριστεί αρίθμηση παραγωγής"
+
+#~ msgid "Product Cost Structure"
+#~ msgstr "Δομή Κόστους Προϊόντος"
+
+#~ msgid "The journal must have centralised counterpart"
+#~ msgstr "Αυτό το ημερολόγιο πρέπει να έχει Συγκεντρωτικό αντιλογισμό"
+
+#~ msgid "A sign-out must be right after a sign-in !"
+#~ msgstr "Η έξοδος πρέπει να είναι μετά από την είσοδο!"
+
+#~ msgid "Error, no partner !"
+#~ msgstr "Σφάλμα! Δεν έχει οριστεί Συνεργάτης"
+
+#~ msgid "Cannot delete a point of sale which is already confirmed !"
+#~ msgstr ""
+#~ "Δεν μπορείτε να διαγράψετε ένα σημείο πώλησης που έχει ήδη επιβεβαιωθεί!"
+
+#~ msgid "Product Margins"
+#~ msgstr "Περιθώρια Προϊόντων"
+
+#~ msgid "You have to provide an account for the write off entry !"
+#~ msgstr "Πρέπει να ορίσετε λογαριασμό για την καταχώρηση της παραγραφής"
+
+#~ msgid "A partner is already defined on this lead."
+#~ msgstr "Έχει ήδη οριστεί συνεργάτης για το Σύνδεσμο."
+
+#~ msgid ""
+#~ "No journal defined on the related employee.\n"
+#~ "Fill in the timesheet tab of the employee form."
+#~ msgstr ""
+#~ "Δεν έχει οριστεί ημερολόγιο για το σχετικό υπάλληλο.\n"
+#~ "Παρακαλώ συμπληρώστε τη σελίδα φύλλου χρόνου εργασίας στη φόρμα του "
+#~ "υπαλλήλου."
+
+#~ msgid ""
+#~ "You can not escalate this case.\n"
+#~ "You are already at the top level."
+#~ msgstr ""
+#~ "Δεν μπορείτε να αναβαθμίσετε αυτό το θέμα.\n"
+#~ "Βρίσκεται ήδη στο ανώτατο επίπεδο."
+
+#~ msgid "Date not in a defined fiscal year"
+#~ msgstr "Η ημερομηνία δεν ανήκει σε Λογιστική Χρήση"
+
+#~ msgid "No line matched this order in the choosed delivery grids !"
+#~ msgstr ""
+#~ "Καμία γραμμή δεν ταιριάζει με αυτήν την εντολή για τον επιλεγμένο πίνακα "
+#~ "παραδόσεων!"
+
+#~ msgid ""
+#~ "You cannot make an advance on a sale order that is defined as 'Automatic "
+#~ "Invoice after delivery'."
+#~ msgstr ""
+#~ "You cannot make an advance on a sale order that is defined as 'Automatic "
+#~ "Invoice after delivery'."
+
+#~ msgid "Please verify that an account is defined in the journal."
+#~ msgstr "Παρακαλώ ελέγξτε αν έχει οριστεί λογαριασμός στο ημερολόγιο."
+
+#~ msgid "No Partner!"
+#~ msgstr "Δεν υπάρχει Συνεργάτης!"
+
+#~ msgid "No Data Available"
+#~ msgstr "Δεν υπάρχει διαθέσιμη πληροφορία"
+
+#~ msgid ""
+#~ "No fiscal year defined for this date !\n"
+#~ "Please create one."
+#~ msgstr ""
+#~ "Η ημερομηνία δεν ανήκει σε Λογιστική Χρήση.\n"
+#~ "Παρακαλώ δημιουργήστε μία."
+
+#~ msgid ""
+#~ "Selected Move lines does not have any account move enties in draft state"
+#~ msgstr ""
+#~ "Οι επιλεγμένες γραμμές κίνησης δεν περιέχουν προσωρινές εγγραφές κίνησης "
+#~ "λογαριασμού"
+
+#~ msgid "January"
+#~ msgstr "Ιανουαρίου"
+
+#~ msgid "Please create an invoice for this sale."
+#~ msgstr "Παρακαλώ δημιουργήστε ένα τιμολόγιο για αυτήν την πώληση."
+
+#~ msgid "Balance product needed"
+#~ msgstr "Χρειάζεται προϊόν υπολοίπου"
+
+#~ msgid "The carrier %s (id: %d) has no delivery grid!"
+#~ msgstr "Ο μεταφορέας %s (κωδ: %d) δεν έχει πίνακα παραδόσεων!"
+
+#~ msgid ""
+#~ "You tried to sign with a date anterior to another event !\n"
+#~ "Try to contact the administrator to correct attendances."
+#~ msgstr ""
+#~ "Η ημερομηνία που χρησιμοποιείτε είναι προγενέστερη!\n"
+#~ "Παρακαλώ επικοινωνήστε με τον υπεύθυνο για διόρθωση των παρουσιών."
+
+#~ msgid "You must first cancel all invoices attached to this purchase order."
+#~ msgstr ""
+#~ "Πρέπει πρώτα να ακυρώσετε όλα τα τιμολόγια που συνδέονται με την "
+#~ "Παραγγελία Αγοράς."
+
+#~ msgid ""
+#~ "No analytic journal available for this employee.\n"
+#~ "Define an employee for the selected user and assign an analytic journal."
+#~ msgstr ""
+#~ "Δεν υπάρχει αναλυτικό ημερολόγιο για τον υπάλληλο\n"
+#~ "Ορίστε υπάλληλο για το συγκεκριμένο χρήστη και συνδέστε ένα αναλυτικό "
+#~ "ημερολόγιο"
+
+#~ msgid "No product in this location."
+#~ msgstr "Κανένα προϊόν σε αυτήν την τοποθεσία"
+
+#~ msgid "You have to define an analytic journal on the '%s' journal!"
+#~ msgstr "Πρέπει να ορίσετε ένα ανλυτικό ημερολόγιο στο '%s' ημερολόγιο!"
+
+#~ msgid "August"
+#~ msgstr "Αυγούστου"
+
+#~ msgid "October"
+#~ msgstr "Οκτωβρίου"
+
+#~ msgid "The date of your account move is not in the defined period !"
+#~ msgstr ""
+#~ "Η ημερομηνία κίνησης λογαριασμού δεν είναι στην καθορισμένη περίοδο!"
+
+#~ msgid "No action found"
+#~ msgstr "Δεν βρέθηκε ενέργεια"
+
+#~ msgid ""
+#~ "You can not cancel this holiday request. first You have to make its case "
+#~ "in draft state."
+#~ msgstr ""
+#~ "Δεν μπορείτε να ακυρώσετε αυτή την αίτηση. Πρέπει πρώτα να να μετατρέψετε "
+#~ "το case σε πρόχειρο."
+
+#~ msgid "Analytic Entries"
+#~ msgstr "Εγγραφές Αναλυτικής"
+
+#~ msgid "1"
+#~ msgstr "1"
+
+#~ msgid ""
+#~ "Couldn't send mail because the contact for this task (%s) has no email "
+#~ "address!"
+#~ msgstr ""
+#~ "Το mail δεν μπόρεσε να σταλλεί διότι η επαφή για την εργασία (%s) δεν "
+#~ "έχει διεύθυνση email!"
+
+#~ msgid "The sign-out date must be in the past"
+#~ msgstr "Η Ημερ/νία Εξόδου πρέπει να είναι στο παρελθόν"
+
+#~ msgid ""
+#~ "You cannot delete an indicator history record. You may have to delete the "
+#~ "concerned Indicator!"
+#~ msgstr ""
+#~ "Δεν μπορείτε να διαγράψετε μιά εγγραφή απο το ιστορικό του δείκτη. Ίσως "
+#~ "χρειαστεί να διαγράψετε τον εν λόγω δείκτη!"
+
+#~ msgid "No Partner Defined !"
+#~ msgstr "Δεν ορίστηκε Συνεργάτης!"
+
+#~ msgid "You can not modify an invoiced analytic line!"
+#~ msgstr "Δεν μπορείτε να τροποποιήσετε μια τιμολογημένη αναλυτική γραμμή!"
+
+#~ msgid "You can not change the tax, you should remove and recreate lines !"
+#~ msgstr ""
+#~ "Δεν μπορείτε να αλλάξετε το φόρο, πρέπει να διαγράψετε και να "
+#~ "επαναδημιουργήσετε τις γραμμές!"
+
+#~ msgid "Cannot delete invoice(s) that are already opened or paid !"
+#~ msgstr ""
+#~ "Δεν μπορείτε να διαγράψετε τιμολόγιο(α) που έχουν ήδη ανοιχτεί ή πληρωθεί!"
+
+#~ msgid "Create line failed !"
+#~ msgstr "Ανεπιτυχής δημιουργία γραμμής!"
+
+#~ msgid "No sequence defined in the journal !"
+#~ msgstr "Καμία αλληλουχία δεν έχει καθοριστεί σε αυτό το ημερολόγιο!"
+
+#~ msgid "Invoice state"
+#~ msgstr "Κατάσταση τιμολογίου"
+
+#~ msgid "You can not delete this case. You should better cancel it."
+#~ msgstr ""
+#~ "Δεν μπορείτε να διαγράψετε αυτό το θέμα. Προσπαθείστε να την ακυρώσετε."
+
+#~ msgid "SUBTOTAL"
+#~ msgstr "ΥΠΟΣΥΝΟΛΟ"
+
+#~ msgid "Delivered Qty"
+#~ msgstr "Παραληφθήσα Ποσ."
+
+#~ msgid ""
+#~ "No period defined for this date !\n"
+#~ "Please create a fiscal year."
+#~ msgstr ""
+#~ "Δεν έχει οριστεί περίοδος για τη συγκεκριμένη ημερομηνία\n"
+#~ "Παρακαλώ δημιουργήστε μια Λογιστική Χρήση"
+
+#~ msgid "Some entries are already reconciled !"
+#~ msgstr "Κάποιες εγγραφές είναι ήδη συμφωνημένες"
+
+#~ msgid "Merging is only allowed on draft inventories."
+#~ msgstr "Η συγχώνευση επιτρέπεται μόνο σε πρόχειρες απογραφές."
+
+#~ msgid "Unable to reconcile entry \"%s\": %.2f"
+#~ msgstr "Αδύνατη η συμφωνία της εγγραφής \"%s\": %.2f"
+
+#~ msgid "You can not remove a lot line !"
+#~ msgstr "Οι γραμμές παρτίδων δε διαγράφονται!"
+
+#~ msgid ""
+#~ "All emails have been successfully sent to Partners:.\n"
+#~ "\n"
+#~ msgstr ""
+#~ "Όλα τα email έχουν αποσταλλεί με επιτυχία στους Συνεργάτες:\n"
+#~ "\n"
+
+#~ msgid "Unable to change tax !"
+#~ msgstr "Αδύνατη η αλλαγή φόρου"
+
+#~ msgid "No grid matching for this carrier !"
+#~ msgstr "Κανένας πίνακας δεν ταιριάζει με αυτόν τον μεταφορέα!"
+
+#~ msgid "Product uom"
+#~ msgstr "ΜοΜ Προϊόντος"
+
+#~ msgid "Standard Encoding"
+#~ msgstr "Τυπική Κωδικοποίηση"
+
+#~ msgid "Please fill a Balance product in the wizard"
+#~ msgstr "Παρακαλώ συμπληρώστε ένα Εξισορροποιητικό Προϊόν"
+
+#~ msgid "Wed"
+#~ msgstr "Τετ"
+
+#~ msgid "Insufficient Data!"
+#~ msgstr "Ανεπαρκή Δεδομένα!"
+
+#~ msgid "You must enter a period length that cannot be 0 or below !"
+#~ msgstr "Το μήκος περιόδου δεν μπορεί να είναι 0 ή μικρότερο!"
+
+#~ msgid "Product name"
+#~ msgstr "Όνομα προϊόντος"
+
+#~ msgid "No cost unit defined for this employee !"
+#~ msgstr "Δεν έχει οριστεί μονάδα κόστους για τον υπάλληλο"
+
+#~ msgid ""
+#~ "The Payment Term of Supplier does not have Payment Term Lines"
+#~ "(Computation) defined !"
+#~ msgstr "Δεν έωουν οριστεί Γραμμές Υπολογισμού Όρων Πληρωμής στο Συνεργάτη!"
+
+#~ msgid "not implemented"
+#~ msgstr "δεν εφαρμόστηκε"
+
+#~ msgid "Global taxes defined, but are not in invoice lines !"
+#~ msgstr ""
+#~ "Οι φόροι έχουν οριστεί γενικά αλλά δε βρίσκονται στις γραμμές τιμολογίου!"
+
+#~ msgid "There is no expense account defined for this product: \"%s\" (id:%d)"
+#~ msgstr "Δεν έχει δηλωθεί λογαριασμός εξόδων για το προϊόν: \"%s\" (id:%d)"
+
+#~ msgid "End of Fiscal Year Entry"
+#~ msgstr "Εγγραφές Κλεισίματος Λογιστικής Χρήσης"
+
+#~ msgid "Operation Done"
+#~ msgstr "Λειτουργία Ολοκληρώθηκε"
+
+#~ msgid ""
+#~ "Please put a partner on the picking list if you want to generate invoice."
+#~ msgstr "Για δημιουργία τιμολογίου, παρακαλώ επιλέξτε συνεργάτη!"
+
+#~ msgid "You must first cancel all packing attached to this purchase order."
+#~ msgstr ""
+#~ "Πρέπει πρώτα να ακυρώσετε όλες τις συσκευασίες που σχετίζονται με την "
+#~ "παραγγελία αγοράς."
+
+#~ msgid "Unable to find a valid period !"
+#~ msgstr "Αδύνατη η εύρεση ορθής περιόδου!"
+
+#~ msgid "Directory name contains special characters!"
+#~ msgstr "Το όνομα του φακέλλου περιέχει ειδικούς χαρακτήρες!"
+
+#~ msgid "Return lines"
+#~ msgstr "Γραμμές Επιστροφών"
+
+#~ msgid "Case"
+#~ msgstr "Θέμα"
+
+#~ msgid "cancel"
+#~ msgstr "ακύρωση"
+
+#~ msgid ""
+#~ "Please verify that the total difference of the sheet is lower than %.2f !"
+#~ msgstr ""
+#~ "Παρακαλώ επιβεβαιώστε ότι η συνολική διαφορά του φύλλου είναι μικρότερη "
+#~ "από %.2f !"
+
+#~ msgid ""
+#~ "Please verify the price of the invoice !\n"
+#~ "The real total does not match the computed total."
+#~ msgstr ""
+#~ "Παρακαλώ ελέγξετε την αξία του τιμολογίου!\n"
+#~ "Το πραγματικό σύνολο δεν συμπίπτει με την υπολογιζόμενη τιμή."
+
+#~ msgid "You can not sign out from an other date than today"
+#~ msgstr "Δεν μπορείτε να αποχωρήσετε άλλη ημέρα παρά μόνο σήμερα!"
+
+#~ msgid "Please provide a partner for the sale."
+#~ msgstr "Παρακαλώ καθορίστε έναν συνεργάτη για πώληση."
+
+#~ msgid "Futur P&L"
+#~ msgstr "Μελλοντικό  P&L"
+
+#~ msgid "The opening journal must not have any entry in the new fiscal year !"
+#~ msgstr ""
+#~ "Το ανοιγόμενο ημερολόγιο δεν θα πρέπει να έχει καμία εγγραφή στο νέο "
+#~ "λογιστικό έτος!"
+
+#~ msgid "Taxes missing !"
+#~ msgstr "Λείπουν φόροι!"
+
+#~ msgid "Closing of states cancelled, please check the box !"
+#~ msgstr "Το κλείσιμο καταστάσεων ακυρώθηκε. Παρακαλώ κάντε τικ στο κουτί!"
+
+#~ msgid "The order state have to be draft to add delivery lines."
+#~ msgstr ""
+#~ "Η κατάσταση εντολής θα πρέπει να είναι πρόχειρη για να προστεθούν "
+#~ "επιπλέον γραμμές παράδοσης"
+
+#~ msgid "Field name"
+#~ msgstr "Όνομα πεδίου"
+
+#~ msgid "Other Pricelist"
+#~ msgstr "Άλλος Τιμοκατάλογος"
+
+#~ msgid ""
+#~ "Can not create an automatic sequence for this piece !\n"
+#~ "\n"
+#~ "Put a sequence in the journal definition for automatic numbering or "
+#~ "create a sequence manually for this piece."
+#~ msgstr ""
+#~ "Αδύνατη η δημιουργία αυτόματης ιεράρχησης στο κομμάτι αυτό!\n"
+#~ "Ορίστε μια Ιεράρχηση στον ορισμό του ημερολογίου για αυτόματη αρίθμηση, ή "
+#~ "τηρείστε χειροκίνητη αρίθμηση για το κομμάτι αυτό."
+
+#~ msgid "Futur Stock"
+#~ msgstr "Μελλοντικό Απόθεμα"
+
+#~ msgid "No analytic plan defined !"
+#~ msgstr "Κανένα πλάνο αναλυτικής δεν προσδιορίστηκε!"
+
+#~ msgid "No Period found on Invoice!"
+#~ msgstr "Καμία Περίοδος δεν βρέθηκε στο τιμολόγιο!"
+
+#~ msgid "Can not export module that is not installed!"
+#~ msgstr "Αδύνατη η εξαγωγή μη εγκατεστημένης Ενότητας Προγράμματος!"
+
+#~ msgid "No period found !"
+#~ msgstr "Δεν βρέθηκε περίοδος!"
+
+#~ msgid "Please select at least two inventories."
+#~ msgstr "Παρακαλώ επιλέξτε τουλάχιστον δύο απογραφές."
+
+#~ msgid "Bank Journal "
+#~ msgstr "Ημερολόγιο Τράπεζας "
+
+#~ msgid "Invoice cannot be created from Packing."
+#~ msgstr "Δεν μπορεί να δημιουργηθεί τιμολόγιο απο αυτήν την συλλογή."
+
+#~ msgid ""
+#~ "Specified Journal does not have any account move entries in draft state "
+#~ "for this period"
+#~ msgstr ""
+#~ "Το επιλεγμένο ημερολόγιο δεν περιέχει πρόχειρες εγγραφές για την "
+#~ "συγκεκριμένη περίοδο"
+
+#~ msgid "Please put a name and a code before saving the model !"
+#~ msgstr ""
+#~ "Παρακαλώ εισάγετε ένα όνομα και έναν κωδικό πριν αποθηκεύσετε το μοντέλο!"
+
+#~ msgid "Could not cancel this sale order !"
+#~ msgstr "Αδύνατη η ακύρωση αυτής της εντολής πώλησης!"
+
+#~ msgid "Could not cancel purchase order !"
+#~ msgstr "Η Παραγγελία δεν μπορεί να ακυρωθεί!"
+
+#~ msgid "This version of the module is already exist on the server"
+#~ msgstr "Αυτή η έκδοση της Ενότητας Προγράμματος υπάρχει ήδη"
+
+#~ msgid "No grid avaible !"
+#~ msgstr "Κανένα διαθέσιμο πλέγμα!"
+
+#~ msgid ""
+#~ "You have to define the bank account\n"
+#~ "in the journal definition for reconciliation."
+#~ msgstr ""
+#~ "Πρέπει να ορίσετε στον ορισμό του ημερολογίου\n"
+#~ "τον τραπεζικό λογαριασμό για συμφωνία."
+
+#~ msgid "March"
+#~ msgstr "Μαρτίου"
+
+#~ msgid "Free Reference"
+#~ msgstr "Ελεύθερη Παραπομπή"
+
+#~ msgid "Directory name must be unique!"
+#~ msgstr "Το όνομα του φακέλου θα πρέπει να είναι μοναδικό!"
+
+#~ msgid "You could not publish a module that is not installed!"
+#~ msgstr ""
+#~ "Δεν μπορείτε να δημοσιεύσετε μια Ενότητα Προγράμματος που δεν έχει "
+#~ "εγκατασταθεί!"
+
+#~ msgid "You must define an analytic journal of type '%s' !"
+#~ msgstr "Πρέπει να ορίσετε αναλυτικό ημερολόγιο τύπου '%s' !"
+
+#~ msgid "You can not use an inactive account!"
+#~ msgstr "Αδύνατη η χρήση ανενεργού λογαριασμού"
+
+#~ msgid "Entries are not of the same account or already reconciled ! "
+#~ msgstr ""
+#~ "Οι εγγραφές δεν είναι του ίδιου λογαριασμού ή έχουν ήδη συμφωνηθεί! "
+
+#~ msgid "Integrity Error !"
+#~ msgstr "Σφάλμα ακεραιότητας!"
+
+#~ msgid "Invalid action !"
+#~ msgstr "Άκυρη ενέργεια!"
+
+#~ msgid ""
+#~ "You have to select a product UOM in the same category than the purchase "
+#~ "UOM of the product"
+#~ msgstr ""
+#~ "Πρέπει να επιλέξετε ΜΟΜ προϊόντος από την ίδια κατηγορία με την ΜΟΜ "
+#~ "αγοράς του προϊόντος"
+
+#~ msgid "Fri"
+#~ msgstr "Παρ"
+
+#~ msgid "Provide the quantities of the returned products."
+#~ msgstr "Πληκτρολογήστε τις ποσότητες των επιστρεφόμενων προϊόντων"
+
+#~ msgid "Thu"
+#~ msgstr "Πεμ"
+
+#~ msgid "Please set an analytic journal on this financial journal !"
+#~ msgstr ""
+#~ "Παρακαλώ ορίστε ένα αναλυτικό ημερολόγιο για αυτό το οικονομικό "
+#~ "ημερολόγιο!"
+
+#~ msgid "No employee defined for your user !"
+#~ msgstr "Δεν έχει οριστεί υπάλληλος για το χρήστη σας!"
+
+#~ msgid "Operation Not Permitted !"
+#~ msgstr "Μη Επιτρεπτή Λειτουργία!"
+
+#~ msgid "Cycles Cost"
+#~ msgstr "Κόστος Κύκλων"
+
+#~ msgid "The employee must have a contact address"
+#~ msgstr "Ο υπάλληλος πρέπει να έχει Διεύθυνση κατοικίας"
+
+#~ msgid "Please select maximum 8 records to fit the page-width."
+#~ msgstr ""
+#~ "Παρακαλώ επιλέξτε το μέγιστο 8 εγγραφές για να χωρέσουν στο πλάτος "
+#~ "σελίδας."
+
+#~ msgid "Invoice is already reconciled"
+#~ msgstr "Το τιμολόγιο είναι ήδη συμφωνημένο"
+
+#~ msgid "Couldn't create move between different companies"
+#~ msgstr "Αδύνατη η δημιουργία κίνησης μεταξύ διαφορετικών εταιρειών"
+
+#~ msgid "Entry \"%s\" is not valid !"
+#~ msgstr "Η εγγραφή \"%s\" δεν είναι έγκυρη!"
+
+#~ msgid ""
+#~ "You have to select a partner in the purchase form !\n"
+#~ "Please set one partner before choosing a product."
+#~ msgstr ""
+#~ "Πρέπει να επιλέξετε συνεργάτη!\n"
+#~ "Παρακαλώ επιλέξτε συνεργάτη πριν επιλέξετε προϊόν."
+
+#~ msgid "No partner defined on entry line"
+#~ msgstr "Κανένας συνεργάτης δεν καθορίστηκε για αυτήν την γραμμή εγγραφής"
+
+#~ msgid "Sorry!"
+#~ msgstr "Συγνώμη!"
+
+#~ msgid "meeting"
+#~ msgstr "συνάντηση"
+
+#~ msgid "Data Insufficient !"
+#~ msgstr "Έλλειψη Δεδομένων"
+
+#~ msgid "error"
+#~ msgstr "σφάλμα"
+
+#~ msgid "No price available !"
+#~ msgstr "Καμία διαθέσιμη τιμή!"
+
+#~ msgid "No address defined for the supplier"
+#~ msgstr "Δεν έχει οριστεί διεύθυνση συνεργάτη"
+
+#~ msgid "Cannot create invoice without a partner."
+#~ msgstr "Αδύνατη η δημιουργία τιμολογίου χωρίς προσθήκη συνεργάτη"
+
+#~ msgid "You must first cancel all invoices attached to this sale order."
+#~ msgstr ""
+#~ "Θα πρέπει πρώτα να ακυρώσετε τα επισυναπτόμενα τιμολόγια αυτής της "
+#~ "εντολής πώλησης."
+
+#~ msgid "ValidateError"
+#~ msgstr "ValidateError"
+
+#~ msgid "Modify line failed !"
+#~ msgstr "Ανεπιτυχής τροποποίηση γραμμής!"
+
+#~ msgid ""
+#~ "No product defined on the related employee.\n"
+#~ "Fill in the timesheet tab of the employee form."
+#~ msgstr ""
+#~ "Δεν έχει οριστεί προϊόν για το σχετικό υπάλληλο.\n"
+#~ "Παρακαλώ συμπληρώστε τη σελίδα φύλλου χρόνου εργασίας στη φόρμα του "
+#~ "υπαλλήλου."
+
+#~ msgid ""
+#~ "The expected balance (%.2f) is different than the computed one. (%.2f)"
+#~ msgstr ""
+#~ "Το αναμενόμενο ισοζύγιο (%.2f) είναι διαφορετικό απο αυτό που έχει "
+#~ "υπολογιστεί. (%.2f)"
+
+#~ msgid "Historize"
+#~ msgstr "Καταχώρηση στο Ιστορικό"
+
+#~ msgid "User Error!"
+#~ msgstr "Σφάλμα Χρήστη!"
+
+#~ msgid "The journal must have default credit and debit account"
+#~ msgstr ""
+#~ "Το ημερολόγιο πρέπει να έχει προεπιλεγμένους λογαρισμούς χρέωσης - "
+#~ "πίστωσης"
+
+#~ msgid ""
+#~ "No analytic account defined on the project.\n"
+#~ "Please set one or we can not automatically fill the timesheet."
+#~ msgstr ""
+#~ "Δεν έχει οριστεί Αναλυτικός Λογαριασμός για το έργο.\n"
+#~ "Παρακαλώ ορίστε έναν για να συμπληρωθεί το Φύλλο Xρόνου Eργασίας αυτόματα."
+
+#~ msgid ""
+#~ "Can not send mail with empty body,you should have description in the body"
+#~ msgstr "Το κυρίως κείμενο είναι κενό, παρακαλώ συμπληρώστε την περιγραφή"
+
+#~ msgid "Closing of fiscal year cancelled, please check the box !"
+#~ msgstr ""
+#~ "Το κλείσιμο της Λογιστικής Χρήσης ακυρώθηκε, παρακαλώ κάντε τικ στο κουτί!"
+
+#~ msgid "Bad account !"
+#~ msgstr "Λάθος λογαριασμός!"
+
+#~ msgid "Sales Journal"
+#~ msgstr "Ημερολόγιο Πωλήσεων"
+
+#~ msgid "No records found for your selection!"
+#~ msgstr "Δε βρέθηκαν δεδομένα για την επιλογή σας!"
+
+#~ msgid "to be invoiced"
+#~ msgstr "προς τιμολόγηση"
+
+#~ msgid ""
+#~ "Mail not sent to following Partners, Email not available !\n"
+#~ "\n"
+#~ msgstr ""
+#~ "Το Mail δεν αποστάλθηκε στους παρακάτω Συνεργάτες, Το Email δεν είναι "
+#~ "διαθέσιμο !\n"
+#~ "\n"
+
+#~ msgid "Could not cancel this purchase order !"
+#~ msgstr "Η Παραγγελία δεν μπορεί να ακυρωθεί!"
+
+#~ msgid "Analytic account incomplete"
+#~ msgstr "Ο Αναλυτικός Λογαριασμός είναι ημιτελής"
+
+#~ msgid ""
+#~ "You can not modify a posted entry of this journal !\n"
+#~ "You should set the journal to allow cancelling entries if you want to do "
+#~ "that."
+#~ msgstr ""
+#~ "Δεν μπορείτε να μεταβάλλεται μια δημοσιευμένη εγγραφή αυτού του "
+#~ "ημερολογίου !\n"
+#~ "Πρέπει να ορίσετε το ημερολόγιο έτσι ώστε να επιτρέπει ακύρωση εγγραφών "
+#~ "αν θελετε κάτι τέτοιο."
+
+#~ msgid "You cannot delete any record!"
+#~ msgstr "Δεν μπορείτε να διαγράψετε καμία εγγραφή!"
+
+#~ msgid "Futur Productions"
+#~ msgstr "Μελλοντικές Παραγωγές"
+
+#~ msgid "A sign-in must be right after a sign-out !"
+#~ msgstr "Είσοδος αμέσως μετά την Έξοδο!"
+
+#~ msgid "Can not %s draft/proforma/cancel invoice."
+#~ msgstr "Αδύνατη η %s προσωρινού/προφόρμα/ακυρωμένου τιμολογίου"
+
+#~ msgid "The account entries lines are not in valid state."
+#~ msgstr ""
+#~ "Οι γραμμές εγγραφών του λογαριασμού δεν βρίσκονται σε έγκυρη κατάσταση"
+
+#~ msgid "No data"
+#~ msgstr "Χωρίς δεδομένα"
+
+#~ msgid "No employee defined for this user. You must create one."
+#~ msgstr ""
+#~ "Δεν έχει οριστεί υπάλληλος για το χρήστη αυτό. Παρακαλώ δημιουργήστε έναν."
+
+#~ msgid "No valid pricelist line found !"
+#~ msgstr "Κανένας έγκυρος τιμοκατάλογος γραμμής δεν βρέθηκε!"
+
+#~ msgid "products"
+#~ msgstr "προϊόντα"
+
+#~ msgid "You must first select a partner !"
+#~ msgstr "Θα πρέπει πρώτα να επιλέξετε συνεργάτη!"
+
+#~ msgid "Escalate"
+#~ msgstr "Αναβάθμιση Θέματος"
+
+#~ msgid "Bad Configuration !"
+#~ msgstr "Λάθος ρυθμίσεις!"
+
+#~ msgid "You can not validate a non-balanced entry !"
+#~ msgstr "Δεν μπορείτε να επικυρώσετε μιά μή αντιλογισμένη εγγραφή!"
+
+#~ msgid ""
+#~ "You can not delete a project with tasks. I suggest you to deactivate it."
+#~ msgstr ""
+#~ "Έργα που περιέχουν Εργασίες δεν μπορούν να διαγραφούν. Μπορούν, όμως, να "
+#~ "απενεργοποιηθούν."
+
+#~ msgid "Product Standard Price"
+#~ msgstr "Κανονική Τιμή Προϊόντος"
+
+#~ msgid "You can not duplicate a timesheet !"
+#~ msgstr "Το Φύλλο υπάρχει ήδη!"
+
+#~ msgid "Opportunity"
+#~ msgstr "Ευκαιρία"
+
+#~ msgid "Partner '+ line.partner_id.name+ ' has no bank account defined"
+#~ msgstr ""
+#~ "Ο συνεργάτης '+ line.partner_id.name+ ' δεν έχει καθορισμένο λογαριασμό "
+#~ "τραπέζης"
+
+#~ msgid "Cannot create invoice move on centralised journal"
+#~ msgstr ""
+#~ "Αδύνατη η δημιουργία κινήσεων τιμολογίου σε συγκεντροποιημένο ημερολόγιο"
+
+#~ msgid "Reconciliation"
+#~ msgstr "Συμφωνία"
+
+#~ msgid "Entries: "
+#~ msgstr "Εγγραφές: "
+
+#~ msgid "Purchase Journal"
+#~ msgstr "Ημερολόγιο Αγορών"
+
+#~ msgid "from stock and no minimum orderpoint rule defined"
+#~ msgstr "απο απόθεμα και χωρίς ελάχιστο κανόνα παραγγελίας καθορισμένο"
+
+#~ msgid "Cannot delete Sale Order(s) which are already confirmed !"
+#~ msgstr "Αδύνατη η διαγραφή Εντολής(λών) Πώλησης που έχουν ήδη επιβεβαιωθεί!"
+
+#~ msgid "Can not pay draft/proforma/cancel invoice."
+#~ msgstr "Αδύνατη η πληρωμή πρόχειρου/προφόρμας/τιμολογίου"
+
+#~ msgid "You can only delete draft moves."
+#~ msgstr "Μπορείτε να διαγράψετε μόνο πρόχειρες κινήσεις."
+
+#~ msgid "Sat"
+#~ msgstr "Σαβ"
+
+#~ msgid "Tue"
+#~ msgstr "Τρι"
+
+#~ msgid "Hours Cost"
+#~ msgstr "Κόστος Ωρών"
+
+#~ msgid "Wrong Product UOM !"
+#~ msgstr "Λάθος ΜΟΜ Προϊόντος"
+
+#~ msgid "Order not in draft state !"
+#~ msgstr "Η εντολή δεν βρίσκεται σε πρόχειρη κατάσταση!"
+
+#~ msgid "Configration Error !"
+#~ msgstr "Σφάλμα Παραμετροποίησης!"
+
+#~ msgid "Exception"
+#~ msgstr "Εξαίρεση"
+
+#~ msgid "Open Page"
+#~ msgstr "Ανοικτή Σελίδα"
+
+#~ msgid "Already Reconciled"
+#~ msgstr "Ήδη Συμφωνημένα"
+
+#~ msgid "Futur Qty"
+#~ msgstr "Μελλοντική Ποσ."
+
+#~ msgid "Suggestion"
+#~ msgstr "Πρόταση"
+
+#~ msgid "No supplier defined for this product !"
+#~ msgstr "Δεν ορίστηκε προμηθευτής για το προϊόν!"
+
+#~ msgid "No Pricelist !"
+#~ msgstr "Δεν υπάρχει Τιμοκατάλογος!"
+
+#~ msgid "Mon"
+#~ msgstr "Δευ"
+
+#~ msgid "You must select accounts to reconcile"
+#~ msgstr "Πρέπει να επιλέξετε λογαριασμούς για συμφωνία"
+
+#~ msgid ""
+#~ "You have to select a pricelist in the purchase form !\n"
+#~ "Please set one before choosing a product."
+#~ msgstr ""
+#~ "Πρέπει να επιλέξετε εναν τιμοκατάλογο στη φόρμα αγορών!\n"
+#~ "Παρακαλώ επιλέξτε έναν πριν την επιλογη του προϊόντος."
+
+#~ msgid "Partner incomplete"
+#~ msgstr "Συνεργάτης ημιτελής"
+
+#~ msgid "July"
+#~ msgstr "Ιουλίου"
+
+#~ msgid "Result"
+#~ msgstr "Αποτέλεσμα"
+
+#~ msgid "No order lines defined for this sale."
+#~ msgstr "Καμία γραμμή εντολής δεν καθορίστηκε για αυτήν την πώληση"
+
+#~ msgid "Bad total !"
+#~ msgstr "Λάθος Σύνολο!"
+
+#~ msgid "Pending"
+#~ msgstr "Εκκρεμεί"
+
+#~ msgid "Questionnaire"
+#~ msgstr "Ερωτηματολόγιο"
+
+#~ msgid "Partner section of the product form"
+#~ msgstr "Τομέας συνεργάτη στην φόρμα προϊόντος"
+
+#~ msgid "No BoM defined for this product !"
+#~ msgstr "Δεν έχει οριστεί Κ.Υ. για το Προϊόν!"
+
+#~ msgid "The Sign-in date must be in the past"
+#~ msgstr "Η ημερ/νία Εισόδου πρέπει να είναι παρελθοντική"
+
+#~ msgid "Sun"
+#~ msgstr "Κυρ"
+
+#~ msgid "Entry is already reconciled"
+#~ msgstr "Η εγγραφή έχει ήδη συμφωνηθεί"
+
+#~ msgid "December"
+#~ msgstr "Δεκεμβρίου"
+
+#~ msgid "This period is already closed !"
+#~ msgstr "Αυτή η περίοδος είναι ήδη κλειστή!"
+
+#~ msgid ""
+#~ "You tried to sign in with a date anterior to another event !\n"
+#~ "Try to contact the administrator to correct attendances."
+#~ msgstr ""
+#~ "Η ημερομηνία που χρησιμοποιείτε είναι προγενέστερη!\n"
+#~ "Παρακαλώ επικοινωνήστε με τον υπεύθυνο για διόρθωση των παρουσιών."
+
+#~ msgid "You must put a Partner eMail to use this action!"
+#~ msgstr ""
+#~ "Πρέπει να συμπληρώσετε ένα email συνεργάτη για να χρησιμοποιήσετε αυτή τη "
+#~ "λειτουργία!"
+
+#~ msgid "November"
+#~ msgstr "Νοεμβρίου"
+
+#~ msgid "Unplanned Qty"
+#~ msgstr "Ποσ. Εκτός Προγραμματισμού"
+
+#~ msgid ""
+#~ "You tried to sign out with a date anterior to another event !\n"
+#~ "Try to contact the administrator to correct attendances."
+#~ msgstr ""
+#~ "Η ημερομηνία που χρησιμοποιείτε είναι προγενέστερη!\n"
+#~ "Παρακαλώ επικοινωνήστε με τον υπεύθυνο για διόρθωση των παρουσιών."
+
+#~ msgid "Cannot delete Sheet(s) which are already confirmed !"
+#~ msgstr "Τα επιβεβαιωμένα φύλλα δεν μπορούν να διαγραφούν!"
+
+#~ msgid "February"
+#~ msgstr "Φεβρουαρίου"
+
+#~ msgid "April"
+#~ msgstr "Απριλίου"
+
+#~ msgid "No analytic journal !"
+#~ msgstr "Κανένα αναλυτικό ημερολόγιο!"
+
+#~ msgid "terp-gtk-jump-to-ltr"
+#~ msgstr "terp-gtk-jump-to-ltr"
+
+#~ msgid "terp-emblem-important"
+#~ msgstr "terp-emblem-important"
+
+#~ msgid "terp-folder-yellow"
+#~ msgstr "terp-folder-yellow"
+
+#~ msgid "terp-stock_align_left_24"
+#~ msgstr "terp-stock_align_left_24"
+
+#~ msgid "terp-camera_test"
+#~ msgstr "terp-camera_test"
+
+#~ msgid "terp-stock_format-default"
+#~ msgstr "terp-stock_format-default"
+
+#~ msgid "terp-personal-"
+#~ msgstr "terp-personal-"
+
+#~ msgid "terp-document-new"
+#~ msgstr "terp-document-new"
+
+#~ msgid "terp-personal+"
+#~ msgstr "terp-personal+"
+
+#~ msgid "terp-go-home"
+#~ msgstr "terp-go-home"
+
+#~ msgid "terp-mail-forward"
+#~ msgstr "terp-mail-forward"

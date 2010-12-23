@@ -48,7 +48,7 @@ import netsvc
 import osv
 import pooler
 from config import config
-from osv.orm import except_orm
+from osv.orm import except_orm, SKIPPED_ELEMENT_TYPES
 from tools.translate import _
 from yaml_import import convert_yaml_import
 
@@ -99,7 +99,7 @@ def _fix_multiple_roots(node):
 
     num_nodes = 0
     for n in node:
-        if n.tag is not etree.Comment:
+        if not isinstance(n.tag, SKIPPED_ELEMENT_TYPES):
             num_nodes += 1
     if num_nodes > 1:
         data_node = etree.Element("data")

@@ -1,8 +1,4 @@
 # Translation of OpenERP Server.
-# This file contains the translation of the following modules:
-# * base
-# Goran Cvijanović <goranc@gmail.com>, 2010.
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: OpenERP Server 5.0.4\n"
@@ -1492,6 +1488,7 @@ msgstr "Operator"
 msgid "Global"
 msgstr ""
 
+#. #-#-#-#-#  .merge_file_XFGJWp (OpenERP Server 5.0.4)  #-#-#-#-#
 #. module: base
 #: field:ir.rule.group,rules:0
 msgid "Tests"
@@ -2642,11 +2639,13 @@ msgid ""
 "- The last parenthesis must match the extension of the module."
 msgstr ""
 
+#. #-#-#-#-#  .merge_file_XFGJWp (OpenERP Server 5.0.4)  #-#-#-#-#
 #. module: base
 #: help:ir.rule.group,global:0
 msgid "Make the rule global, otherwise it needs to be put on a group"
 msgstr "Napravite globalno pravilo, inače je potrebno staviti ga u grupu"
 
+#. #-#-#-#-#  .merge_file_XFGJWp (OpenERP Server 5.0.4)  #-#-#-#-#
 #. module: base
 #: help:ir.rule.group,rules:0
 msgid "The rule is satisfied if at least one test is True"
@@ -10622,6 +10621,46 @@ msgstr ""
 msgid "Context"
 msgstr ""
 
+#. module: base
+#: model:res.partner.title,shortcut:base.res_partner_title_sir
+msgid "M."
+msgstr ""
+
+#. module: base
+#: model:res.company,overdue_msg:base.main_company
+msgid ""
+"Please note that the following payments are now due. If your "
+"payment                         has been sent, kindly forward your payment "
+"details. If payment will be                         delayed further, please "
+"contact us to discuss.                         \n"
+"Would your payment have been carried out after this mail was sent, please "
+"consider the present one as void."
+msgstr ""
+
+#. module: base
+#: model:ir.model,name:base.model_maintenance_contract
+msgid "maintenance.contract"
+msgstr ""
+
+#. module: base
+#: code:addons/base/res/res_config.py:0
+#, python-format
+msgid ""
+"\n"
+"\n"
+"This addon is already installed on your system"
+msgstr ""
+
+#. module: base
+#: model:res.partner.title,shortcut:base.res_partner_title_miss
+msgid "Mss"
+msgstr ""
+
+#. module: base
+#: model:res.partner.title,shortcut:base.res_partner_title_ltd
+msgid "ltd"
+msgstr ""
+
 #~ msgid "Recursivity Detected."
 #~ msgstr "Otkrivena je rekurzivnost"
 
@@ -10633,3 +10672,6 @@ msgstr ""
 
 #~ msgid "Error ! You can not create recursive associated members."
 #~ msgstr "Greška ! Ne možete kreirati rekurzivno pridružene članove."
+
+#~ msgid "Module Repository"
+#~ msgstr "Repozitorij modula"

@@ -76,6 +76,7 @@ class configmanager(object):
             'test_report_directory' : False,
             'test_disable' : False,
             'test_commit' : False,
+            'publisher_warranty_url': 'http://services.openerp.com/publisher-warranty/',
         }
 
         self.aliases = {
