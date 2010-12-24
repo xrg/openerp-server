@@ -450,20 +450,16 @@ class expression(object):
                     # intermediate object yet. That wouldn't still let us read
                     # the forbidden record, but just use its id
 
-                    qu1, qu2, qtables = field_obj._where_calc(cr, uid, right, context)
+                    wquery = field_obj._where_calc(cr, uid, right, context)
+                    field_obj._apply_ir_rules(cr, uid, wquery, 'read', context=context)
+                    from_clause, qu1, qu2 = wquery.get_sql()
+                   
+                    if qu1:
+                        qu1 = "WHERE " + qu1
 
-                    d1, d2, dtables = table.pool.get('ir.rule').domain_get(cr, uid, field_obj._name)
-                    if d1:
-                        qu1.append(d1)
-                        qu2 += d2
+                    qry = "SELECT id FROM %s %s " %( from_clause, qu1)
 
-                        for dt in dtables:
-                            if dt not in qtables:
-                                qtables.append(dt)
-
-                    qry = "SELECT id FROM %s WHERE %s " %( ', '.join(qtables), ' AND '.join(qu1))
-
-                    self.__exp[i] = (left,'inselect', (qry, qu2))
+                    self.__exp[i] = (left,'inselect', (qry, tuple(qu2)))
 
                 elif operator == 'child_of' or operator == '|child_of' :
                     if isinstance(right, basestring):
