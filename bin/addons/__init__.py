@@ -890,7 +890,7 @@ def load_modules(db, force_demo=False, status=None, update_module=False):
             cr.execute("""SELECT model, name FROM ir_model WHERE id NOT IN (SELECT model_id FROM ir_model_access)""")
             for (model, name) in cr.fetchall():
                 model_obj = pool.get(model)
-                if model_obj and not isinstance(model_obj, osv.osv.osv_memory):
+                if model_obj and not isinstance(model_obj, (osv.osv.osv_memory, osv.orm.orm_deprecated)):
                     logger.warning('object %s (%s) has no access rules!' % (model, name))
 
             # Temporary warning while we remove access rights on osv_memory objects, as they have
