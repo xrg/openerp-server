@@ -68,11 +68,11 @@ def try_report(cr, uid, rname, ids, data=None, context=None, our_module=None):
         file(os.path.join(tools.config['test_report_directory'], rname+ '.'+res_format), 'wb+').write(res_data)
 
     log.debug("Have a %s report for %s, will examine it", res_format, rname)
+    res_text = False
     if res_format == 'pdf':
         if res_data[:5] != '%PDF-':
             raise ValueError("Report %s produced a non-pdf header, %r" % (rname, res_data[:10]))
 
-        res_text = False
         try:
             fd, rfname = tempfile.mkstemp(suffix=res_format)
             os.write(fd, res_data)
@@ -85,6 +85,8 @@ def try_report(cr, uid, rname, ids, data=None, context=None, our_module=None):
             log.warning("Cannot extract report's text:", exc_info=True)
         
         if res_text is not False:
+            if not res_text:
+                log.error("Report %s produced no text!", rname)
             for line in res_text.split('\n'):
                 if ('[[' in line) or ('[ [' in line):
                     log.error("Report %s may have bad expression near: \"%s\".", rname, line[80:])
@@ -97,7 +99,7 @@ def try_report(cr, uid, rname, ids, data=None, context=None, our_module=None):
         return False
 
     log.log(netsvc.logging.TEST, "  + Report %s produced correctly.", rname)
-    return True
+    return res_text or True
 
 def try_report_action(cr, uid, action_id, active_model=None, active_ids=None,
                 wiz_data=None, wiz_buttons=None,
