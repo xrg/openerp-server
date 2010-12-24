@@ -5,7 +5,7 @@ msgstr ""
 "Project-Id-Version: OpenERP Server 5.0.0\n"
 "Report-Msgid-Bugs-To: support@openerp.com\n"
 "POT-Creation-Date: 2010-12-24 17:35:50+0000\n"
-"PO-Revision-Date: 2010-12-23 19:37+0200\n"
+"PO-Revision-Date: 2010-12-24 20:33+0200\n"
 "Last-Translator: P. Christeas <p_christ@hol.gr>\n"
 "Language-Team: Greek <openerp@lists.hellug.gr>\n"
 "MIME-Version: 1.0\n"
@@ -162,7 +162,7 @@ msgstr "Δεν μπορείτε να διαγράψετε αυτό το έγγρ
 #: code:addons/orm.py:4034 code:addons/orm.py:4492
 #, python-format
 msgid "AccessError"
-msgstr "AccessError"
+msgstr "Πρόβλημα πρόσβασης"
 
 #. module: base
 #: code:addons/base/ir/ir_model.py:496
@@ -775,6 +775,8 @@ msgid ""
 "\n"
 " %s for %s (id: %d %s)"
 msgstr ""
+"\n"
+" %s για το %s (id: %d %s)"
 
 #. module: base
 #: code:addons/orm.py:1747
@@ -783,6 +785,8 @@ msgid ""
 "\n"
 " <no view found>"
 msgstr ""
+"\n"
+" <δεν βρέθηκε προβολή>"
 
 #. module: base
 #: code:addons/orm.py:1748
@@ -795,6 +799,12 @@ msgid ""
 "Either you wrongly customized this view, or some modules bringing those "
 "views are not compatible with your current data model."
 msgstr ""
+"Το πεδίο '%s' δεν βρέθηκε στα παρακάτω τμήματα της προβολής #%d%s "
+"για το μοντέλο '%s':\n"
+" %s\n"
+" \n"
+"Αυτό σημαίνει ότι είτε υπάρχει σφάλμα στην προσαρμοσμένη προβολή, είτε "
+"οι προβολές που αναφέρονται δεν συμφωνούν με τα μοντέλα δεδομένων."
 
 #. module: base
 #: code:addons/orm.py:1773
@@ -854,7 +864,7 @@ msgstr "Η μέθοδος εγγραφής δεν έχει αναπτυχθεί 
 #: code:addons/orm.py:2475 code:addons/orm.py:2523
 #, fuzzy, python-format
 msgid "Integrity Error!"
-msgstr "Σφάλμα ακεραιότητας!"
+msgstr "Σφάλμα Ακεραιότητας !"
 
 #. module: base
 #: code:addons/orm.py:2476 code:addons/orm.py:2524
@@ -878,7 +888,7 @@ msgstr ""
 #: code:addons/orm.py:2538 code:addons/orm.py:4323
 #, fuzzy, python-format
 msgid "created."
-msgstr "Δημιουργήθηκε στις"
+msgstr "Δημιουργήθηκε"
 
 #. module: base
 #: code:addons/orm.py:2721
@@ -941,6 +951,8 @@ msgid ""
 "Operation prohibited by access rules, or performed on an already deleted "
 "document (Operation: %s, Document type: %s)."
 msgstr ""
+"Η ενέργεια δεν επιτρέπεται από τους κανόνες πρόσβασης, ή αναφερόταν σε "
+"αντικείμενο που έχει διαγραφεί στο μεταξύ. (Ενέργεια: %s, Αντικείμενο: %s)"
 
 #. module: base
 #: code:addons/orm.py:3873
@@ -960,7 +972,7 @@ msgstr ""
 #: code:addons/orm.py:4122
 #, python-format
 msgid "Recursivity Detected."
-msgstr ""
+msgstr "Εντοπίστηκε αναδρομή."
 
 #. module: base
 #: code:addons/orm.py:4122
@@ -997,9 +1009,9 @@ msgstr ""
 
 #. module: base
 #: code:addons/osv.py:135
-#, fuzzy, python-format
+#, python-format
 msgid "Constraint Error"
-msgstr "Περιορισμός"
+msgstr "Σφάλμα Συνθήκης"
 
 #. module: base
 #: code:addons/osv.py:139
@@ -1023,6 +1035,9 @@ msgid ""
 "\n"
 "[object with reference: %s - %s]"
 msgstr ""
+"\n"
+"\n"
+"[αντικείμενο με αναφορά: %s - %s]"
 
 #. module: base
 #: code:addons/osv.py:154 code:addons/osv.py:156
@@ -2999,7 +3014,7 @@ msgstr "Σινιάλο (υπο-ροή.*)"
 #. module: base
 #: field:workflow.activity,split_mode:0
 msgid "Split Mode"
-msgstr ""
+msgstr "Διαχωρισμένο Mode"
 
 #. module: base
 #: field:workflow.activity,subflow_id:0 field:workflow.workitem,subflow_id:0
@@ -3476,6 +3491,8 @@ msgid ""
 "OpenERP will automatically adds some '0' on the left of the 'Next Number' to "
 "get the required padding size."
 msgstr ""
+"Το OpenERP θα προσθέσει μερικά μηδενικά στα αριστερά του αριθμού, ώστε ο "
+"τελικός αριθμός να έχει τόσα ψηφία όσα λέει το Πλήθος Ψηφίων."
 
 #. module: base
 #: help:ir.sequence,prefix:0
@@ -4671,7 +4688,7 @@ msgstr "ir.wizard.screen"
 #: model:ir.model,name:base.model_maintenance_contract
 #, fuzzy
 msgid "maintenance.contract"
-msgstr "maintenance.contract.wizard"
+msgstr "Συμβόλαιο Συντήρησης"
 
 #. module: base
 #: model:ir.model,name:base.model_multi_company_default
@@ -5216,7 +5233,7 @@ msgstr "Argentina"
 #. module: base
 #: model:res.country,name:base.as
 msgid "American Samoa"
-msgstr ""
+msgstr "Αμερικανική Σαμόα"
 
 #. module: base
 #: model:res.country,name:base.at
@@ -6507,7 +6524,7 @@ msgstr "Κύριος"
 #: model:res.partner.title,shortcut:base.res_partner_title_ltd
 #, fuzzy
 msgid "Ltd."
-msgstr "ΕΠΕ"
+msgstr "Ε.Π.Ε."
 
 #. module: base
 #: model:res.partner.title,shortcut:base.res_partner_title_madam
@@ -6518,7 +6535,7 @@ msgstr "Κα."
 #: model:res.partner.title,shortcut:base.res_partner_title_miss
 #, fuzzy
 msgid "Mss."
-msgstr "Δίδα."
+msgstr "Δίδα"
 
 #. module: base
 #: model:res.partner.title,shortcut:base.res_partner_title_pvt_ltd
@@ -7446,9 +7463,8 @@ msgstr "Προεπιλογή"
 
 #. module: base
 #: selection:publisher_warranty.contract,state:0
-#, fuzzy
 msgid "Canceled"
-msgstr "Ακυρώθηκε"
+msgstr "Ακυρωμένο"
 
 #. module: base
 #: selection:publisher_warranty.contract,state:0
@@ -7713,12 +7729,12 @@ msgstr "https://translations.launchpad.net/openobject"
 #. module: base
 #: view:base.language.import:0
 msgid "- module,type,name,res_id,src,value"
-msgstr ""
+msgstr "- module,type,name,res_id,src,value"
 
 #. module: base
 #: view:base.language.import:0
 msgid "- type,name,res_id,src,value"
-msgstr ""
+msgstr "- type,name,res_id,src,value"
 
 #. module: base
 #: view:base.language.import:0
@@ -8135,7 +8151,7 @@ msgstr ""
 #. module: base
 #: view:ir.actions.todo:0
 msgid "Set as Todo"
-msgstr ""
+msgstr "Ορισμός ως Εκκρεμότητα"
 
 #. module: base
 #: view:ir.actions.todo:0
@@ -8589,7 +8605,7 @@ msgstr ""
 #: view:publisher_warranty.contract:0
 #, fuzzy
 msgid "Validate"
-msgstr "Επικυρωμένο"
+msgstr "Επικύρωση"
 
 #. module: base
 #: view:publisher_warranty.contract.wizard:0
