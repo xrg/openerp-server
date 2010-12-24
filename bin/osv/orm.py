@@ -1206,8 +1206,8 @@ class orm_template(object):
                             break
                     return (-1, res, 'Line ' + str(counter) +' : ' + msg, '' )
                 if isinstance(e, osv.orm.except_orm ):
-                    msg = _('Insertion Failed! ' + e[1])
-                    return (-1, res, 'Line ' + str(counter) +' : ' + msg, '' )
+                    msg = _('Line %d: Insertion Failed! ')
+                    return (-1, res, msg % (str(counter),) + e[1] )
                 #Raising Uncaught exception
                 return (-1, res, 'Line ' + str(counter) +' : ' + str(e), '' )
 
@@ -3633,8 +3633,8 @@ class orm(orm_template):
                             _logger.debug("access error @%s  %d != %d " %(self._name, rc, len(sd)))
                             _logger.debug("len(%s) != len(%s)" % (cr.fetchall(), sd))
                         raise except_orm(_('AccessError'),
-                                         _('Operation prohibited by access rules, or performed on an already deleted document (Operation: read, Document type: %s).')
-                                         % (self._description,))
+                                         _('Operation prohibited by access rules, or performed on an already deleted document (Operation: %s, Document type: %s).')
+                                         % ( _('read'), self._description,))
                 else:
                     cr.execute(query, (ids,), debug=self._debug)
                 res.extend(cr.dictfetchall())
@@ -3836,9 +3836,11 @@ class orm(orm_template):
                            ' WHERE ' + self._table + '.id IN %s' + where_clause,
                            [sub_ids] + where_params)
                 if cr.rowcount != len(sub_ids):
+                    opls = {'read': _('read'), 'write': _('write'),
+                        'create': _('create'), 'unlink': _('delete')}
                     raise except_orm(_('AccessError'),
                                      _('Operation prohibited by access rules, or performed on an already deleted document (Operation: %s, Document type: %s).')
-                                     % (operation, self._description))
+                                     % (opls.get(operation, operation), self._description))
 
     def unlink(self, cr, uid, ids, context=None):
         """
