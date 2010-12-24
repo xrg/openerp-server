@@ -197,6 +197,7 @@ class GettextAlias(object):
             try:
                 # TODO: try to match the frame's filename, line_no,
                 # but in a "least distance" sense
+                # if so, double-check the root/base translations filenames
                 
                 cr.execute("SELECT value FROM ir_translation " \
                             "WHERE lang=%s and type IN (%s,%s) AND src=%s "
@@ -773,6 +774,10 @@ def trans_generate(lang, modules, dbname=None):
         path_list = apaths
     else :
         path_list = [root_path,] + apaths
+    
+    # Also scan these non-addon paths
+    for bin_path in ['osv', 'report' ]:
+        path_list.append(os.path.join(tools.config['root_path'], bin_path))
 
     logger.debug("Scanning modules at paths: %s", ' '.join(path_list))
 
