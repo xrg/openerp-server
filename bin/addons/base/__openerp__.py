@@ -89,6 +89,11 @@
         'test/base_test.yml',
         'test/test_context.xml',
         'test/bug_lp541545.xml',
+        'test/test_osv_expression.yml',
+        # 'test/test_auth.yml', don't use that,
+        #                       it can't be run until the db is loaded
+        'test/test_sequence.yml',
+        'test/base_domain_exprs.yml',
     ],
     'installable': True,
     'active': True,
