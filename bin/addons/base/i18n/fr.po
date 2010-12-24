@@ -3,14 +3,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenERP Server 5.0.4\n"
 "Report-Msgid-Bugs-To: support@openerp.com\n"
-"POT-Creation-Date: 2010-12-16 15:02+0000\n"
-"PO-Revision-Date: 2010-12-18 08:50+0000\n"
+"POT-Creation-Date: 2010-12-21 19:43+0000\n"
+"PO-Revision-Date: 2010-12-23 20:15+0000\n"
 "Last-Translator: Quentin THEURET <quentin@theuret.net>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-12-19 04:44+0000\n"
+"X-Launchpad-Export-Date: 2010-12-24 04:56+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #. module: base
@@ -47,7 +47,6 @@ msgid "Problem in configuration `Record Id` in Server Action!"
 msgstr "Problème dans la configuration `Record Id`dans le Server Action!"
 
 #. #-#-#-#-#  .merge_file_AZEFhG (OpenERP Server 5.0.4)  #-#-#-#-#
-#. module: base
 #: code:addons/base/ir/ir_model.py:0
 #, python-format
 msgid ""
@@ -560,7 +559,6 @@ msgid "Can not remove root user!"
 msgstr "Impossible de supprimer l'utilisateur root"
 
 #. #-#-#-#-#  .merge_file_AZEFhG (OpenERP Server 5.0.4)  #-#-#-#-#
-#. module: base
 #: code:addons/base/res/res_user.py:0
 #, fuzzy, python-format
 msgid "Make sure you have no users linked with the group(s)!"
@@ -2069,7 +2067,6 @@ msgid "Apply For Write"
 msgstr "Applicable en écriture"
 
 #. #-#-#-#-#  .merge_file_AZEFhG (OpenERP Server 5.0.4)  #-#-#-#-#
-#. module: base
 #: field:ir.rule.group,rules:0
 msgid "Tests"
 msgstr "Tests"
@@ -3701,7 +3698,6 @@ msgstr ""
 "si aucun groupe n'est spécifié, la règle est globale et s'applique à tous"
 
 #. #-#-#-#-#  .merge_file_AZEFhG (OpenERP Server 5.0.4)  #-#-#-#-#
-#. module: base
 #: help:ir.rule.group,global:0
 msgid "Make the rule global, otherwise it needs to be put on a group"
 msgstr ""
@@ -3709,7 +3705,6 @@ msgstr ""
 "utilisateur"
 
 #. #-#-#-#-#  .merge_file_AZEFhG (OpenERP Server 5.0.4)  #-#-#-#-#
-#. module: base
 #: help:ir.rule.group,rules:0
 msgid "The rule is satisfied if at least one test is True"
 msgstr "La règle est satisfaite si au moins un test est Vrai"
@@ -5225,7 +5220,6 @@ msgid "ir.rule"
 msgstr "ir.rule"
 
 #. #-#-#-#-#  .merge_file_AZEFhG (OpenERP Server 5.0.4)  #-#-#-#-#
-#. module: base
 #: model:ir.model,name:base.model_ir_rule_group
 msgid "ir.rule.group"
 msgstr "ir.rule.group"
@@ -8992,7 +8986,6 @@ msgid "STOCK_ZOOM_OUT"
 msgstr "STOCK_ZOOM_OUT"
 
 #. #-#-#-#-#  .merge_file_AZEFhG (OpenERP Server 5.0.4)  #-#-#-#-#
-#. module: base
 #: selection:ir.ui.menu,icon:0
 #, fuzzy
 msgid "terp-accessories-archiver"
@@ -9002,7 +8995,6 @@ msgstr ""
 "terp-accessories-archiver"
 
 #. #-#-#-#-#  .merge_file_AZEFhG (OpenERP Server 5.0.4)  #-#-#-#-#
-#. module: base
 #: selection:ir.ui.menu,icon:0
 #, fuzzy
 msgid "terp-accessories-archiver+"
@@ -9012,7 +9004,6 @@ msgstr ""
 "terp-accessories-archiver+"
 
 #. #-#-#-#-#  .merge_file_AZEFhG (OpenERP Server 5.0.4)  #-#-#-#-#
-#. module: base
 #: selection:ir.ui.menu,icon:0
 #, fuzzy
 msgid "terp-accessories-archiver-minus"
@@ -9048,7 +9039,6 @@ msgid "terp-camera_test"
 msgstr "terp-camera_test"
 
 #. #-#-#-#-#  .merge_file_AZEFhG (OpenERP Server 5.0.4)  #-#-#-#-#
-#. module: base
 #: selection:ir.ui.menu,icon:0
 #, fuzzy
 msgid "terp-check"
@@ -9063,7 +9053,6 @@ msgid "terp-crm"
 msgstr "terp-crm"
 
 #. #-#-#-#-#  .merge_file_AZEFhG (OpenERP Server 5.0.4)  #-#-#-#-#
-#. module: base
 #: selection:ir.ui.menu,icon:0
 #, fuzzy
 msgid "terp-dialog-close"
@@ -9073,7 +9062,6 @@ msgstr ""
 "terp-dialog-close"
 
 #. #-#-#-#-#  .merge_file_AZEFhG (OpenERP Server 5.0.4)  #-#-#-#-#
-#. module: base
 #: selection:ir.ui.menu,icon:0
 #, fuzzy
 msgid "terp-document-new"
@@ -9083,7 +9071,6 @@ msgstr ""
 "terp-document-new"
 
 #. #-#-#-#-#  .merge_file_AZEFhG (OpenERP Server 5.0.4)  #-#-#-#-#
-#. module: base
 #: selection:ir.ui.menu,icon:0
 #, fuzzy
 msgid "terp-dolar"
@@ -9093,7 +9080,6 @@ msgstr ""
 "terp-dolar"
 
 #. #-#-#-#-#  .merge_file_AZEFhG (OpenERP Server 5.0.4)  #-#-#-#-#
-#. module: base
 #: selection:ir.ui.menu,icon:0
 #, fuzzy
 msgid "terp-dolar_ok!"
@@ -9109,7 +9095,6 @@ msgid "terp-emblem-important"
 msgstr "terp-emblem-important"
 
 #. #-#-#-#-#  .merge_file_AZEFhG (OpenERP Server 5.0.4)  #-#-#-#-#
-#. module: base
 #: selection:ir.ui.menu,icon:0
 #, fuzzy
 msgid "terp-face-plain"
@@ -9119,7 +9104,6 @@ msgstr ""
 "terp-face-plain"
 
 #. #-#-#-#-#  .merge_file_AZEFhG (OpenERP Server 5.0.4)  #-#-#-#-#
-#. module: base
 #: selection:ir.ui.menu,icon:0
 #, fuzzy
 msgid "terp-folder-blue"
@@ -9134,7 +9118,6 @@ msgid "terp-folder-green"
 msgstr ""
 
 #. #-#-#-#-#  .merge_file_AZEFhG (OpenERP Server 5.0.4)  #-#-#-#-#
-#. module: base
 #: selection:ir.ui.menu,icon:0
 #, fuzzy
 msgid "terp-folder-orange"
@@ -9150,7 +9133,6 @@ msgid "terp-folder-yellow"
 msgstr "terp-folder-yellow"
 
 #. #-#-#-#-#  .merge_file_AZEFhG (OpenERP Server 5.0.4)  #-#-#-#-#
-#. module: base
 #: selection:ir.ui.menu,icon:0
 #, fuzzy
 msgid "terp-gdu-smart-failing"
@@ -9160,7 +9142,6 @@ msgstr ""
 "terp-gdu-smart-failing"
 
 #. #-#-#-#-#  .merge_file_AZEFhG (OpenERP Server 5.0.4)  #-#-#-#-#
-#. module: base
 #: selection:ir.ui.menu,icon:0
 #, fuzzy
 msgid "terp-gnome-cpu-frequency-applet+"
@@ -9170,7 +9151,6 @@ msgstr ""
 "terp-gnome-cpu-frequency-applet+"
 
 #. #-#-#-#-#  .merge_file_AZEFhG (OpenERP Server 5.0.4)  #-#-#-#-#
-#. module: base
 #: selection:ir.ui.menu,icon:0
 #, fuzzy
 msgid "terp-go-home"
@@ -9190,7 +9170,6 @@ msgid "terp-go-today"
 msgstr ""
 
 #. #-#-#-#-#  .merge_file_AZEFhG (OpenERP Server 5.0.4)  #-#-#-#-#
-#. module: base
 #: selection:ir.ui.menu,icon:0
 #, fuzzy
 msgid "terp-go-week"
@@ -9210,7 +9189,6 @@ msgid "terp-graph"
 msgstr "terp-graph"
 
 #. #-#-#-#-#  .merge_file_AZEFhG (OpenERP Server 5.0.4)  #-#-#-#-#
-#. module: base
 #: selection:ir.ui.menu,icon:0
 #, fuzzy
 msgid "terp-gtk-go-back-ltr"
@@ -9220,7 +9198,6 @@ msgstr ""
 "terp-gtk-go-back-ltr"
 
 #. #-#-#-#-#  .merge_file_AZEFhG (OpenERP Server 5.0.4)  #-#-#-#-#
-#. module: base
 #: selection:ir.ui.menu,icon:0
 #, fuzzy
 msgid "terp-gtk-go-back-rtl"
@@ -9244,7 +9221,6 @@ msgid "terp-gtk-jump-to-rtl"
 msgstr ""
 
 #. #-#-#-#-#  .merge_file_AZEFhG (OpenERP Server 5.0.4)  #-#-#-#-#
-#. module: base
 #: selection:ir.ui.menu,icon:0
 #, fuzzy
 msgid "terp-gtk-media-pause"
@@ -9254,7 +9230,6 @@ msgstr ""
 "terp-gtk-media-pause"
 
 #. #-#-#-#-#  .merge_file_AZEFhG (OpenERP Server 5.0.4)  #-#-#-#-#
-#. module: base
 #: selection:ir.ui.menu,icon:0
 #, fuzzy
 msgid "terp-gtk-select-all"
@@ -9264,7 +9239,6 @@ msgstr ""
 "terp-gtk-select-all"
 
 #. #-#-#-#-#  .merge_file_AZEFhG (OpenERP Server 5.0.4)  #-#-#-#-#
-#. module: base
 #: selection:ir.ui.menu,icon:0
 #, fuzzy
 msgid "terp-gtk-stop"
@@ -9279,7 +9253,6 @@ msgid "terp-hr"
 msgstr "terp-hr"
 
 #. #-#-#-#-#  .merge_file_AZEFhG (OpenERP Server 5.0.4)  #-#-#-#-#
-#. module: base
 #: selection:ir.ui.menu,icon:0
 #, fuzzy
 msgid "terp-idea"
@@ -9294,7 +9267,6 @@ msgid "terp-locked"
 msgstr ""
 
 #. #-#-#-#-#  .merge_file_AZEFhG (OpenERP Server 5.0.4)  #-#-#-#-#
-#. module: base
 #: selection:ir.ui.menu,icon:0
 #, fuzzy
 msgid "terp-mail-"
@@ -9304,7 +9276,6 @@ msgstr ""
 "terp-mail-"
 
 #. #-#-#-#-#  .merge_file_AZEFhG (OpenERP Server 5.0.4)  #-#-#-#-#
-#. module: base
 #: selection:ir.ui.menu,icon:0
 #, fuzzy
 msgid "terp-mail-forward"
@@ -9319,7 +9290,6 @@ msgid "terp-mail-message-new"
 msgstr ""
 
 #. #-#-#-#-#  .merge_file_AZEFhG (OpenERP Server 5.0.4)  #-#-#-#-#
-#. module: base
 #: selection:ir.ui.menu,icon:0
 #, fuzzy
 msgid "terp-mail-replied"
@@ -9349,7 +9319,6 @@ msgid "terp-personal"
 msgstr ""
 
 #. #-#-#-#-#  .merge_file_AZEFhG (OpenERP Server 5.0.4)  #-#-#-#-#
-#. module: base
 #: selection:ir.ui.menu,icon:0
 #, fuzzy
 msgid "terp-personal+"
@@ -9359,7 +9328,6 @@ msgstr ""
 "terp-personal+"
 
 #. #-#-#-#-#  .merge_file_AZEFhG (OpenERP Server 5.0.4)  #-#-#-#-#
-#. module: base
 #: selection:ir.ui.menu,icon:0
 #, fuzzy
 msgid "terp-personal-"
@@ -9384,7 +9352,6 @@ msgid "terp-purchase"
 msgstr "terp-purchase"
 
 #. #-#-#-#-#  .merge_file_AZEFhG (OpenERP Server 5.0.4)  #-#-#-#-#
-#. module: base
 #: selection:ir.ui.menu,icon:0
 #, fuzzy
 msgid "terp-rating-rated"
@@ -9404,7 +9371,6 @@ msgid "terp-sale"
 msgstr "terp-sale"
 
 #. #-#-#-#-#  .merge_file_AZEFhG (OpenERP Server 5.0.4)  #-#-#-#-#
-#. module: base
 #: selection:ir.ui.menu,icon:0
 #, fuzzy
 msgid "terp-stage"
@@ -9425,7 +9391,6 @@ msgid "terp-stock_align_left_24"
 msgstr "terp-stock_align_left_24"
 
 #. #-#-#-#-#  .merge_file_AZEFhG (OpenERP Server 5.0.4)  #-#-#-#-#
-#. module: base
 #: selection:ir.ui.menu,icon:0
 #, fuzzy
 msgid "terp-stock_effects-object-colorize"
@@ -9441,7 +9406,6 @@ msgid "terp-stock_format-default"
 msgstr "terp-stock_format-default"
 
 #. #-#-#-#-#  .merge_file_AZEFhG (OpenERP Server 5.0.4)  #-#-#-#-#
-#. module: base
 #: selection:ir.ui.menu,icon:0
 #, fuzzy
 msgid "terp-stock_format-scientific"
@@ -9451,7 +9415,6 @@ msgstr ""
 "terp-stock_format-scientific"
 
 #. #-#-#-#-#  .merge_file_AZEFhG (OpenERP Server 5.0.4)  #-#-#-#-#
-#. module: base
 #: selection:ir.ui.menu,icon:0
 #, fuzzy
 msgid "terp-stock_symbol-selection"
@@ -10774,13 +10737,11 @@ msgid "Test"
 msgstr "Test"
 
 #. #-#-#-#-#  .merge_file_AZEFhG (OpenERP Server 5.0.4)  #-#-#-#-#
-#. module: base
 #: view:ir.rule.group:0
 msgid "Multiple rules on same objects are joined using operator OR"
 msgstr "Un \"ou\" est fait entre toutes les règles concernant le même objet."
 
 #. #-#-#-#-#  .merge_file_AZEFhG (OpenERP Server 5.0.4)  #-#-#-#-#
-#. module: base
 #: view:ir.rule.group:0
 msgid "The rule is satisfied if all test are True (AND)"
 msgstr "La règle est satisfaite si tous les tests sont Vrai (ET)"
@@ -12309,6 +12270,7 @@ msgstr ""
 
 #. module: base
 #: model:ir.actions.act_window,help:base.action_res_groups
+#, fuzzy
 msgid ""
 "A group is a set of functional areas that will be assigned to the user in "
 "order to give them access and rights to specific applications and tasks in "
@@ -12317,6 +12279,14 @@ msgid ""
 "to see. Whether they can have a read, write, create and delete access right "
 "can be managed from here."
 msgstr ""
+"#-#-#-#-#  .merge_file_vbvo8r (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_ReJNDB (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"Un groupe définit un ensemble de zones fonctionnelles accessibles aux "
+"utilisateurs qui y sont rattachés. Il permet de gérer les droits d'accès aux "
+"applications et tâches spécifiques dans le système.  Vous pouvez créer vos "
+"propres groupes ou utiliser ceux qui existent par défaut dans le but de "
+"personnaliser la vue des menus que les utilisateurs pourront voir. Les "
+"droits de lecture, d'écriture et de suppression peuvent être gérés ici."
 
 #. module: base
 #: selection:base.language.install,lang:0
@@ -12946,43 +12916,72 @@ msgstr ""
 
 #. module: base
 #: view:res.config.users:0
+#, fuzzy
 msgid "New User"
 msgstr ""
+"#-#-#-#-#  .merge_file_vbvo8r (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_ReJNDB (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"Nouvel utilisateur"
 
 #. module: base
 #: model:ir.ui.menu,name:base.menu_crm_config_opportunity
+#, fuzzy
 msgid "Opportunities"
 msgstr ""
+"#-#-#-#-#  .merge_file_vbvo8r (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_ReJNDB (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"Opportunités"
 
 #. module: base
 #: model:ir.model,name:base.model_ir_config_parameter
+#, fuzzy
 msgid "ir.config_parameter"
 msgstr ""
+"#-#-#-#-#  .merge_file_vbvo8r (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_ReJNDB (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"ir.config_parameter"
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_publisher_warranty_contract_form
 #: model:ir.ui.menu,name:base.menu_publisher_warranty_contract
+#, fuzzy
 msgid "Contracts"
 msgstr ""
+"#-#-#-#-#  .merge_file_vbvo8r (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_ReJNDB (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"Contrats"
 
 #. module: base
 #: code:addons/base/publisher_warranty/publisher_warranty.py:0
-#, python-format
+#, fuzzy, python-format
 msgid "Error during communication with the publisher warranty server."
 msgstr ""
+"#-#-#-#-#  .merge_file_vbvo8r (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_ReJNDB (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"Erreur durant la communication avec le serveur de garantie de l'éditeur."
 
 #. module: base
 #: view:res.lang:0
+#, fuzzy
 msgid "%Y - Year with century."
 msgstr ""
+"#-#-#-#-#  .merge_file_vbvo8r (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_ReJNDB (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"%Y - Année avec siècle"
 
 #. module: base
 #: view:publisher_warranty.contract.wizard:0
+#, fuzzy
 msgid ""
 "This wizard helps you register a publisher warranty contract in your OpenERP "
 "system. After the contract has been registered, you will be able to send "
 "issues directly to OpenERP."
 msgstr ""
+"#-#-#-#-#  .merge_file_vbvo8r (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_ReJNDB (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"Cette aide vous aide à enregistrer un contrat de garantie éditeur dans votre "
+"système OpenERP. Après que le contrat ait été enregistré, vous pourrez "
+"envoyer des rapports d'erreur directement à OpenERP."
 
 #. module: base
 #: field:res.partner.category,parent_left:0
@@ -12991,61 +12990,104 @@ msgstr ""
 
 #. module: base
 #: view:res.config.users:0
+#, fuzzy
 msgid ""
 "Create additional users and assign them groups that will allow them to have "
 "access to selected functionalities within the system. Click on 'Done' if you "
 "do not wish to add more users at this stage, you can always do this later."
 msgstr ""
+"#-#-#-#-#  .merge_file_vbvo8r (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_ReJNDB (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"Créez des utilisateurs additionnels et assignez-les à des groupes qui leur "
+"permettra d'avoir accès à des fonctionnalités choisies dans le système. "
+"Cliquez sur 'Terminé' si vous ne désirez pas ajouter plus d'utilisateurs "
+"pour l'instant, vous pourrez toujours en ajouter plus tard."
 
 #. module: base
 #: view:res.lang:0
+#, fuzzy
 msgid "%y - Year without century [00,99]."
 msgstr ""
+"#-#-#-#-#  .merge_file_vbvo8r (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_ReJNDB (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"%y - Année sans le siècle  (00 à 99)."
 
 #. module: base
 #: selection:publisher_warranty.contract,state:0
+#, fuzzy
 msgid "Canceled"
 msgstr ""
+"#-#-#-#-#  .merge_file_vbvo8r (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_ReJNDB (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"Annulé"
 
 #. module: base
 #: view:res.lang:0
+#, fuzzy
 msgid "%d - Day of the month [01,31]."
 msgstr ""
+"#-#-#-#-#  .merge_file_vbvo8r (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_ReJNDB (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"%d - Jour du mois (01 à 31)."
 
 #. module: base
 #: view:publisher_warranty.contract:0
+#, fuzzy
 msgid "Validate"
 msgstr ""
+"#-#-#-#-#  .merge_file_vbvo8r (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_ReJNDB (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"Valider"
 
 #. module: base
 #: sql_constraint:ir.config_parameter:0
+#, fuzzy
 msgid "Key must be unique."
 msgstr ""
+"#-#-#-#-#  .merge_file_vbvo8r (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_ReJNDB (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"La clé doit être unique."
 
 #. module: base
 #: code:addons/base/res/res_config.py:0
-#, python-format
+#, fuzzy, python-format
 msgid ""
 "Your database is now fully configured.\n"
 "\n"
 "Click 'Continue' and enjoy your OpenERP experience..."
 msgstr ""
+"#-#-#-#-#  .merge_file_vbvo8r (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_ReJNDB (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"Votre base de donnée est totalement configurée.\n"
+"\n"
+"Cliquez sur 'Continuer' et profitez de l'expérience OpenERP..."
 
 #. module: base
 #: selection:base.language.install,lang:0
+#, fuzzy
 msgid "Hebrew / עִבְרִי"
 msgstr ""
+"#-#-#-#-#  .merge_file_vbvo8r (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_ReJNDB (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"Hébreu / עִבְרִי"
 
 #. module: base
 #: code:addons/base/publisher_warranty/publisher_warranty.py:0
-#, python-format
+#, fuzzy, python-format
 msgid "That contract is already registered in the system."
 msgstr ""
+"#-#-#-#-#  .merge_file_vbvo8r (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_ReJNDB (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"Ce contrat est déjà enregistré dans le système."
 
 #. module: base
 #: view:res.lang:0
+#, fuzzy
 msgid "%M - Minute [00,59]."
 msgstr ""
+"#-#-#-#-#  .merge_file_vbvo8r (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_ReJNDB (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"%M - Minute (00 à 59)."
 
 #. module: base
 #: view:res.lang:0
