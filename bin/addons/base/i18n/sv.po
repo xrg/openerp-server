@@ -3,14 +3,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenERP Server 5.0.0\n"
 "Report-Msgid-Bugs-To: support@openerp.com\n"
-"POT-Creation-Date: 2010-12-16 15:02+0000\n"
-"PO-Revision-Date: 2010-12-21 15:17+0000\n"
-"Last-Translator: OpenERP Administrators <Unknown>\n"
+"POT-Creation-Date: 2010-12-21 19:43+0000\n"
+"PO-Revision-Date: 2010-12-27 17:35+0000\n"
+"Last-Translator: Anders Eriksson, Aspirix AB <ae@mobilasystem.se>\n"
 "Language-Team: <>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-12-22 04:45+0000\n"
+"X-Launchpad-Export-Date: 2010-12-28 04:39+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #. module: base
@@ -53,11 +53,16 @@ msgstr ""
 
 #. module: base
 #: code:addons/base/ir/ir_model.py:0
-#, python-format
+#, fuzzy, python-format
 msgid ""
 "'%s' contains too many dots. XML ids should not contain dots ! These are "
 "used to refer to other modules data, as in module.reference_id"
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"'%s' innehåller för många punkter. XML-id:n ska inte innehålla några "
+"punkter. Dessa används för att referera till moduldata, som i modul."
+"referensid"
 
 #. module: base
 #: code:addons/base/ir/ir_model.py:0
@@ -353,22 +358,31 @@ msgstr ""
 
 #. module: base
 #: code:addons/base/res/partner/partner.py:0
-#, python-format
+#, fuzzy, python-format
 msgid ""
 "Couldn't generate the next id because some partners have an alphabetic id !"
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Kan inte skapa nästa id eftersom partnern har ett alfanumeriskt id !"
 
 #. module: base
 #: code:addons/base/res/partner/partner.py:0
-#, python-format
+#, fuzzy, python-format
 msgid "Partners: "
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Partners "
 
 #. module: base
 #: code:addons/base/res/partner/partner.py:0
-#, python-format
+#, fuzzy, python-format
 msgid "Warning"
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Varning"
 
 #. module: base
 #: code:addons/base/res/res_currency.py:0
@@ -381,9 +395,12 @@ msgstr ""
 
 #. module: base
 #: code:addons/base/res/res_lang.py:0
-#, python-format
+#, fuzzy, python-format
 msgid "Base Language 'en_US' can not be deleted !"
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Basspråket 'en_Us' kan inte tas bort !"
 
 #. module: base
 #: code:addons/base/res/res_lang.py:0
@@ -428,9 +445,12 @@ msgstr ""
 
 #. module: base
 #: code:addons/base/res/res_user.py:0
-#, python-format
+#, fuzzy, python-format
 msgid "You can not have two users with the same login !"
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Du kan inte ha två användare med samma användarid !"
 
 #. module: base
 #: code:addons/base/res/res_user.py:0
@@ -572,13 +592,21 @@ msgstr ""
 #: model:ir.actions.act_window,name:base.action_res_groups
 #: model:ir.ui.menu,name:base.menu_action_res_groups view:res.groups:0
 #: view:res.users:0
+#, fuzzy
 msgid "Groups"
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Grupper"
 
 #. module: base
 #: field:ir.actions.act_window,limit:0 field:ir.report.custom,limitt:0
+#, fuzzy
 msgid "Limit"
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Gräns"
 
 #. module: base
 #: field:ir.actions.act_window,menus:0
@@ -628,8 +656,12 @@ msgstr ""
 
 #. module: base
 #: field:ir.actions.act_window,src_model:0
+#, fuzzy
 msgid "Source Object"
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Källobjekt"
 
 #. module: base
 #: field:ir.actions.act_window,target:0
@@ -767,8 +799,12 @@ msgstr ""
 
 #. module: base
 #: field:ir.actions.report.xml,attachment:0
+#, fuzzy
 msgid "Save As Attachment Prefix"
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Spara som bilageprefix"
 
 #. module: base
 #: field:ir.actions.report.xml,attachment_use:0
@@ -782,8 +818,12 @@ msgstr ""
 
 #. module: base
 #: field:ir.actions.report.xml,header:0
+#, fuzzy
 msgid "Add RML header"
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Lägg till RM L header"
 
 #. module: base
 #: field:ir.actions.report.xml,name:0 field:ir.actions.todo,name:0
@@ -848,8 +888,12 @@ msgstr ""
 
 #. module: base
 #: field:ir.actions.report.xml,report_xml:0
+#, fuzzy
 msgid "XML path"
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"XML sökväg"
 
 #. module: base
 #: field:ir.actions.report.xml,report_xsl:0
@@ -888,8 +932,12 @@ msgstr ""
 #: field:ir.actions.server,condition:0
 #: field:ir.report.custom.fields,fc0_condition:0 field:ir.sequence,condition:0
 #: field:workflow.transition,condition:0 view:multi_company.default:0
+#, fuzzy
 msgid "Condition"
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Villkor"
 
 #. module: base
 #: field:ir.actions.server,email:0
@@ -923,8 +971,12 @@ msgstr ""
 
 #. module: base
 #: field:ir.actions.server,mobile:0
+#, fuzzy
 msgid "Mobile No"
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Mobilnr"
 
 #. module: base
 #: field:ir.actions.server,record_id:0
@@ -1026,8 +1078,12 @@ msgstr ""
 
 #. module: base
 #: field:ir.actions.url,target:0
+#, fuzzy
 msgid "Action Target"
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Händelsemål"
 
 #. module: base
 #: field:ir.actions.url,url:0
@@ -1074,8 +1130,12 @@ msgstr "Data"
 
 #. module: base
 #: field:ir.attachment,datas_fname:0 field:wizard.module.lang.export,name:0
+#, fuzzy
 msgid "Filename"
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Filnamn"
 
 #. module: base
 #: field:ir.attachment,description:0 field:ir.module.module,description:0
@@ -1107,14 +1167,22 @@ msgstr ""
 #: field:ir.attachment,res_id:0 field:ir.model.data,res_id:0
 #: field:ir.translation,res_id:0 field:workflow.instance,res_id:0
 #: field:workflow.triggers,res_id:0
+#, fuzzy
 msgid "Resource ID"
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Resurs ID"
 
 #. module: base
 #: field:ir.attachment,res_model:0 field:workflow,osv:0
 #: field:workflow.instance,res_type:0
+#, fuzzy
 msgid "Resource Object"
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Resursobjekt"
 
 #. module: base
 #: field:ir.cron,args:0
@@ -1153,8 +1221,12 @@ msgstr ""
 
 #. module: base
 #: field:ir.cron,numbercall:0
+#, fuzzy
 msgid "Number of Calls"
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Antal anrop"
 
 #. module: base
 #: field:ir.cron,priority:0 field:ir.ui.view,priority:0
@@ -1205,13 +1277,21 @@ msgstr ""
 
 #. module: base
 #: field:ir.exports,name:0
+#, fuzzy
 msgid "Export Name"
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Export namn"
 
 #. module: base
 #: field:ir.exports,resource:0 field:ir.property,res_id:0
+#, fuzzy
 msgid "Resource"
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Resurs"
 
 #. module: base
 #: field:ir.exports.line,export_id:0
@@ -1230,8 +1310,12 @@ msgstr "Fältnamn"
 
 #. module: base
 #: field:ir.model,access_ids:0 field:ir.model.grid,access_ids:0
+#, fuzzy
 msgid "Access"
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Åtkomst"
 
 #. module: base
 #: field:ir.model,field_id:0 field:ir.model.grid,field_id:0
@@ -1330,8 +1414,12 @@ msgstr ""
 
 #. module: base
 #: field:ir.model.data,noupdate:0
+#, fuzzy
 msgid "Non Updatable"
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Ej uppdateringsbar"
 
 #. module: base
 #: field:ir.model.fields,complete_name:0 field:ir.ui.menu,complete_name:0
@@ -1350,13 +1438,21 @@ msgstr ""
 
 #. module: base
 #: field:ir.model.fields,field_description:0
+#, fuzzy
 msgid "Field Label"
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Fält ledtext"
 
 #. module: base
 #: field:ir.model.fields,model_id:0 field:ir.values,res_id:0
+#, fuzzy
 msgid "Object ID"
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Objekt ID"
 
 #. module: base
 #: field:ir.model.fields,on_delete:0
@@ -1379,13 +1475,21 @@ msgstr ""
 
 #. module: base
 #: field:ir.model.fields,relation:0
+#, fuzzy
 msgid "Object Relation"
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Objektrelation"
 
 #. module: base
 #: field:ir.model.fields,relation_field:0
+#, fuzzy
 msgid "Relation Field"
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Relationsfält"
 
 #. module: base
 #: field:ir.model.fields,required:0
@@ -1427,8 +1531,12 @@ msgstr ""
 
 #. module: base
 #: field:ir.model.fields,translate:0
+#, fuzzy
 msgid "Translate"
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Översätt"
 
 #. module: base
 #: field:ir.model.fields,ttype:0 view:ir.model:0
@@ -1814,8 +1922,12 @@ msgstr "Källa"
 
 #. module: base
 #: field:ir.translation,value:0
+#, fuzzy
 msgid "Translation Value"
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Översättning"
 
 #. module: base
 #: field:ir.ui.menu,child_id:0
@@ -1852,8 +1964,12 @@ msgstr ""
 
 #. module: base
 #: field:ir.ui.view,name:0
+#, fuzzy
 msgid "View Name"
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Vynamn"
 
 #. module: base
 #: field:ir.ui.view.custom,ref_id:0
@@ -1875,8 +1991,12 @@ msgstr ""
 
 #. module: base
 #: field:ir.ui.view_sc,res_id:0
+#, fuzzy
 msgid "Resource Ref."
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Resurs ref."
 
 #. module: base
 #: field:ir.ui.view_sc,resource:0
@@ -1910,8 +2030,12 @@ msgstr "Metadata"
 
 #. module: base
 #: field:ir.values,object:0
+#, fuzzy
 msgid "Is Object"
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Är ett objekt"
 
 #. module: base
 #: field:maintenance.contract,date_start:0
@@ -1958,8 +2082,12 @@ msgstr ""
 
 #. module: base
 #: field:res.bank,bic:0
+#, fuzzy
 msgid "BIC/Swift code"
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"BIC/Swift nummer"
 
 #. module: base
 #: field:res.bank,city:0 field:res.partner,city:0
@@ -1983,8 +2111,12 @@ msgstr ""
 #: field:res.partner,country:0 field:res.partner.address,country_id:0
 #: field:res.partner.bank,country_id:0
 #: model:ir.model,name:base.model_res_country view:res.country:0
+#, fuzzy
 msgid "Country"
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Land"
 
 #. module: base
 #: field:res.bank,email:0 field:res.partner.address,email:0
@@ -2122,8 +2254,12 @@ msgstr ""
 
 #. module: base
 #: field:res.currency,accuracy:0
+#, fuzzy
 msgid "Computational Accuracy"
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Beräkningsnoggrannhet"
 
 #. module: base
 #: field:res.currency,base:0
@@ -2199,8 +2335,12 @@ msgstr ""
 
 #. module: base
 #: field:res.lang,code:0
+#, fuzzy
 msgid "Locale Code"
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Lokal kod"
 
 #. module: base
 #: field:res.lang,date_format:0
@@ -2281,8 +2421,12 @@ msgstr ""
 
 #. module: base
 #: field:res.partner,child_ids:0 field:res.request,ref_partner_id:0
+#, fuzzy
 msgid "Partner Ref."
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Partnerref."
 
 #. module: base
 #: field:res.partner,comment:0 field:res.partner.function,ref:0
@@ -2371,8 +2515,12 @@ msgstr "Adresstyp"
 
 #. module: base
 #: field:res.partner.bank,acc_number:0
+#, fuzzy
 msgid "Account Number"
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Kontonummer"
 
 #. module: base
 #: field:res.partner.bank,bank:0 model:ir.model,name:base.model_res_bank
@@ -2382,8 +2530,12 @@ msgstr "Bank"
 
 #. module: base
 #: field:res.partner.bank,owner_name:0
+#, fuzzy
 msgid "Account Owner"
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Kontoägare"
 
 #. module: base
 #: field:res.partner.bank,state:0
@@ -2540,18 +2692,30 @@ msgstr "Historik"
 
 #. module: base
 #: field:res.request,ref_doc1:0
+#, fuzzy
 msgid "Document Ref 1"
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Dokumentreferens 1"
 
 #. module: base
 #: field:res.request,ref_doc2:0
+#, fuzzy
 msgid "Document Ref 2"
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Dokumentreferens 2"
 
 #. module: base
 #: field:res.request,trigger_date:0
+#, fuzzy
 msgid "Trigger Date"
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Triggerdatum"
 
 #. module: base
 #: field:res.request.history,body:0
@@ -2684,8 +2848,12 @@ msgstr ""
 #: field:workflow,activities:0
 #: model:ir.actions.act_window,name:base.action_workflow_activity_form
 #: model:ir.ui.menu,name:base.menu_workflow_activity view:workflow:0
+#, fuzzy
 msgid "Activities"
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Aktiviteter"
 
 #. module: base
 #: field:workflow,on_create:0
@@ -2900,8 +3068,12 @@ msgstr ""
 
 #. module: base
 #: help:ir.actions.server,code:0
+#, fuzzy
 msgid "Python code to be executed"
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Pythonkod som skall exekveras"
 
 #. module: base
 #: help:ir.actions.server,condition:0
@@ -2912,11 +3084,17 @@ msgstr ""
 
 #. module: base
 #: help:ir.actions.server,email:0
+#, fuzzy
 msgid ""
 "Provides the fields that will be used to fetch the email address, e.g. when "
 "you select the invoice, then `object.invoice_address_id.email` is the field "
 "which gives the correct address"
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Visar vilka fält som skall användas för att hämta epostadresser. Exempel när "
+"du väljer en faktura sä är `object.invoice_address_id.email` fältet som "
+"visar rätt epostadress."
 
 #. module: base
 #: help:ir.actions.server,expression:0
@@ -2942,11 +3120,16 @@ msgstr ""
 
 #. module: base
 #: help:ir.actions.server,mobile:0
+#, fuzzy
 msgid ""
 "Provides fields that be used to fetch the mobile number, e.g. you select the "
 "invoice, then `object.invoice_address_id.mobile` is the field which gives "
 "the correct mobile number"
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Visar vilket fält som skall användas som mobilnummer. Exempel välj en "
+"faktura, då innehåller `object.invoice_address_id.mobile` rätt mobilnummer."
 
 #. module: base
 #: help:ir.actions.server,model_id:0
@@ -2967,10 +3150,15 @@ msgstr ""
 
 #. module: base
 #: help:ir.actions.server,sequence:0
+#, fuzzy
 msgid ""
 "Important when you deal with multiple actions, the execution order will be "
 "decided based on this, low number is higher priority."
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Viktigt när du använder multipla åtgärder, exekveringsordningen brestäms av "
+"denna, låga nummer har högst prioritet."
 
 #. module: base
 #: help:ir.actions.server,srcmodel_id:0
@@ -3003,8 +3191,12 @@ msgstr "Markera objektet från den modell som arbetsflödet körs."
 
 #. module: base
 #: help:ir.actions.server,wkf_model_id:0
+#, fuzzy
 msgid "Workflow to be executed on this model."
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Arbetsflöde som skall användas på denna modell."
 
 #. module: base
 #: help:ir.actions.server,write_id:0
@@ -3112,8 +3304,12 @@ msgstr ""
 
 #. module: base
 #: help:res.bank,bic:0
+#, fuzzy
 msgid "Bank Identifier Code"
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Bank identifieringskod"
 
 #. module: base
 #: help:res.country,code:0
@@ -3183,10 +3379,15 @@ msgstr ""
 
 #. module: base
 #: help:res.partner,supplier:0
+#, fuzzy
 msgid ""
 "Check this box if the partner is a supplier. If it's not checked, purchase "
 "people will not see it when encoding a purchase order."
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Markera den här rutan om partnern är en leverantör. Om den inte är markerar "
+"så kommer partnern inte visas när man väljer leverantör på en inköpsorder."
 
 #. module: base
 #: help:res.partner,user_id:0
@@ -3209,15 +3410,24 @@ msgstr ""
 
 #. module: base
 #: help:res.partner.address,partner_id:0
+#, fuzzy
 msgid "Keep empty for a private address, not related to partner."
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Lämna blank om det är en privat adress som inte ska kopplas till en partner."
 
 #. module: base
 #: help:res.partner.address,type:0
+#, fuzzy
 msgid ""
 "Used to select automatically the right address according to the context in "
 "sales and purchases documents."
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Används för att automatiskt välja rätt adress beroende på innehållet i "
+"försäljnings- eller inköpsdokumentet."
 
 #. module: base
 #: help:res.partner.category,active:0
@@ -3371,8 +3581,12 @@ msgstr ""
 #: model:ir.model,name:base.model_res_partner_address
 #: model:ir.ui.menu,name:base.menu_partner_address_form
 #: view:res.partner.address:0
+#, fuzzy
 msgid "Partner Addresses"
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Företagsadress"
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_partner_by_category
@@ -3380,8 +3594,12 @@ msgstr ""
 #: model:ir.model,name:base.model_res_partner_category
 #: model:ir.ui.menu,name:base.menu_partner_category_form
 #: view:res.partner.category:0
+#, fuzzy
 msgid "Partner Categories"
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Partnerkategorier"
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_partner_category
@@ -3392,8 +3610,12 @@ msgstr ""
 #. module: base
 #: model:ir.actions.act_window,name:base.action_partner_customer_form
 #: view:res.partner:0
+#, fuzzy
 msgid "Customers"
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Kunder"
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_partner_customer_form_new
@@ -3409,14 +3631,22 @@ msgstr ""
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_partner_other_form
+#, fuzzy
 msgid "Other Partners"
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Övriga partners"
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_partner_supplier_form
 #: view:res.partner:0
+#, fuzzy
 msgid "Suppliers"
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Leverantörer"
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_partner_title_contact
@@ -3432,8 +3662,12 @@ msgstr ""
 #: model:ir.actions.act_window,name:base.action_partner_title_partner
 #: model:ir.ui.menu,name:base.menu_partner_title_partner
 #: view:res.partner.title:0
+#, fuzzy
 msgid "Partner Titles"
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Partnertitlar"
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_payterm_form
@@ -3609,8 +3843,12 @@ msgstr ""
 #: model:ir.ui.menu,name:base.menu_custom_action
 #: model:ir.ui.menu,name:base.menu_ir_sequence_actions
 #: model:ir.ui.menu,name:base.next_id_6
+#, fuzzy
 msgid "Actions"
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Åtgärder"
 
 #. module: base
 #: model:ir.actions.act_window,name:base.ir_sequence_form
@@ -4048,8 +4286,12 @@ msgstr ""
 
 #. module: base
 #: model:ir.model,name:base.model_res_partner_bank view:res.partner.bank:0
+#, fuzzy
 msgid "Bank Accounts"
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Bankkonton"
 
 #. module: base
 #: model:ir.model,name:base.model_res_partner_bank_type
@@ -4139,8 +4381,12 @@ msgstr "wizard.module.update_translations"
 
 #. module: base
 #: model:ir.model,name:base.model_workflow
+#, fuzzy
 msgid "workflow"
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"arbetsflöde"
 
 #. module: base
 #: model:ir.model,name:base.model_workflow_activity
@@ -4172,8 +4418,12 @@ msgstr ""
 
 #. module: base
 #: model:ir.model,name:base.model_workflow_workitem
+#, fuzzy
 msgid "workflow.workitem"
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"workflow.workitem"
 
 #. module: base
 #: model:ir.module.module,description:base.module_meta_information
@@ -4200,8 +4450,12 @@ msgstr ""
 
 #. module: base
 #: model:ir.ui.menu,name:base.menu_administration
+#, fuzzy
 msgid "Administration"
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Administration"
 
 #. module: base
 #: model:ir.ui.menu,name:base.menu_base_config
@@ -4221,8 +4475,12 @@ msgstr ""
 
 #. module: base
 #: model:ir.ui.menu,name:base.menu_localisation
+#, fuzzy
 msgid "Localisation"
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Lokalisering"
 
 #. module: base
 #: model:ir.ui.menu,name:base.menu_low_workflow
@@ -4539,8 +4797,12 @@ msgstr "Ivory Coast (Cote D'Ivoire)"
 
 #. module: base
 #: model:res.country,name:base.ck
+#, fuzzy
 msgid "Cook Islands"
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Cooköarna"
 
 #. module: base
 #: model:res.country,name:base.cl
@@ -5342,8 +5604,12 @@ msgstr "Svalbard and Jan Mayen Islands"
 
 #. module: base
 #: model:res.country,name:base.sk
+#, fuzzy
 msgid "Slovak Republic"
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Slovakiska republiken"
 
 #. module: base
 #: model:res.country,name:base.sl
@@ -5510,8 +5776,12 @@ msgstr "Uruguay"
 
 #. module: base
 #: model:res.country,name:base.uz
+#, fuzzy
 msgid "Uzbekistan"
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Uzbekistan"
 
 #. module: base
 #: model:res.country,name:base.va
@@ -5545,13 +5815,21 @@ msgstr "Vietnam"
 
 #. module: base
 #: model:res.country,name:base.vu
+#, fuzzy
 msgid "Vanuatu"
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Vanuatu"
 
 #. module: base
 #: model:res.country,name:base.wf
+#, fuzzy
 msgid "Wallis and Futuna Islands"
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Wallis och Futunaöarna"
 
 #. module: base
 #: model:res.country,name:base.ws
@@ -5637,8 +5915,12 @@ msgstr ""
 
 #. module: base
 #: model:res.partner.category,name:base.res_partner_category_12
+#, fuzzy
 msgid "Segmentation"
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Segmentering"
 
 #. module: base
 #: model:res.partner.category,name:base.res_partner_category_13
@@ -5670,8 +5952,12 @@ msgstr ""
 
 #. module: base
 #: model:res.partner.category,name:base.res_partner_category_4
+#, fuzzy
 msgid "Basic Partner"
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Baspartner"
 
 #. module: base
 #: model:res.partner.category,name:base.res_partner_category_5
@@ -5713,8 +5999,12 @@ msgstr "Fröken"
 
 #. module: base
 #: model:res.partner.title,name:base.res_partner_title_pvt_ltd
+#, fuzzy
 msgid "Corp."
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Företag"
 
 #. module: base
 #: model:res.partner.title,name:base.res_partner_title_sir
@@ -5849,8 +6139,12 @@ msgstr ""
 #: selection:ir.actions.act_window.view,view_mode:0
 #: selection:ir.ui.view,type:0
 #: selection:wizard.ir.model.menu.create.line,view_type:0
+#, fuzzy
 msgid "Graph"
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Diagram"
 
 #. module: base
 #: selection:ir.actions.report.xml,report_type:0
@@ -5894,8 +6188,12 @@ msgstr "txt"
 
 #. module: base
 #: selection:ir.actions.server,state:0
+#, fuzzy
 msgid "Create Object"
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Skapa objekt"
 
 #. module: base
 #: selection:ir.actions.server,state:0 selection:workflow.activity,kind:0
@@ -5927,8 +6225,12 @@ msgstr ""
 
 #. module: base
 #: selection:ir.actions.server,state:0 view:ir.actions.server:0
+#, fuzzy
 msgid "Trigger"
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Trigger"
 
 #. module: base
 #: selection:ir.actions.server,state:0
@@ -6038,8 +6340,12 @@ msgstr "Arbetsdagar"
 
 #. module: base
 #: selection:ir.model,state:0 selection:ir.model.grid,state:0
+#, fuzzy
 msgid "Base Object"
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Basobjekt"
 
 #. module: base
 #: selection:ir.model,state:0 selection:ir.model.grid,state:0
@@ -6130,8 +6436,12 @@ msgstr ""
 
 #. module: base
 #: selection:ir.module.module,state:0
+#, fuzzy
 msgid "Not Installable"
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Ej installerbar"
 
 #. module: base
 #: selection:ir.module.module,state:0
@@ -6167,8 +6477,12 @@ msgstr ""
 
 #. module: base
 #: selection:ir.module.module.dependency,state:0
+#, fuzzy
 msgid "Uninstallable"
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Ej installerabar"
 
 #. module: base
 #: selection:ir.module.module.dependency,state:0
@@ -7018,8 +7332,12 @@ msgstr "Bulgarian / български"
 
 #. module: base
 #: selection:module.lang.install,init,lang:0
+#, fuzzy
 msgid "Catalan / Català"
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Katalanska / Català"
 
 #. module: base
 #: selection:module.lang.install,init,lang:0
@@ -7143,8 +7461,12 @@ msgstr "Italian / Italiano"
 
 #. module: base
 #: selection:module.lang.install,init,lang:0
+#, fuzzy
 msgid "Klingon"
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Klingon"
 
 #. module: base
 #: selection:module.lang.install,init,lang:0
@@ -7368,8 +7690,12 @@ msgstr ""
 #. module: base
 #: selection:workflow.activity,join_mode:0
 #: selection:workflow.activity,split_mode:0
+#, fuzzy
 msgid "And"
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Och"
 
 #. module: base
 #: selection:workflow.activity,join_mode:0
@@ -7431,8 +7757,12 @@ msgstr ""
 
 #. module: base
 #: sql_constraint:res.country:0
+#, fuzzy
 msgid "The code of the country must be unique !"
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Landskoden måste vara unik !"
 
 #. module: base
 #: sql_constraint:res.country:0
@@ -7506,8 +7836,12 @@ msgstr ""
 
 #. module: base
 #: view:ir.actions.act_window:0
+#, fuzzy
 msgid "Select Groups"
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Välj grupper"
 
 #. module: base
 #: view:ir.actions.configuration.wizard:0
@@ -7554,8 +7888,12 @@ msgstr ""
 
 #. module: base
 #: view:ir.actions.server:0
+#, fuzzy
 msgid "Action to Launch"
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Åtgärd som skall startas"
 
 #. module: base
 #: view:ir.actions.server:0
@@ -7617,8 +7955,12 @@ msgstr ""
 
 #. module: base
 #: view:ir.actions.server:0
+#, fuzzy
 msgid "Other Actions Configuration"
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Annan åtgärdskonfigurering"
 
 #. module: base
 #: view:ir.actions.server:0
@@ -7669,8 +8011,12 @@ msgstr ""
 
 #. module: base
 #: view:ir.model:0 view:res.groups:0
+#, fuzzy
 msgid "Access Rights"
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Åtkomsträttigheter"
 
 #. module: base
 #: view:ir.model:0 view:res.groups:0
@@ -7789,8 +8135,12 @@ msgstr ""
 
 #. module: base
 #: view:ir.module.module:0
+#, fuzzy
 msgid "Uninstall (beta)"
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Avinstallera (beta)"
 
 #. module: base
 #: view:ir.module.repository:0
@@ -7858,8 +8208,12 @@ msgstr ""
 
 #. module: base
 #: view:ir.sequence:0
+#, fuzzy
 msgid "Day of the week (0:Monday): %(weekday)s"
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Veckoday (0:Måndag): %(weekday)s"
 
 #. module: base
 #: view:ir.sequence:0
@@ -7931,8 +8285,12 @@ msgstr "Nummerserietyp"
 
 #. module: base
 #: view:ir.values:0
+#, fuzzy
 msgid "Action Source"
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Åtgärdskälla"
 
 #. module: base
 #: view:ir.values:0
@@ -7964,8 +8322,12 @@ msgstr ""
 
 #. module: base
 #: view:ir.values:0
+#, fuzzy
 msgid "client_action_multi, client_action_relate"
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"client_action_multi, client_action_relate"
 
 #. module: base
 #: view:ir.values:0
@@ -8023,8 +8385,12 @@ msgstr ""
 
 #. module: base
 #: view:res.company:0 view:res.partner:0
+#, fuzzy
 msgid "General Information"
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Allmän information"
 
 #. module: base
 #: view:res.company:0
@@ -8037,8 +8403,12 @@ msgstr ""
 
 #. module: base
 #: view:res.company:0
+#, fuzzy
 msgid "Internal Header/Footer"
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Internt sidhuvud/sidfot"
 
 #. module: base
 #: view:res.company:0
@@ -8075,8 +8445,12 @@ msgstr ""
 
 #. module: base
 #: view:res.lang:0
+#, fuzzy
 msgid "%B - Full month name."
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"%B - Månadens namn, en förkortat."
 
 #. module: base
 #: view:res.lang:0
@@ -8100,24 +8474,40 @@ msgstr ""
 
 #. module: base
 #: view:res.lang:0
+#, fuzzy
 msgid ""
 "%U - Week number of the year (Sunday as the first day of the week) as a "
 "decimal number [00,53]. All days in a new year preceding the first Sunday "
 "are considered to be in week 0."
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"%U - Årets veckonummer (Söndag är första dagen i veckan) som decimaltal "
+"[00,53] Alla dagar som infaller före den första söndagen antas hamna i vecka "
+"0."
 
 #. module: base
 #: view:res.lang:0
+#, fuzzy
 msgid ""
 "%W - Week number of the year (Monday as the first day of the week) as a "
 "decimal number [00,53]. All days in a new year preceding the first Monday "
 "are considered to be in week 0."
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"%W - Veckonummer för året (Måndag är veckans första dag) som ett decimaltal "
+"[00,53]. All dagar under det nya året som infaller före den första måndagen "
+"antas ligga i vecka 0."
 
 #. module: base
 #: view:res.lang:0
+#, fuzzy
 msgid "%X - Appropriate time representation."
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"%X - Aktuell tidrepresentation"
 
 #. module: base
 #: view:res.lang:0
@@ -8156,8 +8546,12 @@ msgstr ""
 
 #. module: base
 #: view:res.lang:0
+#, fuzzy
 msgid "%p - Equivalent of either AM or PM."
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"%p - Lika med antingen FM eller EM,"
 
 #. module: base
 #: view:res.lang:0
@@ -8265,8 +8659,12 @@ msgstr ""
 
 #. module: base
 #: view:res.partner:0 view:res.partner.address:0
+#, fuzzy
 msgid "Postal Address"
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Postadress"
 
 #. module: base
 #: view:res.partner:0
@@ -8303,8 +8701,12 @@ msgstr "Bankkonto ägare"
 
 #. module: base
 #: view:res.partner.category:0
+#, fuzzy
 msgid "Partner Category"
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Partnerkategori"
 
 #. module: base
 #: view:res.partner.event:0
@@ -8555,8 +8957,12 @@ msgstr ""
 #. module: base
 #: wizard_button:module.upgrade,end,config:0
 #: wizard_button:module.upgrade,start,config:0
+#, fuzzy
 msgid "Start configuration"
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Påbörja konfigurationen"
 
 #. module: base
 #: wizard_button:module.upgrade,next,start:0
@@ -8570,8 +8976,12 @@ msgstr "Skicka e-post"
 
 #. module: base
 #: wizard_button:server.action.create,init,step_1:0
+#, fuzzy
 msgid "Next"
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Nästa"
 
 #. module: base
 #: wizard_button:server.action.create,step_1,create:0
@@ -8925,8 +9335,12 @@ msgstr "Automatiserade händelser"
 
 #. module: base
 #: view:partner.wizard.ean.check:0
+#, fuzzy
 msgid "Want to check Ean ? "
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Vill du kolla EAN? "
 
 #. module: base
 #: view:base.language.export:0
@@ -8941,8 +9355,12 @@ msgstr ""
 
 #. module: base
 #: field:res.partner,title:0
+#, fuzzy
 msgid "Partner Form"
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Partnersida"
 
 #. module: base
 #: model:ir.model,name:base.model_base_language_import
@@ -8996,10 +9414,15 @@ msgstr "Moduluppgradering"
 
 #. module: base
 #: view:res.config.users:0
+#, fuzzy
 msgid ""
 "Groups are used to define access rights on objects and the visibility of "
 "screens and menus"
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Grupper används för att definerar åtkomsträttigheter och vad som visas i "
+"menyer och på sidor."
 
 #. module: base
 #: selection:base.language.install,lang:0
@@ -9035,8 +9458,12 @@ msgstr ""
 
 #. module: base
 #: model:ir.ui.menu,name:base.menu_hr_project
+#, fuzzy
 msgid "Human Resources Dashboard"
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Personal dashboard"
 
 #. module: base
 #: field:ir.module.module,contributors:0
@@ -9133,10 +9560,14 @@ msgstr "Skapa _Meny"
 
 #. module: base
 #: help:base.language.install,overwrite:0
+#, fuzzy
 msgid ""
 "If you check this box, your customized translations will be overwritten and "
 "replaced by the official ones."
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Om du markerar denna så ersätter du din egen översättning med den officiella."
 
 #. module: base
 #: field:ir.actions.report.xml,report_rml:0
@@ -9217,8 +9648,12 @@ msgstr ""
 
 #. module: base
 #: field:ir.attachment,res_model:0
+#, fuzzy
 msgid "Attached Model"
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Modell som används"
 
 #. module: base
 #: view:ir.rule:0
@@ -9257,10 +9692,15 @@ msgstr "https://help.launchpad.net/Translations"
 
 #. module: base
 #: view:base.language.import:0
+#, fuzzy
 msgid ""
 "When using CSV format, please also check that the first line of your file is "
 "one of the following:"
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Om du använder CSV-formatet, kontrollera att den första raden är en av de "
+"följande:"
 
 #. module: base
 #: model:ir.actions.act_window,name:base.res_log_act_window
@@ -9295,17 +9735,27 @@ msgstr ""
 
 #. module: base
 #: view:ir.rule:0
+#, fuzzy
 msgid ""
 "Example: GLOBAL_RULE_1 AND GLOBAL_RULE_2 AND ( (GROUP_A_RULE_1 AND "
 "GROUP_A_RULE_2) OR (GROUP_B_RULE_1 AND GROUP_B_RULE_2) )"
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Exempel: GLOBAL_RULE_1 AND GLOBAL_RULE_2 AND ( (GROUP_A_RULE_1 AND "
+"GROUP_A_RULE_2) OR (GROUP_B_RULE_1 AND GROUP_B_RULE_2) )"
 
 #. module: base
 #: model:ir.actions.act_window,help:base.action_ui_view
+#, fuzzy
 msgid ""
 "Views allows you to personalize each view of OpenERP. You can add new "
 "fields, move fields, rename them or delete the ones that you do not need."
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Vyer gör det möjligt att anpassa alla sidor i OpenERP. Du kan lägga till "
+"fält, flytta fält, döpa om dem eller ta bort de du inte behöver."
 
 #. module: base
 #: selection:base.language.install,lang:0
@@ -9330,24 +9780,40 @@ msgstr ""
 
 #. module: base
 #: view:ir.rule:0
+#, fuzzy
 msgid "Groups (no group = global)"
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Grupper (ingen grupp = global)"
 
 #. module: base
 #: selection:res.config.users,view:0 selection:res.config.view,view:0
 #: selection:res.users,view:0
+#, fuzzy
 msgid "Simplified"
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Förenklat"
 
 #. module: base
 #: selection:base.language.install,lang:0
+#, fuzzy
 msgid "Portugese (BR) / Português (BR)"
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Portugisiska (BR) / Português (BR)"
 
 #. module: base
 #: view:base.module.update:0
+#, fuzzy
 msgid "Please be patient, as this operation may take a few seconds..."
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Vänligen vänta, den här operationen kan ta några sekunder..."
 
 #. module: base
 #: view:base.language.export:0
@@ -9416,13 +9882,21 @@ msgstr ""
 
 #. module: base
 #: selection:base.language.install,lang:0
+#, fuzzy
 msgid "Korean (KR) / 한국어 (KR)"
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Koreanska (KR) / 한국어 (KR)"
 
 #. module: base
 #: model:res.widget,title:base.matrixise_twitter_widget
+#, fuzzy
 msgid "Stéphane Wirtel's tweets"
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Stéphane Wirtel's tweets"
 
 #. module: base
 #: model:ir.actions.act_window,name:base.ir_property_form
@@ -9461,8 +9935,12 @@ msgstr "klar"
 
 #. module: base
 #: field:res.partner.address,partner_id:0
+#, fuzzy
 msgid "Partner Name"
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Partner namn"
 
 #. module: base
 #: model:res.partner.category,name:base.res_partner_category_17
@@ -9485,11 +9963,16 @@ msgstr ""
 
 #. module: base
 #: model:ir.actions.act_window,help:base.action_partner_title_contact
+#, fuzzy
 msgid ""
 "Manage the contact titles you want to have available in your system and the "
 "way you want to print them in letters and other documents. Some example: "
 "Mr., Mrs. "
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Underhåll de kontakttitlar som du vill använda i systemet. T ex Herr, Fru, "
+"Fröken osv... "
 
 #. module: base
 #: field:multi_company.default,company_id:0
@@ -9862,8 +10345,12 @@ msgstr "Översättning"
 
 #. module: base
 #: model:ir.ui.menu,name:base.menu_product
+#, fuzzy
 msgid "Products"
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Produkter"
 
 #. module: base
 #: selection:base.language.install,lang:0
@@ -10237,6 +10724,7 @@ msgstr ""
 
 #. module: base
 #: model:ir.actions.act_window,help:base.action_partner_address_form
+#, fuzzy
 msgid ""
 "Customers (also called Partners in other areas of the system) helps you "
 "manage your address book of companies whether they are prospects, customers "
@@ -10246,6 +10734,15 @@ msgid ""
 "installed the CRM, with the history tab, you can track all the interactions "
 "with a partner such as opportunities, emails, or sales orders issued."
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Kunder (de kallas även partners på andra ställen i systemet) hjälper diga "
+"att underhålla adresserna till företagen oavsett om de är prospekts, kunder "
+"och/eller leverantörer. Kundsidan används för att visa information för att "
+"kommunicera med dina kunder i form av adresser, kontakter, prislistor och "
+"mycket annat? Om du installerat CRM-modulen så visas en historikflik där kan "
+"du följa kommunikation med kunden i form av oppurtunities, mail och "
+"kundorder mm."
 
 #. module: base
 #: field:res.widget,content:0
@@ -10572,8 +11069,12 @@ msgstr ""
 #: model:ir.ui.menu,name:base.menu_base_partner
 #: model:ir.ui.menu,name:base.menu_sale_config_sales
 #: model:ir.ui.menu,name:base.menu_sales
+#, fuzzy
 msgid "Sales"
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Kundorder"
 
 #. module: base
 #: view:ir.actions.todo:0 selection:ir.actions.todo,state:0
@@ -10977,18 +11478,30 @@ msgstr ""
 
 #. module: base
 #: field:base.language.install,overwrite:0
+#, fuzzy
 msgid "Overwrite Existing Terms"
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Skriv över existerande villkor"
 
 #. module: base
 #: model:ir.ui.menu,name:base.menu_project_management_time_tracking
+#, fuzzy
 msgid "Time Tracking"
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Tidredovisning"
 
 #. module: base
 #: model:ir.model,name:base.model_base_module_update
+#, fuzzy
 msgid "Update Module"
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Uppdatera modulen"
 
 #. module: base
 #: help:ir.model,osv_memory:0
@@ -10999,21 +11512,34 @@ msgstr ""
 
 #. module: base
 #: view:base.module.import:0
+#, fuzzy
 msgid ""
 "This wizard helps you add a new language to you OpenERP system. After "
 "loading a new language it becomes available as default interface language "
 "for users and partners."
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Den här wizarden hjälper dig lägga till ett nytt språk till ditt OpenERP "
+"system. Det nya språket blir standardspråk för användare och partners."
 
 #. module: base
 #: view:res.users:0
+#, fuzzy
 msgid "Preferences"
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Preferenser"
 
 #. module: base
 #: model:res.partner.category,name:base.res_partner_category_consumers0
+#, fuzzy
 msgid "Consumers"
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Konsumenter"
 
 #. module: base
 #: help:ir.cron,function:0
@@ -11032,8 +11558,12 @@ msgstr ""
 
 #. module: base
 #: view:ir.actions.report.xml:0
+#, fuzzy
 msgid "Miscellaneous"
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Övriga"
 
 #. module: base
 #: code:addons/base/res/res_user.py:0
@@ -11067,51 +11597,87 @@ msgstr ""
 
 #. module: base
 #: model:res.partner.title,shortcut:base.res_partner_title_ltd
+#, fuzzy
 msgid "ltd"
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"ltd"
 
 #. module: base
 #: view:base.module.update:0
+#, fuzzy
 msgid "Click on Update below to start the process..."
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Klicka op Uppdatera nedan för att starta bearbetningen..."
 
 #. module: base
 #: model:ir.actions.act_window,name:base.res_widget_user_act_window
 #: model:ir.ui.menu,name:base.menu_res_widget_user_act_window
+#, fuzzy
 msgid "Widgets per User"
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Widgets per användare"
 
 #. module: base
 #: selection:base.language.install,lang:0
+#, fuzzy
 msgid "Slovak / Slovenský jazyk"
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Slovakiska / Slovenský jazyk"
 
 #. module: base
 #: field:res.currency,symbol:0
+#, fuzzy
 msgid "Symbol"
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Symbol"
 
 #. module: base
 #: help:res.config.users,login:0 help:res.users,login:0
+#, fuzzy
 msgid "Used to log into the system"
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Används för att logga in i systemet"
 
 #. module: base
 #: view:base.update.translations:0
+#, fuzzy
 msgid "Synchronize Translation"
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Synkronisera översättningen"
 
 #. module: base
 #: model:ir.ui.menu,name:base.menu_association
+#, fuzzy
 msgid "Association"
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Association"
 
 #. module: base
 #: model:ir.ui.menu,name:base.menu_address_book
 #: model:ir.ui.menu,name:base.menu_config_address_book
 #: model:ir.ui.menu,name:base.menu_procurement_management_supplier
+#, fuzzy
 msgid "Address Book"
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Adressbok"
 
 #. module: base
 #: field:res.company,account_no:0
@@ -11120,17 +11686,27 @@ msgstr "Kontonummer"
 
 #. module: base
 #: model:ir.actions.act_window,help:base.action_partner_form
+#, fuzzy
 msgid ""
 "The Address book manages your customers list. The form for customer allows "
 "you to record detailed on your customers (address, contacts, pricelist, "
 "account, etc.). With the history tab, you can follow all moves transactions "
 "related to a customer, like sales order, claims."
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Adressboken hanterar din kundlista. Kundsidan innehåller information "
+"(adresser, kontakter, prislistor, konton mm). Med historikfliken kan du "
+"följa alla transaktioner med kunden som kundorder, ärenden mm."
 
 #. module: base
 #: view:res.widget.user:0
+#, fuzzy
 msgid "User Widgets"
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Användarwidgets"
 
 #. module: base
 #: view:base.module.update:0
@@ -11139,9 +11715,12 @@ msgstr "Uppdateringslista moduler"
 
 #. module: base
 #: code:addons/base/ir/ir_model.py:0
-#, python-format
+#, fuzzy, python-format
 msgid "The osv_memory field can only be compared with = and != operator."
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"osv_memory fältet kan bara jämföras med = och != operatorn."
 
 #. module: base
 #: selection:ir.ui.view,type:0
@@ -11150,25 +11729,41 @@ msgstr "Diagram"
 
 #. module: base
 #: help:multi_company.default,name:0
+#, fuzzy
 msgid "Name it to easily find a record"
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Namnge det för att lätt kunna hitta en post"
 
 #. module: base
 #: model:ir.actions.act_window,name:base.grant_menu_access
 #: model:ir.ui.menu,name:base.menu_grant_menu_access
+#, fuzzy
 msgid "Menu Items"
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Menyrader"
 
 #. module: base
 #: constraint:ir.rule:0
+#, fuzzy
 msgid "Rules are not supported for osv_memory objects !"
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Regler stöds inte av osv_memory objekt !"
 
 #. module: base
 #: model:ir.ui.menu,name:base.menu_event_association
 #: model:ir.ui.menu,name:base.menu_event_main
+#, fuzzy
 msgid "Events Organisation"
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Händelseorganisation"
 
 #. module: base
 #: help:workflow.transition,act_to:0
@@ -11188,13 +11783,21 @@ msgstr "Extra Info"
 #. module: base
 #: model:ir.actions.act_window,name:base.act_values_form_action
 #: model:ir.ui.menu,name:base.menu_values_form_action
+#, fuzzy
 msgid "Client Events"
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Klienthändelser"
 
 #. module: base
 #: model:ir.model,name:base.model_partner_wizard_ean_check
+#, fuzzy
 msgid "Ean Check"
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"EAN kontroll"
 
 #. module: base
 #: model:ir.model,name:base.model_multi_company_default
@@ -11203,40 +11806,67 @@ msgstr ""
 
 #. module: base
 #: field:res.config.users,menu_tips:0 field:res.users,menu_tips:0
+#, fuzzy
 msgid "Menu Tips"
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Meny tips"
 
 #. module: base
 #: view:base.language.export:0
+#, fuzzy
 msgid "_Export"
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"_Export"
 
 #. module: base
 #: field:base.language.install,state:0 field:base.module.import,state:0
 #: field:base.module.update,state:0
+#, fuzzy
 msgid "state"
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"status"
 
 #. module: base
 #: selection:base.language.install,lang:0
+#, fuzzy
 msgid "Serbian (Cyrillic) / српски"
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Serbiska (Cyrillic) / српски"
 
 #. module: base
 #: field:res.widget.user,widget_id:0 field:res.widget.wizard,widget_id:0
+#, fuzzy
 msgid "Widget"
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Widget"
 
 #. module: base
 #: view:res.partner.event:0
+#, fuzzy
 msgid "Event Logs"
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Händelseloggar"
 
 #. module: base
 #: code:addons/base/module/wizard/base_module_configuration.py:0
-#, python-format
+#, fuzzy, python-format
 msgid "System Configuration done"
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Systemkonfigurationen klar"
 
 #. module: base
 #: selection:ir.actions.todo,restart:0
@@ -11263,23 +11893,39 @@ msgstr ""
 
 #. module: base
 #: model:res.widget,title:base.albertnan_twitter_widget
+#, fuzzy
 msgid "Albert Cervera Areny's tweets"
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Albert Cervera Areny's tweets"
 
 #. module: base
 #: model:ir.ui.menu,name:base.menu_crm_config_lead
+#, fuzzy
 msgid "Leads & Opportunities"
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Leads & Opportunities"
 
 #. module: base
 #: selection:base.language.install,lang:0
+#, fuzzy
 msgid "Romanian / română"
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Rumänska / română"
 
 #. module: base
 #: field:ir.rule,perm_create:0
+#, fuzzy
 msgid "Apply For Create"
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Tillämpa vid ny post"
 
 #. module: base
 #: model:ir.actions.act_window,help:base.grant_menu_access
@@ -11293,9 +11939,12 @@ msgstr ""
 
 #. module: base
 #: code:addons/base/ir/ir_model.py:0
-#, python-format
+#, fuzzy, python-format
 msgid "You cannot remove the field '%s' !"
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Du kan inte ta bort fältet '%s' !"
 
 #. module: base
 #: selection:base.language.install,lang:0
@@ -11322,28 +11971,48 @@ msgstr ""
 
 #. module: base
 #: model:ir.model,name:base.model_base_module_configuration
+#, fuzzy
 msgid "base.module.configuration"
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"base.module.configuration"
 
 #. module: base
 #: view:res.users:0
+#, fuzzy
 msgid "Email & Signature"
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Epost & signatur"
 
 #. module: base
 #: selection:base.language.install,lang:0
+#, fuzzy
 msgid "Bulgarian / български език"
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Bulgariska / български език"
 
 #. module: base
 #: model:ir.ui.menu,name:base.menu_aftersale
+#, fuzzy
 msgid "After-Sale Services"
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Eftermarknadsservice"
 
 #. module: base
 #: view:ir.actions.todo:0
+#, fuzzy
 msgid "Launch"
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Starta"
 
 #. module: base
 #: model:ir.actions.act_window,help:base.action_partner_category_form
@@ -11356,13 +12025,21 @@ msgstr ""
 
 #. module: base
 #: view:ir.property:0 model:ir.ui.menu,name:base.next_id_15
+#, fuzzy
 msgid "Parameters"
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Parametrar"
 
 #. module: base
 #: model:ir.model,name:base.model_ir_wizard_screen
+#, fuzzy
 msgid "ir.wizard.screen"
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"ir.wizard.screen"
 
 #. module: base
 #: view:ir.rule:0
@@ -11373,28 +12050,48 @@ msgstr ""
 
 #. module: base
 #: model:res.partner.category,name:base.res_partner_category_15
+#, fuzzy
 msgid "IT sector"
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"IT sektorn"
 
 #. module: base
 #: selection:base.language.install,lang:0
+#, fuzzy
 msgid "Spanish (SV) / Español (SV)"
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Spanska (SV) / Español (SV)"
 
 #. module: base
 #: selection:ir.translation,type:0
+#, fuzzy
 msgid "Report/Template"
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Rapport/Mall"
 
 #. module: base
 #: view:base.module.upgrade:0
+#, fuzzy
 msgid "Note that this operation might take a few minutes."
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Notera att den här operationen kan ta några minuter"
 
 #. module: base
 #: view:ir.cron:0
+#, fuzzy
 msgid "Execution"
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Exekvering"
 
 #. module: base
 #: model:ir.model,name:base.model_res_groups
@@ -11410,18 +12107,30 @@ msgstr ""
 
 #. module: base
 #: view:base.module.upgrade:0
+#, fuzzy
 msgid "System Update"
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Systemuppdatering"
 
 #. module: base
 #: help:ir.sequence,prefix:0
+#, fuzzy
 msgid "Prefix value of the record for the sequence"
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Prefix för löpnumret"
 
 #. module: base
 #: model:res.widget,title:base.nhomar_twitter_widget
+#, fuzzy
 msgid "Nhomar Hernandez's tweets"
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Nhomar Hernandez's tweets"
 
 #. module: base
 #: code:addons/base/res/res_user.py:0
@@ -11436,23 +12145,39 @@ msgstr ""
 
 #. module: base
 #: help:ir.sequence,number_increment:0
+#, fuzzy
 msgid "The next number of the sequence will be incremented by this number"
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Nästa nummer i sekvensen kommer att beräknas utgående från detta"
 
 #. module: base
 #: view:res.widget:0
+#, fuzzy
 msgid "Search Widget"
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Sökwidget"
 
 #. module: base
 #: selection:ir.actions.todo,restart:0
+#, fuzzy
 msgid "Never"
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Aldrig"
 
 #. module: base
 #: view:ir.filters:0 field:res.log,context:0
+#, fuzzy
 msgid "Context"
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Innehåll"
 
 #. module: base
 #: sql_constraint:res.partner.bank:0
@@ -11476,13 +12201,21 @@ msgstr "Ny användare"
 
 #. module: base
 #: model:ir.ui.menu,name:base.menu_crm_config_opportunity
+#, fuzzy
 msgid "Opportunities"
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Tillfällen"
 
 #. module: base
 #: model:ir.model,name:base.model_ir_config_parameter
+#, fuzzy
 msgid "ir.config_parameter"
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"ir.config_parameter"
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_publisher_warranty_contract_form
@@ -11706,8 +12439,12 @@ msgstr ""
 
 #. module: base
 #: view:publisher_warranty.contract.wizard:0
+#, fuzzy
 msgid "Register"
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Registrera"
 
 #. module: base
 #: view:publisher_warranty.contract.wizard:0
@@ -11727,8 +12464,12 @@ msgstr ""
 
 #. module: base
 #: view:res.log:0
+#, fuzzy
 msgid "System Logs"
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Systemloggar"
 
 #. module: base
 #: model:ir.ui.menu,name:base.publisher_warranty
@@ -11742,16 +12483,26 @@ msgstr ""
 
 #. module: base
 #: view:res.config.view:0
+#, fuzzy
 msgid ""
 "If you use OpenERP for the first time we strongly advise you to select the "
 "simplified interface, which has less features but is easier. You can always "
 "switch later from the user preferences."
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Om det är första gången du använder OpenERP så rekomenderar vi förenklat "
+"användargränssnitt, det innehåller färre funktioner men är enklare. Du kan "
+"alltid byta senare."
 
 #. module: base
 #: view:res.lang:0
+#, fuzzy
 msgid "%j - Day of the year [001,366]."
 msgstr ""
+"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"%j - Dag per år [001,366]"
 
 #. module: base
 #: model:res.company,overdue_msg:base.main_company
