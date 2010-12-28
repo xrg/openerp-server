@@ -903,8 +903,7 @@ class orm_template(object):
         return {'datas': datas}
 
     def import_data(self, cr, uid, fields, datas, mode='init', current_module='', noupdate=False, context=None, filename=None):
-        """
-        Import given data in given module
+        """ Import given data in given module
 
         :param cr: database cursor
         :param uid: current user id
@@ -928,13 +927,13 @@ class orm_template(object):
             order_line/product_uom_qty,
             order_line/product_uom/id    (=xml_id)
         """
-        if not context:
+        if context is None:
             context = {}
         def _replace_field(x):
             x = re.sub('([a-z0-9A-Z_])\\.id$', '\\1/.id', x)
             return x.replace(':id','/id').split('/')
         fields = map(_replace_field, fields)
-        logger = netsvc.Logger()
+        logger = logging.getLogger('orm.import')
         ir_model_data_obj = self.pool.get('ir.model.data')
 
         # mode: id (XML id) or .id (database id) or False for name_get
@@ -1052,25 +1051,24 @@ class orm_template(object):
                     res = [(6,0,res)]
 
                 elif fields_def[field[len(prefix)]]['type'] == 'integer':
-                    res = line[i] and int(line[i]) or 0
+                    res = int(line[i])
                 elif fields_def[field[len(prefix)]]['type'] == 'boolean':
                     res = line[i].lower() not in ('0', 'false', 'off')
                 elif fields_def[field[len(prefix)]]['type'] == 'float':
-                    res = line[i] and float(line[i]) or 0.0
+                    res = float(line[i])
                 elif fields_def[field[len(prefix)]]['type'] == 'selection':
                     for key, val in fields_def[field[len(prefix)]]['selection']:
                         if line[i] in [tools.ustr(key), tools.ustr(val)]:
                             res = key
                             break
                     if line[i] and not res:
-                        logger.notifyChannel("import", netsvc.LOG_WARNING,
-                                _("key '%s' not found in selection field '%s'") % \
-                                        (line[i], field[len(prefix)]))
+                        logger.warning( _("key '%s' not found in selection field '%s'"),
+                                        line[i], field[len(prefix)])
                         warning += [_("Key/value '%s' not found in selection field '%s'") % (line[i], field[len(prefix)])]
                 else:
-                    res = line[i]
+                    res = line[i] or False
 
-                row[field[len(prefix)]] = res or False
+                row[field[len(prefix)]] = res
 
             result = (row, nbrmax, warning, data_res_id, xml_id)
             return result
