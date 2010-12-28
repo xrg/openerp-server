@@ -74,7 +74,9 @@ re_queries = [
         ('comment', re.compile(r'comment on column\s+"?([a-z_0-9]+)"?\.', re.I)),
         ('comment', re.compile(r'comment on table\s+"?([a-z_0-9]+)"?\s', re.I)),
         ('create', re.compile('create (?:database|table|view)\s+"?([a-z_0-9]+)"?[\s\(]', re.I)),
-        ('create', re.compile('create index .*\son\s+"?([a-z_0-9]+)"?[\s\(]', re.I)),
+        ('create', re.compile('create or replace view\s+"?([a-z_0-9]+)"?[\s\(]', re.I)),
+        ('create', re.compile('create (?:unique )?index .*\son\s+"?([a-z_0-9]+)"?[\s\(]', re.I)),
+        ('drop', re.compile(r'drop view\s+"?([a-z_0-9]+)"?\s', re.I)),
         ('drop db', re.compile(r'drop database "?([a-z_0-9]+)"?', re.I)),
         ('select', re.compile(r'with recursive.*?\sas\s+\(\s*select\s.*?\s+from\s+"?([a-z_0-9]+)"?', re.I|re.DOTALL)),
         ('select', re.compile(r'select (nextval)\(%s\)', re.I)),
@@ -187,14 +189,6 @@ class Cursor(object):
 
         if self.sql_log or debug:
             now = mdt.now()
-            try:
-                # mogrify must happen before execute
-                qrystr = self._obj.mogrify(query, params or [])
-            except TypeError, e:
-                qrystr = query + '; params: %s' % (params,)
-            except Exception, e:
-                self.__logger.error("Mogrify:%s" % e)
-                self.__logger.debug("Query: %r", query)
 
         # The core of query execution
         try:
@@ -221,7 +215,7 @@ class Cursor(object):
             if delay > 10000: # only show slow times
                 dstr = ' (%dms)' % int(delay/1000)
             try:
-                self.__logger.debug("Q%s: %s" % (dstr, qrystr))
+                self.__logger.debug("Q%s: %s" % (dstr, self._obj.query))
             except Exception:
                 # should't break because of logging
                 pass
