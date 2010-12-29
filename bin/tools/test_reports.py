@@ -78,8 +78,9 @@ def try_report(cr, uid, rname, ids, data=None, context=None, our_module=None):
             os.write(fd, res_data)
             os.close(fd)
 
-            fp = Popen(['pdftotext', '-enc', 'UTF-8', '-nopgbrk', rfname, '-'], shell=False, stdout=PIPE).stdout
-            res_text = tools.ustr(fp.read())
+            pop = Popen(['pdftotext', '-enc', 'UTF-8', '-nopgbrk', rfname, '-'], shell=False, stdout=PIPE)
+            (stdin, _) = pop.communicate()
+            res_text = tools.ustr(stdin)
             os.unlink(rfname)
         except Exception:
             log.warning("Cannot extract report's text:", exc_info=True)
