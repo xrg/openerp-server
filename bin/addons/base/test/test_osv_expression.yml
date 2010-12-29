@@ -58,10 +58,10 @@
 -
     !python {model: res.partner }: |
         for r in range(4):
-            self.create(cr, uid, { 'name': 'P of Acme %d' % r, 
+            self.create(cr, uid, { 'name': 'P of Acme %d' % r,
                     'company_id': ref('ymltest_company2') })
         for r in range(4):
-            self.create(cr, uid, { 'name': 'P of All %d' % r, 
+            self.create(cr, uid, { 'name': 'P of All %d' % r,
                     'company_id': False })
 -
     Check if many2one works with negative empty list
@@ -110,4 +110,4 @@
         res_ids = self.search(cr, uid, [('company_id.partner_id', 'not in', [])])
         res_ids.sort()
         assert res_ids == all_ids, "Searching against empty set failed, returns %r" % res_ids
-    
+

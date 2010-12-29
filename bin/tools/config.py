@@ -49,6 +49,8 @@ class configmanager(object):
             'reportgz': False,
             'translate_in': None,
             'translate_out': None,
+            'overwrite_existing_translations': False,
+            'load_language': None,
             'language': None,
             'pg_path': None,
             'admin_passwd': 'admin',
@@ -203,12 +205,16 @@ class configmanager(object):
             "Option '-l' is mandatory in case of importation"
             )
 
+        group.add_option('--load-language', dest="load_language",
+                         help="specifies the languages for the translations you want to be loaded")
         group.add_option('-l', "--language", dest="language",
                          help="specify the language of the translation file. Use it with --i18n-export or --i18n-import")
         group.add_option("--i18n-export", dest="translate_out",
                          help="export all sentences to be translated to a CSV file, a PO file or a TGZ archive and exit")
         group.add_option("--i18n-import", dest="translate_in",
                          help="import a CSV or a PO file with translations and exit. The '-l' option is required.")
+        group.add_option("--i18n-overwrite", dest="overwrite_existing_translations", action="store_true", default=False,
+                         help="overwrites existing translation terms on importing a CSV or a PO file.")
         group.add_option("--modules", dest="translate_modules",
                          help="specify modules to export. Use in combination with --i18n-export")
         group.add_option("--addons-path", dest="addons_path",
@@ -233,6 +239,9 @@ class configmanager(object):
 
         die(opt.translate_in and (not opt.language or not opt.db_name),
             "the i18n-import option cannot be used without the language (-l) and the database (-d) options")
+
+        die(opt.overwrite_existing_translations and (not opt.translate_in),
+            "the i18n-overwrite option cannot be used without the i18n-import option")
 
         die(opt.translate_out and (not opt.db_name),
             "the i18n-export option cannot be used without the database (-d) option")
@@ -454,6 +463,7 @@ class configmanager(object):
         p.add_section('options')
         for opt in sorted(self.options.keys()):
             if opt in ('version', 'language', 'translate_out', 'translate_in',
+                        'overwrite_existing_translations',
                         'stop_after_init', 'init', 'update'):
                 continue
             if opt in self.blacklist_for_save:

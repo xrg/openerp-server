@@ -719,8 +719,7 @@ class orm_template(object):
 
     def browse(self, cr, uid, select, context=None, list_class=None, 
                 fields_process=None, fields_only=FIELDS_ONLY_DEFAULT, cache=None):
-        """
-        Fetch records as objects allowing to use dot notation to browse fields and relations
+        """Fetch records as objects allowing to use dot notation to browse fields and relations
 
         :param cr: database cursor
         :param user: current user id
@@ -914,8 +913,10 @@ class orm_template(object):
         :param filename: optional file to store partial import state for recovery
         :rtype: tuple
 
-        This method is used when importing data via client menu
-        Example of fields to import for a sale.order
+        This method is used when importing data via client menu.
+
+        Example of fields to import for a sale.order::
+
             .id,                         (=database_id)
             partner_id,                  (=name_search)
             order_line/.id,              (=database_id)

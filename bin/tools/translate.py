@@ -26,6 +26,7 @@ import inspect
 import itertools
 import locale
 import os
+import pooler
 import re
 import logging
 import shutil
@@ -36,7 +37,7 @@ from os.path import join
 from datetime import datetime
 from lxml import etree
 
-import tools, pooler
+import tools
 import netsvc
 from tools.misc import UpdateableStr
 from tools.misc import SKIPPED_ELEMENT_TYPES
@@ -1000,7 +1001,7 @@ def trans_load_data(db_name, fileobj, fileformat, lang, lang_name=None, verbose=
                 args.append(('res_id', '=', dic['res_id']))
             ids = trans_obj.search(cr, uid, args)
             if ids:
-                if context.get('overwrite'):
+                if context.get('overwrite') and dic['value']:
                     trans_obj.write(cr, uid, ids, {'value': dic['value']})
             else:
                 trans_obj.create(cr, uid, dic)
@@ -1057,6 +1058,19 @@ def resetlocale():
             return locale.setlocale(locale.LC_ALL, ln)
         except locale.Error:
             continue
+
+def load_language(cr, lang):
+    """Loads a translation terms for a language.
+    Used mainly to automate language loading at db initialization.
+    
+    :param lang: language ISO code with optional _underscore_ and l10n flavor (ex: 'fr', 'fr_BE', but not 'fr-BE')
+    :type lang: str
+    """
+    pool = pooler.get_pool(cr.dbname)
+    language_installer = pool.get('base.language.install')
+    uid = 1
+    oid = language_installer.create(cr, uid, {'lang': lang})
+    language_installer.lang_install(cr, uid, [oid], context=None)
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
 
