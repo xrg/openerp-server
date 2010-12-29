@@ -4,13 +4,13 @@ msgstr ""
 "Project-Id-Version: OpenERP Server 5.0.0\n"
 "Report-Msgid-Bugs-To: support@openerp.com\n"
 "POT-Creation-Date: 2010-12-21 19:43+0000\n"
-"PO-Revision-Date: 2010-12-27 17:35+0000\n"
+"PO-Revision-Date: 2010-12-28 20:45+0000\n"
 "Last-Translator: Anders Eriksson, Aspirix AB <ae@mobilasystem.se>\n"
 "Language-Team: <>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-12-28 04:39+0000\n"
+"X-Launchpad-Export-Date: 2010-12-29 04:40+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #. module: base
@@ -66,9 +66,12 @@ msgstr ""
 
 #. module: base
 #: code:addons/base/ir/ir_model.py:0
-#, python-format
+#, fuzzy, python-format
 msgid "AccessError"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Access fel"
 
 #. module: base
 #: code:addons/base/ir/ir_model.py:0
@@ -234,9 +237,12 @@ msgstr ""
 
 #. module: base
 #: code:addons/base/module/module.py:0
-#, python-format
+#, fuzzy, python-format
 msgid "Module %s: Invalid Quality Certificate"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Modul %s: Felaktigt kvalitetscertifikat"
 
 #. module: base
 #: code:addons/base/module/module.py:0
@@ -303,12 +309,17 @@ msgstr ""
 
 #. module: base
 #: code:addons/base/module/wizard/wizard_export_lang.py:0
-#, python-format
+#, fuzzy, python-format
 msgid ""
 "Save this document to a .CSV file and open it with your favourite "
 "spreadsheet software. The file encoding is UTF-8. You have to translate the "
 "latest column before reimporting it."
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Spara dokumentet som en .CSV fil och öppna det i ditt favoritkalkylprogram. "
+"Filens kodning är UTF-8. Du måste översätta den senaste kolumnen innan du "
+"importerar den igen."
 
 #. module: base
 #: code:addons/base/module/wizard/wizard_export_lang.py:0
@@ -413,17 +424,24 @@ msgstr ""
 
 #. module: base
 #: code:addons/base/res/res_lang.py:0
-#, python-format
+#, fuzzy, python-format
 msgid ""
 "You cannot delete the language which is Active !\n"
 "Please de-activate the language first."
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Du kan inte makulera ett språk som är aktivt !\n"
+"Sätt språket inaktivt först."
 
 #. module: base
 #: code:addons/base/res/res_lang.py:0
-#, python-format
+#, fuzzy, python-format
 msgid "You cannot delete the language which is User's Preferred Language !"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Du kan inte ta bort språk som är användarens valda språk"
 
 #. module: base
 #: code:addons/base/res/res_user.py:0
@@ -497,8 +515,12 @@ msgstr ""
 
 #. module: base
 #: constraint:ir.actions.act_window:0
+#, fuzzy
 msgid "Invalid model name in the action definition."
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Felaktigt namn för modell i händelsedefinitionen."
 
 #. module: base
 #: constraint:ir.model:0
@@ -555,8 +577,12 @@ msgstr ""
 
 #. module: base
 #: field:ir.actions.act_window,context:0
+#, fuzzy
 msgid "Context Value"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Kontaxtvärde"
 
 #. module: base
 #: field:ir.actions.act_window,default_user_ids:0
@@ -571,8 +597,12 @@ msgstr "Användare"
 
 #. module: base
 #: field:ir.actions.act_window,domain:0
+#, fuzzy
 msgid "Domain Value"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Domänvärde"
 
 #. module: base
 #: field:ir.actions.act_window,filter:0 field:ir.module.repository,filter:0
@@ -622,8 +652,12 @@ msgstr ""
 #: field:ir.actions.act_window,name:0 field:ir.actions.act_window_close,name:0
 #: field:ir.actions.actions,name:0 field:ir.actions.server,name:0
 #: field:ir.actions.url,name:0
+#, fuzzy
 msgid "Action Name"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Åtgärdsnamn"
 
 #. module: base
 #: field:ir.actions.act_window,res_model:0
@@ -646,13 +680,21 @@ msgstr ""
 
 #. module: base
 #: field:ir.actions.act_window,search_view:0
+#, fuzzy
 msgid "Search View"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Sökvy"
 
 #. module: base
 #: field:ir.actions.act_window,search_view_id:0
+#, fuzzy
 msgid "Search View Ref."
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Sökvy ref."
 
 #. module: base
 #: field:ir.actions.act_window,src_model:0
@@ -673,8 +715,12 @@ msgstr "Målfönster"
 #: field:ir.actions.actions,type:0 field:ir.actions.server,state:0
 #: field:ir.actions.server,type:0 field:ir.actions.url,type:0
 #: field:ir.actions.wizard,type:0
+#, fuzzy
 msgid "Action Type"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Åtgärdstyp"
 
 #. module: base
 #: field:ir.actions.act_window,usage:0
@@ -686,8 +732,12 @@ msgstr ""
 
 #. module: base
 #: field:ir.actions.act_window,view_id:0
+#, fuzzy
 msgid "View Ref."
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Vy ref."
 
 #. module: base
 #: field:ir.actions.act_window,view_ids:0 field:ir.actions.act_window,views:0
@@ -728,8 +778,12 @@ msgstr ""
 #: field:ir.actions.todo,action_id:0 field:ir.ui.menu,action:0
 #: field:ir.values,action_id:0 selection:ir.values,key:0
 #: view:ir.actions.actions:0
+#, fuzzy
 msgid "Action"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Åtgärd"
 
 #. module: base
 #: field:ir.actions.act_window.view,multi:0
@@ -808,8 +862,12 @@ msgstr ""
 
 #. module: base
 #: field:ir.actions.report.xml,attachment_use:0
+#, fuzzy
 msgid "Reload from Attachment"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Ladda om från bilagan"
 
 #. module: base
 #: field:ir.actions.report.xml,auto:0
@@ -862,8 +920,12 @@ msgstr ""
 
 #. module: base
 #: field:ir.actions.report.xml,report_sxw:0
+#, fuzzy
 msgid "SXW path"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"SXW sökväg"
 
 #. module: base
 #: field:ir.actions.report.xml,report_sxw_content:0
@@ -915,8 +977,12 @@ msgstr ""
 
 #. module: base
 #: field:ir.actions.server,child_ids:0
+#, fuzzy
 msgid "Other Actions"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Andra åtgärder"
 
 #. module: base
 #: field:ir.actions.server,code:0 selection:ir.actions.server,state:0
@@ -946,18 +1012,30 @@ msgstr "E-postadress"
 
 #. module: base
 #: field:ir.actions.server,expression:0
+#, fuzzy
 msgid "Loop Expression"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Loop uttryck"
 
 #. module: base
 #: field:ir.actions.server,fields_lines:0
+#, fuzzy
 msgid "Field Mappings."
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Fältmappningar."
 
 #. module: base
 #: field:ir.actions.server,loop_action:0
+#, fuzzy
 msgid "Loop Action"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Loop aktivitet"
 
 #. module: base
 #: field:ir.actions.server,message:0
@@ -1018,8 +1096,12 @@ msgstr ""
 
 #. module: base
 #: field:ir.actions.server,trigger_obj_id:0
+#, fuzzy
 msgid "Trigger On"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Trigger på"
 
 #. module: base
 #: field:ir.actions.server,wkf_model_id:0
@@ -1073,8 +1155,12 @@ msgstr ""
 #: field:res.partner.bank,state_id:0 field:res.request,state:0
 #: field:workflow.instance,state:0 field:workflow.workitem,state:0
 #: view:res.country.state:0
+#, fuzzy
 msgid "State"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Status"
 
 #. module: base
 #: field:ir.actions.url,target:0
@@ -1211,8 +1297,12 @@ msgstr ""
 
 #. module: base
 #: field:ir.cron,interval_type:0
+#, fuzzy
 msgid "Interval Unit"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Intervallenhet"
 
 #. module: base
 #: field:ir.cron,nextcall:0
@@ -1252,28 +1342,48 @@ msgstr "Företag"
 
 #. module: base
 #: field:ir.default,field_name:0
+#, fuzzy
 msgid "Object Field"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Objektfält"
 
 #. module: base
 #: field:ir.default,ref_id:0
+#, fuzzy
 msgid "ID Ref."
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"ID ref."
 
 #. module: base
 #: field:ir.default,ref_table:0
+#, fuzzy
 msgid "Table Ref."
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Tabell ref."
 
 #. module: base
 #: field:ir.default,value:0
+#, fuzzy
 msgid "Default Value"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Standardvärde"
 
 #. module: base
 #: field:ir.exports,export_fields:0
+#, fuzzy
 msgid "Export ID"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Exportid"
 
 #. module: base
 #: field:ir.exports,name:0
@@ -1340,8 +1450,12 @@ msgstr "Information"
 #. module: base
 #: field:ir.model,name:0 field:ir.model.fields,model:0
 #: field:ir.model.grid,name:0 field:ir.values,model:0
+#, fuzzy
 msgid "Object Name"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Objektnamn"
 
 #. module: base
 #: field:ir.model,state:0 field:ir.model.fields,state:0
@@ -1375,8 +1489,12 @@ msgstr "Raderingsrättighet"
 
 #. module: base
 #: field:ir.model.access,perm_write:0
+#, fuzzy
 msgid "Write Access"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Skrivrättigheter"
 
 #. module: base
 #: field:ir.model.config,password:0 field:maintenance.contract,password:0
@@ -1392,8 +1510,12 @@ msgstr ""
 
 #. module: base
 #: field:ir.model.data,date_init:0
+#, fuzzy
 msgid "Init Date"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Startdatum"
 
 #. module: base
 #: field:ir.model.data,date_update:0
@@ -1409,8 +1531,12 @@ msgstr "Modul"
 
 #. module: base
 #: field:ir.model.data,name:0
+#, fuzzy
 msgid "XML Identifier"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"XML identifierare"
 
 #. module: base
 #: field:ir.model.data,noupdate:0
@@ -1521,13 +1647,21 @@ msgstr ""
 
 #. module: base
 #: field:ir.model.fields,selection:0
+#, fuzzy
 msgid "Field Selection"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Fälturval"
 
 #. module: base
 #: field:ir.model.fields,size:0
+#, fuzzy
 msgid "Size"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Storlek"
 
 #. module: base
 #: field:ir.model.fields,translate:0
@@ -1540,8 +1674,12 @@ msgstr ""
 
 #. module: base
 #: field:ir.model.fields,ttype:0 view:ir.model:0
+#, fuzzy
 msgid "Field Type"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Fälttyp"
 
 #. module: base
 #: field:ir.model.fields,view_load:0
@@ -1564,8 +1702,12 @@ msgstr "Antal moduler"
 
 #. module: base
 #: field:ir.module.category,parent_id:0 field:res.partner.category,parent_id:0
+#, fuzzy
 msgid "Parent Category"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Föräldrakategori"
 
 #. module: base
 #: field:ir.module.module,author:0
@@ -1579,8 +1721,12 @@ msgstr "Kategori"
 
 #. module: base
 #: field:ir.module.module,certificate:0
+#, fuzzy
 msgid "Quality Certificate"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Kvalitetscertifikat"
 
 #. module: base
 #: field:ir.module.module,demo:0
@@ -1603,8 +1749,12 @@ msgstr ""
 
 #. module: base
 #: field:ir.module.module,latest_version:0
+#, fuzzy
 msgid "Installed version"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Installerad version"
 
 #. module: base
 #: field:ir.module.module,license:0
@@ -1742,8 +1892,12 @@ msgstr ""
 #: field:ir.report.custom.fields,fc2_operande:0
 #: field:ir.report.custom.fields,fc3_operande:0
 #: selection:ir.translation,type:0
+#, fuzzy
 msgid "Constraint"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Villkor"
 
 #. module: base
 #: field:ir.report.custom.fields,fc1_condition:0
@@ -1867,8 +2021,12 @@ msgstr ""
 
 #. module: base
 #: field:ir.sequence,padding:0
+#, fuzzy
 msgid "Number padding"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Numeriskt format"
 
 #. module: base
 #: field:ir.sequence,prefix:0
@@ -1904,8 +2062,12 @@ msgstr ""
 
 #. module: base
 #: field:ir.server.object.lines,server_id:0
+#, fuzzy
 msgid "Object Mapping"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Objektmappning"
 
 #. module: base
 #: field:ir.translation,lang:0 field:res.partner,lang:0
@@ -2000,8 +2162,12 @@ msgstr ""
 
 #. module: base
 #: field:ir.ui.view_sc,resource:0
+#, fuzzy
 msgid "Resource Name"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Resursnamn"
 
 #. module: base
 #: field:ir.ui.view_sc,user_id:0
@@ -2020,8 +2186,12 @@ msgstr ""
 
 #. module: base
 #: field:ir.values,meta:0
+#, fuzzy
 msgid "Meta Datas"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Meta Datas"
 
 #. module: base
 #: field:ir.values,meta_unpickle:0
@@ -2156,8 +2326,12 @@ msgstr "Zip"
 
 #. module: base
 #: field:res.company,child_ids:0
+#, fuzzy
 msgid "Child Companies"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Dotterbolag"
 
 #. module: base
 #: field:res.company,currency_id:0 field:res.company,currency_ids:0
@@ -2187,8 +2361,12 @@ msgstr ""
 #: field:res.partner.bank,partner_id:0 field:res.partner.event,partner_id:0
 #: model:ir.model,name:base.model_res_partner
 #: selection:res.partner.title,domain:0 view:res.users:0
+#, fuzzy
 msgid "Partner"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Partner"
 
 #. module: base
 #: field:res.company,rml_footer1:0
@@ -2210,8 +2388,12 @@ msgstr ""
 
 #. module: base
 #: field:res.company,rml_header:0
+#, fuzzy
 msgid "RML Header"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"RML huvud"
 
 #. module: base
 #: field:res.company,rml_header1:0
@@ -2224,13 +2406,21 @@ msgstr ""
 
 #. module: base
 #: field:res.company,rml_header2:0
+#, fuzzy
 msgid "RML Internal Header"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"RNL internt huvud"
 
 #. module: base
 #: field:res.company,user_ids:0
+#, fuzzy
 msgid "Accepted Users"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Godkända användare"
 
 #. module: base
 #: field:res.country,code:0
@@ -2264,8 +2454,12 @@ msgstr ""
 #. module: base
 #: field:res.currency,base:0
 #: model:ir.module.module,shortdesc:base.module_meta_information
+#, fuzzy
 msgid "Base"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Bas"
 
 #. module: base
 #: field:res.currency,date:0 field:res.currency.rate,name:0
@@ -2300,8 +2494,12 @@ msgstr "Kurs"
 
 #. module: base
 #: field:res.groups,comment:0
+#, fuzzy
 msgid "Comment"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Kommentar"
 
 #. module: base
 #: field:res.groups,menu_access:0
@@ -2358,8 +2556,12 @@ msgstr ""
 
 #. module: base
 #: field:res.lang,direction:0
+#, fuzzy
 msgid "Direction"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Riktning"
 
 #. module: base
 #: field:res.lang,grouping:0
@@ -2386,8 +2588,12 @@ msgstr ""
 
 #. module: base
 #: field:res.lang,time_format:0
+#, fuzzy
 msgid "Time Format"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Tidsformat"
 
 #. module: base
 #: field:res.lang,translatable:0
@@ -2540,13 +2746,21 @@ msgstr ""
 #. module: base
 #: field:res.partner.bank,state:0
 #: field:res.partner.bank.type.field,bank_type_id:0
+#, fuzzy
 msgid "Bank Type"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Banktyp"
 
 #. module: base
 #: field:res.partner.bank.type,field_ids:0
+#, fuzzy
 msgid "Type fields"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Typfält"
 
 #. module: base
 #: field:res.partner.bank.type.field,size:0
@@ -2724,8 +2938,12 @@ msgstr "Kropp"
 
 #. module: base
 #: field:res.request.history,date_sent:0
+#, fuzzy
 msgid "Date sent"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Avsändningsdatum"
 
 #. module: base
 #: field:res.request.history,name:0
@@ -2866,8 +3084,12 @@ msgstr ""
 
 #. module: base
 #: field:workflow.activity,action:0
+#, fuzzy
 msgid "Python Action"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Pythonåtgärd"
 
 #. module: base
 #: field:workflow.activity,action_id:0 view:ir.actions.server:0
@@ -2913,8 +3135,12 @@ msgstr ""
 
 #. module: base
 #: field:workflow.activity,signal_send:0
+#, fuzzy
 msgid "Signal (subflow.*)"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Signal (subflow.*)"
 
 #. module: base
 #: field:workflow.activity,split_mode:0
@@ -2959,8 +3185,12 @@ msgstr ""
 
 #. module: base
 #: field:workflow.transition,signal:0
+#, fuzzy
 msgid "Signal (button Name)"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Signal (knappnamn)"
 
 #. module: base
 #: field:workflow.transition,trigger_expr_id:0
@@ -2973,8 +3203,12 @@ msgstr ""
 
 #. module: base
 #: field:workflow.transition,trigger_model:0
+#, fuzzy
 msgid "Trigger Object"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Trigger objekt"
 
 #. module: base
 #: field:workflow.triggers,instance_id:0
@@ -3113,10 +3347,15 @@ msgstr ""
 
 #. module: base
 #: help:ir.actions.server,message:0
+#, fuzzy
 msgid ""
 "Specify the message. You can use the fields from the object. e.g. `Dear "
 "[[ object.partner_id.name ]]`"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Definera meddelandet. Du kan används fält frpm objektet, t ex 'Bäste "
+"[[ object.partner_id.name ]]'"
 
 #. module: base
 #: help:ir.actions.server,mobile:0
@@ -3174,10 +3413,15 @@ msgstr ""
 
 #. module: base
 #: help:ir.actions.server,subject:0
+#, fuzzy
 msgid ""
 "Specify the subject. You can use fields from the object, e.g. `Hello "
 "[[ object.partner_id.name ]]`"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Ange subjekt. Du kan använda fält från objektet, t ex 'Hej [[ object."
+"partner_id.name ]]"
 
 #. module: base
 #: help:ir.actions.server,trigger_name:0
@@ -3207,10 +3451,15 @@ msgstr ""
 
 #. module: base
 #: help:ir.actions.wizard,multi:0
+#, fuzzy
 msgid ""
 "If set to true, the wizard will not be displayed on the right toolbar of a "
 "form view."
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Om den är markerad så kommer wizarden inte att visas i den hägra "
+"verktygslistan på sidan."
 
 #. module: base
 #: help:ir.cron,numbercall:0
@@ -3294,8 +3543,12 @@ msgstr ""
 
 #. module: base
 #: help:ir.values,res_id:0
+#, fuzzy
 msgid "Keep 0 if the action must appear on all resources."
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Behåll om åtgärden skall synas på alla resurser."
 
 #. module: base
 #: help:multi_company.default,field_id:0
@@ -3367,15 +3620,24 @@ msgstr ""
 
 #. module: base
 #: help:res.partner,customer:0
+#, fuzzy
 msgid "Check this box if the partner is a customer."
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Markera denna om partnern är en kund."
 
 #. module: base
 #: help:res.partner,lang:0
+#, fuzzy
 msgid ""
 "If the selected language is loaded in the system, all documents related to "
 "this partner will be printed in this language. If not, it will be english."
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Om det valda språket has installerats i systemet skriva alla dokumnet "
+"relaterade till partnern i detta språk. Annars används engelska."
 
 #. module: base
 #: help:res.partner,supplier:0
@@ -3398,15 +3660,24 @@ msgstr ""
 
 #. module: base
 #: help:res.partner,vat:0
+#, fuzzy
 msgid ""
 "Value Added Tax number. Check the box if the partner is subjected to the "
 "VAT. Used by the VAT legal statement."
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Momsnummer. Markera denna om partnern skall ha moms. Används av "
+"momsrapporten."
 
 #. module: base
 #: help:res.partner.address,active:0
+#, fuzzy
 msgid "Uncheck the active field to hide the contact."
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Avmarkera aktivfältet för att gömma kontakten."
 
 #. module: base
 #: help:res.partner.address,partner_id:0
@@ -3431,8 +3702,12 @@ msgstr ""
 
 #. module: base
 #: help:res.partner.category,active:0
+#, fuzzy
 msgid "The active field allows you to hide the category without removing it."
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Aktivfält före det möjligt för dig att gömma kategorin utan att ta bort den."
 
 #. module: base
 #: help:res.users,company_id:0
@@ -3441,9 +3716,14 @@ msgstr ""
 
 #. module: base
 #: help:res.users,password:0
+#, fuzzy
 msgid ""
 "Keep empty if you don't want the user to be able to connect on the system."
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Lämna blank om du inte vill att användaren skall kunna koppla sig till "
+"systemet."
 
 #. module: base
 #: help:wizard.module.lang.export,lang:0
@@ -3490,8 +3770,12 @@ msgstr "Företagets arkitektur"
 #. module: base
 #: model:ir.actions.act_window,name:base.action_attachment
 #: model:ir.ui.menu,name:base.menu_action_attachment view:ir.attachment:0
+#, fuzzy
 msgid "Attachments"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Bilagor"
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_config_simple_view_form
@@ -3561,8 +3845,12 @@ msgstr ""
 #: model:ir.actions.act_window,name:base.action_model_model
 #: model:ir.model,name:base.model_ir_model
 #: model:ir.ui.menu,name:base.ir_model_model_menu
+#, fuzzy
 msgid "Objects"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Objekt"
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_module_category_tree
@@ -3573,8 +3861,12 @@ msgstr ""
 #. module: base
 #: model:ir.actions.act_window,name:base.action_partner_addess_tree
 #: view:res.partner:0
+#, fuzzy
 msgid "Partner Contacts"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Företagskontakt"
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_partner_address_form
@@ -3712,20 +4004,32 @@ msgstr ""
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_res_users_my
+#, fuzzy
 msgid "Change My Preferences"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Ändra min inställningar"
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_rule
 #: model:ir.ui.menu,name:base.menu_action_rule
+#, fuzzy
 msgid "Record Rules"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Postregler"
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_server_action
 #: model:ir.ui.menu,name:base.menu_server_action view:ir.actions.server:0
+#, fuzzy
 msgid "Server Actions"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Serveråtgärder"
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_translation
@@ -3811,8 +4115,12 @@ msgstr ""
 #. module: base
 #: model:ir.actions.act_window,name:base.ir_action_window
 #: model:ir.ui.menu,name:base.menu_ir_action_window
+#, fuzzy
 msgid "Window Actions"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Fönsteraktiviteter"
 
 #. module: base
 #: model:ir.actions.act_window,name:base.ir_action_wizard
@@ -3823,8 +4131,12 @@ msgstr "Guider"
 #. module: base
 #: model:ir.actions.act_window,name:base.ir_cron_act
 #: model:ir.ui.menu,name:base.menu_ir_cron_act view:ir.cron:0
+#, fuzzy
 msgid "Scheduled Actions"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Schemalagda årgärder"
 
 #. module: base
 #: model:ir.actions.act_window,name:base.ir_property_form
@@ -3892,8 +4204,12 @@ msgstr ""
 #: model:ir.actions.act_window,name:base.res_lang_act_window
 #: model:ir.model,name:base.model_res_lang
 #: model:ir.ui.menu,name:base.menu_res_lang_act_window view:res.lang:0
+#, fuzzy
 msgid "Languages"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Språk"
 
 #. module: base
 #: model:ir.actions.act_window,name:base.res_partner_canal-act
@@ -4006,8 +4322,12 @@ msgstr ""
 #: model:ir.actions.wizard,name:base.wizard_base_module_import
 #: model:ir.ui.menu,name:base.menu_wizard_module_import
 #: wizard_button:base.module.import,init,import:0
+#, fuzzy
 msgid "Import module"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Importmodul"
 
 #. module: base
 #: model:ir.actions.wizard,name:base.wizard_lang_import
@@ -4027,8 +4347,12 @@ msgstr ""
 
 #. module: base
 #: model:ir.actions.wizard,name:base.wizard_server_action_create
+#, fuzzy
 msgid "Create Action"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Skapa åtgärd"
 
 #. module: base
 #: model:ir.actions.wizard,name:base.wizard_update
@@ -4043,8 +4367,12 @@ msgstr ""
 #. module: base
 #: model:ir.actions.wizard,name:base.wizard_upgrade
 #: model:ir.ui.menu,name:base.menu_wizard_upgrade
+#, fuzzy
 msgid "Apply Scheduled Upgrades"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Applicera planerade uppgraderingar"
 
 #. module: base
 #: model:ir.model,name:base.model_ir_actions_act_window
@@ -4161,8 +4489,12 @@ msgstr ""
 
 #. module: base
 #: model:ir.model,name:base.model_ir_module_module_dependency
+#, fuzzy
 msgid "Module dependency"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Modulberoende"
 
 #. module: base
 #: model:ir.model,name:base.model_ir_property
@@ -4237,8 +4569,12 @@ msgstr "ir.values"
 #. module: base
 #: model:ir.model,name:base.model_maintenance_contract
 #: view:maintenance.contract:0
+#, fuzzy
 msgid "Maintenance Contract"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Underhållsavtal"
 
 #. module: base
 #: model:ir.model,name:base.model_maintenance_contract_module
@@ -4281,8 +4617,12 @@ msgstr "Kurs"
 
 #. module: base
 #: model:ir.model,name:base.model_res_groups
+#, fuzzy
 msgid "res.groups"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"res.groups"
 
 #. module: base
 #: model:ir.model,name:base.model_res_partner_bank view:res.partner.bank:0
@@ -4305,8 +4645,12 @@ msgstr ""
 
 #. module: base
 #: model:ir.model,name:base.model_res_partner_bank_type_field
+#, fuzzy
 msgid "Bank type fields"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Banktyp fält"
 
 #. module: base
 #: model:ir.model,name:base.model_res_partner_event
@@ -4390,8 +4734,12 @@ msgstr ""
 
 #. module: base
 #: model:ir.model,name:base.model_workflow_activity
+#, fuzzy
 msgid "workflow.activity"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"workflow.activity"
 
 #. module: base
 #: model:ir.model,name:base.model_workflow_instance
@@ -4404,8 +4752,12 @@ msgstr ""
 
 #. module: base
 #: model:ir.model,name:base.model_workflow_transition
+#, fuzzy
 msgid "workflow.transition"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"workflow.transition"
 
 #. module: base
 #: model:ir.model,name:base.model_workflow_triggers
@@ -4504,8 +4856,12 @@ msgstr "Översättningar"
 
 #. module: base
 #: model:ir.ui.menu,name:base.menu_translation_app
+#, fuzzy
 msgid "Application Terms"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Applikationstermer"
 
 #. module: base
 #: model:ir.ui.menu,name:base.menu_translation_export
@@ -4537,8 +4893,12 @@ msgstr "Konfiggurationsguide"
 
 #. module: base
 #: model:ir.ui.menu,name:base.next_id_12 view:res.request:0
+#, fuzzy
 msgid "Requests"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Förfrågningar"
 
 #. module: base
 #: model:ir.ui.menu,name:base.next_id_15 view:ir.model:0
@@ -4585,8 +4945,12 @@ msgstr "United Arab Emirates"
 
 #. module: base
 #: model:res.country,name:base.af
+#, fuzzy
 msgid "Afghanistan, Islamic State of"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Afganistan, Islamic State of"
 
 #. module: base
 #: model:res.country,name:base.ag
@@ -4773,8 +5137,12 @@ msgstr ""
 
 #. module: base
 #: model:res.country,name:base.cf
+#, fuzzy
 msgid "Central African Republic"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Centralafrikanska Republiken"
 
 #. module: base
 #: model:res.country,name:base.cg
@@ -4844,8 +5212,12 @@ msgstr "Cuba"
 
 #. module: base
 #: model:res.country,name:base.cv
+#, fuzzy
 msgid "Cape Verde"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Kap Verde"
 
 #. module: base
 #: model:res.country,name:base.cx
@@ -5053,8 +5425,12 @@ msgstr "Hong Kong"
 
 #. module: base
 #: model:res.country,name:base.hm
+#, fuzzy
 msgid "Heard and McDonald Islands"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Heard- och McDonaldsöarna"
 
 #. module: base
 #: model:res.country,name:base.hn
@@ -5282,8 +5658,12 @@ msgstr "Marshall Islands"
 
 #. module: base
 #: model:res.country,name:base.mk
+#, fuzzy
 msgid "FYROM"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"FYROM"
 
 #. module: base
 #: model:res.country,name:base.ml
@@ -5468,13 +5848,21 @@ msgstr ""
 
 #. module: base
 #: model:res.country,name:base.ph
+#, fuzzy
 msgid "Philippines"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Filippinerna"
 
 #. module: base
 #: model:res.country,name:base.pk
+#, fuzzy
 msgid "Pakistan"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Pakistan"
 
 #. module: base
 #: model:res.country,name:base.pl
@@ -5838,8 +6226,12 @@ msgstr "Samoa"
 
 #. module: base
 #: model:res.country,name:base.ye
+#, fuzzy
 msgid "Yemen"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Jemen"
 
 #. module: base
 #: model:res.country,name:base.yt
@@ -5905,13 +6297,21 @@ msgstr ""
 
 #. module: base
 #: model:res.partner.category,name:base.res_partner_category_10
+#, fuzzy
 msgid "Open Source Service Company"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Tjänsteföretag inom open source"
 
 #. module: base
 #: model:res.partner.category,name:base.res_partner_category_11
+#, fuzzy
 msgid "Textile Suppliers"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Textilleverantörer"
 
 #. module: base
 #: model:res.partner.category,name:base.res_partner_category_12
@@ -5942,8 +6342,12 @@ msgstr ""
 
 #. module: base
 #: model:res.partner.category,name:base.res_partner_category_2
+#, fuzzy
 msgid "OpenERP Partners"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"OpenERP Partners"
 
 #. module: base
 #: model:res.partner.category,name:base.res_partner_category_3
@@ -5979,8 +6383,12 @@ msgstr ""
 
 #. module: base
 #: model:res.partner.category,name:base.res_partner_category_9
+#, fuzzy
 msgid "Components Supplier"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Komponentleverantör"
 
 #. module: base
 #: model:res.partner.title,name:base.res_partner_title_ltd
@@ -6033,8 +6441,12 @@ msgstr "Beroenden :"
 
 #. module: base
 #: rml:ir.module.reference:0
+#, fuzzy
 msgid "Directory"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Katalog"
 
 #. module: base
 #: rml:ir.module.reference:0
@@ -6052,8 +6464,12 @@ msgstr ""
 
 #. module: base
 #: rml:ir.module.reference:0
+#, fuzzy
 msgid "Object:"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Objekt:"
 
 #. module: base
 #: rml:ir.module.reference:0
@@ -6220,8 +6636,12 @@ msgstr ""
 
 #. module: base
 #: selection:ir.actions.server,state:0 view:ir.actions.server:0
+#, fuzzy
 msgid "Multi Actions"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Multiåtgärder"
 
 #. module: base
 #: selection:ir.actions.server,state:0 view:ir.actions.server:0
@@ -6234,8 +6654,12 @@ msgstr ""
 
 #. module: base
 #: selection:ir.actions.server,state:0
+#, fuzzy
 msgid "Write Object"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Skriv objekt"
 
 #. module: base
 #: selection:ir.actions.todo,start_on:0
@@ -6271,8 +6695,12 @@ msgstr ""
 
 #. module: base
 #: selection:ir.actions.todo,state:0
+#, fuzzy
 msgid "Done"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Klar"
 
 #. module: base
 #: selection:ir.actions.todo,state:0
@@ -6281,8 +6709,12 @@ msgstr ""
 
 #. module: base
 #: selection:ir.actions.todo,state:0
+#, fuzzy
 msgid "Skipped"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Överhoppad"
 
 #. module: base
 #: selection:ir.actions.todo,type:0
@@ -6377,8 +6809,12 @@ msgstr ""
 
 #. module: base
 #: selection:ir.model.fields,select_level:0
+#, fuzzy
 msgid "Always Searchable"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Alltid sökbar"
 
 #. module: base
 #: selection:ir.model.fields,select_level:0
@@ -6391,13 +6827,21 @@ msgstr ""
 
 #. module: base
 #: selection:ir.model.fields,state:0
+#, fuzzy
 msgid "Base Field"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Basfält"
 
 #. module: base
 #: selection:ir.model.fields,state:0
+#, fuzzy
 msgid "Custom Field"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Anpassade fält"
 
 #. module: base
 #: selection:ir.module.module,license:0
@@ -6446,8 +6890,12 @@ msgstr ""
 #. module: base
 #: selection:ir.module.module,state:0
 #: selection:ir.module.module.dependency,state:0
+#, fuzzy
 msgid "Not Installed"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Inte installerat"
 
 #. module: base
 #: selection:ir.module.module,state:0
@@ -6472,8 +6920,12 @@ msgstr ""
 #. module: base
 #: selection:ir.module.module,state:0
 #: selection:ir.module.module.dependency,state:0
+#, fuzzy
 msgid "To be upgraded"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Kommer att uppgraderas"
 
 #. module: base
 #: selection:ir.module.module.dependency,state:0
@@ -6486,8 +6938,12 @@ msgstr ""
 
 #. module: base
 #: selection:ir.module.module.dependency,state:0
+#, fuzzy
 msgid "Unknown"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Okänd"
 
 #. module: base
 #: selection:ir.report.custom,frequency:0
@@ -6684,8 +7140,12 @@ msgstr ""
 
 #. module: base
 #: selection:ir.translation,type:0
+#, fuzzy
 msgid "Selection"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Urval"
 
 #. module: base
 #: selection:ir.translation,type:0
@@ -7298,8 +7758,12 @@ msgstr "Utkast"
 
 #. module: base
 #: selection:maintenance.contract.wizard,state:0
+#, fuzzy
 msgid "Unvalidated"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Ovaliderade"
 
 #. module: base
 #: selection:maintenance.contract.wizard,state:0
@@ -7398,8 +7862,12 @@ msgstr ""
 
 #. module: base
 #: selection:module.lang.install,init,lang:0
+#, fuzzy
 msgid "English (US)"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Engelska (US)"
 
 #. module: base
 #: selection:module.lang.install,init,lang:0
@@ -7422,8 +7890,12 @@ msgstr ""
 
 #. module: base
 #: selection:module.lang.install,init,lang:0
+#, fuzzy
 msgid "French (CH) / Français (CH)"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Franska (CH) / Français (CH)"
 
 #. module: base
 #: selection:module.lang.install,init,lang:0
@@ -7451,8 +7923,12 @@ msgstr "Hungarian / Magyar"
 
 #. module: base
 #: selection:module.lang.install,init,lang:0
+#, fuzzy
 msgid "Indonesian / Bahasa Indonesia"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Indonesiska / Bahasa Indonesia"
 
 #. module: base
 #: selection:module.lang.install,init,lang:0
@@ -7524,8 +8000,12 @@ msgstr "Swedish / svenska"
 
 #. module: base
 #: selection:module.lang.install,init,lang:0
+#, fuzzy
 msgid "Thai / ภาษาไทย"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Thailändska / ภาษาไทย"
 
 #. module: base
 #: selection:module.lang.install,init,lang:0
@@ -7563,8 +8043,12 @@ msgstr ""
 
 #. module: base
 #: selection:res.lang,direction:0
+#, fuzzy
 msgid "Right-to-Left"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Höger till vänster"
 
 #. module: base
 #: selection:res.partner.address,type:0 selection:res.partner.title,domain:0
@@ -7700,8 +8184,12 @@ msgstr ""
 #. module: base
 #: selection:workflow.activity,join_mode:0
 #: selection:workflow.activity,split_mode:0
+#, fuzzy
 msgid "Xor"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Xor"
 
 #. module: base
 #: selection:workflow.activity,kind:0
@@ -7710,8 +8198,12 @@ msgstr "Stop All"
 
 #. module: base
 #: selection:workflow.activity,split_mode:0
+#, fuzzy
 msgid "Or"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Or"
 
 #. module: base
 #: sql_constraint:ir.model.data:0
@@ -7729,8 +8221,12 @@ msgstr ""
 
 #. module: base
 #: sql_constraint:ir.module.module:0
+#, fuzzy
 msgid "The certificate ID of the module must be unique !"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Certifikat Id:t för modulen måste vara unikt !"
 
 #. module: base
 #: sql_constraint:ir.module.module:0 sql_constraint:ir.module.web:0
@@ -7775,13 +8271,21 @@ msgstr ""
 
 #. module: base
 #: sql_constraint:res.groups:0
+#, fuzzy
 msgid "The name of the group must be unique !"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Gruppens namn måsta vara unikt !"
 
 #. module: base
 #: sql_constraint:res.lang:0
+#, fuzzy
 msgid "The code of the language must be unique !"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Språkkoden måste vara unik !"
 
 #. module: base
 #: sql_constraint:res.lang:0
@@ -7869,8 +8373,12 @@ msgstr ""
 
 #. module: base
 #: view:ir.actions.report.xml:0
+#, fuzzy
 msgid "Report xml"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Rapport xml"
 
 #. module: base
 #: view:ir.actions.server:0
@@ -7912,8 +8420,12 @@ msgstr "E-postkonfiguration"
 
 #. module: base
 #: view:ir.actions.server:0
+#, fuzzy
 msgid "Field Mapping"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Fältmappning"
 
 #. module: base
 #: view:ir.actions.server:0
@@ -7926,25 +8438,42 @@ msgstr ""
 
 #. module: base
 #: view:ir.actions.server:0
+#, fuzzy
 msgid "Fields Mapping"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Fältmappning"
 
 #. module: base
 #: view:ir.actions.server:0
+#, fuzzy
 msgid ""
 "If you use a formula type, use a python expression using the variable "
 "'object'."
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Om du använder en formeltyp, använd ett pythonuttryck och använd "
+"objektvariabler."
 
 #. module: base
 #: view:ir.actions.server:0
+#, fuzzy
 msgid "Iteration Action Configuration"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Internationshändelserkonfigurering"
 
 #. module: base
 #: view:ir.actions.server:0
+#, fuzzy
 msgid "Iteration Actions"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Ternationshändelser"
 
 #. module: base
 #: view:ir.actions.server:0
@@ -7964,13 +8493,21 @@ msgstr ""
 
 #. module: base
 #: view:ir.actions.server:0
+#, fuzzy
 msgid "SMS Configuration"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"SMS konfigurering"
 
 #. module: base
 #: view:ir.actions.server:0
+#, fuzzy
 msgid "Trigger Configuration"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Triggerkonfigurering"
 
 #. module: base
 #: view:ir.attachment:0
@@ -8020,8 +8557,12 @@ msgstr ""
 
 #. module: base
 #: view:ir.model:0 view:res.groups:0
+#, fuzzy
 msgid "Access Rules"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Åtkomstregler"
 
 #. module: base
 #: view:ir.model:0
@@ -8103,8 +8644,12 @@ msgstr "Skapade vyer"
 
 #. module: base
 #: view:ir.module.module:0
+#, fuzzy
 msgid "Defined Reports"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Definerade rapporter"
 
 #. module: base
 #: view:ir.module.module:0
@@ -8198,8 +8743,12 @@ msgstr ""
 
 #. module: base
 #: view:ir.rule.group:0
+#, fuzzy
 msgid "Record rules"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Postregler"
 
 #. module: base
 #: view:ir.rule.group:0
@@ -8217,8 +8766,12 @@ msgstr ""
 
 #. module: base
 #: view:ir.sequence:0
+#, fuzzy
 msgid "Day of the year: %(doy)s"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Dag per år: %(doy)s"
 
 #. module: base
 #: view:ir.sequence:0
@@ -8231,13 +8784,21 @@ msgstr ""
 
 #. module: base
 #: view:ir.sequence:0
+#, fuzzy
 msgid "Hour 00->12: %(h12)s"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Timmar 00->12: %(h12)s"
 
 #. module: base
 #: view:ir.sequence:0
+#, fuzzy
 msgid "Hour 00->24: %(h24)s"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Timmar 00->24: %(h24)s"
 
 #. module: base
 #: view:ir.sequence:0
@@ -8246,13 +8807,21 @@ msgstr ""
 
 #. module: base
 #: view:ir.sequence:0
+#, fuzzy
 msgid "Minute: %(min)s"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Minut: %(min)s"
 
 #. module: base
 #: view:ir.sequence:0
+#, fuzzy
 msgid "Month: %(month)s"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Månad: %(month)s"
 
 #. module: base
 #: view:ir.sequence:0
@@ -8265,8 +8834,12 @@ msgstr ""
 
 #. module: base
 #: view:ir.sequence:0
+#, fuzzy
 msgid "Week of the year: %(woy)s"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Veckonummer: %(woy)s"
 
 #. module: base
 #: view:ir.sequence:0
@@ -8303,8 +8876,12 @@ msgstr ""
 
 #. module: base
 #: view:ir.values:0
+#, fuzzy
 msgid "Connect Events to Actions"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Koppla händelser till åtgärder"
 
 #. module: base
 #: view:ir.values:0
@@ -8317,8 +8894,12 @@ msgstr ""
 
 #. module: base
 #: view:ir.values:0
+#, fuzzy
 msgid "Values for Event Type"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Värde för händelsetyp"
 
 #. module: base
 #: view:ir.values:0
@@ -8331,8 +8912,12 @@ msgstr ""
 
 #. module: base
 #: view:ir.values:0
+#, fuzzy
 msgid "tree_but_action, client_print_multi"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"tree_but_action, client_print_multi"
 
 #. module: base
 #: view:maintenance.contract.wizard:0
@@ -8380,8 +8965,12 @@ msgstr ""
 
 #. module: base
 #: view:res.bank:0 view:res.partner:0 view:res.partner.address:0
+#, fuzzy
 msgid "Communication"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Kommunikation"
 
 #. module: base
 #: view:res.company:0 view:res.partner:0
@@ -8440,8 +9029,12 @@ msgstr ""
 
 #. module: base
 #: view:res.lang:0
+#, fuzzy
 msgid "%A - Full weekday name."
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"%A - Komplett veckodagsnamn"
 
 #. module: base
 #: view:res.lang:0
@@ -8521,8 +9114,12 @@ msgstr "%a - Förkortat veckodagnamn."
 
 #. module: base
 #: view:res.lang:0
+#, fuzzy
 msgid "%b - Abbreviated month name."
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"%b - Förkortat månadsnamn"
 
 #. module: base
 #: view:res.lang:0
@@ -8635,8 +9232,12 @@ msgstr "======================================================"
 
 #. module: base
 #: view:res.lang:0
+#, fuzzy
 msgid "Examples"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Exempel"
 
 #. module: base
 #: view:res.lang:0
@@ -8762,8 +9363,12 @@ msgstr "Skicka"
 
 #. module: base
 #: view:res.request.history:0
+#, fuzzy
 msgid "Request History"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Ärendehistorik"
 
 #. module: base
 #: view:res.request.link:0
@@ -8994,8 +9599,12 @@ msgstr ""
 
 #. module: base
 #: wizard_field:base.module.import,init,module_file:0
+#, fuzzy
 msgid "Module .ZIP file"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Modulens .ZIp fil"
 
 #. module: base
 #: wizard_field:module.lang.import,init,code:0
@@ -9048,8 +9657,12 @@ msgstr ""
 
 #. module: base
 #: wizard_field:res.partner.sms_send,init,app_id:0
+#, fuzzy
 msgid "API ID"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"API ID"
 
 #. module: base
 #: wizard_field:res.partner.sms_send,init,text:0
@@ -9062,8 +9675,12 @@ msgstr ""
 
 #. module: base
 #: wizard_field:res.partner.spam_send,init,from:0
+#, fuzzy
 msgid "Sender's email"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Avsändarens epost"
 
 #. module: base
 #: wizard_field:server.action.create,init,type:0
@@ -9221,8 +9838,12 @@ msgstr ""
 
 #. module: base
 #: wizard_view:res.partner.sms_send,init:0
+#, fuzzy
 msgid "Bulk SMS send"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Mass SMS utskick"
 
 #. module: base
 #: wizard_view:res.partner.sms_send,init:0
@@ -9592,10 +10213,14 @@ msgstr ""
 
 #. module: base
 #: help:res.log,secondary:0
+#, fuzzy
 msgid ""
 "Do not display this log if it belongs to the same object the user is working "
 "on"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Visa inte denna log om den tillhör det objekt som användaren arbetar med."
 
 #. module: base
 #: model:res.company,follow_up_msg:base.main_company
@@ -9657,8 +10282,12 @@ msgstr ""
 
 #. module: base
 #: view:ir.rule:0
+#, fuzzy
 msgid "Domain Setup"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Domäninställning"
 
 #. module: base
 #: code:addons/base/res/res_user.py:0
@@ -9714,8 +10343,12 @@ msgstr ""
 
 #. module: base
 #: selection:base.language.install,lang:0
+#, fuzzy
 msgid "Korean (KP) / 한국어 (KP)"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Koreanska (KP) / 한국어 (KP)"
 
 #. module: base
 #: view:base.module.update:0
@@ -9759,15 +10392,24 @@ msgstr ""
 
 #. module: base
 #: selection:base.language.install,lang:0
+#, fuzzy
 msgid "Spanish (CL) / Español (CL)"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Spanska (CL) / Español (CL)"
 
 #. module: base
 #: help:ir.actions.act_window,view_mode:0
+#, fuzzy
 msgid ""
 "Comma-separated list of allowed view modes, such as 'form', 'tree', "
 "'calendar', etc. (Default: tree,form)"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Komma-separerad list över godkända vymoderm som t ex 'form', 'tree', "
+"'calendar', etc. (Standard: tree,form)"
 
 #. module: base
 #: view:workflow:0
@@ -10008,8 +10650,12 @@ msgstr ""
 
 #. module: base
 #: selection:base.language.install,lang:0
+#, fuzzy
 msgid "Portugese / Português"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Portugisiska / Português"
 
 #. module: base
 #: view:base.module.import:0
@@ -10023,16 +10669,24 @@ msgstr ""
 
 #. module: base
 #: view:base.language.import:0
+#, fuzzy
 msgid "_Import"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"_Import"
 
 #. module: base
 #: view:ir.actions.act_window:0
 #: model:ir.actions.act_window,name:base.actions_ir_filters_view
 #: view:ir.filters:0 model:ir.model,name:base.model_ir_filters
 #: model:ir.ui.menu,name:base.menu_ir_filters
+#, fuzzy
 msgid "Filters"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Filter"
 
 #. module: base
 #: help:ir.property,res_id:0
@@ -10041,11 +10695,17 @@ msgstr ""
 
 #. module: base
 #: view:base.language.install:0
+#, fuzzy
 msgid ""
 "This wizard helps you add a new language to your OpenERP system. After "
 "loading a new language it becomes available as default interface language "
 "for users and partners."
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Den har wizarden hjälper dig med att lägga till ett nytt språk i ditt "
+"OpenERP system. Efter att språket laddats in blir det tillgängligt för "
+"användare och partners."
 
 #. module: base
 #: selection:base.language.install,lang:0
@@ -10064,14 +10724,22 @@ msgstr "Fältinformation"
 
 #. module: base
 #: view:ir.actions.todo:0
+#, fuzzy
 msgid "Search Actions"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Sökätgårder"
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_view_partner_wizard_ean_check
 #: view:partner.wizard.ean.check:0
+#, fuzzy
 msgid "Ean check"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Ean kontroll"
 
 #. module: base
 #: field:ir.ui.menu,web_icon_hover_data:0
@@ -10080,16 +10748,25 @@ msgstr ""
 
 #. module: base
 #: model:res.partner.title,shortcut:base.res_partner_title_sir
+#, fuzzy
 msgid "M."
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"M."
 
 #. module: base
 #: view:base.language.import:0
+#, fuzzy
 msgid ""
 "If you need another language than the official ones available, you can "
 "import a language pack from here. Other OpenERP languages than the official "
 "ones can be found on launchpad."
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Om du behöver ett annat språk än de officiella sp kan du importera "
+"språkpaket här. Andra OpenERP språk än de officiella finns på launchpad."
 
 #. module: base
 #: field:res.config.users,date:0 field:res.users,date:0
@@ -10098,13 +10775,21 @@ msgstr ""
 
 #. module: base
 #: field:ir.actions.act_window,help:0
+#, fuzzy
 msgid "Action description"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Åtgärdsbeskriivning"
 
 #. module: base
 #: field:ir.actions.todo,restart:0
+#, fuzzy
 msgid "Restart"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Starta om"
 
 #. module: base
 #: code:addons/base/res/res_user.py:0
@@ -10114,13 +10799,21 @@ msgstr ""
 
 #. module: base
 #: view:res.users:0
+#, fuzzy
 msgid "Default Filters"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Standardfilter"
 
 #. module: base
 #: field:multi_company.default,expression:0
+#, fuzzy
 msgid "Expression"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Uttryck:"
 
 #. module: base
 #: help:ir.actions.act_window,help:0
@@ -10141,8 +10834,12 @@ msgstr "Telekomsektor"
 
 #. module: base
 #: view:res.users:0
+#, fuzzy
 msgid "Current Activity"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Aktuell aktivitet"
 
 #. module: base
 #: model:ir.ui.menu,name:base.marketing_menu
@@ -10151,8 +10848,12 @@ msgstr "Marknadsföring"
 
 #. module: base
 #: selection:base.language.install,lang:0
+#, fuzzy
 msgid "Spanish (HN) / Español (HN)"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Spanska (HN) / Español (HN)"
 
 #. module: base
 #: selection:base.language.install,lang:0
@@ -10171,10 +10872,15 @@ msgstr "Alltid"
 
 #. module: base
 #: view:base.language.install:0
+#, fuzzy
 msgid ""
 "The selected language has been successfully installed. You must change the "
 "preferences of the user and open a new menu to view the changes."
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Språket du valde jhar installerats, Du kan ändra egenskaperna av användaren "
+"och öppna en meny för att se ändringarna."
 
 #. module: base
 #: selection:base.language.install,lang:0
@@ -10193,13 +10899,21 @@ msgstr "Återförsäljare"
 
 #. module: base
 #: view:res.partner.event:0
+#, fuzzy
 msgid "Event"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Händelse"
 
 #. module: base
 #: model:ir.ui.menu,name:base.menu_custom_reports
+#, fuzzy
 msgid "Custom Reports"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Anpassade rapporter"
 
 #. module: base
 #: selection:base.language.install,lang:0
@@ -10222,18 +10936,30 @@ msgstr "Generell"
 
 #. module: base
 #: help:ir.sequence,suffix:0
+#, fuzzy
 msgid "Suffix value of the record for the sequence"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Suffix värde för löpnumret"
 
 #. module: base
 #: selection:base.language.install,lang:0
+#, fuzzy
 msgid "Spanish (PY) / Español (PY)"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Spanska (PY) / Español (PY)"
 
 #. module: base
 #: view:ir.model.access:0 view:ir.rule:0
+#, fuzzy
 msgid "Full Access"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Full åtkomst"
 
 #. module: base
 #: model:res.widget,title:base.openerp_favorites_twitter_widget
@@ -10242,14 +10968,22 @@ msgstr "OpenERP favoriter"
 
 #. module: base
 #: selection:base.language.install,lang:0
+#, fuzzy
 msgid "Ukrainian / українська"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Ukrainska / українська"
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_translation
 #: model:ir.ui.menu,name:base.menu_action_translation
+#, fuzzy
 msgid "Translation Terms"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Översättningstermer"
 
 #. module: base
 #: selection:ir.module.module,license:0
@@ -10289,13 +11023,21 @@ msgstr ""
 
 #. module: base
 #: model:ir.ui.menu,name:base.menu_base_config_plugins
+#, fuzzy
 msgid "Plugins"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Tillägg"
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_config_simple_view_form
+#, fuzzy
 msgid "Configure Your Interface"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Konfigurera ditt användargränssnitt"
 
 #. module: base
 #: help:ir.actions.act_window,multi:0
@@ -10306,15 +11048,24 @@ msgstr ""
 
 #. module: base
 #: help:res.config.users,context_tz:0 help:res.users,context_tz:0
+#, fuzzy
 msgid ""
 "The user's timezone, used to perform timezone conversions between the server "
 "and the client."
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Användarens tidszon, används för att göra tidszonskonverteringar mellan "
+"servern och klienten."
 
 #. module: base
 #: selection:base.language.install,lang:0
+#, fuzzy
 msgid "Japanese / 日本語"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Japanska / 日本語"
 
 #. module: base
 #: help:workflow.transition,act_from:0
@@ -10354,8 +11105,12 @@ msgstr ""
 
 #. module: base
 #: selection:base.language.install,lang:0
+#, fuzzy
 msgid "Spanish (BO) / Español (BO)"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Spanska (BO) / Español (BO"
 
 #. module: base
 #: selection:base.language.install,lang:0
@@ -10385,24 +11140,40 @@ msgstr ""
 
 #. module: base
 #: help:multi_company.default,object_id:0
+#, fuzzy
 msgid "Object affected by this rule"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Objekt som berörs av den här regeln"
 
 #. module: base
 #: view:ir.module.module:0
+#, fuzzy
 msgid "Author Website"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Författare hemsida"
 
 #. module: base
 #: view:ir.attachment:0
+#, fuzzy
 msgid "Month"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Månad"
 
 #. module: base
 #: view:base.language.install:0
 #: model:ir.actions.act_window,name:base.action_view_base_language_install
+#, fuzzy
 msgid "Load Official Translation"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Läs in den officiella översättningen"
 
 #. module: base
 #: view:res.currency:0
@@ -10411,8 +11182,12 @@ msgstr ""
 
 #. module: base
 #: selection:base.language.install,lang:0
+#, fuzzy
 msgid "Latvian / latviešu valoda"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Lettiska / latviešu valoda"
 
 #. module: base
 #: view:res.config:0 view:res.config.installer:0
@@ -10422,28 +11197,48 @@ msgstr ""
 #. module: base
 #: model:ir.actions.server,name:base.action_start_configurator
 #: model:ir.ui.menu,name:base.menu_view_base_module_configuration
+#, fuzzy
 msgid "Start Configuration"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Starta konfigureringen"
 
 #. module: base
 #: view:ir.rule:0
+#, fuzzy
 msgid "Combination of rules"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Kombination av regler"
 
 #. module: base
 #: view:ir.sequence:0
+#, fuzzy
 msgid "Current Year without Century: %(y)s"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Aktuellt år utan århundrade: %(y)s"
 
 #. module: base
 #: sql_constraint:ir.rule:0
+#, fuzzy
 msgid "Rule must have at least one checked access right !"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"En regel måste ha minst en markerad åtkomstregel !"
 
 #. module: base
 #: selection:base.language.install,lang:0
+#, fuzzy
 msgid "Serbian (Latin) / srpski"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Serbiska (Latin) / srpski"
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_maintenance_contract_form
@@ -10453,28 +11248,48 @@ msgstr ""
 
 #. module: base
 #: view:res.log:0
+#, fuzzy
 msgid "Unread"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Olästa"
 
 #. module: base
 #: view:res.config:0 view:res.config.users:0 view:res.config.view:0
+#, fuzzy
 msgid "res_config_contents"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"res_config_contents"
 
 #. module: base
 #: help:res.partner,employee:0
+#, fuzzy
 msgid "Check this box if the partner is an Employee."
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Markera denna om partnern är en anställd."
 
 #. module: base
 #: view:base.language.import:0
+#, fuzzy
 msgid "- module,type,name,res_id,src,value"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"- module,type,name,res_id,src,value"
 
 #. module: base
 #: view:ir.translation:0
+#, fuzzy
 msgid "Source Term"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Källterm"
 
 #. module: base
 #: model:ir.ui.menu,name:base.menu_main_pm
@@ -10502,8 +11317,12 @@ msgstr "Vill ni rensa Ids ? "
 
 #. module: base
 #: field:res.partner,employee:0
+#, fuzzy
 msgid "Employee"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Anställd"
 
 #. module: base
 #: field:ir.actions.server,copy_object:0
@@ -10517,8 +11336,12 @@ msgstr ""
 
 #. module: base
 #: view:partner.clear.ids:0
+#, fuzzy
 msgid "Clear Ids"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Rensa id'n"
 
 #. module: base
 #: field:res.config.users,view:0 field:res.config.view,view:0
@@ -10538,13 +11361,21 @@ msgstr "_Ok"
 
 #. module: base
 #: help:ir.filters,user_id:0
+#, fuzzy
 msgid "False means for every user"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Falsk betyder för alla användare"
 
 #. module: base
 #: model:ir.ui.menu,name:base.menu_project_long_term
+#, fuzzy
 msgid "Long Term Planning"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Långsiktig planering"
 
 #. module: base
 #: view:res.partner:0 field:res.partner,user_id:0
@@ -10558,13 +11389,21 @@ msgstr "lägg till"
 
 #. module: base
 #: view:res.widget:0
+#, fuzzy
 msgid "Widgets"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Widgets"
 
 #. module: base
 #: view:res.widget.wizard:0
+#, fuzzy
 msgid "Widget Wizard"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Widget Wizard"
 
 #. module: base
 #: selection:ir.property,type:0
@@ -10573,10 +11412,15 @@ msgstr "Heltal"
 
 #. module: base
 #: help:ir.actions.report.xml,report_rml:0
+#, fuzzy
 msgid ""
 "The path to the main report file (depending on Report Type) or NULL if the "
 "content is in another data field"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Sökvägen till huvudrapporten (beroende på rapporttyp) eller NULL om "
+"innehållet är ett annat datafält"
 
 #. module: base
 #: help:res.config.users,company_id:0 help:res.users,company_id:0
@@ -10622,8 +11466,12 @@ msgstr ""
 
 #. module: base
 #: field:ir.ui.menu,web_icon:0
+#, fuzzy
 msgid "Icon File"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Ikonfil"
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_partner_employee_form
@@ -10651,8 +11499,12 @@ msgstr "Adresser"
 
 #. module: base
 #: field:ir.module.module,web:0
+#, fuzzy
 msgid "Has a web component"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Har en webkomponent"
 
 #. module: base
 #: selection:base.language.install,state:0
@@ -10662,23 +11514,39 @@ msgstr ""
 
 #. module: base
 #: model:res.widget,title:base.rvalyi_twitter_widget
+#, fuzzy
 msgid "Raphaël Valyi's tweets"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Raphaël Valyi's tweets"
 
 #. module: base
 #: help:ir.cron,interval_number:0
+#, fuzzy
 msgid "Repeat every x."
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Repetera varje x."
 
 #. module: base
 #: field:ir.module.module,maintainer:0
+#, fuzzy
 msgid "Maintainer"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Underhållsansvarig"
 
 #. module: base
 #: selection:base.language.install,lang:0
+#, fuzzy
 msgid "Spanish (PE) / Español (PE)"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Spanska (PE) / Español (PE)"
 
 #. module: base
 #: help:res.config.users,action_id:0 help:res.users,action_id:0
@@ -10689,38 +11557,66 @@ msgstr ""
 
 #. module: base
 #: view:ir.values:0
+#, fuzzy
 msgid "Client Actions"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Klientåtgärder"
 
 #. module: base
 #: model:ir.model,name:base.model_base_update_translations
+#, fuzzy
 msgid "base.update.translations"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"base.update.translations"
 
 #. module: base
 #: selection:ir.property,type:0
+#, fuzzy
 msgid "Integer Big"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Integer Big"
 
 #. module: base
 #: view:partner.wizard.ean.check:0
+#, fuzzy
 msgid "Ignore"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Ignorera"
 
 #. module: base
 #: view:ir.actions.report.xml:0
+#, fuzzy
 msgid "RML Report"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"RML Rapport"
 
 #. module: base
 #: selection:ir.property,type:0
+#, fuzzy
 msgid "Many2One"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Many2One"
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_partner_sms_send
+#, fuzzy
 msgid "SMS Send"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Skicka SMS"
 
 #. module: base
 #: model:ir.actions.act_window,help:base.action_partner_address_form
@@ -10746,28 +11642,48 @@ msgstr ""
 
 #. module: base
 #: field:res.widget,content:0
+#, fuzzy
 msgid "Content"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Innehåll"
 
 #. module: base
 #: help:ir.rule,global:0
+#, fuzzy
 msgid "If no group is specified the rule is global and applied to everyone"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Om du ingen grupp anges gäller regeln för alla"
 
 #. module: base
 #: help:ir.cron,nextcall:0
+#, fuzzy
 msgid "Next planned execution date for this scheduler"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Nästa planerade exekveringsdatum för denna schemaläggare"
 
 #. module: base
 #: help:res.config.users,view:0 help:res.users,view:0
+#, fuzzy
 msgid "Choose between the simplified interface and the extended one"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Välj mellan förenklat eller avancerat användargränssnitt"
 
 #. module: base
 #: model:res.widget,title:base.odony_twitter_widget
+#, fuzzy
 msgid "Olivier Dony's tweets"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Olivier Dony's tweets"
 
 #. module: base
 #: help:ir.cron,args:0
@@ -10784,10 +11700,14 @@ msgstr ""
 
 #. module: base
 #: code:addons/base/module/module.py:0
-#, python-format
+#, fuzzy, python-format
 msgid ""
 "Unable to upgrade module \"%s\" because an external dependency is not met: %s"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Kan inte uppgradera modul \"%s\" för att ett extern beroende är inte "
+"uppfyllt: %s"
 
 #. module: base
 #: code:addons/base/res/res_user.py:0
@@ -10801,13 +11721,21 @@ msgstr ""
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_view_base_module_upgrade_install
+#, fuzzy
 msgid "Module Upgrade Install"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Modul uppgradering installering"
 
 #. module: base
 #: field:multi_company.default,company_dest_id:0
+#, fuzzy
 msgid "Default Company"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Standardföretag"
 
 #. module: base
 #: selection:base.language.install,lang:0
@@ -10816,8 +11744,12 @@ msgstr "Spanska (EC) / Español (EC)"
 
 #. module: base
 #: help:ir.ui.view,xml_id:0
+#, fuzzy
 msgid "ID of the view defined in xml file"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"ID på vyn definierad i xml-filen"
 
 #. module: base
 #: model:ir.model,name:base.model_base_module_import
@@ -10827,8 +11759,12 @@ msgstr "Importera modulen"
 
 #. module: base
 #: help:ir.actions.act_window,res_model:0
+#, fuzzy
 msgid "Model name of the object to open in the view window"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Modellnamn för objektet som skall öppnas på vysidan"
 
 #. module: base
 #: field:res.log,secondary:0
@@ -10852,9 +11788,12 @@ msgstr "Väntar"
 
 #. module: base
 #: code:addons/__init__.py:0
-#, python-format
+#, fuzzy, python-format
 msgid "Could not load base module"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Kunde inte ladda bas modulerna"
 
 #. module: base
 #: view:ir.actions.report.xml:0
@@ -10888,8 +11827,12 @@ msgstr "Kunde inte hitta föregående ir.actions.todo"
 
 #. module: base
 #: selection:base.language.install,lang:0
+#, fuzzy
 msgid "Vietnamese / Tiếng Việt"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Vietnamesiska / Tiếng Việt"
 
 #. module: base
 #: model:ir.model,name:base.model_osv_memory_autovacuum
@@ -10928,9 +11871,13 @@ msgstr ""
 
 #. module: base
 #: help:res.config.users,menu_tips:0 help:res.users,menu_tips:0
+#, fuzzy
 msgid ""
 "Check out this box if you want to always display tips on each menu action"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Markera den här rutan om du alltid vill ha tips för varje menyalternativ"
 
 #. module: base
 #: field:ir.rule,perm_read:0
@@ -10950,8 +11897,12 @@ msgstr "Språk namnet"
 
 #. module: base
 #: selection:ir.property,type:0
+#, fuzzy
 msgid "Boolean"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Boolean"
 
 #. module: base
 #: view:ir.attachment:0 view:ir.cron:0 view:ir.model.access:0
@@ -10980,19 +11931,31 @@ msgstr "res.config.installer"
 
 #. module: base
 #: help:res.config.users,menu_id:0 help:res.users,menu_id:0
+#, fuzzy
 msgid "If specified, the action will replace the standard menu for this user."
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Om den anges kommer denna åtgärd ersätta standardmenyn för denna användare."
 
 #. module: base
 #: model:ir.ui.menu,name:base.menu_fundrising
+#, fuzzy
 msgid "Fund Raising"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Pengainsamling"
 
 #. module: base
 #: model:ir.actions.act_window,name:base.ir_sequence_type
 #: model:ir.ui.menu,name:base.menu_ir_sequence_type
+#, fuzzy
 msgid "Sequence Codes"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Kodsekvens"
 
 #. module: base
 #: selection:base.language.install,lang:0
@@ -11008,8 +11971,12 @@ msgstr ""
 
 #. module: base
 #: view:ir.sequence:0
+#, fuzzy
 msgid "Current Year with Century: %(year)s"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Nuvarande år med sekel: %(year)s"
 
 #. module: base
 #: model:ir.model,name:base.model_res_log
@@ -11023,8 +11990,12 @@ msgstr "I minnet"
 
 #. module: base
 #: view:ir.actions.todo:0
+#, fuzzy
 msgid "Todo"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Att göra"
 
 #. module: base
 #: field:ir.attachment,datas:0
@@ -11039,31 +12010,53 @@ msgstr ""
 
 #. module: base
 #: constraint:res.config.users:0 constraint:res.users:0
+#, fuzzy
 msgid "The chosen company is not in the allowed companies for this user"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Det valda företaget är inte bland de tillåtna företagen för denna användaren"
 
 #. module: base
 #: field:ir.actions.report.xml,report_name:0
+#, fuzzy
 msgid "Service Name"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Tjänstenamn"
 
 #. module: base
 #: view:base.module.upgrade:0
+#, fuzzy
 msgid ""
 "We suggest to reload the menu tab to see the new menus (Ctrl+T then Ctrl+R)."
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Vi rekommenderar att du laddar om menyn för att se de nya menyerna (ctrl-T "
+"och ctrl-R)."
 
 #. module: base
 #: field:res.config.users,name:0 field:res.users,name:0
+#, fuzzy
 msgid "User Name"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Användarnamn"
 
 #. module: base
 #: help:ir.sequence,padding:0
+#, fuzzy
 msgid ""
 "OpenERP will automatically adds some '0' on the left of the 'Next Number' to "
 "get the required padding size."
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"OpenERP lägger automatiskt till några '0' till vänster på 'Nästa nummer' för "
+"att få rätt storlek."
 
 #. module: base
 #: model:ir.ui.menu,name:base.menu_base_partner
@@ -11078,20 +12071,32 @@ msgstr ""
 
 #. module: base
 #: view:ir.actions.todo:0 selection:ir.actions.todo,state:0
+#, fuzzy
 msgid "To Do"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Att göra"
 
 #. module: base
 #: field:res.config.users,email:0 field:res.partner,email:0
 #: field:res.users,email:0
+#, fuzzy
 msgid "E-mail"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Epost"
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_model_data
 #: view:ir.model.data:0 model:ir.ui.menu,name:base.ir_model_data_menu
+#, fuzzy
 msgid "Object Identifiers"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Objektidentifierare"
 
 #. module: base
 #: model:ir.actions.act_window,help:base.action_partner_title_partner
@@ -11112,66 +12117,113 @@ msgstr ""
 
 #. module: base
 #: selection:base.language.install,lang:0
+#, fuzzy
 msgid "Mongolian / монгол"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Mongoliska / монгол"
 
 #. module: base
 #: view:base.module.update:0
+#, fuzzy
 msgid "Module update result"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Resultat av moduluppdateringen"
 
 #. module: base
 #: selection:base.language.install,lang:0
+#, fuzzy
 msgid "Spanish (CR) / Español (CR)"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Spanska (CR) / Español (CR)"
 
 #. module: base
 #: model:ir.ui.menu,name:base.menu_tools
+#, fuzzy
 msgid "Tools"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Verktyg"
 
 #. module: base
 #: code:addons/base/res/res_currency.py:0
-#, python-format
+#, fuzzy, python-format
 msgid ""
 "No rate found \n"
 "for the currency: %s \n"
 "at the date: %s"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Hittar ingen kurs \n"
+"För valuta: %s \n"
+"per datum: %s"
 
 #. module: base
 #: view:ir.sequence.type:0
+#, fuzzy
 msgid "Sequences Type"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Sekvenstyp"
 
 #. module: base
 #: view:ir.actions.todo:0
+#, fuzzy
 msgid "Set as Todo"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Sätt till att göra"
 
 #. module: base
 #: view:base.language.install:0 view:base.module.import:0
+#, fuzzy
 msgid ""
 "Please be patient, this operation may take a few minutes (depending on the "
 "number of modules currently installed)..."
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Ta det lugnt, den här operationen kan t några minuter (beroende på hur många "
+"moduler som är installerade)..."
 
 #. module: base
 #: view:base.module.import:0 view:base.module.update:0
+#, fuzzy
 msgid "Open Modules"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Öppna moduler"
 
 #. module: base
 #: model:ir.actions.act_window,help:base.action_res_bank_form
+#, fuzzy
 msgid "Manage bank records you want to be used in the system."
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Hantera de bankposter som du vill använda i systemet."
 
 #. module: base
 #: help:ir.actions.report.xml,report_file:0
+#, fuzzy
 msgid ""
 "The path to the main report file (depending on Report Type) or NULL if the "
 "content is in another field"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Sökvägen till huvudrapportfilen (beroende på rapporttyp) eller NULL om "
+"innehållet är ett annat fält."
 
 #. module: base
 #: model:ir.ui.menu,name:base.menu_lunch_reporting
@@ -11181,8 +12233,12 @@ msgstr ""
 #: model:ir.ui.menu,name:base.menu_reporting
 #: model:ir.ui.menu,name:base.next_id_64 model:ir.ui.menu,name:base.next_id_73
 #: model:ir.ui.menu,name:base.reporting_menu
+#, fuzzy
 msgid "Reporting"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Rapportering"
 
 #. module: base
 #: selection:ir.module.module,license:0
@@ -11191,13 +12247,21 @@ msgstr ""
 
 #. module: base
 #: view:ir.model.data:0
+#, fuzzy
 msgid "Updatable"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Uppdateringsbart"
 
 #. module: base
 #: field:workflow.transition,group_id:0
+#, fuzzy
 msgid "Group Required"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Grupp krävs"
 
 #. module: base
 #: help:ir.cron,doall:0
@@ -11208,30 +12272,50 @@ msgstr ""
 
 #. module: base
 #: view:base.module.upgrade:0
+#, fuzzy
 msgid "Start update"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Starta uppdateringen"
 
 #. module: base
 #: model:res.partner.title,shortcut:base.res_partner_title_miss
+#, fuzzy
 msgid "Mss"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Fru"
 
 #. module: base
 #: constraint:res.partner:0
+#, fuzzy
 msgid "Error ! You can not create recursive associated members."
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Fel! Du kan inte skapa rekursivt kopplade medlemmar."
 
 #. module: base
 #: model:ir.ui.menu,name:base.menu_hr_manager
+#, fuzzy
 msgid "HR Manager Dashboard"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Personalchef dashboard"
 
 #. module: base
 #: code:addons/base/module/module.py:0
-#, python-format
+#, fuzzy, python-format
 msgid ""
 "Unable to install module \"%s\" because an external dependency is not met: %s"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Kan inte installera modul \"%s\" för att ett externa beroend inte är "
+"uppfyllt: %s"
 
 #. module: base
 #: view:ir.module.module:0
@@ -11260,13 +12344,21 @@ msgstr "Följande moduler är inte installerade eller okända: %s"
 
 #. module: base
 #: field:ir.actions.act_window,auto_search:0
+#, fuzzy
 msgid "Auto Search"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Automatsökning"
 
 #. module: base
 #: model:res.partner.title,shortcut:base.res_partner_title_madam
+#, fuzzy
 msgid "Ms."
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Frk."
 
 #. module: base
 #: view:base.language.install:0
@@ -11304,8 +12396,12 @@ msgstr "GPL Version 3"
 
 #. module: base
 #: view:partner.wizard.ean.check:0
+#, fuzzy
 msgid "Correct EAN13"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Korrekt EAN13"
 
 #. module: base
 #: model:ir.ui.menu,name:base.menu_audit
@@ -11319,8 +12415,12 @@ msgstr "Spanska (NI) / Español (NI)"
 
 #. module: base
 #: field:ir.cron,nextcall:0
+#, fuzzy
 msgid "Next Execution Date"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Nästa exekveringsdatum"
 
 #. module: base
 #: model:ir.ui.menu,name:base.menu_mrp_root
@@ -11331,8 +12431,12 @@ msgstr "Tillverkning"
 #: view:base.language.export:0
 #: model:ir.actions.act_window,name:base.action_wizard_lang_export
 #: model:ir.ui.menu,name:base.menu_wizard_lang_export
+#, fuzzy
 msgid "Export Translation"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Exportera översättning"
 
 #. module: base
 #: selection:ir.actions.server,state:0
@@ -11341,10 +12445,13 @@ msgstr "Kopiera objekt"
 
 #. module: base
 #: code:addons/base/res/res_user.py:0
-#, python-format
+#, fuzzy, python-format
 msgid ""
 "Group(s) cannot be deleted, because some user(s) still belong to them: %s !"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Gruppen kan inte makulers, det finns användare som tillhör den: %s !"
 
 #. module: base
 #: view:base.update.translations:0
@@ -11368,8 +12475,12 @@ msgstr "Varning !"
 
 #. module: base
 #: help:res.partner,website:0
+#, fuzzy
 msgid "Website of Partner"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Partnerns hemsida"
 
 #. module: base
 #: selection:base.language.install,lang:0
@@ -11388,19 +12499,30 @@ msgstr "Rapportfil"
 
 #. module: base
 #: code:addons/base/ir/ir_model.py:0
-#, python-format
+#, fuzzy, python-format
 msgid "Invalid search criterions"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Felaktiga sökkriterier"
 
 #. module: base
 #: view:ir.attachment:0
+#, fuzzy
 msgid "Created"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Skapad"
 
 #. module: base
 #: view:base.language.import:0
+#, fuzzy
 msgid "- type,name,res_id,src,value"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"- type,name,res_id,src,value"
 
 #. module: base
 #: code:addons/base/module/module.py:0
@@ -11442,23 +12564,39 @@ msgstr "Villkor"
 
 #. module: base
 #: model:ir.model,name:base.model_res_widget_wizard
+#, fuzzy
 msgid "Add a widget for User"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Lägg till en widget för en användare"
 
 #. module: base
 #: selection:base.language.install,lang:0
+#, fuzzy
 msgid "Norwegian Bokmål / Norsk bokmål"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Norska Bokmål / Norsk bokmål"
 
 #. module: base
 #: model:ir.ui.menu,name:base.dashboard
+#, fuzzy
 msgid "Dashboards"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Startsidor"
 
 #. module: base
 #: help:ir.attachment,type:0
+#, fuzzy
 msgid "Binary File or external URL"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Binär fil eller extern URL"
 
 #. module: base
 #: selection:base.language.install,lang:0
@@ -11468,8 +12606,12 @@ msgstr ""
 #. module: base
 #: model:ir.ui.menu,name:base.menu_emails
 #: model:ir.ui.menu,name:base.menu_mail_gateway
+#, fuzzy
 msgid "Emails"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Epost"
 
 #. module: base
 #: selection:base.language.install,lang:0
@@ -11801,8 +12943,12 @@ msgstr ""
 
 #. module: base
 #: model:ir.model,name:base.model_multi_company_default
+#, fuzzy
 msgid "Default multi company"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Standard flerföretag"
 
 #. module: base
 #: field:res.config.users,menu_tips:0 field:res.users,menu_tips:0
@@ -11875,8 +13021,12 @@ msgstr ""
 
 #. module: base
 #: view:base.module.upgrade:0
+#, fuzzy
 msgid "The selected modules have been updated / installed !"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"De valda modulerna har uppdaterats / installerats!"
 
 #. module: base
 #: code:addons/base/ir/ir_ui_menu.py:0
@@ -11958,16 +13108,24 @@ msgstr ""
 
 #. module: base
 #: code:addons/base/module/wizard/base_module_upgrade.py:0
-#, python-format
+#, fuzzy, python-format
 msgid "Unmet dependency !"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Ej uppfyllt beroende !"
 
 #. module: base
 #: view:base.language.import:0
+#, fuzzy
 msgid ""
 "Supported file formats: *.csv (Comma-separated values) or *.po (GetText "
 "Portable Objects)"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Filformat som stöds är: *.csv (kommaseparerat) eller *.po (GetText Portable "
+"Objects)"
 
 #. module: base
 #: model:ir.model,name:base.model_base_module_configuration
@@ -12284,27 +13442,44 @@ msgstr ""
 
 #. module: base
 #: view:res.lang:0
+#, fuzzy
 msgid "%d - Day of the month [01,31]."
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"%d - Dag i månad [01,31]"
 
 #. module: base
 #: view:publisher_warranty.contract:0
+#, fuzzy
 msgid "Validate"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Validera"
 
 #. module: base
 #: sql_constraint:ir.config_parameter:0
+#, fuzzy
 msgid "Key must be unique."
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Nyckeln måste vara unik."
 
 #. module: base
 #: code:addons/base/res/res_config.py:0
-#, python-format
+#, fuzzy, python-format
 msgid ""
 "Your database is now fully configured.\n"
 "\n"
 "Click 'Continue' and enjoy your OpenERP experience..."
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Din databas är nu komplett konfigurerad.\n"
+"\n"
+"Klicka på 'Fortsätt' och njut av din OpenERP upplevelse..."
 
 #. module: base
 #: selection:base.language.install,lang:0
@@ -12313,24 +13488,39 @@ msgstr ""
 
 #. module: base
 #: code:addons/base/publisher_warranty/publisher_warranty.py:0
-#, python-format
+#, fuzzy, python-format
 msgid "That contract is already registered in the system."
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Det kontraktet har redan registrerats i systemet."
 
 #. module: base
 #: view:res.lang:0
+#, fuzzy
 msgid "%M - Minute [00,59]."
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"%M - Minut [00,59]"
 
 #. module: base
 #: view:res.lang:0
+#, fuzzy
 msgid "%w - Weekday number [0(Sunday),6]."
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"%w - Veckodagsnummer [0(Söndag),6]."
 
 #. module: base
 #: model:ir.model,name:base.model_publisher_warranty_contract
+#, fuzzy
 msgid "publisher_warranty.contract"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"publisher_warranty.contract"
 
 #. module: base
 #: view:publisher_warranty.contract.wizard:0
@@ -12339,8 +13529,12 @@ msgstr ""
 
 #. module: base
 #: view:res.lang:0
+#, fuzzy
 msgid "%S - Seconds [00,61]."
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"%S - Sekunder [00,61]."
 
 #. module: base
 #: model:res.partner.title,name:base.res_partner_title_ltd
@@ -12349,14 +13543,22 @@ msgstr ""
 
 #. module: base
 #: view:res.config.users:0
+#, fuzzy
 msgid "Create User"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Skapa användare"
 
 #. module: base
 #: field:publisher_warranty.contract,name:0
 #: field:publisher_warranty.contract.wizard,name:0
+#, fuzzy
 msgid "Serial Key"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Serienyckel"
 
 #. module: base
 #: view:publisher_warranty.contract:0
@@ -12375,47 +13577,77 @@ msgstr ""
 
 #. module: base
 #: field:res.log,create_date:0
+#, fuzzy
 msgid "Creation Date"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Skapad datum"
 
 #. module: base
 #: view:res.lang:0
+#, fuzzy
 msgid "%H - Hour (24-hour clock) [00,23]."
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"%H - Timmar (24 timmars klocka) [00,23]."
 
 #. module: base
 #: view:res.lang:0
+#, fuzzy
 msgid "%I - Hour (12-hour clock) [01,12]."
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"%I - Timmar (12-timmar klocka) [01,12]"
 
 #. module: base
 #: selection:publisher_warranty.contract.wizard,state:0
+#, fuzzy
 msgid "Finished"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Avslutad"
 
 #. module: base
 #: code:addons/base/res/res_config.py:0
-#, python-format
+#, fuzzy, python-format
 msgid "Click 'Continue' to configure the next addon..."
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Klicka på 'Fortsätt' för att konfigurera nästa tillägg..."
 
 #. module: base
 #: view:res.lang:0
+#, fuzzy
 msgid "%m - Month number [01,12]."
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"%m - Månadsnummer [01,12]"
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_publisher_warranty_contract_add_wizard
 #: model:ir.ui.menu,name:base.menu_publisher_warranty_contract_add
 #: view:publisher_warranty.contract.wizard:0
+#, fuzzy
 msgid "Register a Contract"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Registrera ett kontrakt"
 
 #. module: base
 #: code:addons/base/publisher_warranty/publisher_warranty.py:0
-#, python-format
+#, fuzzy, python-format
 msgid "Contract validation error"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Kontraktvalideringsfel"
 
 #. module: base
 #: model:res.partner.title,shortcut:base.res_partner_title_ltd
@@ -12424,8 +13656,12 @@ msgstr ""
 
 #. module: base
 #: selection:publisher_warranty.contract,state:0
+#, fuzzy
 msgid "Terminated"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Avslutad"
 
 #. module: base
 #: field:res.partner.category,parent_right:0
@@ -12434,8 +13670,12 @@ msgstr ""
 
 #. module: base
 #: model:ir.model,name:base.model_publisher_warranty_contract_wizard
+#, fuzzy
 msgid "publisher_warranty.contract.wizard"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"publisher_warranty.contract.wizard"
 
 #. module: base
 #: view:publisher_warranty.contract.wizard:0
@@ -12517,17 +13757,26 @@ msgstr ""
 
 #. module: base
 #: model:ir.model,name:base.model_maintenance_contract
+#, fuzzy
 msgid "maintenance.contract"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"maintenance.contract"
 
 #. module: base
 #: code:addons/base/res/res_config.py:0
-#, python-format
+#, fuzzy, python-format
 msgid ""
 "\n"
 "\n"
 "This addon is already installed on your system"
 msgstr ""
+"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"\n"
+"\n"
+"Detta tillägg är redan installerat i ditt system"
 
 #~ msgid "The unlink method is not implemented on this object !"
 #~ msgstr "Detta objekt saknar metoden för att bryta länk"
