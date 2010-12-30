@@ -132,7 +132,7 @@ def _process_text(self, txt):
                     logging.getLogger('report').exception("Exception at: %s" % expr)
                 if isinstance(txt, basestring):
                     result += str2xml(txt)
-                elif (txt is not None) and (txt is not False):
+                elif txt and (txt is not None) and (txt is not False):
                     result += ustr(txt)
         return result
 

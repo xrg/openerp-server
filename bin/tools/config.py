@@ -96,7 +96,7 @@ class configmanager(object):
             'secure_pkey_file': 'httpsd.sslkey',
         }
         
-        self.blacklist_for_save = set(["publisher_warranty_url"])
+        self.blacklist_for_save = set(["publisher_warranty_url", "load_language"])
         self.misc = {}
         self.config_file = fname
         self.has_ssl = check_ssl()
