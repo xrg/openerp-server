@@ -278,12 +278,27 @@ class TinyPoFile(object):
                 if line.startswith('#~ '):
                     break
                 if line.startswith('#:'):
-                    if ' ' in line[2:].strip():
-                        for lpart in line[2:].strip().split(' '):
-                            tmp_tnrs.append(lpart.strip().split(':',2))
-                    else:
-                        tmp_tnrs.append( line[2:].strip().split(':',2) )
-                elif line.startswith('#,') and (line[2:].strip() == 'fuzzy'):
+                    # We expect lines like
+                    #: type1:place1:id1 type2:place2:id2 ...
+                    # but in a rare Spanish case, id contains spaces
+                    # so we have to merge the parts. Also tolerate empty
+                    # lines like '#:'
+                    lparts = line[2:].strip().split(' ')
+                    while lparts:
+                        lpart = lparts.pop(0)
+                        if not lpart:
+                            continue
+                        if lpart.count(':') < 2:
+                            self.warn("Malformed #: identifier '%s' at line %d", 
+                                lpart, self.line_num)
+                            break # skip the whole line
+                        while lparts and lparts[0].count(':') == 0:
+                            # We consider 'type1:place1:id ab1' to be one, but
+                            # don't allow 'type1:place1:id ab:1'
+                            lpart += ' ' + lparts.pop(0)
+                        tmp_tnrs.append(lpart.strip().split(':',2))
+
+                elif line.startswith('#,') and ('fuzzy' in line[2:]):
                     fuzzy = True
                 line = self._get_line()
             while not line:
@@ -966,7 +981,7 @@ def trans_load_data(db_name, fileobj, fileformat, lang, lang_name=None, verbose=
 
             # This would skip terms that fail to specify a res_id
             if not dic.get('res_id', False):
-                 continue
+                continue
             try:
                 dic['res_id'] = dic['res_id'] and int(dic['res_id']) or 0
             except ValueError:
