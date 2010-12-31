@@ -3,14 +3,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenERP Server 5.0.4\n"
 "Report-Msgid-Bugs-To: support@openerp.com\n"
-"POT-Creation-Date: 2010-12-21 19:43+0000\n"
-"PO-Revision-Date: 2010-12-24 07:56+0000\n"
-"Last-Translator: Quentin THEURET <quentin@theuret.net>\n"
+"POT-Creation-Date: 2010-12-29 18:06+0000\n"
+"PO-Revision-Date: 2010-12-30 22:16+0000\n"
+"Last-Translator: Christophe Chauvet - http://www.syleam.fr/ <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-12-25 04:49+0000\n"
+"X-Launchpad-Export-Date: 2010-12-31 05:15+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #. module: base
@@ -12985,8 +12985,12 @@ msgstr ""
 
 #. module: base
 #: field:res.partner.category,parent_left:0
+#, fuzzy
 msgid "Left parent"
 msgstr ""
+"#-#-#-#-#  .merge_file_3aoEnA (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_uLnyWA (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"Parenté de gauche"
 
 #. module: base
 #: view:res.config.users:0
@@ -13091,28 +13095,48 @@ msgstr ""
 
 #. module: base
 #: view:res.lang:0
+#, fuzzy
 msgid "%w - Weekday number [0(Sunday),6]."
 msgstr ""
+"#-#-#-#-#  .merge_file_3aoEnA (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_uLnyWA (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"%w - Numéro de semaine [0(Dimanche),6]."
 
 #. module: base
 #: model:ir.model,name:base.model_publisher_warranty_contract
+#, fuzzy
 msgid "publisher_warranty.contract"
 msgstr ""
+"#-#-#-#-#  .merge_file_3aoEnA (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_uLnyWA (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"publisher_warranty.contract"
 
 #. module: base
 #: view:publisher_warranty.contract.wizard:0
+#, fuzzy
 msgid "Please enter the serial key provided in your contract document:"
 msgstr ""
+"#-#-#-#-#  .merge_file_3aoEnA (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_uLnyWA (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"Veuillez saisir le numéro de série fournit dans votre contrat :"
 
 #. module: base
 #: view:res.lang:0
+#, fuzzy
 msgid "%S - Seconds [00,61]."
 msgstr ""
+"#-#-#-#-#  .merge_file_3aoEnA (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_uLnyWA (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"%S - Secondes [00 à 61]."
 
 #. module: base
 #: view:res.config.users:0
+#, fuzzy
 msgid "Create User"
 msgstr ""
+"#-#-#-#-#  .merge_file_3aoEnA (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_uLnyWA (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"Créer un utilisateur"
 
 #. module: base
 #: field:publisher_warranty.contract,name:0
@@ -13251,7 +13275,283 @@ msgstr ""
 
 #. module: base
 #: model:ir.model,name:base.model_maintenance_contract
+#, fuzzy
 msgid "maintenance.contract"
+msgstr ""
+"#-#-#-#-#  .merge_file_3aoEnA (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_uLnyWA (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"maintenance.contract"
+
+#. module: base
+#: code:addons/fields.py:534
+#, python-format
+msgid ""
+"The second argument of the many2many field %s must be a SQL table !You used "
+"%s, which is not a valid SQL table name."
+msgstr ""
+"Le deuxième argument du champ many2many %s doit être une table SQL ! Vous "
+"utilisez %s, qui n'est pas ule nom d'une table SQL valide."
+
+#. module: base
+#: code:addons/base/ir/ir_model.py:339
+#, python-format
+msgid ""
+"You can not write in this document (%s) ! Be sure your user belongs to one "
+"of these groups: %s."
+msgstr ""
+"Vous ne pouvez pas écrire dans ce document (%s) ! Êtes-vous sûr que votre "
+"utilisateur fait partie d'un de ces groupes : %s."
+
+#. module: base
+#: code:addons/orm.py:1993 code:addons/orm.py:3653
+#, python-format
+msgid "created."
+msgstr "créé."
+
+#. module: base
+#: code:addons/orm.py:2160
+#, python-format
+msgid "Invalid group_by"
+msgstr "group_by invalide"
+
+#. module: base
+#: code:addons/orm.py:838
+#, python-format
+msgid "Key/value '%s' not found in selection field '%s'"
+msgstr "Clé/Valeur '%s' non trouvé dans le champ sélection '%s'"
+
+#. module: base
+#: code:addons/orm.py:210
+#, python-format
+msgid ""
+"Language with code \"%s\" is not defined in your system !\n"
+"Define it through the Administration menu."
+msgstr ""
+"La langue ayant le code \"%s\" n'est pas définie dans votre système !\n"
+"Définissez-la à partir du menu Administration."
+
+#. module: base
+#: code:addons/orm.py:4018
+#, python-format
+msgid "Record #%d of %s not found, cannot copy!"
+msgstr "Enregistrement #%d de %s non trouvé, vous ne pouvez pas le copier !"
+
+#. module: base
+#: code:addons/fields.py:114
+#, python-format
+msgid "Not implemented search_memory method !"
+msgstr "Méthode search_memory non implémentée !"
+
+#. module: base
+#: code:addons/orm.py:3147
+#, python-format
+msgid "A document was modified since you last viewed it (%s:%d)"
+msgstr ""
+"Un document a été modifié depuis la dernière fois que vous l'avez vu (%s:%d)"
+
+#. module: base
+#: code:addons/orm.py:1040
+#, python-format
+msgid "The perm_read method is not implemented on this object !"
+msgstr "La méthode perm_read n'est pas implémentée sur cet objet !"
+
+#. module: base
+#: code:addons/orm.py:1350
+#, python-format
+msgid "Invalid Object Architecture!"
+msgstr "Architecture de l'objet invalide"
+
+#. module: base
+#: code:addons/orm.py:3366
+#, python-format
+msgid ""
+"One of the records you are trying to modify has already been deleted "
+"(Document type: %s)."
+msgstr ""
+"Un des enregistrements que vous essayez de modifier a déjà été supprimé "
+"(Type de document : %s)."
+
+#. module: base
+#: code:addons/orm.py:3817
+#, python-format
+msgid ""
+"Invalid \"order\" specified. A valid \"order\" specification is a comma-"
+"separated list of valid field names (optionally followed by asc/desc for the "
+"direction)"
+msgstr ""
+
+#. module: base
+#: field:ir.ui.menu,web_icon_hover:0
+msgid "Web Icon File (hover)"
+msgstr "Fichier de l'icone web (au survol)"
+
+#. module: base
+#: code:addons/orm.py:1622
+#, python-format
+msgid "There is no view of type '%s' defined for the structure!"
+msgstr "Il n'y a pas de vue de type '%s' définie pour la structure!"
+
+#. module: base
+#: code:addons/orm.py:2973
+#, python-format
+msgid ""
+"Operation prohibited by access rules, or performed on an already deleted "
+"document (Operation: read, Document type: %s)."
+msgstr ""
+
+#. module: base
+#: code:addons/orm.py:1622
+#, python-format
+msgid "Invalid Architecture!"
+msgstr "Architecture invalide !"
+
+#. module: base
+#: code:addons/base/ir/ir_model.py:340
+#, python-format
+msgid ""
+"You can not create this document (%s) ! Be sure your user belongs to one of "
+"these groups: %s."
+msgstr ""
+
+#. module: base
+#: code:addons/orm.py:1046
+#, python-format
+msgid "The write method is not implemented on this object !"
+msgstr "La méthode 'write' n'est pas implémentée dans cet objet !"
+
+#. module: base
+#: code:addons/orm.py:1049
+#, python-format
+msgid "The create method is not implemented on this object !"
+msgstr "La méthode 'create' n'est pas implémentée dans cet objet !"
+
+#. module: base
+#: code:addons/orm.py:3533
+#, python-format
+msgid ""
+"You cannot perform this operation. New Record Creation is not allowed for "
+"this object as this object is for reporting purpose."
+msgstr ""
+
+#. module: base
+#: field:ir.ui.menu,web_icon_hover_data:0
+msgid "Web Icon Image (hover)"
+msgstr "Image de l'icone web (au survol)"
+
+#. module: base
+#: code:addons/orm.py:3199
+#, python-format
+msgid "Unable to delete this document because it is used as a default property"
+msgstr ""
+
+#. module: base
+#: code:addons/orm.py:1350
+#, python-format
+msgid "Insufficient fields for Calendar View!"
+msgstr ""
+
+#. module: base
+#: code:addons/orm.py:1806
+#, python-format
+msgid "The exists method is not implemented on this object !"
+msgstr ""
+
+#. module: base
+#: field:ir.ui.menu,web_icon_data:0
+msgid "Web Icon Image"
+msgstr ""
+
+#. module: base
+#: code:addons/orm.py:2307
+#, python-format
+msgid ""
+"Invalid value for reference field \"%s\" (last part must be a non-zero "
+"integer): \"%s\""
+msgstr ""
+
+#. module: base
+#: code:addons/orm.py:158
+#, python-format
+msgid "Object %s does not exists"
+msgstr ""
+
+#. module: base
+#: code:addons/orm.py:1803
+#, python-format
+msgid "The copy method is not implemented on this object !"
+msgstr ""
+
+#. module: base
+#: code:addons/fields.py:103
+#, python-format
+msgid "Not implemented get_memory method !"
+msgstr ""
+
+#. module: base
+#: code:addons/orm.py:3775
+#, python-format
+msgid "This method does not exist anymore"
+msgstr ""
+
+#. module: base
+#: code:addons/base/ir/ir_model.py:338
+#, python-format
+msgid ""
+"You can not read this document (%s) ! Be sure your user belongs to one of "
+"these groups: %s."
+msgstr ""
+
+#. module: base
+#: code:addons/orm.py:412
+#, python-format
+msgid "The read_group method is not implemented on this object !"
+msgstr ""
+
+#. module: base
+#: code:addons/orm.py:716
+#, python-format
+msgid "Database ID doesn't exist: %s : %s"
+msgstr ""
+
+#. module: base
+#: code:addons/orm.py:836
+#, python-format
+msgid "key '%s' not found in selection field '%s'"
+msgstr ""
+
+#. module: base
+#: code:addons/orm.py:278
+#, python-format
+msgid "Unknown attribute %s in %s "
+msgstr ""
+
+#. module: base
+#: code:addons/orm.py:3166
+#, python-format
+msgid ""
+"Operation prohibited by access rules, or performed on an already deleted "
+"document (Operation: %s, Document type: %s)."
+msgstr ""
+
+#. module: base
+#: code:addons/orm.py:2161
+#, python-format
+msgid ""
+"Invalid group_by specification: \"%s\".\n"
+"A group_by specification must be a list of valid fields."
+msgstr ""
+
+#. module: base
+#: field:ir.ui.menu,web_icon:0
+msgid "Web Icon File"
+msgstr ""
+
+#. module: base
+#: code:addons/base/ir/ir_model.py:341
+#, python-format
+msgid ""
+"You can not delete this document (%s) ! Be sure your user belongs to one of "
+"these groups: %s."
 msgstr ""
 
 #~ msgid "List of Company"

@@ -3,14 +3,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenERP Server 5.0.4\n"
 "Report-Msgid-Bugs-To: support@openerp.com\n"
-"POT-Creation-Date: 2010-12-21 19:43+0000\n"
-"PO-Revision-Date: 2010-12-29 02:26+0000\n"
+"POT-Creation-Date: 2010-12-29 18:06+0000\n"
+"PO-Revision-Date: 2010-12-30 02:25+0000\n"
 "Last-Translator: Wei \"oldrev\" Li <oldrev@gmail.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-12-29 04:40+0000\n"
+"X-Launchpad-Export-Date: 2010-12-31 05:22+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #. module: base
@@ -601,9 +601,12 @@ msgstr ""
 
 #. module: base
 #: code:addons/osv/osv.py:0
-#, python-format
+#, fuzzy, python-format
 msgid "Constraint Error"
 msgstr ""
+"#-#-#-#-#  .merge_file_OE3qkb (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_X3XHuf (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"约束错误"
 
 #. module: base
 #: code:addons/osv/osv.py:0
@@ -3605,8 +3608,12 @@ msgstr ""
 
 #. module: base
 #: help:ir.property,res_id:0
+#, fuzzy
 msgid "If not set, acts as a default value for new resources"
 msgstr ""
+"#-#-#-#-#  .merge_file_OE3qkb (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_X3XHuf (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"倘若没有设置，则作为新资源的默认值"
 
 #. module: base
 #: help:ir.rule,global:0
@@ -11612,11 +11619,16 @@ msgstr ""
 
 #. module: base
 #: view:base.language.import:0
+#, fuzzy
 msgid ""
 "If you need another language than the official ones available, you can "
 "import a language pack from here. Other OpenERP languages than the official "
 "ones can be found on launchpad."
 msgstr ""
+"#-#-#-#-#  .merge_file_OE3qkb (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_X3XHuf (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"如果您需要使用其他官方支持的语言，您可以在此处导入语言包。其他官方尚未支持的"
+"语言可以在 launchpad.net 上下载。"
 
 #. module: base
 #: code:addons/base/res/res_user.py:0
@@ -12570,9 +12582,12 @@ msgstr ""
 
 #. module: base
 #: code:addons/base/res/res_config.py:0
-#, python-format
+#, fuzzy, python-format
 msgid "Click 'Continue' to configure the next addon..."
 msgstr ""
+"#-#-#-#-#  .merge_file_OE3qkb (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_X3XHuf (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"请单击“继续”按钮配置下一个模块..."
 
 #. module: base
 #: view:res.lang:0
@@ -12703,6 +12718,203 @@ msgstr ""
 "#-#-#-#-#  .merge_file_SQnvkB (OpenERP Server 5.0.4)  #-#-#-#-#\n"
 "#-#-#-#-#  .merge_file_mmSLH2 (OpenERP Server 5.0.4)  #-#-#-#-#\n"
 "maintenance.contract"
+
+#. module: base
+#: code:addons/fields.py:534
+#, python-format
+msgid ""
+"The second argument of the many2many field %s must be a SQL table !You used "
+"%s, which is not a valid SQL table name."
+msgstr ""
+"many2many 字段的第二个参数 %s 必须是数据库表。您所使用的 %s 不是一个有效的数"
+"据库表名。"
+
+#. module: base
+#: code:addons/base/ir/ir_model.py:339
+#, python-format
+msgid ""
+"You can not write in this document (%s) ! Be sure your user belongs to one "
+"of these groups: %s."
+msgstr "您不能写入单据 (%s)！请确保您的帐号属于用户组：%s"
+
+#. module: base
+#: code:addons/orm.py:1993 code:addons/orm.py:3653
+#, python-format
+msgid "created."
+msgstr "已创建"
+
+#. module: base
+#: code:addons/orm.py:2160
+#, python-format
+msgid "Invalid group_by"
+msgstr "无效的 group_by"
+
+#. module: base
+#: code:addons/orm.py:4018
+#, python-format
+msgid "Record #%d of %s not found, cannot copy!"
+msgstr "记录 #%d %s 无法找到，不能复制！"
+
+#. module: base
+#: code:addons/orm.py:3147
+#, python-format
+msgid "A document was modified since you last viewed it (%s:%d)"
+msgstr ""
+
+#. module: base
+#: code:addons/orm.py:1350
+#, python-format
+msgid "Invalid Object Architecture!"
+msgstr "无效的对象架构！"
+
+#. module: base
+#: code:addons/orm.py:3366
+#, python-format
+msgid ""
+"One of the records you are trying to modify has already been deleted "
+"(Document type: %s)."
+msgstr "您正尝试修改的记录已经被删除（单据类型：%s）."
+
+#. module: base
+#: code:addons/orm.py:3817
+#, python-format
+msgid ""
+"Invalid \"order\" specified. A valid \"order\" specification is a comma-"
+"separated list of valid field names (optionally followed by asc/desc for the "
+"direction)"
+msgstr ""
+
+#. module: base
+#: field:ir.ui.menu,web_icon_hover:0
+msgid "Web Icon File (hover)"
+msgstr "Web 图标文件（悬停）"
+
+#. module: base
+#: code:addons/orm.py:1622
+#, python-format
+msgid "There is no view of type '%s' defined for the structure!"
+msgstr "类型 '%s' 没有为该结构定义视图"
+
+#. module: base
+#: code:addons/orm.py:2973
+#, python-format
+msgid ""
+"Operation prohibited by access rules, or performed on an already deleted "
+"document (Operation: read, Document type: %s)."
+msgstr ""
+
+#. module: base
+#: code:addons/orm.py:1622
+#, python-format
+msgid "Invalid Architecture!"
+msgstr ""
+
+#. module: base
+#: code:addons/base/ir/ir_model.py:340
+#, python-format
+msgid ""
+"You can not create this document (%s) ! Be sure your user belongs to one of "
+"these groups: %s."
+msgstr ""
+
+#. module: base
+#: code:addons/orm.py:3533
+#, python-format
+msgid ""
+"You cannot perform this operation. New Record Creation is not allowed for "
+"this object as this object is for reporting purpose."
+msgstr ""
+
+#. module: base
+#: field:ir.ui.menu,web_icon_hover_data:0
+msgid "Web Icon Image (hover)"
+msgstr "Web 图标图片（悬停）"
+
+#. module: base
+#: code:addons/orm.py:3199
+#, python-format
+msgid "Unable to delete this document because it is used as a default property"
+msgstr "不能删除该单据，因为它被作为默认属性使用"
+
+#. module: base
+#: code:addons/orm.py:1350
+#, python-format
+msgid "Insufficient fields for Calendar View!"
+msgstr "日历视图缺少字段！"
+
+#. module: base
+#: field:ir.ui.menu,web_icon_data:0
+msgid "Web Icon Image"
+msgstr "Web 图标图片"
+
+#. module: base
+#: code:addons/orm.py:2307
+#, python-format
+msgid ""
+"Invalid value for reference field \"%s\" (last part must be a non-zero "
+"integer): \"%s\""
+msgstr ""
+
+#. module: base
+#: code:addons/base/ir/ir_model.py:338
+#, python-format
+msgid ""
+"You can not read this document (%s) ! Be sure your user belongs to one of "
+"these groups: %s."
+msgstr ""
+
+#. module: base
+#: code:addons/orm.py:412
+#, python-format
+msgid "The read_group method is not implemented on this object !"
+msgstr ""
+
+#. module: base
+#: code:addons/orm.py:716
+#, python-format
+msgid "Database ID doesn't exist: %s : %s"
+msgstr ""
+
+#. module: base
+#: code:addons/orm.py:836
+#, python-format
+msgid "key '%s' not found in selection field '%s'"
+msgstr ""
+
+#. module: base
+#: code:addons/orm.py:278
+#, python-format
+msgid "Unknown attribute %s in %s "
+msgstr ""
+
+#. module: base
+#: code:addons/orm.py:3166
+#, python-format
+msgid ""
+"Operation prohibited by access rules, or performed on an already deleted "
+"document (Operation: %s, Document type: %s)."
+msgstr ""
+
+#. module: base
+#: code:addons/orm.py:2161
+#, python-format
+msgid ""
+"Invalid group_by specification: \"%s\".\n"
+"A group_by specification must be a list of valid fields."
+msgstr ""
+
+#. module: base
+#: field:ir.ui.menu,web_icon:0
+msgid "Web Icon File"
+msgstr ""
+
+#. module: base
+#: code:addons/base/ir/ir_model.py:341
+#, python-format
+msgid ""
+"You can not delete this document (%s) ! Be sure your user belongs to one of "
+"these groups: %s."
+msgstr ""
 
 #~ msgid "Partner Functions"
 #~ msgstr "业务伙伴职能"
