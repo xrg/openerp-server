@@ -364,6 +364,9 @@ class rml_parse(object):
         else:
             rml_head =  self.rml_header
 
+        if not rml_head:
+            return False
+
         head_dom = etree.XML(rml_head)
         for tag in head_dom:
             found = rml_dom.find('.//'+tag.tag)
