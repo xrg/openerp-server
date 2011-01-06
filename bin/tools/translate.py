@@ -344,7 +344,7 @@ class TinyPoFile(object):
 
         if name is None:
             if not fuzzy:
-                self.warn('Missing "#:" formated comment at line %d for the following source:\n\t%s', 
+                self.warn('Missing "#:" formated comment at line %d for the following source:\n\t%s',
                         self.line_num, source[:30])
             return self.next()
         return type, name, res_id, source, trad
@@ -576,7 +576,7 @@ def trans_generate(lang, modules, dbname=None):
             ' FROM ir_model_data WHERE %s ORDER BY module, model, name'
     query_models = """SELECT * FROM 
             ( SELECT DISTINCT ON(m.model) m.id, m.model, imd.module 
-            FROM ir_model AS m, ir_model_data AS imd 
+            FROM ir_model AS m, ir_model_data AS imd
             WHERE m.id = imd.res_id AND imd.model = 'ir.model'
             ORDER BY m.model, imd.id) AS foo
              WHERE %s
@@ -912,46 +912,11 @@ def trans_load_data(db_name, fileobj, fileformat, lang, lang_name=None, verbose=
 
         if not ids:
             # lets create the language with locale information
-            fail = True
-            for ln in get_locales(lang):
-                try:
-                    locale.setlocale(locale.LC_ALL, str(ln))
-                    fail = False
-                    break
-                except locale.Error:
-                    continue
-            if fail:
-                lc = locale.getdefaultlocale()[0]
-                msg = 'Unable to get information for locale %s. Information from the default locale (%s) have been used.'
-                logger.warning(msg, lang, lc)
+            lang_obj.load_lang(cr, 1, lang=lang, lang_name=lang_name)
             try:
                 locale.setlocale(locale.LC_ALL, str(lc + '.' + encoding))
             except locale.Error:
                 pass
-
-            if not lang_name:
-                lang_name = tools.get_languages().get(lang, lang)
-
-            def fix_xa0(s):
-                if s == '\xa0':
-                    return '\xc2\xa0'
-                return s
-
-            lang_info = {
-                'code': lang,
-                'iso_code': iso_lang,
-                'name': lang_name,
-                'translatable': 1,
-                'date_format' : str(locale.nl_langinfo(locale.D_FMT).replace('%y', '%Y')),
-                'time_format' : str(locale.nl_langinfo(locale.T_FMT)),
-                'decimal_point' : fix_xa0(str(locale.localeconv()['decimal_point'])),
-                'thousands_sep' : fix_xa0(str(locale.localeconv()['thousands_sep'])),
-            }
-
-            try:
-                lang_obj.create(cr, uid, lang_info)
-            finally:
-                resetlocale()
         # Here we try to reset the locale regardless.
         locale.setlocale(locale.LC_ALL, str(lc + '.' + encoding))
 

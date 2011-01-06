@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
-#    
+#
 #    OpenERP, Open Source Management Solution
 #    Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>).
 #
@@ -15,7 +15,7 @@
 #    GNU Affero General Public License for more details.
 #
 #    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.     
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
 
@@ -86,8 +86,8 @@ class db(baseExportService):
         self._pg_psw_env_var_is_set = False # on win32, pg_dump need the PGPASSWORD env var
 
     def dispatch(self, method, auth, params):
-        if method in [ 'create', 'get_progress', 'drop', 'dump', 
-            'restore', 'rename', 
+        if method in [ 'create', 'get_progress', 'drop', 'dump',
+            'restore', 'rename',
             'change_admin_password', 'migrate_databases' ]:
             passwd = params[0]
             params = params[1:]
@@ -100,7 +100,7 @@ class db(baseExportService):
             raise KeyError("Method not found: %s" % method)
         fn = getattr(self, 'exp_'+method)
         return fn(*params)
-    
+
     #def new_dispatch(self,method,auth,params):
     #    pass
     def _create_empty_database(self, name):
@@ -129,6 +129,7 @@ class db(baseExportService):
                     serv.actions[id]['progress'] = 0
                     cr = sql_db.db_connect(db_name).cursor()
                     tools.init_db(cr)
+                    tools.config['lang'] = lang
                     cr.commit()
                     cr.close()
                     cr = None
