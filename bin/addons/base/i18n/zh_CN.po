@@ -3,14 +3,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenERP Server 5.0.4\n"
 "Report-Msgid-Bugs-To: support@openerp.com\n"
-"POT-Creation-Date: 2010-12-29 18:06+0000\n"
-"PO-Revision-Date: 2010-12-31 09:47+0000\n"
+"POT-Creation-Date: 2011-01-03 16:57+0000\n"
+"PO-Revision-Date: 2011-01-05 07:12+0000\n"
 "Last-Translator: Wei \"oldrev\" Li <oldrev@gmail.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-01-01 05:00+0000\n"
+"X-Launchpad-Export-Date: 2011-01-06 04:34+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #. module: base
@@ -616,13 +616,18 @@ msgstr ""
 
 #. module: base
 #: code:addons/osv/osv.py:0
-#, python-format
+#, fuzzy, python-format
 msgid ""
 "The operation cannot be completed, probably due to the following:\n"
 "- deletion: you may be trying to delete a record while other records still "
 "reference it\n"
 "- creation/update: a mandatory field is not correctly set"
 msgstr ""
+"#-#-#-#-#  .merge_file_szREQq (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_DAdSzB (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"该操作无法完成，可能是由于以下原因：\\n\n"
+"- 删除：您可能会试图删除一个记录，但是仍有其它记录引用到它 \\n\n"
+"- 创建/更新：一个必须要输入的字段不正确"
 
 #. module: base
 #: constraint:ir.actions.act_window:0
@@ -964,7 +969,7 @@ msgstr "动作类型"
 #: field:ir.actions.report.custom,usage:0 field:ir.actions.report.xml,usage:0
 #: field:ir.actions.server,usage:0 field:ir.actions.wizard,usage:0
 msgid "Action Usage"
-msgstr "操作用途"
+msgstr "动作用途"
 
 #. module: base
 #: field:ir.actions.act_window,view_id:0
@@ -1000,7 +1005,7 @@ msgstr "视图类型"
 #: field:ir.values,action_id:0 selection:ir.values,key:0
 #: view:ir.actions.actions:0 view:res.users:0
 msgid "Action"
-msgstr "操作"
+msgstr "动作"
 
 #. module: base
 #: field:ir.actions.act_window.view,multi:0
@@ -1680,7 +1685,7 @@ msgstr "完整名称"
 #: field:ir.rule,domain_force:0 field:res.partner.title,domain:0
 #: view:ir.filters:0
 msgid "Domain"
-msgstr "过滤条件"
+msgstr "域"
 
 #. module: base
 #: field:ir.model.fields,field_description:0
@@ -1798,7 +1803,7 @@ msgstr "示范数据"
 #. module: base
 #: field:ir.module.module,dependencies_id:0 view:ir.module.module:0
 msgid "Dependencies"
-msgstr "依附关系"
+msgstr "依赖关系"
 
 #. module: base
 #: field:ir.module.module,installed_version:0
@@ -2392,12 +2397,12 @@ msgstr "业务伙伴"
 #. module: base
 #: field:res.company,rml_footer1:0
 msgid "Report Footer 1"
-msgstr "报告脚注1"
+msgstr "报表页脚1"
 
 #. module: base
 #: field:res.company,rml_footer2:0
 msgid "Report Footer 2"
-msgstr "报告脚注2"
+msgstr "报表页脚 2"
 
 #. module: base
 #: field:res.company,rml_header:0
@@ -3261,13 +3266,9 @@ msgstr ""
 
 #. module: base
 #: help:ir.actions.act_window,src_model:0
-#, fuzzy
 msgid ""
 "Optional model name of the objects on which this action should be visible"
-msgstr ""
-"#-#-#-#-#  .merge_file_O5ynop (OpenERP Server 5.0.4)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_eKjW5O (OpenERP Server 5.0.4)  #-#-#-#-#\n"
-"可选参数，对象名，此操作会显示在此对象视图的右侧"
+msgstr "可选参数，对象名，此动作会显示在此对象视图的右侧"
 
 #. module: base
 #: help:ir.actions.act_window,view_mode:0
@@ -4259,7 +4260,7 @@ msgstr "业务伙伴分类"
 #: model:ir.actions.act_window,name:base.action_partner_form
 #: model:ir.ui.menu,name:base.menu_partner_form view:res.partner:0
 msgid "Customers"
-msgstr "客户列表"
+msgstr "客户"
 
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: model:ir.actions.act_window,name:base.action_partner_customer_form_new
@@ -4309,7 +4310,7 @@ msgstr ""
 #: model:ir.ui.menu,name:base.menu_procurement_management_supplier_name
 #: view:res.partner:0
 msgid "Suppliers"
-msgstr "供应商列表"
+msgstr "供应商"
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_partner_title_contact
@@ -4625,7 +4626,7 @@ msgstr "所有属性"
 #: model:ir.ui.menu,name:base.menu_ir_sequence_actions
 #: model:ir.ui.menu,name:base.next_id_6 view:workflow.activity:0
 msgid "Actions"
-msgstr "操作"
+msgstr "动作"
 
 #. module: base
 #: model:ir.actions.act_window,name:base.ir_sequence_form
@@ -7101,8 +7102,12 @@ msgstr ""
 
 #. module: base
 #: model:res.widget,title:base.openerp_twitter_favorites
+#, fuzzy
 msgid "OpenERP Favorites"
 msgstr ""
+"#-#-#-#-#  .merge_file_szREQq (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_DAdSzB (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"OpenERP 收藏夹"
 
 #. module: base
 #: report:ir.module.reference.graph:0 rml:ir.module.reference:0
@@ -11299,7 +11304,7 @@ msgstr "要下载的模块"
 #: wizard_field:server.action.create,init,type:0
 #: wizard_view:server.action.create,init:0
 msgid "Select Action Type"
-msgstr "选择操作类型"
+msgstr "选择动作类型"
 
 #. module: base
 #: wizard_field:server.action.create,step_1,report:0
@@ -12490,8 +12495,12 @@ msgstr ""
 
 #. module: base
 #: view:publisher_warranty.contract.wizard:0
+#, fuzzy
 msgid "Please enter the serial key provided in your contract document:"
 msgstr ""
+"#-#-#-#-#  .merge_file_szREQq (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_DAdSzB (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"请输入合同中的序列号"
 
 #. module: base
 #: view:res.lang:0
@@ -12757,9 +12766,12 @@ msgstr "记录 #%d %s 无法找到，不能复制！"
 
 #. module: base
 #: code:addons/orm.py:3147
-#, python-format
+#, fuzzy, python-format
 msgid "A document was modified since you last viewed it (%s:%d)"
 msgstr ""
+"#-#-#-#-#  .merge_file_szREQq (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_DAdSzB (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"自您上次查看过以后该单据已被修改(%s:%d)"
 
 #. module: base
 #: code:addons/orm.py:1350
@@ -12797,25 +12809,34 @@ msgstr "类型 '%s' 没有为该结构定义视图"
 
 #. module: base
 #: code:addons/orm.py:2973
-#, python-format
+#, fuzzy, python-format
 msgid ""
 "Operation prohibited by access rules, or performed on an already deleted "
 "document (Operation: read, Document type: %s)."
 msgstr ""
+"#-#-#-#-#  .merge_file_szREQq (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_DAdSzB (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"访问规则禁止对已删除的文件执行以下操作,(操作：读取，单据类型：%s)."
 
 #. module: base
 #: code:addons/orm.py:1622
-#, python-format
+#, fuzzy, python-format
 msgid "Invalid Architecture!"
 msgstr ""
+"#-#-#-#-#  .merge_file_szREQq (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_DAdSzB (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"无效的架构！"
 
 #. module: base
 #: code:addons/base/ir/ir_model.py:340
-#, python-format
+#, fuzzy, python-format
 msgid ""
 "You can not create this document (%s) ! Be sure your user belongs to one of "
 "these groups: %s."
 msgstr ""
+"#-#-#-#-#  .merge_file_szREQq (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_DAdSzB (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"您不能创建单据“%s”！您确定您的用户属于用户组：%s."
 
 #. module: base
 #: code:addons/orm.py:3533
@@ -12914,6 +12935,116 @@ msgstr ""
 msgid ""
 "You can not delete this document (%s) ! Be sure your user belongs to one of "
 "these groups: %s."
+msgstr ""
+
+#. module: base
+#: field:change.user.password,new_password:0
+msgid "New Password"
+msgstr ""
+
+#. module: base
+#: model:res.widget,title:base.facebook_widget
+msgid "Facebook"
+msgstr ""
+
+#. module: base
+#: model:ir.model,name:base.model_change_user_password
+msgid "change.user.password"
+msgstr ""
+
+#. module: base
+#: help:change.user.password,confirm_password:0
+msgid "Enter the new password again for confirmation."
+msgstr ""
+
+#. module: base
+#: model:ir.actions.act_window,help:base.action_partner_form
+msgid ""
+"A customer is an entity you do business with, like a company or an "
+"organization. A customer can have several contacts or addresses which are "
+"the people working for this company. You can use the history tab, to follow "
+"all transactions related to a customer: sales order, emails, opportunities, "
+"claims, etc. If you use the email gateway, the Outlook or the Thunderbird "
+"plugin, don't forget to register emails to each contact so that the gateway "
+"will automatically attach incoming emails to the right partner."
+msgstr ""
+
+#. module: base
+#: model:res.widget,title:base.currency_converter_widget
+msgid "Currency Converter"
+msgstr ""
+
+#. module: base
+#: field:change.user.password,current_password:0
+msgid "Current Password"
+msgstr ""
+
+#. module: base
+#: model:ir.actions.act_window,help:base.act_ir_actions_todo_form
+msgid ""
+"The configuration wizards are used to help you configure a new instance of "
+"OpenERP. They are launched during the installation of new modules, but you "
+"can choose to restart some wizards manually from this menu."
+msgstr ""
+
+#. module: base
+#: code:addons/base/res/res_user.py:605
+#, python-format
+msgid "The current password does not match, please double-check it."
+msgstr ""
+
+#. module: base
+#: help:change.user.password,new_password:0
+msgid "Enter the new password."
+msgstr ""
+
+#. module: base
+#: field:change.user.password,confirm_password:0
+msgid "Confirm Password"
+msgstr ""
+
+#. module: base
+#: code:addons/base/res/res_user.py:594
+#, python-format
+msgid ""
+"The new and confirmation passwords do not match, please double-check them."
+msgstr ""
+
+#. module: base
+#: view:change.user.password:0
+msgid "Change"
+msgstr ""
+
+#. module: base
+#: model:ir.actions.act_window,name:base.res_log_act_window
+#: model:ir.ui.menu,name:base.menu_res_log_act_window
+msgid "Client Logs"
+msgstr ""
+
+#. module: base
+#: model:res.widget,title:base.google_maps_widget
+msgid "Google Maps"
+msgstr ""
+
+#. module: base
+#: view:change.user.password:0
+#: model:ir.actions.act_window,name:base.action_view_change_password_form
+#: view:res.users:0
+msgid "Change Password"
+msgstr ""
+
+#. module: base
+#: help:change.user.password,current_password:0
+msgid "Enter your current password."
+msgstr ""
+
+#. module: base
+#: model:ir.actions.act_window,help:base.action_partner_supplier_form
+msgid ""
+"You can access all information regarding your suppliers from the supplier "
+"form: accounting data, history of emails, meetings, purchases, etc. You can "
+"uncheck the 'Suppliers' filter button in order to search in all your "
+"partners, including customers and prospects."
 msgstr ""
 
 #~ msgid "Partner Functions"
