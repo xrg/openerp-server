@@ -215,6 +215,16 @@ class users(osv.osv):
                 self.write(cr, uid, ids, {'address_id': address_id}, context)
         return True
 
+    def _set_new_password(self, cr, uid, id, name, value, args, context=None):
+        if not value:
+            raise osv.except_osv(_('Empty new password'), _('Please provide a new password value'))
+        if uid == id:
+            # To change their own password users must use the client-specific change password wizard,
+            # so that the new password is immediately used for further RPC requests, otherwise the user
+            # will face unexpected 'Access Denied' exceptions.
+            raise osv.except_osv(_('Operation Canceled'), _('Please use the change password wizard (in User Preferences or User menu) to change your own password.'))
+        self.write(cr, uid, id, {'password': value})
+
     _columns = {
         'name': fields.char('User Name', size=64, required=True, select=True,
                             help="The new user's real name, used for searching"
@@ -222,6 +232,10 @@ class users(osv.osv):
         'login': fields.char('Login', size=64, required=True,
                              help="Used to log into the system"),
         'password': fields.char('Password', size=64, invisible=True, help="Keep empty if you don't want the user to be able to connect on the system."),
+        'new_password': fields.function(lambda *a:'', method=True, type='char', size=64,
+                                fnct_inv=_set_new_password,
+                                string='Change password', help="Only specify a value if you want to change the user password. "
+                                "This user will have to logout and login again!"),
         'email': fields.char('E-mail', size=64,
             help='If an email is provided, the user will be sent a message '
                  'welcoming him.\n\nWarning: if "email_from" and "smtp_server"'
@@ -497,10 +511,16 @@ class users(osv.osv):
         finally:
             cr.close()
 
-    def change_password(self, cr, uid, ids, old_passwd, new_passwd):
-        for id in ids:
-            if self.check(cr.dbname, id, old_passwd):
-                self.write(cr, uid, uid, {'password': new_passwd})
+    def change_password(self, cr, uid, old_passwd, new_passwd):
+        """Change current user password. Old password must be provided explicitly
+        to prevent hijacking an existing user session, or for cases where the cleartext
+        password is not used to authenticate requests.
+
+        :return: True
+        :raise: security.ExceptionNoTb when old password is wrong
+        """
+        if self.check(cr.dbname, uid, old_passwd):
+            self.write(cr, uid, uid, {'password': new_passwd})
         return True
 
 users()

@@ -109,7 +109,7 @@
                     <field name="name" select="1"/>
                     <field name="active"/>
                     <field name="login" select="1"/>
-                    <field name="password" password="True"/>
+                    <field name="new_password" password="True"/>
                     <newline/>
                     <notebook colspan="4">
                         <page string="User">
