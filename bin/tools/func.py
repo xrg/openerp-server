@@ -20,7 +20,8 @@
 #
 ##############################################################################
 
-__all__ = ['partial', 'wraps', 'update_wrapper', 'synchronized']
+__all__ = ['partial', 'wraps', 'update_wrapper', 'synchronized', 
+            'virtual', 'frame_codeinfo']
 
 try:
     from functools import partial, wraps, update_wrapper
