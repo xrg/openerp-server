@@ -442,7 +442,9 @@ class expression(object):
                             self.__exp[i] = ('id', m2m_op, (erqu, erpa))
 
             elif field._type == 'many2one':
-                if isinstance(right, list) and len(right) and isinstance(right[0], tuple):
+                if isinstance(right, list) and len(right) \
+                        and isinstance(right[0], (tuple, list)) \
+                        and len(right[0]) == 3:
                     # That's a nested expression
 
                     assert(operator == 'in') # others not implemented
