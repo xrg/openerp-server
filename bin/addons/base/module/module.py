@@ -42,7 +42,7 @@ class module_category(osv.osv):
     def _module_nbr(self,cr,uid, ids, prop, unknow_none, context):
         cr.execute('SELECT category_id, COUNT(*) FROM ir_module_module '
                 'WHERE category_id = ANY (%s) OR category_id IN '
-                '(SELECT id FROM ir_module_category WHERE parent_id = ANY(%s) '
+                '(SELECT id FROM ir_module_category WHERE parent_id = ANY(%s)) '
                 ' GROUP BY category_id', (ids, ids), debug=self._debug )
         result = dict(cr.fetchall())
         for id in ids:
