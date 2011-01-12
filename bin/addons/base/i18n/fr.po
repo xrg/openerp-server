@@ -4,13 +4,13 @@ msgstr ""
 "Project-Id-Version: OpenERP Server 5.0.4\n"
 "Report-Msgid-Bugs-To: support@openerp.com\n"
 "POT-Creation-Date: 2011-01-03 16:57+0000\n"
-"PO-Revision-Date: 2011-01-04 19:55+0000\n"
-"Last-Translator: Fabien (Open ERP) <fp@tinyerp.com>\n"
+"PO-Revision-Date: 2011-01-07 14:52+0000\n"
+"Last-Translator: Quentin THEURET <quentin@theuret.net>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-01-05 04:44+0000\n"
+"X-Launchpad-Export-Date: 2011-01-08 04:55+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #. module: base
@@ -13813,8 +13813,12 @@ msgstr "change.user.password"
 
 #. module: base
 #: help:change.user.password,confirm_password:0
+#, fuzzy
 msgid "Enter the new password again for confirmation."
 msgstr ""
+"#-#-#-#-#  .merge_file_MAAMo0 (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_6lqxNV (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"Entrer le mot de passe à nouveau pour confirmer."
 
 #. module: base
 #: model:ir.actions.act_window,help:base.action_partner_form
@@ -13840,17 +13844,27 @@ msgstr "Mot de passe actuel"
 
 #. module: base
 #: model:ir.actions.act_window,help:base.act_ir_actions_todo_form
+#, fuzzy
 msgid ""
 "The configuration wizards are used to help you configure a new instance of "
 "OpenERP. They are launched during the installation of new modules, but you "
 "can choose to restart some wizards manually from this menu."
 msgstr ""
+"#-#-#-#-#  .merge_file_MAAMo0 (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_6lqxNV (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"Les assistants de configuration sont utilisés pour vous aider à configurer "
+"une nouvelle instance OpenERP. Ils sont lancés lors de l'installation de "
+"nouveaux modules mais vous pouvez choisir de les déclencher manuellement à "
+"partir de ce menu."
 
 #. module: base
 #: code:addons/base/res/res_user.py:605
-#, python-format
+#, fuzzy, python-format
 msgid "The current password does not match, please double-check it."
 msgstr ""
+"#-#-#-#-#  .merge_file_MAAMo0 (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_6lqxNV (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"Le mot de passe actuel ne correspond pas, vérifiez de nouveau."
 
 #. module: base
 #: help:change.user.password,new_password:0
@@ -13859,20 +13873,32 @@ msgstr "Entrez le mot de passe."
 
 #. module: base
 #: field:change.user.password,confirm_password:0
+#, fuzzy
 msgid "Confirm Password"
 msgstr ""
+"#-#-#-#-#  .merge_file_MAAMo0 (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_6lqxNV (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"Confirmer le mot de passe"
 
 #. module: base
 #: code:addons/base/res/res_user.py:594
-#, python-format
+#, fuzzy, python-format
 msgid ""
 "The new and confirmation passwords do not match, please double-check them."
 msgstr ""
+"#-#-#-#-#  .merge_file_MAAMo0 (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_6lqxNV (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"Le nouveau mot de passe et la confirmation ne correspondent pas. Vérifiez de "
+"nouveau."
 
 #. module: base
 #: view:change.user.password:0
+#, fuzzy
 msgid "Change"
 msgstr ""
+"#-#-#-#-#  .merge_file_MAAMo0 (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_6lqxNV (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"Modifier"
 
 #. module: base
 #: model:ir.actions.act_window,name:base.res_log_act_window
@@ -13882,29 +13908,49 @@ msgstr ""
 
 #. module: base
 #: model:res.widget,title:base.google_maps_widget
+#, fuzzy
 msgid "Google Maps"
 msgstr ""
+"#-#-#-#-#  .merge_file_MAAMo0 (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_6lqxNV (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"Google Maps"
 
 #. module: base
 #: view:change.user.password:0
 #: model:ir.actions.act_window,name:base.action_view_change_password_form
 #: view:res.users:0
+#, fuzzy
 msgid "Change Password"
 msgstr ""
+"#-#-#-#-#  .merge_file_MAAMo0 (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_6lqxNV (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"Modifier le mot de passe"
 
 #. module: base
 #: help:change.user.password,current_password:0
+#, fuzzy
 msgid "Enter your current password."
 msgstr ""
+"#-#-#-#-#  .merge_file_MAAMo0 (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_6lqxNV (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"Entrez votre mot de passe actuel."
 
 #. module: base
 #: model:ir.actions.act_window,help:base.action_partner_supplier_form
+#, fuzzy
 msgid ""
 "You can access all information regarding your suppliers from the supplier "
 "form: accounting data, history of emails, meetings, purchases, etc. You can "
 "uncheck the 'Suppliers' filter button in order to search in all your "
 "partners, including customers and prospects."
 msgstr ""
+"#-#-#-#-#  .merge_file_MAAMo0 (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_6lqxNV (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"Vous pouvez accéder à toutes les informations fournisseur grâce à son "
+"formulaire : données comptables, historique des courriels, rendez-vous, "
+"achats, etc. Vous pouvez désélectionner le boutton  \"Fournisseur\" afin de "
+"chercher dans la totalité de vos partenaires, incluant les clients et les "
+"opportunités."
 
 #~ msgid "List of Company"
 #~ msgstr "Liste des sociétés"

@@ -545,7 +545,7 @@ class module(osv.osv):
                     to_load.reverse()
                 for (iso_lang, f) in to_load:
                     logger.info('module %s: loading translation file for language %s', mod.name, iso_lang)
-                    tools.trans_load(cr.dbname, f, lang, verbose=False, context=context)
+                    tools.trans_load(cr, f, lang, verbose=False, context=context)
                 if to_load == [] and lang != 'en_US':
                     logger.warning('module %s: no translation for language %s', mod.name, lang)
 
