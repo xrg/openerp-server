@@ -3,14 +3,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenERP Server 5.0.4\n"
 "Report-Msgid-Bugs-To: support@openerp.com\n"
-"POT-Creation-Date: 2011-01-03 16:57+0000\n"
-"PO-Revision-Date: 2011-01-07 14:52+0000\n"
+"POT-Creation-Date: 2011-01-11 11:14+0000\n"
+"PO-Revision-Date: 2011-01-10 15:41+0000\n"
 "Last-Translator: Quentin THEURET <quentin@theuret.net>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-01-08 04:55+0000\n"
+"X-Launchpad-Export-Date: 2011-01-12 04:47+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #. module: base
@@ -13951,6 +13951,207 @@ msgstr ""
 "achats, etc. Vous pouvez désélectionner le boutton  \"Fournisseur\" afin de "
 "chercher dans la totalité de vos partenaires, incluant les clients et les "
 "opportunités."
+
+#. module: base
+#: help:ir.model.fields,domain:0
+msgid ""
+"The optional domain to restrict possible values for relationship fields, "
+"specified as a Python expression defining a list of triplets. For example: "
+"[('color','=','red')]"
+msgstr ""
+
+#. module: base
+#: code:addons/base/res/res_user.py:507
+#, python-format
+msgid "Warning!"
+msgstr ""
+
+#. module: base
+#: code:addons/base/ir/ir_model.py:304
+#, python-format
+msgid ""
+"Properties of base fields cannot be altered in this manner! Please modify "
+"them through Python code, preferably through a custom addon!"
+msgstr ""
+
+#. module: base
+#: code:addons/base/res/res_user.py:507
+#, python-format
+msgid "Setting empty passwords is not allowed for security reasons!"
+msgstr ""
+
+#. module: base
+#: code:addons/base/ir/ir_model.py:328
+#, python-format
+msgid "Changing the model of a field is forbidden!"
+msgstr ""
+
+#. module: base
+#: code:addons/base/res/res_user.py:206
+#, python-format
+msgid "Operation Canceled"
+msgstr ""
+
+#. module: base
+#: help:ir.model.fields,model:0
+msgid "The technical name of the model this field belongs to"
+msgstr ""
+
+#. module: base
+#: help:ir.ui.view_sc,res_id:0
+msgid ""
+"Reference of the target resource, whose model/table depends on the 'Resource "
+"Name' field."
+msgstr ""
+
+#. module: base
+#: view:ir.ui.view.custom:0
+msgid "Customized Architecture"
+msgstr ""
+
+#. module: base
+#: field:ir.translation,xml_id:0
+msgid "XML Id"
+msgstr ""
+
+#. module: base
+#: code:addons/base/ir/ir_model.py:319
+#, python-format
+msgid "Cannot rename column to %s, because that column already exists!"
+msgstr ""
+
+#. module: base
+#: code:addons/base/ir/ir_model.py:205
+#, python-format
+msgid ""
+"The Selection Options expression is not a valid Pythonic expression.Please "
+"provide an expression in the [('key','Label'), ...] format."
+msgstr ""
+
+#. module: base
+#: help:ir.model.fields,relation_field:0
+msgid ""
+"For one2many fields, the field on the target model that implement the "
+"opposite many2one relationship"
+msgstr ""
+
+#. module: base
+#: help:ir.model.fields,translate:0
+msgid ""
+"Whether values for this field can be translated (enables the translation "
+"mechanism for that field)"
+msgstr ""
+
+#. module: base
+#: help:ir.model.fields,relation:0
+msgid "For relationship fields, the technical name of the target model"
+msgstr ""
+
+#. module: base
+#: code:addons/base/res/res_user.py:206
+#, python-format
+msgid ""
+"Please use the change password wizard (in User Preferences or User menu) to "
+"change your own password."
+msgstr ""
+
+#. module: base
+#: code:addons/base/ir/ir_model.py:250
+#, python-format
+msgid "For selection fields, the Selection Options must be given!"
+msgstr ""
+
+#. module: base
+#: model:ir.actions.act_window,name:base.action_ui_view_custom
+#: model:ir.ui.menu,name:base.menu_action_ui_view_custom
+#: view:ir.ui.view.custom:0
+msgid "Customized Views"
+msgstr ""
+
+#. module: base
+#: code:addons/base/ir/ir_model.py:321
+#, python-format
+msgid ""
+"New column name must still start with x_ , because it is a custom field!"
+msgstr ""
+
+#. module: base
+#: help:ir.translation,module:0 help:ir.translation,xml_id:0
+msgid "Maps to the ir_model_data for which this translation is provided."
+msgstr ""
+
+#. module: base
+#: model:ir.actions.act_window,help:base.action_ui_view_custom
+msgid ""
+"Customized views are used when users reorganize the content of their "
+"dashboard views (via web client)"
+msgstr ""
+
+#. module: base
+#: help:ir.model.fields,model_id:0
+msgid "The model this field belongs to"
+msgstr ""
+
+#. module: base
+#: field:ir.model.fields,selection:0
+msgid "Selection Options"
+msgstr ""
+
+#. module: base
+#: code:addons/base/ir/ir_model.py:331
+#, python-format
+msgid ""
+"Changing the type of a column is not yet supported. Please drop it and "
+"create it again!"
+msgstr ""
+
+#. module: base
+#: help:res.config.users,new_password:0 help:res.users,new_password:0
+msgid ""
+"Only specify a value if you want to change the user password. This user will "
+"have to logout and login again!"
+msgstr ""
+
+#. module: base
+#: field:res.config.users,new_password:0 field:res.users,new_password:0
+msgid "Change password"
+msgstr ""
+
+#. module: base
+#: model:ir.actions.act_window,help:base.open_module_tree
+msgid ""
+"You can install new modules in order to activate new features, menu, reports "
+"or data in your OpenERP instance. To install some modules, click on the "
+"button \"Schedule for Installation\" from the form view, then click on "
+"\"Apply Scheduled Upgrades\" to migrate your system."
+msgstr ""
+
+#. module: base
+#: help:ir.model.fields,selection:0
+msgid ""
+"List of options for a selection field, specified as a Python expression "
+"defining a list of (key, label) pairs. For example: [('blue','Blue'),"
+"('yellow','Yellow')]"
+msgstr ""
+
+#. module: base
+#: code:addons/base/ir/ir_model.py:219
+#, python-format
+msgid ""
+"The Selection Options expression is must be in the [('key','Label'), ...] "
+"format!"
+msgstr ""
+
+#. module: base
+#: selection:ir.model.fields,select_level:0
+msgid "Advanced Search (deprecated)"
+msgstr ""
+
+#. module: base
+#: code:addons/base/ir/ir_model.py:317
+#, python-format
+msgid "Can only rename one column at a time!"
+msgstr ""
 
 #~ msgid "List of Company"
 #~ msgstr "Liste des sociétés"
