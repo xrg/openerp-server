@@ -76,6 +76,8 @@ def _symbol_set_long(symb):
         warnings.warn("You passed empty string as value to a long integer",
                       DeprecationWarning, stacklevel=4)
         return None
+    #elif not isinstance(symb, (basestring, int, long, float)):
+    #    raise ValueError("Why passed %r to _symbol_set_long?" % symb)
     return long(symb)
 
 
