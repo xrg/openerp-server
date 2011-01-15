@@ -2600,7 +2600,7 @@ class orm(orm_template):
             if f not in ['id','sequence']:
                 oper = fget[f].get('group_operator','sum')
                 if flist:
-                    flist += ','
+                    flist += ', '
                 ftbl = ''
                 if f in self._columns:
                     ftbl = '"%s".' % self._table
