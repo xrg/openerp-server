@@ -4,13 +4,13 @@ msgstr ""
 "Project-Id-Version: OpenERP Server 5.0.0\n"
 "Report-Msgid-Bugs-To: support@openerp.com\n"
 "POT-Creation-Date: 2011-01-11 11:14+0000\n"
-"PO-Revision-Date: 2011-01-12 20:47+0000\n"
+"PO-Revision-Date: 2011-01-14 10:29+0000\n"
 "Last-Translator: Aries Bucquet, Aspirix AB <Unknown>\n"
 "Language-Team: <>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-01-13 04:40+0000\n"
+"X-Launchpad-Export-Date: 2011-01-16 05:02+0000\n"
 "X-Generator: Launchpad (build 12177)\n"
 
 #. module: base
@@ -496,9 +496,12 @@ msgstr ""
 
 #. module: base
 #: code:addons/osv/osv.py:0
-#, python-format
+#, fuzzy, python-format
 msgid "Constraint Error"
 msgstr ""
+"#-#-#-#-#  .merge_file_3OAgqr (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_Egcu1j (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Restriktionsfel"
 
 #. module: base
 #: code:addons/osv/osv.py:0
@@ -5977,7 +5980,7 @@ msgstr "Singapore"
 #. module: base
 #: model:res.country,name:base.sh
 msgid "Saint Helena"
-msgstr "Saint Helena"
+msgstr "St Helena"
 
 #. module: base
 #: model:res.country,name:base.si
@@ -7922,7 +7925,7 @@ msgstr ""
 #. module: base
 #: selection:module.lang.install,init,lang:0
 msgid "Hungarian / Magyar"
-msgstr "Hungarian / Magyar"
+msgstr "Ungersk / Magyar"
 
 #. module: base
 #: selection:module.lang.install,init,lang:0
@@ -13783,19 +13786,27 @@ msgstr ""
 
 #. module: base
 #: code:addons/fields.py:534
-#, python-format
+#, fuzzy, python-format
 msgid ""
 "The second argument of the many2many field %s must be a SQL table !You used "
 "%s, which is not a valid SQL table name."
 msgstr ""
+"#-#-#-#-#  .merge_file_3OAgqr (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_Egcu1j (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Det andra argumentet i many2many fältet %s måste vara en SQL tabell! Du "
+"använde %s , som inte är ett giltigt tabellnamn"
 
 #. module: base
 #: code:addons/base/ir/ir_model.py:339
-#, python-format
+#, fuzzy, python-format
 msgid ""
 "You can not write in this document (%s) ! Be sure your user belongs to one "
 "of these groups: %s."
 msgstr ""
+"#-#-#-#-#  .merge_file_3OAgqr (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_Egcu1j (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Du har inte rättigheter att skriva i detta dokument(%s)! Se till att din "
+"användare tillhör en av följande grupper: %s."
 
 #. module: base
 #: code:addons/orm.py:1993 code:addons/orm.py:3653
@@ -14242,17 +14253,24 @@ msgstr ""
 
 #. module: base
 #: code:addons/base/res/res_user.py:507
-#, python-format
+#, fuzzy, python-format
 msgid "Warning!"
 msgstr ""
+"#-#-#-#-#  .merge_file_3OAgqr (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_Egcu1j (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Varning!"
 
 #. module: base
 #: code:addons/base/ir/ir_model.py:304
-#, python-format
+#, fuzzy, python-format
 msgid ""
 "Properties of base fields cannot be altered in this manner! Please modify "
 "them through Python code, preferably through a custom addon!"
 msgstr ""
+"#-#-#-#-#  .merge_file_3OAgqr (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_Egcu1j (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Egenskaperna för basfälten can inte ändras på detta sätt! var vänlig och "
+"ändra dem med Python kod, eller via en egengjord Addon."
 
 #. module: base
 #: code:addons/base/res/res_user.py:507
