@@ -104,7 +104,7 @@ def find_addons():
                 yield mname, join(empath, mname)
             else:
                 print "Module %s specified, but no valid path." % mname
-    except:
+    except Exception:
         pass
 
 def data_files():
