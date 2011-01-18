@@ -636,6 +636,10 @@ class SecureMultiHTTPHandler(MultiHTTPHandler):
         except Exception:
             pass
 
+    def handle_one_request(self):
+        MultiHTTPHandler.handle_one_request(self)
+        self.wfile.flush()
+
 import threading
 
 socket_error = socket.error # keep a reference
