@@ -328,6 +328,8 @@ class browse_record(object):
             field_values = self._table.read(self._cr, self._uid, ids, field_names, context=self._context, load="_classic_write")
             # if self._table._debug: # too much now, please enable if really needed
             #     self.__logger.debug("Got result %r", field_values)
+
+            # TODO: improve this, very slow for reports
             if self._fields_process:
                 lang_obj = None
                 if self._context.get('lang', False):
@@ -4453,7 +4455,7 @@ class orm(orm_template):
         else:
             # extract the field names, to be able to qualify them and add desc/asc
             m2o_order_list = []
-            for order_part in m2o_order.split(",",1):
+            for order_part in m2o_order.split(","):
                 m2o_order_list.append(order_part.strip().split(" ",1)[0].strip())
             m2o_order = m2o_order_list
 
@@ -4784,7 +4786,7 @@ class orm(orm_template):
                     return False
         return True
 
-    def get_xml_ids(self, cr, uid, ids, *args, **kwargs):
+    def _get_xml_ids(self, cr, uid, ids, *args, **kwargs):
         """Find out the XML ID(s) of any database record.
 
         **Synopsis**: ``_get_xml_ids(cr, uid, ids) -> { 'id': ['module.xml_id'] }``
@@ -4818,7 +4820,7 @@ class orm(orm_template):
                  defaulting to an empty string when there's none
                  (to be usable as a function field).
         """
-        results = self.get_xml_ids(cr, uid, ids)
+        results = self._get_xml_ids(cr, uid, ids)
         for k, v in results.items():
             if results[k]:
                 results[k] = v[0]

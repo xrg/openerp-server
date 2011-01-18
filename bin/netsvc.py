@@ -607,7 +607,6 @@ agent_runner = threading.Thread(target=Agent.runner, name="netsvc.Agent.runner")
 agent_runner.setDaemon(True)
 agent_runner.start()
 
-
 import traceback
 
 class Server:
