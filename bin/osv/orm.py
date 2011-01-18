@@ -348,53 +348,12 @@ class browse_record(object):
                 # Where did those ids come from? Perhaps old entries in ir_model_dat?
                 self.__logger.warn("No field_values found for ids %s in %s", ids, self)
                 raise KeyError('Field %s not found in %s'%(name, self))
-            # create browse records for 'remote' objects
+
+            # store the raw data (eg. ids for many2one fields) in cache
             for result_line in field_values:
-                new_data = {}
-                for field_name, field_column in fields_to_fetch:
-                    if field_column._type in ('many2one', 'one2one'):
-                        if result_line[field_name]:
-                            obj = self._table.pool.get(field_column._obj)
-                            if isinstance(result_line[field_name], (list, tuple)):
-                                value = result_line[field_name][0]
-                            else:
-                                value = result_line[field_name]
-                            if value:
-                                # FIXME: this happen when a _inherits object
-                                #        overwrite a field of it parent. Need
-                                #        testing to be sure we got the right
-                                #        object and not the parent one.
-                                if not isinstance(value, browse_record):
-                                    new_data[field_name] = browse_record(self._cr,
-                                        self._uid, value, obj, self._cache,
-                                        context=self._context,
-                                        list_class=self._list_class,
-                                        fields_process=self._fields_process)
-                                else:
-                                    new_data[field_name] = value
-                            else:
-                                new_data[field_name] = browse_null()
-                        else:
-                            new_data[field_name] = browse_null()
-                    elif field_column._type in ('one2many', 'many2many') and len(result_line[field_name]):
-                        new_data[field_name] = self._list_class([browse_record(self._cr, self._uid, id, self._table.pool.get(field_column._obj), self._cache, context=self._context, list_class=self._list_class, fields_process=self._fields_process) for id in result_line[field_name]], self._context)
-                    elif field_column._type in ('reference'):
-                        if result_line[field_name]:
-                            if isinstance(result_line[field_name], browse_record):
-                                new_data[field_name] = result_line[field_name]
-                            else:
-                                ref_obj, ref_id = result_line[field_name].split(',')
-                                ref_id = long(ref_id)
-                                if ref_id:
-                                    obj = self._table.pool.get(ref_obj)
-                                    new_data[field_name] = browse_record(self._cr, self._uid, ref_id, obj, self._cache, context=self._context, list_class=self._list_class, fields_process=self._fields_process)
-                                else:
-                                    new_data[field_name] = browse_null()
-                        else:
-                            new_data[field_name] = browse_null()
-                    else:
-                        new_data[field_name] = result_line[field_name]
-                self._data[result_line['id']].update(new_data)
+                res_id = result_line['id']
+                del result_line['id']
+                self._data[res_id].update(result_line)
         
         if not name in self._data[self._id]:
             #how did this happen?
@@ -411,7 +370,64 @@ class browse_record(object):
             self._table._column_stats.setdefault(name,0)
             self._table._column_stats[name] += 1
 
-        return self._data[self._id][name]
+        # Process the return value and convert from raw data into
+        # browse records, where applicable. 
+        # The browse records shall have a very short life, only as return
+        # values of this function, never stored in self._data{} cache
+        
+        ret = self._data[self._id][name]
+        col = None
+        if name in self._table._columns:
+            col = self._table._columns[name]
+        elif name in self._table._inherit_fields:
+            col = self._table._inherit_fields[name][2]
+
+        if col and col._type in ('many2one', 'one2one'):
+            if ret:
+                obj = self._table.pool.get(col._obj)
+                if isinstance(ret, (list, tuple)):
+                    value = ret[0]
+                else:
+                    value = ret
+                if value:
+                    # FIXME: this happen when a _inherits object
+                    #        overwrite a field of it parent. Need
+                    #        testing to be sure we got the right
+                    #        object and not the parent one.
+                    if not isinstance(value, browse_record):
+                        ret = browse_record(self._cr,
+                                    self._uid, value, obj, self._cache,
+                                    context=self._context,
+                                    list_class=self._list_class,
+                                    fields_process=self._fields_process)
+                    else: # unlikely
+                        ret = value
+                else:
+                    ret = browse_null()
+            else:
+                ret = browse_null()
+        elif col and col._type in ('one2many', 'many2many') and len(ret):
+            ret = self._list_class([
+                        browse_record(self._cr, self._uid, id, self._table.pool.get(col._obj),
+                                    self._cache, context=self._context, list_class=self._list_class,
+                                    fields_process=self._fields_process) \
+                        for id in ret],
+                        self._context)
+        elif col and col._type in ('reference'):
+            if ret:
+                if not isinstance(ret, browse_record): # most likely
+                    ref_obj, ref_id = ret.split(',')
+                    ref_id = long(ref_id)
+                    if ref_id:
+                        obj = self._table.pool.get(ref_obj)
+                        ret = browse_record(self._cr, self._uid, ref_id, obj, self._cache,
+                                            context=self._context, list_class=self._list_class,
+                                            fields_process=self._fields_process)
+                    else:
+                        ret = browse_null()
+            else:
+                ret = browse_null()
+        return ret
 
     def __getattr__(self, name):
         try:
