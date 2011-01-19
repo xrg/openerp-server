@@ -24,6 +24,7 @@ from operator import attrgetter
 
 from osv import osv, fields
 from tools.translate import _
+from tools import ustr
 import pooler
 
 
@@ -276,7 +277,7 @@ class res_config_installer(osv.osv_memory):
     ``res.config``). Hooks and additionals *are not run* when skipping
     installation, even for already installed addons.
 
-    Again, setup your hooks accordinly.
+    Again, setup your hooks accordingly.
 
     .. [#] note that since a mapping key needs to be hashable, it's
            possible to use a tuple or a frozenset, but not a list or a
@@ -376,9 +377,8 @@ class res_config_installer(osv.osv_memory):
                 continue
             fields[module.name].update(
                 readonly=True,
-                help=fields[module.name].get('help', '') +
+                help= ustr(fields[module.name].get('help', '')) +
                      _('\n\nThis addon is already installed on your system'))
-
         return fields
 
     def execute(self, cr, uid, ids, context=None):
@@ -415,9 +415,9 @@ class ir_actions_configuration_wizard(osv.osv_memory):
             # if the next one is also an old-style extension, you never know...
             if next.note:
                 return next.note
-            return "Click 'Continue' to configure the next addon..."
-        return "Your database is now fully configured.\n\n"\
-            "Click 'Continue' and enjoy your OpenERP experience..."
+            return _("Click 'Continue' to configure the next addon...")
+        return _("Your database is now fully configured.\n\n"\
+            "Click 'Continue' and enjoy your OpenERP experience...")
 
     _columns = {
         'note': fields.text('Next Wizard', readonly=True),

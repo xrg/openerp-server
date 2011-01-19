@@ -33,16 +33,12 @@ import render
 import urllib
 
 #
-# encode a value to a string in utf8 and converts XML entities
+# coerce any type to a unicode string (to preserve non-ascii characters)
+# and escape XML entities
 #
-def toxml(val):
-    if isinstance(val, str):
-        str_utf8 = val
-    elif isinstance(val, unicode):
-        str_utf8 = val.encode('utf-8')
-    else:
-        str_utf8 = str(val)
-    return str_utf8.replace('&', '&amp;').replace('<','&lt;').replace('>','&gt;')
+def toxml(value):
+    unicode_value = tools.ustr(value)
+    return unicode_value.replace('&', '&amp;').replace('<','&lt;').replace('>','&gt;')
 
 class report_int(netsvc.Service):
     def __init__(self, name, audience='*'):
@@ -150,13 +146,18 @@ class report_rml(report_int):
         if not self.xsl:
             return xml
 
-        stylesheet = etree.parse(tools.file_open(self.xsl))
-        xsl_path, _ = os.path.split(self.xsl)
-        for import_child in stylesheet.findall('./import'):
-            if 'href' in import_child.attrib:
-                imp_file = import_child.get('href')
-                _, imp_file = tools.file_open(imp_file, subdir=xsl_path, pathinfo=True)
-                import_child.set('href', urllib.quote(str(imp_file)))
+        stylesheet_file = tools.file_open(self.xsl)
+        try:
+            stylesheet = etree.parse(stylesheet_file)
+            xsl_path, _ = os.path.split(self.xsl)
+            for import_child in stylesheet.findall('./import'):
+                if 'href' in import_child.attrib:
+                    imp_file = import_child.get('href')
+                    _, imp_file = tools.file_open(imp_file, subdir=xsl_path, pathinfo=True)
+                    import_child.set('href', urllib.quote(str(imp_file)))
+                    imp_file.close()
+        finally:
+            stylesheet_file.close()
 
         #TODO: get all the translation in one query. That means we have to:
         # * build a list of items to translate,
@@ -165,6 +166,8 @@ class report_rml(report_int):
 
         def translate(doc, lang):
             for node in doc.xpath('//*[@t]'):
+                if not node.text:
+                    continue
                 translation = ir_translation_obj._get_source(cr, uid, self.name2, 'xsl', lang, node.text)
                 if translation:
                     node.text = translation
@@ -187,7 +190,7 @@ class report_rml(report_int):
         else:
             if 'logo' in self.bin_datas:
                 del self.bin_datas['logo']
-        obj = render.rml(rml, localcontext, self.bin_datas, tools.config['root_path'],title)
+        obj = render.rml(rml, localcontext, self.bin_datas, self._get_path(), title)
         obj.render()
         return obj.get()
 
@@ -227,5 +230,13 @@ class report_rml(report_int):
         obj.render()
         return obj.get()
 
+    def _get_path(self):
+        ret = []
+        ret.append(self.tmpl.rsplit('/',1)[0]) # Same dir as the report rml
+        pmpath = tools.config.get_misc('paths', 'pixmaps')
+        if pmpath:
+            ret.append(pmpath)
+        ret.append(tools.config['root_path'])
+        return ret
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

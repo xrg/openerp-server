@@ -29,11 +29,13 @@ from reportlab import platypus
 import utils
 import color
 import os
+import threading
 import logging
 from lxml import etree
 import base64
 from reportlab.platypus.doctemplate import ActionFlowable
 from tools.safe_eval import safe_eval as eval
+from tools.misc import file_open
 from reportlab.pdfbase import pdfmetrics
 
 try:
@@ -44,6 +46,27 @@ except ImportError:
 
 encoding = 'utf-8'
 
+def _open_image(filename, path=None):
+    """Attempt to open a binary file and return the descriptor
+    """
+    
+    if os.path.isfile(filename):
+        return open(filename, 'rb')
+    for p in (path or []):
+        if p and os.path.isabs(p):
+            fullpath = os.path.join(p, filename)
+            if os.path.isfile(fullpath):
+                return open(fullpath, 'rb')
+        try:
+            if p:
+                fullpath = os.path.join(p, filename)
+            else:
+                fullpath = filename
+            return file_open(fullpath)
+        except IOError:
+            pass
+    raise IOError("File %s cannot be found in image path" % filename)
+    
 class NumberedCanvas(canvas.Canvas):
     def __init__(self, *args, **kwargs):
         canvas.Canvas.__init__(self, *args, **kwargs)
@@ -124,6 +147,13 @@ class _rml_styles(object,):
             for variable in node.findall('initialize'):
                 for name in variable.findall('name'):
                     self.names[ name.get('id')] = name.get('value')
+
+    def tick(self):
+        """Inform upstream that the process is running, cancel it if needed
+        """
+        ct = threading.currentThread()
+        if ct and getattr(ct, 'must_stop', False):
+            raise KeyboardInterrupt
 
     def _para_style_update(self, node):
         data = {}
@@ -212,6 +242,13 @@ class _rml_doc(object):
         self.path = path
         self.title = title
 
+    def tick(self):
+        """Inform upstream that the process is running, cancel it if needed
+        """
+        ct = threading.currentThread()
+        if ct and getattr(ct, 'must_stop', False):
+            raise KeyboardInterrupt
+
     def docinit(self, els):
         from reportlab.lib.fonts import addMapping
         from reportlab.pdfbase.ttfonts import TTFont
@@ -220,7 +257,8 @@ class _rml_doc(object):
             for font in node.findall('registerFont'):
                 name = font.get('fontName').encode('ascii')
                 fname = font.get('fontFile').encode('ascii')
-                pdfmetrics.registerFont(TTFont(name, fname ))
+                if name not in pdfmetrics._fonts:
+                    pdfmetrics.registerFont(TTFont(name, fname))
                 addMapping(name, 0, 0, name)    #normal
                 addMapping(name, 0, 1, name)    #italic
                 addMapping(name, 1, 0, name)    #bold
@@ -230,7 +268,8 @@ class _rml_doc(object):
         from reportlab.lib.fonts import addMapping
         from reportlab.pdfbase.ttfonts import TTFont
 
-        pdfmetrics.registerFont(TTFont(fontname, filename ))
+        if fontname not in pdfmetrics._fonts:
+            pdfmetrics.registerFont(TTFont(fontname, filename))
         if (mode == 'all'):
             addMapping(face, 0, 0, fontname)    #normal
             addMapping(face, 0, 1, fontname)    #italic
@@ -253,23 +292,24 @@ class _rml_doc(object):
 
     def _images(self, el):
         result = {}
-        for node in el.findall('image'):
+        for node in el.findall('.//image'):
             rc =( node.text or '')
             result[node.get('name')] = base64.decodestring(rc)
         return result
 
     def render(self, out):
-        el = self.etree.findall('docinit')
+        el = self.etree.findall('.//docinit')
         if el:
             self.docinit(el)
 
-        el = self.etree.findall('stylesheet')
+        el = self.etree.findall('.//stylesheet')
         self.styles = _rml_styles(el,self.localcontext)
 
-        el = self.etree.findall('images')
+        el = self.etree.findall('.//images')
         if el:
             self.images.update( self._images(el[0]) )
-        el = self.etree.findall('template')
+
+        el = self.etree.findall('.//template')
         if len(el):
             pt_obj = _rml_template(self.localcontext, out, el[0], self, images=self.images, path=self.path, title=self.title)
             el = utils._child_get(self.etree, self, 'story')
@@ -293,6 +333,7 @@ class _rml_canvas(object):
         self.images = images
         self.path = path
         self.title = title
+        self._logger = logging.getLogger('report.rml.canvas')
         if self.title:
             self.canvas.setTitle(self.title)
 
@@ -410,10 +451,13 @@ class _rml_canvas(object):
 
     def _image(self, node):
         import urllib
+        import urlparse
         from reportlab.lib.utils import ImageReader
-        if not node.get('file') :
+        nfile = node.get('file')
+        if not nfile:
             if node.get('name'):
                 image_data = self.images[node.get('name')]
+                self._logger.debug("Image %s used", node.get('name'))
                 s = StringIO(image_data)
             else:
                 if self.localcontext:
@@ -427,34 +471,45 @@ class _rml_canvas(object):
                 if image_data:
                     s = StringIO(image_data)
                 else:
+                    self._logger.debug("No image data!")
                     return False
         else:
-            if node.get('file') in self.images:
-                s = StringIO(self.images[node.get('file')])
+            if nfile in self.images:
+                s = StringIO(self.images[nfile])
             else:
                 try:
-                    u = urllib.urlopen(str(node.get('file')))
+                    up = urlparse.urlparse(str(nfile))
+                except ValueError:
+                    up = False
+                if up and up.scheme:
+                    # RFC: do we really want to open external URLs?
+                    # Are we safe from cross-site scripting or attacks?
+                    self._logger.debug("Retrieve image from %s", nfile)
+                    u = urllib.urlopen(str(nfile))
                     s = StringIO(u.read())
-                except Exception:
-                    u = file(os.path.join(self.path,str(node.get('file'))), 'rb')
-                    s = StringIO(u.read())
-        img = ImageReader(s)
-        (sx,sy) = img.getSize()
-
-        args = {}
-        for tag in ('width','height','x','y'):
-            if node.get(tag):
-                args[tag] = utils.unit_get(node.get(tag))
-        if ('width' in args) and (not 'height' in args):
-            args['height'] = sy * args['width'] / sx
-        elif ('height' in args) and (not 'width' in args):
-            args['width'] = sx * args['height'] / sy
-        elif ('width' in args) and ('height' in args):
-            if (float(args['width'])/args['height'])>(float(sx)>sy):
-                args['width'] = sx * args['height'] / sy
-            else:
+                else:
+                    self._logger.debug("Open image file %s ", nfile)
+                    s = _open_image(nfile, path=self.path)
+        try:
+            img = ImageReader(s)
+            (sx,sy) = img.getSize()
+            self._logger.debug("Image is %dx%d", sx, sy)
+            args = { 'x': 0.0, 'y': 0.0 }
+            for tag in ('width','height','x','y'):
+                if node.get(tag):
+                    args[tag] = utils.unit_get(node.get(tag))
+            if ('width' in args) and (not 'height' in args):
                 args['height'] = sy * args['width'] / sx
-        self.canvas.drawImage(img, **args)
+            elif ('height' in args) and (not 'width' in args):
+                args['width'] = sx * args['height'] / sy
+            elif ('width' in args) and ('height' in args):
+                if (float(args['width'])/args['height'])>(float(sx)>sy):
+                    args['width'] = sx * args['height'] / sy
+                else:
+                    args['height'] = sy * args['width'] / sx
+            self.canvas.drawImage(img, **args)
+        finally:
+            s.close()
 #        self.canvas._doc.SaveToFile(self.canvas._filename, self.canvas)
 
     def _path(self, node):
@@ -491,12 +546,13 @@ class _rml_canvas(object):
                     pdfmetrics.getFont(fname)
                 except Exception:
                     logging.getLogger('report.fonts').\
-                        debug('Could not locate font %s, substituting default: %s',
+                        warning('Could not locate font %s, substituting default: %s',
                                  fname, self.canvas._fontname)
                     fname = self.canvas._fontname
         try:
             return self.canvas.setFont(fname, utils.unit_get(node.get('size')))
         except KeyError:
+            logging.getLogger('report.fonts').error("setFont failed for %s", fname)
             raise KeyError('Font "%s" cannot be used in the PDF engine' % fname)
 
     def render(self, node):
@@ -521,6 +577,7 @@ class _rml_canvas(object):
             'image': self._image
         }
         for n in utils._child_get(node, self):
+            self.doc.tick()
             if n.tag in tags:
                 tags[n.tag](n)
 
@@ -540,14 +597,29 @@ class _rml_draw(object):
         cnv.render(self.node)
         canvas.restoreState()
 
+class _rml_Illustration(platypus.flowables.Flowable):
+    def __init__(self, node, localcontext, styles, self2):
+        self.localcontext = (localcontext or {}).copy()
+        self.node = node
+        self.styles = styles
+        self.width = utils.unit_get(node.get('width'))
+        self.height = utils.unit_get(node.get('height'))
+        self.self2 = self2
+    def wrap(self, *args):
+        return (self.width, self.height)
+    def draw(self):
+        drw = _rml_draw(self.localcontext ,self.node,self.styles, images=self.self2.images, path=self.self2.path, title=self.self2.title)
+        drw.render(self.canv, None)
+
 class _rml_flowable(object):
-    def __init__(self, doc, localcontext, images={}, path='.', title=None):
+    def __init__(self, doc, localcontext, images=None, path='.', title=None):
         self.localcontext = localcontext
         self.doc = doc
         self.styles = doc.styles
-        self.images = images
+        self.images = images or {}
         self.path = path
         self.title = title
+        self._logger = logging.getLogger('report.rml.flowable')
 
     def _textual(self, node):
         rc1 = utils._process_text(self, node.text or '')
@@ -638,21 +710,7 @@ class _rml_flowable(object):
         return table
 
     def _illustration(self, node):
-        class Illustration(platypus.flowables.Flowable):
-            def __init__(self, node, localcontext, styles, self2):
-                self.localcontext = (localcontext or {}).copy()
-                self.node = node
-                self.styles = styles
-                self.width = utils.unit_get(node.get('width'))
-                self.height = utils.unit_get(node.get('height'))
-                self.self2 = self2
-            def wrap(self, *args):
-                return (self.width, self.height)
-            def draw(self):
-                canvas = self.canv
-                drw = _rml_draw(self.localcontext ,self.node,self.styles, images=self.self2.images, path=self.self2.path, title=self.self2.title)
-                drw.render(self.canv, None)
-        return Illustration(node, self.localcontext, self.styles, self)
+        return _rml_Illustration(node, self.localcontext, self.styles, self)
 
     def _textual_image(self, node):
         return base64.decodestring(node.text)
@@ -697,21 +755,26 @@ class _rml_flowable(object):
                 from reportlab.graphics.barcode import common
                 # from reportlab.graphics.barcode import fourstate
                 from reportlab.graphics.barcode import usps
+                from reportlab.graphics.barcode import createBarcodeDrawing
+
             except ImportError:
+                self._logger.warning("Cannot use barcode renderers:", exc_info=True)
                 return None
             args = utils.attr_get(node, [], {'ratio':'float','xdim':'unit','height':'unit','checksum':'int','quiet':'int','width':'unit','stop':'bool','bearers':'int','barWidth':'float','barHeight':'float'})
             codes = {
                 'codabar': lambda x: common.Codabar(x, **args),
                 'code11': lambda x: common.Code11(x, **args),
-                'code128': lambda x: code128.Code128(x, **args),
-                'standard39': lambda x: code39.Standard39(x, **args),
-                'standard93': lambda x: code93.Standard93(x, **args),
+                'code128': lambda x: code128.Code128(str(x), **args),
+                'standard39': lambda x: code39.Standard39(str(x), **args),
+                'standard93': lambda x: code93.Standard93(str(x), **args),
                 'i2of5': lambda x: common.I2of5(x, **args),
-                'extended39': lambda x: code39.Extended39(x, **args),
-                'extended93': lambda x: code93.Extended93(x, **args),
+                'extended39': lambda x: code39.Extended39(str(x), **args),
+                'extended93': lambda x: code93.Extended93(str(x), **args),
                 'msi': lambda x: common.MSI(x, **args),
                 'fim': lambda x: usps.FIM(x, **args),
                 'postnet': lambda x: usps.POSTNET(x, **args),
+                'ean13': lambda x: createBarcodeDrawing('EAN13', value=str(x), **args),
+                'qrcode': lambda x: createBarcodeDrawing('QR', value=x, **args),
             }
             code = 'code128'
             if node.get('code'):
@@ -739,38 +802,29 @@ class _rml_flowable(object):
             style = styles['Heading'+str(node.tag[1:])]
             return platypus.Paragraph(self._textual(node), style, **(utils.attr_get(node, [], {'bulletText':'str'})))
         elif node.tag=='image':
+            image_data = False
             if not node.get('file'):
                 if node.get('name'):
-                    image_data = self.doc.images[node.get('name')].read()
+                    if node.get('name') in self.doc.images:
+                        self._logger.debug("Image %s read ", node.get('name'))
+                        image_data = self.doc.images[node.get('name')]
+                    else:
+                        self._logger.warning("Image %s not defined", node.get('name'))
+                        return False
                 else:
                     import base64
                     if self.localcontext:
                         newtext = utils._process_text(self, node.text or '')
                         node.text = newtext
                     image_data = base64.decodestring(node.text)
-                if not image_data: return False
+                if not image_data:
+                    self._logger.debug("No inline image data")
+                    return False
                 image = StringIO(image_data)
-                return platypus.Image(image, mask=(250,255,250,255,250,255), **(utils.attr_get(node, ['width','height'])))
             else:
-                return platypus.Image(node.get('file'), mask=(250,255,250,255,250,255), **(utils.attr_get(node, ['width','height'])))
-            from reportlab.lib.utils import ImageReader
-            name = str(node.get('file'))
-            img = ImageReader(name)
-            (sx,sy) = img.getSize()
-            args = {}
-            for tag in ('width','height'):
-                if node.get(tag):
-                    args[tag] = utils.unit_get(node.get(tag))
-            if ('width' in args) and (not 'height' in args):
-                args['height'] = sy * args['width'] / sx
-            elif ('height' in args) and (not 'width' in args):
-                args['width'] = sx * args['height'] / sy
-            elif ('width' in args) and ('height' in args):
-                if (float(args['width'])/args['height'])>(float(sx)>sy):
-                    args['width'] = sx * args['height'] / sy
-                else:
-                    args['height'] = sy * args['width'] / sx
-            return platypus.Image(name, mask=(250,255,250,255,250,255), **args)
+                self._logger.debug("Image get from file %s", node.get('file'))
+                image = _open_image(node.get('file'), path=self.doc.path)
+            return platypus.Image(image, mask=(250,255,250,255,250,255), **(utils.attr_get(node, ['width','height'])))
         elif node.tag=='spacer':
             if node.get('width'):
                 width = utils.unit_get(node.get('width'))
@@ -812,6 +866,7 @@ class _rml_flowable(object):
         def process_story(node_story):
             sub_story = []
             for node in utils._child_get(node_story, self):
+                self.doc.tick()
                 if node.tag == etree.Comment:
                     node.text = ''
                     continue
@@ -867,7 +922,7 @@ class _rml_template(object):
             ps = map(lambda x:x.strip(), node.get('pageSize').replace(')', '').replace('(', '').split(','))
             pageSize = ( utils.unit_get(ps[0]),utils.unit_get(ps[1]) )
 
-        self.doc_tmpl = TinyDocTemplate(out, pagesize=pageSize, **utils.attr_get(node, ['leftMargin','rightMargin','topMargin','bottomMargin'], {'allowSplitting':'int','showBoundary':'bool','title':'str','author':'str'}))
+        self.doc_tmpl = TinyDocTemplate(out, pagesize=pageSize, **utils.attr_get(node, ['leftMargin','rightMargin','topMargin','bottomMargin'], {'allowSplitting':'int','showBoundary':'bool','rotation':'int','title':'str','author':'str'}))
         self.page_templates = []
         self.styles = doc.styles
         self.doc = doc
@@ -901,6 +956,7 @@ class _rml_template(object):
         r = _rml_flowable(self.doc,self.localcontext, images=self.images, path=self.path, title=self.title)
         story_cnt = 0
         for node_story in node_stories:
+            self.doc.tick()
             if story_cnt > 0:
                 fis.append(platypus.PageBreak())
             fis += r.render(node_story)
@@ -914,8 +970,12 @@ class _rml_template(object):
             fis.append(PageCount())
             self.doc_tmpl.build(fis)
 
-def parseNode(rml, localcontext = {},fout=None, images={}, path='.',title=None):
+def parseNode(rml, localcontext=None,fout=None, images=None, path='.',title=None):
     node = etree.XML(rml)
+    if localcontext is None:
+        localcontext = {}
+    if images is None:
+        images = {}
     r = _rml_doc(node, localcontext, images, path, title=title)
     #try to override some font mappings
     try:

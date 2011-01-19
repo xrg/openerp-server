@@ -55,6 +55,11 @@ try:
 except ImportError:
     class SSLError(Exception): pass
 
+if os.name == 'posix':
+    WRITE_BUFFER_SIZE = 32768
+else:
+    WRITE_BUFFER_SIZE = 0
+
 class ThreadedHTTPServer(ConnThreadingMixIn, SimpleXMLRPCDispatcher, HTTPServer):
     """ A threaded httpd server, with all the necessary functionality for us.
 
@@ -145,6 +150,7 @@ class HttpLogHandler:
     
 class MultiHandler2(HttpLogHandler, MultiHTTPHandler):
     _logger = logging.getLogger('http')
+    wbufsize = WRITE_BUFFER_SIZE
     
     def setup(self):
         self.server.regHandler(self)
@@ -157,6 +163,7 @@ class MultiHandler2(HttpLogHandler, MultiHTTPHandler):
 
 class SecureMultiHandler2(HttpLogHandler, SecureMultiHTTPHandler):
     _logger = logging.getLogger('https')
+    wbufsize = WRITE_BUFFER_SIZE
 
     def getcert_fnames(self):
         tc = tools.config

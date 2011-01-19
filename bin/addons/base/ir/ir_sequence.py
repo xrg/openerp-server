@@ -2,20 +2,19 @@
 ##############################################################################
 #
 #    OpenERP, Open Source Management Solution
-#    Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>). All Rights Reserved
-#    $Id$
+#    Copyright (C) 2004-TODAY OpenERP S.A. <http://www.openerp.com>
 #
 #    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU General Public License as published by
-#    the Free Software Foundation, either version 3 of the License, or
-#    (at your option) any later version.
+#    it under the terms of the GNU Affero General Public License as
+#    published by the Free Software Foundation, either version 3 of the
+#    License, or (at your option) any later version.
 #
 #    This program is distributed in the hope that it will be useful,
 #    but WITHOUT ANY WARRANTY; without even the implied warranty of
 #    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU General Public License for more details.
+#    GNU Affero General Public License for more details.
 #
-#    You should have received a copy of the GNU General Public License
+#    You should have received a copy of the GNU Affero General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
@@ -27,6 +26,7 @@ import logging
 
 class ir_sequence_type(osv.osv):
     _name = 'ir.sequence.type'
+    _order = 'name'
     _columns = {
         'name': fields.char('Name',size=64, required=True),
         'code': fields.char('Code',size=32, required=True),
@@ -39,6 +39,7 @@ def _code_get(self, cr, uid, context=None):
 
 class ir_sequence(osv.osv):
     _name = 'ir.sequence'
+    _order = 'name'
     _columns = {
         'name': fields.char('Name',size=64, required=True),
         'code': fields.selection(_code_get, 'Code',size=64, required=True),
@@ -88,10 +89,16 @@ class ir_sequence(osv.osv):
         log = logging.getLogger('orm')
         try:
             sql_test = self._get_test(test, context)
-            cr.execute('SELECT id, number_next, prefix, suffix, padding, condition \
-                FROM ir_sequence \
-                WHERE '+sql_test+' AND active=%s ORDER BY weight DESC, length(COALESCE(condition,\'\')) DESC \
-                FOR UPDATE', (sequence_id, True), debug=self._debug)
+            cr.execute("""SELECT id, number_next, prefix, suffix, padding, condition
+                FROM ir_sequence
+                WHERE """ + sql_test + """
+                  AND active=%s
+                  AND (company_id IS NULL OR
+                       company_id IN ( SELECT company_id
+                                         FROM res_users
+                                        WHERE id = %s ) )
+                ORDER BY company_id, weight DESC, length(COALESCE(condition,'')) DESC
+                FOR UPDATE """, (sequence_id, True, uid), debug=self._debug)
             for res in cr.dictfetchall():
                 if res['condition']:
                     if self._debug:

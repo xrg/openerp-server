@@ -1,30 +1,46 @@
 -
-    Testing that some domain expressions work
--
-    !python {model: res.partner.address }: |
-        ids = self.search(cr, uid, [('partner_id','=','Agrolait')])
-        assert len(ids) >= 1, ids
--
-    Trying the "in" operator, for scalar value
--
-    !python {model: res.partner.address }: |
-        ids = self.search(cr, uid, [('partner_id','in','Agrolait')])
-        assert len(ids) >= 1, ids
--
-    Trying the "in" operator for list value
--
-    !python {model: res.partner.address }: |
-        ids = self.search(cr, uid, [('partner_id','in',['Agrolait','ASUStek'])])
-        assert len(ids) >= 1, ids
--
     Trying the nested query (pg84 extension)
 -
     !python {model: res.partner.address }: |
         ids = self.search(cr, uid, [('partner_id','in',[('name','in',['Agrolait','ASUStek'])])])
         assert len(ids) >= 1, ids
 -
-    I will test that we can use "in" operator for plain fields.
+    I will test an one2many operator with empty search list
 -
-    !python {model: ir.ui.menu }: |
-        ids = self.search(cr, uid, [('sequence','in',[1, 2, 10, 20])])
-        assert len(ids) >= 1, ids
+    !python {model: res.partner}: |
+        ids = self.search(cr, uid, [('address', 'in', [])])
+        assert len(ids) == 0, "Ids should be empty, it is: " % ids
+-
+    I will test an one2many operator with False
+-
+    !python {model: res.partner}: |
+        ids = self.search(cr, uid, [('address', '=', False)])
+        assert len(ids) > 0, "Should find partners with empty address"
+        for b in self.browse(cr, uid, ids):
+            assert not b.address, "Address of partner %d should be empty" % b.id
+-
+   Testing a many2many operator with empty search list
+-
+    !python {model: res.partner}: |
+        ids = self.search(cr, uid, [('category_id', 'in', [])])
+        assert len(ids) == 0, "Ids should be empty, it is: " % ids
+-
+    And a many2many operator with False
+-
+    !python {model: res.partner}: |
+        ids = self.search(cr, uid, [('category_id', '=', False)])
+        assert len(ids) > 0, "Should find partners with empty category"
+        for b in self.browse(cr, uid, ids):
+            assert not b.category_id, "Categories of partner %d should be empty" % b.id
+-
+  Test operator on translatable values
+-
+  !python {model: ir.actions.act_window}: |
+      ids = self.search(cr, uid, [('name', '=', 'Users')])
+      assert len(ids) >= 1, "should have found at least 1 action"
+-
+  Test operator on translatable values 2
+-
+  !python {model: ir.actions.act_window}: |
+      ids = self.search(cr, uid, [('name', 'in', ['Users', 'Menu' ])])
+      assert len(ids) >= 2, "should have found at least 2 actions"

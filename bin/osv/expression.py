@@ -267,30 +267,39 @@ class expression(object):
             if len(fargs) > 1: # TODO pg84 reduce
                 if field._type == 'many2one':
                     right = field_obj.search(cr, uid, [(fargs[1], operator, right)], context=context)
-                    self.__exp[i] = (fargs[0], 'in', right)
+                    if right == []:
+                        self.__exp[i] = ( 'id', '=', 0 )
+                    else:
+                        self.__exp[i] = (fargs[0], 'in', right)
                 # Making search easier when there is a left operand as field.o2m or field.m2m
                 if field._type in ['many2many','one2many']:
                     right = field_obj.search(cr, uid, [(fargs[1], operator, right)], context=context)
                     right1 = table.search(cr, uid, [(fargs[0],'in', right)], context=context)
-                    self.__exp[i] = ('id', 'in', right1)
+                    if right1 == []:
+                        self.__exp[i] = ( 'id', '=', 0 )
+                    else:
+                        self.__exp[i] = ('id', 'in', right1)
                 
                 if not isinstance(field,fields.property):
                     continue
 
-            if field._properties and ((not field.store) or field._fnct_search):
-                # this is a function field
+            if field._properties and not field.store:
+                # this is a function field that is not stored
                 if not field._fnct_search:
                     # the function field doesn't provide a search function and doesn't store
                     # values in the database, so we must ignore it : we generate a dummy leaf
                     self.__exp[i] = self.__DUMMY_LEAF
                 else:
                     subexp = field.search(cr, uid, table, left, [self.__exp[i]], context=context)
-                    # we assume that the expression is valid
-                    # we create a dummy leaf for forcing the parsing of the resulting expression
-                    self.__exp[i] = '&'
-                    self.__exp.insert(i + 1, self.__DUMMY_LEAF)
-                    for j, se in enumerate(subexp):
-                        self.__exp.insert(i + 2 + j, se)
+                    if not subexp:
+                        self.__exp[i] = self.__DUMMY_LEAF
+                    else:
+                        # we assume that the expression is valid
+                        # we create a dummy leaf for forcing the parsing of the resulting expression
+                        self.__exp[i] = '&'
+                        self.__exp.insert(i + 1, self.__DUMMY_LEAF)
+                        for j, se in enumerate(subexp):
+                            self.__exp.insert(i + 2 + j, se)
             # else, the value of the field is store in the database, so we search on it
 
             elif field._type == 'one2many':
@@ -310,7 +319,7 @@ class expression(object):
                 else:
                     call_null = True
 
-                    if right:
+                    if right is not False:
                         if isinstance(right, basestring):
                             ids2 = [x[0] for x in field_obj.name_search(cr, uid, right, [], operator, context=context, limit=None)]
                             if ids2:
@@ -384,7 +393,7 @@ class expression(object):
                     self.__exp[i] = ('id', 'in', _rec_convert(ids2))
                 else:
                     call_null_m2m = True
-                    if right:
+                    if right is not False:
                         if isinstance(right, basestring):
                             res_ids = [x[0] for x in field_obj.name_search(cr, uid, right, [], operator, context=context)]
                             if res_ids:
@@ -438,7 +447,9 @@ class expression(object):
                             self.__exp[i] = ('id', m2m_op, (erqu, erpa))
 
             elif field._type == 'many2one':
-                if isinstance(right, list) and len(right) and isinstance(right[0], tuple):
+                if isinstance(right, list) and len(right) \
+                        and isinstance(right[0], (tuple, list)) \
+                        and len(right[0]) == 3:
                     # That's a nested expression
 
                     assert(operator == 'in') # others not implemented
@@ -446,20 +457,16 @@ class expression(object):
                     # intermediate object yet. That wouldn't still let us read
                     # the forbidden record, but just use its id
 
-                    qu1, qu2, qtables = field_obj._where_calc(cr, uid, right, context)
+                    wquery = field_obj._where_calc(cr, uid, right, context)
+                    field_obj._apply_ir_rules(cr, uid, wquery, 'read', context=context)
+                    from_clause, qu1, qu2 = wquery.get_sql()
+                   
+                    if qu1:
+                        qu1 = "WHERE " + qu1
 
-                    d1, d2, dtables = table.pool.get('ir.rule').domain_get(cr, uid, field_obj._name)
-                    if d1:
-                        qu1.append(d1)
-                        qu2 += d2
+                    qry = "SELECT id FROM %s %s " %( from_clause, qu1)
 
-                        for dt in dtables:
-                            if dt not in qtables:
-                                qtables.append(dt)
-
-                    qry = "SELECT id FROM %s WHERE %s " %( ', '.join(qtables), ' AND '.join(qu1))
-
-                    self.__exp[i] = (left,'inselect', (qry, qu2))
+                    self.__exp[i] = (left,'inselect', (qry, tuple(qu2)))
 
                 elif operator == 'child_of' or operator == '|child_of' :
                     if isinstance(right, basestring):
@@ -479,7 +486,6 @@ class expression(object):
                 else:
                     do_name = False
                     op2 = operator
-                    
                     if isinstance(right, basestring):
                             # and not isinstance(field, fields.related):
                         do_name = True
@@ -489,6 +495,13 @@ class expression(object):
                             op2 = '!='
                         else:
                             op2 = operator
+                    elif right == []:
+                        do_name = False
+                        if operator in ('not in', '!=', '<>'):
+                            # (many2one not in []) should return all records
+                            self.__exp[i] = self.__DUMMY_LEAF
+                        else:
+                            self.__exp[i] = ('id','=',0)
                     elif isinstance(right, (list, tuple)) and operator in ('in', 'not in'):
                         do_name = True
                         for r in right:
@@ -543,19 +556,19 @@ class expression(object):
                              '  SELECT id'              \
                              '    FROM "' + working_table._table + '"'       \
                              '   WHERE "' + left + '" ' + operator + ' ' +" (" + instr + "))"
+                        right = list(right)
                     else:
                         query1 += '     AND value ' + operator + instr +   \
                              ') UNION ('                \
                              '  SELECT id'              \
                              '    FROM "' + working_table._table + '"'       \
                              '   WHERE "' + left + '" ' + operator + instr + ")"
+                        right = [right,]
 
                     query2 = [working_table._name + ',' + left,
                               context.get('lang', False) or 'en_US',
                               'model',
-                              right,
-                              right,
-                             ]
+                             ] + right + right
 
                     self.__exp[i] = ('id', 'inselect', (query1, query2))
 

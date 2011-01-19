@@ -95,12 +95,13 @@ def _child_get(node, self=None, tagname=None):
                 continue
         if self and self.localcontext and n.get('rml_tag'):
             try:
-                (tag,attr) = eval(n.get('rml_tag'),{}, self.localcontext)
-                n2 = copy.deepcopy(n)
-                n2.tag = tag
-                n2.attrib.update(attr or {})
-                yield n2
-                tagname = ''
+                (tag,attr) = eval(n.get('rml_tag'),{}, self.localcontext) or (False, False)
+                if tag is not False:
+                    n2 = copy.deepcopy(n)
+                    n2.tag = tag
+                    n2.attrib.update(attr or {})
+                    yield n2
+                    tagname = ''
             except GeneratorExit:
                 pass
             except Exception, e:
@@ -131,7 +132,7 @@ def _process_text(self, txt):
                     logging.getLogger('report').exception("Exception at: %s" % expr)
                 if isinstance(txt, basestring):
                     result += str2xml(txt)
-                elif (txt is not None) and (txt is not False):
+                elif txt and (txt is not None) and (txt is not False):
                     result += ustr(txt)
         return result
 

@@ -43,6 +43,7 @@
         'ir/wizard/wizard_menu_view.xml',
         'ir/ir.xml',
         'ir/workflow/workflow_view.xml',
+        'ir/report/ir_report.xml',
         'module/module_view.xml',
         'module/module_data.xml',
         'module/module_report.xml',
@@ -52,6 +53,7 @@
         'module/wizard/base_import_language_view.xml',
         'module/wizard/base_module_upgrade_view.xml',
         'module/wizard/base_module_configuration_view.xml',
+        'module/wizard/base_module_shortcut_data.xml',
         'module/wizard/base_export_language_view.xml',
         'module/wizard/base_update_translations_view.xml',
         'res/res_request_view.xml',
@@ -59,6 +61,7 @@
         'res/res_log_view.xml',
         'res/partner/partner_report.xml',
         'res/partner/partner_view.xml',
+        'res/partner/partner_shortcut_data.xml',
         'res/bank_view.xml',
         'res/country_view.xml',
         'res/res_currency_view.xml',
@@ -71,11 +74,12 @@
 
         'res/ir_property_view.xml',
         'security/base_security.xml',
-        'maintenance/maintenance_view.xml',
+        'publisher_warranty/publisher_warranty_view.xml',
 
         'security/ir.model.access.csv',
         'res/res_widget_view.xml',
         'res/res_widget_data.xml',
+        'publisher_warranty/publisher_warranty_data.xml',
     ],
     'demo_xml': [
         'base_demo.xml',
@@ -85,9 +89,14 @@
     ],
     'test': [
         'test/base_test.xml',
-        #'test/base_test.yml'
+        'test/base_test.yml',
         'test/test_context.xml',
         'test/bug_lp541545.xml',
+        'test/test_osv_expression.yml',
+        # 'test/test_auth.yml', don't use that,
+        #                       it can't be run until the db is loaded
+        'test/test_sequence.yml',
+        'test/base_domain_exprs.yml',
     ],
     'installable': True,
     'active': True,

@@ -3,6 +3,7 @@
 #    
 #    OpenERP, Open Source Management Solution
 #    Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>).
+#    Copyright (C) 2010-2011 OpenERP s.a. (<http://openerp.com>).
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -53,6 +54,7 @@ psycopg2.extensions.register_type(psycopg2.extensions.new_type((700, 701, 1700,)
 
 import tools
 from tools.func import wraps, frame_codeinfo
+from netsvc import Agent
 from datetime import datetime as mdt
 from datetime import timedelta
 import threading
@@ -74,7 +76,9 @@ re_queries = [
         ('comment', re.compile(r'comment on column\s+"?([a-z_0-9]+)"?\.', re.I)),
         ('comment', re.compile(r'comment on table\s+"?([a-z_0-9]+)"?\s', re.I)),
         ('create', re.compile('create (?:database|table|view)\s+"?([a-z_0-9]+)"?[\s\(]', re.I)),
-        ('create', re.compile('create index .*\son\s+"?([a-z_0-9]+)"?[\s\(]', re.I)),
+        ('create', re.compile('create or replace view\s+"?([a-z_0-9]+)"?[\s\(]', re.I)),
+        ('create', re.compile('create (?:unique )?index .*\son\s+"?([a-z_0-9]+)"?[\s\(]', re.I)),
+        ('drop', re.compile(r'drop view\s+"?([a-z_0-9]+)"?\s', re.I)),
         ('drop db', re.compile(r'drop database "?([a-z_0-9]+)"?', re.I)),
         ('select', re.compile(r'with recursive.*?\sas\s+\(\s*select\s.*?\s+from\s+"?([a-z_0-9]+)"?', re.I|re.DOTALL)),
         ('select', re.compile(r'select (nextval)\(%s\)', re.I)),
@@ -187,14 +191,6 @@ class Cursor(object):
 
         if self.sql_log or debug:
             now = mdt.now()
-            try:
-                # mogrify must happen before execute
-                qrystr = self._obj.mogrify(query, params or [])
-            except TypeError, e:
-                qrystr = query + '; params: %s' % (params,)
-            except Exception, e:
-                self.__logger.error("Mogrify:%s" % e)
-                self.__logger.debug("Query: %r", query)
 
         # The core of query execution
         try:
@@ -221,7 +217,7 @@ class Cursor(object):
             if delay > 10000: # only show slow times
                 dstr = ' (%dms)' % int(delay/1000)
             try:
-                self.__logger.debug("Q%s: %s" % (dstr, qrystr))
+                self.__logger.debug("Q%s: %s" % (dstr, self._obj.query))
             except Exception:
                 # should't break because of logging
                 pass
@@ -473,7 +469,11 @@ class ConnectionPool(object):
                 # note: this code is called only if the for loop has completed (no break)
                 raise PoolError('The Connection Pool Is Full')
 
-        result = psycopg2.connect(dsn=dsn, connection_factory=PsycoConnection)
+        try:
+            result = psycopg2.connect(dsn=dsn, connection_factory=PsycoConnection)
+        except psycopg2.Error, e:
+            self.__logger.exception('Connection to the database failed')
+            raise
         self._connections.append((result, True))
         self._debug('Create new connection')
         if do_cursor:
@@ -561,6 +561,7 @@ def db_connect(db_name):
 
 def close_db(db_name):
     _Pool.close_all(dsn(db_name))
+    Agent.cancel(db_name)
     tools.cache.clean_caches_for_db(db_name)
 
 

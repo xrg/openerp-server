@@ -73,6 +73,7 @@ multi_company_default()
 class res_company(osv.osv):
     _name = "res.company"
     _description = 'Companies'
+    _order = 'name'
     _columns = {
         'name': fields.char('Company Name', size=64, required=True),
         'parent_id': fields.many2one('res.company', 'Parent Company', select=True),
@@ -81,9 +82,9 @@ class res_company(osv.osv):
         'rml_header1': fields.char('Report Header', size=200),
         'rml_footer1': fields.char('Report Footer 1', size=200),
         'rml_footer2': fields.char('Report Footer 2', size=200),
-        'rml_header' : fields.text('RML Header'),
-        'rml_header2' : fields.text('RML Internal Header'),
-        'rml_header3' : fields.text('RML Internal Header'),
+        'rml_header' : fields.text('RML Header', required=True),
+        'rml_header2' : fields.text('RML Internal Header', required=True),
+        'rml_header3' : fields.text('RML Internal Header', required=True),
         'logo' : fields.binary('Logo'),
         'currency_id': fields.many2one('res.currency', 'Currency', required=True),
         'currency_ids': fields.one2many('res.currency', 'company_id', 'Currency'),
@@ -98,13 +99,7 @@ class res_company(osv.osv):
             context = {}
         user_preference = context.get('user_preference', False)
         if user_preference:
-            # TODO: improve this as soon as the client sends the proper
-            # combination of active_id and active_model we'll be able to
-            # use active_id here to restrict to the user being modified instead
-            # of current user.
-            user_id = context.get('user_id', uid)
-
-            user = self.pool.get('res.users').browse(cr, uid, user_id, context=context)
+            user = self.pool.get('res.users').browse(cr, uid, uid, context=context)
             cmp_ids = list(set([user.company_id.id] + [cmp.id for cmp in user.company_ids]))
             return cmp_ids
         return super(res_company, self)._search(cr, uid, args, offset=offset, limit=limit, order=order,
@@ -189,9 +184,6 @@ class res_company(osv.osv):
         except:
             return False
 
-    def _check_recursion(self, cr, uid, ids):
-        return super(res_company, self)._check_recursion(cr, uid, ids)
-
     def _get_logo(self, cr, uid, ids):
         # Note: we do not try to access files above our root_path, because
         # at a production system root_path/../pixmaps is arbitrary!
@@ -241,7 +233,11 @@ class res_company(osv.osv):
 </header>"""
     def _get_header(self,cr,uid,ids):
         try :
-            return tools.file_open(os.path.join('base', 'report', 'corporate_rml_header.rml')).read()
+            header_file = tools.file_open(os.path.join('base', 'report', 'corporate_rml_header.rml'))
+            try:
+                return header_file.read()
+            finally:
+                header_file.close()
         except:
             return """
     <header>
@@ -286,7 +282,7 @@ class res_company(osv.osv):
     }
 
     _constraints = [
-        (_check_recursion, 'Error! You can not create recursive companies.', ['parent_id'])
+        (osv.osv._check_recursion, 'Error! You can not create recursive companies.', ['parent_id'])
     ]
 
 res_company()

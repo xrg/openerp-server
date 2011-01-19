@@ -2,20 +2,19 @@
 ##############################################################################
 #
 #    OpenERP, Open Source Management Solution
-#    Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>). All Rights Reserved
-#    $Id$
+#    Copyright (C) 2004-TODAY OpenERP S.A. <http://www.openerp.com>
 #
 #    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU General Public License as published by
-#    the Free Software Foundation, either version 3 of the License, or
-#    (at your option) any later version.
+#    it under the terms of the GNU Affero General Public License as
+#    published by the Free Software Foundation, either version 3 of the
+#    License, or (at your option) any later version.
 #
 #    This program is distributed in the hope that it will be useful,
 #    but WITHOUT ANY WARRANTY; without even the implied warranty of
 #    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU General Public License for more details.
+#    GNU Affero General Public License for more details.
 #
-#    You should have received a copy of the GNU General Public License
+#    You should have received a copy of the GNU Affero General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
@@ -42,7 +41,12 @@ _intervalTypes = {
 }
 
 class ir_cron(osv.osv, netsvc.Agent):
+    """ This is the ORM object that periodically executes actions.
+    
+        Note that we use the netsvc.Agent()._logger member.
+    """
     _name = "ir.cron"
+    _order = 'name'
     _columns = {
         'name': fields.char('Name', size=60, required=True),
         'user_id': fields.many2one('res.users', 'User', required=True),
@@ -74,7 +78,7 @@ class ir_cron(osv.osv, netsvc.Agent):
         try:
             for this in self.browse(cr, uid, ids, context):
                 str2tuple(this.args)
-        except:
+        except Exception:
             return False
         return True
 
@@ -90,8 +94,8 @@ class ir_cron(osv.osv, netsvc.Agent):
             try:
                 f(cr, uid, *args)
             except Exception, e:
-                self._logger.notifyChannel('timers', netsvc.LOG_ERROR, "Job call of self.pool.get('%s').%s(cr, uid, *%r) failed" % (model, func, args))
-                self._logger.notifyChannel('timers', netsvc.LOG_ERROR, tools.exception_to_unicode(e))
+                cr.rollback()
+                self._logger.exception("Job call of self.pool.get('%s').%s(cr, uid, *%r) failed" % (model, func, args))
 
 
     def _poolJobs(self, db_name, check=False):
@@ -131,7 +135,7 @@ class ir_cron(osv.osv, netsvc.Agent):
 
 
             cr.execute('SELECT min(nextcall) AS min_next_call FROM ir_cron '
-                        'WHERE numbercall<>0 AND active AND nextcall>=now()', debug=self._debug)
+                        'WHERE numbercall<>0 AND active ', debug=self._debug)
             next_call = cr.dictfetchone()['min_next_call']
             if next_call:
                 next_call = time.mktime(time.strptime(next_call, '%Y-%m-%d %H:%M:%S'))
@@ -142,9 +146,7 @@ class ir_cron(osv.osv, netsvc.Agent):
                 self.setAlarm(self._poolJobs, next_call, db_name, db_name)
 
         except Exception, ex:
-            logger = netsvc.Logger()
-            logger.notifyChannel('cron', netsvc.LOG_WARNING,
-                'Exception in cron:'+str(ex))
+            self._logger.warning('Exception in cron:', exc_info=True)
 
         finally:
             cr.commit()
@@ -152,7 +154,8 @@ class ir_cron(osv.osv, netsvc.Agent):
 
     def restart(self, dbname):
         self.cancel(dbname)
-        self._poolJobs(dbname)
+        # Reschedule cron processing job asap, but not in the current thread
+        self.setAlarm(self._poolJobs, time.time(), dbname, dbname)
 
     def create(self, cr, uid, vals, context=None):
         res = super(ir_cron, self).create(cr, uid, vals, context=context)

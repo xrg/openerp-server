@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
-#    
+#
 #    OpenERP, Open Source Management Solution
 #    Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>).
 #
@@ -15,7 +15,7 @@
 #    GNU Affero General Public License for more details.
 #
 #    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.     
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
 
@@ -32,7 +32,6 @@ import release
 import security
 import sql_db
 import sys
-import thread
 import threading
 import time
 import tools
@@ -87,8 +86,8 @@ class db(baseExportService):
         self._pg_psw_env_var_is_set = False # on win32, pg_dump need the PGPASSWORD env var
 
     def dispatch(self, method, auth, params):
-        if method in [ 'create', 'get_progress', 'drop', 'dump', 
-            'restore', 'rename', 
+        if method in [ 'create', 'get_progress', 'drop', 'dump',
+            'restore', 'rename',
             'change_admin_password', 'migrate_databases' ]:
             passwd = params[0]
             params = params[1:]
@@ -101,7 +100,7 @@ class db(baseExportService):
             raise KeyError("Method not found: %s" % method)
         fn = getattr(self, 'exp_'+method)
         return fn(*params)
-    
+
     #def new_dispatch(self,method,auth,params):
     #    pass
     def _create_empty_database(self, name):
@@ -130,6 +129,7 @@ class db(baseExportService):
                     serv.actions[id]['progress'] = 0
                     cr = sql_db.db_connect(db_name).cursor()
                     tools.init_db(cr)
+                    tools.config['lang'] = lang
                     cr.commit()
                     cr.close()
                     cr = None
@@ -451,7 +451,7 @@ class common(_ObjectService):
         elif method == 'logout':
             if auth:
                 auth.logout(params[1])
-            logger.info('Logout %s from database %s'%(login,db))
+            logger.info('Logout %s from database %s'%(params[1],db))
             return True
         elif method in self._auth_commands['pub']:
             pass
@@ -673,6 +673,8 @@ GNU Public Licence.
         import threading
         res = "OpenERP server: %d threads\n" % threading.active_count()
         res += netsvc.Server.allStats()
+        res += "\n"
+        res += netsvc.ExportService.allStats()
         try:
             import gc
             if gc.isenabled():
@@ -874,8 +876,96 @@ class ExceptionWithTraceback(Exception):
         self.traceback = tb
         self.args = (msg, tb)
 
+class _report_spool_job(threading.Thread):
+    def __init__(self, id, db, uid, obj, ids, datas=None, context=None):
+        """A report job, that should be spooled in the background
+
+        @param id the index at the parent spool list, shall not be trusted,
+                only useful for the repr()
+        @param db the database name
+        @param uid the calling user
+        @param obj the report orm object (string w/o the 'report.' prefix)
+        @param ids of the obj model
+        @param datas dictionary of input to report
+        """
+        threading.Thread.__init__(self)
+        self.id = id
+        self.uid = uid
+        self.db = db
+        self.report_obj = obj
+        self.ids = ids
+        self.datas = datas
+        self.context = context
+        if self.context is None:
+            self.context = {}
+        self.result = False
+        self.format = None
+        self.state = False
+        self.exception = None
+        self.name = "report-%s-%s" % (self.report_obj, self.id)
+
+    def run(self):
+        try:
+            self.cr = pooler.get_db(self.db).cursor()
+            self.go()
+            self.cr.commit()
+        except Exception, e:
+            logger = logging.getLogger('web-services')
+            logger.exception('Exception: %s' % (e))
+            if hasattr(e, 'name') and hasattr(e, 'value'):
+                self.exception = ExceptionWithTraceback(tools.ustr(e.name), tools.ustr(e.value))
+            else:
+                tb = sys.exc_info()
+                self.exception = ExceptionWithTraceback(tools.exception_to_unicode(e), tb)
+            self.state = True
+            return
+        except KeyboardInterrupt, e:
+            tb = sys.exc_info()
+            logger = logging.getLogger('web-services')
+            logger.exception('Interrupt of report: %r' % self)
+            self.exception = ExceptionWithTraceback('KeyboardInterrupt of report: %r' % self, tb)
+            self.state = True
+            # we don't need to raise higher, because we already printed the tb
+            # and are exiting the thread loop.
+            return
+        finally:
+            if self.cr:
+                self.cr.close()
+                self.cr = None
+        return True
+        
+        
+    def stop(self):
+        """Try to kill the job.
+        
+        So far there is no genuinely good way to stop the thread (is there?), 
+        so we can at least kill the cursor, so that the rest of the job borks.
+        """
+        self.must_stop = True
+        if self.cr:
+            self.cr.rollback()
+            self.cr.close()
+            self.cr = None
+        
+    def __repr__(self):
+        """Readable name of report job
+        """
+        return "<Report job #%s: %s.%s>" % (self.id, self.db, self.report_obj)
+
+    def go(self,):
+        cr = self.cr
+        obj = netsvc.LocalService('report.' + self.report_obj)
+        (result, format) = obj.create(cr, self.uid, self.ids, self.datas, self.context)
+        if not result:
+            tb = sys.exc_info()
+            self.exception = ExceptionWithTraceback('RML is not available at specified location or not enough data to print!', tb)
+        self.result = result
+        self.format = format
+        self.state = True
+        return True
+
 class report_spool(dbExportDispatch, baseExportService):
-    _auth_commands = { 'db': ['report','report_get'] }
+    _auth_commands = { 'db': ['report','report_get', 'report_stop'] }
     def __init__(self, name='report'):
         netsvc.ExportService.__init__(self, name)
         self.joinGroup('web-services')
@@ -886,12 +976,25 @@ class report_spool(dbExportDispatch, baseExportService):
     def dispatch(self, method, auth, params):
         (db, uid, passwd ) = params[0:3]
         params = params[3:]
-        if method not in ['report','report_get']:
+        if method not in ['report','report_get', 'report_stop']:
             raise KeyError("Method not supported %s" % method)
         security.check(db,uid,passwd)
         fn = getattr(self, 'exp_' + method)
         res = fn(db, uid, *params)
         return res
+
+    def stats(self, _pre_msg=None):
+        ret = baseExportService.stats(self, _pre_msg='%d reports' % len(self._reports))
+        for id, r in self._reports.items():
+            if not r:
+                continue
+            ret += '\n    [%d] ' % id
+            if r.is_alive() or not r.state:
+                ret += 'running '
+            else:
+                ret += 'finished '
+            ret += repr(r)
+        return ret
 
     def exp_report(self, db, uid, object, ids, datas=None, context=None):
         if not datas:
@@ -904,66 +1007,67 @@ class report_spool(dbExportDispatch, baseExportService):
         id = self.id
         self.id_protect.release()
 
-        self._reports[id] = {'uid': uid, 'result': False, 'state': False, 'exception': None}
-
-        def go(id, uid, ids, datas, context):
-            cr = pooler.get_db(db).cursor()
-            import traceback
-            import sys
-            try:
-                obj = netsvc.LocalService('report.'+object)
-                (result, format) = obj.create(cr, uid, ids, datas, context)
-                if not result:
-                    tb = sys.exc_info()
-                    self._reports[id]['exception'] = ExceptionWithTraceback('RML is not available at specified location or not enough data to print!', tb)
-                self._reports[id]['result'] = result
-                self._reports[id]['format'] = format
-                self._reports[id]['state'] = True
-            except Exception, exception:
-                
-                tb = sys.exc_info()
-                tb_s = "".join(traceback.format_exception(*tb))
-                logger = logging.getLogger('web-services')
-                logger.error('Exception: %s\n%s' % (exception, tb_s))
-                if hasattr(exception, 'name') and hasattr(exception, 'value'):
-                    self._reports[id]['exception'] = ExceptionWithTraceback(tools.ustr(exception.name), tools.ustr(exception.value))
-                else:
-                    self._reports[id]['exception'] = ExceptionWithTraceback(tools.exception_to_unicode(exception), tb)
-                self._reports[id]['state'] = True
-            cr.commit()
-            cr.close()
-            return True
-
-        thread.start_new_thread(go, (id, uid, ids, datas, context))
+        self._reports[id] = _report_spool_job(id, db, uid, object, ids, datas=datas, context=context)
+        self._reports[id].start()
         return id
 
     def _check_report(self, report_id):
-        result = self._reports[report_id]
-        exc = result['exception']
+        report = self._reports[report_id]
+        exc = report.exception
         if exc:
+            # rfc: Why send the traceback?
             self.abortResponse(exc, exc.message, 'warning', exc.traceback)
-        res = {'state': result['state']}
+        res = {'state': report.state }
         if res['state']:
             if tools.config['reportgz']:
                 import zlib
-                res2 = zlib.compress(result['result'])
+                res2 = zlib.compress(report.result)
                 res['code'] = 'zlib'
             else:
                 #CHECKME: why is this needed???
-                if isinstance(result['result'], unicode):
-                    res2 = result['result'].encode('latin1', 'replace')
+                if isinstance(report.result, unicode):
+                    res2 = report.result.encode('latin1', 'replace')
                 else:
-                    res2 = result['result']
+                    res2 = report.result
             if res2:
                 res['result'] = base64.encodestring(res2)
-            res['format'] = result['format']
+            res['format'] = report.format
+            self.id_protect.acquire()
             del self._reports[report_id]
+            self.id_protect.release()
         return res
 
     def exp_report_get(self, db, uid, report_id):
         if report_id in self._reports:
-            if self._reports[report_id]['uid'] == uid:
+            if self._reports[report_id].uid == uid:
                 return self._check_report(report_id)
+            else:
+                raise Exception, 'AccessDenied'
+        else:
+            raise Exception, 'ReportNotFound'
+
+    def exp_report_stop(self, db, uid, report_id, timeout=5.0):
+        """ Stop a running report, wait for it to finish
+        
+            @return True if stopped, False if alredy finished,
+                    Exception('Timeout') if cannot stop
+            
+            Note that after a "report_stop" request, the caller shall
+            do one more "report_get" to fetch the exception and free
+            the job object.
+        """
+        if report_id in self._reports:
+            report = self._reports[report_id]
+            if report.uid == uid or uid == 1:
+                if report.is_alive() and not report.state:
+                    report.stop()
+                    report.join(timeout=timeout)
+                    if report.is_alive():
+                        raise Exception('Timeout')
+                    
+                    return True
+                else:
+                    return False
             else:
                 raise Exception, 'AccessDenied'
         else:

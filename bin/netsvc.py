@@ -142,6 +142,30 @@ class ExportService(object):
         else:
             raise
 
+    def stats(self, _pre_msg='No statistics'):
+        """ This function should return statistics about the service.
+            @param _pre_msg helps when a child class wants to just display
+                    a simple message
+        """
+        return "%s (%s.%s): %s" % (self.__name, 
+                    self.__class__.__module__, self.__class__.__name__,
+                    _pre_msg)
+
+    @classmethod
+    def allStats(cls):
+        """ Return a newline-delimited string of all services stats
+        
+            Remember that the purpose of this is to inspect what the
+            server is doing at each moment.
+        """
+        res = []
+        for srv in cls._services.values():
+            st = srv.stats()
+            if not st:
+                continue
+            res.append(st)
+        return '\n'.join(res)
+
 LOG_NOTSET = 'notset'
 LOG_DEBUG_SQL = 'debug_sql'
 LOG_DEBUG_RPC = 'debug_rpc'
@@ -185,6 +209,22 @@ class DBFormatter(logging.Formatter):
         else:
             record.at_dbname = ''
         return logging.Formatter.format(self, record)
+
+    def formatException(self, ei):
+        """ A little better formatter of exceptions, that will tolerate
+            locale-encoded strings (or utf8)
+        """
+        from locale import getpreferredencoding
+        res = logging.Formatter.formatException(self, ei)
+        if isinstance(res, unicode):
+            return res
+
+        for enc in (getpreferredencoding(), 'utf-8'):
+            try:
+                return unicode(res, 'utf-8')
+            except UnicodeEncodeError:
+                pass
+        return res
 
 class ColoredFormatter(DBFormatter):
     def format(self, record):
@@ -339,8 +379,9 @@ class Logger(object):
                       "the standard `logging` module instead",
                       PendingDeprecationWarning, stacklevel=2)
         from service.web_services import common
+        from tools.misc import ustr
 
-        log = logging.getLogger(tools.ustr(name))
+        log = logging.getLogger(ustr(name))
 
         if level in [LOG_DEBUG_RPC, LOG_TEST] and not hasattr(log, level):
             fct = lambda msg, *args, **kwargs: log.log(getattr(logging, level.upper()), msg, *args, **kwargs)
@@ -565,7 +606,6 @@ agent_runner = threading.Thread(target=Agent.runner, name="netsvc.Agent.runner")
 # threads it spawns are not marked daemon)
 agent_runner.setDaemon(True)
 agent_runner.start()
-
 
 import traceback
 

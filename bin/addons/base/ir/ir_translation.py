@@ -57,7 +57,7 @@ class ir_translation(osv.osv):
     _columns = {
         'name': fields.char('Field Name', size=128, required=True),
         'res_id': fields.integer('Resource ID', select=True),
-        'lang': fields.selection(_get_language, string='Language', size=5),
+        'lang': fields.selection(_get_language, string='Language', size=16),
         'type': fields.selection(TRANSLATION_TYPE, string='Type', size=16, select=True),
         'src': fields.text('Source'),
         'value': fields.text('Translation Value'),
@@ -126,7 +126,7 @@ class ir_translation(osv.osv):
         and source. All values passed to this method should be unicode (not byte strings),
         especially ``source``.
 
-        :param name: identification of the term to translate, such as field name
+        :param name: identification of the term to translate, such as field name (optional if source is passed)
         :param types: single string defining type of term to translate (see ``type`` field on ir.translation), or sequence of allowed types (strings)
         :param lang: language code of the desired translation
         :param source: optional source term to translate (should be unicode)
@@ -142,7 +142,16 @@ class ir_translation(osv.osv):
             types = [types,]
         else:
             types = list(types)
-        if source:
+        if source and not name:
+            cr.execute_prepared('ir_trans_get_src0',
+                    'SELECT value ' \
+                    'FROM ir_translation ' \
+                    'WHERE lang=%s ' \
+                        'AND type = ANY(%s) ' \
+                        'AND src=%s ' \
+                        "AND value IS NOT NULL AND value <> '' ",
+                    (lang, types, source), debug=self._debug)
+        elif source:
             cr.execute_prepared('ir_trans_get_src1',
                     'SELECT value ' \
                     'FROM ir_translation ' \

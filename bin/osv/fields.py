@@ -36,7 +36,7 @@ import string
 import logging
 import warnings
 import sys
-
+import xmlrpclib
 from psycopg2 import Binary
 
 import tools
@@ -76,6 +76,8 @@ def _symbol_set_long(symb):
         warnings.warn("You passed empty string as value to a long integer",
                       DeprecationWarning, stacklevel=4)
         return None
+    #elif not isinstance(symb, (basestring, int, long, float)):
+    #    raise ValueError("Why passed %r to _symbol_set_long?" % symb)
     return long(symb)
 
 
@@ -185,20 +187,21 @@ class boolean(_column):
     _symbol_f = lambda x: x and 'True' or 'False'
     _symbol_set = (_symbol_c, _symbol_f)
 
-class integer_big(_column):
-    _type = 'integer_big'
+class integer(_column):
+    _type = 'integer'
     _symbol_c = '%s'
     _symbol_f = _symbol_set_long
     _symbol_set = (_symbol_c, _symbol_f)
     _symbol_get = lambda self,x: x or 0
 
-class integer(_column):
-    _type = 'integer'
+class integer_big(_column):
+    _type = 'integer_big'
+    # do not reference the _symbol_* of integer class, as that would possibly
+    # unbind the lambda functions
     _symbol_c = '%s'
     _symbol_f = _symbol_set_integer
     _symbol_set = (_symbol_c, _symbol_f)
     _symbol_get = lambda self,x: x or 0
-
 
 class reference(_column):
     _type = 'reference'
@@ -434,7 +437,9 @@ class many2one(_column):
         # build a dictionary of the form {'id_of_distant_resource': name_of_distant_resource}
         # we use uid=1 because the visibility of a many2one field value (just id and name)
         # must be the access right of the parent form and not the linked object itself.
-        records = dict(obj.name_get(cr, 1, list(set(filter(None, res.values()))), context=context))
+        records = dict(obj.name_get(cr, 1,
+                                    list(set([x for x in res.values() if isinstance(x, (int,long))])),
+                                    context=context))
         for id in res:
             if res[id] in records:
                 res[id] = (res[id], records[res[id]])
@@ -524,7 +529,7 @@ class one2many(_column):
             elif act[0] == 3:
                 obj.datas[act[1]][self._fields_id] = False
             elif act[0] == 4:
-                obj.datas[act[1]] = id
+                obj.datas[act[1]][self._fields_id] = id
             elif act[0] == 5:
                 for o in obj.datas.values():
                     if o[self._fields_id] == id:
@@ -606,7 +611,8 @@ class one2many(_column):
                 # parent but then are reassigned to the correct one thanks
                 # to the (0, 0, ...)
                 d = rel.copy_data(cr, uid, rel_id, context=context)
-                res.append((0, 0, d))
+                if d:
+                    res.append((0, 0, d))
         return res
 
 
@@ -653,7 +659,7 @@ class many2many(_column):
                       DeprecationWarning, stacklevel=2)
         obj = obj.pool.get(self._obj)
 
-        # static domains are lists, and are evaluated both here and on client-side, while string 
+        # static domains are lists, and are evaluated both here and on client-side, while string
         # domains supposed by dynamic and evaluated on client-side only (thus ignored here)
         # FIXME: make this distinction explicit in API!
         domain = isinstance(self._domain, list) and self._domain or []
@@ -715,7 +721,10 @@ class many2many(_column):
             elif act[0] == 3:
                 cr.execute('delete from '+self._rel+' where ' + self._id1 + '=%s and '+ self._id2 + '=%s', (id, act[1]), debug=obj._debug)
             elif act[0] == 4:
-                cr.execute('insert into '+self._rel+' ('+self._id1+','+self._id2+') values (%s,%s)', (id, act[1]), debug=obj._debug)
+                # following queries are in the same transaction - so should be relatively safe
+                cr.execute('SELECT 1 FROM '+self._rel+' WHERE '+self._id1+' = %s and '+self._id2+' = %s', (id, act[1]), debug=obj._debug)
+                if not cr.fetchone():
+                    cr.execute('insert into '+self._rel+' ('+self._id1+','+self._id2+') values (%s,%s)', (id, act[1]), debug=obj._debug)
             elif act[0] == 5:
                 cr.execute('update '+self._rel+' set '+self._id2+'=null where '+self._id2+'=%s', (id,), debug=obj._debug)
             elif act[0] == 6:
@@ -776,6 +785,37 @@ def get_nice_size(a):
         size = 0
     return (x, tools.human_size(size))
 
+def sanitize_binary_value(dict_item):
+    # binary fields should be 7-bit ASCII base64-encoded data,
+    # but we do additional sanity checks to make sure the values
+    # are not something else that won't pass via xmlrpc
+    index, value = dict_item
+    if isinstance(value, (xmlrpclib.Binary, tuple, list, dict)):
+        # these builtin types are meant to pass untouched
+        return index, value
+
+    # For all other cases, handle the value as a binary string:
+    # it could be a 7-bit ASCII string (e.g base64 data), but also
+    # any 8-bit content from files, with byte values that cannot
+    # be passed inside XML!
+    # See for more info:
+    #  - http://bugs.python.org/issue10066
+    #  - http://www.w3.org/TR/2000/REC-xml-20001006#NT-Char
+    #
+    # One solution is to convert the byte-string to unicode,
+    # so it gets serialized as utf-8 encoded data (always valid XML)
+    # If invalid XML byte values were present, tools.ustr() uses
+    # the Latin-1 codec as fallback, which converts any 8-bit
+    # byte value, resulting in valid utf-8-encoded bytes
+    # in the end:
+    #  >>> unicode('\xe1','latin1').encode('utf8') == '\xc3\xa1'
+    # Note: when this happens, decoding on the other endpoint
+    # is not likely to produce the expected output, but this is
+    # just a safety mechanism (in these cases base64 data or
+    # xmlrpc.Binary values should be used instead)
+    return index, tools.ustr(value)
+
+
 # ---------------------------------------------------------
 # Function fields
 # ---------------------------------------------------------
@@ -831,6 +871,11 @@ class function(_column):
             self._symbol_f = boolean._symbol_f
             self._symbol_set = boolean._symbol_set
 
+        if type in ['integer','integer_big']:
+            self._symbol_c = integer._symbol_c
+            self._symbol_f = integer._symbol_f
+            self._symbol_set = integer._symbol_set
+
     def digits_change(self, cr):
         if self.digits_compute:
             t = self.digits_compute(cr)
@@ -866,9 +911,13 @@ class function(_column):
                     if res[r] and res[r] in dict_names:
                         res[r] = (res[r], dict_names[res[r]])
 
-        if self._type == 'binary' and context.get('bin_size', False):
-            # convert the data returned by the function with the size of that data...
-            res = dict(map( get_nice_size, res.items()))
+        if self._type == 'binary':
+            if context.get('bin_size', False):
+                # client requests only the size of binary fields
+                res = dict(map(get_nice_size, res.items()))
+            else:
+                res = dict(map(sanitize_binary_value, res.items()))
+
         if self._type == "integer":
             for r in res.keys():
                 # Converting value into string so that it does not affect XML-RPC Limits
@@ -1121,11 +1170,16 @@ class property(function):
             value = properties.get_by_record(cr, uid, prop, context=context)
             res[prop.res_id.id][prop.fields_id.name] = value or False
             if value and (prop.type == 'many2one'):
-                replaces.setdefault(value._name, {})
-                replaces[value._name][value.id] = True
+                record_exists = obj.pool.get(value._name).exists(cr, uid, value.id)
+                if record_exists:
+                    replaces.setdefault(value._name, {})
+                    replaces[value._name][value.id] = True
+                else:
+                    res[prop.res_id.id][prop.fields_id.name] = False
 
         for rep in replaces:
-            replaces[rep] = dict(obj.pool.get(rep).name_get(cr, uid, replaces[rep].keys(), context=context))
+            nids = obj.pool.get(rep).search(cr, uid, [('id','in',replaces[rep].keys())], context=context)
+            replaces[rep] = dict(obj.pool.get(rep).name_get(cr, uid, nids, context=context))
 
         for prop in prop_name:
             for id in ids:

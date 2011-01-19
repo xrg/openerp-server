@@ -44,12 +44,17 @@ from email.Header import Header
 from email.Utils import formatdate, COMMASPACE
 from email import Encoders
 from itertools import islice, izip
+from lxml import etree
 from which import which
 if sys.version_info[:2] < (2, 4):
     from threadinglocal import local
     _hush_pyflakes = [local,]
 else:
     from threading import local
+try:
+    from html2text import html2text
+except ImportError:
+    html2text = None
 
 import netsvc
 from config import config
@@ -57,12 +62,20 @@ from lru import LRU
 
 _logger = logging.getLogger('tools')
 
+# List of etree._Element subclasses that we choose to ignore when parsing XML.
+# We include the *Base ones just in case, currently they seem to be subclasses of the _* ones.
+SKIPPED_ELEMENT_TYPES = (etree._Comment, etree._ProcessingInstruction, etree.CommentBase, etree.PIBase)
+
 # initialize a database with base/base.sql
 def init_db(cr):
     import addons
     f = addons.get_module_resource('base', 'base.sql')
-    cr.execute(file_open(f).read())
-    cr.commit()
+    base_sql_file = file_open(f)
+    try:
+        cr.execute(base_sql_file.read())
+        cr.commit()
+    finally:
+        base_sql_file.close()
 
     for i in addons.get_modules():
         mod_path = addons.get_module_path(i)
@@ -142,15 +155,15 @@ def exec_pg_command(name, *args):
     prog = find_pg_tool(name)
     if not prog:
         raise Exception('Couldn\'t find %s' % name)
-    args2 = (os.path.basename(prog),) + args
+    args2 = (prog,) + args
     
-    return subprocess.call(args2, executable=prog)
+    return subprocess.call(args2)
 
 def exec_pg_command_pipe(name, *args):
     prog = find_pg_tool(name)
     if not prog:
         raise Exception('Couldn\'t find %s' % name)
-    pop = subprocess.Popen(args, executable=prog, shell=True, bufsize= -1,
+    pop = subprocess.Popen((prog,) + args, bufsize= -1,
           stdin=subprocess.PIPE, stdout=subprocess.PIPE, close_fds=True)
     return (pop.stdin, pop.stdout)
 
@@ -158,7 +171,7 @@ def exec_command_pipe(name, *args):
     prog = find_in_path(name)
     if not prog:
         raise Exception('Couldn\'t find %s' % name)
-    pop = subprocess.Popen(args, executable=prog, shell=True, bufsize= -1,
+    pop = subprocess.Popen((prog,) + args, bufsize= -1,
           stdin=subprocess.PIPE, stdout=subprocess.PIPE, close_fds=True)
     return (pop.stdin, pop.stdout)
 
@@ -223,9 +236,15 @@ def file_open(name, mode="r", subdir='addons', pathinfo=False):
     head = name
     zipname = False
     name2 = False
+    sys_root_dirs = ('/', '/home', '/net')
     while True:
+        if os.path.isfile(head):
+            # avoid zip algorithm for a proper path
+            break
         head, tail = os.path.split(head)
         if not tail:
+            break
+        if head in sys_root_dirs:
             break
         if zipname:
             zipname = os.path.join(tail, zipname)
@@ -254,7 +273,7 @@ def file_open(name, mode="r", subdir='addons', pathinfo=False):
             return fo
     if os.path.splitext(name)[1] == '.rml':
         raise IOError, 'Report %s doesn\'t exist or deleted : ' %str(name)
-    raise IOError, 'File not found : '+str(name)
+    raise IOError, 'File not found : %s' % name
 
 
 #----------------------------------------------------------
@@ -501,8 +520,7 @@ def email_send(email_from, email_to, subject, body, email_cc=None, email_bcc=Non
     email_body = ustr(body).encode('utf-8')
     email_text = MIMEText(email_body or '',_subtype=subtype,_charset='utf-8')
 
-    if attach: msg = MIMEMultipart()
-    else: msg = email_text
+    msg = MIMEMultipart()
 
     msg['Subject'] = Header(ustr(subject), 'utf-8')
     msg['From'] = email_from
@@ -524,8 +542,16 @@ def email_send(email_from, email_to, subject, body, email_cc=None, email_bcc=Non
     for key, value in x_headers.iteritems():
         msg['%s' % key] = str(value)
 
-    if attach:
+    if html2text and subtype == 'html':
+        text = html2text(email_body.decode('utf-8')).encode('utf-8')
+        alternative_part = MIMEMultipart(_subtype="alternative")
+        alternative_part.attach(MIMEText(text, _charset='utf-8', _subtype='plain'))
+        alternative_part.attach(email_text)
+        msg.attach(alternative_part)
+    else:
         msg.attach(email_text)
+
+    if attach:
         for (fname,fcontent) in attach:
             part = MIMEBase('application', "octet-stream")
             part.set_payload( fcontent )
@@ -854,12 +880,12 @@ def get_encodings(hint_encoding='utf-8'):
         yield hint_encoding
         if hint_encoding.lower() in fallbacks:
             yield fallbacks[hint_encoding.lower()]
-
+    
     # some defaults (also taking care of pure ASCII)
-    for charset in ['utf8','latin1']:
+    for charset in ['utf-8','latin1']:
         if not (hint_encoding) or (charset.lower() != hint_encoding.lower()):
             yield charset
-
+    
     from locale import getpreferredencoding
     prefenc = getpreferredencoding()
     if prefenc and prefenc.lower() != 'utf-8':
@@ -945,6 +971,8 @@ def get_iso_codes(lang):
     return lang
 
 def get_languages():
+    # The codes below are those from Launchpad's Rosetta, with the exception
+    # of some trivial codes where the Launchpad code is xx and we have xx_XX.
     languages={
         'ab_RU': u'Abkhazian / аҧсуа',
         'ar_AR': u'Arabic / الْعَرَبيّة',
@@ -985,6 +1013,7 @@ def get_languages():
         'fr_FR': u'French / Français',
         'gl_ES': u'Galician / Galego',
         'gu_IN': u'Gujarati / ગુજરાતી',
+        'he_IL': u'Hebrew / עִבְרִי',
         'hi_IN': u'Hindi / हिंदी',
         'hr_HR': u'Croatian / hrvatski jezik',
         'hu_HU': u'Hungarian / Magyar',
@@ -1011,7 +1040,8 @@ def get_languages():
         'sl_SI': u'Slovenian / slovenščina',
         'sk_SK': u'Slovak / Slovenský jazyk',
         'sq_AL': u'Albanian / Shqip',
-        'sr_RS': u'Serbian / српски језик',
+        'sr_RS': u'Serbian (Cyrillic) / српски',
+        'sr@latin': u'Serbian (Latin) / srpski',
         'sv_SE': u'Swedish / svenska',
         'te_IN': u'Telugu / తెలుగు',
         'tr_TR': u'Turkish / Türkçe',
@@ -1359,6 +1389,51 @@ DEFAULT_SERVER_TIME_FORMAT = "%H:%M:%S"
 DEFAULT_SERVER_DATETIME_FORMAT = "%s %s" % (
     DEFAULT_SERVER_DATE_FORMAT,
     DEFAULT_SERVER_TIME_FORMAT)
+
+# Python's strftime supports only the format directives
+# that are available on the platform's libc, so in order to
+# be cross-platform we map to the directives required by
+# the C standard (1989 version), always available on platforms
+# with a C standard implementation.
+DATETIME_FORMATS_MAP = {
+        '%C': '', # century
+        '%D': '%m/%d/%Y', # modified %y->%Y
+        '%e': '%d',
+        '%E': '', # special modifier
+        '%F': '%Y-%m-%d',
+        '%g': '%Y', # modified %y->%Y
+        '%G': '%Y',
+        '%h': '%b',
+        '%k': '%H',
+        '%l': '%I',
+        '%n': '\n',
+        '%O': '', # special modifier
+        '%P': '%p',
+        '%R': '%H:%M',
+        '%r': '%I:%M:%S %p',
+        '%s': '', #num of seconds since epoch
+        '%T': '%H:%M:%S',
+        '%t': ' ', # tab
+        '%u': ' %w',
+        '%V': '%W',
+        '%y': '%Y', # Even if %y works, it's ambiguous, so we should use %Y
+        '%+': '%Y-%m-%d %H:%M:%S',
+
+        # %Z is a special case that causes 2 problems at least:
+        #  - the timezone names we use (in res_user.context_tz) come
+        #    from pytz, but not all these names are recognized by
+        #    strptime(), so we cannot convert in both directions
+        #    when such a timezone is selected and %Z is in the format
+        #  - %Z is replaced by an empty string in strftime() when
+        #    there is not tzinfo in a datetime value (e.g when the user
+        #    did not pick a context_tz). The resulting string does not
+        #    parse back if the format requires %Z.
+        # As a consequence, we strip it completely from format strings.
+        # The user can always have a look at the context_tz in
+        # preferences to check the timezone.
+        '%z': '',
+        '%Z': '',
+}
 
 def server_to_local_timestamp(src_tstamp_str, src_format, dst_format, dst_tz_name,
         tz_offset=True, ignore_unparsable_time=True):

@@ -54,7 +54,7 @@ fi
 
 if ! (psql -qt -U $PG_ROOT $DB_CONNS -c "SELECT usename FROM pg_user WHERE usename = '$DB_USER';" | \
 	grep $DB_USER > /dev/null) ; then
-	if ! createuser -U $PG_ROOT $DB_CONNS -S -D -R -l $DB_USER < /dev/null ; then
+	if ! createuser -U $PG_ROOT $DB_CONNS -S -d -R -l $DB_USER < /dev/null ; then
 		echo "Failed to create user $DB_USER"
 		exit 1
 	fi

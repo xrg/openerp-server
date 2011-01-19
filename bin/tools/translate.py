@@ -26,8 +26,10 @@ import inspect
 import itertools
 import locale
 import os
+import pooler
 import re
 import logging
+import shutil
 import tarfile
 import tempfile
 from os.path import join
@@ -35,9 +37,10 @@ from os.path import join
 from datetime import datetime
 from lxml import etree
 
-import tools, pooler
+import tools
 import netsvc
 from tools.misc import UpdateableStr
+from tools.misc import SKIPPED_ELEMENT_TYPES
 
 _LOCALE2WIN32 = {
     'af_ZA': 'Afrikaans_South Africa',
@@ -183,8 +186,10 @@ class GettextAlias(object):
             if not lang:
                 return source
             if (not cr) and frame.f_globals.get('pooler',False):
-                cr = pooler.get_db(frame.f_globals['pooler'].pool_dic.keys()[0]).cursor()
-                own_cr = True
+                db = frame.f_locals.get('dbname') or frame.f_locals.get('db')
+                if db and isinstance(db, basestring):
+                    cr = pooler.get_db(db).cursor()
+                    own_cr = True
             if not cr:
                 return source
         except Exception:
@@ -194,6 +199,7 @@ class GettextAlias(object):
             try:
                 # TODO: try to match the frame's filename, line_no,
                 # but in a "least distance" sense
+                # if so, double-check the root/base translations filenames
                 
                 cr.execute("SELECT value FROM ir_translation " \
                             "WHERE lang=%s and type IN (%s,%s) AND src=%s "
@@ -222,8 +228,8 @@ class TinyPoFile(object):
         self.re_unquote_repls = {'n': '\n', } # 't': '\t', 'r': '\r'
         self.line_num = 0    # same as csv.reader's
 
-    def warn(self, msg):
-        self.logger.warning(msg)
+    def warn(self, msg, *args):
+        self.logger.warning(msg, *args)
 
     def __iter__(self):
         self.buffer.seek(0)
@@ -272,12 +278,27 @@ class TinyPoFile(object):
                 if line.startswith('#~ '):
                     break
                 if line.startswith('#:'):
-                    if ' ' in line[2:].strip():
-                        for lpart in line[2:].strip().split(' '):
-                            tmp_tnrs.append(lpart.strip().split(':',2))
-                    else:
-                        tmp_tnrs.append( line[2:].strip().split(':',2) )
-                elif line.startswith('#,') and (line[2:].strip() == 'fuzzy'):
+                    # We expect lines like
+                    #: type1:place1:id1 type2:place2:id2 ...
+                    # but in a rare Spanish case, id contains spaces
+                    # so we have to merge the parts. Also tolerate empty
+                    # lines like '#:'
+                    lparts = line[2:].strip().split(' ')
+                    while lparts:
+                        lpart = lparts.pop(0)
+                        if not lpart:
+                            continue
+                        if lpart.count(':') < 2:
+                            self.warn("Malformed #: identifier '%s' at line %d", 
+                                lpart, self.line_num)
+                            break # skip the whole line
+                        while lparts and lparts[0].count(':') == 0:
+                            # We consider 'type1:place1:id ab1' to be one, but
+                            # don't allow 'type1:place1:id ab:1'
+                            lpart += ' ' + lparts.pop(0)
+                        tmp_tnrs.append(lpart.strip().split(':',2))
+
+                elif line.startswith('#,') and ('fuzzy' in line[2:]):
                     fuzzy = True
                 line = self._get_line()
             while not line:
@@ -323,7 +344,7 @@ class TinyPoFile(object):
 
         if name is None:
             if not fuzzy:
-                self.warn('Missing "#:" formated comment at line %d for the following source:\n\t%s', 
+                self.warn('Missing "#:" formated comment at line %d for the following source:\n\t%s',
                         self.line_num, source[:30])
             return self.next()
         return type, name, res_id, source, trad
@@ -352,7 +373,7 @@ class TinyPoFile(object):
                               'version': release.version,
                               'modules': reduce(lambda s, m: s + "#\t* %s\n" % m, modules, ""),
                               'bugmail': release.support_email,
-                              'now': datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S')+"+0000",
+                              'now': datetime.utcnow().strftime('%Y-%m-%d %H:%M')+"+0000",
                             }
                           )
 
@@ -419,7 +440,7 @@ class TinyPoFile(object):
 
 # Methods to export the translation file
 
-def trans_export(lang, modules, buffer, format, dbname=None):
+def trans_export(lang, modules, buffer, format, cr):
 
     def _process(format, modules, rows, buffer, lang, newlang):
         if format == 'csv':
@@ -448,7 +469,9 @@ def trans_export(lang, modules, buffer, format, dbname=None):
             rows_by_module = {}
             for row in rows:
                 module = row[0]
-                rows_by_module.setdefault(module, []).append(row)
+                # first row is the "header", as in csv, it will be popped
+                rows_by_module.setdefault(module, [['module', 'type', 'name', 'res_id', 'src', ''],])
+                rows_by_module[module].append(row)
 
             tmpdir = tempfile.mkdtemp()
             for mod, modrows in rows_by_module.items():
@@ -462,14 +485,15 @@ def trans_export(lang, modules, buffer, format, dbname=None):
             tar = tarfile.open(fileobj=buffer, mode='w|gz')
             tar.add(tmpdir, '')
             tar.close()
+            shutil.rmtree(tmpdir)
 
         else:
             raise Exception(_('Bad file format'))
 
     newlang = not bool(lang)
-    if newlang:
-        lang = 'en_US'
-    trans = trans_generate(lang, modules, dbname)
+    #if newlang:
+    #    lang = 'en_US'
+    trans = trans_generate(lang, modules, cr)
     if newlang and format!='csv':
         for trx in trans:
             trx[-1] = ''
@@ -477,12 +501,13 @@ def trans_export(lang, modules, buffer, format, dbname=None):
     _process(format, modules, trans, buffer, lang, newlang)
     del trans
 
-
 def trans_parse_xsl(de):
     res = []
     for n in de:
         if n.get("t"):
-            for m in [j for j in n if j.text]:
+            for m in n:
+                if isinstance(m, SKIPPED_ELEMENT_TYPES) or not m.text:
+                    continue
                 l = m.text.strip().replace('\n',' ')
                 if len(l):
                     res.append(l.encode("utf8"))
@@ -492,7 +517,9 @@ def trans_parse_xsl(de):
 def trans_parse_rml(de):
     res = []
     for n in de:
-        for m in [j for j in n if j.text]:
+        for m in n:
+            if isinstance(m, SKIPPED_ELEMENT_TYPES) or not m.text:
+                continue
             string_list = [s.replace('\n', ' ').strip() for s in re.split('\[\[.+?\]\]', m.text)]
             for s in string_list:
                 if s:
@@ -502,10 +529,15 @@ def trans_parse_rml(de):
 
 def trans_parse_view(de):
     res = []
+    if de.tag == 'attribute' and de.get("name") == 'string':
+        if de.text:
+            res.append(de.text.encode("utf8"))
     if de.get("string"):
         res.append(de.get('string').encode("utf8"))
     if de.get("sum"):
         res.append(de.get('sum').encode("utf8"))
+    if de.get("confirm"):
+        res.append(de.get('confirm').encode("utf8"))
     for n in de:
         res.extend(trans_parse_view(n))
     return res
@@ -524,17 +556,13 @@ def in_modules(object_name, modules):
     module = module_dict.get(module, module)
     return module in modules
 
-def trans_generate(lang, modules, dbname=None):
+def trans_generate(lang, modules, cr):
     logger = logging.getLogger('i18n')
-    if not dbname:
-        dbname=tools.config['db_name']
-        if not modules:
-            modules = ['all']
+    dbname = cr.dbname
 
     pool = pooler.get_pool(dbname)
     trans_obj = pool.get('ir.translation')
     model_data_obj = pool.get('ir.model.data')
-    cr = pooler.get_db(dbname).cursor()
     uid = 1
     l = pool.obj_pool.items()
     l.sort()
@@ -544,7 +572,7 @@ def trans_generate(lang, modules, dbname=None):
             ' FROM ir_model_data WHERE %s ORDER BY module, model, name'
     query_models = """SELECT * FROM 
             ( SELECT DISTINCT ON(m.model) m.id, m.model, imd.module 
-            FROM ir_model AS m, ir_model_data AS imd 
+            FROM ir_model AS m, ir_model_data AS imd
             WHERE m.id = imd.res_id AND imd.model = 'ir.model'
             ORDER BY m.model, imd.id) AS foo
              WHERE %s
@@ -568,9 +596,9 @@ def trans_generate(lang, modules, dbname=None):
 
     _to_translate = []
     def push_translation(module, type, name, id, source):
-        tuple = (module, source, name, id, type)
-        if source and tuple not in _to_translate:
-            _to_translate.append(tuple)
+        tup = (module, source, name, id, type)
+        if source and (tup not in _to_translate):
+            _to_translate.append(tup)
 
     def encode(s):
         if isinstance(s, unicode):
@@ -688,9 +716,13 @@ def trans_generate(lang, modules, dbname=None):
                 report_type = "xsl"
             if fname and obj.report_type in ('pdf', 'xsl'):
                 try:
-                    d = etree.parse(tools.file_open(fname))
-                    for t in parse_func(d.iter()):
-                        push_translation(module, report_type, name, 0, t)
+                    report_file = tools.file_open(fname)
+                    try:
+                        d = etree.parse(report_file)
+                        for t in parse_func(d.iter()):
+                            push_translation(module, report_type, name, 0, t)
+                    finally:
+                        report_file.close()
                 except (IOError, etree.XMLSyntaxError):
                     logger.exception("couldn't export translation for report %s %s %s", name, report_type, fname)
 
@@ -762,6 +794,10 @@ def trans_generate(lang, modules, dbname=None):
         path_list = apaths
     else :
         path_list = [root_path,] + apaths
+    
+    # Also scan these non-addon paths
+    for bin_path in ['osv', 'report' ]:
+        path_list.append(os.path.join(tools.config['root_path'], bin_path))
 
     logger.debug("Scanning modules at paths: %s", ' '.join(path_list))
 
@@ -778,10 +814,16 @@ def trans_generate(lang, modules, dbname=None):
         is_mod_installed = module in installed_modules
         if (('all' in modules) or (module in modules)) and is_mod_installed:
             logger.debug("Scanning code of %s at module: %s", frelativepath, module)
-            code_string = tools.file_open(fabsolutepath, subdir='').read()
+            src_file = tools.file_open(fabsolutepath, subdir='')
+            try:
+                code_string = src_file.read()
+            finally:
+                src_file.close()
             if module in installed_modules:
                 frelativepath = str("addons" + frelativepath)
             ite = re_dquotes.finditer(code_string)
+            code_offset = 0
+            code_line = 1
             for i in ite:
                 src = i.group(1)
                 if src.startswith('""'):
@@ -789,11 +831,18 @@ def trans_generate(lang, modules, dbname=None):
                     src = src[2:-2]
                 else:
                     src = join_dquotes.sub(r'\1', src)
+                # try to count the lines from the last pos to our place:
+                code_line += code_string[code_offset:i.start(1)].count('\n')
                 # now, since we did a binary read of a python source file, we
                 # have to expand pythonic escapes like the interpreter does.
                 src = src.decode('string_escape')
-                push_translation(module, terms_type, frelativepath, 0, encode(src))
+                push_translation(module, terms_type, frelativepath, code_line, encode(src))
+                code_line += i.group(1).count('\n')
+                code_offset = i.end() # we have counted newlines up to the match end
+
             ite = re_quotes.finditer(code_string)
+            code_offset = 0 #reset counters
+            code_line = 1
             for i in ite:
                 src = i.group(1)
                 if src.startswith("''"):
@@ -801,8 +850,11 @@ def trans_generate(lang, modules, dbname=None):
                     src = src[2:-2]
                 else:
                     src = join_quotes.sub(r'\1', src)
+                code_line += code_string[code_offset:i.start(1)].count('\n')
                 src = src.decode('string_escape')
-                push_translation(module, terms_type, frelativepath, 0, encode(src))
+                push_translation(module, terms_type, frelativepath, code_line, encode(src))
+                code_line += i.group(1).count('\n')
+                code_offset = i.end() # we have counted newlines up to the match end
 
     for path in path_list:
         logger.debug("Scanning files of modules at %s", path)
@@ -820,16 +872,15 @@ def trans_generate(lang, modules, dbname=None):
         trans = trans_obj._get_source(cr, uid, name, type, lang, source)
         out.append([module, type, name, id, source, encode(trans) or ''])
 
-    cr.close()
     return out
 
-def trans_load(db_name, filename, lang, strict=False, verbose=True, context=None):
+def trans_load(cr, filename, lang, verbose=True, context=None):
     logger = logging.getLogger('i18n')
     try:
         fileobj = open(filename,'r')
         logger.info("loading %s", filename)
         fileformat = os.path.splitext(filename)[-1][1:].lower()
-        r = trans_load_data(db_name, fileobj, fileformat, lang, strict=strict, verbose=verbose, context=context)
+        r = trans_load_data(cr, fileobj, fileformat, lang, verbose=verbose, context=context)
         fileobj.close()
         return r
     except IOError:
@@ -837,12 +888,15 @@ def trans_load(db_name, filename, lang, strict=False, verbose=True, context=None
             logger.error("couldn't read translation file %s", filename)
         return None
 
-def trans_load_data(db_name, fileobj, fileformat, lang, strict=False, lang_name=None, verbose=True, context=None):
+def trans_load_data(cr, fileobj, fileformat, lang, lang_name=None, verbose=True, context=None):
+    """Populates the ir_translation table. 
+    """
     logger = logging.getLogger('i18n')
     if verbose:
         logger.info('loading translation file for language %s', lang)
     if context is None:
         context = {}
+    db_name = cr.dbname
     pool = pooler.get_pool(db_name)
     lang_obj = pool.get('res.lang')
     trans_obj = pool.get('ir.translation')
@@ -851,51 +905,15 @@ def trans_load_data(db_name, fileobj, fileformat, lang, strict=False, lang_name=
     try:
         uid = 1
         (lc, encoding) = locale.getdefaultlocale()
-        cr = pooler.get_db(db_name).cursor()
         ids = lang_obj.search(cr, uid, [('code','=', lang)])
 
         if not ids:
             # lets create the language with locale information
-            fail = True
-            for ln in get_locales(lang):
-                try:
-                    locale.setlocale(locale.LC_ALL, str(ln))
-                    fail = False
-                    break
-                except locale.Error:
-                    continue
-            if fail:
-                lc = locale.getdefaultlocale()[0]
-                msg = 'Unable to get information for locale %s. Information from the default locale (%s) have been used.'
-                logger.warning(msg, lang, lc)
+            lang_obj.load_lang(cr, 1, lang=lang, lang_name=lang_name)
             try:
                 locale.setlocale(locale.LC_ALL, str(lc + '.' + encoding))
             except locale.Error:
                 pass
-
-            if not lang_name:
-                lang_name = tools.get_languages().get(lang, lang)
-
-            def fix_xa0(s):
-                if s == '\xa0':
-                    return '\xc2\xa0'
-                return s
-
-            lang_info = {
-                'code': lang,
-                'iso_code': iso_lang,
-                'name': lang_name,
-                'translatable': 1,
-                'date_format' : str(locale.nl_langinfo(locale.D_FMT).replace('%y', '%Y')),
-                'time_format' : str(locale.nl_langinfo(locale.T_FMT)),
-                'decimal_point' : fix_xa0(str(locale.localeconv()['decimal_point'])),
-                'thousands_sep' : fix_xa0(str(locale.localeconv()['thousands_sep'])),
-            }
-
-            try:
-                lang_obj.create(cr, uid, lang_info)
-            finally:
-                resetlocale()
         # Here we try to reset the locale regardless.
         locale.setlocale(locale.LC_ALL, str(lc + '.' + encoding))
 
@@ -933,7 +951,7 @@ def trans_load_data(db_name, fileobj, fileformat, lang, strict=False, lang_name=
 
             # This would skip terms that fail to specify a res_id
             if not dic.get('res_id', False):
-                 continue
+                continue
             try:
                 dic['res_id'] = dic['res_id'] and int(dic['res_id']) or 0
             except ValueError:
@@ -958,60 +976,26 @@ def trans_load_data(db_name, fileobj, fileformat, lang, strict=False, lang_name=
                                     dic['res_id'], exc_info=True)
                     dic['res_id'] = False
 
-            if dic['type'] == 'model' and not strict:
-                (model, field) = dic['name'].split(',')
-
-                # get the ids of the resources of this model which share
-                # the same source
-                obj = pool.get(model)
-                if obj:
-                    if field not in obj.fields_get_keys(cr, uid):
-                        continue
-                    ids = obj.search(cr, uid, [(field, '=', dic['src'])])
-
-                    # if the resource id (res_id) is in that list, use it,
-                    # otherwise use the whole list
-                    if not ids:
-                        ids = []
-                    ids = (dic['res_id'] in ids) and [dic['res_id']] or ids
-                    for id in ids:
-                        dic['res_id'] = id
-                        ids = trans_obj.search(cr, uid, [
-                            ('lang', '=', lang),
-                            ('type', '=', dic['type']),
-                            ('name', '=', dic['name']),
-                            ('src', '=', dic['src']),
-                            ('res_id', '=', dic['res_id'])
-                        ])
-                        if ids:
-                            if context.get('overwrite', False):
-                                trans_obj.write(cr, uid, ids, {'value': dic['value']})
-                        else:
-                            trans_obj.create(cr, uid, dic)
+            args = [
+                ('lang', '=', lang),
+                ('type', '=', dic['type']),
+                ('name', '=', dic['name']),
+                ('src', '=', dic['src']),
+            ]
+            if dic['type'] == 'model':
+                args.append(('res_id', '=', dic['res_id']))
+            ids = trans_obj.search(cr, uid, args)
+            if ids:
+                if context.get('overwrite') and dic['value']:
+                    trans_obj.write(cr, uid, ids, {'value': dic['value']})
             else:
-                ids = trans_obj.search(cr, uid, [
-                    ('lang', '=', lang),
-                    ('type', '=', dic['type']),
-                    ('name', '=', dic['name']),
-                    ('src', '=', dic['src'])
-                ])
-                if ids:
-                    if context.get('overwrite', False):
-                        trans_obj.write(cr, uid, ids, {'value': dic['value']})
-                else:
-                    trans_obj.create(cr, uid, dic)
-            cr.commit()
-        cr.close()
+                trans_obj.create(cr, uid, dic)
         if verbose:
             logger.info("translation file loaded succesfully")
     except IOError:
         filename = '[lang: %s][format: %s]' % (iso_lang or 'new', fileformat)
         logger.exception("couldn't read translation file %s", filename)
-        cr.commit()
-        cr.close()
     except Exception:
-        cr.commit()
-        cr.close()
         raise
 
 def get_locales(lang=None):
@@ -1053,6 +1037,19 @@ def resetlocale():
             return locale.setlocale(locale.LC_ALL, ln)
         except locale.Error:
             continue
+
+def load_language(cr, lang):
+    """Loads a translation terms for a language.
+    Used mainly to automate language loading at db initialization.
+    
+    :param lang: language ISO code with optional _underscore_ and l10n flavor (ex: 'fr', 'fr_BE', but not 'fr-BE')
+    :type lang: str
+    """
+    pool = pooler.get_pool(cr.dbname)
+    language_installer = pool.get('base.language.install')
+    uid = 1
+    oid = language_installer.create(cr, uid, {'lang': lang})
+    language_installer.lang_install(cr, uid, [oid], context=None)
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
 

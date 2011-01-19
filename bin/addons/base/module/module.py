@@ -19,10 +19,15 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
+import base64
+import cStringIO
 import imp
 import logging
+import os
 import re
+import StringIO
 import urllib
+import zipfile
 import zipimport
 
 import addons
@@ -42,7 +47,7 @@ class module_category(osv.osv):
     def _module_nbr(self,cr,uid, ids, prop, unknow_none, context):
         cr.execute('SELECT category_id, COUNT(*) FROM ir_module_module '
                 'WHERE category_id = ANY (%s) OR category_id IN '
-                '(SELECT id FROM ir_module_category WHERE parent_id = ANY(%s) '
+                '(SELECT id FROM ir_module_category WHERE parent_id = ANY(%s)) '
                 ' GROUP BY category_id', (ids, ids), debug=self._debug )
         result = dict(cr.fetchall())
         for id in ids:
@@ -65,14 +70,15 @@ class module(osv.osv):
     _description = "Module"
     __logger = logging.getLogger('base.' + _name)
 
-    def get_module_info(self, name):
+    @classmethod
+    def get_module_info(cls, name):
         info = {}
         try:
             info = addons.load_information_from_description_file(name)
             if 'version' in info:
                 info['version'] = release.major_version + '.' + info['version']
         except Exception:
-            self.__logger.debug('Error when trying to fetch informations for '
+            cls.__logger.debug('Error when trying to fetch informations for '
                                 'module %s', name, exc_info=True)
         return info
 
@@ -242,6 +248,19 @@ class module(osv.osv):
             if tools.find_in_path(binary) is None:
                 raise Exception('Unable to find %r in path' % (binary,))
 
+    @classmethod
+    def check_external_dependencies(cls, module_name, newstate='to install'):
+        terp = cls.get_module_info(module_name)
+        try:
+            cls._check_external_dependencies(terp)
+        except Exception, e:
+            if newstate == 'to install':
+                msg = _('Unable to install module "%s" because an external dependency is not met: %s')
+            elif newstate == 'to upgrade':
+                msg = _('Unable to upgrade module "%s" because an external dependency is not met: %s')
+            else:
+                msg = _('Unable to process module "%s" because an external dependency is not met: %s')
+            raise orm.except_orm(_('Error'), msg % (module_name, e.args[0]))
 
     def state_update(self, cr, uid, ids, newstate, states_to_update, context=None, level=100):
         if level<1:
@@ -259,17 +278,7 @@ class module(osv.osv):
                     od = self.browse(cr, uid, ids2)[0]
                     mdemo = od.demo or mdemo
 
-            terp = self.get_module_info(module.name)
-            try:
-                self._check_external_dependencies(terp)
-            except Exception, e:
-                if newstate == 'to install':
-                    msg = _('Unable to install module "%s" because an external dependency is not met: %s')
-                elif newstate == 'to upgrade':
-                    msg = _('Unable to upgrade module "%s" because an external dependency is not met: %s')
-                else:
-                    msg = _('Unable to process module "%s" because an external dependency is not met: %s')
-                raise orm.except_orm(_('Error'), msg % (module.name, e.args[0]))
+            self.check_external_dependencies(module.name, newstate)
             if not module.dependencies_id:
                 mdemo = module.demo
             if module.state in states_to_update:
@@ -313,6 +322,7 @@ class module(osv.osv):
             if mod.state not in ('installed','to upgrade'):
                 raise orm.except_orm(_('Error'),
                         _("Can not upgrade module '%s'. It is not installed.") % (mod.name,))
+            self.check_external_dependencies(mod.name, 'to upgrade')
             iids = depobj.search(cr, uid, [('name', '=', mod.name)], context=context)
             for dep in depobj.browse(cr, uid, iids, context=context):
                 if dep.module_id.state=='installed' and dep.module_id not in todo:
@@ -521,20 +531,27 @@ class module(osv.osv):
                 # unable to find the module. we skip
                 continue
             for lang in filter_lang:
-                if len(lang) > 5:
-                    raise osv.except_osv(_('Error'), _('You Can Not Load Translation For language Due To Invalid Language/Country Code'))
                 iso_lang = tools.get_iso_codes(lang)
+                # Implementation notice: We need to load both the base language,
+                # like "en" and then the dialects (like "en_GB"). 
+                # With overwrite=False, en will be complemented with 'en_GB' terms.
+                # with overwrite, we need to reverse the loading order
+                to_load = []
+                
                 f = addons.get_module_resource(mod.name, 'i18n', iso_lang + '.po')
-                # Implementation notice: we must first search for the full name of
-                # the language derivative, like "en_UK", and then the generic,
-                # like "en".
-                if (not f) and '_' in iso_lang:
+                if f:
+                    to_load.append((iso_lang, f))
+                if '_' in iso_lang:
                     iso_lang = iso_lang.split('_')[0]
                     f = addons.get_module_resource(mod.name, 'i18n', iso_lang + '.po')
-                if f:
+                    if f:
+                        to_load.append((iso_lang, f))
+                if context and context.get('overwrite', False):
+                    to_load.reverse()
+                for (iso_lang, f) in to_load:
                     logger.info('module %s: loading translation file for language %s', mod.name, iso_lang)
-                    tools.trans_load(cr.dbname, f, lang, verbose=False, context=context)
-                elif lang != 'en_US':
+                    tools.trans_load(cr, f, lang, verbose=False, context=context)
+                if to_load == [] and lang != 'en_US':
                     logger.warning('module %s: no translation for language %s', mod.name, lang)
 
     def check(self, cr, uid, ids, context=None):
@@ -552,13 +569,13 @@ class module(osv.osv):
                     raise osv.except_osv(_('Error'), _('Module %s: Invalid Quality Certificate') % (mod.name,))
 
     def list_web(self, cr, uid, context=None):
-        """ list_web(cr, uid, context) -> [module_name]
+        """ list_web(cr, uid, context) -> [(module_name, module_version)]
         Lists all the currently installed modules with a web component.
 
-        Returns a list of addon names.
+        Returns a list of a tuple of addon names and addon versions.
         """
         return [
-            module['name']
+            (module['name'], module['installed_version'])
             for module in self.browse(cr, uid,
                 self.search(cr, uid,
                     [('web', '=', True),
@@ -575,15 +592,68 @@ class module(osv.osv):
             else:
                 self._web_dependencies(
                     cr, uid, parent, context=context)
-    def get_web(self, cr, uid, names, context=None):
-        """ get_web(cr, uid, [module_name], context) -> [{name, depends, content}]
 
-        Returns the web content of all the named addons.
+    def _translations_subdir(self, module):
+        """ Returns the path to the subdirectory holding translations for the
+        module files, or None if it can't find one
+
+        :param module: a module object
+        :type module: browse(ir.module.module)
+        """
+        subdir = addons.get_module_resource(module.name, 'po')
+        if subdir: return subdir
+        # old naming convention
+        subdir = addons.get_module_resource(module.name, 'i18n')
+        if subdir: return subdir
+        return None
+
+    def _add_translations(self, module, web_data):
+        """ Adds translation data to a zipped web module
+
+        :param module: a module descriptor
+        :type module: browse(ir.module.module)
+        :param web_data: zipped data of a web module
+        :type web_data: bytes
+        """
+        # cStringIO.StringIO is either read or write, not r/w
+        web_zip = StringIO.StringIO(web_data)
+        web_archive = zipfile.ZipFile(web_zip, 'a')
+
+        # get the contents of the i18n or po folder and move them to the
+        # po/messages subdirectory of the web module.
+        # The POT file will be incorrectly named, but that should not
+        # matter since the web client is not going to use it, only the PO
+        # files.
+        translations_file = cStringIO.StringIO(
+            addons.zip_directory(self._translations_subdir(module), False))
+        translations_archive = zipfile.ZipFile(translations_file)
+
+        for path in translations_archive.namelist():
+            web_path = os.path.join(
+                'web', 'po', 'messages', os.path.basename(path))
+            web_archive.writestr(
+                web_path,
+                translations_archive.read(path))
+
+        translations_archive.close()
+        translations_file.close()
+
+        web_archive.close()
+        try:
+            return web_zip.getvalue()
+        finally:
+            web_zip.close()
+
+    def get_web(self, cr, uid, names, context=None):
+        """Returns the web content of all the named addons.
+        
+        get_web(cr, uid, [module_name], context) -> [{name, depends, content}]
 
         The toplevel directory of the zipped content is called 'web',
         its final naming has to be managed by the client
         """
         mod_ids = self.search(cr, uid, [('name', 'in', names)], context=context)
+        # TODO: browse_search
         if not mod_ids:
             return []
         res = []
@@ -591,13 +661,18 @@ class module(osv.osv):
             web_dir = addons.get_module_resource(module.name, 'web')
             if not web_dir:
                 continue
-            res.append( {'name': module.name,
-                    'depends': list(self._web_dependencies(
+            web_data = addons.zip_directory(web_dir, False)
+            if self._translations_subdir(module):
+                web_data = self._add_translations(module, web_data)
+            res.append({
+                'name': module.name,
+                'version': module.installed_version,
+                'depends': list(self._web_dependencies(
                             cr, uid, module, context=context)),
-                    'content': addons.zip_directory(web_dir)
-                        })
-
-        self.__logger.debug('Sending web content of modules %s to web client', 
+                'content': base64.encodestring(web_data)
+            })
+            
+        self.__logger.debug('Sending web content of modules %s to web client',    
                     [ r['name'] for r in res])
         return res
 

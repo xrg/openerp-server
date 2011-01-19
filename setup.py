@@ -33,7 +33,7 @@ import glob
 
 from pprint import pprint as pp
 
-from setuptools import setup as official_setup, find_packages
+from setuptools import setup, find_packages
 from setuptools.command.install import install
 from distutils.sysconfig import get_python_lib
 
@@ -104,7 +104,7 @@ def find_addons():
                 yield mname, join(empath, mname)
             else:
                 print "Module %s specified, but no valid path." % mname
-    except:
+    except Exception:
         pass
 
 def data_files():
@@ -193,20 +193,17 @@ options = {
         "optimize": 2,
         "dist_dir": 'dist',
         "packages": [
-                 "lxml", "lxml.builder", "lxml._elementpath", "lxml.etree",
-                 "lxml.objectify", "decimal", "xml", "xml", "xml.dom", "xml.xpath",
-                 "encodings", "dateutil", "wizard", "pychart", "PIL", "pyparsing",
-                 "pydot", "asyncore","asynchat", "reportlab", "vobject",
-                 "HTMLParser", "select", "mako", "poplib",
-                 "imaplib", "smtplib", "email", "yaml", "DAV",
-                 ],
+            "lxml", "lxml.builder", "lxml._elementpath", "lxml.etree",
+            "lxml.objectify", "decimal", "xml", "xml", "xml.dom", "xml.xpath",
+            "encodings", "dateutil", "wizard", "pychart", "PIL", "pyparsing",
+            "pydot", "asyncore","asynchat", "reportlab", "vobject",
+            "HTMLParser", "select", "mako", "poplib",
+            "imaplib", "smtplib", "email", "yaml", "DAV",
+            "uuid",
+        ],
         "excludes" : ["Tkconstants","Tkinter","tcl"],
     }
 }
-
-def setup(**kwargs):
-    #pp(kwargs)
-    return official_setup(**kwargs)
 
 install_requires = None
 if not os.getenv('NO_INSTALL_REQS'):

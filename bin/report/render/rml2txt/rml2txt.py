@@ -223,7 +223,9 @@ class _flowable(object):
         """ Recursive render: fill outarr with text of current node
         """
         if node.tag != None:
-            if node.tag in self._tags:
+            if node.tag == etree.Comment:
+                pass
+            elif node.tag in self._tags:
                 self._tags[node.tag](node)
             else:
                 self.warn_nitag(node.tag)

@@ -54,9 +54,9 @@ class res_request(osv.osv):
         return True
 
     def request_get(self, cr, uid):
-        cr.execute('select id from res_request where act_to=%s and (trigger_date<=%s or trigger_date is null) and active=True', (uid,time.strftime('%Y-%m-%d')))
+        cr.execute('select id from res_request where act_to=%s and (trigger_date<=%s or trigger_date is null) and active=True and state != %s', (uid,time.strftime('%Y-%m-%d'), 'closed'))
         ids = map(lambda x:x[0], cr.fetchall())
-        cr.execute('select id from res_request where act_from=%s and (act_to<>%s) and (trigger_date<=%s or trigger_date is null) and active=True', (uid,uid,time.strftime('%Y-%m-%d')))
+        cr.execute('select id from res_request where act_from=%s and (act_to<>%s) and (trigger_date<=%s or trigger_date is null) and active=True and state != %s', (uid,uid,time.strftime('%Y-%m-%d'), 'closed'))
         ids2 = map(lambda x:x[0], cr.fetchall())
         return (ids, ids2)
 
@@ -65,11 +65,11 @@ class res_request(osv.osv):
         'name': fields.char('Subject', states={'waiting':[('readonly',True)],'active':[('readonly',True)],'closed':[('readonly',True)]}, required=True, size=128),
         'active': fields.boolean('Active'),
         'priority': fields.selection([('0','Low'),('1','Normal'),('2','High')], 'Priority', states={'waiting':[('readonly',True)],'closed':[('readonly',True)]}, required=True),
-        'act_from': fields.many2one('res.users', 'From', required=True, readonly=True, states={'closed':[('readonly',True)]}),
-        'act_to': fields.many2one('res.users', 'To', required=True, states={'waiting':[('readonly',True)],'closed':[('readonly',True)]}),
+        'act_from': fields.many2one('res.users', 'From', required=True, readonly=True, states={'closed':[('readonly',True)]}, select=1),
+        'act_to': fields.many2one('res.users', 'To', required=True, states={'waiting':[('readonly',True)],'closed':[('readonly',True)]}, select=1),
         'body': fields.text('Request', states={'waiting':[('readonly',True)],'closed':[('readonly',True)]}),
         'date_sent': fields.datetime('Date', readonly=True),
-        'trigger_date': fields.datetime('Trigger Date', states={'waiting':[('readonly',True)],'closed':[('readonly',True)]}),
+        'trigger_date': fields.datetime('Trigger Date', states={'waiting':[('readonly',True)],'closed':[('readonly',True)]}, select=1),
         'ref_partner_id':fields.many2one('res.partner', 'Partner Ref.', states={'closed':[('readonly',True)]}),
         'ref_doc1':fields.reference('Document Ref 1', selection=_links_get, size=128, states={'closed':[('readonly',True)]}),
         'ref_doc2':fields.reference('Document Ref 2', selection=_links_get, size=128, states={'closed':[('readonly',True)]}),

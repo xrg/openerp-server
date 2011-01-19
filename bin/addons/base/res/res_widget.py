@@ -20,6 +20,8 @@
 ##############################################################################
 
 from osv import fields,osv
+
+
 class res_widget(osv.osv):
     _name = "res.widget"
     _rec_name = "title"
@@ -27,7 +29,9 @@ class res_widget(osv.osv):
         'title' : fields.char('Title', size=64, required=True, translate=True),
         'content': fields.text('Content', required=True),
     }
+
 res_widget()
+
 
 class res_widget_user(osv.osv):
     _name="res.widget.user"
@@ -35,17 +39,36 @@ class res_widget_user(osv.osv):
     _columns = {
         'sequence': fields.integer('Sequence'),
         'user_id': fields.many2one('res.users','User', select=1),
-        'widget_id': fields.many2one('res.widget','Widget',required=True),
+        'widget_id': fields.many2one('res.widget','Widget',required=True, ondelete='cascade'),
     }
+
+    def create(self, cr, uid, vals, context=None):
+        existing = self.search(cr, uid, [('user_id', '=', vals.get('user_id')), ('widget_id', '=', vals.get('widget_id'))], context=context)
+        if existing:
+            res = existing[0]
+        else:
+            res = super(res_widget_user, self).create(cr, uid, vals, context=context)
+        return res
+
 res_widget_user()
 
 class res_widget_wizard(osv.osv_memory):
     _name = "res.widget.wizard"
     _description = "Add a widget for User"
+    
+    def widgets_list_get(self, cr, uid,context=None):
+        widget_obj=self.pool.get('res.widget')
+        ids=widget_obj.search(cr, uid,[],context=context)
+        if not len(ids):
+            return []
+        reads = widget_obj.read(cr, uid, ids, ['title'], context=context)
+        res = []
+        for record in reads:
+            res.append((record['id'], record['title']))
+        return res
+
     _columns = {
-        'widget_id': fields.many2many("res.widget",
-                                      "res_widget_user_rel", "uid", "wid",
-                                      "Widget"),
+        'widgets_list': fields.selection(widgets_list_get,string='Widget',required=True),
     }
 
     def action_get(self, cr, uid, context=None):
@@ -53,9 +76,11 @@ class res_widget_wizard(osv.osv_memory):
             cr, uid, 'base', 'action_res_widget_wizard', context=context)
 
     def res_widget_add(self, cr, uid, ids, context=None):
-        wizard = self.read(cr, uid, ids, context=context)[0]
-        for wiz_id in wizard['widget_id']:
+        widget_id = self.read(cr, uid, ids, context=context)[0]
+        if widget_id.has_key('widgets_list') and widget_id['widgets_list']:
             self.pool.get('res.widget.user').create(
-                cr, uid, {'user_id':uid, 'widget_id':wiz_id}, context=context)
+                cr, uid, {'user_id':uid, 'widget_id':widget_id['widgets_list']}, context=context)
         return {'type': 'ir.actions.act_window_close'}
+
 res_widget_wizard()
+

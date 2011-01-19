@@ -29,6 +29,7 @@ import logging
 
 class ir_rule(osv.osv):
     _name = 'ir.rule'
+    _order = 'name'
     _MODES = ['read', 'write', 'create', 'unlink']
 
     def _domain_force_get(self, cr, uid, ids, field_name, arg, context=None):
@@ -61,8 +62,7 @@ class ir_rule(osv.osv):
                 res[rule.id] = False
         return res
 
-        
-    def _check_model_obj(self, cr, uid, ids, context={}):
+    def _check_model_obj(self, cr, uid, ids, context=None):
         return not any(isinstance(self.pool.get(rule.model_id.model), osv.osv_memory) for rule in self.browse(cr, uid, ids, context))
 
     _columns = {

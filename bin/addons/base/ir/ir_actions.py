@@ -36,6 +36,7 @@ from report.report_sxw import report_sxw, report_rml
 class actions(osv.osv):
     _name = 'ir.actions.actions'
     _table = 'ir_actions'
+    _order = 'name'
     _columns = {
         'name': fields.char('Action Name', required=True, size=64),
         'type': fields.char('Action Type', required=True, size=32,readonly=True),
@@ -54,11 +55,15 @@ class report_xml(osv.osv):
         for report in self.browse(cursor, user, ids, context=context):
             data = report[name + '_data']
             if not data and report[name[:-8]]:
+                fp = None
                 try:
                     fp = tools.file_open(report[name[:-8]], mode='rb')
                     data = fp.read()
                 except:
                     data = False
+                finally:
+                    if fp:
+                        fp.close()
             res[report.id] = data
         return res
 
@@ -100,6 +105,7 @@ class report_xml(osv.osv):
     _name = 'ir.actions.report.xml'
     _table = 'ir_act_report_xml'
     _sequence = 'ir_actions_id_seq'
+    _order = 'name'
     _columns = {
         'name': fields.char('Name', size=64, required=True, translate=True),
         'model': fields.char('Object', size=64, required=True),
@@ -146,6 +152,7 @@ class act_window(osv.osv):
     _name = 'ir.actions.act_window'
     _table = 'ir_act_window'
     _sequence = 'ir_actions_id_seq'
+    _order = 'name'
 
     def _check_model(self, cr, uid, ids, context=None):
         for action in self.browse(cr, uid, ids, context):
@@ -330,6 +337,7 @@ class act_wizard(osv.osv):
     _inherit = 'ir.actions.actions'
     _table = 'ir_act_wizard'
     _sequence = 'ir_actions_id_seq'
+    _order = 'name'
     _columns = {
         'name': fields.char('Wizard Info', size=64, required=True, translate=True),
         'type': fields.char('Action Type', size=32, required=True),
@@ -348,6 +356,7 @@ class act_url(osv.osv):
     _name = 'ir.actions.url'
     _table = 'ir_act_url'
     _sequence = 'ir_actions_id_seq'
+    _order = 'name'
     _columns = {
         'name': fields.char('Action Name', size=64, translate=True),
         'type': fields.char('Action Type', size=32, required=True),
@@ -442,7 +451,7 @@ class actions_server(osv.osv):
     _name = 'ir.actions.server'
     _table = 'ir_act_server'
     _sequence = 'ir_actions_id_seq'
-    _order = 'sequence'
+    _order = 'sequence,name'
     _columns = {
         'name': fields.char('Action Name', required=True, size=64, help="Easy to Refer action by name e.g. One Sales Order -> Many Invoices", translate=True),
         'condition' : fields.char('Condition', size=256, required=True, help="Condition that is to be tested before action is executed, e.g. object.list_price > object.cost_price"),
@@ -800,7 +809,7 @@ class ir_actions_todo(osv.osv):
         'sequence': 10,
         'restart': 'onskip',
     }
-    _order="sequence,id"
+    _order="sequence,name,id"
 
     def action_launch(self, cr, uid, ids, context=None):
         """ Launch Action of Wizard"""

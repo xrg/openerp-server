@@ -35,7 +35,8 @@ def is_comment(node):
     return isinstance(node, types.StringTypes)
 
 def is_assert(node):
-    return _is_yaml_mapping(node, yaml_tag.Assert)
+    return isinstance(node, yaml_tag.Assert) \
+        or _is_yaml_mapping(node, yaml_tag.Assert)
 
 def is_record(node):
     return _is_yaml_mapping(node, yaml_tag.Record)
@@ -163,6 +164,8 @@ class YamlInterpreter(object):
             self.logger.log(logging.ERROR, 'id: %s is to long (max: 64)', id)
 
     def get_id(self, xml_id):
+        if xml_id is False:
+            return False
         if not xml_id:
             raise YamlImportException("The xml_id should be a non empty string.")
         if isinstance(xml_id, types.IntType):
@@ -219,19 +222,22 @@ class YamlInterpreter(object):
         elif assertion.search:
             q = eval(assertion.search, self.eval_context)
             ids = self.pool.get(assertion.model).search(self.cr, self.uid, q, context=assertion.context)
-        if not ids:
+        else:
             raise YamlImportException('Nothing to assert: you must give either an id or a search criteria.')
         return ids
 
     def process_assert(self, node):
-        assertion, expressions = node.items()[0]
+        if isinstance(node, dict):
+            assertion, expressions = node.items()[0]
+        else:
+            assertion, expressions = node, []
 
         if self.isnoupdate(assertion) and self.mode != 'init':
             self.logger.warn('This assertion was not evaluated ("%s").' % assertion.string)
             return
         model = self.get_model(assertion.model)
         ids = self._get_assertion_id(assertion)
-        if assertion.count and len(ids) != assertion.count:
+        if assertion.count is not None and len(ids) != assertion.count:
             msg = 'assertion "%s" failed!\n'   \
                   ' Incorrect search count:\n' \
                   ' expected count: %d\n'      \
@@ -690,8 +696,12 @@ class YamlInterpreter(object):
         if node.auto:
             values['auto'] = eval(node.auto)
         if node.sxw:
-            sxw_content = misc.file_open(node.sxw).read()
-            values['report_sxw_content'] = sxw_content
+            sxw_file = misc.file_open(node.sxw)
+            try:
+                sxw_content = sxw_file.read()
+                values['report_sxw_content'] = sxw_content
+            finally:
+                sxw_file.close()
         if node.header:
             values['header'] = eval(node.header)
         values['multi'] = node.multi and eval(node.multi)
@@ -730,11 +740,11 @@ class YamlInterpreter(object):
             try:
                 self._process_node(node)
             except YamlImportException, e:
-                self.logger.exception(e)
+                self.logger.exception(misc.ustr(e))
                 if fatal:
                     raise
             except Exception, e:
-                self.logger.exception(e)
+                self.logger.exception(misc.ustr(e))
                 raise
     
     def _process_node(self, node):

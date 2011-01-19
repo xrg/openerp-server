@@ -34,6 +34,7 @@ import tools
 import zipfile
 import common
 from osv.fields import float as float_class, function as function_class
+from osv.orm import browse_record
 
 DT_FORMAT = '%Y-%m-%d'
 DHM_FORMAT = '%Y-%m-%d %H:%M:%S'
@@ -74,7 +75,7 @@ class _format(object):
         self.lang_obj = lang_obj
 
 class _float_format(float, _format):
-    def __init__(self,value):
+    def __init__(self, value):
         super(_float_format, self).__init__()
         self.val = value
 
@@ -84,9 +85,14 @@ class _float_format(float, _format):
             digits = self._field.digits[1]
         if getattr(self, 'lang_obj', False):
             return self.lang_obj.format('%.' + str(digits) + 'f', self.name, True)
-        else:
+        elif getattr(self, 'name', False):
             return ('%.' + str(digits) + 'f') % self.name
-        return self.val
+        elif isinstance(self.val, basestring):
+            return self.val
+        else:
+            # if there is no number, "0.0" is not appropriate. We'd better
+            # return an empty string to indicate NULL data
+            return ''
 
 class _int_format(int, _format):
     def __init__(self,value):
@@ -162,14 +168,13 @@ class rml_parse(object):
         user = self.pool.get('res.users').browse(cr, uid, uid, context=context)
         self.localcontext = {
             'user': user,
-            'company': user.company_id,
+            'setCompany': self.setCompany,
             'repeatIn': self.repeatIn,
             'setLang': self.setLang,
             'setTag': self.setTag,
             'removeParentNode': self.removeParentNode,
             'format': self.format,
             'formatLang': self.formatLang,
-            'logo' : user.company_id.logo,
             'lang' : user.company_id.partner_id.lang,
             'translate' : self._translate,
             'setHtmlImage' : self.set_html_image,
@@ -178,12 +183,12 @@ class rml_parse(object):
             'reduce': reduce,
             'filter': filter,
             'sum': sum,
+            # more context members are setup in setCompany() below:
+            #  - company_id
+            #  - logo
         }
+        self.setCompany(user.company_id)
         self.localcontext.update(context)
-        self.rml_header = user.company_id.rml_header
-        self.rml_header2 = user.company_id.rml_header2
-        self.rml_header3 = user.company_id.rml_header3
-        self.logo = user.company_id.logo
         self.name = name
         self._node = None
         self.parents = parents
@@ -203,6 +208,15 @@ class rml_parse(object):
         elif len(char) <= size:
             return char
         return char[:size-len(truncation_str)] + truncation_str
+
+    def setCompany(self, company_id):
+        if company_id:
+            self.localcontext['company'] = company_id
+            self.localcontext['logo'] = company_id.logo
+            self.rml_header = company_id.rml_header
+            self.rml_header2 = company_id.rml_header2
+            self.rml_header3 = company_id.rml_header3
+            self.logo = company_id.logo
 
     def _strip_name(self, name, maxlen=50):
         return self._ellipsis(name, maxlen)
@@ -295,6 +309,9 @@ class rml_parse(object):
         if isinstance(value, (str, unicode)) and not value:
             return ''
 
+        if value is None:
+            return ''
+
         if not self.lang_dict_called:
             self._get_lang_dict()
             self.lang_dict_called = True
@@ -347,6 +364,9 @@ class rml_parse(object):
         else:
             rml_head =  self.rml_header
 
+        if not rml_head:
+            return False
+
         head_dom = etree.XML(rml_head)
         for tag in head_dom:
             found = rml_dom.find('.//'+tag.tag)
@@ -370,6 +390,15 @@ class rml_parse(object):
                 self.localcontext.update({'name_space' :common.odt_namespace})
             else:
                 self.localcontext.update({'name_space' :common.sxw_namespace})
+
+        # WARNING: the object[0].exists() call below is slow but necessary because
+        # some broken reporting wizards pass incorrect IDs (e.g. ir.ui.menu ids)
+        if objects and len(objects) == 1 and \
+            objects[0].exists() and 'company_id' in objects[0] and objects[0].company_id:
+            # When we print only one record, we can auto-set the correct
+            # company in the localcontext. For other cases the report
+            # will have to call setCompany() inside the main repeatIn loop.
+            self.setCompany(objects[0].company_id)
 
 class report_sxw(report_rml, preprocess.report):
     def __init__(self, name, table, rml=False, parser=rml_parse, header='external', store=False):
@@ -400,14 +429,19 @@ class report_sxw(report_rml, preprocess.report):
             report_xml = ir_obj.browse(cr, uid, report_xml_ids[0], context=context)
         else:
             title = ''
-            rml = tools.file_open(self.tmpl, subdir=None).read()
-            report_type= data.get('report_type', 'pdf')
-            class a(object):
-                def __init__(self, *args, **argv):
-                    for key,arg in argv.items():
-                        setattr(self, key, arg)
-            report_xml = a(title=title, report_type=report_type, report_rml_content=rml, name=title, attachment=False, header=self.header)
-        report_xml.header = self.header
+            report_file = tools.file_open(self.tmpl, subdir=None)
+            try:
+                rml = report_file.read()
+                report_type= data.get('report_type', 'pdf')
+                class a(object):
+                    def __init__(self, *args, **argv):
+                        for key,arg in argv.items():
+                            setattr(self, key, arg)
+                report_xml = a(title=title, report_type=report_type, report_rml_content=rml, name=title, attachment=False, header=self.header)
+            finally:
+                report_file.close()
+        if report_xml.header:
+            report_xml.header = self.header
         report_type = report_xml.report_type
         if report_type in ['sxw','odt']:
             fnct = self.create_source_odt
@@ -513,7 +547,14 @@ class report_sxw(report_rml, preprocess.report):
         context = context.copy()
         report_type = report_xml.report_type
         context['parents'] = sxw_parents
-        sxw_io = StringIO.StringIO(report_xml.report_sxw_content)
+
+        # if binary content was passed as unicode, we must
+        # re-encode it as a 8-bit string using the pass-through
+        # 'latin1' encoding, to restore the original byte values.
+        # See also osv.fields.sanitize_binary_value()
+        binary_report_content = report_xml.report_sxw_content.encode("latin1")
+
+        sxw_io = StringIO.StringIO(binary_report_content)
         sxw_z = zipfile.ZipFile(sxw_io, mode='r')
         rml = sxw_z.read('content.xml')
         meta = sxw_z.read('meta.xml')
@@ -589,20 +630,24 @@ class report_sxw(report_rml, preprocess.report):
 
         if report_xml.header:
             #Add corporate header/footer
-            rml = tools.file_open(os.path.join('base', 'report', 'corporate_%s_header.xml' % report_type)).read()
-            rml_parser = self.parser(cr, uid, self.name2, context=context)
-            rml_parser.parents = sxw_parents
-            rml_parser.tag = sxw_tag
-            objs = self.getObjects(cr, uid, ids, context)
-            rml_parser.set_context(objs, data, ids, report_xml.report_type)
-            rml_dom = self.preprocess_rml(etree.XML(rml),report_type)
-            create_doc = self.generators[report_type]
-            odt = create_doc(rml_dom,rml_parser.localcontext)
-            if report_xml.header:
-                rml_parser._add_header(odt)
-            odt = etree.tostring(odt, encoding='utf-8',
-                                 xml_declaration=True)
-            sxw_z.writestr('styles.xml', odt)
+            rml_file = tools.file_open(os.path.join('base', 'report', 'corporate_%s_header.xml' % report_type))
+            try:
+                rml = rml_file.read()
+                rml_parser = self.parser(cr, uid, self.name2, context=context)
+                rml_parser.parents = sxw_parents
+                rml_parser.tag = sxw_tag
+                objs = self.getObjects(cr, uid, ids, context)
+                rml_parser.set_context(objs, data, ids, report_xml.report_type)
+                rml_dom = self.preprocess_rml(etree.XML(rml),report_type)
+                create_doc = self.generators[report_type]
+                odt = create_doc(rml_dom,rml_parser.localcontext)
+                if report_xml.header:
+                    rml_parser._add_header(odt)
+                odt = etree.tostring(odt, encoding='utf-8',
+                                     xml_declaration=True)
+                sxw_z.writestr('styles.xml', odt)
+            finally:
+                rml_file.close()
         sxw_z.close()
         final_op = sxw_io.getvalue()
         sxw_io.close()
