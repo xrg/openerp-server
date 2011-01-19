@@ -23,6 +23,7 @@ import base64
 import cStringIO
 import imp
 import logging
+import os
 import re
 import StringIO
 import urllib
