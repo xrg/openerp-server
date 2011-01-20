@@ -4,13 +4,13 @@ msgstr ""
 "Project-Id-Version: OpenERP Server 5.0.4\n"
 "Report-Msgid-Bugs-To: support@openerp.com\n"
 "POT-Creation-Date: 2011-01-11 11:14+0000\n"
-"PO-Revision-Date: 2011-01-15 10:23+0000\n"
+"PO-Revision-Date: 2011-01-19 13:31+0000\n"
 "Last-Translator: Quentin THEURET <quentin@theuret.net>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-01-16 05:01+0000\n"
+"X-Launchpad-Export-Date: 2011-01-20 06:08+0000\n"
 "X-Generator: Launchpad (build 12177)\n"
 
 #. module: base
@@ -38,7 +38,7 @@ msgstr "Spécifier, SVP,  l'option du serveur --email-from !"
 #: code:addons/base/ir/ir_actions.py:0
 #, python-format
 msgid "Please specify server option --smtp-from !"
-msgstr "Veuillez spécifier l'option du server --smtp-from !"
+msgstr ""
 
 #. module: base
 #: code:addons/base/ir/ir_actions.py:0
@@ -53,9 +53,6 @@ msgid ""
 "\"%s\" contains too many dots. XML ids should not contain dots ! These are "
 "used to refer to other modules data, as in module.reference_id"
 msgstr ""
-"\"%s\" contient trop de points. Les ids XML ne devraient pas contenir de "
-"points! Les points sont utilisés pour faire référence à des données d'autres "
-"modules, tel que module.reference_id"
 
 #. module: base
 #: code:addons/base/ir/ir_model.py:0
@@ -84,7 +81,7 @@ msgstr "Les champs personnalisés doivent avoir un nom commençant par 'x_' !"
 #: code:addons/base/ir/ir_model.py:0
 #, python-format
 msgid "Model %s Does not Exist !"
-msgstr "Le modèle %s n'existe pas !"
+msgstr ""
 
 #. module: base
 #: code:addons/base/ir/ir_model.py:0
@@ -105,37 +102,37 @@ msgstr ""
 #: code:addons/base/ir/ir_model.py:0
 #, python-format
 msgid "Password empty !"
-msgstr "Mot de passe vide !"
+msgstr ""
 
 #. module: base
 #: code:addons/base/ir/ir_model.py:0
 #, python-format
 msgid "Password mismatch !"
-msgstr "Le mot de passe ne correspond pas !"
+msgstr ""
 
 #. module: base
 #: code:addons/base/ir/ir_model.py:0
 #, python-format
 msgid "You can not create this kind of document! (%s)"
-msgstr "Vous ne pouvez pas créer ce type de document! (%s)"
+msgstr ""
 
 #. module: base
 #: code:addons/base/ir/ir_model.py:0
 #, python-format
 msgid "You can not delete this document! (%s)"
-msgstr "Vous ne pouvez pas supprimer ce document ! (%s)"
+msgstr ""
 
 #. module: base
 #: code:addons/base/ir/ir_model.py:0
 #, python-format
 msgid "You can not read this document! (%s)"
-msgstr "Vous ne pouvez pas lire ce document ! (%s)"
+msgstr ""
 
 #. module: base
 #: code:addons/base/ir/ir_model.py:0
 #, python-format
 msgid "You can not remove the field '%s' !"
-msgstr "Vous ne pouvez pas supprimer le champs '%s' !"
+msgstr ""
 
 #. module: base
 #: code:addons/base/ir/ir_model.py:0
@@ -147,7 +144,7 @@ msgstr "Vous ne pouvez pas supprimer le model '%s' !"
 #: code:addons/base/ir/ir_model.py:0
 #, python-format
 msgid "You can not write in this document! (%s)"
-msgstr "Vous ne pouvez pas écrire dans ce document ! (%s)"
+msgstr ""
 
 #. module: base
 #: code:addons/base/ir/ir_model.py:0
@@ -159,71 +156,67 @@ msgstr "Vous ne pouvez pas supprimer le champ '%s' !"
 #: code:addons/base/ir/ir_report_custom.py:0
 #, python-format
 msgid "Bar charts need at least two fields"
-msgstr "Les graphiques en barres ont besoin d'au moins deux champs"
+msgstr ""
 
 #. module: base
 #: code:addons/base/ir/ir_report_custom.py:0
 #, python-format
 msgid "Enter at least one field !"
-msgstr "Entrez au moins un champ !"
+msgstr ""
 
 #. module: base
 #: code:addons/base/ir/ir_report_custom.py:0
 #, python-format
 msgid "Field %d should be a figure"
-msgstr "Le champ %d doit être un nombre"
+msgstr ""
 
 #. module: base
 #: code:addons/base/ir/ir_report_custom.py:0
 #, python-format
 msgid "Invalid operation"
-msgstr "Opération non valide"
+msgstr ""
 
 #. module: base
 #: code:addons/base/ir/ir_report_custom.py:0
 #, python-format
 msgid "Pie charts need exactly two fields"
-msgstr "Les graphiques en camembert ont besoin d'exactement deux champs"
+msgstr ""
 
 #. module: base
 #: code:addons/base/ir/ir_report_custom.py:0
 #, python-format
 msgid "Second field should be figures"
-msgstr "Le second champ doit contenir des chiffres"
+msgstr ""
 
 #. module: base
 #: code:addons/base/ir/ir_report_custom.py:0
 #, python-format
 msgid "Tree can only be used in tabular reports"
 msgstr ""
-"Les arbres peuvent uniquement être utilisés dans les rapports de type "
-"\"tableau\""
 
 #. module: base
 #: code:addons/base/ir/ir_report_custom.py:0
 #, python-format
 msgid "Using a relation field which uses an unknown object"
-msgstr "Utilisation d'un champ relation qui utilise un objet inconnu"
+msgstr ""
 
 #. module: base
 #: code:addons/base/maintenance/maintenance.py:0
 #, python-format
 msgid "This error occurs on database %s"
-msgstr "Cette erreur est survenue dans la base de données %s"
+msgstr ""
 
 #. module: base
 #: code:addons/base/maintenance/maintenance.py:0
 #, python-format
 msgid "Unable to find a valid contract"
-msgstr "Impossible de trouver un contrat valide"
+msgstr ""
 
 #. module: base
 #: code:addons/base/maintenance/maintenance.py:0
 #, python-format
 msgid "Your can't submit bug reports due to uncovered modules: %s"
 msgstr ""
-"Vous ne pouvez pas soumettre de rapport de bug sur les modules non "
-"supportés: %s"
 
 #. module: base
 #: code:addons/base/module/module.py:0
@@ -269,8 +262,6 @@ msgstr ""
 #, python-format
 msgid "This url '%s' must provide an html file with links to zip modules"
 msgstr ""
-"Cette URL '%s' doit fournir un fichier html avec les liens vers les modules "
-"au format zip"
 
 #. module: base
 #: code:addons/base/module/module.py:0
@@ -325,8 +316,6 @@ msgid ""
 "You try to install the module '%s' that depends on the module:'%s'.\n"
 "But this module is not available in your system."
 msgstr ""
-"Vous essayer d'installer le module '%s' qui dépend du module: '%s'.\n"
-"Par contre ce module n'est pas disponible sur votre système."
 
 #. module: base
 #: code:addons/base/module/module.py:0
@@ -484,9 +473,6 @@ msgid ""
 "' \\n                    'for the currency: %s \n"
 "' \\n                    'at the date: %s"
 msgstr ""
-"Pas de taux trouvé \n"
-"' \\n                    'pour la devise: %s \n"
-"' \\n                    'à la date date: %s"
 
 #. module: base
 #: code:addons/base/res/res_lang.py:0
@@ -693,7 +679,7 @@ msgstr ""
 #. module: base
 #: constraint:res.partner:0
 msgid "The VAT doesn't seem to be correct."
-msgstr "Le numéro de TVA ne semble pas correct."
+msgstr ""
 
 #. module: base
 #: constraint:res.partner.category:0
@@ -712,7 +698,7 @@ msgstr ""
 #. module: base
 #: constraint:res.users:0
 msgid "This user can not connect using this company !"
-msgstr "Cet utilisateur ne peut pas se conencter en utilisant cette société"
+msgstr ""
 
 #. module: base
 #: field:base.language.export,advice:0
@@ -1047,7 +1033,7 @@ msgstr "Vue"
 #. module: base
 #: field:ir.actions.configuration.wizard,item_id:0
 msgid "Next Configuration Wizard"
-msgstr "Prochain assistant de configuration"
+msgstr ""
 
 #. module: base
 #: field:ir.actions.configuration.wizard,name:0
@@ -1070,12 +1056,12 @@ msgstr "Sur de multiples enregistrements"
 #. module: base
 #: field:ir.actions.report.custom,name:0 field:ir.report.custom,name:0
 msgid "Report Name"
-msgstr "Nom du rapport"
+msgstr ""
 
 #. module: base
 #: field:ir.actions.report.custom,report_id:0
 msgid "Report Ref."
-msgstr "Réf. du rapport"
+msgstr ""
 
 #. module: base
 #: field:ir.actions.report.custom,type:0
@@ -1098,7 +1084,7 @@ msgstr "Recharger depuis la pièce jointe"
 #. module: base
 #: field:ir.actions.report.xml,auto:0
 msgid "Automatic XSL:RML"
-msgstr "XSL:RML automatique"
+msgstr ""
 
 #. module: base
 #: field:ir.actions.report.xml,auto:0
@@ -1136,7 +1122,7 @@ msgstr "Fichier du rapport"
 #. module: base
 #: field:ir.actions.report.xml,report_name:0
 msgid "Internal Name"
-msgstr "Nom interne"
+msgstr ""
 
 #. module: base
 #: field:ir.actions.report.xml,report_name:0
@@ -1152,7 +1138,7 @@ msgstr "Chemin d'accès aux rapports"
 #. module: base
 #: field:ir.actions.report.xml,report_rml:0
 msgid "RML path"
-msgstr "Chemin vers le RML"
+msgstr ""
 
 #. module: base
 #: field:ir.actions.report.xml,report_rml_content:0
@@ -1307,7 +1293,7 @@ msgstr "Actif"
 #. module: base
 #: field:ir.actions.todo,end_date:0
 msgid "End Date"
-msgstr "Date de fin"
+msgstr ""
 
 #. module: base
 #: field:ir.actions.todo,note:0 selection:ir.property,type:0
@@ -1326,12 +1312,12 @@ msgstr ""
 #. module: base
 #: field:ir.actions.todo,start_date:0
 msgid "Start Date"
-msgstr "Date de début"
+msgstr ""
 
 #. module: base
 #: field:ir.actions.todo,start_on:0
 msgid "Start On"
-msgstr "Commencer"
+msgstr ""
 
 #. module: base
 #: field:ir.actions.todo,state:0 field:ir.module.module,state:0
@@ -1405,7 +1391,7 @@ msgstr "Description"
 #. module: base
 #: field:ir.attachment,link:0
 msgid "Link"
-msgstr "Lien"
+msgstr ""
 
 #. module: base
 #: field:ir.attachment,name:0
@@ -1415,7 +1401,7 @@ msgstr "Nom de la pièce jointe"
 #. module: base
 #: field:ir.attachment,preview:0
 msgid "Image Preview"
-msgstr "Aperçu de l'image"
+msgstr ""
 
 #. module: base
 #: field:ir.attachment,res_id:0
@@ -1483,7 +1469,7 @@ msgstr "Unité de l'intervalle"
 #. module: base
 #: field:ir.cron,nextcall:0
 msgid "Next Call Date"
-msgstr "Prochaine Date d'exécution"
+msgstr ""
 
 #. module: base
 #: field:ir.cron,nextcall:0
@@ -1601,7 +1587,7 @@ msgstr ""
 #: field:ir.model,state:0 field:ir.model.fields,state:0
 #: field:ir.model.grid,state:0
 msgid "Manually Created"
-msgstr "Créé manuellement"
+msgstr ""
 
 #. module: base
 #: field:ir.model.access,group_id:0 field:ir.rule,rule_group:0
@@ -1631,7 +1617,7 @@ msgstr ""
 #. module: base
 #: field:ir.model.access,perm_unlink:0
 msgid "Delete Permission"
-msgstr "Accès en suppression"
+msgstr ""
 
 #. module: base
 #: field:ir.model.access,perm_write:0 view:ir.model.access:0 view:ir.rule:0
@@ -1650,7 +1636,7 @@ msgstr "Mot de passe"
 #. module: base
 #: field:ir.model.config,password_check:0
 msgid "Confirmation"
-msgstr "Confirmation"
+msgstr ""
 
 #. module: base
 #: field:ir.model.data,date_init:0
@@ -1743,7 +1729,7 @@ msgstr "Sélectionnable"
 #. module: base
 #: field:ir.model.fields,selection:0
 msgid "Field Selection"
-msgstr "Sélection de champ"
+msgstr ""
 
 #. module: base
 #: field:ir.model.fields,size:0
@@ -1899,12 +1885,12 @@ msgstr "Champ enfant"
 #. module: base
 #: field:ir.report.custom,footer:0
 msgid "Report Footer"
-msgstr "Pied de page du rapport"
+msgstr ""
 
 #. module: base
 #: field:ir.report.custom,frequency:0
 msgid "Frequency"
-msgstr "Fréquence"
+msgstr ""
 
 #. module: base
 #: field:ir.report.custom,menu_id:0 field:ir.ui.menu,name:0
@@ -1915,42 +1901,42 @@ msgstr "Menu"
 #. module: base
 #: field:ir.report.custom,print_format:0
 msgid "Print format"
-msgstr "Format d'impression"
+msgstr ""
 
 #. module: base
 #: field:ir.report.custom,print_orientation:0
 msgid "Print orientation"
-msgstr "Orientation de l'impression"
+msgstr ""
 
 #. module: base
 #: field:ir.report.custom,repeat_header:0
 msgid "Repeat Header"
-msgstr "Répéter l'entête"
+msgstr ""
 
 #. module: base
 #: field:ir.report.custom,sortby:0
 msgid "Sorted By"
-msgstr "Trier par"
+msgstr ""
 
 #. module: base
 #: field:ir.report.custom,title:0
 msgid "Report Title"
-msgstr "Titre du rapport"
+msgstr ""
 
 #. module: base
 #: field:ir.report.custom.fields,alignment:0
 msgid "Alignment"
-msgstr "Alignement"
+msgstr ""
 
 #. module: base
 #: field:ir.report.custom.fields,bgcolor:0
 msgid "Background Color"
-msgstr "Couleur d'arrière-plan"
+msgstr ""
 
 #. module: base
 #: field:ir.report.custom.fields,cumulate:0
 msgid "Accumulate"
-msgstr "Accumulé"
+msgstr ""
 
 #. module: base
 #: field:ir.report.custom.fields,fc0_op:0
@@ -1958,7 +1944,7 @@ msgstr "Accumulé"
 #: field:ir.report.custom.fields,fc2_op:0
 #: field:ir.report.custom.fields,fc3_op:0
 msgid "Relation"
-msgstr "Relation"
+msgstr ""
 
 #. module: base
 #: field:ir.report.custom.fields,fc0_operande:0
@@ -1974,32 +1960,32 @@ msgstr "Contrainte"
 #: field:ir.report.custom.fields,fc2_condition:0
 #: field:ir.report.custom.fields,fc3_condition:0
 msgid "condition"
-msgstr "condition"
+msgstr ""
 
 #. module: base
 #: field:ir.report.custom.fields,field_child0:0
 msgid "Field child0"
-msgstr "Champ fils0"
+msgstr ""
 
 #. module: base
 #: field:ir.report.custom.fields,field_child1:0
 msgid "Field child1"
-msgstr "Champ fils1"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: field:ir.report.custom.fields,field_child2:0
 msgid "Field child2"
-msgstr "Champ fils2"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: field:ir.report.custom.fields,field_child3:0
 msgid "Field child3"
-msgstr "Champ fils3"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: field:ir.report.custom.fields,fontcolor:0
 msgid "Font color"
-msgstr "Couleur de la police"
+msgstr ""
 
 #. module: base
 #: field:ir.report.custom.fields,groupby:0 view:ir.actions.act_window:0
@@ -2011,17 +1997,17 @@ msgstr "Grouper par"
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: field:ir.report.custom.fields,report_id:0
 msgid "Report Ref"
-msgstr "Réf. rapport"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: field:ir.report.custom.fields,width:0
 msgid "Fixed Width"
-msgstr "Largeur fixe"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: field:ir.rule,domain_force:0
 msgid "Force Domain"
-msgstr "Forcer le domaine"
+msgstr ""
 
 #. module: base
 #: field:ir.rule,global:0 field:ir.rule.group,global:0 view:ir.model.access:0
@@ -2032,12 +2018,12 @@ msgstr "Global"
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: field:ir.rule,operand:0
 msgid "Operand"
-msgstr "Opérande"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: field:ir.rule,operator:0
 msgid "Operator"
-msgstr "Opérateur"
+msgstr ""
 
 #. module: base
 #: field:ir.rule,perm_create:0
@@ -2069,7 +2055,7 @@ msgstr "Applicable en écriture"
 #. #-#-#-#-#  .merge_file_AZEFhG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: field:ir.rule.group,rules:0
 msgid "Tests"
-msgstr "Tests"
+msgstr ""
 
 #. module: base
 #: field:ir.sequence,code:0 field:ir.sequence.type,code:0
@@ -2082,12 +2068,12 @@ msgstr "Code"
 #. module: base
 #: field:ir.sequence,code:0 field:ir.sequence.type,code:0
 msgid "Sequence Code"
-msgstr "Code de la séquence"
+msgstr ""
 
 #. module: base
 #: field:ir.sequence,name:0 field:ir.sequence.type,name:0
 msgid "Sequence Name"
-msgstr "Nom de la séquence"
+msgstr ""
 
 #. module: base
 #: field:ir.sequence,number_increment:0
@@ -2117,7 +2103,7 @@ msgstr "Suffixe"
 #. module: base
 #: field:ir.sequence,weight:0
 msgid "Weight"
-msgstr "Poids"
+msgstr ""
 
 #. module: base
 #: field:ir.server.object.lines,col1:0
@@ -2233,12 +2219,12 @@ msgstr "Genre"
 #. module: base
 #: field:maintenance.contract,module_ids:0 view:maintenance.contract:0
 msgid "Covered Modules"
-msgstr "Modules couverts"
+msgstr ""
 
 #. module: base
 #: field:maintenance.contract,name:0 field:maintenance.contract.wizard,name:0
 msgid "Contract ID"
-msgstr "Identifiant du contrat"
+msgstr ""
 
 #. module: base
 #: field:maintenance.contract.module,version:0
@@ -2250,7 +2236,7 @@ msgstr "Version"
 #. module: base
 #: field:maintenance.contract.wizard,state:0
 msgid "States"
-msgstr "États"
+msgstr ""
 
 #. module: base
 #: field:multi_company.default,company_dest_id:0
@@ -2473,7 +2459,7 @@ msgstr "Action du menu"
 #. module: base
 #: field:res.config.users,menu_tips:0 field:res.users,menu_tips:0
 msgid "Menu Tips"
-msgstr "Astuces du menu"
+msgstr "Astuces"
 
 #. module: base
 #: field:res.config.users,name:0 field:res.users,name:0
@@ -2762,7 +2748,7 @@ msgstr "Titre"
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: field:res.partner,user_id:0
 msgid "Dedicated Salesman"
-msgstr "Vendeur dédié"
+msgstr ""
 
 #. module: base
 #: field:res.partner,user_id:0 view:res.partner:0
@@ -2872,42 +2858,42 @@ msgstr "Canal"
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: field:res.partner.event,document:0
 msgid "Document"
-msgstr "Document"
+msgstr ""
 
 #. module: base
 #: field:res.partner.event,event_ical_id:0
 msgid "iCal id"
-msgstr "ID iCal"
+msgstr ""
 
 #. module: base
 #: field:res.partner.event,partner_type:0
 msgid "Partner Relation"
-msgstr "Relation partenaire"
+msgstr ""
 
 #. module: base
 #: field:res.partner.event,planned_cost:0
 msgid "Planned Cost"
-msgstr "Coût prévus"
+msgstr ""
 
 #. module: base
 #: field:res.partner.event,planned_revenue:0
 msgid "Planned Revenue"
-msgstr "Revenus attendus"
+msgstr ""
 
 #. module: base
 #: field:res.partner.event,probability:0
 msgid "Probability (0.50)"
-msgstr "Probabilité (0.50)"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: field:res.partner.event,som:0 field:res.partner.som,name:0
 msgid "State of Mind"
-msgstr "État d'esprit"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: field:res.partner.event,type:0
 msgid "Type of Event"
-msgstr "Type d'évènement"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: field:res.partner.event.type,key:0
@@ -2917,12 +2903,12 @@ msgstr "Clé"
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: field:res.partner.function,name:0
 msgid "Function Name"
-msgstr "Nom de la fonction"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: field:res.partner.som,factor:0
 msgid "Factor"
-msgstr "Facteur"
+msgstr ""
 
 #. module: base
 #: field:res.partner.title,shortcut:0 view:ir.ui.view_sc:0
@@ -2983,22 +2969,22 @@ msgstr "Sommaire"
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: field:res.roles,child_id:0
 msgid "Children"
-msgstr "Enfants"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: field:res.roles,name:0
 msgid "Role Name"
-msgstr "Nom du rôle"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: field:res.roles,parent_id:0
 msgid "Parent"
-msgstr "Parent"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: field:res.users,company_ids:0 view:res.users:0
 msgid "Accepted Companies"
-msgstr "Sociétés autorisées"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: field:res.users,roles_id:0
@@ -3006,7 +2992,7 @@ msgstr "Sociétés autorisées"
 #: model:ir.ui.menu,name:base.menu_action_res_roles_form view:res.roles:0
 #: view:res.users:0
 msgid "Roles"
-msgstr "Rôles"
+msgstr ""
 
 #. module: base
 #: field:res.widget,content:0
@@ -3105,7 +3091,7 @@ msgstr "Flux métier"
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: field:workflow.instance,uid:0
 msgid "User ID"
-msgstr "Identifiant utilisateur"
+msgstr ""
 
 #. module: base
 #: field:workflow.transition,act_from:0
@@ -3129,7 +3115,7 @@ msgstr ""
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: field:workflow.transition,role_id:0
 msgid "Role Required"
-msgstr "Rôle nécessaire"
+msgstr ""
 
 #. module: base
 #: field:workflow.transition,signal:0
@@ -3344,7 +3330,6 @@ msgstr ""
 msgid ""
 "The .rml path of the file or NULL if the content is in report_rml_content"
 msgstr ""
-"Le chemin vers le .rml ou NULL si le contenu est dans le report_rml_content"
 
 #. module: base
 #: help:ir.actions.report.xml,report_rml:0
@@ -3613,8 +3598,6 @@ msgid ""
 "Number of time the function is called,\n"
 "a negative number indicates that the function will always be called"
 msgstr ""
-"Nombre de fois que la fonction est appelée ;\n"
-"un nombre négatif indique que la fonction est toujours appelée."
 
 #. module: base
 #: help:ir.cron,priority:0
@@ -3659,10 +3642,6 @@ msgid ""
 "- The second parenthesis must match the whole version number.\n"
 "- The last parenthesis must match the extension of the module."
 msgstr ""
-"Expression rationelle pour rechercher les modules sur la page Web du dépôt:\n"
-"- la première parenthèse doit correspondre au nom du module\n"
-"- la seconde parenthèse doit correspondre au numéro de version complet\n"
-"- la dernière parenthèse doit correspondre à l'extension du module"
 
 #. module: base
 #: help:ir.property,res_id:0
@@ -3687,13 +3666,11 @@ msgstr ""
 #: help:ir.rule.group,global:0
 msgid "Make the rule global, otherwise it needs to be put on a group"
 msgstr ""
-"Faire une règle globale, sinon il sera nécessaire de mettre un groupe ou "
-"utilisateur"
 
 #. #-#-#-#-#  .merge_file_AZEFhG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: help:ir.rule.group,rules:0
 msgid "The rule is satisfied if at least one test is True"
-msgstr "La règle est satisfaite si au moins un test est Vrai"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: help:ir.sequence,condition:0
@@ -3701,8 +3678,6 @@ msgid ""
 "If set, sequence will only be used in case this python expression matches, "
 "and will precede other sequences."
 msgstr ""
-"Si renseignée, la séquence sera utilisée seulement dans le cas où cette "
-"expression python correspond, et précédera toutes les autres séquences."
 
 #. module: base
 #: help:ir.sequence,number_increment:0
@@ -3755,7 +3730,7 @@ msgstr ""
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: help:ir.sequence,weight:0
 msgid "If two sequences match, the highest weight will be used."
-msgstr "Si deux sequence"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: help:ir.ui.menu,groups_id:0
@@ -3764,9 +3739,6 @@ msgid ""
 "groups. If this field is empty, Open ERP will compute visibility based on "
 "the related object's read access."
 msgstr ""
-"Si vous avez des Groupes, la visibilité de ce menu sera basée sur ces "
-"groupes. Si ce champ est vide, Open ERP calculera la visibilité en se basant "
-"sur l'accès en lecture de l'objet apparenté."
 
 #. module: base
 #: help:ir.ui.menu,groups_id:0
@@ -4133,7 +4105,7 @@ msgstr "Décochez le champ 'Actif' pour cacher la catégorie sans la supprimer."
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: help:res.users,company_id:0
 msgid "The company this user is currently working on."
-msgstr "La société de l'utilisateur dans laquelle il travaille."
+msgstr ""
 
 #. module: base
 #: help:workflow.transition,act_from:0
@@ -4225,12 +4197,12 @@ msgstr "Evénements du client"
 #: model:ir.actions.act_window,name:base.act_values_form_action
 #: model:ir.ui.menu,name:base.menu_values_form_action
 msgid "Connect Actions To Client Events"
-msgstr "Associer les actions aux évènements client"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: model:ir.actions.act_window,name:base.action2
 msgid "Company Architecture"
-msgstr "Architecture de la société"
+msgstr ""
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_attachment
@@ -4242,7 +4214,7 @@ msgstr "Pièces jointes"
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: model:ir.actions.act_window,name:base.action_config_simple_view_form
 msgid "Configure Simple View"
-msgstr "Configurer les vues simples"
+msgstr ""
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_config_simple_view_form
@@ -4257,7 +4229,7 @@ msgstr ""
 #: model:ir.actions.act_window,name:base.action_config_user_form
 #: view:res.users:0
 msgid "Configure User"
-msgstr "Configurer l'Utilisateur"
+msgstr ""
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_config_user_form
@@ -4272,7 +4244,7 @@ msgstr ""
 #: model:ir.actions.act_window,name:base.action_config_wizard_form
 #: model:ir.ui.menu,name:base.menu_config_module
 msgid "Configuration Wizard"
-msgstr "Assistant de configuration"
+msgstr ""
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_country
@@ -4296,14 +4268,14 @@ msgstr "Devises"
 #: model:ir.actions.act_window,name:base.action_inventory_form
 #: model:ir.ui.menu,name:base.menu_action_inventory_form
 msgid "Default Company per Object"
-msgstr "Société par défaut par objet"
+msgstr ""
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_maintenance_contract_add_wizard
 #: model:ir.ui.menu,name:base.menu_maintenance_contract_add
 #: view:maintenance.contract.wizard:0
 msgid "Add Maintenance Contract"
-msgstr "Ajouter un contrat de maintenance"
+msgstr ""
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_maintenance_contract_form
@@ -4319,7 +4291,7 @@ msgstr ""
 #: model:ir.actions.act_window,name:base.action_maintenance_contract_form
 #: model:ir.ui.menu,name:base.menu_maintenance_contract
 msgid "Your Maintenance Contracts"
-msgstr "Vos contrats de maintenance"
+msgstr ""
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_model_data
@@ -4335,7 +4307,7 @@ msgstr ""
 #: model:ir.actions.act_window,name:base.action_model_grid_security
 #: model:ir.ui.menu,name:base.menu_ir_access_grid
 msgid "Access Controls Grid"
-msgstr "Grille de contrôles d'accès"
+msgstr ""
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_model_model
@@ -4348,7 +4320,7 @@ msgstr "Objets"
 #: model:ir.actions.act_window,name:base.action_module_category_tree
 #: model:ir.ui.menu,name:base.menu_action_module_category_tree
 msgid "Categories of Modules"
-msgstr "Catégories de modules"
+msgstr ""
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_partner_addess_tree
@@ -4383,7 +4355,7 @@ msgstr "Catégories de partenaires"
 #: model:ir.actions.act_window,name:base.action_partner_category
 #: model:ir.ui.menu,name:base.menu_partner_category_main
 msgid "Partners by Categories"
-msgstr "Partenaires par catégories"
+msgstr ""
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_partner_customer_form
@@ -4395,7 +4367,7 @@ msgstr "Clients"
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: model:ir.actions.act_window,name:base.action_partner_customer_form_new
 msgid "New Partner"
-msgstr "Nouveau partenaire"
+msgstr ""
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_partner_employee_form
@@ -4411,7 +4383,7 @@ msgstr ""
 #: model:ir.ui.menu,name:base.menu_partner_function_form
 #: view:res.partner.function:0
 msgid "Contact Functions"
-msgstr "Fonctions du contact"
+msgstr ""
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_partner_mass_mail
@@ -4465,13 +4437,13 @@ msgstr "Conditions de paiement"
 #: model:ir.actions.act_window,name:base.action_report_custom
 #: view:ir.report.custom:0
 msgid "Custom Report"
-msgstr "Rapport Personalisé"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: model:ir.actions.act_window,name:base.action_res_bank_form
 #: model:ir.ui.menu,name:base.menu_action_res_bank_form
 msgid "Bank List"
-msgstr "Liste des banques"
+msgstr ""
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_res_company_tree
@@ -4483,7 +4455,7 @@ msgstr "Structure de la société"
 #: model:ir.actions.act_window,name:base.action_res_roles
 #: model:ir.ui.menu,name:base.menu_action_res_roles
 msgid "Roles Structure"
-msgstr "Structure des rôles"
+msgstr ""
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_res_users_my
@@ -4506,7 +4478,7 @@ msgstr "Actions du serveur"
 #: model:ir.actions.act_window,name:base.action_translation
 #: model:ir.ui.menu,name:base.menu_action_translation
 msgid "All terms"
-msgstr "Tous les termes"
+msgstr ""
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_translation
@@ -4522,7 +4494,7 @@ msgstr ""
 #: model:ir.actions.act_window,name:base.action_translation_untrans
 #: model:ir.ui.menu,name:base.menu_action_translation_untrans
 msgid "Untranslated terms"
-msgstr "Termes non traduits"
+msgstr ""
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_view_base_import_language
@@ -4622,13 +4594,13 @@ msgstr ""
 #: model:ir.actions.act_window,name:base.action_wizard_lang_export
 #: model:ir.ui.menu,name:base.menu_wizard_lang_export
 msgid "Export a Translation File"
-msgstr "Exporter un fichier de traduction"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: model:ir.actions.act_window,name:base.action_wizard_update_translations
 #: model:ir.ui.menu,name:base.menu_wizard_update_translations
 msgid "Resynchronise Terms"
-msgstr "Resynchroniser les termes"
+msgstr ""
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_wizard_update_translations
@@ -4684,7 +4656,7 @@ msgstr ""
 #: model:ir.actions.act_window,name:base.grant_menu_access
 #: model:ir.ui.menu,name:base.menu_grant_menu_access
 msgid "Manage Menus"
-msgstr "Gestion des Menus"
+msgstr ""
 
 #. module: base
 #: model:ir.actions.act_window,name:base.grant_menu_access
@@ -4706,13 +4678,13 @@ msgstr "Liste des contrôles d'accès"
 #: model:ir.actions.act_window,name:base.ir_action_report_custom
 #: model:ir.ui.menu,name:base.menu_ir_action_report_custom
 msgid "Report Custom"
-msgstr "Rapport personnalisé"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: model:ir.actions.act_window,name:base.ir_action_report_xml
 #: model:ir.ui.menu,name:base.menu_ir_action_report_xml
 msgid "Report Xml"
-msgstr "Rapport XML"
+msgstr ""
 
 #. module: base
 #: model:ir.actions.act_window,name:base.ir_action_window
@@ -4746,13 +4718,13 @@ msgstr ""
 #: model:ir.actions.act_window,name:base.ir_property_form
 #: model:ir.ui.menu,name:base.menu_ir_property_form
 msgid "Default Properties"
-msgstr "Propriétés par défaut"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: model:ir.actions.act_window,name:base.ir_property_form_all
 #: model:ir.ui.menu,name:base.menu_ir_property_form_all
 msgid "All Properties"
-msgstr "Toutes les propriétés"
+msgstr ""
 
 #. module: base
 #: model:ir.actions.act_window,name:base.ir_sequence_actions
@@ -4779,32 +4751,32 @@ msgstr "Codes de la séquence"
 #: model:ir.actions.act_window,name:base.ir_sequence_type
 #: model:ir.ui.menu,name:base.menu_ir_sequence_type
 msgid "Sequence Types"
-msgstr "Types de séquence"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: model:ir.actions.act_window,name:base.open_module_tree_install
 #: model:ir.ui.menu,name:base.menu_module_tree_install
 msgid "Installed modules"
-msgstr "Modules installés"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: model:ir.actions.act_window,name:base.open_module_tree_uninstall
 #: model:ir.ui.menu,name:base.menu_module_tree_uninstall
 msgid "Uninstalled modules"
-msgstr "Modules non installés"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: model:ir.actions.act_window,name:base.open_module_tree_upgrade
 #: model:ir.ui.menu,name:base.menu_module_tree_upgrade
 msgid "Modules to be installed, upgraded or removed"
-msgstr "Modules a installer, mettre à jour ou supprimer"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: model:ir.actions.act_window,name:base.open_repository_tree
 #: model:ir.ui.menu,name:base.menu_module_repository_tree
 #: view:ir.module.repository:0
 msgid "Repository list"
-msgstr "Liste des dépôts"
+msgstr ""
 
 #. module: base
 #: model:ir.actions.act_window,name:base.res_lang_act_window
@@ -4835,19 +4807,19 @@ msgstr "Canaux"
 #: model:ir.actions.act_window,name:base.res_partner_event_type-act
 #: model:ir.ui.menu,name:base.menu_res_partner_event_type-act
 msgid "Active Partner Events"
-msgstr "Évènements actifs des partenaires"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: model:ir.actions.act_window,name:base.res_partner_som-act
 #: model:ir.ui.menu,name:base.menu_res_partner_som-act
 msgid "States of mind"
-msgstr "État d'esprit"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: model:ir.actions.act_window,name:base.res_request-act
 #: model:ir.ui.menu,name:base.menu_res_request_act
 msgid "My Requests"
-msgstr "Mes requêtes"
+msgstr ""
 
 #. module: base
 #: model:ir.actions.act_window,name:base.res_request-act
@@ -4861,13 +4833,13 @@ msgstr "Requêtes"
 #: model:ir.actions.act_window,name:base.res_request-closed
 #: model:ir.ui.menu,name:base.next_id_12_close
 msgid "My Closed Requests"
-msgstr "Mes requêtes terminés"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: model:ir.actions.act_window,name:base.res_request_link-act
 #: model:ir.ui.menu,name:base.menu_res_request_link_act
 msgid "Accepted Links in Requests"
-msgstr "Accepté les liens dans les requêtes"
+msgstr ""
 
 #. module: base
 #: model:ir.actions.act_window,name:base.res_request_link-act
@@ -4922,12 +4894,6 @@ msgid ""
 "understand. You will be able to switch to the extended view later.\n"
 "            "
 msgstr ""
-"Choisissez entre \"Interface Simplifée\" et \"Interface Étendue\".\n"
-"Si vous testez ou utilisez OpenERP pour la première fois, nous vous "
-"suggérons d'utiliser l'interface simplifiée, qui a moins d'options et de "
-"champs mais sera plus facile à comprendre. Vous pourrez basculer "
-"ultérieurement dans la vue étendue.\n"
-"            "
 
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: model:ir.actions.todo,note:base.config_wizard_step_user
@@ -4937,10 +4903,6 @@ msgid ""
 "of each users on the different objects of the system.\n"
 "            "
 msgstr ""
-"Créer vos utilisateurs.\n"
-"Vous pourrez assigner des groupes aux utilisateurs ; les groupes définissent "
-"les droits d'accès de chaque utilisateur aux différents objets du système.\n"
-"            "
 
 #. module: base
 #: model:ir.actions.wizard,name:base.res_partner_send_sms_wizard
@@ -4960,7 +4922,7 @@ msgstr "Importer le module"
 #: model:ir.actions.wizard,name:base.wizard_lang_import
 #: model:ir.ui.menu,name:base.menu_wizard_lang_import
 msgid "Import a Translation File"
-msgstr "Importer un fichier de traduction"
+msgstr ""
 
 #. module: base
 #: model:ir.actions.wizard,name:base.wizard_lang_install
@@ -5071,7 +5033,7 @@ msgstr "ir.actions.configuration.wizard"
 #: model:ir.model,name:base.model_ir_actions_report_custom
 #: selection:ir.ui.menu,action:0
 msgid "ir.actions.report.custom"
-msgstr "ir.actions.report.custom"
+msgstr ""
 
 #. module: base
 #: model:ir.model,name:base.model_ir_actions_report_xml
@@ -5134,7 +5096,7 @@ msgstr "ir.model.access"
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: model:ir.model,name:base.model_ir_model_config
 msgid "ir.model.config"
-msgstr "ir.model.config"
+msgstr ""
 
 #. module: base
 #: model:ir.model,name:base.model_ir_model_data
@@ -5144,7 +5106,7 @@ msgstr "ir.model.data"
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: model:ir.model,name:base.model_ir_model_grid
 msgid "Objects Security Grid"
-msgstr "Grille de sécurité des objets"
+msgstr ""
 
 #. module: base
 #: model:ir.model,name:base.model_ir_module_category view:ir.module.category:0
@@ -5164,12 +5126,12 @@ msgstr "ir.property"
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: model:ir.model,name:base.model_ir_report_custom
 msgid "ir.report.custom"
-msgstr "ir.report.custom"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: model:ir.model,name:base.model_ir_report_custom_fields
 msgid "ir.report.custom.fields"
-msgstr "ir.report.custom.fields"
+msgstr ""
 
 #. module: base
 #: model:ir.model,name:base.model_ir_rule
@@ -5179,7 +5141,7 @@ msgstr "ir.rule"
 #. #-#-#-#-#  .merge_file_AZEFhG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: model:ir.model,name:base.model_ir_rule_group
 msgid "ir.rule.group"
-msgstr "ir.rule.group"
+msgstr ""
 
 #. module: base
 #: model:ir.model,name:base.model_ir_sequence
@@ -5244,12 +5206,12 @@ msgstr "Contrat de maintenance"
 #. module: base
 #: model:ir.model,name:base.model_maintenance_contract_module
 msgid "maintenance contract modules"
-msgstr "Modules du contrat de maintenance"
+msgstr ""
 
 #. module: base
 #: model:ir.model,name:base.model_maintenance_contract_wizard
 msgid "maintenance.contract.wizard"
-msgstr "maintenance.contract.wizard"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_47q2SR (OpenERP Server 5.0.4)  #-#-#-#-#
 #: model:ir.model,name:base.model_multi_company_default
@@ -5259,7 +5221,7 @@ msgstr "Multi société par défaut"
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: model:ir.model,name:base.model_multi_company_default
 msgid "multi_company.default"
-msgstr "multi_company.default"
+msgstr ""
 
 #. module: base
 #: model:ir.model,name:base.model_partner_wizard_ean_check
@@ -5273,7 +5235,7 @@ msgstr ""
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: model:ir.model,name:base.model_res_company
 msgid "res.company"
-msgstr "res.company"
+msgstr ""
 
 #. module: base
 #: model:ir.model,name:base.model_res_config
@@ -5356,17 +5318,17 @@ msgstr "res.partner.event"
 #: model:ir.model,name:base.model_res_partner_event_type
 #: model:ir.ui.menu,name:base.next_id_14 view:res.partner.event:0
 msgid "Partner Events"
-msgstr "Évènements partenaire"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: model:ir.model,name:base.model_res_partner_function
 msgid "Function of the contact"
-msgstr "Fonction du contact"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: model:ir.model,name:base.model_res_partner_som
 msgid "res.partner.som"
-msgstr "res.partner.som"
+msgstr ""
 
 #. module: base
 #: model:ir.model,name:base.model_res_partner_title
@@ -5391,7 +5353,7 @@ msgstr "res.request.link"
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: model:ir.model,name:base.model_res_roles
 msgid "res.roles"
-msgstr "res.roles"
+msgstr ""
 
 #. module: base
 #: model:ir.model,name:base.model_res_users
@@ -5438,12 +5400,12 @@ msgstr "wizard.ir.model.menu.create.line"
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: model:ir.model,name:base.model_wizard_module_lang_export
 msgid "wizard.module.lang.export"
-msgstr "wizard.module.lang.export"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: model:ir.model,name:base.model_wizard_module_update_translations
 msgid "wizard.module.update_translations"
-msgstr "wizard.module.update_translations"
+msgstr ""
 
 #. module: base
 #: model:ir.model,name:base.model_workflow
@@ -5498,7 +5460,7 @@ msgstr ""
 #. module: base
 #: model:ir.ui.menu,name:base.maintenance
 msgid "Maintenance"
-msgstr "Maintenance"
+msgstr ""
 
 #. module: base
 #: model:ir.ui.menu,name:base.marketing_menu
@@ -5625,7 +5587,7 @@ msgstr "Paramétrage"
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: model:ir.ui.menu,name:base.menu_custom_multicompany
 msgid "Multi company"
-msgstr "Multi société"
+msgstr ""
 
 #. module: base
 #: model:ir.ui.menu,name:base.menu_custom_reports
@@ -5699,7 +5661,7 @@ msgstr "Localisation"
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: model:ir.ui.menu,name:base.menu_low_workflow
 msgid "Workflow Items"
-msgstr "Élements du processus"
+msgstr ""
 
 #. module: base
 #: model:ir.ui.menu,name:base.menu_lunch_reporting
@@ -5728,7 +5690,7 @@ msgstr ""
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: model:ir.ui.menu,name:base.menu_management
 msgid "Modules Management"
-msgstr "Gestion des Modules"
+msgstr ""
 
 #. module: base
 #: model:ir.ui.menu,name:base.menu_mrp_root
@@ -5810,7 +5772,7 @@ msgstr ""
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: model:ir.ui.menu,name:base.menu_workflow_root
 msgid "Workflow Definitions"
-msgstr "Définitions du processus"
+msgstr ""
 
 #. module: base
 #: model:ir.ui.menu,name:base.next_id_10
@@ -5902,9 +5864,6 @@ msgid ""
 "consider the present one as void. Do not hesitate to contact our accounting "
 "department at (+32).81.81.37.00."
 msgstr ""
-"Veuillez ne pas prendre en considération ce mail si votre paiement a été "
-"effectué après que nous vous l'ayons adressé. N'hésitez pas à contacter "
-"notre service comptable au (+ 32).81.81.37.00."
 
 #. module: base
 #: model:res.country,name:base.ad
@@ -7406,7 +7365,7 @@ msgstr ""
 #: selection:base.language.install,lang:0
 #: selection:module.lang.install,init,lang:0
 msgid "Albanian / Shqipëri"
-msgstr "Albanian / Shqipëri"
+msgstr ""
 
 #. module: base
 #: selection:base.language.install,lang:0
@@ -7424,7 +7383,7 @@ msgstr "Bosniaque / bosanski jezik"
 #: selection:base.language.install,lang:0
 #: selection:module.lang.install,init,lang:0
 msgid "Bulgarian / български"
-msgstr "Bulgare / български"
+msgstr ""
 
 #. module: base
 #: selection:base.language.install,lang:0
@@ -7472,7 +7431,7 @@ msgstr "Danish / Dansk"
 #: selection:base.language.install,lang:0
 #: selection:module.lang.install,init,lang:0
 msgid "Dutch (Belgium) / Nederlands (Belgïe)"
-msgstr "Néerlandais (Belgique) / Nederlands (Belgïe)"
+msgstr ""
 
 #. module: base
 #: selection:base.language.install,lang:0
@@ -7508,7 +7467,7 @@ msgstr "Estonien / Eesti keel"
 #: selection:base.language.install,lang:0
 #: selection:module.lang.install,init,lang:0
 msgid "Finland / Suomi"
-msgstr "Finland / Suomi"
+msgstr ""
 
 #. module: base
 #: selection:base.language.install,lang:0
@@ -7596,7 +7555,7 @@ msgstr "Klingon"
 #. module: base
 #: selection:base.language.install,lang:0
 msgid "Korean / Korea, Democratic Peoples Republic of"
-msgstr "Coréen / Corée République Démocratique de"
+msgstr ""
 
 #. module: base
 #: selection:base.language.install,lang:0
@@ -7622,7 +7581,7 @@ msgstr ""
 #. module: base
 #: selection:base.language.install,lang:0
 msgid "Mongolian / Mongolia"
-msgstr "Mongole / Mongolie"
+msgstr ""
 
 #. module: base
 #: selection:base.language.install,lang:0
@@ -7653,19 +7612,19 @@ msgstr "Polonais / Język polski"
 #: selection:base.language.install,lang:0
 #: selection:module.lang.install,init,lang:0
 msgid "Portugese (BR) / português (BR)"
-msgstr "Portuguais (BR) / português (BR)"
+msgstr ""
 
 #. module: base
 #: selection:base.language.install,lang:0
 #: selection:module.lang.install,init,lang:0
 msgid "Portugese / português"
-msgstr "Portuguais / português"
+msgstr ""
 
 #. module: base
 #: selection:base.language.install,lang:0
 #: selection:module.lang.install,init,lang:0
 msgid "Romanian / limba română"
-msgstr "Roumain / limba română"
+msgstr ""
 
 #. module: base
 #: selection:base.language.install,lang:0
@@ -7676,7 +7635,7 @@ msgstr "Russie / русский язык"
 #. module: base
 #: selection:base.language.install,lang:0
 msgid "Serbian / Serbia"
-msgstr "Serbe / Serbie"
+msgstr ""
 
 #. module: base
 #: selection:base.language.install,lang:0
@@ -7737,7 +7696,7 @@ msgstr "Turque / Türkçe"
 #: selection:base.language.install,lang:0
 #: selection:module.lang.install,init,lang:0
 msgid "Ukrainian / украї́нська мо́ва"
-msgstr "Ukrainian / украї́нська мо́ва"
+msgstr ""
 
 #. module: base
 #: selection:base.language.install,lang:0
@@ -7748,7 +7707,7 @@ msgstr ""
 #: selection:base.language.install,lang:0
 #: selection:module.lang.install,init,lang:0
 msgid "Vietnam / Cộng hòa xã hội chủ nghĩa Việt Nam"
-msgstr "Vietnam / Cộng hòa xã hội chủ nghĩa Việt Nam"
+msgstr ""
 
 #. module: base
 #: selection:base.language.install,state:0
@@ -7813,42 +7772,42 @@ msgstr "Graphe"
 #. module: base
 #: selection:ir.actions.report.xml,report_type:0
 msgid "HTML from HTML"
-msgstr "HTML to HTML"
+msgstr ""
 
 #. module: base
 #: selection:ir.actions.report.xml,report_type:0
 msgid "HTML from HTML(Mako)"
-msgstr "HTML to HTML (Mako)"
+msgstr ""
 
 #. module: base
 #: selection:ir.actions.report.xml,report_type:0
 msgid "html"
-msgstr "html"
+msgstr ""
 
 #. module: base
 #: selection:ir.actions.report.xml,report_type:0
 msgid "odt"
-msgstr "odt"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: selection:ir.actions.report.xml,report_type:0
 msgid "pdf"
-msgstr "pdf"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: selection:ir.actions.report.xml,report_type:0
 msgid "raw"
-msgstr "brut"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: selection:ir.actions.report.xml,report_type:0
 msgid "sxw"
-msgstr "sxw"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: selection:ir.actions.report.xml,report_type:0
 msgid "txt"
-msgstr "txt"
+msgstr ""
 
 #. module: base
 #: selection:ir.actions.server,state:0
@@ -7915,17 +7874,17 @@ msgstr ""
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: selection:ir.actions.todo,start_on:0
 msgid "At Once"
-msgstr "Immédiatement"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: selection:ir.actions.todo,start_on:0
 msgid "Auto"
-msgstr "Auto"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: selection:ir.actions.todo,start_on:0
 msgid "Manual"
-msgstr "Manuel"
+msgstr ""
 
 #. module: base
 #: selection:ir.actions.todo,state:0 view:base.language.install:0
@@ -7961,7 +7920,7 @@ msgstr "Terminé"
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: selection:ir.actions.todo,state:0
 msgid "Not Started"
-msgstr "Non démarré"
+msgstr ""
 
 #. module: base
 #: selection:ir.actions.todo,state:0
@@ -7980,7 +7939,7 @@ msgstr ""
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: selection:ir.actions.todo,type:0
 msgid "Configure"
-msgstr "Configuration"
+msgstr ""
 
 #. module: base
 #: selection:ir.actions.todo,type:0 selection:res.partner.address,type:0
@@ -7990,7 +7949,7 @@ msgstr "Autre"
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: selection:ir.actions.todo,type:0
 msgid "Service"
-msgstr "Service"
+msgstr ""
 
 #. module: base
 #: selection:ir.actions.url,target:0
@@ -8060,7 +8019,7 @@ msgstr "Mettre NULL"
 #. module: base
 #: selection:ir.model.fields,select_level:0
 msgid "Advanced Search"
-msgstr "Recherche avancée"
+msgstr ""
 
 #. module: base
 #: selection:ir.model.fields,select_level:0
@@ -8112,7 +8071,7 @@ msgstr ""
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: selection:ir.module.module,license:0
 msgid "GPL-2"
-msgstr "GPL-2"
+msgstr ""
 
 #. module: base
 #: selection:ir.module.module,license:0
@@ -8122,7 +8081,7 @@ msgstr "GPL-2 ou version supérieure"
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: selection:ir.module.module,license:0
 msgid "GPL-3"
-msgstr "GPL-3"
+msgstr ""
 
 #. module: base
 #: selection:ir.module.module,license:0
@@ -8150,7 +8109,7 @@ msgstr ""
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: selection:ir.module.module,license:0
 msgid "Other proprietary"
-msgstr "Autre license propriétaire"
+msgstr ""
 
 #. module: base
 #: selection:ir.module.module,state:0
@@ -8263,27 +8222,27 @@ msgstr ""
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: selection:ir.report.custom,frequency:0
 msgid "Daily"
-msgstr "Journalière"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: selection:ir.report.custom,frequency:0
 msgid "Monthly"
-msgstr "Mensuel"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: selection:ir.report.custom,frequency:0
 msgid "Yearly"
-msgstr "Annuel"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: selection:ir.report.custom,print_format:0
 msgid "a4"
-msgstr "a4"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: selection:ir.report.custom,print_format:0
 msgid "a5"
-msgstr "a5"
+msgstr ""
 
 #. module: base
 #: selection:ir.report.custom,print_orientation:0 view:res.company:0
@@ -8298,47 +8257,47 @@ msgstr "Portrait"
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: selection:ir.report.custom,state:0
 msgid "Subscribed"
-msgstr "Inscrit"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: selection:ir.report.custom,state:0
 msgid "Unsubscribed"
-msgstr "Non inscrit"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: selection:ir.report.custom,type:0
 msgid "Bar Chart"
-msgstr "Graphique en barres"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: selection:ir.report.custom,type:0
 msgid "Line Plot"
-msgstr "Tracer une ligne"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: selection:ir.report.custom,type:0
 msgid "Pie Chart"
-msgstr "Graphique en camembert"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: selection:ir.report.custom,type:0
 msgid "Tabular"
-msgstr "En tableau"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: selection:ir.report.custom.fields,alignment:0
 msgid "center"
-msgstr "centre"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: selection:ir.report.custom.fields,alignment:0
 msgid "left"
-msgstr "gauche"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: selection:ir.report.custom.fields,alignment:0
 msgid "right"
-msgstr "à droite"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: selection:ir.report.custom.fields,fc0_op:0
@@ -8346,7 +8305,7 @@ msgstr "à droite"
 #: selection:ir.report.custom.fields,fc2_op:0
 #: selection:ir.report.custom.fields,fc3_op:0
 msgid "(year)="
-msgstr "(année)="
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: selection:ir.report.custom.fields,fc0_op:0
@@ -8354,7 +8313,7 @@ msgstr "(année)="
 #: selection:ir.report.custom.fields,fc2_op:0
 #: selection:ir.report.custom.fields,fc3_op:0
 msgid "<"
-msgstr "<"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: selection:ir.report.custom.fields,fc0_op:0
@@ -8362,7 +8321,7 @@ msgstr "<"
 #: selection:ir.report.custom.fields,fc2_op:0
 #: selection:ir.report.custom.fields,fc3_op:0 selection:ir.rule,operator:0
 msgid "="
-msgstr "="
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: selection:ir.report.custom.fields,fc0_op:0
@@ -8370,7 +8329,7 @@ msgstr "="
 #: selection:ir.report.custom.fields,fc2_op:0
 #: selection:ir.report.custom.fields,fc3_op:0
 msgid ">"
-msgstr ">"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: selection:ir.report.custom.fields,fc0_op:0
@@ -8378,52 +8337,52 @@ msgstr ">"
 #: selection:ir.report.custom.fields,fc2_op:0
 #: selection:ir.report.custom.fields,fc3_op:0 selection:ir.rule,operator:0
 msgid "in"
-msgstr "dans"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: selection:ir.report.custom.fields,operation:0
 msgid "Calculate Average"
-msgstr "Calculer la moyenne"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: selection:ir.report.custom.fields,operation:0
 msgid "Calculate Count"
-msgstr "Compter"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: selection:ir.report.custom.fields,operation:0
 msgid "Calculate Sum"
-msgstr "Calculer la somme"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: selection:ir.report.custom.fields,operation:0
 msgid "Get Max"
-msgstr "Valeur maxi"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: selection:ir.report.custom.fields,operation:0
 msgid "None"
-msgstr "Aucun"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: selection:ir.rule,operator:0
 msgid "<="
-msgstr "<="
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: selection:ir.rule,operator:0
 msgid "<>"
-msgstr "<>"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: selection:ir.rule,operator:0
 msgid ">="
-msgstr ">="
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: selection:ir.rule,operator:0
 msgid "child_of"
-msgstr "child_of"
+msgstr ""
 
 #. module: base
 #: selection:ir.server.object.lines,type:0
@@ -8438,7 +8397,7 @@ msgstr "Aide"
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: selection:ir.translation,type:0
 msgid "RML"
-msgstr "RML"
+msgstr ""
 
 #. module: base
 #: selection:ir.translation,type:0
@@ -8491,452 +8450,452 @@ msgstr "XSL"
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_ABOUT"
-msgstr "STOCK_ABOUT"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_ADD"
-msgstr "STOCK_ADD"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_APPLY"
-msgstr "STOCK_APPLY"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_BOLD"
-msgstr "STOCK_BOLD"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_CANCEL"
-msgstr "STOCK_CANCEL"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_CDROM"
-msgstr "STOCK_CDROM"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_CLEAR"
-msgstr "STOCK_CLEAR"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_CLOSE"
-msgstr "STOCK_CLOSE"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_COLOR_PICKER"
-msgstr "STOCK_COLOR_PICKER"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_CONNECT"
-msgstr "STOCK_CONNECT"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_CONVERT"
-msgstr "STOCK_CONVERT"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_COPY"
-msgstr "STOCK_COPY"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_CUT"
-msgstr "STOCK_CUT"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_DELETE"
-msgstr "STOCK_DELETE"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_DIALOG_AUTHENTICATION"
-msgstr "STOCK_DIALOG_AUTHENTICATION"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_DIALOG_ERROR"
-msgstr "STOCK_DIALOG_ERROR"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_DIALOG_INFO"
-msgstr "STOCK_DIALOG_INFO"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_DIALOG_QUESTION"
-msgstr "STOCK_DIALOG_QUESTION"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_DIALOG_WARNING"
-msgstr "STOCK_DIALOG_WARNING"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_DIRECTORY"
-msgstr "STOCK_DIRECTORY"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_DISCONNECT"
-msgstr "STOCK_DISCONNECT"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_DND"
-msgstr "STOCK_DND"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_DND_MULTIPLE"
-msgstr "STOCK_DND_MULTIPLE"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_EDIT"
-msgstr "STOCK_EDIT"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_EXECUTE"
-msgstr "STOCK_EXECUTE"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_FILE"
-msgstr "STOCK_FILE"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_FIND"
-msgstr "STOCK_FIND"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_FIND_AND_REPLACE"
-msgstr "STOCK_FIND_AND_REPLACE"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_FLOPPY"
-msgstr "STOCK_FLOPPY"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_GOTO_BOTTOM"
-msgstr "STOCK_GOTO_BOTTOM"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_GOTO_FIRST"
-msgstr "STOCK_GOTO_FIRST"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_GOTO_LAST"
-msgstr "STOCK_GOTO_LAST"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_GOTO_TOP"
-msgstr "STOCK_GOTO_TOP"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_GO_BACK"
-msgstr "STOCK_GO_BACK"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_GO_DOWN"
-msgstr "STOCK_GO_DOWN"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_GO_FORWARD"
-msgstr "STOCK_GO_FORWARD"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_GO_UP"
-msgstr "STOCK_GO_UP"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_HARDDISK"
-msgstr "STOCK_HARDDISK"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_HELP"
-msgstr "STOCK_HELP"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_HOME"
-msgstr "STOCK_HOME"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_INDENT"
-msgstr "STOCK_INDENT"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_INDEX"
-msgstr "STOCK_INDEX"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_ITALIC"
-msgstr "STOCK_ITALIC"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_JUMP_TO"
-msgstr "STOCK_JUMP_TO"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_JUSTIFY_CENTER"
-msgstr "STOCK_JUSTIFY_CENTER"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_JUSTIFY_FILL"
-msgstr "STOCK_JUSTIFY_FILL"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_JUSTIFY_LEFT"
-msgstr "STOCK_JUSTIFY_LEFT"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_JUSTIFY_RIGHT"
-msgstr "STOCK_JUSTIFY_RIGHT"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_MEDIA_FORWARD"
-msgstr "STOCK_MEDIA_FORWARD"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_MEDIA_NEXT"
-msgstr "STOCK_MEDIA_NEXT"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_MEDIA_PAUSE"
-msgstr "STOCK_MEDIA_PAUSE"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_MEDIA_PLAY"
-msgstr "STOCK_MEDIA_PLAY"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_MEDIA_PREVIOUS"
-msgstr "STOCK_MEDIA_PREVIOUS"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_MEDIA_RECORD"
-msgstr "STOCK_MEDIA_RECORD"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_MEDIA_REWIND"
-msgstr "STOCK_MEDIA_REWIND"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_MEDIA_STOP"
-msgstr "STOCK_MEDIA_STOP"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_MISSING_IMAGE"
-msgstr "STOCK_MISSING_IMAGE"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_NETWORK"
-msgstr "STOCK_NETWORK"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_NEW"
-msgstr "STOCK_NEW"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_NO"
-msgstr "STOCK_NO"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_OK"
-msgstr "STOCK_OK"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_OPEN"
-msgstr "STOCK_OPEN"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_PASTE"
-msgstr "STOCK_PASTE"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_PREFERENCES"
-msgstr "STOCK_PREFERENCES"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_PRINT"
-msgstr "STOCK_PRINT"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_PRINT_PREVIEW"
-msgstr "STOCK_PRINT_PREVIEW"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_PROPERTIES"
-msgstr "STOCK_PROPERTIES"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_QUIT"
-msgstr "STOCK_QUIT"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_REDO"
-msgstr "STOCK_REDO"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_REFRESH"
-msgstr "STOCK_REFRESH"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_REMOVE"
-msgstr "STOCK_REMOVE"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_REVERT_TO_SAVED"
-msgstr "STOCK_REVERT_TO_SAVED"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_SAVE"
-msgstr "STOCK_SAVE"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_SAVE_AS"
-msgstr "STOCK_SAVE_AS"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_SELECT_COLOR"
-msgstr "STOCK_SELECT_COLOR"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_SELECT_FONT"
-msgstr "STOCK_SELECT_FONT"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_SORT_ASCENDING"
-msgstr "STOCK_SORT_ASCENDING"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_SORT_DESCENDING"
-msgstr "STOCK_SORT_DESCENDING"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_SPELL_CHECK"
-msgstr "STOCK_SPELL_CHECK"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_STOP"
-msgstr "STOCK_STOP"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_STRIKETHROUGH"
-msgstr "STOCK_STRIKETHROUGH"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_UNDELETE"
-msgstr "STOCK_UNDELETE"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_UNDERLINE"
-msgstr "STOCK_UNDERLINE"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_UNDO"
-msgstr "STOCK_UNDO"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_UNINDENT"
-msgstr "STOCK_UNINDENT"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_YES"
-msgstr "STOCK_YES"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_ZOOM_100"
-msgstr "STOCK_ZOOM_100"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_ZOOM_FIT"
-msgstr "STOCK_ZOOM_FIT"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_ZOOM_IN"
-msgstr "STOCK_ZOOM_IN"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_ZOOM_OUT"
-msgstr "STOCK_ZOOM_OUT"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_AZEFhG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: selection:ir.ui.menu,icon:0
@@ -8968,17 +8927,17 @@ msgstr ""
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "terp-account"
-msgstr "terp-account"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "terp-administration"
-msgstr "terp-administration"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "terp-calendar"
-msgstr "terp-calendar"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
@@ -8987,9 +8946,8 @@ msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
-#, fuzzy
 msgid "terp-camera_test"
-msgstr "terp-camera_test"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_AZEFhG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: selection:ir.ui.menu,icon:0
@@ -9003,7 +8961,7 @@ msgstr ""
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "terp-crm"
-msgstr "terp-crm"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_AZEFhG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: selection:ir.ui.menu,icon:0
@@ -9043,9 +9001,8 @@ msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
-#, fuzzy
 msgid "terp-emblem-important"
-msgstr "terp-emblem-important"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_AZEFhG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: selection:ir.ui.menu,icon:0
@@ -9081,9 +9038,8 @@ msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
-#, fuzzy
 msgid "terp-folder-yellow"
-msgstr "terp-folder-yellow"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_AZEFhG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: selection:ir.ui.menu,icon:0
@@ -9139,7 +9095,7 @@ msgstr ""
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "terp-graph"
-msgstr "terp-graph"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_AZEFhG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: selection:ir.ui.menu,icon:0
@@ -9203,7 +9159,7 @@ msgstr ""
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "terp-hr"
-msgstr "terp-hr"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_AZEFhG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: selection:ir.ui.menu,icon:0
@@ -9259,12 +9215,12 @@ msgstr ""
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "terp-mrp"
-msgstr "terp-mrp"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "terp-partner"
-msgstr "terp-partner"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
@@ -9292,17 +9248,17 @@ msgstr ""
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "terp-product"
-msgstr "terp-product"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "terp-project"
-msgstr "terp-project"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "terp-purchase"
-msgstr "terp-purchase"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_AZEFhG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: selection:ir.ui.menu,icon:0
@@ -9316,12 +9272,12 @@ msgstr ""
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "terp-report"
-msgstr "terp-report"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "terp-sale"
-msgstr "terp-sale"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_AZEFhG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: selection:ir.ui.menu,icon:0
@@ -9335,13 +9291,12 @@ msgstr ""
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "terp-stock"
-msgstr "terp-stock"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
-#, fuzzy
 msgid "terp-stock_align_left_24"
-msgstr "terp-stock_align_left_24"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_AZEFhG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: selection:ir.ui.menu,icon:0
@@ -9354,9 +9309,8 @@ msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
-#, fuzzy
 msgid "terp-stock_format-default"
-msgstr "terp-stock_format-default"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_AZEFhG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: selection:ir.ui.menu,icon:0
@@ -9379,7 +9333,7 @@ msgstr ""
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "terp-tools"
-msgstr "terp-tools"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.view,type:0
@@ -9408,17 +9362,17 @@ msgstr "Défaut"
 #. module: base
 #: selection:maintenance.contract,kind:0
 msgid "Full"
-msgstr "Complet"
+msgstr ""
 
 #. module: base
 #: selection:maintenance.contract,kind:0
 msgid "Partial"
-msgstr "Partiel"
+msgstr ""
 
 #. module: base
 #: selection:maintenance.contract,state:0
 msgid "Unvalid"
-msgstr "Invalide"
+msgstr ""
 
 #. module: base
 #: selection:maintenance.contract,state:0
@@ -9438,7 +9392,7 @@ msgstr "Non validé"
 #. module: base
 #: selection:maintenance.contract.wizard,state:0
 msgid "Validated"
-msgstr "Validé"
+msgstr ""
 
 #. module: base
 #: selection:res.config.users,view:0 selection:res.config.view,view:0
@@ -9459,12 +9413,12 @@ msgstr ""
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: selection:res.config.view,view:0
 msgid "Extended Interface"
-msgstr "Interface étendue"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: selection:res.config.view,view:0
 msgid "Simplified Interface"
-msgstr "Interface simplifiée"
+msgstr ""
 
 #. module: base
 #: selection:res.lang,direction:0
@@ -9495,27 +9449,27 @@ msgstr "Facture"
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: selection:res.partner.event,partner_type:0
 msgid "Commercial Prospect"
-msgstr "Prospection commerciale"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: selection:res.partner.event,partner_type:0
 msgid "Retailer"
-msgstr "Détaillant"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: selection:res.partner.event,type:0
 msgid "Prospect Contact"
-msgstr "Contact du prospect"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: selection:res.partner.event,type:0
 msgid "Purchase Offer"
-msgstr "Offre d'achat"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: selection:res.partner.event,type:0
 msgid "Sale Opportunity"
-msgstr "Opportunité de Vente"
+msgstr ""
 
 #. module: base
 #: selection:res.request,priority:0
@@ -9609,7 +9563,7 @@ msgstr "Un raccourci pour ce menu existe déjà !"
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: sql_constraint:maintenance.contract:0
 msgid "Your maintenance contract is already subscribed in the system !"
-msgstr "Votre contrat de maintenance est déjà enregistré dans le système !"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: sql_constraint:res.country:0
@@ -9639,17 +9593,17 @@ msgstr "Le nom de la langue doit être unique !"
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: sql_constraint:res.partner:0
 msgid "The name of the Partner must be unique !"
-msgstr "Le nom du Partenaire doit être unique !"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: sql_constraint:res.partner.function:0
 msgid "The Code of the Partner Function must be unique !"
-msgstr "Le Code de la Fonction du Partenaire doit être unique !"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: sql_constraint:res.user:0
 msgid "You cannot have two users with the same login !"
-msgstr "Vous ne pouvez pas avoir deux utilsiateurs avec le même login !"
+msgstr ""
 
 #. module: base
 #: view:base.language.export:0
@@ -10118,12 +10072,12 @@ msgstr "Étape de configuration suivante"
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: view:ir.actions.configuration.wizard:0
 msgid "Skip Step"
-msgstr "Passer cette étape"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: view:ir.actions.report.custom:0
 msgid "Report custom"
-msgstr "Rapport personnalisé"
+msgstr ""
 
 #. module: base
 #: view:ir.actions.report.xml:0
@@ -10177,8 +10131,6 @@ msgid ""
 "Access all the fields related to the current object using expression in "
 "double brackets, i.e. [[ object.partner_id.name ]]"
 msgstr ""
-"Accèdez à tous les champs relations de l'objet courant en utilisant une "
-"expression à double crochet, ex. : [[ object.partner_id.name ]]"
 
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: view:ir.actions.server:0
@@ -10186,8 +10138,6 @@ msgid ""
 "Access all the fields related to the current object using expression in "
 "double brackets, i.e.[[ object.partner_id.name ]]"
 msgstr ""
-"Accéder à tous les champs liés à l'objet courant en utilisant une expression "
-"à double crochet, ex [[ object.partner_id.name ]]"
 
 #. module: base
 #: view:ir.actions.server:0
@@ -10214,7 +10164,7 @@ msgstr "Configuration de l'action client"
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: view:ir.actions.server:0
 msgid "Create / Write"
-msgstr "Créer / Écrire"
+msgstr ""
 
 #. module: base
 #: view:ir.actions.server:0
@@ -10270,8 +10220,6 @@ msgid ""
 "Only one client action will be execute, last                                 "
 "clinent action will be consider in case of multiples clients actions"
 msgstr ""
-"Une seule action client sera exécutée : la dernière action client sera prise "
-"en compte dans le cas d'actions clients multiples"
 
 #. module: base
 #: view:ir.actions.server:0
@@ -10380,7 +10328,7 @@ msgstr "Propriétaire"
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: view:ir.attachment:0
 msgid "Preview"
-msgstr "Aperçu"
+msgstr ""
 
 #. module: base
 #: view:ir.cron:0
@@ -10447,12 +10395,12 @@ msgstr "Description du modèle"
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: view:ir.model:0 view:ir.model.fields:0
 msgid "Security on Groups"
-msgstr "Sécurité sur les groupes"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: view:ir.model:0 view:res.request:0
 msgid "Status"
-msgstr "Statut"
+msgstr ""
 
 #. module: base
 #: view:ir.model.access:0 view:ir.rule:0
@@ -10548,7 +10496,7 @@ msgstr "Désinstaller (beta)"
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: view:ir.module.repository:0
 msgid "Repository"
-msgstr "Dépôt"
+msgstr ""
 
 #. module: base
 #: view:ir.property:0
@@ -10576,17 +10524,17 @@ msgstr "Propriété"
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: view:ir.report.custom:0
 msgid "Subscribe Report"
-msgstr "Inscrire le rapport"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: view:ir.report.custom:0
 msgid "Unsubscribe Report"
-msgstr "Désinscrire le rapport"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: view:ir.report.custom.fields:0
 msgid "Report Fields"
-msgstr "Champs du rapport"
+msgstr ""
 
 #. module: base
 #: view:ir.rule:0
@@ -10670,13 +10618,11 @@ msgstr ""
 #: view:ir.rule:0
 msgid "If you don't force the domain, it will use the simple domain setup"
 msgstr ""
-"Si vous ne forcez pas le domaine, il utilisera la configuration du domaine "
-"simplifiée."
 
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: view:ir.rule:0
 msgid "Manual domain setup"
-msgstr "Configuration manuelle du domaine"
+msgstr ""
 
 #. module: base
 #: view:ir.rule:0 view:ir.rule.group:0
@@ -10686,22 +10632,22 @@ msgstr "Enregistrer la règle"
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: view:ir.rule:0
 msgid "Simple domain setup"
-msgstr "Paramétrer un domaine simple"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: view:ir.rule:0
 msgid "Test"
-msgstr "Test"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_AZEFhG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: view:ir.rule.group:0
 msgid "Multiple rules on same objects are joined using operator OR"
-msgstr "Un \"ou\" est fait entre toutes les règles concernant le même objet."
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_AZEFhG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: view:ir.rule.group:0
 msgid "The rule is satisfied if all test are True (AND)"
-msgstr "La règle est satisfaite si tous les tests sont Vrai (ET)"
+msgstr ""
 
 #. module: base
 #: view:ir.sequence:0
@@ -10774,12 +10720,12 @@ msgstr "Semaine de l'année : %(woy)s"
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: view:ir.sequence:0
 msgid "Year with century: %(year)s"
-msgstr "Année avec siècle : %(year)s"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: view:ir.sequence:0
 msgid "Year without century: %(y)s"
-msgstr "Année sans le siècle : %(y)s"
+msgstr ""
 
 #. module: base
 #: view:ir.sequence.type:0
@@ -10901,37 +10847,37 @@ msgstr "tree_but_action, client_print_multi"
 #. module: base
 #: view:maintenance.contract.wizard:0
 msgid "Could you check your contract information ?"
-msgstr "Pouvez-vous vérifier les informations de votre contrat ?"
+msgstr ""
 
 #. module: base
 #: view:maintenance.contract.wizard:0
 msgid "Maintenance contract added !"
-msgstr "Contrat de maintenance ajouté !"
+msgstr ""
 
 #. module: base
 #: view:maintenance.contract.wizard:0
 msgid "_Cancel"
-msgstr "_Annuler"
+msgstr ""
 
 #. module: base
 #: view:maintenance.contract.wizard:0
 msgid "_Validate"
-msgstr "_Valider"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: view:multi_company.default:0
 msgid "Matching"
-msgstr "Correspondance"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: view:multi_company.default:0
 msgid "Multi Company"
-msgstr "Multi société"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: view:multi_company.default:0
 msgid "Returning"
-msgstr "Retour"
+msgstr ""
 
 #. module: base
 #: view:partner.clear.ids:0
@@ -11084,7 +11030,7 @@ msgstr ""
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: view:res.config.view:0
 msgid "Choose Your Mode"
-msgstr "Choisissez votre mode"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: view:res.config.view:0
@@ -11093,20 +11039,16 @@ msgid ""
 "time. Less used options or fields are automatically hidden. You will be able "
 "to change this, later, through the Administration menu."
 msgstr ""
-"Choisissez l'interface simplifiée si vous testez OpenERP pour la première "
-"fois.. Les options et champs les moins utilisés seront automatiquement "
-"cachés. Vous pourrez changer ce paramètre plus tard, dans le menu "
-"Administration."
 
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: view:res.config.view:0
 msgid "Configure simple view"
-msgstr "Configurer la vue simple"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: view:res.config.view:0
 msgid "Set"
-msgstr "Définir"
+msgstr ""
 
 #. module: base
 #: view:res.currency:0
@@ -11139,22 +11081,22 @@ msgstr "%B - Nom complet du mois."
 #. module: base
 #: view:res.lang:0
 msgid "%H - Hour (24-hour clock) as a decimal number [00,23]."
-msgstr "%H - Heure (24-heure) comme un nombre décimal [00,23]."
+msgstr ""
 
 #. module: base
 #: view:res.lang:0
 msgid "%I - Hour (12-hour clock) as a decimal number [01,12]."
-msgstr "%I - Heure (12-heure)  comme un nombre décimal [01,12]."
+msgstr ""
 
 #. module: base
 #: view:res.lang:0
 msgid "%M - Minute as a decimal number [00,59]."
-msgstr "%M - Minute comme un nombre décimal [00,59]."
+msgstr ""
 
 #. module: base
 #: view:res.lang:0
 msgid "%S - Second as a decimal number [00,61]."
-msgstr "%S - Seconde comme nombre décimal [00,61]"
+msgstr ""
 
 #. module: base
 #: view:res.lang:0
@@ -11186,7 +11128,7 @@ msgstr "%X - Représentation adaptée de l'heure"
 #. module: base
 #: view:res.lang:0
 msgid "%Y - Year with century as a decimal number."
-msgstr "%Y - Année avec le siècle en nombre décimal."
+msgstr ""
 
 #. module: base
 #: view:res.lang:0
@@ -11206,17 +11148,17 @@ msgstr "%c - Représentation appropriées d'une date et d'une heure"
 #. module: base
 #: view:res.lang:0
 msgid "%d - Day of the month as a decimal number [01,31]."
-msgstr "%d - Jour dans le mois comme un nombre décimal [01,31]."
+msgstr ""
 
 #. module: base
 #: view:res.lang:0
 msgid "%j - Day of the year as a decimal number [001,366]."
-msgstr "%j - Numéro du Jour dans l'année [001,366]."
+msgstr ""
 
 #. module: base
 #: view:res.lang:0
 msgid "%m - Month as a decimal number [01,12]."
-msgstr "%m - Mois comme un nombre décimal [01,12]."
+msgstr ""
 
 #. module: base
 #: view:res.lang:0
@@ -11226,7 +11168,7 @@ msgstr "%p - AM ou PM"
 #. module: base
 #: view:res.lang:0
 msgid "%w - Weekday as a decimal number [0(Sunday),6]."
-msgstr "%w - Jour de la semaine comme un nombre décimal [0(Dimanche),6]."
+msgstr ""
 
 #. module: base
 #: view:res.lang:0
@@ -11236,7 +11178,7 @@ msgstr "%x - Représentation de date appropriée"
 #. module: base
 #: view:res.lang:0
 msgid "%y - Year without century as a decimal number [00,99]."
-msgstr "%y - Année dans le siècle [00,99]."
+msgstr ""
 
 #. module: base
 #: view:res.lang:0
@@ -11363,7 +11305,7 @@ msgstr "Rechercher un partenaire"
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: view:res.partner.address:0
 msgid "Partner Address"
-msgstr "Adresse du partenaire"
+msgstr ""
 
 #. module: base
 #: view:res.partner.address:0
@@ -11383,7 +11325,7 @@ msgstr "Catégorie de partenaire"
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: view:res.partner.event:0
 msgid "Document Link"
-msgstr "Lien document"
+msgstr ""
 
 #. module: base
 #: view:res.partner.event:0
@@ -11411,7 +11353,7 @@ msgstr "Description générale"
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: view:res.partner.som:0
 msgid "Partner State of Mind"
-msgstr "État d'esprit partenaire"
+msgstr ""
 
 #. module: base
 #: view:res.payterm:0
@@ -11430,7 +11372,7 @@ msgstr ""
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: view:res.request:0
 msgid "End of Request"
-msgstr "Fin de la requête"
+msgstr ""
 
 #. module: base
 #: view:res.request:0
@@ -11478,7 +11420,7 @@ msgstr "Lien de la requête"
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: view:res.roles:0
 msgid "Role"
-msgstr "Rôle"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: view:res.users:0
@@ -11506,7 +11448,7 @@ msgstr ""
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: view:res.users:0
 msgid "Define New Users"
-msgstr "Définir de nouveaux utilisateurs"
+msgstr ""
 
 #. module: base
 #: view:res.users:0
@@ -11521,8 +11463,6 @@ msgstr ""
 #: view:res.users:0
 msgid "Groups are used to defined access rights on each screen and menu."
 msgstr ""
-"Les groupes sont utilisés pour définir les droits d'accès sur chaque écran "
-"et menu."
 
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: view:res.users:0
@@ -11530,8 +11470,6 @@ msgid ""
 "Please note that you will have to logout and relog if you change your "
 "password."
 msgstr ""
-"Veuillez noter que vous devrez vous déconnecter et vous reconnecter si vous "
-"changer de mot de passe."
 
 #. module: base
 #: view:res.users:0
@@ -11546,8 +11484,6 @@ msgstr ""
 #: view:res.users:0
 msgid "Roles are used to defined available actions, provided by workflows."
 msgstr ""
-"Les rôles sont utilisés pour définir les actions disponibles, fournies par "
-"les processus."
 
 #. module: base
 #: view:res.users:0
@@ -11598,22 +11534,22 @@ msgstr ""
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: view:wizard.module.lang.export:0
 msgid "Export Data"
-msgstr "Exporter les données"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: view:wizard.module.lang.export:0
 msgid "Export language"
-msgstr "Exporter la langue"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: view:wizard.module.lang.export:0
 msgid "Export translation file"
-msgstr "Exporter le fichier de traduction"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: view:wizard.module.lang.export:0
 msgid "Get file"
-msgstr "Obtenir le fichier"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: view:wizard.module.lang.export:0
@@ -11622,15 +11558,11 @@ msgid ""
 "through launchpad. We use their online interface to synchronize all "
 "translations efforts."
 msgstr ""
-"Les traductions officielles de tous les modules OpenERP/OpenObjects sont "
-"gérées via Launchpad. Nous utilisons leur interface en ligne pour "
-"synchronizer tous les efforts de traduction."
 
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: view:wizard.module.lang.export:0
 msgid "To browse official translations, you can visit this link: "
 msgstr ""
-"Pour parcourir les traductions officielles, vous pouvez visiter ce lien: "
 
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: view:wizard.module.lang.export:0
@@ -11640,10 +11572,6 @@ msgid ""
 "translations for your own module, you can also publish all your translation "
 "at once."
 msgstr ""
-"Pour améliorer certains termes des traductions officielles d'OpenERP, vous "
-"devez modifier les termes directement via l'interface de Launchpad. Si vous "
-"avez traduit beaucoup de termes pour votre propre module, vous pouvez "
-"également publier toutes vos traductions en une fois."
 
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: view:wizard.module.update_translations:0
@@ -11651,13 +11579,11 @@ msgid ""
 "This wizard will detect new terms in the application so that you can update "
 "them manually."
 msgstr ""
-"Cet assistant détectera les nouveaux termes dans l'application, ainsi, vous "
-"pourrez les mettre à jour manuellement."
 
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: view:wizard.module.update_translations:0
 msgid "Update Translations"
-msgstr "Mettre à jour les traductions"
+msgstr ""
 
 #. module: base
 #: view:workflow:0
@@ -11680,12 +11606,12 @@ msgstr ""
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: view:workflow.activity:0
 msgid "Incoming transitions"
-msgstr "Transitions entrante"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: view:workflow.activity:0
 msgid "Outgoing transitions"
-msgstr "Transitions sortantes"
+msgstr ""
 
 #. module: base
 #: view:workflow.activity:0
@@ -11716,22 +11642,22 @@ msgstr "Workflow Workitems"
 #: wizard_button:module.lang.install,start,end:0
 #: wizard_button:module.module.update,update,open_window:0
 msgid "Ok"
-msgstr "Ok"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: wizard_button:module.lang.install,init,start:0
 msgid "Start installation"
-msgstr "Commencer l'installation"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: wizard_button:module.module.update,init,update:0
 msgid "Check new modules"
-msgstr "Rechercher de nouveaux modules"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: wizard_button:module.upgrade,next,start:0
 msgid "Start Upgrade"
-msgstr "Démarrer la mise à jour"
+msgstr ""
 
 #. module: base
 #: wizard_button:server.action.create,step_1,create:0
@@ -11741,18 +11667,18 @@ msgstr "Créer"
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: wizard_field:module.lang.import,init,name:0
 msgid "Language name"
-msgstr "Nom de la langue"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: wizard_field:module.module.update,init,repositories:0
 msgid "Repositories"
-msgstr "Dépôts"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: wizard_field:module.upgrade,next,module_download:0
 #: wizard_view:module.upgrade,next:0
 msgid "Modules to download"
-msgstr "Modules à télécharger"
+msgstr ""
 
 #. module: base
 #: wizard_field:server.action.create,init,type:0
@@ -11770,32 +11696,32 @@ msgstr "Choisir un rapport"
 #: wizard_view:base.module.import,import:0
 #: wizard_view:base.module.import,init:0
 msgid "Module import"
-msgstr "Importation de module"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: wizard_view:base.module.import,import:0
 msgid "Module successfully imported !"
-msgstr "Module importé avec succès !"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: wizard_view:base.module.import,init:0
 msgid "Please give your module .ZIP file to import."
-msgstr "Veuillez spécifier le fichier .ZIP à importer"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: wizard_view:module.lang.import,init:0
 msgid "Import New Language"
-msgstr "Importer un nouveau langage"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: wizard_view:module.lang.import,init:0
 msgid "Import language"
-msgstr "Importer la langue"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: wizard_view:module.lang.import,init:0
 msgid "You can also import .po files."
-msgstr "Vous pouvez également importer un fichier .po"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: wizard_view:module.lang.import,init:0
@@ -11803,43 +11729,41 @@ msgid ""
 "You have to import a .CSV file wich is encoded in UTF-8.  Please check that "
 "the first line of your file is one of the following:"
 msgstr ""
-"Vous devez importer une fichier .CSV encodé en UTF-8. Veuillez vérifier que "
-"la première ligne de votre fichier est l'une des suivantes:"
 
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: wizard_view:module.lang.import,init:0
 msgid "module,type,name,res_id,src,value"
-msgstr "module,type,name,res_id,src,value"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: wizard_view:module.lang.import,init:0
 msgid "type,name,res_id,src,value"
-msgstr "type,name,res_id,src,value"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: wizard_view:module.lang.install,init:0
 msgid "Choose a language to install:"
-msgstr "Choisir une langue à installer"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: wizard_view:module.lang.install,init:0
 msgid "Note that this operation may take a few minutes."
-msgstr "Notez que cette opération peut prendre quelques minutes"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: wizard_view:module.lang.install,init:0 wizard_view:module.upgrade,next:0
 msgid "System Upgrade"
-msgstr "Mise à jour du système"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: wizard_view:module.lang.install,start:0
 msgid "Installation Done"
-msgstr "Installation terminée"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: wizard_view:module.lang.install,start:0
 msgid "Language file loaded."
-msgstr "Fichier de Langue chargé"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: wizard_view:module.lang.install,start:0
@@ -11847,14 +11771,11 @@ msgid ""
 "The selected language has been successfully installed. You must change the "
 "preferences of the user and open a new menu to view changes."
 msgstr ""
-"La langue sélectionnée a été installée avec succès. Vous devez changer les "
-"préférences de l'utilisateur et ouvrir un nouveau menu pour voir les "
-"changements."
 
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: wizard_view:module.module.update,init:0
 msgid "Scan for new modules"
-msgstr "Recherche de nouveaux modules"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: wizard_view:module.module.update,init:0
@@ -11862,43 +11783,41 @@ msgid ""
 "This function will check for new modules in the 'addons' path and on module "
 "repositories:"
 msgstr ""
-"Cette fonction vérifiera si des nouveaux modules sont disponibles dans le "
-"chemin 'addons' et sur les dépôts de modules :"
 
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: wizard_view:module.module.update,update:0
 msgid "New modules"
-msgstr "Nouveaux modules"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: wizard_view:module.upgrade,end:0 wizard_view:module.upgrade,start:0
 msgid "System upgrade done"
-msgstr "Mise à jour du système terminée"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: wizard_view:module.upgrade,end:0 wizard_view:module.upgrade,start:0
 msgid "The modules have been upgraded / installed !"
-msgstr "Les modules ont été mis à jour / installés !"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: wizard_view:module.upgrade,end:0 wizard_view:module.upgrade,start:0
 msgid "We suggest you to reload the menu tab (Ctrl+t Ctrl+r)."
-msgstr "Nous vous suggérons de recharger l'onglet menu (Ctrl+t ctrl+r)"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: wizard_view:module.upgrade,end:0 wizard_view:module.upgrade,start:0
 msgid "You may have to reinstall some language pack."
-msgstr "Vous devrez réinstaller quelques packs de langue."
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: wizard_view:module.upgrade,next:0
 msgid "Note that this operation my take a few minutes."
-msgstr "Notez que cette opération peut prendre quelques minutes."
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: wizard_view:module.upgrade,next:0
 msgid "Your system will be upgraded."
-msgstr "Votre système va être mis à jour."
+msgstr ""
 
 #. module: base
 #: selection:base.language.install,lang:0
@@ -12845,7 +12764,7 @@ msgstr ""
 #. module: base
 #: model:res.widget,title:base.matrixise_twitter_widget
 msgid "Stéphane Wirtel's tweets"
-msgstr "Tweets de Stéphane Wirtel"
+msgstr ""
 
 #. module: base
 #: selection:base.language.install,lang:0
@@ -12869,12 +12788,12 @@ msgstr ""
 #. module: base
 #: model:res.widget,title:base.rvalyi_twitter_widget
 msgid "Raphaël Valyi's tweets"
-msgstr "Tweets de Raphaël Valyi"
+msgstr ""
 
 #. module: base
 #: model:res.widget,title:base.odony_twitter_widget
 msgid "Olivier Dony's tweets"
-msgstr "Tweets d'Oliver Dony"
+msgstr ""
 
 #. module: base
 #: model:ir.model,name:base.model_res_widget_wizard
@@ -12893,7 +12812,7 @@ msgstr "Serbe (Cyrilique) / српски"
 #. module: base
 #: model:res.widget,title:base.albertnan_twitter_widget
 msgid "Albert Cervera Areny's tweets"
-msgstr "Tweets d'Albert Cervera Areny"
+msgstr ""
 
 #. module: base
 #: model:res.widget,title:base.nhomar_twitter_widget
@@ -13734,7 +13653,7 @@ msgstr ""
 #. module: base
 #: field:change.user.password,new_password:0
 msgid "New Password"
-msgstr "Nouveau mot de passe"
+msgstr ""
 
 #. module: base
 #: model:res.widget,title:base.facebook_widget
@@ -13744,7 +13663,7 @@ msgstr "Facebook"
 #. module: base
 #: model:ir.model,name:base.model_change_user_password
 msgid "change.user.password"
-msgstr "change.user.password"
+msgstr ""
 
 #. module: base
 #: help:change.user.password,confirm_password:0
@@ -13787,7 +13706,7 @@ msgstr "Convertisseur de devise"
 #. module: base
 #: field:change.user.password,current_password:0
 msgid "Current Password"
-msgstr "Mot de passe actuel"
+msgstr ""
 
 #. module: base
 #: model:ir.actions.act_window,help:base.act_ir_actions_todo_form
@@ -13816,7 +13735,7 @@ msgstr ""
 #. module: base
 #: help:change.user.password,new_password:0
 msgid "Enter the new password."
-msgstr "Entrez le mot de passe."
+msgstr ""
 
 #. module: base
 #: field:change.user.password,confirm_password:0
@@ -14228,29 +14147,14 @@ msgstr ""
 "#-#-#-#-#  .merge_file_IJz4z4 (OpenERP Server 5.0.4)  #-#-#-#-#\n"
 "Vous ne pouvez renommer q'une seule colonne à la fois !"
 
-#~ msgid "List of Company"
-#~ msgstr "Liste des sociétés"
-
-#~ msgid "Object affect by this rules"
-#~ msgstr "Objet affecté par cette règle"
-
 #~ msgid "undefined get method !"
 #~ msgstr "Méthode 'get' non définie !"
 
 #~ msgid "The value \"%s\" for the field \"%s\" is not in the selection"
 #~ msgstr "La valeur \"%s\" pour le champ \"%s\" n'est pas dans la sélection"
 
-#~ msgid "Unknown position in inherited view %s !"
-#~ msgstr "Position inconnue dans la vue héritée %s !"
-
 #~ msgid "Not Implemented"
 #~ msgstr "Non implémenté"
-
-#~ msgid "The name_get method is not implemented on this object !"
-#~ msgstr "La méthode 'name_get' n'est pas implémentée sur cet objet !"
-
-#~ msgid "Couldn't find tag '%s' in parent view !"
-#~ msgstr "Balise '%s' non trouvée dans la vue parente !"
 
 #~ msgid "Recursivity Detected."
 #~ msgstr "Récursivité détectée"
@@ -14271,17 +14175,8 @@ msgstr ""
 #~ msgid "The search method is not implemented on this object !"
 #~ msgstr "La méthode \"search\" n'est pas implémentée dans cet objet !"
 
-#~ msgid "Suppliers Partners"
-#~ msgstr "Partenaires fournisseurs"
-
 #~ msgid "ValidateError"
 #~ msgstr "Erreur de validation"
-
-#~ msgid "Customers Partners"
-#~ msgstr "Partenaires clients"
-
-#~ msgid "Partner Functions"
-#~ msgstr "Fonctions de partenaire"
 
 #~ msgid "UserError"
 #~ msgstr "Erreur utilisateur"
@@ -14294,33 +14189,8 @@ msgstr ""
 #~ msgid "Error occurred while validating the field(s) %s: %s"
 #~ msgstr "Une erreur est apparue lors de la validation du/des champ(s) %s: %s"
 
-#~ msgid ""
-#~ "You try to install a module that depends on the module: %s.\n"
-#~ "But this module is not available in your system."
-#~ msgstr ""
-#~ "Vous essayez d'installer un module qui dépend du module: %s\n"
-#~ "Mais ce module n'est pas disponible sur votre système."
-
 #~ msgid "The read method is not implemented on this object !"
 #~ msgstr "La méthode \"read\" n'est pas implémentée dans cet objet !"
 
 #~ msgid "The unlink method is not implemented on this object !"
 #~ msgstr "La méthode \"unlink\" n'est pas implémentée dans cet objet !"
-
-#~ msgid "Titles"
-#~ msgstr "Titres"
-
-#~ msgid "Html from html"
-#~ msgstr "De Html à html"
-
-#~ msgid "Macedonia"
-#~ msgstr "Macédoine"
-
-#~ msgid "Grant Access To Menus"
-#~ msgstr "Droits d'accès aux menus"
-
-#~ msgid "Others Partners"
-#~ msgstr "Autres partenaires"
-
-#~ msgid "Module Repository"
-#~ msgstr "Dépot de modules"

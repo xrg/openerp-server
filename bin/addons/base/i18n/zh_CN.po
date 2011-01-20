@@ -4,13 +4,13 @@ msgstr ""
 "Project-Id-Version: OpenERP Server 5.0.4\n"
 "Report-Msgid-Bugs-To: support@openerp.com\n"
 "POT-Creation-Date: 2011-01-11 11:14+0000\n"
-"PO-Revision-Date: 2011-01-17 08:00+0000\n"
+"PO-Revision-Date: 2011-01-19 13:31+0000\n"
 "Last-Translator: Wei \"oldrev\" Li <oldrev@gmail.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-01-18 04:35+0000\n"
+"X-Launchpad-Export-Date: 2011-01-20 06:12+0000\n"
 "X-Generator: Launchpad (build 12177)\n"
 
 #. module: base
@@ -41,7 +41,7 @@ msgstr ""
 #: code:addons/base/ir/ir_actions.py:0
 #, python-format
 msgid "Please specify server option --smtp-from !"
-msgstr "请指定服务器选项：“--smtp-from”！"
+msgstr ""
 
 #. module: base
 #: code:addons/base/ir/ir_actions.py:0
@@ -56,8 +56,6 @@ msgid ""
 "\"%s\" contains too many dots. XML ids should not contain dots ! These are "
 "used to refer to other modules data, as in module.reference_id"
 msgstr ""
-"“%s“包含太多点。XML 标识符不应该包括点！\r\n"
-"其作用是引用到其他模块数据，如module.reference_id"
 
 #. module: base
 #: code:addons/base/ir/ir_model.py:0
@@ -85,7 +83,7 @@ msgstr "自定义的字段名称必须以“x_”开始！"
 #: code:addons/base/ir/ir_model.py:0
 #, python-format
 msgid "Model %s Does not Exist !"
-msgstr "模型 %s 不存在！"
+msgstr ""
 
 #. module: base
 #: code:addons/base/ir/ir_model.py:0
@@ -106,37 +104,37 @@ msgstr ""
 #: code:addons/base/ir/ir_model.py:0
 #, python-format
 msgid "Password empty !"
-msgstr "密码为空！"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: code:addons/base/ir/ir_model.py:0
 #, python-format
 msgid "Password mismatch !"
-msgstr "密码不符合！"
+msgstr ""
 
 #. module: base
 #: code:addons/base/ir/ir_model.py:0
 #, python-format
 msgid "You can not create this kind of document! (%s)"
-msgstr "您不能创建 (%s) 类型的文档！"
+msgstr ""
 
 #. module: base
 #: code:addons/base/ir/ir_model.py:0
 #, python-format
 msgid "You can not delete this document! (%s)"
-msgstr "您不能删除文档：%s！"
+msgstr ""
 
 #. module: base
 #: code:addons/base/ir/ir_model.py:0
 #, python-format
 msgid "You can not read this document! (%s)"
-msgstr "您不能读取文档 %s！"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: code:addons/base/ir/ir_model.py:0
 #, python-format
 msgid "You can not remove the field '%s' !"
-msgstr "不能删除字段“%s”！"
+msgstr ""
 
 #. module: base
 #: code:addons/base/ir/ir_model.py:0
@@ -148,7 +146,7 @@ msgstr "您不能删除模型“%s”！"
 #: code:addons/base/ir/ir_model.py:0
 #, python-format
 msgid "You can not write in this document! (%s)"
-msgstr "您不能写入此文档 %s！"
+msgstr ""
 
 #. module: base
 #: code:addons/base/ir/ir_model.py:0
@@ -163,67 +161,67 @@ msgstr ""
 #: code:addons/base/ir/ir_report_custom.py:0
 #, python-format
 msgid "Bar charts need at least two fields"
-msgstr "条形图需要至少两个字段"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: code:addons/base/ir/ir_report_custom.py:0
 #, python-format
 msgid "Enter at least one field !"
-msgstr "至少输入一个字段！"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: code:addons/base/ir/ir_report_custom.py:0
 #, python-format
 msgid "Field %d should be a figure"
-msgstr "字段 %d 应该是数字"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: code:addons/base/ir/ir_report_custom.py:0
 #, python-format
 msgid "Invalid operation"
-msgstr "非法操作"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: code:addons/base/ir/ir_report_custom.py:0
 #, python-format
 msgid "Pie charts need exactly two fields"
-msgstr "需要两个字段来构建饼图"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: code:addons/base/ir/ir_report_custom.py:0
 #, python-format
 msgid "Second field should be figures"
-msgstr "第二字段应该是数字"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: code:addons/base/ir/ir_report_custom.py:0
 #, python-format
 msgid "Tree can only be used in tabular reports"
-msgstr "树结构只能用在表格式报表"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: code:addons/base/ir/ir_report_custom.py:0
 #, python-format
 msgid "Using a relation field which uses an unknown object"
-msgstr "正在使用的关联字段引用了未知对象"
+msgstr ""
 
 #. module: base
 #: code:addons/base/maintenance/maintenance.py:0
 #, python-format
 msgid "This error occurs on database %s"
-msgstr "该错误是在数据库%s发生的"
+msgstr ""
 
 #. module: base
 #: code:addons/base/maintenance/maintenance.py:0
 #, python-format
 msgid "Unable to find a valid contract"
-msgstr "未找到有效的服务合约"
+msgstr ""
 
 #. module: base
 #: code:addons/base/maintenance/maintenance.py:0
 #, python-format
 msgid "Your can't submit bug reports due to uncovered modules: %s"
-msgstr "您无法提交错误报告，因为您没有为模块 %s 签订技术服务协议"
+msgstr ""
 
 #. module: base
 #: code:addons/base/module/module.py:0
@@ -265,7 +263,7 @@ msgstr "一些已安装的模块依赖您打算卸载的模块：%s"
 #: code:addons/base/module/module.py:0
 #, python-format
 msgid "This url '%s' must provide an html file with links to zip modules"
-msgstr "这个 URL '%s' 必须提供一个链接到 zip 模块文件的 HTML 页面"
+msgstr ""
 
 #. module: base
 #: code:addons/base/module/module.py:0
@@ -319,8 +317,6 @@ msgid ""
 "You try to install the module '%s' that depends on the module:'%s'.\n"
 "But this module is not available in your system."
 msgstr ""
-"您试图安装模块'%s'.这模块依赖模块： %s。\n"
-"但您的系统中该模块不可用。"
 
 #. module: base
 #: code:addons/base/module/module.py:0
@@ -469,9 +465,6 @@ msgid ""
 "' \\n                    'for the currency: %s \n"
 "' \\n                    'at the date: %s"
 msgstr ""
-"未找到外币汇率 \n"
-"'\\n '相关货币： %s\n"
-"'\\n '日期： %s"
 
 #. module: base
 #: code:addons/base/res/res_lang.py:0
@@ -623,9 +616,12 @@ msgstr ""
 
 #. module: base
 #: code:addons/osv/osv.py:0
-#, python-format
+#, fuzzy, python-format
 msgid "Integrity Error"
 msgstr ""
+"#-#-#-#-#  .merge_file_sExF8x (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_8yntUj (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"完整性错误"
 
 #. module: base
 #: code:addons/osv/osv.py:0
@@ -689,7 +685,7 @@ msgstr "错误！您不能创建循环的关联成员。"
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: constraint:res.partner:0
 msgid "The VAT doesn't seem to be correct."
-msgstr "增值税似乎不正确。"
+msgstr ""
 
 #. module: base
 #: constraint:res.partner.category:0
@@ -708,7 +704,7 @@ msgstr ""
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: constraint:res.users:0
 msgid "This user can not connect using this company !"
-msgstr "该用户不能使用该公司连接。"
+msgstr ""
 
 #. module: base
 #: field:base.language.export,advice:0
@@ -1052,7 +1048,7 @@ msgstr "视图"
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: field:ir.actions.configuration.wizard,item_id:0
 msgid "Next Configuration Wizard"
-msgstr "下一步"
+msgstr ""
 
 #. module: base
 #: field:ir.actions.configuration.wizard,name:0
@@ -1075,12 +1071,12 @@ msgstr "作用于多个文档。"
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: field:ir.actions.report.custom,name:0 field:ir.report.custom,name:0
 msgid "Report Name"
-msgstr "报告名称"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: field:ir.actions.report.custom,report_id:0
 msgid "Report Ref."
-msgstr "报告参照"
+msgstr ""
 
 #. module: base
 #: field:ir.actions.report.custom,type:0
@@ -1103,7 +1099,7 @@ msgstr "从附件重新载入"
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: field:ir.actions.report.xml,auto:0
 msgid "Automatic XSL:RML"
-msgstr "自动XSL:RML"
+msgstr ""
 
 #. module: base
 #: field:ir.actions.report.xml,auto:0
@@ -1149,7 +1145,7 @@ msgstr ""
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: field:ir.actions.report.xml,report_name:0
 msgid "Internal Name"
-msgstr "内部名称"
+msgstr ""
 
 #. module: base
 #: field:ir.actions.report.xml,report_name:0
@@ -1168,7 +1164,7 @@ msgstr "主报表文件路径"
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: field:ir.actions.report.xml,report_rml:0
 msgid "RML path"
-msgstr "RML 路径"
+msgstr ""
 
 #. module: base
 #: field:ir.actions.report.xml,report_rml_content:0
@@ -1327,7 +1323,7 @@ msgstr "有效"
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: field:ir.actions.todo,end_date:0
 msgid "End Date"
-msgstr "结束日期"
+msgstr ""
 
 #. module: base
 #: field:ir.actions.todo,note:0 selection:ir.property,type:0
@@ -1346,12 +1342,12 @@ msgstr ""
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: field:ir.actions.todo,start_date:0
 msgid "Start Date"
-msgstr "起始日期"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: field:ir.actions.todo,start_on:0
 msgid "Start On"
-msgstr "开始于"
+msgstr ""
 
 #. module: base
 #: field:ir.actions.todo,state:0 field:ir.module.module,state:0
@@ -1425,7 +1421,7 @@ msgstr "说明"
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: field:ir.attachment,link:0
 msgid "Link"
-msgstr "链接"
+msgstr ""
 
 #. module: base
 #: field:ir.attachment,name:0
@@ -1435,7 +1431,7 @@ msgstr "附件名称"
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: field:ir.attachment,preview:0
 msgid "Image Preview"
-msgstr "图像预览"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_8UH1cp (OpenERP Server 5.0.4)  #-#-#-#-#
 #: field:ir.attachment,res_id:0
@@ -1503,7 +1499,7 @@ msgstr "间隔单位"
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: field:ir.cron,nextcall:0
 msgid "Next Call Date"
-msgstr "下次调用时间"
+msgstr ""
 
 #. module: base
 #: field:ir.cron,nextcall:0
@@ -1621,7 +1617,7 @@ msgstr ""
 #: field:ir.model,state:0 field:ir.model.fields,state:0
 #: field:ir.model.grid,state:0
 msgid "Manually Created"
-msgstr "已手工创建"
+msgstr ""
 
 #. module: base
 #: field:ir.model.access,group_id:0 field:ir.rule,rule_group:0
@@ -1647,7 +1643,7 @@ msgstr "删除访问许可"
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: field:ir.model.access,perm_unlink:0
 msgid "Delete Permission"
-msgstr "删除权限"
+msgstr ""
 
 #. module: base
 #: field:ir.model.access,perm_write:0 view:ir.model.access:0 view:ir.rule:0
@@ -1666,7 +1662,7 @@ msgstr "密码"
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: field:ir.model.config,password_check:0
 msgid "Confirmation"
-msgstr "确认"
+msgstr ""
 
 #. module: base
 #: field:ir.model.data,date_init:0
@@ -1759,7 +1755,7 @@ msgstr "可选择"
 #. module: base
 #: field:ir.model.fields,selection:0
 msgid "Field Selection"
-msgstr "选择字段"
+msgstr ""
 
 #. module: base
 #: field:ir.model.fields,size:0
@@ -1911,12 +1907,12 @@ msgstr "子栏位"
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: field:ir.report.custom,footer:0
 msgid "Report Footer"
-msgstr "报告脚注"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: field:ir.report.custom,frequency:0
 msgid "Frequency"
-msgstr "次数"
+msgstr ""
 
 #. module: base
 #: field:ir.report.custom,menu_id:0 field:ir.ui.menu,name:0
@@ -1927,42 +1923,42 @@ msgstr "菜单"
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: field:ir.report.custom,print_format:0
 msgid "Print format"
-msgstr "打印格式"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: field:ir.report.custom,print_orientation:0
 msgid "Print orientation"
-msgstr "打印方向"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: field:ir.report.custom,repeat_header:0
 msgid "Repeat Header"
-msgstr "报表头"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: field:ir.report.custom,sortby:0
 msgid "Sorted By"
-msgstr "排序方式"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: field:ir.report.custom,title:0
 msgid "Report Title"
-msgstr "报表标题"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: field:ir.report.custom.fields,alignment:0
 msgid "Alignment"
-msgstr "对齐方式"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: field:ir.report.custom.fields,bgcolor:0
 msgid "Background Color"
-msgstr "背景色"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: field:ir.report.custom.fields,cumulate:0
 msgid "Accumulate"
-msgstr "累计"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: field:ir.report.custom.fields,fc0_op:0
@@ -1970,7 +1966,7 @@ msgstr "累计"
 #: field:ir.report.custom.fields,fc2_op:0
 #: field:ir.report.custom.fields,fc3_op:0
 msgid "Relation"
-msgstr "关联"
+msgstr ""
 
 #. module: base
 #: field:ir.report.custom.fields,fc0_operande:0
@@ -1986,32 +1982,32 @@ msgstr "约束"
 #: field:ir.report.custom.fields,fc2_condition:0
 #: field:ir.report.custom.fields,fc3_condition:0
 msgid "condition"
-msgstr "条件"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: field:ir.report.custom.fields,field_child0:0
 msgid "Field child0"
-msgstr "字段 child0"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: field:ir.report.custom.fields,field_child1:0
 msgid "Field child1"
-msgstr "字段 child1"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: field:ir.report.custom.fields,field_child2:0
 msgid "Field child2"
-msgstr "字段 child2"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: field:ir.report.custom.fields,field_child3:0
 msgid "Field child3"
-msgstr "字段 child3"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: field:ir.report.custom.fields,fontcolor:0
 msgid "Font color"
-msgstr "字体颜色"
+msgstr ""
 
 #. module: base
 #: field:ir.report.custom.fields,groupby:0 view:ir.actions.act_window:0
@@ -2023,17 +2019,17 @@ msgstr "分组方式"
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: field:ir.report.custom.fields,report_id:0
 msgid "Report Ref"
-msgstr "报告参照"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: field:ir.report.custom.fields,width:0
 msgid "Fixed Width"
-msgstr "固定宽度"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: field:ir.rule,domain_force:0
 msgid "Force Domain"
-msgstr "强制域"
+msgstr ""
 
 #. module: base
 #: field:ir.rule,global:0 view:ir.model.access:0 view:ir.rule:0
@@ -2043,12 +2039,12 @@ msgstr "全局"
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: field:ir.rule,operand:0
 msgid "Operand"
-msgstr "操作符"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: field:ir.rule,operator:0
 msgid "Operator"
-msgstr "操作符"
+msgstr ""
 
 #. module: base
 #: field:ir.rule,perm_create:0
@@ -2089,12 +2085,12 @@ msgstr "代码"
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: field:ir.sequence,code:0 field:ir.sequence.type,code:0
 msgid "Sequence Code"
-msgstr "序列代码"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: field:ir.sequence,name:0 field:ir.sequence.type,name:0
 msgid "Sequence Name"
-msgstr "序列名称"
+msgstr ""
 
 #. module: base
 #: field:ir.sequence,number_increment:0
@@ -2124,7 +2120,7 @@ msgstr "后缀"
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: field:ir.sequence,weight:0
 msgid "Weight"
-msgstr "重量"
+msgstr ""
 
 #. module: base
 #: field:ir.server.object.lines,col1:0
@@ -2244,12 +2240,12 @@ msgstr "类别"
 #. module: base
 #: field:maintenance.contract,module_ids:0 view:maintenance.contract:0
 msgid "Covered Modules"
-msgstr "涉及的模块"
+msgstr ""
 
 #. module: base
 #: field:maintenance.contract,name:0 field:maintenance.contract.wizard,name:0
 msgid "Contract ID"
-msgstr "合同号"
+msgstr ""
 
 #. module: base
 #: field:maintenance.contract.module,version:0
@@ -2261,7 +2257,7 @@ msgstr "版本"
 #. module: base
 #: field:maintenance.contract.wizard,state:0
 msgid "States"
-msgstr "省/州"
+msgstr ""
 
 #. module: base
 #: field:multi_company.default,company_dest_id:0
@@ -2806,7 +2802,7 @@ msgstr "称谓"
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: field:res.partner,user_id:0
 msgid "Dedicated Salesman"
-msgstr "业务专员"
+msgstr ""
 
 #. module: base
 #: field:res.partner,user_id:0 view:res.partner:0
@@ -2916,42 +2912,42 @@ msgstr "渠道"
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: field:res.partner.event,document:0
 msgid "Document"
-msgstr "单据"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: field:res.partner.event,event_ical_id:0
 msgid "iCal id"
-msgstr "iCal 标识符"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: field:res.partner.event,partner_type:0
 msgid "Partner Relation"
-msgstr "业务伙伴关系"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: field:res.partner.event,planned_cost:0
 msgid "Planned Cost"
-msgstr "计划成本"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: field:res.partner.event,planned_revenue:0
 msgid "Planned Revenue"
-msgstr "计划收入"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: field:res.partner.event,probability:0
 msgid "Probability (0.50)"
-msgstr "概率(0.50)"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: field:res.partner.event,som:0 field:res.partner.som,name:0
 msgid "State of Mind"
-msgstr "满意度"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: field:res.partner.event,type:0
 msgid "Type of Event"
-msgstr "事件类型"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: field:res.partner.event.type,key:0
@@ -2961,12 +2957,12 @@ msgstr "关键字"
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: field:res.partner.function,name:0
 msgid "Function Name"
-msgstr "职能名称"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: field:res.partner.som,factor:0
 msgid "Factor"
-msgstr "满意度"
+msgstr ""
 
 #. module: base
 #: field:res.partner.title,shortcut:0 view:ir.ui.view_sc:0
@@ -3027,22 +3023,22 @@ msgstr "摘要"
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: field:res.roles,child_id:0
 msgid "Children"
-msgstr "下级"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: field:res.roles,name:0
 msgid "Role Name"
-msgstr "角色名称"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: field:res.roles,parent_id:0
 msgid "Parent"
-msgstr "上级"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: field:res.users,company_ids:0 view:res.users:0
 msgid "Accepted Companies"
-msgstr "已接受公司列表"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: field:res.users,roles_id:0
@@ -3050,7 +3046,7 @@ msgstr "已接受公司列表"
 #: model:ir.ui.menu,name:base.menu_action_res_roles_form view:res.roles:0
 #: view:res.users:0
 msgid "Roles"
-msgstr "角色"
+msgstr ""
 
 #. module: base
 #: field:res.widget,content:0
@@ -3149,7 +3145,7 @@ msgstr "工作流"
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: field:workflow.instance,uid:0
 msgid "User ID"
-msgstr "用户ID"
+msgstr ""
 
 #. module: base
 #: field:workflow.transition,act_from:0
@@ -3173,7 +3169,7 @@ msgstr ""
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: field:workflow.transition,role_id:0
 msgid "Role Required"
-msgstr "需要的角色"
+msgstr ""
 
 #. module: base
 #: field:workflow.transition,signal:0
@@ -3360,7 +3356,7 @@ msgstr ""
 #: help:ir.actions.report.xml,report_rml:0
 msgid ""
 "The .rml path of the file or NULL if the content is in report_rml_content"
-msgstr ".RML 文件的路径或当内容包含在 report_rml_content 中时则为 NULL"
+msgstr ""
 
 #. module: base
 #: help:ir.actions.report.xml,report_rml:0
@@ -3601,7 +3597,7 @@ msgstr ""
 msgid ""
 "Number of time the function is called,\n"
 "a negative number indicates that the function will always be called"
-msgstr "函数调用的次数，负数表示该函数总是被调用。"
+msgstr ""
 
 #. module: base
 #: help:ir.cron,priority:0
@@ -3643,10 +3639,6 @@ msgid ""
 "- The second parenthesis must match the whole version number.\n"
 "- The last parenthesis must match the extension of the module."
 msgstr ""
-"在 Web 页上搜索模块的正则表达式：\n"
-"- 第一个括号必须匹配模块名称。\n"
-"- 第二个括号必须匹配完整版本号。\n"
-"- 最后一个括号必须匹配模块扩展名。"
 
 #. module: base
 #: help:ir.property,res_id:0
@@ -3671,7 +3663,7 @@ msgstr ""
 msgid ""
 "If set, sequence will only be used in case this python expression matches, "
 "and will precede other sequences."
-msgstr "当设置后, 系统会优先使用这个python表达式来做为序号."
+msgstr ""
 
 #. module: base
 #: help:ir.sequence,number_increment:0
@@ -3709,13 +3701,17 @@ msgstr ""
 
 #. module: base
 #: help:ir.sequence,suffix:0
+#, fuzzy
 msgid "Suffix value of the record for the sequence"
 msgstr ""
+"#-#-#-#-#  .merge_file_sExF8x (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_8yntUj (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"序列号的后缀"
 
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: help:ir.sequence,weight:0
 msgid "If two sequences match, the highest weight will be used."
-msgstr "如果有两种设置, 则采用优先级最高的一个."
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: help:ir.ui.menu,groups_id:0
@@ -3724,8 +3720,6 @@ msgid ""
 "groups. If this field is empty, Open ERP will compute visibility based on "
 "the related object's read access."
 msgstr ""
-"如果您设置了用户组则该菜单的可见性由这些用户组决定。如果该字段为空，那么系统"
-"将依据相关对象的读访问权限来计算菜单可见性。"
 
 #. module: base
 #: help:ir.ui.menu,groups_id:0
@@ -4093,7 +4087,7 @@ msgstr "激活字段允许您隐藏该分类而不是删除它。"
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: help:res.users,company_id:0
 msgid "The company this user is currently working on."
-msgstr "该用户当前工作的公司。"
+msgstr ""
 
 #. module: base
 #: help:workflow.transition,act_from:0
@@ -4177,12 +4171,12 @@ msgstr ""
 #: model:ir.actions.act_window,name:base.act_values_form_action
 #: model:ir.ui.menu,name:base.menu_values_form_action
 msgid "Connect Actions To Client Events"
-msgstr "连接动作到客户端事件"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: model:ir.actions.act_window,name:base.action2
 msgid "Company Architecture"
-msgstr "公司组织结构"
+msgstr ""
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_attachment
@@ -4194,7 +4188,7 @@ msgstr "附件"
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: model:ir.actions.act_window,name:base.action_config_simple_view_form
 msgid "Configure Simple View"
-msgstr "配置简单视图"
+msgstr ""
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_config_simple_view_form
@@ -4209,7 +4203,7 @@ msgstr ""
 #: model:ir.actions.act_window,name:base.action_config_user_form
 #: view:res.users:0
 msgid "Configure User"
-msgstr "用户设置"
+msgstr ""
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_config_user_form
@@ -4224,7 +4218,7 @@ msgstr ""
 #: model:ir.actions.act_window,name:base.action_config_wizard_form
 #: model:ir.ui.menu,name:base.menu_config_module
 msgid "Configuration Wizard"
-msgstr "配置向导"
+msgstr ""
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_country
@@ -4248,14 +4242,14 @@ msgstr "货币"
 #: model:ir.actions.act_window,name:base.action_inventory_form
 #: model:ir.ui.menu,name:base.menu_action_inventory_form
 msgid "Default Company per Object"
-msgstr "每对象的默认公司"
+msgstr ""
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_maintenance_contract_add_wizard
 #: model:ir.ui.menu,name:base.menu_maintenance_contract_add
 #: view:maintenance.contract.wizard:0
 msgid "Add Maintenance Contract"
-msgstr "添加技术维护合同"
+msgstr ""
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_maintenance_contract_form
@@ -4271,7 +4265,7 @@ msgstr ""
 #: model:ir.actions.act_window,name:base.action_maintenance_contract_form
 #: model:ir.ui.menu,name:base.menu_maintenance_contract
 msgid "Your Maintenance Contracts"
-msgstr "您的技术服务协议"
+msgstr ""
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_model_data
@@ -4287,7 +4281,7 @@ msgstr ""
 #: model:ir.actions.act_window,name:base.action_model_grid_security
 #: model:ir.ui.menu,name:base.menu_ir_access_grid
 msgid "Access Controls Grid"
-msgstr "访问控制列表"
+msgstr ""
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_model_model
@@ -4300,7 +4294,7 @@ msgstr "对象"
 #: model:ir.actions.act_window,name:base.action_module_category_tree
 #: model:ir.ui.menu,name:base.menu_action_module_category_tree
 msgid "Categories of Modules"
-msgstr "模块分类"
+msgstr ""
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_partner_addess_tree
@@ -4335,7 +4329,7 @@ msgstr "业务伙伴分类"
 #: model:ir.actions.act_window,name:base.action_partner_category
 #: model:ir.ui.menu,name:base.menu_partner_category_main
 msgid "Partners by Categories"
-msgstr "业务伙伴分类"
+msgstr ""
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_partner_customer_form
@@ -4347,7 +4341,7 @@ msgstr "客户"
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: model:ir.actions.act_window,name:base.action_partner_customer_form_new
 msgid "New Partner"
-msgstr "新建业务伙伴"
+msgstr ""
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_partner_employee_form
@@ -4363,7 +4357,7 @@ msgstr ""
 #: model:ir.ui.menu,name:base.menu_partner_function_form
 #: view:res.partner.function:0
 msgid "Contact Functions"
-msgstr "联系人职能"
+msgstr ""
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_partner_mass_mail
@@ -4417,13 +4411,13 @@ msgstr "付款方式"
 #: model:ir.actions.act_window,name:base.action_report_custom
 #: view:ir.report.custom:0
 msgid "Custom Report"
-msgstr "自定义报表"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: model:ir.actions.act_window,name:base.action_res_bank_form
 #: model:ir.ui.menu,name:base.menu_action_res_bank_form
 msgid "Bank List"
-msgstr "银行列表"
+msgstr ""
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_res_company_tree
@@ -4435,7 +4429,7 @@ msgstr "公司结构"
 #: model:ir.actions.act_window,name:base.action_res_roles
 #: model:ir.ui.menu,name:base.menu_action_res_roles
 msgid "Roles Structure"
-msgstr "角色结构"
+msgstr ""
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_res_users_my
@@ -4458,7 +4452,7 @@ msgstr "服务器动作"
 #: model:ir.actions.act_window,name:base.action_translation
 #: model:ir.ui.menu,name:base.menu_action_translation
 msgid "All terms"
-msgstr "所有术语"
+msgstr ""
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_translation
@@ -4474,7 +4468,7 @@ msgstr ""
 #: model:ir.actions.act_window,name:base.action_translation_untrans
 #: model:ir.ui.menu,name:base.menu_action_translation_untrans
 msgid "Untranslated terms"
-msgstr "未翻译术语"
+msgstr ""
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_view_base_import_language
@@ -4570,13 +4564,13 @@ msgstr ""
 #: model:ir.actions.act_window,name:base.action_wizard_lang_export
 #: model:ir.ui.menu,name:base.menu_wizard_lang_export
 msgid "Export a Translation File"
-msgstr "导出翻译文件"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: model:ir.actions.act_window,name:base.action_wizard_update_translations
 #: model:ir.ui.menu,name:base.menu_wizard_update_translations
 msgid "Resynchronise Terms"
-msgstr "重新同步术语"
+msgstr ""
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_wizard_update_translations
@@ -4632,7 +4626,7 @@ msgstr ""
 #: model:ir.actions.act_window,name:base.grant_menu_access
 #: model:ir.ui.menu,name:base.menu_grant_menu_access
 msgid "Manage Menus"
-msgstr "管理菜单"
+msgstr ""
 
 #. module: base
 #: model:ir.actions.act_window,name:base.grant_menu_access
@@ -4654,13 +4648,13 @@ msgstr "访问控制列表"
 #: model:ir.actions.act_window,name:base.ir_action_report_custom
 #: model:ir.ui.menu,name:base.menu_ir_action_report_custom
 msgid "Report Custom"
-msgstr "自定义报表"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: model:ir.actions.act_window,name:base.ir_action_report_xml
 #: model:ir.ui.menu,name:base.menu_ir_action_report_xml
 msgid "Report Xml"
-msgstr "报表Xml"
+msgstr ""
 
 #. module: base
 #: model:ir.actions.act_window,name:base.ir_action_window
@@ -4694,13 +4688,13 @@ msgstr ""
 #: model:ir.actions.act_window,name:base.ir_property_form
 #: model:ir.ui.menu,name:base.menu_ir_property_form
 msgid "Default Properties"
-msgstr "默认属性"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: model:ir.actions.act_window,name:base.ir_property_form_all
 #: model:ir.ui.menu,name:base.menu_ir_property_form_all
 msgid "All Properties"
-msgstr "所有属性"
+msgstr ""
 
 #. module: base
 #: model:ir.actions.act_window,name:base.ir_sequence_actions
@@ -4731,32 +4725,32 @@ msgstr ""
 #: model:ir.actions.act_window,name:base.ir_sequence_type
 #: model:ir.ui.menu,name:base.menu_ir_sequence_type
 msgid "Sequence Types"
-msgstr "序列类型"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: model:ir.actions.act_window,name:base.open_module_tree_install
 #: model:ir.ui.menu,name:base.menu_module_tree_install
 msgid "Installed modules"
-msgstr "已安装模块"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: model:ir.actions.act_window,name:base.open_module_tree_uninstall
 #: model:ir.ui.menu,name:base.menu_module_tree_uninstall
 msgid "Uninstalled modules"
-msgstr "已卸载的模块"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: model:ir.actions.act_window,name:base.open_module_tree_upgrade
 #: model:ir.ui.menu,name:base.menu_module_tree_upgrade
 msgid "Modules to be installed, upgraded or removed"
-msgstr "将要安装，升级或删除的模块"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: model:ir.actions.act_window,name:base.open_repository_tree
 #: model:ir.ui.menu,name:base.menu_module_repository_tree
 #: view:ir.module.repository:0
 msgid "Repository list"
-msgstr "软件仓库列表"
+msgstr ""
 
 #. module: base
 #: model:ir.actions.act_window,name:base.res_lang_act_window
@@ -4783,19 +4777,19 @@ msgstr "渠道"
 #: model:ir.actions.act_window,name:base.res_partner_event_type-act
 #: model:ir.ui.menu,name:base.menu_res_partner_event_type-act
 msgid "Active Partner Events"
-msgstr "进行中的业务伙伴事件"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: model:ir.actions.act_window,name:base.res_partner_som-act
 #: model:ir.ui.menu,name:base.menu_res_partner_som-act
 msgid "States of mind"
-msgstr "满意度"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: model:ir.actions.act_window,name:base.res_request-act
 #: model:ir.ui.menu,name:base.menu_res_request_act
 msgid "My Requests"
-msgstr "我的请求列表"
+msgstr ""
 
 #. module: base
 #: model:ir.actions.act_window,name:base.res_request-act
@@ -4809,13 +4803,13 @@ msgstr "请求"
 #: model:ir.actions.act_window,name:base.res_request-closed
 #: model:ir.ui.menu,name:base.next_id_12_close
 msgid "My Closed Requests"
-msgstr "我的已关闭请求列表"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: model:ir.actions.act_window,name:base.res_request_link-act
 #: model:ir.ui.menu,name:base.menu_res_request_link_act
 msgid "Accepted Links in Requests"
-msgstr "已接受的请求的链接"
+msgstr ""
 
 #. module: base
 #: model:ir.actions.act_window,name:base.res_request_link-act
@@ -4878,10 +4872,6 @@ msgid ""
 "understand. You will be able to switch to the extended view later.\n"
 "            "
 msgstr ""
-"请在“简化界面”和扩展界面之间选择。\n"
-"如果您是第一次测试或使用 OpenERP，我们建议您使用简化界面，它的选项和字段更少"
-"更容易理解。以后您可以切换到扩展视图方式。\n"
-"            "
 
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: model:ir.actions.todo,note:base.config_wizard_step_user
@@ -4891,9 +4881,6 @@ msgid ""
 "of each users on the different objects of the system.\n"
 "            "
 msgstr ""
-"创建您的用户。\n"
-"您可以给用户分配用户组。用户组为各个用户定义了系统中不同对象的访问权限。\n"
-"            "
 
 #. module: base
 #: model:ir.actions.wizard,name:base.res_partner_send_sms_wizard
@@ -4913,7 +4900,7 @@ msgstr "导入模块"
 #: model:ir.actions.wizard,name:base.wizard_lang_import
 #: model:ir.ui.menu,name:base.menu_wizard_lang_import
 msgid "Import a Translation File"
-msgstr "导入翻译文件"
+msgstr ""
 
 #. module: base
 #: model:ir.actions.wizard,name:base.wizard_lang_install
@@ -5024,7 +5011,7 @@ msgstr "ir.actions.configuration.wizard"
 #: model:ir.model,name:base.model_ir_actions_report_custom
 #: selection:ir.ui.menu,action:0
 msgid "ir.actions.report.custom"
-msgstr "自定义报表"
+msgstr ""
 
 #. module: base
 #: model:ir.model,name:base.model_ir_actions_report_xml
@@ -5087,7 +5074,7 @@ msgstr "ir.model.access"
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: model:ir.model,name:base.model_ir_model_config
 msgid "ir.model.config"
-msgstr "ir.model.config"
+msgstr ""
 
 #. module: base
 #: model:ir.model,name:base.model_ir_model_data
@@ -5097,7 +5084,7 @@ msgstr "ir.model.data"
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: model:ir.model,name:base.model_ir_model_grid
 msgid "Objects Security Grid"
-msgstr "对象安全配置参照表"
+msgstr ""
 
 #. module: base
 #: model:ir.model,name:base.model_ir_module_category view:ir.module.category:0
@@ -5117,12 +5104,12 @@ msgstr "ir.property"
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: model:ir.model,name:base.model_ir_report_custom
 msgid "ir.report.custom"
-msgstr "ir.report.custom"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: model:ir.model,name:base.model_ir_report_custom_fields
 msgid "ir.report.custom.fields"
-msgstr "自定义报表字段"
+msgstr ""
 
 #. module: base
 #: model:ir.model,name:base.model_ir_rule
@@ -5192,12 +5179,12 @@ msgstr "维护合同"
 #. module: base
 #: model:ir.model,name:base.model_maintenance_contract_module
 msgid "maintenance contract modules"
-msgstr "维护合同模块"
+msgstr ""
 
 #. module: base
 #: model:ir.model,name:base.model_maintenance_contract_wizard
 msgid "maintenance.contract.wizard"
-msgstr "maintenance.contract.wizard"
+msgstr ""
 
 #. module: base
 #: model:ir.model,name:base.model_multi_company_default
@@ -5211,7 +5198,7 @@ msgstr ""
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: model:ir.model,name:base.model_multi_company_default
 msgid "multi_company.default"
-msgstr "multi_company.default"
+msgstr ""
 
 #. module: base
 #: model:ir.model,name:base.model_partner_wizard_ean_check
@@ -5225,7 +5212,7 @@ msgstr ""
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: model:ir.model,name:base.model_res_company
 msgid "res.company"
-msgstr "公司"
+msgstr ""
 
 #. module: base
 #: model:ir.model,name:base.model_res_config
@@ -5308,17 +5295,17 @@ msgstr "res.partner.event"
 #: model:ir.model,name:base.model_res_partner_event_type
 #: model:ir.ui.menu,name:base.next_id_14 view:res.partner.event:0
 msgid "Partner Events"
-msgstr "业务伙伴事件"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: model:ir.model,name:base.model_res_partner_function
 msgid "Function of the contact"
-msgstr "联系人职能"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: model:ir.model,name:base.model_res_partner_som
 msgid "res.partner.som"
-msgstr "res.partner.som"
+msgstr ""
 
 #. module: base
 #: model:ir.model,name:base.model_res_partner_title
@@ -5343,7 +5330,7 @@ msgstr "res.request.link"
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: model:ir.model,name:base.model_res_roles
 msgid "res.roles"
-msgstr "角色"
+msgstr ""
 
 #. module: base
 #: model:ir.model,name:base.model_res_users
@@ -5386,12 +5373,12 @@ msgstr "wizard.ir.model.menu.create.line"
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: model:ir.model,name:base.model_wizard_module_lang_export
 msgid "wizard.module.lang.export"
-msgstr "wizard.module.lang.export"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: model:ir.model,name:base.model_wizard_module_update_translations
 msgid "wizard.module.update_translations"
-msgstr "wizard.module.update_translations"
+msgstr ""
 
 #. module: base
 #: model:ir.model,name:base.model_workflow
@@ -5446,7 +5433,7 @@ msgstr ""
 #. module: base
 #: model:ir.ui.menu,name:base.maintenance
 msgid "Maintenance"
-msgstr "维护"
+msgstr ""
 
 #. module: base
 #: model:ir.ui.menu,name:base.marketing_menu
@@ -5554,8 +5541,12 @@ msgstr ""
 
 #. module: base
 #: model:ir.ui.menu,name:base.menu_crm_config_lead
+#, fuzzy
 msgid "Leads & Opportunities"
 msgstr ""
+"#-#-#-#-#  .merge_file_sExF8x (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_8yntUj (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"线索&商机"
 
 #. module: base
 #: model:ir.ui.menu,name:base.menu_custom
@@ -5565,7 +5556,7 @@ msgstr "自定义"
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: model:ir.ui.menu,name:base.menu_custom_multicompany
 msgid "Multi company"
-msgstr "多公司"
+msgstr ""
 
 #. module: base
 #: model:ir.ui.menu,name:base.menu_custom_reports
@@ -5627,7 +5618,7 @@ msgstr "本地化"
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: model:ir.ui.menu,name:base.menu_low_workflow
 msgid "Workflow Items"
-msgstr "工作流项"
+msgstr ""
 
 #. module: base
 #: model:ir.ui.menu,name:base.menu_lunch_reporting
@@ -5656,7 +5647,7 @@ msgstr ""
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: model:ir.ui.menu,name:base.menu_management
 msgid "Modules Management"
-msgstr "模块管理"
+msgstr ""
 
 #. module: base
 #: model:ir.ui.menu,name:base.menu_mrp_root
@@ -5738,7 +5729,7 @@ msgstr ""
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: model:ir.ui.menu,name:base.menu_workflow_root
 msgid "Workflow Definitions"
-msgstr "工作流定义"
+msgstr ""
 
 #. module: base
 #: model:ir.ui.menu,name:base.next_id_10
@@ -7326,7 +7317,7 @@ msgstr ""
 #: selection:base.language.install,lang:0
 #: selection:module.lang.install,init,lang:0
 msgid "Albanian / Shqipëri"
-msgstr "阿尔巴尼亚语 / Shqipëri"
+msgstr ""
 
 #. module: base
 #: selection:base.language.install,lang:0
@@ -7344,7 +7335,7 @@ msgstr "波斯尼亚语 / bosanski jezik"
 #: selection:base.language.install,lang:0
 #: selection:module.lang.install,init,lang:0
 msgid "Bulgarian / български"
-msgstr "保加利亚语 / български"
+msgstr ""
 
 #. module: base
 #: selection:base.language.install,lang:0
@@ -7391,7 +7382,7 @@ msgstr "丹麦语 / Dansk"
 #: selection:base.language.install,lang:0
 #: selection:module.lang.install,init,lang:0
 msgid "Dutch (Belgium) / Nederlands (Belgïe)"
-msgstr "荷兰语（比利时） / Nederlands (Belgïe)"
+msgstr ""
 
 #. module: base
 #: selection:base.language.install,lang:0
@@ -7427,7 +7418,7 @@ msgstr "爱沙尼亚语 / Eesti keel"
 #: selection:base.language.install,lang:0
 #: selection:module.lang.install,init,lang:0
 msgid "Finland / Suomi"
-msgstr "芬兰 / Suomi"
+msgstr ""
 
 #. module: base
 #: selection:base.language.install,lang:0
@@ -7515,7 +7506,7 @@ msgstr "克林贡文"
 #. module: base
 #: selection:base.language.install,lang:0
 msgid "Korean / Korea, Democratic Peoples Republic of"
-msgstr "朝鲜民主主义人民共和国"
+msgstr ""
 
 #. module: base
 #: selection:base.language.install,lang:0
@@ -7572,19 +7563,19 @@ msgstr "波兰语言 / Język polski"
 #: selection:base.language.install,lang:0
 #: selection:module.lang.install,init,lang:0
 msgid "Portugese (BR) / português (BR)"
-msgstr "葡萄牙语 / português (BR)"
+msgstr ""
 
 #. module: base
 #: selection:base.language.install,lang:0
 #: selection:module.lang.install,init,lang:0
 msgid "Portugese / português"
-msgstr "葡萄牙语 / português"
+msgstr ""
 
 #. module: base
 #: selection:base.language.install,lang:0
 #: selection:module.lang.install,init,lang:0
 msgid "Romanian / limba română"
-msgstr "罗马尼亚语 / limba română"
+msgstr ""
 
 #. module: base
 #: selection:base.language.install,lang:0
@@ -7656,7 +7647,7 @@ msgstr "土耳其语 / Türkçe"
 #: selection:base.language.install,lang:0
 #: selection:module.lang.install,init,lang:0
 msgid "Ukrainian / украї́нська мо́ва"
-msgstr "乌克兰语 / украї́нська мо́ва"
+msgstr ""
 
 #. module: base
 #: selection:base.language.install,lang:0
@@ -7667,7 +7658,7 @@ msgstr ""
 #: selection:base.language.install,lang:0
 #: selection:module.lang.install,init,lang:0
 msgid "Vietnam / Cộng hòa xã hội chủ nghĩa Việt Nam"
-msgstr "越南 / Cộng hòa xã hội chủ nghĩa Việt Nam"
+msgstr ""
 
 #. module: base
 #: selection:base.language.install,state:0
@@ -7724,42 +7715,42 @@ msgstr "图表"
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: selection:ir.actions.report.xml,report_type:0
 msgid "HTML from HTML"
-msgstr "HTML 来自 HTML"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: selection:ir.actions.report.xml,report_type:0
 msgid "HTML from HTML(Mako)"
-msgstr "HTML 到 HTML 报表（使用 Mako 模板）"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: selection:ir.actions.report.xml,report_type:0
 msgid "html"
-msgstr "html"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: selection:ir.actions.report.xml,report_type:0
 msgid "odt"
-msgstr "ODT"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: selection:ir.actions.report.xml,report_type:0
 msgid "pdf"
-msgstr "pdf"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: selection:ir.actions.report.xml,report_type:0
 msgid "raw"
-msgstr "原始格式"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: selection:ir.actions.report.xml,report_type:0
 msgid "sxw"
-msgstr "SXW"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: selection:ir.actions.report.xml,report_type:0
 msgid "txt"
-msgstr "txt"
+msgstr ""
 
 #. module: base
 #: selection:ir.actions.server,state:0
@@ -7830,17 +7821,17 @@ msgstr ""
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: selection:ir.actions.todo,start_on:0
 msgid "At Once"
-msgstr "一次性"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: selection:ir.actions.todo,start_on:0
 msgid "Auto"
-msgstr "自动"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: selection:ir.actions.todo,start_on:0
 msgid "Manual"
-msgstr "手工"
+msgstr ""
 
 #. module: base
 #: selection:ir.actions.todo,state:0 view:base.language.install:0
@@ -7876,7 +7867,7 @@ msgstr "已完成"
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: selection:ir.actions.todo,state:0
 msgid "Not Started"
-msgstr "尚未开始"
+msgstr ""
 
 #. module: base
 #: selection:ir.actions.todo,state:0
@@ -7895,7 +7886,7 @@ msgstr ""
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: selection:ir.actions.todo,type:0
 msgid "Configure"
-msgstr "配置"
+msgstr ""
 
 #. module: base
 #: selection:ir.actions.todo,type:0 selection:res.partner.address,type:0
@@ -7905,7 +7896,7 @@ msgstr "其他"
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: selection:ir.actions.todo,type:0
 msgid "Service"
-msgstr "服务"
+msgstr ""
 
 #. module: base
 #: selection:ir.actions.url,target:0
@@ -7975,7 +7966,7 @@ msgstr "设为空（NULL）"
 #. module: base
 #: selection:ir.model.fields,select_level:0
 msgid "Advanced Search"
-msgstr "高级搜索"
+msgstr ""
 
 #. module: base
 #: selection:ir.model.fields,select_level:0
@@ -8027,7 +8018,7 @@ msgstr ""
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: selection:ir.module.module,license:0
 msgid "GPL-2"
-msgstr "GPL－2"
+msgstr ""
 
 #. module: base
 #: selection:ir.module.module,license:0
@@ -8037,7 +8028,7 @@ msgstr "GPL-2 或更新版本"
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: selection:ir.module.module,license:0
 msgid "GPL-3"
-msgstr "GPL-3"
+msgstr ""
 
 #. module: base
 #: selection:ir.module.module,license:0
@@ -8061,7 +8052,7 @@ msgstr ""
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: selection:ir.module.module,license:0
 msgid "Other proprietary"
-msgstr "其他商业协议"
+msgstr ""
 
 #. module: base
 #: selection:ir.module.module,state:0
@@ -8170,27 +8161,27 @@ msgstr ""
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: selection:ir.report.custom,frequency:0
 msgid "Daily"
-msgstr "每日"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: selection:ir.report.custom,frequency:0
 msgid "Monthly"
-msgstr "每月"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: selection:ir.report.custom,frequency:0
 msgid "Yearly"
-msgstr "每年"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: selection:ir.report.custom,print_format:0
 msgid "a4"
-msgstr "a4"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: selection:ir.report.custom,print_format:0
 msgid "a5"
-msgstr "a5"
+msgstr ""
 
 #. module: base
 #: selection:ir.report.custom,print_orientation:0 view:res.company:0
@@ -8205,47 +8196,47 @@ msgstr "纵向"
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: selection:ir.report.custom,state:0
 msgid "Subscribed"
-msgstr "已订阅"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: selection:ir.report.custom,state:0
 msgid "Unsubscribed"
-msgstr "取消订购"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: selection:ir.report.custom,type:0
 msgid "Bar Chart"
-msgstr "柱状图表"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: selection:ir.report.custom,type:0
 msgid "Line Plot"
-msgstr "现状图表"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: selection:ir.report.custom,type:0
 msgid "Pie Chart"
-msgstr "饼图"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: selection:ir.report.custom,type:0
 msgid "Tabular"
-msgstr "表格式"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: selection:ir.report.custom.fields,alignment:0
 msgid "center"
-msgstr "中间对齐"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: selection:ir.report.custom.fields,alignment:0
 msgid "left"
-msgstr "左对齐"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: selection:ir.report.custom.fields,alignment:0
 msgid "right"
-msgstr "右对齐"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: selection:ir.report.custom.fields,fc0_op:0
@@ -8253,7 +8244,7 @@ msgstr "右对齐"
 #: selection:ir.report.custom.fields,fc2_op:0
 #: selection:ir.report.custom.fields,fc3_op:0
 msgid "(year)="
-msgstr "（年）＝"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: selection:ir.report.custom.fields,fc0_op:0
@@ -8261,7 +8252,7 @@ msgstr "（年）＝"
 #: selection:ir.report.custom.fields,fc2_op:0
 #: selection:ir.report.custom.fields,fc3_op:0
 msgid "<"
-msgstr "<"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: selection:ir.report.custom.fields,fc0_op:0
@@ -8269,7 +8260,7 @@ msgstr "<"
 #: selection:ir.report.custom.fields,fc2_op:0
 #: selection:ir.report.custom.fields,fc3_op:0 selection:ir.rule,operator:0
 msgid "="
-msgstr "="
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: selection:ir.report.custom.fields,fc0_op:0
@@ -8277,7 +8268,7 @@ msgstr "="
 #: selection:ir.report.custom.fields,fc2_op:0
 #: selection:ir.report.custom.fields,fc3_op:0
 msgid ">"
-msgstr ">"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: selection:ir.report.custom.fields,fc0_op:0
@@ -8285,52 +8276,52 @@ msgstr ">"
 #: selection:ir.report.custom.fields,fc2_op:0
 #: selection:ir.report.custom.fields,fc3_op:0 selection:ir.rule,operator:0
 msgid "in"
-msgstr "包含"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: selection:ir.report.custom.fields,operation:0
 msgid "Calculate Average"
-msgstr "计算平均值"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: selection:ir.report.custom.fields,operation:0
 msgid "Calculate Count"
-msgstr "计算数量"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: selection:ir.report.custom.fields,operation:0
 msgid "Calculate Sum"
-msgstr "计算总额"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: selection:ir.report.custom.fields,operation:0
 msgid "Get Max"
-msgstr "获取最大值"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: selection:ir.report.custom.fields,operation:0
 msgid "None"
-msgstr "无"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: selection:ir.rule,operator:0
 msgid "<="
-msgstr "<="
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: selection:ir.rule,operator:0
 msgid "<>"
-msgstr "<>"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: selection:ir.rule,operator:0
 msgid ">="
-msgstr ">="
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: selection:ir.rule,operator:0
 msgid "child_of"
-msgstr "子项"
+msgstr ""
 
 #. module: base
 #: selection:ir.server.object.lines,type:0
@@ -8345,7 +8336,7 @@ msgstr "帮助"
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: selection:ir.translation,type:0
 msgid "RML"
-msgstr "RML"
+msgstr ""
 
 #. module: base
 #: selection:ir.translation,type:0
@@ -8398,452 +8389,452 @@ msgstr "XSL"
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_ABOUT"
-msgstr "STOCK_ABOUT"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_ADD"
-msgstr "STOCK_ADD"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_APPLY"
-msgstr "STOCK_APPLY"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_BOLD"
-msgstr "STOCK_BOLD"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_CANCEL"
-msgstr "STOCK_CANCEL"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_CDROM"
-msgstr "STOCK_CDROM"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_CLEAR"
-msgstr "STOCK_CLEAR"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_CLOSE"
-msgstr "STOCK_CLOSE"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_COLOR_PICKER"
-msgstr "STOCK_COLOR_PICKER"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_CONNECT"
-msgstr "STOCK_CONNECT"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_CONVERT"
-msgstr "STOCK_CONVERT"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_COPY"
-msgstr "STOCK_COPY"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_CUT"
-msgstr "STOCK_CUT"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_DELETE"
-msgstr "STOCK_DELETE"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_DIALOG_AUTHENTICATION"
-msgstr "STOCK_DIALOG_AUTHENTICATION"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_DIALOG_ERROR"
-msgstr "STOCK_DIALOG_ERROR"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_DIALOG_INFO"
-msgstr "STOCK_DIALOG_INFO"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_DIALOG_QUESTION"
-msgstr "STOCK_DIALOG_QUESTION"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_DIALOG_WARNING"
-msgstr "STOCK_DIALOG_WARNING"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_DIRECTORY"
-msgstr "STOCK_DIRECTORY"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_DISCONNECT"
-msgstr "STOCK_DISCONNECT"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_DND"
-msgstr "STOCK_DND"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_DND_MULTIPLE"
-msgstr "STOCK_DND_MULTIPLE"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_EDIT"
-msgstr "STOCK_EDIT"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_EXECUTE"
-msgstr "STOCK_EXECUTE"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_FILE"
-msgstr "STOCK_FILE"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_FIND"
-msgstr "STOCK_FIND"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_FIND_AND_REPLACE"
-msgstr "STOCK_FIND_AND_REPLACE"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_FLOPPY"
-msgstr "STOCK_FLOPPY"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_GOTO_BOTTOM"
-msgstr "STOCK_GOTO_BOTTOM"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_GOTO_FIRST"
-msgstr "STOCK_GOTO_FIRST"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_GOTO_LAST"
-msgstr "STOCK_GOTO_LAST"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_GOTO_TOP"
-msgstr "STOCK_GOTO_TOP"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_GO_BACK"
-msgstr "STOCK_GO_BACK"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_GO_DOWN"
-msgstr "STOCK_GO_DOWN"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_GO_FORWARD"
-msgstr "STOCK_GO_FORWARD"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_GO_UP"
-msgstr "STOCK_GO_UP"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_HARDDISK"
-msgstr "STOCK_HARDDISK"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_HELP"
-msgstr "STOCK_HELP"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_HOME"
-msgstr "STOCK_HOME"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_INDENT"
-msgstr "STOCK_INDENT"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_INDEX"
-msgstr "STOCK_INDEX"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_ITALIC"
-msgstr "STOCK_ITALIC"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_JUMP_TO"
-msgstr "STOCK_JUMP_TO"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_JUSTIFY_CENTER"
-msgstr "STOCK_JUSTIFY_CENTER"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_JUSTIFY_FILL"
-msgstr "STOCK_JUSTIFY_FILL"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_JUSTIFY_LEFT"
-msgstr "STOCK_JUSTIFY_LEFT"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_JUSTIFY_RIGHT"
-msgstr "STOCK_JUSTIFY_RIGHT"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_MEDIA_FORWARD"
-msgstr "STOCK_MEDIA_FORWARD"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_MEDIA_NEXT"
-msgstr "STOCK_MEDIA_NEXT"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_MEDIA_PAUSE"
-msgstr "STOCK_MEDIA_PAUSE"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_MEDIA_PLAY"
-msgstr "STOCK_MEDIA_PLAY"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_MEDIA_PREVIOUS"
-msgstr "STOCK_MEDIA_PREVIOUS"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_MEDIA_RECORD"
-msgstr "STOCK_MEDIA_RECORD"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_MEDIA_REWIND"
-msgstr "STOCK_MEDIA_REWIND"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_MEDIA_STOP"
-msgstr "STOCK_MEDIA_STOP"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_MISSING_IMAGE"
-msgstr "STOCK_MISSING_IMAGE"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_NETWORK"
-msgstr "STOCK_NETWORK"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_NEW"
-msgstr "STOCK_NEW"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_NO"
-msgstr "STOCK_NO"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_OK"
-msgstr "STOCK_OK"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_OPEN"
-msgstr "STOCK_OPEN"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_PASTE"
-msgstr "STOCK_PASTE"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_PREFERENCES"
-msgstr "STOCK_PREFERENCES"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_PRINT"
-msgstr "STOCK_PRINT"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_PRINT_PREVIEW"
-msgstr "STOCK_PRINT_PREVIEW"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_PROPERTIES"
-msgstr "STOCK_PROPERTIES"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_QUIT"
-msgstr "STOCK_QUIT"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_REDO"
-msgstr "STOCK_REDO"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_REFRESH"
-msgstr "STOCK_REFRESH"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_REMOVE"
-msgstr "STOCK_REMOVE"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_REVERT_TO_SAVED"
-msgstr "STOCK_REVERT_TO_SAVED"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_SAVE"
-msgstr "STOCK_SAVE"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_SAVE_AS"
-msgstr "STOCK_SAVE_AS"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_SELECT_COLOR"
-msgstr "STOCK_SELECT_COLOR"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_SELECT_FONT"
-msgstr "STOCK_SELECT_FONT"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_SORT_ASCENDING"
-msgstr "STOCK_SORT_ASCENDING"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_SORT_DESCENDING"
-msgstr "STOCK_SORT_DESCENDING"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_SPELL_CHECK"
-msgstr "STOCK_SPELL_CHECK"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_STOP"
-msgstr "STOCK_STOP"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_STRIKETHROUGH"
-msgstr "STOCK_STRIKETHROUGH"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_UNDELETE"
-msgstr "STOCK_UNDELETE"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_UNDERLINE"
-msgstr "STOCK_UNDERLINE"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_UNDO"
-msgstr "STOCK_UNDO"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_UNINDENT"
-msgstr "STOCK_UNINDENT"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_YES"
-msgstr "STOCK_YES"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_ZOOM_100"
-msgstr "STOCK_ZOOM_100"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_ZOOM_FIT"
-msgstr "STOCK_ZOOM_FIT"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_ZOOM_IN"
-msgstr "STOCK_ZOOM_IN"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_ZOOM_OUT"
-msgstr "STOCK_ZOOM_OUT"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
@@ -8863,17 +8854,17 @@ msgstr ""
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "terp-account"
-msgstr "terp-account"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "terp-administration"
-msgstr "terp-administration"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "terp-calendar"
-msgstr "terp-calendar"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
@@ -8897,7 +8888,7 @@ msgstr ""
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "terp-crm"
-msgstr "terp-crm"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
@@ -8995,7 +8986,7 @@ msgstr ""
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "terp-graph"
-msgstr "terp-graph"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
@@ -9039,7 +9030,7 @@ msgstr ""
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "terp-hr"
-msgstr "terp-hr"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
@@ -9079,12 +9070,12 @@ msgstr ""
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "terp-mrp"
-msgstr "terp-mrp"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "terp-partner"
-msgstr "terp-partner"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
@@ -9104,17 +9095,17 @@ msgstr ""
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "terp-product"
-msgstr "terp-product"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "terp-project"
-msgstr "terp-project"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "terp-purchase"
-msgstr "terp-purchase"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
@@ -9124,12 +9115,12 @@ msgstr ""
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "terp-report"
-msgstr "terp-report"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "terp-sale"
-msgstr "terp-sale"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
@@ -9139,7 +9130,7 @@ msgstr ""
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "terp-stock"
-msgstr "terp-stock"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
@@ -9177,7 +9168,7 @@ msgstr ""
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "terp-tools"
-msgstr "terp-tools"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.view,type:0
@@ -9206,17 +9197,17 @@ msgstr "默认"
 #. module: base
 #: selection:maintenance.contract,kind:0
 msgid "Full"
-msgstr "完全"
+msgstr ""
 
 #. module: base
 #: selection:maintenance.contract,kind:0
 msgid "Partial"
-msgstr "部分"
+msgstr ""
 
 #. module: base
 #: selection:maintenance.contract,state:0
 msgid "Unvalid"
-msgstr "未验证"
+msgstr ""
 
 #. module: base
 #: selection:maintenance.contract,state:0
@@ -9236,7 +9227,7 @@ msgstr "未验证"
 #. module: base
 #: selection:maintenance.contract.wizard,state:0
 msgid "Validated"
-msgstr "已验证"
+msgstr ""
 
 #. module: base
 #: selection:res.config.users,view:0 selection:res.config.view,view:0
@@ -9261,12 +9252,12 @@ msgstr ""
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: selection:res.config.view,view:0
 msgid "Extended Interface"
-msgstr "扩展界面"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: selection:res.config.view,view:0
 msgid "Simplified Interface"
-msgstr "简单界面"
+msgstr ""
 
 #. module: base
 #: selection:res.lang,direction:0
@@ -9297,27 +9288,27 @@ msgstr "发票"
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: selection:res.partner.event,partner_type:0
 msgid "Commercial Prospect"
-msgstr "潜在客户"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: selection:res.partner.event,partner_type:0
 msgid "Retailer"
-msgstr "零售商"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: selection:res.partner.event,type:0
 msgid "Prospect Contact"
-msgstr "潜在客户联系人"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: selection:res.partner.event,type:0
 msgid "Purchase Offer"
-msgstr "采购建议"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: selection:res.partner.event,type:0
 msgid "Sale Opportunity"
-msgstr "商机"
+msgstr ""
 
 #. module: base
 #: selection:res.request,priority:0
@@ -9489,7 +9480,7 @@ msgstr ""
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: sql_constraint:res.user:0
 msgid "You cannot have two users with the same login !"
-msgstr "用户名必须唯一！"
+msgstr ""
 
 #. module: base
 #: view:base.language.export:0
@@ -9917,12 +9908,12 @@ msgstr "下一步设置"
 #. module: base
 #: view:ir.actions.configuration.wizard:0
 msgid "Skip Step"
-msgstr "跳过此步"
+msgstr ""
 
 #. module: base
 #: view:ir.actions.report.custom:0
 msgid "Report custom"
-msgstr "自定义报表"
+msgstr ""
 
 #. module: base
 #: view:ir.actions.report.xml:0
@@ -9972,8 +9963,6 @@ msgid ""
 "Access all the fields related to the current object using expression in "
 "double brackets, i.e. [[ object.partner_id.name ]]"
 msgstr ""
-"使用双中括号中的表达式访问当前对象的所有相关字段，如：[[ object.partner_id."
-"name ]]"
 
 #. module: base
 #: view:ir.actions.server:0
@@ -9981,8 +9970,6 @@ msgid ""
 "Access all the fields related to the current object using expression in "
 "double brackets, i.e.[[ object.partner_id.name ]]"
 msgstr ""
-"访问当前对象的所有字段可以使用双中括号表达式，如：[[ object.partner_id."
-"name ]]"
 
 #. module: base
 #: view:ir.actions.server:0
@@ -10005,7 +9992,7 @@ msgstr "客户端动作设置"
 #. module: base
 #: view:ir.actions.server:0
 msgid "Create / Write"
-msgstr "创建／写入"
+msgstr ""
 
 #. module: base
 #: view:ir.actions.server:0
@@ -10055,7 +10042,6 @@ msgid ""
 "Only one client action will be execute, last                                 "
 "clinent action will be consider in case of multiples clients actions"
 msgstr ""
-"只有一个客户端动作会执行，如果有多个客户端动作，将执行最后一个客户端动作。"
 
 #. module: base
 #: view:ir.actions.server:0
@@ -10160,7 +10146,7 @@ msgstr "所有者"
 #. module: base
 #: view:ir.attachment:0
 msgid "Preview"
-msgstr "预览"
+msgstr ""
 
 #. module: base
 #: view:ir.cron:0
@@ -10227,12 +10213,12 @@ msgstr "模型描述"
 #. module: base
 #: view:ir.model:0 view:ir.model.fields:0
 msgid "Security on Groups"
-msgstr "用户组安全设置"
+msgstr ""
 
 #. module: base
 #: view:ir.model:0 view:res.request:0
 msgid "Status"
-msgstr "状态"
+msgstr ""
 
 #. module: base
 #: view:ir.model.access:0 view:ir.rule:0
@@ -10325,7 +10311,7 @@ msgstr "卸载"
 #. module: base
 #: view:ir.module.repository:0
 msgid "Repository"
-msgstr "模块库"
+msgstr ""
 
 #. module: base
 #: view:ir.property:0
@@ -10347,17 +10333,17 @@ msgstr "属性"
 #. module: base
 #: view:ir.report.custom:0
 msgid "Subscribe Report"
-msgstr "签署报告"
+msgstr ""
 
 #. module: base
 #: view:ir.report.custom:0
 msgid "Unsubscribe Report"
-msgstr "无法退订的报表"
+msgstr ""
 
 #. module: base
 #: view:ir.report.custom.fields:0
 msgid "Report Fields"
-msgstr "报告字段"
+msgstr ""
 
 #. module: base
 #: view:ir.rule:0
@@ -10429,12 +10415,12 @@ msgstr ""
 #. module: base
 #: view:ir.rule:0
 msgid "If you don't force the domain, it will use the simple domain setup"
-msgstr "如果没有强制域则将使用简单域设置。"
+msgstr ""
 
 #. module: base
 #: view:ir.rule:0
 msgid "Manual domain setup"
-msgstr "手动域设置"
+msgstr ""
 
 #. module: base
 #: view:ir.rule:0
@@ -10444,12 +10430,12 @@ msgstr "记录规则"
 #. module: base
 #: view:ir.rule:0
 msgid "Simple domain setup"
-msgstr "简单域设置"
+msgstr ""
 
 #. module: base
 #: view:ir.rule:0
 msgid "Test"
-msgstr "测试"
+msgstr ""
 
 #. module: base
 #: view:ir.sequence:0
@@ -10519,12 +10505,12 @@ msgstr "一年中的第几周：%(woy)s"
 #. module: base
 #: view:ir.sequence:0
 msgid "Year with century: %(year)s"
-msgstr "包含世纪的年份数：%(year)s"
+msgstr ""
 
 #. module: base
 #: view:ir.sequence:0
 msgid "Year without century: %(y)s"
-msgstr "不包含世纪的年数：%(y)s"
+msgstr ""
 
 #. module: base
 #: view:ir.sequence.type:0
@@ -10639,37 +10625,37 @@ msgstr "tree_but_action, client_print_multi"
 #. module: base
 #: view:maintenance.contract.wizard:0
 msgid "Could you check your contract information ?"
-msgstr "您能否检查一下合同信息？"
+msgstr ""
 
 #. module: base
 #: view:maintenance.contract.wizard:0
 msgid "Maintenance contract added !"
-msgstr "维护合同已添加！"
+msgstr ""
 
 #. module: base
 #: view:maintenance.contract.wizard:0
 msgid "_Cancel"
-msgstr "取消(_C)"
+msgstr ""
 
 #. module: base
 #: view:maintenance.contract.wizard:0
 msgid "_Validate"
-msgstr "验证（_V）"
+msgstr ""
 
 #. module: base
 #: view:multi_company.default:0
 msgid "Matching"
-msgstr "匹配"
+msgstr ""
 
 #. module: base
 #: view:multi_company.default:0
 msgid "Multi Company"
-msgstr "多公司"
+msgstr ""
 
 #. module: base
 #: view:multi_company.default:0
 msgid "Returning"
-msgstr "所属公司"
+msgstr ""
 
 #. module: base
 #: view:partner.clear.ids:0
@@ -10818,7 +10804,7 @@ msgstr ""
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: view:res.config.view:0
 msgid "Choose Your Mode"
-msgstr "选择您的模式"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: view:res.config.view:0
@@ -10827,18 +10813,16 @@ msgid ""
 "time. Less used options or fields are automatically hidden. You will be able "
 "to change this, later, through the Administration menu."
 msgstr ""
-"如果您是初次使用系统建议选择简单模式，这样会减少或隐藏一些设置。以后您可以通"
-"过管理菜单修改。"
 
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: view:res.config.view:0
 msgid "Configure simple view"
-msgstr "配置为简单视图"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: view:res.config.view:0
 msgid "Set"
-msgstr "集"
+msgstr ""
 
 #. module: base
 #: view:res.currency:0
@@ -10871,22 +10855,22 @@ msgstr "%B - 月份全称"
 #. module: base
 #: view:res.lang:0
 msgid "%H - Hour (24-hour clock) as a decimal number [00,23]."
-msgstr "%H - 十进制表示的小时数（24 小时） [00,23]."
+msgstr ""
 
 #. module: base
 #: view:res.lang:0
 msgid "%I - Hour (12-hour clock) as a decimal number [01,12]."
-msgstr "%I - 十进制格式的小时数（12 小时）[01,12]."
+msgstr ""
 
 #. module: base
 #: view:res.lang:0
 msgid "%M - Minute as a decimal number [00,59]."
-msgstr "%M - 十进制的分钟数 [00,59]."
+msgstr ""
 
 #. module: base
 #: view:res.lang:0
 msgid "%S - Second as a decimal number [00,61]."
-msgstr "%S - 十进制的秒数 [00,61]."
+msgstr ""
 
 #. module: base
 #: view:res.lang:0
@@ -10916,7 +10900,7 @@ msgstr "%X - 时间表示方式"
 #. module: base
 #: view:res.lang:0
 msgid "%Y - Year with century as a decimal number."
-msgstr "%Y - 十进制形式包含世纪的年份数。"
+msgstr ""
 
 #. module: base
 #: view:res.lang:0
@@ -10936,17 +10920,17 @@ msgstr "%c - 日期时间表示"
 #. module: base
 #: view:res.lang:0
 msgid "%d - Day of the month as a decimal number [01,31]."
-msgstr "%d - 十进制表示的每月中的日数 [01,31]。"
+msgstr ""
 
 #. module: base
 #: view:res.lang:0
 msgid "%j - Day of the year as a decimal number [001,366]."
-msgstr "%j - 十进制表示的该年中的天数 [001,366]."
+msgstr ""
 
 #. module: base
 #: view:res.lang:0
 msgid "%m - Month as a decimal number [01,12]."
-msgstr "%m - 十进制形式的月份数 [01,12]。"
+msgstr ""
 
 #. module: base
 #: view:res.lang:0
@@ -10956,7 +10940,7 @@ msgstr "%p - 等价于 AM 或 PM"
 #. module: base
 #: view:res.lang:0
 msgid "%w - Weekday as a decimal number [0(Sunday),6]."
-msgstr "%w - 十进制的周数 [0(周日),6]"
+msgstr ""
 
 #. module: base
 #: view:res.lang:0
@@ -10966,7 +10950,7 @@ msgstr "%x - 使用日期表示"
 #. module: base
 #: view:res.lang:0
 msgid "%y - Year without century as a decimal number [00,99]."
-msgstr "%y - 不包含世纪的十进制年份数 [00,99]。"
+msgstr ""
 
 #. module: base
 #: view:res.lang:0
@@ -11093,7 +11077,7 @@ msgstr "搜索业务伙伴"
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: view:res.partner.address:0
 msgid "Partner Address"
-msgstr "业务伙伴地址"
+msgstr ""
 
 #. module: base
 #: view:res.partner.address:0
@@ -11113,7 +11097,7 @@ msgstr "业务伙伴分类"
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: view:res.partner.event:0
 msgid "Document Link"
-msgstr "单据连接"
+msgstr ""
 
 #. module: base
 #: view:res.partner.event:0
@@ -11141,7 +11125,7 @@ msgstr "一般说明"
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: view:res.partner.som:0
 msgid "Partner State of Mind"
-msgstr "业务伙伴满意度"
+msgstr ""
 
 #. module: base
 #: view:res.payterm:0
@@ -11160,7 +11144,7 @@ msgstr ""
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: view:res.request:0
 msgid "End of Request"
-msgstr "请求结束"
+msgstr ""
 
 #. module: base
 #: view:res.request:0
@@ -11204,7 +11188,7 @@ msgstr "请求连接"
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: view:res.roles:0
 msgid "Role"
-msgstr "角色"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: view:res.users:0
@@ -11232,7 +11216,7 @@ msgstr ""
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: view:res.users:0
 msgid "Define New Users"
-msgstr "定义新用户"
+msgstr ""
 
 #. module: base
 #: view:res.users:0
@@ -11246,14 +11230,14 @@ msgstr ""
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: view:res.users:0
 msgid "Groups are used to defined access rights on each screen and menu."
-msgstr "用户组用于为每个屏幕和菜单定义访问权限。"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: view:res.users:0
 msgid ""
 "Please note that you will have to logout and relog if you change your "
 "password."
-msgstr "更换密码后，登出再登录时起效。"
+msgstr ""
 
 #. module: base
 #: view:res.users:0
@@ -11267,7 +11251,7 @@ msgstr ""
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: view:res.users:0
 msgid "Roles are used to defined available actions, provided by workflows."
-msgstr "角色由工作流提供，用于定义可用的动作。"
+msgstr ""
 
 #. module: base
 #: view:res.users:0
@@ -11313,22 +11297,22 @@ msgstr "创建菜单(_M)"
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: view:wizard.module.lang.export:0
 msgid "Export Data"
-msgstr "导出数据"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: view:wizard.module.lang.export:0
 msgid "Export language"
-msgstr "导出语言"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: view:wizard.module.lang.export:0
 msgid "Export translation file"
-msgstr "导出翻译文件"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: view:wizard.module.lang.export:0
 msgid "Get file"
-msgstr "获取文件"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: view:wizard.module.lang.export:0
@@ -11337,13 +11321,11 @@ msgid ""
 "through launchpad. We use their online interface to synchronize all "
 "translations efforts."
 msgstr ""
-"系统的所有模块的官方语言包由 launchpad 管理。我们使用其在线界面来同步所有翻译"
-"成果。"
 
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: view:wizard.module.lang.export:0
 msgid "To browse official translations, you can visit this link: "
-msgstr "要浏览官方翻译，请访问此链接： "
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: view:wizard.module.lang.export:0
@@ -11353,20 +11335,18 @@ msgid ""
 "translations for your own module, you can also publish all your translation "
 "at once."
 msgstr ""
-"要改善官方术语的翻译，您应该在 lunchpad 的界面中直接修改这些术语。如果您完成"
-"了很多您自己模块的翻译，您也可以一次性发布您的翻译。"
 
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: view:wizard.module.update_translations:0
 msgid ""
 "This wizard will detect new terms in the application so that you can update "
 "them manually."
-msgstr "本向导将自动检测应用程序中的新术语以便您手工更新它们。"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: view:wizard.module.update_translations:0
 msgid "Update Translations"
-msgstr "更新翻译"
+msgstr ""
 
 #. module: base
 #: view:workflow:0
@@ -11385,12 +11365,12 @@ msgstr ""
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: view:workflow.activity:0
 msgid "Incoming transitions"
-msgstr "传入转换"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: view:workflow.activity:0
 msgid "Outgoing transitions"
-msgstr "传出节点"
+msgstr ""
 
 #. module: base
 #: view:workflow.activity:0
@@ -11417,22 +11397,22 @@ msgstr "工作流工作项"
 #: wizard_button:module.lang.install,start,end:0
 #: wizard_button:module.module.update,update,open_window:0
 msgid "Ok"
-msgstr "确定"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: wizard_button:module.lang.install,init,start:0
 msgid "Start installation"
-msgstr "开始安装"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: wizard_button:module.module.update,init,update:0
 msgid "Check new modules"
-msgstr "检查新模块"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: wizard_button:module.upgrade,next,start:0
 msgid "Start Upgrade"
-msgstr "开始升级"
+msgstr ""
 
 #. module: base
 #: wizard_button:server.action.create,step_1,create:0
@@ -11442,18 +11422,18 @@ msgstr "创建"
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: wizard_field:module.lang.import,init,name:0
 msgid "Language name"
-msgstr "语言名称"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: wizard_field:module.module.update,init,repositories:0
 msgid "Repositories"
-msgstr "软件库"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: wizard_field:module.upgrade,next,module_download:0
 #: wizard_view:module.upgrade,next:0
 msgid "Modules to download"
-msgstr "要下载的模块"
+msgstr ""
 
 #. module: base
 #: wizard_field:server.action.create,init,type:0
@@ -11471,74 +11451,74 @@ msgstr "选择报表"
 #: wizard_view:base.module.import,import:0
 #: wizard_view:base.module.import,init:0
 msgid "Module import"
-msgstr "模块导入"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: wizard_view:base.module.import,import:0
 msgid "Module successfully imported !"
-msgstr "模块已成功导入！"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: wizard_view:base.module.import,init:0
 msgid "Please give your module .ZIP file to import."
-msgstr "请指定要导入的模块文件"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: wizard_view:module.lang.import,init:0
 msgid "Import New Language"
-msgstr "导入新语言"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: wizard_view:module.lang.import,init:0
 msgid "Import language"
-msgstr "导入语言"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: wizard_view:module.lang.import,init:0
 msgid "You can also import .po files."
-msgstr "您也可以导入 .po 文件。"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: wizard_view:module.lang.import,init:0
 msgid ""
 "You have to import a .CSV file wich is encoded in UTF-8.  Please check that "
 "the first line of your file is one of the following:"
-msgstr "您必须导入 UTF-8 编码的 .CSV 文件。请确保该文件的首行为："
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: wizard_view:module.lang.import,init:0
 msgid "module,type,name,res_id,src,value"
-msgstr "module,type,name,res_id,src,value"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: wizard_view:module.lang.import,init:0
 msgid "type,name,res_id,src,value"
-msgstr "type,name,res_id,src,value"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: wizard_view:module.lang.install,init:0
 msgid "Choose a language to install:"
-msgstr "选择要安装的语言："
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: wizard_view:module.lang.install,init:0
 msgid "Note that this operation may take a few minutes."
-msgstr "提示：这个操作会花费一些时间"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: wizard_view:module.lang.install,init:0 wizard_view:module.upgrade,next:0
 msgid "System Upgrade"
-msgstr "系统升级"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: wizard_view:module.lang.install,start:0
 msgid "Installation Done"
-msgstr "安装完成"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: wizard_view:module.lang.install,start:0
 msgid "Language file loaded."
-msgstr "正在读取语言文件"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: wizard_view:module.lang.install,start:0
@@ -11546,55 +11526,53 @@ msgid ""
 "The selected language has been successfully installed. You must change the "
 "preferences of the user and open a new menu to view changes."
 msgstr ""
-"您选择的语言已经成功安装。您必须在用户偏好中修改，并且重新打开目录才能改变修"
-"改。"
 
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: wizard_view:module.module.update,init:0
 msgid "Scan for new modules"
-msgstr "查找新模块"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: wizard_view:module.module.update,init:0
 msgid ""
 "This function will check for new modules in the 'addons' path and on module "
 "repositories:"
-msgstr "该功能将在“addons”路径和模块库中检查新模块。"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: wizard_view:module.module.update,update:0
 msgid "New modules"
-msgstr "新模块"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: wizard_view:module.upgrade,end:0 wizard_view:module.upgrade,start:0
 msgid "System upgrade done"
-msgstr "系统升级完成"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: wizard_view:module.upgrade,end:0 wizard_view:module.upgrade,start:0
 msgid "The modules have been upgraded / installed !"
-msgstr "模块以被升级/安装"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: wizard_view:module.upgrade,end:0 wizard_view:module.upgrade,start:0
 msgid "We suggest you to reload the menu tab (Ctrl+t Ctrl+r)."
-msgstr "建议您重新载入菜单条（Ctrl+t，Ctrl+r）"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: wizard_view:module.upgrade,end:0 wizard_view:module.upgrade,start:0
 msgid "You may have to reinstall some language pack."
-msgstr "你可能需要重新安装一些语言包"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: wizard_view:module.upgrade,next:0
 msgid "Note that this operation my take a few minutes."
-msgstr "请注意此操作需要花费一些时间。"
+msgstr ""
 
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: wizard_view:module.upgrade,next:0
 msgid "Your system will be upgraded."
-msgstr "即将升级您的系统。"
+msgstr ""
 
 #. module: base
 #: selection:base.language.install,lang:0
@@ -11609,12 +11587,12 @@ msgstr "因纽特语"
 #. module: base
 #: model:res.partner.title,name:base.res_partner_title_sir
 msgid "Mister"
-msgstr "小姐"
+msgstr ""
 
 #. module: base
 #: model:res.partner.title,name:base.res_partner_title_pvt_ltd
 msgid "Corporation"
-msgstr "公司"
+msgstr ""
 
 #. module: base
 #: selection:base.language.install,lang:0
@@ -11646,14 +11624,11 @@ msgid ""
 "schedule button in this list. Then, apply the schedule upgrade from Action "
 "menu once for all the ones you have scheduled for installation."
 msgstr ""
-"这里列出了您服务器上所有可安装的模块，包括已安装的模块。您可以用模块名称或描"
-"述的部分字符去查找模块。并不需要逐个安装，可以先在列表中点“安排安装”按钮，最"
-"后点“执行安排的升级”操作。"
 
 #. module: base
 #: selection:base.language.install,lang:0
 msgid "Serbian / српски језик"
-msgstr "Serbian / српски језик"
+msgstr ""
 
 #. module: base
 #: selection:base.language.install,lang:0
@@ -11937,7 +11912,7 @@ msgstr "规则必须至少有一个检查访问权限"
 #. module: base
 #: model:res.partner.title,name:base.res_partner_title_ltd
 msgid "Limited Company"
-msgstr "有限公司"
+msgstr ""
 
 #. module: base
 #: selection:base.language.install,lang:0
@@ -12371,7 +12346,7 @@ msgstr ""
 #. module: base
 #: field:ir.ui.menu,web_icon_data:0
 msgid "Web Icons"
-msgstr "Web图标"
+msgstr ""
 
 #. module: base
 #: model:res.widget,title:base.matrixise_twitter_widget
@@ -13678,471 +13653,11 @@ msgstr ""
 msgid "Can only rename one column at a time!"
 msgstr ""
 
-#~ msgid "Partner Functions"
-#~ msgstr "业务伙伴职能"
-
-#~ msgid "Directory name must be unique!"
-#~ msgstr "目录名必须唯一！"
-
-#~ msgid "No Default Credit Account !"
-#~ msgstr "无默认贷方科目！"
-
-#~ msgid "No grid avaible !"
-#~ msgstr "无可用的交货格子！"
-
-#~ msgid "March"
-#~ msgstr "三月"
-
-#~ msgid "This version of the module is already exist on the server"
-#~ msgstr "此模块版本在服务器已经存在！"
-
-#~ msgid "Could not cancel purchase order !"
-#~ msgstr "无法取消采购订单！"
-
-#~ msgid "Could not cancel this sale order !"
-#~ msgstr "无法取消该销售订单！"
-
 #~ msgid "Object %s does not exists"
 #~ msgstr "对象%s不存在"
 
-#~ msgid "The Total Should be Between %s and %s"
-#~ msgstr "合计应该在%s和%s之间"
-
-#~ msgid "Please put a name and a code before saving the model !"
-#~ msgstr "保存模式之前，请输入名称和编码！"
-
-#~ msgid "Operation is Already Cancelled  !"
-#~ msgstr "操作已取消！"
-
-#~ msgid ""
-#~ "You must define a reply-to address in order to mail the participant. You "
-#~ "can do this in the Mailing tab of your event. Note that this is also the "
-#~ "place where you can configure your event to not send emails automaticly "
-#~ "while registering"
-#~ msgstr ""
-#~ "为能够发电邮给参加者您必须指定回复地址。您在事件的电邮选页卡可完成上述操"
-#~ "作。\r\n"
-#~ "在这儿您也可以设定事件登录的时候不自动发电邮的行为。"
-
-#~ msgid "Attention!"
-#~ msgstr "注意！"
-
-#~ msgid " Type of ul: "
-#~ msgstr " 货运单位类型： "
-
-#~ msgid "Insertion Failed!"
-#~ msgstr "插入失败！"
-
-#~ msgid "You can not deactivate an account that contains account moves."
-#~ msgstr "您不能使已包含分录的科目无效。"
-
-#~ msgid "Invoice cannot be created from Packing."
-#~ msgstr "不可根据分拣单创建发票"
-
-#~ msgid "The old fiscal year does not have any entry to reconcile!"
-#~ msgstr "老会计年度没有可对帐的分录！"
-
-#~ msgid ""
-#~ "You cannot enter an attendance ' \\n                            'date "
-#~ "outside the current timesheet dates!"
-#~ msgstr "您不能输入现有工作时间表日期之外的出勤记录！"
-
-#~ msgid "No period found !"
-#~ msgstr "未找到时间段！"
-
-#~ msgid "No Period found on Invoice!"
-#~ msgstr "发票无指定时间段！"
-
-#~ msgid "Unable to find a valid period !"
-#~ msgstr "无法找到有效的时间段！"
-
-#~ msgid "You do not permissions to write on the server side."
-#~ msgstr "您未被授权在服务器端写入"
-
-#~ msgid ""
-#~ "No bank name defined\n"
-#~ "' \\n\t\t\t\t\t'for the bank account: %s\n"
-#~ "' \\n\t\t\t\t\t'on the partner: %s\n"
-#~ "' \\n\t\t\t\t\t'on line: %s"
-#~ msgstr ""
-#~ "未定义银行名称\n"
-#~ "' \\n\t\t\t\t\t'相关银行账户： %s\n"
-#~ "' \\n\t\t\t\t\t'相关业务伙伴： %s\n"
-#~ "' \\n\t\t\t\t\t'行号： %s"
-
-#~ msgid ""
-#~ "You selected a quantity of %d Units.\n"
-#~ "But it's not compatible with the selected packaging.\n"
-#~ "Here is a proposition of quantities according to the packaging: "
-#~ msgstr ""
-#~ "您已指定%d单位数量。\n"
-#~ "但该数量不符合选定的包装。\n"
-#~ "以下是数量符合包装的方案： "
-
-#~ msgid ""
-#~ "Can not create an automatic sequence for this piece !\n"
-#~ "\n"
-#~ "Put a sequence in the journal definition for automatic numbering or "
-#~ "create a sequence manually for this piece."
-#~ msgstr ""
-#~ "无法自动创建该分录的序号。\n"
-#~ "\n"
-#~ "为自动编号，请在日记账设定中建一个序列或者手动创建一个序列。"
-
-#~ msgid "Closing of states cancelled, please check the box !"
-#~ msgstr "已取消状态关闭过程，请在复选框里打勾！"
-
-#~ msgid "Could not cancel sale order !"
-#~ msgstr "不能取消销售订单！"
-
-#~ msgid ""
-#~ "You can not do this modification on a reconciled entry ! Please note that "
-#~ "you can just change some non important fields !"
-#~ msgstr ""
-#~ "您不能在已对帐的分录做此修改！\r\n"
-#~ "您只能修改一些非重要字段！"
-
-#~ msgid "Bank Journal "
-#~ msgstr "银行日记账 "
-
-#~ msgid ""
-#~ "Please fill in the partner and pricelist field '\n"
-#~ "                        'in the analytic account:\n"
-#~ "%s"
-#~ msgstr ""
-#~ "请在分析科目%s\n"
-#~ "填写业务伙伴和价格表字段"
-
 #~ msgid "The exists method is not implemented on this object !"
 #~ msgstr "该对象尚未实现“exists”方法 !"
-
-#~ msgid "Please select at least two inventories."
-#~ msgstr "请选择至少2个盘存"
-
-#~ msgid "WARNING:audittrail is not part of the pool"
-#~ msgstr "警报：audittrail 不在 pool 里"
-
-#~ msgid "Can not export module that is not installed!"
-#~ msgstr "不能导出尚未安装的模块。"
-
-#~ msgid "Speed Test"
-#~ msgstr "速度测试"
-
-#~ msgid "No analytic plan defined !"
-#~ msgstr "未定义分析计划"
-
-#~ msgid "Futur Stock"
-#~ msgstr "预计库存"
-
-#~ msgid "You can not create new moves."
-#~ msgstr "你不能创建新的调拨"
-
-#~ msgid "Task '%s' closed"
-#~ msgstr "任务'%s'已关闭"
-
-#~ msgid ""
-#~ "There is no expense account define ' \\n                                "
-#~ "'for this product: \"%s\" (id:%d)"
-#~ msgstr "未定义该产品“%s“（标识符：%d）的成本科目"
-
-#~ msgid "Other Pricelist"
-#~ msgstr "其他价格表"
-
-#~ msgid "Efficient"
-#~ msgstr "有效率的"
-
-#~ msgid "The order state have to be draft to add delivery lines."
-#~ msgstr "订单状态应该是草稿再能加上交货明细"
-
-#~ msgid "Field name"
-#~ msgstr "字段名称"
-
-#~ msgid "The opening journal must not have any entry in the new fiscal year !"
-#~ msgstr "启用日记账不应有新会计年度的分录。"
-
-#~ msgid "Futur P&L"
-#~ msgstr "计划益损"
-
-#~ msgid "Taxes missing !"
-#~ msgstr "缺少税目！"
-
-#~ msgid ""
-#~ "Please verify that the total difference of the sheet is lower than %.2f !"
-#~ msgstr "请确认工作表的总差低于%.2f！"
-
-#~ msgid "No IBAN for the company bank account."
-#~ msgstr "公司银行账户无IBAN帐号"
-
-#~ msgid "At least one line has no product !"
-#~ msgstr "至少一条无产品!"
-
-#~ msgid ""
-#~ "There is no stock output account defined ' "
-#~ "\\n                                        'for this product: \"%s\" (id: "
-#~ "%d)"
-#~ msgstr "未定义该产品“%s“（标识符：%d）库存输出科目"
-
-#~ msgid "No Records Found for Report!"
-#~ msgstr "未找到该报表所需记录"
-
-#~ msgid "This method can be called with multiple ids"
-#~ msgstr "这方法可被成倍的标识符调用"
-
-#~ msgid "You can not sign out from an other date than today"
-#~ msgstr "您必须用今天的日期退出登录"
-
-#~ msgid "Please provide a partner for the sale."
-#~ msgstr "请提供销售订单的业务伙伴。"
-
-#~ msgid "Invoices"
-#~ msgstr "发票"
-
-#~ msgid ""
-#~ "Please verify the price of the invoice !\n"
-#~ "The real total does not match the computed total."
-#~ msgstr ""
-#~ "请验证发票金额！\n"
-#~ "实际合计金额与计算金额不符。"
-
-#~ msgid "cancel"
-#~ msgstr "取消"
-
-#~ msgid "Case"
-#~ msgstr "案例"
-
-#~ msgid ""
-#~ "Please configure Default Expanse account for Product purchase, "
-#~ "`property_account_expense_categ`"
-#~ msgstr ""
-#~ "请为产品采购配置默认成本科目，\r\n"
-#~ "`property_account_expense_categ`"
-
-#~ msgid "Object Test"
-#~ msgstr "对象测试"
-
-#~ msgid "Return lines"
-#~ msgstr "退回明细"
-
-#~ msgid "Warning! Not enough demo data"
-#~ msgstr "警报！示范数据不足"
-
-#~ msgid "Unable to start The Open ERP server without backups"
-#~ msgstr "缺少备份情况下无法启动Open ERP服务器"
-
-#~ msgid "Directory name contains special characters!"
-#~ msgstr "目录名包含特殊字符！"
-
-#~ msgid ""
-#~ "You try to write on an record that doesn't exist ' "
-#~ "\\n                                        '(Document type: %s)."
-#~ msgstr "您试图写入一个不存在的记录'\\n'（文档类型：%s）。"
-
-#~ msgid "You are not authorized to write module repositories"
-#~ msgstr "您未被授权写入模块软件库"
-
-#~ msgid "You must first cancel all packing attached to this purchase order."
-#~ msgstr "您必须先取消该采购订单所有附加的分拣单。"
-
-#~ msgid "A partner is already existing with the same name."
-#~ msgstr "已经存在有该名称的业务伙伴"
-
-#~ msgid ""
-#~ "Please put a partner on the picking list if you want to generate invoice."
-#~ msgstr "如果想生成发票，请在分拣单填写一家业务伙伴。"
-
-#~ msgid "Operation Done"
-#~ msgstr "操作完成"
-
-#~ msgid "There is no expense account defined for this product: \"%s\" (id:%d)"
-#~ msgstr "未定义此产品“%s“（标识：%d）的费用科目"
-
-#~ msgid "End of Fiscal Year Entry"
-#~ msgstr "会计年尾分录"
-
-#~ msgid "Task '%s' cancelled"
-#~ msgstr "任务‘%s‘已取消"
-
-#~ msgid ""
-#~ "Please provide another source document.\n"
-#~ "This one does not exist !"
-#~ msgstr "该单据不存在，请提供另外的来源单据！"
-
-#~ msgid ""
-#~ "No bank specified on invoice:\n"
-#~ "%s"
-#~ msgstr ""
-#~ "发票上未指定银行：\n"
-#~ "%s"
-
-#~ msgid "Global taxes defined, but are not in invoice lines !"
-#~ msgstr "已定义全球税目， 但未在发票明细中出现！"
-
-#~ msgid "not implemented"
-#~ msgstr "尚未实现"
-
-#~ msgid ""
-#~ "The Payment Term of Supplier does not have Payment Term Lines"
-#~ "(Computation) defined !"
-#~ msgstr "该供应商的 付款方式未定义（计算）付款方式明细！"
-
-#~ msgid "Data Insufficient!"
-#~ msgstr "数据不足！"
-
-#~ msgid "No cost unit defined for this employee !"
-#~ msgstr "为该员工未定义成本单位！"
-
-#~ msgid "The \"use_control\" module is not uninstallable"
-#~ msgstr "无法安装“use_control”模块"
-
-#~ msgid "Record found after total record!"
-#~ msgstr "发现在总计记录后的记录!"
-
-#~ msgid "BNK"
-#~ msgstr "银行"
-
-#~ msgid "Permission Denied !"
-#~ msgstr "权限被拒绝！"
-
-#~ msgid "You must enter a period length that cannot be 0 or below !"
-#~ msgstr "您必须输入的时间长度不能为0或以下!"
-
-#~ msgid "Product name"
-#~ msgstr "产品名称"
-
-#~ msgid "Wed"
-#~ msgstr "周三"
-
-#~ msgid "Insufficient Data!"
-#~ msgstr "数据不足！"
-
-#~ msgid "Invoice is already created."
-#~ msgstr "发票已创建"
-
-#~ msgid "Please fill a Balance product in the wizard"
-#~ msgstr "请在向导输入一个余额产品"
-
-#~ msgid "Product uom"
-#~ msgstr "产品计量单位"
-
-#~ msgid "Standard Encoding"
-#~ msgstr "标准记账"
-
-#~ msgid "No grid matching for this carrier !"
-#~ msgstr "无与该承运人相配的格子"
-
-#~ msgid "Activation of your subscription"
-#~ msgstr "激活您的订购"
-
-#~ msgid "This feature is only available for location of type \"Amazon\""
-#~ msgstr "此功能只有类型为“Amazon“的货位可用"
-
-#~ msgid "Unable to change tax !"
-#~ msgstr "无法更改税目!"
-
-#~ msgid ""
-#~ "All emails have been successfully sent to Partners:.\n"
-#~ "\n"
-#~ msgstr ""
-#~ "给业务伙伴所有电子邮件已发送成功：\n"
-#~ "\n"
-
-#~ msgid "Unable to reconcile entry \"%s\": %.2f"
-#~ msgstr "无法对帐分录“%s“：%.2f"
-
-#~ msgid "You can not remove a lot line !"
-#~ msgstr "您不能删除批次明细!"
-
-#~ msgid "Merging is only allowed on draft inventories."
-#~ msgstr "只允许合并草搞盘存"
-
-#~ msgid ""
-#~ "No period defined for this date !\n"
-#~ "Please create a fiscal year."
-#~ msgstr ""
-#~ "未定义该日期的期间！\n"
-#~ "请创建一个会计年度。"
-
-#~ msgid "Some entries are already reconciled !"
-#~ msgstr "一些分录已经对账完成！"
-
-#~ msgid "SUBTOTAL"
-#~ msgstr "小计"
-
-#~ msgid "Delivered Qty"
-#~ msgstr "已交货数量"
-
-#~ msgid "Unable to delete non uninstalled instances"
-#~ msgstr "无法删除未安装的实例"
-
-#~ msgid "Packing Information !"
-#~ msgstr "分拣信息！"
-
-#~ msgid "You have to select a partner in the repair form !"
-#~ msgstr "在维修表单您必须选定一个业务伙伴！"
-
-#~ msgid "This image has been created by the synchronization wizard"
-#~ msgstr "该影像已由同步向导创建"
-
-#~ msgid "Invoice state"
-#~ msgstr "发票状态"
-
-#~ msgid "You can not delete this case. You should better cancel it."
-#~ msgstr "您不能删除此案例。您最好取消它。"
-
-#~ msgid "You can not change the tax, you should remove and recreate lines !"
-#~ msgstr "您不能更改此税目，请移除并重新创建分录！"
-
-#~ msgid "Cannot delete invoice(s) that are already opened or paid !"
-#~ msgstr "无法删除已开据的或已付款的发票！"
-
-#~ msgid "Cannot delete an order line which is %s !"
-#~ msgstr "无法删除销售订单明细%s！"
-
-#~ msgid ""
-#~ "There is no expense account define ' "
-#~ "\\n                                    'for this product: \"%s\" (id:%d)"
-#~ msgstr "未定义此产品“%s“（标识：%d）的费用科目"
-
-#~ msgid ""
-#~ "You cannot delete an indicator history record. You may have to delete the "
-#~ "concerned Indicator!"
-#~ msgstr "您不能删除已标记历史记录。您可能要先删除关联的标记！"
-
-#~ msgid ""
-#~ "You cannot enter an attendance ' \\n                        'date outside "
-#~ "the current timesheet dates!"
-#~ msgstr "您不能输入现有工作时间记录表日期之外的出勤记录！"
-
-#~ msgid "You can not modify an invoiced analytic line!"
-#~ msgstr "您不能修改已开发票的分析明细！"
-
-#~ msgid "Create line failed !"
-#~ msgstr "创建明细失败！"
-
-#~ msgid "No sequence defined in the journal !"
-#~ msgstr "未定义日记账的序列！"
-
-#~ msgid "Result (/1)"
-#~ msgstr "结果（/１）"
-
-#~ msgid "You can not create this kind of document"
-#~ msgstr "您不能创建此类型的文档!"
-
-#~ msgid "Couldn't find bill of material for product"
-#~ msgstr "无法找到产品的物料清单"
-
-#~ msgid ""
-#~ "You have to define a Default Debit Account for your Financial Journals!\n"
-#~ msgstr "您必须设定财务日记账的默认借方科目！\n"
-
-#~ msgid "No Partner Defined !"
-#~ msgstr "未定义业务伙伴！"
-
-#~ msgid "The sign-out date must be in the past"
-#~ msgstr "签出必须在过去的某个时间"
-
-#~ msgid "Login failed!"
-#~ msgstr "登录失败！"
 
 #~ msgid ""
 #~ "Language with code \"%s\" is not defined in your system !\n"
@@ -14151,498 +13666,14 @@ msgstr ""
 #~ "在您的系统有“%s“编码的语言未定义！\n"
 #~ "请通过管理菜单设定它。"
 
-#~ msgid ""
-#~ "Couldn't send mail because the contact for this task (%s) has no email "
-#~ "address!"
-#~ msgstr "无法发送邮件因为任务 %s 的联系人信息不包含电子邮件地址！"
-
-#~ msgid "Alert for ' + product_info.name +' !"
-#~ msgstr "'product_info.name +'的警报！"
-
-#~ msgid "1"
-#~ msgstr "1"
-
-#~ msgid "PEP-8 Test"
-#~ msgstr "PEP-8测试"
-
-#~ msgid ""
-#~ "You have to select a customer in the sale form !\n"
-#~ "Please set one customer before choosing a product."
-#~ msgstr ""
-#~ "您在销售订单必须选定一个客户！\n"
-#~ "请先指定一个客户然后选择产品。"
-
-#~ msgid "Analytic Entries"
-#~ msgstr "分析分录"
-
-#~ msgid ""
-#~ "You can not cancel this holiday request. first You have to make its case "
-#~ "in draft state."
-#~ msgstr "您不能取消该假日申请，您应先把它置于草稿状态。"
-
-#~ msgid "No action found"
-#~ msgstr "找不到动作"
-
-#~ msgid "The date of your account move is not in the defined period !"
-#~ msgstr "分录日期不在定义期间内！"
-
-#~ msgid "October"
-#~ msgstr "十月"
-
-#~ msgid "August"
-#~ msgstr "八月"
-
-#~ msgid "No Customer Defined !"
-#~ msgstr "未定义客户！"
-
-#~ msgid "You have to define an analytic journal on the '%s' journal!"
-#~ msgstr "你必须为“%s“日记账定义一本分析日记账！"
-
-#~ msgid "The module does not contain the __terp__.py file"
-#~ msgstr "模块不包含__terp__.py文档"
-
-#~ msgid "Configuration of the DNS servers"
-#~ msgstr "DNS服务器配置"
-
-#~ msgid "Configuration of the incremental backup servers"
-#~ msgstr "增量备份服务器配置"
-
-#~ msgid "The Buyer \"%s\" has no Invoice Address."
-#~ msgstr "买方“%s“没有发票地址。"
-
-#~ msgid "You are not authorized to create module repositories"
-#~ msgstr "您未被授权创建模块软件库"
-
-#~ msgid "You are not authorized to copy module repositories"
-#~ msgstr "您未被授权复制模块软件库"
-
-#~ msgid "You are not authorized to unlink module repositories"
-#~ msgstr "您未被授权解链模块软件库"
-
-#~ msgid ""
-#~ "You must provide ' \\n\t\t\t\t\t\t'a Clearing Number\n"
-#~ "' \\n\t\t\t\t\t\t'for the partner bank: %s\n"
-#~ "' \\n\t\t\t\t\t\t'on line %s"
-#~ msgstr ""
-#~ "您应该提供 ' \\n\t\t\t\t\t\t'一个结算号\n"
-#~ "' \\n\t\t\t\t\t\t'为业务伙伴银行： %s\n"
-#~ "' \\n\t\t\t\t\t\t'在行 %s"
-
-#~ msgid "No product in this location."
-#~ msgstr "该货位没有产品"
-
-#~ msgid ""
-#~ "You tried to sign with a date anterior to another event !\n"
-#~ "Try to contact the administrator to correct attendances."
-#~ msgstr ""
-#~ "您试图登录其他事件之前的日期！\n"
-#~ "为修正出席请联系统管理员。"
-
-#~ msgid "No Workflow define"
-#~ msgstr "未定义工作流"
-
-#~ msgid "Wrong Source Document !"
-#~ msgstr "不正确的来源单据！"
-
-#~ msgid ""
-#~ "No analytic journal available for this employee.\n"
-#~ "Define an employee for the selected user and assign an analytic journal."
-#~ msgstr ""
-#~ "此员工无分析日记账可用。\n"
-#~ "请为选定的用户定义一个员工然后指定分析日记账。"
-
-#~ msgid "You must first cancel all invoices attached to this purchase order."
-#~ msgstr "您必须先取消此采购订单附加的所有发票。"
-
-#~ msgid "Checking your Promotional Code"
-#~ msgstr "正在检查您的促销编码"
-
-#~ msgid "Production Order Cannot start in [%s] state"
-#~ msgstr "生产单不能在［%s］状态开始"
-
-#~ msgid "Open"
-#~ msgstr "未结"
-
-#~ msgid "No partner !"
-#~ msgstr "无业务伙伴！"
-
-#~ msgid "File name must be unique!"
-#~ msgstr "文档名称必不能重复！"
-
-#~ msgid "The carrier %s (id: %d) has no delivery grid!"
-#~ msgstr "运送者%s（标识：%d）无交货格子！"
-
-#~ msgid "Value Error"
-#~ msgstr "值错误"
-
-#~ msgid "Product supplier"
-#~ msgstr "产品供应商"
-
-#~ msgid ""
-#~ "You must provide ' \\n\t\t\t\t\t\t\t'a bank number \n"
-#~ "' \\n\t\t\t\t\t\t\t'for the partner bank: %s\n"
-#~ "' \\n\t\t\t\t\t\t\t'on line: %s"
-#~ msgstr ""
-#~ "您应该提供'\\n\t\t\t\t\t\t\t'一个银行帐号 \n"
-#~ "' \\n\t\t\t\t\t\t\t'业务伙伴银行：%s\n"
-#~ "' \\n\t\t\t\t\t\t\t'在行：%s"
-
-#~ msgid "Configuration of the server"
-#~ msgstr "服务器配置"
-
-#~ msgid "Balance product needed"
-#~ msgstr "所需余额产品"
-
-#~ msgid "Missed Address !"
-#~ msgstr "遗漏地址！"
-
-#~ msgid ""
-#~ "Selected Move lines does not have any account move enties in draft state"
-#~ msgstr "在选定行中无草稿状态的分录"
-
-#~ msgid ""
-#~ "No fiscal year defined for this date !\n"
-#~ "Please create one."
-#~ msgstr ""
-#~ "此日期未经会计年度定义！\n"
-#~ "\"请创建一个。"
-
-#~ msgid "Please select one and only one inventory !"
-#~ msgstr "请只选定一个盘存"
-
-#~ msgid "Please verify that an account is defined in the journal."
-#~ msgstr "请确认日记账中已定义科目。"
-
-#~ msgid "Please create an invoice for this sale."
-#~ msgstr "请为此销售单创建发票。"
-
-#~ msgid "January"
-#~ msgstr "一月"
-
-#~ msgid "No Data Available"
-#~ msgstr "无数据可用"
-
-#~ msgid "Unable to create invoice (partner has no address)."
-#~ msgstr "无法创建发票（业务伙伴无地址）"
-
-#~ msgid "Missing info: Test Instance"
-#~ msgstr "缺少信息：测试实例"
-
-#~ msgid "No line matched this order in the choosed delivery grids !"
-#~ msgstr "选定交货框架中无相配此销售订单的行！"
-
-#~ msgid "Registration of your account"
-#~ msgstr "账户注册"
-
-#~ msgid ""
-#~ "The account move (%s) for centralisation ' "
-#~ "\\n                                        'has been confirmed!"
-#~ msgstr "将集中分录（%s）已确认！"
-
-#~ msgid ""
-#~ "You can't delete this server because it acts as backup for other servers."
-#~ msgstr "因为此服务器是他服务器的备份，您不能删除它。"
-
-#~ msgid ""
-#~ "You cannot make an advance on a sale order that is defined as 'Automatic "
-#~ "Invoice after delivery'."
-#~ msgstr "不能创建预付款发漂为定义“发货后自动发票”的销售订单。"
-
-#~ msgid "Date not in a defined fiscal year"
-#~ msgstr "日期不在任何已定义的会计年度内"
-
-#~ msgid ""
-#~ "No journal defined on the related employee.\n"
-#~ "Fill in the timesheet tab of the employee form."
-#~ msgstr ""
-#~ "未定义相关员工日记账。\n"
-#~ "请填好员工表格的工作时间记录表。"
-
-#~ msgid "A partner is already defined on this lead."
-#~ msgstr "此索线已定义业务伙伴"
-
-#~ msgid "Product Margins"
-#~ msgstr "产品毛利"
-
-#~ msgid "The account is not defined to be reconciled !"
-#~ msgstr "科目未设定为可对帐！"
-
-#~ msgid ""
-#~ "There is no journal defined '\\n                            'on the "
-#~ "product category: \"%s\" (id: %d)"
-#~ msgstr "产品类别：“%s“（识别码：%d）未定义日记账"
-
-#~ msgid ""
-#~ "No bank defined\n"
-#~ "' \\n\t\t\t\t\t'for the bank account: %s\n"
-#~ "' \\n\t\t\t\t\t'on the partner: %s\n"
-#~ "' \\n\t\t\t\t\t'on line: %s"
-#~ msgstr ""
-#~ "未定义银行\n"
-#~ "' \\n\t\t\t\t\t'银行帐户：%s\n"
-#~ "' \\n\t\t\t\t\t'业务伙伴：%s\n"
-#~ "' \\n\t\t\t\t\t'行：%s"
-
-#~ msgid "Unable to create your control center user"
-#~ msgstr "无法创建您控制中心的用户"
-
-#~ msgid "The journal must have centralised counterpart"
-#~ msgstr "该日记账必须有集中的对方"
-
-#~ msgid "The region should be in "
-#~ msgstr "该地区应该在 "
-
-#~ msgid "Cannot delete a point of sale which is already confirmed !"
-#~ msgstr "无法删除已确认的销售终端"
-
-#~ msgid ""
-#~ "There is no receivable account defined for this "
-#~ "journal:'\\n                    ' \"%s\" (id:%d)"
-#~ msgstr "未定义此日记账“%s”(识别码:%d)的应收账款科目"
-
-#~ msgid "Missing info: Subscription"
-#~ msgstr "缺少信息： 签署预订"
-
-#~ msgid "Invalid Region"
-#~ msgstr "地区无效"
-
-#~ msgid "You can not modify/delete a journal with entries for this period !"
-#~ msgstr "您不能修改/删除有此期间分录的日记账！"
-
-#~ msgid "Date to must be set between %s and %s"
-#~ msgstr "必须在%s至%s之间设置日期"
-
-#~ msgid ""
-#~ "No E-Mail ID Found for your Company address or missing reply address in "
-#~ "section!"
-#~ msgstr "无您公司地址的电子邮件识别码或章节缺少回复地址!"
-
-#~ msgid "Connection to WWW.Auction-in-Europe.com failed !"
-#~ msgstr "连接到www.auction-in-europe.com失败！"
-
-#~ msgid "Your journal must have a default credit and debit account."
-#~ msgstr "您的日记帐必须有默认贷方和借方科目。"
-
-#~ msgid "No Analytic Journal !"
-#~ msgstr "无分析日记账！"
-
-#~ msgid ""
-#~ "You can not do this modification on a confirmed entry ! Please note that "
-#~ "you can just change some non important fields !"
-#~ msgstr ""
-#~ "您不能修改该已确认记录的字段！\r\n"
-#~ "您只能修改一些非重要字段！"
-
-#~ msgid "invalid mode for test_state"
-#~ msgstr "无效测试状态模式"
-
-#~ msgid ""
-#~ "You have to define a Default Credit Account for your Financial Journals!\n"
-#~ msgstr "您需要设定财务日记账的默认贷方科目！\n"
-
-#~ msgid "The properties account payable account receivable"
-#~ msgstr "应付账款和应收账款属性"
-
-#~ msgid "A model having this name and code already exists !"
-#~ msgstr "有该名称和代码的模块已经存在！"
-
-#~ msgid "TOTAL"
-#~ msgstr "总计"
-
-#~ msgid "Created by the synchronization wizard"
-#~ msgstr "由同步向导创建"
-
-#~ msgid "SAJ"
-#~ msgstr "SAJ"
-
-#~ msgid ""
-#~ "You did not installed the opportunities tracking when you configured the "
-#~ "crm_configuration module.' \\n                  '\n"
-#~ "I can not convert the lead to an opportunity, you must create a section "
-#~ "with the code 'oppor'."
-#~ msgstr ""
-#~ "您在配置crm_configuration模块时未安装商机跟踪。'\\n'\n"
-#~ "我无法将索线转换为商机，您必须创建一个章节含有'oppor'代码。"
-
-#~ msgid "Eff. Hours"
-#~ msgstr "有效小时数"
-
-#~ msgid "You can not set negative Duration."
-#~ msgstr "您无法设定负性期限。"
-
-#~ msgid "Too much total record found!"
-#~ msgstr "读取太多总计记录"
-
-#~ msgid "The General Budget '%s' has no Accounts!"
-#~ msgstr "总预算’%s‘未设定科目！"
-
-#~ msgid "You can not sign in from an other date than today"
-#~ msgstr "你只能用今天的日期登入系统"
-
-#~ msgid "No partner has a VAT Number asociated with him."
-#~ msgstr "无指定增值税编码的业务伙伴"
-
-#~ msgid ""
-#~ "You must assign a partner to this lead before converting to opportunity.\n"
-#~ "' \\n                  'You can use the convert to partner button."
-#~ msgstr ""
-#~ "你必须在线索转换为商机前指定一名业务伙伴。\n"
-#~ "'\\n'您可以使用转换为为业务伙伴按钮。"
-
-#~ msgid ""
-#~ "''\n"
-#~ "\n"
-#~ "OpenERP is an ERP+CRM program for small and medium businesses.\n"
-#~ "\n"
-#~ "The whole source code is distributed under the terms of the\n"
-#~ "GNU Public Licence.\n"
-#~ "\n"
-#~ "(c) 2003-TODAY, Fabien Pinckaers - Tiny sprl''"
-#~ msgstr ""
-#~ "OpenERP系统是一个针对中小型企业的企业资源计划（ERP）和客户关系管理（CRM）"
-#~ "程序。\n"
-#~ "\n"
-#~ "整个源代码是根据GNU通用公共许可证的条款分布。\n"
-#~ "\n"
-#~ "(c) 2003-今天，Fabien Pinckaers - Tiny sprl"
-
-#~ msgid "You can not use this general account in this journal !"
-#~ msgstr "在此日记帐您不能用该总账科目！"
-
-#~ msgid "You can not add/modify entries in a closed journal."
-#~ msgstr "在已结帐的日记帐中您不能加/改分录了。"
-
-#~ msgid "Please fill in the Address field in the Partner: %s."
-#~ msgstr "请填写业务伙伴 %s 的地址字段"
-
-#~ msgid "Method Test"
-#~ msgstr "方法测试"
-
-#~ msgid "unable to find a server"
-#~ msgstr "无法找到服务器"
-
-#~ msgid "You can't modify this order. It has already been paid"
-#~ msgstr "您不能修改此订单，它已经付款。"
-
-#~ msgid "No bank account for the company."
-#~ msgstr "此公司没有银行帐号。"
-
-#~ msgid ""
-#~ "\n"
-#~ "\n"
-#~ "Mail sent to following Partners successfully, !\n"
-#~ "\n"
-#~ msgstr ""
-#~ "\n"
-#~ "\n"
-#~ "如下业务伙伴的邮件已发送成功！\n"
-#~ "\n"
-
-#~ msgid "Bad account!"
-#~ msgstr "无效科目！"
-
-#~ msgid "No enough data"
-#~ msgstr "没有足够的数据"
-
-#~ msgid "You need to choose a model"
-#~ msgstr "您需要选择一个模型"
-
-#~ msgid "Can't connect instance %s"
-#~ msgstr "无法连接实例 %s"
-
 #~ msgid "Key/value '%s' not found in selection field '%s'"
 #~ msgstr "键/值对 '%s' 并未包含在选定的字段 '%s' 中"
-
-#~ msgid ""
-#~ "You can not escalate this case.\n"
-#~ "You are already at the top level."
-#~ msgstr "您不能提升已在最高层次的案例。"
 
 #~ msgid "Error!"
 #~ msgstr "错误！"
 
-#~ msgid "You have to provide an account for the write off entry !"
-#~ msgstr "您必须指定一个坏账准备科目"
-
-#~ msgid "Message !"
-#~ msgstr "消息！"
-
-#~ msgid "Error, no partner !"
-#~ msgstr "错误，无业务伙伴！"
-
-#~ msgid "A sign-out must be right after a sign-in !"
-#~ msgstr "签入时间必须在签出之后！"
-
-#~ msgid "Product Cost Structure"
-#~ msgstr "产品成本构成"
-
-#~ msgid "No production sequence defined"
-#~ msgstr "无生产序列定义"
-
-#~ msgid "P&L Qty"
-#~ msgstr "益损数量"
-
-#~ msgid "UnknownError"
-#~ msgstr "未知错误"
-
-#~ msgid "Products: "
-#~ msgstr "产品列表： "
-
-#~ msgid ""
-#~ "The production is in \"%s\" state. You can not change the production "
-#~ "quantity anymore"
-#~ msgstr "产品状态为 \"%s\"，您不能再更改产品数量"
-
-#~ msgid "Received Qty"
-#~ msgstr "已接收数量"
-
-#~ msgid "Couldn't send mail because your email address is not configured!"
-#~ msgstr "不能发送邮件因为您的邮件地址没有配置！"
-
-#~ msgid "Unit Product Price"
-#~ msgstr "产品单价"
-
-#~ msgid "September"
-#~ msgstr "九月"
-
-#~ msgid "Invoice is not created"
-#~ msgstr "没有创建发票"
-
-#~ msgid "File Name"
-#~ msgstr "文件名"
-
-#~ msgid "Futur Deliveries"
-#~ msgstr "计划交货"
-
-#~ msgid "from stock: products assigned."
-#~ msgstr "来自库存：产品已分配"
-
-#~ msgid "Product Quantity"
-#~ msgstr "产品数量"
-
-#~ msgid "Feed back About Workflow of Module"
-#~ msgstr "关于该模块的工作流程反馈"
-
-#~ msgid "Workcenter name"
-#~ msgstr "工作中心名称"
-
-#~ msgid ""
-#~ "Could not resolve product category, ' "
-#~ "\\n                                    'you have defined cyclic "
-#~ "categories ' \\n                                    'of products!"
-#~ msgstr "无法决定产品类别, '\\n '您定义的产品类别包括循环的类别！'\\n '"
-
 #~ msgid "The search method is not implemented on this object !"
 #~ msgstr "该对象尚未实现“search”方法！"
-
-#~ msgid "Titles"
-#~ msgstr "称谓"
-
-#~ msgid "Bad query."
-#~ msgstr "无效的查询。"
-
-#~ msgid "Suppliers Partners"
-#~ msgstr "供应商"
 
 #~ msgid "undefined get method !"
 #~ msgstr "未定义“get”方法！"
@@ -14653,23 +13684,11 @@ msgstr ""
 #~ msgid "ValidateError"
 #~ msgstr "验证错误"
 
-#~ msgid "Unknown position in inherited view %s !"
-#~ msgstr "在继承视图 %s 中包含未知位置！"
-
 #~ msgid "This method does not exist anymore"
 #~ msgstr "该方法不存在"
 
-#~ msgid "Number too large '%d', can not translate it"
-#~ msgstr "数字“%d”太大，不能转换"
-
-#~ msgid "Bad file format"
-#~ msgstr "无效的文件格式"
-
 #~ msgid "Not implemented get_memory method !"
 #~ msgstr "该对象尚未实现“get_memory“方法！"
-
-#~ msgid "You cannot perform this operation."
-#~ msgstr "您无法执行此项操作。"
 
 #~ msgid "The copy method is not implemented on this object !"
 #~ msgstr "该对象尚未实现“copy”方法！"
@@ -14677,23 +13696,8 @@ msgstr ""
 #~ msgid "UserError"
 #~ msgstr "用户错误"
 
-#~ msgid "The name_search method is not implemented on this object !"
-#~ msgstr "该对象尚未实现“name_search“方法！"
-
-#~ msgid "Records were modified in the meanwhile"
-#~ msgstr "记录也同时被修改"
-
-#~ msgid "Macedonia"
-#~ msgstr "马其顿"
-
 #~ msgid "Not Implemented"
 #~ msgstr "尚未实现"
-
-#~ msgid "The name_get method is not implemented on this object !"
-#~ msgstr "该对象尚未实现“name_get”方法！"
-
-#~ msgid "Couldn't find tag '%s' in parent view !"
-#~ msgstr "未在上级视图中找到标签 '%s'！"
 
 #~ msgid "Wrong ID for the browse record, got %r, expected an integer."
 #~ msgstr "%r 错误的浏览记录标识符，其应该为一个整数。"
@@ -14704,28 +13708,14 @@ msgstr ""
 #~ msgid "Error occurred while validating the field(s) %s: %s"
 #~ msgstr "验证字段 %s 时发生错误：%s"
 
-#~ msgid "Grant Access To Menus"
-#~ msgstr "授予菜单访问权"
-
-#~ msgid ""
-#~ "You try to install a module that depends on the module: %s.\n"
-#~ "But this module is not available in your system."
-#~ msgstr "您试图安装的一个模块依赖模块： %s，但您的系统中该模块不可用。"
-
 #~ msgid "The create method is not implemented on this object !"
 #~ msgstr "该对象尚未实现“create”方法！"
-
-#~ msgid "Can not define a column %s. Reserved keyword !"
-#~ msgstr "不能定义名为 %s 的列，因为这个名字是保留的关键字。"
 
 #~ msgid "Recursivity Detected."
 #~ msgstr "检测到循环。"
 
 #~ msgid "Please check that all your lines have %d columns."
 #~ msgstr "请确保所有行都有 %d 列。"
-
-#~ msgid "Others Partners"
-#~ msgstr "其他业务伙伴"
 
 #~ msgid "The perm_read method is not implemented on this object !"
 #~ msgstr "该对象尚未实现“perm_read”方法！"
@@ -14743,250 +13733,8 @@ msgstr ""
 #~ "这些数据的总和（第二个字段）为空。\n"
 #~ "我们无法绘制饼图！"
 
-#~ msgid "You try to bypass an access rule (Document type: %s)."
-#~ msgstr "您尝试跳过访问规则（文档类型：%s）。"
-
 #~ msgid "The read method is not implemented on this object !"
 #~ msgstr "该对象的“read”方法尚未实现！"
 
-#~ msgid "June"
-#~ msgstr "六月"
-
-#~ msgid "No payment mode or payment type code invalid."
-#~ msgstr "无付款方式或付款类型代码无效"
-
-#~ msgid ""
-#~ "There is no income account defined ' "
-#~ "\\n                                        'for this product: \"%s\" (id:"
-#~ "%d)"
-#~ msgstr "该产品：\"%s\"(id:%d) \"\\n\" 未定义收入科目"
-
-#~ msgid "You can not delete posted movement: \"%s\"!"
-#~ msgstr "不能删除已过帐的凭证明细项：\"%s\"！"
-
-#~ msgid "Result (/10)"
-#~ msgstr "结果(/10)"
-
-#~ msgid ""
-#~ "\"\"\n"
-#~ "This test checks if the module classes are raising exception when calling "
-#~ "basic methods or not.\n"
-#~ "\"\""
-#~ msgstr "\"\""
-
 #~ msgid "The unlink method is not implemented on this object !"
 #~ msgstr "此对象尚未实现“unlink”方法！"
-
-#~ msgid "The Bank type %s of the bank account: %s is not supported"
-#~ msgstr "不支持银行类型%s（银行账户%s）"
-
-#~ msgid "Account move line \"%s\" is not valid"
-#~ msgstr "会计分录\\\"%s\\\"行无效"
-
-#~ msgid "Product quantity"
-#~ msgstr "产品数量"
-
-#~ msgid "No journal for ending writing has been defined for the fiscal year"
-#~ msgstr "未定义结束会计年度分录的日记帐"
-
-#~ msgid "Tests"
-#~ msgstr "测试"
-
-#~ msgid "Module Repository"
-#~ msgstr "模块库"
-
-#~ msgid "The rule is satisfied if at least one test is True"
-#~ msgstr "只要一个条件判断为真，该规则即满足"
-
-#~ msgid "The rule is satisfied if all test are True (AND)"
-#~ msgstr "如果所有测试都为真的话该规则将满足条件（“与”运算）"
-
-#~ msgid "ir.rule.group"
-#~ msgstr "ir.rule.group"
-
-#~ msgid "Multiple rules on same objects are joined using operator OR"
-#~ msgstr "同一对象上的多条规则使用“或”（OR）操作符连接。"
-
-#~ msgid ""
-#~ "Cannot delete Purchase Order(s) which are in %s State!' % s['state']))\n"
-#~ "        return super(purchase_order, self).unlink(cr, uid, unlink_ids, "
-#~ "context=context)\n"
-#~ "\n"
-#~ "    def button_dummy(self, cr, uid, ids, context={}):\n"
-#~ "        return True\n"
-#~ "\n"
-#~ "    def onchange_dest_address_id(self, cr, uid, ids, adr_id):\n"
-#~ "        if not adr_id:\n"
-#~ "            return {}\n"
-#~ "        part_id = self.pool.get('res.partner.address"
-#~ msgstr ""
-#~ "无法删除在%s状态的采购订单！' % s['state']))\n"
-#~ "        return super(purchase_order, self).unlink(cr, uid, unlink_ids, \n"
-#~ "context=context)\n"
-#~ "\n"
-#~ "    def button_dummy(self, cr, uid, ids, context={}):\n"
-#~ "        return True\\n\n"
-#~ "\n"
-#~ "    def onchange_dest_address_id(self, cr, uid, ids, adr_id):\n"
-#~ "        if not adr_id:\n"
-#~ "            return {}\n"
-#~ "        part_id = self.pool.get('res.partner.address"
-
-#~ msgid "Make the rule global, otherwise it needs to be put on a group"
-#~ msgstr "让规则的作用范围为全局，否则需要将其指定给用户组"
-
-#~ msgid "Demo instance"
-#~ msgstr "示范实例"
-
-#~ msgid "Warning! Object has no demo data"
-#~ msgstr "警报！对象没有示范数据"
-
-#~ msgid "You could not publish a module that is not installed!"
-#~ msgstr "您不能发布一个未安装的模块！"
-
-#~ msgid "Please specify the Partner Email address !"
-#~ msgstr "请指定业务伙伴的电邮地址!"
-
-#~ msgid "You must define an analytic journal of type '%s' !"
-#~ msgstr "您必须定义已本有‘%s‘类型的分析日记账！"
-
-#~ msgid "You must first cancel all packing attached to this sale order."
-#~ msgstr "您必须先取消该销售订单所有附加的分拣单。"
-
-#~ msgid "Entries are not of the same account or already reconciled ! "
-#~ msgstr "不同科目或者已对帐的分录！ "
-
-#~ msgid "Integrity Error !"
-#~ msgstr "完整性错误！"
-
-#~ msgid "Invalid action !"
-#~ msgstr "无效动作！"
-
-#~ msgid "Change audittrail depends -- Setting rule as DRAFT"
-#~ msgstr "修改检查跟踪依靠--设定规则为草稿"
-
-#~ msgid ""
-#~ "No IBAN defined \n"
-#~ "' \\n\t\t\t\t\t\t'for the bank account: %s\n"
-#~ "' + \\n\t\t\t\t\t\t'on line: %s"
-#~ msgstr ""
-#~ "未定义IBAN帐号\n"
-#~ "' \\n\t\t\t\t\t\t'相关银行账户： %s\n"
-#~ "' + \\n\t\t\t\t\t\t'行号： %s"
-
-#~ msgid ""
-#~ "There is no default default credit account defined \n"
-#~ "' \\n                                'on journal \"%s\""
-#~ msgstr ""
-#~ "未定义日记账“%s“的\n"
-#~ "默认贷方科目"
-
-#~ msgid "Fri"
-#~ msgstr "周五"
-
-#~ msgid ""
-#~ "You have to select a product UOM in the same category than the purchase "
-#~ "UOM of the product"
-#~ msgstr "您必须选定和采购产品计量单位同样类型的产品计量单位。"
-
-#~ msgid "Number record different from the computed!"
-#~ msgstr "记录号码和计算的号码不同！"
-
-#~ msgid "This feature is only available for location type Amazon"
-#~ msgstr "此功能只有类型为“Amazon“的货位可用"
-
-#~ msgid "Customers Partners"
-#~ msgstr "客户业务伙伴"
-
-#~ msgid "Provide the quantities of the returned products."
-#~ msgstr "输入退货的数量"
-
-#~ msgid "No timebox child of this one !"
-#~ msgstr "此无时间盒子子代！"
-
-#~ msgid "Thu"
-#~ msgstr "周四"
-
-#~ msgid "Operation Not Permitted !"
-#~ msgstr "未许可操作！"
-
-#~ msgid "Cycles Cost"
-#~ msgstr "按循环计算的成本"
-
-#~ msgid "Please set an analytic journal on this financial journal !"
-#~ msgstr "请设定此财务日记账的分析日记账！"
-
-#~ msgid "The employee must have a contact address"
-#~ msgstr "员工必须有联系地址"
-
-#~ msgid "Invoice is already reconciled"
-#~ msgstr "发票已对帐"
-
-#~ msgid "Entry \"%s\" is not valid !"
-#~ msgstr "分录“%s“无效！"
-
-#~ msgid "Analytic Account incomplete"
-#~ msgstr "分析科目不完整"
-
-#~ msgid ""
-#~ "Specified Journal does not have any account move entries in draft state "
-#~ "for this period"
-#~ msgstr "指定的日记账没有此时间段草稿状态的分录"
-
-#~ msgid "Customer has no addresses defined!"
-#~ msgstr "客户无已定义地址！"
-
-#~ msgid "Alert for ' + partner.name +' !"
-#~ msgstr "给'+partner.name+'的警示!"
-
-#~ msgid "The statement balance is incorrect !\n"
-#~ msgstr "银行结单余额不对！\n"
-
-#~ msgid ""
-#~ "You have to define the bank account\n"
-#~ "in the journal definition for reconciliation."
-#~ msgstr ""
-#~ "为了对帐，您必须在日记账设定中\n"
-#~ "定义一个银行账户"
-
-#~ msgid "Free Reference"
-#~ msgstr "无限制引用"
-
-#~ msgid ""
-#~ "Tax base different !\n"
-#~ "Click on compute to update tax base"
-#~ msgstr ""
-#~ "税目基数相异！\n"
-#~ "为更新税目基数，单击“计算”"
-
-#~ msgid "You can not use an inactive account!"
-#~ msgstr "您不能使用静止科目！"
-
-#~ msgid ""
-#~ "You can specify year, month and date in the name of the model using the "
-#~ "following labels:\n"
-#~ "\n"
-#~ "%(year)s : To Specify Year \n"
-#~ "%(month)s : To Specify Month \n"
-#~ "%(date)s : Current Date\n"
-#~ "\n"
-#~ "e.g. My model on %(date)s"
-#~ msgstr ""
-#~ "为在模式名称中指定年，月或日期，您可以使用以下的标签： \n"
-#~ "%(year)s ：为指定年\n"
-#~ "%(month)s ：为指定月\n"
-#~ "%(date)s ：为指定现行日期\n"
-#~ "\n"
-#~ "比如：　我的%(date)s模式"
-
-#~ msgid "You cannot Pause the Operation other then Start/Resume state !"
-#~ msgstr "在启动/恢复状态时您不能暂停运行！"
-
-#~ msgid "No employee defined for your user !"
-#~ msgstr "无员工为此用户定义"
-
-#~ msgid "Please select maximum 8 records to fit the page-width."
-#~ msgstr "请选择至多８条记录以适合页面宽度"
-
-#~ msgid "Couldn't create move between different companies"
-#~ msgstr "无法在公司之间建立记帐"
