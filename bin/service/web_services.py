@@ -431,6 +431,7 @@ class common(_ObjectService):
                         'set_logger_level', 'get_pgmode', 'set_pgmode',
                         'get_loglevel', 'get_sqlcount', 'get_sql_stats',
                         'reset_sql_stats',
+                        'get_garbage_stats',
                         'get_os_time']
                 }
     def __init__(self,name="common"):
@@ -722,6 +723,21 @@ GNU Public Licence.
     def exp_reset_sql_stats(self):
         sql_db._Pool.sql_stats = {}
         return True
+
+    def exp_get_garbage_stats(self):
+        import gc
+        garbage_count = {}
+        for garb in gc.garbage:
+            try:
+                name = '%s.%s' % (garb.__class__.__module__, garb.__class__.__name__)
+                garbage_count.setdefault(name, 0)
+                garbage_count[name] += 1
+            except Exception, e:
+                print "Exception:", e
+                continue
+            # Perhaps list the attributes of garb that are instances of object
+        
+        return garbage_count
 
     def exp_get_options(self, module=None):
         """Return a list of options, keywords, that the server supports.
