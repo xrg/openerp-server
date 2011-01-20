@@ -681,6 +681,11 @@ GNU Public Licence.
                 res += "\nPython GC enabled: %d:%d:%d objs." % \
                     gc.get_count()
         except ImportError: pass
+        try:
+            from tools import lru
+            res += "\nLRU counts: LRU: %d, nodes: %d" %  \
+                    (sys.getrefcount(lru.LRU), sys.getrefcount(lru.LRUNode))
+        except Exception: pass
         return res
 
     def exp_list_http_services(self):
@@ -778,6 +783,19 @@ class objects_proxy(baseExportService):
         db, uid = (acds[2], acds[3])
         res = fn(db, uid, *params)
         return res
+
+    def stats(self, _pre_msg='No statistics'):
+        try:
+            from osv import orm
+            msg = ''
+            for klass in ('browse_record', 'browse_record_list', 'browse_null',
+                        'orm_memory', 'orm'):
+                msg += "%s[%d] " % (klass, sys.getrefcount(getattr(orm,klass)))
+        except Exception, e:
+            msg = str(e)
+        return "%s (%s.%s): %s" % ('object',
+                    self.__class__.__module__, self.__class__.__name__,
+                    msg)
 
 objects_proxy()
 
