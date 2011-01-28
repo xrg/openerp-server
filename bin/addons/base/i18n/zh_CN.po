@@ -4,13 +4,13 @@ msgstr ""
 "Project-Id-Version: OpenERP Server 5.0.4\n"
 "Report-Msgid-Bugs-To: support@openerp.com\n"
 "POT-Creation-Date: 2011-01-11 11:14+0000\n"
-"PO-Revision-Date: 2011-01-19 13:31+0000\n"
-"Last-Translator: Wei \"oldrev\" Li <oldrev@gmail.com>\n"
+"PO-Revision-Date: 2011-01-20 16:26+0000\n"
+"Last-Translator: Joshua Jan <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-01-20 06:12+0000\n"
+"X-Launchpad-Export-Date: 2011-01-21 05:58+0000\n"
 "X-Generator: Launchpad (build 12177)\n"
 
 #. module: base
@@ -1820,7 +1820,7 @@ msgstr "示范数据"
 #. module: base
 #: field:ir.module.module,dependencies_id:0 view:ir.module.module:0
 msgid "Dependencies"
-msgstr "依赖关系"
+msgstr "依赖模块"
 
 #. module: base
 #: field:ir.module.module,installed_version:0
@@ -3696,8 +3696,12 @@ msgstr ""
 
 #. module: base
 #: help:ir.sequence,prefix:0
+#, fuzzy
 msgid "Prefix value of the record for the sequence"
 msgstr ""
+"#-#-#-#-#  .merge_file_h1CveI (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_DU8Ro3 (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"记录流水号的前缀"
 
 #. module: base
 #: help:ir.sequence,suffix:0
@@ -4120,17 +4124,26 @@ msgstr ""
 
 #. module: base
 #: help:workflow.transition,group_id:0
+#, fuzzy
 msgid ""
 "The group that a user must have to be authorized to validate this transition."
 msgstr ""
+"#-#-#-#-#  .merge_file_h1CveI (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_DU8Ro3 (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"用户组中的用户需要授权才能确认此转换。"
 
 #. module: base
 #: help:workflow.transition,signal:0
+#, fuzzy
 msgid ""
 "When the operation of transition comes from a button pressed in the client "
 "form, signal tests the name of the pressed button. If signal is NULL, no "
 "button is necessary to validate this transition."
 msgstr ""
+"#-#-#-#-#  .merge_file_h1CveI (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_DU8Ro3 (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"如果转换的操作来源于界面上的一个按钮，信号字段存储按钮的名称。如果该值为"
+"NULL，界面上不需要按钮"
 
 #. module: base
 #: model:ir.actions.act_window,name:base.act_ir_actions_todo_form
@@ -7669,8 +7682,12 @@ msgstr "完成"
 #. module: base
 #: selection:base.language.install,state:0
 #: selection:base.module.import,state:0 selection:base.module.update,state:0
+#, fuzzy
 msgid "init"
 msgstr ""
+"#-#-#-#-#  .merge_file_h1CveI (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_DU8Ro3 (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"初始化"
 
 #. module: base
 #: selection:ir.actions.act_window,target:0
@@ -9571,8 +9588,12 @@ msgstr ""
 
 #. module: base
 #: view:base.language.import:0
+#, fuzzy
 msgid "- type,name,res_id,src,value"
 msgstr ""
+"#-#-#-#-#  .merge_file_h1CveI (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_DU8Ro3 (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"- type,name,res_id,src,value"
 
 #. module: base
 #: view:base.language.import:0
@@ -9860,11 +9881,16 @@ msgstr ""
 
 #. module: base
 #: view:base.update.translations:0
+#, fuzzy
 msgid ""
 "This wizard will detect new terms to translate in the application, so that "
 "you can then add translations manually or perform a complete export (as a "
 "template for a new language example)."
 msgstr ""
+"#-#-#-#-#  .merge_file_h1CveI (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_DU8Ro3 (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"此向导将检测应用程序中待翻译的新术语，之后您可以手工添加翻译或进行完整的导出"
+"（作为一种新语言的模板）。"
 
 #. module: base
 #: view:ir.actions.act_window:0
@@ -10045,10 +10071,14 @@ msgstr ""
 
 #. module: base
 #: view:ir.actions.server:0
+#, fuzzy
 msgid ""
 "Only one client action will be executed, last client action will be "
 "considered in case of multiple client actions."
 msgstr ""
+"#-#-#-#-#  .merge_file_h1CveI (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_DU8Ro3 (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"如果有多个客户端操作的话只会执行最进的那个。"
 
 #. module: base
 #: view:ir.actions.server:0
@@ -10778,8 +10808,12 @@ msgstr ""
 
 #. module: base
 #: view:res.config:0 view:res.config.installer:0
+#, fuzzy
 msgid "vsep"
 msgstr ""
+"#-#-#-#-#  .merge_file_h1CveI (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_DU8Ro3 (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"vsep"
 
 #. module: base
 #: view:res.config.installer:0
@@ -11849,6 +11883,7 @@ msgstr ""
 
 #. module: base
 #: model:ir.actions.act_window,help:base.action_res_groups
+#, fuzzy
 msgid ""
 "A group is a set of functional areas that will be assigned to the user in "
 "order to give them access and rights to specific applications and tasks in "
@@ -11857,6 +11892,11 @@ msgid ""
 "to see. Whether they can have a read, write, create and delete access right "
 "can be managed from here."
 msgstr ""
+"#-#-#-#-#  .merge_file_h1CveI (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_DU8Ro3 (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"用户组用于把一系列功能分配给用户，使其能够访问特定的模块和功能。可以新建或修"
+"改现有的用户组，这样就可以自定义该组用户的菜单，或者对某个对象的插删改查权"
+"限。"
 
 #. module: base
 #: selection:base.language.install,lang:0
@@ -11937,11 +11977,16 @@ msgstr ""
 
 #. module: base
 #: model:ir.actions.act_window,help:base.res_partner_canal-act
+#, fuzzy
 msgid ""
 "Track from where is coming your leads and opportunities by creating specific "
 "channels that will be maintained at the creation of a document in the "
 "system. Some examples of channels can be: Website, Phone Call, Reseller, etc."
 msgstr ""
+"#-#-#-#-#  .merge_file_h1CveI (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_DU8Ro3 (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"渠道用于记录你的销售线索或商机的来源，并记录在这些单据上。例如：网站、电话、"
+"经销商等"
 
 #. module: base
 #: selection:base.language.install,lang:0
@@ -12123,12 +12168,17 @@ msgstr ""
 
 #. module: base
 #: model:ir.actions.act_window,help:base.action_res_users
+#, fuzzy
 msgid ""
 "Create and manage users that will connect to the system. Users can be "
 "deactivated should there be a period of time during which they will/should "
 "not connect to the system. You can assign them groups in order to give them "
 "specific access to the applications they need to use in the system."
 msgstr ""
+"#-#-#-#-#  .merge_file_h1CveI (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_DU8Ro3 (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"为系统创建和管理用户。在一段时间内用该系统的用户可以暂不激活。你还可以给用户"
+"分配某一个组，以便他们能用到系统的指定功能"
 
 #. module: base
 #: model:res.partner.title,shortcut:base.res_partner_title_ltd
@@ -12178,8 +12228,12 @@ msgstr ""
 
 #. module: base
 #: selection:base.language.install,lang:0
+#, fuzzy
 msgid "Occitan (FR, post 1500) / Occitan"
 msgstr ""
+"#-#-#-#-#  .merge_file_h1CveI (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_DU8Ro3 (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"Occitan (FR, post 1500) / Occitan"
 
 #. module: base
 #: selection:base.language.install,lang:0
@@ -12192,10 +12246,15 @@ msgstr ""
 
 #. module: base
 #: model:ir.actions.act_window,help:base.action_res_company_form
+#, fuzzy
 msgid ""
 "Create and manage the companies that will be managed by OpenERP from here. "
 "Shops or subsidiaries can be created and maintained from here."
 msgstr ""
+"#-#-#-#-#  .merge_file_h1CveI (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_DU8Ro3 (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"在此处创建与管理系统中的公司机构信息。门店与下属机构也可以在这里进行创建与维"
+"护。"
 
 #. module: base
 #: model:ir.actions.act_window,help:base.action_partner_form
@@ -12222,6 +12281,7 @@ msgstr ""
 
 #. module: base
 #: model:ir.actions.act_window,help:base.grant_menu_access
+#, fuzzy
 msgid ""
 "Manage and customize the items available and displayed in your OpenERP "
 "system menu. You can delete an item by clicking on the box at the beginning "
@@ -12229,6 +12289,10 @@ msgid ""
 "be assigned to specific groups in order to make them accessible to some "
 "users within the system."
 msgstr ""
+"#-#-#-#-#  .merge_file_h1CveI (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_DU8Ro3 (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"管理和自定义用户的菜单项。你可以用勾选一些菜单项，然后删除。菜单项可以分配给"
+"某些特定的用户组，以便他们使用系统的某些特定的功能"
 
 #. module: base
 #: selection:base.language.install,lang:0
@@ -12241,12 +12305,18 @@ msgstr ""
 
 #. module: base
 #: model:ir.actions.act_window,help:base.action_partner_category_form
+#, fuzzy
 msgid ""
 "Manage the partner categories in order to better classify them for tracking "
 "and analysis purposes. A partner may belong to several categories and "
 "categories have a hierarchy structure: a partner belonging to a category "
 "also belong to his parent category."
 msgstr ""
+"#-#-#-#-#  .merge_file_h1CveI (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_DU8Ro3 (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"管理业务伙伴分类，以便更好地鉴它们用于进行数据的跟踪和分析。一个业务伙伴可以"
+"属于多个分类，分类是层次结构的形式，也就是说一个业务伙伴如果属于一个分类那么"
+"它也属于该分类的上级分类。"
 
 #. module: base
 #: selection:base.language.install,lang:0
@@ -12921,6 +12991,7 @@ msgstr ""
 
 #. module: base
 #: model:res.company,overdue_msg:base.main_company
+#, fuzzy
 msgid ""
 "Please note that the following payments are now due. If your "
 "payment                         has been sent, kindly forward your payment "
@@ -12929,6 +13000,10 @@ msgid ""
 "Would your payment have been carried out after this mail was sent, please "
 "consider the present one as void."
 msgstr ""
+"#-#-#-#-#  .merge_file_h1CveI (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_DU8Ro3 (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"请注意，下列款项现已到期。如果您已付款，请将您的付款详单发给我们。\\n 如果将"
+"进一步拖延付款，请联系我们洽谈。"
 
 #. module: base
 #: model:ir.model,name:base.model_maintenance_contract
@@ -13362,20 +13437,31 @@ msgstr ""
 
 #. module: base
 #: model:ir.actions.act_window,help:base.action_partner_supplier_form
+#, fuzzy
 msgid ""
 "You can access all information regarding your suppliers from the supplier "
 "form: accounting data, history of emails, meetings, purchases, etc. You can "
 "uncheck the 'Suppliers' filter button in order to search in all your "
 "partners, including customers and prospects."
 msgstr ""
+"#-#-#-#-#  .merge_file_h1CveI (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_DU8Ro3 (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"在供应商界面你能看到所有该供应商的信息：财务数据、邮件往来历史、会见记录、采"
+"购记录等。你也可以释放“供应商”那个过滤按钮，这样就可以在这个界面搜索到所有业"
+"务伙伴，包括客户和潜在客户"
 
 #. module: base
 #: help:ir.model.fields,domain:0
+#, fuzzy
 msgid ""
 "The optional domain to restrict possible values for relationship fields, "
 "specified as a Python expression defining a list of triplets. For example: "
 "[('color','=','red')]"
 msgstr ""
+"#-#-#-#-#  .merge_file_h1CveI (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_DU8Ro3 (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"过滤条件这个字段是可选输入的，用于在输入关系型字段时限制可选值的范围。格式为"
+"一个python列表，每个列表项由三个字符组成。"
 
 #. module: base
 #: code:addons/base/res/res_user.py:507
@@ -13473,10 +13559,14 @@ msgstr ""
 
 #. module: base
 #: help:ir.model.fields,relation_field:0
+#, fuzzy
 msgid ""
 "For one2many fields, the field on the target model that implement the "
 "opposite many2one relationship"
 msgstr ""
+"#-#-#-#-#  .merge_file_h1CveI (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_DU8Ro3 (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"对于一对多的字段，此字段在目标模型是实现了相反的多对一关系。"
 
 #. module: base
 #: help:ir.model.fields,translate:0
@@ -13541,8 +13631,12 @@ msgstr ""
 
 #. module: base
 #: help:ir.translation,module:0 help:ir.translation,xml_id:0
+#, fuzzy
 msgid "Maps to the ir_model_data for which this translation is provided."
 msgstr ""
+"#-#-#-#-#  .merge_file_h1CveI (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_DU8Ro3 (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"该翻译对应ir_model_data表中的数据条目"
 
 #. module: base
 #: model:ir.actions.act_window,help:base.action_ui_view_custom
@@ -13586,10 +13680,14 @@ msgstr ""
 
 #. module: base
 #: help:res.config.users,new_password:0 help:res.users,new_password:0
+#, fuzzy
 msgid ""
 "Only specify a value if you want to change the user password. This user will "
 "have to logout and login again!"
 msgstr ""
+"#-#-#-#-#  .merge_file_h1CveI (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_DU8Ro3 (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"如果您要修改用户密码的话只需要输入一个新密码。用户应该先注销再登录。"
 
 #. module: base
 #: field:res.config.users,new_password:0 field:res.users,new_password:0
@@ -13649,9 +13747,12 @@ msgstr ""
 
 #. module: base
 #: code:addons/base/ir/ir_model.py:317
-#, python-format
+#, fuzzy, python-format
 msgid "Can only rename one column at a time!"
 msgstr ""
+"#-#-#-#-#  .merge_file_h1CveI (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_DU8Ro3 (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"一次只能给一列改名"
 
 #~ msgid "Object %s does not exists"
 #~ msgstr "对象%s不存在"
