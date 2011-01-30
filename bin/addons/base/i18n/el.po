@@ -5,17 +5,18 @@ msgstr ""
 "Project-Id-Version: OpenERP Server 5.0.0\n"
 "Report-Msgid-Bugs-To: support@openerp.com\n"
 "POT-Creation-Date: 2011-01-03 16:57+0000\n"
-"PO-Revision-Date: 2010-12-18 08:23+0000\n"
-"Last-Translator: Dimitris Andavoglou <dimitrisand@gmail.com>\n"
-"Language-Team: nls@hellug.gr <nls@hellug.gr>\n"
+"PO-Revision-Date: 2011-01-30 12:09+0200\n"
+"Last-Translator: P. Christeas <p_christ@hol.gr>\n"
+"Language-Team: Greek <openerp@lists.hellug.gr>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Launchpad-Export-Date: 2011-01-04 14:04+0000\n"
-"X-Generator: Launchpad (build Unknown)\n"
+"X-Generator: Lokalize 1.0\n"
 "X-Poedit-Country: GREECE\n"
 "X-Poedit-Language: Greek\n"
 "X-Poedit-SourceCharset: utf-8\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: base
 #: code:addons/__init__.py:842
@@ -663,7 +664,7 @@ msgstr ""
 #: code:addons/orm.py:405
 #, python-format
 msgid "Unknown attribute %s in %s "
-msgstr ""
+msgstr "Άγνωστη ιδιότητα %s στο %s "
 
 #. module: base
 #: code:addons/orm.py:559
@@ -1414,7 +1415,7 @@ msgstr "Όνομα"
 #. module: base
 #: field:ir.actions.report.xml,report_file:0
 msgid "Report file"
-msgstr "Τίτλος Αναφοράς"
+msgstr "Πρότυπο Αναφοράς"
 
 #. module: base
 #: field:ir.actions.report.xml,report_name:0
@@ -3210,6 +3211,8 @@ msgid ""
 "The path to the main report file (depending on Report Type) or NULL if the "
 "content is in another field"
 msgstr ""
+"Η διαδρομή για το κύριο αρχείο-πρότυπο για την αναφορά (εξαρτάται από τον "
+"τύπο της αναφοράς) ή άδειο όταν το πρότυπο είναι στη βάση."
 
 #. module: base
 #: help:ir.actions.report.xml,report_rml:0
@@ -4112,12 +4115,8 @@ msgstr "Νομίσματα"
 #. module: base
 #: model:ir.actions.act_window,name:base.action_model_data
 #: model:ir.ui.menu,name:base.ir_model_data_menu view:ir.model.data:0
-#, fuzzy
 msgid "Object Identifiers"
-msgstr ""
-"#-#-#-#-#  .merge_file_UIdw14 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"Σχέση Αντικειμένου\n"
-"#-#-#-#-#  .merge_file_IJStut (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+msgstr "Αναγνωριστικά Αντικειμένου"
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_model_model
@@ -4712,7 +4711,7 @@ msgstr "Έλεγχος EAN"
 #. module: base
 #: model:ir.model,name:base.model_publisher_warranty_contract
 msgid "publisher_warranty.contract"
-msgstr ""
+msgstr "publisher_warranty.contract"
 
 #. module: base
 #: model:ir.model,name:base.model_publisher_warranty_contract_wizard
@@ -4879,8 +4878,9 @@ msgstr "Ο πυρήνας του OpenERP, αναγκαίος για κάθε ε�
 
 #. module: base
 #: model:ir.ui.menu,name:base.dashboard
+#, fuzzy
 msgid "Dashboards"
-msgstr ""
+msgstr "Ταμπλό"
 
 #. module: base
 #: model:ir.ui.menu,name:base.marketing_menu
@@ -4957,7 +4957,7 @@ msgstr "Ημερολόγιο"
 #. module: base
 #: model:ir.ui.menu,name:base.menu_crm_case_job_req_main
 msgid "Recruitment"
-msgstr ""
+msgstr "Προσλήψεις"
 
 #. module: base
 #: model:ir.ui.menu,name:base.menu_crm_config_lead
@@ -4999,8 +4999,9 @@ msgstr "Διαχείριση Εκδηλώσεων"
 
 #. module: base
 #: model:ir.ui.menu,name:base.menu_fundrising
+#, fuzzy
 msgid "Fund Raising"
-msgstr ""
+msgstr "Χρηματοδότηση"
 
 #. module: base
 #: model:ir.ui.menu,name:base.menu_hr_dasboard
@@ -6910,7 +6911,7 @@ msgstr "Ρώσσικα / русский язык"
 #. module: base
 #: selection:base.language.install,lang:0
 msgid "Serbian (Cyrillic) / српски"
-msgstr ""
+msgstr "Σερβικά (Κυριλλικά) / српски"
 
 #. module: base
 #: selection:base.language.install,lang:0
@@ -7025,17 +7026,17 @@ msgstr "Ισπανικά (VE) / Español (VE)"
 #. module: base
 #: selection:base.language.install,lang:0
 msgid "Spanish / Español"
-msgstr "Spanish / Español"
+msgstr "Ισπανικά / Español"
 
 #. module: base
 #: selection:base.language.install,lang:0
 msgid "Swedish / svenska"
-msgstr "Swedish / svenska"
+msgstr "Σουηδικά / svenska"
 
 #. module: base
 #: selection:base.language.install,lang:0
 msgid "Telugu / తెలుగు"
-msgstr ""
+msgstr "Telugu / తెలుగు"
 
 #. module: base
 #: selection:base.language.install,lang:0
@@ -7045,7 +7046,7 @@ msgstr "Ταϊλανδέζικα / ภาษาไทย"
 #. module: base
 #: selection:base.language.install,lang:0
 msgid "Turkish / Türkçe"
-msgstr "Turkish / Türkçe"
+msgstr "Τούρκικα / Türkçe"
 
 #. module: base
 #: selection:base.language.install,lang:0
@@ -7162,7 +7163,7 @@ msgstr "Ποτέ"
 #. module: base
 #: selection:ir.actions.todo,restart:0
 msgid "On Skip"
-msgstr ""
+msgstr "Στην Παράβλεψη"
 
 #. module: base
 #: selection:ir.actions.todo,state:0
@@ -7383,7 +7384,7 @@ msgstr "Μεγάλος Ακέραιος"
 #. module: base
 #: selection:ir.property,type:0
 msgid "Many2One"
-msgstr ""
+msgstr "Πολλά-σε-ένα"
 
 #. module: base
 #: selection:ir.server.object.lines,type:0
@@ -7654,7 +7655,7 @@ msgstr "Το όνομα της ομάδας δεν μπορεί να ξεκιν�
 #. module: base
 #: sql_constraint:res.lang:0
 msgid "The code of the language must be unique !"
-msgstr ""
+msgstr "Ο κωδικός γλώσσας πρέπει να είναι μοναδικός!"
 
 #. module: base
 #: sql_constraint:res.lang:0
@@ -8848,7 +8849,7 @@ msgstr "%m - Ο μήνας [01,12]"
 #. module: base
 #: view:res.lang:0
 msgid "%p - Equivalent of either AM or PM."
-msgstr "%p - Αντίστοιχο με το π.μ ή το μ.μ."
+msgstr "%p - Ένδειξη π.μ ή μ.μ."
 
 #. module: base
 #: view:res.lang:0
@@ -9233,17 +9234,17 @@ msgstr ""
 #. module: base
 #: field:change.user.password,new_password:0
 msgid "New Password"
-msgstr ""
+msgstr "Νέο Συνθηματικό"
 
 #. module: base
 #: model:res.widget,title:base.facebook_widget
 msgid "Facebook"
-msgstr ""
+msgstr "Facebook"
 
 #. module: base
 #: model:ir.model,name:base.model_change_user_password
 msgid "change.user.password"
-msgstr ""
+msgstr "change.user.password"
 
 #. module: base
 #: help:change.user.password,confirm_password:0
@@ -9294,7 +9295,7 @@ msgstr ""
 #. module: base
 #: field:change.user.password,confirm_password:0
 msgid "Confirm Password"
-msgstr ""
+msgstr "Επαλήθευση Συνθηματικού"
 
 #. module: base
 #: code:addons/base/res/res_user.py:594
@@ -9311,14 +9312,14 @@ msgstr ""
 #. module: base
 #: model:res.widget,title:base.google_maps_widget
 msgid "Google Maps"
-msgstr ""
+msgstr "Google Maps"
 
 #. module: base
 #: view:change.user.password:0
 #: model:ir.actions.act_window,name:base.action_view_change_password_form
 #: view:res.users:0
 msgid "Change Password"
-msgstr ""
+msgstr "Αλλαγή Συνθηματικού"
 
 #. module: base
 #: help:change.user.password,current_password:0
@@ -9346,7 +9347,7 @@ msgstr ""
 #: code:addons/base/res/res_user.py:507
 #, python-format
 msgid "Warning!"
-msgstr ""
+msgstr "Προειδοποίηση!"
 
 #. module: base
 #: code:addons/base/ir/ir_model.py:304
@@ -9497,7 +9498,7 @@ msgstr ""
 #. module: base
 #: field:res.config.users,new_password:0 field:res.users,new_password:0
 msgid "Change password"
-msgstr ""
+msgstr "Αλλαγή Συνθηματικού"
 
 #. module: base
 #: model:ir.actions.act_window,help:base.open_module_tree
