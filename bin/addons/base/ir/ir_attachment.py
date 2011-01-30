@@ -30,7 +30,6 @@ class ir_attachment(osv.osv):
         """
         if not ids:
             return
-        ima = self.pool.get('ir.model.access')
         res_ids = {}
         if ids:
             if isinstance(ids, (int, long)):
