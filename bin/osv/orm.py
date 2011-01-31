@@ -2275,12 +2275,12 @@ class orm_template(object):
             # override defaults with the provided values, never allow the other way around
             defaults = self.default_get(cr, uid, missing_defaults, context)
             for dv in defaults:
-                if (dv in self._columns and self._columns[dv]._type == 'many2many') \
-                     or (dv in self._inherit_fields and self._inherit_fields[dv][2]._type == 'many2many') \
+                if ((dv in self._columns and self._columns[dv]._type == 'many2many') \
+                     or (dv in self._inherit_fields and self._inherit_fields[dv][2]._type == 'many2many')) \
                         and defaults[dv] and isinstance(defaults[dv][0], (int, long)):
                     defaults[dv] = [(6, 0, defaults[dv])]
-                if dv in self._columns and self._columns[dv]._type == 'one2many' \
-                    or (dv in self._inherit_fields and self._inherit_fields[dv][2]._type == 'one2many') \
+                if (dv in self._columns and self._columns[dv]._type == 'one2many' \
+                    or (dv in self._inherit_fields and self._inherit_fields[dv][2]._type == 'one2many')) \
                         and isinstance(defaults[dv], (list, tuple)) and isinstance(defaults[dv][0], dict):
                     defaults[dv] = [(0, 0, x) for x in defaults[dv]]
             #if self._debug:
@@ -4764,7 +4764,7 @@ class orm(orm_template):
         trans_obj = self.pool.get('ir.translation')
         fields = self.fields_get(cr, uid, context=context)
 
-        translation_records = []
+        translation_names = []
         for field_name, field_def in fields.items():
             # we must recursively copy the translations for o2o and o2m
             if field_def['type'] in ('one2one', 'one2many'):
@@ -4784,16 +4784,31 @@ class orm(orm_template):
                 elif field_name in self._inherit_fields:
                     trans_name = self._inherit_fields[field_name][0] + "," + field_name
                 if trans_name:
-                    trans_ids = trans_obj.search(cr, uid, [
-                            ('name', '=', trans_name),
-                            ('res_id', '=', old_id)
-                    ])
-                    translation_records.extend(trans_obj.read(cr, uid, trans_ids, context=context))
+                    translation_names.append(trans_name)
 
-        for record in translation_records:
-            del record['id']
-            record['res_id'] = new_id
-            trans_obj.create(cr, uid, record, context=context)
+        if translation_names:
+            # first, find all ids of translations that already exist
+            trans_exist_ids = trans_obj.search(cr, uid, [
+                    ('name', 'in', translation_names),
+                    ('res_id', '=', new_id)
+                ])
+            if trans_exist_ids:
+                # Remove from the list the names that are already translated
+                for res in trans_obj.read(cr,uid, trans_exist_ids, ['name'], context=context):
+                    translation_names.remove(res['name'])
+            
+            trans_ids = []
+            if translation_names:
+                # then, locate the ones that we need to copy
+                trans_ids = trans_obj.search(cr, uid, [
+                        ('name', 'in', translation_names),
+                        ('res_id', '=', old_id)
+                    ])
+            if trans_ids:
+                for record in trans_obj.read(cr, uid, trans_ids, context=context):
+                    del record['id']
+                    record['res_id'] = new_id
+                    trans_obj.create(cr, uid, record, context=context)
 
 
     def copy(self, cr, uid, id, default=None, context=None):

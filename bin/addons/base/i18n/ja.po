@@ -4,15 +4,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: openobject-server\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2010-12-16 15:02+0000\n"
-"PO-Revision-Date: 2010-09-09 06:58+0000\n"
+"POT-Creation-Date: 2011-01-11 11:14+0000\n"
+"PO-Revision-Date: 2011-01-19 13:31+0000\n"
 "Last-Translator: Harry (Open ERP) <hmo@tinyerp.com>\n"
 "Language-Team: Japanese <ja@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-12-17 04:49+0000\n"
-"X-Generator: Launchpad (build Unknown)\n"
+"X-Launchpad-Export-Date: 2011-01-20 06:09+0000\n"
+"X-Generator: Launchpad (build 12177)\n"
 
 #. module: base
 #: code:addons/base/ir/ir_actions.py:0 code:addons/base/ir/ir_model.py:0
@@ -73,7 +73,7 @@ msgstr "カスタム・フィールドは、x_で始まる名前を持ってい�
 #: code:addons/base/ir/ir_model.py:0
 #, python-format
 msgid "Model %s Does not Exist !"
-msgstr "モデル %s がありません！"
+msgstr ""
 
 #. module: base
 #: code:addons/base/ir/ir_model.py:0
@@ -103,7 +103,7 @@ msgstr ""
 #: code:addons/base/ir/ir_model.py:0
 #, python-format
 msgid "You can not read this document! (%s)"
-msgstr "あなたはこの文書を読むことができません！（%s)"
+msgstr ""
 
 #. module: base
 #: code:addons/base/ir/ir_model.py:0
@@ -236,9 +236,6 @@ msgid ""
 "You try to install the module '%s' that depends on the module:'%s'.\n"
 "But this module is not available in your system."
 msgstr ""
-"あなたは、モジュール %s をインストールしようとしていて、そのモジュールは、モ"
-"ジュール %s に依存しています。\n"
-"しかし、このモジュールは、あなたのシステムでは利用可能ではありません。"
 
 #. module: base
 #: code:addons/base/module/module.py:0
@@ -1451,7 +1448,7 @@ msgstr ""
 #. module: base
 #: field:ir.report.custom.fields,width:0
 msgid "Fixed Width"
-msgstr "固定幅"
+msgstr ""
 
 #. module: base
 #: field:ir.rule,domain_force:0
@@ -1482,7 +1479,7 @@ msgstr ""
 #. module: base
 #: field:ir.rule.group,rules:0
 msgid "Tests"
-msgstr "テスト"
+msgstr ""
 
 #. module: base
 #: field:ir.sequence,code:0 field:ir.sequence.type,code:0
@@ -2626,7 +2623,7 @@ msgstr ""
 #. module: base
 #: help:ir.rule.group,rules:0
 msgid "The rule is satisfied if at least one test is True"
-msgstr "このルールは、少なくとも一つのテストが通ることで満たされます。"
+msgstr ""
 
 #. module: base
 #: help:ir.sequence,condition:0
@@ -5218,7 +5215,7 @@ msgstr ""
 #. module: base
 #: selection:ir.actions.report.xml,report_type:0
 msgid "txt"
-msgstr "txt"
+msgstr ""
 
 #. module: base
 #: selection:ir.actions.server,state:0
@@ -5301,7 +5298,7 @@ msgstr ""
 #. module: base
 #: selection:ir.actions.todo,type:0
 msgid "Configure"
-msgstr "設定する"
+msgstr ""
 
 #. module: base
 #: selection:ir.actions.todo,type:0 selection:res.partner.address,type:0
@@ -5511,7 +5508,7 @@ msgstr ""
 #. module: base
 #: selection:ir.report.custom,type:0
 msgid "Bar Chart"
-msgstr "棒グラフ"
+msgstr ""
 
 #. module: base
 #: selection:ir.report.custom,type:0
@@ -5621,7 +5618,7 @@ msgstr ""
 #. module: base
 #: selection:ir.rule,operator:0
 msgid ">="
-msgstr ">="
+msgstr ""
 
 #. module: base
 #: selection:ir.rule,operator:0
@@ -6451,7 +6448,7 @@ msgstr ""
 #. module: base
 #: selection:res.config.view,view:0
 msgid "Extended Interface"
-msgstr "拡張インターフェース"
+msgstr ""
 
 #. module: base
 #: selection:res.config.view,view:0
@@ -6911,7 +6908,7 @@ msgstr ""
 #. module: base
 #: view:ir.module.repository:0
 msgid "Repository"
-msgstr "リポジトリ"
+msgstr ""
 
 #. module: base
 #: view:ir.property:0
@@ -7515,7 +7512,7 @@ msgstr ""
 #. module: base
 #: view:wizard.module.lang.export:0
 msgid "To browse official translations, you can visit this link: "
-msgstr "公式の翻訳は、次のリンクで見ることができます： "
+msgstr ""
 
 #. module: base
 #: view:wizard.module.lang.export:0
@@ -7806,8 +7803,6 @@ msgstr ""
 #: wizard_view:module.upgrade,end:0 wizard_view:module.upgrade,start:0
 msgid "You may have to reinstall some language pack."
 msgstr ""
-"あなたは、いくつかの言語パックを再インストールしなければならないかもしれませ"
-"ん。"
 
 #. module: base
 #: wizard_view:module.upgrade,next:0

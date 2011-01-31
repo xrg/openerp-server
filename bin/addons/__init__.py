@@ -899,14 +899,14 @@ def load_modules(db, force_demo=False, status=None, update_module=False):
             logger.debug('Updating graph with %d more modules' % (len(module_list)))
             processed_modules.extend(load_module_graph(cr, graph, status, report=report, skip_modules=processed_modules))
 
+        # load custom models
+        cr.execute('SELECT model FROM ir_model WHERE state=%s', ('manual',))
+        for model in cr.dictfetchall():
+            pool.get('ir.model').instanciate(cr, 1, model['model'], {})
+
         # STEP 4: Finish and cleanup
         if processed_modules:
-            # load custom models
-            cr.execute('SELECT model FROM ir_model WHERE state=%s', ('manual',))
-            for model in cr.dictfetchall():
-                pool.get('ir.model').instanciate(cr, 1, model['model'], {})
-
-            cr.execute("""SELECT model, name FROM ir_model WHERE id NOT IN (SELECT model_id FROM ir_model_access)""")
+            cr.execute("""SELECT model,name FROM ir_model WHERE id NOT IN (SELECT DISTINCT model_id FROM ir_model_access)""")
             for (model, name) in cr.fetchall():
                 model_obj = pool.get(model)
                 if model_obj and not isinstance(model_obj, (osv.osv.osv_memory, osv.orm.orm_deprecated)):

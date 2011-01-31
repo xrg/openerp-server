@@ -3,15 +3,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenERP Server 5.0.0\n"
 "Report-Msgid-Bugs-To: support@openerp.com\n"
-"POT-Creation-Date: 2010-12-16 15:02+0000\n"
-"PO-Revision-Date: 2010-12-16 08:59+0000\n"
+"POT-Creation-Date: 2011-01-11 11:14+0000\n"
+"PO-Revision-Date: 2011-01-19 13:31+0000\n"
 "Last-Translator: Fabien (Open ERP) <fp@tinyerp.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-12-17 04:53+0000\n"
-"X-Generator: Launchpad (build Unknown)\n"
+"X-Launchpad-Export-Date: 2011-01-20 06:11+0000\n"
+"X-Generator: Launchpad (build 12177)\n"
 
 #. module: base
 #: code:addons/base/ir/ir_actions.py:0 code:addons/base/ir/ir_model.py:0
@@ -72,43 +72,43 @@ msgstr "Назва поля користувача має починатися �
 #: code:addons/base/ir/ir_model.py:0
 #, python-format
 msgid "Model %s Does not Exist !"
-msgstr "Моделі %s Не Існує !"
+msgstr ""
 
 #. module: base
 #: code:addons/base/ir/ir_model.py:0
 #, python-format
 msgid "Password empty !"
-msgstr "Не введений пароль!"
+msgstr ""
 
 #. module: base
 #: code:addons/base/ir/ir_model.py:0
 #, python-format
 msgid "Password mismatch !"
-msgstr "Неправильний пароль!"
+msgstr ""
 
 #. module: base
 #: code:addons/base/ir/ir_model.py:0
 #, python-format
 msgid "You can not create this kind of document! (%s)"
-msgstr "Ви не можете створювати цей вид документу! (%s)"
+msgstr ""
 
 #. module: base
 #: code:addons/base/ir/ir_model.py:0
 #, python-format
 msgid "You can not delete this document! (%s)"
-msgstr "Ви не можете видалити цей документ! (%s)"
+msgstr ""
 
 #. module: base
 #: code:addons/base/ir/ir_model.py:0
 #, python-format
 msgid "You can not read this document! (%s)"
-msgstr "Ви не можете читати цей документ! (%s)"
+msgstr ""
 
 #. module: base
 #: code:addons/base/ir/ir_model.py:0
 #, python-format
 msgid "You can not remove the field '%s' !"
-msgstr "Ви не можете видалити поле '%s'!"
+msgstr ""
 
 #. module: base
 #: code:addons/base/ir/ir_model.py:0
@@ -120,49 +120,49 @@ msgstr "Ви не можете видалити модель '%s'!"
 #: code:addons/base/ir/ir_model.py:0
 #, python-format
 msgid "You can not write in this document! (%s)"
-msgstr "Ви не можете редагувати цей документ! (%s)"
+msgstr ""
 
 #. module: base
 #: code:addons/base/ir/ir_report_custom.py:0
 #, python-format
 msgid "Bar charts need at least two fields"
-msgstr "Для стовпчикової діаграми потрібно щонайменш два поля"
+msgstr ""
 
 #. module: base
 #: code:addons/base/ir/ir_report_custom.py:0
 #, python-format
 msgid "Enter at least one field !"
-msgstr "Введіть щонайменш одне поле!"
+msgstr ""
 
 #. module: base
 #: code:addons/base/ir/ir_report_custom.py:0
 #, python-format
 msgid "Field %d should be a figure"
-msgstr "Поле %d повинно бути числом"
+msgstr ""
 
 #. module: base
 #: code:addons/base/ir/ir_report_custom.py:0
 #, python-format
 msgid "Invalid operation"
-msgstr "Неправильна операція"
+msgstr ""
 
 #. module: base
 #: code:addons/base/ir/ir_report_custom.py:0
 #, python-format
 msgid "Pie charts need exactly two fields"
-msgstr "Для кругової діаграми потрібно два поля"
+msgstr ""
 
 #. module: base
 #: code:addons/base/ir/ir_report_custom.py:0
 #, python-format
 msgid "Second field should be figures"
-msgstr "Друге поле має бути числовим"
+msgstr ""
 
 #. module: base
 #: code:addons/base/ir/ir_report_custom.py:0
 #, python-format
 msgid "Tree can only be used in tabular reports"
-msgstr "Дерево може використовуватися лише у табличних звітах"
+msgstr ""
 
 #. module: base
 #: code:addons/base/ir/ir_report_custom.py:0
@@ -180,7 +180,7 @@ msgstr ""
 #: code:addons/base/maintenance/maintenance.py:0
 #, python-format
 msgid "Unable to find a valid contract"
-msgstr "Не можу знайти коректний контракт"
+msgstr ""
 
 #. module: base
 #: code:addons/base/maintenance/maintenance.py:0
@@ -229,7 +229,6 @@ msgstr ""
 #, python-format
 msgid "This url '%s' must provide an html file with links to zip modules"
 msgstr ""
-"Адреса '%s' повинна надати файл html з посиланнями на модулі в zip-архівах"
 
 #. module: base
 #: code:addons/base/module/module.py:0
@@ -238,8 +237,6 @@ msgid ""
 "You try to install the module '%s' that depends on the module:'%s'.\n"
 "But this module is not available in your system."
 msgstr ""
-"Ви намагаєтесь встановити модуль '%s' який залежить від модуля:'%s'.\n"
-"Але цей модуль не встановлено у вашій системі."
 
 #. module: base
 #: code:addons/base/module/module.py:0
@@ -454,7 +451,7 @@ msgstr "Помилка! Не можна створювати рекурсивн�
 #. module: base
 #: constraint:res.partner:0
 msgid "The VAT doesn't seem to be correct."
-msgstr "ПДВ здається некоректним"
+msgstr ""
 
 #. module: base
 #: constraint:res.partner.category:0
@@ -464,7 +461,7 @@ msgstr "Помилка! Не можна створювати рекурсивн�
 #. module: base
 #: constraint:res.users:0
 msgid "This user can not connect using this company !"
-msgstr "Цєй користувач не може підключатись до цієї компанії !"
+msgstr ""
 
 #. module: base
 #: field:ir.actions.act_window,auto_refresh:0
@@ -638,7 +635,7 @@ msgstr "Вид"
 #. module: base
 #: field:ir.actions.configuration.wizard,item_id:0
 msgid "Next Configuration Wizard"
-msgstr "Наступний майстер конфігурації"
+msgstr ""
 
 #. module: base
 #: field:ir.actions.configuration.wizard,name:0
@@ -658,12 +655,12 @@ msgstr "При багатьох док."
 #. module: base
 #: field:ir.actions.report.custom,name:0 field:ir.report.custom,name:0
 msgid "Report Name"
-msgstr "Назва звіту"
+msgstr ""
 
 #. module: base
 #: field:ir.actions.report.custom,report_id:0
 msgid "Report Ref."
-msgstr "Звіт"
+msgstr ""
 
 #. module: base
 #: field:ir.actions.report.custom,type:0 field:ir.actions.report.xml,type:0
@@ -684,7 +681,7 @@ msgstr "Перезавантажити з Вкладення"
 #. module: base
 #: field:ir.actions.report.xml,auto:0
 msgid "Automatic XSL:RML"
-msgstr "Автоматичний XSL:RML"
+msgstr ""
 
 #. module: base
 #: field:ir.actions.report.xml,header:0
@@ -709,12 +706,12 @@ msgstr "Назва"
 #. module: base
 #: field:ir.actions.report.xml,report_name:0
 msgid "Internal Name"
-msgstr "Внутрішня назва"
+msgstr ""
 
 #. module: base
 #: field:ir.actions.report.xml,report_rml:0
 msgid "RML path"
-msgstr "RML шлях"
+msgstr ""
 
 #. module: base
 #: field:ir.actions.report.xml,report_rml_content:0
@@ -859,7 +856,7 @@ msgstr "Активовано"
 #. module: base
 #: field:ir.actions.todo,end_date:0
 msgid "End Date"
-msgstr "Кінцева Дата"
+msgstr ""
 
 #. module: base
 #: field:ir.actions.todo,note:0
@@ -869,12 +866,12 @@ msgstr "Текст"
 #. module: base
 #: field:ir.actions.todo,start_date:0
 msgid "Start Date"
-msgstr "Дата Початку"
+msgstr ""
 
 #. module: base
 #: field:ir.actions.todo,start_on:0
 msgid "Start On"
-msgstr "Початок В"
+msgstr ""
 
 #. module: base
 #: field:ir.actions.todo,state:0 field:ir.module.module,state:0
@@ -941,7 +938,7 @@ msgstr "Опис"
 #. module: base
 #: field:ir.attachment,link:0
 msgid "Link"
-msgstr "Зв'язок"
+msgstr ""
 
 #. module: base
 #: field:ir.attachment,name:0
@@ -951,7 +948,7 @@ msgstr "Назва додатку"
 #. module: base
 #: field:ir.attachment,preview:0
 msgid "Image Preview"
-msgstr "Перегляд зображення"
+msgstr ""
 
 #. module: base
 #: field:ir.attachment,res_id:0 field:ir.model.data,res_id:0
@@ -995,7 +992,7 @@ msgstr "Од.виміру інтервалу"
 #. module: base
 #: field:ir.cron,nextcall:0
 msgid "Next Call Date"
-msgstr "Наступна Дата Дзвінка"
+msgstr ""
 
 #. module: base
 #: field:ir.cron,numbercall:0
@@ -1101,7 +1098,7 @@ msgstr "Назва об'єкта"
 #: field:ir.model,state:0 field:ir.model.fields,state:0
 #: field:ir.model.grid,state:0
 msgid "Manually Created"
-msgstr "Створено Вручну"
+msgstr ""
 
 #. module: base
 #: field:ir.model.access,group_id:0 field:ir.rule,rule_group:0
@@ -1121,7 +1118,7 @@ msgstr "Доступ для читання"
 #. module: base
 #: field:ir.model.access,perm_unlink:0
 msgid "Delete Permission"
-msgstr "Закрити Доступ"
+msgstr ""
 
 #. module: base
 #: field:ir.model.access,perm_write:0
@@ -1138,7 +1135,7 @@ msgstr "Пароль"
 #. module: base
 #: field:ir.model.config,password_check:0
 msgid "Confirmation"
-msgstr "Підтвердження"
+msgstr ""
 
 #. module: base
 #: field:ir.model.data,date_init:0
@@ -1228,7 +1225,7 @@ msgstr ""
 #. module: base
 #: field:ir.model.fields,selection:0
 msgid "Field Selection"
-msgstr "Вибір поля"
+msgstr ""
 
 #. module: base
 #: field:ir.model.fields,size:0
@@ -1345,12 +1342,12 @@ msgstr "Підлегле поле"
 #. module: base
 #: field:ir.report.custom,footer:0
 msgid "Report Footer"
-msgstr "Нижній колонтитул"
+msgstr ""
 
 #. module: base
 #: field:ir.report.custom,frequency:0
 msgid "Frequency"
-msgstr "Частота"
+msgstr ""
 
 #. module: base
 #: field:ir.report.custom,menu_id:0 field:ir.ui.menu,name:0
@@ -1361,37 +1358,37 @@ msgstr "Меню"
 #. module: base
 #: field:ir.report.custom,print_format:0
 msgid "Print format"
-msgstr "Формат друку"
+msgstr ""
 
 #. module: base
 #: field:ir.report.custom,print_orientation:0
 msgid "Print orientation"
-msgstr "Орієнтація друку"
+msgstr ""
 
 #. module: base
 #: field:ir.report.custom,repeat_header:0
 msgid "Repeat Header"
-msgstr "Повторювати заголовок"
+msgstr ""
 
 #. module: base
 #: field:ir.report.custom,sortby:0
 msgid "Sorted By"
-msgstr "Впорядковано за"
+msgstr ""
 
 #. module: base
 #: field:ir.report.custom,title:0
 msgid "Report Title"
-msgstr "Заголовок Звіту"
+msgstr ""
 
 #. module: base
 #: field:ir.report.custom.fields,alignment:0
 msgid "Alignment"
-msgstr "Вирівнювання"
+msgstr ""
 
 #. module: base
 #: field:ir.report.custom.fields,bgcolor:0
 msgid "Background Color"
-msgstr "Колір фону"
+msgstr ""
 
 #. module: base
 #: field:ir.report.custom.fields,cumulate:0
@@ -1404,7 +1401,7 @@ msgstr ""
 #: field:ir.report.custom.fields,fc2_op:0
 #: field:ir.report.custom.fields,fc3_op:0
 msgid "Relation"
-msgstr "Зв'язок"
+msgstr ""
 
 #. module: base
 #: field:ir.report.custom.fields,fc0_operande:0
@@ -1420,7 +1417,7 @@ msgstr "Обмеження"
 #: field:ir.report.custom.fields,fc2_condition:0
 #: field:ir.report.custom.fields,fc3_condition:0
 msgid "condition"
-msgstr "умова"
+msgstr ""
 
 #. module: base
 #: field:ir.report.custom.fields,field_child0:0
@@ -1445,7 +1442,7 @@ msgstr ""
 #. module: base
 #: field:ir.report.custom.fields,fontcolor:0
 msgid "Font color"
-msgstr "Колір шрифта"
+msgstr ""
 
 #. module: base
 #: field:ir.report.custom.fields,groupby:0
@@ -1461,17 +1458,17 @@ msgstr "невідомий"
 #. module: base
 #: field:ir.report.custom.fields,report_id:0
 msgid "Report Ref"
-msgstr "Звіт пос."
+msgstr ""
 
 #. module: base
 #: field:ir.report.custom.fields,width:0
 msgid "Fixed Width"
-msgstr "Фіксована ширина"
+msgstr ""
 
 #. module: base
 #: field:ir.rule,domain_force:0
 msgid "Force Domain"
-msgstr "Підставляти домен"
+msgstr ""
 
 #. module: base
 #: field:ir.rule,field_id:0 field:multi_company.default,field_id:0
@@ -1482,12 +1479,12 @@ msgstr "Поле"
 #. module: base
 #: field:ir.rule,operand:0
 msgid "Operand"
-msgstr "Операнд"
+msgstr ""
 
 #. module: base
 #: field:ir.rule,operator:0
 msgid "Operator"
-msgstr "Оператор"
+msgstr ""
 
 #. module: base
 #: field:ir.rule.group,global:0
@@ -1497,17 +1494,17 @@ msgstr "Глобальне"
 #. module: base
 #: field:ir.rule.group,rules:0
 msgid "Tests"
-msgstr "Тести"
+msgstr ""
 
 #. module: base
 #: field:ir.sequence,code:0 field:ir.sequence.type,code:0
 msgid "Sequence Code"
-msgstr "Код послідовності"
+msgstr ""
 
 #. module: base
 #: field:ir.sequence,name:0 field:ir.sequence.type,name:0
 msgid "Sequence Name"
-msgstr "Назва послідовності"
+msgstr ""
 
 #. module: base
 #: field:ir.sequence,number_increment:0
@@ -1661,12 +1658,12 @@ msgstr "Вид"
 #. module: base
 #: field:maintenance.contract,module_ids:0 view:maintenance.contract:0
 msgid "Covered Modules"
-msgstr "Охоплені Модулі"
+msgstr ""
 
 #. module: base
 #: field:maintenance.contract,name:0 field:maintenance.contract.wizard,name:0
 msgid "Contract ID"
-msgstr "Контракт №"
+msgstr ""
 
 #. module: base
 #: field:maintenance.contract.module,version:0 rml:ir.module.reference:0
@@ -1676,7 +1673,7 @@ msgstr "Версія"
 #. module: base
 #: field:maintenance.contract.wizard,state:0
 msgid "States"
-msgstr "Області"
+msgstr ""
 
 #. module: base
 #: field:res.bank,bic:0
@@ -2003,7 +2000,7 @@ msgstr "Звернення"
 #. module: base
 #: field:res.partner,user_id:0
 msgid "Dedicated Salesman"
-msgstr "Призначений продавець"
+msgstr ""
 
 #. module: base
 #: field:res.partner,vat:0
@@ -2100,42 +2097,42 @@ msgstr "Канал"
 #. module: base
 #: field:res.partner.event,document:0
 msgid "Document"
-msgstr "Документ"
+msgstr ""
 
 #. module: base
 #: field:res.partner.event,event_ical_id:0
 msgid "iCal id"
-msgstr "iCal id"
+msgstr ""
 
 #. module: base
 #: field:res.partner.event,partner_type:0
 msgid "Partner Relation"
-msgstr "Відношення до партнера"
+msgstr ""
 
 #. module: base
 #: field:res.partner.event,planned_cost:0
 msgid "Planned Cost"
-msgstr "Заплановані витрати"
+msgstr ""
 
 #. module: base
 #: field:res.partner.event,planned_revenue:0
 msgid "Planned Revenue"
-msgstr "Запланований дохід"
+msgstr ""
 
 #. module: base
 #: field:res.partner.event,probability:0
 msgid "Probability (0.50)"
-msgstr "Ймовірність (0.50)"
+msgstr ""
 
 #. module: base
 #: field:res.partner.event,som:0 field:res.partner.som,name:0
 msgid "State of Mind"
-msgstr "Настрій"
+msgstr ""
 
 #. module: base
 #: field:res.partner.event,type:0
 msgid "Type of Event"
-msgstr "Тип події"
+msgstr ""
 
 #. module: base
 #: field:res.partner.event.type,key:0
@@ -2145,12 +2142,12 @@ msgstr "Ключ"
 #. module: base
 #: field:res.partner.function,name:0
 msgid "Function Name"
-msgstr "Назва Функції"
+msgstr ""
 
 #. module: base
 #: field:res.partner.som,factor:0
 msgid "Factor"
-msgstr "Фактор"
+msgstr ""
 
 #. module: base
 #: field:res.partner.title,shortcut:0 view:ir.ui.view_sc:0
@@ -2221,17 +2218,17 @@ msgstr "Підсумок"
 #. module: base
 #: field:res.roles,child_id:0
 msgid "Children"
-msgstr "Дочірні"
+msgstr ""
 
 #. module: base
 #: field:res.roles,name:0
 msgid "Role Name"
-msgstr "Назва ролі"
+msgstr ""
 
 #. module: base
 #: field:res.roles,parent_id:0
 msgid "Parent"
-msgstr "Батьківська"
+msgstr ""
 
 #. module: base
 #: field:res.users,action_id:0
@@ -2269,7 +2266,7 @@ msgstr "Дія меню"
 #: model:ir.ui.menu,name:base.menu_action_res_roles_form view:res.roles:0
 #: view:res.users:0
 msgid "Roles"
-msgstr "Ролі"
+msgstr ""
 
 #. module: base
 #: field:res.users,signature:0
@@ -2382,7 +2379,7 @@ msgstr "Процес"
 #. module: base
 #: field:workflow.instance,uid:0
 msgid "User ID"
-msgstr "ІД Користувача"
+msgstr ""
 
 #. module: base
 #: field:workflow.transition,act_from:0
@@ -2397,7 +2394,7 @@ msgstr "Діяльність куди"
 #. module: base
 #: field:workflow.transition,role_id:0
 msgid "Role Required"
-msgstr "Обов'язкова роль"
+msgstr ""
 
 #. module: base
 #: field:workflow.transition,signal:0
@@ -2478,7 +2475,7 @@ msgstr "Додати чи ні корпоративний заголовок RML
 #: help:ir.actions.report.xml,report_rml:0
 msgid ""
 "The .rml path of the file or NULL if the content is in report_rml_content"
-msgstr "Шлях до RML-файлу або NULL, якщо вміст існує в report_rml_content"
+msgstr ""
 
 #. module: base
 #: help:ir.actions.server,action_id:0
@@ -2625,8 +2622,6 @@ msgid ""
 "Number of time the function is called,\n"
 "a negative number indicates that the function will always be called"
 msgstr ""
-"Скільки разів функція викликається.\n"
-"Негативне значення показує, що функція завжди буде викликатися."
 
 #. module: base
 #: help:ir.cron,priority:0
@@ -2654,12 +2649,12 @@ msgstr ""
 #. module: base
 #: help:ir.rule.group,global:0
 msgid "Make the rule global, otherwise it needs to be put on a group"
-msgstr "Зробіть правило загальним чи призначте його групі"
+msgstr ""
 
 #. module: base
 #: help:ir.rule.group,rules:0
 msgid "The rule is satisfied if at least one test is True"
-msgstr "Правило задовольняється, якщо принаймні один тест є 'істина'"
+msgstr ""
 
 #. module: base
 #: help:ir.sequence,condition:0
@@ -2667,8 +2662,6 @@ msgid ""
 "If set, sequence will only be used in case this python expression matches, "
 "and will precede other sequences."
 msgstr ""
-"Якщо выбрано, послідовність буде використана тількі у випадку, якщо цей "
-"python вираз співпаде, та буде перед іншими послідовностями."
 
 #. module: base
 #: help:ir.sequence,weight:0
@@ -2823,7 +2816,7 @@ msgstr "Активне поле дозволяє Вам зховати кате�
 #. module: base
 #: help:res.users,company_id:0
 msgid "The company this user is currently working on."
-msgstr "Компанія цього користувача"
+msgstr ""
 
 #. module: base
 #: help:res.users,password:0
@@ -2860,12 +2853,12 @@ msgstr "Зв'язки Дій Клієнта"
 #: model:ir.actions.act_window,name:base.act_values_form_action
 #: model:ir.ui.menu,name:base.menu_values_form_action
 msgid "Connect Actions To Client Events"
-msgstr "З'єднати Дії з Подіями Клієнта"
+msgstr ""
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action2
 msgid "Company Architecture"
-msgstr "Архітектура компанії"
+msgstr ""
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_attachment
@@ -2876,19 +2869,19 @@ msgstr "Долучення"
 #. module: base
 #: model:ir.actions.act_window,name:base.action_config_simple_view_form
 msgid "Configure Simple View"
-msgstr "Налаштувати простий вид"
+msgstr ""
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_config_user_form
 #: view:res.users:0
 msgid "Configure User"
-msgstr "Налаштувати користувача"
+msgstr ""
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_config_wizard_form
 #: model:ir.ui.menu,name:base.menu_config_module
 msgid "Configuration Wizard"
-msgstr "Майстер налаштування"
+msgstr ""
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_country
@@ -2919,19 +2912,19 @@ msgstr ""
 #: model:ir.ui.menu,name:base.menu_maintenance_contract_add
 #: view:maintenance.contract.wizard:0
 msgid "Add Maintenance Contract"
-msgstr "Додати Контракт на Підтримку"
+msgstr ""
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_maintenance_contract_form
 #: model:ir.ui.menu,name:base.menu_maintenance_contract
 msgid "Your Maintenance Contracts"
-msgstr "Ваші Контракти на Підтримку"
+msgstr ""
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_model_grid_security
 #: model:ir.ui.menu,name:base.menu_ir_access_grid
 msgid "Access Controls Grid"
-msgstr "Сітка контролю доступу"
+msgstr ""
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_model_model
@@ -2944,7 +2937,7 @@ msgstr "Об'єкти"
 #: model:ir.actions.act_window,name:base.action_module_category_tree
 #: model:ir.ui.menu,name:base.menu_action_module_category_tree
 msgid "Categories of Modules"
-msgstr "Категорії модулів"
+msgstr ""
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_partner_addess_tree
@@ -2973,7 +2966,7 @@ msgstr "Категорії партнерів"
 #: model:ir.actions.act_window,name:base.action_partner_category
 #: model:ir.ui.menu,name:base.menu_partner_category_main
 msgid "Partners by Categories"
-msgstr "Партнери за категоріями"
+msgstr ""
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_partner_customer_form
@@ -2984,7 +2977,7 @@ msgstr "Клієнти"
 #. module: base
 #: model:ir.actions.act_window,name:base.action_partner_customer_form_new
 msgid "New Partner"
-msgstr "Новий Партнер"
+msgstr ""
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_partner_function_form
@@ -3027,7 +3020,7 @@ msgstr "Термін оплати"
 #: model:ir.actions.act_window,name:base.action_report_custom
 #: view:ir.report.custom:0
 msgid "Custom Report"
-msgstr "Звіт користувача"
+msgstr ""
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_res_bank_form
@@ -3052,7 +3045,7 @@ msgstr "Структура компанії"
 #: model:ir.actions.act_window,name:base.action_res_roles
 #: model:ir.ui.menu,name:base.menu_action_res_roles
 msgid "Roles Structure"
-msgstr "Структура ролей"
+msgstr ""
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_res_users_my
@@ -3075,25 +3068,25 @@ msgstr "Дії на сервері"
 #: model:ir.actions.act_window,name:base.action_translation
 #: model:ir.ui.menu,name:base.menu_action_translation
 msgid "All terms"
-msgstr "Всі терміни"
+msgstr ""
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_translation_untrans
 #: model:ir.ui.menu,name:base.menu_action_translation_untrans
 msgid "Untranslated terms"
-msgstr "Неперекладені терміни"
+msgstr ""
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_wizard_lang_export
 #: model:ir.ui.menu,name:base.menu_wizard_lang_export
 msgid "Export a Translation File"
-msgstr "Експорт файлу перекладів"
+msgstr ""
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_wizard_update_translations
 #: model:ir.ui.menu,name:base.menu_wizard_update_translations
 msgid "Resynchronise Terms"
-msgstr "Синхронізувати Терміни"
+msgstr ""
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_workflow_form
@@ -3124,7 +3117,7 @@ msgstr "Робочі позиції"
 #: model:ir.actions.act_window,name:base.grant_menu_access
 #: model:ir.ui.menu,name:base.menu_grant_menu_access
 msgid "Manage Menus"
-msgstr "Керувати Меню"
+msgstr ""
 
 #. module: base
 #: model:ir.actions.act_window,name:base.ir_access_act
@@ -3136,13 +3129,13 @@ msgstr "Список контролю доступу"
 #: model:ir.actions.act_window,name:base.ir_action_report_custom
 #: model:ir.ui.menu,name:base.menu_ir_action_report_custom
 msgid "Report Custom"
-msgstr "Звіт користувача"
+msgstr ""
 
 #. module: base
 #: model:ir.actions.act_window,name:base.ir_action_report_xml
 #: model:ir.ui.menu,name:base.menu_ir_action_report_xml
 msgid "Report Xml"
-msgstr "Звіт Xml"
+msgstr ""
 
 #. module: base
 #: model:ir.actions.act_window,name:base.ir_action_window
@@ -3166,13 +3159,13 @@ msgstr "Заплановані дії"
 #: model:ir.actions.act_window,name:base.ir_property_form
 #: model:ir.ui.menu,name:base.menu_ir_property_form
 msgid "Default Properties"
-msgstr "Типові Властивості"
+msgstr ""
 
 #. module: base
 #: model:ir.actions.act_window,name:base.ir_property_form_all
 #: model:ir.ui.menu,name:base.menu_ir_property_form_all
 msgid "All Properties"
-msgstr "Всі властивості"
+msgstr ""
 
 #. module: base
 #: model:ir.actions.act_window,name:base.ir_sequence_actions
@@ -3193,32 +3186,32 @@ msgstr "Послідовності"
 #: model:ir.actions.act_window,name:base.ir_sequence_type
 #: model:ir.ui.menu,name:base.menu_ir_sequence_type
 msgid "Sequence Types"
-msgstr "Типи послідовностей"
+msgstr ""
 
 #. module: base
 #: model:ir.actions.act_window,name:base.open_module_tree_install
 #: model:ir.ui.menu,name:base.menu_module_tree_install
 msgid "Installed modules"
-msgstr "Встановлені модулі"
+msgstr ""
 
 #. module: base
 #: model:ir.actions.act_window,name:base.open_module_tree_uninstall
 #: model:ir.ui.menu,name:base.menu_module_tree_uninstall
 msgid "Uninstalled modules"
-msgstr "Вилучені модулі"
+msgstr ""
 
 #. module: base
 #: model:ir.actions.act_window,name:base.open_module_tree_upgrade
 #: model:ir.ui.menu,name:base.menu_module_tree_upgrade
 msgid "Modules to be installed, upgraded or removed"
-msgstr "Модулі до встановлення, оновлення, видалення"
+msgstr ""
 
 #. module: base
 #: model:ir.actions.act_window,name:base.open_repository_tree
 #: model:ir.ui.menu,name:base.menu_module_repository_tree
 #: view:ir.module.repository:0
 msgid "Repository list"
-msgstr "Список репозитаріїв"
+msgstr ""
 
 #. module: base
 #: model:ir.actions.act_window,name:base.res_lang_act_window
@@ -3238,31 +3231,31 @@ msgstr "Канали"
 #: model:ir.actions.act_window,name:base.res_partner_event_type-act
 #: model:ir.ui.menu,name:base.menu_res_partner_event_type-act
 msgid "Active Partner Events"
-msgstr "Активні Події Партнера"
+msgstr ""
 
 #. module: base
 #: model:ir.actions.act_window,name:base.res_partner_som-act
 #: model:ir.ui.menu,name:base.menu_res_partner_som-act
 msgid "States of mind"
-msgstr "Стани настрою"
+msgstr ""
 
 #. module: base
 #: model:ir.actions.act_window,name:base.res_request-act
 #: model:ir.ui.menu,name:base.menu_res_request_act
 msgid "My Requests"
-msgstr "Мої Запроси"
+msgstr ""
 
 #. module: base
 #: model:ir.actions.act_window,name:base.res_request-closed
 #: model:ir.ui.menu,name:base.next_id_12_close
 msgid "My Closed Requests"
-msgstr "Мої Закриті Запити"
+msgstr ""
 
 #. module: base
 #: model:ir.actions.act_window,name:base.res_request_link-act
 #: model:ir.ui.menu,name:base.menu_res_request_link_act
 msgid "Accepted Links in Requests"
-msgstr "Прийнятні посилання у запитах"
+msgstr ""
 
 #. module: base
 #: model:ir.actions.report.xml,name:base.ir_module_reference_print
@@ -3285,11 +3278,6 @@ msgid ""
 "understand. You will be able to switch to the extended view later.\n"
 "            "
 msgstr ""
-"Зробіть вибір між спрощеним і розширеним інтерфейсом.\n"
-"Якщо Ви тестуєте або використовуєте OpenERP вперше, ми радимо Вам\n"
-"спрощений інтерфейс, у якому менше опцій та полів, але він легший для\n"
-"розуміння. Ви будете в змозі перемкнути інтерфейс на розширений пізніше.\n"
-"            "
 
 #. module: base
 #: model:ir.actions.todo,note:base.config_wizard_step_user
@@ -3299,10 +3287,6 @@ msgid ""
 "of each users on the different objects of the system.\n"
 "            "
 msgstr ""
-"Створіть Ваших користувачів.\n"
-"Ви зможете призначити групи користувачам. Групи визначають права доступу "
-"кожного користувача до різних об'єктів системи.\n"
-"            "
 
 #. module: base
 #: model:ir.actions.wizard,name:base.res_partner_mass_mailing_wizard
@@ -3327,7 +3311,7 @@ msgstr "Імпорт модуля"
 #: model:ir.actions.wizard,name:base.wizard_lang_import
 #: model:ir.ui.menu,name:base.menu_wizard_lang_import
 msgid "Import a Translation File"
-msgstr "Імпорт файлу перекладу"
+msgstr ""
 
 #. module: base
 #: model:ir.actions.wizard,name:base.wizard_lang_install
@@ -3382,7 +3366,7 @@ msgstr "ir.actions.configuration.wizard"
 #: model:ir.model,name:base.model_ir_actions_report_custom
 #: selection:ir.ui.menu,action:0
 msgid "ir.actions.report.custom"
-msgstr "ir.actions.report.custom"
+msgstr ""
 
 #. module: base
 #: model:ir.model,name:base.model_ir_actions_report_xml
@@ -3444,7 +3428,7 @@ msgstr "ir.model.access"
 #. module: base
 #: model:ir.model,name:base.model_ir_model_config
 msgid "ir.model.config"
-msgstr "ir.model.config"
+msgstr ""
 
 #. module: base
 #: model:ir.model,name:base.model_ir_model_data
@@ -3454,7 +3438,7 @@ msgstr "ir.model.data"
 #. module: base
 #: model:ir.model,name:base.model_ir_model_grid
 msgid "Objects Security Grid"
-msgstr "Сітка безпеки об'єктів"
+msgstr ""
 
 #. module: base
 #: model:ir.model,name:base.model_ir_module_category view:ir.module.category:0
@@ -3474,12 +3458,12 @@ msgstr "ir.property"
 #. module: base
 #: model:ir.model,name:base.model_ir_report_custom
 msgid "ir.report.custom"
-msgstr "ir.report.custom"
+msgstr ""
 
 #. module: base
 #: model:ir.model,name:base.model_ir_report_custom_fields
 msgid "ir.report.custom.fields"
-msgstr "ir.report.custom.fields"
+msgstr ""
 
 #. module: base
 #: model:ir.model,name:base.model_ir_rule
@@ -3489,7 +3473,7 @@ msgstr "ir.rule"
 #. module: base
 #: model:ir.model,name:base.model_ir_rule_group
 msgid "ir.rule.group"
-msgstr "ir.rule.group"
+msgstr ""
 
 #. module: base
 #: model:ir.model,name:base.model_ir_sequence
@@ -3545,12 +3529,12 @@ msgstr "Контракт на Підтримку"
 #. module: base
 #: model:ir.model,name:base.model_maintenance_contract_module
 msgid "maintenance contract modules"
-msgstr "модулі контракту на підтримку"
+msgstr ""
 
 #. module: base
 #: model:ir.model,name:base.model_maintenance_contract_wizard
 msgid "maintenance.contract.wizard"
-msgstr "maintenance.contract.wizard"
+msgstr ""
 
 #. module: base
 #: model:ir.model,name:base.model_multi_company_default
@@ -3560,7 +3544,7 @@ msgstr ""
 #. module: base
 #: model:ir.model,name:base.model_res_company
 msgid "res.company"
-msgstr "res.company"
+msgstr ""
 
 #. module: base
 #: model:ir.model,name:base.model_res_config_view
@@ -3607,17 +3591,17 @@ msgstr "res.partner.event"
 #: model:ir.model,name:base.model_res_partner_event_type
 #: model:ir.ui.menu,name:base.next_id_14 view:res.partner.event:0
 msgid "Partner Events"
-msgstr "Події партнера"
+msgstr ""
 
 #. module: base
 #: model:ir.model,name:base.model_res_partner_function
 msgid "Function of the contact"
-msgstr "Функція контакту"
+msgstr ""
 
 #. module: base
 #: model:ir.model,name:base.model_res_partner_som
 msgid "res.partner.som"
-msgstr "res.partner.som"
+msgstr ""
 
 #. module: base
 #: model:ir.model,name:base.model_res_partner_title
@@ -3642,7 +3626,7 @@ msgstr "res.request.link"
 #. module: base
 #: model:ir.model,name:base.model_res_roles
 msgid "res.roles"
-msgstr "res.roles"
+msgstr ""
 
 #. module: base
 #: model:ir.model,name:base.model_res_users
@@ -3662,12 +3646,12 @@ msgstr "wizard.ir.model.menu.create.line"
 #. module: base
 #: model:ir.model,name:base.model_wizard_module_lang_export
 msgid "wizard.module.lang.export"
-msgstr "wizard.module.lang.export"
+msgstr ""
 
 #. module: base
 #: model:ir.model,name:base.model_wizard_module_update_translations
 msgid "wizard.module.update_translations"
-msgstr "wizard.module.update_translations"
+msgstr ""
 
 #. module: base
 #: model:ir.model,name:base.model_workflow
@@ -3712,7 +3696,7 @@ msgstr ""
 #. module: base
 #: model:ir.ui.menu,name:base.maintenance
 msgid "Maintenance"
-msgstr "Підтримка"
+msgstr ""
 
 #. module: base
 #: model:ir.ui.menu,name:base.menu_administration
@@ -3733,7 +3717,7 @@ msgstr "Налаштування"
 #. module: base
 #: model:ir.ui.menu,name:base.menu_custom_multicompany
 msgid "Multi company"
-msgstr "Декілька компаній"
+msgstr ""
 
 #. module: base
 #: model:ir.ui.menu,name:base.menu_localisation
@@ -3743,12 +3727,12 @@ msgstr "Локалізація"
 #. module: base
 #: model:ir.ui.menu,name:base.menu_low_workflow
 msgid "Workflow Items"
-msgstr "Елементи процесу"
+msgstr ""
 
 #. module: base
 #: model:ir.ui.menu,name:base.menu_management
 msgid "Modules Management"
-msgstr "Керування модулями"
+msgstr ""
 
 #. module: base
 #: model:ir.ui.menu,name:base.menu_security view:ir.actions.act_window:0
@@ -3773,7 +3757,7 @@ msgstr "Імпорт / експорт"
 #. module: base
 #: model:ir.ui.menu,name:base.menu_workflow_root
 msgid "Workflow Definitions"
-msgstr "Визначення процесів"
+msgstr ""
 
 #. module: base
 #: model:ir.ui.menu,name:base.next_id_10
@@ -5239,7 +5223,7 @@ msgstr "Графік"
 #. module: base
 #: selection:ir.actions.report.xml,report_type:0
 msgid "HTML from HTML"
-msgstr "HTML з HTML"
+msgstr ""
 
 #. module: base
 #: selection:ir.actions.report.xml,report_type:0
@@ -5249,32 +5233,32 @@ msgstr ""
 #. module: base
 #: selection:ir.actions.report.xml,report_type:0
 msgid "html"
-msgstr "html"
+msgstr ""
 
 #. module: base
 #: selection:ir.actions.report.xml,report_type:0
 msgid "odt"
-msgstr "odt"
+msgstr ""
 
 #. module: base
 #: selection:ir.actions.report.xml,report_type:0
 msgid "pdf"
-msgstr "pdf"
+msgstr ""
 
 #. module: base
 #: selection:ir.actions.report.xml,report_type:0
 msgid "raw"
-msgstr "сирий"
+msgstr ""
 
 #. module: base
 #: selection:ir.actions.report.xml,report_type:0
 msgid "sxw"
-msgstr "sxw"
+msgstr ""
 
 #. module: base
 #: selection:ir.actions.report.xml,report_type:0
 msgid "txt"
-msgstr "txt"
+msgstr ""
 
 #. module: base
 #: selection:ir.actions.server,state:0
@@ -5314,12 +5298,12 @@ msgstr "Записати об'єкт"
 #. module: base
 #: selection:ir.actions.todo,start_on:0
 msgid "At Once"
-msgstr "Одночасно"
+msgstr ""
 
 #. module: base
 #: selection:ir.actions.todo,start_on:0
 msgid "Auto"
-msgstr "Автоматично"
+msgstr ""
 
 #. module: base
 #: selection:ir.actions.todo,start_on:0
@@ -5347,7 +5331,7 @@ msgstr "Виконано"
 #. module: base
 #: selection:ir.actions.todo,state:0
 msgid "Not Started"
-msgstr "Не розпочато"
+msgstr ""
 
 #. module: base
 #: selection:ir.actions.todo,state:0
@@ -5357,7 +5341,7 @@ msgstr "Пропущено"
 #. module: base
 #: selection:ir.actions.todo,type:0
 msgid "Configure"
-msgstr "Налаштувати"
+msgstr ""
 
 #. module: base
 #: selection:ir.actions.todo,type:0 selection:res.partner.address,type:0
@@ -5367,7 +5351,7 @@ msgstr "Інше"
 #. module: base
 #: selection:ir.actions.todo,type:0
 msgid "Service"
-msgstr "Послуга"
+msgstr ""
 
 #. module: base
 #: selection:ir.actions.url,target:0
@@ -5427,7 +5411,7 @@ msgstr "Set NULL"
 #. module: base
 #: selection:ir.model.fields,select_level:0
 msgid "Advanced Search"
-msgstr "Розширений пошук"
+msgstr ""
 
 #. module: base
 #: selection:ir.model.fields,select_level:0
@@ -5452,7 +5436,7 @@ msgstr "Поле користувача"
 #. module: base
 #: selection:ir.module.module,license:0
 msgid "GPL-2"
-msgstr "GPL-2"
+msgstr ""
 
 #. module: base
 #: selection:ir.module.module,license:0
@@ -5462,7 +5446,7 @@ msgstr "GPL-2 або пізніша версія"
 #. module: base
 #: selection:ir.module.module,license:0
 msgid "GPL-3"
-msgstr "GPL-3"
+msgstr ""
 
 #. module: base
 #: selection:ir.module.module,license:0
@@ -5472,7 +5456,7 @@ msgstr "GPL-3 або пізніша версія"
 #. module: base
 #: selection:ir.module.module,license:0
 msgid "Other proprietary"
-msgstr "Інша пропрієтарна"
+msgstr ""
 
 #. module: base
 #: selection:ir.module.module,state:0
@@ -5522,27 +5506,27 @@ msgstr "Невідомо"
 #. module: base
 #: selection:ir.report.custom,frequency:0
 msgid "Daily"
-msgstr "Щодня"
+msgstr ""
 
 #. module: base
 #: selection:ir.report.custom,frequency:0
 msgid "Monthly"
-msgstr "Щомісяця"
+msgstr ""
 
 #. module: base
 #: selection:ir.report.custom,frequency:0
 msgid "Yearly"
-msgstr "Щороку"
+msgstr ""
 
 #. module: base
 #: selection:ir.report.custom,print_format:0
 msgid "a4"
-msgstr "А4"
+msgstr ""
 
 #. module: base
 #: selection:ir.report.custom,print_format:0
 msgid "a5"
-msgstr "А5"
+msgstr ""
 
 #. module: base
 #: selection:ir.report.custom,print_orientation:0
@@ -5557,47 +5541,47 @@ msgstr "Портрет"
 #. module: base
 #: selection:ir.report.custom,state:0
 msgid "Subscribed"
-msgstr "Підписаний"
+msgstr ""
 
 #. module: base
 #: selection:ir.report.custom,state:0
 msgid "Unsubscribed"
-msgstr "Непідписаний"
+msgstr ""
 
 #. module: base
 #: selection:ir.report.custom,type:0
 msgid "Bar Chart"
-msgstr "Стовпчиковий графік"
+msgstr ""
 
 #. module: base
 #: selection:ir.report.custom,type:0
 msgid "Line Plot"
-msgstr "Лінійний графік"
+msgstr ""
 
 #. module: base
 #: selection:ir.report.custom,type:0
 msgid "Pie Chart"
-msgstr "Діаграма"
+msgstr ""
 
 #. module: base
 #: selection:ir.report.custom,type:0
 msgid "Tabular"
-msgstr "Табличний"
+msgstr ""
 
 #. module: base
 #: selection:ir.report.custom.fields,alignment:0
 msgid "center"
-msgstr "центр"
+msgstr ""
 
 #. module: base
 #: selection:ir.report.custom.fields,alignment:0
 msgid "left"
-msgstr "вліво"
+msgstr ""
 
 #. module: base
 #: selection:ir.report.custom.fields,alignment:0
 msgid "right"
-msgstr "вправо"
+msgstr ""
 
 #. module: base
 #: selection:ir.report.custom.fields,fc0_op:0
@@ -5605,7 +5589,7 @@ msgstr "вправо"
 #: selection:ir.report.custom.fields,fc2_op:0
 #: selection:ir.report.custom.fields,fc3_op:0
 msgid "(year)="
-msgstr "(рік)="
+msgstr ""
 
 #. module: base
 #: selection:ir.report.custom.fields,fc0_op:0
@@ -5613,7 +5597,7 @@ msgstr "(рік)="
 #: selection:ir.report.custom.fields,fc2_op:0
 #: selection:ir.report.custom.fields,fc3_op:0
 msgid "<"
-msgstr "<"
+msgstr ""
 
 #. module: base
 #: selection:ir.report.custom.fields,fc0_op:0
@@ -5621,7 +5605,7 @@ msgstr "<"
 #: selection:ir.report.custom.fields,fc2_op:0
 #: selection:ir.report.custom.fields,fc3_op:0 selection:ir.rule,operator:0
 msgid "="
-msgstr "="
+msgstr ""
 
 #. module: base
 #: selection:ir.report.custom.fields,fc0_op:0
@@ -5629,7 +5613,7 @@ msgstr "="
 #: selection:ir.report.custom.fields,fc2_op:0
 #: selection:ir.report.custom.fields,fc3_op:0
 msgid ">"
-msgstr ">"
+msgstr ""
 
 #. module: base
 #: selection:ir.report.custom.fields,fc0_op:0
@@ -5637,52 +5621,52 @@ msgstr ">"
 #: selection:ir.report.custom.fields,fc2_op:0
 #: selection:ir.report.custom.fields,fc3_op:0 selection:ir.rule,operator:0
 msgid "in"
-msgstr "в"
+msgstr ""
 
 #. module: base
 #: selection:ir.report.custom.fields,operation:0
 msgid "Calculate Average"
-msgstr "Рахувати середнє"
+msgstr ""
 
 #. module: base
 #: selection:ir.report.custom.fields,operation:0
 msgid "Calculate Count"
-msgstr "Рахувати кількість"
+msgstr ""
 
 #. module: base
 #: selection:ir.report.custom.fields,operation:0
 msgid "Calculate Sum"
-msgstr "Рахувати суму"
+msgstr ""
 
 #. module: base
 #: selection:ir.report.custom.fields,operation:0
 msgid "Get Max"
-msgstr "Максимальне"
+msgstr ""
 
 #. module: base
 #: selection:ir.report.custom.fields,operation:0
 msgid "None"
-msgstr "Нічого"
+msgstr ""
 
 #. module: base
 #: selection:ir.rule,operator:0
 msgid "<="
-msgstr "<="
+msgstr ""
 
 #. module: base
 #: selection:ir.rule,operator:0
 msgid "<>"
-msgstr "<>"
+msgstr ""
 
 #. module: base
 #: selection:ir.rule,operator:0
 msgid ">="
-msgstr ">="
+msgstr ""
 
 #. module: base
 #: selection:ir.rule,operator:0
 msgid "child_of"
-msgstr "child_of"
+msgstr ""
 
 #. module: base
 #: selection:ir.server.object.lines,type:0
@@ -5697,7 +5681,7 @@ msgstr "Help"
 #. module: base
 #: selection:ir.translation,type:0
 msgid "RML"
-msgstr "RML"
+msgstr ""
 
 #. module: base
 #: selection:ir.translation,type:0
@@ -5732,527 +5716,527 @@ msgstr "XSL"
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_ABOUT"
-msgstr "STOCK_ABOUT"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_ADD"
-msgstr "STOCK_ADD"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_APPLY"
-msgstr "STOCK_APPLY"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_BOLD"
-msgstr "STOCK_BOLD"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_CANCEL"
-msgstr "STOCK_CANCEL"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_CDROM"
-msgstr "STOCK_CDROM"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_CLEAR"
-msgstr "STOCK_CLEAR"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_CLOSE"
-msgstr "STOCK_CLOSE"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_COLOR_PICKER"
-msgstr "STOCK_COLOR_PICKER"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_CONNECT"
-msgstr "STOCK_CONNECT"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_CONVERT"
-msgstr "STOCK_CONVERT"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_COPY"
-msgstr "STOCK_COPY"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_CUT"
-msgstr "STOCK_CUT"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_DELETE"
-msgstr "STOCK_DELETE"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_DIALOG_AUTHENTICATION"
-msgstr "STOCK_DIALOG_AUTHENTICATION"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_DIALOG_ERROR"
-msgstr "STOCK_DIALOG_ERROR"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_DIALOG_INFO"
-msgstr "STOCK_DIALOG_INFO"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_DIALOG_QUESTION"
-msgstr "STOCK_DIALOG_QUESTION"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_DIALOG_WARNING"
-msgstr "STOCK_DIALOG_WARNING"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_DIRECTORY"
-msgstr "STOCK_DIRECTORY"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_DISCONNECT"
-msgstr "STOCK_DISCONNECT"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_DND"
-msgstr "STOCK_DND"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_DND_MULTIPLE"
-msgstr "STOCK_DND_MULTIPLE"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_EDIT"
-msgstr "STOCK_EDIT"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_EXECUTE"
-msgstr "STOCK_EXECUTE"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_FILE"
-msgstr "STOCK_FILE"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_FIND"
-msgstr "STOCK_FIND"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_FIND_AND_REPLACE"
-msgstr "STOCK_FIND_AND_REPLACE"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_FLOPPY"
-msgstr "STOCK_FLOPPY"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_GOTO_BOTTOM"
-msgstr "STOCK_GOTO_BOTTOM"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_GOTO_FIRST"
-msgstr "STOCK_GOTO_FIRST"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_GOTO_LAST"
-msgstr "STOCK_GOTO_LAST"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_GOTO_TOP"
-msgstr "STOCK_GOTO_TOP"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_GO_BACK"
-msgstr "STOCK_GO_BACK"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_GO_DOWN"
-msgstr "STOCK_GO_DOWN"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_GO_FORWARD"
-msgstr "STOCK_GO_FORWARD"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_GO_UP"
-msgstr "STOCK_GO_UP"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_HARDDISK"
-msgstr "STOCK_HARDDISK"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_HELP"
-msgstr "STOCK_HELP"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_HOME"
-msgstr "STOCK_HOME"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_INDENT"
-msgstr "STOCK_INDENT"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_INDEX"
-msgstr "STOCK_INDEX"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_ITALIC"
-msgstr "STOCK_ITALIC"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_JUMP_TO"
-msgstr "STOCK_JUMP_TO"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_JUSTIFY_CENTER"
-msgstr "STOCK_JUSTIFY_CENTER"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_JUSTIFY_FILL"
-msgstr "STOCK_JUSTIFY_FILL"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_JUSTIFY_LEFT"
-msgstr "STOCK_JUSTIFY_LEFT"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_JUSTIFY_RIGHT"
-msgstr "STOCK_JUSTIFY_RIGHT"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_MEDIA_FORWARD"
-msgstr "STOCK_MEDIA_FORWARD"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_MEDIA_NEXT"
-msgstr "STOCK_MEDIA_NEXT"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_MEDIA_PAUSE"
-msgstr "STOCK_MEDIA_PAUSE"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_MEDIA_PLAY"
-msgstr "STOCK_MEDIA_PLAY"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_MEDIA_PREVIOUS"
-msgstr "STOCK_MEDIA_PREVIOUS"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_MEDIA_RECORD"
-msgstr "STOCK_MEDIA_RECORD"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_MEDIA_REWIND"
-msgstr "STOCK_MEDIA_REWIND"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_MEDIA_STOP"
-msgstr "STOCK_MEDIA_STOP"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_MISSING_IMAGE"
-msgstr "STOCK_MISSING_IMAGE"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_NETWORK"
-msgstr "STOCK_NETWORK"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_NEW"
-msgstr "STOCK_NEW"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_NO"
-msgstr "STOCK_NO"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_OK"
-msgstr "STOCK_OK"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_OPEN"
-msgstr "STOCK_OPEN"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_PASTE"
-msgstr "STOCK_PASTE"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_PREFERENCES"
-msgstr "STOCK_PREFERENCES"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_PRINT"
-msgstr "STOCK_PRINT"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_PRINT_PREVIEW"
-msgstr "STOCK_PRINT_PREVIEW"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_PROPERTIES"
-msgstr "STOCK_PROPERTIES"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_QUIT"
-msgstr "STOCK_QUIT"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_REDO"
-msgstr "STOCK_REDO"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_REFRESH"
-msgstr "STOCK_REFRESH"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_REMOVE"
-msgstr "STOCK_REMOVE"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_REVERT_TO_SAVED"
-msgstr "STOCK_REVERT_TO_SAVED"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_SAVE"
-msgstr "STOCK_SAVE"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_SAVE_AS"
-msgstr "STOCK_SAVE_AS"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_SELECT_COLOR"
-msgstr "STOCK_SELECT_COLOR"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_SELECT_FONT"
-msgstr "STOCK_SELECT_FONT"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_SORT_ASCENDING"
-msgstr "STOCK_SORT_ASCENDING"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_SORT_DESCENDING"
-msgstr "STOCK_SORT_DESCENDING"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_SPELL_CHECK"
-msgstr "STOCK_SPELL_CHECK"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_STOP"
-msgstr "STOCK_STOP"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_STRIKETHROUGH"
-msgstr "STOCK_STRIKETHROUGH"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_UNDELETE"
-msgstr "STOCK_UNDELETE"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_UNDERLINE"
-msgstr "STOCK_UNDERLINE"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_UNDO"
-msgstr "STOCK_UNDO"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_UNINDENT"
-msgstr "STOCK_UNINDENT"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_YES"
-msgstr "STOCK_YES"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_ZOOM_100"
-msgstr "STOCK_ZOOM_101"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_ZOOM_FIT"
-msgstr "STOCK_ZOOM_FIT"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_ZOOM_IN"
-msgstr "STOCK_ZOOM_IN"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "STOCK_ZOOM_OUT"
-msgstr "STOCK_ZOOM_OUT"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "terp-account"
-msgstr "terp-account"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "terp-administration"
-msgstr "terp-administration"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "terp-calendar"
-msgstr "terp-calendar"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "terp-crm"
-msgstr "terp-crm"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "terp-graph"
-msgstr "terp-graph"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "terp-hr"
-msgstr "terp-hr"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "terp-mrp"
-msgstr "terp-mrp"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "terp-partner"
-msgstr "terp-partner"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "terp-product"
-msgstr "terp-product"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "terp-project"
-msgstr "terp-project"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "terp-purchase"
-msgstr "terp-purchase"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "terp-report"
-msgstr "terp-report"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "terp-sale"
-msgstr "terp-sale"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "terp-stock"
-msgstr "terp-stock"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.menu,icon:0
 msgid "terp-tools"
-msgstr "terp-tools"
+msgstr ""
 
 #. module: base
 #: selection:ir.ui.view,type:0
@@ -6272,7 +6256,7 @@ msgstr "Типовий"
 #. module: base
 #: selection:maintenance.contract,kind:0
 msgid "Full"
-msgstr "Повністю"
+msgstr ""
 
 #. module: base
 #: selection:maintenance.contract,kind:0
@@ -6302,12 +6286,12 @@ msgstr ""
 #. module: base
 #: selection:maintenance.contract.wizard,state:0
 msgid "Validated"
-msgstr "Підтверджено"
+msgstr ""
 
 #. module: base
 #: selection:module.lang.install,init,lang:0
 msgid "Albanian / Shqipëri"
-msgstr "Албанська / Shqipëri"
+msgstr ""
 
 #. module: base
 #: selection:module.lang.install,init,lang:0
@@ -6322,7 +6306,7 @@ msgstr "Боснійська / bosanski jezik"
 #. module: base
 #: selection:module.lang.install,init,lang:0
 msgid "Bulgarian / български"
-msgstr "Болгарська / български"
+msgstr ""
 
 #. module: base
 #: selection:module.lang.install,init,lang:0
@@ -6387,7 +6371,7 @@ msgstr "Естонська / Estonian"
 #. module: base
 #: selection:module.lang.install,init,lang:0
 msgid "Finland / Suomi"
-msgstr "Фінська / Suomi"
+msgstr ""
 
 #. module: base
 #: selection:module.lang.install,init,lang:0
@@ -6447,17 +6431,17 @@ msgstr ""
 #. module: base
 #: selection:module.lang.install,init,lang:0
 msgid "Portugese (BR) / português (BR)"
-msgstr "Португальська / Portugese (BR)"
+msgstr ""
 
 #. module: base
 #: selection:module.lang.install,init,lang:0
 msgid "Portugese / português"
-msgstr "Португальська / Portugese"
+msgstr ""
 
 #. module: base
 #: selection:module.lang.install,init,lang:0
 msgid "Romanian / limba română"
-msgstr "Румунська / Romanian"
+msgstr ""
 
 #. module: base
 #: selection:module.lang.install,init,lang:0
@@ -6497,7 +6481,7 @@ msgstr "Турецька / Turkish"
 #. module: base
 #: selection:module.lang.install,init,lang:0
 msgid "Ukrainian / украї́нська мо́ва"
-msgstr "Ukrainian / Украї́нська Мо́ва"
+msgstr ""
 
 #. module: base
 #: selection:module.lang.install,init,lang:0
@@ -6507,12 +6491,12 @@ msgstr ""
 #. module: base
 #: selection:res.config.view,view:0
 msgid "Extended Interface"
-msgstr "Розширений інтерфейс"
+msgstr ""
 
 #. module: base
 #: selection:res.config.view,view:0
 msgid "Simplified Interface"
-msgstr "Спрощений інтерфейс"
+msgstr ""
 
 #. module: base
 #: selection:res.lang,direction:0
@@ -6542,27 +6526,27 @@ msgstr "Інвойс"
 #. module: base
 #: selection:res.partner.event,partner_type:0
 msgid "Commercial Prospect"
-msgstr "Перспективний"
+msgstr ""
 
 #. module: base
 #: selection:res.partner.event,partner_type:0
 msgid "Retailer"
-msgstr "Продавець"
+msgstr ""
 
 #. module: base
 #: selection:res.partner.event,type:0
 msgid "Prospect Contact"
-msgstr "Контакт перспективного"
+msgstr ""
 
 #. module: base
 #: selection:res.partner.event,type:0
 msgid "Purchase Offer"
-msgstr "Пропозиція купівлі"
+msgstr ""
 
 #. module: base
 #: selection:res.partner.event,type:0
 msgid "Sale Opportunity"
-msgstr "Можливість продажу"
+msgstr ""
 
 #. module: base
 #: selection:res.request,priority:0
@@ -6754,12 +6738,12 @@ msgstr "Наступний крок конфігурації"
 #. module: base
 #: view:ir.actions.configuration.wizard:0
 msgid "Skip Step"
-msgstr "Пропустити крок"
+msgstr ""
 
 #. module: base
 #: view:ir.actions.report.custom:0
 msgid "Report custom"
-msgstr "Інший звіт"
+msgstr ""
 
 #. module: base
 #: view:ir.actions.report.xml:0
@@ -6793,7 +6777,7 @@ msgstr ""
 #. module: base
 #: view:ir.actions.server:0
 msgid "Create / Write"
-msgstr "Створити / записати"
+msgstr ""
 
 #. module: base
 #: view:ir.actions.server:0
@@ -6869,7 +6853,7 @@ msgstr "Вкладення"
 #. module: base
 #: view:ir.attachment:0
 msgid "Preview"
-msgstr "Попередній перегляд"
+msgstr ""
 
 #. module: base
 #: view:ir.cron:0
@@ -6909,12 +6893,12 @@ msgstr "Опис моделі"
 #. module: base
 #: view:ir.model:0 view:ir.model.fields:0
 msgid "Security on Groups"
-msgstr "Безпека груп"
+msgstr ""
 
 #. module: base
 #: view:ir.model:0 view:res.request:0
 msgid "Status"
-msgstr "Ствтус"
+msgstr ""
 
 #. module: base
 #: view:ir.module.module:0
@@ -6969,7 +6953,7 @@ msgstr "Видалити (бета)"
 #. module: base
 #: view:ir.module.repository:0
 msgid "Repository"
-msgstr "Репозиторій"
+msgstr ""
 
 #. module: base
 #: view:ir.property:0
@@ -6979,44 +6963,42 @@ msgstr "Властивість"
 #. module: base
 #: view:ir.report.custom:0
 msgid "Subscribe Report"
-msgstr "Підписатися на звіт"
+msgstr ""
 
 #. module: base
 #: view:ir.report.custom:0
 msgid "Unsubscribe Report"
-msgstr "Відписатися від звіту"
+msgstr ""
 
 #. module: base
 #: view:ir.report.custom.fields:0
 msgid "Report Fields"
-msgstr "Поля звіту"
+msgstr ""
 
 #. module: base
 #: view:ir.rule:0
 msgid "If you don't force the domain, it will use the simple domain setup"
 msgstr ""
-"Якщо Ви не визначите галузь зараз, буде використовуватися просте "
-"встановлення галузі"
 
 #. module: base
 #: view:ir.rule:0
 msgid "Manual domain setup"
-msgstr "Ручне встановлення галузі"
+msgstr ""
 
 #. module: base
 #: view:ir.rule:0
 msgid "Simple domain setup"
-msgstr "Просте встановлення галузі"
+msgstr ""
 
 #. module: base
 #: view:ir.rule:0
 msgid "Test"
-msgstr "Тест"
+msgstr ""
 
 #. module: base
 #: view:ir.rule.group:0
 msgid "Multiple rules on same objects are joined using operator OR"
-msgstr "Декілька правил для однакових об'єктів об'єднуються оператором OR"
+msgstr ""
 
 #. module: base
 #: view:ir.rule.group:0
@@ -7026,7 +7008,7 @@ msgstr "Правила запису"
 #. module: base
 #: view:ir.rule.group:0
 msgid "The rule is satisfied if all test are True (AND)"
-msgstr "Правило задовольняється, якщо всі тести є True (AND)"
+msgstr ""
 
 #. module: base
 #: view:ir.sequence:0
@@ -7081,12 +7063,12 @@ msgstr "Тиждень року: %(woy)"
 #. module: base
 #: view:ir.sequence:0
 msgid "Year with century: %(year)s"
-msgstr "Рік з століттям: %рік"
+msgstr ""
 
 #. module: base
 #: view:ir.sequence:0
 msgid "Year without century: %(y)s"
-msgstr "Рік без століття: %(y)s"
+msgstr ""
 
 #. module: base
 #: view:ir.sequence.type:0
@@ -7131,17 +7113,17 @@ msgstr ""
 #. module: base
 #: view:maintenance.contract.wizard:0
 msgid "Could you check your contract information ?"
-msgstr "Ви могли б перевірити вашу інформацію контракту ?"
+msgstr ""
 
 #. module: base
 #: view:maintenance.contract.wizard:0
 msgid "Maintenance contract added !"
-msgstr "Контракт на підтримку додано !"
+msgstr ""
 
 #. module: base
 #: view:maintenance.contract.wizard:0
 msgid "_Cancel"
-msgstr "_Скасувати"
+msgstr ""
 
 #. module: base
 #: view:maintenance.contract.wizard:0
@@ -7151,7 +7133,7 @@ msgstr "_Закрити"
 #. module: base
 #: view:maintenance.contract.wizard:0
 msgid "_Validate"
-msgstr "_Підтвердити"
+msgstr ""
 
 #. module: base
 #: view:multi_company.default:0
@@ -7196,7 +7178,7 @@ msgstr "Ваш логотип розміром приблизно 450x150 пік
 #. module: base
 #: view:res.config.view:0
 msgid "Choose Your Mode"
-msgstr "Виберіть режим"
+msgstr ""
 
 #. module: base
 #: view:res.config.view:0
@@ -7205,19 +7187,16 @@ msgid ""
 "time. Less used options or fields are automatically hidden. You will be able "
 "to change this, later, through the Administration menu."
 msgstr ""
-"Виберіть спрощений інтерфейс, якщо Ви вперше випробовуєте OpenERP. Менш "
-"вживані опції та поля будуть прихованими. Ви зможете змінити інтерфейс "
-"пізніше через меню адміністрування."
 
 #. module: base
 #: view:res.config.view:0
 msgid "Configure simple view"
-msgstr "Налаштувати простий вид"
+msgstr ""
 
 #. module: base
 #: view:res.config.view:0
 msgid "Set"
-msgstr "Встановити"
+msgstr ""
 
 #. module: base
 #: view:res.lang:0
@@ -7232,22 +7211,22 @@ msgstr "%B - Повна назва місяця."
 #. module: base
 #: view:res.lang:0
 msgid "%H - Hour (24-hour clock) as a decimal number [00,23]."
-msgstr "%H - Години (24-годинний час) як десяткове число [00,23]."
+msgstr ""
 
 #. module: base
 #: view:res.lang:0
 msgid "%I - Hour (12-hour clock) as a decimal number [01,12]."
-msgstr "%I - Година (12-годинний час) як десяткове число [01,12]."
+msgstr ""
 
 #. module: base
 #: view:res.lang:0
 msgid "%M - Minute as a decimal number [00,59]."
-msgstr "%M - Хвилини як десяткове число [00,59]."
+msgstr ""
 
 #. module: base
 #: view:res.lang:0
 msgid "%S - Second as a decimal number [00,61]."
-msgstr "%S - Секунда як десяткове число [00,61]."
+msgstr ""
 
 #. module: base
 #: view:res.lang:0
@@ -7299,17 +7278,17 @@ msgstr "%c - Прийнятне відображення дати та часу.
 #. module: base
 #: view:res.lang:0
 msgid "%d - Day of the month as a decimal number [01,31]."
-msgstr "%d - День місяця як десяткове число [01,31]."
+msgstr ""
 
 #. module: base
 #: view:res.lang:0
 msgid "%j - Day of the year as a decimal number [001,366]."
-msgstr "%j - День року як десяткове число [001,366]."
+msgstr ""
 
 #. module: base
 #: view:res.lang:0
 msgid "%m - Month as a decimal number [01,12]."
-msgstr "%m - Місяць як десяткове число [01,12]."
+msgstr ""
 
 #. module: base
 #: view:res.lang:0
@@ -7319,7 +7298,7 @@ msgstr "%p - Еквівалент AM або PM."
 #. module: base
 #: view:res.lang:0
 msgid "%w - Weekday as a decimal number [0(Sunday),6]."
-msgstr "%w - День тиждня як десяткове число [0(Sunday),6]."
+msgstr ""
 
 #. module: base
 #: view:res.lang:0
@@ -7329,7 +7308,7 @@ msgstr "%x - Прийнятне представлення дати."
 #. module: base
 #: view:res.lang:0
 msgid "%y - Year without century as a decimal number [00,99]."
-msgstr "%y - Рік без століття цифрами [00,99]."
+msgstr ""
 
 #. module: base
 #: view:res.lang:0
@@ -7434,7 +7413,7 @@ msgstr "Знайти Партнера"
 #. module: base
 #: view:res.partner.address:0
 msgid "Partner Address"
-msgstr "Адреса партнера"
+msgstr ""
 
 #. module: base
 #: view:res.partner.address:0
@@ -7454,7 +7433,7 @@ msgstr "Категорія Партнера"
 #. module: base
 #: view:res.partner.event:0
 msgid "Document Link"
-msgstr "Зв'язок з документом"
+msgstr ""
 
 #. module: base
 #: view:res.partner.event:0
@@ -7464,7 +7443,7 @@ msgstr "Загальний опис"
 #. module: base
 #: view:res.partner.som:0
 msgid "Partner State of Mind"
-msgstr "Настрій"
+msgstr ""
 
 #. module: base
 #: view:res.payterm:0
@@ -7474,7 +7453,7 @@ msgstr "Термін Оплати"
 #. module: base
 #: view:res.request:0
 msgid "End of Request"
-msgstr "Кінець запиту"
+msgstr ""
 
 #. module: base
 #: view:res.request:0
@@ -7504,7 +7483,7 @@ msgstr "Запит на лінк"
 #. module: base
 #: view:res.roles:0
 msgid "Role"
-msgstr "Роль"
+msgstr ""
 
 #. module: base
 #: view:res.users:0
@@ -7514,7 +7493,7 @@ msgstr "Додати Користувача"
 #. module: base
 #: view:res.users:0
 msgid "Define New Users"
-msgstr "Визначити Нових Користувачів"
+msgstr ""
 
 #. module: base
 #: view:res.users:0
@@ -7526,12 +7505,12 @@ msgstr ""
 msgid ""
 "Please note that you will have to logout and relog if you change your "
 "password."
-msgstr "Зауваження: Вам треба вийти і ввійти до системи"
+msgstr ""
 
 #. module: base
 #: view:res.users:0
 msgid "Roles are used to defined available actions, provided by workflows."
-msgstr "Використані ролі для визначених наявних дій, наданих процесами."
+msgstr ""
 
 #. module: base
 #: view:res.users:0
@@ -7551,7 +7530,7 @@ msgstr "Закрити"
 #. module: base
 #: view:wizard.module.lang.export:0
 msgid "Export Data"
-msgstr "Експорт Даних"
+msgstr ""
 
 #. module: base
 #: view:wizard.module.lang.export:0
@@ -7561,17 +7540,17 @@ msgstr "Експорт виконано"
 #. module: base
 #: view:wizard.module.lang.export:0
 msgid "Export language"
-msgstr "Експорт мови"
+msgstr ""
 
 #. module: base
 #: view:wizard.module.lang.export:0
 msgid "Export translation file"
-msgstr "Експорт файлу перекладів"
+msgstr ""
 
 #. module: base
 #: view:wizard.module.lang.export:0
 msgid "Get file"
-msgstr "Отримати файл"
+msgstr ""
 
 #. module: base
 #: view:wizard.module.lang.export:0
@@ -7580,14 +7559,11 @@ msgid ""
 "through launchpad. We use their online interface to synchronize all "
 "translations efforts."
 msgstr ""
-"Офіційні пакети перекладу всіх модулів OpenERP/OpenObjects здійснюються "
-"через launchpad. Ми використовуємо їхній онлайн інтерфейс для синхронізації "
-"всіх робіт з перекладу."
 
 #. module: base
 #: view:wizard.module.lang.export:0
 msgid "To browse official translations, you can visit this link: "
-msgstr "Для перегляду офіційних перекладів перейдіть на це посилання: "
+msgstr ""
 
 #. module: base
 #: view:wizard.module.lang.export:0
@@ -7609,7 +7585,6 @@ msgid ""
 "This wizard will detect new terms in the application so that you can update "
 "them manually."
 msgstr ""
-"Майстер виявить нові умови у цьому застосунку і Ви можете оновити їх вручну."
 
 #. module: base
 #: view:wizard.module.update_translations:0
@@ -7619,17 +7594,17 @@ msgstr "Поновити"
 #. module: base
 #: view:wizard.module.update_translations:0
 msgid "Update Translations"
-msgstr "Поновити переклади"
+msgstr ""
 
 #. module: base
 #: view:workflow.activity:0
 msgid "Incoming transitions"
-msgstr "Вхідні переміщення"
+msgstr ""
 
 #. module: base
 #: view:workflow.activity:0
 msgid "Outgoing transitions"
-msgstr "Вихідні переміщення"
+msgstr ""
 
 #. module: base
 #: view:workflow.instance:0
@@ -7651,17 +7626,17 @@ msgstr "Елементи процесу"
 #: wizard_button:module.lang.install,start,end:0
 #: wizard_button:module.module.update,update,open_window:0
 msgid "Ok"
-msgstr "Ок"
+msgstr ""
 
 #. module: base
 #: wizard_button:module.lang.install,init,start:0
 msgid "Start installation"
-msgstr "Початок встановлення"
+msgstr ""
 
 #. module: base
 #: wizard_button:module.module.update,init,update:0
 msgid "Check new modules"
-msgstr "Перевірити нові модулі"
+msgstr ""
 
 #. module: base
 #: wizard_button:module.upgrade,end,config:0
@@ -7672,7 +7647,7 @@ msgstr "Почати налаштування"
 #. module: base
 #: wizard_button:module.upgrade,next,start:0
 msgid "Start Upgrade"
-msgstr "Розпочати оновлення"
+msgstr ""
 
 #. module: base
 #: wizard_button:res.partner.spam_send,init,send:0
@@ -7702,12 +7677,12 @@ msgstr "Код (напр.:ua__UA)"
 #. module: base
 #: wizard_field:module.lang.import,init,name:0
 msgid "Language name"
-msgstr "Назва мови"
+msgstr ""
 
 #. module: base
 #: wizard_field:module.module.update,init,repositories:0
 msgid "Repositories"
-msgstr "Репозиторії"
+msgstr ""
 
 #. module: base
 #: wizard_field:module.module.update,update,add:0
@@ -7723,7 +7698,7 @@ msgstr "Кількість обновлених модулів"
 #: wizard_field:module.upgrade,next,module_download:0
 #: wizard_view:module.upgrade,next:0
 msgid "Modules to download"
-msgstr "Модулі для завантаження"
+msgstr ""
 
 #. module: base
 #: wizard_field:module.upgrade,next,module_info:0
@@ -7762,12 +7737,12 @@ msgstr "Вибрати Звіт"
 #: wizard_view:base.module.import,import:0
 #: wizard_view:base.module.import,init:0
 msgid "Module import"
-msgstr "Імпорт модуля"
+msgstr ""
 
 #. module: base
 #: wizard_view:base.module.import,import:0
 msgid "Module successfully imported !"
-msgstr "Модуль успішно імпортовано !"
+msgstr ""
 
 #. module: base
 #: wizard_view:base.module.import,init:0
@@ -7777,22 +7752,22 @@ msgstr "Імпорт Модуля"
 #. module: base
 #: wizard_view:base.module.import,init:0
 msgid "Please give your module .ZIP file to import."
-msgstr "Будьласка надайте Ваш .ZIP файл модуля для імпорту."
+msgstr ""
 
 #. module: base
 #: wizard_view:module.lang.import,init:0
 msgid "Import New Language"
-msgstr "Імпортувати Нову Мову"
+msgstr ""
 
 #. module: base
 #: wizard_view:module.lang.import,init:0
 msgid "Import language"
-msgstr "Імпорт мови"
+msgstr ""
 
 #. module: base
 #: wizard_view:module.lang.import,init:0
 msgid "You can also import .po files."
-msgstr "Ви також можете імпортувати .po файли."
+msgstr ""
 
 #. module: base
 #: wizard_view:module.lang.import,init:0
@@ -7800,8 +7775,6 @@ msgid ""
 "You have to import a .CSV file wich is encoded in UTF-8.  Please check that "
 "the first line of your file is one of the following:"
 msgstr ""
-"Вам необхідно імпортувати файл .CSV, в форматі UTF-8. Будьласка "
-"переконайтесь, що перший рядок Вашого файла наступний:"
 
 #. module: base
 #: wizard_view:module.lang.import,init:0
@@ -7811,32 +7784,32 @@ msgstr ""
 #. module: base
 #: wizard_view:module.lang.import,init:0
 msgid "type,name,res_id,src,value"
-msgstr "тип,назва,№_ресурсу,джерело,значення"
+msgstr ""
 
 #. module: base
 #: wizard_view:module.lang.install,init:0
 msgid "Choose a language to install:"
-msgstr "Виберіть мову для встановлення:"
+msgstr ""
 
 #. module: base
 #: wizard_view:module.lang.install,init:0
 msgid "Note that this operation may take a few minutes."
-msgstr "Ця операція може зайняти декілька хвилин"
+msgstr ""
 
 #. module: base
 #: wizard_view:module.lang.install,init:0 wizard_view:module.upgrade,next:0
 msgid "System Upgrade"
-msgstr "Оновлення системи"
+msgstr ""
 
 #. module: base
 #: wizard_view:module.lang.install,start:0
 msgid "Installation Done"
-msgstr "Встановлення Завершено"
+msgstr ""
 
 #. module: base
 #: wizard_view:module.lang.install,start:0
 msgid "Language file loaded."
-msgstr "Файл мови завантажено."
+msgstr ""
 
 #. module: base
 #: wizard_view:module.lang.install,start:0
@@ -7844,13 +7817,11 @@ msgid ""
 "The selected language has been successfully installed. You must change the "
 "preferences of the user and open a new menu to view changes."
 msgstr ""
-"Вибрана мова успішно встановлена. Вам треба змінити параметри користувача і "
-"відкрити нове меню щоб продивитися зміни."
 
 #. module: base
 #: wizard_view:module.module.update,init:0
 msgid "Scan for new modules"
-msgstr "Пошук нових модулів"
+msgstr ""
 
 #. module: base
 #: wizard_view:module.module.update,init:0
@@ -7858,43 +7829,41 @@ msgid ""
 "This function will check for new modules in the 'addons' path and on module "
 "repositories:"
 msgstr ""
-"Ця функція перевірить наявність нових модулів у каталозі 'addons' і в "
-"репозитарії модулів:"
 
 #. module: base
 #: wizard_view:module.module.update,update:0
 msgid "New modules"
-msgstr "Нові модулі"
+msgstr ""
 
 #. module: base
 #: wizard_view:module.upgrade,end:0 wizard_view:module.upgrade,start:0
 msgid "System upgrade done"
-msgstr "Оновлення системи виконано"
+msgstr ""
 
 #. module: base
 #: wizard_view:module.upgrade,end:0 wizard_view:module.upgrade,start:0
 msgid "The modules have been upgraded / installed !"
-msgstr "Модулі оновлено/встановлено!"
+msgstr ""
 
 #. module: base
 #: wizard_view:module.upgrade,end:0 wizard_view:module.upgrade,start:0
 msgid "We suggest you to reload the menu tab (Ctrl+t Ctrl+r)."
-msgstr "Ми радимо Вам перезавантажити вкладку меню (Ctrl+t Ctrl+r)."
+msgstr ""
 
 #. module: base
 #: wizard_view:module.upgrade,end:0 wizard_view:module.upgrade,start:0
 msgid "You may have to reinstall some language pack."
-msgstr "Можливо Вам необхідно буде повторно встановити деякі мовні пакети."
+msgstr ""
 
 #. module: base
 #: wizard_view:module.upgrade,next:0
 msgid "Note that this operation my take a few minutes."
-msgstr "Ця дія може зайняти декілька хвилин."
+msgstr ""
 
 #. module: base
 #: wizard_view:module.upgrade,next:0
 msgid "Your system will be upgraded."
-msgstr "Вашу систему буде оновлено."
+msgstr ""
 
 #. module: base
 #: wizard_view:res.partner.sms_send,init:0
@@ -11229,9 +11198,6 @@ msgstr ""
 #~ msgid "The read method is not implemented on this object !"
 #~ msgstr "Метод read не реалізований у цьому об'єкті!"
 
-#~ msgid "You try to bypass an access rule (Document type: %s)."
-#~ msgstr "Ви намагаєтеся знехтувати правилами доступу (Тип документу: %s)."
-
 #~ msgid ""
 #~ "The sum of the data (2nd field) is null.\n"
 #~ "We can't draw a pie chart !"
@@ -11254,9 +11220,6 @@ msgstr ""
 #~ msgid "The perm_read method is not implemented on this object !"
 #~ msgstr "Метод perm_read не реалізований у цьому об'єкті!"
 
-#~ msgid "Others Partners"
-#~ msgstr "Інші партнери"
-
 #~ msgid "HR sector"
 #~ msgstr "Працевлаштування"
 
@@ -11266,75 +11229,29 @@ msgstr ""
 #~ msgid "Please check that all your lines have %d columns."
 #~ msgstr "Перевірте, чи всі рядки мають %d колонок."
 
-#~ msgid "Can not define a column %s. Reserved keyword !"
-#~ msgstr "Не можна визначити колонку %s. Зарезервоване ключове слово!"
-
 #~ msgid "The create method is not implemented on this object !"
 #~ msgstr "Метод create не реалізований у цьому об'єкті!"
-
-#~ msgid ""
-#~ "You try to install a module that depends on the module: %s.\n"
-#~ "But this module is not available in your system."
-#~ msgstr ""
-#~ "Ви намагаєтеся встановити модуль залежний від модуля: %s.\n"
-#~ "Але цей модуль недоступний у Вашій системі."
-
-#~ msgid "Grant Access To Menus"
-#~ msgstr "Надати Доступ до Меню"
 
 #~ msgid "The write method is not implemented on this object !"
 #~ msgstr "Метод write не реалізований у цьому об'єкті!"
 
-#~ msgid "Couldn't find tag '%s' in parent view !"
-#~ msgstr "Неможливо знайти теґ '%s' у батьківському виді!"
-
-#~ msgid "The name_get method is not implemented on this object !"
-#~ msgstr "Метод name_get не реалізований у цьому об'єкті!"
-
 #~ msgid "Not Implemented"
 #~ msgstr "Не реалізовано"
-
-#~ msgid "Macedonia"
-#~ msgstr "Македонія"
 
 #~ msgid "Addresses"
 #~ msgstr "Адреси"
 
-#~ msgid "Records were modified in the meanwhile"
-#~ msgstr "Записи тим часом були змінені"
-
-#~ msgid "The name_search method is not implemented on this object !"
-#~ msgstr "Метод name_search не реалізований у цьому об'єкті!"
-
 #~ msgid "The copy method is not implemented on this object !"
 #~ msgstr "Метод copy не реалізований у цьому об'єкті!"
 
-#~ msgid "Partner Functions"
-#~ msgstr "Функції партнера"
-
-#~ msgid "You cannot perform this operation."
-#~ msgstr "Ви не можете виконати цю операцію."
-
 #~ msgid "Not implemented get_memory method !"
 #~ msgstr "Метод get_memory не реалізовано!"
-
-#~ msgid "Customers Partners"
-#~ msgstr "Партнери-клієнти"
-
-#~ msgid "Bad file format"
-#~ msgstr "Неправильний формат файлу"
-
-#~ msgid "Number too large '%d', can not translate it"
-#~ msgstr "Номер надто великий '%d', неможливо створити його"
 
 #~ msgid "This method does not exist anymore"
 #~ msgstr "Цього метода вже не існує"
 
 #~ msgid "File Content"
 #~ msgstr "Вміст Файлу"
-
-#~ msgid "Unknown position in inherited view %s !"
-#~ msgstr "Невідома позиція в успадкованому виді %s!"
 
 #~ msgid "ValidateError"
 #~ msgstr "ValidateError"
@@ -11348,34 +11265,8 @@ msgstr ""
 #~ msgid "undefined get method !"
 #~ msgstr "невизначений метод get!"
 
-#~ msgid "Suppliers Partners"
-#~ msgstr "Партнери-постачальники"
-
-#~ msgid "Bad query."
-#~ msgstr "Неправильний запит."
-
-#~ msgid "Titles"
-#~ msgstr "Заголовки"
-
 #~ msgid "The search method is not implemented on this object !"
 #~ msgstr "Метод search не реалізований у цьому об'єкті!"
 
 #~ msgid "IT sector"
 #~ msgstr "Сфера IT"
-
-#~ msgid ""
-#~ "Make the rule global, otherwise it needs to be put on a group or user"
-#~ msgstr ""
-#~ "Зробіть правило глобальним, інакше його необхідно застосувати до групи "
-#~ "або користувача"
-
-#~ msgid ""
-#~ "Some installed modules depends on the module you plan to desinstall :\n"
-#~ " %s"
-#~ msgstr ""
-#~ "Деякі встановлені модулі залежать від модуля який Ви хочете "
-#~ "деінсталювати :\n"
-#~ " %s"
-
-#~ msgid "Module Repository"
-#~ msgstr "Репозитарій модулів"

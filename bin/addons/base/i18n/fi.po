@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: OpenERP Server 5.0.4\n"
 "Report-Msgid-Bugs-To: support@openerp.com\n"
 "POT-Creation-Date: 2011-01-11 11:14+0000\n"
-"PO-Revision-Date: 2011-01-12 08:52+0000\n"
+"PO-Revision-Date: 2011-01-30 22:08+0000\n"
 "Last-Translator: Sami Haahtinen <ressu@ressukka.net>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-01-13 04:39+0000\n"
+"X-Launchpad-Export-Date: 2011-01-31 06:08+0000\n"
 "X-Generator: Launchpad (build 12177)\n"
 
 #. module: base
@@ -33,7 +33,7 @@ msgstr "Saint Helena"
 #. module: base
 #: view:ir.actions.report.xml:0
 msgid "Other Configuration"
-msgstr ""
+msgstr "Muut määritukset"
 
 #. module: base
 #: selection:ir.property,type:0
@@ -47,6 +47,8 @@ msgid ""
 "The second argument of the many2many field %s must be a SQL table !You used "
 "%s, which is not a valid SQL table name."
 msgstr ""
+"Many2many kentän %s toisen argumentin pitää olla SQL taulu! Suottämäsi arvo "
+"%s, ei ole käypä SQL taulun nimi."
 
 #. module: base
 #: view:ir.values:0
@@ -171,12 +173,12 @@ msgstr "Swazimaa"
 #: code:addons/orm.py:3653
 #, python-format
 msgid "created."
-msgstr ""
+msgstr "luotu."
 
 #. module: base
 #: model:res.partner.category,name:base.res_partner_category_woodsuppliers0
 msgid "Wood Suppliers"
-msgstr ""
+msgstr "Puutavaran Toimittajat"
 
 #. module: base
 #: code:addons/base/module/module.py:303
@@ -207,13 +209,13 @@ msgstr ""
 #. module: base
 #: view:res.partner:0
 msgid "Search Partner"
-msgstr ""
+msgstr "Etsi kummpaneista"
 
 #. module: base
 #: code:addons/base/res/res_user.py:132
 #, python-format
 msgid "\"smtp_server\" needs to be set to send mails to users"
-msgstr ""
+msgstr "\"smtp_server\" pitää olla määritetty viestien lähettämiseksi"
 
 #. module: base
 #: code:addons/base/module/wizard/base_export_language.py:60
@@ -259,7 +261,7 @@ msgstr ""
 #. module: base
 #: sql_constraint:res.lang:0
 msgid "The name of the language must be unique !"
-msgstr ""
+msgstr "Kielen niim pitää olla uniikki"
 
 #. module: base
 #: selection:res.request,state:0
@@ -275,7 +277,7 @@ msgstr "Wizardin nimi"
 #: code:addons/orm.py:2160
 #, python-format
 msgid "Invalid group_by"
-msgstr ""
+msgstr "Virheellinen group_by"
 
 #. module: base
 #: field:res.partner,credit_limit:0
@@ -290,7 +292,7 @@ msgstr "Päivityksen ajankohta"
 #. module: base
 #: view:ir.attachment:0
 msgid "Owner"
-msgstr ""
+msgstr "Omistaja"
 
 #. module: base
 #: field:ir.actions.act_window,src_model:0
@@ -311,7 +313,7 @@ msgstr "ir.ui.view_sc"
 #: field:res.widget.user,widget_id:0
 #: field:res.widget.wizard,widgets_list:0
 msgid "Widget"
-msgstr ""
+msgstr "Elementti"
 
 #. module: base
 #: view:ir.model.access:0
@@ -377,7 +379,7 @@ msgstr "Ranskan Guayana"
 #. module: base
 #: selection:base.language.install,lang:0
 msgid "Greek / Ελληνικά"
-msgstr ""
+msgstr "Kreikka / Ελληνικά"
 
 #. module: base
 #: selection:base.language.install,lang:0
@@ -458,7 +460,7 @@ msgstr "Myynti ja hankinta"
 #. module: base
 #: view:ir.translation:0
 msgid "Untranslated"
-msgstr ""
+msgstr "Kääntämätön"
 
 #. module: base
 #: help:ir.actions.act_window,context:0
@@ -492,7 +494,7 @@ msgstr "Valitse suorettava toimintoikkuna, raportti tai ohjattu toiminto."
 #. module: base
 #: view:res.config.users:0
 msgid "New User"
-msgstr ""
+msgstr "Uusi käyttäjä"
 
 #. module: base
 #: view:base.language.export:0
@@ -523,7 +525,7 @@ msgstr "Jordania"
 #. module: base
 #: view:ir.module.module:0
 msgid "Certified"
-msgstr ""
+msgstr "Sertifioitu"
 
 #. module: base
 #: model:res.country,name:base.er
@@ -534,12 +536,12 @@ msgstr "Eritrea"
 #: view:res.config:0
 #: view:res.config.installer:0
 msgid "description"
-msgstr ""
+msgstr "kuvaus"
 
 #. module: base
 #: model:ir.ui.menu,name:base.menu_base_action_rule
 msgid "Automated Actions"
-msgstr ""
+msgstr "Automatisoidut Toiminnot"
 
 #. module: base
 #: model:ir.model,name:base.model_ir_actions_actions
@@ -567,7 +569,7 @@ msgstr ""
 #. module: base
 #: field:res.partner,title:0
 msgid "Partner Form"
-msgstr ""
+msgstr "Kumppani Lomake"
 
 #. module: base
 #: selection:base.language.install,lang:0
@@ -615,7 +617,7 @@ msgstr ""
 #. module: base
 #: model:ir.ui.menu,name:base.menu_crm_config_opportunity
 msgid "Opportunities"
-msgstr ""
+msgstr "Mahdollisuudet"
 
 #. module: base
 #: model:ir.model,name:base.model_base_language_export
@@ -631,6 +633,7 @@ msgstr "Papua-Uusi-Guinea"
 #: help:ir.actions.report.xml,report_type:0
 msgid "Report Type, e.g. pdf, html, raw, sxw, odt, html2html, mako2html, ..."
 msgstr ""
+"Raportin Tyyppi, esim. pdf, html, raw, sxw, odt, html2html, mako2html, ..."
 
 #. module: base
 #: model:res.partner.category,name:base.res_partner_category_4
@@ -645,12 +648,12 @@ msgstr ","
 #. module: base
 #: view:res.partner:0
 msgid "My Partners"
-msgstr ""
+msgstr "Omat Kumppanit"
 
 #. module: base
 #: view:ir.actions.report.xml:0
 msgid "XML Report"
-msgstr ""
+msgstr "XML Raportti"
 
 #. module: base
 #: model:res.country,name:base.es
@@ -672,7 +675,7 @@ msgstr ""
 #: model:ir.actions.act_window,name:base.action_view_base_module_upgrade
 #: model:ir.model,name:base.model_base_module_upgrade
 msgid "Module Upgrade"
-msgstr ""
+msgstr "Modulin Päivitys"
 
 #. module: base
 #: view:res.config.users:0
@@ -814,13 +817,13 @@ msgstr "Guam (Yhdysvallat)"
 #. module: base
 #: model:ir.ui.menu,name:base.menu_hr_project
 msgid "Human Resources Dashboard"
-msgstr ""
+msgstr "Henkilöstö Työpöytä"
 
 #. module: base
 #: code:addons/base/res/res_user.py:507
 #, python-format
 msgid "Setting empty passwords is not allowed for security reasons!"
-msgstr ""
+msgstr "Tyhjän salasanan käyttäminen ei ole sallittua tietoturvasyistä!"
 
 #. module: base
 #: selection:ir.actions.server,state:0
@@ -854,23 +857,23 @@ msgstr "Siirtymät"
 #: code:addons/orm.py:4020
 #, python-format
 msgid "Record #%d of %s not found, cannot copy!"
-msgstr ""
+msgstr "Tietuetta #%d / %s ei löydy, ei voi kopioida!"
 
 #. module: base
 #: field:ir.module.module,contributors:0
 msgid "Contributors"
-msgstr ""
+msgstr "Tekijät"
 
 #. module: base
 #: selection:ir.property,type:0
 msgid "Char"
-msgstr ""
+msgstr "Merkki"
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_publisher_warranty_contract_form
 #: model:ir.ui.menu,name:base.menu_publisher_warranty_contract
 msgid "Contracts"
-msgstr ""
+msgstr "Sopimukset"
 
 #. module: base
 #: selection:base.language.install,lang:0
@@ -967,7 +970,7 @@ msgstr "Haiti"
 #: view:ir.ui.view:0
 #: selection:ir.ui.view,type:0
 msgid "Search"
-msgstr ""
+msgstr "Haku"
 
 #. module: base
 #: code:addons/osv.py:136
@@ -989,7 +992,7 @@ msgstr ""
 #: code:addons/base/res/res_user.py:206
 #, python-format
 msgid "Operation Canceled"
-msgstr ""
+msgstr "Toiminto Peruutettu"
 
 #. module: base
 #: help:base.language.export,lang:0
@@ -1004,12 +1007,12 @@ msgstr ""
 #. module: base
 #: model:ir.ui.menu,name:base.menu_hr_dasboard
 msgid "Dashboard"
-msgstr ""
+msgstr "Työpöytä"
 
 #. module: base
 #: model:ir.ui.menu,name:base.menu_purchase_root
 msgid "Purchases"
-msgstr ""
+msgstr "Ostot"
 
 #. module: base
 #: model:res.country,name:base.md
@@ -1175,7 +1178,7 @@ msgstr "Valtio"
 #. module: base
 #: selection:ir.property,type:0
 msgid "Float"
-msgstr ""
+msgstr "Liukuluku"
 
 #. module: base
 #: model:ir.model,name:base.model_res_request_link
@@ -1283,7 +1286,7 @@ msgstr ""
 #: code:addons/base/res/res_company.py:66
 #, python-format
 msgid " (copy)"
-msgstr ""
+msgstr " (kopio)"
 
 #. module: base
 #: view:res.lang:0
@@ -1306,7 +1309,7 @@ msgstr ""
 #: model:ir.actions.act_window,name:base.res_widget_act_window
 #: model:ir.ui.menu,name:base.menu_res_widget_act_window
 msgid "Homepage Widgets"
-msgstr ""
+msgstr "Kotisivun Elementit"
 
 #. module: base
 #: help:ir.actions.server,message:0
@@ -1375,7 +1378,7 @@ msgstr "Malawi"
 #: code:addons/base/res/res_user.py:413
 #, python-format
 msgid "%s (copy)"
-msgstr ""
+msgstr "%s (kopio)"
 
 #. module: base
 #: field:res.partner.address,type:0
@@ -1385,7 +1388,7 @@ msgstr "Osoitteen tyyppi"
 #. module: base
 #: view:ir.ui.menu:0
 msgid "Full Path"
-msgstr ""
+msgstr "Täydellinen tiedostopolku"
 
 #. module: base
 #: view:res.request:0
@@ -1406,7 +1409,7 @@ msgstr ""
 #. module: base
 #: view:ir.ui.view:0
 msgid "Advanced"
-msgstr ""
+msgstr "Laajennettu"
 
 #. module: base
 #: model:res.country,name:base.fi
@@ -1431,12 +1434,12 @@ msgstr "Jätä tyhjäksi jos haluat ettei käyttäjä voi yhdistyä järjestelm�
 #. module: base
 #: view:ir.actions.server:0
 msgid "Create / Write / Copy"
-msgstr ""
+msgstr "Luku / Kirjoitus / Kopiointi"
 
 #. module: base
 #: view:base.language.export:0
 msgid "https://help.launchpad.net/Translations"
-msgstr ""
+msgstr "https://help.launchpad.net/Translations"
 
 #. module: base
 #: field:ir.actions.act_window,view_mode:0
@@ -1459,7 +1462,7 @@ msgstr "Search_memory-menetelmä ei käytössä!"
 #. module: base
 #: view:res.log:0
 msgid "Logs"
-msgstr ""
+msgstr "Lokit"
 
 #. module: base
 #: selection:base.language.install,lang:0
@@ -1486,7 +1489,7 @@ msgstr "Logo"
 #. module: base
 #: view:res.partner.address:0
 msgid "Search Contact"
-msgstr ""
+msgstr "Etsi Yhteystiedoista"
 
 #. module: base
 #: view:ir.module.module:0
@@ -1664,7 +1667,7 @@ msgstr "Färsaaret"
 #: selection:res.config.view,view:0
 #: selection:res.users,view:0
 msgid "Simplified"
-msgstr ""
+msgstr "Yksinkertaistettu"
 
 #. module: base
 #: model:res.country,name:base.st
@@ -1762,7 +1765,7 @@ msgstr "Zimbabwe"
 #. module: base
 #: view:base.module.update:0
 msgid "Please be patient, as this operation may take a few seconds..."
-msgstr ""
+msgstr "Toiminto saattaa kestää hetken, ole ystävällinen ja odota..."
 
 #. module: base
 #: help:ir.values,action_id:0
@@ -1881,7 +1884,7 @@ msgstr ""
 #. module: base
 #: model:ir.ui.menu,name:base.menu_email_gateway_form
 msgid "Messages"
-msgstr ""
+msgstr "Viestit"
 
 #. module: base
 #: code:addons/base/ir/ir_model.py:303
@@ -2001,7 +2004,7 @@ msgstr "res.partner.event"
 #. module: base
 #: model:res.widget,title:base.facebook_widget
 msgid "Facebook"
-msgstr ""
+msgstr "Facebook"
 
 #. module: base
 #: model:res.country,name:base.am
@@ -2017,7 +2020,7 @@ msgstr ""
 #. module: base
 #: constraint:ir.cron:0
 msgid "Invalid arguments"
-msgstr ""
+msgstr "Virheellisiä argumentteja"
 
 #. module: base
 #: model:res.country,name:base.se
@@ -2057,7 +2060,7 @@ msgstr "Pankkitilin tyyppi"
 #: field:res.config.users,config_logo:0
 #: field:res.config.view,config_logo:0
 msgid "Image"
-msgstr ""
+msgstr "Kuva"
 
 #. module: base
 #: view:ir.actions.server:0
@@ -2067,7 +2070,7 @@ msgstr "Iteraatiotoimintojen asetukset"
 #. module: base
 #: selection:publisher_warranty.contract,state:0
 msgid "Canceled"
-msgstr ""
+msgstr "Peruttu"
 
 #. module: base
 #: model:res.country,name:base.at
@@ -2092,7 +2095,7 @@ msgstr "Kalenteri"
 #. module: base
 #: field:res.partner.address,partner_id:0
 msgid "Partner Name"
-msgstr ""
+msgstr "Kumppanin Nimi"
 
 #. module: base
 #: field:workflow.activity,signal_send:0
@@ -2128,7 +2131,7 @@ msgstr "Vedos"
 #: selection:res.config.view,view:0
 #: selection:res.users,view:0
 msgid "Extended"
-msgstr ""
+msgstr "Laajennettu"
 
 #. module: base
 #: model:ir.actions.act_window,help:base.action_partner_title_contact
@@ -2280,7 +2283,7 @@ msgstr "Tunnusviite"
 #: model:ir.actions.server,name:base.action_start_configurator
 #: model:ir.ui.menu,name:base.menu_view_base_module_configuration
 msgid "Start Configuration"
-msgstr ""
+msgstr "Aloita määritys"
 
 #. module: base
 #: model:res.country,name:base.mt
@@ -2333,7 +2336,7 @@ msgstr ""
 #. module: base
 #: view:base.language.import:0
 msgid "_Import"
-msgstr ""
+msgstr "_Tuo"
 
 #. module: base
 #: view:res.partner.canal:0
@@ -2390,7 +2393,7 @@ msgstr "Oikealta vasemmalle"
 #: model:ir.model,name:base.model_ir_filters
 #: model:ir.ui.menu,name:base.menu_ir_filters
 msgid "Filters"
-msgstr ""
+msgstr "Suotimet"
 
 #. module: base
 #: code:addons/orm.py:758
@@ -2454,7 +2457,7 @@ msgstr ""
 #. module: base
 #: model:ir.model,name:base.model_maintenance_contract
 msgid "maintenance.contract"
-msgstr ""
+msgstr "maintenance.contract"
 
 #. module: base
 #: model:res.country,name:base.ru
@@ -2490,7 +2493,7 @@ msgstr "Tietuesäännöt"
 #. module: base
 #: view:ir.property:0
 msgid "Field Information"
-msgstr ""
+msgstr "Tietoa kentästä"
 
 #. module: base
 #: view:ir.actions.todo:0
@@ -2723,7 +2726,7 @@ msgstr ""
 #: model:ir.ui.menu,name:base.menu_partner_form
 #: view:res.partner:0
 msgid "Customers"
-msgstr ""
+msgstr "Asiakkaat"
 
 #. module: base
 #: model:res.country,name:base.au
@@ -2753,12 +2756,12 @@ msgstr "Peruskenttä"
 #. module: base
 #: view:publisher_warranty.contract:0
 msgid "Validate"
-msgstr ""
+msgstr "Hyväksy"
 
 #. module: base
 #: field:ir.actions.todo,restart:0
 msgid "Restart"
-msgstr ""
+msgstr "Käynnistä uudelleen"
 
 #. module: base
 #: field:ir.actions.report.xml,report_sxw_content:0
@@ -2804,7 +2807,7 @@ msgstr "Vaadittu"
 #. module: base
 #: view:res.users:0
 msgid "Default Filters"
-msgstr ""
+msgstr "Oletussuotimet"
 
 #. module: base
 #: field:res.request.history,name:0
@@ -2814,7 +2817,7 @@ msgstr "Yhteenveto"
 #. module: base
 #: field:multi_company.default,expression:0
 msgid "Expression"
-msgstr ""
+msgstr "Lauseke"
 
 #. module: base
 #: help:ir.actions.server,subject:0
@@ -2850,7 +2853,7 @@ msgstr "Moduuli .zip-tiedosto"
 #. module: base
 #: field:ir.ui.view,xml_id:0
 msgid "XML ID"
-msgstr ""
+msgstr "XML ID"
 
 #. module: base
 #: model:res.partner.category,name:base.res_partner_category_16
@@ -2881,7 +2884,7 @@ msgstr "Suriname"
 #. module: base
 #: model:ir.ui.menu,name:base.marketing_menu
 msgid "Marketing"
-msgstr ""
+msgstr "Markkinointi"
 
 #. module: base
 #: view:res.partner.bank:0
@@ -2912,12 +2915,12 @@ msgstr "Lisenssi"
 #. module: base
 #: field:ir.attachment,url:0
 msgid "Url"
-msgstr ""
+msgstr "Verkko-osoite"
 
 #. module: base
 #: selection:ir.actions.todo,restart:0
 msgid "Always"
-msgstr ""
+msgstr "Aina"
 
 #. module: base
 #: selection:ir.translation,type:0
@@ -3059,12 +3062,12 @@ msgstr "Työnkulut"
 #. module: base
 #: field:ir.translation,xml_id:0
 msgid "XML Id"
-msgstr ""
+msgstr "XML Id"
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_config_user_form
 msgid "Create Users"
-msgstr ""
+msgstr "Luo Käyttäjiä"
 
 #. module: base
 #: model:ir.model,name:base.model_res_partner_title
@@ -3115,7 +3118,7 @@ msgstr "Kenia"
 #. module: base
 #: view:res.partner.event:0
 msgid "Event"
-msgstr ""
+msgstr "Tapahtuma"
 
 #. module: base
 #: model:ir.ui.menu,name:base.menu_custom_reports
@@ -3426,7 +3429,7 @@ msgstr "Meksiko"
 #. module: base
 #: model:ir.ui.menu,name:base.menu_base_config_plugins
 msgid "Plugins"
-msgstr ""
+msgstr "Liitännäiset"
 
 #. module: base
 #: field:res.company,child_ids:0
@@ -3679,7 +3682,7 @@ msgstr "Ryhmittele"
 #: view:res.config:0
 #: view:res.config.installer:0
 msgid "title"
-msgstr ""
+msgstr "otsake"
 
 #. module: base
 #: model:ir.model,name:base.model_base_language_install
@@ -3689,7 +3692,7 @@ msgstr ""
 #. module: base
 #: view:ir.translation:0
 msgid "Translation"
-msgstr ""
+msgstr "Käännös"
 
 #. module: base
 #: selection:res.request,state:0
@@ -3714,7 +3717,7 @@ msgstr "Kirjoitustunnus"
 #. module: base
 #: model:ir.ui.menu,name:base.menu_product
 msgid "Products"
-msgstr ""
+msgstr "Tuotteet"
 
 #. module: base
 #: field:ir.actions.act_window,domain:0
@@ -6790,7 +6793,7 @@ msgstr "OpenERP-kumppanit"
 #. module: base
 #: model:ir.ui.menu,name:base.menu_hr_manager
 msgid "HR Manager Dashboard"
-msgstr ""
+msgstr "Henkilöstöhallinnan Työpöytä"
 
 #. module: base
 #: code:addons/base/module/module.py:253
@@ -7568,7 +7571,7 @@ msgstr "Viro"
 #. module: base
 #: model:ir.ui.menu,name:base.dashboard
 msgid "Dashboards"
-msgstr ""
+msgstr "Työpöydät"
 
 #. module: base
 #: help:ir.attachment,type:0
@@ -9338,3295 +9341,3 @@ msgstr "Sri Lanka"
 #: selection:base.language.install,lang:0
 msgid "Russian / русский язык"
 msgstr "Venäjä / русский язык"
-
-#~ msgid "%j - Day of the year as a decimal number [001,366]."
-#~ msgstr "%j - Vuodenpäivä desimaalilukuna [001,366]."
-
-#~ msgid "Outgoing transitions"
-#~ msgstr "Lähtevät siirtymät"
-
-#~ msgid "Yearly"
-#~ msgstr "Vuotuinen"
-
-#~ msgid ""
-#~ "Choose between the \"Simplified Interface\" or the extended one.\n"
-#~ "If you are testing or using OpenERP for the first time, we suggest you to "
-#~ "use\n"
-#~ "the simplified interface, which has less options and fields but is easier "
-#~ "to\n"
-#~ "understand. You will be able to switch to the extended view later.\n"
-#~ "            "
-#~ msgstr ""
-#~ "Valitse joko yksinkertaistettu tai laajennettu käyttöliittymä.\n"
-#~ "Jos testaat tai käytät OpenERP:iä ensimmäistä kertaa, suosittelemme että\n"
-#~ "valitset yksinkertaistetun käyttöliittymän. Siinä on vähemmän vaihtoehtoja,\n"
-#~ "mutta se on helpompi ymmärtää. Voit vaihtaa käyttöliittymän myöhemmin.\n"
-#~ "            "
-
-#~ msgid "Operand"
-#~ msgstr "Operandi"
-
-#~ msgid "ir.actions.report.custom"
-#~ msgstr "ir.actions.report.custom"
-
-#~ msgid "STOCK_CANCEL"
-#~ msgstr "STOCK_CANCEL"
-
-#~ msgid "Sorted By"
-#~ msgstr "Järjestelyn peruste"
-
-#~ msgid "ir.report.custom.fields"
-#~ msgstr "ir.report.custom.fields"
-
-#~ msgid "STOCK_GOTO_TOP"
-#~ msgstr "STOCK_GOTO_TOP"
-
-#~ msgid "STOCK_DELETE"
-#~ msgstr "STOCK_DELETE"
-
-#~ msgid "%y - Year without century as a decimal number [00,99]."
-#~ msgstr "%y - Vuosiluku ilman vuosisatoja desimaalilukuna [00,99]."
-
-#~ msgid "Validated"
-#~ msgstr "Vahvistettu"
-
-#~ msgid "The rule is satisfied if at least one test is True"
-#~ msgstr "Sääntö toteutuu jos vähintään yksi testeistä on \"tosi\""
-
-#~ msgid "Get Max"
-#~ msgstr "Hae maksimi"
-
-#~ msgid "To browse official translations, you can visit this link: "
-#~ msgstr "Virallisia käännöksiä voit selata tästä linkistä: "
-
-#~ msgid "Uninstalled modules"
-#~ msgstr "Asentamattomat moduulit"
-
-#~ msgid "STOCK_MEDIA_REWIND"
-#~ msgstr "STOCK_MEDIA_REWIND"
-
-#~ msgid "STOCK_CUT"
-#~ msgstr "STOCK_CUT"
-
-#~ msgid "Extended Interface"
-#~ msgstr "Laajennettu käyttöliittymä"
-
-#~ msgid "Configure simple view"
-#~ msgstr "Konfiguroi yksinkertainen näkymä"
-
-#~ msgid "Bulgarian / български"
-#~ msgstr "Bulgaria / български"
-
-#~ msgid "Bar Chart"
-#~ msgstr "Pylväsdiagrammi"
-
-#~ msgid "STOCK_DIALOG_ERROR"
-#~ msgstr "STOCK_DIALOG_ERROR"
-
-#~ msgid "STOCK_INDEX"
-#~ msgstr "STOCK_INDEX"
-
-#~ msgid "STOCK_DIALOG_QUESTION"
-#~ msgstr "STOCK_DIALOG_QUESTION"
-
-#~ msgid "You may have to reinstall some language pack."
-#~ msgstr "Jokin kielipaketti täytyy ehkä asentaa uudelleen."
-
-#~ msgid "maintenance contract modules"
-#~ msgstr "ylläpitosopimus-moduulit"
-
-#~ msgid "STOCK_FILE"
-#~ msgstr "STOCK_FILE"
-
-#~ msgid "Field child2"
-#~ msgstr "Alakenttä 2"
-
-#~ msgid "Objects Security Grid"
-#~ msgstr "Objektin turvataulukko"
-
-#~ msgid "STOCK_GO_DOWN"
-#~ msgstr "STOCK_GO_DOWN"
-
-#~ msgid "STOCK_OK"
-#~ msgstr "STOCK_OK"
-
-#~ msgid "Alignment"
-#~ msgstr "Kohdistus"
-
-#~ msgid ">="
-#~ msgstr ">="
-
-#~ msgid "Planned Cost"
-#~ msgstr "Suunnitellut kustannukset"
-
-#~ msgid "ir.model.config"
-#~ msgstr "ir.model.config"
-
-#~ msgid "Tests"
-#~ msgstr "Testit"
-
-#~ msgid "STOCK_JUSTIFY_FILL"
-#~ msgstr "STOCK_JUSTIFY_FILL"
-
-#~ msgid "RML"
-#~ msgstr "RML"
-
-#~ msgid "Partners by Categories"
-#~ msgstr "Kumppanit kategorioittain"
-
-#~ msgid "Frequency"
-#~ msgstr "Taajuus"
-
-#~ msgid "Relation"
-#~ msgstr "Suhde"
-
-#~ msgid "STOCK_MISSING_IMAGE"
-#~ msgstr "STOCK_MISSING_IMAGE"
-
-#~ msgid "Define New Users"
-#~ msgstr "Määrittele uusia käyttäjiä"
-
-#~ msgid "STOCK_REMOVE"
-#~ msgstr "STOCK_REMOVE"
-
-#~ msgid "raw"
-#~ msgstr "muotoilematon"
-
-#~ msgid "Role Name"
-#~ msgstr "Työtehtävän nimi"
-
-#~ msgid "Dedicated Salesman"
-#~ msgstr "Vastaava myyjä"
-
-#~ msgid "Please give your module .ZIP file to import."
-#~ msgstr "Anna moduulisi ZIP-tiedosto tuontia varten."
-
-#~ msgid "Covered Modules"
-#~ msgstr "Katetut moduulit"
-
-#~ msgid "STOCK_COPY"
-#~ msgstr "STOCK_COPY"
-
-#~ msgid "Check new modules"
-#~ msgstr "Tarkista uudet moduulit"
-
-#~ msgid "Simple domain setup"
-#~ msgstr "Yksinkertaisen toimialueen asetus"
-
-#~ msgid "STOCK_FIND_AND_REPLACE"
-#~ msgstr "STOCK_FIND_AND_REPLACE"
-
-#~ msgid "terp-crm"
-#~ msgstr "terp-crm"
-
-#~ msgid "Fixed Width"
-#~ msgstr "Kiinteä leveys"
-
-#~ msgid "terp-calendar"
-#~ msgstr "terp-calendar"
-
-#~ msgid "STOCK_YES"
-#~ msgstr "STOCK_YES"
-
-#~ msgid "Report Custom"
-#~ msgstr "Kustomoitu raportti"
-
-#~ msgid "STOCK_JUSTIFY_LEFT"
-#~ msgstr "STOCK_JUSTIFY_LEFT"
-
-#~ msgid "End of Request"
-#~ msgstr "Pyynnön loppu"
-
-#~ msgid "Note that this operation may take a few minutes."
-#~ msgstr "Ota huomioon että toimenpide saattaa kestää muutaman minuutin."
-
-#~ msgid "Could you check your contract information ?"
-#~ msgstr "Voisitko tarkistaa sopimustietosi?"
-
-#~ msgid "STOCK_CLEAR"
-#~ msgstr "STOCK_CLEAR"
-
-#~ msgid "STOCK_PROPERTIES"
-#~ msgstr "STOCK_PROPERTIES"
-
-#~ msgid "Maintenance contract added !"
-#~ msgstr "Ylläpitosopimus lisätty!"
-
-#~ msgid ""
-#~ "This wizard will detect new terms in the application so that you can update "
-#~ "them manually."
-#~ msgstr ""
-#~ "Toiminto tunnistaa uudet termit sovelluksessa jotta voit päivittää ne käsin."
-
-#~ msgid "STOCK_SELECT_COLOR"
-#~ msgstr "STOCK_SELECT_COLOR"
-
-#~ msgid "STOCK_NO"
-#~ msgstr "STOCK_NO"
-
-#~ msgid "STOCK_REDO"
-#~ msgstr "STOCK_REDO"
-
-#~ msgid "Confirmation"
-#~ msgstr "Vahvistus"
-
-#~ msgid "Configure User"
-#~ msgstr "Konfiguroi käyttäjä"
-
-#~ msgid "left"
-#~ msgstr "vasen"
-
-#~ msgid "STOCK_PRINT_PREVIEW"
-#~ msgstr "STOCK_PRINT_PREVIEW"
-
-#~ msgid "STOCK_MEDIA_PLAY"
-#~ msgstr "STOCK_MEDIA_PLAY"
-
-#~ msgid "Operator"
-#~ msgstr "Operaattori"
-
-#~ msgid "Installation Done"
-#~ msgstr "Asennus valmis"
-
-#~ msgid "STOCK_OPEN"
-#~ msgstr "STOCK_OPEN"
-
-#~ msgid "right"
-#~ msgstr "oikea"
-
-#~ msgid "Others Partners"
-#~ msgstr "Muut kumppanit"
-
-#~ msgid "%S - Second as a decimal number [00,61]."
-#~ msgstr "%S - Sekunnit desimaalilukuna [00,61]."
-
-#~ msgid "Year with century: %(year)s"
-#~ msgstr "Vuosi kokonaisuudessaan: %(year)s"
-
-#~ msgid "Daily"
-#~ msgstr "Päivittäin"
-
-#~ msgid "terp-project"
-#~ msgstr "terp-project"
-
-#~ msgid "STOCK_JUSTIFY_CENTER"
-#~ msgstr "STOCK_JUSTIFY_CENTER"
-
-#~ msgid "Choose Your Mode"
-#~ msgstr "Valitse tyyppi"
-
-#~ msgid "Background Color"
-#~ msgstr "Taustaväri"
-
-#~ msgid "res.partner.som"
-#~ msgstr "res.partner.som"
-
-#~ msgid "Start Upgrade"
-#~ msgstr "Käynnistä päivitys"
-
-#~ msgid "Export language"
-#~ msgstr "Vie kieli"
-
-#~ msgid "STOCK_JUSTIFY_RIGHT"
-#~ msgstr "STOCK_JUSTIFY_RIGHT"
-
-#~ msgid "Function of the contact"
-#~ msgstr "Yhteyshenkilön toimi"
-
-#~ msgid "Modules to be installed, upgraded or removed"
-#~ msgstr "Moduulit jotka asennetaan, päivitetään tai poistetaan"
-
-#~ msgid "Report Footer"
-#~ msgstr "Raportin alatunniste"
-
-#~ msgid "Import language"
-#~ msgstr "Tuo kieli"
-
-#~ msgid "terp-account"
-#~ msgstr "terp-account"
-
-#~ msgid "Categories of Modules"
-#~ msgstr "Moduulien kategoriat"
-
-#~ msgid "Not Started"
-#~ msgstr "Ei aloitettu"
-
-#~ msgid "Roles"
-#~ msgstr "Työtehtävät"
-
-#~ msgid ""
-#~ "Regexp to search module on the repository webpage:\n"
-#~ "- The first parenthesis must match the name of the module.\n"
-#~ "- The second parenthesis must match the whole version number.\n"
-#~ "- The last parenthesis must match the extension of the module."
-#~ msgstr ""
-#~ "Regexp (säännöllinen lauseke) moduulien hakemiseen ohjelmalähteen "
-#~ "verkkosivulta:\n"
-#~ "- Ensimmäiset sulkeet vastaavat moduulin nimeä.\n"
-#~ "- Toiset sulkeet vastaavat moduulin koko versionumeroa.\n"
-#~ "- Viimeiset sulkeet vastaavat moduulin päätettä."
-
-#~ msgid "%M - Minute as a decimal number [00,59]."
-#~ msgstr "%M - Minuutit desimaalilukuna [00,59]."
-
-#~ msgid "Connect Actions To Client Events"
-#~ msgstr "Yhdistä toiminnot asiakasohjelman tapahtumiin"
-
-#~ msgid "Prospect Contact"
-#~ msgstr "Mahdollinen yhteyshenkilö"
-
-#~ msgid "STOCK_QUIT"
-#~ msgstr "STOCK_QUIT"
-
-#~ msgid "terp-purchase"
-#~ msgstr "terp-purchase"
-
-#~ msgid "Repositories"
-#~ msgstr "Ohjelmalähteet"
-
-#~ msgid "Report Ref."
-#~ msgstr "Raportin viite"
-
-#~ msgid "Unvalid"
-#~ msgstr "Ei voimassa"
-
-#~ msgid "Language name"
-#~ msgstr "Kielen nimi"
-
-#~ msgid "System Upgrade"
-#~ msgstr "Järjestelmän päivitys"
-
-#~ msgid "Partner Address"
-#~ msgstr "Kumppanin osoite"
-
-#~ msgid "STOCK_SAVE_AS"
-#~ msgstr "STOCK_SAVE_AS"
-
-#~ msgid "STOCK_UNDELETE"
-#~ msgstr "STOCK_UNDELETE"
-
-#~ msgid "wizard.module.update_translations"
-#~ msgstr "wizard.module.update_translations"
-
-#~ msgid "STOCK_PASTE"
-#~ msgstr "STOCK_PASTE"
-
-#~ msgid "Configuration Wizard"
-#~ msgstr "Ohjattu konfiguraatio"
-
-#~ msgid "res.roles"
-#~ msgstr "res.roles"
-
-#~ msgid "Accepted Links in Requests"
-#~ msgstr "Hyväksytyt linkit pyynnöissä"
-
-#~ msgid "Grant Access To Menus"
-#~ msgstr "Anna käyttöoikeus valikkoihin"
-
-#~ msgid ""
-#~ "Choose the simplified interface if you are testing OpenERP for the first "
-#~ "time. Less used options or fields are automatically hidden. You will be able "
-#~ "to change this, later, through the Administration menu."
-#~ msgstr ""
-#~ "Valitse yksinkertainen käyttöliittymä jos kokeilet OpenERP:iä ensimmäistä "
-#~ "kertaa. Tämä piilottaa vähemmän käytetyt vaihtoehdot ja kentät "
-#~ "automaattisesti. Voit myöhemmin vaihtaa käyttöliittymää Ylläpito-valikon "
-#~ "kautta."
-
-#~ msgid "The rule is satisfied if all test are True (AND)"
-#~ msgstr "Sääntö täyttyy jos kaikki testit ovat tosia"
-
-#~ msgid "STOCK_CONNECT"
-#~ msgstr "STOCK_CONNECT"
-
-#~ msgid "Next Call Date"
-#~ msgstr "Seuraava kutsu"
-
-#~ msgid "Scan for new modules"
-#~ msgstr "Etsi uusia moduuleja"
-
-#~ msgid "Module Repository"
-#~ msgstr "Moduulin ohjelmalähde"
-
-#~ msgid "wizard.module.lang.export"
-#~ msgstr "wizard.module.lang.export"
-
-#~ msgid "Field child3"
-#~ msgstr "Alakenttä 3"
-
-#~ msgid "Field child0"
-#~ msgstr "Alakenttä 0"
-
-#~ msgid "Field child1"
-#~ msgstr "Alakenttä 1"
-
-#~ msgid "Groups are used to defined access rights on each screen and menu."
-#~ msgstr ""
-#~ "Ryhmiä käytetään käyttöoikeuksien määrittelyyn jokaisessa ruudussa ja "
-#~ "valikossa."
-
-#~ msgid "Sale Opportunity"
-#~ msgstr "Myyntimahdollisuus"
-
-#~ msgid "Report Xml"
-#~ msgstr "Raportin XML"
-
-#~ msgid "Calculate Average"
-#~ msgstr "Laske keskiarvo"
-
-#~ msgid "Planned Revenue"
-#~ msgstr "Suunniteltu tuotto"
-
-#~ msgid ""
-#~ "You have to import a .CSV file wich is encoded in UTF-8.  Please check that "
-#~ "the first line of your file is one of the following:"
-#~ msgstr ""
-#~ "Tuotavan CSV-tiedoston täytyy käyttää UTF-8 merkkikoodausta. Tarkista että "
-#~ "tiedoston ensimmäinen rivi on yksi seuraavista:"
-
-#~ msgid "%H - Hour (24-hour clock) as a decimal number [00,23]."
-#~ msgstr "%H - Tunnit (24:n tunnin kello) desimaalilukuna [00,23]."
-
-#~ msgid "Role"
-#~ msgstr "Työtehtävä"
-
-#~ msgid "Test"
-#~ msgstr "Testi"
-
-#~ msgid "STOCK_DIALOG_WARNING"
-#~ msgstr "STOCK_DIALOG_WARNING"
-
-#~ msgid "STOCK_ZOOM_IN"
-#~ msgstr "STOCK_ZOOM_IN"
-
-#~ msgid "STOCK_ITALIC"
-#~ msgstr "STOCK_ITALIC"
-
-#~ msgid "We suggest you to reload the menu tab (Ctrl+t Ctrl+r)."
-#~ msgstr "Valikko tulisi ladata uudelleen (Ctrl+t Ctrl+r)."
-
-#~ msgid "Security on Groups"
-#~ msgstr "Tietoturvallisuus ryhmissä"
-
-#~ msgid "Accumulate"
-#~ msgstr "Akkumuloi"
-
-#~ msgid "Report Title"
-#~ msgstr "Raportin otsikko"
-
-#~ msgid "Font color"
-#~ msgstr "Fontin väri"
-
-#~ msgid "STOCK_SORT_DESCENDING"
-#~ msgstr "STOCK_SORT_DESCENDING"
-
-#~ msgid "Roles Structure"
-#~ msgstr "Työtehtävien rakenne"
-
-#~ msgid "STOCK_MEDIA_STOP"
-#~ msgstr "STOCK_MEDIA_STOP"
-
-#~ msgid "STOCK_DND_MULTIPLE"
-#~ msgstr "STOCK_DND_MULTIPLE"
-
-#~ msgid "Role Required"
-#~ msgstr "Vaadittu työtehtävä"
-
-#~ msgid "STOCK_INDENT"
-#~ msgstr "STOCK_INDENT"
-
-#~ msgid "STOCK_ZOOM_OUT"
-#~ msgstr "STOCK_ZOOM_OUT"
-
-#~ msgid "STOCK_CLOSE"
-#~ msgstr "STOCK_CLOSE"
-
-#~ msgid "%m - Month as a decimal number [01,12]."
-#~ msgstr "%m - Kuukausi desimaalilukuna [01,12]."
-
-#~ msgid "Export Data"
-#~ msgstr "Vie tiedot"
-
-#~ msgid "Your system will be upgraded."
-#~ msgstr "Järjestelmäsi päivitetään."
-
-#~ msgid "terp-tools"
-#~ msgstr "terp-tools"
-
-#~ msgid "STOCK_UNDO"
-#~ msgstr "STOCK_UNDO"
-
-#~ msgid "terp-sale"
-#~ msgstr "terp-sale"
-
-#~ msgid "%d - Day of the month as a decimal number [01,31]."
-#~ msgstr "%d - Kuukaudenpäivä desimaalilukuna [01,31]."
-
-#~ msgid "%I - Hour (12-hour clock) as a decimal number [01,12]."
-#~ msgstr "%I - Tunnit (12:sta tunnin kello) desimaalilukuna [01,12]."
-
-#~ msgid "Romanian / limba română"
-#~ msgstr "Romania / limba română"
-
-#~ msgid "STOCK_ADD"
-#~ msgstr "STOCK_ADD"
-
-#~ msgid "in"
-#~ msgstr "kohteessa"
-
-#~ msgid "Create / Write"
-#~ msgstr "Luo / Kirjoita"
-
-#~ msgid "Service"
-#~ msgstr "Palvelu"
-
-#~ msgid "Modules to download"
-#~ msgstr "Ladattavat moduulit"
-
-#~ msgid "ir.rule.group"
-#~ msgstr "ir.rule.group"
-
-#~ msgid "Installed modules"
-#~ msgstr "Asennetut moduulit"
-
-#~ msgid "Manually Created"
-#~ msgstr "Manuaalisesti luotu"
-
-#~ msgid "Calculate Count"
-#~ msgstr "Laske lukumäärä"
-
-#~ msgid "Partner State of Mind"
-#~ msgstr "Kumppanin mielentila"
-
-#~ msgid "STOCK_DIALOG_AUTHENTICATION"
-#~ msgstr "STOCK_DIALOG_AUTHENTICATION"
-
-#~ msgid "Macedonia"
-#~ msgstr "Makedonia"
-
-#~ msgid "a4"
-#~ msgstr "A4"
-
-#~ msgid "Multiple rules on same objects are joined using operator OR"
-#~ msgstr ""
-#~ "Monta sääntöä samalle objektille liitetään käyttämällä operaattoria TAI"
-
-#~ msgid "STOCK_MEDIA_NEXT"
-#~ msgstr "STOCK_MEDIA_NEXT"
-
-#~ msgid "Note that this operation my take a few minutes."
-#~ msgstr "Ota huomioon että tämä toimenpide voi kestää muutaman minuutin."
-
-#~ msgid "Internal Name"
-#~ msgstr "Sisäinen nimi"
-
-#~ msgid "STOCK_EDIT"
-#~ msgstr "STOCK_EDIT"
-
-#~ msgid "STOCK_MEDIA_FORWARD"
-#~ msgstr "STOCK_MEDIA_FORWARD"
-
-#~ msgid "User ID"
-#~ msgstr "Käyttäjätunnus"
-
-#~ msgid ""
-#~ "Access all the fields related to the current object using expression in "
-#~ "double brackets, i.e.[[ object.partner_id.name ]]"
-#~ msgstr ""
-#~ "Kaikkiin objektin kenttiin voi viitata käyttämällä kaksoishakasulkuja, esim. "
-#~ "[[ object.partner_id.name ]]"
-
-#~ msgid "type,name,res_id,src,value"
-#~ msgstr "type,name,res_id,src,value"
-
-#~ msgid "condition"
-#~ msgstr "ehto"
-
-#~ msgid "STOCK_SAVE"
-#~ msgstr "STOCK_SAVE"
-
-#~ msgid "STOCK_NEW"
-#~ msgstr "STOCK_NEW"
-
-#~ msgid "Report Fields"
-#~ msgstr "Raportin kentät"
-
-#~ msgid "terp-mrp"
-#~ msgstr "terp-mrp"
-
-#~ msgid "STOCK_ABOUT"
-#~ msgstr "STOCK_ABOUT"
-
-#~ msgid "STOCK_UNDERLINE"
-#~ msgstr "STOCK_UNDERLINE"
-
-#~ msgid "STOCK_ZOOM_100"
-#~ msgstr "STOCK_ZOOM_100"
-
-#~ msgid "STOCK_BOLD"
-#~ msgstr "STOCK_BOLD"
-
-#~ msgid "terp-graph"
-#~ msgstr "terp-graph"
-
-#~ msgid ""
-#~ "The selected language has been successfully installed. You must change the "
-#~ "preferences of the user and open a new menu to view changes."
-#~ msgstr ""
-#~ "Valitun kielen asennus onnistui. Käyttäjän asetukset täytyy muuttaa ja avata "
-#~ "uusi valikko nähdäksesi muutokset."
-
-#~ msgid "Partner Events"
-#~ msgstr "Kumppanien tapahtumat"
-
-#~ msgid "iCal id"
-#~ msgstr "iCal-tunnus"
-
-#~ msgid "Print orientation"
-#~ msgstr "Tulostussuunta"
-
-#~ msgid "Export a Translation File"
-#~ msgstr "Vie käännöstiedosto"
-
-#~ msgid "Full"
-#~ msgstr "Täysi"
-
-#~ msgid "html"
-#~ msgstr "HTML"
-
-#~ msgid "terp-stock"
-#~ msgstr "terp-stock"
-
-#~ msgid "STOCK_MEDIA_RECORD"
-#~ msgstr "STOCK_MEDIA_RECORD"
-
-#~ msgid "None"
-#~ msgstr "Ei mitään"
-
-#~ msgid "STOCK_UNINDENT"
-#~ msgstr "STOCK_UNINDENT"
-
-#~ msgid "Partial"
-#~ msgstr "Osittainen"
-
-#~ msgid "Partner Functions"
-#~ msgstr "Kumppanien ammattinimikeet"
-
-#~ msgid "%Y - Year with century as a decimal number."
-#~ msgstr "%Y - Vuosi kokonaisuudessaan desimaalilukuna."
-
-#~ msgid "STOCK_DIALOG_INFO"
-#~ msgstr "STOCK_DIALOG_INFO"
-
-#~ msgid "Get file"
-#~ msgstr "Hae tiedosto"
-
-#~ msgid ""
-#~ "This function will check for new modules in the 'addons' path and on module "
-#~ "repositories:"
-#~ msgstr ""
-#~ "Tämä toimito tarkistaa onko uusia moduuleja saatavilla \"addons\"-polussa "
-#~ "tai moduulien ohjelmalähteessä:"
-
-#~ msgid "STOCK_GO_BACK"
-#~ msgstr "STOCK_GO_BACK"
-
-#~ msgid "Customers Partners"
-#~ msgstr "Asiakaskumppanit"
-
-#~ msgid "STOCK_HARDDISK"
-#~ msgstr "STOCK_HARDDISK"
-
-#~ msgid "STOCK_APPLY"
-#~ msgstr "STOCK_APPLY"
-
-#~ msgid "Your Maintenance Contracts"
-#~ msgstr "Omat ylläpitosopimukset"
-
-#~ msgid ""
-#~ "Please note that you will have to logout and relog if you change your "
-#~ "password."
-#~ msgstr ""
-#~ "Ota huomioon että sinun täytyy kirjautua ulos ja takaisin sisään jos vaihdat "
-#~ "salasanasi."
-
-#~ msgid "GPL-3"
-#~ msgstr "GPL-3"
-
-#~ msgid "GPL-2"
-#~ msgstr "GPL-2"
-
-#~ msgid "Portugese (BR) / português (BR)"
-#~ msgstr "Portugali (BR) / português (BR)"
-
-#~ msgid "STOCK_CDROM"
-#~ msgstr "STOCK_CDROM"
-
-#~ msgid "Type of Event"
-#~ msgstr "Tapahtuman tyyppi"
-
-#~ msgid "Sequence Types"
-#~ msgstr "Sarjojen tyypit"
-
-#~ msgid "Update Translations"
-#~ msgstr "Päivitä käännökset"
-
-#~ msgid "The modules have been upgraded / installed !"
-#~ msgstr "Moduulit on päivitetty tai asennettu!"
-
-#~ msgid "terp-hr"
-#~ msgstr "terp-hr"
-
-#~ msgid "Manual"
-#~ msgstr "Manuaalinen"
-
-#~ msgid "Line Plot"
-#~ msgstr "Viivadiagrammi"
-
-#~ msgid "STOCK_GO_UP"
-#~ msgstr "STOCK_GO_UP"
-
-#~ msgid "pdf"
-#~ msgstr "PDF"
-
-#~ msgid "Preview"
-#~ msgstr "Esikatselu"
-
-#~ msgid "Skip Step"
-#~ msgstr "Ohita vaihe"
-
-#~ msgid "Active Partner Events"
-#~ msgstr "Aktiiviset kumppanien tapahtumat"
-
-#~ msgid "STOCK_SPELL_CHECK"
-#~ msgstr "STOCK_SPELL_CHECK"
-
-#~ msgid "Force Domain"
-#~ msgstr "Pakota toimialue"
-
-#~ msgid "_Validate"
-#~ msgstr "_Vahvista"
-
-#~ msgid "maintenance.contract.wizard"
-#~ msgstr "maintenance.contract.wizard"
-
-#~ msgid "STOCK_GOTO_FIRST"
-#~ msgstr "STOCK_GOTO_FIRST"
-
-#~ msgid "<>"
-#~ msgstr "<>"
-
-#~ msgid "<="
-#~ msgstr "<="
-
-#~ msgid "Portugese / português"
-#~ msgstr "Portugali / português"
-
-#~ msgid "Probability (0.50)"
-#~ msgstr "Todennäköisyys (0.50)"
-
-#~ msgid "Repeat Header"
-#~ msgstr "Toista ylätunniste"
-
-#~ msgid "Workflow Definitions"
-#~ msgstr "Työnkulun määritykset"
-
-#~ msgid "STOCK_MEDIA_PAUSE"
-#~ msgstr "STOCK_MEDIA_PAUSE"
-
-#~ msgid "All Properties"
-#~ msgstr "Kaikki ominaisuudet"
-
-#~ msgid "STOCK_HOME"
-#~ msgstr "STOCK_HOME"
-
-#~ msgid "Ok"
-#~ msgstr "OK"
-
-#~ msgid "STOCK_DISCONNECT"
-#~ msgstr "STOCK_DISCONNECT"
-
-#~ msgid "Resynchronise Terms"
-#~ msgstr "Synkronisoi termit"
-
-#~ msgid "STOCK_PREFERENCES"
-#~ msgstr "STOCK_PREFERENCES"
-
-#~ msgid "STOCK_GOTO_LAST"
-#~ msgstr "STOCK_GOTO_LAST"
-
-#~ msgid ""
-#~ "To improve some terms of the official translations of OpenERP, you should "
-#~ "modify the terms directly on the launchpad interface. If you made lots of "
-#~ "translations for your own module, you can also publish all your translation "
-#~ "at once."
-#~ msgstr ""
-#~ "Parantaaksesi termejä OpenERP:in virallissa käännöksissä, sinun tulisi "
-#~ "muuttaa termit suoraan launchpad-liittymään. Jos olet tehnyt paljon "
-#~ "käännöksiä omalle moduulillesi, voit myös julkaista kaikki käännöksesi "
-#~ "yhdellä kertaa."
-
-#~ msgid "Start installation"
-#~ msgstr "Aloita asennus"
-
-#~ msgid "New modules"
-#~ msgstr "Uudet moduulit"
-
-#~ msgid "res.company"
-#~ msgstr "res.company"
-
-#~ msgid "System upgrade done"
-#~ msgstr "Järjestelmän päivitys valmis"
-
-#~ msgid "Configure Simple View"
-#~ msgstr "Konfiguroi yksinkertainen näkymä"
-
-#~ msgid "Custom Report"
-#~ msgstr "Kustomoitu raportti"
-
-#~ msgid "sxw"
-#~ msgstr "SXW"
-
-#~ msgid "Automatic XSL:RML"
-#~ msgstr "Automaattinen XSL:RML"
-
-#~ msgid "Manual domain setup"
-#~ msgstr "Manuaalinen toimialueen asetus"
-
-#~ msgid "Report Name"
-#~ msgstr "Raportin nimi"
-
-#~ msgid "Partner Relation"
-#~ msgstr "Suhde"
-
-#~ msgid ""
-#~ "Number of time the function is called,\n"
-#~ "a negative number indicates that the function will always be called"
-#~ msgstr ""
-#~ "Kertoo kuinka monta kertaa funktio kutsutaan,\n"
-#~ "negatiivinen numero tarkoittaa että funktio kutsutaan aina."
-
-#~ msgid "Monthly"
-#~ msgstr "Kuukausittainen"
-
-#~ msgid "States of mind"
-#~ msgstr "Mielentilat"
-
-#~ msgid "STOCK_SORT_ASCENDING"
-#~ msgstr "STOCK_SORT_ASCENDING"
-
-#~ msgid "Parent"
-#~ msgstr "Ylempi rooli"
-
-#~ msgid "%w - Weekday as a decimal number [0(Sunday),6]."
-#~ msgstr "%w - Viikonpäivä desimaalilukuna [0(sunnuntai),6]."
-
-#~ msgid "Export translation file"
-#~ msgstr "Vie käännöstiedosto"
-
-#~ msgid "Retailer"
-#~ msgstr "Jälleenmyyjä"
-
-#~ msgid "Tabular"
-#~ msgstr "Taulukkomallinen"
-
-#~ msgid "Start On"
-#~ msgstr "Aloitus"
-
-#~ msgid "odt"
-#~ msgstr "ODT"
-
-#~ msgid "Other proprietary"
-#~ msgstr "Muu sovelluskohtainen"
-
-#~ msgid "terp-administration"
-#~ msgstr "terp-administration"
-
-#~ msgid "All terms"
-#~ msgstr "Kaikki termit"
-
-#~ msgid "Link"
-#~ msgstr "Linkki"
-
-#~ msgid "Report Ref"
-#~ msgstr "Raportin viite"
-
-#~ msgid "STOCK_DND"
-#~ msgstr "STOCK_DND"
-
-#~ msgid "Dutch (Belgium) / Nederlands (Belgïe)"
-#~ msgstr "Hollanti (belgia) / Nederlands (Belgïe)"
-
-#~ msgid "Repository list"
-#~ msgstr "Ohjelmalähteiden lista"
-
-#~ msgid "Children"
-#~ msgstr "Alatunnukset"
-
-#~ msgid "STOCK_FLOPPY"
-#~ msgstr "STOCK_FLOPPY"
-
-#~ msgid "Status"
-#~ msgstr "Tila"
-
-#~ msgid "ir.report.custom"
-#~ msgstr "ir.report.custom"
-
-#~ msgid "Purchase Offer"
-#~ msgstr "Ostotarjous"
-
-#~ msgid "STOCK_ZOOM_FIT"
-#~ msgstr "STOCK_ZOOM_FIT"
-
-#~ msgid "Language file loaded."
-#~ msgstr "Kielitiedosto ladattu."
-
-#~ msgid "Company Architecture"
-#~ msgstr "Yrityksen rakenne"
-
-#~ msgid "STOCK_GOTO_BOTTOM"
-#~ msgstr "STOCK_GOTO_BOTTOM"
-
-#~ msgid "STOCK_GO_FORWARD"
-#~ msgstr "STOCK_GO_FORWARD"
-
-#~ msgid ""
-#~ "Access all the fields related to the current object using expression in "
-#~ "double brackets, i.e. [[ object.partner_id.name ]]"
-#~ msgstr ""
-#~ "Kaikkiin objektin kenttiin voi viitata käyttämällä kaksoishakasulkuja, esim. "
-#~ "[[ object.partner_id.name ]]"
-
-#~ msgid "STOCK_SELECT_FONT"
-#~ msgstr "STOCK_SELECT_FONT"
-
-#~ msgid "Html from html"
-#~ msgstr "HTML HTML:stä"
-
-#~ msgid "Workflow Items"
-#~ msgstr "Työnkulku"
-
-#~ msgid ""
-#~ "The .rml path of the file or NULL if the content is in report_rml_content"
-#~ msgstr ""
-#~ "Polku RML-tiedostoon tai NULL jos sisältö on \"report_rml_content\":ssä."
-
-#~ msgid ""
-#~ "If you have groups, the visibility of this menu will be based on these "
-#~ "groups. If this field is empty, Open ERP will compute visibility based on "
-#~ "the related object's read access."
-#~ msgstr ""
-#~ "Jos ryhmät on määritelty, valikkoon pääsy perustuu näihin ryhmiin. Jos "
-#~ "ryhmiä ei ole, OpenERP määrittelee pääsyn valikkoon siihen liittyvien "
-#~ "objektien lukuoikeuksista."
-
-#~ msgid "_Cancel"
-#~ msgstr "_Peruuta"
-
-#~ msgid "terp-report"
-#~ msgstr "terp-report"
-
-#~ msgid "Incoming transitions"
-#~ msgstr "Saapuvat siirtymät"
-
-#~ msgid "Set"
-#~ msgstr "Aseta"
-
-#~ msgid "At Once"
-#~ msgstr "Heti"
-
-#~ msgid ""
-#~ "Only one client action will be execute, last                                 "
-#~ "clinent action will be consider in case of multiples clients actions"
-#~ msgstr ""
-#~ "Vain yksi asiakasohjelman toiminto suoritetaan. Jos toimintoja on useampia, "
-#~ "vain viimeinen toiminto huomioidaan."
-
-#~ msgid "STOCK_HELP"
-#~ msgstr "STOCK_HELP"
-
-#~ msgid "module,type,name,res_id,src,value"
-#~ msgstr "module,type,name,res_id,src,value"
-
-#~ msgid "child_of"
-#~ msgstr "child_of"
-
-#~ msgid "Module import"
-#~ msgstr "Moduulin tuonti"
-
-#~ msgid "Suppliers Partners"
-#~ msgstr "Toimittajakumppanit"
-
-#~ msgid "STOCK_STRIKETHROUGH"
-#~ msgstr "STOCK_STRIKETHROUGH"
-
-#~ msgid "(year)="
-#~ msgstr "(vuosi)="
-
-#~ msgid "terp-partner"
-#~ msgstr "terp-partner"
-
-#~ msgid "Modules Management"
-#~ msgstr "Moduulien hallinta"
-
-#~ msgid ""
-#~ "The official translations pack of all OpenERP/OpenObjects module are managed "
-#~ "through launchpad. We use their online interface to synchronize all "
-#~ "translations efforts."
-#~ msgstr ""
-#~ "OpenERP:in ja OpenObjects:in virallisia käännöksiä ylläpidetään "
-#~ "launchpadissä. Sivuston käyttöliittymää käytetään kaiken käännöstyön "
-#~ "hallintaan."
-
-#~ msgid "RML path"
-#~ msgstr "RML-polku"
-
-#~ msgid "Next Configuration Wizard"
-#~ msgstr "Seuraava ohjattu konfiguraatio"
-
-#~ msgid "Untranslated terms"
-#~ msgstr "Kääntämättömät termit"
-
-#~ msgid "Import New Language"
-#~ msgstr "Tuo uusi kieli"
-
-#~ msgid "="
-#~ msgstr "="
-
-#~ msgid "Access Controls Grid"
-#~ msgstr "Käyttöoikeuksien taulukko"
-
-#~ msgid "STOCK_REFRESH"
-#~ msgstr "STOCK_REFRESH"
-
-#~ msgid "STOCK_STOP"
-#~ msgstr "STOCK_STOP"
-
-#~ msgid "STOCK_CONVERT"
-#~ msgstr "STOCK_CONVERT"
-
-#~ msgid "STOCK_EXECUTE"
-#~ msgstr "STOCK_EXECUTE"
-
-#~ msgid "Advanced Search"
-#~ msgstr "Tarkennettu haku"
-
-#~ msgid "STOCK_COLOR_PICKER"
-#~ msgstr "STOCK_COLOR_PICKER"
-
-#~ msgid "Titles"
-#~ msgstr "Nimikkeet"
-
-#~ msgid "Start Date"
-#~ msgstr "Aloituspäivämäärä"
-
-#~ msgid ""
-#~ "Create your users.\n"
-#~ "You will be able to assign groups to users. Groups define the access rights "
-#~ "of each users on the different objects of the system.\n"
-#~ "            "
-#~ msgstr ""
-#~ "Luo käyttäjät.\n"
-#~ "Voit myös antaa käyttäjille ryhmät. Ryhmät määrittelevät käyttöoikeudet "
-#~ "järjestelmän eri objekteissa.\n"
-#~ "            "
-
-#~ msgid ">"
-#~ msgstr ">"
-
-#~ msgid "Delete Permission"
-#~ msgstr "Poista oikeus"
-
-#~ msgid "STOCK_PRINT"
-#~ msgstr "STOCK_PRINT"
-
-#~ msgid "<"
-#~ msgstr "<"
-
-#~ msgid "If you don't force the domain, it will use the simple domain setup"
-#~ msgstr ""
-#~ "Jos et määrittele toimialuetta, käytetään yksinkertaisia toimialueasetuksia."
-
-#~ msgid "Print format"
-#~ msgstr "Tulostusmuotoilu"
-
-#~ msgid "STOCK_JUMP_TO"
-#~ msgstr "STOCK_JUMP_TO"
-
-#~ msgid "End Date"
-#~ msgstr "Lopetuspäivämäärä"
-
-#~ msgid "Contract ID"
-#~ msgstr "Sopimuksen tunnus"
-
-#~ msgid "center"
-#~ msgstr "keskitetty"
-
-#~ msgid "STOCK_FIND"
-#~ msgstr "STOCK_FIND"
-
-#~ msgid "Add Maintenance Contract"
-#~ msgstr "Lisää ylläpitosopimus"
-
-#~ msgid "Unsubscribed"
-#~ msgstr "Poistettu käytöstä"
-
-#~ msgid "STOCK_MEDIA_PREVIOUS"
-#~ msgstr "STOCK_MEDIA_PREVIOUS"
-
-#~ msgid "The VAT doesn't seem to be correct."
-#~ msgstr "ALV ei vaikuta olevan oikea."
-
-#~ msgid "Calculate Sum"
-#~ msgstr "Laske summa"
-
-#~ msgid "STOCK_NETWORK"
-#~ msgstr "STOCK_NETWORK"
-
-#~ msgid "Module successfully imported !"
-#~ msgstr "Moduulin tuonti onnistui!"
-
-#~ msgid "Subscribe Report"
-#~ msgstr "Ota käyttöön"
-
-#~ msgid "Unsubscribe Report"
-#~ msgstr "Ota pois käytöstä"
-
-#~ msgid "STOCK_DIRECTORY"
-#~ msgstr "STOCK_DIRECTORY"
-
-#~ msgid "New Partner"
-#~ msgstr "Uusi kumppani"
-
-#~ msgid "Report custom"
-#~ msgstr "Raportti kustomoitu"
-
-#~ msgid "Simplified Interface"
-#~ msgstr "Yksinkertainen käyttöliittymä"
-
-#~ msgid "STOCK_REVERT_TO_SAVED"
-#~ msgstr "STOCK_REVERT_TO_SAVED"
-
-#~ msgid "Import a Translation File"
-#~ msgstr "Tuo käännöstiedosto"
-
-#~ msgid "Sequence Code"
-#~ msgstr "Sarjan koodi"
-
-#~ msgid "a5"
-#~ msgstr "A5"
-
-#~ msgid "terp-product"
-#~ msgstr "terp-product"
-
-#~ msgid "State of Mind"
-#~ msgstr "Mielentila"
-
-#~ msgid "Image Preview"
-#~ msgstr "Kuvan esikatselu"
-
-#~ msgid "Choose a language to install:"
-#~ msgstr "Valitse asennettava kieli:"
-
-#, python-format
-#~ msgid "This url '%s' must provide an html file with links to zip modules"
-#~ msgstr ""
-#~ "URL-osoitteen '%s' täytyy sisältää HTML-tiedosto, jossa on linkit zip-"
-#~ "moduuleihin"
-
-#~ msgid "Sequence Name"
-#~ msgstr "Jakson nimi"
-
-#~ msgid "Auto"
-#~ msgstr "Auto"
-
-#, python-format
-#~ msgid "Product quantity"
-#~ msgstr "Tuotemäärä"
-
-#, python-format
-#~ msgid "You can not create this kind of document! (%s)"
-#~ msgstr "Tällaista dokumenttia ei voida luoda! (%s)"
-
-#, python-format
-#~ msgid ""
-#~ "\"\"\n"
-#~ "This test checks if the module classes are raising exception when calling "
-#~ "basic methods or not.\n"
-#~ "\"\""
-#~ msgstr ""
-#~ "\"\"\n"
-#~ "Tämä testi luovatko moduuliluokat poikkeuksia kun kutsutaan perusmetodeja.\n"
-#~ "\"\""
-
-#, python-format
-#~ msgid "Result (/10)"
-#~ msgstr "Tulos (/10)"
-
-#, python-format
-#~ msgid ""
-#~ "There is no income account defined ' \\n                                     "
-#~ "   'for this product: \"%s\" (id:%d)"
-#~ msgstr "Tulotiliä ei ole määritelty ' \\n 'tälle tuotteelle: \"%s\" (id:%d)"
-
-#, python-format
-#~ msgid "Password mismatch !"
-#~ msgstr "Salasanat eivät täsmää!"
-
-#, python-format
-#~ msgid "No payment mode or payment type code invalid."
-#~ msgstr "Ei maksutapaa tai maksutyypin koodi on virheellinen."
-
-#, python-format
-#~ msgid ""
-#~ "Could not resolve product category, ' \\n                                    "
-#~ "'you have defined cyclic categories ' \\n                                    "
-#~ "'of products!"
-#~ msgstr ""
-#~ "Ei voitu selvittää tuoteluokkaa ' \\n ' olet määritellyt jaksottaisia "
-#~ "tuotteiden tuoteluokkia ' \\n ' !"
-
-#, python-format
-#~ msgid " You cannot Resume the operation other then Pause state !"
-#~ msgstr " Et voi jatkaa toimintoa muulloin kuin Tauko -tilassa!"
-
-#~ msgid "Configure"
-#~ msgstr "Määritä"
-
-#, python-format
-#~ msgid "Feed back About Workflow of Module"
-#~ msgstr "Anna palautetta Moduulin toiminnasta"
-
-#, python-format
-#~ msgid "Product Quantity"
-#~ msgstr "Tuotemäärä"
-
-#, python-format
-#~ msgid ""
-#~ "''\n"
-#~ "\n"
-#~ "OpenERP is an ERP+CRM program for small and medium businesses.\n"
-#~ "\n"
-#~ "The whole source code is distributed under the terms of the\n"
-#~ "GNU Public Licence.\n"
-#~ "\n"
-#~ "(c) 2003-TODAY, Fabien Pinckaers - Tiny sprl''"
-#~ msgstr ""
-#~ "\"\n"
-#~ "\n"
-#~ "OpenERP on ERP+CRM -ohjelmisto pk -yrityksille.\n"
-#~ "Lähdekoodi on julkaistu GNU Public Licencen\n"
-#~ "alaisuudessa.\n"
-#~ "\n"
-#~ "(c) 2003-Tähän päivään, Fabien Pinckaers - Tiny sprl\""
-
-#, python-format
-#~ msgid ""
-#~ "You must assign a partner to this lead before converting to opportunity.\n"
-#~ "' \\n                  'You can use the convert to partner button."
-#~ msgstr ""
-#~ "Sinun täytyy valita kumppani tälle kohdalle ennenkuin muunnat "
-#~ "mahdollisuudeksi.\n"
-#~ "' \\n 'Voit käyttää \"muunna kumppaniksi\" -painiketta."
-
-#, python-format
-#~ msgid "No partner has a VAT Number asociated with him."
-#~ msgstr "Kumppanille ei ole ALV:a yhdistettynä."
-
-#, python-format
-#~ msgid "Can't connect instance %s"
-#~ msgstr "Ei voi yhdistää instanssiin %s"
-
-#, python-format
-#~ msgid "You need to choose a model"
-#~ msgstr "Sinun täytyy valita malli"
-
-#, python-format
-#~ msgid "Tag Name"
-#~ msgstr "Tagin nimi"
-
-#, python-format
-#~ msgid "You can not sign in from an other date than today"
-#~ msgstr "Et voi kirjautua sisään muulla päivämäärällä kuin nykyisellä"
-
-#, python-format
-#~ msgid "from stock: products assigned."
-#~ msgstr "varastosta: tuotteet luovutettu."
-
-#, python-format
-#~ msgid "Too much total record found!"
-#~ msgstr "Liikaa tietueita löydetty!"
-
-#, python-format
-#~ msgid "The General Budget '%s' has no Accounts!"
-#~ msgstr "Yleisellä budjetilla '%s' ei ole kirjanpitoa!"
-
-#, python-format
-#~ msgid "Invoice is not created"
-#~ msgstr "Laskua ei ole luotu"
-
-#, python-format
-#~ msgid "You can not set negative Duration."
-#~ msgstr "Et voi asettaa negatiivista kestoa."
-
-#, python-format
-#~ msgid "Created by the synchronization wizard"
-#~ msgstr "Synkronoinnin ohjattu toiminto on luonut tämän"
-
-#, python-format
-#~ msgid "Futur Deliveries"
-#~ msgstr "Tulevat toimitukset"
-
-#, python-format
-#~ msgid "Not Efficient"
-#~ msgstr "Tehoton"
-
-#~ msgid "Factor"
-#~ msgstr "Aiheuttaja"
-
-#, python-format
-#~ msgid "A model having this name and code already exists !"
-#~ msgstr "Malli,jolla on tämä nimi ja koodi on jo olemassa"
-
-#, python-format
-#~ msgid "No enough data"
-#~ msgstr "Ei tarpeeksi dataa"
-
-#, python-format
-#~ msgid ""
-#~ "You have to define a Default Credit Account for your Financial Journals!\n"
-#~ msgstr "Sinun on määritettävä oletusluottotili talouden lokeille!\n"
-
-#, python-format
-#~ msgid "You try to bypass an access rule (Document type: %s)."
-#~ msgstr "Yritit ohittaa käyttöoikeusrajoituksen (Dokumentin tyyppi: %s)."
-
-#, python-format
-#~ msgid "September"
-#~ msgstr "Syyskuu"
-
-#, python-format
-#~ msgid ""
-#~ "You can not do this modification on a confirmed entry ! Please note that you "
-#~ "can just change some non important fields !"
-#~ msgstr ""
-#~ "Et voi muokata tätä hyväksyttyä merkintää! Ota huomioon että voit muuttaa "
-#~ "ainoastaan ei tärkeitä kenttiä"
-
-#, python-format
-#~ msgid ""
-#~ "\n"
-#~ "\n"
-#~ "Mail sent to following Partners successfully, !\n"
-#~ "\n"
-#~ msgstr ""
-#~ "\n"
-#~ "\n"
-#~ "Posti on lähetetty onnistuneesti seuraaville kumppaneille, !\n"
-#~ "\n"
-
-#~ msgid "Repository"
-#~ msgstr "Sijoituspaikka"
-
-#, python-format
-#~ msgid "Your journal must have a default credit and debit account."
-#~ msgstr "Lokikirjassasi täytyy olla oletus luotto ja debet tili"
-
-#, python-format
-#~ msgid "Bad account!"
-#~ msgstr "Kelvoton tili!"
-
-#, python-format
-#~ msgid "Received Qty"
-#~ msgstr "Vastaanotettu määrä"
-
-#, python-format
-#~ msgid "Pie charts need exactly two fields"
-#~ msgstr "Piirakkadiagrammi tarvitsee kaksi kenttää"
-
-#, python-format
-#~ msgid "Id is not the same than existing one: %s"
-#~ msgstr "Id ei ole sama kuin olemassa oleva: %s"
-
-#, python-format
-#~ msgid "Couldn't send mail because your email address is not configured!"
-#~ msgstr ""
-#~ "Sähköpostiviestin lähettäminen epäonnistui, koska sähköpostiosoitetta ei ole "
-#~ "määritetty!"
-
-#, python-format
-#~ msgid "No Analytic Journal !"
-#~ msgstr "Ei analyyttistä lokia!"
-
-#, python-format
-#~ msgid "Unit Product Price"
-#~ msgstr "Tuotteen kappalehinta"
-
-#, python-format
-#~ msgid ""
-#~ "The production is in \"%s\" state. You can not change the production "
-#~ "quantity anymore"
-#~ msgstr "Tuotanto on \"%s\" vaiheessa. Et voi muuttaa tuotanto määrä enää"
-
-#, python-format
-#~ msgid "Connection to WWW.Auction-in-Europe.com failed !"
-#~ msgstr "Yhdistäminen www.auction-in-europe.com -osoitteeseen epäonnistui !"
-
-#, python-format
-#~ msgid ""
-#~ "No E-Mail ID Found for your Company address or missing reply address in "
-#~ "section!"
-#~ msgstr ""
-#~ "Sähköposti ID:tä ei löytyny yrityksesi osoitteistosta tai puuttuva vastaus "
-#~ "osoite!"
-
-#, python-format
-#~ msgid "O(1)"
-#~ msgstr "O(1)"
-
-#, python-format
-#~ msgid "You can't modify this order. It has already been paid"
-#~ msgstr "Et voi muokata tätä tilausta. Se on jo maksettu"
-
-#, python-format
-#~ msgid "Method Test"
-#~ msgstr "Menetelmä testi"
-
-#, python-format
-#~ msgid "Date to must be set between %s and %s"
-#~ msgstr "Päiväys täytyy asettaa välille %s ja %s"
-
-#, python-format
-#~ msgid "Products: "
-#~ msgstr "Tuotteet: "
-
-#, python-format
-#~ msgid "No bank account for the company."
-#~ msgstr "Ei pankkitiliä yritykselle."
-
-#, python-format
-#~ msgid "You can not modify/delete a journal with entries for this period !"
-#~ msgstr "Et voi muokata/poistaa lokikirjaa jossa merkintöjä tälle kaudelle"
-
-#, python-format
-#~ msgid "You can not read this document! (%s)"
-#~ msgstr "Dokumenttia ei voida lukea! (%s)"
-
-#, python-format
-#~ msgid "UnknownError"
-#~ msgstr "Tuntematon virhe"
-
-#, python-format
-#~ msgid "Relation not found: %s on '%s'"
-#~ msgstr "Yhteyttä ei löytynyt: %s ja '%s' välille"
-
-#, python-format
-#~ msgid "Invalid Region"
-#~ msgstr "Virheellinen alue"
-
-#, python-format
-#~ msgid "unable to find a server"
-#~ msgstr "palvelinta ei löytynyt"
-
-#, python-format
-#~ msgid "Missing info: Subscription"
-#~ msgstr "Puuttuva tieto: Ennakkomaksu"
-
-#, python-format
-#~ msgid "No production sequence defined"
-#~ msgstr "Ei määritettyä tuotantosekvenssiä"
-
-#, python-format
-#~ msgid "Unable to create your control center user"
-#~ msgstr "Ei voinut luoda käyttäjää ohjauskeskukselle"
-
-#~ msgid "Commercial Prospect"
-#~ msgstr "Kaupallinen näkymä"
-
-#~ msgid "Year without century: %(y)s"
-#~ msgstr "Vuosi ilman vuosisataa: %(y)-luku"
-
-#, python-format
-#~ msgid "A sign-out must be right after a sign-in !"
-#~ msgstr "Uloskirjautumisen täytyy olla heti sisäänkirjautumisen jälkeen !"
-
-#, python-format
-#~ msgid "Please fill in the Address field in the Partner: %s."
-#~ msgstr "Täytä kumppanin osoitekenttä: %s."
-
-#, python-format
-#~ msgid "Error, no partner !"
-#~ msgstr "Virhe, ei kumppania !"
-
-#, python-format
-#~ msgid "The region should be in "
-#~ msgstr "Alueen tulisi olla "
-
-#, python-format
-#~ msgid "Cannot delete a point of sale which is already confirmed !"
-#~ msgstr "Ei voi poistaa myyntipistettä joka on jo vahvistettu !"
-
-#~ msgid "Make the rule global, otherwise it needs to be put on a group"
-#~ msgstr "Tee säännöstä yleinen, muuten se pitää laittaa ryhmään"
-
-#, python-format
-#~ msgid "Enter at least one field !"
-#~ msgstr "Syötä vähintään yksi kenttä !"
-
-#, python-format
-#~ msgid "You can not write in this document! (%s)"
-#~ msgstr "Et voi kirjoittaa tähän asiakirjaan! (%s)"
-
-#, python-format
-#~ msgid "The account is not defined to be reconciled !"
-#~ msgstr "Tiliä ei ole määritetty soviteltavaksi !"
-
-#, python-format
-#~ msgid "Product Margins"
-#~ msgstr "Tuotemarginaalit"
-
-#, python-format
-#~ msgid "You have to provide an account for the write off entry !"
-#~ msgstr "Hinnan alennukselle täytyy määrittää tili !"
-
-#, python-format
-#~ msgid "CHECK: "
-#~ msgstr "TARKISTA: "
-
-#, python-format
-#~ msgid "Message !"
-#~ msgstr "Viesti !"
-
-#, python-format
-#~ msgid ""
-#~ "You can not escalate this case.\n"
-#~ "You are already at the top level."
-#~ msgstr ""
-#~ "Et voi nousta ylemmäs tältä tasolta.\n"
-#~ "Olet jo ylimmällä tasolla."
-
-#, python-format
-#~ msgid "Date not in a defined fiscal year"
-#~ msgstr "Päivämäärä ei ole määritellyllä tilikaudella"
-
-#, python-format
-#~ msgid "No line matched this order in the choosed delivery grids !"
-#~ msgstr "Yksikään rivi ei vastannut tilausta valituilla toimitustaulukoilla !"
-
-#, python-format
-#~ msgid ""
-#~ "You can't delete this server because it acts as backup for other servers."
-#~ msgstr ""
-#~ "Et voi poistaa tätä palvelinta koska se toimii varmistuksena muille "
-#~ "palvelimille."
-
-#, python-format
-#~ msgid "Registration of your account"
-#~ msgstr "Tilisi rekisteröinti"
-
-#, python-format
-#~ msgid ""
-#~ "You cannot make an advance on a sale order that is defined as 'Automatic "
-#~ "Invoice after delivery'."
-#~ msgstr ""
-#~ "Ennakkoa ei voi tehdä myyntitilauksesta johon on määritelty \"Automaattinen "
-#~ "lasku toimituksen jälkeen\"."
-
-#, python-format
-#~ msgid "You can not delete this document! (%s)"
-#~ msgstr "Et voi poistaa tätä asiakirjaa (%s)"
-
-#, python-format
-#~ msgid "Missing info: Test Instance"
-#~ msgstr "Puuttuva tieto: Testaa instanssi"
-
-#, python-format
-#~ msgid "Unable to create invoice (partner has no address)."
-#~ msgstr "Laskua ei voitu luoda (kumppanilla ei ole osoitetta)."
-
-#, python-format
-#~ msgid "Please select one and only one inventory !"
-#~ msgstr "Valitse vain ja ainoastaan yksi varasto !"
-
-#, python-format
-#~ msgid "No Data Available"
-#~ msgstr "Ei tietoa saatavilla"
-
-#, python-format
-#~ msgid ""
-#~ "No fiscal year defined for this date !\n"
-#~ "Please create one."
-#~ msgstr ""
-#~ "Ei tilikautta määritetty tälle päivämäärälle !\n"
-#~ "Luo sellainen."
-
-#, python-format
-#~ msgid "Missed Address !"
-#~ msgstr "Vältetty osoite !"
-
-#, python-format
-#~ msgid "January"
-#~ msgstr "Tammikuu"
-
-#, python-format
-#~ msgid "Please create an invoice for this sale."
-#~ msgstr "Luo lasku tälle myynnille."
-
-#~ msgid "Document Link"
-#~ msgstr "Asiakirjan linkki"
-
-#, python-format
-#~ msgid "Balance product needed"
-#~ msgstr "Tuotteensaldo tarvitaan"
-
-#, python-format
-#~ msgid "Result of dependancy in %"
-#~ msgstr "Riippuvuuden tulos %:na"
-
-#, python-format
-#~ msgid "Product supplier"
-#~ msgstr "Tuotetoimittaja"
-
-#, python-format
-#~ msgid "Configuration of the server"
-#~ msgstr "Palvelimen konfigurointi"
-
-#, python-format
-#~ msgid "You are not authorized to copy module repositories"
-#~ msgstr "Et ole valtuutettu kopioimaan moodulitietolähteitä"
-
-#~ msgid "You can also import .po files."
-#~ msgstr "Voit myös tuoda .po tiedostoja."
-
-#, python-format
-#~ msgid "Unable to find a valid contract"
-#~ msgstr "Ei löydy voimassa olevaa sopimusta"
-
-#, python-format
-#~ msgid "File name must be unique!"
-#~ msgstr "Tiedostonimen täytyy olla ainutkertainen!"
-
-#, python-format
-#~ msgid "Open"
-#~ msgstr "Avaa"
-
-#, python-format
-#~ msgid "No partner !"
-#~ msgstr "Ei kumppania!"
-
-#, python-format
-#~ msgid "Production Order Cannot start in [%s] state"
-#~ msgstr "Tuotantotilaus ei voi alkaa [%s] -tilassa"
-
-#~ msgid "Ukrainian / украї́нська мо́ва"
-#~ msgstr "Ukraina / украї́нська мо́ва"
-
-#, python-format
-#~ msgid "Checking your Promotional Code"
-#~ msgstr "Tarkistaa kampanjakoodiasi"
-
-#, python-format
-#~ msgid "You must first cancel all invoices attached to this purchase order."
-#~ msgstr "Sinun täytyy ensin perua kaikki laskut liittynen tilaukseen."
-
-#, python-format
-#~ msgid "No Workflow define"
-#~ msgstr "Ei työnkulun määritystä"
-
-#, python-format
-#~ msgid "Wrong Source Document !"
-#~ msgstr "Väärä lähdedokumentti !"
-
-#, python-format
-#~ msgid "Can not define a column %s. Reserved keyword !"
-#~ msgstr "Saraketta %s ei voi määritellä. Varattu avainsana!"
-
-#, python-format
-#~ msgid "No product in this location."
-#~ msgstr "Ei tuotetta tässä sijainnissa."
-
-#, python-format
-#~ msgid "Configuration of the incremental backup servers"
-#~ msgstr "Lisävarmistuspalvelimien konfigurointi"
-
-#, python-format
-#~ msgid "The Buyer \"%s\" has no Invoice Address."
-#~ msgstr "Ostajalla \"%s\" ei ole laskutusosoitetta."
-
-#, python-format
-#~ msgid "No Customer Defined !"
-#~ msgstr "Asiakasta ei ole määritetty !"
-
-#, python-format
-#~ msgid "Configuration of the DNS servers"
-#~ msgstr "DNS palvelimien konfigurointi"
-
-#, python-format
-#~ msgid "August"
-#~ msgstr "Elokuu"
-
-#, python-format
-#~ msgid "October"
-#~ msgstr "Lokakuu"
-
-#, python-format
-#~ msgid "The date of your account move is not in the defined period !"
-#~ msgstr "Päiväystä tilinsiirrolle ei ole määritellyssä ajanjaksossa"
-
-#, python-format
-#~ msgid "No action found"
-#~ msgstr "Toimintoa ei löytynyt"
-
-#, python-format
-#~ msgid ""
-#~ "You can not cancel this holiday request. first You have to make its case in "
-#~ "draft state."
-#~ msgstr ""
-#~ "Et voi perua tätä lomapyyntöä. Se täytyy ensiksi tehdä luonnostilassa."
-
-#, python-format
-#~ msgid ""
-#~ "You have to select a customer in the sale form !\n"
-#~ "Please set one customer before choosing a product."
-#~ msgstr ""
-#~ "Sinun täytyy valita asiakas myyntilomakkeella !\n"
-#~ "Aseta yksi asiakas ennen kuin valitset tuotteita."
-
-#, python-format
-#~ msgid "Analytic Entries"
-#~ msgstr "Analyyttiset merkinnät"
-
-#~ msgid "Subscribed"
-#~ msgstr "Tilattu"
-
-#, python-format
-#~ msgid "Invalid operation"
-#~ msgstr "Virheellinen toiminto"
-
-#, python-format
-#~ msgid ""
-#~ "You try to install a module that depends on the module: %s.\n"
-#~ "But this module is not available in your system."
-#~ msgstr ""
-#~ "Asennettava moduuli on riippuvainen moduulista %s,\n"
-#~ "mutta tämä moduuli ei ole saatavilla järjestelmässä."
-
-#, python-format
-#~ msgid ""
-#~ "Couldn't send mail because the contact for this task (%s) has no email "
-#~ "address!"
-#~ msgstr ""
-#~ "Sähköpostin lähettäminen epäonnistui, koska tämän tehtävän (%s)  "
-#~ "yhteyshenkilöllä ei ole sähköpostiosoitetta!"
-
-#~ msgid "Finland / Suomi"
-#~ msgstr "Suomi / Finland"
-
-#, python-format
-#~ msgid "The sign-out date must be in the past"
-#~ msgstr "Uloskirjautumispäivämäärän täytyy olla aikaisemmin"
-
-#, python-format
-#~ msgid "Login failed!"
-#~ msgstr "Kirjautuminen epäonnistui!"
-
-#, python-format
-#~ msgid "No Partner Defined !"
-#~ msgstr "Ei kumppania määriteltynä!"
-
-#, python-format
-#~ msgid ""
-#~ "You cannot enter an attendance ' \\n                        'date outside "
-#~ "the current timesheet dates!"
-#~ msgstr ""
-#~ "Et voi merkitä läsnäolopäivämäärää ' \\n ' nykyisten tuntilistojen "
-#~ "päivämäärien ulkopuolelta!"
-
-#, python-format
-#~ msgid ""
-#~ "There is no expense account define ' \\n                                    "
-#~ "'for this product: \"%s\" (id:%d)"
-#~ msgstr ""
-#~ "Ei ole määritettyä menotiliä ' \\n ' tälle tuotteelle: \"%s\" (id:%d)"
-
-#, python-format
-#~ msgid "Cannot delete an order line which is %s !"
-#~ msgstr "Ei voi poistaa tilausriviä joka on %s !"
-
-#, python-format
-#~ msgid "Result of Security in %"
-#~ msgstr "Turvallisuuden tulos %:na"
-
-#, python-format
-#~ msgid "You can not change the tax, you should remove and recreate lines !"
-#~ msgstr ""
-#~ "Et voi muuttaa veroa, sinun tulisi poistaa rivit ja uudelleen luoda ne !"
-
-#, python-format
-#~ msgid "You can not create this kind of document"
-#~ msgstr "Et voi luoda tämänkaltaista dokumenttia"
-
-#, python-format
-#~ msgid "Result (/1)"
-#~ msgstr "Tulos (/1)"
-
-#, python-format
-#~ msgid "Cannot delete invoice(s) that are already opened or paid !"
-#~ msgstr ""
-#~ "Ei voida poistaa laskua tai laskuja jotka ovat jo avattuja tai maksettuja !"
-
-#, python-format
-#~ msgid "Couldn't find bill of material for product"
-#~ msgstr "Ei löytynyt tuotteen materiaalilaskua"
-
-#, python-format
-#~ msgid "Using a relation field which uses an unknown object"
-#~ msgstr "Sisältää kenttän joka käyttää tuntematonta objektia"
-
-#, python-format
-#~ msgid "Invoice state"
-#~ msgstr "Laskun tila"
-
-#, python-format
-#~ msgid "You can not delete this case. You should better cancel it."
-#~ msgstr "Et voi poistaa tätä kohtaa. Sinun olisi parempi peruuttaa se."
-
-#, python-format
-#~ msgid "You are not authorized to write module repositories"
-#~ msgstr "Et ole valtuutettu kirjoittamaan moduulitietolähteitä"
-
-#, python-format
-#~ msgid "You have to select a partner in the repair form !"
-#~ msgstr "Kumppani on valittava korjauslomakkeelta !"
-
-#~ msgid "Albanian / Shqipëri"
-#~ msgstr "Albania / Shqiperia"
-
-#~ msgid "Field Selection"
-#~ msgstr "Kentän valinta"
-
-#, python-format
-#~ msgid "Delivered Qty"
-#~ msgstr "Toimitettu määrä"
-
-#, python-format
-#~ msgid "Unable to delete non uninstalled instances"
-#~ msgstr "Kykenemätön poistamaan poistamattomia instansseja"
-
-#, python-format
-#~ msgid "Packing Information !"
-#~ msgstr "Pakkaustiedot !"
-
-#, python-format
-#~ msgid ""
-#~ "No period defined for this date !\n"
-#~ "Please create a fiscal year."
-#~ msgstr ""
-#~ "Ei jaksoa määritelty tälle päivämäärälle !\n"
-#~ "Luo tilikausi."
-
-#, python-format
-#~ msgid "Some entries are already reconciled !"
-#~ msgstr "Jotkut merkinnät ovat jo soviteltuja"
-
-#, python-format
-#~ msgid "Merging is only allowed on draft inventories."
-#~ msgstr "Liittäminen on sallittu vain luonnosvarastoille."
-
-#, python-format
-#~ msgid "Feedback about structure of module"
-#~ msgstr "Palaute koskien moduulin rakennetta"
-
-#, python-format
-#~ msgid ""
-#~ "All emails have been successfully sent to Partners:.\n"
-#~ "\n"
-#~ msgstr ""
-#~ "Kaikki sähköpostit on onnistuneesti lähetetty kumppaneille:.\n"
-#~ "\n"
-
-#, python-format
-#~ msgid "Unable to change tax !"
-#~ msgstr "Veroa ei voida muuttaa!"
-
-#, python-format
-#~ msgid "Activation of your subscription"
-#~ msgstr "Ennakkomaksusi aktivointi"
-
-#, python-format
-#~ msgid "This feature is only available for location of type \"Amazon\""
-#~ msgstr "Tämä ominaisuus on ainoastaan saatavilla \"Amazon\" sijaintityyppiin"
-
-#, python-format
-#~ msgid "Structure Test"
-#~ msgstr "Rakennetesti"
-
-#, python-format
-#~ msgid "Wed"
-#~ msgstr "Ke"
-
-#, python-format
-#~ msgid ""
-#~ "You try to write on an record that doesn't exist ' \\n                       "
-#~ "                 '(Document type: %s)."
-#~ msgstr ""
-#~ "Yritit kirjoittaa tietueeseen jota ei ole olemassa ' \\n '(Dokumentin "
-#~ "tyyppi: %s)."
-
-#, python-format
-#~ msgid "Invoice is already created."
-#~ msgstr "Lasku on jo luotu."
-
-#, python-format
-#~ msgid "Insufficient Data!"
-#~ msgstr "Riittämätön tieto!"
-
-#, python-format
-#~ msgid "You must enter a period length that cannot be 0 or below !"
-#~ msgstr "Ajanjakson keston täytyy olla suurempi kuin 0 !"
-
-#, python-format
-#~ msgid "Product name"
-#~ msgstr "Tuotenimi"
-
-#, python-format
-#~ msgid "Permission Denied !"
-#~ msgstr "Lupa evätty !"
-
-#, python-format
-#~ msgid "Record found after total record!"
-#~ msgstr "Löydetty tietue kokonaistietueen jälkeen!"
-
-#, python-format
-#~ msgid ""
-#~ "\"%s\" contains too many dots. XML ids should not contain dots ! These are "
-#~ "used to refer to other modules data, as in module.reference_id"
-#~ msgstr ""
-#~ "\"%s\" sisältää liikaa pisteitä. XML ids eivät saa sisältää pisteitä ! Näitä "
-#~ "käytetään viittaamaan toisten moodulien tietoihin kuten module.reference_id "
-#~ "kerrotaan"
-
-#, python-format
-#~ msgid "The \"use_control\" module is not uninstallable"
-#~ msgstr "Moduuli \"use_control\" ei ole poistettavissa"
-
-#, python-format
-#~ msgid "BNK"
-#~ msgstr "BNK"
-
-#, python-format
-#~ msgid "No cost unit defined for this employee !"
-#~ msgstr "Työntekijälle ei ole määritetty kustannusyksikköä !"
-
-#, python-format
-#~ msgid "Data Insufficient!"
-#~ msgstr "Riittämätön tieto!"
-
-#, python-format
-#~ msgid ""
-#~ "The Payment Term of Supplier does not have Payment Term Lines(Computation) "
-#~ "defined !"
-#~ msgstr ""
-#~ "Toimittajan maksuehdoissa ei ole maksuehtorivejä (Iaskelmia) määritettynä !"
-
-#, python-format
-#~ msgid "Tree can only be used in tabular reports"
-#~ msgstr "Puuta voidaan käyttää vain taulukkomallisissa raporteissa"
-
-#, python-format
-#~ msgid "not implemented"
-#~ msgstr "ei toteutettu"
-
-#, python-format
-#~ msgid "Global taxes defined, but are not in invoice lines !"
-#~ msgstr "Yleisiä veroja on määritetty, mutta ne eivät ole laskuriveillä !"
-
-#, python-format
-#~ msgid "Task '%s' cancelled"
-#~ msgstr "Tehtävä '%s' peruutettu"
-
-#, python-format
-#~ msgid ""
-#~ "Please provide another source document.\n"
-#~ "This one does not exist !"
-#~ msgstr ""
-#~ "Anna toinen lähdedokumentti.\n"
-#~ "Tätä ei ole olemassa !"
-
-#, python-format
-#~ msgid ""
-#~ "No bank specified on invoice:\n"
-#~ "%s"
-#~ msgstr ""
-#~ "Laskulla ei ole määritelty pankkia:\n"
-#~ "%s"
-
-#, python-format
-#~ msgid "There is no expense account defined for this product: \"%s\" (id:%d)"
-#~ msgstr "Tälle tuotteelle ei ole määritetty menotiliä \"%s\" (id:%d)"
-
-#, python-format
-#~ msgid ""
-#~ "Given module has no objects.Speed test can work only when new objects are "
-#~ "created in the module along with demo data"
-#~ msgstr ""
-#~ "Annetulla moduulilla ei ole objekteja. Nopeustestit toimivat vain kun uusia "
-#~ "objekteja on luotu moduulissa demotietojen kanssa"
-
-#, python-format
-#~ msgid "Operation Done"
-#~ msgstr "Toimenpide valmis"
-
-#, python-format
-#~ msgid ""
-#~ "Please put a partner on the picking list if you want to generate invoice."
-#~ msgstr "Laita kumppani keräilylistaan jos haluat luoda laskun."
-
-#, python-format
-#~ msgid "A partner is already existing with the same name."
-#~ msgstr "Samanniminen kumppani on jo olemassa."
-
-#, python-format
-#~ msgid "This method can be called with multiple ids"
-#~ msgstr "Tätä metodia voidaan kutsua useillla ids:llä"
-
-#, python-format
-#~ msgid "At least one line has no product !"
-#~ msgstr "Vähintään yhdellä rivillä ei ole tuotetta !"
-
-#, python-format
-#~ msgid "No Records Found for Report!"
-#~ msgstr "Ei löydettyjä tietueita raporttia varten!"
-
-#, python-format
-#~ msgid "You must first cancel all packing attached to this purchase order."
-#~ msgstr ""
-#~ "Sinun täytyy ensin perua kaikki pakkaukset liittyen tähän tilaukseen."
-
-#, python-format
-#~ msgid "Unable to find a valid period !"
-#~ msgstr "Voimassa olevaa jaksoa ei löydy"
-
-#, python-format
-#~ msgid "You are not authorized to create module repositories"
-#~ msgstr "Et ole oikeutettu luomaan moduulin tietolähteitä"
-
-#, python-format
-#~ msgid "Directory name contains special characters!"
-#~ msgstr "Kansionnimi sisältää erikoismerkkejä!"
-
-#, python-format
-#~ msgid "Return lines"
-#~ msgstr "Paluurivit"
-
-#, python-format
-#~ msgid "Unable to start The Open ERP server without backups"
-#~ msgstr "OpenERP -palvelin ei voi käynnistyä ilman varmistuksia"
-
-#, python-format
-#~ msgid "Warning! Not enough demo data"
-#~ msgstr "Varoitus! Ei tarpeeksi testitietoa"
-
-#, python-format
-#~ msgid "Couldn't find tag '%s' in parent view !"
-#~ msgstr "Merkintää \"%s\" ei löydy edeltävästä näkymästä!"
-
-#, python-format
-#~ msgid "Object Test"
-#~ msgstr "Objekti testi"
-
-#, python-format
-#~ msgid "The name_get method is not implemented on this object !"
-#~ msgstr "Menetelmä \"name_get\" ei ole käytössä tässä objektissa!"
-
-#, python-format
-#~ msgid "No IBAN for the company bank account."
-#~ msgstr "Ei IBAN -koodia yrityksen pankkitilille."
-
-#, python-format
-#~ msgid "You are not authorized to unlink module repositories"
-#~ msgstr "Et ole oikeutettu poistamaan linkityksiä moodulin tietolähteiltä"
-
-#, python-format
-#~ msgid ""
-#~ "Please verify that the total difference of the sheet is lower than %.2f !"
-#~ msgstr "Varmista että listan lopullinen erotus on pienempi kuin %.2f !"
-
-#, python-format
-#~ msgid ""
-#~ "Please verify the price of the invoice !\n"
-#~ "The real total does not match the computed total."
-#~ msgstr ""
-#~ "Tarkista laskun loppusumma !\n"
-#~ "Loppusumma ei täsmää laskennalliseen loppusummaan."
-
-#, python-format
-#~ msgid "Invoices"
-#~ msgstr "Laskutus"
-
-#~ msgid "Maintenance"
-#~ msgstr "Ylläpito"
-
-#, python-format
-#~ msgid "You can not sign out from an other date than today"
-#~ msgstr "Et voi kirjautua ulos muulla kuin nykyisellä päivämäärällä"
-
-#, python-format
-#~ msgid "Please provide a partner for the sale."
-#~ msgstr "Anna kumppani myyntiä varten."
-
-#, python-format
-#~ msgid "Test Is Not Implemented"
-#~ msgstr "Testiä ei ole toteutettu"
-
-#, python-format
-#~ msgid "The opening journal must not have any entry in the new fiscal year !"
-#~ msgstr ""
-#~ "Avaavalla lokilla ei saa olla yhtään merkintää uudella tilikaudella !"
-
-#, python-format
-#~ msgid "Taxes missing !"
-#~ msgstr "Verot puuttuu !"
-
-#, python-format
-#~ msgid "Efficient"
-#~ msgstr "Tehokas"
-
-#, python-format
-#~ msgid "The order state have to be draft to add delivery lines."
-#~ msgstr "Tilauksen tila täytyy luonnostella toimitusrivien lisäämiseksi."
-
-#, python-format
-#~ msgid "Field name"
-#~ msgstr "Kentän nimi"
-
-#, python-format
-#~ msgid "Task '%s' closed"
-#~ msgstr "Tehtävä '%s' suljettu"
-
-#, python-format
-#~ msgid ""
-#~ "There is no expense account define ' \\n                                'for "
-#~ "this product: \"%s\" (id:%d)"
-#~ msgstr "Ei ole menotilimääritystä ' \\n 'tälle tuotteelle: \"%s\" (id:%d)"
-
-#, python-format
-#~ msgid "Other Pricelist"
-#~ msgstr "Muu hinnasto"
-
-#, python-format
-#~ msgid "You can not create new moves."
-#~ msgstr "Et voi luoda uusia siirtoja."
-
-#, python-format
-#~ msgid ""
-#~ "Can not create an automatic sequence for this piece !\n"
-#~ "\n"
-#~ "Put a sequence in the journal definition for automatic numbering or create a "
-#~ "sequence manually for this piece."
-#~ msgstr ""
-#~ "Ei voi luoda automaattista sekvenssiä tälle osalle !\n"
-#~ "\n"
-#~ "Laita sekvenssi lokimääritykseen automaattista numerointia varten tai luo "
-#~ "sekvenssi manuaalisesti tälle osalle."
-
-#, python-format
-#~ msgid "Futur Stock"
-#~ msgstr "Tuleva varasto"
-
-#, python-format
-#~ msgid "No analytic plan defined !"
-#~ msgstr "Ei määritettyä analyyttistä suunnitelmaa !"
-
-#, python-format
-#~ msgid ""
-#~ "You selected a quantity of %d Units.\n"
-#~ "But it's not compatible with the selected packaging.\n"
-#~ "Here is a proposition of quantities according to the packaging: "
-#~ msgstr ""
-#~ "Olet valinnut määrän %d yksikköä.\n"
-#~ "Mutta se ei ole yhteensopiva valitun pakkauksen kanssa.\n"
-#~ "Tässä määräehdotuksia pakkauksen mukaan: "
-
-#, python-format
-#~ msgid "Speed Test"
-#~ msgstr "Nopeustesti"
-
-#, python-format
-#~ msgid "No Period found on Invoice!"
-#~ msgstr "Kautta ei löytynyt laskusta"
-
-#, python-format
-#~ msgid "You do not permissions to write on the server side."
-#~ msgstr "Sinulla ei ole lupaa kirjoittaa palvelimelle."
-
-#, python-format
-#~ msgid "Can not export module that is not installed!"
-#~ msgstr "Ei voi viedä moduulia jota ei ole asennettu!"
-
-#, python-format
-#~ msgid "No period found !"
-#~ msgstr "Ajanjaksoa ei löydy!"
-
-#, python-format
-#~ msgid "Records were modified in the meanwhile"
-#~ msgstr "Tietueet muutettiin sillä välin"
-
-#, python-format
-#~ msgid "Please select at least two inventories."
-#~ msgstr "Valitse vähintään kaksi varastoa."
-
-#, python-format
-#~ msgid "The name_search method is not implemented on this object !"
-#~ msgstr "Menetelmä \"name_search\" ei ole käytössä tässä objektissa!"
-
-#, python-format
-#~ msgid ""
-#~ "You cannot enter an attendance ' \\n                            'date "
-#~ "outside the current timesheet dates!"
-#~ msgstr ""
-#~ "Et voi antaa läsnäoloilmoitusta, ' \\n 'päivämäärä ei täsmää nykyisten "
-#~ "tuntilistojen päivämääriin!"
-
-#, python-format
-#~ msgid "Bank Journal "
-#~ msgstr "pankkiloki "
-
-#, python-format
-#~ msgid "Invoice cannot be created from Packing."
-#~ msgstr "Pakkaukselta ei voida luoda laskua."
-
-#, python-format
-#~ msgid "The old fiscal year does not have any entry to reconcile!"
-#~ msgstr "Vanhalla tilikaudella ei ole yhtään soviteltavissa olevaa merkintää!"
-
-#, python-format
-#~ msgid ""
-#~ "You can not do this modification on a reconciled entry ! Please note that "
-#~ "you can just change some non important fields !"
-#~ msgstr ""
-#~ "Et voi tehdä tätä muokkausta sovitetulle merkinnälle! Huomioi että voit "
-#~ "muuttaa vain joitain ei tärkeitä kenttiä!"
-
-#, python-format
-#~ msgid "You can not deactivate an account that contains account moves."
-#~ msgstr ""
-#~ "Et voi ottaa sellaista tiliä pois käytöstä joka sisältää tilisiirtoja."
-
-#, python-format
-#~ msgid "Could not cancel sale order !"
-#~ msgstr "Myyntitilausta ei voitu peruuttaa!"
-
-#, python-format
-#~ msgid ""
-#~ "You must define a reply-to address in order to mail the participant. You can "
-#~ "do this in the Mailing tab of your event. Note that this is also the place "
-#~ "where you can configure your event to not send emails automaticly while "
-#~ "registering"
-#~ msgstr ""
-#~ "Sinun on määritettävä vastausosoite lähettääksesi sähköpostia osalliselle. "
-#~ "Voit tehdä tämän tapahtumasi Postitus -välilehdeltä. Huomio, että on "
-#~ "olemassa myös paikka jossa voit konfiguroida tapahtumasi olemaan "
-#~ "lähettämättä sähköpostia automaattisesti rekisteröitäessä."
-
-#, python-format
-#~ msgid "Insertion Failed!"
-#~ msgstr "Lisääminen epäonnistui!"
-
-#, python-format
-#~ msgid "Attention!"
-#~ msgstr "Huomio!"
-
-#, python-format
-#~ msgid "Please put a name and a code before saving the model !"
-#~ msgstr "Anna nimi ja koodi ennenkuin tallennat mallia !"
-
-#, python-format
-#~ msgid "Operation is Already Cancelled  !"
-#~ msgstr "Toiminto on jo peruutettu !"
-
-#, python-format
-#~ msgid "The Total Should be Between %s and %s"
-#~ msgstr "Loppusumman tulisi olla %s ja %s välillä"
-
-#, python-format
-#~ msgid "Customer has no addresses defined!"
-#~ msgstr "Asiakkaalle ei ole määritetty osoitetta!"
-
-#~ msgid "Pie Chart"
-#~ msgstr "Ympyräkaavio"
-
-#, python-format
-#~ msgid "Could not cancel this sale order !"
-#~ msgstr "Myyntitilausta ei voitu peruuttaa!"
-
-#, python-format
-#~ msgid "Could not cancel purchase order !"
-#~ msgstr "Ei voitu perua hankintatilausta"
-
-#, python-format
-#~ msgid "This version of the module is already exist on the server"
-#~ msgstr "Tämä versio moduuleista on jo olemassa palvelimella"
-
-#~ msgid "Default Properties"
-#~ msgstr "Oletus ominaisuudet"
-
-#, python-format
-#~ msgid "Alert for ' + partner.name +' !"
-#~ msgstr "Hälytys koskien ' + partner.name +' !"
-
-#, python-format
-#~ msgid ""
-#~ "You have to define the bank account\n"
-#~ "in the journal definition for reconciliation."
-#~ msgstr ""
-#~ "Sinun on määritettävä pankkitili\n"
-#~ "lokimäärityksessä sovittelua varten."
-
-#, python-format
-#~ msgid "March"
-#~ msgstr "Maaliskuu"
-
-#, python-format
-#~ msgid "The statement balance is incorrect !\n"
-#~ msgstr "Tiliotteen saldo on virheellinen !\n"
-
-#, python-format
-#~ msgid "No Default Credit Account !"
-#~ msgstr "Oletusluottotiliä ei ole !"
-
-#, python-format
-#~ msgid "Free Reference"
-#~ msgstr "Avoin viite"
-
-#, python-format
-#~ msgid "Directory name must be unique!"
-#~ msgstr "Kansionimen tulee olla ainutkertainen!"
-
-#, python-format
-#~ msgid "Warning! Object has no demo data"
-#~ msgstr "Varoitus! Objektilla ei ole demotietoa"
-
-#, python-format
-#~ msgid "Please specify the Partner Email address !"
-#~ msgstr "Määritä kumppanin sähköpostiosoite!"
-
-#, python-format
-#~ msgid "You could not publish a module that is not installed!"
-#~ msgstr "Et voi julkaista moduulia, jota ei ole asennettu"
-
-#, python-format
-#~ msgid "You can not use an inactive account!"
-#~ msgstr "Et voi käyttää käytöstä poistettua tiliä!"
-
-#, python-format
-#~ msgid "You must first cancel all packing attached to this sale order."
-#~ msgstr ""
-#~ "Sinun täytyy ensiksi perua kaikki pakkaukset jotka ovat liitetty tähän "
-#~ "myyntitilaukseen."
-
-#, python-format
-#~ msgid "Integrity Error !"
-#~ msgstr "Eheysvirhe!"
-
-#, python-format
-#~ msgid "Invalid action !"
-#~ msgstr "Virheellinen toiminto!"
-
-#, python-format
-#~ msgid ""
-#~ "You can specify year, month and date in the name of the model using the "
-#~ "following labels:\n"
-#~ "\n"
-#~ "%(year)s : To Specify Year \n"
-#~ "%(month)s : To Specify Month \n"
-#~ "%(date)s : Current Date\n"
-#~ "\n"
-#~ "e.g. My model on %(date)s"
-#~ msgstr ""
-#~ "Voit määrittää vuoden, kuukauden ja päivämäärän mallin nimessä käyttäen "
-#~ "seuraavia tunnuksia:\n"
-#~ "%(year)s : Määrittääksesi vuoden \n"
-#~ "%(month)s : Määrittääksesi kuukauden\n"
-#~ "%(date)s : Nykyinen päivämäärä\n"
-#~ "\n"
-#~ "Esim. Oma mallini %(date)s"
-
-#, python-format
-#~ msgid "Fri"
-#~ msgstr "Pe"
-
-#, python-format
-#~ msgid "This feature is only available for location type Amazon"
-#~ msgstr "Tämä ominaisuus on saatavissa vain Amazon -sijaintityypille"
-
-#, python-format
-#~ msgid "You cannot perform this operation."
-#~ msgstr "Et voi suorittaa tätä toimenpidettä."
-
-#, python-format
-#~ msgid "You cannot Pause the Operation other then Start/Resume state !"
-#~ msgstr "Et voi keskeyttää toimintoa muutoin kuin Start/Resume -tilasta !"
-
-#, python-format
-#~ msgid "Please specify server option --smtp-from !"
-#~ msgstr "Määritä palvelinoptio \"--smtp-from\"!"
-
-#, python-format
-#~ msgid "Provide the quantities of the returned products."
-#~ msgstr "Kerro palautettujen tuotteiden määrät."
-
-#, python-format
-#~ msgid "Thu"
-#~ msgstr "To"
-
-#, python-format
-#~ msgid "Bad file format"
-#~ msgstr "Väärä tiedostomuoto"
-
-#, python-format
-#~ msgid "No employee defined for your user !"
-#~ msgstr "Käyttäjälle ei ole määritetty työntekijää !"
-
-#, python-format
-#~ msgid "Operation Not Permitted !"
-#~ msgstr "Toimenpide ei ole sallittu !"
-
-#, python-format
-#~ msgid "Cycles Cost"
-#~ msgstr "Syklien kustannukset"
-
-#, python-format
-#~ msgid "The employee must have a contact address"
-#~ msgstr "Työntekijällä täytyy olla osoite"
-
-#, python-format
-#~ msgid "Please select maximum 8 records to fit the page-width."
-#~ msgstr "Valitse enimmillään 8 tietuetta jotta ne sopii paperin leveyteen."
-
-#, python-format
-#~ msgid "Invoice is already reconciled"
-#~ msgstr "Lasku on jo sovitettu"
-
-#, python-format
-#~ msgid "Couldn't create move between different companies"
-#~ msgstr "Ei voida luoda siirtoa eri yritysten välille"
-
-#, python-format
-#~ msgid "Entry \"%s\" is not valid !"
-#~ msgstr "Merkintä \"%s\" ei ole kelvollinen !"
-
-#, python-format
-#~ msgid "Number too large '%d', can not translate it"
-#~ msgstr "Numero on liian suuri \"%d\", sitä ei voida kääntää"
-
-#, python-format
-#~ msgid ""
-#~ "This test checks where object has workflow or not on it if there is a state "
-#~ "field and several buttons on it and also checks validity of workflow xml file"
-#~ msgstr ""
-#~ "Tämä testi tarkistaa missä objektilla on työkulkua ja missä ei jos siinä on "
-#~ "tilakenttä ja useita painikkeita ja tarkistaa myös työkulun kelvollisuuden "
-#~ "xml -tiedosto"
-
-#, python-format
-#~ msgid "Configuration of your control center account"
-#~ msgstr "Ohjauskeskustilin konfiguraatio"
-
-#, python-format
-#~ msgid " Quantity: "
-#~ msgstr " Määrä: "
-
-#, python-format
-#~ msgid ""
-#~ "No E-Mail ID Found for the Responsible Partner or missing reply address in "
-#~ "section!"
-#~ msgstr ""
-#~ "Ei löydettyä sähköposti ID:tä vastaavalle kumppanille tai puuttuva "
-#~ "vastausosoite tässä osiossa!"
-
-#, python-format
-#~ msgid ""
-#~ "You have to select a partner in the purchase form !\n"
-#~ "Please set one partner before choosing a product."
-#~ msgstr ""
-#~ "Sinun täytyy valita yhteistyökumppani tilauslomakkeesta!\n"
-#~ "Valitse yksi yhteistyökumppani ennen kuin valitset tuotteen."
-
-#, python-format
-#~ msgid "No partner defined on entry line"
-#~ msgstr "Ei määritettyä kumppania merkkirivillä"
-
-#, python-format
-#~ msgid "Sorry!"
-#~ msgstr "Pahoittelut!"
-
-#, python-format
-#~ msgid "meeting"
-#~ msgstr "kokous"
-
-#, python-format
-#~ msgid "Data Insufficient !"
-#~ msgstr "Riittämätön tieto !"
-
-#, python-format
-#~ msgid "error"
-#~ msgstr "virhe"
-
-#, python-format
-#~ msgid "Total record different from the computed!"
-#~ msgstr "Tietueiden määrä eri kuin laskettu!"
-
-#, python-format
-#~ msgid "open"
-#~ msgstr "avaa"
-
-#, python-format
-#~ msgid "Unknown position in inherited view %s !"
-#~ msgstr "Tuntematon paikka periytyneessä näkymässä %s!"
-
-#, python-format
-#~ msgid "failed. Bad Promotional Code."
-#~ msgstr "epäonnistui. Epäkelpo kampanjakoodi."
-
-#, python-format
-#~ msgid "No price available !"
-#~ msgstr "Ei hintaa saatavilla !"
-
-#, python-format
-#~ msgid ""
-#~ "\"\"\n"
-#~ "This test checks the speed of the module. Note that at least 5 demo data is "
-#~ "needed in order to run it.\n"
-#~ "\n"
-#~ "\"\""
-#~ msgstr ""
-#~ "\"\"\n"
-#~ "Tämä testi tarkistaa moduulin nopeuden. Huomaa, että tarvitaan vähintään 5 "
-#~ "demotietoa jotta testi voidaan suorittaa.\n"
-#~ "\n"
-#~ "\"\""
-
-#, python-format
-#~ msgid "No address defined for the supplier"
-#~ msgstr "Toimittajan osoitetta ei ole määritetty"
-
-#, python-format
-#~ msgid "Cannot create invoice without a partner."
-#~ msgstr "Et voi luoda laskua ilman kumppania."
-
-#, python-format
-#~ msgid "You must first cancel all invoices attached to this sale order."
-#~ msgstr ""
-#~ "Sinun täytyy ensin peruuttaa kaikki myyntitilaukseen liittyvät laskut"
-
-#, python-format
-#~ msgid "This error occurs on database %s"
-#~ msgstr "Virhe ilmenee tietokannassa %s"
-
-#, python-format
-#~ msgid "No Related Models!!"
-#~ msgstr "Ei liittyviä malleja!!"
-
-#, python-format
-#~ msgid "Reading Complexity"
-#~ msgstr "Lukemisen monimutkaisuus"
-
-#, python-format
-#~ msgid "Modify line failed !"
-#~ msgstr "Muokkausrivi epäonnistui !"
-
-#, python-format
-#~ msgid "Failed to upload the file"
-#~ msgstr "Tiedoston lähettäminen epäonnistui."
-
-#, python-format
-#~ msgid "Field %d should be a figure"
-#~ msgstr "Kentän %d pitäisi olla luku"
-
-#, python-format
-#~ msgid ""
-#~ "No product defined on the related employee.\n"
-#~ "Fill in the timesheet tab of the employee form."
-#~ msgstr ""
-#~ "Työntekijälle ei ole määritetty tuotetta.\n"
-#~ "Täytä työntekijä -lomakkeen tuntilista -välilehti."
-
-#, python-format
-#~ msgid "No python file found"
-#~ msgstr "Python -tiedostoa ei löytynyt"
-
-#, python-format
-#~ msgid ""
-#~ "The expected balance (%.2f) is different than the computed one. (%.2f)"
-#~ msgstr "Oletettu saldo (%.2f) on erisuuri kuin laskettu. (%2f)"
-
-#, python-format
-#~ msgid "Historize"
-#~ msgstr "Historioi"
-
-#, python-format
-#~ msgid "User Error!"
-#~ msgstr "Käyttäjävirhe!"
-
-#, python-format
-#~ msgid "Operation is already finished !"
-#~ msgstr "Toiminto on jo suoritettu loppuun !"
-
-#, python-format
-#~ msgid "Installation of your instance(s)"
-#~ msgstr "Instanssisi tai intanssiesi asennus"
-
-#, python-format
-#~ msgid "You cannot modify an entry in a confirmed timesheet !"
-#~ msgstr "Et voi muokata merkintää vahvistetulla tuntilistalla !"
-
-#, python-format
-#~ msgid "The journal must have default credit and debit account"
-#~ msgstr "Lokikirjassa täytyy olla oletus luotto- ja debettili"
-
-#, python-format
-#~ msgid "No E-Mail ID Found for your Company address!"
-#~ msgstr "Sähköposti ID:tä ei löytynyt yrityksen osoitteistosta!"
-
-#, python-format
-#~ msgid ""
-#~ "No rate found \n"
-#~ "' \\n                    'for the currency: %s \n"
-#~ "' \\n                    'at the date: %s"
-#~ msgstr ""
-#~ "Kurssia ei löytynyt \n"
-#~ "' \\n 'valuutalle: %s \n"
-#~ "' \\n 'päivämäärällä: %s"
-
-#, python-format
-#~ msgid ""
-#~ "Can not send mail with empty body,you should have description in the body"
-#~ msgstr ""
-#~ "Sähköpostia ei voi lähettää tyhjällä viesti -kentällä. Sinulla tulisi olla "
-#~ "kuvaus viesti -kentässä"
-
-#, python-format
-#~ msgid "Bad account !"
-#~ msgstr "Epäkelpo tili !"
-
-#, python-format
-#~ msgid "Sales Journal"
-#~ msgstr "Myyntiloki"
-
-#, python-format
-#~ msgid "No piece number !"
-#~ msgstr "Ei osan numeroa !"
-
-#, python-format
-#~ msgid "No records found for your selection!"
-#~ msgstr "Tietoja ei löydy valinnalle"
-
-#, python-format
-#~ msgid "to be invoiced"
-#~ msgstr "laskutetaan"
-
-#, python-format
-#~ msgid ""
-#~ "Error. Is pylint correctly installed? (http://pypi.python.org/pypi/pylint)"
-#~ msgstr ""
-#~ "Virhe. Onko pylint oikein asennettu? (http://pypi.python.org/pypi/pylint)"
-
-#, python-format
-#~ msgid ""
-#~ "Mail not sent to following Partners, Email not available !\n"
-#~ "\n"
-#~ msgstr ""
-#~ "Sähköpostia ei lehetetty seuraaville kumppaneille, Sähköposti ei ole "
-#~ "saatavilla\n"
-#~ "\n"
-
-#, python-format
-#~ msgid "Could not cancel this purchase order !"
-#~ msgstr "Ei voitu perua tätä hankintatilausta"
-
-#, python-format
-#~ msgid "May"
-#~ msgstr "Toukokuu"
-
-#, python-format
-#~ msgid ""
-#~ "These is/are model(s) (%s) in selection which is/are not related to any "
-#~ "other model"
-#~ msgstr ""
-#~ "Tämä/nämä on valinnan malli(t) (%s) joka/jotka eivät liity muihin malleihin"
-
-#, python-format
-#~ msgid "Module has no objects"
-#~ msgstr "Moduulilla ei ole objekteja"
-
-#, python-format
-#~ msgid ""
-#~ "You can not modify a posted entry of this journal !\n"
-#~ "You should set the journal to allow cancelling entries if you want to do "
-#~ "that."
-#~ msgstr ""
-#~ "Et voi muuttaa vietyä merkintää tähän päiväkirjaan!\n"
-#~ "Sinun tulisi asettaa päiväkirja sallimaan merkintöjen poiston jos haluat "
-#~ "tehdä tämän."
-
-#, python-format
-#~ msgid ""
-#~ "A new project has been created !\n"
-#~ "We suggest you to close this one and work on this new project."
-#~ msgstr ""
-#~ "Uusi projekti on luotu !\n"
-#~ "Suosittelemme, että suljet tämän ja alat työskentelemään uudessa projektissa."
-
-#, python-format
-#~ msgid "Futur Receptions"
-#~ msgstr "Tulevat vastaanotot"
-
-#, python-format
-#~ msgid ""
-#~ "There is no income '\\n                        'account defined for this "
-#~ "product: \"%s\" (id:%d)"
-#~ msgstr "Ei määritettyä tulo '\\n'tiliä tälle tuotteelle: \"%s\" (id:%d)"
-
-#, python-format
-#~ msgid "A sign-in must be right after a sign-out !"
-#~ msgstr "Sisäänkirjautumisen täytyy tapahtua heti uloskirjautumisen jälkeen !"
-
-#, python-format
-#~ msgid "Cannot delete a sale order line which is %s !"
-#~ msgstr "Ei voi poistaa myyntitilauksen riviä joka on %s !"
-
-#, python-format
-#~ msgid "Can not %s draft/proforma/cancel invoice."
-#~ msgstr "Ei voi %s vedos/proforma/peruuttaa laskua"
-
-#, python-format
-#~ msgid "The account entries lines are not in valid state."
-#~ msgstr "Tilin merkintärivit eivät ole hyväksytyssä tilassa."
-
-#, python-format
-#~ msgid "Report does not contain the sxw content!"
-#~ msgstr "Raportti ei sisällä sxw sisältöä!"
-
-#, python-format
-#~ msgid "No data"
-#~ msgstr "Ei tietoa"
-
-#, python-format
-#~ msgid "No employee defined for this user. You must create one."
-#~ msgstr ""
-#~ "Käyttäkälle ei ole määritetty työntekijää. Sinun täytyy luoda sellainen."
-
-#, python-format
-#~ msgid "No valid pricelist line found !"
-#~ msgstr "Ei kelvollista hintalistanriviä löydetty !"
-
-#, python-format
-#~ msgid "Unable to delete connected server"
-#~ msgstr "Yhdistettyä palvelinta ei voida poistaa"
-
-#, python-format
-#~ msgid "products"
-#~ msgstr "tuotteet"
-
-#, python-format
-#~ msgid "You cannot cancel a sale order line that has already been invoiced !"
-#~ msgstr "Et vo perua myyntitilauksen riviä joka on jo laskutettu !"
-
-#, python-format
-#~ msgid "You must first select a partner !"
-#~ msgstr "Sinun täytyy ensiksi valita yhteistyökumppani!"
-
-#, python-format
-#~ msgid "Your can't submit bug reports due to uncovered modules: %s"
-#~ msgstr ""
-#~ "Et voi lähettää bug-raporttia johtuen kattamattomista moduuleista: %s"
-
-#, python-format
-#~ msgid "EAN: "
-#~ msgstr "EAN: "
-
-#, python-format
-#~ msgid "Escalate"
-#~ msgstr "Kiihdyttää"
-
-#, python-format
-#~ msgid "Bad Configuration !"
-#~ msgstr "Virheellinen konfiguraatio !"
-
-#, python-format
-#~ msgid ""
-#~ "\"\"This test uses Pylint and checks if the module satisfies the coding "
-#~ "standard of Python. See http://www.logilab.org/project/name/pylint for "
-#~ "further info.\n"
-#~ " \"\""
-#~ msgstr ""
-#~ "\"\"Tämä testi käyttää Pylint:ä ja tarkistaa onko moduuli ohjelmoitu Python -"
-#~ "standardien mukaan. Katso http://www.logilab.org/project/name/pylint "
-#~ "saadaksesi lisätietoa.\n"
-#~ " \"\""
-
-#, python-format
-#~ msgid "You can not validate a non-balanced entry !"
-#~ msgstr "Et voi hyväksyä merkintää joka ei ole tasan !"
-
-#, python-format
-#~ msgid "Workflow Test"
-#~ msgstr "Työnkulun testi"
-
-#, python-format
-#~ msgid ""
-#~ "You can not delete a project with tasks. I suggest you to deactivate it."
-#~ msgstr ""
-#~ "Et voi poistaa projektia millä on tehtäviä. Ehdotan, että poistat sen "
-#~ "käytöstä."
-
-#, python-format
-#~ msgid "The Host type must be Amazon to perform this action."
-#~ msgstr "Isännän tyyppi täytyy olla Amazon toiminnon suorittamista varten."
-
-#, python-format
-#~ msgid "Product Standard Price"
-#~ msgstr "Tuotteen standardi hinta"
-
-#, python-format
-#~ msgid "You can not duplicate a timesheet !"
-#~ msgstr "Et voi monistaa tuntilistaa !"
-
-#, python-format
-#~ msgid "Opportunity"
-#~ msgstr "Mahdollisuus"
-
-#, python-format
-#~ msgid "The object \"%s\" has no buyer assigned."
-#~ msgstr "Objektille \"%s\" ei ole ostajaa määrättynä."
-
-#, python-format
-#~ msgid "Partner '+ line.partner_id.name+ ' has no bank account defined"
-#~ msgstr ""
-#~ "Kumppanilla '+ line.partner_id.name+ ' ei ole määritettyä pankkitiliä"
-
-#, python-format
-#~ msgid "Missing info: Partner"
-#~ msgstr "Puuttuva tieto: Kumppani"
-
-#, python-format
-#~ msgid "Reconciliation"
-#~ msgstr "Sovitus"
-
-#, python-format
-#~ msgid "Entries: "
-#~ msgstr "Merkinnät: "
-
-#, python-format
-#~ msgid "Purchase Journal"
-#~ msgstr "Ostoloki"
-
-#, python-format
-#~ msgid "from stock and no minimum orderpoint rule defined"
-#~ msgstr "varastosta ja ei pienintä tilauspistettä määritetty"
-
-#, python-format
-#~ msgid "Production instance"
-#~ msgstr "Tuotantoinstanssi"
-
-#, python-format
-#~ msgid "Cannot delete Sale Order(s) which are already confirmed !"
-#~ msgstr "Vahvistettuja myyntitilauksia ei voi poistaa!"
-
-#, python-format
-#~ msgid "You can only delete draft moves."
-#~ msgstr "Voit ainoastaan poistaa luonnossiirtoja."
-
-#~ msgid "Function Name"
-#~ msgstr "Funktion nimi"
-
-#, python-format
-#~ msgid "Sat"
-#~ msgstr "La"
-
-#, python-format
-#~ msgid "You cannot finish the operation without Starting/Resuming it !"
-#~ msgstr "Et voi päättää toimintoa ilman sen käynnistämistä/jatkamista !"
-
-#, python-format
-#~ msgid "There is no Operation to be cancelled !"
-#~ msgstr "Ei ole peruutettavaa toimintoa !"
-
-#, python-format
-#~ msgid "Password empty !"
-#~ msgstr "Tyhjä salasana !"
-
-#, python-format
-#~ msgid "Tue"
-#~ msgstr "Ti"
-
-#, python-format
-#~ msgid "Hours Cost"
-#~ msgstr "Tuntikustannukset"
-
-#, python-format
-#~ msgid "No timebox of the type \"%s\" defined !"
-#~ msgstr "Ei määritettyä aikalaatikon tyyppiä \"%s\" !"
-
-#, python-format
-#~ msgid "Order not in draft state !"
-#~ msgstr "Tilaus ei ole luonnostilassa !"
-
-#, python-format
-#~ msgid "Configration Error !"
-#~ msgstr "Konfiguraatiovirhe !"
-
-#, python-format
-#~ msgid "No Invoice Address"
-#~ msgstr "Ei laskutusosoitetta"
-
-#, python-format
-#~ msgid "Result of fields in %"
-#~ msgstr "Kenttien tulokset % :ssa"
-
-#, python-format
-#~ msgid "Exception"
-#~ msgstr "Poikkeus"
-
-#, python-format
-#~ msgid "Operation is not started yet !"
-#~ msgstr "Toimintoa ei ole vielä aloitettu !"
-
-#, python-format
-#~ msgid "This instance is already running the latest version of %s"
-#~ msgstr "Tästä instanssista on jo viimeisin versio %s"
-
-#, python-format
-#~ msgid "Bad query."
-#~ msgstr "Virheellinen kysely."
-
-#, python-format
-#~ msgid "unable to find a server with a newer version"
-#~ msgstr "palvelimesta ei ole uudempaa versiota"
-
-#, python-format
-#~ msgid ""
-#~ "No project defined for this event.\n"
-#~ "You can create one with the retro-planning button !"
-#~ msgstr ""
-#~ "Tälle tapahtumalle ei ole määritetty projektia.\n"
-#~ "Voit luoda sellaisen retro-planning -painikkeella !"
-
-#, python-format
-#~ msgid "Open Page"
-#~ msgstr "Avaa sivu"
-
-#, python-format
-#~ msgid "Already Reconciled"
-#~ msgstr "Jo soviteltu"
-
-#, python-format
-#~ msgid "No Address defined for this partner"
-#~ msgstr "Kumppanille ei ole määritetty osoitetta"
-
-#, python-format
-#~ msgid "Second field should be figures"
-#~ msgstr "Toinen kenttä pitäisi olla luku"
-
-#, python-format
-#~ msgid ""
-#~ "No active version for the selected pricelist !\n"
-#~ "' \\n                                'Please create or activate one."
-#~ msgstr ""
-#~ "Valitulle hinnastolle ei ole aktiivista versiota !\n"
-#~ "' \\n'Luo sellainen tai aktivoi jokin."
-
-#, python-format
-#~ msgid "Line number"
-#~ msgstr "Rivinumero"
-
-#, python-format
-#~ msgid "Futur Qty"
-#~ msgstr "Tuleva määrä"
-
-#, python-format
-#~ msgid "Suggestion"
-#~ msgstr "Ehdoitus"
-
-#, python-format
-#~ msgid "EXJ"
-#~ msgstr "EXJ"
-
-#, python-format
-#~ msgid "You can not remove the field '%s' !"
-#~ msgstr "Kenttää \"%s\" ei voi poistaa!"
-
-#, python-format
-#~ msgid "Programming Error"
-#~ msgstr "Ohjelmointivirhe"
-
-#, python-format
-#~ msgid "No supplier defined for this product !"
-#~ msgstr "Tuotteelle ei ole määritelty toimittajaa !"
-
-#~ msgid "Document"
-#~ msgstr "Asiakirja"
-
-#, python-format
-#~ msgid "No Pricelist !"
-#~ msgstr "Ei hinnastoa!"
-
-#, python-format
-#~ msgid "Mon"
-#~ msgstr "Ma"
-
-#, python-format
-#~ msgid ""
-#~ "No available server for this offer.\n"
-#~ "Please contact us."
-#~ msgstr ""
-#~ "Tarjoukselle ei ole saatavilla palvelinta.\n"
-#~ "Ota meihin yhteyttä."
-
-#, python-format
-#~ msgid ""
-#~ "This test checks if the module satisfies the current coding standard used by "
-#~ "OpenERP."
-#~ msgstr ""
-#~ "Tämä testi tarkistaa onko moduuli tehty OpenERP:n ohjelmointistandardien "
-#~ "mukaan."
-
-#, python-format
-#~ msgid ""
-#~ "You have to select a pricelist in the purchase form !\n"
-#~ "Please set one before choosing a product."
-#~ msgstr ""
-#~ "Sinun täytyy valita hintalista tilauslomakkeessa!\n"
-#~ "Valitse yksi ennen tuotteen valitsemista"
-
-#, python-format
-#~ msgid "The Buyer has no Invoice Address."
-#~ msgstr "Ostajalla ei ole laskutusosoitetta."
-
-#, python-format
-#~ msgid "N (Number of Records)"
-#~ msgstr "N (Tietueiden määrä)"
-
-#, python-format
-#~ msgid "Partner incomplete"
-#~ msgstr "Keskeneräinen kumppani"
-
-#, python-format
-#~ msgid "July"
-#~ msgstr "Heinäkuu"
-
-#, python-format
-#~ msgid "Bar charts need at least two fields"
-#~ msgstr "Pylväsdiagrammi tarvitsee vähintään kaksi kenttää"
-
-#, python-format
-#~ msgid "Task '%s' set in progress"
-#~ msgstr "Tehtävän '%s' asetus käynnissä"
-
-#, python-format
-#~ msgid ""
-#~ "You have to select a pricelist in the sale form !\n"
-#~ "' \\n                'Please set one before choosing a product."
-#~ msgstr ""
-#~ "Sinun täytyy valita hinnasto myyntilomakkeelta !\n"
-#~ "' \\n'Aseta yksi ennen tuotteen valitsemista."
-
-#, python-format
-#~ msgid "Result"
-#~ msgstr "Tulos"
-
-#, python-format
-#~ msgid ""
-#~ "Operation has already started !' 'You  can either Pause /Finish/Cancel the "
-#~ "operation"
-#~ msgstr ""
-#~ "Toiminto on jo aloitettu ! ' 'Voit joko pysäyttää/Lopettaa/Peruuttaa "
-#~ "toiminnon"
-
-#, python-format
-#~ msgid "Recursive mod10 is invalid for reference: %s"
-#~ msgstr "Toistuva mod10 on virheellinen viitteelle: %s"
-
-#, python-format
-#~ msgid "No order lines defined for this sale."
-#~ msgstr "Ei tilausrivejä määritetty tälle myynnille."
-
-#, python-format
-#~ msgid "Bad total !"
-#~ msgstr "Epäkelpo loppusumma !"
-
-#, python-format
-#~ msgid "Pending"
-#~ msgstr "Odottaa"
-
-#, python-format
-#~ msgid "Unable to delete a connected backup configuration"
-#~ msgstr "Ei voi poistaa yhdistettyä varmistuskonfiguraatiota"
-
-#, python-format
-#~ msgid ""
-#~ "Couldn't find a pricelist line matching this product\" \\n                \" "
-#~ "and quantity.\n"
-#~ "You have to change either the product,\" \\n                \" the quantity "
-#~ "or the pricelist."
-#~ msgstr ""
-#~ "Ei voitu löytää tuotteeseen\" \\n \" täsmäävää hinnaston riviä ja määrää.\n"
-#~ "Sinun on joko vaihdettava tuote \" \\n\", määrä tai hinnasto."
-
-#, python-format
-#~ msgid "Questionnaire"
-#~ msgstr "Kyselylomake"
-
-#, python-format
-#~ msgid "An account already exists for this email address."
-#~ msgstr "Tälle sähköpostiosoitteelle on jo olemassa tili."
-
-#, python-format
-#~ msgid "Pylint Test"
-#~ msgstr "Pylint testi"
-
-#, python-format
-#~ msgid ""
-#~ "The second argument of the many2many field %s must be a SQL table !'\\n      "
-#~ "          'You used %s, which is not a valid SQL table name."
-#~ msgstr ""
-#~ "Toinen väite monta-moneen kentässä %s täytyy olla SQL -taulu !'\\n 'Käytit "
-#~ "%s, joka ei ole kelvollinen SQL -taulun nimi."
-
-#, python-format
-#~ msgid "Partner section of the product form"
-#~ msgstr "Tuotelomakkeen kumppaniosio"
-
-#, python-format
-#~ msgid "No report to save!"
-#~ msgstr "Ei tallennettavaa raporttia!"
-
-#~ msgid "Vietnam / Cộng hòa xã hội chủ nghĩa Việt Nam"
-#~ msgstr "Vietnam / Vietnam"
-
-#, python-format
-#~ msgid "The Sign-in date must be in the past"
-#~ msgstr "Sisäänkirjautumis päivämäärän täytyy olla menneisyydessä"
-
-#, python-format
-#~ msgid "Sun"
-#~ msgstr "Su"
-
-#, python-format
-#~ msgid ""
-#~ "There is no expense account defined ' \\n                                "
-#~ "'for this product: \"%s\" (id:%d)"
-#~ msgstr "Ei menotiliä määritetty ' \\n 'tälle tuotteelle: \"%s\" (id:%d)"
-
-#, python-format
-#~ msgid "Entry is already reconciled"
-#~ msgstr "Merkintä on jo soviteltu"
-
-#, python-format
-#~ msgid "Result in %"
-#~ msgstr "Tulos %:na"
-
-#, python-format
-#~ msgid "December"
-#~ msgstr "Joulukuu"
-
-#, python-format
-#~ msgid "This period is already closed !"
-#~ msgstr "Tämä jakso on jo suljettu !"
-
-#, python-format
-#~ msgid ""
-#~ "You tried to sign in with a date anterior to another event !\n"
-#~ "Try to contact the administrator to correct attendances."
-#~ msgstr ""
-#~ "Yritit kirjautua päivämäärällä joka on toisessa tapahtumassa !\n"
-#~ "Ota yhteyttä järjestelmänvalvojaan korjataksesi läsnäolot."
-
-#, python-format
-#~ msgid "Unable to parse the result. Check the details."
-#~ msgstr "Ei voi jäsennellä tulosta. Tarkista yksityiskohdat."
-
-#, python-format
-#~ msgid "You must put a Partner eMail to use this action!"
-#~ msgstr ""
-#~ "Sinun täytyy laittaa kumppanin sähköpostiosoite käyttääksesi tätä toimintoa!"
-
-#, python-format
-#~ msgid "Demo instance"
-#~ msgstr "Demoinstanssi"
-
-#, python-format
-#~ msgid "November"
-#~ msgstr "Marraskuu"
-
-#, python-format
-#~ msgid "Unplanned Qty"
-#~ msgstr "Suunnittelematon määrä"
-
-#, python-format
-#~ msgid "You can not modify an entry in a confirmed timesheet !"
-#~ msgstr "Et voi muokata merkintää vahvistetulla tuntilistalla !"
-
-#, python-format
-#~ msgid ""
-#~ "You tried to sign out with a date anterior to another event !\n"
-#~ "Try to contact the administrator to correct attendances."
-#~ msgstr ""
-#~ "Yritit uloskirjautua päivämäärällä joka on aiemassa tapahtumassa !\n"
-#~ "Ota yhteyttä järjestelmänvalvojaan korjataksesi läsnäolon."
-
-#, python-format
-#~ msgid "Unable to delete an active subdomain"
-#~ msgstr "Ei voi poistaa aktiivista alitoimialuetta"
-
-#, python-format
-#~ msgid "Cannot delete Sheet(s) which are already confirmed !"
-#~ msgstr "Et voi poistaa listaa/listoja jotka on jo vahvistettu !"
-
-#, python-format
-#~ msgid "Produced Qty"
-#~ msgstr "Tuotettu määrä"
-
-#, python-format
-#~ msgid "Cannot modify a captcha"
-#~ msgstr "Et voi muokata captchaa (tunnistusta)"
-
-#, python-format
-#~ msgid "February"
-#~ msgstr "Helmikuu"
-
-#, python-format
-#~ msgid "April"
-#~ msgstr "Huhtikuu"
-
-#, python-format
-#~ msgid "The module has to be installed before running this test."
-#~ msgstr "Moduulin täytyy olla asennettu ennen testin suorittamista."
-
-#, python-format
-#~ msgid "Data Insufficient"
-#~ msgstr "Riittämätön tieto"
-
-#, python-format
-#~ msgid "No analytic journal !"
-#~ msgstr "Ei analyyttistä lokia"
-
-#~ msgid ""
-#~ "Some installed modules depends on the module you plan to desinstall :\n"
-#~ " %s"
-#~ msgstr ""
-#~ "Jotkin asennetut moduulit ovat riippuvaisia moduulista jonka aiot poistaa:\n"
-#~ " %s"
-
-#~ msgid "Make the rule global, otherwise it needs to be put on a group or user"
-#~ msgstr ""
-#~ "Tekee säännöstä yleisen, muuten se täytyy liittää ryhmään tai käyttäjään"
-
-#~ msgid "States"
-#~ msgstr "Tilat"
-
-#~ msgid "Roles are used to defined available actions, provided by workflows."
-#~ msgstr ""
-#~ "Työtehtävät määrittelevät käytettävissä olevat toiminnot, joita työnkulut "
-#~ "edellyttävät."

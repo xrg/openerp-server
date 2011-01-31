@@ -431,6 +431,7 @@ class common(_ObjectService):
                         'set_logger_level', 'get_pgmode', 'set_pgmode',
                         'get_loglevel', 'get_sqlcount', 'get_sql_stats',
                         'reset_sql_stats',
+                        'get_garbage_stats',
                         'get_os_time']
                 }
     def __init__(self,name="common"):
@@ -681,6 +682,11 @@ GNU Public Licence.
                 res += "\nPython GC enabled: %d:%d:%d objs." % \
                     gc.get_count()
         except ImportError: pass
+        try:
+            from tools import lru
+            res += "\nLRU counts: LRU: %d, nodes: %d" %  \
+                    (sys.getrefcount(lru.LRU), sys.getrefcount(lru.LRUNode))
+        except Exception: pass
         return res
 
     def exp_list_http_services(self):
@@ -717,6 +723,21 @@ GNU Public Licence.
     def exp_reset_sql_stats(self):
         sql_db._Pool.sql_stats = {}
         return True
+
+    def exp_get_garbage_stats(self):
+        import gc
+        garbage_count = {}
+        for garb in gc.garbage:
+            try:
+                name = '%s.%s' % (garb.__class__.__module__, garb.__class__.__name__)
+                garbage_count.setdefault(name, 0)
+                garbage_count[name] += 1
+            except Exception, e:
+                print "Exception:", e
+                continue
+            # Perhaps list the attributes of garb that are instances of object
+        
+        return garbage_count
 
     def exp_get_options(self, module=None):
         """Return a list of options, keywords, that the server supports.
@@ -778,6 +799,19 @@ class objects_proxy(baseExportService):
         db, uid = (acds[2], acds[3])
         res = fn(db, uid, *params)
         return res
+
+    def stats(self, _pre_msg='No statistics'):
+        try:
+            from osv import orm
+            msg = ''
+            for klass in ('browse_record', 'browse_record_list', 'browse_null',
+                        'orm_memory', 'orm'):
+                msg += "%s[%d] " % (klass, sys.getrefcount(getattr(orm,klass)))
+        except Exception, e:
+            msg = str(e)
+        return "%s (%s.%s): %s" % ('object',
+                    self.__class__.__module__, self.__class__.__name__,
+                    msg)
 
 objects_proxy()
 
