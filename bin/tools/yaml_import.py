@@ -80,6 +80,10 @@ def is_ref(node):
 def is_ir_set(node):
     return _is_yaml_mapping(node, yaml_tag.IrSet)
 
+def is_repeat(node):
+    return isinstance(node, yaml_tag.Repeat) \
+        or _is_yaml_mapping(node, yaml_tag.Repeat)
+
 def is_string(node):
     return isinstance(node, basestring)
 
@@ -302,6 +306,10 @@ class YamlInterpreter(object):
     def process_record(self, node):
         import osv
         record, fields = node.items()[0]
+        rec_id = record.id
+        if isinstance(rec_id, yaml_tag.Eval):
+            record = yaml_tag.Record(**record.__dict__)
+            record.id = self.process_eval(rec_id)
         model = self.get_model(record.model)
         if isinstance(model, osv.osv.osv_memory):
             record_dict=self.create_osv_memory_record(record, fields)
@@ -373,6 +381,12 @@ class YamlInterpreter(object):
             if column._type in ("many2many", "one2many"):
                 value = [(6, 0, elements)]
             else: # many2one
+                value = self._get_first_result(elements)
+        elif is_repeat(expression):
+            elements = self._process_repeat_field(expression, model, field_name)
+            if column._type in ("many2many", "one2many"):
+                value = elements
+            else:
                 value = self._get_first_result(elements)
         elif column._type == "many2one":
             value = self.get_id(expression)
@@ -726,7 +740,52 @@ class YamlInterpreter(object):
         Empty node or commented node should not pass silently.
         """
         self._log_assert_failure(logging.WARNING, "You have an empty block in your tests.")
-        
+
+    def process_repeat(self, node, **kwargs):
+        repeat, body = node.items()[0]
+        subnode = {}
+        seqs = {}
+        ret_list = []
+        if isinstance(body, types.DictionaryType):
+            for key, val in body.items():
+                if isinstance(key, basestring) \
+                        and isinstance(val, basestring) \
+                        and '%d' in val:
+                    seqs[key] = val
+                else:
+                    subnode[key] = val
+        else:
+            subnode = body
+        for r in range(repeat.num):
+            for key, val in seqs.items():
+                self.eval_context[key] = val % r
+            ret = self._process_node(subnode, **kwargs)
+            if ret is not None:
+                ret_list.append(ret)
+        return ret_list
+
+    def _process_repeat_field(self, node, model, field_name):
+        repeat, body = node.items()[0]
+        subnode = body.copy()
+        seqs = {}
+        ret_list = []
+        if isinstance(body, types.DictionaryType):
+            for key, val in body.items():
+                if isinstance(key, basestring) \
+                        and isinstance(val, basestring) \
+                        and '%d' in val:
+                    seqs[key] = val
+        for r in range(repeat.num):
+            for key, val in seqs.items():
+                subnode[key] = val % r
+                # self.eval_context[key] = subnode[key]
+            ret = self._eval_field(model=model, field_name=field_name, expression=[subnode,])
+            if ret is not None:
+                if ret and isinstance(ret, list) and isinstance(ret[0], tuple):
+                    ret_list.extend(ret)
+                else:
+                    ret_list.append(ret)
+        return ret_list
 
     def process(self, yaml_string, fatal=False):
         """
@@ -780,6 +839,8 @@ class YamlInterpreter(object):
                 self.process_function(node)
             else:
                 self.process_function({node: []})
+        elif is_repeat(node):
+            self.process_repeat(node)
         elif node is None:
             self.process_none()
         else:

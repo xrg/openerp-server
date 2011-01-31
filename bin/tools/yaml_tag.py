@@ -102,6 +102,15 @@ class IrSet(YamlTag):
     def __init__(self):
         super(IrSet, self).__init__()
 
+class Repeat(YamlTag):
+    def __init__(self, num, **kwargs):
+        self.num = int(num)
+        assert self.num >= 0, num
+        super(Repeat, self).__init__(**kwargs)
+
+    def __str__(self):
+        return '!repeat %s' % self.num
+
 def assert_constructor(loader, node):
     kwargs = loader.construct_mapping(node)
     return Assert(**kwargs)
@@ -149,7 +158,7 @@ def url_constructor(loader, node):
 def eval_constructor(loader, node):
     expression = loader.construct_scalar(node)
     return Eval(expression)
-    
+
 def ref_constructor(loader, tag_suffix, node):
     if tag_suffix == "id":
         kwargs = {"id": loader.construct_scalar(node)}
@@ -160,6 +169,10 @@ def ref_constructor(loader, tag_suffix, node):
 def ir_set_constructor(loader, node):
     kwargs = loader.construct_mapping(node)
     return IrSet(**kwargs)
+
+def repeat_constructor(loader, node):
+    num = loader.construct_scalar(node)
+    return Repeat(num=num)
 
 # Registers constructors for custom tags.
 # Constructors are actually defined globally: do not redefined them in another
@@ -179,5 +192,6 @@ def add_constructors():
     yaml.add_constructor(u"!eval", eval_constructor)
     yaml.add_multi_constructor(u"!ref", ref_constructor)
     yaml.add_constructor(u"!ir_set", ir_set_constructor)
+    yaml.add_constructor(u"!repeat", repeat_constructor)
 add_constructors()
 
