@@ -3575,6 +3575,8 @@ class orm(orm_template):
                 qfrom, qwhere, qargs = s_query.get_sql()
                 tables.append(qfrom)
                 tables = ', '.join(set(tables))
+                if not qwhere:
+                    qwhere = 'true'
                 query = 'SELECT %s FROM %s WHERE %s' % \
                             (select_fields, tables, qwhere)
                 params += qargs
