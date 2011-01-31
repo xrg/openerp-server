@@ -61,7 +61,7 @@
   I will try to read again, connecting as the disabled user.
 -
   !python {model: res.users }: |
-    from xmlrpclib import ServerProxy
+    from xmlrpclib import ServerProxy, Fault
     cr.commit()
     try:
         logsock = ServerProxy(context['test_xmlrpc_url']+'object')
