@@ -328,8 +328,11 @@ def try_report_action(cr, uid, action_id, active_model=None, active_ids=None,
                 del datas['ids']
             res = try_report(cr, uid, 'report.'+action['report_name'], ids, datas, context, our_module=our_module)
             return res
+        elif action['type']=='ir.actions.act_window_close':
+            log_test("closing window gracefully")
+            return True
         else:
-            raise Exception("Cannot handle action of type %s" % act_model)
+            raise Exception("Cannot handle action of type %s" % action['type'])
 
     log_test("will be using %s action %s #%d", act_model, act_xmlid, act_id)
     action = pool.get(act_model).read(cr, uid, act_id, context=context)
