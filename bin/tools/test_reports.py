@@ -210,7 +210,19 @@ def try_report_action(cr, uid, action_id, active_model=None, active_ids=None,
                         and view_data.get(fk, False) \
                         and isinstance(view_data[fk], list) \
                         and not isinstance(view_data[fk][0], tuple) :
-                    view_data[fk] = [(6, 0, view_data[fk])]
+                    nvdata = []
+                    new_ids = []
+                    for da in view_data[fk]:
+                        if isinstance(da, (int, long)):
+                            new_ids.append(da)
+                        elif isinstance(da, dict):
+                            nvdata.append((0,0, da))
+                        else:
+                            raise ValueError("Don't know what to do with %r data in %s" % \
+                                    (da, field['type']))
+                    if new_ids:
+                        nvdata.append((6, 0, new_ids))
+                    view_data[fk] = nvdata
 
             action_name = action.get('name')
             try:
