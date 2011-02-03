@@ -127,7 +127,7 @@ class RecordDictWrapper(dict):
         return dict.__getitem__(self, key)
 
 class YamlInterpreter(object):
-    def __init__(self, cr, module, id_map, mode, filename, noupdate=False):
+    def __init__(self, cr, module, id_map, mode, filename, noupdate=False, uid=1):
         self.cr = cr
         self.module = module
         self.id_map = id_map
@@ -137,7 +137,7 @@ class YamlInterpreter(object):
         self.noupdate = noupdate
         self.logger = logging.getLogger("%s.%s" % (logger_channel, self.module))
         self.pool = pooler.get_pool(cr.dbname)
-        self.uid = 1
+        self.uid = uid
         self.context = {} # opererp context
         self.eval_context = {'ref': self._ref(),
                              '_ref': self._ref(), # added '_ref' so that record['ref'] is possible
