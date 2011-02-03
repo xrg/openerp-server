@@ -23,9 +23,9 @@ from osv import fields,osv
 
 class board(osv.osv):
     _name = 'ir.board'
-    def create(self, cr, user, vals, context={}):
+    def create(self, cr, user, vals, context=None):
         return False
-    def copy(self, cr, uid, id, default=None, context={}):
+    def copy(self, cr, uid, id, default=None, context=None):
         return False
     _columns = {
         'name': fields.char('Board', size=64),
