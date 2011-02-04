@@ -4732,12 +4732,17 @@ class orm(orm_template):
 
         if self._vtable:
             copying_fields.append('_vptr')
+            read_fields.append('_vptr')
 
         data = self.read(cr, uid, [id,], fields=read_fields, context=context_wo_lang)
         if data:
             data = data[0]
         else:
             raise IndexError( _("Record #%d of %s not found, cannot copy!") %( id, self._name))
+
+        if '_vptr' in default:
+            # it won't be in copying_fields
+            data['_vptr'] = default['_vptr']
 
         for f in copying_fields:
             if f in self._columns:
@@ -4771,7 +4776,23 @@ class orm(orm_template):
                 # These fields should always define a copy_data()
                 raise NotImplementedError('missing %s.copy_data()' % field_col._type)
 
-        if True: # todo ;)
+        if '_vptr' in data and data['_vptr'] != self._name:
+            # We are just the baseclass of the real model the data belongs to.
+            # Let's return the full data the object wants.
+            # We call copy_data() again, but pass current data as defaults, so
+            # that it needs not be computed again.
+            vmodel = self.pool.get(data['_vptr'])
+            assert vmodel, "Could not get model %s" % data['_vptr']
+            vids = vmodel.search(cr, uid, [(vmodel._inherits[self._name],'=', id) ],
+                                context=context_wo_lang)
+            if self._debug:
+                _logger.debug("Copying %s instead of %s#%d because it is virtual",
+                                data['_vptr'], self._name, id)
+            if len(vids) != 1:
+                raise ValueError("More than 1 entries of %s#%d to %s" %(vmodel._name, id, self._name))
+            data = vmodel.copy_data(cr, uid, vids[0], default=data, context=context_wo_lang)
+            data['__vmodel_old_id'] = vids[0] # special value, for subsequent translations
+        else:
             for d in data.keys():
                 if not d in copying_fields:
                     data.pop(d)
@@ -4856,8 +4877,19 @@ class orm(orm_template):
             context = {}
         context = context.copy()
         data = self.copy_data(cr, uid, id, default, context)
-        new_id = self.create(cr, uid, data, context)
-        self.copy_translations(cr, uid, id, new_id, context)
+        if self._vtable and '_vptr' in data and data['_vptr'] != self._name:
+            vmodel = self.pool.get(data['_vptr'])
+            vnew_id = vmodel.create(cr, uid, data, context)
+            vfld = vmodel._inherits[self._name]
+            new_id = vmodel.read(cr, uid, [vnew_id,], fields=[vfld], context=context)[0][vfld][0]
+            if '__vmodel_old_id' in data:
+                vold_id = data.pop('__vmodel_old_id')
+                vmodel.copy_translations(cr, uid, vold_id, vnew_id, context)
+            else:
+                self.copy_translations(cr, uid, id, new_id, context)
+        else:
+            new_id = self.create(cr, uid, data, context)
+            self.copy_translations(cr, uid, id, new_id, context)
         return new_id
 
     def exists(self, cr, uid, ids, context=None):
