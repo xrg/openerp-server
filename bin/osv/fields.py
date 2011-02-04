@@ -145,16 +145,14 @@ class _column(object):
         raise Exception(_('Not implemented %s.%s.search_memory method !')%(obj._name, name))
 
 
-    def __copy_data_template(self, cr, uid, obj, id, fields, f, data, context):
+    def __copy_data_template(self, cr, uid, obj, id, f, data, context):
         """ Sample function for copying the data of this column.
         If some column needs to override the conventional copying of
         its data, it should define a copy_data() like this function.
         
         @param obj The parent orm object
         @param id  The id of the record in the parent orm object
-        @param fields The dictionary of fields, as returned by 
-                orm.fields_get()
-        @param f The name of the field, useful to index the fields param
+        @param f The name of the field
         @param data The current data of the object. It may be the data of
                 the source object (for the later fields) or the copied data
                 for the fields that have been already computed
@@ -365,7 +363,7 @@ class one2one(_column):
         self._obj = obj
 
         if 'copy_data' not in args:
-            self.copy_data = self.shallow_copy
+            self.copy_data = 'deep_copy'
 
     def set(self, cr, obj_src, id, field, act, user=None, context=None):
         if not context:
@@ -383,9 +381,9 @@ class one2one(_column):
     def search(self, cr, obj, args, name, value, offset=0, limit=None, uid=None, context=None):
         return obj.pool.get(self._obj).search(cr, uid, args+self._domain+[('name', 'like', value)], offset, limit, context=context)
 
-    def shallow_copy(self, cr, uid, obj, id, fields, f, data, context):
+    def deep_copy(self, cr, uid, obj, id, f, data, context):
         res = []
-        rel = obj.pool.get(fields[f]['relation'])
+        rel = obj.pool.get(self._obj)
         if data[f]:
             # duplicate following the order of the ids
             # because we'll rely on it later for copying
@@ -490,7 +488,7 @@ class one2many(_column):
         assert(self.change_default != True)
 
         if 'copy_data' not in args:
-            self.copy_data = self.shallow_copy
+            self.copy_data = 'deep_copy'
 
     def get_memory(self, cr, obj, ids, name, user=None, offset=0, context=None, values=None):
         if context is None:
@@ -598,9 +596,9 @@ class one2many(_column):
     def search(self, cr, obj, args, name, value, offset=0, limit=None, uid=None, operator='like', context=None):
         return obj.pool.get(self._obj).name_search(cr, uid, value, self._domain, operator, context=context,limit=limit)
 
-    def shallow_copy(self, cr, uid, obj, id, fields, f, data, context):
+    def deep_copy(self, cr, uid, obj, id, f, data, context):
         res = []
-        rel = obj.pool.get(fields[f]['relation'])
+        rel = obj.pool.get(self._obj)
         if data[f]:
             # duplicate following the order of the ids
             # because we'll rely on it later for copying
@@ -642,7 +640,7 @@ class many2many(_column):
         self._limit = limit
         
         if 'copy_data' not in args:
-            self.copy_data = self.shallow_copy
+            self.copy_data = 'shallow_copy'
 
     def get(self, cr, obj, ids, name, user=None, offset=0, context=None, values=None):
         if not context:
@@ -771,9 +769,9 @@ class many2many(_column):
             elif act[0] == 6:
                 obj.datas[id][name] = act[2]
 
-    def shallow_copy(self, cr, uid, obj, id, fields, f, data, context):
+    def shallow_copy(self, cr, uid, obj, id, f, data, context):
         return [(6, 0, data[f])]
-
+    # TODO: a deep_copy
 
 def get_nice_size(a):
     (x,y) = a

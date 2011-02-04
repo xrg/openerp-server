@@ -1353,7 +1353,7 @@ class orm_template(object):
                     res[f]['related_columns'] = list((field_col._id1, field_col._id2))
                     res[f]['third_table'] = field_col._rel
                 for arg in ('string', 'readonly', 'states', 'size', 'required', 'group_operator',
-                        'change_default', 'translate', 'help', 'select', 'selectable', 'copy_data'):
+                        'change_default', 'translate', 'help', 'select', 'selectable'):
                     if getattr(field_col, arg, False):
                         res[f][arg] = getattr(field_col, arg)
                 if not write_access:
@@ -4706,51 +4706,76 @@ class orm(orm_template):
         context_wo_lang = context.copy()
         if 'lang' in context:
             del context_wo_lang['lang']
-        data = self.read(cr, uid, [id,], context=context_wo_lang)
+        
+        # First, prepare the columns we need to fetch from the old record
+        copying_fields = []
+        read_fields = [] # an even smaller list, to avoid unnecessary fetches
+        for f in (self._columns.keys() + self._inherit_fields.keys()):
+            if f in ('id', 'parent_left', 'parent_right'):
+                # make sure we don't break the current parent_store structure and
+                # force a clean recompute!
+                continue
+            if self._log_access and f in ('create_date', 'create_uid', 'write_date', 'write_uid'):
+                continue
+            if f in self._inherits.values():
+                # Don't copy the inherits /foreign key/ field(s)
+                continue
+            if f in self._columns:
+                field_col = self._columns[f]
+            elif f in self._inherit_fields:
+                field_col = self._inherit_fields[f][2]
+            if isinstance(field_col, fields.function):
+                continue
+            copying_fields.append(f)
+            if f not in default:
+                read_fields.append(f)
+
+        if self._vtable:
+            copying_fields.append('_vptr')
+
+        data = self.read(cr, uid, [id,], fields=read_fields, context=context_wo_lang)
         if data:
             data = data[0]
         else:
             raise IndexError( _("Record #%d of %s not found, cannot copy!") %( id, self._name))
 
-        fields = self.fields_get(cr, uid, context=context)
-        for f in fields:
-            ftype = fields[f]['type']
-
-            if self._log_access and f in ('create_date', 'create_uid', 'write_date', 'write_uid'):
-                del data[f]
-
-            copy_fn = fields[f].get('copy_data', False)
+        for f in copying_fields:
+            if f in self._columns:
+                field_col = self._columns[f]
+            elif f in self._inherit_fields:
+                field_col = self._inherit_fields[f][2]
+            elif f == '_vptr':
+                # leave as is, even though there is no corresponding column
+                continue
+                # TODO: shall we also copy inherited children, from virtual table?
+            else:
+                raise KeyError(f) # how did a column end up here?
+            
+            copy_fn = getattr(field_col, 'copy_data', False)
             if f in default:
                 data[f] = default[f]
             elif copy_fn:
                 if isinstance(copy_fn, basestring):
-                    copy_fn = getattr(fields[f], copy_fn)
-                res = copy_fn(cr, uid, self, id, fields, f, data, context)
+                    copy_fn = getattr(field_col, copy_fn)
+                res = copy_fn(cr, uid, obj=self, id=id, f=f, data=data, context=context)
                 if res is not None:
                     data[f] = res
                 else:
                     del data[f]
-            elif 'function' in fields[f]:
-                del data[f]
-            elif ftype == 'many2one':
+            elif field_col._type == 'many2one': # catch both many2one and relations of many2one
                 try:
                     data[f] = data[f] and data[f][0]
-                except:
+                except Exception:
                     pass
-            elif ftype in ('one2many', 'one2one', 'many2many'):
+            elif isinstance(field_col, (fields.one2many, fields.one2one, fields.many2many)):
                 # These fields should always define a copy_data()
-                raise NotImplementedError('missing %s.copy_data()' % ftype)
+                raise NotImplementedError('missing %s.copy_data()' % field_col._type)
 
-        del data['id']
+        if True: # todo ;)
+            for d in data.keys():
+                if not d in copying_fields:
+                    data.pop(d)
 
-        # make sure we don't break the current parent_store structure and
-        # force a clean recompute!
-        for parent_column in ['parent_left', 'parent_right']:
-            data.pop(parent_column, None)
-
-        # TODO: shall we also copy inherited children, from virtual table?
-        for v in self._inherits:
-            del data[self._inherits[v]]
         return data
 
     def copy_translations(self, cr, uid, old_id, new_id, context=None):
