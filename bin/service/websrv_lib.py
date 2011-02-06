@@ -622,7 +622,9 @@ class SecureMultiHTTPHandler(MultiHTTPHandler):
             addr_str = '?'
             if self.connection.cipher():
                 ciph_str = self.connection.cipher()[0]
-            if self.client_address:
+            if self.client_address and len(self.client_address) == 4:
+                addr_str = '[%s]:%s' % self.client_address[:2]
+            elif self.client_address:
                 addr_str = '%s:%s' % self.client_address
             self.log_message("Secure %s connection from %s",ciph_str,addr_str)
         except Exception:

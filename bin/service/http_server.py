@@ -129,6 +129,11 @@ class ThreadedHTTPServer(ConnThreadingMixIn, SimpleXMLRPCDispatcher, HTTPServer)
         self.__threadno += 1
         return 'http-client-%d' % self.__threadno
 
+class Threaded6HTTPServer(ThreadedHTTPServer):
+    """A variant of ThreadedHTTPServer for IPv6
+    """
+    address_family = socket.AF_INET6
+
 class HttpLogHandler:
     """ helper class for uniform log handling
     Please define self._logger at each class that is derived from this
@@ -183,16 +188,16 @@ class SecureMultiHandler2(HttpLogHandler, SecureMultiHTTPHandler):
 class BaseHttpDaemon(threading.Thread, netsvc.Server):
     _RealProto = '??'
 
-    def __init__(self, interface, port, handler):
-        threading.Thread.__init__(self, name='%sDaemon-%d'%(self._RealProto, port))
+    def __init__(self, address, handler, server_class=ThreadedHTTPServer):
+        threading.Thread.__init__(self, name='%sDaemon-%d'%(self._RealProto, address[1]))
         netsvc.Server.__init__(self)
-        self.__port = port
-        self.__interface = interface
+        self.__address = address
 
         try:
-            self.server = ThreadedHTTPServer((interface, port), handler, proto=self._RealProto)
+            self.server = server_class(address, handler, proto=self._RealProto)
             self.server.vdirs = []
             self.server.logRequests = True
+            interface, port = address[:2]
             logging.getLogger("web-services").info(
                         "starting %s service at %s port %d" %
                         (self._RealProto, interface or '0.0.0.0', port,))
@@ -259,7 +264,7 @@ class BaseHttpDaemon(threading.Thread, netsvc.Server):
 class HttpDaemon(BaseHttpDaemon):
     _RealProto = 'HTTP'
     def __init__(self, interface, port):
-        super(HttpDaemon, self).__init__(interface, port,
+        super(HttpDaemon, self).__init__(address=(interface, port),
                                          handler=MultiHandler2)
         self.daemon = True
 
@@ -267,8 +272,30 @@ class HttpSDaemon(BaseHttpDaemon):
     _RealProto = 'HTTPS'
     def __init__(self, interface, port):
         try:
-            super(HttpSDaemon, self).__init__(interface, port,
+            super(HttpSDaemon, self).__init__(address=(interface, port),
                                               handler=SecureMultiHandler2)
+            self.daemon = True
+
+        except SSLError, e:
+            logging.getLogger('httpsd').exception( \
+                        "Can not load the certificate and/or the private key files")
+            raise
+
+class Http6Daemon(BaseHttpDaemon):
+    _RealProto = 'HTTP6'
+    def __init__(self, interface, port):
+        super(Http6Daemon, self).__init__(address=(interface, port, 0, 0),
+                                         handler=MultiHandler2,
+                                         server_class=Threaded6HTTPServer)
+        self.daemon = True
+
+class Http6SDaemon(BaseHttpDaemon):
+    _RealProto = 'HTTP6S'
+    def __init__(self, interface, port):
+        try:
+            super(Http6SDaemon, self).__init__(address(interface, port),
+                                              handler=SecureMultiHandler2,
+                                              server_class=Threaded6HTTPServer)
             self.daemon = True
 
         except SSLError, e:
@@ -278,6 +305,8 @@ class HttpSDaemon(BaseHttpDaemon):
 
 httpd = None
 httpsd = None
+http6d = None
+http6sd = None
 
 def init_servers():
     global httpd, httpsd
@@ -288,18 +317,37 @@ def init_servers():
     if tools.config.get_misc('httpsd','enable', False):
         httpsd = HttpSDaemon(tools.config.get_misc('httpsd','interface', ''), \
             int(tools.config.get_misc('httpsd','port', 8071)))
+    
+    global http6d, http6sd
+    if socket.has_ipv6:
+        if tools.config.get_misc('http6d','enable', False):
+            httpd = Http6Daemon(tools.config.get_misc('http6d','interface', ''), \
+                int(tools.config.get_misc('http6d','port', 8069)))
+
+        if tools.config.get_misc('http6sd','enable', False):
+            httpsd = Http6SDaemon(tools.config.get_misc('http6sd','interface', ''), \
+                int(tools.config.get_misc('http6sd','port', 8071)))
+    elif tools.config.get_misc('http6d','enable', False) \
+            or tools.config.get_misc('http6sd','enable', False):
+        logging.getLogger('http6d').warning("HTTPd servers for IPv6 specified, but not supported at this platform.")
 
 def reg_http_service(hts, secure_only = False):
     """ Register some handler to httpd.
         hts must be an HTTPDir
     """
-    global httpd, httpsd
+    global httpd, httpsd, http6d, http6sd
 
     if httpd and not secure_only:
         httpd.append_svc(hts)
 
     if httpsd:
         httpsd.append_svc(hts)
+
+    if http6d and not secure_only:
+        http6d.append_svc(hts)
+    
+    if http6sd:
+        http6sd.append_svc(hts)
 
     if (not httpd) and (not httpsd):
         logging.getLogger('httpd').warning("No httpd available to register service %s" % hts.path)
@@ -582,7 +630,9 @@ class OerpAuthProxy(AuthProxy):
             (user,passwd) = base64.decodestring(auth_str).split(':')
             try:
                 acd = self.provider.authenticate(db,user,passwd,handler.client_address)
-                if handler.client_address:
+                if handler.client_address and len(handler.client_address) == 4:
+                    addr_str = "[%s]:%s" % (handler.client_address[:2])
+                elif handler.client_address:
                     addr_str = "%s:%s" % handler.client_address
                 else:
                     addr_str = '?'
