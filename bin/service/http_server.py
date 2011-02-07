@@ -40,6 +40,7 @@ import urllib
 import os
 import select
 import socket
+import re
 import xmlrpclib
 import StringIO
 
@@ -187,6 +188,7 @@ class SecureMultiHandler2(HttpLogHandler, SecureMultiHTTPHandler):
 
 class BaseHttpDaemon(threading.Thread, netsvc.Server):
     _RealProto = '??'
+    _IsSecure = False
 
     def __init__(self, address, handler, server_class=ThreadedHTTPServer):
         threading.Thread.__init__(self, name='%sDaemon-%d'%(self._RealProto, address[1]))
@@ -270,6 +272,7 @@ class HttpDaemon(BaseHttpDaemon):
 
 class HttpSDaemon(BaseHttpDaemon):
     _RealProto = 'HTTPS'
+    _IsSecure = True
     def __init__(self, interface, port):
         try:
             super(HttpSDaemon, self).__init__(address=(interface, port),
@@ -303,65 +306,84 @@ class Http6SDaemon(BaseHttpDaemon):
                         "Can not load the certificate and/or the private key files")
             raise
 
-httpd = None
-httpsd = None
-http6d = None
-http6sd = None
+http_daemons = []
 
 def init_servers():
-    global httpd, httpsd
-    if tools.config.get_misc('httpd','enable', True):
-        httpd = HttpDaemon(tools.config.get_misc('httpd','interface', ''), \
-            int(tools.config.get_misc('httpd','port', tools.config.get('port',8069))))
-
-    if tools.config.get_misc('httpsd','enable', False):
-        httpsd = HttpSDaemon(tools.config.get_misc('httpsd','interface', ''), \
-            int(tools.config.get_misc('httpsd','port', 8071)))
+    global http_daemons
+    ipv4_re = re.compile('^([0-9]{1,3}(?:\.(?:[0-9]{1,3})){3})(?::(\d{1,5}))?$')
+    ipv6_re = re.compile('^\[([0-9a-f:]+)\](?::(\d{1,5}))?$')
     
-    global http6d, http6sd
-    if socket.has_ipv6:
-        if tools.config.get_misc('http6d','enable', False):
-            httpd = Http6Daemon(tools.config.get_misc('http6d','interface', ''), \
-                int(tools.config.get_misc('http6d','port', 8069)))
+    ipv6_missing = False
+    if tools.config.get_misc('httpd','enable', True):
+        ifaces = tools.config.get_misc('httpd','interface', '')
+        if not ifaces:
+            ifaces = '0.0.0.0' # By default, IPv4 only
+        ifaces = map(str.strip, ifaces.split(','))
+        base_port = tools.config.get_misc('httpd','port', tools.config.get('port',8069))
+        for iface in ifaces:
+            m = ipv4_re.match(iface)
+            if m:
+                httpd = HttpDaemon( m.group(1), int(m.group(2) or base_port))
+                http_daemons.append(httpd)
+                continue
+            m = ipv6_re.match(iface)
+            if m:
+                if not socket.has_ipv6:
+                    ipv6_missing = True
+                    continue
+                httpd = Http6Daemon( m.group(1), int(m.group(2) or base_port))
+                http_daemons.append(httpd)
+                continue
+            logging.getLogger('httpd').error("Cannot understand address \"%s\" to launch http daemon on!", iface)
 
-        if tools.config.get_misc('http6sd','enable', False):
-            httpsd = Http6SDaemon(tools.config.get_misc('http6sd','interface', ''), \
-                int(tools.config.get_misc('http6sd','port', 8071)))
-    elif tools.config.get_misc('http6d','enable', False) \
-            or tools.config.get_misc('http6sd','enable', False):
+    if tools.config.get_misc('httpsd','enable', True):
+        ifaces = tools.config.get_misc('httpsd','interface', '')
+        if not ifaces:
+            ifaces = '0.0.0.0' # By default, IPv4 only
+        ifaces = map(str.strip, ifaces.split(','))
+        base_port = tools.config.get_misc('httpsd','port', 8071)
+        for iface in ifaces:
+            m = ipv4_re.match(iface)
+            if m:
+                httpd = HttpSDaemon( m.group(1), int(m.group(2) or base_port))
+                http_daemons.append(httpd)
+                continue
+            m = ipv6_re.match(iface)
+            if m:
+                if not socket.has_ipv6:
+                    ipv6_missing = True
+                    continue
+                httpd = Http6SDaemon( m.group(1), int(m.group(2) or base_port))
+                http_daemons.append(httpd)
+                continue
+            logging.getLogger('httpd').error("Cannot understand address \"%s\" to launch http daemon on!", iface)
+
+    if ipv6_missing:
         logging.getLogger('http6d').warning("HTTPd servers for IPv6 specified, but not supported at this platform.")
 
 def reg_http_service(hts, secure_only = False):
     """ Register some handler to httpd.
         hts must be an HTTPDir
     """
-    global httpd, httpsd, http6d, http6sd
+    global http_daemons
 
-    if httpd and not secure_only:
-        httpd.append_svc(hts)
-
-    if httpsd:
-        httpsd.append_svc(hts)
-
-    if http6d and not secure_only:
-        http6d.append_svc(hts)
-    
-    if http6sd:
-        http6sd.append_svc(hts)
-
-    if (not httpd) and (not httpsd):
+    if not http_daemons:
         logging.getLogger('httpd').warning("No httpd available to register service %s" % hts.path)
         return False
+
+    for httpd in http_daemons:
+        if secure_only and not httpd._IsSecure:
+            continue
+        httpd.append_svc(hts)
     return True
 
 def list_http_services(protocol=None):
-    global httpd, httpsd
-    if httpd and (protocol == 'http' or protocol == None):
+    global http_daemons
+    for httpd in http_daemons:
+        if protocol is not None and protocol != httpd._RealProto.lower():
+            continue
         return httpd.list_services()
-    elif httpsd and (protocol == 'https' or protocol == None):
-        return httpsd.list_services()
-    else:
-        raise Exception("Incorrect protocol or no http services")
+    raise Exception("Incorrect protocol or no http services")
 
 import SimpleXMLRPCServer
 import gzip
