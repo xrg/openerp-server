@@ -144,6 +144,9 @@ class HTTPDir:
         if request.startswith(self.path):
             return self.path
         return False
+    
+    def __repr__(self):
+        return "<http %r on %s>" %(self.handler, self.path)
 
 class noconnection(object):
     """ a class to use instead of the real connection
