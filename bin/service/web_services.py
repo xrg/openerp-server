@@ -689,9 +689,9 @@ GNU Public Licence.
         except Exception: pass
         return res
 
-    def exp_list_http_services(self):
+    def exp_list_http_services(self, *args):
         from service import http_server
-        return http_server.list_http_services()
+        return http_server.list_http_services(*args)
 
     def exp_check_connectivity(self):
         return bool(sql_db.db_connect('template1'))
