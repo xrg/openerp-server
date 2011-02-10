@@ -1205,6 +1205,42 @@ class property(function):
     def restart(self):
         self.field_id = {}
 
+# Special:
+
+class inherit(object):
+    """ A special placeholder which tells the osv engine to override a field
+
+    Note that this class is NOT a _column !
+
+    With this class, we are able to override a field and change some of its
+    properties through an _inherit model of ORM. the gain is that we don't
+    need to redefine the whole field, but only the properties which we want
+    to change.
+    Example:
+        In the base model, we could have
+            'foo': fields.char('Foo', size=64, help='Some foo'),
+        and in our extension addon, improve to
+            'foo': fields.inherit(size=128),
+    """
+
+    def __init__(self, **kwargs):
+        self.__kwargs = kwargs.copy()
+
+    def _adapt(self, field):
+        """ Manipulate field and alter it according to our kwargs
+        """
+
+        assert isinstance(field, _column), type(field)
+
+        for kw, val in self.__kwargs.items():
+            if kw == 'domain':
+                field._domain = val
+            elif kw == 'context':
+                field._context = val
+            elif kw == 'selection_extend':
+                field.selection.extend(val)
+            else:
+                setattr(field, kw, val)
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
 

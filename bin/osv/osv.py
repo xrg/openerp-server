@@ -330,7 +330,14 @@ class osv_memory(osv_base, orm.orm_memory):
                 nattr = {}
                 for s in ('_columns', '_defaults', '_virtuals'):
                     new = copy.copy(getattr(pool.get(parent_name), s))
-                    if hasattr(new, 'update'):
+                    if s == '_columns':
+                        new_cols = cls.__dict__.get(s, {})
+                        for nn, nc in new_cols.items():
+                            if isinstance(nc, orm.fields.inherit):
+                                nc._adapt(new[nn])
+                            else:
+                                new[nn] = nc
+                    elif hasattr(new, 'update'):
                         new.update(cls.__dict__.get(s, {}))
                     else:
                         new.extend(cls.__dict__.get(s, []))
@@ -364,7 +371,14 @@ class osv(osv_base, orm.orm):
                 nattr = {}
                 for s in ('_columns', '_defaults', '_inherits', '_constraints', '_sql_constraints', '_virtuals', '_column_stats'):
                     new = copy.copy(getattr(pool.get(parent_name), s))
-                    if hasattr(new, 'update'):
+                    if s == '_columns':
+                        new_cols = cls.__dict__.get(s, {})
+                        for nn, nc in new_cols.items():
+                            if isinstance(nc, orm.fields.inherit):
+                                nc._adapt(new[nn])
+                            else:
+                                new[nn] = nc
+                    elif hasattr(new, 'update'):
                         new.update(cls.__dict__.get(s, {}))
                     else:
                         if s=='_constraints':
