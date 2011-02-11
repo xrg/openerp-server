@@ -79,6 +79,8 @@ class configmanager(object):
             'test_disable' : False,
             'test_commit' : False,
             'publisher_warranty_url': 'http://services.openerp.com/publisher-warranty/',
+            'osv_memory_count_limit': None, # number of records in each osv_memory virtual table
+            'osv_memory_age_limit': 1, # hours
         }
 
         self.aliases = {
@@ -94,6 +96,8 @@ class configmanager(object):
             'netrpc': 'netrpcd.enable',
             'secure_cert_file': 'httpsd.sslcert',
             'secure_pkey_file': 'httpsd.sslkey',
+            'osv_memory_count_limit': 'osv_memory.count_limit',
+            'osv_memory_age_limit': 'osv_memory.age_limit',
         }
         
         self.blacklist_for_save = set(["publisher_warranty_url", "load_language"])
@@ -220,6 +224,15 @@ class configmanager(object):
         group.add_option("--addons-path", dest="addons_path",
                          help="specify an alternative addons path.",
                          action="callback", callback=self._check_addons_path, nargs=1, type="string")
+        group.add_option("--osv-memory-count-limit", dest="osv_memory_count_limit", default=False,
+                         help="Force a limit on the maximum number of records kept in the virtual "
+                              "osv_memory tables. The default is False, which means no count-based limit.",
+                         type="int")
+        group.add_option("--osv-memory-age-limit", dest="osv_memory_age_limit", default=1.0,
+                         help="Force a limit on the maximum age of records kept in the virtual "
+                              "osv_memory tables. This is a decimal value expressed in hours, "
+                              "and the default is 1 hour.",
+                         type="float")
         parser.add_option_group(group)
 
         security = optparse.OptionGroup(parser, 'Security-related options')
