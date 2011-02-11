@@ -4,13 +4,13 @@ msgstr ""
 "Project-Id-Version: OpenERP Server 5.0.0\n"
 "Report-Msgid-Bugs-To: support@openerp.com\n"
 "POT-Creation-Date: 2011-01-11 11:14+0000\n"
-"PO-Revision-Date: 2011-01-19 13:31+0000\n"
-"Last-Translator: Fabien (Open ERP) <fp@tinyerp.com>\n"
+"PO-Revision-Date: 2011-02-03 12:11+0000\n"
+"Last-Translator: Casufi <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-01-20 06:11+0000\n"
+"X-Launchpad-Export-Date: 2011-02-04 14:10+0000\n"
 "X-Generator: Launchpad (build 12177)\n"
 
 #. module: base
@@ -218,11 +218,16 @@ msgstr "Рекурсивна помилка у залежностях модул
 
 #. module: base
 #: code:addons/base/module/module.py:0
-#, python-format
+#, fuzzy, python-format
 msgid ""
 "Some installed modules depend on the module you plan to Uninstall :\n"
 " %s"
 msgstr ""
+"#-#-#-#-#  .merge_file_hWQWWL (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_H9kID5 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Деякі зі встановлених модулів залежать від модуля, який ви плануєте "
+"вилучити:\n"
+" %s"
 
 #. module: base
 #: code:addons/base/module/module.py:0
@@ -782,13 +787,21 @@ msgstr "Циклічний Вираз"
 
 #. module: base
 #: field:ir.actions.server,fields_lines:0
+#, fuzzy
 msgid "Field Mappings."
 msgstr ""
+"#-#-#-#-#  .merge_file_hWQWWL (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_H9kID5 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Відображення полів"
 
 #. module: base
 #: field:ir.actions.server,loop_action:0
+#, fuzzy
 msgid "Loop Action"
 msgstr ""
+"#-#-#-#-#  .merge_file_hWQWWL (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_H9kID5 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Дія цикл"
 
 #. module: base
 #: field:ir.actions.server,message:0
@@ -1173,7 +1186,7 @@ msgstr "Повна назва"
 #: field:ir.model.fields,domain:0 field:ir.rule,domain:0
 #: field:res.partner.title,domain:0
 msgid "Domain"
-msgstr "Категорія"
+msgstr "Домен"
 
 #. module: base
 #: field:ir.model.fields,field_description:0
@@ -2045,8 +2058,12 @@ msgstr "Банк"
 
 #. module: base
 #: field:res.partner.bank,owner_name:0
+#, fuzzy
 msgid "Account Owner"
 msgstr ""
+"#-#-#-#-#  .merge_file_hWQWWL (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_H9kID5 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Власник рахунку"
 
 #. module: base
 #: field:res.partner.bank,state:0
@@ -2374,7 +2391,7 @@ msgstr "Субпроцес"
 #: field:workflow.activity,wkf_id:0 field:workflow.instance,wkf_id:0
 #: view:workflow:0
 msgid "Workflow"
-msgstr "Процес"
+msgstr "Робочий процес"
 
 #. module: base
 #: field:workflow.instance,uid:0
@@ -2461,10 +2478,16 @@ msgstr ""
 
 #. module: base
 #: help:ir.actions.report.xml,attachment_use:0
+#, fuzzy
 msgid ""
 "If you check this, then the second time the user prints with same attachment "
 "name, it returns the previous report."
 msgstr ""
+"#-#-#-#-#  .merge_file_hWQWWL (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_H9kID5 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Якщо буде позначено цей пункт, під час наступної спроби користувачем "
+"надрукувати дані з використанням тієї самої назви долучення, буде повернуто "
+"попередній звіт."
 
 #. module: base
 #: help:ir.actions.report.xml,header:0
@@ -2587,8 +2610,12 @@ msgstr ""
 
 #. module: base
 #: help:ir.actions.server,trigger_name:0
+#, fuzzy
 msgid "Select the Signal name that is to be used as the trigger."
 msgstr ""
+"#-#-#-#-#  .merge_file_hWQWWL (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_H9kID5 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Оберіть ім'я сигналу що буде використане як тригер"
 
 #. module: base
 #: help:ir.actions.server,trigger_obj_id:0
@@ -4240,8 +4267,12 @@ msgstr "Гуам (США)"
 
 #. module: base
 #: model:res.country,name:base.gw
+#, fuzzy
 msgid "Guinea Bissau"
 msgstr ""
+"#-#-#-#-#  .merge_file_hWQWWL (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_H9kID5 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Гвінея-Біссау"
 
 #. module: base
 #: model:res.country,name:base.gy
@@ -6280,8 +6311,12 @@ msgstr "Чорновик"
 
 #. module: base
 #: selection:maintenance.contract.wizard,state:0
+#, fuzzy
 msgid "Unvalidated"
 msgstr ""
+"#-#-#-#-#  .merge_file_hWQWWL (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_H9kID5 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Неперевірено"
 
 #. module: base
 #: selection:maintenance.contract.wizard,state:0
@@ -6687,8 +6722,12 @@ msgstr ""
 
 #. module: base
 #: sql_constraint:res.lang:0
+#, fuzzy
 msgid "The name of the language must be unique !"
 msgstr ""
+"#-#-#-#-#  .merge_file_hWQWWL (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_H9kID5 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Назви мов не повинні повторюватися"
 
 #. module: base
 #: sql_constraint:res.partner:0
@@ -7877,59 +7916,103 @@ msgstr "SMS шлюз: clickatell"
 
 #. module: base
 #: view:ir.actions.report.xml:0
+#, fuzzy
 msgid "Other Configuration"
 msgstr ""
+"#-#-#-#-#  .merge_file_hWQWWL (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_H9kID5 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Інша конфігурація"
 
 #. module: base
 #: selection:ir.property,type:0
+#, fuzzy
 msgid "DateTime"
 msgstr ""
+"#-#-#-#-#  .merge_file_hWQWWL (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_H9kID5 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Дата та час"
 
 #. module: base
 #: selection:base.language.install,lang:0
+#, fuzzy
 msgid "Spanish (VE) / Español (VE)"
 msgstr ""
+"#-#-#-#-#  .merge_file_hWQWWL (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_H9kID5 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Іспанська (VE) / Español (VE)"
 
 #. module: base
 #: field:ir.actions.act_window,display_menu_tip:0
+#, fuzzy
 msgid "Display Menu Tips"
 msgstr ""
+"#-#-#-#-#  .merge_file_hWQWWL (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_H9kID5 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Показувати підказки до пунктів меню"
 
 #. module: base
 #: field:res.partner,ref:0
+#, fuzzy
 msgid "Reference"
 msgstr ""
+"#-#-#-#-#  .merge_file_hWQWWL (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_H9kID5 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Посилання"
 
 #. module: base
 #: model:res.partner.category,name:base.res_partner_category_woodsuppliers0
+#, fuzzy
 msgid "Wood Suppliers"
 msgstr ""
+"#-#-#-#-#  .merge_file_hWQWWL (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_H9kID5 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Постачальники деревини"
 
 #. module: base
 #: selection:base.language.install,lang:0
+#, fuzzy
 msgid "Inuktitut / ᐃᓄᒃᑎᑐᑦ"
 msgstr ""
+"#-#-#-#-#  .merge_file_hWQWWL (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_H9kID5 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Інуктітут / ᐃᓄᒃᑎᑐᑦ"
 
 #. module: base
 #: code:addons/base/res/res_user.py:0
-#, python-format
+#, fuzzy, python-format
 msgid "\"smtp_server\" needs to be set to send mails to users"
 msgstr ""
+"#-#-#-#-#  .merge_file_hWQWWL (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_H9kID5 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Для надсилання поштових повідомлень користувачам слід встановити модуль "
+"\"smtp_server\""
 
 #. module: base
 #: help:multi_company.default,company_dest_id:0
+#, fuzzy
 msgid "Company to store the current record"
 msgstr ""
+"#-#-#-#-#  .merge_file_hWQWWL (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_H9kID5 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Компанія, якої стосується поточний запис"
 
 #. module: base
 #: view:ir.attachment:0
+#, fuzzy
 msgid "Owner"
 msgstr ""
+"#-#-#-#-#  .merge_file_hWQWWL (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_H9kID5 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Власник"
 
 #. module: base
 #: field:res.widget.user,widget_id:0 field:res.widget.wizard,widget_id:0
+#, fuzzy
 msgid "Widget"
 msgstr ""
+"#-#-#-#-#  .merge_file_hWQWWL (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_H9kID5 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Віджет"
 
 #. module: base
 #: field:ir.ui.menu,web_icon_data:0
@@ -7953,18 +8036,31 @@ msgstr ""
 
 #. module: base
 #: view:ir.translation:0
+#, fuzzy
 msgid "Untranslated"
 msgstr ""
+"#-#-#-#-#  .merge_file_hWQWWL (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_H9kID5 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Не перекладено"
 
 #. module: base
 #: help:ir.actions.act_window,context:0
+#, fuzzy
 msgid "Context dictionary as Python expression, empty by default (Default: {})"
 msgstr ""
+"#-#-#-#-#  .merge_file_hWQWWL (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_H9kID5 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Список контекстів у форматі виразу Python, типово порожній (Типове значення: "
+"{})"
 
 #. module: base
 #: model:res.partner.category,name:base.res_partner_category_miscellaneoussuppliers0
+#, fuzzy
 msgid "Miscellaneous Suppliers"
 msgstr ""
+"#-#-#-#-#  .merge_file_hWQWWL (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_H9kID5 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Інші постачальники"
 
 #. module: base
 #: view:res.config.users:0
@@ -7984,13 +8080,21 @@ msgstr ""
 
 #. module: base
 #: view:res.config:0 view:res.config.installer:0
+#, fuzzy
 msgid "description"
 msgstr ""
+"#-#-#-#-#  .merge_file_hWQWWL (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_H9kID5 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"опис"
 
 #. module: base
 #: model:ir.ui.menu,name:base.menu_base_action_rule
+#, fuzzy
 msgid "Automated Actions"
 msgstr ""
+"#-#-#-#-#  .merge_file_hWQWWL (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_H9kID5 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Автоматизовані дії"
 
 #. module: base
 #: view:partner.wizard.ean.check:0
@@ -10638,19 +10742,27 @@ msgstr ""
 
 #. module: base
 #: code:addons/fields.py:534
-#, python-format
+#, fuzzy, python-format
 msgid ""
 "The second argument of the many2many field %s must be a SQL table !You used "
 "%s, which is not a valid SQL table name."
 msgstr ""
+"#-#-#-#-#  .merge_file_hWQWWL (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_H9kID5 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Другим аргументом поля many2many %s повинна бути валідна SQL таблиця !Ви "
+"використовуєте %s, яка не є валідною SQL таблицею."
 
 #. module: base
 #: code:addons/base/ir/ir_model.py:339
-#, python-format
+#, fuzzy, python-format
 msgid ""
 "You can not write in this document (%s) ! Be sure your user belongs to one "
 "of these groups: %s."
 msgstr ""
+"#-#-#-#-#  .merge_file_hWQWWL (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_H9kID5 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Ви не можете писати у цьому документі (%s) ! Ви повинні належати до однієї з "
+"цих груп: %s."
 
 #. module: base
 #: code:addons/orm.py:1993 code:addons/orm.py:3653
@@ -11001,9 +11113,12 @@ msgstr ""
 
 #. module: base
 #: code:addons/base/res/res_user.py:507
-#, python-format
+#, fuzzy, python-format
 msgid "Warning!"
 msgstr ""
+"#-#-#-#-#  .merge_file_hWQWWL (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_H9kID5 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Попередження!"
 
 #. module: base
 #: code:addons/base/ir/ir_model.py:304
