@@ -188,6 +188,7 @@ class SecureMultiHandler2(HttpLogHandler, SecureMultiHTTPHandler):
 
 class BaseHttpDaemon(threading.Thread, netsvc.Server):
     _RealProto = '??'
+    _ClientProto = False  # one to report to clients, like  <clientproto>://1.2.3.4:8069/
     _IsSecure = False
 
     def __init__(self, address, handler, server_class=ThreadedHTTPServer):
@@ -196,7 +197,7 @@ class BaseHttpDaemon(threading.Thread, netsvc.Server):
         self.__address = address
 
         try:
-            self.server = server_class(address, handler, proto=self._RealProto)
+            self.server = server_class(address, handler, proto=(self._ClientProto or self._RealProto))
             self.server.vdirs = []
             self.server.logRequests = True
             interface, port = address[:2]
@@ -265,6 +266,7 @@ class BaseHttpDaemon(threading.Thread, netsvc.Server):
 
 class HttpDaemon(BaseHttpDaemon):
     _RealProto = 'HTTP'
+    _ClientProto = 'http'
     def __init__(self, interface, port):
         super(HttpDaemon, self).__init__(address=(interface, port),
                                          handler=MultiHandler2)
@@ -272,6 +274,7 @@ class HttpDaemon(BaseHttpDaemon):
 
 class HttpSDaemon(BaseHttpDaemon):
     _RealProto = 'HTTPS'
+    _ClientProto = 'https'
     _IsSecure = True
     def __init__(self, interface, port):
         try:
@@ -286,6 +289,7 @@ class HttpSDaemon(BaseHttpDaemon):
 
 class Http6Daemon(BaseHttpDaemon):
     _RealProto = 'HTTP6'
+    _ClientProto = 'http'
     def __init__(self, interface, port):
         super(Http6Daemon, self).__init__(address=(interface, port, 0, 0),
                                          handler=MultiHandler2,
@@ -294,6 +298,7 @@ class Http6Daemon(BaseHttpDaemon):
 
 class Http6SDaemon(BaseHttpDaemon):
     _RealProto = 'HTTP6S'
+    _ClientProto = 'https'
     def __init__(self, interface, port):
         try:
             super(Http6SDaemon, self).__init__(address(interface, port),
