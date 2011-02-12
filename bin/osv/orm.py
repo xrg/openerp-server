@@ -3723,7 +3723,7 @@ class orm(orm_template):
                 else:
                     get_ids = ids
                 res2 = self._columns[val[0]].get(cr, self, get_ids, val, user, context=context, values=res)
-                
+
                 for pos in val:
                     for record in res:
                         if isinstance(res2[record['id']], str):

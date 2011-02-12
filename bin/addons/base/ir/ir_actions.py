@@ -59,7 +59,7 @@ class report_xml(osv.osv):
                 try:
                     fp = tools.file_open(report[name[:-8]], mode='rb')
                     data = fp.read()
-                except:
+                except Exception:
                     data = False
                 finally:
                     if fp:
@@ -211,7 +211,7 @@ class act_window(osv.osv):
                             'search', context)
                 fields_from_fields_get.update(field_get['fields'])
                 field_get['fields'] = fields_from_fields_get
-                res[act.id] = str(field_get)
+                res[act.id] = str(field_get) # TODO: remove str() after client has adapted
             else:
                 def process_child(node, new_node, doc):
                     for child in node.childNodes:
@@ -237,7 +237,7 @@ class act_window(osv.osv):
 
                 form_arch['arch'] = new_node.toxml()
                 form_arch['fields'].update(fields_from_fields_get)
-                res[act.id] = str(form_arch)
+                res[act.id] = str(form_arch) # TODO: remove str()
         return res
 
     def _get_help_status(self, cr, uid, ids, name, arg, context=None):

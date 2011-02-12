@@ -50,8 +50,8 @@ class multi_company_default(osv.osv):
     }
 
     _defaults = {
-        'expression': lambda *a: 'True',
-        'sequence': lambda *a: 100,
+        'expression': 'True',
+        'sequence': 100,
     }
 
     def copy(self, cr, uid, id, default=None, context=None):
@@ -140,7 +140,7 @@ class res_company(osv.osv):
         ids =  self.search(cr, uid, [('parent_id','child_of',[company])])
         return ids
 
-    def _get_partner_hierarchy(self, cr, uid, company_id, context={}):
+    def _get_partner_hierarchy(self, cr, uid, company_id, context=None):
         if company_id:
             parent_id = self.browse(cr, uid, company_id)['parent_id']
             if parent_id:
@@ -149,7 +149,7 @@ class res_company(osv.osv):
                 return self._get_partner_descendance(cr, uid, company_id, [], context)
         return []
 
-    def _get_partner_descendance(self, cr, uid, company_id, descendance, context={}):
+    def _get_partner_descendance(self, cr, uid, company_id, descendance, context=None):
         descendance.append(self.browse(cr, uid, company_id).partner_id.id)
         for child_id in self._get_company_children(cr, uid, company_id):
             if child_id != company_id:

@@ -64,6 +64,7 @@ class res_log(osv.osv):
         res = self.read(cr, uid, unread_log_ids,
             ['name','res_model','res_id','context'],
             context=context)
+        # TODO: search_read?
         res.reverse()
         result = []
         res_dict = {}

@@ -142,7 +142,9 @@ class users(osv.osv):
         return self.WELCOME_MAIL_BODY
 
     def get_current_company(self, cr, uid):
-        cr.execute('select company_id, res_company.name from res_users left join res_company on res_company.id = company_id where res_users.id=%s' %uid)
+        cr.execute('SELECT company_id, res_company.name FROM res_users '
+                    'LEFT JOIN res_company ON res_company.id = company_id '
+                    'WHERE res_users.id=%s',(uid,))
         return cr.fetchall()
 
     def send_welcome_email(self, cr, uid, id, context=None):
@@ -354,7 +356,7 @@ class users(osv.osv):
             dummy,group_id = dataobj.get_object_reference(cr, 1, 'base', 'group_partner_manager')
             result.append(group_id)
         except ValueError:
-            # If these groups does not exists anymore
+            # If these groups do not exist anymore
             pass
         return result
 

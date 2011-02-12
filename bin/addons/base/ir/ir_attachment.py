@@ -109,7 +109,7 @@ class ir_attachment(osv.osv):
                 res = model_pool.name_get(cr,uid,[res_id],context)
                 data[attachment.id] = (res and res[0][1]) or False
             else:
-                 data[attachment.id] = False
+                data[attachment.id] = False
         return data
 
     _name = 'ir.attachment'
