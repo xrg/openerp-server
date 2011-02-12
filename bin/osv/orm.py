@@ -158,7 +158,6 @@ class browse_record_list(list):
         super(browse_record_list, self).__init__(lst)
         self.context = context
 
-
 class browse_record(object):
     """ An object that behaves like a row of an object's table.
         It has attributes after the columns of the corresponding object.
@@ -3602,7 +3601,7 @@ class orm(orm_template):
                 params += [ids,]
                 
                 if order_by:
-                    order_by = 'ORDER BY ' + order_by
+                    order_by = ' ORDER BY ' + order_by
 
             if rule_clause:
                 query += " AND (" + (' OR '.join(rule_clause)) + ") "
