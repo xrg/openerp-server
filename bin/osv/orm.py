@@ -3705,9 +3705,25 @@ class orm(orm_template):
         for f in fields_post:
             todo.setdefault(self._columns[f]._multi, [])
             todo[self._columns[f]._multi].append(f)
+        browse_records = ids
+        if todo and getattr(self, '_function_field_browse', False):
+            if self._debug:
+                _logger.debug('%s: using browse_records in function fields for %r', self._name, ids)
+            browse_cache = {self._name: {} }
+            for r in res:
+                # pre-fill the cache with all data we have so far
+                browse_cache[self._name][r['id']] = r
+            browse_records = browse_record_list( [ \
+                    browse_record(cr, user, id, table=self, cache=browse_cache, context=context, fields_only=True)
+                    for id in ids ])
         for key,val in todo.items():
             if key:
-                res2 = self._columns[val[0]].get(cr, self, ids, val, user, context=context, values=res)
+                if isinstance(self._columns[val[0]], fields.function):
+                    get_ids = browse_records
+                else:
+                    get_ids = ids
+                res2 = self._columns[val[0]].get(cr, self, get_ids, val, user, context=context, values=res)
+                
                 for pos in val:
                     for record in res:
                         if isinstance(res2[record['id']], str):
@@ -3718,7 +3734,11 @@ class orm(orm_template):
                             record[pos] = multi_fields.get(pos,[])
             else:
                 for f in val:
-                    res2 = self._columns[f].get(cr, self, ids, f, user, context=context, values=res)
+                    if isinstance(self._columns[f], fields.function):
+                        get_ids = browse_records
+                    else:
+                        get_ids = ids
+                    res2 = self._columns[f].get(cr, self, get_ids, f, user, context=context, values=res)
                     for record in res:
                         if res2:
                             record[f] = res2[record['id']]
