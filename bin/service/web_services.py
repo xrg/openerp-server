@@ -758,14 +758,14 @@ class objects_proxy(baseExportService):
     def __init__(self, name="object"):
         netsvc.ExportService.__init__(self,name)
         self.joinGroup('web-services')
+        self._ls = netsvc.LocalService('object_proxy')
 
     def dispatch(self, method, auth, params):
         if method in self._auth_commands['root']:
             passwd = params[0]
             params = params[1:]
             security.check_super(passwd)
-            ls = netsvc.LocalService('object_proxy')
-            fn = getattr(ls, method)
+            fn = getattr(self._ls, method)
             res = fn(*params)
             return res
         (db, uid, passwd ) = params[0:3]
@@ -773,8 +773,7 @@ class objects_proxy(baseExportService):
         if method not in ['execute','exec_workflow', 'obj_list']:
             raise KeyError("Method not supported %s" % method)
         security.check(db,uid,passwd)
-        ls = netsvc.LocalService('object_proxy')
-        fn = getattr(ls, method)
+        fn = getattr(self._ls, method)
         res = fn(db, uid, *params)
         return res
 
@@ -788,8 +787,7 @@ class objects_proxy(baseExportService):
         if method not in self._auth_commands[auth.provider.domain]:
             raise Exception("Method not found: %s" % method)
 
-        ls = netsvc.LocalService('object_proxy')
-        fn = getattr(ls, method)
+        fn = getattr(self._ls, method)
 
         if auth.provider.domain == 'root':
             res = fn(*params)
