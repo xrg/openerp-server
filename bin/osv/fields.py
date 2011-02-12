@@ -985,13 +985,14 @@ class related(function):
                 model.write(cr, uid, [t_id], {args[-1]: values}, context=context)
 
     def _fnct_read(self, obj, cr, uid, ids, field_name, args, context=None):
+        from orm import only_ids
         self._field_get2(cr, uid, obj, context)
         if not ids: return {}
         relation = obj._name
         if self._type in ('one2many', 'many2many'):
-            res = dict([(i, []) for i in ids])
+            res = dict([(i, []) for i in only_ids(ids)])
         else:
-            res = {}.fromkeys(ids, False)
+            res = {}.fromkeys(only_ids(ids), False)
 
         objlst = obj.browse(cr, 1, ids, context=context)
         for data in objlst:
@@ -1153,16 +1154,14 @@ class property(function):
 
 
     def _fnct_read(self, obj, cr, uid, ids, prop_name, obj_dest, context=None):
-        from osv import orm
+        from orm import only_ids
         properties = obj.pool.get('ir.property')
         domain = [('fields_id.model', '=', obj._name), ('fields_id.name','in',prop_name)]
         default_val,replaces = self._get_defaults(obj, cr, uid, prop_name, context)
 
         res = {}
         dnids = []
-        if isinstance(ids, orm.browse_record_list):
-            ids = [ id.id for id in ids]
-        for id in ids:
+        for id in only_ids(ids):
             res[id] = default_val.copy()
             dnids.append(obj._name + ',' + str(id))
         domain += [('res_id','in', dnids)]
