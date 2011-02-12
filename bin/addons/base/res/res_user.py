@@ -192,9 +192,17 @@ class users(osv.osv):
         @return:  Dictionary of values
         """
         group_obj = self.pool.get('res.groups')
-        extended_group_id = group_obj.get_extended_interface_group(cr, uid, context=context)
-        extended_users = group_obj.read(cr, uid, extended_group_id, ['users'], context=context)['users']
-        return dict(zip(ids, ['extended' if user in extended_users else 'simple' for user in ids]))
+        extended_gid = group_obj.get_extended_interface_group(cr, uid, context=context)
+        
+        res = {}
+        for ubr in self.browse(cr, uid, ids, context=context):
+            res[ubr.id] = 'simple'
+        cr.execute("SELECT uid FROM res_groups_users_rel "
+                    "WHERE uid = ANY(%s) AND gid = %s",
+                    (res.keys(), extended_gid), debug=self._debug)
+        for r in cr.fetchall():
+            res[r[0]] = 'extended'
+        return res
 
     def _email_get(self, cr, uid, ids, name, arg, context=None):
         # perform this as superuser because the current user is allowed to read users, and that includes
