@@ -41,7 +41,7 @@ class multi_company_default(osv.osv):
         'company_id': fields.many2one('res.company', 'Main Company', required=True,
             help='Company where the user is connected'),
         'company_dest_id': fields.many2one('res.company', 'Default Company', required=True,
-            help='Company to store the current record'),
+            help='Company to store the current record', ondelete="cascade"),
         'object_id': fields.many2one('ir.model', 'Object', required=True,
             help='Object affected by this rule'),
         'expression': fields.char('Expression', size=256, required=True,
