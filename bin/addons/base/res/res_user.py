@@ -148,15 +148,13 @@ class users(osv.osv):
         return cr.fetchall()
 
     def send_welcome_email(self, cr, uid, id, context=None):
-        logger= netsvc.Logger()
+        logger = logging.getLogger('mails')
         user = self.pool.get('res.users').read(cr, uid, id, context=context)
         if not tools.config.get('smtp_server'):
-            logger.notifyChannel('mails', netsvc.LOG_WARNING,
-                _('"smtp_server" needs to be set to send mails to users'))
+            logger.warning(_('"smtp_server" needs to be set to send mails to users'))
             return False
         if not tools.config.get('email_from'):
-            logger.notifyChannel("mails", netsvc.LOG_WARNING,
-                _('"email_from" needs to be set to send welcome mails '
+            logger.warning(_('"email_from" needs to be set to send welcome mails '
                   'to users'))
             return False
         if not user.get('email'):
