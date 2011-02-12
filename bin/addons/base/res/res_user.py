@@ -106,8 +106,8 @@ roles()
 
 def _lang_get(self, cr, uid, context=None):
     obj = self.pool.get('res.lang')
-    ids = obj.search(cr, uid, [('translatable','=',True)])
-    res = obj.read(cr, uid, ids, ['code', 'name'], context=context)
+    res = obj.search_read(cr, uid, [('translatable','=',True)],
+                fields=['code', 'name'], context=context)
     res = [(r['code'], r['name']) for r in res]
     return res
 

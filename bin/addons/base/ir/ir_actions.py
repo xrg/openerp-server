@@ -375,15 +375,13 @@ act_url()
 
 def model_get(self, cr, uid, context=None):
     wkf_pool = self.pool.get('workflow')
-    ids = wkf_pool.search(cr, uid, [])
-    osvs = wkf_pool.read(cr, uid, ids, ['osv'])
+    osvs = wkf_pool.search_read(cr, uid, [], ['osv'])
 
     res = []
     mpool = self.pool.get('ir.model')
     for osv in osvs:
         model = osv.get('osv')
-        id = mpool.search(cr, uid, [('model','=',model)])
-        name = mpool.read(cr, uid, id)[0]['name']
+        name = mpool.search_read(cr, uid, [('model','=',model)])[0]['name']
         res.append((model, name))
 
     return res

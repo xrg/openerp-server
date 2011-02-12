@@ -98,8 +98,7 @@ res_partner_title()
 
 def _lang_get(self, cr, uid, context={}):
     obj = self.pool.get('res.lang')
-    ids = obj.search(cr, uid, [], context=context)
-    res = obj.read(cr, uid, ids, ['code', 'name'], context)
+    res = obj.search_read(cr, uid, [], fields=['code', 'name'], context=context)
     return [(r['code'], r['name']) for r in res] + [('','')]
 
 
@@ -266,11 +265,7 @@ class res_partner(osv.osv):
         ''' Return the id of the main partner
         '''
         model_data = self.pool.get('ir.model.data')
-        return model_data.browse(
-            cr, uid,
-            model_data.search(cr, uid, [('module','=','base'),
-                                        ('name','=','main_partner')])[0],
-            ).res_id
+        return model_data.browse(cr, uid, [('module','=','base'), ('name','=','main_partner')])[0].res_id
 res_partner()
 
 class res_partner_address(osv.osv):
@@ -386,8 +381,7 @@ class res_partner_bank(osv.osv):
         bank_type_obj = self.pool.get('res.partner.bank.type')
 
         result = []
-        type_ids = bank_type_obj.search(cr, uid, [])
-        bank_types = bank_type_obj.browse(cr, uid, type_ids, context=context)
+        bank_types = bank_type_obj.browse(cr, uid, [True,], context=context)
         for bank_type in bank_types:
             result.append((bank_type.code, bank_type.name))
         return result
