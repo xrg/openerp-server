@@ -180,6 +180,7 @@ class browse_record(object):
             email = user_rec.email
             signature = user_rec.signature
     """
+    __logger = logging.getLogger('orm.browse_record')
 
     def __init__(self, cr, uid, id, table, cache, context=None, list_class=None,
                 fields_process=None, fields_only=FIELDS_ONLY_DEFAULT):
@@ -197,7 +198,6 @@ class browse_record(object):
         self._id = id
         self._table = table
         self._table_name = self._table._name
-        self.__logger = logging.getLogger('orm.browse_record')
         self._context = context
         self._fields_process = fields_process
         self._fields_only = fields_only
