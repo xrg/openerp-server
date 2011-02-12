@@ -754,7 +754,7 @@ GNU Public Licence.
 common()
 
 class objects_proxy(baseExportService):
-    _auth_commands = { 'db': ['execute','exec_workflow',], 'root': ['obj_list',] }
+    _auth_commands = { 'db': ['execute','exec_workflow', 'exec_dict'], 'root': ['obj_list',] }
     def __init__(self, name="object"):
         netsvc.ExportService.__init__(self,name)
         self.joinGroup('web-services')
@@ -770,7 +770,7 @@ class objects_proxy(baseExportService):
             return res
         (db, uid, passwd ) = params[0:3]
         params = params[3:]
-        if method not in ['execute','exec_workflow', 'obj_list']:
+        if method not in ['execute','exec_workflow', 'exec_dict', 'obj_list']:
             raise KeyError("Method not supported %s" % method)
         security.check(db,uid,passwd)
         fn = getattr(self._ls, method)

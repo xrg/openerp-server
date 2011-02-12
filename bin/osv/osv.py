@@ -50,6 +50,7 @@ class object_proxy(netsvc.Service):
         netsvc.Service.__init__(self, 'object_proxy', audience='')
         self.exportMethod(self.exec_workflow)
         self.exportMethod(self.execute)
+        self.exportMethod(self.exec_dict)
         self.exportMethod(self.set_debug)
         self.exportMethod(self.obj_list)
 
@@ -189,6 +190,35 @@ class object_proxy(netsvc.Service):
                 res = self.execute_cr(cr, uid, obj, method, *args, **kw)
                 if res is None:
                     self.logger.warning('Method %s.%s can not return a None value (crash in XML-RPC)' % (obj, method))
+                cr.commit()
+            except Exception:
+                cr.rollback()
+                raise
+        finally:
+            cr.close()
+        return res
+
+    @check
+    def exec_dict(self, db, uid, obj, method, args, kwargs=None):
+        """ Execute some ORM call, with support of both positional and keyword arguments
+            Note that we strictly expect *2* positional arguments here, one list for
+            args and one dict for kwargs
+        """
+        if not isinstance(args, list):
+            raise ValueError("exec_dict() must be called with (args:list, kwargs: dict)")
+        if kwargs is None:
+            kwargs = {}
+        elif not isinstance(kwargs, dict):
+            raise ValueError("exec_dict() must be called with (args:list, kwargs: dict)")
+        
+        cr = pooler.get_db(db).cursor()
+        try:
+            try:
+                if method.startswith('_'):
+                    raise except_osv('Access Denied', 'Private methods (such as %s) cannot be called remotely.', method)
+                res = self.execute_cr(cr, uid, obj, method, *args, **kwargs)
+                if res is None:
+                    self.logger.warning('Method %s.%s can not return a None value (crash in XML-RPC)', obj, method)
                 cr.commit()
             except Exception:
                 cr.rollback()
