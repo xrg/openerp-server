@@ -1153,18 +1153,21 @@ class property(function):
 
 
     def _fnct_read(self, obj, cr, uid, ids, prop_name, obj_dest, context=None):
+        from osv import orm
         properties = obj.pool.get('ir.property')
         domain = [('fields_id.model', '=', obj._name), ('fields_id.name','in',prop_name)]
-        domain += [('res_id','in', [obj._name + ',' + str(oid) for oid in  ids])]
-        nids = properties.search(cr, uid, domain, context=context)
         default_val,replaces = self._get_defaults(obj, cr, uid, prop_name, context)
 
         res = {}
+        dnids = []
+        if isinstance(ids, orm.browse_record_list):
+            ids = [ id.id for id in ids]
         for id in ids:
             res[id] = default_val.copy()
+            dnids.append(obj._name + ',' + str(id))
+        domain += [('res_id','in', dnids)]
 
-        brs = properties.browse(cr, uid, nids, context=context)
-        for prop in brs:
+        for prop in properties.browse(cr, uid, domain, context=context):
             value = properties.get_by_record(cr, uid, prop, context=context)
             res[prop.res_id.id][prop.fields_id.name] = value or False
             if value and (prop.type == 'many2one'):
