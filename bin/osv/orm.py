@@ -158,6 +158,14 @@ class browse_record_list(list):
         super(browse_record_list, self).__init__(lst)
         self.context = context
 
+def only_ids(ids):
+    """ Return the list of ids from either a browse_record_list or plain list
+    """
+    if isinstance(ids, browse_record_list):
+        return [ id.id for id in ids]
+    else:
+        return ids
+
 class browse_record(object):
     """ An object that behaves like a row of an object's table.
         It has attributes after the columns of the corresponding object.
