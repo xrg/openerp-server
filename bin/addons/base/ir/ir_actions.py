@@ -49,7 +49,8 @@ actions()
 
 
 class report_xml(osv.osv):
-
+    _function_field_browse = True
+    
     def _report_content(self, cursor, user, ids, name, arg, context=None):
         res = {}
         for report in self.browse(cursor, user, ids, context=context):
@@ -153,6 +154,7 @@ class act_window(osv.osv):
     _table = 'ir_act_window'
     _sequence = 'ir_actions_id_seq'
     _order = 'name'
+    _function_field_browse = True
 
     def _check_model(self, cr, uid, ids, context=None):
         for action in self.browse(cr, uid, ids, context):
@@ -242,7 +244,11 @@ class act_window(osv.osv):
 
     def _get_help_status(self, cr, uid, ids, name, arg, context=None):
         activate_tips = self.pool.get('res.users').browse(cr, uid, uid, context=context).menu_tips
-        return dict([(id, activate_tips) for id in ids])
+        res = {}
+        for bid in self.browse(cr, uid, ids, context=context):
+            # we don't really want to browse, but handle ids for symmetry
+            res[bid.id] = activate_tips
+        return res
 
     _columns = {
         'name': fields.char('Action Name', size=64, translate=True),

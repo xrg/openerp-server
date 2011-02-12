@@ -31,6 +31,7 @@ class ir_rule(osv.osv):
     _name = 'ir.rule'
     _order = 'name'
     _MODES = ['read', 'write', 'create', 'unlink']
+    _function_field_browse = True
 
     def _domain_force_get(self, cr, uid, ids, field_name, arg, context=None):
         res = {}

@@ -113,6 +113,7 @@ class ir_attachment(osv.osv):
         return data
 
     _name = 'ir.attachment'
+    _function_field_browse = True
     _columns = {
         'name': fields.char('Attachment Name',size=256, required=True),
         'datas': fields.binary('Data'),
