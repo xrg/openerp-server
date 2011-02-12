@@ -757,6 +757,8 @@ class orm_template(object):
         # launched by button in the interface have a type long...
         if isinstance(select, (int, long)):
             return browse_record(cr, uid, select, self, cache, context=context, list_class=self._list_class, fields_process=fields_process, fields_only=fields_only)
+        elif isinstance(select, (browse_record, browse_record_list, browse_null)):
+            return select
         elif isinstance(select, list):
             # since the loop below will create data[id] for each of the ids, 
             # the first time one of them is accessed, the whole dataset is
