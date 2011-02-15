@@ -52,5 +52,12 @@ server_options = [ 'base6.0',
         'report-job',
         ]
 
+# In addition to server_options, some details about the API used
+# internally (by the addons). This list is not useful to the RPC
+# clients, but may define which addons are compatible with this
+# server.
+api_options = [
+        ]
+
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
 

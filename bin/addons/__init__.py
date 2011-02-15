@@ -366,9 +366,19 @@ def upgrade_graph(graph, cr, module_list, force=None):
             finally:
                 terp_f.close()
             if info.get('installable', True):
-                packages.append((module, info.get('depends', []), info))
+                api_missing = []
+                if 'api_depends' in info:
+                    for apidep in info['api_depends']:
+                        if apidep not in release.api_options \
+                                and apidep not in release.server_options:
+                            api_missing.append(apidep)
+                if not api_missing:
+                    packages.append((module, info.get('depends', []), info))
+                else:
+                    logger.error('module %s: not installable, because this %s server doesn\'t provide %s',
+                            module, release.version, ', '.join(api_missing))
             else:
-                logger.warning('module %s: not installable, skipped' % (module))
+                logger.warning('module %s: not installable, skipped', module)
     if not packages:
         return False
     dependencies = dict([(p, deps) for p, deps, data in packages])
