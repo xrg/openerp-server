@@ -32,6 +32,7 @@ import copy
 import os
 from xml import dom
 from report.report_sxw import report_sxw, report_rml
+from osv.orm import only_ids
 
 class actions(osv.osv):
     _name = 'ir.actions.actions'
@@ -244,11 +245,7 @@ class act_window(osv.osv):
 
     def _get_help_status(self, cr, uid, ids, name, arg, context=None):
         activate_tips = self.pool.get('res.users').browse(cr, uid, uid, context=context).menu_tips
-        res = {}
-        for bid in self.browse(cr, uid, ids, context=context):
-            # we don't really want to browse, but handle ids for symmetry
-            res[bid.id] = activate_tips
-        return res
+        return dict.fromkeys(only_ids(ids), activate_tips)
 
     _columns = {
         'name': fields.char('Action Name', size=64, translate=True),
