@@ -59,6 +59,9 @@ server_options = [ 'base6.0',
 # clients, but may define which addons are compatible with this
 # server.
 api_options = [
+        'fields_only',
+        'browse-browse', 'function_field_browse',
+        'fields-inherit',
         ]
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
