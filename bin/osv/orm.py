@@ -4637,7 +4637,7 @@ class orm(orm_template):
                 inner_clause = None
                 if order_field in ('id', 'create_date', 'create_uid', 'write_date', 'write_uid', '_vptr'):
                     # builtin columns first
-                    order_by_clause = '"%s"."%s"' % (self._table, order_field)
+                    inner_clause = '"%s"."%s"' % (self._table, order_field)
                 elif order_field in self._columns:
                     order_column = self._columns[order_field]
                     if order_column._classic_read:
