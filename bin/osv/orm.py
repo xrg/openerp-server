@@ -726,10 +726,6 @@ class orm_template(object):
 
         if self._virtuals:
             self._vtable = set(self._virtuals)
-            
-            # temp:
-            self._debug = True
-            _logger.debug("Object %s is virtual", self._name)
 
         if self._vtable and self._inherits:
             for pinh in self._inherits:
@@ -738,9 +734,8 @@ class orm_template(object):
                     pclass._vtable = set()
                 pclass._vtable.update(self._vtable)
                 
-                # temp: turn on debugging
-                pclass._debug = True
-                _logger.debug("Object %s is virtual because of %s", pclass._name, self._name)
+                # pclass._debug = True
+                # _logger.debug("Object %s is virtual because of %s", pclass._name, self._name)
 
     def browse(self, cr, uid, select, context=None, list_class=None, 
                 fields_process=None, fields_only=FIELDS_ONLY_DEFAULT, cache=None):
