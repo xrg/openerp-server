@@ -939,6 +939,14 @@ class function(_column):
 # ---------------------------------------------------------
 
 class related(function):
+    """Field that points to some data inside another field of the current record.
+
+        Example:
+       _columns = {
+           'foo_id': fields.many2one('my.foo', 'Foo'),
+           'bar': fields.related('frol', 'foo_id', type='char', string='Frol of Foo'),
+        }
+    """
 
     def _fnct_search(self, tobj, cr, uid, obj=None, name=None, domain=None, context=None):
         self._field_get2(cr, uid, obj, context)
