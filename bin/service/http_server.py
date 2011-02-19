@@ -301,7 +301,7 @@ class Http6SDaemon(BaseHttpDaemon):
     _ClientProto = 'https'
     def __init__(self, interface, port):
         try:
-            super(Http6SDaemon, self).__init__(address(interface, port),
+            super(Http6SDaemon, self).__init__(address=(interface, port),
                                               handler=SecureMultiHandler2,
                                               server_class=Threaded6HTTPServer)
             self.daemon = True
