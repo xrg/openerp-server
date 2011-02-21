@@ -123,7 +123,7 @@ class RecordDictWrapper(dict):
         return dict.__getitem__(self, key)
 
 class YamlInterpreter(object):
-    def __init__(self, cr, module, id_map, mode, filename, noupdate=False):
+    def __init__(self, cr, module, id_map, mode, filename, noupdate=False, **kwargs):
         self.cr = cr
         self.module = module
         self.id_map = id_map
@@ -728,9 +728,10 @@ class YamlInterpreter(object):
         self._log_assert_failure(logging.WARNING, "You have an empty block in your tests.")
         
 
-    def process(self, yaml_string, fatal=False):
+    def process(self, yaml_string, fatal=False, **kwargs):
         """
         Processes a Yaml string. Custom tags are interpreted by 'process_' instance methods.
+        @param kwargs   extra arguments, for future expansions. Ignored now.
         """
         yaml_tag.add_constructors()
 
