@@ -127,7 +127,7 @@ class RecordDictWrapper(dict):
         return dict.__getitem__(self, key)
 
 class YamlInterpreter(object):
-    def __init__(self, cr, module, id_map, mode, filename, noupdate=False, uid=1):
+    def __init__(self, cr, module, id_map, mode, filename, noupdate=False, uid=1, **kwargs):
         self.cr = cr
         self.module = module
         self.id_map = id_map
@@ -787,9 +787,10 @@ class YamlInterpreter(object):
                     ret_list.append(ret)
         return ret_list
 
-    def process(self, yaml_string, fatal=False):
+    def process(self, yaml_string, fatal=False, **kwargs):
         """
         Processes a Yaml string. Custom tags are interpreted by 'process_' instance methods.
+        @param kwargs   extra arguments, for future expansions. Ignored now.
         """
         yaml_tag.add_constructors()
 

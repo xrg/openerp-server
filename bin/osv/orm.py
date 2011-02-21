@@ -365,7 +365,7 @@ class browse_record(object):
                 self._data[res_id].update(result_line)
         
         if not name in self._data[self._id]:
-            #how did this happen?
+            # How did this happen? Could be a missing model due to custom fields used too soon, see above.
             self.__logger.error( "Ffields: %s, datas: %s"%(field_names, field_values))
             self.__logger.error( "Data: %s, Table: %s"%(self._data[self._id], self._table))
             raise KeyError(_('Unknown attribute %s in %s ') % (name, self))
@@ -399,11 +399,19 @@ class browse_record(object):
                 else:
                     value = ret
                 if value:
-                    # FIXME: this happen when a _inherits object
-                    #        overwrite a field of it parent. Need
-                    #        testing to be sure we got the right
-                    #        object and not the parent one.
                     if not isinstance(value, browse_record):
+                        if obj is None:
+                            # In some cases the target model is not available yet,
+                            # but this resolution is late enough to let the model
+                            # be required. Therefore it is an error
+                            # This situation can be caused by custom fields that
+                            # connect objects with m2o without respecting module 
+                            # dependencies, causing relationships to be connected 
+                            # to soon when the target is not loaded yet.
+                            cr = self._cr # for gettext
+                            context = self._context
+                            raise except_orm(_('Error'), _('%s: ORM model %s cannot be found for %s field!') % \
+                                        (self._table_name, col._obj, name))
                         ret = browse_record(self._cr,
                                     self._uid, value, obj, self._cache,
                                     context=self._context,
