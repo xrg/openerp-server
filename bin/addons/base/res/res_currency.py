@@ -69,7 +69,7 @@ class res_currency(osv.osv):
     def read(self, cr, user, ids, fields=None, context=None, load='_classic_read'):
         res=super(osv.osv, self).read(cr, user, ids, fields, context, load)
         for r in res:
-            if r.__contains__('rate_ids'):
+            if 'rate_ids' in r:
                 rates=r['rate_ids']
                 if rates:
                     currency_rate_obj=  self.pool.get('res.currency.rate')
@@ -122,7 +122,7 @@ class res_currency(osv.osv):
             else:
                 return (from_amount * rate)
 
-    def name_search(self, cr, uid, name, args=[], operator='ilike', context={}, limit=100):
+    def name_search(self, cr, uid, name, args=[], operator='ilike', context=None, limit=100):
         args2 = args[:]
         if name:
             args += [('name', operator, name)]
