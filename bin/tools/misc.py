@@ -43,6 +43,7 @@ from email.MIMEMultipart import MIMEMultipart
 from email.Header import Header
 from email.Utils import formatdate, COMMASPACE
 from email import Encoders
+from email import Charset
 from itertools import islice, izip
 from lxml import etree
 from which import which
@@ -440,12 +441,14 @@ def _email_send(smtp_from, smtp_to_list, message, openobject_id=None, ssl=False,
         :return: True if the mail was delivered successfully to the smtp,
                  else False (+ exception logged)
     """
+    logger = logging.getLogger('email_send')
+    
     class WriteToLogger(object):
-        def __init__(self):
-            self.logger = netsvc.Logger()
+        def __init__(self, logger):
+            self.logger = logger
 
         def write(self, s):
-            self.logger.notifyChannel('email_send', netsvc.LOG_DEBUG, s)
+            self.logger.debug(s)
 
     if openobject_id:
         message['Message-Id'] = generate_tracking_message_id(openobject_id)
@@ -456,19 +459,22 @@ def _email_send(smtp_from, smtp_to_list, message, openobject_id=None, ssl=False,
         if smtp_server.startswith('maildir:/'):
             from mailbox import Maildir
             maildir_path = smtp_server[8:]
-            mdir = Maildir(maildir_path,factory=None, create = True)
+            mdir = Maildir(maildir_path, factory=None, create = True)
             mdir.add(message.as_string(True))
+            logger.info("1 message to %d recepients saved at %s. Dry run.", len(smtp_to_list), maildir_path)
             return True
 
         oldstderr = smtplib.stderr
-        if not ssl: ssl = config.get('smtp_ssl', False)
+        ssl = ssl or config.get('smtp_ssl', False)
         s = smtplib.SMTP()
         try:
             # in case of debug, the messages are printed to stderr.
             if debug:
-                smtplib.stderr = WriteToLogger()
+                smtplib.stderr = WriteToLogger(logger)
 
+            logger.debug("Sending Message to %s through %s", ','.join(smtp_to_list), smtp_server)
             s.set_debuglevel(int(bool(debug)))  # 0 or 1
+            
             s.connect(smtp_server, config['smtp_port'])
             if ssl:
                 s.ehlo()
@@ -479,6 +485,7 @@ def _email_send(smtp_from, smtp_to_list, message, openobject_id=None, ssl=False,
                 s.login(config['smtp_user'], config['smtp_password'])
 
             s.sendmail(smtp_from, smtp_to_list, message.as_string())
+            logger.info("1 message sent to %d recepients through %s", len(smtp_to_list), smtp_server)
         finally:
             try:
                 s.quit()
@@ -489,7 +496,7 @@ def _email_send(smtp_from, smtp_to_list, message, openobject_id=None, ssl=False,
                 pass
 
     except Exception:
-        _logger.error('could not deliver email', exc_info=True)
+        logger.error('could not deliver email', exc_info=True)
         return False
 
     return True
@@ -512,49 +519,71 @@ def email_send(email_from, email_to, subject, body, email_cc=None, email_bcc=Non
         x_headers = {}
 
 
+    def Header_Encoded(hstr):
+        """Format hstr for an email header, possibly through utf8 encoding
+        """
+
+        if not isinstance(hstr, unicode):
+            hstr = ustr(hstr)
+
+        try:
+            return hstr.encode('us-ascii')
+        except UnicodeError:
+            return Header(hstr, 'utf-8')
+
     if not (email_from or config['email_from']):
         raise ValueError("Sending an email requires either providing a sender "
                          "address or having configured one")
 
     if not email_from: email_from = config.get('email_from', False)
-    email_from = ustr(email_from).encode('utf-8')
 
     if not email_cc: email_cc = []
     if not email_bcc: email_bcc = []
-    if not body: body = u''
+    body_charset = 'us-ascii'
+    if not body:
+        body = u''
+    else:
+        body = ustr(body)
+        try:
+            txt_body = body.encode('us-ascii')
+        except UnicodeError:
+            txt_body = body.encode('utf-8')
+            body_charset = 'utf-8'
 
-    email_body = ustr(body).encode('utf-8')
-    email_text = MIMEText(email_body or '',_subtype=subtype,_charset='utf-8')
+    email_text = MIMEText(txt_body,_subtype=subtype,_charset=body_charset)
 
-    msg = MIMEMultipart()
+    if attach or (html2text and subtype == 'html'):
+        msg = MIMEMultipart()
+    else:
+        msg = email_text
 
-    msg['Subject'] = Header(ustr(subject), 'utf-8')
-    msg['From'] = email_from
+    msg['Subject'] = Header_Encoded(subject)
+    msg['From'] = Header_Encoded(email_from)
     del msg['Reply-To']
     if reply_to:
-        msg['Reply-To'] = reply_to
+        msg['Reply-To'] = Header_Encoded(reply_to)
     else:
         msg['Reply-To'] = msg['From']
-    msg['To'] = COMMASPACE.join(email_to)
+    msg['To'] = Header_Encoded(COMMASPACE.join(email_to))
     if email_cc:
-        msg['Cc'] = COMMASPACE.join(email_cc)
+        msg['Cc'] = Header_Encoded(COMMASPACE.join(email_cc))
     if email_bcc:
-        msg['Bcc'] = COMMASPACE.join(email_bcc)
+        msg['Bcc'] = Header_Encoded(COMMASPACE.join(email_bcc))
     msg['Date'] = formatdate(localtime=True)
 
     msg['X-Priority'] = priorities.get(priority, '3 (Normal)')
 
     # Add dynamic X Header
     for key, value in x_headers.iteritems():
-        msg['%s' % key] = str(value)
+        msg['%s' % key] =  Header_Encoded(value)
 
     if html2text and subtype == 'html':
-        text = html2text(email_body.decode('utf-8')).encode('utf-8')
+        text = html2text(body).encode(body_charset)
         alternative_part = MIMEMultipart(_subtype="alternative")
-        alternative_part.attach(MIMEText(text, _charset='utf-8', _subtype='plain'))
+        alternative_part.attach(MIMEText(text, _charset=body_charset, _subtype='plain'))
         alternative_part.attach(email_text)
         msg.attach(alternative_part)
-    else:
+    elif msg is not email_text:
         msg.attach(email_text)
 
     if attach:
