@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
-#    
+#
 #    OpenERP, Open Source Management Solution
 #    Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>).
 #
@@ -15,7 +15,7 @@
 #    GNU Affero General Public License for more details.
 #
 #    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.     
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
 
@@ -34,7 +34,7 @@ class workflow(osv.osv):
         'activities': fields.one2many('workflow.activity', 'wkf_id', 'Activities'),
     }
     _defaults = {
-        'on_create': lambda *a: True
+        'on_create': True
     }
 
     def write(self, cr, user, ids, vals, context=None):
@@ -44,22 +44,21 @@ class workflow(osv.osv):
         wf_service.clear_cache(cr, user)
         return super(workflow, self).write(cr, user, ids, vals, context=context)
 
-    def get_active_workitems(self, cr, uid, res, res_id, context={}):
-        
-        cr.execute('select * from wkf where osv=%s limit 1',(res,))
+    def get_active_workitems(self, cr, uid, res, res_id, context=None):
+
+        cr.execute('SELECT * FROM wkf WHERE osv=%s LIMIT 1',(res,), debug=self._debug)
         wkfinfo = cr.dictfetchone()
         workitems = []
-        
+
         if wkfinfo:
-            cr.execute('SELECT id FROM wkf_instance \
+            cr.execute('SELECT act_id, count(*) \
+                    FROM wkf_workitem \
+                    WHERE inst_id= (SELECT id FROM wkf_instance \
                             WHERE res_id=%s AND wkf_id=%s \
-                            ORDER BY state LIMIT 1',
-                            (res_id, wkfinfo['id']))
-            inst_id = cr.fetchone()
-         
-            cr.execute('select act_id,count(*) from wkf_workitem where inst_id=%s group by act_id', (inst_id,))
-            workitems = dict(cr.fetchall())        
-         
+                            ORDER BY state LIMIT 1 ) \
+                    GROUP BY act_id', (res_id, wkfinfo['id']), debug=self._debug)
+            workitems = dict(cr.fetchall())
+
         return {'wkf': wkfinfo, 'workitems':  workitems}
 
 
@@ -110,6 +109,7 @@ class workflow(osv.osv):
         wf_service = netsvc.LocalService("workflow")
         wf_service.clear_cache(cr, user)
         return super(workflow, self).create(cr, user, vals, context=context)
+
 workflow()
 
 class wkf_activity(osv.osv):
@@ -117,6 +117,7 @@ class wkf_activity(osv.osv):
     _table = "wkf_activity"
     _order = "name"
    # _log_access = False
+
     _columns = {
         'name': fields.char('Name', size=64, required=True),
         'wkf_id': fields.many2one('workflow', 'Workflow', required=True, select=True, ondelete='cascade'),
@@ -132,11 +133,13 @@ class wkf_activity(osv.osv):
         'out_transitions': fields.one2many('workflow.transition', 'act_from', 'Outgoing Transitions'),
         'in_transitions': fields.one2many('workflow.transition', 'act_to', 'Incoming Transitions'),
     }
+
     _defaults = {
-        'kind': lambda *a: 'dummy',
-        'join_mode': lambda *a: 'XOR',
-        'split_mode': lambda *a: 'XOR',
+        'kind': 'dummy',
+        'join_mode': 'XOR',
+        'split_mode': 'XOR',
     }
+
 wkf_activity()
 
 class wkf_transition(osv.osv):
@@ -144,15 +147,16 @@ class wkf_transition(osv.osv):
     _name = "workflow.transition"
    # _log_access = False
     _rec_name = 'signal'
+
     _columns = {
         'trigger_model': fields.char('Trigger Object', size=128),
         'trigger_expr_id': fields.char('Trigger Expression', size=128),
-        'signal': fields.char('Signal (button Name)', size=64, 
+        'signal': fields.char('Signal (button Name)', size=64,
                               help="When the operation of transition comes from a button pressed in the client form, "\
                               "signal tests the name of the pressed button. If signal is NULL, no button is necessary to validate this transition."),
-        'group_id': fields.many2one('res.groups', 'Group Required', 
+        'group_id': fields.many2one('res.groups', 'Group Required',
                                    help="The group that a user must have to be authorized to validate this transition."),
-        'condition': fields.char('Condition', required=True, size=128, 
+        'condition': fields.char('Condition', required=True, size=128,
                                  help="Expression to be satisfied if we want the transition done."),
         'act_from': fields.many2one('workflow.activity', 'Source Activity', required=True, select=True, ondelete='cascade',
                                     help="Source activity. When this activity is over, the condition is tested to determine if we can start the ACT_TO activity."),
@@ -161,7 +165,7 @@ class wkf_transition(osv.osv):
         'wkf_id': fields.related('act_from','wkf_id', type='many2one', relation='workflow', string='Workflow', select=True),
     }
     _defaults = {
-        'condition': lambda *a: 'True',
+        'condition': 'True',
     }
 wkf_transition()
 
@@ -170,12 +174,14 @@ class wkf_instance(osv.osv):
     _name = "workflow.instance"
     _rec_name = 'res_type'
     _log_access = False
+
     _columns = {
         'wkf_id': fields.many2one('workflow', 'Workflow', ondelete='cascade', select=True),
         'res_id': fields.integer('Resource ID'),
         'res_type': fields.char('Resource Object', size=64),
         'state': fields.char('State', size=32),
     }
+
     def _auto_init(self, cr, context=None):
         super(wkf_instance, self)._auto_init(cr, context)
         cr.execute('SELECT indexname FROM pg_indexes WHERE indexname = \'wkf_instance_res_type_res_id_state_index\'')
@@ -184,6 +190,7 @@ class wkf_instance(osv.osv):
         cr.execute('SELECT indexname FROM pg_indexes WHERE indexname = \'wkf_instance_res_id_wkf_id_index\'')
         if not cr.fetchone():
             cr.execute('CREATE INDEX wkf_instance_res_id_wkf_id_index ON wkf_instance (res_id, wkf_id)')
+        # TODO
 
 wkf_instance()
 
@@ -192,6 +199,7 @@ class wkf_workitem(osv.osv):
     _name = "workflow.workitem"
     _log_access = False
     _rec_name = 'state'
+
     _columns = {
         'act_id': fields.many2one('workflow.activity', 'Activity', required=True, ondelete="restrict", select=True),
         'wkf_id': fields.related('act_id','wkf_id', type='many2one', relation='workflow', string='Workflow'),
@@ -199,26 +207,30 @@ class wkf_workitem(osv.osv):
         'inst_id': fields.many2one('workflow.instance', 'Instance', required=True, ondelete="cascade", select=True),
         'state': fields.char('State', size=64, select=True),
     }
+
 wkf_workitem()
 
 class wkf_triggers(osv.osv):
     _table = "wkf_triggers"
     _name = "workflow.triggers"
     _log_access = False
+
     _columns = {
         'res_id': fields.integer('Resource ID', size=128),
         'model': fields.char('Object', size=128),
         'instance_id': fields.many2one('workflow.instance', 'Destination Instance', ondelete="cascade"),
         'workitem_id': fields.many2one('workflow.workitem', 'Workitem', required=True, ondelete="cascade"),
     }
+
     def _auto_init(self, cr, context={}):
         super(wkf_triggers, self)._auto_init(cr, context)
         cr.execute('SELECT indexname FROM pg_indexes WHERE indexname = \'wkf_triggers_res_id_model_index\'')
         if not cr.fetchone():
             cr.execute('CREATE INDEX wkf_triggers_res_id_model_index ON wkf_triggers (res_id, model)')
             cr.commit()
+        # TODO
+
 wkf_triggers()
 
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
-
