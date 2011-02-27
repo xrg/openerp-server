@@ -2963,8 +2963,13 @@ class orm(orm_template):
             update_custom_fields = context.get('update_custom_fields', False)
 
             for k in self._columns:
-                if k in ('id', 'write_uid', 'write_date', 'create_uid', 'create_date', '_vptr'):
+                if k in ('id', '_vptr'): # never controlled by _columns
                     continue
+                if self._log_access and k in ('write_uid', 'write_date', 'create_uid', 'create_date'):
+                    # they are automatically maintained above.
+                    # Still, if _log_access == False, _columns are allowed to create them
+                    continue
+
                 #Not Updating Custom fields
                 if k.startswith('x_') and not update_custom_fields:
                     continue
