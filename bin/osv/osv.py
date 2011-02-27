@@ -358,7 +358,7 @@ class osv_memory(osv_base, orm.orm_memory):
                 parent_class = pool.get(parent_name).__class__
                 assert pool.get(parent_name), "parent class %s does not exist in module %s !" % (parent_name, module)
                 nattr = {}
-                for s in ('_columns', '_defaults', '_virtuals'):
+                for s in ('_columns', '_defaults', '_virtuals', '_vtable'):
                     new = copy.copy(getattr(pool.get(parent_name), s))
                     if s == '_columns':
                         new_cols = cls.__dict__.get(s, {})
@@ -367,6 +367,11 @@ class osv_memory(osv_base, orm.orm_memory):
                                 nc._adapt(new[nn])
                             else:
                                 new[nn] = nc
+                    elif s == '_vtable':
+                        if not new:
+                            new = cls.__dict__.get(s, False)
+                        elif cls.__dict__.get(s, False):
+                            new.update(cls.__dict__.get(s))
                     elif hasattr(new, 'update'):
                         new.update(cls.__dict__.get(s, {}))
                     else:
@@ -399,7 +404,7 @@ class osv(osv_base, orm.orm):
                 parent_class = pool.get(parent_name).__class__
                 assert pool.get(parent_name), "parent class %s does not exist in module %s !" % (parent_name, module)
                 nattr = {}
-                for s in ('_columns', '_defaults', '_inherits', '_constraints', '_sql_constraints', '_virtuals', '_column_stats'):
+                for s in ('_columns', '_defaults', '_inherits', '_constraints', '_sql_constraints', '_virtuals', '_column_stats', '_vtable'):
                     new = copy.copy(getattr(pool.get(parent_name), s))
                     if s == '_columns':
                         new_cols = cls.__dict__.get(s, {})
@@ -408,6 +413,11 @@ class osv(osv_base, orm.orm):
                                 nc._adapt(new[nn])
                             else:
                                 new[nn] = nc
+                    elif s == '_vtable':
+                        if not new:
+                            new = cls.__dict__.get(s, False)
+                        elif cls.__dict__.get(s, False):
+                            new.update(cls.__dict__.get(s))
                     elif hasattr(new, 'update'):
                         new.update(cls.__dict__.get(s, {}))
                     else:

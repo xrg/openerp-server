@@ -563,6 +563,7 @@ class orm_template(object):
     _invalids = set() # FIXME: why persistent?
     _log_create = False
     _virtuals = None
+    _vtable = False
 
     CONCURRENCY_CHECK_FIELD = '__last_update'
     def log(self, cr, uid, id, message, secondary=False, context=None):
@@ -720,7 +721,6 @@ class orm_template(object):
         self._column_stats = {}
         
         # code for virtual functions:
-        self._vtable = False
         if not self._virtuals:
             self._virtuals = []
         for key, ffn in self.__class__.__dict__.items():
@@ -3231,7 +3231,7 @@ class orm(orm_template):
                             ' FROM "%(b)s" WHERE "%(a)s".id = "%(b)s"."%(i)s" AND "%(a)s"._vptr IS NULL ' % \
                                 {'a': pclass._table, 'b': self._table,
                                 'i': self._inherits[inh], 'self': self._name },
-                            debug=True)
+                            debug=self._debug)
         else:
             cr.execute("SELECT relname FROM pg_class WHERE relkind IN ('r','v') AND relname=%s", (self._table,))
             create = not bool(cr.fetchone())
