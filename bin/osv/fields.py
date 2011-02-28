@@ -1249,6 +1249,15 @@ class inherit(object):
                 field._context = val
             elif kw == 'selection_extend':
                 field.selection.extend(val)
+            elif isinstance(field, function) \
+                    and kw in ('old', 'method', 'fnct', 'fnct_inv', 'arg',
+                                'multi', 'fnct_inv_arg', 'type', 'fnct_search'):
+                # All these differ from params to attributes by an underscore
+                setattr(field, '_'+kw, val)
+            elif kw == 'limit' and isinstance(field, (one2many, many2many)):
+                # We do NOT adapt the other attributes _obj, _id1, _id2 etc.
+                # because you must think twice before hacking them.
+                setattr(field, '_limit', val)
             else:
                 setattr(field, kw, val)
 
