@@ -5,7 +5,7 @@ msgstr ""
 "Project-Id-Version: OpenERP Server 5.0.0\n"
 "Report-Msgid-Bugs-To: support@openerp.com\n"
 "POT-Creation-Date: 2011-01-03 16:57+0000\n"
-"PO-Revision-Date: 2011-01-30 12:09+0200\n"
+"PO-Revision-Date: 2011-03-01 23:32+0200\n"
 "Last-Translator: P. Christeas <p_christ@hol.gr>\n"
 "Language-Team: Greek <openerp@lists.hellug.gr>\n"
 "MIME-Version: 1.0\n"
@@ -1351,7 +1351,7 @@ msgstr "Σε πολλαπλές εγγραφές"
 #: field:wizard.ir.model.menu.create.line,sequence:0 view:ir.cron:0
 #: view:ir.sequence:0 view:ir.ui.view:0
 msgid "Sequence"
-msgstr "Ιεράρχηση"
+msgstr "Ακολουθία"
 
 #. module: base
 #: field:ir.actions.act_window.view,view_id:0 field:ir.default,page:0
@@ -4402,7 +4402,7 @@ msgstr "Ενέργειες"
 #: model:ir.ui.menu,name:base.menu_ir_sequence_form
 #: model:ir.ui.menu,name:base.next_id_5 view:ir.sequence:0
 msgid "Sequences"
-msgstr "Ιεραρχήσεις"
+msgstr "Ακολουθίες"
 
 #. module: base
 #: model:ir.actions.act_window,name:base.ir_sequence_type
@@ -7998,7 +7998,7 @@ msgstr "Επιλογή ομάδων"
 #. module: base
 #: view:ir.actions.act_window:0
 msgid "View Ordering"
-msgstr "Ιεράρχηση Προβολών"
+msgstr "Κατάταξη Προβολών"
 
 #. module: base
 #: view:ir.actions.configuration.wizard:0
@@ -8454,7 +8454,7 @@ msgstr "Εβδομάδα του χρόνου: %(woy)s"
 #. module: base
 #: view:ir.sequence.type:0
 msgid "Sequence Type"
-msgstr "Τύπος Ιεράρχησης"
+msgstr "Τύπος Ακολουθίας"
 
 #. module: base
 #: view:ir.sequence.type:0
