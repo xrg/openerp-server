@@ -364,6 +364,8 @@ class osv_memory(osv_base, orm.orm_memory):
                         new_cols = cls.__dict__.get(s, {})
                         for nn, nc in new_cols.items():
                             if isinstance(nc, orm.fields.inherit):
+                                if parent_name != name:
+                                    new[nn] = copy.copy(new[nn])
                                 nc._adapt(new[nn])
                             else:
                                 new[nn] = nc
@@ -410,6 +412,8 @@ class osv(osv_base, orm.orm):
                         new_cols = cls.__dict__.get(s, {})
                         for nn, nc in new_cols.items():
                             if isinstance(nc, orm.fields.inherit):
+                                if parent_name != name:
+                                    new[nn] = copy.copy(new[nn])
                                 nc._adapt(new[nn])
                             else:
                                 new[nn] = nc
