@@ -2699,6 +2699,7 @@ class orm(orm_template):
 
         for d in data:
             if groupby:
+                # If you get a KeyError here, it means search() is yielding duplicate ids
                 d['__domain'] = [(groupby,'=',alldata[d['id']][groupby] or False)] + domain
                 if not isinstance(groupby_list,(str, unicode)):
                     if groupby or not context.get('group_by_no_leaf', False):
