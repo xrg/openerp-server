@@ -48,6 +48,8 @@ class ir_rule(osv.osv):
         @rule_dic is a dictionary with rule{'domain_force', 'operand', 'operator', 'field_name'}
         @eval_data a dictionary with context for eval()
         """
+        if not rule_dic['domain_force']:
+            return []
         res = eval(rule_dic['domain_force'], eval_data)
 
         if self._debug:
@@ -169,7 +171,11 @@ class ir_rule(osv.osv):
         """
         dom = self._compute_domain(cr, uid, model_name, mode=mode)
         if dom:
-            query = self.pool.get(model_name)._where_calc(cr, uid, dom, active_test=False)
+            # _where_calc is called as superuser. This means that rules can
+            # involve objects on which the real uid has no acces rights.
+            # This means also there is no implicit restriction (e.g. an object
+            # references another object the user can't see).
+            query = self.pool.get(model_name)._where_calc(cr, 1, dom, active_test=False)
             return query.where_clause, query.where_clause_params, query.tables
         return [], [], ['"'+self.pool.get(model_name)._table+'"']
 
@@ -186,8 +192,6 @@ class ir_rule(osv.osv):
         return res
 
     def write(self, cr, uid, ids, vals, context=None):
-        if not context:
-            context={}
         res = super(ir_rule, self).write(cr, uid, ids, vals, context=context)
         # Restart the cache on the _compute_domain method
         self._compute_domain.clear_cache(cr.dbname)
