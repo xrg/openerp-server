@@ -714,7 +714,7 @@ def trans_generate(lang, modules, cr):
                 fname = obj.report_xsl
                 parse_func = trans_parse_xsl
                 report_type = "xsl"
-            if fname and obj.report_type in ('pdf', 'xsl'):
+            if fname and obj.report_type in ('pdf', 'xsl', 'txt'):
                 try:
                     report_file = tools.file_open(fname)
                     try:
