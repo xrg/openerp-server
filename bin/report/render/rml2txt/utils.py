@@ -37,6 +37,8 @@ def _child_get(node, self=None, tagname=None):
                     if n.get('rml_except', False):
                         try:
                             eval(n.get('rml_except'), {}, self.localcontext)
+                        except GeneratorExit:
+                            continue
                         except Exception:
                             continue
                     if n.get('rml_tag'):
@@ -55,6 +57,8 @@ def _child_get(node, self=None, tagname=None):
         if self and self.localcontext and n.get('rml_except', False):
             try:
                 eval(n.get('rml_except'), {}, self.localcontext)
+            except GeneratorExit:
+                continue
             except Exception:
                 continue
         if (tagname is None) or (n.tag==tagname):
