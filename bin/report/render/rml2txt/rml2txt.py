@@ -29,7 +29,7 @@ import logging
 
 import utils
 
-Font_size= 10.0
+Font_size= 8.0
 
 def verbose(text):
     logging.getLogger('report.rml2txt').debug(text)
@@ -81,12 +81,12 @@ class textbox(object):
     def rendertxt(self,xoffset=0):
         result = ''
         lineoff = ""
-        for i in range(self.posy):
-            result +="\n"
-        for i in range(self.posx+xoffset):
-            lineoff+=" "
+        if self.posy:
+            result += "\n"  * int(self.posy)
+        if (self.posx+xoffset):
+            lineoff += " " * int(self.posx+xoffset)
         for l in self.lines:
-            result+= lineoff+ l +"\n"
+            result += lineoff+ l +"\n"
         return result
     
     def renderlines(self,pad=0):
@@ -95,13 +95,12 @@ class textbox(object):
         """
         result = []
         lineoff = ""
-        for i in range(self.posx):
-            lineoff+=" "
+        if (self.posx):
+            lineoff += " " * int(self.posx)
         for l in self.lines:
             lpad = ""
             if pad and len(l) < pad :
-                for i in range(pad - len(l)):
-                    lpad += " "
+                lpad += " " * int(pad - len(l))
             #elif pad and len(l) > pad ?
             result.append(lineoff+ l+lpad)
         return result
@@ -113,8 +112,8 @@ class textbox(object):
             self.lines.append("")
         
         for i in range(len(self.lines)):
-            while (len(self.lines[i]) < offset):
-                self.lines[i] += " "
+            if (len(self.lines[i]) < offset):
+                self.lines[i] += " " * int(offset - len(self.lines[i]))
         for i in range(len(arr)):
             self.lines[i] += cc +arr[i] 
         
@@ -193,7 +192,7 @@ class _flowable(object):
                 p = int(sizes[i]/Font_size)
                 trl = tds[i].renderlines(pad=p)
                 trt.haplines(trl,off)
-                off += sizes[i]/Font_size
+                off += sizes[i]/Font_size + 1
             saved_tb.curline = trt
             saved_tb.fline()
         
