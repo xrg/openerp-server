@@ -393,12 +393,18 @@ class ir_model_fields(osv.osv):
         res = super(ir_model_fields,self).write(cr, user, ids, vals, context=context)
 
         if column_rename:
-            cr.execute('ALTER TABLE "%s" RENAME COLUMN "%s" TO "%s"' % column_rename[1])
+            if isinstance(column_rename[0], osv.orm.orm):
+                cr.execute('ALTER TABLE "%s" RENAME COLUMN "%s" TO "%s"' % column_rename[1])
+            elif isinstance(column_rename[0], osv.orm.orm_memory):
+                for id in column_rename[0].datas:
+                    rec = column_rename[0].datas[id]
+                    rec[column_rename[1][2]] = rec[column_rename[1][1]]
+                    del rec[column_rename[1][1]]
             # This is VERY risky, but let us have this feature:
             # we want to change the key of column in obj._columns dict
             col = column_rename[0]._columns.pop(column_rename[1][1]) # take object out, w/o copy
             column_rename[0]._columns[column_rename[1][2]] = col
-            
+
         if models:
             # We have to update _columns of the model(s) and then call their 
             # _auto_init to sync the db with the model. Hopefully, since write()

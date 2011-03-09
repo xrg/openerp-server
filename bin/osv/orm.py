@@ -2320,6 +2320,39 @@ class orm_memory(orm_template):
         cr.execute('DELETE FROM wkf_instance WHERE res_type=%s', 
                 (self._name,), debug=self._debug)
 
+        # Load manual fields
+        if True:
+            cr.execute('SELECT * FROM ir_model_fields WHERE model=%s AND state=%s', (self._name, 'manual'))
+            for field in cr.dictfetchall():
+                if field['name'] in self._columns:
+                    continue
+                attrs = {
+                    'string': field['field_description'],
+                    'required': bool(field['required']),
+                    'readonly': bool(field['readonly']),
+                    'domain': field['domain'] or None,
+                    'size': field['size'],
+                    'ondelete': field['on_delete'],
+                    'translate': (field['translate']),
+                    #'select': int(field['select_level'])
+                }
+
+                if field['ttype'] == 'selection':
+                    self._columns[field['name']] = getattr(fields, field['ttype'])(eval(field['selection']), **attrs)
+                elif field['ttype'] == 'reference':
+                    self._columns[field['name']] = getattr(fields, field['ttype'])(selection=eval(field['selection']), **attrs)
+                elif field['ttype'] == 'many2one':
+                    self._columns[field['name']] = getattr(fields, field['ttype'])(field['relation'], **attrs)
+                elif field['ttype'] == 'one2many':
+                    self._columns[field['name']] = getattr(fields, field['ttype'])(field['relation'], field['relation_field'], **attrs)
+                elif field['ttype'] == 'many2many':
+                    _rel1 = field['relation'].replace('.', '_')
+                    _rel2 = field['model'].replace('.', '_')
+                    _rel_name = 'x_%s_%s_%s_rel' %(_rel1, _rel2, field['name'])
+                    self._columns[field['name']] = getattr(fields, field['ttype'])(field['relation'], _rel_name, 'id1', 'id2', **attrs)
+                else:
+                    self._columns[field['name']] = getattr(fields, field['ttype'])(**attrs)
+
     def _check_access(self, uid, object_id, mode):
         if uid != 1 and self.datas[object_id]['internal.create_uid'] != uid:
             raise except_orm(_('AccessError'), '%s access is only allowed on your own records for osv_memory objects except for the super-user' % mode.capitalize())
