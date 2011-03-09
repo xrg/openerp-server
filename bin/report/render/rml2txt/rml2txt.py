@@ -25,13 +25,14 @@ import StringIO
 import copy
 from lxml import etree
 import base64
+import logging
 
 import utils
 
 Font_size= 10.0
 
 def verbose(text):
-    sys.stderr.write(text+"\n");
+    logging.getLogger('report.rml2txt').debug(text)
 
 class textbox(object):
     """A box containing plain text.
@@ -133,13 +134,14 @@ class _flowable(object):
         }
         self.template = template
         self.doc = doc
+        self._log = logging.getLogger('render.rml2txt')
         self.localcontext = localcontext
         self.nitags = []
         self.tbox = None
 
     def warn_nitag(self,tag):
         if tag not in self.nitags:
-            verbose("Unknown tag \"%s\", please implement it." % tag)
+            self._log.warning("Unknown tag \"%s\", please implement it.", tag)
             self.nitags.append(tag)
     
     def _tag_page_break(self, node):
@@ -183,7 +185,7 @@ class _flowable(object):
                     trs.append(tds)
         
         if not sizes:
-            verbose("computing table sizes..")
+            self._log.debug("computing table sizes..")
         for tds in trs:
             trt = textbox()
             off=0
@@ -471,6 +473,7 @@ class _rml_doc(object):
         self.etree = node
         self.filename = self.etree.get('filename')
         self.result = ''
+        self._log = logging.getLogger('render.rml2txt')
 
     def render(self, out):
         #el = self.etree.findall('docinit')
@@ -525,6 +528,7 @@ if __name__=="__main__":
     if len(sys.argv)>1:
         if sys.argv[1]=='--help':
             trml2pdf_help()
+        logging.basicConfig(level=logging.DEBUG)
         print parseString(file(sys.argv[1], 'r').read()).encode('iso8859-7')
     else:
         print 'Usage: trml2txt input.rml >output.pdf'
