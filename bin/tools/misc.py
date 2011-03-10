@@ -518,7 +518,6 @@ def email_send(email_from, email_to, subject, body, email_cc=None, email_bcc=Non
     if x_headers is None:
         x_headers = {}
 
-
     def Header_Encoded(hstr):
         """Format hstr for an email header, possibly through utf8 encoding
         """
@@ -530,6 +529,44 @@ def email_send(email_from, email_to, subject, body, email_cc=None, email_bcc=Non
             return hstr.encode('us-ascii')
         except UnicodeError:
             return Header(hstr, 'utf-8')
+
+    email_adre = re.compile(r'^((?:"[^"]+?")|(?:[^,<]+?)|\A)\s*<([\w\.-~]+?(?:@[\w\.-~]+)?)>$')
+    email_charset = config.get_misc('smtp', 'charset', None)
+
+    def Address_Encoded(inp, header_name=None):
+        """ Encode the inp address into a valid RFC 2047 header
+        The problem is, that some mail transports (like Postfix <= 2.5) don't
+        like all the header encoded into one string (that spans lines) and the
+        protocol doesn't provide a line-continuation mark around that case.
+        So, we have to split tokens and encode them separately.
+        """
+        if isinstance(inp, basestring):
+            inp = [inp,]
+
+        tokens = []
+        for itok in inp:
+            if not isinstance(itok, unicode):
+                itok = ustr(itok)
+            itok = itok.strip()
+            if not itok: # skip empty ones
+                continue
+            if tokens:
+                tokens.append(',')
+            m = email_adre.match(itok)
+            if m:
+                if m.group(1):
+                    tokens.append(m.group(1))
+                tokens.append('<' + m.group(2) + '>')
+            else:
+                tokens.append(itok)
+        
+        # Now, encode them one by one
+        ret = Header(header_name=header_name)
+        for t in tokens:
+            # this method will try 'us-ascii', email_charset and 'utf-8'
+            ret.append(t, charset=email_charset)
+        
+        return ret
 
     if not (email_from or config['email_from']):
         raise ValueError("Sending an email requires either providing a sender "
@@ -558,17 +595,17 @@ def email_send(email_from, email_to, subject, body, email_cc=None, email_bcc=Non
         msg = email_text
 
     msg['Subject'] = Header_Encoded(subject)
-    msg['From'] = Header_Encoded(email_from)
+    msg['From'] = Address_Encoded(email_from, 'From')
     del msg['Reply-To']
     if reply_to:
-        msg['Reply-To'] = Header_Encoded(reply_to)
+        msg['Reply-To'] = Address_Encoded(reply_to, 'Reply-To')
     else:
         msg['Reply-To'] = msg['From']
-    msg['To'] = Header_Encoded(COMMASPACE.join(email_to))
+    msg['To'] = Address_Encoded(email_to, 'To')
     if email_cc:
-        msg['Cc'] = Header_Encoded(COMMASPACE.join(email_cc))
+        msg['Cc'] = Address_Encoded(email_cc, 'Cc')
     if email_bcc:
-        msg['Bcc'] = Header_Encoded(COMMASPACE.join(email_bcc))
+        msg['Bcc'] = Address_Encoded(email_bcc, 'Bcc')
     msg['Date'] = formatdate(localtime=True)
 
     msg['X-Priority'] = priorities.get(priority, '3 (Normal)')
