@@ -13,6 +13,7 @@ method_1() {
 		<param><value>$DO_DEBUG</value></param>
 	</params>
 </methodCall>
+</xml>
 EOF
 }
 
