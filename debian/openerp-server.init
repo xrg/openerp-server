@@ -30,8 +30,8 @@ case "${1}" in
 
 		start-stop-daemon --start --quiet --pidfile /var/run/${NAME}.pid \
 			--chuid ${USER} --background --make-pidfile \
-			--exec ${DAEMON} -- --config=$CONFIG \
-			    --logfile=$LOGFILE
+			--exec ${DAEMON} -- --config=${CONFIG} \
+			    --logfile=${LOGFILE}
 
 		echo "${NAME}."
 		;;
@@ -55,8 +55,8 @@ case "${1}" in
 
 		start-stop-daemon --start --quiet --pidfile /var/run/${NAME}.pid \
 			--chuid ${USER} --background --make-pidfile \
-			--exec ${DAEMON} -- --config=$CONFIG \
-			    --logfile=$LOGFILE
+			--exec ${DAEMON} -- --config=${CONFIG} \
+			    --logfile=${LOGFILE}
 
 		echo "${NAME}."
 		;;
