@@ -281,19 +281,24 @@ class ir_model_fields(osv.osv):
                 raise except_orm(_('Error'), _('For selection fields, the Selection Options must be given!'))
             self._check_selection(cr, user, vals['selection'], context=context)
         res = super(ir_model_fields,self).create(cr, user, vals, context)
-        if vals.get('state','base') == 'manual':
-            if not vals['name'].startswith('x_'):
-                raise except_orm(_('Error'), _("Custom fields must have a name that starts with 'x_' !"))
+        try:
+            if vals.get('state','base') == 'manual':
+                if not vals['name'].startswith('x_'):
+                    raise except_orm(_('Error'), _("Custom fields must have a name that starts with 'x_' !"))
 
-            if vals.get('relation',False) and not self.pool.get('ir.model').search(cr, user, [('model','=',vals['relation'])]):
-                 raise except_orm(_('Error'), _("Model %s does not exist!") % vals['relation'])
+                if vals.get('relation',False) and not self.pool.get('ir.model').search(cr, user, [('model','=',vals['relation'])]):
+                    raise except_orm(_('Error'), _("Model %s does not exist!") % vals['relation'])
 
-            if self.pool.get(vals['model']):
-                self.pool.get(vals['model']).__init__(self.pool, cr)
-                #Added context to _auto_init for special treatment to custom field for select_level
-                ctx = context.copy()
-                ctx.update({'field_name':vals['name'],'field_state':'manual','select':vals.get('select_level','0'),'update_custom_fields':True})
-                self.pool.get(vals['model'])._auto_init(cr, ctx)
+                if self.pool.get(vals['model']):
+                    self.pool.get(vals['model']).__init__(self.pool, cr)
+                    #Added context to _auto_init for special treatment to custom field for select_level
+                    ctx = context.copy()
+                    ctx.update({'field_name':vals['name'],'field_state':'manual','select':vals.get('select_level','0'),'update_custom_fields':True})
+                    self.pool.get(vals['model'])._auto_init(cr, ctx)
+        except Exception, e:
+            # we have to behave like _validate() and never let the dirty data in the db.
+            cr.rollback()
+            raise
 
         return res
 
