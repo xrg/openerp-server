@@ -524,7 +524,7 @@ GNU Public Licence.
             return info, release.version
         return info
 
-    def exp_timezone_get(self, db, login, password):
+    def exp_timezone_get(self, *args):
         return tools.misc.get_server_timezone()
 
     def exp_get_available_updates(self, contract_id, contract_password):
