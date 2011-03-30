@@ -1,5 +1,7 @@
 import yaml
 import logging
+from date_eval import date_eval
+from misc import DEFAULT_SERVER_DATE_FORMAT, DEFAULT_SERVER_DATETIME_FORMAT
 
 class YamlTag(object):
     """
@@ -90,7 +92,7 @@ class Eval(YamlTag):
         super(Eval, self).__init__()
     def __str__(self):
         return '!eval %s' % str(self.expression)
-    
+
 class Ref(YamlTag):
     def __init__(self, expr="False", *args, **kwargs):
         self.expr = expr
@@ -159,6 +161,16 @@ def eval_constructor(loader, node):
     expression = loader.construct_scalar(node)
     return Eval(expression)
 
+def date_constructor(loader, node):
+    expression = loader.construct_scalar(node)
+    # TODO return a datetime.date object, not string
+    return date_eval(expression).strftime(DEFAULT_SERVER_DATE_FORMAT)
+
+def datetime_constructor(loader, node):
+    expression = loader.construct_scalar(node)
+    # TODO return a datetime.datetime object
+    return date_eval(expression).strftime(DEFAULT_SERVER_DATETIME_FORMAT)
+
 def ref_constructor(loader, tag_suffix, node):
     if tag_suffix == "id":
         kwargs = {"id": loader.construct_scalar(node)}
@@ -190,6 +202,8 @@ def add_constructors():
     yaml.add_constructor(u"!delete", delete_constructor)
     yaml.add_constructor(u"!url", url_constructor)
     yaml.add_constructor(u"!eval", eval_constructor)
+    yaml.add_constructor(u"!date", date_constructor)
+    yaml.add_constructor(u"!datetime", datetime_constructor)
     yaml.add_multi_constructor(u"!ref", ref_constructor)
     yaml.add_constructor(u"!ir_set", ir_set_constructor)
     yaml.add_constructor(u"!repeat", repeat_constructor)
