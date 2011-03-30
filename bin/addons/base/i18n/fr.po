@@ -4,13 +4,13 @@ msgstr ""
 "Project-Id-Version: OpenERP Server 5.0.4\n"
 "Report-Msgid-Bugs-To: support@openerp.com\n"
 "POT-Creation-Date: 2011-01-11 11:14+0000\n"
-"PO-Revision-Date: 2011-03-18 13:42+0000\n"
-"Last-Translator: Aline (OpenERP) <Unknown>\n"
+"PO-Revision-Date: 2011-03-22 22:41+0000\n"
+"Last-Translator: Pierre Burnier <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-03-19 07:09+0000\n"
+"X-Launchpad-Export-Date: 2011-03-23 06:23+0000\n"
 "X-Generator: Launchpad (build 12559)\n"
 
 #. module: base
@@ -13944,10 +13944,15 @@ msgstr ""
 
 #. module: base
 #: help:ir.model.fields,relation_field:0
+#, fuzzy
 msgid ""
 "For one2many fields, the field on the target model that implement the "
 "opposite many2one relationship"
 msgstr ""
+"#-#-#-#-#  .merge_file_xDcdCB (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_mtA3Af (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"Pour les champs one2many, le champ du modèle cible qui réalise la relation "
+"many2one correspondante"
 
 #. module: base
 #: help:ir.model.fields,translate:0
@@ -13984,13 +13989,11 @@ msgstr ""
 
 #. module: base
 #: code:addons/base/ir/ir_model.py:250
-#, fuzzy, python-format
+#, python-format
 msgid "For selection fields, the Selection Options must be given!"
 msgstr ""
-"#-#-#-#-#  .merge_file_hVt3ke (OpenERP Server 5.0.4)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_IJz4z4 (OpenERP Server 5.0.4)  #-#-#-#-#\n"
-"Pour les champs de sélection, les valeurs pour la sélection doivent être "
-"renseignées !"
+"Pour les champs de type liste déroulante, les valeurs de la liste doivent "
+"être fournies !"
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_ui_view_custom

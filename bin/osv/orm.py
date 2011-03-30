@@ -3954,8 +3954,23 @@ class orm(orm_template):
         # Shall we also remove the inherited records in python, here?
 
         self.check_access_rule(cr, uid, ids, 'unlink', context=context)
+        pool_model_data = self.pool.get('ir.model.data')
+        pool_ir_values = self.pool.get('ir.values')
         cr.execute('DELETE FROM ' + self._table + ' ' \
                        'WHERE id = ANY(%s)', (ids,), debug=self._debug)
+
+
+        # Removing the ir_model_data reference if the record being deleted is a record created by xml/csv file,
+        # as these are not connected with real database foreign keys, and would be dangling references.
+        # Step 1. Calling unlink of ir_model_data only for the affected IDS.
+        cr.execute('DELETE FROM "%s" WHERE model = %%s AND res_id = ANY(%%s)' \
+                    % pool_model_data._table,
+                (self._name, list(ids)), debug=self._debug)
+        
+        cr.execute('DELETE FROM "%s" WHERE (model = %%s AND res_id = ANY(%%s) ) OR value = ANY(%%s)' \
+                    % pool_ir_values._table,
+                    (self._name, list(ids), ['%s,%s' % (self._name, sid) for sid in ids]),
+                    debug=self._debug)
 
         for order, object, store_ids, fields in result_store:
             if object != self._name:
@@ -3964,6 +3979,7 @@ class orm(orm_template):
                 rids = map(lambda x: x[0], cr.fetchall())
                 if rids:
                     obj._store_set_values(cr, uid, rids, fields, context)
+
         return True
 
     #

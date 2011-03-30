@@ -38,7 +38,10 @@ import logging
 
 __all__ = ['test_expr', 'literal_eval', 'safe_eval', 'const_eval' ]
 
-_ALLOWED_MODULES = ['_strptime']
+# The time module is usually already provided in the safe_eval environment
+# but some code, e.g. datetime.datetime.now() (Windows/Python 2.5.2, bug
+# lp:703841), does import time.
+_ALLOWED_MODULES = ['_strptime', 'time']
 
 _CONST_OPCODES = set(opmap[x] for x in [
     'POP_TOP', 'ROT_TWO', 'ROT_THREE', 'ROT_FOUR', 'DUP_TOP','POP_BLOCK','SETUP_LOOP',
