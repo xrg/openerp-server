@@ -19,6 +19,7 @@ method_1() {
 		<param><value><int>$REPORT</int></value></param>
 	</params>
 </methodCall>
+</xml>
 EOF
 }
 

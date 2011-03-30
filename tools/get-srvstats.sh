@@ -9,6 +9,7 @@ method_1() {
     <params>
     </params>
 </methodCall>
+</xml>
 EOF
 }
 LEVEL=10

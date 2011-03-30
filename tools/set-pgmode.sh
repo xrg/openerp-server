@@ -11,6 +11,7 @@ method_1() {
 		<param><value><string>$1</string></value></param>
 	</params>
 </methodCall>
+</xml>
 EOF
 }
 

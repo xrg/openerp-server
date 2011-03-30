@@ -10,6 +10,7 @@ method_1() {
 		<param><value><string>$ADMIN_PASSWD</string></value></param>
 	</params>
 </methodCall>
+</xml>
 EOF
 }
 
