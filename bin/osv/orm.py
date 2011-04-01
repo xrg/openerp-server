@@ -3773,13 +3773,20 @@ class orm(orm_template):
                 else:
                     get_ids = ids
                 res2 = self._columns[val[0]].get(cr, self, get_ids, val, user, context=context, values=res)
+                if not res2:
+                    _logger.warning("%s.%s didn't provide us data for %s",
+                                    self._name, val[0], get_ids)
+                    res2 = {}
 
                 for pos in val:
                     for record in res:
+                        if not (record['id'] in res2):
+                            # Is it right not to have that?
+                            continue
                         if isinstance(res2[record['id']], str):
                             res2[record['id']] = eval(res2[record['id']])
                             #TOCHECK : why got string instend of dict in python2.6
-                        multi_fields = res2.get(record['id'],{})
+                        multi_fields = res2[record['id']]
                         if multi_fields:
                             record[pos] = multi_fields.get(pos,[])
             else:
