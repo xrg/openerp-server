@@ -52,7 +52,7 @@ RETVAL=0
 start() {
     if [ -d /etc/openerp/start.d ] ; then
         echo -n $"Preparing $desc: "
-        run-parts --exit-on-error /etc/openerp/start.d
+        run-parts /etc/openerp/start.d
         RETVAL=$?
         echo
         [ $RETVAL -ne 0 ] && return $RETVAL
