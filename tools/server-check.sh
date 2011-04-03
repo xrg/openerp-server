@@ -91,8 +91,12 @@ if [ -n "$SUCMD"  ] ; then
     if [ -n "$DB_PASSWORD" ] ; then
 	CMD="$CMD -W $DB_PASSWORD"
     fi
-    su $PG_ROOT -c "$CMD"
-    exit "$?"
+    su $PG_ROOT -c "$CMD" || "$?"
+    
+    if [ -z "$DEVEL_MODE" ] ; then
+	rm -f "/var/run/openerp-server-check"
+    fi
+    exit 0
 fi
 
 if ! (psql -qt -U $PG_ROOT $DB_CONNS -c "SELECT usename FROM pg_user WHERE usename = '$DB_USER';" | \
