@@ -1608,6 +1608,18 @@ def attrgetter(*items):
     return g
 
 
+class attrob(object):
+    """An object with arbitrary attributes
+    
+        It is used to behave like a browse record, offering 'self.foo' style
+        attributes.
+    """
+    def __init__(self, adict):
+        """Initialize and fill with dict
+        """
+        super(attrob, self).__init__()
+        self.__dict__.update(adict)
+
 class TSValue(object):
     """ A threading-safe variable, with notify functionality.
     
