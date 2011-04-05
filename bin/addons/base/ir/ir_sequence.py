@@ -22,6 +22,7 @@
 import time
 from osv import fields,osv
 from tools.safe_eval import safe_eval
+from tools.misc import attrob
 import logging
 
 class ir_sequence_type(osv.osv):
@@ -31,6 +32,8 @@ class ir_sequence_type(osv.osv):
         'name': fields.char('Name',size=64, required=True),
         'code': fields.char('Code',size=32, required=True),
     }
+    
+    # code unique?
 ir_sequence_type()
 
 def _code_get(self, cr, uid, context=None):
@@ -104,7 +107,9 @@ class ir_sequence(osv.osv):
                     if self._debug:
                         log.debug("ir_seq: %s has condition: %s" %(res['id'], res['condition']))
                     try:
-                        bo = safe_eval(res['condition'],context)
+                        ctx = context.copy()
+                        ctx['this'] = attrob(res)
+                        bo = safe_eval(res['condition'],ctx)
                         if not bo:
                             if self._debug:
                                 log.debug('ir_seq: %d not matched' % res['id'])
@@ -113,8 +118,8 @@ class ir_sequence(osv.osv):
                         # it would be normal to have exceptions, because
                         # the domain may contain errors
                         if self._debug:
-                            log.exception('ir_seq[%d]: Exception %s with context %s' % \
-                                                (res['id'], context, e))
+                            log.debug('ir_seq[%d]: Exception %s with context %s' % \
+                                                (res['id'], e, context), exc_info=True)
                         continue
                     if self._debug:
                         log.debug('ir_seq: %d matched' % res['id'])
