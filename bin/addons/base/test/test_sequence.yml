@@ -89,3 +89,39 @@
     for i in range(0, 4):
         seq = self.get_id(cr, uid2, 'ir.sequence.test-type', 'code', context={})
         assert seq.startswith('TS1'), "Invalid sequence chosen: %s" % seq
+-
+  I will create a second testing type
+-
+  !record {model: ir.sequence.type, id: test_sequence_type_2}:
+    name: Testing type 2
+    code: ir.sequence.test-type2
+-
+  Then I will create 2 sequences with maximum numbers
+-
+  !record {model: ir.sequence, id: test_sequence_b1}:
+    code: ir.sequence.test-type2
+    name: Test sequence B 1
+    prefix: 'TS1-'
+    number_next: 1
+    padding: 2
+    company_id: False
+    weight: 50
+    condition: this.number_next < 100
+-
+  !record {model: ir.sequence, id: test_sequence_b2}:
+    code: ir.sequence.test-type2
+    name: Test sequence B 2
+    prefix: 'TS2-'
+    number_next: 1
+    padding: 2
+    company_id: False
+    weight: 40
+    condition: this.number_next < 100
+-
+  I will now try to obtain 150 numbers
+-
+  !python {model: ir.sequence }: |
+    for i in range(150):
+        seq_id = self.get(cr, uid, 'ir.sequence.test-type2')
+        # print "%d: %s" % (i, seq_id)
+    assert seq_id == 'TS2-51', seq_id
