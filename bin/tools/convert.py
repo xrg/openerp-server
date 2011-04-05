@@ -944,6 +944,8 @@ def convert_csv_import(cr, module, fname, csvcontent, idref=None, mode='init',
 
     pool = pooler.get_pool(cr.dbname)
 
+    if isinstance(csvcontent, unicode):
+        csvcontent = csvcontent.encode('utf-8')
     input = cStringIO.StringIO(csvcontent) #FIXME
     reader = csv.reader(input, quotechar='"', delimiter=',')
     fields = reader.next()
