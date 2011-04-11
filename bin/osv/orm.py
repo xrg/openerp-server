@@ -5129,19 +5129,19 @@ class orm_deprecated(object):
 
     def read(self, *args, **kwargs):
         self.__issue_depr()
-        super(orm_deprecated, self).read(*args, **kwargs)
+        return super(orm_deprecated, self).read(*args, **kwargs)
     def write(self, *args, **kwargs):
         self.__issue_depr()
-        super(orm_deprecated, self).write(*args, **kwargs)
+        return super(orm_deprecated, self).write(*args, **kwargs)
     def copy(self, *args, **kwargs):
         self.__issue_depr()
-        super(orm_deprecated, self).copy(*args, **kwargs)
+        return super(orm_deprecated, self).copy(*args, **kwargs)
     def search(self, *args, **kwargs):
         self.__issue_depr()
-        super(orm_deprecated, self).search(*args, **kwargs)
+        return super(orm_deprecated, self).search(*args, **kwargs)
     def unlink(self, *args, **kwargs):
         self.__issue_depr()
-        super(orm_deprecated, self).unlink(*args, **kwargs)
+        return super(orm_deprecated, self).unlink(*args, **kwargs)
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
 
