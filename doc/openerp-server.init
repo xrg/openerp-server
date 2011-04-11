@@ -10,10 +10,9 @@
 
 ### BEGIN INIT INFO
 # Provides: openerp-server
-# Required-Start: postgresql
-# Required-Stop: postgresql
-# Should-Start: $network harddrake
-# Default-Start: 345
+# Should-Start: $network $local_fs postgresql
+# Should-Stop: postgresql
+# Default-Start: 3 4 5
 # Short-Description: Launches the OpenERP server.
 # Description: This startup script launches the OpenERP server.
 ### END INIT INFO
@@ -24,6 +23,7 @@
 PIDFILE=/var/run/openerp/openerp-server.pid
 LOCKFILE=/var/lock/subsys/openerp-server
 LOGFILE=/var/log/openerp/openerp-server.log
+ETC_OPENERP_DIR=/etc/openerp/
 
 OPTS="--pidfile=$PIDFILE --logfile=$LOGFILE"
 
@@ -116,6 +116,47 @@ status() {
     return $RETVAL
 }
 
+gen_cert(){
+    if [ -r "/etc/openerp/server.cert" ] ; then
+	return 0
+    fi
+
+    if [ ! -x "/usr/bin/openssl" ] ; then
+	    echo "OpenERP server: openssl is missing. Cannot create SSL certificates"
+    else
+	    pushd $ETC_OPENERP_DIR
+
+	    if [ ! -f server.key ] ; then
+	    /usr/bin/openssl genrsa -rand /proc/apm:/proc/cpuinfo:/proc/dma:/proc/filesystems:/proc/interrupts:/proc/ioports:/proc/pci:/proc/rtc:/proc/uptime \
+		    1024 > server.key 2> /dev/null
+	    fi
+
+	    FQDN=`hostname`
+	    if [ "x${FQDN}" = "x" ]; then
+		    FQDN=localhost.localdomain
+	    fi
+
+	    if [ ! -f server.cert ] ; then
+		    cat << EOF | /usr/bin/openssl req -new -key server.key \
+			    -x509 -days 365 -set_serial $RANDOM -extensions v3_req \
+			    -out server.cert 2>/dev/null
+--
+SomeState
+SomeCity
+SomeOrganization
+SomeOrganizationalUnit
+${FQDN}
+root@${FQDN}
+EOF
+		fi
+
+		echo "Created a self-signed SSL certificate for OpenERP. You may want to revise it or get a real one."
+		chown openerp:openerp server.cert server.key
+		popd
+    fi
+
+}
+
 case "$1" in
 start)
     start
@@ -135,6 +176,10 @@ condrestart)
 
 status)
     status
+    ;;
+
+gen_cert)
+    gen_cert
     ;;
 
 probe)
