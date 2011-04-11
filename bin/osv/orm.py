@@ -1018,7 +1018,8 @@ class orm_template(object):
                     raise Exception(_('Please check that all your lines have %d columns.') % (len(fields),))
 
                 field = fields[i]
-                if field[:len(prefix)] <> prefix:
+                if field[:len(prefix)] <> prefix \
+                        or (not field[len(prefix):] ):
                     if line[i] and skip:
                         return False
                     continue
