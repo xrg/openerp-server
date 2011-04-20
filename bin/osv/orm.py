@@ -2676,6 +2676,7 @@ class orm(orm_template):
                 if fget[groupby]['type'] in ('date', 'datetime'):
                     flist = "to_char(%s%s,'yyyy-mm') as %s " % ( ftbl, groupby,groupby)
                     groupby = "to_char(%s%s,'yyyy-mm')" % (ftbl, groupby)
+                    qualified_groupby_field = groupby
                 else:
                     groupby = ftbl+groupby
                     flist = groupby
@@ -3397,7 +3398,7 @@ class orm(orm_template):
                     'string': field['field_description'],
                     'required': bool(field['required']),
                     'readonly': bool(field['readonly']),
-                    'domain': field['domain'] or None,
+                    'domain': eval(field['domain']) if field['domain'] else None,
                     'size': field['size'],
                     'ondelete': field['on_delete'],
                     'translate': (field['translate']),
