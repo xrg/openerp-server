@@ -71,15 +71,15 @@ class ir_values(osv.osv):
         'name': fields.char('Name', size=128),
         'model_id': fields.many2one('ir.model', 'Object', size=128,
             help="This field is not used, it only helps you to select a good model."),
-        'model': fields.char('Object Name', size=128, select=True),
+        'model': fields.char('Object Name', size=128),
         'action_id': fields.many2one('ir.actions.actions', 'Action',
             help="This field is not used, it only helps you to select the right action."),
         'value': fields.text('Value'),
         'value_unpickle': fields.function(_value_unpickle, fnct_inv=_value_pickle,
             method=True, type='text', string='Value'),
         'object': fields.boolean('Is Object'),
-        'key': fields.selection([('action','Action'),('default','Default')], 'Type', size=128, select=True),
-        'key2' : fields.char('Event Type',help="The kind of action or button in the client side that will trigger the action.", size=128, select=True),
+        'key': fields.selection([('action','Action'),('default','Default')], 'Type', size=128),
+        'key2' : fields.char('Event Type',help="The kind of action or button in the client side that will trigger the action.", size=128),
         'meta': fields.text('Meta Datas'),
         'meta_unpickle': fields.function(_value_unpickle, fnct_inv=_value_pickle,
             method=True, type='text', string='Metadata'),
@@ -88,9 +88,9 @@ class ir_values(osv.osv):
         'company_id': fields.many2one('res.company', 'Company', select=True)
     }
     _defaults = {
-        'key': lambda *a: 'action',
-        'key2': lambda *a: 'tree_but_open',
-        'company_id': lambda *a: False
+        'key': 'action',
+        'key2': 'tree_but_open',
+        'company_id': False
     }
 
     def _auto_init(self, cr, context=None):
@@ -132,7 +132,7 @@ class ir_values(osv.osv):
                 'model': model,
                 'object': isobject,
                 'key': key,
-                'key2': key2 and key2[:200],
+                'key2': key2,
                 'meta': meta,
                 'user_id': preserve_user and uid,
             }
@@ -156,7 +156,7 @@ class ir_values(osv.osv):
             params = [key, str(m)]
             if key2:
                 where.append('key2=%s')
-                params.append(key2[:200])
+                params.append(key2)
             elif key2_req and not meta:
                 where.append('key2 IS NULL')
             if res_id_req and (models[-1][0]==m):
