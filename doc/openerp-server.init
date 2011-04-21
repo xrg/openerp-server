@@ -14,6 +14,7 @@
 # Required-Stop: postgresql
 # Should-Start: $network harddrake
 # Default-Start: 345
+# Default-Stop: 3 4 5
 # Short-Description: Launches the OpenERP server.
 # Description: This startup script launches the OpenERP server.
 ### END INIT INFO
