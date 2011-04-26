@@ -5,7 +5,7 @@ msgstr ""
 "Project-Id-Version: OpenERP Server 5.0.0\n"
 "Report-Msgid-Bugs-To: support@openerp.com\n"
 "POT-Creation-Date: 2011-03-09 17:47+0000\n"
-"PO-Revision-Date: 2011-03-31 10:13+0300\n"
+"PO-Revision-Date: 2011-04-26 12:47+0300\n"
 "Last-Translator: P. Christeas <p_christ@hol.gr>\n"
 "Language-Team: Greek <openerp@lists.hellug.gr>\n"
 "MIME-Version: 1.0\n"
@@ -2423,7 +2423,7 @@ msgstr "API ID"
 #: field:partner.sms.send,mobile_to:0 field:res.request,act_to:0
 #: field:res.request.history,act_to:0
 msgid "To"
-msgstr "Σε"
+msgstr "Προς"
 
 #. module: base
 #: field:partner.sms.send,password:0 field:res.config.users,password:0
@@ -7809,7 +7809,7 @@ msgstr "Χαμηλή"
 #. module: base
 #: selection:res.request,priority:0
 msgid "Normal"
-msgstr "Κανονικό"
+msgstr "Κανονική"
 
 #. module: base
 #: selection:res.request,state:0
@@ -9312,7 +9312,7 @@ msgstr "Σε αναμονή"
 #. module: base
 #: view:res.request.history:0
 msgid "Request History"
-msgstr "Αίτηση Ιστορικού"
+msgstr "Ιστορικό Αίτησης"
 
 #. module: base
 #: view:res.request.link:0
