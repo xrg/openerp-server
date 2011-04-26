@@ -50,26 +50,25 @@ class ExpressionError(ValueError):
     pass
 
 class expression(object):
-    """
-    parse a domain expression
+    """ Parse a domain expression into objects and SQL syntax
     use a real polish notation
     leafs are still in a ('foo', '=', 'bar') format
     For more info: http://christophe-simonis-at-tiny.blogspot.com/2008/08/new-new-domain-notation.html
     """
+    OPS = ('=', '!=', '<>', '<=', '<', '>', '>=', '=?', 
+            '=like', '=ilike', 'like', 'not like', 'ilike', 'not ilike', 
+            'in', 'not in',
+            'child_of', '|child_of' )
+    INTERNAL_OPS = OPS + ('inselect', 'not inselect')
 
     def _is_operator(self, element):
         return isinstance(element, (str, unicode)) and element in ['&', '|', '!']
 
     def _is_leaf(self, element, internal=False):
-        OPS = ('=', '!=', '<>', '<=', '<', '>', '>=', '=?', 
-                '=like', '=ilike', 'like', 'not like', 'ilike', 'not ilike', 
-                'in', 'not in',
-                'child_of', '|child_of' )
-        INTERNAL_OPS = OPS + ('inselect', 'not inselect')
         return (isinstance(element, tuple) or isinstance(element, list)) \
            and len(element) == 3 \
-           and (((not internal) and element[1] in OPS) \
-                or (internal and element[1] in INTERNAL_OPS))
+           and (((not internal) and element[1] in self.OPS) \
+                or (internal and element[1] in self.INTERNAL_OPS))
 
     def __execute_recursive_in(self, cr, s, f, w, ids, op, type):
         # todo: merge into parent query as sub-query

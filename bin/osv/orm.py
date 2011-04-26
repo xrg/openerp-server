@@ -3813,7 +3813,7 @@ class orm(orm_template):
         ima_obj = self.pool.get('ir.model.access')
         no_perm = "=No Permission=" # TODO translate, outside of this fn
         for vals in res:
-            for field in vals.copy():
+            for field in vals:
                 fobj = None
                 if field in self._columns:
                     fobj = self._columns[field]
@@ -3824,11 +3824,11 @@ class orm(orm_template):
                 if groups:
                     edit = ima_obj.check_groups(cr, user, groups)
                     if not edit:
-                        if type(vals[field]) == type([]):
+                        if isinstance(vals[field], list):
                             vals[field] = []
-                        elif type(vals[field]) == type(0.0):
+                        elif isinstance(vals[field], (float, int, long)): # FIXME: have False
                             vals[field] = 0
-                        elif type(vals[field]) == type(''):
+                        elif isinstance(vals[field], basestring):
                             vals[field] = no_perm
                         else:
                             vals[field] = False
@@ -4339,7 +4339,7 @@ class orm(orm_template):
             if bool_field not in vals:
                 vals[bool_field] = False
         #End
-        for field in vals.copy():
+        for field in vals.keys():
             fobj = None
             if field == '_vptr':
                 continue
@@ -4353,6 +4353,7 @@ class orm(orm_template):
             if groups:
                 edit = self.pool.get('ir.model.access').check_groups(cr, user, groups)
                 if not edit:
+                    # RFC: shall we only silently ignore the fields?
                     vals.pop(field)
         for field in vals:
             if field == '_vptr':
