@@ -532,14 +532,11 @@ def trans_parse_view(de):
     if de.tag == 'attribute' and de.get("name") == 'string':
         if de.text:
             res.append(de.text.encode("utf8"))
-    if de.get("string"):
-        res.append(de.get('string').encode("utf8"))
-    if de.get("help"):
-        res.append(de.get('help').encode("utf8"))
-    if de.get("sum"):
-        res.append(de.get('sum').encode("utf8"))
-    if de.get("confirm"):
-        res.append(de.get('confirm').encode("utf8"))
+
+    for attr in ('string', 'help', 'sum', 'confirm'):
+        if de.get(attr):
+            res.append(de.get(attr).encode("utf8"))
+
     for n in de:
         res.extend(trans_parse_view(n))
     return res
