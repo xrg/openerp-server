@@ -2,7 +2,7 @@
 # openerp-server        This shell script takes care of starting and stopping
 #                       OpenERP server
 #
-# chkconfig: 345 95 05
+# chkconfig: - 95 05
 # description: OpenERP server
 #
 # pidfile: /var/run/openerp-server.pid
@@ -12,8 +12,6 @@
 # Provides: openerp-server
 # Should-Start: $network $local_fs postgresql
 # Should-Stop: postgresql
-# Default-Start: 3 4 5
-# Default-Stop: 3 4 5
 # Short-Description: Launches the OpenERP server.
 # Description: This startup script launches the OpenERP server.
 ### END INIT INFO
