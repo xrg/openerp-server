@@ -48,6 +48,32 @@
     except Exception:
         raise
 -
+  I will try to read again, using a wrong password.
+-
+  !python {model: res.users }: |
+    from xmlrpclib import ServerProxy, Fault
+    try:
+        logsock = ServerProxy(context['test_xmlrpc_url']+'object')
+        luid = ref('res_user_test_a1')
+        res = logsock.execute(cr.dbname, luid, 'base-wrong-passwd', 'res.users', 'read', luid, ['name',])
+        raise AssertionError("SECURITY ERROR: We shouldn't be able to read this!")
+    except Fault, e:
+        if e.faultCode != 'AccessDenied':
+            raise
+-
+  I will try to read again, using an empty password.
+-
+  !python {model: res.users }: |
+    from xmlrpclib import ServerProxy, Fault
+    try:
+        logsock = ServerProxy(context['test_xmlrpc_url']+'object')
+        luid = ref('res_user_test_a1')
+        res = logsock.execute(cr.dbname, luid, False, 'res.users', 'read', luid, ['name',])
+        raise AssertionError("SECURITY ERROR: We shouldn't be able to read this!")
+    except Fault, e:
+        if e.faultCode != 'AccessDenied':
+            raise
+-
   I will now disable the user.
 -
   !record {model: res.users, id: res_user_test_a1}:
@@ -62,7 +88,6 @@
 -
   !python {model: res.users }: |
     from xmlrpclib import ServerProxy, Fault
-    cr.commit()
     try:
         logsock = ServerProxy(context['test_xmlrpc_url']+'object')
         luid = ref('res_user_test_a1')
