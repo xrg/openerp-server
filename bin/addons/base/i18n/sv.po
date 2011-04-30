@@ -4,14 +4,14 @@ msgstr ""
 "Project-Id-Version: OpenERP Server 5.0.0\n"
 "Report-Msgid-Bugs-To: support@openerp.com\n"
 "POT-Creation-Date: 2011-01-11 11:14+0000\n"
-"PO-Revision-Date: 2011-02-07 11:12+0000\n"
-"Last-Translator: Alec Leamas <Unknown>\n"
+"PO-Revision-Date: 2011-04-26 19:36+0000\n"
+"Last-Translator: Jan-Eric Lindh <jelindh@gmail.com>\n"
 "Language-Team: <>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-02-08 05:58+0000\n"
-"X-Generator: Launchpad (build 12177)\n"
+"X-Launchpad-Export-Date: 2011-04-27 05:45+0000\n"
+"X-Generator: Launchpad (build 12758)\n"
 
 #. module: base
 #: code:addons/base/ir/ir_actions.py:0 code:addons/base/ir/ir_model.py:0
@@ -78,12 +78,9 @@ msgstr ""
 
 #. module: base
 #: code:addons/base/ir/ir_model.py:0
-#, fuzzy, python-format
+#, python-format
 msgid "Custom fields must have a name that starts with 'x_' !"
-msgstr ""
-"#-#-#-#-#  .merge_file_LN9yti (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_q28zqL (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"Anpassade fält måste ha ett namn som börjar med 'x_' !"
+msgstr "Anpassade fält måste ha ett namn som börjar med 'x_' ."
 
 #. module: base
 #: code:addons/base/ir/ir_model.py:0
@@ -377,13 +374,10 @@ msgstr ""
 
 #. module: base
 #: code:addons/base/res/partner/partner.py:0
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "Couldn't generate the next id because some partners have an alphabetic id !"
-msgstr ""
-"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"Kan inte skapa nästa id eftersom partnern har ett alfanumeriskt id !"
+msgstr "Kan inte skapa nästa id eftersom partnern har ett alfanumeriskt id."
 
 #. module: base
 #: code:addons/base/res/partner/partner.py:0
@@ -453,12 +447,9 @@ msgstr ""
 
 #. module: base
 #: code:addons/base/res/res_user.py:0
-#, fuzzy, python-format
+#, python-format
 msgid "Can not remove root user!"
-msgstr ""
-"#-#-#-#-#  .merge_file_LN9yti (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_q28zqL (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"Kan inte ta bort root användare!"
+msgstr "Kan inte ta bort root-användare."
 
 #. module: base
 #: code:addons/base/res/res_user.py:0
@@ -538,16 +529,12 @@ msgstr ""
 msgid ""
 "The Object name must start with x_ and not contain any special character !"
 msgstr ""
-"Objektnamnet måste börja med x_ och får inte innehålla några specialtecken!"
+"Objektnamnet måste börja med x_ och får inte innehålla några specialtecken."
 
 #. module: base
 #: constraint:ir.ui.view:0
-#, fuzzy
 msgid "Invalid XML for View Architecture!"
-msgstr ""
-"#-#-#-#-#  .merge_file_LN9yti (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_q28zqL (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"Felaktig XML för Vyarkitektur!"
+msgstr "Felaktig XML för vyarkitektur."
 
 #. module: base
 #: constraint:res.company:0
@@ -1172,12 +1159,8 @@ msgstr ""
 
 #. module: base
 #: field:ir.actions.url,url:0
-#, fuzzy
 msgid "Action URL"
-msgstr ""
-"#-#-#-#-#  .merge_file_EiefvT (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_ssZMfU (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"Händelse URL"
+msgstr "Händelse-URL"
 
 #. module: base
 #: field:ir.actions.wizard,multi:0
@@ -2142,12 +2125,8 @@ msgstr ""
 
 #. module: base
 #: field:ir.ui.view.custom,ref_id:0
-#, fuzzy
 msgid "Original View"
-msgstr ""
-"#-#-#-#-#  .merge_file_EiefvT (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_ssZMfU (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"Orginalvy"
+msgstr "Originalvy"
 
 #. module: base
 #: field:ir.ui.view_sc,name:0
@@ -3213,12 +3192,8 @@ msgstr ""
 
 #. module: base
 #: field:workflow.transition,trigger_expr_id:0
-#, fuzzy
 msgid "Trigger Expression"
-msgstr ""
-"#-#-#-#-#  .merge_file_EiefvT (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_ssZMfU (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"Trigger uttryck"
+msgstr "Trigger-uttryck"
 
 #. module: base
 #: field:workflow.transition,trigger_model:0
@@ -3356,29 +3331,23 @@ msgstr ""
 
 #. module: base
 #: help:ir.actions.server,email:0
-#, fuzzy
 msgid ""
 "Provides the fields that will be used to fetch the email address, e.g. when "
 "you select the invoice, then `object.invoice_address_id.email` is the field "
 "which gives the correct address"
 msgstr ""
-"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"Visar vilka fält som skall användas för att hämta epostadresser. Exempel när "
-"du väljer en faktura sä är `object.invoice_address_id.email` fältet som "
-"visar rätt epostadress."
+"Visar vilka fält som skall användas för att hämta e-postadresser. Exempel "
+"när du väljer en faktura så är `object.invoice_address_id.email` fältet som "
+"visar rätt e-postadress."
 
 #. module: base
 #: help:ir.actions.server,expression:0
-#, fuzzy
 msgid ""
 "Enter the field/expression that will return the list. E.g. select the sale "
 "order in Object, and you can have loop on the sales order line. Expression = "
 "`object.order_line`."
 msgstr ""
-"#-#-#-#-#  .merge_file_x4k48P (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_hc7Dz8 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"Skriv in de fält/uttryck som returnernar listan. Välj t ex 'sälj order' i "
+"Skriv in de fält/uttryck som returnernar listan. Välj t ex 'säljorder' i "
 "'Object', och du kan loopa över säljordrar. Uttryck är av formen object."
 "order_line."
 
@@ -3399,7 +3368,7 @@ msgid ""
 "Specify the message. You can use the fields from the object. e.g. `Dear "
 "[[ object.partner_id.name ]]`"
 msgstr ""
-"Definera meddelandet. Du kan används fält från objektet, t ex 'Bäste "
+"Definera meddelandet. Du kan använda fält från objektet, t ex 'Bäste "
 "[[ object.partner_id.name ]]'"
 
 #. module: base
@@ -3483,12 +3452,8 @@ msgstr ""
 
 #. module: base
 #: help:ir.actions.server,trigger_name:0
-#, fuzzy
 msgid "Select the Signal name that is to be used as the trigger."
-msgstr ""
-"#-#-#-#-#  .merge_file_x4k48P (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_hc7Dz8 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"Välj den Signal som skall användas som trigger"
+msgstr "Välj den signal som skall användas som trigger"
 
 #. module: base
 #: help:ir.actions.server,trigger_obj_id:0
@@ -3632,14 +3597,11 @@ msgstr ""
 
 #. module: base
 #: help:res.country,code:0
-#, fuzzy
 msgid ""
 "The ISO country code in two chars.\n"
 "You can use this field for quick search."
 msgstr ""
-"#-#-#-#-#  .merge_file_LN9yti (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_q28zqL (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"ISO landskod med två tecken.\n"
+"ISO-landskod med två tecken.\n"
 "Du kan använda detta fält för snabbsökning."
 
 #. module: base
@@ -5000,7 +4962,7 @@ msgstr ""
 #. module: base
 #: model:res.country,name:base.ad
 msgid "Andorra, Principality of"
-msgstr "Andorra, Principality of"
+msgstr "Andorra, furstendöme"
 
 #. module: base
 #: model:res.country,name:base.ae
@@ -5419,7 +5381,7 @@ msgstr "Georgien"
 #. module: base
 #: model:res.country,name:base.gf
 msgid "French Guyana"
-msgstr "French Guyana"
+msgstr "Franska Guyana"
 
 #. module: base
 #: model:res.country,name:base.gh
@@ -5528,7 +5490,7 @@ msgstr "Indonesien"
 #. module: base
 #: model:res.country,name:base.ie
 msgid "Ireland"
-msgstr "Ireland"
+msgstr "Irland"
 
 #. module: base
 #: model:res.country,name:base.il
@@ -5707,7 +5669,7 @@ msgstr "Monaco"
 #. module: base
 #: model:res.country,name:base.md
 msgid "Moldavia"
-msgstr "Moldavia"
+msgstr "Moldavien"
 
 #. module: base
 #: model:res.country,name:base.me
@@ -5722,7 +5684,7 @@ msgstr "Madagaskar"
 #. module: base
 #: model:res.country,name:base.mh
 msgid "Marshall Islands"
-msgstr "Marshall Islands"
+msgstr "Marshallöarna"
 
 #. module: base
 #: model:res.country,name:base.mk
@@ -5786,7 +5748,7 @@ msgstr "Mauritius"
 #. module: base
 #: model:res.country,name:base.mv
 msgid "Maldives"
-msgstr "Maldives"
+msgstr "Maldiverna"
 
 #. module: base
 #: model:res.country,name:base.mw
@@ -6181,7 +6143,7 @@ msgstr "Tonga"
 #. module: base
 #: model:res.country,name:base.tp
 msgid "East Timor"
-msgstr "East Timor"
+msgstr "Östtimor"
 
 #. module: base
 #: model:res.country,name:base.tr
@@ -7867,7 +7829,7 @@ msgstr "Arabic / الْعَرَبيّة"
 #. module: base
 #: selection:module.lang.install,init,lang:0
 msgid "Bosnian / bosanski jezik"
-msgstr "Bosnian / bosanski jezik"
+msgstr "Bosniska/bosanski jezik"
 
 #. module: base
 #: selection:module.lang.install,init,lang:0
@@ -8066,17 +8028,17 @@ msgstr ""
 #. module: base
 #: selection:module.lang.install,init,lang:0
 msgid "Spanish (AR) / Español (AR)"
-msgstr "Spanish (AR) / Español (AR)"
+msgstr "Spanska (AR) / Español (AR)"
 
 #. module: base
 #: selection:module.lang.install,init,lang:0
 msgid "Spanish / Español"
-msgstr "Spanish / Español"
+msgstr "Spanska / Español"
 
 #. module: base
 #: selection:module.lang.install,init,lang:0
 msgid "Swedish / svenska"
-msgstr "Swedish / svenska"
+msgstr "Svenska"
 
 #. module: base
 #: selection:module.lang.install,init,lang:0
@@ -8230,12 +8192,8 @@ msgstr ""
 
 #. module: base
 #: selection:wizard.module.lang.export,format:0
-#, fuzzy
 msgid "TGZ Archive"
-msgstr ""
-"#-#-#-#-#  .merge_file_LN9yti (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_q28zqL (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"TGZ arkiv"
+msgstr "TGZ-arkiv"
 
 #. module: base
 #: selection:wizard.module.lang.export,state:0
@@ -8373,12 +8331,8 @@ msgstr ""
 
 #. module: base
 #: sql_constraint:res.lang:0
-#, fuzzy
 msgid "The name of the language must be unique !"
-msgstr ""
-"#-#-#-#-#  .merge_file_LN9yti (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_q28zqL (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"Namnet på språket måste vara unikt!"
+msgstr "Namnet på språket måste vara unikt."
 
 #. module: base
 #: sql_constraint:res.partner:0
@@ -8552,12 +8506,8 @@ msgstr ""
 
 #. module: base
 #: view:ir.actions.server:0
-#, fuzzy
 msgid "Iteration Actions"
-msgstr ""
-"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"Ternationshändelser"
+msgstr "Upprepande händelser"
 
 #. module: base
 #: view:ir.actions.server:0
@@ -8750,12 +8700,8 @@ msgstr ""
 
 #. module: base
 #: view:ir.module.module:0
-#, fuzzy
 msgid "Schedule Upgrade"
-msgstr ""
-"#-#-#-#-#  .merge_file_LN9yti (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_q28zqL (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"Schemalägg Uppgradering"
+msgstr "Schemalägg uppgradering"
 
 #. module: base
 #: view:ir.module.module:0
@@ -9155,30 +9101,24 @@ msgstr ""
 
 #. module: base
 #: view:res.lang:0
-#, fuzzy
 msgid ""
 "%U - Week number of the year (Sunday as the first day of the week) as a "
 "decimal number [00,53]. All days in a new year preceding the first Sunday "
 "are considered to be in week 0."
 msgstr ""
-"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"%U - Årets veckonummer (Söndag är första dagen i veckan) som decimaltal "
+"%U - Årets veckonummer (söndag är första dagen i veckan) som decimaltal "
 "[00,53] Alla dagar som infaller före den första söndagen antas hamna i vecka "
 "0."
 
 #. module: base
 #: view:res.lang:0
-#, fuzzy
 msgid ""
 "%W - Week number of the year (Monday as the first day of the week) as a "
 "decimal number [00,53]. All days in a new year preceding the first Monday "
 "are considered to be in week 0."
 msgstr ""
-"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"%W - Veckonummer för året (Måndag är veckans första dag) som ett decimaltal "
-"[00,53]. All dagar under det nya året som infaller före den första måndagen "
+"%W - Veckonummer för året (måndag är veckans första dag) som ett decimaltal "
+"[00,53]. Alla dagar under det nya året som infaller före den första måndagen "
 "antas ligga i vecka 0."
 
 #. module: base
@@ -9949,7 +9889,7 @@ msgstr "SMS-brygga: clickatell"
 #. module: base
 #: view:ir.actions.report.xml:0
 msgid "Other Configuration"
-msgstr "Övrig Konfiguration"
+msgstr "Övrig konfiguration"
 
 #. module: base
 #: selection:ir.property,type:0
@@ -10066,9 +10006,9 @@ msgid ""
 "net, our open source project management facility. We use their online "
 "interface to synchronize all translations efforts."
 msgstr ""
-"OpenERP översättningar (kärna, moduler, klienter) sköts genom Launchpad.net, "
-"vårat öppen källkods projekthanteringssystem. Vi använder deras gränssnitt "
-"för att synkronisera alla översättningar."
+"OpenERP-översättningar (kärna, moduler, klienter) sköts genom Launchpad.net, "
+"vårt öppenkällkods-projekthanteringssystem. Vi använder deras gränssnitt för "
+"att synkronisera alla översättningar."
 
 #. module: base
 #: field:res.partner,title:0
@@ -10111,17 +10051,13 @@ msgstr "Rapporttyp t.ex. pdf, html, raw, swx,odt, html2html, mako2html"
 #. module: base
 #: view:ir.actions.report.xml:0
 msgid "XML Report"
-msgstr "XML rapport"
+msgstr "XML-rapport"
 
 #. module: base
 #: help:ir.actions.act_window,domain:0
-#, fuzzy
 msgid ""
 "Optional domain filtering of the destination data, as a Python expression"
-msgstr ""
-"#-#-#-#-#  .merge_file_YXLxsr (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_xbbHTK (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"Valfri domänfiltrering av slutdatan, i form av ett python uttryck"
+msgstr "Valfri domänfiltrering av slutdatan, i form av ett Pythonuttryck"
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_view_base_module_upgrade
@@ -10148,12 +10084,8 @@ msgstr "Spanska (UY) / Español (UY)"
 
 #. module: base
 #: selection:ir.module.module,license:0
-#, fuzzy
 msgid "Other OSI Approved Licence"
-msgstr ""
-"#-#-#-#-#  .merge_file_Uw7Qmz (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_PYpwey (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"Övrig OSI godkänd licens"
+msgstr "Övrig OSI-godkänd licens"
 
 #. module: base
 #: help:res.config.users,context_lang:0 help:res.users,context_lang:0
@@ -10175,12 +10107,8 @@ msgstr ""
 
 #. module: base
 #: model:ir.ui.menu,name:base.menu_hr_project
-#, fuzzy
 msgid "Human Resources Dashboard"
-msgstr ""
-"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"Personal dashboard"
+msgstr "personlig infopanel"
 
 #. module: base
 #: field:ir.module.module,contributors:0
@@ -10208,17 +10136,14 @@ msgstr "Kinesiska (HK)"
 
 #. module: base
 #: view:base.language.export:0
-#, fuzzy
 msgid ""
 "To improve or expand the official translations, you should use directly "
 "Lauchpad's web interface (Rosetta). If you need to perform mass translation, "
 "Launchpad also allows uploading full .po files at once"
 msgstr ""
-"#-#-#-#-#  .merge_file_YXLxsr (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_xbbHTK (OpenERP Server 5.0.0)  #-#-#-#-#\n"
 "För att förbättra eller utvidga officiella översättningar så bör du arbeta "
-"direkt mot Launchpad's webgränssnitt (Rosetta). Om du behöver genomföra "
-"massöversättningar så tillåter Launchpad direkt uppladdning av .po filer."
+"direkt mot Launchpads webbgränssnitt (Rosetta). Om du behöver genomföra "
+"massöversättningar så tillåter Launchpad direkt uppladdning av .po-filer."
 
 #. module: base
 #: selection:base.language.install,lang:0
@@ -10235,8 +10160,8 @@ msgstr "Modulnamn"
 msgid ""
 "2. Group-specific rules are combined together with a logical AND operator"
 msgstr ""
-"2. Gruppspecifika regler är kombinerade tillsammans med en logisk AND  "
-"operand"
+"2. Gruppspecifika regler är kombinerade tillsammans med en logisk AND-"
+"operator"
 
 #. module: base
 #: view:res.request:0
@@ -10381,12 +10306,8 @@ msgstr ""
 #. module: base
 #: model:ir.actions.act_window,name:base.res_widget_act_window
 #: model:ir.ui.menu,name:base.menu_res_widget_act_window
-#, fuzzy
 msgid "Homepage Widgets"
-msgstr ""
-"#-#-#-#-#  .merge_file_EiefvT (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_ssZMfU (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"Hemside widgets"
+msgstr "Hemside-widgets"
 
 #. module: base
 #: field:ir.attachment,res_model:0
@@ -10522,7 +10443,7 @@ msgid ""
 "Comma-separated list of allowed view modes, such as 'form', 'tree', "
 "'calendar', etc. (Default: tree,form)"
 msgstr ""
-"Komma-separerad list över godkända vymoder som t ex 'form', 'tree', "
+"Komma-separerad lista över godkända vymoder som t ex 'form', 'tree', "
 "'calendar', etc. (Standard: tree,form)"
 
 #. module: base
@@ -10611,7 +10532,7 @@ msgstr "Meddelanden"
 #: code:addons/base/module/wizard/base_update_translations.py:0
 #, python-format
 msgid "Error!"
-msgstr "Fel!"
+msgstr "Fel"
 
 #. module: base
 #: help:multi_company.default,company_id:0
@@ -10691,31 +10612,19 @@ msgstr "klar"
 
 #. module: base
 #: field:res.partner.address,partner_id:0
-#, fuzzy
 msgid "Partner Name"
-msgstr ""
-"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"Partner namn"
+msgstr "Partnernamn"
 
 #. module: base
 #: model:res.partner.category,name:base.res_partner_category_17
-#, fuzzy
 msgid "HR sector"
-msgstr ""
-"#-#-#-#-#  .merge_file_EiefvT (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_ssZMfU (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"Personalsektorn"
+msgstr "Personalsektor"
 
 #. module: base
 #: selection:res.config.users,view:0 selection:res.config.view,view:0
 #: selection:res.users,view:0
-#, fuzzy
 msgid "Extended"
-msgstr ""
-"#-#-#-#-#  .merge_file_EiefvT (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_ssZMfU (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"Utökat"
+msgstr "Utökad"
 
 #. module: base
 #: model:ir.actions.act_window,help:base.action_partner_title_contact
@@ -13590,25 +13499,18 @@ msgstr ""
 
 #. module: base
 #: view:res.lang:0
-#, fuzzy
 msgid "%Y - Year with century."
-msgstr ""
-"#-#-#-#-#  .merge_file_EiefvT (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_ssZMfU (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"%Y - Är med århundrade"
+msgstr "%Y - År med århundrade"
 
 #. module: base
 #: view:publisher_warranty.contract.wizard:0
-#, fuzzy
 msgid ""
 "This wizard helps you register a publisher warranty contract in your OpenERP "
 "system. After the contract has been registered, you will be able to send "
 "issues directly to OpenERP."
 msgstr ""
-"#-#-#-#-#  .merge_file_x4k48P (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_hc7Dz8 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
 "Denna guide hjälper dig att registrera ett garantikontrakt från utgivaren i "
-"ditt OpenERP-system. Sedan kontraktet reggistrerats kan du skicka ärenden "
+"ditt OpenERP-system. Sedan kontraktet registrerats kan du skicka ärenden "
 "direkt till utgivaren."
 
 #. module: base
@@ -14021,14 +13923,12 @@ msgstr ""
 
 #. module: base
 #: code:addons/fields.py:534
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "The second argument of the many2many field %s must be a SQL table !You used "
 "%s, which is not a valid SQL table name."
 msgstr ""
-"#-#-#-#-#  .merge_file_3OAgqr (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_Egcu1j (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"Det andra argumentet i many2many fältet %s måste vara en SQL tabell! Du "
+"Det andra argumentet i many2many-fältet %s måste vara en SQL-tabell. Du "
 "använde %s , som inte är ett giltigt tabellnamn"
 
 #. module: base
@@ -14063,12 +13963,9 @@ msgstr ""
 
 #. module: base
 #: code:addons/orm.py:904
-#, fuzzy, python-format
+#, python-format
 msgid "The read method is not implemented on this object !"
-msgstr ""
-"#-#-#-#-#  .merge_file_x4k48P (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_hc7Dz8 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"Läsmetoden är ej implementerad för detta objekt!"
+msgstr "Läsmetoden är inte implementerad i detta objekt."
 
 #. module: base
 #: code:addons/orm.py:838
@@ -14078,15 +13975,13 @@ msgstr ""
 
 #. module: base
 #: code:addons/orm.py:210
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "Language with code \"%s\" is not defined in your system !\n"
 "Define it through the Administration menu."
 msgstr ""
-"#-#-#-#-#  .merge_file_x4k48P (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_hc7Dz8 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"Språket med koden \"%s\" är ej definierat på ditt system!\n"
-"Definiera den med hjälp av Administrationsmenyn."
+"Språket med koden \"%s\" är inte definierat på ditt system.\n"
+"Definiera den med hjälp av administrationsmenyn."
 
 #. module: base
 #: code:addons/orm.py:4018
@@ -14111,12 +14006,9 @@ msgstr ""
 
 #. module: base
 #: code:addons/fields.py:100
-#, fuzzy, python-format
+#, python-format
 msgid "Not implemented set_memory method !"
-msgstr ""
-"#-#-#-#-#  .merge_file_x4k48P (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_hc7Dz8 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"Ej implementerad set_memory metod!"
+msgstr "Ej implementerad set_memory metod."
 
 #. module: base
 #: code:addons/orm.py:3147
@@ -14176,12 +14068,9 @@ msgstr ""
 
 #. module: base
 #: code:addons/orm.py:1622
-#, fuzzy, python-format
+#, python-format
 msgid "There is no view of type '%s' defined for the structure!"
-msgstr ""
-"#-#-#-#-#  .merge_file_x4k48P (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_hc7Dz8 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"Det finns ingen vy av typ %s definierar för denna struktur!"
+msgstr "Det finns ingen vy av typ %s definierad för denna struktur."
 
 #. module: base
 #: code:addons/orm.py:758
@@ -14652,12 +14541,9 @@ msgstr ""
 
 #. module: base
 #: code:addons/base/res/res_user.py:507
-#, fuzzy, python-format
+#, python-format
 msgid "Setting empty passwords is not allowed for security reasons!"
-msgstr ""
-"#-#-#-#-#  .merge_file_x4k48P (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_hc7Dz8 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"Att ha tomma lösenord är Ej tillåtet av säkerhetskäl!"
+msgstr "Att ha tomma lösenord är inte tillåtet av säkerhetskäl."
 
 #. module: base
 #: code:addons/base/ir/ir_model.py:328
