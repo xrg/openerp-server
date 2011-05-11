@@ -5,7 +5,7 @@ msgstr ""
 "Project-Id-Version: OpenERP Server 5.0.0\n"
 "Report-Msgid-Bugs-To: support@openerp.com\n"
 "POT-Creation-Date: 2011-04-26 16:56+0000\n"
-"PO-Revision-Date: 2011-04-26 12:47+0300\n"
+"PO-Revision-Date: 2011-05-11 23:44+0300\n"
 "Last-Translator: P. Christeas <p_christ@hol.gr>\n"
 "Language-Team: Greek <openerp@lists.hellug.gr>\n"
 "Language: el\n"
@@ -297,6 +297,8 @@ msgstr ""
 msgid ""
 "Unable to install module \"%s\" because an external dependency is not met: %s"
 msgstr ""
+"Αδυναμία χρήσης του αρθρώματος \"%s\", επειδή μια εξωτερική εξάρτηση δεν "
+"ικανοποιείται: %s"
 
 #. module: base
 #: code:addons/base/module/module.py:260
@@ -304,6 +306,8 @@ msgstr ""
 msgid ""
 "Unable to upgrade module \"%s\" because an external dependency is not met: %s"
 msgstr ""
+"Αδυναμία αναβάθμισης του αρθρώματος \"%s\", επειδή μια εξωτερική εξάρτηση δεν "
+"ικανοποιείται: %s"
 
 #. module: base
 #: code:addons/base/module/module.py:262
@@ -327,6 +331,9 @@ msgid ""
 "You try to install module '%s' that depends on module '%s'.\n"
 "But the latter module is not available in your system."
 msgstr ""
+"Προσπαθείτε να εγκαταστήσετε το πρόσθετο '%s' το οποίο εξαρτάται από το "
+"πρόσθετο: '%s',\n"
+"αλλά αυτό δεν είναι διαθέσιμο στο σύστημα σας."
 
 #. module: base
 #: code:addons/base/module/module.py:305
@@ -636,6 +643,9 @@ msgid ""
 "Please use the change password wizard (in User Preferences or User menu) to "
 "change your own password."
 msgstr ""
+"Παρακαλώ χρησιμοποιήστε τον οδηγό αλλαγής κωδικού (από το μενού Χρήστη ή "
+"Ρυθμίσεων Χρήστη) "
+"αν θέλετε να αλλάξετε τον κωδικό σας."
 
 #. module: base
 #: code:addons/base/res/res_user.py:285
@@ -674,6 +684,7 @@ msgstr ""
 #, python-format
 msgid "Setting empty passwords is not allowed for security reasons!"
 msgstr ""
+"Για λόγους ασφαλείας, δεν επιτρέπεται να ορίσετε έναν κενό κωδικό πρόσβασης!"
 
 #. module: base
 #: code:addons/base/res/res_user.py:536
@@ -816,7 +827,7 @@ msgstr "Παρακαλώ ελέγξτε ότι όλες οι γραμμές σα
 #: code:addons/orm.py:1098
 #, python-format
 msgid "key '%s' not found in selection field '%s'"
-msgstr ""
+msgstr "το κλειδί '%s' δεν είναι στις επιλογές του '%s'"
 
 #. module: base
 #: code:addons/orm.py:1100
@@ -875,6 +886,8 @@ msgid ""
 "Can't find view for field '%s' in view parts of object model '%s':\n"
 "Please define some view for that model."
 msgstr ""
+"Δεν υπάρχει προβολή για το '%s' ώστε να προβληθεί το μοντέλο '%s'\n"
+"Παρακαλώ ορίσετε προβολή για το πεδίο αυτό."
 
 #. module: base
 #: code:addons/orm.py:1670
@@ -1103,7 +1116,7 @@ msgstr "Εντοπίστηκε αναδρομή."
 #: code:addons/orm.py:4232
 #, python-format
 msgid "UserError"
-msgstr "UserError"
+msgstr "Σφάλμα Χρήστη"
 
 #. module: base
 #: code:addons/orm.py:4570
@@ -1124,13 +1137,13 @@ msgstr ""
 #: code:addons/orm.py:4733
 #, python-format
 msgid "Object model does not support order by \"%s\"!"
-msgstr ""
+msgstr "Το μοντέλο αντικειμένου δεν υποστηρίζει ταξινόμηση ανά \"%s\"!"
 
 #. module: base
 #: code:addons/orm.py:4861
 #, python-format
 msgid "Record #%d of %s not found, cannot copy!"
-msgstr ""
+msgstr "Η εγγραφή #%d του %s δε βρέθηκε, δεν γίνεται αντίγραφο!"
 
 #. module: base
 #: code:addons/osv.py:136
@@ -2811,7 +2824,7 @@ msgstr "Μορφή Ώρας"
 #. module: base
 #: field:res.lang,translatable:0 view:res.lang:0
 msgid "Translatable"
-msgstr "Translatable"
+msgstr "Μεταφράσιμο"
 
 #. module: base
 #: field:res.log,context:0 view:ir.filters:0
@@ -3356,7 +3369,7 @@ msgstr ""
 #. module: base
 #: help:ir.actions.report.xml,header:0
 msgid "Add or not the coporate RML header"
-msgstr "Add or not the coporate RML header"
+msgstr "Να προστεθεί ή όχι η κεφαλίδα RML της εταιρείας"
 
 #. module: base
 #: help:ir.actions.report.xml,report_file:0
@@ -8924,7 +8937,7 @@ msgstr "Γενικές Πληροφορίες"
 #. module: base
 #: view:res.company:0
 msgid "Header/Footer"
-msgstr "Header/Footer"
+msgstr "Κεφαλίδα/Υποσέλιδο"
 
 #. module: base
 #: view:res.company:0
@@ -8944,7 +8957,7 @@ msgstr "Πορτραίτο"
 #. module: base
 #: view:res.company:0
 msgid "Your Logo - Use a size of about 450x150 pixels."
-msgstr "Λογότυπο - Χρησιμοποιείστε μέγεθος 450x150 pixels."
+msgstr "Λογότυπο - Χρησιμοποιήστε μέγεθος 450x150 pixels."
 
 #. module: base
 #: view:res.config:0 wizard_button:server.action.create,init,step_1:0
