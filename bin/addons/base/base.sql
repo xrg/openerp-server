@@ -11,7 +11,7 @@ CREATE TABLE ir_values
     id serial,
     name varchar(128) NOT NULL,
     key varchar(128) NOT NULL,
-    key2 varchar(256) NOT NULL,
+    key2 varchar(128) NOT NULL,
     model varchar(128) NOT NULL,
     value text,
     meta text DEFAULT NULL,
@@ -38,13 +38,13 @@ CREATE TABLE ir_model_fields (
   model_id int REFERENCES ir_model ON DELETE CASCADE,
   name varchar(64) DEFAULT ''::varchar NOT NULL,
   relation varchar(64),
-  select_level varchar(4),
+  select_level varchar(16),
   field_description varchar(256),
   ttype varchar(64),
-  state varchar(64) DEFAULT 'base',
+  state varchar(16) DEFAULT 'base',
   view_load boolean,
   relate boolean DEFAULT False,
-  relation_field varchar(128),
+  relation_field varchar(64),
   "translate" boolean NOT NULL DEFAULT False,
   PRIMARY KEY(id)
 );
@@ -96,7 +96,7 @@ INHERITS (ir_actions);
 
 CREATE TABLE ir_act_url (
     url text NOT NULL,
-    target varchar(64) NOT NULL,
+    target varchar(16) NOT NULL,
     PRIMARY KEY(id)
 )
 INHERITS (ir_actions);
@@ -111,7 +111,7 @@ CREATE TABLE ir_ui_view (
     id serial NOT NULL,
     name varchar(64) DEFAULT ''::varchar NOT NULL,
     model varchar(64) DEFAULT ''::varchar NOT NULL,
-    "type" varchar(64) DEFAULT 'form'::varchar NOT NULL,
+    "type" varchar(16) DEFAULT 'form'::varchar NOT NULL,
     arch text NOT NULL,
     field_parent varchar(64),
     priority integer DEFAULT 5 NOT NULL,
@@ -148,7 +148,7 @@ CREATE TABLE res_users (
     email varchar(64) DEFAULT NULL,
     context_tz varchar(64) DEFAULT NULL,
     signature text,
-    context_lang varchar(64) DEFAULT '',
+    context_lang varchar(16) DEFAULT '',
     -- No FK REFERENCES below, will be added later by ORM
     -- (when the destination rows exist)
     company_id int,
@@ -192,7 +192,7 @@ CREATE TABLE wkf_activity
     subflow_id int REFERENCES wkf ON DELETE SET NULL,
     split_mode varchar(3) DEFAULT 'XOR',
     join_mode varchar(3) DEFAULT 'XOR',
-    kind varchar(16) NOT NULL DEFAULT 'dummy',
+    kind varchar(64) NOT NULL DEFAULT 'dummy',
     name varchar(64),
     signal_send varchar(32) DEFAULT NULL,
     flow_start boolean DEFAULT False,
@@ -292,7 +292,7 @@ CREATE TABLE ir_module_module (
     description text,
     demo boolean DEFAULT False,
     web boolean DEFAULT FALSE,
-    license VARCHAR(32),
+    license VARCHAR(26),
     PRIMARY KEY(id)
 );
 ALTER TABLE ir_module_module add constraint name_uniq unique (name);
