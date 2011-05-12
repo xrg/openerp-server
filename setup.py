@@ -220,15 +220,13 @@ if not os.getenv('NO_INSTALL_REQS'):
                         'pytz',
                         'reportlab',
                         'pyyaml',
-                        'egenix-mx-base']
+                        ]
       # Others just needed by some addons, may be skipped at lean
       # installation..
     if not os.getenv('NO_INSTALL_EXTRA_REQS'):
         install_requires += ['pydot', 
-                        # 'sqlalchemy', 'django',
                         'pywebdav', 'ldap',
-                        # 'cx_Oracle', 'mysqldb',
-                        'feedparser', 'bsddb3', 'caldav', ],
+                        'feedparser',],
 
 
 setup(name             = name,
