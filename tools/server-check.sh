@@ -51,7 +51,7 @@ while [ -n "$1" ] ; do
     shift 1
 done
 
-if [ ! -f "/var/run/openerp-server-check" ] && [ -z "$DEVEL_MODE" ] ; then
+if [ -f "/var/run/openerp-server-checked" ] && [ -z "$DEVEL_MODE" ] ; then
     # only run this if the magic file is there
     exit 0
 fi
@@ -94,7 +94,7 @@ if [ -n "$SUCMD"  ] ; then
     su $PG_ROOT -c "$CMD" || "$?"
     
     if [ -z "$DEVEL_MODE" ] ; then
-	rm -f "/var/run/openerp-server-check"
+	touch "/var/run/openerp-server-checked"
     fi
     exit 0
 fi
@@ -111,7 +111,7 @@ fi
 
 echo "OK"
 if [ -z "$DEVEL_MODE" ] && [ -z "$IN_SU" ] ; then
-    rm -f "/var/run/openerp-server-check"
+    touch "/var/run/openerp-server-checked"
 fi
 
 #eof
