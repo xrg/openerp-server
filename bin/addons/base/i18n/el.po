@@ -5,7 +5,7 @@ msgstr ""
 "Project-Id-Version: OpenERP Server 5.0.0\n"
 "Report-Msgid-Bugs-To: support@openerp.com\n"
 "POT-Creation-Date: 2011-04-26 16:56+0000\n"
-"PO-Revision-Date: 2011-05-11 23:44+0300\n"
+"PO-Revision-Date: 2011-05-13 12:23+0300\n"
 "Last-Translator: P. Christeas <p_christ@hol.gr>\n"
 "Language-Team: Greek <openerp@lists.hellug.gr>\n"
 "Language: el\n"
@@ -1005,6 +1005,8 @@ msgstr "Δεν βρέθηκε το ID!"
 #, python-format
 msgid "Id #%d of %s object not found, you may need to repeat the operation!"
 msgstr ""
+"Η εγγραφή #%d του μοντέλου %s δε βρέθηκε, ίσως χρειάζεται να επαναλάβετε τη "
+"διαδικασία!"
 
 #. module: base
 #: code:addons/orm.py:2507 code:addons/orm.py:4434
