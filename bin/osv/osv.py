@@ -176,7 +176,7 @@ class object_proxy(netsvc.Service):
                 __fn_file = inspect.getfile(fn)
                 tb_s = "Function %s from file %s" %( __fn_name, __fn_file)
             except Exception:
-                tb_s = "Object: %s Function: %s\n" % (object, getattr(object, method))
+                tb_s = "Object: %s Function: %s\n" % (object, getattr(object, method,'<%s ?>' % method))
             self.logger.exception(tb_s)
             raise
 
@@ -189,7 +189,7 @@ class object_proxy(netsvc.Service):
                     raise except_osv('Access Denied', 'Private methods (such as %s) cannot be called remotely.' % (method,))
                 res = self.execute_cr(cr, uid, obj, method, *args, **kw)
                 if res is None:
-                    self.logger.warning('Method %s.%s can not return a None value (crash in XML-RPC)' % (obj, method))
+                    self.logger.warning('Method %s.%s can not return a None value (crash in XML-RPC)', obj, method)
                 cr.commit()
             except Exception:
                 cr.rollback()
