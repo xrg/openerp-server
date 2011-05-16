@@ -170,6 +170,10 @@ class YamlInterpreter(object):
     def get_id(self, xml_id):
         if xml_id is False:
             return False
+        if is_eval(xml_id):
+            xml_id = self.process_eval(xml_id)
+            # and continue, allow to be parsed/dereferenced
+
         if not xml_id:
             raise YamlImportException("The xml_id should be a non empty string.")
         if isinstance(xml_id, types.IntType):
