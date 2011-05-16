@@ -765,7 +765,7 @@ class YamlInterpreter(object):
         for r in range(repeat.num):
             for key, val in seqs.items():
                 self.eval_context[key] = val % r
-            ret = self._process_node(subnode, **kwargs)
+            ret = self._process_node(subnode, multi=True, **kwargs)
             if ret is not None:
                 ret_list.append(ret)
         return ret_list
@@ -813,7 +813,7 @@ class YamlInterpreter(object):
                 self.logger.exception(misc.ustr(e))
                 raise
     
-    def _process_node(self, node):
+    def _process_node(self, node, multi=False):
         if is_comment(node):
             self.process_comment(node)
         elif is_assert(node):
@@ -850,6 +850,9 @@ class YamlInterpreter(object):
             self.process_repeat(node)
         elif node is None:
             self.process_none()
+        elif multi and isinstance(node, dict) and len(node) > 1:
+            for k, v in node.items():
+                self._process_node({k: v}, multi=True)
         else:
             raise YamlImportException("Can not process YAML block: %s" % node)
     
