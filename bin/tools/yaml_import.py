@@ -193,7 +193,10 @@ class YamlInterpreter(object):
     def get_context(self, node, eval_dict):
         context = self.context.copy()
         if node.context:
-            context.update(eval(node.context, eval_dict))
+            if isinstance(node.context, dict):
+                context.update(node.context)
+            else:
+                context.update(eval(node.context, eval_dict))
         return context
 
     def isnoupdate(self, node):
@@ -330,8 +333,7 @@ class YamlInterpreter(object):
                         return None
 
             record_dict = self._create_record(model, fields)
-            #context = self.get_context(record, self.eval_context)
-            context = record.context #TOFIX: record.context like {'withoutemployee':True} should pass from self.eval_context. example: test_project.yml in project module
+            context = self.get_context(record, self.eval_context)
             id = self.pool.get('ir.model.data')._update(self.cr, 1, record.model, \
                     self.module, record_dict, record.id, noupdate=self.isnoupdate(record), mode=self.mode, context=context)
             if model._debug:
