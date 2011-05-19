@@ -4,14 +4,14 @@ msgstr ""
 "Project-Id-Version: OpenERP Server 5.0.4\n"
 "Report-Msgid-Bugs-To: support@openerp.com\n"
 "POT-Creation-Date: 2011-01-11 11:14+0000\n"
-"PO-Revision-Date: 2011-03-22 22:41+0000\n"
-"Last-Translator: Pierre Burnier <Unknown>\n"
+"PO-Revision-Date: 2011-05-16 16:57+0000\n"
+"Last-Translator: lolivier <olivier.lenoir@free.fr>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-03-23 06:23+0000\n"
-"X-Generator: Launchpad (build 12559)\n"
+"X-Launchpad-Export-Date: 2011-05-17 06:04+0000\n"
+"X-Generator: Launchpad (build 12959)\n"
 
 #. module: base
 #: code:addons/base/ir/ir_actions.py:0 code:addons/base/ir/ir_model.py:0
@@ -14134,8 +14134,12 @@ msgstr ""
 
 #. module: base
 #: selection:ir.model.fields,select_level:0
+#, fuzzy
 msgid "Advanced Search (deprecated)"
 msgstr ""
+"#-#-#-#-#  .merge_file_Is8Wdk (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_iElpxg (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"Recherche avancée (obsolète)"
 
 #. module: base
 #: code:addons/base/ir/ir_model.py:317
