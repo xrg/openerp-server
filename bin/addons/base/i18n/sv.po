@@ -4,14 +4,14 @@ msgstr ""
 "Project-Id-Version: OpenERP Server 5.0.0\n"
 "Report-Msgid-Bugs-To: support@openerp.com\n"
 "POT-Creation-Date: 2011-01-11 11:14+0000\n"
-"PO-Revision-Date: 2011-04-26 19:36+0000\n"
-"Last-Translator: Jan-Eric Lindh <jelindh@gmail.com>\n"
+"PO-Revision-Date: 2011-05-20 16:43+0000\n"
+"Last-Translator: Anders Wallenquist <anders.wallenquist@vertel.se>\n"
 "Language-Team: <>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-04-27 05:45+0000\n"
-"X-Generator: Launchpad (build 12758)\n"
+"X-Launchpad-Export-Date: 2011-05-21 06:14+0000\n"
+"X-Generator: Launchpad (build 12959)\n"
 
 #. module: base
 #: code:addons/base/ir/ir_actions.py:0 code:addons/base/ir/ir_model.py:0
@@ -309,7 +309,7 @@ msgid ""
 "Save this document to a %s file and edit it with a specific software or a "
 "text editor. The file encoding is UTF-8."
 msgstr ""
-"Spara detta dokument till en %s fil och redigera den med en speciell "
+"Spara detta dokument till en %sfil och redigera den med en speciell "
 "programvara eller en textredigerare. Filkodningen är UTF-8."
 
 #. module: base
@@ -507,13 +507,19 @@ msgstr ""
 
 #. module: base
 #: code:addons/osv/osv.py:0
-#, python-format
+#, fuzzy, python-format
 msgid ""
 "The operation cannot be completed, probably due to the following:\n"
 "- deletion: you may be trying to delete a record while other records still "
 "reference it\n"
 "- creation/update: a mandatory field is not correctly set"
 msgstr ""
+"#-#-#-#-#  .merge_file_TeFBO8 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_0Wr6ZC (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Operationen inte slutförd, troligen på grund av följande:\n"
+"- radering: du försöker radera en post som andra poster fortfarande "
+"refererar till\n"
+"- skapa/uppdatering: ett obligatoriskt fält är inte ifyllt"
 
 #. module: base
 #: constraint:ir.actions.act_window:0
@@ -3253,10 +3259,15 @@ msgstr ""
 #. module: base
 #: help:ir.actions.act_window.view,multi:0
 #: help:ir.actions.report.custom,multi:0 help:ir.actions.report.xml,multi:0
+#, fuzzy
 msgid ""
 "If set to true, the action will not be displayed on the right toolbar of a "
 "form view."
 msgstr ""
+"#-#-#-#-#  .merge_file_TeFBO8 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_0Wr6ZC (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Om sant, så kommer inte åtgärden att visas i verktygsfältet till höger i "
+"formulärvyn."
 
 #. module: base
 #: help:ir.actions.report.xml,attachment:0
@@ -4389,12 +4400,8 @@ msgstr ""
 #. module: base
 #: model:ir.actions.wizard,name:base.wizard_upgrade
 #: model:ir.ui.menu,name:base.menu_wizard_upgrade
-#, fuzzy
 msgid "Apply Scheduled Upgrades"
-msgstr ""
-"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"Applicera planerade uppgraderingar"
+msgstr "Inför uppgraderingar"
 
 #. module: base
 #: model:ir.model,name:base.model_ir_actions_act_window
@@ -4805,12 +4812,8 @@ msgstr ""
 
 #. module: base
 #: model:ir.module.module,description:base.module_meta_information
-#, fuzzy
 msgid "The kernel of OpenERP, needed for all installation."
-msgstr ""
-"#-#-#-#-#  .merge_file_LN9yti (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_q28zqL (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"OpenERP's kärna, behövs för alla installationer"
+msgstr "OpenERP's kärna, behövs för alla installationer."
 
 #. module: base
 #: model:ir.ui.menu,name:base.custom_shortcuts
@@ -5555,7 +5558,7 @@ msgstr "Kyrgyz Republic (Kyrgyzstan)"
 #. module: base
 #: model:res.country,name:base.kh
 msgid "Cambodia, Kingdom of"
-msgstr "Cambodia, Kingdom of"
+msgstr "Kambodja (kungariket)"
 
 #. module: base
 #: model:res.country,name:base.ki
@@ -6856,12 +6859,8 @@ msgstr ""
 
 #. module: base
 #: selection:ir.model.fields,select_level:0
-#, fuzzy
 msgid "Not Searchable"
-msgstr ""
-"#-#-#-#-#  .merge_file_LN9yti (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_q28zqL (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"Inte Sökbara"
+msgstr "Inte sökbara"
 
 #. module: base
 #: selection:ir.model.fields,state:0
@@ -6928,22 +6927,14 @@ msgstr ""
 #. module: base
 #: selection:ir.module.module,state:0
 #: selection:ir.module.module.dependency,state:0
-#, fuzzy
 msgid "Not Installed"
-msgstr ""
-"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"Inte installerat"
+msgstr "Inte installerad"
 
 #. module: base
 #: selection:ir.module.module,state:0
 #: selection:ir.module.module.dependency,state:0
-#, fuzzy
 msgid "To be installed"
-msgstr ""
-"#-#-#-#-#  .merge_file_LN9yti (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_q28zqL (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"Att installeras"
+msgstr "Kommer att installeras"
 
 #. module: base
 #: selection:ir.module.module,state:0
@@ -7882,7 +7873,7 @@ msgstr ""
 #. module: base
 #: selection:module.lang.install,init,lang:0
 msgid "Dutch / Nederlands"
-msgstr "Dutch / Nederlands"
+msgstr "Holland / Nederländerna"
 
 #. module: base
 #: selection:module.lang.install,init,lang:0
@@ -8641,12 +8632,8 @@ msgstr ""
 
 #. module: base
 #: view:ir.module.module:0
-#, fuzzy
 msgid "Cancel Install"
-msgstr ""
-"#-#-#-#-#  .merge_file_LN9yti (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_q28zqL (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"Avbryt installering"
+msgstr "Avbryt installationen"
 
 #. module: base
 #: view:ir.module.module:0
@@ -9908,7 +9895,7 @@ msgstr "Spanska (VE) / Español (VE)"
 #. module: base
 #: field:ir.actions.act_window,display_menu_tip:0
 msgid "Display Menu Tips"
-msgstr "Visa Meny Tips"
+msgstr "Visa menytips"
 
 #. module: base
 #: field:res.partner,ref:0
@@ -9929,7 +9916,7 @@ msgstr ""
 #: code:addons/base/res/res_user.py:0
 #, python-format
 msgid "\"smtp_server\" needs to be set to send mails to users"
-msgstr "\"Smtp_server\" måste ställas in för att skicka mail till användare"
+msgstr "\"Smtp_server\" måste ställas in för att skicka e-post till användare"
 
 #. module: base
 #: help:multi_company.default,company_dest_id:0
@@ -10390,10 +10377,15 @@ msgstr ""
 
 #. module: base
 #: view:base.module.update:0
+#, fuzzy
 msgid ""
 "This wizard will scan all module repositories on the server side to detect "
 "newly added modules as well as any change to existing modules."
 msgstr ""
+"#-#-#-#-#  .merge_file_TeFBO8 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_0Wr6ZC (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Denna guide söker igenom alla modularkiv på servern och upptäcker nya "
+"moduler liksom uppdateringar av befintliga moduler"
 
 #. module: base
 #: view:workflow.activity:0
@@ -10910,7 +10902,7 @@ msgid ""
 "The selected language has been successfully installed. You must change the "
 "preferences of the user and open a new menu to view the changes."
 msgstr ""
-"Språket du valde jhar installerats. Du kan ändra egenskaperna av användaren "
+"Språket du valde har installerats. Du kan ändra egenskaperna av användaren "
 "och öppna en meny för att se ändringarna."
 
 #. module: base
@@ -11797,12 +11789,8 @@ msgstr ""
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_view_base_module_upgrade_install
-#, fuzzy
 msgid "Module Upgrade Install"
-msgstr ""
-"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"Modul uppgradering installering"
+msgstr "Moduluppgradering"
 
 #. module: base
 #: field:multi_company.default,company_dest_id:0
@@ -12844,12 +12832,8 @@ msgstr ""
 
 #. module: base
 #: view:base.module.update:0
-#, fuzzy
 msgid "Click on Update below to start the process..."
-msgstr ""
-"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"Klicka op Uppdatera nedan för att starta bearbetningen..."
+msgstr "Klicka på \"Uppdatera\" nedan för att starta bearbetningen..."
 
 #. module: base
 #: model:ir.actions.act_window,name:base.res_widget_user_act_window
@@ -13493,9 +13477,12 @@ msgstr "Kontrakt"
 
 #. module: base
 #: code:addons/base/publisher_warranty/publisher_warranty.py:0
-#, python-format
+#, fuzzy, python-format
 msgid "Error during communication with the publisher warranty server."
 msgstr ""
+"#-#-#-#-#  .merge_file_TeFBO8 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_0Wr6ZC (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Fel vid kommunikation med servern för 'publisher warranty'."
 
 #. module: base
 #: view:res.lang:0
@@ -13954,12 +13941,9 @@ msgstr ""
 
 #. module: base
 #: code:addons/orm.py:2160
-#, fuzzy, python-format
+#, python-format
 msgid "Invalid group_by"
-msgstr ""
-"#-#-#-#-#  .merge_file_upMVls (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_zXcxxB (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"Felaktig Group_by"
+msgstr "Felaktig group_by"
 
 #. module: base
 #: code:addons/orm.py:904
@@ -13969,9 +13953,12 @@ msgstr "Läsmetoden är inte implementerad i detta objekt."
 
 #. module: base
 #: code:addons/orm.py:838
-#, python-format
+#, fuzzy, python-format
 msgid "Key/value '%s' not found in selection field '%s'"
 msgstr ""
+"#-#-#-#-#  .merge_file_TeFBO8 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_0Wr6ZC (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Nyckel/värde '%s' saknas i urvalsfältet '%s'"
 
 #. module: base
 #: code:addons/orm.py:210
@@ -13985,9 +13972,12 @@ msgstr ""
 
 #. module: base
 #: code:addons/orm.py:4018
-#, python-format
+#, fuzzy, python-format
 msgid "Record #%d of %s not found, cannot copy!"
 msgstr ""
+"#-#-#-#-#  .merge_file_TeFBO8 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_0Wr6ZC (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Post #%d av %s saknas, kan inte kopiera!"
 
 #. module: base
 #: code:addons/orm.py:1744
@@ -14529,15 +14519,13 @@ msgstr ""
 
 #. module: base
 #: code:addons/base/ir/ir_model.py:304
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "Properties of base fields cannot be altered in this manner! Please modify "
 "them through Python code, preferably through a custom addon!"
 msgstr ""
-"#-#-#-#-#  .merge_file_3OAgqr (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_Egcu1j (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"Egenskaperna för basfälten can inte ändras på detta sätt! var vänlig och "
-"ändra dem med Python kod, eller via en egengjord Addon."
+"Egenskaperna för basfälten kan inte ändras på detta sätt. Var vänlig och "
+"ändra dem med Pythonkod, eller via ett eget tillägg."
 
 #. module: base
 #: code:addons/base/res/res_user.py:507
@@ -14547,15 +14535,21 @@ msgstr "Att ha tomma lösenord är inte tillåtet av säkerhetskäl."
 
 #. module: base
 #: code:addons/base/ir/ir_model.py:328
-#, python-format
+#, fuzzy, python-format
 msgid "Changing the model of a field is forbidden!"
 msgstr ""
+"#-#-#-#-#  .merge_file_TeFBO8 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_0Wr6ZC (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Förbjudet att ändring av fältets klasstillhörighet!"
 
 #. module: base
 #: code:addons/base/res/res_user.py:206
-#, python-format
+#, fuzzy, python-format
 msgid "Operation Canceled"
 msgstr ""
+"#-#-#-#-#  .merge_file_TeFBO8 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_0Wr6ZC (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Åtgärden avbruten"
 
 #. module: base
 #: help:ir.model.fields,model:0
