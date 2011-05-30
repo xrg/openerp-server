@@ -101,8 +101,6 @@ class db(baseExportService):
         fn = getattr(self, 'exp_'+method)
         return fn(*params)
 
-    #def new_dispatch(self,method,auth,params):
-    #    pass
     def _create_empty_database(self, name):
         db = sql_db.db_connect('template1')
         cr = db.cursor()
