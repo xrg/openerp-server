@@ -546,7 +546,7 @@ class XMLRPCRequestHandler2_Db(netsvc.OpenERPDispatcher2,xrBaseRequestHandler):
     def get_db_from_path(self, path):
         if path.startswith('/'):
             path = path[1:]
-        db = path.split('/')[0]
+        db = path.split('/',1)[0]
         return db
 
 def init_xmlrpc():
