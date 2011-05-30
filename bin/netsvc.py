@@ -858,19 +858,24 @@ class OpenERPDispatcher:
             raise OpenERPDispatcherException(e.args[0], details=details, traceback=tb_s)
 
 class OpenERPDispatcher2:
-
+    _logger = logging.getLogger('rpc')
+    
     def dispatch(self, service_name, method, params):
-        _logger = logging.getLogger('rpc')
-        def log(title, msg):
-            _logger.log(logging.DEBUG_RPC,'%s: %s' %(title, pformat(msg)))
+        
+        def _real_log(title, msg):
+            self._logger.log(logging.DEBUG_RPC,'%s: %s' %(title, pformat(msg)))
         
         try:
+            if self._logger.isEnabledFor(logging.DEBUG_RPC):
+                log = _real_log
+            else:
+                log = lambda *a: None
             log('service', service_name)
             log('method', method)
             log('params', params)
             auth = getattr(self, 'auth_proxy', None)
             if not auth:
-                _logger.warn("No Authentication!")
+                self._logger.warn("No Authentication!")
             result = ExportService.getService(service_name).new_dispatch(method, auth, params)
             log('result', result)
             # We shouldn't marshall None,
