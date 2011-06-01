@@ -66,6 +66,11 @@ class ir_sequence(osv.osv):
     }
 
     def _process(self, s):
+        if not s:
+            return ''
+        elif not '%(' in s:
+            return s
+
         return (s or '') % {
             'year':time.strftime('%Y'),
             'month': time.strftime('%m'),
