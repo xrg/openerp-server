@@ -386,12 +386,14 @@ class ConnectionPool(object):
         self._connections = []
         self._maxconn = max(maxconn, 1)
         self._lock = threading.Lock()
-        self._debug_pool = False
+        self._debug_pool = tools.config.get_misc('debug', 'db_pool', False)
         self.sql_stats = {}
         if pgmode: # not None or False
             Cursor.set_pgmode(pgmode)
 
     def __del__(self):
+        # explicitly free them
+        del self._connections
         if self.sql_stats:
             self.print_all_stats()
 
