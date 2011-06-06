@@ -45,8 +45,7 @@ class ir_translation(osv.osv):
 
     def _get_language(self, cr, uid, context):
         lang_model = self.pool.get('res.lang')
-        lang_ids = lang_model.search(cr, uid, [('translatable', '=', True)], context=context)
-        lang_data = lang_model.read(cr, uid, lang_ids, ['code','name'])
+        lang_data = lang_model.search_read(cr, uid, [('translatable', '=', True)], fields=['code','name'], context=context)
         l = [(d['code'],d['name']) for d in lang_data]
         return l
 
