@@ -57,6 +57,10 @@ class ir_translation(osv.osv):
         'src': fields.text('Source'),
         'value': fields.text('Translation Value'),
     }
+    
+    _sql_constraints = [ ('lang_fkey_res_lang', 'FOREIGN KEY(lang) REFERENCES res_lang(code)', 
+        'Language code of translation item must be among known languages' ), ]
+
 
     def _auto_init(self, cr, context=None):
         super(ir_translation, self)._auto_init(cr, context)
@@ -70,6 +74,11 @@ class ir_translation(osv.osv):
             cr.execute('CREATE INDEX ir_translation_src ON ir_translation USING hash (src)')
             cr.commit()
 
+    def _check_selection_field_value(self, cr, uid, field, value, context=None):
+        if field == 'lang':
+            return
+        return super(ir_translation, self)._check_selection_field_value(cr, uid, field, value, context=context)
+    
     @tools.cache(skiparg=3, multi='ids')
     def _get_ids(self, cr, uid, name, tt, lang, ids):
         translations = dict.fromkeys(ids, False)

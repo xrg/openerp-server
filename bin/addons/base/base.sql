@@ -316,6 +316,12 @@ CREATE TABLE res_company (
     PRIMARY KEY(id)
 );
 
+CREATE TABLE res_lang (
+    id serial PRIMARY KEY,
+    name VARCHAR(64) NOT NULL UNIQUE,
+    code VARCHAR(16) NOT NULL UNIQUE
+);
+
 CREATE TABLE ir_model_data (
     id serial NOT NULL,
     create_uid integer,
