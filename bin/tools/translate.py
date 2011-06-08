@@ -899,7 +899,6 @@ def trans_load_data(cr, fileobj, fileformat, lang, lang_name=None, verbose=True,
     pool = pooler.get_pool(db_name)
     lang_obj = pool.get('res.lang')
     trans_obj = pool.get('ir.translation')
-    model_data_obj = pool.get('ir.model.data')
     iso_lang = tools.get_iso_codes(lang)
     try:
         uid = 1
@@ -932,6 +931,8 @@ def trans_load_data(cr, fileobj, fileformat, lang, lang_name=None, verbose=True,
 
         # read the rest of the file
         line = 1
+        irt_cursor = trans_obj._get_import_cursor(cr, uid, context=context)
+
         for row in reader:
             line += 1
             # skip empty rows and rows where the translation field (=last fiefd) is empty
@@ -951,44 +952,32 @@ def trans_load_data(cr, fileobj, fileformat, lang, lang_name=None, verbose=True,
             # This would skip terms that fail to specify a res_id
             if not dic.get('res_id', False):
                 continue
-            try:
-                dic['res_id'] = dic['res_id'] and int(dic['res_id']) or 0
-            except ValueError:
+
+            res_id = dic.pop('res_id')
+            if res_id and isinstance(res_id, (int, long)) \
+                or (isinstance(res_id, basestring) and res_id.isdigit()):
+                    dic['res_id'] = int(res_id)
+            else:
                 try:
                     tmodel = dic['name'].split(',')[0]
-                    if '.' in dic['res_id']:
-                        tmodule, tname = dic['res_id'].split('.', 1)
+                    if '.' in res_id:
+                        tmodule, tname = res_id.split('.', 1)
                     else:
                         tmodule = dic_module
-                        tname = dic['res_id']
-                    model_data_res = model_data_obj.search_read(cr, uid, [
-                        ('model', '=', tmodel),
-                        ('module', '=', tmodule),
-                        ('name', '=', tname),
-                        ], fields=['res_id'])
-                    if model_data_res:
-                        dic['res_id'] = model_data_res[0]['res_id']
-                    else:
-                        dic['res_id'] = False
-                except Exception:
-                    logger.warning("Could not locate resource for %s, please fix the po file.",
-                                    dic['res_id'], exc_info=True)
-                    dic['res_id'] = False
+                        tname = res_id
+                    dic['imd_model'] = tmodel
+                    dic['imd_module'] = tmodule
+                    dic['imd_name'] =  tname
 
-            args = [
-                ('lang', '=', lang),
-                ('type', '=', dic['type']),
-                ('name', '=', dic['name']),
-                ('src', '=', dic['src']),
-            ]
-            if dic['type'] == 'model':
-                args.append(('res_id', '=', dic['res_id']))
-            ids = trans_obj.search(cr, uid, args)
-            if ids:
-                if context.get('overwrite') and dic['value']:
-                    trans_obj.write(cr, uid, ids, {'value': dic['value']})
-            else:
-                trans_obj.create(cr, uid, dic)
+                    dic['res_id'] = None
+                except Exception:
+                    logger.warning("Could not decode resource for %s, please fix the po file.",
+                                    dic['res_id'], exc_info=True)
+                    dic['res_id'] = None
+
+            irt_cursor.push(dic)
+
+        irt_cursor.finish()
         if verbose:
             logger.info("translation file loaded succesfully")
     except IOError:
