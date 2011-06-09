@@ -646,13 +646,17 @@ def load_module_graph(cr, graph, status=None, perform_checks=True, skip_modules=
             try:
                 if ext == '.csv':
                     noupdate = (kind == 'init')
-                    tools.convert_csv_import(cr, m, os.path.basename(filename), fp.read(), idref, mode=mode, noupdate=noupdate)
+                    tools.convert_csv_import(cr, m, os.path.basename(filename),
+                            fp.read(), idref, mode=mode, noupdate=noupdate,
+                            context={'__ignore_ir_values': True})
                 elif ext == '.sql':
                     process_sql_file(cr, fp)
                 elif ext == '.yml':
-                    tools.convert_yaml_import(cr, m, fp, idref, mode=mode, **kwargs)
+                    tools.convert_yaml_import(cr, m, fp, idref, mode=mode,
+                            context={'__ignore_ir_values': True}, **kwargs)
                 else:
-                    tools.convert_xml_import(cr, m, fp, idref, mode=mode, **kwargs)
+                    tools.convert_xml_import(cr, m, fp, idref, mode=mode,
+                            context={'__ignore_ir_values': True}, **kwargs)
             finally:
                 fp.close()
 
@@ -663,11 +667,17 @@ def load_module_graph(cr, graph, status=None, perform_checks=True, skip_modules=
             fp = tools.file_open(opj(m, xml))
             try:
                 if ext == '.csv':
-                    tools.convert_csv_import(cr, m, os.path.basename(xml), fp.read(), idref, mode=mode, noupdate=True)
+                    tools.convert_csv_import(cr, m, os.path.basename(xml),
+                            fp.read(), idref, mode=mode, noupdate=True,
+                            context=kwargs.get('context', {}))
                 elif ext == '.yml':
-                    tools.convert_yaml_import(cr, m, fp, idref, mode=mode, noupdate=True, **kwargs)
+                    tools.convert_yaml_import(cr, m, fp, idref, mode=mode,
+                            noupdate=True, context={'__ignore_ir_values': True},
+                            **kwargs)
                 else:
-                    tools.convert_xml_import(cr, m, fp, idref, mode=mode, noupdate=True, **kwargs)
+                    tools.convert_xml_import(cr, m, fp, idref, mode=mode,
+                            noupdate=True,context={'__ignore_ir_values': True},
+                            **kwargs)
             finally:
                 fp.close()
 
@@ -714,11 +724,17 @@ def load_module_graph(cr, graph, status=None, perform_checks=True, skip_modules=
                     process_sql_file(cr, file)
                 elif ext == '.csv':
                     noupdate = (kind == 'init')
-                    tools.convert_csv_import(cr, module_name, pathname, fp.read(), id_map, mode, noupdate)
+                    tools.convert_csv_import(cr, module_name, pathname,
+                            fp.read(), id_map, mode, noupdate,
+                            context={ '__ignore_ir_values': True })
                 elif ext == '.yml':
-                    tools.convert_yaml_import(cr, module_name, fp, id_map, mode, noupdate)
+                    tools.convert_yaml_import(cr, module_name, fp,
+                            id_map, mode, noupdate,
+                            context = { '__ignore_ir_values': True })
                 else:
-                    tools.convert_xml_import(cr, module_name, fp, id_map, mode, noupdate)
+                    tools.convert_xml_import(cr, module_name, fp,
+                            id_map, mode, noupdate,
+                            context={ '__ignore_ir_values': True })
             finally:
                 fp.close()
 
@@ -768,7 +784,7 @@ def load_module_graph(cr, graph, status=None, perform_checks=True, skip_modules=
 
         if hasattr(package, 'init') or hasattr(package, 'update') or package.state in ('to install', 'to upgrade'):
             for kind in ('init', 'update'):
-                if package.state=='to upgrade':
+                if package.state == 'to upgrade':
                     # upgrading the module information
                     modobj.write(cr, 1, [mid], modobj.get_values_from_terp(package.data))
                 load_init_update_xml(cr, m, idref, mode, kind)
