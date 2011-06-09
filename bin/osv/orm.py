@@ -2840,21 +2840,35 @@ class orm(orm_template):
     def _update_store(self, cr, f, k):
         _logger.debug("storing computed values of field '%s.%s'" % (self._name, k,))
         ss = self._columns[k]._symbol_set
-        update_query = 'UPDATE "%s" SET "%s"=%s WHERE id=%%s' % (self._table, k, ss[0])
+        update_query = 'UPDATE "%s" SET "%s"=%s WHERE id = ANY(%%s)' % (self._table, k, ss[0])
+
+        upd_vals = [] # list of tuples with (value, id) *in that order*
+        def __flush():
+            upd_vals.sort() # values first, ids next
+            while upd_vals:
+                val, id = upd_vals.pop(0)
+                upd_ids = [id,]
+                while upd_vals and (upd_vals[0][0] is val):
+                    upd_ids.append(upd_vals.pop(0)[1])
+                cr.execute(update_query, (val, upd_ids), debug=self._debug)
+
         cr.execute('select id from '+self._table, debug=self._debug)
         ids_lst = map(lambda x: x[0], cr.fetchall())
         while ids_lst:
-            iids = ids_lst[:40]
-            ids_lst = ids_lst[40:]
+            iids = ids_lst[:100]
+            ids_lst = ids_lst[100:]
             res = f.get(cr, self, iids, k, 1, {})
             for key,val in res.items():
                 if f._multi:
                     val = val[k]
                 # if val is a many2one, just write the ID
-                if type(val)==tuple:
+                if isinstance(val, tuple):
                     val = val[0]
-                if (val<>False) or (type(val)<>bool):
-                    cr.execute(update_query, (ss[1](val), key), debug=self._debug)
+                if (val is not False) or f._type == 'boolean':
+                    upd_vals.append((ss[1](val), key))
+                if len(upd_vals) >= 1000:
+                    __flush()
+        __flush()
 
     def force_update_store(self, cr, uid, ids=False, column=False, context=None):
         """ Externally visible call to update the stored fields
