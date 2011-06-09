@@ -106,12 +106,13 @@ class ir_values(osv.osv):
             value = pickle.dumps(value)
         if meta:
             meta = pickle.dumps(meta)
+        assert isinstance(models, (tuple, list)), models
         ids_res = []
         for model in models:
             if isinstance(model, (list, tuple)):
                 model,res_id = model
             else:
-                res_id=False
+                res_id = False
             if replace:
                 search_criteria = [
                     ('key', '=', key),
@@ -146,11 +147,13 @@ class ir_values(osv.osv):
 
     def get(self, cr, uid, key, key2, models, meta=False, context={}, res_id_req=False, without_user=True, key2_req=True):
         result = []
+        assert isinstance(models, (list, tuple)), models
+
         for m in models:
             if isinstance(m, (list, tuple)):
                 m, res_id = m
             else:
-                res_id=False
+                res_id = False
 
             where = ['key=%s','model=%s']
             params = [key, str(m)]
@@ -159,7 +162,7 @@ class ir_values(osv.osv):
                 params.append(key2)
             elif key2_req and not meta:
                 where.append('key2 IS NULL')
-            if res_id_req and (models[-1][0]==m):
+            if res_id_req and (models[-1][0] == m):
                 if res_id:
                     where.append('res_id=%s')
                     params.append(res_id)
