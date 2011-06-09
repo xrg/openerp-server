@@ -99,7 +99,7 @@ class lang(osv.osv):
         }
         lang_id = False
         try:
-            lang_id = self.create(cr, uid, lang_info)
+            lang_id = self.create(cr, uid, lang_info, context={'__ignore_ir_values':True})
         finally:
             tools.resetlocale()
         return lang_id

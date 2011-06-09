@@ -143,7 +143,9 @@ class ir_values(osv.osv):
                 vals['company_id']=cid
             if res_id:
                 vals['res_id']= res_id
-            ids_res.append(self.create(cr, uid, vals))
+            # Note that __ignore_ir_values means vals will not be appended with a recursive
+            # lookup using self.ir_get(, model='ir.values') !
+            ids_res.append(self.create(cr, uid, vals, context={'__ignore_ir_values': True}))
         return ids_res
 
     def get(self, cr, uid, key, key2, models, meta=False, context={}, res_id_req=False, without_user=True, key2_req=True):
