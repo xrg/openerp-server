@@ -1,12 +1,13 @@
 # This file contains the translation of the following modules:
 # P. Christeas <p_christ@hol.gr>, 2010, 2011.
+# P. Christeas <xrg@linux.gr>, 2011.
 msgid ""
 msgstr ""
 "Project-Id-Version: OpenERP Server 5.0.0\n"
 "Report-Msgid-Bugs-To: support@openerp.com\n"
 "POT-Creation-Date: 2011-04-26 16:56+0000\n"
-"PO-Revision-Date: 2011-05-13 12:23+0300\n"
-"Last-Translator: P. Christeas <p_christ@hol.gr>\n"
+"PO-Revision-Date: 2011-05-25 10:18+0300\n"
+"Last-Translator: P. Christeas <xrg@linux.gr>\n"
 "Language-Team: Greek <openerp@lists.hellug.gr>\n"
 "Language: el\n"
 "MIME-Version: 1.0\n"
@@ -4726,7 +4727,7 @@ msgstr "Αιτήσεις"
 #: model:ir.actions.act_window,name:base.res_request_link-act
 #: model:ir.ui.menu,name:base.menu_res_request_link_act
 msgid "Request Reference Types"
-msgstr "Αίτημα τύπων αναφοράς"
+msgstr "Τύποι Παραπομπής για Αιτήματα"
 
 #. module: base
 #: model:ir.actions.act_window,name:base.res_widget_act_window
