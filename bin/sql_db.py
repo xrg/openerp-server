@@ -79,7 +79,7 @@ re_queries = [
         ('create', re.compile('create or replace view\s+"?([a-z_0-9]+)"?[\s\(]', re.I)),
         ('create', re.compile('create (?:unique )?index .*\son\s+"?([a-z_0-9]+)"?[\s\(]', re.I)),
         ('drop', re.compile(r'drop view\s+"?([a-z_0-9]+)"?\s', re.I)),
-        ('drop', re.compile(r'drop table\s+"?([a-z_0-9]+)"?\s', re.I)),
+        ('drop', re.compile(r'drop table\s+"?([a-z_0-9]+)"?', re.I)),
         ('drop db', re.compile(r'drop database "?([a-z_0-9]+)"?', re.I)),
         ('select', re.compile(r'with recursive.*?\sas\s+\(\s*select\s.*?\s+from\s+"?([a-z_0-9]+)"?', re.I|re.DOTALL)),
         ('select', re.compile(r'select (nextval)\(%s\)', re.I)),
