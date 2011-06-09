@@ -824,7 +824,7 @@ class ir_model_data(osv.osv):
         else:
             where += ' and (key2 is null)'
 
-        cr.execute('select * from ir_values where model=%s and key=%s and name=%s'+where,(model, key, name))
+        cr.execute('SELECT * FROM ir_values WHERE model=%s AND key=%s AND name=%s'+where,(model, key, name))
         res = cr.fetchone()
         if not res:
             res = ir.ir_set(cr, uid, key, key2, name, models, value, replace, isobject, meta)
