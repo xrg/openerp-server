@@ -30,6 +30,7 @@ EXCLUDED_FIELDS = set((
 
 class ir_values(osv.osv):
     _name = 'ir.values'
+    _function_field_browse = True
 
     def _value_unpickle(self, cursor, user, ids, name, arg, context=None):
         res = {}
