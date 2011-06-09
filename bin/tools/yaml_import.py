@@ -138,7 +138,7 @@ class YamlInterpreter(object):
         self.logger = logging.getLogger("%s.%s" % (logger_channel, self.module))
         self.pool = pooler.get_pool(cr.dbname)
         self.uid = uid
-        self.context = {} # opererp context
+        self.context = kwargs.get('context', {})
         self.eval_context = {'ref': self._ref(),
                              '_ref': self._ref(), # added '_ref' so that record['ref'] is possible
                              'time': time,
@@ -871,7 +871,7 @@ class YamlInterpreter(object):
             is_preceded_by_comment = False
         return is_preceded_by_comment
 
-def yaml_import(cr, module, yamlfile, idref=None, mode='init', noupdate=False, report=None, filename=None, fatal=False):
+def yaml_import(cr, module, yamlfile, idref=None, mode='init', noupdate=False, report=None, filename=None, fatal=False, context=None):
     if idref is None:
         idref = {}
     yaml_string = yamlfile.read()

@@ -353,7 +353,10 @@ form: module.record_id""" % (xml_id,)
                     groups_value.append((4, group_id))
             res['groups_id'] = groups_value
 
-        id = self.pool.get('ir.model.data')._update(cr, self.uid, "ir.actions.report.xml", self.module, res, xml_id, noupdate=self.isnoupdate(data_node), mode=self.mode)
+        id = self.pool.get('ir.model.data')._update(cr, self.uid, 
+                "ir.actions.report.xml", self.module, res, xml_id, 
+                noupdate=self.isnoupdate(data_node), mode=self.mode,
+                context=self.context)
         self.idref[xml_id] = int(id)
 
         if not rec.get('menu') or eval(rec.get('menu','False')):
@@ -398,7 +401,10 @@ form: module.record_id""" % (xml_id,)
                     groups_value.append((4, group_id))
             res['groups_id'] = groups_value
 
-        id = self.pool.get('ir.model.data')._update(cr, self.uid, "ir.actions.wizard", self.module, res, xml_id, noupdate=self.isnoupdate(data_node), mode=self.mode)
+        id = self.pool.get('ir.model.data')._update(cr, self.uid,
+                "ir.actions.wizard", self.module, res, xml_id,
+                noupdate=self.isnoupdate(data_node), mode=self.mode,
+                context=self.context)
         self.idref[xml_id] = int(id)
         # ir_set
         if (not rec.get('menu') or eval(rec.get('menu','False'))) and id:
@@ -420,14 +426,19 @@ form: module.record_id""" % (xml_id,)
 
         res = {'name': name, 'url': url, 'target':target}
 
-        id = self.pool.get('ir.model.data')._update(cr, self.uid, "ir.actions.url", self.module, res, xml_id, noupdate=self.isnoupdate(data_node), mode=self.mode)
+        id = self.pool.get('ir.model.data')._update(cr, self.uid,
+                "ir.actions.url", self.module, res, xml_id, 
+                noupdate=self.isnoupdate(data_node), mode=self.mode,
+                context=self.context)
         self.idref[xml_id] = int(id)
         # ir_set
         if (not rec.get('menu') or eval(rec.get('menu','False'))) and id:
             keyword = str(rec.get('keyword','') or 'client_action_multi')
             value = 'ir.actions.url,'+str(id)
             replace = rec.get("replace",'') or True
-            self.pool.get('ir.model.data').ir_set(cr, self.uid, 'action', keyword, url, ["ir.actions.url"], value, replace=replace, isobject=True, xml_id=xml_id)
+            self.pool.get('ir.model.data').ir_set(cr, self.uid, 
+                    'action', keyword, url, ["ir.actions.url"], value, 
+                    replace=replace, isobject=True, xml_id=xml_id)
         elif self.mode=='update' and (rec.get('menu') and eval(rec.get('menu','False'))==False):
             # Special check for URL having attribute menu=False on update
             value = 'ir.actions.url,'+str(id)
@@ -517,7 +528,10 @@ form: module.record_id""" % (xml_id,)
             res['target'] = rec.get('target','')
         if rec.get('multi'):
             res['multi'] = rec.get('multi', False)
-        id = self.pool.get('ir.model.data')._update(cr, self.uid, 'ir.actions.act_window', self.module, res, xml_id, noupdate=self.isnoupdate(data_node), mode=self.mode)
+        id = self.pool.get('ir.model.data')._update(cr, self.uid,
+                'ir.actions.act_window', self.module, res, xml_id,
+                noupdate=self.isnoupdate(data_node), mode=self.mode,
+                context=self.context)
         self.idref[xml_id] = int(id)
 
         if src_model:
@@ -676,7 +690,11 @@ form: module.record_id""" % (xml_id,)
 
         xml_id = rec.get('id','').encode('utf8')
         self._test_xml_id(xml_id)
-        pid = self.pool.get('ir.model.data')._update(cr, self.uid, 'ir.ui.menu', self.module, values, xml_id, noupdate=self.isnoupdate(data_node), mode=self.mode, res_id=res and res[0] or False)
+        pid = self.pool.get('ir.model.data')._update(cr, self.uid, 
+                'ir.ui.menu', self.module, values, xml_id,
+                noupdate=self.isnoupdate(data_node), mode=self.mode,
+                res_id=res and res[0] or False,
+                context=self.context)
 
         if rec_id and pid:
             self.idref[rec_id] = int(pid)
@@ -771,9 +789,9 @@ form: module.record_id""" % (xml_id,)
         model = self.pool.get(rec_model)
         assert model, "The model %s does not exist !" % (rec_model,)
         rec_id = rec.get("id",'').encode('ascii')
-        rec_context = rec.get("context", None)
-        if rec_context:
-            rec_context = unsafe_eval(rec_context)
+        rec_context = self.context.copy()
+        if rec.get("context", None):
+            rec_context.update(unsafe_eval(rec.get('context')))
         self._test_xml_id(rec_id)
         if self.isnoupdate(data_node) and self.mode != 'init':
             # check if the xml record has an id string
@@ -845,7 +863,11 @@ form: module.record_id""" % (xml_id,)
                         f_val = int(f_val)
             res[f_name] = f_val
 
-        id = self.pool.get('ir.model.data')._update(cr, self.uid, rec_model, self.module, res, rec_id or False, not self.isnoupdate(data_node), noupdate=self.isnoupdate(data_node), mode=self.mode, context=rec_context )
+        id = self.pool.get('ir.model.data')._update(cr, self.uid,
+                rec_model, self.module, res, rec_id or False,
+                not self.isnoupdate(data_node),
+                noupdate=self.isnoupdate(data_node),
+                mode=self.mode, context=rec_context )
         if rec_id:
             self.idref[rec_id] = int(id)
         if config.get('import_partial', False):
@@ -902,7 +924,7 @@ form: module.record_id""" % (xml_id,)
                             raise
         return True
 
-    def __init__(self, cr, module, idref, mode, report=None, noupdate=False):
+    def __init__(self, cr, module, idref, mode, report=None, noupdate=False, context=None):
 
         self.logger = logging.getLogger('init')
         self.mode = mode
@@ -915,6 +937,7 @@ form: module.record_id""" % (xml_id,)
             report = assertion_report()
         self.assert_report = report
         self.noupdate = noupdate
+        self.context = context or {}
         self._tags = {
             'menuitem': self._tag_menuitem,
             'record': self._tag_record,
@@ -930,7 +953,7 @@ form: module.record_id""" % (xml_id,)
         }
 
 def convert_csv_import(cr, module, fname, csvcontent, idref=None, mode='init',
-        noupdate=False):
+        noupdate=False, context=None):
     '''Import csv file :
         quote: "
         delimiter: ,
@@ -976,7 +999,8 @@ def convert_csv_import(cr, module, fname, csvcontent, idref=None, mode='init',
             datas.append(map(lambda x: misc.ustr(x), line))
         except Exception:
             logger.error("Cannot import the line: %s", line)
-    result, rows, warning_msg, dummy = pool.get(model).import_data(cr, uid, fields, datas,mode, module, noupdate, filename=fname_partial)
+    result, rows, warning_msg, dummy = pool.get(model).import_data(cr, uid,
+        fields, datas,mode, module, noupdate, filename=fname_partial, context=context)
     if result < 0:
         # Report failed import and abort module install
         raise Exception(_('Module loading failed: file %s/%s could not be processed:\n %s') % (module, fname, warning_msg))
@@ -989,7 +1013,7 @@ def convert_csv_import(cr, module, fname, csvcontent, idref=None, mode='init',
 #
 # xml import/export
 #
-def convert_xml_import(cr, module, xmlfile, idref=None, mode='init', noupdate=False, report=None):
+def convert_xml_import(cr, module, xmlfile, idref=None, mode='init', noupdate=False, report=None, context=None):
     doc = etree.parse(xmlfile)
     relaxng = etree.RelaxNG(
         etree.parse(os.path.join(config['root_path'],'import_xml.rng' )))
@@ -1004,7 +1028,7 @@ def convert_xml_import(cr, module, xmlfile, idref=None, mode='init', noupdate=Fa
 
     if idref is None:
         idref={}
-    obj = xml_import(cr, module, idref, mode, report=report, noupdate=noupdate)
+    obj = xml_import(cr, module, idref, mode, report=report, noupdate=noupdate, context=context)
     obj.parse(doc.getroot())
     return True
 
