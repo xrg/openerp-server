@@ -34,7 +34,7 @@ from tools.translate import _
 import pooler
 
 def _get_fields_type(self, cr, uid, context=None):
-    cr.execute('select distinct ttype,ttype from ir_model_fields')
+    cr.execute('SELECT DISTINCT ttype,ttype FROM ir_model_fields')
     field_types = cr.fetchall()
     field_types_copy = field_types
     for types in field_types_copy:
