@@ -121,10 +121,10 @@ class module(osv.osv):
 
             # then, search and group ir.model.data records
             imd_models = dict( [(m,[]) for m in dmodels])
-            imd_ids = model_data_obj.search(cr,uid,[('module','=', module_rec.name),
-                ('model','in',tuple(dmodels))])
 
-            for imd_res in model_data_obj.read(cr, uid, imd_ids, ['model', 'res_id'], context=context):
+            for imd_res in model_data_obj.search_read(cr, uid,
+                    [('module','=', module_rec.name), ('model','in',tuple(dmodels))],
+                    fields=['model', 'res_id'], context=context):
                 imd_models[imd_res['model']].append(imd_res['res_id'])
 
             # For each one of the models, get the names of these ids
