@@ -56,7 +56,7 @@ for adp in ad_paths:
 
 ad_paths.append(_ad)    # for get_module_path
 
-# Modules already loaded
+#: Modules already loaded
 loaded = []
 
 class Graph(dict):
