@@ -176,6 +176,11 @@ openerp_isrunning.value = True
 
 init_logger = logging.getLogger('init')
 
+if tools.config.get_misc('modules', 'preload', False):
+    _preload_modules = map(str.strip, tools.config.get_misc('modules', 'preload').split(','))
+    for pm in _preload_modules:
+        addons.register_class(pm)
+    
 if tools.config['db_name']:
     for dbname in tools.config['db_name'].split(','):
         db,pool = pooler.get_db_and_pool(dbname, update_module=tools.config['init'] or tools.config['update'], pooljobs=False)
