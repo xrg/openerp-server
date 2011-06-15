@@ -10,7 +10,12 @@ import misc
 from config import config
 import yaml_tag
 import yaml
-from osv.osv import except_osv
+
+try:
+    from osv.osv import except_osv
+except ImportError:
+    class except_osv(Exception):
+        pass
 
 # YAML import needs both safe and unsafe eval, but let's
 # default to /safe/.

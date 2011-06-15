@@ -474,7 +474,8 @@ class Logger(object):
         return log.level or False
 
 import tools
-init_logger()
+if getattr(tools, 'config', {}).get('log_level', None) is not None:
+    init_logger()
 
 class Agent(object):
     """Singleton that keeps track of cancellable tasks to run at a given
