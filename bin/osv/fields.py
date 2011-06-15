@@ -19,18 +19,19 @@
 #
 ##############################################################################
 
-# . Fields:
-#      - simple
-#      - relations (one2many, many2one, many2many)
-#      - function
-#
-# Fields Attributes:
-#   _classic_read: is a classic sql fields
-#   _type   : field type
-#   readonly
-#   required
-#   size
-#
+""" Fields:
+      - simple
+      - relations (one2many, many2one, many2many)
+      - function
+
+    Fields Attributes:
+        * _classic_read: is a classic sql fields
+        * _type   : field type
+        * readonly
+        * required
+        * size
+"""
+
 import datetime as DT
 import string
 import logging
@@ -82,6 +83,12 @@ def _symbol_set_long(symb):
 
 
 class _column(object):
+    """ Base of all fields, a database column
+    
+        An instance of this object is a *description* of a database column. It will
+        not hold any data, but only provide the methods to manipulate data of an
+        ORM record or even prepare/update the database to hold such a field of data.
+    """
     _classic_read = True
     _classic_write = True
     _prefetch = True
@@ -941,7 +948,8 @@ class function(_column):
 class related(function):
     """Field that points to some data inside another field of the current record.
 
-        Example:
+    Example::
+
        _columns = {
            'foo_id': fields.many2one('my.foo', 'Foo'),
            'bar': fields.related('frol', 'foo_id', type='char', string='Frol of Foo'),
@@ -1226,7 +1234,9 @@ class inherit(object):
     properties through an _inherit model of ORM. the gain is that we don't
     need to redefine the whole field, but only the properties which we want
     to change.
-    Example:
+    
+    Example::
+    
         In the base model, we could have
             'foo': fields.char('Foo', size=64, help='Some foo'),
         and in our extension addon, improve to

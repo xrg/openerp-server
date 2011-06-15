@@ -19,24 +19,25 @@
 #
 ##############################################################################
 
-#
-# Object relationnal mapping to postgresql module
-#    . Hierarchical structure
-#    . Constraints consistency, validations
-#    . Object meta Data depends on its status
-#    . Optimised processing by complex query (multiple actions at once)
-#    . Default fields value
-#    . Permissions optimisation
-#    . Persistant object: DB postgresql
-#    . Datas conversions
-#    . Multi-level caching system
-#    . 2 different inheritancies
-#    . Fields:
-#         - classicals (varchar, integer, boolean, ...)
-#         - relations (one2many, many2one, many2many)
-#         - functions
-#
-#
+"""
+  Object relational mapping to database (postgresql) module
+     * Hierarchical structure
+     * Constraints consistency, validations
+     * Object meta Data depends on its status
+     * Optimised processing by complex query (multiple actions at once)
+     * Default fields value
+     * Permissions optimisation
+     * Persistant object: DB postgresql
+     * Datas conversions
+     * Multi-level caching system
+     * 2 different inheritancies
+     * Fields:
+          - classicals (varchar, integer, boolean, ...)
+          - relations (one2many, many2one, many2many)
+          - functions
+ 
+"""
+
 import calendar
 import copy
 import datetime
@@ -74,24 +75,27 @@ POSTGRES_CONFDELTYPES = {
 }
 
 
-# This controls the "fields_only" feature. The purpose of the feature is to
-# optimize the set of fields fetched each time a browse() is used.
-# Some tables are bloated with dozens of fields, which are rarely used by
-# the browse objects (sometimes, when browsing, we merely need the 'name'
-# column), so it would be a waste of resources to fetch them all the time.
-#
-# There are 4 modes:
-#     False:    Was the default before this feature, will prefetch all the
-#               fields of the table
-#     True:     The default in pg84 for some time, will only prefetch the
-#               field that was asked in the browse()
-#     [f1, f2..]:  Will prefetch the fields of the list/tuple, is used for
-#               manually tuning the optimization
-#     'auto':   Will use the _column_stats{} of the table to select the
-#               most popular fields (AUTO_SELECT_COLS) to prefetch
 FIELDS_ONLY_DEFAULT = 'auto'
+""" This controls the "fields_only" feature. The purpose of the feature is to
+    optimize the set of fields fetched each time a browse() is used.
+    Some tables are bloated with dozens of fields, which are rarely used by
+    the browse objects (sometimes, when browsing, we merely need the 'name'
+    column), so it would be a waste of resources to fetch them all the time.
+ 
+    There are 4 modes:
+        - False:    Was the default before this feature, will prefetch all the
+          fields of the table
+        - True:     The default in pg84 for some time, will only prefetch the
+          field that was asked in the browse()
+        - [f1, f2..]:  Will prefetch the fields of the list/tuple, is used for
+          manually tuning the optimization
+        - 'auto':   Will use the _column_stats{} of the table to select the
+          most popular fields (AUTO_SELECT_COLS) to prefetch
+"""
 
-AUTO_SELECT_COLS = 4 # Columns of table to prefetch by default
+AUTO_SELECT_COLS = 4
+""" Columns of table to prefetch by default
+"""
 
 # not used yet AUTO_SELECT_WRAP = 1000000 # prevent integer overflow, wrap at that num.
 
@@ -113,9 +117,12 @@ class BrowseRecordError(Exception):
     pass
 
 _logger = logging.getLogger('orm')
+""" Persistent logger to be used throughout ORM
+"""
 
-# Readonly python database object browser
 class browse_null(object):
+    """ Readonly python database object browser
+    """
 
     def __init__(self):
         self.id = False
@@ -151,6 +158,11 @@ class browse_null(object):
 # TODO: execute an object method on browse_record_list
 #
 class browse_record_list(list):
+    """ Collection of browse objects
+    
+        Such an instance will be returned when doing a ``browse([ids..])``
+        and will be iterable, yielding browse() objects
+    """
 
     def __init__(self, lst, context=None):
         if not context:
@@ -176,25 +188,33 @@ class browse_record(object):
         time, or a list/tuple, which indicates which columns to also 
         prefetch.
         
-        Examples:
+        Examples::
+        
             uobj = pool.get('res.users')
-            user_rec = uobj.browse(cr, uid, 104,)
+            user_rec = uobj.browse(cr, uid, 104)
             name = user_rec.name
         
-        If you know which columns you want, re-write as:
+        If you explicitly want to fetch some columns, re-write as::
+        
             user_rec = uobj.browse(cr,uid, 104, fields_only =('name', 'email', 'signature'))
             name = user_rec.name
             email = user_rec.email
             signature = user_rec.signature
+
+        @note With the default "auto" mode, column prefetching should be efficient
+            enough, so you can avoid using 'fields_only'.
     """
     __logger = logging.getLogger('orm.browse_record')
 
     def __init__(self, cr, uid, id, table, cache, context=None, list_class=None,
                 fields_process=None, fields_only=FIELDS_ONLY_DEFAULT):
-        '''
-        table : the object (inherited from orm)
-        context : dictionary with an optional context
-        '''
+        """
+        @param cache a dictionary of model->field->data to be shared accross browse
+            objects, thus reducing the SQL read()s . It can speed up things a lot,
+            but also be disastrous if not discarded after write()/unlink() operations
+        @param table the object (inherited from orm)
+        @param context dictionary with an optional context
+        """
         if fields_process is None:
             fields_process = {}
         if context is None:
@@ -488,12 +508,13 @@ class browse_record(object):
 
 
 def get_pg_type(f):
-    '''
-    returns a tuple
-    ( type returned by postgres when the column was created, 
-      type expression to create the column,
-      size of the column for char types)
-    '''
+    """
+    returns a tuple ``( type1, type2, size)`` for the field @param f
+    
+    @param type1 type returned by postgres when the column was created
+    @param type2 type expression to create the column
+    @param size size of the column for char types
+    """
 
     type_dict = {
             fields.boolean: 'bool',
@@ -546,6 +567,9 @@ def get_pg_type(f):
 
 
 class orm_template(object):
+    """ THE base of all ORM models
+    """
+    #TODO doc!
     _name = None
     _columns = {}
     _constraints = []
@@ -751,13 +775,13 @@ class orm_template(object):
 
         :param cr: database cursor
         :param user: current user id
-        :param select: id or list of ids
-                        can also be expression, like [(...), ...],
-                        or [True,] for all records
+        :param select: id or list of ids.
+                        Can also be expression, like ``[(...), ...]`` ,
+                        or ``[True,]`` for all records
         :param context: context arguments, like lang, time zone
         :rtype: object or list of objects requested
 
-        :param cache The parent's cache. Pleas ONLY use it when the caller is
+        :param cache: The parent's cache. Pleas ONLY use it when the caller is
             itself a browse object, and within a single transaction. If unsure,
             just don't use!
         """
@@ -5153,9 +5177,12 @@ class orm(orm_template):
 
 class orm_deprecated(object):
     """ Mix-in for deprecated models.
+
     Add this class as the first baseclass for your object, so that deprecation
     warnings are issued against using this ORM model.
-    Example:
+
+    Example::
+
         class my_old_class(orm.orm_deprecated, osv.osv):
             def __init__(...):
                 ...
