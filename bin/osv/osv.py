@@ -271,6 +271,8 @@ class osv_pool(object):
         self._init = True
         self._init_parent = {}
         self.logger = logging.getLogger("pool")
+        #: Store some values, temprarily, for the init phase
+        self._init_values = {}
 
     def init_set(self, cr, mode):
         different = mode != self._init

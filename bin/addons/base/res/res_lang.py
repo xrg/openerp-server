@@ -36,7 +36,14 @@ class lang(osv.osv):
     _disallowed_datetime_patterns.remove('%y') # this one is in fact allowed, just not good practice
 
     def install_lang(self, cr, uid, **args):
-        lang = tools.config.get('lang')
+        """ Install the `official` language of the database
+        
+            Since this function is called through a ``<function .../>`` XML tag,
+            called by a deep stack of other calls, it is difficult to directly
+            supply the language as an argument. Instead, we *must* have saved
+            the language in the pooler's ``_init_values`` dictionary.
+        """
+        lang = self.pool._init_values.get('lang')
         if not lang:
             return False
         lang_ids = self.search(cr, uid, [('code','=', lang)])

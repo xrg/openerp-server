@@ -21,7 +21,7 @@
 
 pool_dic = {}
 
-def get_db_and_pool(db_name, force_demo=False, status=None, update_module=False, pooljobs=True):
+def get_db_and_pool(db_name, force_demo=False, status=None, update_module=False, pooljobs=True, languages=False):
     if not status:
         status={}
 
@@ -49,7 +49,7 @@ def get_db_and_pool(db_name, force_demo=False, status=None, update_module=False,
         pool_dic[db_name] = pool
 
         try:
-            addons.load_modules(db, force_demo, status, update_module)
+            addons.load_modules(db, force_demo, status, update_module, languages=languages)
         except Exception:
             del pool_dic[db_name]
             log.exception("Could not load modules for %s" % db_name)
@@ -69,10 +69,10 @@ def get_db_and_pool(db_name, force_demo=False, status=None, update_module=False,
     return db, pool
 
 
-def restart_pool(db_name, force_demo=False, status=None, update_module=False):
+def restart_pool(db_name, force_demo=False, status=None, update_module=False, languages=False):
     if db_name in pool_dic:
         del pool_dic[db_name]
-    return get_db_and_pool(db_name, force_demo, status, update_module=update_module)
+    return get_db_and_pool(db_name, force_demo, status, update_module=update_module, languages=languages)
 
 
 def get_db_only(db_name):
