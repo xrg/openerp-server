@@ -20,6 +20,14 @@
 #
 ##############################################################################
 
+"""
+The PostgreSQL connector is a connectivity layer between the OpenERP code and
+the database, *not* a database abstraction toolkit. Database abstraction is what
+the ORM does, in fact.
+
+See also: the `pooler` module
+"""
+
 __all__ = ['db_connect', 'close_db']
 
 import logging
@@ -89,6 +97,12 @@ sql_counter = 0
 
 def print_stats(stats, logger):
     """ Print the statistics at the stats dict 
+    
+        It will print sums per database TABLE, and then per
+        SQL verb (like SELECT, INSERT, UPDATE etc)
+        
+        @param logger is used for output, at level `debug`
+        @return None
     """
     all_sum = [0, 0]
     sum_tbl = {}
@@ -119,6 +133,13 @@ def print_stats(stats, logger):
                         all_sum[0], timedelta(microseconds=all_sum[1]))
 
 class Cursor(object):
+    """ Cursor is an open transaction to Postgres, utilizing a TCP connection
+    
+        A lightweight wrapper around psycopg2's `psycopg1cursor` objects
+        
+        This is the object behind the `cr` variable used all over the OpenERP
+        code.
+    """
     IN_MAX = 1000 # decent limit on size of IN queries - guideline = Oracle limit
     __logger = logging.getLogger('db.cursor')
     __pgmode = None
@@ -340,10 +361,14 @@ class Cursor(object):
 
     @check
     def commit(self):
+        """ Perform an SQL `COMMIT`
+        """
         return self._cnx.commit()
 
     @check
     def rollback(self):
+        """ Perform an SQL `ROLLBACK`
+        """
         return self._cnx.rollback()
 
     @check
@@ -356,11 +381,15 @@ class Cursor(object):
 
     @classmethod
     def set_pgmode(cls, pgmode):
+        """ Set the mode of postgres operations for all cursors
+        """
         cls.__pgmode = pgmode
         cls.__logger.info("Postgres mode set to %s" % str(pgmode))
 
     @classmethod
     def get_pgmode(cls):
+        """Obtain the mode of postgres operations for all cursors
+        """
         cls.__logger.info("Postgres mode is %s" % str(cls.__pgmode))
         return cls.__pgmode
 
@@ -369,7 +398,14 @@ class PsycoConnection(psycopg2.extensions.connection):
     pass
 
 class ConnectionPool(object):
-
+    """ The pool of connections to database(s)
+    
+        Keep a set of connections to pg databases open, and reuse them
+        to open cursors for all transactions.
+        
+        The connections are *not* automatically closed. Only a close_db()
+        can trigger that.
+    """
     __logger = logging.getLogger('db.connection_pool')
 
     def locked(fun):
@@ -513,6 +549,8 @@ class ConnectionPool(object):
         print_stats(self.sql_stats, logger)
 
 class Connection(object):
+    """ A lightweight instance of a connection to postgres
+    """
     __logger = logging.getLogger('db.connection')
 
     def __init__(self, pool, dbname):
