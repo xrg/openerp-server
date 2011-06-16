@@ -127,12 +127,14 @@ class db(baseExportService):
                     serv.actions[id]['progress'] = 0
                     cr = sql_db.db_connect(db_name).cursor()
                     tools.init_db(cr)
-                    tools.config['lang'] = lang
                     cr.commit()
                     cr.close()
                     cr = None
+                    _langs = []
+                    if lang:
+                        _langs.append(lang)
                     pool = pooler.restart_pool(db_name, demo, serv.actions[id],
-                            update_module=True)[1]
+                            update_module=True, languages=_langs)[1]
 
                     cr = sql_db.db_connect(db_name).cursor()
 

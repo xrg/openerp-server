@@ -839,7 +839,7 @@ def _check_module_names(cr, module_names):
             incorrect_names = mod_names.difference([x['name'] for x in cr.dictfetchall()])
             logger.warning('invalid module names, ignored: %s', ", ".join(incorrect_names))
 
-def load_modules(db, force_demo=False, status=None, update_module=False):
+def load_modules(db, force_demo=False, status=None, update_module=False, languages=False):
     if not status:
         status = {}
 
@@ -860,6 +860,11 @@ def load_modules(db, force_demo=False, status=None, update_module=False):
     # This is a brand new pool, just created in pooler.get_db_and_pool()
     pool = pooler.get_pool(cr.dbname)
 
+    if languages:
+        # the first of the languages to load is the "official" one, that
+        # res_lang.init_lang() will use
+        pool._init_values['lang'] = languages.pop(0)
+
     try:
         processed_modules = []
         report = tools.assertion_report()
@@ -875,8 +880,8 @@ def load_modules(db, force_demo=False, status=None, update_module=False):
             raise osv.osv.except_osv(_('Could not load base module'), _('module base cannot be loaded! (hint: verify addons-path)'))
         processed_modules.extend(load_module_graph(cr, graph, status, perform_checks=(not update_module), report=report))
 
-        if tools.config['load_language']:
-            for lang in tools.config['load_language'].split(','):
+        if languages:
+            for lang in languages:
                 tools.load_language(cr, lang)
 
         # STEP 2: Mark other modules to be loaded/updated

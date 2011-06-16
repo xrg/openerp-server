@@ -183,7 +183,13 @@ if tools.config.get_misc('modules', 'preload', False):
     
 if tools.config['db_name']:
     for dbname in tools.config['db_name'].split(','):
-        db,pool = pooler.get_db_and_pool(dbname, update_module=tools.config['init'] or tools.config['update'], pooljobs=False)
+        _langs = []
+        if tools.config.get('lang'):
+            _langs.append(tools.config['lang'])
+        if tools.config.get('load_language'):
+            _langs.extend(tools.config['load_language'].split(','))
+        db,pool = pooler.get_db_and_pool(dbname, update_module=tools.config['init'] or tools.config['update'],
+                pooljobs=False, languages=_langs)
         cr = db.cursor()
 
         if tools.config["test-file"]:
