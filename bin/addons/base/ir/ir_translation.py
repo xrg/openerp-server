@@ -370,7 +370,6 @@ class ir_translation(osv.osv):
         else:
             fl2 = name_list
             nlen = 1
-            nexpr = 'name'
             
         cr.execute_prepared('ir_trans_get_mids',
                     'SELECT substr(name, %s) as name, res_id, value ' \
