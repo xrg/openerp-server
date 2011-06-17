@@ -31,8 +31,6 @@ import os
 from os.path import join, isfile, basename
 import glob
 
-from pprint import pprint as pp
-
 from setuptools import setup, find_packages
 from setuptools.command.install import install
 from distutils.sysconfig import get_python_lib
@@ -41,6 +39,7 @@ has_py2exe = False
 py2exe_keywords = {}
 if os.name == 'nt':
     import py2exe
+    _hush_pf = [ py2exe, ]
     has_py2exe = True
     py2exe_keywords['console'] = [
         { "script": join("bin", "openerp-server.py"),
@@ -65,6 +64,8 @@ if os.name == 'nt':
     }
 
 sys.path.append(join(os.path.abspath(os.path.dirname(__file__)), "bin"))
+
+version = name = description = long_desc = url = author = author_email = classifiers = None
 
 execfile(join('bin', 'release.py'))
 
