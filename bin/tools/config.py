@@ -27,6 +27,8 @@ import netsvc
 import logging
 import release
 
+#.apidoc title: Server Configuration
+
 def check_ssl():
     try:
         from OpenSSL import SSL

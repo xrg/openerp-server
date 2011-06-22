@@ -20,6 +20,14 @@
 #
 ##############################################################################
 
+#.apidoc title: Addons support
+
+""" Support for loading and managing OpenERP addons (modules)
+
+    Note: this is _not_ the addons themselves, but the code which supports loading
+    the OpenERP addons.
+"""
+
 import os, sys, imp
 from os.path import join as opj
 import itertools
