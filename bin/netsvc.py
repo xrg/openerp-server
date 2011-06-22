@@ -38,6 +38,9 @@ import warnings
 import types
 import heapq
 
+#.apidoc title: Common Services: netsvc
+#.apidoc module-mods: member-order: bysource
+
 try:
     from inspect import currentframe
 except ImportError:
@@ -144,8 +147,9 @@ class ExportService(object):
 
     def stats(self, _pre_msg='No statistics'):
         """ This function should return statistics about the service.
+
             @param _pre_msg helps when a child class wants to just display
-                    a simple message
+                a simple message
         """
         return "%s (%s.%s): %s" % (self.__name, 
                     self.__class__.__module__, self.__class__.__name__,
@@ -478,19 +482,22 @@ if getattr(tools, 'config', {}).get('log_level', None) is not None:
     init_logger()
 
 class Agent(object):
-    """Singleton that keeps track of cancellable tasks to run at a given
-       timestamp.
-       The tasks are caracterised by:
+    """ Singleton that keeps track of cancellable tasks to run at a given
+        timestamp.
+       
+        The tasks are characterised by:
+       
             * a timestamp
             * the database on which the task run
             * the function to call
             * the arguments and keyword arguments to pass to the function
 
         Implementation details:
-          Tasks are stored as list, allowing the cancellation by setting
-          the timestamp to 0.
-          A heapq is used to store tasks, so we don't need to sort
-          tasks ourself.
+        
+          - Tasks are stored as list, allowing the cancellation by setting
+            the timestamp to 0.
+          - A heapq is used to store tasks, so we don't need to sort
+            tasks ourself.
     """
     __tasks = []
     __tasks_by_db = {}
