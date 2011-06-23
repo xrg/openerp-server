@@ -11,6 +11,8 @@ from config import config
 import yaml_tag
 import yaml
 
+#.apidoc title: YAML import
+
 try:
     from osv.osv import except_osv
 except ImportError:
@@ -800,8 +802,8 @@ class YamlInterpreter(object):
 
     def process(self, yaml_string, fatal=False, **kwargs):
         """
-        Processes a Yaml string. Custom tags are interpreted by 'process_' instance methods.
-        @param kwargs   extra arguments, for future expansions. Ignored now.
+        Processes a Yaml string. Custom tags are interpreted by `process_` instance methods.
+        @param kwargs extra arguments, for future expansions. Ignored now.
         """
         yaml_tag.add_constructors()
 
