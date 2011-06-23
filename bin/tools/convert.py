@@ -835,7 +835,9 @@ form: module.record_id""" % (xml_id,)
                 field = []
                 assert f_model, 'Define an attribute model="..." in your .XML file !'
                 f_obj = self.pool.get(f_model)
-                # search-browse the objects
+                # search-browse the objects, but amend for the case q == []
+                if q == []:
+                    q = [True,]
                 s = f_obj.browse(cr, self.uid, q)
                 # column definitions of the "local" object
                 _cols = self.pool.get(rec_model)._columns

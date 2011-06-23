@@ -76,7 +76,7 @@ def english_number(val):
                 ret = ret + ', ' + english_number(r)
             return ret
 
-def amount_to_text(number, currency):
+def _amount_to_text_en(number, currency):
     number = '%.2f' % number
     units_name = currency
     list = str(number).split('.')
@@ -92,7 +92,7 @@ def amount_to_text(number, currency):
 # Generic functions
 #-------------------------------------------------------------
 
-_translate_funcs = {'en' : amount_to_text}
+_translate_funcs = {'en' : _amount_to_text_en}
     
 #TODO: we should use the country AND language (ex: septante VS soixante dix)
 #TODO: we should use en by default, but the translation func is yet to be implemented
@@ -120,9 +120,9 @@ if __name__=='__main__':
     lang = 'nl'
     if len(argv) < 2:
         for i in range(1,200):
-            print i, ">>", int_to_text(i, lang)
+            print i, ">>", amount_to_text(i, lang)
         for i in range(200,999999,139):
-            print i, ">>", int_to_text(i, lang)
+            print i, ">>", amount_to_text(i, lang)
     else:
-        print int_to_text(int(argv[1]), lang)
+        print amount_to_text(int(argv[1]), lang)
 
