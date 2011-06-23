@@ -213,7 +213,7 @@ class BaseHttpDaemon(threading.Thread, netsvc.Server):
             logging.getLogger("web-services").info(
                         "starting %s service at %s port %d" %
                         (self._RealProto, interface or '0.0.0.0', port,))
-        except Exception, e:
+        except Exception:
             logging.getLogger("httpd").exception("Error occured when starting the server daemon.")
             raise
 
@@ -291,7 +291,7 @@ class HttpSDaemon(BaseHttpDaemon):
                                               handler=SecureMultiHandler2)
             self.daemon = True
 
-        except SSLError, e:
+        except SSLError:
             logging.getLogger('httpsd').exception( \
                         "Can not load the certificate and/or the private key files")
             raise
@@ -315,7 +315,7 @@ class Http6SDaemon(BaseHttpDaemon):
                                               server_class=Threaded6HTTPServer)
             self.daemon = True
 
-        except SSLError, e:
+        except SSLError:
             logging.getLogger('httpsd').exception( \
                         "Can not load the certificate and/or the private key files")
             raise
