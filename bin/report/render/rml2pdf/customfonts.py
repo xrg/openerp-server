@@ -28,6 +28,8 @@ import platform
 from reportlab import rl_config
 from tools import config
 
+#.apidoc title: TTF Font Table
+
 """This module allows the mapping of some system-available TTF fonts to
 the reportlab engine.
 

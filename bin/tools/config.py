@@ -27,7 +27,7 @@ import netsvc
 import logging
 import release
 
-#.apidoc title: Server Configuration
+#.apidoc title: Server Configuration Loader
 
 def check_ssl():
     try:
