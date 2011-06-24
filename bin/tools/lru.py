@@ -3,6 +3,8 @@
 import threading
 from func import synchronized
 
+#.apidoc title: LRU cache implementation
+
 __all__ = ['LRU']
 
 class LRUNode(object):

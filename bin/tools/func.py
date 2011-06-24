@@ -20,6 +20,8 @@
 #
 ##############################################################################
 
+#.apidoc title: Function tools
+
 __all__ = ['partial', 'wraps', 'update_wrapper', 'synchronized', 
             'virtual', 'frame_codeinfo']
 

@@ -19,10 +19,30 @@
 #
 ##############################################################################
 
-""" Helper functions for reports testing.
+#.apidoc title: Helper functions for reports testing
+""" These functions help perform reports testing with 1-2 YAML lines.
 
     Please /do not/ import this file by default, but only explicitly call it
     through the code of yaml tests.
+    
+    Examples (in YAML)::
+    
+        -
+          In order to test the PDF reports defined on a partner, we will print the Overdue Report 
+        -
+          !python {model: res.partner}: |
+            from tools.test_reports import try_report
+            try_report(cr, uid, 'report.account.overdue', [ref('base.res_partner_asus'),ref('base.res_partner_agrolait'),ref('base.res_partner_c2c')],  context={'model': 'ir.ui.menu', 'active_ids': [1234567,] })
+        -
+          Print the Aged Partner Balance Report
+        -
+          !python {model: account.account}: |
+            ctx={}
+            ctx.update({'model': 'account.account','active_ids':[ref('account.chart0')],'active_id':ref('account.chart0')})
+            data_dict = {'chart_account_id':ref('account.chart0')}
+            from tools import test_reports
+            test_reports.try_report_action(cr, uid, 'action_account_aged_balance_view',wiz_data=data_dict, context=ctx, our_module='account')
+
 """
 
 import netsvc
