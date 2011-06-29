@@ -229,6 +229,10 @@ class char(_column):
 
         return u_symb[:self.size].encode('utf8')
 
+    def copy_copy(self, cr, uid, obj, id, f, data, context):
+        """ Copies this string as "old-val (copy)"
+        """
+        return _("%s (copy)") % data[f]
 
 class text(_column):
     _type = 'text'
