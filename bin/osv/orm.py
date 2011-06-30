@@ -2949,6 +2949,7 @@ class orm(orm_template):
                    "  FROM pg_class c, pg_attribute a"
                    " WHERE c.relname=%s"
                    "   AND c.oid=a.attrelid"
+                   "   AND c.relnamespace IN (SELECT oid from pg_namespace WHERE nspname = ANY(current_schemas(false)))"
                    "   AND a.attisdropped=%s"
                    "   AND pg_catalog.format_type(a.atttypid, a.atttypmod) NOT IN ('cid', 'tid', 'oid', 'xid')"
                    "   AND a.attname NOT IN %s" ,(self._table, False, tuple(columns))),
@@ -2979,6 +2980,7 @@ class orm(orm_template):
                     CASE WHEN a.attlen=-1 THEN a.atttypmod-4 ELSE a.attlen END as size
                 FROM pg_class c, pg_attribute a LEFT JOIN pg_type t ON (a.atttypid=t.oid)
                 WHERE c.relname=%s AND relkind IN ('r','v')
+                  AND c.relnamespace IN (SELECT oid from pg_namespace WHERE nspname = ANY(current_schemas(false)))
                   AND c.oid=a.attrelid """, (self._table,), debug=self._debug)
             
             if not cr.rowcount:
@@ -3060,14 +3062,17 @@ class orm(orm_template):
                                 raise except_orm('Programming Error', ("There is no reference field '%s' found for '%s'") % (f._fields_id,f._obj,))
 
                     cr.execute("""SELECT relname, a.attname 
-                            FROM pg_class c LEFT JOIN pg_attribute a 
+                            FROM pg_class c LEFT JOIN pg_attribute a
                                     ON ( a.attname=%s AND c.oid=a.attrelid)
-                            WHERE c.relname=%s""", (f._fields_id, f._obj))
+                            WHERE c.relname=%s
+                              AND c.relnamespace IN (SELECT oid from pg_namespace WHERE nspname = ANY(current_schemas(false)))
+                              """, (f._fields_id, f._obj))
                     res = cr.fetchone()
                     if res and not res[1]:
                         cr.execute('ALTER TABLE "%s" ADD FOREIGN KEY (%s) REFERENCES "%s" ON DELETE SET NULL' % (self._obj, f._fields_id, f._table), debug=self._debug)
                 elif isinstance(f, fields.many2many):
-                    cr.execute("SELECT relname FROM pg_class WHERE relkind IN ('r','v') AND relname=%s", (f._rel,), debug=self._debug)
+                    cr.execute("SELECT relname FROM pg_class WHERE relkind IN ('r','v') AND relname=%s "
+                        "AND relnamespace IN (SELECT oid from pg_namespace WHERE nspname = ANY(current_schemas(false)))", (f._rel,), debug=self._debug)
                     if not cr.dictfetchall():
                         if not self.pool.get(f._obj):
                             raise except_orm('Programming Error', ('There is no reference available for %s') % (f._obj,))
@@ -3234,6 +3239,8 @@ class orm(orm_template):
                                     cr.execute('SELECT confdeltype, conname FROM pg_constraint as con, pg_class as cl1, pg_class as cl2, '
                                                 'pg_attribute as att1, pg_attribute as att2 '
                                             'WHERE con.conrelid = cl1.oid '
+                                                'AND cl1.relnamespace IN (SELECT oid from pg_namespace WHERE nspname = ANY(current_schemas(false)))'
+                                                'AND cl2.relnamespace IN (SELECT oid from pg_namespace WHERE nspname = ANY(current_schemas(false)))'
                                                 'AND cl1.relname = %s '
                                                 'AND con.confrelid = cl2.oid '
                                                 'AND cl2.relname = %s '
@@ -3315,7 +3322,9 @@ class orm(orm_template):
                                 'i': self._inherits[inh], 'self': self._name },
                             debug=self._debug)
         else:
-            cr.execute("SELECT relname FROM pg_class WHERE relkind IN ('r','v') AND relname=%s", (self._table,))
+            cr.execute("SELECT relname FROM pg_class WHERE relkind IN ('r','v') AND relname=%s"
+                " AND relnamespace IN (SELECT oid from pg_namespace WHERE nspname = ANY(current_schemas(false)))",
+                (self._table,))
             create = not bool(cr.fetchone())
 
         cr.commit()     # start a new transaction
