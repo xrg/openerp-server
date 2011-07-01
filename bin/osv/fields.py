@@ -137,8 +137,8 @@ class _column(object):
         raise Exception(_('undefined %s.%s.get method ! (%s)')%(obj._name, name, type(self)))
 
     def search(self, cr, obj, args, name, value, offset=0, limit=None, uid=None, context=None):
-        ids = obj.search(cr, uid, args+self._domain+[(name, 'ilike', value)], offset, limit, context=context)
-        res = obj.read(cr, uid, ids, [name], context=context)
+        res = obj.search_read(cr, uid, domain=args+self._domain+[(name, 'ilike', value)],
+            offset=offset, limit=limit, fields=[name], context=context)
         return [x[name] for x in res]
 
     def search_memory(self, cr, obj, args, name, value, offset=0, limit=None, uid=None, context=None):
