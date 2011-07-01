@@ -886,6 +886,17 @@ class function(_column):
 
 
     def search(self, cr, uid, obj, name, args, context=None):
+        """ Perform partial search for 'args' within a greater query
+        
+            @param obj the orm model object
+            @param name the name of the column being searched, should be our field name
+            @param args a list of /one/ domain expression item ``[(left, op, right),]``
+            
+            @return another expression item, to be evaluated in the expression
+            
+            If possible, this function should directly return a more complete query
+            domain expression (inselect, possibly) to feed in the greater SQL one.
+            """
         if not self._fnct_search:
             #CHECKME: should raise an exception
             return []
@@ -948,7 +959,7 @@ class related(function):
         Example:
        _columns = {
            'foo_id': fields.many2one('my.foo', 'Foo'),
-           'bar': fields.related('frol', 'foo_id', type='char', string='Frol of Foo'),
+           'bar': fields.related('foo_id', 'frol', type='char', string='Frol of Foo'),
         }
     """
 
