@@ -1297,7 +1297,7 @@ class orm_template(object):
             defaults[field] = field_value
 
         # Next method: get the default values defined in the object
-        defaults_props = [] # will take last-resort values
+        defaults_props = {} # will take last-resort values
         for f in fields_list:
             if f in defaults:
                 continue
