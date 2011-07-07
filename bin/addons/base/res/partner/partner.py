@@ -223,8 +223,9 @@ class res_partner(osv.osv):
         return True
 
     def address_get(self, cr, uid, ids, adr_pref=['default']):
-        cr.execute('SELECT type,id FROM res_partner_address WHERE partner_id = ANY(%s)',(list(ids),))
-        res = cr.fetchall()
+        address_obj = self.pool.get('res.partner.address')
+        address_rec = address_obj.search_read(cr, uid, [('partner_id', '=', ids)], fields=['type'])
+        res = list(tuple(addr.values()) for addr in address_rec)
         adr = dict(res)
         # get the id of the (first) default address if there is one,
         # otherwise get the id of the first address in the list

@@ -101,12 +101,16 @@ class ir_sequence(osv.osv):
                 FROM ir_sequence
                 WHERE """ + sql_test + """
                   AND active=%s
-                  AND (company_id IS NULL OR
-                       company_id IN ( SELECT company_id
+                  AND ( company_id IS NULL
+                        OR company_id IN ( SELECT company_id
                                          FROM res_users
-                                        WHERE id = %s ) )
+                                        WHERE id = %s )
+                        OR company_id IN ( SELECT cid
+                                        FROM res_company_users_rel
+                                        WHERE user_id = %s
+                                        ))
                 ORDER BY company_id, weight DESC, length(COALESCE(condition,'')) DESC
-                FOR UPDATE """, (sequence_id, True, uid), debug=self._debug)
+                FOR UPDATE """, (sequence_id, True, uid, uid), debug=self._debug)
             for res in cr.dictfetchall():
                 if res['condition']:
                     if self._debug:
