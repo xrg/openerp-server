@@ -1105,6 +1105,7 @@ class dummy(function):
 # Serialized fields
 # ---------------------------------------------------------
 class serialized(_column):
+    # Does anybody use it still?
     def __init__(self, string='unknown', serialize_func=repr, deserialize_func=eval, type='text', **args):
         self._serialize_func = serialize_func
         self._deserialize_func = deserialize_func
@@ -1113,6 +1114,34 @@ class serialized(_column):
         self._symbol_get = self._deserialize_func
         super(serialized, self).__init__(string=string, **args)
 
+
+try:
+    import json
+    def _symbol_set_struct(val):
+        return json.dumps(val)
+
+    def _symbol_get_struct(self, val):
+        return json.loads(val)
+except ImportError:
+    def _symbol_set_struct(val):
+        raise NotImplementedError
+        return json.dumps(val)
+
+    def _symbol_get_struct(self, val):
+        raise NotImplementedError
+        return json.loads(val)
+
+class struct(_column):
+    """ A field able to store an arbitrary python data structure.
+    
+        Note: only plain components allowed.
+    """
+    _type = 'struct'
+
+    _symbol_c = '%s'
+    _symbol_f = _symbol_set_struct
+    _symbol_set = (_symbol_c, _symbol_f)
+    _symbol_get = _symbol_get_struct
 
 # TODO: review completly this class for speed improvement
 class property(function):

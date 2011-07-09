@@ -62,6 +62,7 @@ api_options = [
         'browse-browse', 'function_field_browse',
         'fields-inherit',
         'date_eval',
+        'struct-field',
         ]
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

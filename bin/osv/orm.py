@@ -505,6 +505,7 @@ def get_pg_type(f):
             fields.datetime: 'timestamp',
             fields.binary: 'bytea',
             fields.many2one: 'int4',
+            fields.struct: 'text',
             }
     if type(f) in type_dict:
         f_type = (type_dict[type(f)], type_dict[type(f)], f.size)
@@ -3129,6 +3130,7 @@ class orm(orm_template):
                                 ('timestamp', 'date', 'date'),
                                 ('numeric', 'float', f_obj_ctype),
                                 ('float8', 'float', f_obj_ctype),
+                                ('varchar', 'struct', 'TEXT'),
                                 (f_obj_type, 'selection', f_obj_ctype),
                             ]
                             
