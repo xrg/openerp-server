@@ -245,7 +245,7 @@ def file_open(name, mode="r", subdir='addons', pathinfo=False):
     name2 = False
     sys_root_dirs = ('/', '/home', '/net')
     while True:
-        if os.path.isfile(head):
+        if os.path.exists(head):
             # avoid zip algorithm for a proper path
             break
         head, tail = os.path.split(head)
