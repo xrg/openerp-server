@@ -633,6 +633,20 @@ class many2many(_column):
     _prefetch = False
     _type = 'many2many'
     def __init__(self, obj, rel, id1, id2, string='unknown', limit=None, **args):
+        """
+            @param obj  the foreign model to relate to
+            @param rel  a name for the table to hold the relation data
+            @param id1  column name for /our/ id in `rel` table
+            @param id2  column name for obj's id in `rel` table
+            
+            In fact, `rel`, `id1` and `id2` are not limited to any names, but
+            usually follow the naming convention:
+            
+                rel:  like '%s_%s_rel' %(our_model->name, rel->name)
+                id1:  our_model+'_id'
+                id2:  rel._table_name + '_id'
+        """
+        # TODO: why not automatically apply the above naming convention?
         _column.__init__(self, string=string, **args)
         self._obj = obj
         if '.' in rel:
