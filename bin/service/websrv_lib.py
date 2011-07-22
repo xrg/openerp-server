@@ -404,7 +404,13 @@ class MultiHTTPHandler(FixSendError, HttpOptions, BaseHTTPRequestHandler):
         if self.request:
             self.request.close()
         self.close_connection = 1
-        BaseHTTPRequestHandler.finish(self)
+        try:
+            # at python2.7/socket.py:281 there is no 'if self._sock', so it
+            # borks upon server shutdown
+            # ( called through python2.7/SocketServer.py:695 )
+            BaseHTTPRequestHandler.finish(self)
+        except AttributeError:
+            pass
 
     def parse_rawline(self):
         """Parse a request (internal).
@@ -583,7 +589,13 @@ class MultiHTTPHandler(FixSendError, HttpOptions, BaseHTTPRequestHandler):
                             "client closed connection", self.rlpath.rstrip())
                 else:
                     raise
-            self.wfile.flush()
+            try:
+                self.wfile.flush()
+            except AttributeError:
+                self.log_message("could not complete response to %s", self.rlpath.rstrip())
+                # happens when wfile is closed and it's _sock is vanished
+                # at python2.7/socket.py:303 flush()
+                self.close_connection = 1
             return
         # if no match:
         self.send_error(404, "Path not found: %s" % self.path)
