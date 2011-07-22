@@ -251,7 +251,8 @@ class browse_record(object):
                 if '_vptr' not in self._data[self._id]:
                     self.__logger.warning("%s.%s is virtual, but no _vptr for #%s!", 
                             self._table._name, name, self._id)
-                elif self._data[self._id]['_vptr']:
+                elif self._data[self._id]['_vptr'] \
+                        and self._data[self._id]['_vptr'] != self._name:
                     vobj = self._table.pool.get(self._data[self._id]['_vptr'])
                     if self._debug:
                         self.__logger.debug("%s[%s].%s dispatching to %s..", 
@@ -4155,7 +4156,7 @@ class orm(orm_template):
         for field in vals:
             if field == '_vptr':
                 upd0.append('_vptr=%s')
-                upd1.append(vals[field])
+                upd1.append(vals[field] or None)
             elif field in self._columns:
                 if self._columns[field]._classic_write and not (hasattr(self._columns[field], '_fnct_inv')):
                     if (not totranslate) or not self._columns[field].translate:
@@ -4405,7 +4406,7 @@ class orm(orm_template):
             if field == '_vptr':
                 upd0.append('_vptr')
                 upd1.append('%s')
-                upd2.append(vals[field])
+                upd2.append(vals[field] or None)
                 continue
             if field in self._columns:
                 if self._columns[field]._classic_write:
@@ -4942,7 +4943,7 @@ class orm(orm_template):
                 # These fields should always define a copy_data()
                 raise NotImplementedError('missing %s.copy_data()' % field_col._type)
 
-        if '_vptr' in data and data['_vptr'] != self._name:
+        if '_vptr' in data and data['_vptr'] and data['_vptr'] != self._name:
             # We are just the baseclass of the real model the data belongs to.
             # Let's return the full data the object wants.
             # We call copy_data() again, but pass current data as defaults, so
@@ -5043,7 +5044,7 @@ class orm(orm_template):
             context = {}
         context = context.copy()
         data = self.copy_data(cr, uid, id, default, context)
-        if self._vtable and '_vptr' in data and data['_vptr'] != self._name:
+        if self._vtable and data.get('_vptr', False) and data['_vptr'] != self._name:
             vmodel = self.pool.get(data['_vptr'])
             vnew_id = vmodel.create(cr, uid, data, context)
             vfld = vmodel._inherits[self._name]
