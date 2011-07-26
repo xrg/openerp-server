@@ -91,6 +91,9 @@ class res_company(osv.osv):
         'user_ids': fields.many2many('res.users', 'res_company_users_rel', 'cid', 'user_id', 'Accepted Users'),
         'account_no':fields.char('Account No.', size=64),
     }
+    _sql_constraints = [
+        ('com_name_uniq', 'unique (name)', 'The company name must be unique !')
+    ]
 
     def _search(self, cr, uid, args, offset=0, limit=None, order=None,
             context=None, count=False, access_rights_uid=None):
