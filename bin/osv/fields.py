@@ -1135,15 +1135,15 @@ try:
         return json.dumps(val)
 
     def _symbol_get_struct(self, val):
+        if not val:
+            return None
         return json.loads(val)
 except ImportError:
     def _symbol_set_struct(val):
         raise NotImplementedError
-        return json.dumps(val)
 
     def _symbol_get_struct(self, val):
         raise NotImplementedError
-        return json.loads(val)
 
 class struct(_column):
     """ A field able to store an arbitrary python data structure.
