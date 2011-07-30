@@ -892,8 +892,12 @@ class OpenERPDispatcher2:
                 import pdb
                 pdb.post_mortem(tb[2])
             details = ''
+            if e.args:
+                msg = e.args[0]
+            else:
+                msg = tools.ustr(e)
             if len(e.args) > 1:
                 details = e.args[1]
-            raise OpenERPDispatcherException(e.args[0], details=details, traceback=tb_s)
+            raise OpenERPDispatcherException(msg, details=details, traceback=tb_s)
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
