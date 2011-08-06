@@ -1,3 +1,4 @@
+#!/usr/bin/python
 # -*- coding: utf-8 -*-
 ##############################################################################
 #
@@ -34,8 +35,6 @@ import logging
 from lxml import etree
 import base64
 from reportlab.platypus.doctemplate import ActionFlowable
-from tools.safe_eval import safe_eval as eval
-from tools.misc import file_open
 from reportlab.pdfbase import pdfmetrics
 
 try:
@@ -44,7 +43,37 @@ try:
 except ImportError:
     from StringIO import StringIO
 
-encoding = 'utf-8'
+if __name__=="__main__":
+    import optparse
+
+    def file_open(name, mode="r", subdir=None, pathinfo=False):
+        """Open a file using a subdir folder.
+
+        Taken from tools.misc, simplified.
+        
+        Examples::
+        
+        >>> file_open('hr/report/timesheer.xsl')
+        >>> file_open('../../base/report/rml_template.xsl', subdir='addons/hr/report', pathinfo=True)
+
+        @param name: name of the file
+        @param mode: file open mode
+        @param subdir: subdirectory
+        @param pathinfo: if True returns tupple (fileobject, filepath)
+
+        @return: fileobject if pathinfo is False else (fileobject, filepath)
+        """
+        
+        fo = file(name, mode)
+        if pathinfo:
+            return fo, name
+        else:
+            return fo
+
+else:
+    # we are imported in OpenERP server
+    from tools.safe_eval import safe_eval as eval
+    from tools.misc import file_open
 
 def _open_image(filename, path=None):
     """Attempt to open a binary file and return the descriptor
@@ -76,6 +105,7 @@ class NumberedCanvas(canvas.Canvas):
         self._currentPage =0
         self._pageCounter=0
         self.pages={}
+        logging.getLogger('report.canvas').debug('Using NumberedCanvas')
 
     def showPage(self):
         self._currentPage +=1
@@ -97,7 +127,7 @@ class NumberedCanvas(canvas.Canvas):
                 key = key + 1
         self.setFont("Helvetica", 8)
         self.drawRightString((self._pagesize[0]-30), (self._pagesize[1]-40),
-            "Page %(this)i of %(total)i" % {
+            "Page %(this)i of %(total)i" % { # FIXME!
                'this': self._pageNumber+1,
                'total': self.pages.get(key,False),
             }
@@ -859,7 +889,7 @@ class _rml_flowable(object):
             lineCap_hr=node.get('lineCap') or 'round'
             return platypus.flowables.HRFlowable(width=width_hr,color=color.get(color_hr),thickness=float(thickness_hr),lineCap=str(lineCap_hr))
         else:
-            sys.stderr.write('Warning: flowable not yet implemented: %s !\n' % (node.tag,))
+            self._logger.warning('flowable not yet implemented: %s !', (node.tag,))
             return None
 
     def render(self, node_story):
@@ -1012,17 +1042,50 @@ def parseString(rml, localcontext = {},fout=None, images={}, path='.',title=None
         r.render(fp)
         return fp.getvalue()
 
-def trml2pdf_help():
-    print 'Usage: trml2pdf input.rml >output.pdf'
-    print 'Render the standard input (RML) and output a PDF file'
-    sys.exit(0)
 
 if __name__=="__main__":
-    if len(sys.argv)>1:
-        if sys.argv[1]=='--help':
-            trml2pdf_help()
-        print parseString(file(sys.argv[1], 'r').read()),
-    else:
-        print 'Usage: trml2pdf input.rml >output.pdf'
-        print 'Try \'trml2pdf --help\' for more information.'
+    # We are in standalone mode, let us be a script
+    logging.basicConfig(level=logging.INFO)
 
+    usage = """%prog [-vq] [-o output.pdf]  input.rml
+    """
+
+    parser = optparse.OptionParser(usage)
+    parser.add_option("-o", "--output", default=None,
+                        help="Store output at that filename"),
+    parser.add_option("-v", "--debug", dest="debug", action='store_true', default=False,
+                        help="Enable debugging information")
+    parser.add_option('-q', "--quiet", dest="quiet", action='store_true', default=False,
+                        help="Print less verbose messages")
+
+    (opt, args) = parser.parse_args()
+
+    def die(msg, *args):
+        logging.getLogger().critical(msg, *args)
+        sys.exit(1)
+
+    if opt.debug:
+        logging.getLogger().setLevel(logging.DEBUG)
+    elif opt.quiet:
+        logging.getLogger().setLevel(logging.WARN)
+
+    if not args:
+        die("You must provide at least one RML file to parse")
+    
+    if len(args) > 1:
+        die("More than 1 input files are not supported yet")
+
+    outfname = opt.output
+    for fname in args:
+        if not os.path.exists(fname):
+            die("Could not find input file %s", fname)
+        
+        out = parseString(file(fname, 'r').read())
+        if opt.output:
+            ofile = file(outfname,'wb')
+            ofile.write(out)
+            ofile.close()
+        else:
+            print out
+
+#eof

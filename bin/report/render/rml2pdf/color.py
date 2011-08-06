@@ -22,7 +22,7 @@
 from reportlab.lib import colors
 import re
 
-allcols = colors.getAllNamedColors()
+allcols = None
 
 regex_t = re.compile('\(([0-9\.]*),([0-9\.]*),([0-9\.]*)\)')
 regex_h = re.compile('#([0-9a-zA-Z][0-9a-zA-Z])([0-9a-zA-Z][0-9a-zA-Z])([0-9a-zA-Z][0-9a-zA-Z])')
@@ -31,6 +31,8 @@ def get(col_str):
     if col_str == None:
         col_str = ''
     global allcols
+    if allcols is None:
+        allcols = colors.getAllNamedColors()
     if col_str in allcols.keys():
         return allcols[col_str]
     res = regex_t.search(col_str, 0)

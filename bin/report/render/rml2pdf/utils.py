@@ -42,10 +42,27 @@ import locale
 import logging
 import re
 import reportlab
+import sys
 
-import tools
-from tools.safe_eval import safe_eval as eval
-from tools import ustr
+if 'openerp-server' in sys.modules['__main__'].__file__:
+    from tools.safe_eval import safe_eval as eval
+    from tools import ustr
+else:
+    def ustr(value):
+        if isinstance(value, unicode):
+            return value
+
+        if not isinstance(value, basestring):
+            try:
+                return unicode(value)
+            except Exception:
+                raise UnicodeError('unable to convert %r' % (value,))
+
+        try:
+            return unicode(value, 'utf-8')
+        except Exception:
+            pass
+        raise UnicodeError('unable to convert %r' % (value,))
 
 _regex = re.compile('\[\[(.+?)\]\]')
 
@@ -119,8 +136,8 @@ def _process_text(self, txt):
         sps = _regex.split(txt)
         while sps:
             # This is a simple text to translate
-            to_translate = tools.ustr(sps.pop(0))
-            result += tools.ustr(self.localcontext.get('translate', lambda x:x)(to_translate))
+            to_translate = ustr(sps.pop(0))
+            result += ustr(self.localcontext.get('translate', lambda x:x)(to_translate))
             if sps:
                 try:
                     txt = None
@@ -180,7 +197,7 @@ def attr_get(node, attrs, dict={}):
     for key in dict:
         if node.get(key):
             if dict[key]=='str':
-                res[key] = tools.ustr(node.get(key))
+                res[key] = ustr(node.get(key))
             elif dict[key]=='bool':
                 res[key] = bool_get(node.get(key))
             elif dict[key]=='int':

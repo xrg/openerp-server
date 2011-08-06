@@ -21,12 +21,20 @@
 ##############################################################################
 
 import glob
-import os
+import os, sys
 import logging
 import platform
 
 from reportlab import rl_config
-from tools import config
+
+if 'openerp-server' in sys.modules['__main__'].__file__:
+    from tools import config
+else:
+    class config(object):
+        @staticmethod
+        def get_misc(k, k2, default):
+            return default
+
 
 """This module allows the mapping of some system-available TTF fonts to
 the reportlab engine.
