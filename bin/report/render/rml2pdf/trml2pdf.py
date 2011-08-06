@@ -915,7 +915,9 @@ class EndFrameFlowable(ActionFlowable):
         ActionFlowable.__init__(self,('frameEnd',resume))
 
 class TinyDocTemplate(platypus.BaseDocTemplate):
+    _logger = logging.getLogger('report.doctemplate')
     def ___handle_pageBegin(self):
+        # Remove, it's not used!
         self.page = self.page + 1
         self.pageTemplate.beforeDrawPage(self.canv,self)
         self.pageTemplate.checkPageSize(self.canv,self)
@@ -930,6 +932,12 @@ class TinyDocTemplate(platypus.BaseDocTemplate):
                 self.frame = f
                 break
         self.handle_frameBegin()
+    
+    def handle_pageBegin(self):
+        self._handle_pageBegin()
+        self._logger.debug('starting page %s, with template: %s',
+                self.page, self.pageTemplate.id)
+    
     def afterFlowable(self, flowable):
         if isinstance(flowable, PageReset):
             self.canv._pageCount=self.page
@@ -939,7 +947,7 @@ class TinyDocTemplate(platypus.BaseDocTemplate):
 
 class _rml_template(object):
     def __init__(self, localcontext, out, node, doc, images={}, path='.', title=None):
-        if not localcontext:
+        if localcontext is None:
             localcontext={'internal_header':True}
         self.localcontext = localcontext
         self.images= images
@@ -1021,7 +1029,9 @@ def parseNode(rml, localcontext=None,fout=None, images=None, path='.',title=None
     r.render(fp)
     return fp.getvalue()
 
-def parseString(rml, localcontext = {},fout=None, images={}, path='.',title=None):
+def parseString(rml, localcontext=None,fout=None, images={}, path='.',title=None):
+    if localcontext is None:
+        localcontext = {}
     node = etree.XML(rml)
     r = _rml_doc(node, localcontext, images, path, title=title)
 
@@ -1075,16 +1085,14 @@ if __name__=="__main__":
     if len(args) > 1:
         die("More than 1 input files are not supported yet")
 
-    outfname = opt.output
+    outfname = opt.output or None
     for fname in args:
         if not os.path.exists(fname):
             die("Could not find input file %s", fname)
         
-        out = parseString(file(fname, 'r').read())
+        out = parseString(file(fname, 'r').read(), localcontext={}, fout=outfname)
         if opt.output:
-            ofile = file(outfname,'wb')
-            ofile.write(out)
-            ofile.close()
+            print "Saved: ", out
         else:
             print out
 
