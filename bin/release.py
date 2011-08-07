@@ -63,6 +63,7 @@ api_options = [
         'fields-inherit',
         'date_eval',
         'struct-field',
+        'auth-in-cr',
         ]
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
