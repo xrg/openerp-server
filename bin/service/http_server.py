@@ -622,6 +622,7 @@ class OerpAuthProxy(AuthProxy):
         self.auth_creds = {}
         self.auth_tries = 0
         self.last_auth = None
+        self.last_address = None #: will hold last client address
 
     def checkRequest(self,handler,path='/', db=False):
         """ Check authorization of request to path.
@@ -681,6 +682,7 @@ class OerpAuthProxy(AuthProxy):
                     # the True value gets cached, too, for the super-admin
                     self.auth_creds[db] = acd
                     self.last_auth=db
+                    self.last_address = addr_str
                 return True
         else:    # no auth string
             if db is False:
