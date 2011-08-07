@@ -145,6 +145,7 @@ class Cursor(object):
                                 # is raised by any of the following initialisations
         self._pool = pool
         self.dbname = dbname
+        self.auth_proxy = None
         self._serialized = serialized
         self._cnx, self._obj = pool.borrow(dsn(dbname), True)
         self.__closed = False   # real initialisation value

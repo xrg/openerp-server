@@ -766,7 +766,7 @@ class objects_proxy(baseExportService):
             params = params[1:]
             security.check_super(passwd)
             fn = getattr(self._ls, method)
-            res = fn(*params)
+            res = fn(*params, auth_proxy=auth)
             return res
         (db, uid, passwd ) = params[0:3]
         params = params[3:]
@@ -774,7 +774,7 @@ class objects_proxy(baseExportService):
             raise KeyError("Method not supported %s" % method)
         security.check(db,uid,passwd)
         fn = getattr(self._ls, method)
-        res = fn(db, uid, *params)
+        res = fn(db, uid, *params, auth_proxy=auth)
         return res
 
     def new_dispatch(self, method, auth, params, auth_domain=None):
@@ -790,12 +790,12 @@ class objects_proxy(baseExportService):
         fn = getattr(self._ls, method)
 
         if auth.provider.domain == 'root':
-            res = fn(*params)
+            res = fn(*params, auth_proxy=auth)
             return res
 
         acds = auth.auth_creds[auth.last_auth]
         db, uid = (acds[2], acds[3])
-        res = fn(db, uid, *params)
+        res = fn(db, uid, *params, auth_proxy=auth)
         return res
 
     def stats(self, _pre_msg='No statistics'):

@@ -161,6 +161,19 @@ class object_proxy(netsvc.Service):
 
         return wrapper
 
+    def _get_cr_auth(self, dbname, kwargs=None):
+        """ retrieve the cursor, but also decorate it with caller info from kwargs['auth_proxy']
+
+            The overlying `objects_proxy` of `web_services` will call these methods
+            with 'auth_proxy' mirrored in kwargs. If so, we keep a weak reference
+            to that in cursor (that's `cr` all over the ORM code).
+        """
+        cr = pooler.get_db(dbname).cursor()
+
+        if kwargs and 'auth_proxy' in kwargs:
+            cr.auth_proxy = kwargs.pop('auth_proxy')
+
+        return cr
 
     def execute_cr(self, cr, uid, obj, method, *args, **kw):
         object = pooler.get_pool(cr.dbname).get(obj)
@@ -182,7 +195,7 @@ class object_proxy(netsvc.Service):
 
     @check
     def execute(self, db, uid, obj, method, *args, **kw):
-        cr = pooler.get_db(db).cursor()
+        cr = self._get_cr_auth(db, kw)
         try:
             try:
                 if method.startswith('_'):
@@ -199,7 +212,7 @@ class object_proxy(netsvc.Service):
         return res
 
     @check
-    def exec_dict(self, db, uid, obj, method, args, kwargs=None):
+    def exec_dict(self, db, uid, obj, method, args, kwargs=None, **kw):
         """ Execute some ORM call, with support of both positional and keyword arguments
             Note that we strictly expect *2* positional arguments here, one list for
             args and one dict for kwargs
@@ -211,7 +224,7 @@ class object_proxy(netsvc.Service):
         elif not isinstance(kwargs, dict):
             raise ValueError("exec_dict() must be called with (args:list, kwargs: dict)")
         
-        cr = pooler.get_db(db).cursor()
+        cr = self._get_cr_auth(db, **kw)
         try:
             try:
                 if method.startswith('_'):
@@ -232,8 +245,8 @@ class object_proxy(netsvc.Service):
         return wf_service.trg_validate(uid, obj, args[0], method, cr)
 
     @check
-    def exec_workflow(self, db, uid, obj, method, *args):
-        cr = pooler.get_db(db).cursor()
+    def exec_workflow(self, db, uid, obj, method, *args, **kw):
+        cr = self._get_cr_auth(db, **kw)
         try:
             try:
                 res = self.exec_workflow_cr(cr, uid, obj, method, *args)
@@ -245,7 +258,7 @@ class object_proxy(netsvc.Service):
             cr.close()
         return res
 
-    def set_debug(self, db, obj, do_debug=True):
+    def set_debug(self, db, obj, do_debug=True, **kw):
         object = pooler.get_pool(db).get(obj)
         if not object:
             raise except_osv('Object Error', 'Object %s doesn\'t exist' % str(obj))
@@ -255,7 +268,7 @@ class object_proxy(netsvc.Service):
         except Exception:
             raise
 
-    def obj_list(self):
+    def obj_list(self, **kw):
         return []
 
 object_proxy()
