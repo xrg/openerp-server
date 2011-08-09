@@ -224,7 +224,7 @@ class object_proxy(netsvc.Service):
         elif not isinstance(kwargs, dict):
             raise ValueError("exec_dict() must be called with (args:list, kwargs: dict)")
         
-        cr = self._get_cr_auth(db, **kw)
+        cr = self._get_cr_auth(db, kw)
         try:
             try:
                 if method.startswith('_'):
@@ -246,7 +246,7 @@ class object_proxy(netsvc.Service):
 
     @check
     def exec_workflow(self, db, uid, obj, method, *args, **kw):
-        cr = self._get_cr_auth(db, **kw)
+        cr = self._get_cr_auth(db, kw)
         try:
             try:
                 res = self.exec_workflow_cr(cr, uid, obj, method, *args)
