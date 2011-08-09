@@ -1,6 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
+#.apidoc title: Date Evaluation from string
 import re
 import time
 import datetime
