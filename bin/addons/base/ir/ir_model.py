@@ -45,7 +45,7 @@ def _get_fields_type(self, cr, uid, context=None):
 def _in_modules(self, cr, uid, ids, field_name, arg, context=None):
     #pseudo-method used by fields.function in ir.model/ir.model.fields
     module_pool = self.pool.get("ir.module.module")
-    installed_module_names = module_pool.search_read(cr, uid, [('state','=','installed')], ['name'], context=context)
+    installed_module_names = module_pool.search_read(cr, uid, [('state','=','installed')], fields=['name'], context=context)
     installed_modules = set(x['name'] for x in installed_module_names)
 
     result = {}
