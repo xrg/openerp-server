@@ -196,9 +196,23 @@ class BoundStream(object):
             data = self._lbuf[self._fpos:]
             if size >= 0:
                 data = data[:size]
-            # print "Read %r:%d at pos %d" % (data, size, self._fpos)
+            # print "Read %r:%d at pos %d, rem %d" % (data, size, self._fpos, self._rem_length)
             self._fpos += len(data)
             assert self._fpos <= 0
+            if size > 0 and len(data) < size and self._rem_length > 0:
+                # cross _lbuf->stream boundary
+                # we didn't have enough data in _lbuf, let's not return less
+                # than the read() expects, rather use the stream to fill in
+                # some more bytes
+                rsize = min(self._rem_length, size - len(data))
+                data2 = self._stream.read(rsize)
+                self._rem_length -= len(data2)
+                if len(data2) > 32:
+                    self._lbuf = data2[-32:]
+                else:
+                    self._lbuf += data2
+                    self._lbuf = self._lbuf[-32:]
+                data += data2
             return data
         if not self._stream or self._fpos != 0L:
             raise IOError(errno.EBADF, "read() without stream")
@@ -237,7 +251,7 @@ class BoundStream(object):
             self._fpos += pos
         elif whence == os.SEEK_END:
             if self._rem_length:
-                self._fpos = 1000000 + pos
+                self._fpos = 100000000 + pos
             else:
                 self._fpos = pos
 
