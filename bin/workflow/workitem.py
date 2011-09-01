@@ -42,7 +42,7 @@ def create(cr, act_datas, inst_id, ident, stack):
 
 def process(cr, workitem, ident, signal=None, force_running=False, stack=None):
     if stack is None:
-        raise 'Error !!!'
+        raise RuntimeError('No stack!')
     result = True
     cr.execute('select * from wkf_activity where id=%s', (workitem['act_id'],))
     activity = cr.dictfetchone()
