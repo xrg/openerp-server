@@ -149,7 +149,7 @@ class ir_sequence(osv.osv):
             pass
         return False
 
-    def get(self, cr, uid, code, context = None):
+    def get(self, cr, uid, code, context=None):
         return self.get_id(cr, uid, code, test='code',context=context)
 ir_sequence()
 
