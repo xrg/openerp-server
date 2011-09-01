@@ -6,7 +6,7 @@ msgstr ""
 "Project-Id-Version: OpenERP Server 5.0.0\n"
 "Report-Msgid-Bugs-To: support@openerp.com\n"
 "POT-Creation-Date: 2011-04-26 16:56+0000\n"
-"PO-Revision-Date: 2011-05-25 10:18+0300\n"
+"PO-Revision-Date: 2011-08-26 10:11+0300\n"
 "Last-Translator: P. Christeas <xrg@linux.gr>\n"
 "Language-Team: Greek <openerp@lists.hellug.gr>\n"
 "Language: el\n"
@@ -4689,7 +4689,7 @@ msgstr "Ακολουθίες"
 #: model:ir.actions.act_window,name:base.ir_sequence_type
 #: model:ir.ui.menu,name:base.menu_ir_sequence_type
 msgid "Sequence Codes"
-msgstr "Ακολουθίες"
+msgstr "Σειρές Ακολουθίας"
 
 #. module: base
 #: model:ir.actions.act_window,name:base.res_lang_act_window
@@ -7407,7 +7407,7 @@ msgstr "Δημιουργία Αντικειμένου"
 #. module: base
 #: selection:ir.actions.server,state:0 selection:workflow.activity,kind:0
 msgid "Dummy"
-msgstr "Εικονικό"
+msgstr "Αδρανές"
 
 #. module: base
 #: selection:ir.actions.server,state:0
