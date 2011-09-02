@@ -23,6 +23,8 @@
 from tools import flatten, reverse_enumerate
 import fields
 
+#.apidoc title: Domain Expressions
+
 class placeholder(object):
     """ A dummy string, that will substitute the ids array in 
         recursive queries.

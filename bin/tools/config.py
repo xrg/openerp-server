@@ -27,6 +27,8 @@ import netsvc
 import logging
 import release
 
+#.apidoc title: Server Configuration Loader
+
 def check_ssl():
     try:
         from OpenSSL import SSL
@@ -519,10 +521,33 @@ class configmanager(object):
     def __getitem__(self, key):
         return self.options[key]
 
-config = configmanager()
+if 'openerp-server' in sys.modules['__main__'].__file__:
+    # Following line should be called explicitly by the server
+    # when it starts, to allow doing 'import tools.config' from
+    # other python executables without parsing *their* args.
+    config = configmanager()
+    config.parse_config()
+else:
+    class dummy_confmanager(object):
+        """ replace the configmanager with some all-empty dictionary
 
-# FIXME:following line should be called explicitly by the server
-# when it starts, to allow doing 'import tools.config' from
-# other python executables without parsing *their* args.
-config.parse_config()
+            In particular, for *.enable it will return False
+        """
+        def get_misc(self, a, b, c=None):
+            if b == 'enable':
+                return False
+            return c
 
+        def __getitem__(self, a):
+            if a in ('addons_path', ):
+                return ''
+            if a in ('db_maxconn', ):
+                return 0
+            return None
+
+        def get(self, a, c):
+            return c
+
+    config = dummy_confmanager()
+
+#eof

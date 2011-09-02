@@ -10,7 +10,14 @@ import misc
 from config import config
 import yaml_tag
 import yaml
-from osv.osv import except_osv
+
+#.apidoc title: YAML import
+
+try:
+    from osv.osv import except_osv
+except ImportError:
+    class except_osv(Exception):
+        pass
 
 # YAML import needs both safe and unsafe eval, but let's
 # default to /safe/.
@@ -795,8 +802,8 @@ class YamlInterpreter(object):
 
     def process(self, yaml_string, fatal=False, **kwargs):
         """
-        Processes a Yaml string. Custom tags are interpreted by 'process_' instance methods.
-        @param kwargs   extra arguments, for future expansions. Ignored now.
+        Processes a Yaml string. Custom tags are interpreted by `process_` instance methods.
+        @param kwargs extra arguments, for future expansions. Ignored now.
         """
         yaml_tag.add_constructors()
 

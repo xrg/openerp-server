@@ -19,16 +19,22 @@
 #
 ##############################################################################
 
-""" Copyright (c) 2003-2007 LOGILAB S.A. (Paris, FRANCE).
+#.apidoc title: PDF Manipulation
+
+""" manipulate pdf and fdf files. pdftk recommended.
+
+Copyright (c) 2003-2007 LOGILAB S.A. (Paris, FRANCE).
  http://www.logilab.fr/ -- mailto:contact@logilab.fr
 
-manipulate pdf and fdf files. pdftk recommended.
-
 Notes regarding pdftk, pdf forms and fdf files (form definition file)
-fields names can be extracted with:
+fields names can be extracted with::
+
     pdftk orig.pdf generate_fdf output truc.fdf
-to merge fdf and pdf:
+
+to merge fdf and pdf::
+
     pdftk orig.pdf fill_form test.fdf output result.pdf [flatten]
+
 without flatten, one could further edit the resulting form.
 with flatten, everything is turned into text.
 """

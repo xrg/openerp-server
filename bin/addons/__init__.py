@@ -20,6 +20,14 @@
 #
 ##############################################################################
 
+#.apidoc title: Addons support
+
+""" Support for loading and managing OpenERP addons (modules)
+
+    Note: this is _not_ the addons themselves, but the code which supports loading
+    the OpenERP addons.
+"""
+
 import os, sys, imp
 from os.path import join as opj
 import itertools
@@ -56,10 +64,12 @@ for adp in ad_paths:
 
 ad_paths.append(_ad)    # for get_module_path
 
-# Modules already loaded
+#: Modules already loaded
 loaded = []
 
 class Graph(dict):
+    """ Holds the hierarchical structure of the addons (nodes)
+    """
 
     def addNode(self, name, deps):
         max_depth, father = 0, None
@@ -73,9 +83,10 @@ class Graph(dict):
             Node(name, self)
 
     def update_from_db(self, cr):
+        """Update the graph with values from the database (if exist)
+        """
         if not len(self):
             return
-        # update the graph with values from the database (if exist)
         ## First, we set the default values for each package in graph
         additional_data = dict.fromkeys(self.keys(), {'id': 0, 'state': 'uninstalled', 'dbdemo': False, 'installed_version': None})
         ## Then we get the values from the database
@@ -155,7 +166,8 @@ class Node(Singleton):
 
 
 def get_module_path(module, downloaded=False):
-    """Return the path of the given module."""
+    """Return the path of the given module
+    """
     for adp in ad_paths:
         if os.path.exists(opj(adp, module)) or os.path.exists(opj(adp, '%s.zip' % module)):
             return opj(adp, module)
@@ -202,11 +214,11 @@ def get_module_filetree(module, dir='.'):
 def zip_directory(directory, b64enc=True, src=True):
     """Compress a directory
 
-    @param directory: The directory to compress
-    @param base64enc: if True the function will encode the zip file with base64
-    @param src: Integrate the source files
+    @param directory The directory to compress
+    @param base64enc if True the function will encode the zip file with base64
+    @param src Integrate the source files
 
-    @return: a string containing the zip file
+    @return a string containing the zip file
     """
 
     RE_exclude = re.compile('(?:^\..+\.swp$)|(?:\.py[oc]$)|(?:\.bak$)|(?:\.~.~$)', re.I)
@@ -239,11 +251,11 @@ def zip_directory(directory, b64enc=True, src=True):
 def get_module_as_zip(modulename, b64enc=True, src=True):
     """Generate a module as zip file with the source or not and can do a base64 encoding
 
-    @param modulename: The module name
-    @param b64enc: if True the function will encode the zip file with base64
-    @param src: Integrate the source files
+    @param modulename The module name
+    @param b64enc if True the function will encode the zip file with base64
+    @param src Integrate the source files
 
-    @return: a stream to store in a file-like object
+    @return a stream to store in a file-like object
     """
 
     ap = get_module_path(str(modulename))
@@ -264,10 +276,10 @@ def get_module_as_zip(modulename, b64enc=True, src=True):
 def get_module_resource(module, *args):
     """Return the full path of a resource of the given module.
 
-    @param module: the module
-    @param args: the resource path components
+    @param module the module
+    @param args the resource path components
 
-    @return: absolute path to the resource
+    @return absolute path to the resource
     """
     a = get_module_path(module)
     if not a:
@@ -285,6 +297,9 @@ def get_module_resource(module, *args):
 
 def get_modules():
     """Returns the list of module names
+    
+        This scans in all addons paths and returns the possible modules,
+        regardless of database or module descriptions.
     """
     def listdir(dir):
         def clean(name):
@@ -306,7 +321,7 @@ def get_modules():
     return list(set(plist))
 
 def load_information_from_description_file(module):
-    """
+    """ Read the module description as a dict
     :param module: The name of the module (sale, purchase, ...)
     """
 
@@ -441,8 +456,7 @@ def init_module_objects(cr, module_name, obj_list):
 
 
 def register_class(m):
-    """
-    Register module named m, if not already registered
+    """ Register module named m, if not already registered
     """
 
     global loaded
@@ -481,7 +495,8 @@ class MigrationManager(object):
         folder by version. Version can be 'module' version or 'server.module' version (in this case,
         the files will only be processed by this version of the server). Python file names must start
         by 'pre' or 'post' and will be executed, respectively, before and after the module initialisation
-        Example:
+        
+        Example::
 
             <moduledir>
             `-- migrations
@@ -506,11 +521,10 @@ class MigrationManager(object):
         self._get_files()
 
     def _get_files(self):
-
         """
         import addons.base.maintenance.utils as maintenance_utils
         maintenance_utils.update_migrations_files(self.cr)
-        #"""
+        """
 
         for pkg in self.graph:
             self.migrations[pkg.name] = {}
@@ -623,7 +637,8 @@ class MigrationManager(object):
 log = logging.getLogger('init')
 
 def load_module_graph(cr, graph, status=None, perform_checks=True, skip_modules=None, **kwargs):
-    """Migrates+Updates or Installs all module nodes from ``graph``
+    """ Migrates+Updates or Installs all module nodes from ``graph``
+    
        :param graph: graph of module nodes to load
        :param status: status dictionary for keeping track of progress
        :param perform_checks: whether module descriptors should be checked for validity (prints warnings

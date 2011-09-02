@@ -19,18 +19,21 @@
 #
 ##############################################################################
 
-# . Fields:
-#      - simple
-#      - relations (one2many, many2one, many2many)
-#      - function
-#
-# Fields Attributes:
-#   _classic_read: is a classic sql fields
-#   _type   : field type
-#   readonly
-#   required
-#   size
-#
+#.apidoc title: Fields for ORM models
+
+""" Fields:
+      - simple
+      - relations (one2many, many2one, many2many)
+      - function
+
+    Fields Attributes:
+        * _classic_read: is a classic sql fields
+        * _type   : field type
+        * readonly
+        * required
+        * size
+"""
+
 import datetime as DT
 import string
 import logging
@@ -82,6 +85,12 @@ def _symbol_set_long(symb):
 
 
 class _column(object):
+    """ Base of all fields, a database column
+    
+        An instance of this object is a *description* of a database column. It will
+        not hold any data, but only provide the methods to manipulate data of an
+        ORM record or even prepare/update the database to hold such a field of data.
+    """
     _classic_read = True
     _classic_write = True
     _prefetch = True
@@ -618,16 +627,18 @@ class one2many(_column):
         return res
 
 
-#
-# Values: (0, 0,  { fields })    create
-#         (1, ID, { fields })    update (write fields to ID)
-#         (2, ID)                remove (calls unlink on ID, that will also delete the relationship because of the ondelete)
-#         (3, ID)                unlink (delete the relationship between the two objects but does not delete ID)
-#         (4, ID)                link (add a relationship)
-#         (5, ID)                unlink all
-#         (6, ?, ids)            set a list of links
-#
 class many2many(_column):
+    """
+    ::
+    
+        Values: (0, 0,  { fields })    create
+                (1, ID, { fields })    update (write fields to ID)
+                (2, ID)                remove (calls unlink on ID, that will also delete the relationship because of the ondelete)
+                (3, ID)                unlink (delete the relationship between the two objects but does not delete ID)
+                (4, ID)                link (add a relationship)
+                (5, ID)                unlink all
+                (6, ?, ids)            set a list of links
+    """
     _classic_read = False
     _classic_write = False
     _prefetch = False
@@ -802,9 +813,10 @@ def get_nice_size(a):
     return (x, tools.human_size(size))
 
 def sanitize_binary_value(dict_item):
-    # binary fields should be 7-bit ASCII base64-encoded data,
-    # but we do additional sanity checks to make sure the values
-    # are not something else that won't pass via xmlrpc
+    """ Binary fields should be 7-bit ASCII base64-encoded data,
+        but we do additional sanity checks to make sure the values
+        are not something else that won't pass via xmlrpc
+    """
     index, value = dict_item
     if isinstance(value, (xmlrpclib.Binary, tuple, list, dict)):
         # these builtin types are meant to pass untouched
@@ -832,20 +844,20 @@ def sanitize_binary_value(dict_item):
     return index, tools.ustr(value)
 
 
-# ---------------------------------------------------------
-# Function fields
-# ---------------------------------------------------------
 class function(_column):
+    """ Function fields
+    
+    """
     _classic_read = False
     _classic_write = False
     _prefetch = False
     _type = 'function'
     _properties = True
 
-#
-# multi: compute several fields in one call
-#
     def __init__(self, fnct, arg=None, fnct_inv=None, fnct_inv_arg=None, type='float', fnct_search=None, obj=None, method=False, store=False, multi=False, **args):
+        """
+            @param multi compute several fields in one call
+        """
         _column.__init__(self, **args)
         self._obj = obj
         self._method = method
@@ -970,7 +982,8 @@ class function(_column):
 class related(function):
     """Field that points to some data inside another field of the current record.
 
-        Example:
+    Example::
+
        _columns = {
            'foo_id': fields.many2one('my.foo', 'Foo'),
            'bar': fields.related('foo_id', 'frol', type='char', string='Frol of Foo'),
@@ -1096,11 +1109,9 @@ class related(function):
                 obj_name = f['relation']
                 self._relations[-1]['relation'] = f['relation']
 
-# ---------------------------------------------------------
-# Dummy fields
-# ---------------------------------------------------------
-
 class dummy(function):
+    """ Dummy fields
+    """
     def _fnct_search(self, tobj, cr, uid, obj=None, name=None, domain=None, context=None):
         return []
 
@@ -1115,11 +1126,11 @@ class dummy(function):
         self._relations = []
         super(dummy, self).__init__(self._fnct_read, arg, self._fnct_write, fnct_inv_arg=arg, method=True, fnct_search=None, **args)
 
-# ---------------------------------------------------------
-# Serialized fields
-# ---------------------------------------------------------
 class serialized(_column):
-    # Does anybody use it still?
+    """Serialized fields
+    
+        Pending deprecation?
+    """
     def __init__(self, string='unknown', serialize_func=repr, deserialize_func=eval, type='text', **args):
         self._serialize_func = serialize_func
         self._deserialize_func = deserialize_func
@@ -1284,7 +1295,9 @@ class inherit(object):
     properties through an _inherit model of ORM. the gain is that we don't
     need to redefine the whole field, but only the properties which we want
     to change.
-    Example:
+    
+    Example::
+    
         In the base model, we could have
             'foo': fields.char('Foo', size=64, help='Some foo'),
         and in our extension addon, improve to

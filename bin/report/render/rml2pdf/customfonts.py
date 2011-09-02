@@ -36,6 +36,8 @@ else:
             return default
 
 
+#.apidoc title: TTF Font Table
+
 """This module allows the mapping of some system-available TTF fonts to
 the reportlab engine.
 

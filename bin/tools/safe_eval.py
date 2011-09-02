@@ -17,6 +17,8 @@
 #
 ##############################################################################
 
+#.apidoc title: Safe replacement of eval()
+
 """
 safe_eval module - methods intended to provide more restricted alternatives to
                    evaluate simple and/or untrusted code.

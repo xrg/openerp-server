@@ -19,6 +19,7 @@
 #
 ##############################################################################
 
+#.apidoc title: Query object
 
 def _quote(to_quote):
     if '"' not in to_quote:
@@ -70,17 +71,17 @@ class Query(object):
         """Adds the JOIN specified in ``connection``.
 
         :param connection: a tuple ``(lhs, table, lhs_col, col)``.
-                           The join corresponds to the SQL equivalent of::
+            The join corresponds to the SQL equivalent of::
 
-                                ``(lhs.lhs_col = table.col)``
+                ``(lhs.lhs_col = table.col)``
 
         :param outer: True if a LEFT OUTER JOIN should be used, if possible
-                      (no promotion to OUTER JOIN is supported in case the JOIN
-                       was already present in the query, as for the moment
-                       implicit INNER JOINs are only connected from NON-NULL
-                       columns so it would not be correct (e.g. for
-                       ``_inherits`` or when a domain criterion explicitly
-                       adds filtering)
+            (no promotion to OUTER JOIN is supported in case the JOIN
+            was already present in the query, as for the moment
+            implicit INNER JOINs are only connected from NON-NULL
+            columns so it would not be correct (e.g. for
+            ``_inherits`` or when a domain criterion explicitly
+            adds filtering)
         """
         (lhs, table, lhs_col, col) = connection
         lhs = _quote(lhs)

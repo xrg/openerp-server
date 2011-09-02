@@ -19,6 +19,8 @@
 #
 ##############################################################################
 
+#.apidoc title: Object deep copy
+
 """
 FROM Python 2.5 
 Generic (shallow and deep) copying operations.

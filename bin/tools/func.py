@@ -20,6 +20,8 @@
 #
 ##############################################################################
 
+#.apidoc title: Function tools
+
 __all__ = ['partial', 'wraps', 'update_wrapper', 'synchronized', 
             'virtual', 'frame_codeinfo']
 
@@ -31,6 +33,10 @@ except ImportError:
     # http://svn.python.org/view/python/tags/r254/Lib/functools.py?view=markup
 
     def partial(fun, *args, **kwargs):
+        """ Partial implementation
+        
+            See: http://svn.python.org/view/python/tags/r254/Lib/functools.py
+        """
         def _partial(*args2, **kwargs2):
             return fun(*(args+args2), **dict(kwargs, **kwargs2))
         return _partial
@@ -99,7 +105,8 @@ def virtual(f):
        It will merely add a _virtual attribute to the function, marking
        it for the _vtable.
        
-       Write your orm code like:
+       Write your orm code like::
+       
            class aaa(osv.osv):
                @virtual
                def funct(self,...):
