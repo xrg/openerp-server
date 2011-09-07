@@ -647,11 +647,15 @@ def load_module_graph(cr, graph, status=None, perform_checks=True, skip_modules=
        :return: list of modules that were installed or updated
     """
     def process_sql_file(cr, fp):
-        queries = fp.read().split(';')
-        for query in queries:
-            new_query = ' '.join(query.split())
-            if new_query:
-                cr.execute(new_query)
+        """ Load a pure SQL file onto the database
+        
+            This function uploads the *full* contents of the SQL file,
+            unmodified, in one cr.execute() call. That's because we cannot
+            safely split at ';' boundaries (may appear within a quoted view
+            segment) or parse the '--' comments.
+        """
+        query = fp.read()
+        cr.execute(query)
 
     def load_init_update_xml(cr, m, idref, mode, kind):
         for filename in package.data.get('%s_xml' % kind, []):
