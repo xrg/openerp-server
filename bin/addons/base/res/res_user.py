@@ -600,8 +600,10 @@ class groups2(osv.osv):
 
     def unlink(self, cr, uid, ids, context=None):
         group_users = []
-        for record in self.read(cr, uid, ids, ['users'], context=context):
+        group_names = []
+        for record in self.read(cr, uid, ids, ['name', 'users'], context=context):
             if record['users']:
+                group_names.append(record['name'])
                 group_users.extend(record['users'])
         
         if group_users:
@@ -610,8 +612,9 @@ class groups2(osv.osv):
                 user_names = user_names[:5]
                 user_names += '...'
             raise osv.except_osv(_('Warning !'),
-                        _('Group(s) cannot be deleted, because some user(s) still belong to them: %s !') % \
-                            ', '.join(user_names))
+                        _('Group(s) %s cannot be deleted, because some user(s) still belong to them: %s !') % \
+                            ( ', '.join(['"%s"' % g for g in group_names]),
+                                ', '.join(user_names)))
         return super(groups2, self).unlink(cr, uid, ids, context=context)
 
 groups2()
