@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: openobject-addons\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-01-11 11:14+0000\n"
-"PO-Revision-Date: 2011-09-05 04:26+0000\n"
+"PO-Revision-Date: 2011-09-06 09:46+0000\n"
 "Last-Translator: David_Lee <Unknown>\n"
 "Language-Team: Korean <ko@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-09-06 05:04+0000\n"
+"X-Launchpad-Export-Date: 2011-09-07 04:54+0000\n"
 "X-Generator: Launchpad (build 13861)\n"
 
 #. module: base
@@ -1818,7 +1818,7 @@ msgstr "필드 매핑"
 #. module: base
 #: view:base.language.export:0
 msgid "Export Translations"
-msgstr ""
+msgstr "번역 내보내기"
 
 #. module: base
 #: model:ir.ui.menu,name:base.menu_custom
@@ -3133,7 +3133,7 @@ msgstr "사용자 정의 보고서"
 #. module: base
 #: selection:base.language.install,lang:0
 msgid "Abkhazian / аҧсуа"
-msgstr ""
+msgstr "아브카지안"
 
 #. module: base
 #: view:base.module.configuration:0
@@ -3185,12 +3185,12 @@ msgstr "연락처는 이미 시스템에 등록되었습니다."
 #. module: base
 #: help:ir.sequence,suffix:0
 msgid "Suffix value of the record for the sequence"
-msgstr ""
+msgstr "순열에 대한 레코드의 접미사값"
 
 #. module: base
 #: selection:base.language.install,lang:0
 msgid "Spanish (PY) / Español (PY)"
-msgstr ""
+msgstr "스페인어"
 
 #. module: base
 #: field:ir.config_parameter,key:0
@@ -3401,6 +3401,9 @@ msgid ""
 "to see. Whether they can have a read, write, create and delete access right "
 "can be managed from here."
 msgstr ""
+"그룹은 시스템내에서 특정 애플리케이션과 태스크로의 접근과 권한을 사용자에게 주기위하여 사용자들에게 할당한 기능적 영역의 집합니다. 당신은 "
+"사용자가 볼수 있도록 할 메뉴의 모습을 커스터마이징하기 위하여 사용자정의 그룹을 만들거나 기존의 것을 변경할 수 있다. 그룹이 가지는 "
+"접근권한을 여기에서 관리될 수 있다."
 
 #. module: base
 #: view:res.partner:0
@@ -3424,16 +3427,18 @@ msgid ""
 "Would your payment have been carried out after this mail was sent, please "
 "consider the present one as void."
 msgstr ""
+"다음과 같은 지불은 지금 필요합니다. 당신이 지불을 처리했다면 상세지불내역을 전달해 주십시오. 결제가 좀더 연기된다면 연락바랍니다. 이 "
+"메일이 전송된 후 당시의 결제가 이루어지기를 바랍니다."
 
 #. module: base
 #: model:res.country,name:base.mx
 msgid "Mexico"
-msgstr ""
+msgstr "멕시코"
 
 #. module: base
 #: model:ir.ui.menu,name:base.menu_base_config_plugins
 msgid "Plugins"
-msgstr ""
+msgstr "플러그인"
 
 #. module: base
 #: field:res.company,child_ids:0
@@ -3448,7 +3453,7 @@ msgstr ""
 #. module: base
 #: model:res.country,name:base.ni
 msgid "Nicaragua"
-msgstr ""
+msgstr "니카라과"
 
 #. module: base
 #: code:addons/orm.py:1046
@@ -3465,7 +3470,7 @@ msgstr "일반 설명"
 #: model:ir.actions.act_window,name:base.action_config_simple_view_form
 #: view:res.config.view:0
 msgid "Configure Your Interface"
-msgstr ""
+msgstr "인터페이스 구성"
 
 #. module: base
 #: field:ir.values,meta:0
@@ -3475,12 +3480,12 @@ msgstr "메타데이타"
 #. module: base
 #: sql_constraint:ir.ui.view_sc:0
 msgid "Shortcut for this menu already exists!"
-msgstr ""
+msgstr "이 메뉴에 대한 단축키가 이미 존재합니다."
 
 #. module: base
 #: model:res.country,name:base.ve
 msgid "Venezuela"
-msgstr ""
+msgstr "베네수엘라"
 
 #. module: base
 #: view:res.lang:0
@@ -3490,7 +3495,7 @@ msgstr ""
 #. module: base
 #: model:res.country,name:base.zm
 msgid "Zambia"
-msgstr ""
+msgstr "잠비아"
 
 #. module: base
 #: help:res.partner,user_id:0
@@ -3502,22 +3507,22 @@ msgstr "이 파트너와의 소통을 담당하는 내부 사용자"
 #. module: base
 #: field:res.partner,parent_id:0
 msgid "Parent Partner"
-msgstr ""
+msgstr "상위 파트너"
 
 #. module: base
 #: view:ir.module.module:0
 msgid "Cancel Upgrade"
-msgstr ""
+msgstr "업그레이드 취소"
 
 #. module: base
 #: model:res.country,name:base.ci
 msgid "Ivory Coast (Cote D'Ivoire)"
-msgstr ""
+msgstr "코트디부아르"
 
 #. module: base
 #: model:res.country,name:base.kz
 msgid "Kazakhstan"
-msgstr ""
+msgstr "카자흐스탄"
 
 #. module: base
 #: view:res.lang:0
@@ -3574,7 +3579,7 @@ msgstr ""
 #. module: base
 #: model:res.country,name:base.ms
 msgid "Montserrat"
-msgstr ""
+msgstr "몬세라트산"
 
 #. module: base
 #: code:addons/base/ir/ir_model.py:205
