@@ -113,9 +113,16 @@ class db(baseExportService):
     def _create_empty_database(self, name):
         db = sql_db.db_connect('template1')
         cr = db.cursor()
+        ## We check if we can use geospatial enable database directly
+        cr.execute("SELECT datname from pg_database where datistemplate = true and datname = 'template_postgis';")
+        postgis_tpl = cr.fetchone()
         try:
             cr.autocommit(True) # avoid transaction block
-            cr.execute("""CREATE DATABASE "%s" ENCODING 'unicode' TEMPLATE "template0" """ % name)
+            if postgis_tpl:
+                cr.execute("""CREATE DATABASE "%s" ENCODING 'unicode' TEMPLATE "template_postgis" """ % name)
+            else:
+                cr.execute("""CREATE DATABASE "%s" ENCODING 'unicode' TEMPLATE "template0" """ % name)
+
         finally:
             cr.close()
 
