@@ -54,14 +54,14 @@ class ir_values(osv.osv):
             value = pickle.dumps(value)
         self.write(cursor, user, id, {name[:-9]: value}, context=ctx)
 
-    def onchange_object_id(self, cr, uid, ids, object_id, context={}):
+    def onchange_object_id(self, cr, uid, ids, object_id, context=None):
         if not object_id: return {}
         act = self.pool.get('ir.model').browse(cr, uid, object_id, context=context)
         return {
                 'value': {'model': act.model}
         }
 
-    def onchange_action_id(self, cr, uid, ids, action_id, context={}):
+    def onchange_action_id(self, cr, uid, ids, action_id, context=None):
         if not action_id: return {}
         act = self.pool.get('ir.actions.actions').browse(cr, uid, action_id, context=context)
         return {
@@ -148,7 +148,7 @@ class ir_values(osv.osv):
             ids_res.append(self.create(cr, uid, vals, context={'__ignore_ir_values': True}))
         return ids_res
 
-    def get(self, cr, uid, key, key2, models, meta=False, context={}, res_id_req=False, without_user=True, key2_req=True):
+    def get(self, cr, uid, key, key2, models, meta=False, context=None, res_id_req=False, without_user=True, key2_req=True):
         result = []
         assert isinstance(models, (list, tuple)), models
 
