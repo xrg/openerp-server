@@ -46,10 +46,8 @@ from email import Encoders
 from itertools import islice, izip
 from lxml import etree
 from which import which
-if sys.version_info[:2] < (2, 4):
-    from threadinglocal import local
-else:
-    from threading import local
+from threading import local
+
 try:
     from html2text import html2text
 except ImportError:
