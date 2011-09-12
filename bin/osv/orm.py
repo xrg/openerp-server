@@ -2138,6 +2138,17 @@ class orm_template(object):
             resrelate = ir_values_obj.get(cr, user, 'action',
                     'client_action_relate', [(self._name, False)], False,
                     context)
+
+            if self._debug:
+                if resprint:
+                    logging.getLogger('orm').debug('%s: client_print_multi actions: %r', self._name,
+                            [ '%s: %s' % (x[0], x[1]) for x in resprint])
+                if resaction:
+                    logging.getLogger('orm').debug('%s: client_action_multi actions: %r', self._name,
+                            [ '%s: %s' % (x[0], x[1]) for x in resaction])
+                if resrelate:
+                    logging.getLogger('orm').debug('%s: client_action_relate actions: %r', self._name,
+                            [ '%s: %s' % (x[0], x[1]) for x in resrelate])
             resprint = map(clean, resprint)
             resaction = map(clean, resaction)
             resaction = filter(lambda x: not x.get('multi', False), resaction)
