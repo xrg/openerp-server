@@ -364,13 +364,17 @@ class db(baseExportService):
                     import pwd
                     db_user = pwd.getpwuid(os.getuid())[0]
                 if not db_user:
-                    cr.execute("select decode(usename, 'escape') from pg_user where usesysid=(select datdba from pg_database where datname=%s)", (tools.config["db_name"],))
+                    cr.execute("""select decode(usename, 'escape') from pg_user 
+                                    where usesysid=(select datdba from pg_database where datname=%s)""", (tools.config["db_name"],))
                     res = cr.fetchone()
                     db_user = res and str(res[0])
                 if db_user:
-                    cr.execute("select decode(datname, 'escape') from pg_database where datdba=(select usesysid from pg_user where usename=%s) and datname not in ('template0', 'template1', 'postgres') order by datname", (db_user,))
+                    cr.execute("""select decode(datname, 'escape') from pg_database 
+                                    where datdba=(select usesysid from pg_user where usename=%s) 
+                                      and datname not in %s order by datname""", (db_user, cr.sys_and_template_db))
                 else:
-                    cr.execute("select decode(datname, 'escape') from pg_database where datname not in('template0', 'template1','postgres') order by datname")
+                    cr.execute("""select decode(datname, 'escape') from pg_database
+                                    where datname not in %s order by datname""", (cr.sys_and_template_db,))
                 res = [str(name) for (name,) in cr.fetchall()]
             except Exception:
                 res = []

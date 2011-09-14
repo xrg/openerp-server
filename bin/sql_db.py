@@ -193,6 +193,7 @@ class Cursor(object):
                 self.__pgmode = 'pg84'
             else:
                 self.__pgmode = 'pgsql'
+        self.sys_and_template_db = self.get_sys_and_template_db()
 
     def __del__(self):
         if not self.__closed:
@@ -208,6 +209,13 @@ class Cursor(object):
                 msg += "Please enable sql debugging to trace the caller."
             self.__logger.warn(msg)
             self._close(True)
+            
+    def get_sys_and_template_db(self):
+        """Return a list of system and template database name"""
+        sql = """SELECT datname from pg_database
+                   where datistemplate=true or  datname = 'postgres';"""
+        self.execute(sql)
+        return tuple([x[0] for x in self._obj.fetchall()])
 
     def __repr__(self):
         return "<sql_db.Cursor %x %s>" %( id(self), self.__closed and 'closed' or '')
@@ -365,7 +373,7 @@ class Cursor(object):
         if leak:
             self._cnx.leaked = True
         else:
-            keep_in_pool = self.dbname not in ('template1', 'template0', 'postgres')
+            keep_in_pool = self.dbname not in self.sys_and_template_db
             self._pool.give_back(self._cnx, keep_in_pool=keep_in_pool)
 
     @check
