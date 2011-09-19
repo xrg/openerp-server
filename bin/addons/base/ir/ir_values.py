@@ -179,10 +179,14 @@ class ir_values(osv.osv):
                     where.append('res_id=%s')
                     params.append(res_id)
 
-            where.append('(user_id=%s or (user_id IS NULL)) order by id')
+            where.append('(user_id=%s OR (user_id IS NULL))')
             params.append(uid)
-            clause = ' and '.join(where)
-            cr.execute('SELECT id,name,value,object,meta, key FROM ir_values WHERE ' + clause, params, debug=self._debug)
+            cr.execute('SELECT id,name,value,object,meta, key ' \
+                'FROM ir_values ' \
+                'WHERE ' + ' AND '.join(where) + \
+                'ORDER BY user_id, id', params, debug=self._debug)
+            # Note: by default, ordering is "BY user_id NULLS LAST", and
+            # we would only be allowed to explicitly use that in pg >= 8.3
             result = cr.fetchall()
             if result:
                 break
