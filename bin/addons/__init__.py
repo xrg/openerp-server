@@ -825,7 +825,7 @@ def load_module_graph(cr, graph, status=None, perform_checks=True, skip_modules=
             migrations.migrate_module(package, 'post')
 
             if modobj:
-                ver = release.major_version + '.' + package.data.get('version', '1.0')
+                ver = release.major_version + '.' + package.data.get('version', '0.1')
                 # Set new modules and dependencies
                 modobj.write(cr, 1, [mid], {'state': 'installed', 'latest_version': ver})
                 cr.commit()
