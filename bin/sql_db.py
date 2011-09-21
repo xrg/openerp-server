@@ -450,13 +450,34 @@ class ConnectionPool(object):
             msg = '%r ' + msg
             self.__logger.debug(msg, self, *args)
 
+    def _debug_dsn(self, msg, *args, **kwargs):
+        """Debug function, that will decode the dsn_pos'th argument as dsn
+        
+            @param kwargs may only contain 'dsn_pos'
+        """
+        if not self._debug_pool:
+            return
+
+        def cleanup(dsn):
+            cl = [x for x in dsn.strip().split() if x.split('=', 1)[0] != 'password']
+            return ' '.join(cl)
+
+        largs = list(args)
+        dsn_pos = kwargs.pop('dsn_pos', 0)
+        if kwargs:
+            raise TypeError("Unknown keyword argument(s): %r" % kwargs)
+        assert dsn_pos < len(largs)
+        largs[dsn_pos] = cleanup(largs[dsn_pos])
+        msg = '%r ' + msg
+        self.__logger.debug(msg, self, *largs)
+
     def set_pool_debug(self, do_debug = True):
         self._debug_pool = do_debug
         self.__logger.info("Debugging set to %s" % str(do_debug))
 
     @locked
     def borrow(self, dsn, do_cursor=False):
-        self._debug('Borrow connection to %r', dsn)
+        self._debug_dsn('Borrow connection to %r', dsn)
 
         # free leaked connections
         for i, (cnx, _) in tools.reverse_enumerate(self._connections):
@@ -464,7 +485,7 @@ class ConnectionPool(object):
                 delattr(cnx, 'leaked')
                 self._connections.pop(i)
                 self._connections.append((cnx, False))
-                self._debug('Free leaked connection to %r', cnx.dsn)
+                self._debug_dsn('Free leaked connection to %r', cnx.dsn)
 
         result = None
         for i, (cnx, used) in enumerate(self._connections):
@@ -508,7 +529,7 @@ class ConnectionPool(object):
             for i, (cnx, used) in enumerate(self._connections):
                 if not used:
                     self._connections.pop(i)
-                    self._debug('Removing old connection at index %d: %r', i, cnx.dsn)
+                    self._debug_dsn('Removing old connection at index %d: %r', i, cnx.dsn, dsn_pos=1)
                     break
             else:
                 # note: this code is called only if the for loop has completed (no break)
@@ -528,22 +549,22 @@ class ConnectionPool(object):
 
     @locked
     def give_back(self, connection, keep_in_pool=True):
-        self._debug('Give back connection to %r', connection.dsn)
+        self._debug_dsn('Give back connection to %r', connection.dsn)
         for i, (cnx, used) in enumerate(self._connections):
             if cnx is connection:
                 self._connections.pop(i)
                 if keep_in_pool and not (cnx.closed or not cnx.status):
                     self._connections.insert(i,(cnx, False))
-                    self._debug('Put connection to %r back in pool', cnx.dsn)
+                    self._debug_dsn('Put connection to %r back in pool', cnx.dsn)
                 else:
-                    self._debug('Forgot connection to %r', cnx.dsn)
+                    self._debug_dsn('Forgot connection to %r', cnx.dsn)
                 break
         else:
             raise PoolError('This connection does not below to the pool')
 
     @locked
     def close_all(self, dsn):
-        self._debug('Close all connections to %r', dsn)
+        self._debug_dsn('Close all connections to %r', dsn)
         for i, (cnx, used) in tools.reverse_enumerate(self._connections):
             if dsn_are_equals(cnx.dsn, dsn):
                 cnx.close()
