@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 ##############################################################################
 #
@@ -20,7 +19,7 @@
 #
 ##############################################################################
 
-from tools import flatten, reverse_enumerate
+from tools import reverse_enumerate
 import fields
 
 #.apidoc title: Domain Expressions

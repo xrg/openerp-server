@@ -49,13 +49,12 @@ from email import Charset
 from itertools import islice, izip
 from lxml import etree
 from which import which
-if sys.version_info[:2] < (2, 4):
-    from threadinglocal import local
-    _hush_pyflakes = [local,]
-else:
-    from threading import local
+from threading import local
+
+_hush_pyflakes = []
 try:
     from html2text import html2text
+    _hush_pyflakes.append(html2text)
 except ImportError:
     html2text = None
 
