@@ -3691,7 +3691,7 @@ class orm(orm_template):
 
         res = []
         if s_query or len(fields_pre):
-            if len(tables) > 1:
+            if len(tables) > 1 or (s_query and (len(s_query.tables) > 1)):
                 table_prefix = self._table + '.'
             else:
                 table_prefix = ''
