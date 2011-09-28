@@ -98,9 +98,7 @@ class ir_model(osv.osv):
         'modules': fields.function(_in_modules, method=True, type='char', size=128, string='In modules', help='List of modules in which the object is defined or inherited'),
         'view_ids': fields.function(_view_ids, method=True, type='one2many', obj='ir.ui.view', string='Views'),
     }
-    _sql_constraints = [
-        ('obj_name_uniq', 'unique (name)', 'The object name must be unique !'),
-    ]
+
     _defaults = {
         'model': lambda *a: 'x_',
         'state': lambda self,cr,uid,ctx=None: (ctx and ctx.get('manual',False)) and 'manual' or 'base',
@@ -117,10 +115,11 @@ class ir_model(osv.osv):
 
     def _model_name_msg(self, cr, uid, ids, context=None):
         return _('The Object name must start with x_ and not contain any special character !')
+
     _constraints = [
         (_check_model_name, _model_name_msg, ['model']),
     ]
-    
+
     def _model_uniq_msg(self, cr, uid, ids, context=None):
         return _('Object must be unique')
 
