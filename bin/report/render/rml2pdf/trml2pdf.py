@@ -264,13 +264,14 @@ class _rml_styles(object,):
         return style
 
 class _rml_doc(object):
-    def __init__(self, node, localcontext, images={}, path='.', title=None):
+    def __init__(self, node, localcontext, images={}, path='.', title=None, page_limit=None):
         self.localcontext = localcontext
         self.etree = node
         self.filename = self.etree.get('filename')
         self.images = images
         self.path = path
         self.title = title
+        self.page_limit = page_limit
 
     def tick(self):
         """Inform upstream that the process is running, cancel it if needed
@@ -341,7 +342,9 @@ class _rml_doc(object):
 
         el = self.etree.findall('.//template')
         if len(el):
-            pt_obj = _rml_template(self.localcontext, out, el[0], self, images=self.images, path=self.path, title=self.title)
+            pt_obj = _rml_template(self.localcontext, out, el[0], self, 
+                    images=self.images, path=self.path, title=self.title,
+                    page_limit=self.page_limit)
             el = utils._child_get(self.etree, self, 'story')
             pt_obj.render(el)
         else:
@@ -916,6 +919,8 @@ class EndFrameFlowable(ActionFlowable):
 
 class TinyDocTemplate(platypus.BaseDocTemplate):
     _logger = logging.getLogger('report.doctemplate')
+    page_limit = None
+
     def ___handle_pageBegin(self):
         # Remove, it's not used!
         self.page = self.page + 1
@@ -932,8 +937,13 @@ class TinyDocTemplate(platypus.BaseDocTemplate):
                 self.frame = f
                 break
         self.handle_frameBegin()
-    
+
+    def set_page_limit(self, plimit):
+        self.page_limit = plimit
+
     def handle_pageBegin(self):
+        if self.page_limit is not None and (self.page > self.page_limit):
+            raise RuntimeError("Tried to start page %d > %d" % (self.page, self.page_limit))
         self._handle_pageBegin()
         self._logger.debug('starting page %s, with template: %s',
                 self.page, self.pageTemplate.id)
@@ -946,13 +956,18 @@ class TinyDocTemplate(platypus.BaseDocTemplate):
             self.canv._pageNumber = 0
 
 class _rml_template(object):
-    def __init__(self, localcontext, out, node, doc, images={}, path='.', title=None):
+    def __init__(self, localcontext, out, node, doc, images=None, path='.', 
+            title=None, page_limit=None):
         if localcontext is None:
             localcontext={'internal_header':True}
         self.localcontext = localcontext
-        self.images= images
+        if images is None:
+            self.images = {}
+        else:
+            self.images = images
         self.path = path
         self.title = title
+        self.page_limit = page_limit
 
         if not node.get('pageSize'):
             pageSize = (utils.unit_get('21cm'), utils.unit_get('29.7cm'))
@@ -961,6 +976,8 @@ class _rml_template(object):
             pageSize = ( utils.unit_get(ps[0]),utils.unit_get(ps[1]) )
 
         self.doc_tmpl = TinyDocTemplate(out, pagesize=pageSize, **utils.attr_get(node, ['leftMargin','rightMargin','topMargin','bottomMargin'], {'allowSplitting':'int','showBoundary':'bool','rotation':'int','title':'str','author':'str'}))
+        if self.page_limit is not None:
+            self.doc_tmpl.set_page_limit(self.page_limit)
         self.page_templates = []
         self.styles = doc.styles
         self.doc = doc
@@ -1008,13 +1025,13 @@ class _rml_template(object):
             fis.append(PageCount())
             self.doc_tmpl.build(fis)
 
-def parseNode(rml, localcontext=None,fout=None, images=None, path='.',title=None):
+def parseNode(rml, localcontext=None,fout=None, images=None, path='.',title=None, page_limit=None):
     node = etree.XML(rml)
     if localcontext is None:
         localcontext = {}
     if images is None:
         images = {}
-    r = _rml_doc(node, localcontext, images, path, title=title)
+    r = _rml_doc(node, localcontext, images, path, title=title, page_limit=page_limit)
     #try to override some font mappings
     try:
         from customfonts import SetCustomFonts
@@ -1029,11 +1046,11 @@ def parseNode(rml, localcontext=None,fout=None, images=None, path='.',title=None
     r.render(fp)
     return fp.getvalue()
 
-def parseString(rml, localcontext=None,fout=None, images={}, path='.',title=None):
+def parseString(rml, localcontext=None,fout=None, images={}, path='.',title=None, page_limit=None):
     if localcontext is None:
         localcontext = {}
     node = etree.XML(rml)
-    r = _rml_doc(node, localcontext, images, path, title=title)
+    r = _rml_doc(node, localcontext, images, path, title=title, page_limit=page_limit)
 
     #try to override some font mappings
     try:

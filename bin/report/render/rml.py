@@ -36,9 +36,10 @@ class rml(render.render):
         self.output_type = 'pdf'
         self.title=title
 
-
     def _render(self):
-        return rml2pdf.parseNode(self.rml, self.localcontext, images=self.bin_datas, path=self.path,title=self.title)
+        return rml2pdf.parseNode(self.rml, self.localcontext, 
+                images=self.bin_datas, path=self.path,
+                title=self.title, page_limit=self._page_limit)
 
 class rml2html(render.render):
     def __init__(self, rml,localcontext = None, datas=None):
