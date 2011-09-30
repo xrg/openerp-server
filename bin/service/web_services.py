@@ -956,8 +956,7 @@ class _report_spool_job(threading.Thread):
             if hasattr(e, 'name') and hasattr(e, 'value'):
                 self.exception = ExceptionWithTraceback(tools.ustr(e.name), tools.ustr(e.value))
             else:
-                tb = sys.exc_info()
-                self.exception = ExceptionWithTraceback(tools.exception_to_unicode(e), tb)
+                self.exception = e
             self.state = True
             return
         except KeyboardInterrupt, e:
@@ -1056,8 +1055,7 @@ class report_spool(dbExportDispatch, baseExportService):
         report = self._reports[report_id]
         exc = report.exception
         if exc:
-            # rfc: Why send the traceback?
-            self.abortResponse(exc, exc.message, 'warning', exc.traceback)
+            self.abortResponse(1, exc.__class__.__name__, 'warning', exc.message)
         res = {'state': report.state }
         if res['state']:
             if tools.config['reportgz']:
