@@ -1423,7 +1423,7 @@
                 <form string="Menu">
                     <group col="6">
                         <field name="name" string="Menu" />
-                        <field name="parent_id" colspan="2"/>
+                        <field name="parent_id" colspan="2" context="{'ir.ui.menu.full_list':True}"/>
                         <field name="sequence" colspan="2"/>
 
                         <field name="complete_name" string="Full Path" colspan="2"/>
