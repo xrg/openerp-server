@@ -791,6 +791,8 @@ class OpenERPDispatcherException(Exception):
         self.args = (description, details, origin)
         self.traceback = traceback
         self.faultCode = faultCode
+        assert isinstance(faultCode, int) or \
+            (isinstance(faultCode, basestring) and faultCode.isdigit()), faultCode
 
     def get_faultCode(self):
         return int(self.faultCode) or 1
