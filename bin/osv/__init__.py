@@ -21,6 +21,11 @@
 
 import osv
 import fields
+import fields_simple
+import fields_relational
+import fields_special
+import fields_function
+import fields_inherit
 
 #.apidoc title: Object Services and Relational Mapping
 
