@@ -56,9 +56,13 @@ class render(object):
         else:
             self.bin_datas = bin_datas
         self.path = path
-    
+        self._page_limit = None
+
     def _render(self):
         return None
+
+    def set_page_limit(self, plim):
+        self._page_limit = plim
 
     def render(self):
         self.done = False

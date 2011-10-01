@@ -81,6 +81,12 @@ class report_rml(report_int):
             'html2html' : self.create_html2html,
             'makohtml2html' :self.create_makohtml2html,
         }
+        plimit = tools.config.get_misc('report','page_limit', None)
+        if plimit:
+            self._page_limit = int(plimit)
+        else:
+            self._page_limit = None
+        
 
     def create(self, cr, uid, ids, datas, context):
         xml = self.create_xml(cr, uid, ids, datas, context)
@@ -191,42 +197,50 @@ class report_rml(report_int):
             if 'logo' in self.bin_datas:
                 del self.bin_datas['logo']
         obj = render.rml(rml, localcontext, self.bin_datas, self._get_path(), title)
+        obj.set_page_limit(self._page_limit)
         obj.render()
         return obj.get()
 
     def create_html(self, rml, localcontext = None, logo=None, title=None):
         obj = render.rml2html(rml, localcontext, self.bin_datas)
+        obj.set_page_limit(self._page_limit)
         obj.render()
         return obj.get()
 
     def create_txt(self, rml,localcontext, logo=None, title=None):
         obj = render.rml2txt(rml, localcontext, self.bin_datas)
+        obj.set_page_limit(self._page_limit)
         obj.render()
         return obj.get().encode('utf-8')
 
     def create_html2html(self, rml, localcontext = None, logo=None, title=None):
         obj = render.html2html(rml, localcontext, self.bin_datas)
+        obj.set_page_limit(self._page_limit)
         obj.render()
         return obj.get()
 
 
     def create_raw(self,rml, localcontext = None, logo=None, title=None):
         obj = render.odt2odt(etree.XML(rml),localcontext)
+        obj.set_page_limit(self._page_limit)
         obj.render()
         return etree.tostring(obj.get())
 
     def create_sxw(self,rml,localcontext = None):
         obj = render.odt2odt(rml,localcontext)
+        obj.set_page_limit(self._page_limit)
         obj.render()
         return obj.get()
 
     def create_odt(self,rml,localcontext = None):
         obj = render.odt2odt(rml,localcontext)
+        obj.set_page_limit(self._page_limit)
         obj.render()
         return obj.get()
 
     def create_makohtml2html(self,html,localcontext = None):
         obj = render.makohtml2html(html,localcontext)
+        obj.set_page_limit(self._page_limit)
         obj.render()
         return obj.get()
 

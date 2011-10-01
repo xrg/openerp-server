@@ -622,20 +622,21 @@ class ir_model_data(osv.osv):
     _columns = {
         'name': fields.char('XML Identifier', required=True, size=128, select=1),
         'model': fields.char('Object', required=True, size=64, select=1),
-        'module': fields.char('Module', required=True, size=64, select=1),
+        'module': fields.char('Module', required=True, size=64, select=False),
         'res_id': fields.integer('Resource ID', select=1),
         'noupdate': fields.boolean('Non Updatable'),
         'date_update': fields.datetime('Update Date'),
         'date_init': fields.datetime('Init Date')
     }
     _defaults = {
-        'date_init': lambda *a: time.strftime('%Y-%m-%d %H:%M:%S'),
-        'date_update': lambda *a: time.strftime('%Y-%m-%d %H:%M:%S'),
+        'date_init': fields.datetime.now,
+        'date_update': fields.datetime.now,
         'noupdate': False,
         'module': ''
     }
     _sql_constraints = [
-        ('module_name_uniq', 'unique(name, module)', 'You cannot have multiple records with the same id for the same module !'),
+        ('module_name_uniq', 'unique(module, name)', 'You cannot have multiple records with the same id for the same module !'),
+        # note: this also creates the useful (module, name) index
     ]
 
     def __init__(self, pool, cr):
@@ -647,12 +648,6 @@ class ir_model_data(osv.osv):
         if getattr(pool, 'model_data_reference_ids', None) is None:
             self.pool.model_data_reference_ids = {}
         self.loads = self.pool.model_data_reference_ids
-
-    def _auto_init(self, cr, context=None):
-        super(ir_model_data, self)._auto_init(cr, context)
-        cr.execute('SELECT indexname FROM pg_indexes WHERE indexname = \'ir_model_data_module_name_index\'')
-        if not cr.fetchone():
-            cr.execute('CREATE INDEX ir_model_data_module_name_index ON ir_model_data (module, name)')
 
     @tools.cache()
     def _get_id(self, cr, uid, module, xml_id):
