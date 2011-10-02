@@ -26,7 +26,7 @@
     so that the ORM can maintain it in an efficient way.
 """
 
-def load_from_db(cr, relnames):
+def load_from_db(cr, relnames, _debug=False):
     """ Load the relations from the database into element structures
         
         @return dict (tables, indices, views, ...), each of them being
@@ -42,10 +42,10 @@ def load_from_db(cr, relnames):
             WHERE c.relname = ANY(%s) AND relkind IN ('r','v')
                   AND c.relnamespace IN (SELECT oid from pg_namespace 
                         WHERE nspname = ANY(current_schemas(false)))""",
-                (relnames,)) #, debug=self._debug)
+                (relnames,), debug=_debug)
 
         tbl_reloids = {} # map oid: relname
-        for r in cr:
+        for r in cr.dictfetchall():
             if r['relkind'] == 'r':
                 ret['tables'].append(Table(r['relname'], r['oid']))
                 tbl_reloids[r['oid']] = r['relname']
@@ -64,8 +64,8 @@ def load_from_db(cr, relnames):
                                 LEFT JOIN pg_attrdef d ON (d.adrelid = a.attrelid AND d.adnum = a.attnum)
                 WHERE a.attrelid = ANY(%s) AND a.attisdropped = false
                   AND a.attnum > 0""",
-                      (tbl_reloids.keys(),) ) # , debug=self._debug)
-            for c in cr:
+                      (tbl_reloids.keys(),), debug=_debug)
+            for c in cr.dictfetchall():
                 tbl = ret['tables'][tbl_reloids[c['reloid']]]
                 tbl._get_column(c.copy()) # dopy converts dictRow() to dict
 
@@ -78,8 +78,8 @@ def load_from_db(cr, relnames):
                       AND c.relnamespace IN (SELECT oid from pg_namespace 
                             WHERE nspname = ANY(current_schemas(false)))
                       AND i.indrelid = ANY(%s) """,
-                      (tbl_reloids.keys(),) ) # , debug=self._debug)
-            for idx in cr:
+                      (tbl_reloids.keys(),), debug=_debug)
+            for idx in cr.dictfetchall():
                 tbl = ret['tables'][tbl_reloids[idx['reloid']]]
                 idx = idx.copy() # we want it dict
                 idx_cols = map(tbl.find_colname, idx.pop('indkey').split(' '))
@@ -104,8 +104,8 @@ def load_from_db(cr, relnames):
                             WHERE nspname = ANY(current_schemas(false)))
                       AND s.conrelid = ANY(%s)
                      """,
-                    (tbl_reloids.keys(), ))
-            for con in cr:
+                    (tbl_reloids.keys(), ), debug=_debug)
+            for con in cr.dictfetchall():
                 tbl = ret['tables'][tbl_reloids[con['reloid']]]
                 con = con.copy()
                 con_cols = map(tbl.find_colname, con.pop('conkey'))
@@ -146,7 +146,6 @@ def load_from_db(cr, relnames):
                 elif con['contype'] == 'x':
                     # exclusion constraint
                     pass
-                print "other constraint:", con
                 tbl.constraints.append(OtherTableConstraint(**con))
                 
     return ret
