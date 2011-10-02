@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: openobject-server\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-01-11 11:14+0000\n"
-"PO-Revision-Date: 2011-09-30 10:04+0000\n"
+"PO-Revision-Date: 2011-10-01 10:05+0000\n"
 "Last-Translator: arruah <Unknown>\n"
 "Language-Team: Kazakh <kk@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-10-01 05:21+0000\n"
+"X-Launchpad-Export-Date: 2011-10-02 05:14+0000\n"
 "X-Generator: Launchpad (build 14071)\n"
 
 #. module: base
@@ -4573,7 +4573,7 @@ msgstr ""
 #. module: base
 #: model:res.country,name:base.bt
 msgid "Bhutan"
-msgstr ""
+msgstr "Бутан"
 
 #. module: base
 #: help:ir.sequence,number_next:0
@@ -4603,7 +4603,7 @@ msgstr ""
 #. module: base
 #: field:base.language.export,format:0
 msgid "File Format"
-msgstr ""
+msgstr "Файл пішімі"
 
 #. module: base
 #: field:res.lang,iso_code:0
@@ -4619,7 +4619,7 @@ msgstr ""
 #: view:res.log:0
 #: field:res.log,read:0
 msgid "Read"
-msgstr ""
+msgstr "Оқылған"
 
 #. module: base
 #: sql_constraint:res.country:0
@@ -4649,7 +4649,7 @@ msgstr ""
 #: field:res.config.users,password:0
 #: field:res.users,password:0
 msgid "Password"
-msgstr ""
+msgstr "Пароль"
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_model_fields
@@ -4705,12 +4705,12 @@ msgstr ""
 #: model:ir.actions.act_window,name:base.action_partner_address_form
 #: model:ir.ui.menu,name:base.menu_partner_address_form
 msgid "Addresses"
-msgstr ""
+msgstr "Адрестер"
 
 #. module: base
 #: model:res.country,name:base.mm
 msgid "Myanmar"
-msgstr ""
+msgstr "Мьянма"
 
 #. module: base
 #: selection:base.language.install,lang:0
@@ -4722,12 +4722,12 @@ msgstr ""
 #: field:res.partner.address,street:0
 #: field:res.partner.bank,street:0
 msgid "Street"
-msgstr ""
+msgstr "Көше"
 
 #. module: base
 #: model:res.country,name:base.yu
 msgid "Yugoslavia"
-msgstr ""
+msgstr "Югославия"
 
 #. module: base
 #: field:ir.model.data,name:0
