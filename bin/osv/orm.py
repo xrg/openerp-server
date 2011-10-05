@@ -116,6 +116,41 @@ class except_orm(Exception):
         self.value = value
         self.args = (name, value)
 
+class pythonOrderBy(list):
+    """ Placeholder class for _generate_order_by() requesting python sorting
+    """
+
+    def get_sort_key(self):
+        """ returns a function to use in sort(key=...)
+        """
+        if len(self) != 1:
+            raise NotImplementedError("Cannot sort by: %s" % ','.join(self))
+
+        def sort_key(k):
+            return tuple([k[x] for x in self.get_fields()])
+        return sort_key
+
+    def get_fields(self):
+        """Return the field components of this order-by list
+        """
+        return [ x.split(' ', 1)[0] for x in self]
+
+    def get_direction(self):
+        """ returns the order direction
+            True if ascending (default)
+        """
+        ascending = None
+        for x in self:
+            if ' ' in x:
+                adir = (x.split(' ', 1)[1].lower() != 'desc' )
+            else:
+                adir = True
+            if ascending is None:
+                ascending = adir
+            elif ascending != adir:
+                raise NotImplementedError("Cannot use multiple order directions on python sorting!")
+        return ascending
+
 class BrowseRecordError(Exception):
     pass
 
@@ -4799,6 +4834,7 @@ class orm(orm_template):
             _logger.debug('Generate order from %s and %s', self._order, order_spec)
         if order_spec:
             order_by_elements = []
+            python_order = False
             self._check_qorder(order_spec)
             for order_part in order_spec.split(','):
                 order_split = order_part.strip().split(' ')
@@ -4817,7 +4853,20 @@ class orm(orm_template):
                     elif order_column._type == 'many2one':
                         inner_clause = self._generate_m2o_order_by(order_field, query)
                     else:
-                        continue # ignore non-readable or "non-joinable" fields
+                        do_fallback = None
+                        if hasattr(self, '_fallback_search'):
+                            do_fallback = self._fallback_search
+                        else:
+                            do_fallback = config.get_misc('orm', 'fallback_search', None)
+                        if do_fallback is None:
+                            continue # ignore non-readable or "non-joinable" fields
+                        elif do_fallback is True:
+                            inner_clause = order_field
+                            python_order = True
+                        else:
+                            raise except_orm(_('Error!'), 
+                                    _('Object model %s does not support order by function field "%s"!') % \
+                                     (self._name, order_field))
                 elif order_field in self._inherit_fields:
                     parent_obj = self.pool.get(self._inherit_fields[order_field][0])
                     order_column = parent_obj._columns[order_field]
@@ -4826,7 +4875,22 @@ class orm(orm_template):
                     elif order_column._type == 'many2one':
                         inner_clause = self._generate_m2o_order_by(order_field, query)
                     else:
-                        continue # ignore non-readable or "non-joinable" fields
+                        do_fallback = None
+                        if hasattr(self, '_fallback_search'):
+                            do_fallback = self._fallback_search
+                        elif hasattr(parent_obj, '_fallback_search'):
+                            do_fallback = parent_obj._fallback_search
+                        else:
+                            do_fallback = config.get_misc('orm', 'fallback_search', None)
+                        if do_fallback is None:
+                            continue # ignore non-readable or "non-joinable" fields
+                        elif do_fallback is True:
+                            inner_clause = order_field
+                            python_order = True
+                        else:
+                            raise except_orm(_('Error!'),
+                                    _('Object model %s does not support order by function field "%s"!') % \
+                                     (self._name, order_field))
                 else:
                     raise except_orm(_('Error!'), _('Object model does not support order by "%s"!') % order_field)
                 if inner_clause:
@@ -4837,6 +4901,8 @@ class orm(orm_template):
                         order_by_elements.append("%s %s" % (inner_clause, order_direction))
                     if self._debug:
                         _logger.debug("Order for %s: %r", self._name, order_by_elements[-1])
+            if python_order and order_by_elements:
+                return pythonOrderBy(order_by_elements)
             if order_by_elements:
                 order_by_clause = ",".join(order_by_elements)
 
@@ -4872,11 +4938,26 @@ class orm(orm_template):
                     debug=self._debug)
             res = cr.fetchall()
             return res[0][0]
-        cr.execute('SELECT "%s".id FROM ' % self._table + from_clause +
-                where_str + order_by + limit_str + offset_str, 
-                where_clause_params, debug=self._debug)
-        res = cr.fetchall()
-        return [x[0] for x in res]
+        elif isinstance(order_by, pythonOrderBy):
+            # Fall back to pythonic sorting (+ offset, limit)
+            cr.execute('SELECT "%s".id FROM ' % self._table + from_clause +
+                    where_str, # no offset or limit
+                    where_clause_params, debug=self._debug)
+            res = cr.fetchall()
+            data_res = self.read(cr, user, [x[0] for x in res],
+                        fields=order_by.get_fields(), context=context)
+            data_res.sort(key=order_by.get_sort_key(), reverse=not order_by.get_direction())
+            if offset:
+                data_res = data_res[offset:]
+            if limit:
+                data_res = data_res[:limit]
+            return [x['id'] for x in data_res]
+        else:
+            cr.execute('SELECT "%s".id FROM ' % self._table + from_clause +
+                    where_str + order_by + limit_str + offset_str, 
+                    where_clause_params, debug=self._debug)
+            res = cr.fetchall()
+            return [x[0] for x in res]
 
     # returns the different values ever entered for one field
     # this is used, for example, in the client when the user hits enter on
