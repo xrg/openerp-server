@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: openobject-server\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-01-11 11:14+0000\n"
-"PO-Revision-Date: 2011-10-04 04:30+0000\n"
+"PO-Revision-Date: 2011-10-05 03:54+0000\n"
 "Last-Translator: arruah <Unknown>\n"
 "Language-Team: Kazakh <kk@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-10-04 05:10+0000\n"
-"X-Generator: Launchpad (build 14071)\n"
+"X-Launchpad-Export-Date: 2011-10-05 04:55+0000\n"
+"X-Generator: Launchpad (build 14085)\n"
 
 #. module: base
 #: view:ir.filters:0
@@ -5707,7 +5707,7 @@ msgstr ""
 #. module: base
 #: model:res.country,name:base.is
 msgid "Iceland"
-msgstr ""
+msgstr "Исландия"
 
 #. module: base
 #: model:ir.actions.act_window,name:base.ir_action_window
@@ -5723,12 +5723,12 @@ msgstr ""
 #. module: base
 #: selection:publisher_warranty.contract.wizard,state:0
 msgid "Finished"
-msgstr ""
+msgstr "Біткен"
 
 #. module: base
 #: model:res.country,name:base.de
 msgid "Germany"
-msgstr ""
+msgstr "Германия"
 
 #. module: base
 #: view:ir.sequence:0
@@ -5748,7 +5748,7 @@ msgstr ""
 #. module: base
 #: model:res.country,name:base.gy
 msgid "Guyana"
-msgstr ""
+msgstr "Гайана"
 
 #. module: base
 #: help:ir.actions.act_window,view_type:0
@@ -5771,7 +5771,7 @@ msgstr ""
 #. module: base
 #: model:res.country,name:base.hn
 msgid "Honduras"
-msgstr ""
+msgstr "Гондурас"
 
 #. module: base
 #: help:res.config.users,menu_tips:0
@@ -5783,7 +5783,7 @@ msgstr ""
 #. module: base
 #: model:res.country,name:base.eg
 msgid "Egypt"
-msgstr ""
+msgstr "Мысыр"
 
 #. module: base
 #: field:ir.rule,perm_read:0
@@ -5810,7 +5810,7 @@ msgstr ""
 #. module: base
 #: selection:ir.property,type:0
 msgid "Boolean"
-msgstr ""
+msgstr "Логикалық мән"
 
 #. module: base
 #: view:ir.model:0
@@ -5846,13 +5846,13 @@ msgstr ""
 #: selection:ir.translation,type:0
 #: field:wizard.ir.model.menu.create.line,view_id:0
 msgid "View"
-msgstr ""
+msgstr "Қарау"
 
 #. module: base
 #: selection:ir.module.module,state:0
 #: selection:ir.module.module.dependency,state:0
 msgid "To be installed"
-msgstr ""
+msgstr "Орнатуға"
 
 #. module: base
 #: help:ir.actions.act_window,display_menu_tip:0
@@ -5866,7 +5866,7 @@ msgstr ""
 #: model:ir.module.module,shortdesc:base.module_meta_information
 #: field:res.currency,base:0
 msgid "Base"
-msgstr ""
+msgstr "Негізгі"
 
 #. module: base
 #: selection:base.language.install,lang:0
@@ -5876,7 +5876,7 @@ msgstr ""
 #. module: base
 #: model:res.country,name:base.lr
 msgid "Liberia"
-msgstr ""
+msgstr "Либерия"
 
 #. module: base
 #: view:ir.attachment:0
@@ -5886,7 +5886,7 @@ msgstr ""
 #: field:res.partner,comment:0
 #: model:res.widget,title:base.note_widget
 msgid "Notes"
-msgstr ""
+msgstr "Жазбалар"
 
 #. module: base
 #: field:ir.config_parameter,value:0
@@ -5902,7 +5902,7 @@ msgstr ""
 #: field:ir.values,value:0
 #: field:ir.values,value_unpickle:0
 msgid "Value"
-msgstr ""
+msgstr "Мәні"
 
 #. module: base
 #: field:ir.sequence,code:0
@@ -5911,7 +5911,7 @@ msgstr ""
 #: field:res.bank,code:0
 #: field:res.partner.bank.type,code:0
 msgid "Code"
-msgstr ""
+msgstr "Коды"
 
 #. module: base
 #: model:ir.model,name:base.model_res_config_installer
@@ -5921,17 +5921,17 @@ msgstr ""
 #. module: base
 #: model:res.country,name:base.mc
 msgid "Monaco"
-msgstr ""
+msgstr "Монако"
 
 #. module: base
 #: selection:ir.cron,interval_type:0
 msgid "Minutes"
-msgstr ""
+msgstr "Минут"
 
 #. module: base
 #: selection:ir.translation,type:0
 msgid "Help"
-msgstr ""
+msgstr "Көмек"
 
 #. module: base
 #: help:res.config.users,menu_id:0
