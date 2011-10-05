@@ -2673,6 +2673,17 @@ class orm_memory(orm_template):
         return all(( id in self.datas for id in ids ))
 
 class orm(orm_template):
+    """ ORM for regular, database-stored models
+
+        @attribute _fallback_search enables *slow*, fallback search for those
+                function fields that do not provide a _fnct_search() .
+                Use with care, as this may perform a read() of the full dataset
+                of that model, in order to compute the search condition.
+                Takes 3 values:
+                    None    the default 'ignore' behavior,
+                    True    use the slow method
+                    False   stop and raise an exception on those fields
+    """
     _sql_constraints = []
     _table = None
     _protected = ['read','write','create','default_get','perm_read','unlink','fields_get','fields_view_get','search','name_get','distinct_field_get','name_search','copy','import_data','search_count', 'exists']

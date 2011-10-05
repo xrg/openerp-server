@@ -19,8 +19,9 @@
 #
 ##############################################################################
 
-from tools import reverse_enumerate
+from tools import reverse_enumerate, config
 import fields
+from tools.safe_eval import safe_eval as eval
 
 #.apidoc title: Domain Expressions
 
@@ -286,11 +287,55 @@ class expression(object):
             if field._properties and not field.store:
                 # this is a function field that is not stored
                 if not field._fnct_search:
-                    # the function field doesn't provide a search function and doesn't store
-                    # values in the database, so we must ignore it : we generate a dummy leaf
-                    self.__exp[i] = self.__DUMMY_LEAF
+                    do_fallback = None
+                    if hasattr(table, '_fallback_search'):
+                        do_fallback = table._fallback_search
+                    else:
+                        do_fallback = config.get_misc('orm', 'fallback_search', None)
+                    if do_fallback is None:
+                        # the function field doesn't provide a search function and doesn't store
+                        # values in the database, so we must ignore it : we generate a dummy leaf
+                        self.__exp[i] = self.__DUMMY_LEAF
+                    elif do_fallback:
+                        # Do the slow fallback.
+                        # Try to see if the expression so far is a straight (ANDed)
+                        # combination. In that case, we can restrict the query
+                        if operator not in ('=',  '!=', '<>', '<=', '<', '>', '>=',
+                                        'in', 'not in'):
+                            raise ExpressionError('Cannot fallback with operator "%s" !' % operator)
+                        e_so_far = self.__exp[:i]
+                        for e in e_so_far:
+                            if not self._is_leaf(e, internal=True):
+                                e_so_far = []
+                                break
+                        ids_so_far = table.search(cr, uid, e_so_far, context=context)
+                        if not ids_so_far:
+                            self.__exp[i] = ( 'id', '=', 0 )
+                        else:
+                            ids2 = []
+                            for res_id, rval in field.get(cr, table, ids_so_far,
+                                                        name=fargs[0], user=uid,
+                                                        context=context).items():
+                                if field._type == 'integer' and rval is not None and rval is not False:
+                                    # workaround the str() of fields.function.get() :(
+                                    rval = int(rval)
+                                # TODO: relational fields don't work here, must implement
+                                # special operators between their (id, name) and right
+        
+                                if operator == '=':
+                                    # note: equality operators differ among expressions and python eval()
+                                    if rval == right:
+                                        ids2.append(res_id)
+                                elif eval('%r %s %r' %(rval, operator, right)):
+                                    ids2.append(res_id)
+                            self.__exp[i] = ( 'id', 'in', ids2 )
+                    else:
+                        raise NotImplementedError("Cannot compute %s.%s field for filtering" % \
+                                    (table._name, left))
                 else:
                     subexp = field.search(cr, uid, table, left, [self.__exp[i]], context=context)
+                    # Reminder: the field.search() API returns an expression, not a dataset,
+                    # which means that [] => True clause
                     if not subexp:
                         self.__exp[i] = self.__DUMMY_LEAF
                     else:
