@@ -1431,6 +1431,12 @@ class orm_template(object):
         for parent in self._inherits:
             res.update(self.pool.get(parent).fields_get(cr, user, allfields, context))
 
+        all_selectable = False
+        if getattr(self, '_fallback_search', False) == True:
+            all_selectable = True
+        elif config.get_misc('orm', 'fallback_search', None) == True:
+            all_selectable = True
+
         if self._columns.keys():
             for f in self._columns.keys():
                 field_col = self._columns[f]
@@ -1491,6 +1497,9 @@ class orm_template(object):
                     res[f]['relation'] = field_col._obj
                     res[f]['domain'] = field_col._domain
                     res[f]['context'] = field_col._context
+                
+                if all_selectable:
+                    res[f]['selectable'] = True
         
             # Now, collectively translate the fields' strings and help:
             fld_list = []
