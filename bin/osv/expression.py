@@ -21,7 +21,6 @@
 
 from tools import reverse_enumerate, config
 import fields
-from tools.safe_eval import safe_eval as eval
 
 #.apidoc title: Domain Expressions
 
@@ -62,6 +61,24 @@ class expression(object):
             'in', 'not in',
             'child_of', '|child_of' )
     INTERNAL_OPS = OPS + ('inselect', 'not inselect')
+
+    FALLBACK_OPS = {'=': lambda a, b: bool(a == b),
+            '!=': lambda a, b: bool(a != b),
+            '<>': lambda a, b: bool(a != b),
+            '<=': lambda a, b: bool(a <= b),
+            '<': lambda a, b: bool(a < b),
+            '>': lambda a, b: bool(a > b),
+            '>=': lambda a, b: bool(a >= b),
+            '=?': lambda a, b: b is None or b is False or bool(a == b),
+            #'=like': lambda a, b: , need regexp?
+            #'=ilike': lambda a, b: ,
+            'like': lambda a, b: bool(b in a),
+            'not like': lambda a, b: bool(b not in a),
+            'ilike': lambda a, b: (not b) or (a and bool(b.lower() in a.lower())),
+            'not ilike': lambda a, b: b and ((not a) or bool(b.lower() not in a.lower())),
+            'in': lambda a, b: bool(a in b),
+            'not in': lambda a, b: bool(a not in b),
+            }
 
     def _is_operator(self, element):
         return isinstance(element, (str, unicode)) and element in ['&', '|', '!']
@@ -300,8 +317,8 @@ class expression(object):
                         # Do the slow fallback.
                         # Try to see if the expression so far is a straight (ANDed)
                         # combination. In that case, we can restrict the query
-                        if operator not in ('=',  '!=', '<>', '<=', '<', '>', '>=',
-                                        'in', 'not in'):
+                        op_fn = self.FALLBACK_OPS.get(operator, None)
+                        if not op_fn:
                             raise ExpressionError('Cannot fallback with operator "%s" !' % operator)
                         e_so_far = self.__exp[:i]
                         for e in e_so_far:
@@ -322,11 +339,7 @@ class expression(object):
                                 # TODO: relational fields don't work here, must implement
                                 # special operators between their (id, name) and right
         
-                                if operator == '=':
-                                    # note: equality operators differ among expressions and python eval()
-                                    if rval == right:
-                                        ids2.append(res_id)
-                                elif eval('%r %s %r' %(rval, operator, right)):
+                                if op_fn(rval, right):
                                     ids2.append(res_id)
                             self.__exp[i] = ( 'id', 'in', ids2 )
                     else:
