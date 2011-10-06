@@ -21,6 +21,7 @@
 
 from tools import reverse_enumerate, config
 import fields
+import logging
 
 #.apidoc title: Domain Expressions
 
@@ -309,6 +310,11 @@ class expression(object):
                         do_fallback = table._fallback_search
                     else:
                         do_fallback = config.get_misc('orm', 'fallback_search', None)
+
+                    if table._debug:
+                        logging.getLogger('orm.expression').debug( \
+                                    "%s.%s expression (%s %s %r) will fallback to %r",
+                                    table._name, fargs[0], left, operator, right, do_fallback)
                     if do_fallback is None:
                         # the function field doesn't provide a search function and doesn't store
                         # values in the database, so we must ignore it : we generate a dummy leaf
@@ -341,6 +347,10 @@ class expression(object):
         
                                 if op_fn(rval, right):
                                     ids2.append(res_id)
+                            if self._debug:
+                                logging.getLogger('orm.expression').debug( \
+                                            "%s.%s expression yielded %s of %s records",
+                                            table._name, fargs[0], len(ids2), len(ids_so_far))
                             self.__exp[i] = ( 'id', 'in', ids2 )
                     else:
                         raise NotImplementedError("Cannot compute %s.%s field for filtering" % \
