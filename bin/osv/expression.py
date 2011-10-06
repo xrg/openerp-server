@@ -336,15 +336,26 @@ class expression(object):
                             self.__exp[i] = ( 'id', '=', 0 )
                         else:
                             ids2 = []
+                            if field._multi:
+                                fget_name = [fargs[0],]
+                            else:
+                                fget_name = fargs[0]
                             for res_id, rval in field.get(cr, table, ids_so_far,
-                                                        name=fargs[0], user=uid,
+                                                        name=fget_name, user=uid,
                                                         context=context).items():
-                                if field._type == 'integer' and rval is not None and rval is not False:
+                                if field._multi:
+                                    rval = rval.get(fargs[0], None)
+                                if rval is None or rval is False:
+                                    pass
+                                elif field._type == 'integer':
                                     # workaround the str() of fields.function.get() :(
                                     rval = int(rval)
+                                elif field._type == 'float':
+                                    assert isinstance(rval, float), "%s: %r" %(type(rval), rval)
+
                                 # TODO: relational fields don't work here, must implement
                                 # special operators between their (id, name) and right
-        
+
                                 if op_fn(rval, right):
                                     ids2.append(res_id)
                             if self._debug:
