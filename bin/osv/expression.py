@@ -352,6 +352,8 @@ class expression(object):
                                     rval = int(rval)
                                 elif field._type == 'float':
                                     assert isinstance(rval, float), "%s: %r" %(type(rval), rval)
+                                    if field.digits:
+                                        rval = round(rval, field.digits[1])
 
                                 # TODO: relational fields don't work here, must implement
                                 # special operators between their (id, name) and right
