@@ -28,12 +28,15 @@
 """
 # TODO move the story here.
 
-from fields import _column, get_nice_size, sanitize_binary_value, register_field_classes
+from fields import _column, get_nice_size, sanitize_binary_value, \
+    register_field_classes, get_field_class
 #from tools.translate import _
 import logging
 import __builtin__
 from fields_simple import boolean, integer, float
+from tools import config
 
+_logger = logging.getLogger('orm')
 
 class function(_column):
     """
@@ -348,6 +351,52 @@ class function(_column):
         if self._fnct_inv:
             self._fnct_inv(obj, cr, user, id, name, value, self._fnct_inv_arg, context)
     set_memory = set
+
+    def _auto_init_sql(self, name, obj, schema_table, context=None):
+        if self.store:
+
+            if self._type == 'many2one':
+                rtype = 'integer'
+                rrefs = None
+                assert self._obj, "%s.%s has no reference" %(obj._name, name)
+                dest_obj = obj.pool.get(self._obj)
+                if not dest_obj:
+                    raise KeyError('There is no reference available for %s' % (self._obj,))
+
+                if self._obj != 'ir.actions.actions':
+                    # on delete/update just remove the stored value and
+                    # cause computation
+                    rrefs = {'table': dest_obj._table, 'on_delete': 'cascade', 'on_update': 'cascade'}
+            else:
+                rfield = get_field_class(self._type)
+
+                rtype = rfield._sql_type
+                rrefs = None
+                if not rfield._sql_type:
+                    raise NotImplementedError("Why called function<stored>._auto_init_sql() on %s (%s) ?" % \
+                        (name, rfield.__class__.__name__))
+
+            col = schema_table.column_or_renamed(name, getattr(self, 'oldname', None))
+
+            r = schema_table.check_column(name, rtype, not_null=self.required,
+                    default=False, select=self.select, size=self.size,
+                    references=rrefs, comment=self.string)
+
+        else: # not store
+            if getattr(self, 'nodrop', False):
+                _logger.info('column %s (%s) in table %s is obsolete, but data is preserved.',
+                            name, self.string, obj._table)
+            elif config.get_misc('debug', 'drop_guard', False):
+                _logger.warning('column %s (%s) in table %s should be removed:' \
+                            'please inspect and drop if appropriate !',
+                            name, self.string, obj._table)
+            elif name not in schema_table.columns:
+                pass
+            else:
+                _logger.info('column %s (%s) in table %s removed: converted to a function !',
+                    name, self.string, obj._table)
+                schema_table.columns[name].drop()
+
 
 # ---------------------------------------------------------
 # Related fields
