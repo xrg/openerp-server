@@ -308,5 +308,15 @@ def register_any_classes(*args):
         assert klass.__name__ not in globals(), klass.__name__
         globals()[klass.__name__] = klass
 
+def get_field_class(clname):
+    """ Returns fields.clname class
+
+        Useful for dynamically retrieving any of the available classes,
+        without the need to import it directly
+    """
+    if clname not in globals():
+        raise NameError("fields.%s is not registered" % clname)
+    return globals()[clname]
+
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
 
