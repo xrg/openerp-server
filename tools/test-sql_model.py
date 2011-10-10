@@ -1,8 +1,13 @@
 #!/usr/bin/python
 
 import psycopg2
+import logging
 
 from psycopg2.psycopg1 import cursor as psycopg1cursor
+
+import sys, os
+
+sys.path.append(os.path.join(os.path.abspath(os.path.dirname(__file__)),"..", "bin","tools"))
 
 class myCursor(object):
     def __init__(self, conn):
@@ -17,17 +22,33 @@ class myCursor(object):
     def __iter__(self):
         return iter(self.cr)
 
+logging.basicConfig(level=logging.DEBUG)
+
 conn = psycopg2.connect("dbname=test_bqi")
 #conn.set_client_encoding("xxx")
 cr = myCursor(conn)
 
-import model
+import sql_model
 
-ret = model.load_from_db(cr, ['res_users', 'ir_model_data'])
+sch = sql_model.Schema()
+sch.hints['tables'] = ['res_users', 'ir_model_data']
+sch.load_from_db(cr)
 
-print "ret:", type(ret)
+sch.tables.append(sql_model.Table('foo'))
+sch.tables['foo'].columns.append(sql_model.Column('bar', 'INTEGER', not_null=True))
+sch.tables['foo'].check_column('frol', 'TIMESTAMP', select=True, default=sql_model.Column.now())
+sch.tables['foo'].check_column('r_id', 'INTEGER', not_null=True, 
+        references=dict(table='brob'))
+sch.tables['foo'].check_column('user_id', 'INTEGER', not_null=True, 
+        references=dict(table='res_users'))
+print sch.pretty_print()
 
-print model.pretty_print(ret)
+print
+print "TODO:"
+print sch._dump_todo()
+print
+print "Dry run commit:"
+sch.commit_to_db(cr, dry_run=True)
 
 #eof
 
