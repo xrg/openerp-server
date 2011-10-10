@@ -543,6 +543,8 @@ class config_users(osv.osv_memory):
     _name = 'res.config.users'
     _inherit = ['res.users', 'res.config']
 
+    _columns = {}
+
     def _generate_signature(self, cr, name, email, context=None):
         return _('--\n%(name)s %(email)s\n') % {
             'name': name or '',
