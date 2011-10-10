@@ -2,21 +2,23 @@
 -- Pure SQL
 -------------------------------------------------------------------------
 
+-- This file bootstraps the necessary SQL tables for OpenERP, in order to
+-- run the rest of the ORM create procedure
+
 -------------------------------------------------------------------------
 -- IR dictionary
 -------------------------------------------------------------------------
 
 CREATE TABLE ir_values
 (
-    id serial,
+    id serial PRIMARY KEY,
     name varchar(128) NOT NULL,
     key varchar(128) NOT NULL,
     key2 varchar(128) NOT NULL,
     model varchar(128) NOT NULL,
-    value text,
+    "value" text,
     meta text DEFAULT NULL,
-    res_id integer DEFAULT NULL,
-    PRIMARY KEY (id)
+    res_id integer DEFAULT NULL
 ) WITHOUT OIDS;
 
 -------------------------------------------------------------------------
@@ -24,16 +26,15 @@ CREATE TABLE ir_values
 -------------------------------------------------------------------------
 
 CREATE TABLE ir_model (
-  id serial,
+  id serial PRIMARY KEY,
   model varchar(64) DEFAULT ''::varchar NOT NULL,
   name varchar(64),
   state varchar(16),
-  info text,
-  PRIMARY KEY(id)
+  info text
 ) WITHOUT OIDS;
 
 CREATE TABLE ir_model_fields (
-  id serial,
+  id serial PRIMARY KEY,
   model varchar(64) DEFAULT ''::varchar NOT NULL,
   model_id int REFERENCES ir_model ON DELETE CASCADE,
   name varchar(64) DEFAULT ''::varchar NOT NULL,
@@ -46,7 +47,9 @@ CREATE TABLE ir_model_fields (
   relate boolean DEFAULT False,
   relation_field varchar(64),
   "translate" boolean NOT NULL DEFAULT False,
-  PRIMARY KEY(id)
+  selectable boolean NOT NULL DEFAULT False,
+  readonly boolean NOT NULL DEFAULT False,
+  required boolean NOT NULL DEFAULT False
 ) WITHOUT OIDS;
 
 
@@ -55,11 +58,14 @@ CREATE TABLE ir_model_fields (
 -------------------------------------------------------------------------
 
 CREATE TABLE ir_actions (
-    id serial NOT NULL,
+    id serial NOT NULL PRIMARY KEY,
+    create_date TIMESTAMP DEFAULT now(),
+    create_uid INTEGER,
+    write_date TIMESTAMP,
+    write_uid INTEGER,
     name varchar(64) DEFAULT ''::varchar NOT NULL,
     "type" varchar(32) DEFAULT 'window'::varchar NOT NULL,
-    "usage" varchar(32) DEFAULT NULL,
-    PRIMARY KEY(id)
+    "usage" varchar(32) DEFAULT NULL
 ) WITHOUT OIDS;
 
 CREATE TABLE ir_act_window (
@@ -144,7 +150,7 @@ CREATE TABLE res_users (
     name varchar(64) NOT NULL,
     active boolean DEFAULT True,
     login varchar(64) NOT NULL UNIQUE,
-    password varchar(64) DEFAULT NULL,
+    "password" varchar(64) DEFAULT NULL,
     email varchar(64) DEFAULT NULL,
     context_tz varchar(64) DEFAULT NULL,
     signature text,
