@@ -30,6 +30,7 @@ from fields_function import function
 
 class binary(_column):
     _type = 'binary'
+    _sql_type = 'bytea'
     _symbol_c = '%s'
     _symbol_f = lambda symb: symb and Binary(symb) or None
     _symbol_set = (_symbol_c, _symbol_f)
@@ -70,16 +71,33 @@ class binary(_column):
 
 class selection(_column):
     _type = 'selection'
+    _sql_type = None
 
     def __init__(self, selection, string='unknown', **args):
         _column.__init__(self, string=string, **args)
         self.selection = selection
+        if isinstance(selection, list) and isinstance(selection[0][0], (str, unicode)):
+            f_size = reduce(lambda x, y: max(x, len(y[0])), selection, self.size or 16)
+        elif isinstance(selection, list) and isinstance(selection[0][0], int):
+            f_size = -1
+        else:
+            f_size = getattr(self, 'size', None) or 16
+
+        if f_size == -1:
+            self._sql_type = 'INTEGER'
+            self.size = None
+        else:
+            self._sql_type = 'VARCHAR'
+            self.size = f_size
 
 class serialized(_column):
     """Serialized fields
     
         Pending deprecation?
     """
+    
+    _sql_type = 'text'
+
     def __init__(self, string='unknown', serialize_func=repr, deserialize_func=eval, type='text', **args):
         self._serialize_func = serialize_func
         self._deserialize_func = deserialize_func
@@ -111,6 +129,7 @@ class struct(_column):
         Note: only plain components allowed.
     """
     _type = 'struct'
+    _sql_type = 'text'
 
     _symbol_c = '%s'
     _symbol_f = _symbol_set_struct

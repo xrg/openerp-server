@@ -95,12 +95,17 @@ class _column(object):
     _type = 'unknown'
     _obj = None
     _multi = False
+    _sql_type = None #: type of sql column to be created. Leave empty if you redefine _auto_init_sql
     _symbol_c = '%s'
     _symbol_f = _symbol_set
     _symbol_set = (_symbol_c, _symbol_f)
     _symbol_get = None
 
-    def __init__(self, string='unknown', required=False, readonly=False, domain=None, context=None, states=None, priority=0, change_default=False, size=None, ondelete=None, translate=False, select=False, **args):
+    def __init__(self, string='unknown', required=False, readonly=False,
+                    domain=None, context=None, states=None, priority=0,
+                    change_default=False, size=None, ondelete=None,
+                    translate=False, select=False, **args):
+        # TODO docstring
         if domain is None:
             domain = []
         if context is None:
@@ -181,6 +186,52 @@ class _column(object):
               # OK, the string will be bound.
         """
         return None
+
+    def _auto_init_prefetch(self, name, obj, prefetch_schema, context=None):
+        """Populate schema's hints with tables to fetch from SQL
+
+            Override this fn. for relational fields
+        """
+        pass
+
+    def _auto_init_sql(self, name, obj, schema_table, context=None):
+        """ Update this column in in schema_table
+
+            Here, the database schema is _virtually_ updated to fit
+            this column. (real DB actions may be deferred)
+
+            @param name Name of this column in obj
+            @param obj the parent ORM model
+            @param schema_table an sql_model Table() instance
+
+            @return ?? todo actions?
+        """
+
+        if not self._sql_type:
+            raise NotImplementedError("Why called _auto_init_sql() on %s (%s.%s) ?" % \
+                    (self.__class__.__name__, obj._name, name))
+
+        col = schema_table.column_or_renamed(name, getattr(self, 'oldname', None))
+
+        r = schema_table.check_column(name, self._sql_type, not_null=self.required,
+                default=self._sql_default_for(name,obj), select=self.select, size=self.size,
+                references=False, comment=self.string)
+        assert r
+
+    def _sql_default_for(self, name, obj):
+        """returns the default SQL value for this column, if available
+
+            If this column has a scalar, stable, default, this will be returned.
+            May also work for some special functions (like "now()")
+        """
+
+        obj_def = obj._defaults.get(name, None)
+        if obj_def is None:
+            return None
+        elif callable(obj_def):
+            return None
+        else:
+            return self._symbol_set[1](obj_def)
 
 def get_nice_size(a):
     (x,y) = a

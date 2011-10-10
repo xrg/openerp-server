@@ -38,12 +38,14 @@ import __builtin__
 
 class boolean(_column):
     _type = 'boolean'
+    _sql_type = 'bool'
     _symbol_c = '%s'
     _symbol_f = lambda x: x and 'True' or 'False'
     _symbol_set = (_symbol_c, _symbol_f)
 
 class integer(_column):
     _type = 'integer'
+    _sql_type = 'integer'
     _symbol_c = '%s'
     _symbol_f = _symbol_set_long
     _symbol_set = (_symbol_c, _symbol_f)
@@ -51,6 +53,7 @@ class integer(_column):
 
 class integer_big(_column):
     _type = 'integer_big'
+    _sql_type = 'bigint'
     # do not reference the _symbol_* of integer class, as that would possibly
     # unbind the lambda functions
     _symbol_c = '%s'
@@ -60,12 +63,14 @@ class integer_big(_column):
 
 class reference(_column):
     _type = 'reference'
+    _sql_type = 'varchar'
     def __init__(self, string, selection, size, **args):
         _column.__init__(self, string=string, size=size, selection=selection, **args)
 
 
 class char(_column):
     _type = 'char'
+    _sql_type = 'varchar'
 
     def __init__(self, string, size, **args):
         _column.__init__(self, string=string, size=size, **args)
@@ -93,9 +98,11 @@ class char(_column):
 
 class text(_column):
     _type = 'text'
+    _sql_type = 'text'
 
 class float(_column):
     _type = 'float'
+    _sql_type = 'double precision'
     _symbol_c = '%s'
     _symbol_f = _symbol_set_float
     _symbol_set = (_symbol_c, _symbol_f)
@@ -104,6 +111,10 @@ class float(_column):
     def __init__(self, string='unknown', digits=None, digits_compute=None, **args):
         _column.__init__(self, string=string, **args)
         self.digits = digits
+        if digits or digits_compute:
+            # with digits_compute, we are pretty sure we will need 'numeric',
+            # but cannot tell the exact size at this stage
+            self._sql_type = 'numeric'
         self.digits_compute = digits_compute
 
 
@@ -112,9 +123,12 @@ class float(_column):
             t = self.digits_compute(cr)
             self._symbol_set=('%s', lambda x: ('%.'+str(t[1])+'f') % (__builtin__.float(x or 0.0),))
             self.digits = t
+            self._sql_type = 'numeric'
 
 class date(_column):
     _type = 'date'
+    _sql_type = 'date'
+
     @staticmethod
     def today(*args):
         """ Returns the current date in a format fit for being a
@@ -128,6 +142,8 @@ class date(_column):
 
 class datetime(_column):
     _type = 'datetime'
+    _sql_type = 'timestamp'
+
     @staticmethod
     def now(*args):
         """ Returns the current datetime in a format fit for being a
@@ -141,6 +157,8 @@ class datetime(_column):
 
 class time(_column):
     _type = 'time'
+    _sql_type = 'time'
+
     @staticmethod
     def now( *args):
         """ Returns the current time in a format fit for being a
