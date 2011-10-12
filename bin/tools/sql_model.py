@@ -667,6 +667,7 @@ class collection(_element):
         assert newname not in self._d, "element %s already exists" % newname
         elem = self._d.pop(oldname)
         elem._name = newname
+        elem.oldname = oldname
         elem._state = 'rename' # use the shallow setter, not set_state()
         self._d[newname] = elem
         return elem
