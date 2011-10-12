@@ -158,6 +158,13 @@ class many2one(_column):
     def search(self, cr, obj, args, name, value, offset=0, limit=None, uid=None, context=None):
         return obj.pool.get(self._obj).search(cr, uid, args+self._domain+[('name', 'like', value)], offset, limit, context=context)
 
+    def _auto_init_prefetch(self, name, obj, prefetch_schema, context=None):
+        _column._auto_init_prefetch(self, name, obj, prefetch_schema, context=context)
+        dest_obj = obj.pool.get(self._obj)
+        if not dest_obj:
+            raise KeyError('There is no reference available for %s' % (self._obj,))
+        prefetch_schema.hints['tables'].append(dest_obj._table)
+
     def _auto_init_sql(self, name, obj, schema_table, context=None):
         assert self._obj, "%s.%s has no reference" %(obj._name, name)
         dest_obj = obj.pool.get(self._obj)
@@ -321,6 +328,12 @@ class one2many(_column):
                     res.append((0, 0, d))
         return res
 
+    def _auto_init_prefetch(self, name, obj, prefetch_schema, context=None):
+        _column._auto_init_prefetch(self, name, obj, prefetch_schema, context=context)
+        dest_obj = obj.pool.get(self._obj)
+        if not dest_obj:
+            raise KeyError('There is no reference available for %s' % (self._obj,))
+        prefetch_schema.hints['tables'].append(dest_obj._table)
 
     def _auto_init_sql(self, name, obj, schema_table, context=None):
         # Treat like many2one, don't care about other->self being limited
@@ -342,8 +355,10 @@ class one2many(_column):
         
         if rev_column:
             if rev_column._type != 'many2one' or rev_column._obj != obj._name:
-                raise RuntimeError("%s.%s is one2many of %s.%s, but latter is not the inverse many2one!" % \
-                    (obj._name, name, self._obj, self._fields_id))
+                # This happens in mail_gateway, crm. Keep this warning until they're fixed
+                warnings.warn("%s.%s is one2many of %s.%s, but latter is not the inverse many2one!" % \
+                        (obj._name, name, self._obj, self._fields_id), FutureWarning)
+                #raise RuntimeError()
         else:
             # Dirty job, define the column implicitly
             assert obj._name != 'ir.actions.actions'
