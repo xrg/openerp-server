@@ -441,6 +441,7 @@ def init_module_objects(cr, module_name, obj_list):
     logger.info('module %s: creating or updating database tables' % module_name)
     todo = []
     schema = sql_model.Schema() # TODO: once per graph!
+    schema.hints['tables'].append('res_users') # always needed, for implicit fields
     context = {'module': module_name}
     for obj in obj_list:
         obj._auto_init_prefetch(schema, context=context)
