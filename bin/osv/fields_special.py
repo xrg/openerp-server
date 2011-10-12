@@ -73,22 +73,26 @@ class selection(_column):
     _type = 'selection'
     _sql_type = None
 
-    def __init__(self, selection, string='unknown', **args):
-        _column.__init__(self, string=string, **args)
-        self.selection = selection
+    @classmethod
+    def _get_sql_type(cls, selection, def_size):
+        """Compute the sql type based on selection list and size
+        """
         if isinstance(selection, list) and isinstance(selection[0][0], (str, unicode)):
-            f_size = reduce(lambda x, y: max(x, len(y[0])), selection, self.size or 16)
+            f_size = reduce(lambda x, y: max(x, len(y[0])), selection, def_size or 16)
         elif isinstance(selection, list) and isinstance(selection[0][0], int):
             f_size = -1
         else:
-            f_size = getattr(self, 'size', None) or 16
+            f_size = def_size or 16
 
         if f_size == -1:
-            self._sql_type = 'INTEGER'
-            self.size = None
+            return 'INTEGER',  None
         else:
-            self._sql_type = 'VARCHAR'
-            self.size = f_size
+            return 'VARCHAR', f_size
+
+    def __init__(self, selection, string='unknown', **args):
+        _column.__init__(self, string=string, **args)
+        self.selection = selection
+        self._sql_type, self.size = self._get_sql_type(selection, getattr(self, 'size', None))
 
 class serialized(_column):
     """Serialized fields

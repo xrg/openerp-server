@@ -372,11 +372,15 @@ class function(_column):
             else:
                 rfield = get_field_class(self._type)
 
-                rtype = rfield._sql_type
+                if self._type == 'selection':
+                    # they must compute dynamically
+                    rtype, self.size = rfield._get_sql_type(self.selection, getattr(self, 'size', None))
+                else:
+                    rtype = rfield._sql_type
                 rrefs = None
-                if not rfield._sql_type:
-                    raise NotImplementedError("Why called function<stored>._auto_init_sql() on %s (%s) ?" % \
-                        (name, rfield.__class__.__name__))
+                if not rtype:
+                    raise NotImplementedError("Why called function<stored>._auto_init_sql() on %s.%s (%s) ?" % \
+                        (obj._name, name, rfield.__name__))
 
             schema_table.column_or_renamed(name, getattr(self, 'oldname', None))
 
