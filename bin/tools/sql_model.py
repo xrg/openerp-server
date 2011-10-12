@@ -477,14 +477,12 @@ class _element(object):
             if e.commit_state(failed=failed):
                 child_changes = True
             if not e.is_idle():
-                print "%s is not idle: %s -> %s" %(e, pcs, e._state)
                 need_alter = True
         if failed:
             if not child_changes:
                 # If we couldn't identify the single sub-element that failed
                 self._state = 'failed:' + self._state[1:]
             else:
-                print "retry state: ", self._state
                 self._state = self._state[1:] # retry
         elif self._state in ('@create', '@alter', '@sql'):
             if need_alter:
@@ -615,7 +613,6 @@ class collection(_element):
             if e.commit_state(failed=failed):
                 has_changes = True
             if not e.is_idle():
-                print "coll element %s not idle: %s" %( e, e._state)
                 need_alter = True
         
         if _element.commit_state(self, failed=(failed and not has_changes)):
@@ -663,7 +660,6 @@ class collection(_element):
     def get_depends(self, partial=False):
         clear = super(collection, self).get_depends(partial=partial)
         if not clear:
-            print "not clear up"
             return False
         
         if partial:
@@ -877,7 +873,6 @@ class ColumnConstraint(_element):
         elif self._state == '@drop':
             self._state = 'dropped'
         else:
-            print "constraint state:", self._state
             return False
         return True
 
@@ -1016,7 +1011,6 @@ class Table(Relation):
                                 print "column constraint mismatch on %s: %r -> %r" %(self._name, references, con)
                                 con.set_state('drop')
                     if not found_ref:
-                        print "add new constraint"
                         new_name = "%s_%s_fkey" %(self._name, colname)
                         i = 1
                         while i and new_name in col.constraints:
@@ -1066,10 +1060,7 @@ class Table(Relation):
                 col._state = 'alter'
         
             if col._state not in IDLE_STATES and self._state in IDLE_STATES:
-                print "altering %s from %s to alter" %(self, self._state)
                 self._state = 'alter'
-            if self._name == 'ir_values':
-                print "ir values column ", col._name, col._state, col._todo_attrs
         return can_do
     
     def check_constraint(self, conname, obj, condef):
