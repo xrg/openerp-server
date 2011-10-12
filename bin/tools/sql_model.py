@@ -449,6 +449,23 @@ class _element(object):
     def is_idle(self):
         return self._state in IDLE_STATES or self._state.startswith('failed:')
 
+    def mark(self):
+        """Set the state as 'done', so that we know we need this element
+        
+            Used to distinguish the elements which are redundant in the
+            database and need to be dropped.
+        """
+        if self._state in ('sql', 'drop'):
+            self._state = 'done'
+        elif self._state == 'dropped':
+            if self.parent():
+                parent_name = self.parent()._name + '.'
+            else:
+                parent_name = ''
+                logging.getLogger('init.sql').error( \
+                    'Element %s%s is already dropped, but may still be needed!',
+                    parent_name, self._name)
+
     def drop(self):
         """Mark this element to drop.
         """
@@ -484,11 +501,13 @@ class _element(object):
                 self._state = 'failed:' + self._state[1:]
             else:
                 self._state = self._state[1:] # retry
-        elif self._state in ('@create', '@alter', '@sql'):
+        elif self._state == '@sql':
+            self._state = 'sql'
+        elif self._state in ('@create', '@alter', '@rename'):
             if need_alter:
                 self._state = 'alter'
             else:
-                self._state = 'sql'
+                self._state = 'done'
         elif self._state == '@drop':
             self._state = 'dropped'
         #elif self._state == 'create' and not need_alter:
@@ -866,8 +885,10 @@ class ColumnConstraint(_element):
             return False
         if failed:
             self._state = 'failed:' + self._state[1:]
-        elif self._state in ('@create', '@sql'):
+        elif self._state == '@sql':
             self._state = 'sql'
+        elif self._state  == '@create':
+            self._state = 'done'
         elif self._state == '@alter':
             self._state = 'create'
         elif self._state == '@drop':
@@ -1058,6 +1079,8 @@ class Table(Relation):
             
             if col._state not in ('create', 'rename') and col._todo_attrs:
                 col._state = 'alter'
+            else:
+                col.mark()
         
             if col._state not in IDLE_STATES and self._state in IDLE_STATES:
                 self._state = 'alter'
