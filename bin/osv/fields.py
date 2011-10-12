@@ -211,25 +211,28 @@ class _column(object):
             raise NotImplementedError("Why called _auto_init_sql() on %s (%s.%s) ?" % \
                     (self.__class__.__name__, obj._name, name))
 
-        col = schema_table.column_or_renamed(name, getattr(self, 'oldname', None))
+        schema_table.column_or_renamed(name, getattr(self, 'oldname', None))
 
         r = schema_table.check_column(name, self._sql_type, not_null=self.required,
-                default=self._sql_default_for(name,obj), select=self.select, size=self.size,
+                default=self._sql_default_for(name,obj, context=context),
+                select=self.select, size=self.size,
                 references=False, comment=self.string)
         assert r
 
-    def _sql_default_for(self, name, obj):
+    def _sql_default_for(self, name, obj, context=None):
         """returns the default SQL value for this column, if available
 
             If this column has a scalar, stable, default, this will be returned.
             May also work for some special functions (like "now()")
+            
+            @param context may be passed to the default-computing function
         """
 
         obj_def = obj._defaults.get(name, None)
         if obj_def is None:
             return None
         elif callable(obj_def):
-            return None
+            return None # TODO
         else:
             return self._symbol_set[1](obj_def)
 

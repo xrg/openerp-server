@@ -353,6 +353,8 @@ class function(_column):
     set_memory = set
 
     def _auto_init_sql(self, name, obj, schema_table, context=None):
+        
+        todo = None
         if self.store:
 
             if self._type == 'many2one':
@@ -376,11 +378,20 @@ class function(_column):
                     raise NotImplementedError("Why called function<stored>._auto_init_sql() on %s (%s) ?" % \
                         (name, rfield.__class__.__name__))
 
-            col = schema_table.column_or_renamed(name, getattr(self, 'oldname', None))
+            schema_table.column_or_renamed(name, getattr(self, 'oldname', None))
 
             r = schema_table.check_column(name, rtype, not_null=self.required,
                     default=False, select=self.select, size=self.size,
                     references=rrefs, comment=self.string)
+
+            assert r
+
+            if schema_table._state != 'create':
+                todo = []
+                order = 10
+                if self.store is not True: #is dict
+                    order = self.store[self.store.keys()[0]][2]
+                todo.append((order, obj._update_store, (self, name)))
 
         else: # not store
             if getattr(self, 'nodrop', False):
@@ -396,6 +407,7 @@ class function(_column):
                 _logger.info('column %s (%s) in table %s removed: converted to a function !',
                     name, self.string, obj._table)
                 schema_table.columns[name].drop()
+
 
 
 # ---------------------------------------------------------
