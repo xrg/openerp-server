@@ -3195,11 +3195,13 @@ class orm(orm_template):
                 schema_table = schema.tables[self._table]
                 for (key, con, _) in self._sql_constraints:
                     conname = '%s_%s' % (self._table, key)
-                    schema_table.check_constraint(key, self, con)
+                    schema_table.check_constraint(conname, self, con)
                 # then, drop rest of them
                 for con in schema_table.constraints:
                     if con._state == 'sql':
-                        con.drop()
+                        print "should drop constraint %s" % self._table, con, con._state
+                        # *-*
+                        #    con.drop()
 
         # Note about order:
         # Since we put these operations in the "todo_end" list, they may

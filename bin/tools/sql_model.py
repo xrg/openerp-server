@@ -1079,7 +1079,14 @@ class Table(Relation):
             @param obj ORM model
             @param condef Definition of the constraint (text?)
         """
-        pass # TODO *-*
+        if conname in self.constraints:
+            # For the time being, assume just the same name is OK
+            self.constraints[conname].mark()
+        else:
+            con = self.constraints.append(OtherTableConstraint(name=conname, definition=condef))
+            # con.set_depends(self) needed?
+            
+        return True
 
     def column_or_renamed(self, colname, oldname=None):
         """ Retrieve the named column, or `oldname` through a rename
@@ -1326,7 +1333,7 @@ class PlainUniqueConstraint(TableConstraint):
     def _to_create_sql(self, args):
         return '"%s" UNIQUE(%s)' % (self._name, ', '.join(self.columns))
 
-class CheckConstraint(ColumnConstraint):
+class CheckConstraint(TableConstraint):
     def __init__(self, name, definition):
         _element.__init__(self, name)
         self.definition = definition
@@ -1340,8 +1347,8 @@ class OtherTableConstraint(TableConstraint):
         _element.__init__(self, name)
         self.__dict__.update(kwargs) #dirty
         
-    def __repr__(self):
-        ret = "%s %s" % (self._name, self.definition)
+    def _to_create_sql(self, args):
+        ret = '"%s" %s' % (self._name, self.definition)
         return ret
 
 #eof
