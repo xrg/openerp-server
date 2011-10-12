@@ -24,7 +24,7 @@
 from fields import _column, register_field_classes
 from tools.translate import _
 import warnings
-
+from tools import sql_model
 
 #.apidoc title: Relationals fields
 
@@ -157,6 +157,28 @@ class many2one(_column):
 
     def search(self, cr, obj, args, name, value, offset=0, limit=None, uid=None, context=None):
         return obj.pool.get(self._obj).search(cr, uid, args+self._domain+[('name', 'like', value)], offset, limit, context=context)
+
+    def _auto_init_sql(self, name, obj, schema_table, context=None):
+        assert self._obj, "%s.%s has no reference" %(obj._name, name)
+        dest_obj = obj.pool.get(self._obj)
+        if not dest_obj:
+            raise KeyError('There is no reference available for %s' % (self._obj,))
+
+        if self._obj != 'ir.actions.actions':
+            references = {'table': dest_obj._table, 'on_delete': self.ondelete}
+        else:
+            # We cannot have a proper key for the sql-inherited 'ir_actions'
+            # table, can we?
+            references = False
+
+        schema_table.column_or_renamed(name, getattr(self, 'oldname', None))
+
+        r = schema_table.check_column(name, 'INTEGER', not_null=self.required,
+                default=self._sql_default_for(name,obj, context=context),
+                select=self.select, references=references, comment=self.string)
+
+        assert r
+        return None
 
 
 class one2many(_column):
@@ -300,6 +322,45 @@ class one2many(_column):
         return res
 
 
+    def _auto_init_sql(self, name, obj, schema_table, context=None):
+        # Treat like many2one, don't care about other->self being limited
+        assert self._obj, "%s.%s has no reference" %(obj._name, name)
+        dest_obj = obj.pool.get(self._obj)
+        if not dest_obj:
+            raise KeyError('There is no reference available for %s' % (self._obj,))
+
+        rev_column = None
+        # Try to locate if remote object already has the corresponding
+        # many2one column
+        if self._fields_id in dest_obj._columns:
+            rev_column = dest_obj._columns[self._fields_id]
+        else:
+            for diname in dest_obj.inherits:
+                dobj2 = obj.pool.get(diname)
+                if self._fields_id in dobj2._columns:
+                    rev_column = dobj2._columns[self._fields_id]
+        
+        if rev_column:
+            if rev_column._type != 'many2one' or rev_column._obj != obj._name:
+                raise RuntimeError("%s.%s is one2many of %s.%s, but latter is not the inverse many2one!" % \
+                    (obj._name, name, self._obj, self._fields_id))
+        else:
+            # Dirty job, define the column implicitly
+            assert obj._name != 'ir.actions.actions'
+            assert not self.required
+            assert not self._sql_default_for(name,obj), self._sql_default_for(name,obj)
+            
+            dest_table = schema_table.parent()[dest_obj._table]
+            references = {'table': obj._table }
+
+            r = dest_table.check_column(self._fields_id, 'INTEGER',
+                    select=self.select,
+                    references=references, comment=self.string)
+                    # not_null=? , default=self._sql_default_for(name,obj),
+
+            assert r
+        return None
+
 class many2many(_column):
     """ many-to-many bidirectional relationship
 
@@ -363,6 +424,10 @@ class many2many(_column):
     def _sql_names(self, source_model):
         """Return the SQL names defining the structure of the m2m relationship table
 
+            Note: by default, a m2m is symmetrical among source and destination models.
+            This means that if a m2m field is declared at both models, it will use
+            the same relation table and keep the same data entered from either end.
+            
             :return: (m2m_table, local_col, dest_col) where m2m_table is the table name,
                      local_col is the name of the column holding the current model's FK, and
                      dest_col is the name of the column holding the destination model's FK, and
@@ -515,6 +580,57 @@ class many2many(_column):
     def shallow_copy(self, cr, uid, obj, id, f, data, context):
         return [(6, 0, data[f])]
     # TODO: a deep_copy
+
+    def _auto_init_prefetch(self, name, obj, prefetch_schema, context=None):
+        _column._auto_init_prefetch(self, name, obj, prefetch_schema, context=context)
+        rel, id1, id2 = self._sql_names(obj)
+        prefetch_schema.hints['tables'].append(rel)
+
+    def _auto_init_sql(self, name, obj, schema_table, context=None):
+        rel, id1, id2 = self._sql_names(obj)
+
+        dest_obj = obj.pool.get(self._obj)
+        if not dest_obj:
+            raise KeyError('There is no reference available for %s' % (self._obj,))
+
+        schema_alltables = schema_table.parent_schema().tables
+        if not rel in schema_alltables:
+            table = schema_alltables.append(sql_model.Table(rel,
+                        comment='Relation between %s and %s' % \
+                                    (obj._table, dest_obj._table)))
+        else:
+            table = schema_alltables[rel]
+
+        has_constraint = False
+        is_id1_first = True
+        for con in table.constraints:
+            if isinstance(con, sql_model.PlainUniqueConstraint) \
+                        and set(con.columns) == set([id1, id2]):
+                has_constraint = True
+                is_id1_first = (con.columns[0] == id1 )
+            else:
+                con.set_state('drop')
+
+        # Note: since the UNIQUE constraint will create an implicit index
+        # for the first column, we need only to create another index for
+        # the second column.
+
+        c1 = table.check_column(id1,'INTEGER', not_null=True,
+                references=dict(table=obj._table, on_delete="cascade"),
+                select=not is_id1_first)
+        c2 = table.check_column(id2,'INTEGER', not_null=True,
+                references=dict(table=dest_obj._table, on_delete="cascade"),
+                select=is_id1_first)
+
+        assert c1 and c2
+
+        if not has_constraint:
+            con = table.constraints.append(sql_model.PlainUniqueConstraint(
+                name="%s_ids_uniq" % rel, columns=[id1, id2]))
+            con.set_depends(table.columns[id1])
+            con.set_depends(table.columns[id2])
+
+        return None
 
 register_field_classes(one2one, many2one, one2many, many2many)
 
