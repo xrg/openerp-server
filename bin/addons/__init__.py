@@ -37,6 +37,7 @@ import zipimport
 import osv
 import tools
 import tools.osutil
+from tools import sql_model
 from tools.safe_eval import safe_eval as eval
 import pooler
 from tools.translate import _
@@ -439,16 +440,41 @@ def upgrade_graph(graph, cr, module_list, force=None):
 def init_module_objects(cr, module_name, obj_list):
     logger.info('module %s: creating or updating database tables' % module_name)
     todo = []
+    schema = sql_model.Schema() # TODO: once per graph!
+    context = {'module': module_name}
+    for obj in obj_list:
+        obj._auto_init_prefetch(schema, context=context)
+    
+    logger.debug("Loading existing elements from db: %r" , schema.hints)
+    schema.load_from_db(cr)
+    
     for obj in obj_list:
         try:
-            result = obj._auto_init(cr, {'module': module_name})
+            context = {'module': module_name} # is it safe to move up?
+            # Savepoint ? *-*
+            obj._field_model2db(cr, context=context)
+            obj._auto_init_sql(schema, context=context)
+            
+            # we need only commit the sql model if the object overrides
+            # its _auto_init (compatibility mode)
+            if not (getattr(obj._auto_init, 'deferrable', False)):
+                logger.debug("Commit schema before %s._auto_init()", obj._name)
+                schema.commit_to_db(cr)
+            result = obj._auto_init(cr, context=context )
         except Exception:
+            logger.error("Schema at time of exception: \n%s", schema.pretty_print(todo_only=True))
             raise
         if result:
             todo += result
         if hasattr(obj, 'init'):
+            schema.commit_to_db(cr)
             obj.init(cr)
         cr.commit()
+
+    # print "TODO(last):"
+    # print schema._dump_todo()
+    schema.commit_to_db(cr)
+    cr.commit()
     todo.sort()
     for t in todo:
         t[1](cr, *t[2])
