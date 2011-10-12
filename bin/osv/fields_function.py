@@ -384,8 +384,8 @@ class function(_column):
 
             schema_table.column_or_renamed(name, getattr(self, 'oldname', None))
 
-            r = schema_table.check_column(name, rtype, not_null=self.required,
-                    default=False, select=self.select, size=self.size,
+            r = schema_table.check_column(name, rtype, not_null=None,
+                    default=None, select=self.select, size=self.size,
                     references=rrefs, comment=self.string)
 
             assert r
