@@ -780,6 +780,7 @@ class Column(_element):
         self.default = default
         self.primary_key = primary_key
         self.constraints = collection('constraints', ColumnConstraint, self)
+        # self.constraints._wait_for_me = False # We can do things without them ?
         self.not_null = not_null
         self._todo_attrs = {}
         if constraint:
@@ -889,10 +890,32 @@ class Column(_element):
             self.last_epoch = epoch
         
         if not self.constraints.is_idle():
-            # FIXME
-            print pretty_print(self.constraints)
-            raise NotImplementedError('%s.constraints: %s' %( self._name, self.constraints._state))
-        if self._todo_attrs:
+            for con in self.constraints:
+                if con.is_idle() or not con.get_depends():
+                    continue
+                if isinstance(con, NotNullColumnConstraint):
+                    assert con._state == 'create', "%s: %s" % (self._name, con._state)
+                    alter_column('SET NOT NULL')
+                elif con._state == 'create':
+                    ret.append('ADD CONSTRAINT "%s" %s' %(con._name, con._to_table_constraint(self._name, args)))
+                elif con._state == 'drop':
+                    ret.append('DROP CONSTRAINT "%s"' % con._name)
+                else:
+                    raise RuntimeError('How to handle column "%s" constraint in state "%s"?' % \
+                            (self._name, con._state))
+                if not dry_run:
+                    con._state = '@' + con._state
+                if partial:
+                    break
+            
+            if ret and not dry_run:
+                if not self._state.startswith('@'):
+                    self._state = '@' + self._state
+                if not self.constraints._state.startswith('@'):
+                    self.constraints._state = self._state
+                self.last_epoch = epoch
+
+        if self._todo_attrs and not partial:
             raise NotImplementedError("Cannot know how to alter %s for %r" % (self._name, self._todo_attrs))
         return ret
 
@@ -940,6 +963,15 @@ class ColumnConstraint(_element):
     def _to_create_sql(self, args):
         raise NotImplementedError
 
+    def _to_table_constraint(self, colname, args):
+        """ reformat this constraint as a table-wide expression
+        
+            When we add this constraint late, we cannot write the same
+            expression as the column shorthand.
+            @param colname name of column
+        """
+        raise NotImplementedError
+
     def commit_state(self, failed=False):
         """ Column constraints go from @alter -> create
         
@@ -964,6 +996,9 @@ class UniqueColumnConstraint(ColumnConstraint):
 
     def _to_create_sql(self, args):
         return 'UNIQUE'
+    
+    def _to_table_constraint(self, colname, args):
+        return 'UNIQUE("%s")' % colname
 
 class CheckColumnConstraint(ColumnConstraint):
     def __init__(self, name, definition):
@@ -986,6 +1021,9 @@ class FkColumnConstraint(ColumnConstraint):
 
     def __str__(self):
         return 'REFERENCES %s(%s)' % (self.fcname, self.fc_colname)
+
+    def _to_table_constraint(self, colname, args):
+        return ('FOREIGN KEY("%s") ' % colname) + self._to_create_sql(args)
 
     def _to_create_sql(self, args):
         ret = 'REFERENCES %s(%s)' % (self.fcname, self.fc_colname)
@@ -1086,10 +1124,19 @@ class Table(Relation):
                     else:
                         self._logger.debug("Table %s.%s column is missing for foreign key of %s.%s",
                                 references['table'], ref_colname, self._name, colname)
-                        newcol.set_depends(ref_tbl)
+                        newcol.set_depends(ref_tbl, on_alter=True)
                 else:
                     self._logger.warning("Column %s.%s set to reference %s(%s), but the latter table is not known",
                             self._name, colname, references['table'], references.get('column', 'id'))
+            
+            if self._state != 'create' and isinstance(default, Command):
+                # We need to execute the command (to update defaults) _after_
+                # the column has been added, and then enforce the NOT NULL constraint
+                self.parent_schema().commands.append(default)
+                default.set_depends(newcol, on_alter=True)
+                if not_null:
+                    nnc = newcol.constraints.append(NotNullColumnConstraint())
+                    nnc.set_depends(default)
             if select:
                 idx = self.indices.append(Index('%s_%s_idx' % (self._name, colname),
                                             colnames=[colname], state='create'))
@@ -1100,13 +1147,17 @@ class Table(Relation):
                 self._state = 'alter'
         else:
             col = self.columns[colname]
-            if col.ctype.lower() not in (ctype.lower(), Column.PG_TYPE_ALIASES.get(ctype.upper(), 'any')):
-                self._logger.info("Column %s.%s must change type from %s to %s aka. %s",
-                        self._name, colname, col.ctype, ctype, Column.PG_TYPE_ALIASES.get(ctype, '-'))
-                raise NotImplementedError # FIXME
+            plain_default = None
+            if default and not isinstance(default, Command):
+                plain_default = default
             if not_null is not None:
                 if not_null != col.not_null:
-                    col._todo_attrs['not_null'] = not_null
+                    if (not not_null) or plain_default:
+                        col._todo_attrs['not_null'] = not_null
+                    if not not_null:
+                        for c in col.constraints:
+                            if isinstance(c, NotNullColumnConstraint):
+                                c.drop()
                 else:
                     col._todo_attrs.pop('not_null', None)
             if references is not None:
@@ -1151,11 +1202,29 @@ class Table(Relation):
                     col._todo_attrs['size'] = size
                 else:
                     col._todo_attrs.pop('size', None)
-            if default is not None:
-                if default != col.default:
+            if plain_default is not None:
+                if plain_default != col.default:
                     col._todo_attrs['default'] = default
                 else:
                     col._todo_attrs.pop('default', None)
+            elif col.default:
+                # we have to drop the SQL static default
+                col._todo_attrs['default'] = None
+            if isinstance(default, Command) and not col.not_null:
+                # We need to execute the command (to update defaults) _after_
+                # the column has been added, and then enforce the NOT NULL constraint
+                # If the not_null is already set for the column, we assume all
+                # data is already updated.
+                assert not default.parent
+                self.parent_schema().commands.append(default)
+                default.set_depends(col)
+                if not_null:
+                    for c in col.constraints:
+                        if isinstance(c, NotNullColumnConstraint):
+                            break
+                    else:
+                        nnc = col.constraints.append(NotNullColumnConstraint())
+                        nnc.set_depends(default)
             if select is not None:
                 found_indices = [ i for i in self.indices \
                         if len(i.columns) == 1 and colname in i.columns]
@@ -1320,7 +1389,7 @@ class Table(Relation):
                     if con.is_idle():
                         continue
                     if not con.get_depends(partial=partial):
-                        # This column cannot be created yet
+                        # This constraint cannot be created yet
                         continue
                     elif partial and con.last_epoch == epoch:
                         continue
