@@ -234,7 +234,7 @@ class Schema(object):
                         self._dump_todo())
                 raise RuntimeError("Cannot update schema")
         
-            logger.info("Creating or updating, epoch %d", self.epoch)
+            logger.debug("Creating or updating, epoch %d", self.epoch)
             # Section 1: tables
             for tbl in self.tables:
                 if tbl.is_idle():
@@ -1210,7 +1210,7 @@ class Table(Relation):
                                     and (con_update is None or con.on_update == con_update)):
                                 found_ref = True
                             else:
-                                print "column constraint mismatch on %s: %r -> %r" %(self._name, references, con)
+                                self._logger.debug("column constraint mismatch on %s: %r -> %r", self._name, references, con)
                                 con.set_state('drop')
                     if not found_ref:
                         new_name = "%s_%s_fkey" %(self._name, colname)
