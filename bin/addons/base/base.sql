@@ -327,12 +327,13 @@ CREATE TABLE ir_model_data (
     create_date timestamp WITHOUT time zone,
     write_date timestamp WITHOUT time zone,
     write_uid integer,
-    noupdate boolean,
+    noupdate boolean NOT NULL DEFAULT False,
     name character varying(128) NOT NULL,
     date_init timestamp WITHOUT time zone,
     date_update timestamp WITHOUT time zone,
     module character varying(64) NOT NULL,
     model character varying(64) NOT NULL,
+    "source" VARCHAR(16) NOT NULL DEFAULT 'xml',
     res_id integer
 ) WITHOUT OIDS;
 

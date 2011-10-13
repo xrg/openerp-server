@@ -651,7 +651,7 @@ class orm_template(object):
             # model. Almost harmless, because the reference will point to the
             # right model (BUT may behave different at next db installation!).
             if not cr.rowcount:
-                cr.execute("INSERT INTO ir_model_data (name,date_init,date_update,module,model,res_id) VALUES (%s, now(), now(), %s, %s, %s)", \
+                cr.execute("INSERT INTO ir_model_data (name,date_init,date_update,module,model,res_id, source) VALUES (%s, now(), now(), %s, %s, %s, 'orm')", \
                     (name_id, context['module'], 'ir.model', model_id), debug=self._debug)
 
         cr.commit() # *-*
@@ -703,8 +703,8 @@ class orm_template(object):
                         (name1,), debug=self._debug)
                     if cr.fetchone():
                         name1 = name1 + "_" + str(id)
-                    cr.execute("INSERT INTO ir_model_data (name,date_init,date_update,module,model,res_id)"
-                               "VALUES (%s, now(), now(), %s, %s, %s)", \
+                    cr.execute("INSERT INTO ir_model_data (name,date_init,date_update,module,model,res_id, source)"
+                               "VALUES (%s, now(), now(), %s, %s, %s, 'orm')", \
                                (name1, context['module'], 'ir.model.fields', id),
                                debug=self._debug )
             else:

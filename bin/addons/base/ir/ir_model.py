@@ -259,6 +259,8 @@ class ir_model_fields(osv.osv):
 
     def unlink(self, cr, user, ids, context=None):
         for field in self.browse(cr, user, ids, context):
+            if field.name not in self.pool.get(field.model)._columns:
+                continue
             if field.state <> 'manual':
                 raise except_orm(_('Error'), _("You cannot remove the field '%s' !") %(field.name,))
         #
@@ -624,15 +626,20 @@ class ir_model_data(osv.osv):
         'model': fields.char('Object', required=True, size=64, select=1),
         'module': fields.char('Module', required=True, size=64, select=False),
         'res_id': fields.integer('Resource ID', select=1),
-        'noupdate': fields.boolean('Non Updatable'),
+        'noupdate': fields.boolean('Non Updatable', required=True),
         'date_update': fields.datetime('Update Date'),
-        'date_init': fields.datetime('Init Date')
+        'date_init': fields.datetime('Init Date'),
+        'source': fields.selection([('orm', 'Internal'), ('xml', 'XML data')],
+                string="Source Domain", required=True, select=True,
+                help="Specifies where this record has come from. " \
+                    "Used to coordinate synchronization algorithms."),
     }
     _defaults = {
         'date_init': fields.datetime.now,
         'date_update': fields.datetime.now,
         'noupdate': False,
-        'module': ''
+        'module': '',
+        'source': 'xml',
     }
     _sql_constraints = [
         ('module_name_uniq', 'unique(module, name)', 'You cannot have multiple records with the same id for the same module !'),
@@ -650,15 +657,16 @@ class ir_model_data(osv.osv):
         self.loads = self.pool.model_data_reference_ids
 
     @tools.cache()
-    def _get_id(self, cr, uid, module, xml_id):
+    def _get_id(self, cr, uid, module, xml_id, source=('orm', 'xml')):
         """Returns the id of the ir.model.data record corresponding to a given module and xml_id (cached) or raise a ValueError if not found"""
-        ids = self.search(cr, uid, [('module','=',module), ('name','=', xml_id)])
+        ids = self.search(cr, uid, [('module','=',module), ('name','=', xml_id),
+                        ('source', 'in', source)])
         if not ids:
             raise ValueError('No references to %s.%s' % (module, xml_id))
         # the sql constraints ensure us we have only one result
         return ids[0]
 
-    def get_rev_ref(self, cr, uid, model, res_id):
+    def get_rev_ref(self, cr, uid, model, res_id, source=('orm', 'xml')):
         """ Reverse resolve some model.id into its symbolic name(s), if any.
         
         This is useful for debugging or data inspection, since it will allow
@@ -666,31 +674,37 @@ class ir_model_data(osv.osv):
         
         Returns tuple like ( res_id, [module.name, ...] )
         """
-        ids = self.search(cr, uid, [('model','=',model),('res_id','=', res_id)])
+        sedom = [('model','=',model),('res_id','=', res_id)]
+        if source:
+            sedom.append(('source', 'in', source))
+        ids = self.search(cr, uid, sedom)
         if not ids:
             return ( res_id, False )
         re = self.read(cr, uid, ids, ['module', 'name'])
         return ( res_id, [ x['module'] + '.' + x['name'] for x in re])
 
     @tools.cache()
-    def get_object_reference(self, cr, uid, module, xml_id):
+    def get_object_reference(self, cr, uid, module, xml_id, source=('orm', 'xml')):
         """Returns (model, res_id) corresponding to a given module and xml_id (cached) or raise ValueError if not found"""
-        res = self.search_read(cr, uid, [('module','=',module), ('name','=', xml_id)],
-                                fields=['model', 'res_id'])
+        sedom = [('module','=',module), ('name','=', xml_id)]
+        if source:
+            sedom.append(('source', 'in', source))
+        res = self.search_read(cr, uid, sedom, fields=['model', 'res_id'])
         if not res:
             raise ValueError('No references to %s.%s' % (module, xml_id))
         return (res[0]['model'], res[0]['res_id'])
 
-    def get_object(self, cr, uid, module, xml_id, context=None):
+    def get_object(self, cr, uid, module, xml_id, context=None, source=('orm', 'xml')):
         """Returns a browsable record for the given module name and xml_id or raise ValueError if not found"""
-        res_model, res_id = self.get_object_reference(cr, uid, module, xml_id)
+        res_model, res_id = self.get_object_reference(cr, uid, module, xml_id, source=source)
         return self.pool.get(res_model).browse(cr, uid, res_id, context=context)
 
     def _update_dummy(self,cr, uid, model, module, xml_id=False, store=True):
         if not xml_id:
             return False
         try:
-            id = self.search_read(cr, uid, [('module','=', module),('name','=',xml_id)],
+            id = self.search_read(cr, uid, [('module','=', module),('name','=',xml_id),
+                                            ('source', 'in', ('orm', 'xml'))],
                                     fields=['res_id'])[0]['res_id']
             self.loads[(module,xml_id)] = (model,id)
         except Exception:
@@ -717,7 +731,7 @@ class ir_model_data(osv.osv):
                     'EXISTS(SELECT id FROM ' + model_obj._table +
                     '       WHERE id=ir_model_data.res_id AND %s = ir_model_data.model) AS is_valid '
                     'FROM ir_model_data '
-                    'WHERE module=%s AND name=%s',
+                    'WHERE module=%s AND name=%s AND source IN (\'orm\', \'xml\') ',
                     (model, module, xml_id), debug=self._debug)
             results = cr.fetchall()
             for action_id2,res_id2,model2,is_valid2 in results:
@@ -743,6 +757,7 @@ class ir_model_data(osv.osv):
                     'module':module,
                     'res_id':res_id,
                     'noupdate': noupdate,
+                    'source': 'xml',
                     },context=context)
                 if model_obj._inherits:
                     for table in model_obj._inherits:
@@ -754,6 +769,7 @@ class ir_model_data(osv.osv):
                             'module': module,
                             'res_id': inherit_id.id,
                             'noupdate': noupdate,
+                            'source': 'xml',
                             },context=context)
         else:
             if mode=='init' or (mode=='update' and xml_id):
@@ -764,7 +780,8 @@ class ir_model_data(osv.osv):
                         'model': model,
                         'module': module,
                         'res_id': res_id,
-                        'noupdate': noupdate
+                        'noupdate': noupdate,
+                        'source': 'xml',
                         },context=context)
                     if model_obj._inherits:
                         for table in model_obj._inherits:
@@ -778,6 +795,7 @@ class ir_model_data(osv.osv):
                                 'module': module,
                                 'res_id': inherit_id,
                                 'noupdate': noupdate,
+                                'source': 'xml',
                                 },context=context)
                             # Debugger's note: if you get an integrity error at
                             # the above line, it means that the inherited (base)
@@ -796,10 +814,11 @@ class ir_model_data(osv.osv):
                                 table.replace('.', '_'))] = (table, inherit_id)
         return res_id
 
-    def _unlink(self, cr, uid, model, res_ids):
+    def _unlink(self, cr, uid, model, res_ids, source=('orm', 'xml')):
         for res_id in res_ids:
             self.unlink_mark[(model, res_id)] = False
-            cr.execute('delete from ir_model_data where res_id=%s and model=%s', (res_id, model))
+            cr.execute('DELETE FROM ir_model_data WHERE res_id=%s AND model=%s AND source IN %s',
+                    (res_id, model, source))
         return True
 
     def ir_set(self, cr, uid, key, key2, name, models, value, replace=True, isobject=False, meta=None, xml_id=False):
@@ -833,11 +852,13 @@ class ir_model_data(osv.osv):
         modules = list(modules)
         cr.execute('SELECT id, name, model, res_id, module '
                     'FROM ir_model_data '
-                    'WHERE module = ANY(%s) AND noupdate=%s',
+                    'WHERE module = ANY(%s) AND noupdate=%s AND source = \'xml\' ',
                     (modules, False), debug=self._debug)
         wkf_todo = []
         for (id, name, model, res_id,module) in cr.fetchall():
             if (module,name) not in self.loads:
+                if self._debug:
+                    self.__logger.debug("Setting %s,%s = %s for unlink", model, res_id, id)
                 self.unlink_mark[(model,res_id)] = id
                 if model=='workflow.activity':
                     cr.execute('SELECT res_type, res_id FROM wkf_instance '
@@ -860,15 +881,14 @@ class ir_model_data(osv.osv):
                 if self.pool.get(model):
                     self.__logger.info('Deleting %s@%s', res_id, model)
                     try:
-                        self.pool.get(model).unlink(cr, uid, [res_id])
-                        if id:
+                        res = self.pool.get(model).unlink(cr, uid, [res_id])
+                        if res:
                             ids = self.search(cr, uid, [('res_id','=',res_id),
                                                         ('model','=',model)])
                             self.__logger.debug('=> Deleting %s: %s',
                                                 self._name, ids)
-                            if len(ids) > 1 and \
-                               self.__logger.isEnabledFor(logging.WARNING):
-                                self.__logger.warn(
+                            if len(ids) > 1 and self._debug:
+                                self.__logger.debug(
                                     'Got %d %s for (%s, %d): %s',
                                     len(ids), self._name, model, res_id,
                                     map(itemgetter('module','name'),
@@ -877,7 +897,7 @@ class ir_model_data(osv.osv):
                             self.unlink(cr, uid, ids)
                             cr.execute(
                                 'DELETE FROM ir_values WHERE value=%s',
-                                ('%s,%s'%(model, res_id),))
+                                ('%s,%s'%(model, res_id),),debug=self._debug)
                         cr.commit()
                     except Exception:
                         cr.rollback()
