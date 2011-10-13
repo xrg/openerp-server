@@ -232,7 +232,7 @@ CREATE TABLE wkf_instance
 CREATE TABLE wkf_workitem
 (
     id serial PRIMARY KEY,
-    act_id int NOT NULL REFERENCES wkf_activity ON DELETE CASCADE,
+    act_id int NOT NULL REFERENCES wkf_activity ON DELETE RESTRICT,
     inst_id int NOT NULL REFERENCES wkf_instance ON DELETE CASCADE,
     subflow_id int REFERENCES wkf_instance ON DELETE CASCADE,
     state varchar(64) DEFAULT 'blocked'
@@ -275,7 +275,7 @@ CREATE TABLE ir_module_category (
 
 
 CREATE TABLE ir_module_module (
-    id serial NOT NULL,
+    id serial NOT NULL PRIMARY KEY,
     create_uid integer REFERENCES res_users ON DELETE SET NULL,
     create_date timestamp WITHOUT time zone,
     write_date timestamp WITHOUT time zone,
@@ -292,10 +292,9 @@ CREATE TABLE ir_module_module (
     description text,
     demo boolean DEFAULT False,
     web boolean DEFAULT FALSE,
-    license VARCHAR(26),
-    PRIMARY KEY(id)
+    license VARCHAR(26)
 ) WITHOUT OIDS;
-ALTER TABLE ir_module_module add constraint name_uniq unique (name);
+ALTER TABLE ir_module_module add constraint ir_module_module_name_uniq unique (name);
 
 CREATE TABLE ir_module_module_dependency (
     id serial NOT NULL,
