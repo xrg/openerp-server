@@ -49,7 +49,8 @@ def ifupper(s):
 
 class Schema(object):
     def __init__(self, debug=False):
-        self.tables = collection('tables', Table, self)
+        self.tables = collection('tables', Relation, self)
+        self.commands = collection('commands', Command, self)
         self.state = None
         self._debug = debug or []
         self._logger = logging.getLogger('init.sql')
@@ -98,6 +99,10 @@ class Schema(object):
             if r['relkind'] == 'r':
                 self.tables.append(Table(r['relname'], oid=r['oid']))
                 tbl_reloids[r['oid']] = r['relname']
+            elif r['relkind'] == 'v':
+                # pg_get_viewdef(c.oid) AS definition
+                self.tables.append(View(r['relname'], oid=r['oid']))
+                # need to analyze any further?
             else:
                 raise NotImplementedError(r['relkind'])
             
