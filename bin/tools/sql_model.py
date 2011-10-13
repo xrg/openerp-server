@@ -1296,7 +1296,7 @@ class Table(Relation):
     
     def check_constraint(self, conname, obj, condef):
         """ verify or create an sql constraint
-        
+
             @param conname Name of the constraint
             @param obj ORM model
             @param condef Definition of the constraint (text?)
@@ -1306,8 +1306,9 @@ class Table(Relation):
             self.constraints[conname].mark()
         else:
             con = self.constraints.append(OtherTableConstraint(name=conname, definition=condef))
-            # con.set_depends(self) needed?
-            
+            # constraints are not safe to create until table has settled:
+            con.set_depends(self, on_alter=True)
+
         return True
 
     def column_or_renamed(self, colname, oldname=None):
