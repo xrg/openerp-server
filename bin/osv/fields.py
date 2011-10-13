@@ -42,6 +42,7 @@ import xmlrpclib
 import tools
 from tools.translate import _
 import __builtin__
+from tools import sql_model
 
 def _symbol_set(symb):
     if symb is None or symb is False:
@@ -232,7 +233,10 @@ class _column(object):
         if obj_def is None:
             return None
         elif callable(obj_def):
-            return None # TODO
+            ss = self._symbol_set
+            query = 'UPDATE "%s" SET "%s"=%s WHERE "%s" is NULL' % (obj._table, name, ss[0], name)
+            prepare_fn = lambda cr: (ss[1](obj_def(obj, cr, 1, context)),)
+            return sql_model.SQLCommand(query, prepare_fn=prepare_fn, debug=obj._debug)
         else:
             return self._symbol_set[1](obj_def)
 
