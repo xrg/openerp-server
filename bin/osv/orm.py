@@ -1445,8 +1445,9 @@ class orm_template(object):
                     res[f]['func_obj'] = field_col._obj or False
                     res[f]['func_method'] = field_col._method
                 if isinstance(field_col, fields.many2many):
-                    res[f]['related_columns'] = list((field_col._id1, field_col._id2))
-                    res[f]['third_table'] = field_col._rel
+                    m2m_rel, m2m_id1, m2m_id2 = field_col._sql_names(self)
+                    res[f]['related_columns'] = list((m2m_id1, m2m_id2))
+                    res[f]['third_table'] = m2m_rel
                 for arg in ('string', 'readonly', 'states', 'size', 'required', 'group_operator',
                         'change_default', 'translate', 'help', 'select', 'selectable'):
                     if getattr(field_col, arg, False):
