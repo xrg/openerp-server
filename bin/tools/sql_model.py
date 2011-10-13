@@ -801,6 +801,8 @@ class Column(_element):
         if newstate == '@create':
             # When we create the column, we implicitly create all constraints
             for c in self.constraints:
+                if isinstance(c, NotNullColumnConstraint):
+                    continue
                 c.set_state('@create')
 
     def rollback_state(self):
@@ -834,6 +836,10 @@ class Column(_element):
         if self.primary_key:
             ret += ' PRIMARY KEY'
         for c in self.constraints:
+            if isinstance(c, NotNullColumnConstraint):
+                if self._state == '@create':
+                    raise RuntimeError("Not null applies too early for %s", self._name)
+                continue
             ret += ' ' + c._to_create_sql(args)
         return ret
    
@@ -988,6 +994,36 @@ class FkColumnConstraint(ColumnConstraint):
         if self.on_delete:
             ret += ' ON DELETE %s' % self.on_delete
         return ret
+
+class NotNullColumnConstraint(ColumnConstraint):
+    """ Special, transient element for the NOT NULL constraint
+    
+        This is mostly covered through the 'not_null' attribute of the
+        Column, but sometimes this is not possible to apply until the
+        data are updated with default values. Then, use this element
+        to have the 'not null' depend on the update command
+    """
+    _wait_depends = True # cannot apply at the same epoch as the column
+    _wait_for_me = False
+
+    def __init__(self):
+        ColumnConstraint.__init__(self, name=False)
+
+    def commit_state(self, failed=False):
+        """ Column constraints go from @alter -> create
+        
+        """
+        if not self._state.startswith('@'):
+            return False
+        
+        if failed:
+            self._state = 'failed:' + self._state[1:]
+        elif self._state == '@create':
+            self._state = 'dropped'
+        else:
+            raise RuntimeError("state: %s?" % self._state)
+            # return False
+        return True
 
 class Table(Relation):
     """ Represents a regular SQL table
