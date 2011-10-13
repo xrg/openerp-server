@@ -819,7 +819,7 @@ class Column(_element):
             @param args append corresponding SQL arguments there
         """
         ret = '"%s" %s' % (self._name, self.ctype.upper())
-        if self.ctype.lower() in ('char', 'varchar'):
+        if self.ctype.lower() in ('char', 'varchar') and self.size:
             ret += '(%d)' % self.size
         if self.has_def:
             if self.default is None:
@@ -875,12 +875,13 @@ class Column(_element):
             if ret and partial:
                 break
 
-            if 'size' in self._todo_attrs:
-                newsize = self._todo_attrs.pop('size')
-                if newsize:
-                    alter_column('TYPE %s(%s)' % (self.ctype, newsize))
+            if 'size' in self._todo_attrs or 'type' in self._todo_attrs:
+                newtype = self._todo_attrs.pop('type', self.ctype)
+                newsize = self._todo_attrs.pop('size', self.size)
+                if newsize and newtype.lower() in ('char', 'varchar', 'character varying'):
+                    alter_column('TYPE %s(%s)' % (newtype, newsize))
                 else:
-                    alter_column('TYPE %s' % self.ctype)
+                    alter_column('TYPE %s' % newtype)
             
             if ret and partial:
                 break
@@ -1100,7 +1101,39 @@ class Table(Relation):
         """
         
         can_do = True
-        
+        moved_col = None
+        casts = { 'text': ('char', 'varchar'),
+                  'varchar': ('char', 'text' ),
+                  'int4': ('float', 'float8', 'numeric'),
+                  'date': ('datetime', 'timestamp'),
+                  'timestamp': ('date', ),
+                  'numeric': ('float', 'integer', 'float8'),
+                  'float8': ('float', ),
+                }
+        if colname in self.columns:
+            col = self.columns[colname]
+            if col.ctype.lower() not in (ctype.lower(), Column.PG_TYPE_ALIASES.get(ctype.upper(), 'any')):
+                self._logger.info("Column %s.%s must change type from %s to %s aka. %s",
+                        self._name, colname, col.ctype, ctype, Column.PG_TYPE_ALIASES.get(ctype, '-'))
+                # TODO code for non-trivial casting
+                allowed_casts = casts.get(col.ctype.lower(),())
+                if not allowed_casts:
+                    self._logger.warning("are we sure there can be no cast from type %s?", col.ctype)
+                if ctype.lower() in allowed_casts\
+                        or Column.PG_TYPE_ALIASES.get(ctype.upper(), 'any') in allowed_casts:
+                    col._todo_attrs['type'] = ctype
+                else:
+                    i = 0
+                    while i < 100:
+                        newname = colname + '_moved' + str(i)
+                        if newname not in self.columns:
+                            break
+                        i+=1
+                    self._logger.warning("column '%s' in table '%s' could not change type (DB=%s, def=%s), data moved instead to %s !" % \
+                            (colname, self._name, col.ctype, ctype, newname))
+                    moved_col = self.columns.rename(colname, newname)
+                    moved_col._todo_attrs['not_null'] = False
+
         if colname not in self.columns:
             if not do_create:
                 return False
@@ -1198,8 +1231,11 @@ class Table(Relation):
             if size is not None and \
                     (col._todo_attrs.get('ctype', col.ctype).lower() \
                             in ('char', 'varchar', 'character varying')):
-                if size != col.size:
+                if size > col.size:
+                    self._logger.info("column '%s' in table '%s' increased size to %d.",
+                            colname, self._name, size)
                     col._todo_attrs['size'] = size
+                #elif size < col.size: TODO may need to check data, non-trivial
                 else:
                     col._todo_attrs.pop('size', None)
             if plain_default is not None:
