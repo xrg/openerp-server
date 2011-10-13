@@ -1273,9 +1273,15 @@ class Table(Relation):
                     if not found_indices:
                         self.indices.append(Index('%s_%s_idx' % (self._name ,colname),
                                 colnames=[colname],state='create'))
+                    else:
+                        for idx in found_indices:
+                            idx.mark()
                 else:
                     # remove indices
                     for idx in found_indices:
+                        if idx.indirect:
+                            idx.mark()
+                            continue
                         idx.drop()
                     self.indices.cleanup()
             
@@ -1456,8 +1462,20 @@ class Table(Relation):
                         continue
                     elif partial and idx.last_epoch == epoch:
                         continue
-                
-                    ret = idx._to_create_sql(self._name, args)
+                    
+                    if idx._state == 'create':
+                        ret = idx._to_create_sql(self._name, args)
+                    elif idx._state == 'drop' and idx.indirect:
+                        # We cannot drop it here, assume the constraint
+                        # will go and cascade the index, too
+                        ret = ''
+                        if not dry_run:
+                            idx.set_state('done')
+                    elif idx._state == 'drop':
+                        ret = 'DROP INDEX "%s"' % idx._name
+                    else:
+                        raise NotImplementedError('What is %s state for index "%s"?' % \
+                                (idx._state, idx._name))
                     if not ret:
                         continue
                     if not dry_run:
@@ -1519,7 +1537,12 @@ class Index(Relation):
         for i,cn in enumerate(colnames):
             self.columns.append(Column(name=cn, ctype='', num=(i+1)))
         self.set_state(None)
-    # r = ordinary table, i = index, S = sequence, v = view, c = composite type, t = TOAST table, f = foreign table
+        if is_unique:
+            self.indirect = 'u'
+        elif indisprimary:
+            self.indirect = 'p'
+        else:
+            self.indirect = False
 
     def _to_create_sql(self, table_name, args):
         ret = 'CREATE INDEX "%s" ON "%s" ' % (self._name, table_name)
