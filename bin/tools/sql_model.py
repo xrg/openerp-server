@@ -449,12 +449,14 @@ class _element(object):
     
     _elem_attrs = [] #: names of our attributes, which are elements (see: Column, Relation)
     _wait_depends = True #: unlock ourself one epoch later than our dependencies
-    
+    _wait_for_me = True #: this element can block parents depends
+
     def __init__(self, name):
         self._name = name
         self._state = None
         self.parent = None
         self._depends = []
+        self._depends_on_alter = False
         self.last_epoch = None #: last time the operations had been attempted
 
     def __repr__(self):
@@ -566,23 +568,37 @@ class _element(object):
         for elem in self._sub_elems():
             elem.rollback_state()
 
-    def set_depends(self, other):
+    def set_depends(self, other, on_alter=False):
         """ self depends on other
         
             @param other an element
+            @param on_alter fire even if the other is at 'alter', aka. just
+                    after it has been created
         """
         # TODO revise the algorithm
         if other.is_idle():
             # we can depend on that right now, not bother about epochs
             return
         
+        if on_alter and other._state == 'alter':
+            return
         self._depends.append(weakref.ref(other))
+        if on_alter:
+            self._depends_on_alter = True
 
     def get_depends(self, partial=False):
         """Return if we can proceed, dependencies are satisfied
         """
-        
-        self._depends = filter( lambda d: d() and not d().is_idle(), self._depends)
+        def _flt(d):
+            if not d():
+                return False
+            if d().is_idle():
+                return False
+            if self._depends_on_alter and d()._state in ('alter', '@alter'):
+                return False
+            return True
+
+        self._depends = filter( _flt, self._depends)
         if self._wait_depends:
             if self._depends:
                 return False
@@ -730,7 +746,7 @@ class collection(_element):
                     continue
                 if e.get_depends(partial=partial):
                     return True
-                else:
+                elif e._wait_for_me:
                     clear = False
             return clear
         else:
