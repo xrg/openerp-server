@@ -179,7 +179,10 @@ class wkf_instance(osv.osv):
         'wkf_id': fields.many2one('workflow', 'Workflow', ondelete='cascade', select=True),
         'res_id': fields.integer('Resource ID'),
         'res_type': fields.char('Resource Object', size=64),
-        'state': fields.char('State', size=32),
+        'state': fields.char('State', size=32, required=True),
+    }
+    _defaults = {
+        'state': 'active',
     }
 
     def _auto_init(self, cr, context=None):
@@ -206,6 +209,10 @@ class wkf_workitem(osv.osv):
         'subflow_id': fields.many2one('workflow.instance', 'Subflow', ondelete="cascade", select=True),
         'inst_id': fields.many2one('workflow.instance', 'Instance', required=True, ondelete="cascade", select=True),
         'state': fields.char('State', size=64, select=True),
+    }
+
+    _defaults = {
+        'state': 'blocked',
     }
 
 wkf_workitem()

@@ -284,6 +284,7 @@ class ir_ui_menu(osv.osv):
         (osv.osv._check_recursion, _rec_message , ['parent_id'])
     ]
     _defaults = {
+        'name' : '',
         'icon' : 'STOCK_OPEN',
         'icon_pict': ('stock', ('STOCK_OPEN','ICON_SIZE_MENU')),
         'sequence' : 10,

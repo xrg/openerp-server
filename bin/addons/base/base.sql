@@ -192,7 +192,7 @@ CREATE TABLE wkf
 
 CREATE TABLE wkf_activity
 (
-    id serial,
+    id serial PRIMARY KEY,
     wkf_id int REFERENCES wkf ON DELETE CASCADE,
     subflow_id int REFERENCES wkf ON DELETE SET NULL,
     split_mode varchar(3) DEFAULT 'XOR',
@@ -202,45 +202,40 @@ CREATE TABLE wkf_activity
     signal_send varchar(32) DEFAULT NULL,
     flow_start boolean DEFAULT False,
     flow_stop boolean DEFAULT False,
-    action text DEFAULT NULL,
-    PRIMARY KEY(id)
+    action text DEFAULT NULL
 ) WITHOUT OIDS;
 
 CREATE TABLE wkf_transition
 (
-    id serial,
+    id serial PRIMARY KEY,
     act_from int REFERENCES wkf_activity ON DELETE CASCADE,
     act_to int REFERENCES wkf_activity ON DELETE CASCADE,
-    condition varchar(128) DEFAULT NULL,
+    condition varchar(128),
 
-    trigger_type varchar(128) DEFAULT NULL,
-    trigger_expr_id varchar(128) DEFAULT NULL,
+    trigger_type varchar(128),
+    trigger_expr_id varchar(128),
 
     signal varchar(64) DEFAULT NULL,
-    group_id int REFERENCES res_groups ON DELETE SET NULL,
-
-    PRIMARY KEY(id)
+    group_id int REFERENCES res_groups ON DELETE SET NULL
 ) WITHOUT OIDS;
 
 CREATE TABLE wkf_instance
 (
-    id serial,
+    id serial PRIMARY KEY,
     wkf_id int REFERENCES wkf ON DELETE RESTRICT,
     uid int DEFAULT NULL,
     res_id int NOT NULL,
     res_type varchar(64) NOT NULL,
-    state varchar(32) NOT NULL DEFAULT 'active',
-    PRIMARY KEY(id)
+    state varchar(32) NOT NULL DEFAULT 'active'
 ) WITHOUT OIDS;
 
 CREATE TABLE wkf_workitem
 (
-    id serial,
+    id serial PRIMARY KEY,
     act_id int NOT NULL REFERENCES wkf_activity ON DELETE CASCADE,
     inst_id int NOT NULL REFERENCES wkf_instance ON DELETE CASCADE,
     subflow_id int REFERENCES wkf_instance ON DELETE CASCADE,
-    state varchar(64) DEFAULT 'blocked',
-    PRIMARY KEY(id)
+    state varchar(64) DEFAULT 'blocked'
 ) WITHOUT OIDS;
 
 CREATE TABLE wkf_witm_trans

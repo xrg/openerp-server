@@ -82,7 +82,8 @@ class view(osv.osv):
     }
     _defaults = {
         'arch': '<?xml version="1.0"?>\n<tree string="My view">\n\t<field name="name"/>\n</tree>',
-        'priority': 16
+        'priority': 16,
+        'type': 'form',
     }
     def _invalid_xml_message(self, cr, uid, ids, context=None):
         """ Only print the message, through a callable
