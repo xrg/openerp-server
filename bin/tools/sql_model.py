@@ -77,9 +77,11 @@ class Schema(object):
             self._load_from_db2(cr)
         finally:
             self.tables.commit_state()
+            self.commands.set_state('create')
             self.tables._state = 'after-sql'
             self.epoch += 1
             self.tables.get_depends() # quick cleanup
+            self.commands.get_depends()
     
     def _load_from_db2(self, cr):
         # Load tables from db
@@ -273,7 +275,34 @@ class Schema(object):
                     logger.warning("Full command %s... failed. Re-trying with separate queries", sql[:25])
                     logger.debug("Object: %s", pretty_print(tbl))
                     tbl.rollback_state()
-            
+
+            # Section 2: commands
+            for cmd in self.commands:
+                if cmd.is_idle():
+                    continue
+                need_more = True
+
+                if not cmd.get_depends():
+                    continue
+
+                try:
+                    if cmd._state != 'create':
+                        logger.warning("What is %s state?", tbl._state)
+
+                    if dry_run:
+                        logger.debug("Command: %s", cmd.get_dry())
+                    else:
+                        cr.execute('SAVEPOINT "cmd_run";')
+                        cmd.set_state('@'+cmd._state)
+                        cmd.execute(cr)
+                        cr.execute('RELEASE SAVEPOINT "cmd_run";')
+
+                    done_actions = True
+                    cmd.commit_state()
+                except DatabaseError:
+                    cr.execute('ROLLBACK TO SAVEPOINT "cmd_run";')
+                    cmd.rollback_state()
+
             # TODO: here go indices etc..
             
             if done_actions:
@@ -342,6 +371,12 @@ class Schema(object):
             r2 = pretty_print(tbl, todo_only=todo_only) 
             if r2:
                 ret += r2 + '\n'
+        if self.commands:
+            ret += '\nCommands: %d\n' % len(self.commands)
+            for cmd in self.commands:
+                r2 = pretty_print(cmd, todo_only=todo_only)
+                if r2:
+                    ret += r2 + '\n'
         return ret
 
 def pretty_print(elem, indent=0, todo_only=False):
@@ -1370,5 +1405,61 @@ class OtherTableConstraint(TableConstraint):
     def _to_create_sql(self, args):
         ret = '"%s" %s' % (self._name, self.definition)
         return ret
+
+class Command(_element):
+    """Represents various SQL commands that must be carried out in order
+
+        In some cases we have to execute some queries before we can update
+        the schema. See subclasses
+    """
+
+    def get_dry(self):
+        """ return the string of the command to be executed
+        """
+        raise NotImplementedError
+
+    def execute(self, cr):
+        """ carry out the command, given the cursor
+        """
+        raise NotImplementedError
+
+class SQLCommand(Command):
+    """ Arbitrary SQL command
+    """
+    def __init__(self, sql, args=None, name=None, prepare_fn=None, debug=False):
+        """
+            @param prepare_fn If given, append results of calling this function
+                to the arguments
+        """
+        assert sql, "Must have some SQL"
+        if not name:
+            #just invent a unique name
+            name = 'sql-' + hex(id(self))[-8:]
+        Command.__init__(self, name=name)
+        self.sql = sql
+        if args:
+            self.args = tuple(args)
+        else:
+            self.args = ()
+        self._prepare_fn = prepare_fn
+        self._debug=debug
+
+    def get_dry(self):
+        return self.sql
+
+    def __str__(self):
+        return self.sql
+
+    def __repr__(self):
+        return "%s(%s)" % (self.__class__.__name__, self.sql)
+
+    def execute(self, cr):
+        if self._prepare_fn:
+            self.args = self.args + self._prepare_fn(cr)
+        cr.execute(self.sql, self.args, debug=self._debug)
+
+#class SQLExistsCommand(Command):
+#    """Executes SELECT command to see if records exist
+#    """
 
 #eof
