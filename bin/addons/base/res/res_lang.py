@@ -119,10 +119,10 @@ class lang(osv.osv):
                     return False
         return True
 
-    def _get_default_date_format(self,cursor,user,context={}):
+    def _get_default_date_format(self,cursor,user,context=None):
         return '%m/%d/%Y'
 
-    def _get_default_time_format(self,cursor,user,context={}):
+    def _get_default_time_format(self,cursor,user,context=None):
         return '%H:%M:%S'
 
     _columns = {
@@ -149,8 +149,8 @@ class lang(osv.osv):
         'thousands_sep': ',',
     }
     _sql_constraints = [
-        ('name_uniq', 'unique (name)', 'The name of the language must be unique !'),
-        ('code_uniq', 'unique (code)', 'The code of the language must be unique !'),
+        ('name_key', 'unique (name)', 'The name of the language must be unique !'),
+        ('code_key', 'unique (code)', 'The code of the language must be unique !'),
     ]
 
     _constraints = [
