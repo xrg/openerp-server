@@ -1137,10 +1137,14 @@ class Table(Relation):
         if colname not in self.columns:
             if not do_create:
                 return False
+            plain_default = None
+            if default and not isinstance(default, Command):
+                plain_default = default
             newcol = self.columns.append(Column(name=colname, ctype=ctype,
-                size=size, not_null=not_null))
-            if default:
-                newcol.default = default
+                size=size, default=plain_default,
+                not_null=not_null and (self._state == 'create' or plain_default is not None)))
+            if moved_col:
+                newcol.set_depends(moved_col)
             if comment:
                 newcol.comment = comment
             if references:
