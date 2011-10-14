@@ -5077,7 +5077,7 @@ class orm(orm_template):
         :type default: dictionary
         :param context: context arguments, like lang, time zone
         :type context: dictionary
-        :return: True
+        :return: id of new record
 
         """
         if context is None:
