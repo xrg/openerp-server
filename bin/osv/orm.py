@@ -127,14 +127,25 @@ class pythonOrderBy(list):
         if len(self) != 1:
             raise NotImplementedError("Cannot sort by: %s" % ','.join(self))
 
+        _getters = []
+        for x in [ x.split(' ', 1)[0] for x in self]:
+            if x.endswith(':'):
+                _getters.append(lambda k: (k[x[:-1]] and k[x[:-1]][1]) or None) # the visual string of m2o
+            else:
+                _getters.append(lambda k: k[x])
         def sort_key(k):
-            return tuple([k[x] for x in self.get_fields()])
+            return tuple([ g(k) for g in _getters])
         return sort_key
 
     def get_fields(self):
         """Return the field components of this order-by list
         """
-        return [ x.split(' ', 1)[0] for x in self]
+        def _clean(x):
+            x = x.split(' ',1)[0]
+            if x.endswith(':'):
+                x = x[:-1]
+            return x
+        return map(_clean, self)
 
     def get_direction(self):
         """ returns the order direction
@@ -4447,7 +4458,9 @@ class orm(orm_template):
                     order_column = self._columns[order_field]
                     if order_column._classic_read:
                         inner_clause = '"%s"."%s"' % (self._table, order_field)
-                    elif order_column._type == 'many2one':
+                    elif order_column._type == 'many2one' \
+                            and (order_column._classic_write \
+                                or getattr(order_column, 'store', False)):
                         inner_clause = self._generate_m2o_order_by(order_field, query)
                     else:
                         do_fallback = None
@@ -4459,6 +4472,8 @@ class orm(orm_template):
                             continue # ignore non-readable or "non-joinable" fields
                         elif do_fallback is True:
                             inner_clause = order_field
+                            if order_column._type in ('many2one',):
+                                inner_clause += ':'
                             python_order = True
                         else:
                             raise except_orm(_('Error!'), 
@@ -4469,7 +4484,9 @@ class orm(orm_template):
                     order_column = parent_obj._columns[order_field]
                     if order_column._classic_read:
                         inner_clause = self._inherits_join_calc(order_field, query)
-                    elif order_column._type == 'many2one':
+                    elif order_column._type == 'many2one' \
+                            and (order_column._classic_write \
+                                or getattr(order_column, 'store', False)):
                         inner_clause = self._generate_m2o_order_by(order_field, query)
                     else:
                         do_fallback = None
@@ -4483,6 +4500,8 @@ class orm(orm_template):
                             continue # ignore non-readable or "non-joinable" fields
                         elif do_fallback is True:
                             inner_clause = order_field
+                            if order_column._type in ('many2one',):
+                                inner_clause += ':'
                             python_order = True
                         else:
                             raise except_orm(_('Error!'),
