@@ -358,6 +358,8 @@ class Schema(object):
                 raise RuntimeError("Idle at epoch %d" % self.epoch)
             self.epoch += 1
 
+        if not dry_run:
+            cr.commit()
         return not need_more
         
     def _dump_todo(self):
@@ -525,8 +527,8 @@ class _element(object):
             @return if we had any state changes
         """
         if not self._state.startswith('@'):
-            for e in self._sub_elems():
-                assert not e._state.startswith('@'), '%s.%s' %(self._name, e._name)
+            #for e in self._sub_elems():
+            #    assert not e._state.startswith('@'), '%s.%s' %(self._name, e._name)
             return False
 
         child_changes = False
@@ -555,7 +557,6 @@ class _element(object):
         #elif self._state == 'create' and not need_alter:
         #    self._state = 'sql'
         else:
-            print "strange state:", self._state
             return child_changes
         return True
 
@@ -680,8 +681,8 @@ class collection(_element):
         has_changes = False
         need_alter = False
         if not self._state.startswith('@'):
-            for e in self:
-                assert not e._state.startswith('@'), '%s.%s' %(self._name, e._name)
+            #for e in self:
+            #    assert not e._state.startswith('@'), '%s.%s' %(self._name, e._name)
             return False
 
         for e in self:
@@ -1230,7 +1231,6 @@ class Table(Relation):
                     # try to remove foreign key constraints from column
                     for con in col.constraints:
                         if isinstance(con, FkColumnConstraint):
-                            print "column constraint need not be: ", con
                             con.drop()
             if size is not None and \
                     (col._todo_attrs.get('ctype', col.ctype).lower() \
@@ -1372,10 +1372,11 @@ class Table(Relation):
                     con.last_epoch = epoch
                     do_constraints = True
             
-            assert ret_col, "Why can't we %s create anything at epoch %d? %r" % (\
+            if not ret_col:
+                raise RuntimeError("Why can't we %s create anything at epoch %d? %r" % (\
                     partial and 'partially' or '', epoch, \
                     [ "%s: %s %s %s" % (c._name, c._state, c.get_depends(), c.last_epoch) \
-                            for c in self.columns])
+                            for c in self.columns]))
 
             ret += ',\n\t'.join(ret_col)
             
@@ -1494,7 +1495,7 @@ class Table(Relation):
                         for coll in (self.columns, self.indices, self.constraints)] )
                 raise RuntimeError("Table %s marked as 'alter' but cannot proceed at epoch %d" % \
                         (self._name, epoch))
-                return '', []
+                # return '', []
             
             ret += ',\n\t'.join(ret_col)
             
