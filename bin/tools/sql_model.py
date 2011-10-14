@@ -1546,8 +1546,27 @@ class Index(Relation):
         else:
             self.indirect = False
 
+    def _using_method(self):
+        return ''
+
     def _to_create_sql(self, table_name, args):
         ret = 'CREATE INDEX "%s" ON "%s" ' % (self._name, table_name)
+        ret += self._using_method()
+        # the simple case: non-decorated columns (so far)
+        colnames = [ (c.num, c._name) for c in self.columns]
+        colnames.sort(key=lambda cc: cc[0])
+        ret += '(' + (', '.join([cc[1] for cc in colnames])) + ')'
+        return ret
+
+class HashIndex(Index):
+    def _using_method(self):
+        return 'USING hash'
+
+class UniqueIndex(Index):
+    # TODO ensure that it won't be detected as "indirect"
+    def _to_create_sql(self, table_name, args):
+        ret = 'CREATE UNIQUE INDEX "%s" ON "%s" ' % (self._name, table_name)
+        ret += self._using_method()
         # the simple case: non-decorated columns (so far)
         colnames = [ (c.num, c._name) for c in self.columns]
         colnames.sort(key=lambda cc: cc[0])
