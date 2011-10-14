@@ -19,7 +19,7 @@
 #
 ##############################################################################
 
-from osv import osv,fields
+from osv import osv,fields,index
 from osv.orm import except_orm
 import pickle
 from tools.translate import _
@@ -94,11 +94,9 @@ class ir_values(osv.osv):
         'company_id': False
     }
 
-    def _auto_init(self, cr, context=None):
-        super(ir_values, self)._auto_init(cr, context)
-        cr.execute('SELECT indexname FROM pg_indexes WHERE indexname = \'ir_values_key_model_key2_res_id_user_id_idx\'')
-        if not cr.fetchone():
-            cr.execute('CREATE INDEX ir_values_key_model_key2_res_id_user_id_idx ON ir_values (key, model, key2, res_id, user_id)')
+    _indices = {
+        'key_model_key2_res_id_user_id_idx': index.plain('key', 'model', 'key2', 'res_id', 'user_id'),
+    }
 
     def set(self, cr, uid, key, key2, name, models, value, replace=True, isobject=False, meta=False, preserve_user=False, company=False):
         if isinstance(value, unicode):

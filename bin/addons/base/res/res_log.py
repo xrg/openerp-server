@@ -19,7 +19,7 @@
 #
 ##############################################################################
 
-from osv import fields, osv
+from osv import fields, osv, index
 
 class res_log(osv.osv):
     _name = 'res.log'
@@ -40,14 +40,9 @@ class res_log(osv.osv):
     }
     _order='create_date desc'
 
-    _index_name = 'res_log_uid_read'
-    def _auto_init(self, cr, context={}):
-        super(res_log, self)._auto_init(cr, context)
-        cr.execute('SELECT 1 FROM pg_indexes WHERE indexname=%s',
-                   (self._index_name,))
-        if not cr.fetchone():
-            cr.execute('CREATE INDEX %s ON res_log (user_id, read)' %
-                       self._index_name)
+    _indices = {
+        'uid_read' : index.plain('user_id', 'read'),
+    }
 
     def create(self, cr, uid, vals, context=None):
         create_context = context and dict(context) or {}

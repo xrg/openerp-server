@@ -19,7 +19,7 @@
 #
 ##############################################################################
 
-from osv import osv, fields
+from osv import osv, fields, index
 from tools.translate import _
 
 class ir_filters(osv.osv):
@@ -48,12 +48,9 @@ class ir_filters(osv.osv):
             return False
         return self.create(cr, uid, vals, context)
 
-    def _auto_init(self, cr, context=None):
-        super(ir_filters, self)._auto_init(cr, context)
-        # Use unique index to implement unique constraint on the lowercase name (not possible using a constraint)
-        cr.execute("SELECT indexname FROM pg_indexes WHERE indexname = 'ir_filters_name_model_uid_unique_index'")
-        if not cr.fetchone():
-            cr.execute('CREATE UNIQUE INDEX "ir_filters_name_model_uid_unique_index" ON ir_filters (lower(name), model_id, user_id)')
+    _indices = {
+        'name_model_uid_unique_index': index.unique('lower(name)', 'model_id', 'user_id'),
+    }
 
     _columns = {
         'name': fields.char('Action Name', size=64, translate=True, required=True),

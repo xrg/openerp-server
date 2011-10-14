@@ -19,7 +19,7 @@
 #
 ##############################################################################
 
-from osv import fields,osv
+from osv import fields,osv, index
 from lxml import etree
 from tools import graph
 from tools.safe_eval import safe_eval as eval
@@ -52,11 +52,10 @@ class view_custom(osv.osv):
         'arch': fields.text('View Architecture', required=True),
     }
 
-    def _auto_init(self, cr, context=None):
-        super(view_custom, self)._auto_init(cr, context)
-        cr.execute('SELECT indexname FROM pg_indexes WHERE indexname = \'ir_ui_view_custom_user_id_ref_id\'')
-        if not cr.fetchone():
-            cr.execute('CREATE INDEX ir_ui_view_custom_user_id_ref_id ON ir_ui_view_custom (user_id, ref_id)')
+    _indices = {
+        'user_id_ref_id': index.plain('user_id', 'ref_id'),
+    }
+
 view_custom()
 
 class view(osv.osv):
@@ -193,12 +192,6 @@ class view_sc(osv.osv):
         'resource': fields.char('Resource Name', size=64, required=True, select=True)
     }
 
-    def _auto_init(self, cr, context=None):
-        super(view_sc, self)._auto_init(cr, context)
-        cr.execute('SELECT indexname FROM pg_indexes WHERE indexname = \'ir_ui_view_sc_user_id_resource\'')
-        if not cr.fetchone():
-            cr.execute('CREATE INDEX ir_ui_view_sc_user_id_resource ON ir_ui_view_sc (user_id, resource)')
-
     def get_sc(self, cr, uid, user_id, model='ir.ui.menu', context=None):
         ids = self.search(cr, uid, [('user_id','=',user_id),('resource','=',model)], context=context)
         results = self.read(cr, uid, ids, ['res_id','name'], context=context)
@@ -214,6 +207,10 @@ class view_sc(osv.osv):
     _sql_constraints = [
         ('shortcut_unique', 'unique(res_id, resource, user_id)', 'Shortcut for this menu already exists!'),
     ]
+
+    _indices = {
+        'user_id_resource': index.plain('user_id', 'resource'),
+    }
 
 view_sc()
 

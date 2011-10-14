@@ -21,7 +21,7 @@
 
 import itertools
 
-from osv import fields,osv
+from osv import fields, osv, index
 # from osv.orm import except_orm
 
 class ir_attachment(osv.osv):
@@ -166,12 +166,9 @@ class ir_attachment(osv.osv):
         'company_id': lambda s,cr,uid,c: s.pool.get('res.company')._company_default_get(cr, uid, 'ir.attachment', context=c),
     }
 
-    def _auto_init(self, cr, context=None):
-        super(ir_attachment, self)._auto_init(cr, context)
-        cr.execute('SELECT indexname FROM pg_indexes WHERE indexname = %s', ('ir_attachment_res_idx',))
-        if not cr.fetchone():
-            cr.execute('CREATE INDEX ir_attachment_res_idx ON ir_attachment (res_model, res_id)')
-            cr.commit()
+    _indices = {
+        'res_idx': index.plain('res_model', 'res_id'),
+    }
 
 ir_attachment()
 

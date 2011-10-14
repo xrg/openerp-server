@@ -19,7 +19,7 @@
 #
 ##############################################################################
 
-from osv import fields, osv
+from osv import fields, osv, index
 import tools
 import logging
 
@@ -176,18 +176,10 @@ class ir_translation(osv.osv):
     _sql_constraints = [ ('lang_fkey_res_lang', 'FOREIGN KEY(lang) REFERENCES res_lang(code)', 
         'Language code of translation item must be among known languages' ), ]
 
-
-    def _auto_init(self, cr, context=None):
-        super(ir_translation, self)._auto_init(cr, context)
-        cr.execute('SELECT indexname FROM pg_indexes WHERE indexname = %s', ('ir_translation_ltnr',))
-        if not cr.fetchone():
-            cr.execute('CREATE INDEX ir_translation_ltnr ON ir_translation (lang, type, name, res_id)')
-            cr.commit()
-
-        cr.execute('SELECT indexname FROM pg_indexes WHERE indexname = %s', ('ir_translation_src',))
-        if not cr.fetchone():
-            cr.execute('CREATE INDEX ir_translation_src ON ir_translation USING hash (src)')
-            cr.commit()
+    _indices = {
+        'ir_translation_ltnr': index.plain('lang', 'type', 'name', 'res_id'),
+        'ir_translation_src': index.ihash('src'),
+    }
 
     def _check_selection_field_value(self, cr, uid, field, value, context=None):
         if field == 'lang':
