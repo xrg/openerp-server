@@ -34,8 +34,6 @@ import tools
 from tools.translate import _
 import __builtin__
 
-
-
 class boolean(_column):
     _type = 'boolean'
     _sql_type = 'bool'
@@ -60,13 +58,6 @@ class integer_big(_column):
     _symbol_f = _symbol_set_integer
     _symbol_set = (_symbol_c, _symbol_f)
     _symbol_get = lambda self,x: x or 0
-
-class reference(_column):
-    _type = 'reference'
-    _sql_type = 'varchar'
-    def __init__(self, string, selection, size, **args):
-        _column.__init__(self, string=string, size=size, selection=selection, **args)
-
 
 class char(_column):
     _type = 'char'
@@ -118,7 +109,8 @@ class float(_column):
         self.digits_compute = digits_compute
 
 
-    def digits_change(self, cr):
+    def post_init(self, cr, name, obj):
+        super(float, self).post_init(cr, name, obj)
         if self.digits_compute:
             t = self.digits_compute(cr)
             self._symbol_set=('%s', lambda x: ('%.'+str(t[1])+'f') % (__builtin__.float(x or 0.0),))
@@ -170,7 +162,7 @@ class time(_column):
         return DT.datetime.now().strftime(
             tools.DEFAULT_SERVER_TIME_FORMAT)
 
-register_field_classes(boolean, integer, integer_big, reference, char, text,
+register_field_classes(boolean, integer, integer_big, char, text,
         float, date, datetime, time)
 
 #eof

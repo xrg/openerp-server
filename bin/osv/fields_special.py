@@ -27,6 +27,7 @@ from fields import _column, register_field_classes
 import tools
 from psycopg2 import Binary
 from fields_function import function
+from tools.safe_eval import safe_eval as eval
 
 class binary(_column):
     _type = 'binary'
@@ -89,10 +90,40 @@ class selection(_column):
         else:
             return 'VARCHAR', f_size
 
+    @classmethod
+    def from_manual(cls, field_dict, attrs):
+        return cls(eval(field_dict['selection']), **attrs)
+
     def __init__(self, selection, string='unknown', **args):
         _column.__init__(self, string=string, **args)
         self.selection = selection
         self._sql_type, self.size = self._get_sql_type(selection, getattr(self, 'size', None))
+
+    def _get_field_def(self, cr, uid, name, obj, ret, context=None):
+        super(selection, self)._get_field_def(cr, uid, name, obj, ret, context=context)
+        if isinstance(self.selection, (tuple, list)):
+            translation_obj = obj.pool.get('ir.translation')
+            # translate each selection option
+            sel_vals = []
+            sel2 = []
+            for (key, val) in self.selection:
+                if val:
+                    sel_vals.append(val)
+
+            if context and context.get('lang', False):
+                sel_dic =  translation_obj._get_multisource(cr, uid,
+                            obj._name + ',' + name, 'selection',
+                            context['lang'], sel_vals)
+            else:
+                sel_dic = {}
+
+            for key, val in self.selection:
+                sel2.append((key, sel_dic.get(val, val)))
+            ret['selection'] = sel2
+        else:
+            # call the 'dynamic selection' function
+            ret['selection'] = self.selection(obj, cr, uid, context)
+
 
 class serialized(_column):
     """Serialized fields
@@ -254,7 +285,8 @@ class property(function):
         function.__init__(self, self._fnct_read, False, self._fnct_write,
                           obj_prop, multi='properties', **args)
 
-    def restart(self):
+    def post_init(self, cr, name, obj):
+        super(property, self).post_init(cr, name, obj)
         self.field_id = {}
 
 register_field_classes(binary, selection, serialized, struct, property)

@@ -38,14 +38,80 @@ from tools import sql_model
 #
 #CHECKME: dans la pratique c'est quoi la syntaxe utilisee pour le 5? (5) ou (5, 0)?
 
-class one2one(_column):
+class _relational(_column):
     _classic_read = False
     _classic_write = True
+
+    def _get_field_def(self, cr, uid, name, obj, ret, context=None):
+        super(_relational, self)._get_field_def(cr, uid, name, obj, ret, context=context)
+        ret['relation'] = self._obj
+        ret['domain'] = self._domain
+        ret['context'] = self._context
+
+    def _auto_init_prefetch(self, name, obj, prefetch_schema, context=None):
+        _column._auto_init_prefetch(self, name, obj, prefetch_schema, context=context)
+        dest_obj = obj.pool.get(self._obj)
+        if not dest_obj:
+            raise KeyError('There is no reference available for %s' % (self._obj,))
+        prefetch_schema.hints['tables'].append(dest_obj._table)
+
+class _rel2one(_relational):
+    def _val2browse(self, val, name, parent_bro):
+        from orm import browse_null, browse_record, except_orm
+        if val:
+            obj = parent_bro._table.pool.get(self._obj)
+            if isinstance(val, (list, tuple)):
+                value = val[0]
+            else:
+                value = val
+        else:
+            value = False
+
+        if value:
+            assert not isinstance(value, browse_record)
+            if obj is None:
+                # In some cases the target model is not available yet,
+                # but this resolution is late enough to let the model
+                # be required. Therefore it is an error
+                # This situation can be caused by custom fields that
+                # connect objects with m2o without respecting module
+                # dependencies, causing relationships to be connected
+                # to soon when the target is not loaded yet.
+                cr = parent_bro._cr # for gettext
+                context = parent_bro._context
+                global __hush_pyflakes
+                __hush_pyflakes= (cr, context)
+                raise except_orm(_('Error'), _('%s: ORM model %s cannot be found for %s field!') % \
+                            (parent_bro._table_name, self._obj, name))
+            ret = browse_record(parent_bro._cr,
+                        parent_bro._uid, value, obj, parent_bro._cache,
+                        context=parent_bro._context,
+                        list_class=parent_bro._list_class,
+                        fields_process=parent_bro._fields_process)
+        else:
+            ret = browse_null()
+        return ret
+
+
+class _rel2many(_relational):
+    def _val2browse(self, val, name, parent_bro):
+        from orm import browse_record
+
+        obj = parent_bro._table.pool.get(self._obj)
+        return parent_bro._list_class([
+                    browse_record(parent_bro._cr, parent_bro._uid, id, obj,
+                                parent_bro._cache, context=parent_bro._context, list_class=parent_bro._list_class,
+                                fields_process=parent_bro._fields_process) \
+                    for id in val],
+                    parent_bro._context)
+
+class one2one(_rel2one):
     _type = 'one2one'
 
     def __init__(self, obj, string='unknown', **args):
         warnings.warn("The one2one field doesn't work anymore", DeprecationWarning)
         _column.__init__(self, string=string, **args)
+        assert obj
         self._obj = obj
 
         if 'copy_data' not in args:
@@ -83,16 +149,19 @@ class one2one(_column):
                 res.append((0, 0, d))
         return res
 
-class many2one(_column):
-    _classic_read = False
-    _classic_write = True
+class many2one(_rel2one):
     _type = 'many2one'
     _symbol_c = '%s'
     _symbol_f = lambda x: x or None
     _symbol_set = (_symbol_c, _symbol_f)
 
+    @classmethod
+    def from_manual(cls, field_dict, attrs):
+        return cls(field_dict['relation'], **attrs)
+
     def __init__(self, obj, string='unknown', **args):
-        _column.__init__(self, string=string, **args)
+        _relational.__init__(self, string=string, **args)
+        assert obj
         self._obj = obj
 
     def set_memory(self, cr, obj, id, field, values, user=None, context=None):
@@ -158,13 +227,6 @@ class many2one(_column):
     def search(self, cr, obj, args, name, value, offset=0, limit=None, uid=None, context=None):
         return obj.pool.get(self._obj).search(cr, uid, args+self._domain+[('name', 'like', value)], offset, limit, context=context)
 
-    def _auto_init_prefetch(self, name, obj, prefetch_schema, context=None):
-        _column._auto_init_prefetch(self, name, obj, prefetch_schema, context=context)
-        dest_obj = obj.pool.get(self._obj)
-        if not dest_obj:
-            raise KeyError('There is no reference available for %s' % (self._obj,))
-        prefetch_schema.hints['tables'].append(dest_obj._table)
-
     def _auto_init_sql(self, name, obj, schema_table, context=None):
         assert self._obj, "%s.%s has no reference" %(obj._name, name)
         dest_obj = obj.pool.get(self._obj)
@@ -188,14 +250,18 @@ class many2one(_column):
         return None
 
 
-class one2many(_column):
-    _classic_read = False
+class one2many(_rel2many):
     _classic_write = False
     _prefetch = False
     _type = 'one2many'
 
+    @classmethod
+    def from_manual(cls, field_dict, attrs):
+        return cls(field_dict['relation'], field_dict['relation_field'], **attrs)
+
     def __init__(self, obj, fields_id, string='unknown', limit=None, **args):
-        _column.__init__(self, string=string, **args)
+        _relational.__init__(self, string=string, **args)
+        assert obj
         self._obj = obj
         self._fields_id = fields_id
         self._limit = limit
@@ -328,13 +394,6 @@ class one2many(_column):
                     res.append((0, 0, d))
         return res
 
-    def _auto_init_prefetch(self, name, obj, prefetch_schema, context=None):
-        _column._auto_init_prefetch(self, name, obj, prefetch_schema, context=context)
-        dest_obj = obj.pool.get(self._obj)
-        if not dest_obj:
-            raise KeyError('There is no reference available for %s' % (self._obj,))
-        prefetch_schema.hints['tables'].append(dest_obj._table)
-
     def _auto_init_sql(self, name, obj, schema_table, context=None):
         # Treat like many2one, don't care about other->self being limited
         assert self._obj, "%s.%s has no reference" %(obj._name, name)
@@ -376,7 +435,7 @@ class one2many(_column):
             assert r
         return None
 
-class many2many(_column):
+class many2many(_rel2many):
     """ many-to-many bidirectional relationship
 
        It handles the low-level details of the intermediary relationship
@@ -405,10 +464,17 @@ class many2many(_column):
                 (5, ID)                unlink all
                 (6, ?, ids)            set a list of links
     """
-    _classic_read = False
     _classic_write = False
     _prefetch = False
     _type = 'many2many'
+
+    @classmethod
+    def from_manual(cls, field_dict, attrs):
+        _rel1 = field_dict['relation'].replace('.', '_')
+        _rel2 = field_dict['model'].replace('.', '_')
+        _rel_name = 'x_%s_%s_%s_rel' %(_rel1, _rel2, field_dict['name'])
+        return cls(field_dict['relation'], _rel_name, 'id1', 'id2', **attrs)
+
     def __init__(self, obj, rel=None, id1=None, id2=None, string='unknown', limit=None, **args):
         """
             @param obj  the foreign model to relate to
@@ -423,7 +489,8 @@ class many2many(_column):
                 id1:  our_model+'_id'
                 id2:  rel._table_name + '_id'
         """
-        _column.__init__(self, string=string, **args)
+        _relational.__init__(self, string=string, **args)
+        assert obj
         self._obj = obj
         if rel and '.' in rel:
             raise Exception(_('The second argument of the many2many field %s must be a SQL table !'\
@@ -597,7 +664,7 @@ class many2many(_column):
     # TODO: a deep_copy
 
     def _auto_init_prefetch(self, name, obj, prefetch_schema, context=None):
-        _column._auto_init_prefetch(self, name, obj, prefetch_schema, context=context)
+        _relational._auto_init_prefetch(self, name, obj, prefetch_schema, context=context)
         rel, id1, id2 = self._sql_names(obj)
         prefetch_schema.hints['tables'].append(rel)
 
@@ -647,6 +714,40 @@ class many2many(_column):
 
         return None
 
-register_field_classes(one2one, many2one, one2many, many2many)
+    def _get_field_def(self, cr, uid, name, obj, ret, context=None):
+        super(many2many, self)._get_field_def(cr, uid, name, obj, ret, context=context)
+        # This additional attributes for M2M and function field is added
+        # because we need to display tooltip with this additional information
+        # when client is started in debug mode.
+        m2m_rel, m2m_id1, m2m_id2 = self._sql_names(obj)
+        ret['related_columns'] = list((m2m_id1, m2m_id2))
+        ret['third_table'] = m2m_rel
+
+class reference(_column):
+    _type = 'reference'
+    _sql_type = 'varchar'
+
+    @classmethod
+    def from_manual(cls, field_dict, attrs):
+        return cls(selection=eval(field_dict['selection']), **attrs)
+
+    def __init__(self, string, selection, size=64, **args):
+        _column.__init__(self, string=string, size=size, selection=selection, **args)
+
+    def _val2browse(self, val, name, parent_bro):
+        from orm import browse_null, browse_record
+        if not val:
+            return browse_null()
+        ref_obj, ref_id = val.split(',')
+        ref_id = long(ref_id)
+        if ref_id:
+            obj = parent_bro._table.pool.get(ref_obj)
+            return browse_record(parent_bro._cr, parent_bro._uid, ref_id, obj, parent_bro._cache,
+                                context=parent_bro._context, list_class=parent_bro._list_class,
+                                fields_process=parent_bro._fields_process)
+
+        return browse_null()
+
+register_field_classes(one2one, many2one, one2many, many2many, reference)
 
 #eof

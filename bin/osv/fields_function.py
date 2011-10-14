@@ -234,6 +234,9 @@ class function(_column):
     def __init__(self, fnct, arg=None, fnct_inv=None, fnct_inv_arg=None, type='float', fnct_search=None, obj=None, method=False, store=False, multi=False, **args):
         """
             @param multi compute several fields in one call
+            @param relation name of ORM model for relational functions,
+                synonym for `obj` for historical reasons. Please prefer to
+                use `obj` instead in new code
         """
         _column.__init__(self, **args)
         self._obj = obj
@@ -242,10 +245,10 @@ class function(_column):
         self._fnct_inv = fnct_inv
         self._arg = arg
         self._multi = multi
-        if 'relation' in args:
+        if 'relation' in args: # unfortunate old API
             self._obj = args['relation']
 
-        self.digits = args.get('digits', (16,2))
+        self.digits = args.get('digits', (16,2)) # FIXME: use shadow
         self.digits_compute = args.get('digits_compute', None)
 
         self._fnct_inv_arg = fnct_inv_arg
@@ -257,6 +260,16 @@ class function(_column):
 
         if not fnct_search and not store:
             self.selectable = False
+
+        assert type not in ('function', 'related', 'dummy')
+        # The trick: keep a regular field of the target type, so
+        # that we can redirect procedures to it
+        args.setdefault('string', '')
+        if self._type == 'one2many':
+            args['fields_id'] = False
+        elif self._type == 'char':
+            args.setdefault('size', 16)
+        self._shadow = get_field_class(self._type)(obj=self._obj, **args)
 
         if store:
             if self._type != 'many2one':
@@ -282,10 +295,44 @@ class function(_column):
             self._symbol_set = integer._symbol_set
 
     def digits_change(self, cr):
+        # FIXME Remove after using shadow everywhere
         if self.digits_compute:
             t = self.digits_compute(cr)
             self._symbol_set=('%s', lambda x: ('%.'+str(t[1])+'f') % (__builtin__.float(x or 0.0),))
             self.digits = t
+
+    def post_init(self, cr, name, obj):
+
+        super(function, self).post_init(cr, name, obj)
+        self._shadow.post_init(cr, name, obj)
+        if not self.store:
+            return
+        if self.store is True:
+            sm = {obj._name:(lambda obj,cr, uid, ids, c={}: ids, None, 10, None)}
+        else:
+            sm = self.store
+
+        pool_fnstore = obj.pool._store_function
+        for object, aa in sm.items():
+            if len(aa)==4:
+                (fnct,fields2,order,length)=aa
+            elif len(aa)==3:
+                (fnct,fields2,order)=aa
+                length = None
+            else:
+                raise RuntimeError('Invalid function definition %s in object %s !\n' \
+                                'You must use the definition: ' \
+                                'store={object:(fnct, fields, priority, time length)}.' % \
+                                (name, obj._name))
+            pool_fnstore.setdefault(object, [])
+            ok = True
+            for x,y,z,e,f,l in pool_fnstore[object]:
+                if (x == obj._name) and (y == name) and (e==fields2):
+                    if f == order:
+                        ok = False
+            if ok:
+                pool_fnstore[object].append( (obj._name, name, fnct, fields2, order, length))
+                pool_fnstore[object].sort(lambda x,y: cmp(x[4],y[4]))
 
 
     def search(self, cr, uid, obj, name, args, context=None):
@@ -357,6 +404,7 @@ class function(_column):
         todo = None
         if self.store:
 
+            # FIXME: use shadow
             if self._type == 'many2one':
                 rtype = 'integer'
                 rrefs = None
@@ -412,7 +460,48 @@ class function(_column):
                     name, self.string, obj._table)
                 schema_table.columns[name].drop()
 
+    def _get_field_def(self, cr, uid, name, obj, ret, context=None):
+        super(function, self)._get_field_def(cr, uid, name, obj, ret, context=context)
+        # This additional attributes for M2M and function field is added
+        # because we need to display tooltip with this additional information
+        # when client is started in debug mode.
+        ret['function'] = self._fnct and self._fnct.func_name or False
+        ret['store'] = self.store
+        if isinstance(self.store, dict):
+            ret['store'] = str(self.store)
+        ret['fnct_search'] = self._fnct_search and self._fnct_search.func_name or False
+        ret['fnct_inv'] = self._fnct_inv and self._fnct_inv.func_name or False
+        ret['fnct_inv_arg'] = self._fnct_inv_arg or False
+        ret['func_obj'] = self._obj or False
+        ret['func_method'] = self._method
 
+        if hasattr(self, 'selection'):
+            # Ugly copy-paste from selection field
+            if isinstance(self.selection, (tuple, list)):
+                translation_obj = obj.pool.get('ir.translation')
+                # translate each selection option
+                sel_vals = []
+                sel2 = []
+                for (key, val) in self.selection:
+                    if val:
+                        sel_vals.append(val)
+
+                if context and context.get('lang', False):
+                    sel_dic =  translation_obj._get_multisource(cr, uid,
+                                obj._name + ',' + name, 'selection',
+                                context['lang'], sel_vals)
+                else:
+                    sel_dic = {}
+
+                for key, val in self.selection:
+                    sel2.append((key, sel_dic.get(val, val)))
+                ret['selection'] = sel2
+            else:
+                # call the 'dynamic selection' function
+                ret['selection'] = self.selection(obj, cr, uid, context)
+
+    def _val2browse(self, val, name, parent_bro):
+        return self._shadow._val2browse(val, name, parent_bro)
 
 # ---------------------------------------------------------
 # Related fields

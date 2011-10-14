@@ -451,59 +451,10 @@ class browse_record(object):
         elif name in self._table._inherit_fields:
             col = self._table._inherit_fields[name][2]
 
-        if col and col._type in ('many2one', 'one2one'): # *-*
-            if ret:
-                obj = self._table.pool.get(col._obj)
-                if isinstance(ret, (list, tuple)):
-                    value = ret[0]
-                else:
-                    value = ret
-                if value:
-                    if not isinstance(value, browse_record):
-                        if obj is None:
-                            # In some cases the target model is not available yet,
-                            # but this resolution is late enough to let the model
-                            # be required. Therefore it is an error
-                            # This situation can be caused by custom fields that
-                            # connect objects with m2o without respecting module 
-                            # dependencies, causing relationships to be connected 
-                            # to soon when the target is not loaded yet.
-                            cr = self._cr # for gettext
-                            context = self._context
-                            raise except_orm(_('Error'), _('%s: ORM model %s cannot be found for %s field!') % \
-                                        (self._table_name, col._obj, name))
-                        ret = browse_record(self._cr,
-                                    self._uid, value, obj, self._cache,
-                                    context=self._context,
-                                    list_class=self._list_class,
-                                    fields_process=self._fields_process)
-                    else: # unlikely
-                        ret = value
-                else:
-                    ret = browse_null()
-            else:
-                ret = browse_null()
-        elif col and col._type in ('one2many', 'many2many') and len(ret):
-            ret = self._list_class([
-                        browse_record(self._cr, self._uid, id, self._table.pool.get(col._obj),
-                                    self._cache, context=self._context, list_class=self._list_class,
-                                    fields_process=self._fields_process) \
-                        for id in ret],
-                        self._context)
-        elif col and col._type in ('reference'):
-            if ret:
-                if not isinstance(ret, browse_record): # most likely
-                    ref_obj, ref_id = ret.split(',')
-                    ref_id = long(ref_id)
-                    if ref_id:
-                        obj = self._table.pool.get(ref_obj)
-                        ret = browse_record(self._cr, self._uid, ref_id, obj, self._cache,
-                                            context=self._context, list_class=self._list_class,
-                                            fields_process=self._fields_process)
-                    else:
-                        ret = browse_null()
-            else:
-                ret = browse_null()
+        if col and not isinstance(ret, browse_record): # most likely
+            # some (relational) fields need to convert their data
+            # to browse records
+            ret = col._val2browse(ret, name, self)
         return ret
 
     def __getattr__(self, name):
@@ -1436,62 +1387,12 @@ class orm_template(object):
                 if allfields and f not in allfields:
                     continue
                 res[f] = {'type': field_col._type}
-                # This additional attributes for M2M and function field is added
-                # because we need to display tooltip with this additional information
-                # when client is started in debug mode.
-                if isinstance(field_col, fields.function): # *-*
-                    res[f]['function'] = field_col._fnct and field_col._fnct.func_name or False
-                    res[f]['store'] = field_col.store
-                    if isinstance(field_col.store, dict):
-                        res[f]['store'] = str(field_col.store)
-                    res[f]['fnct_search'] = field_col._fnct_search and field_col._fnct_search.func_name or False
-                    res[f]['fnct_inv'] = field_col._fnct_inv and field_col._fnct_inv.func_name or False
-                    res[f]['fnct_inv_arg'] = field_col._fnct_inv_arg or False
-                    res[f]['func_obj'] = field_col._obj or False
-                    res[f]['func_method'] = field_col._method
-                if isinstance(field_col, fields.many2many):
-                    m2m_rel, m2m_id1, m2m_id2 = field_col._sql_names(self)
-                    res[f]['related_columns'] = list((m2m_id1, m2m_id2))
-                    res[f]['third_table'] = m2m_rel
-                for arg in ('string', 'readonly', 'states', 'size', 'required', 'group_operator',
-                        'change_default', 'translate', 'help', 'select', 'selectable'):
-                    if getattr(field_col, arg, False):
-                        res[f][arg] = getattr(field_col, arg)
+                field_col._get_field_def(cr, user, f, self, res[f], context=context)
+
                 if not write_access:
                     res[f]['readonly'] = True
                     res[f]['states'] = {}
-                for arg in ('digits', 'invisible', 'filters'):
-                    if getattr(field_col, arg, None):
-                        res[f][arg] = getattr(field_col, arg)
 
-                if hasattr(field_col, 'selection'):
-                    if isinstance(field_col.selection, (tuple, list)):
-                        sel = field_col.selection
-                        # translate each selection option
-                        sel_vals = []
-                        sel2 = []
-                        for (key, val) in sel:
-                            if val:
-                                sel_vals.append(val)
-                        
-                        if context.get('lang', False):
-                            sel_dic =  translation_obj._get_multisource(cr, user,
-                                        self._name + ',' + f, 'selection',
-                                        context['lang'], sel_vals)
-                        else:
-                            sel_dic = {}
-                        
-                        for key, val in sel:
-                            sel2.append((key, sel_dic.get(val, val)))
-                        res[f]['selection'] = sel2
-                    else:
-                        # call the 'dynamic selection' function
-                        res[f]['selection'] = field_col.selection(self, cr, user, context)
-                if res[f]['type'] in ('one2many', 'many2many', 'many2one', 'one2one'):
-                    res[f]['relation'] = field_col._obj
-                    res[f]['domain'] = field_col._domain
-                    res[f]['context'] = field_col._context
-                
                 if all_selectable:
                     res[f]['selectable'] = True
         
@@ -3227,46 +3128,9 @@ class orm(orm_template):
             # if not access is not specify, it is the same value as _auto
             self._log_access = getattr(self, "_auto", True)
 
-        self._columns = self._columns.copy()
-        for store_field in self._columns: # *-*
-            f = self._columns[store_field]
-            if hasattr(f, 'digits_change'):
-                f.digits_change(cr)
-            if not isinstance(f, fields.function):
-                continue
-            if not f.store:
-                continue
-            if self._columns[store_field].store is True:
-                sm = {self._name:(lambda self,cr, uid, ids, c={}: ids, None, 10, None)}
-            else:
-                sm = self._columns[store_field].store
-            for object, aa in sm.items():
-                if len(aa)==4:
-                    (fnct,fields2,order,length)=aa
-                elif len(aa)==3:
-                    (fnct,fields2,order)=aa
-                    length = None
-                else:
-                    raise except_orm('Error',
-                        ('Invalid function definition %s in object %s !\nYou must use the definition: store={object:(fnct, fields, priority, time length)}.' % (store_field, self._name)))
-                self.pool._store_function.setdefault(object, [])
-                ok = True
-                for x,y,z,e,f,l in self.pool._store_function[object]:
-                    if (x==self._name) and (y==store_field) and (e==fields2):
-                        if f==order:
-                            ok = False
-                if ok:
-                    self.pool._store_function[object].append( (self._name, store_field, fnct, fields2, order, length))
-                    self.pool._store_function[object].sort(lambda x,y: cmp(x[4],y[4]))
-
-        for (key, _, msg) in self._sql_constraints:
-            if self._debug:
-                _logger.debug("Installing sql error \"%s\" for %s", key, self._name)
-            self.pool._sql_error[self._table+'_'+key] = msg
-
+        self._columns = self._columns.copy() # AAArrgh!
+        
         # Load manual fields
-
-        # cr.execute("SELECT id FROM ir_model_fields WHERE name=%s AND model=%s", ('state', 'ir.model.fields'))
         if True:
             cr.execute('SELECT * FROM ir_model_fields WHERE model=%s AND state=%s', (self._name, 'manual'))
             for field in cr.dictfetchall():
@@ -3283,29 +3147,23 @@ class orm(orm_template):
                     #'select': int(field['select_level'])
                 }
 
-                if field['ttype'] == 'selection':
-                    self._columns[field['name']] = getattr(fields, field['ttype'])(eval(field['selection']), **attrs)
-                elif field['ttype'] == 'reference':
-                    self._columns[field['name']] = getattr(fields, field['ttype'])(selection=eval(field['selection']), **attrs)
-                elif field['ttype'] == 'many2one':
-                    self._columns[field['name']] = getattr(fields, field['ttype'])(field['relation'], **attrs)
-                elif field['ttype'] == 'one2many':
-                    self._columns[field['name']] = getattr(fields, field['ttype'])(field['relation'], field['relation_field'], **attrs)
-                elif field['ttype'] == 'many2many':
-                    _rel1 = field['relation'].replace('.', '_')
-                    _rel2 = field['model'].replace('.', '_')
-                    _rel_name = 'x_%s_%s_%s_rel' %(_rel1, _rel2, field['name'])
-                    self._columns[field['name']] = getattr(fields, field['ttype'])(field['relation'], _rel_name, 'id1', 'id2', **attrs)
-                else:
-                    self._columns[field['name']] = getattr(fields, field['ttype'])(**attrs)
+                klass = fields.get_field_class(field['ttype'])
+                self._columns[field['name']] = klass.from_manual(field, attrs)
+
+        for name, field in self._columns.items():
+            field.post_init(cr, name, self)
+
+        for (key, _, msg) in self._sql_constraints:
+            if self._debug:
+                _logger.debug("Installing sql error \"%s\" for %s", key, self._name)
+            self.pool._sql_error[self._table+'_'+key] = msg
+
         self._inherits_check()
         self._inherits_reload()
         if not self._sequence:
             self._sequence = self._table+'_id_seq'
         for k in self._defaults:
             assert (k in self._columns) or (k in self._inherit_fields), 'Default function defined in %s but field %s does not exist !' % (self._name, k,)
-        for f in self._columns:
-            self._columns[f].restart()
 
     #
     # Update objects that uses this one to update their _inherits fields
