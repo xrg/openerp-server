@@ -452,7 +452,7 @@ def init_module_objects(cr, module_name, obj_list):
     for obj in obj_list:
         try:
             context = {'module': module_name} # is it safe to move up?
-            # Savepoint ? *-*
+            # should we have a savepoint ?
             obj._field_model2db(cr, context=context)
             obj._auto_init_sql(schema, context=context)
             
@@ -470,12 +470,10 @@ def init_module_objects(cr, module_name, obj_list):
         if hasattr(obj, 'init'):
             schema.commit_to_db(cr)
             obj.init(cr)
-        cr.commit()
 
     # print "TODO(last):"
     # print schema._dump_todo()
     schema.commit_to_db(cr)
-    cr.commit()
     todo.sort()
     for t in todo:
         t[1](cr, *t[2])

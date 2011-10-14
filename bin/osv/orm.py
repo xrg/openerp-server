@@ -654,14 +654,13 @@ class orm_template(object):
                 cr.execute("INSERT INTO ir_model_data (name,date_init,date_update,module,model,res_id, source) VALUES (%s, now(), now(), %s, %s, %s, 'orm')", \
                     (name_id, context['module'], 'ir.model', model_id), debug=self._debug)
 
-        cr.commit() # *-*
-
         cr.execute("SELECT * FROM ir_model_fields WHERE model=%s", (self._name,) ,
                         debug=self._debug)
         cols = {}
         for rec in cr.dictfetchall():
             cols[rec['name']] = rec
 
+        new_imd_colnames = []
         for (k, f) in self._columns.items():
             vals = {
                 'model_id': model_id,
@@ -697,16 +696,7 @@ class orm_template(object):
                     debug=self._debug)
                 id = cr.fetchone()[0]
                 vals['id'] = id
-                if 'module' in context:
-                    name1 = 'field_' + self._table + '_' + k
-                    cr.execute("select name from ir_model_data where name=%s", 
-                        (name1,), debug=self._debug)
-                    if cr.fetchone():
-                        name1 = name1 + "_" + str(id)
-                    cr.execute("INSERT INTO ir_model_data (name,date_init,date_update,module,model,res_id, source)"
-                               "VALUES (%s, now(), now(), %s, %s, %s, 'orm')", \
-                               (name1, context['module'], 'ir.model.fields', id),
-                               debug=self._debug )
+                new_imd_colnames.append(('field_' + self._table + '_' + k, id))
             else:
                 if self._debug:
                     _logger.debug("Field %s.%s found in db", self._name, k)
@@ -714,8 +704,6 @@ class orm_template(object):
                     if cols[k][key] != vals[key]:
                         if self._debug:
                             _logger.debug("Column %s[%s] differs: %r != %r", k, key, cols[k][key], vals[key])
-                        # cr.execute('UPDATE ir_model_fields SET field_description=%s WHERE model=%s AND name=%s', (vals['field_description'], vals['model'], vals['name']))
-                        # cr.commit()
                         cr.execute("UPDATE ir_model_fields SET "
                             "model_id=%s, field_description=%s, ttype=%s, relation=%s, "
                             "view_load=%s, select_level=%s, readonly=%s ,required=%s,  "
@@ -729,7 +717,24 @@ class orm_template(object):
                                 debug=self._debug)
                         # Don't check any more attributes, we're up-to-date now.
                         break
-        cr.commit() # *-*
+
+        if new_imd_colnames and 'module' in context:
+            cr.execute("SELECT name FROM ir_model_data WHERE name = ANY(%s) AND module = %s",
+                            ([name1 for name1, id in new_imd_colnames], context['module']),
+                            debug=self._debug)
+            existing_names = [ name1 for name1, in cr.fetchall()]
+            
+            for name1, id in new_imd_colnames:
+                if name1 in existing_names:
+                    continue
+                cr.execute("INSERT INTO ir_model_data (name,date_init, module,model, res_id, source)"
+                        " VALUES(%s, now(), %s, %s, %s, 'orm')", \
+                        (name1, context['module'], 'ir.model.fields', id),
+                        debug=self._debug )
+
+        # Discovered that keeping the transaction short improves
+        # performance, hence we can commit now:
+        cr.commit()
 
     def _auto_init(self, cr, context=None):
         """ Deprecated initialization function of model -> db schema
@@ -2390,7 +2395,7 @@ class orm_template(object):
             # override defaults with the provided values, never allow the other way around
             defaults = self.default_get(cr, uid, missing_defaults, context)
             for dv in defaults:
-                # *-*
+                # TODO refactor
                 if ((dv in self._columns and self._columns[dv]._type == 'many2many') \
                      or (dv in self._inherit_fields and self._inherit_fields[dv][2]._type == 'many2many')) \
                         and defaults[dv] and isinstance(defaults[dv][0], (int, long)):
@@ -2814,7 +2819,7 @@ class orm(orm_template):
                 elif groupby in self._inherit_fields:
                     ftbl = '"%s".' % self.pool.get(self._inherit_fields[groupby][0])._table
 
-                # *-*
+                # TODO: refactor
                 if fget[groupby]['type'] in ('date', 'datetime'):
                     flist = "to_char(%s%s,'yyyy-mm') as %s " % ( ftbl, groupby,groupby)
                     groupby = "to_char(%s%s,'yyyy-mm')" % (ftbl, groupby)
@@ -2882,7 +2887,7 @@ class orm(orm_template):
                     if groupby or not context.get('group_by_no_leaf', False):
                         d['__context'] = {'group_by':groupby_list[1:]}
             if groupby and groupby in fget:
-                # *-*
+                # TODO: refactor
                 if d[groupby] and fget[groupby]['type'] in ('date','datetime'):
                     dt = datetime.datetime.strptime(alldata[d['id']][groupby][:7],'%Y-%m')
                     days = calendar.monthrange(dt.year, dt.month)[1]
@@ -3062,7 +3067,7 @@ class orm(orm_template):
         columns = [c for c in self._columns if not (isinstance(self._columns[c], fields.function) and not self._columns[c].store)]
         columns += ('id', 'write_uid', 'write_date', 'create_uid', 'create_date') # openerp access columns
         # TODO: refactor
-        return None # *-*
+        return None # FIXME
         if self._vtable:
             columns.append('_vptr')
         cr.execute("SELECT a.attname, a.attnotnull"
@@ -3153,7 +3158,7 @@ class orm(orm_template):
             if self._vtable:
                 schema_table.check_column('_vptr', ctype='VARCHAR', size=64)
 
-            # self._check_removed_columns(cr, log=False) *-*
+            # self._check_removed_columns(cr, log=False) TODO
 
             # iterate on the "object columns"
             todo_update_store = []
@@ -3200,9 +3205,8 @@ class orm(orm_template):
                 # then, drop rest of them
                 for con in schema_table.constraints:
                     if con._state == 'sql':
-                        print "should drop constraint %s" % self._table, con, con._state
-                        # *-*
-                        #    con.drop()
+                        _logger.info("Dropping constraint %s off %s", con._name, self._table)
+                        con.drop()
 
         # Note about order:
         # Since we put these operations in the "todo_end" list, they may
