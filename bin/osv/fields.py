@@ -102,6 +102,16 @@ class _column(object):
     _symbol_set = (_symbol_c, _symbol_f)
     _symbol_get = None
 
+    @classmethod
+    def from_manual(cls, field_dict, attrs):
+        """create a field instance for manual fields (from DB)
+        
+            @param field_dict the corresponding line in ir.model.fields
+            @param attrs pre-processed attributes from that line, may
+                    be passed directly to class constructor
+        """
+        return cls(**attrs)
+
     def __init__(self, string='unknown', required=False, readonly=False,
                     domain=None, context=None, states=None, priority=0,
                     change_default=False, size=None, ondelete=None,
@@ -133,7 +143,12 @@ class _column(object):
             if args[a]:
                 setattr(self, a, args[a])
 
-    def restart(self):
+    def post_init(self, cr, name, obj):
+        """ Called when the ORM model `obj` is being initialized
+            
+            May involve any operations that are dependent on the db and/or
+            the ORM model.
+        """
         pass
 
     def set(self, cr, obj, id, name, value, user=None, context=None):
@@ -239,6 +254,29 @@ class _column(object):
             return sql_model.SQLCommand(query, prepare_fn=prepare_fn, debug=obj._debug)
         else:
             return self._symbol_set[1](obj_def)
+
+    def _get_field_def(self, cr, uid, name, obj, ret, context=None):
+        """ Fill 'ret' with field definition, for orm.fields_get()
+        """
+        for arg in ('string', 'readonly', 'states', 'size', 'required',
+                    'group_operator', 'change_default', 'translate',
+                    'help', 'select', 'selectable','digits', 'invisible',
+                    'filters'):
+            if getattr(self, arg, False):
+                ret[arg] = getattr(self, arg)
+
+    def _val2browse(self, val, name, parent_bro):
+        """ Convert raw value to browse_record() format
+
+            Only meaningful for non-scalar fields
+
+            @return the value
+            @param val input value
+            @param name this field's name in parent object
+            @param parent_bro container browse_record. Contains references
+                    to cr, uid, context etc.
+        """
+        return val
 
 def get_nice_size(a):
     (x,y) = a
