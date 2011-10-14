@@ -419,7 +419,9 @@ class osv(osv_base, orm.orm):
                 parent_class = pool.get(parent_name).__class__
                 assert pool.get(parent_name), "parent class %s does not exist in module %s !" % (parent_name, module)
                 nattr = {}
-                for s in ('_columns', '_defaults', '_inherits', '_constraints', '_sql_constraints', '_virtuals', '_column_stats', '_vtable'):
+                for s in ('_columns', '_defaults', '_inherits', '_indices',
+                        '_constraints', '_sql_constraints', '_virtuals',
+                        '_column_stats', '_vtable'):
                     new = copy.copy(getattr(pool.get(parent_name), s))
                     if s == '_columns':
                         new_cols = cls.__dict__.get(s, {})

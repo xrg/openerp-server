@@ -2666,6 +2666,7 @@ class orm(orm_template):
                     False   stop and raise an exception on those fields
     """
     _sql_constraints = []
+    _indices = {}
     _table = None
     _protected = ['read','write','create','default_get','perm_read','unlink','fields_get','fields_view_get','search','name_get','distinct_field_get','name_search','copy','import_data','search_count', 'exists']
     __logger = logging.getLogger('orm')
@@ -3122,6 +3123,27 @@ class orm(orm_template):
                     if con._state == 'sql':
                         _logger.info("Dropping constraint %s off %s", con._name, self._table)
                         con.drop()
+
+        if self._indices:
+            if self._table not in schema.tables:
+                _logger.error('%s: sql indices defined for table %s, but that table does not exist in the model!',
+                        self._name, self._table)
+            else:
+                schema_table = schema.tables[self._table]
+                for name, idx in self._indices.items():
+                    fr = idx._auto_init_sql(name, self, schema_table, context=context)
+
+                    if fr and isinstance(fr, list):
+                        # is that enough?
+                        todo_end.extend(fr)
+                    elif fr:
+                        todo_end.append(fr)
+
+                # then, drop rest of them
+                for idx in schema_table.indices:
+                    if idx._state == 'sql':
+                        _logger.info("Should drop index %s off %s", idx._name, self._table)
+                        #idx.drop() ..but we don't
 
         # Note about order:
         # Since we put these operations in the "todo_end" list, they may
