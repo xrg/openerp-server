@@ -633,6 +633,7 @@ class MigrationManager(object):
                         continue
                     mod = fp = fp2 = None
                     try:
+                        mlog.info("module %s: Loading migration file %s", pkg.name, pyfile)
                         fp = tools.file_open(pyfile)
 
                         # imp.load_source need a real file object, so we create
@@ -649,7 +650,7 @@ class MigrationManager(object):
                             raise
                         except AttributeError:
                             mlog.exception('module %(addon)s: Each %(stage)s-migration file must have a "migrate(cr, installed_version)" function' % strfmt)
-                        except:
+                        except Exception:
                             raise
                     finally:
                         if fp:
