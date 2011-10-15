@@ -675,6 +675,8 @@ class collection(_element):
             elem.set_state(self._state) # mark child element with our state
         else:
             elem.set_state('create')
+        if self._state in ('done', 'sql'):
+            self._state = 'create'
         elem.parent = weakref.ref(self)
         self._d[elem._name] = elem
         return elem
