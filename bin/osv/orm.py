@@ -3129,6 +3129,8 @@ class orm(orm_template):
                 _logger.error('%s: sql indices defined for table %s, but that table does not exist in the model!',
                         self._name, self._table)
             else:
+                if self._debug:
+                    _logger.debug("%s: Updating indices", self._name)
                 schema_table = schema.tables[self._table]
                 for name, idx in self._indices.items():
                     fr = idx._auto_init_sql(name, self, schema_table, context=context)

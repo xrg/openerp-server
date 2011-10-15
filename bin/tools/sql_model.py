@@ -268,7 +268,10 @@ class Schema(object):
                     done_actions = True
                     tbl.commit_state()
                     if does_debug(tbl._name):
-                        logger.debug("After create, state: \n %s", pretty_print(tbl))
+                        logger.debug("After %s, state: %s \n %s", tstate,
+                                ', '.join(["%s:%s" % (e._name, e._state) \
+                                            for e in tbl._sub_elems()]),
+                                pretty_print(tbl))
                     sql = False # reset it, we're done
                 except DatabaseError:
                     cr.execute('ROLLBACK TO SAVEPOINT "full_%s";' % tstate)
