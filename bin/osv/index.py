@@ -56,7 +56,7 @@ class plain(_baseindex):
         if idxname in schema_table.indices:
             schema_table.indices[idxname].mark()
         else:
-            idx = schema_table.indices.append(self.sql_model_klass(name=idxname, colnames=self.colnames, state='create'))
+            idx = schema_table.indices.append(self.sql_model_klass(name=idxname, colnames=self.colnames, state=sql_model.CREATE))
 
             needs_table = False
             for c in self.colnames:

@@ -30,7 +30,33 @@ import weakref
 import logging
 from psycopg2 import DatabaseError, IntegrityError
 
-IDLE_STATES = ('sql', 'done', 'dropped', 'skipped')
+SQL = 1
+DONE = 2
+SKIPPED = 3
+DROPPED = 4
+FAILED = 8
+
+NON_IDLE_STATE = 10
+CREATE = 12
+ALTER = 13
+DROP = 14
+RENAME = 15
+
+AT_STATE = 30
+AT_SQL = 31
+AT_CREATE = 42
+AT_ALTER = 43
+AT_DROP = 44
+AT_RENAME = 45
+
+_state_names = {
+    SQL: 'sql', DONE: 'done', DROPPED: 'dropped',
+    SKIPPED: 'skipped', FAILED: 'failed',
+    CREATE: 'create', ALTER: 'alter', DROP: 'drop', RENAME: 'rename',
+    AT_SQL: '@sql', AT_CREATE: '@create', AT_ALTER: '@alter',
+    AT_DROP: '@drop', AT_RENAME: '@rename',
+    }
+
 drop_guard = True # ORM must unlock it explicitly
 
 POSTGRES_CONFDELTYPES = {
@@ -72,13 +98,12 @@ class Schema(object):
                 a collection of elements
         """
         
-        self.tables.set_state('@sql')
+        self.tables.set_state(AT_SQL)
         try:
             self._load_from_db2(cr)
         finally:
             self.tables.commit_state()
-            self.commands.set_state('create')
-            self.tables._state = 'after-sql'
+            self.commands.set_state(CREATE)
             self.epoch += 1
             self.tables.get_depends() # quick cleanup
             self.commands.get_depends()
@@ -249,10 +274,10 @@ class Schema(object):
                 logger.debug("Working on relation %s", tbl._name)
                 
                 try:
-                    if tstate in ('create', 'alter', 'drop'):
+                    if tstate in (CREATE, ALTER, DROP):
                         sql, args = tbl.pop_sql(epoch=self.epoch, partial=False)
                     else:
-                        logger.error("What is %s state?", tbl._state)
+                        logger.error("What is %s state?", _state_names[tbl._state])
                     
                     if not sql:
                         continue
@@ -261,21 +286,21 @@ class Schema(object):
                         logger.debug("Command for %s: %s +%r", tbl._name, sql, args)
 
                     if not dry_run:
-                        cr.execute('SAVEPOINT "full_%s";' % tstate)
+                        cr.execute('SAVEPOINT "full_%s";' % _state_names[tstate])
                         cr.execute(sql, args)
-                        cr.execute('RELEASE SAVEPOINT "full_%s";' % tstate)
+                        cr.execute('RELEASE SAVEPOINT "full_%s";' % _state_names[tstate])
                     
                     done_actions = True
                     tbl.commit_state()
                     if does_debug(tbl._name):
-                        logger.debug("After %s, state: %s \n %s", tstate,
-                                ', '.join(["%s:%s" % (e._name, e._state) \
+                        logger.debug("After %s, state: %s \n %s", _state_names[tstate],
+                                ', '.join(["%s:%s" % (e._name, _state_names[e._state]) \
                                             for e in tbl._sub_elems()]),
                                 pretty_print(tbl))
                     sql = False # reset it, we're done
                 except DatabaseError:
-                    cr.execute('ROLLBACK TO SAVEPOINT "full_%s";' % tstate)
-                    logger.warning("Full command %s... failed. Re-trying with separate queries", sql[:25])
+                    cr.execute('ROLLBACK TO SAVEPOINT "full_%s";' % _state_names[tstate])
+                    logger.warning("Full command %s... failed. Re-trying with separate queries", sql[:45])
                     logger.debug("Object: %s", pretty_print(tbl))
                     tbl.rollback_state()
 
@@ -289,14 +314,14 @@ class Schema(object):
                     continue
 
                 try:
-                    if cmd._state != 'create':
-                        logger.warning("What is %s state?", tbl._state)
+                    if cmd._state != CREATE:
+                        logger.warning("What is %s state?", _state_names[tbl._state])
 
                     if dry_run:
                         logger.debug("Command: %s", cmd.get_dry())
                     else:
                         cr.execute('SAVEPOINT "cmd_run";')
-                        cmd.set_state('@'+cmd._state)
+                        cmd.set_state(cmd._state + AT_STATE)
                         cmd.execute(cr)
                         cr.execute('RELEASE SAVEPOINT "cmd_run";')
 
@@ -330,10 +355,10 @@ class Schema(object):
                 logger.debug("Working on relation %s", tbl._name)
                 
                 try:
-                    if tstate in ('create', 'alter', 'drop'):
+                    if tstate in (CREATE, ALTER, DROP):
                         sql, args = tbl.pop_sql(epoch=self.epoch, partial=True)
                     else:
-                        logger.error("What is %s state?", tbl._state)
+                        logger.error("What is %s state?", _state_names[tbl._state])
                     
                     if not sql:
                         continue
@@ -342,9 +367,9 @@ class Schema(object):
                         logger.debug("Command for %s: %s +%r", tbl._name, sql, args)
 
                     if not dry_run:
-                        cr.execute('SAVEPOINT "partial_%s";' % tstate)
+                        cr.execute('SAVEPOINT "partial_%s";' % _state_names[tstate])
                         cr.execute(sql, args)
-                        cr.execute('RELEASE SAVEPOINT "partial_%s";' % tstate)
+                        cr.execute('RELEASE SAVEPOINT "partial_%s";' % _state_names[tstate])
                     
                     done_actions = True
                     tbl.commit_state()
@@ -389,16 +414,16 @@ def pretty_print(elem, indent=0, todo_only=False):
         @return a multi-line string
     """
     assert isinstance(elem, _element), "elem is %s: %r" %(type(elem), elem)
-    if todo_only and elem._state == 'sql':
+    if todo_only and elem._state == SQL:
         return ''
     ret = (' ' * indent) + repr(elem)
-    if elem._state not in ('sql',):
+    if elem._state not in (SQL,):
         dep = ''
         if elem._depends:
             dep = 'depends on: '
             dep += ','.join(['%s' % e() for e in elem._depends])
-        ret += ' [%s %s]' % (elem._state, dep)
-    if todo_only and elem._state in IDLE_STATES:
+        ret += ' [%s %s]' % (_state_names[elem._state], dep)
+    if todo_only and elem._state < NON_IDLE_STATE:
         return ret
     if isinstance(elem, collection):
         if indent > 80:
@@ -415,7 +440,7 @@ def pretty_print(elem, indent=0, todo_only=False):
             return ret
         ret += '{'
         if not elem.columns.is_idle():
-            ret += '\n'+ (' ' * indent) + 'columns: %s' % elem.columns._state
+            ret += '\n'+ (' ' * indent) + 'columns: %s' % _state_names[elem.columns._state]
         for e2 in elem.columns:
             r2 = pretty_print(e2, indent+4, todo_only=todo_only)
             if r2:
@@ -423,7 +448,7 @@ def pretty_print(elem, indent=0, todo_only=False):
 
         if isinstance(elem, Table):
             if not elem.indices.is_idle():
-                ret += '\n'+ (' ' * indent) + 'indices: %s' % elem.indices._state
+                ret += '\n'+ (' ' * indent) + 'indices: %s' % _state_names[elem.indices._state]
             ret += '\n'
             for e2 in elem.indices:
                 r2 = pretty_print(e2, indent+4, todo_only=todo_only)
@@ -431,7 +456,7 @@ def pretty_print(elem, indent=0, todo_only=False):
                     ret += '\n' + r2
             
             if not elem.constraints.is_idle():
-                ret += '\n'+ (' ' * indent) + 'constraints: %s' % elem.constraints._state
+                ret += '\n'+ (' ' * indent) + 'constraints: %s' % _state_names[elem.constraints._state]
             if len(elem.constraints):
                 for e2 in elem.constraints:
                     r2 = pretty_print(e2, indent+4, todo_only=todo_only)
@@ -489,22 +514,23 @@ class _element(object):
     def set_state(self, state):
         """ setter, overridable
         """
+        # assert isinstance(state, int), repr(state)
         self._state = state
         for elem in self._sub_elems():
             elem.set_state(state)
 
     def is_idle(self):
-        return self._state in IDLE_STATES or self._state.startswith('failed:')
+        return self._state < NON_IDLE_STATE
 
     def mark(self):
-        """Set the state as 'done', so that we know we need this element
+        """Set the state as DONE, so that we know we need this element
         
             Used to distinguish the elements which are redundant in the
             database and need to be dropped.
         """
-        if self._state in ('sql', 'drop'):
-            self._state = 'done'
-        elif self._state == 'dropped':
+        if self._state in (SQL, DROP):
+            self._state = DONE
+        elif self._state == DROPPED:
             if self.parent():
                 parent_name = self.parent()._name + '.'
             else:
@@ -516,12 +542,12 @@ class _element(object):
     def drop(self):
         """Mark this element to drop.
         """
-        if self._state == 'create':
-            self.set_state('dropped')
-        elif self._state == 'rename':
+        if self._state == CREATE:
+            self.set_state(DROPPED)
+        elif self._state == RENAME:
             raise NotImplementedError
         else:
-            self.set_state('drop')
+            self.set_state(DROP)
 
     def commit_state(self, failed=False):
         """ Set state as "done" for each kind of operation
@@ -529,9 +555,7 @@ class _element(object):
             Please, override this if we have sub-components!
             @return if we had any state changes
         """
-        if not self._state.startswith('@'):
-            #for e in self._sub_elems():
-            #    assert not e._state.startswith('@'), '%s.%s' %(self._name, e._name)
+        if self._state < AT_STATE:
             return False
 
         child_changes = False
@@ -545,20 +569,18 @@ class _element(object):
         if failed:
             if not child_changes:
                 # If we couldn't identify the single sub-element that failed
-                self._state = 'failed:' + self._state[1:]
+                self._state = FAILED
             else:
-                self._state = self._state[1:] # retry
-        elif self._state == '@sql':
-            self._state = 'sql'
-        elif self._state in ('@create', '@alter', '@rename'):
+                self._state -= AT_STATE # retry
+        elif self._state == AT_SQL:
+            self._state = SQL
+        elif self._state in (AT_CREATE, AT_ALTER, AT_RENAME):
             if need_alter:
-                self._state = 'alter'
+                self._state = ALTER
             else:
-                self._state = 'done'
-        elif self._state == '@drop':
-            self._state = 'dropped'
-        #elif self._state == 'create' and not need_alter:
-        #    self._state = 'sql'
+                self._state = DONE
+        elif self._state == AT_DROP:
+            self._state = DROPPED
         else:
             return child_changes
         return True
@@ -566,8 +588,8 @@ class _element(object):
     def rollback_state(self):
         """ Set back state, we failed to update
         """
-        if self._state.startswith('@'):
-            self._state = self._state[1:]
+        if self._state > AT_STATE:
+            self._state -= AT_STATE
             
         for elem in self._sub_elems():
             elem.rollback_state()
@@ -576,7 +598,7 @@ class _element(object):
         """ self depends on other
         
             @param other an element
-            @param on_alter fire even if the other is at 'alter', aka. just
+            @param on_alter fire even if the other is at ALTER, aka. just
                     after it has been created
         """
         # TODO revise the algorithm
@@ -584,7 +606,7 @@ class _element(object):
             # we can depend on that right now, not bother about epochs
             return
         
-        if on_alter and other._state == 'alter':
+        if on_alter and other._state == ALTER:
             return
         self._depends.append(weakref.ref(other))
         if on_alter:
@@ -598,7 +620,7 @@ class _element(object):
                 return False
             if d().is_idle():
                 return False
-            if self._depends_on_alter and d()._state in ('alter', '@alter'):
+            if self._depends_on_alter and d()._state in (ALTER, AT_ALTER):
                 return False
             return True
 
@@ -608,7 +630,7 @@ class _element(object):
                 return False
         else:
             for d in self._depends:
-                if d()._state.startswith('@'):
+                if d()._state >= AT_STATE:
                     pass
                 else:
                     return False
@@ -616,7 +638,7 @@ class _element(object):
         for e in self._sub_elems():
             if isinstance(e, collection) and len(e) == 0 and not e.is_idle():
                 # fix empty collections being non-idle
-                e._state = 'done'
+                e._state = DONE
 
         if partial:
             # proceed if any of the elements is non-idle
@@ -671,12 +693,12 @@ class collection(_element):
         assert (elem is not None) and elem._name not in self._d, elem._name
         assert isinstance(elem, self._baseclass)
         assert self._state is not None
-        if self._state == '@sql':
+        if self._state == AT_SQL:
             elem.set_state(self._state) # mark child element with our state
         else:
-            elem.set_state('create')
-        if self._state in ('done', 'sql'):
-            self._state = 'create'
+            elem.set_state(CREATE)
+        if self._state in (DONE, SQL):
+            self._state = CREATE
         elem.parent = weakref.ref(self)
         self._d[elem._name] = elem
         return elem
@@ -685,9 +707,7 @@ class collection(_element):
         
         has_changes = False
         need_alter = False
-        if not self._state.startswith('@'):
-            #for e in self:
-            #    assert not e._state.startswith('@'), '%s.%s' %(self._name, e._name)
+        if self._state < AT_STATE:
             return False
 
         for e in self:
@@ -698,20 +718,20 @@ class collection(_element):
         
         if _element.commit_state(self, failed=(failed and not has_changes)):
             has_changes = True
-        if (self._state in ('sql', 'done')) and need_alter:
+        if (self._state in (SQL, DONE)) and need_alter:
             assert len(self),"%s: %s" %(self, self._state)
-            self._state = 'alter'
-        #elif False and self._state == 'create' and not need_alter:
-        #    self._state = 'done'
+            self._state = ALTER
+        #elif False and self._state == CREATE and not need_alter:
+        #    self._state = DONE
         #    has_changes = True
 
         return has_changes
         
     def cleanup(self):
-        """ remove 'dropped' elements
+        """ remove DROPPED elements
         """
         for k in self._d.keys():
-            if self._d[k]._state == 'dropped':
+            if self._d[k]._state == DROPPED:
                 del self._d[k]
 
     def rename(self, oldname, newname):
@@ -724,13 +744,14 @@ class collection(_element):
         """
         
         assert oldname in self._d, oldname
-        assert self._d[oldname]._state not in ('dropped', 'drop', 'skipped', 'rename'), \
-            "%s element %s is already in %s state" % (self._baseclass.__name__, oldname, self._d[oldname]._state)
+        assert self._d[oldname]._state not in (DROPPED, DROP, SKIPPED, RENAME), \
+            "%s element %s is already in %s state" % \
+                (self._baseclass.__name__, oldname, _state_names[self._d[oldname]._state])
         assert newname not in self._d, "element %s already exists" % newname
         elem = self._d.pop(oldname)
         elem._name = newname
         elem.oldname = oldname
-        elem._state = 'rename' # use the shallow setter, not set_state()
+        elem._state = RENAME # use the shallow setter, not set_state()
         self._d[newname] = elem
         return elem
         
@@ -805,12 +826,12 @@ class Column(_element):
 
     def set_state(self, newstate):
         super(Column, self).set_state(newstate)
-        if newstate == '@create':
+        if newstate == AT_CREATE:
             # When we create the column, we implicitly create all constraints
             for c in self.constraints:
                 if isinstance(c, NotNullColumnConstraint):
                     continue
-                c.set_state('@create')
+                c.set_state(AT_CREATE)
 
     def rollback_state(self):
         super(Column, self).rollback_state()
@@ -844,7 +865,7 @@ class Column(_element):
             ret += ' PRIMARY KEY'
         for c in self.constraints:
             if isinstance(c, NotNullColumnConstraint):
-                if self._state == '@create':
+                if self._state == AT_CREATE:
                     raise RuntimeError("Not null applies too early for %s", self._name)
                 continue
             ret += ' ' + c._to_create_sql(args)
@@ -893,7 +914,7 @@ class Column(_element):
                 break
             
         if ret and not dry_run:
-            self._state = '@' + self._state
+            self._state = AT_STATE + self._state
             self.last_epoch = epoch
         
         if not self.constraints.is_idle():
@@ -901,24 +922,24 @@ class Column(_element):
                 if con.is_idle() or not con.get_depends():
                     continue
                 if isinstance(con, NotNullColumnConstraint):
-                    assert con._state == 'create', "%s: %s" % (self._name, con._state)
+                    assert con._state == CREATE, "%s: %s" % (self._name, _state_names[con._state])
                     alter_column('SET NOT NULL')
-                elif con._state == 'create':
+                elif con._state == CREATE:
                     ret.append('ADD CONSTRAINT "%s" %s' %(con._name, con._to_table_constraint(self._name, args)))
-                elif con._state == 'drop':
+                elif con._state == DROP:
                     ret.append('DROP CONSTRAINT "%s"' % con._name)
                 else:
                     raise RuntimeError('How to handle column "%s" constraint in state "%s"?' % \
                             (self._name, con._state))
                 if not dry_run:
-                    con._state = '@' + con._state
+                    con._state = AT_STATE + con._state
                 if partial:
                     break
             
             if ret and not dry_run:
-                if not self._state.startswith('@'):
-                    self._state = '@' + self._state
-                if not self.constraints._state.startswith('@'):
+                if self._state < AT_STATE:
+                    self._state = AT_STATE + self._state
+                if self.constraints._state < AT_STATE:
                     self.constraints._state = self._state
                 self.last_epoch = epoch
 
@@ -936,10 +957,7 @@ class Relation(_element):
     def __init__(self, name, oid=None, comment=None):
         _element.__init__(self, name=name)
         self._oid = oid
-        #state = 'create' | 'ok' | 'update' | 'drop'
-        #indices (table)
         self.columns = collection('columns', Column, self)
-        #constraints (table)
         self.comment = comment
 
     def _get_column(self, c):
@@ -983,18 +1001,18 @@ class ColumnConstraint(_element):
         """ Column constraints go from @alter -> create
         
         """
-        if not self._state.startswith('@'):
+        if self._state < AT_STATE:
             return False
         if failed:
-            self._state = 'failed:' + self._state[1:]
-        elif self._state == '@sql':
-            self._state = 'sql'
-        elif self._state  == '@create':
-            self._state = 'done'
-        elif self._state == '@alter':
-            self._state = 'create'
-        elif self._state == '@drop':
-            self._state = 'dropped'
+            self._state = FAILED
+        elif self._state == AT_SQL:
+            self._state = SQL
+        elif self._state  == AT_CREATE:
+            self._state = DONE
+        elif self._state == AT_ALTER:
+            self._state = CREATE
+        elif self._state == AT_DROP:
+            self._state = DROPPED
         else:
             return False
         return True
@@ -1058,13 +1076,13 @@ class NotNullColumnConstraint(ColumnConstraint):
         """ Column constraints go from @alter -> create
         
         """
-        if not self._state.startswith('@'):
+        if self._state < AT_STATE:
             return False
         
         if failed:
-            self._state = 'failed:' + self._state[1:]
-        elif self._state == '@create':
-            self._state = 'dropped'
+            self._state = FAILED
+        elif self._state == AT_CREATE:
+            self._state = DROPPED
         else:
             raise RuntimeError("state: %s?" % self._state)
             # return False
@@ -1148,7 +1166,7 @@ class Table(Relation):
                 plain_default = default
             newcol = self.columns.append(Column(name=colname, ctype=ctype,
                 size=size, default=plain_default,
-                not_null=not_null and (self._state == 'create' or plain_default is not None)))
+                not_null=not_null and (self._state == CREATE or plain_default is not None)))
             if moved_col:
                 newcol.set_depends(moved_col)
             if comment:
@@ -1172,7 +1190,7 @@ class Table(Relation):
                     self._logger.warning("Column %s.%s set to reference %s(%s), but the latter table is not known",
                             self._name, colname, references['table'], references.get('column', 'id'))
             
-            if self._state != 'create' and isinstance(default, Command):
+            if self._state != CREATE and isinstance(default, Command):
                 # We need to execute the command (to update defaults) _after_
                 # the column has been added, and then enforce the NOT NULL constraint
                 self.parent_schema().commands.append(default)
@@ -1182,12 +1200,12 @@ class Table(Relation):
                     nnc.set_depends(default)
             if select:
                 idx = self.indices.append(Index('%s_%s_idx' % (self._name, colname),
-                                            colnames=[colname], state='create'))
+                                            colnames=[colname], state=CREATE))
                 idx.set_depends(newcol)
             
-            assert newcol._state == 'create', "%s %s" % (newcol._state, self._state)
-            if self._state in IDLE_STATES:
-                self._state = 'alter'
+            assert newcol._state == CREATE, "%s %s" % (newcol._state, self._state)
+            if self._state < NON_IDLE_STATE:
+                self._state = ALTER
         else:
             col = self.columns[colname]
             plain_default = None
@@ -1217,7 +1235,7 @@ class Table(Relation):
                                 found_ref = True
                             else:
                                 self._logger.debug("column constraint mismatch on %s: %r -> %r", self._name, references, con)
-                                con.set_state('drop')
+                                con.set_state(DROP)
                     if not found_ref:
                         new_name = "%s_%s_fkey" %(self._name, colname)
                         i = 1
@@ -1277,7 +1295,7 @@ class Table(Relation):
                     # add index, if needed
                     if not found_indices:
                         self.indices.append(Index('%s_%s_idx' % (self._name ,colname),
-                                colnames=[colname],state='create'))
+                                colnames=[colname],state=CREATE))
                     else:
                         for idx in found_indices:
                             idx.mark()
@@ -1290,13 +1308,13 @@ class Table(Relation):
                         idx.drop()
                     self.indices.cleanup()
             
-            if col._state not in ('create', 'rename') and col._todo_attrs:
-                col._state = 'alter'
+            if col._state not in (CREATE, RENAME) and col._todo_attrs:
+                col._state = ALTER
             else:
                 col.mark()
         
-            if col._state not in IDLE_STATES and self._state in IDLE_STATES:
-                self._state = 'alter'
+            if col._state >= NON_IDLE_STATE and self._state < NON_IDLE_STATE:
+                self._state = ALTER
         return can_do
     
     def check_constraint(self, conname, obj, condef):
@@ -1342,14 +1360,14 @@ class Table(Relation):
         args = []
         do_columns = do_constraints = False
 
-        if self._state == 'create':
+        if self._state == CREATE:
             ret = 'CREATE TABLE %s (' % self._name
                 
             ret_col = []
             for col in self.columns:
-                if col._state != 'create':
+                if col._state != CREATE:
                     self._logger.warning("Column: %s.%s: what is state %s when table is not created yet?",
-                            self._name, col._name, col._state)
+                            self._name, col._name, _state_names[col._state])
                     continue
                 if not col.get_depends(partial=partial):
                     continue
@@ -1358,14 +1376,14 @@ class Table(Relation):
                     continue
                 ret_col.append(col._to_create_sql(args))
                 if not dry_run:
-                    col.set_state('@' + col._state)
+                    col.set_state(AT_STATE + col._state)
                     col.last_epoch = epoch
                     do_columns = True
             
             for con in self.constraints:
-                if con._state != 'create':
+                if con._state != CREATE:
                     self._logger.warning("Table Constraint: %s.%s: what is state %s when table is not created yet?",
-                        self._name, con._name, con._state)
+                        self._name, con._name, _state_names[con._state])
                     continue
                 elif partial and ret_col and epoch == con.last_epoch:
                     continue
@@ -1373,7 +1391,7 @@ class Table(Relation):
                     continue
                 ret_col.append('CONSTRAINT ' + con._to_create_sql(args))
                 if not dry_run:
-                    con._state = '@' + con._state
+                    con._state = AT_STATE + con._state
                     con.last_epoch = epoch
                     do_constraints = True
             
@@ -1386,7 +1404,7 @@ class Table(Relation):
             ret += ',\n\t'.join(ret_col)
             
             ret += ');\n'
-        elif self._state == 'alter':
+        elif self._state == ALTER:
             ret += 'ALTER TABLE %s ' % self._name
             
             ret_col = []
@@ -1398,18 +1416,18 @@ class Table(Relation):
                     continue
                 elif partial and ret_col and col.last_epoch == epoch:
                     continue
-                if col._state == 'create':
+                if col._state == CREATE:
                     col_sql = col._to_create_sql(args)
                     if not dry_run:
-                        col.set_state('@' + col._state) # recursive, including constraints
+                        col.set_state(AT_STATE + col._state) # recursive, including constraints
                         col.last_epoch = epoch
                     ret_col.append('ADD COLUMN %s' % col_sql)
-                elif col._state == 'alter':
+                elif col._state == ALTER:
                     col_sqls = col.pop_sql(args, epoch=epoch, partial=partial, dry_run=dry_run)
                     if not col_sqls:
                         continue
                     ret_col.extend(col_sqls)
-                elif col._state == 'rename':
+                elif col._state == RENAME:
                     if ret_col:
                         # ALTER TABLE.. RENAME column must only perform this
                         # single operation
@@ -1418,15 +1436,15 @@ class Table(Relation):
                         ret_col.append('RENAME COLUMN "%s" TO "%s" ' % (col.oldname, col._name))
                         partial = True # switch to partial mode, avoid
                                        # any other operations at this pass
-                        col._state = '@rename'
+                        col._state = AT_RENAME
                         col.last_epoch = epoch
-                elif col._state == 'drop':
+                elif col._state == DROP:
                     if drop_guard:
                         self._logger.warning("Column %s.%s should be dropped, but drop_guard won't allow that!", self._name, col._name)
-                        col._state = 'skipped'
+                        col._state = SKIPPED
                         continue
                     ret_col.append('DROP COLUMN "%s" ' % col._name)
-                    col._state = '@drop'
+                    col._state = AT_DROP
                     col.last_epoch = epoch
                 else:
                     self._logger.warning("How can I alter column %s state %s?", col._name, col._state)
@@ -1446,16 +1464,16 @@ class Table(Relation):
                         continue
                     elif partial and con.last_epoch == epoch:
                         continue
-                    if con._state == 'create':
+                    if con._state == CREATE:
                         ret_col.append('ADD CONSTRAINT ' +con._to_create_sql(args))
-                    elif con._state in ('alter', 'drop'):
+                    elif con._state in (ALTER, DROP):
                         # we cannot "alter" a constraint, so we drop + create it
                         ret_col.append('DROP CONSTRAINT "%s"' % con._name)
                     else:
                         self._logger.warning("How can I alter constraint %s state %s?", con._name, con._state)
                         continue
                     if not dry_run:
-                        con.set_state('@' + con._state)
+                        con.set_state(AT_STATE + con._state)
                         con.last_epoch = epoch
                         do_constraints = True
                     if partial:
@@ -1470,15 +1488,15 @@ class Table(Relation):
                     elif partial and idx.last_epoch == epoch:
                         continue
                     
-                    if idx._state == 'create':
+                    if idx._state == CREATE:
                         ret = idx._to_create_sql(self._name, args)
-                    elif idx._state == 'drop' and idx.indirect:
+                    elif idx._state == DROP and idx.indirect:
                         # We cannot drop it here, assume the constraint
                         # will go and cascade the index, too
                         ret = ''
                         if not dry_run:
-                            idx.set_state('done')
-                    elif idx._state == 'drop':
+                            idx.set_state(DONE)
+                    elif idx._state == DROP:
                         ret = 'DROP INDEX "%s"' % idx._name
                     else:
                         raise NotImplementedError('What is %s state for index "%s"?' % \
@@ -1486,8 +1504,8 @@ class Table(Relation):
                     if not ret:
                         continue
                     if not dry_run:
-                        idx.set_state('@' + idx._state)
-                        self._state = '@' + self._state
+                        idx.set_state(AT_STATE + idx._state)
+                        self._state = AT_STATE + self._state
                         self.indices._state = self._state
                         idx.last_epoch = epoch
                     # shortcut: only return this index, as a separate SQL command
@@ -1498,7 +1516,7 @@ class Table(Relation):
                     partial and 'partially' or '', self._name, epoch, \
                     [ [ "%s: %s %s %s" % (c._name, c._state, c.get_depends(partial=partial), c.last_epoch) for c in coll] \
                         for coll in (self.columns, self.indices, self.constraints)] )
-                raise RuntimeError("Table %s marked as 'alter' but cannot proceed at epoch %d" % \
+                raise RuntimeError("Table %s marked as ALTER but cannot proceed at epoch %d" % \
                         (self._name, epoch))
                 # return '', []
             
@@ -1506,17 +1524,17 @@ class Table(Relation):
             
             ret += ';\n'
     
-        elif self._state == 'drop':
+        elif self._state == DROP:
             if drop_guard:
                 self._logger.warning("Table %s would be dropped, but drop_guard saved it", self._name)
-                self._state = 'skipped'
+                self._state = SKIPPED
                 return '', []
             ret = 'DROP TABLE %s;' % self._name
         else:
             self._logger.warning("Table(%s) pop_sql called on state %s", self._name, self._state)
 
         if not dry_run:
-            self._state = '@' + self._state
+            self._state = AT_STATE + self._state
             if do_columns:
                 self.columns._state = self._state
             if do_constraints:
@@ -1540,10 +1558,9 @@ class Index(Relation):
         Relation.__init__(self, name=name)
         self.is_unique = False
         self.set_state(state)
-        self.columns.set_state('done') # never mind
+        self.columns.set_state(DONE) # never mind
         for i,cn in enumerate(colnames):
             self.columns.append(Column(name=cn, ctype='', num=(i+1)))
-        self.set_state(None)
         if is_unique:
             self.indirect = 'u'
         elif indisprimary:

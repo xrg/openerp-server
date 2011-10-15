@@ -3039,7 +3039,7 @@ class orm(orm_template):
             else:
                 schema_table = schema.tables.append(sql_model.\
                             Table(name=self._table, comment=self._description))
-                assert schema_table._state == 'create', schema_table._state
+                assert schema_table._state == sql_model.CREATE, schema_table._state
                 # Create the 'id' column only on new tables, otherwise we are doing sth wrong
                 schema_table.columns.append(sql_model.Column('id','SERIAL', not_null=True, primary_key=True))
 
@@ -3122,7 +3122,7 @@ class orm(orm_template):
                     schema_table.check_constraint(conname, self, con)
                 # then, drop rest of them
                 for con in schema_table.constraints:
-                    if con._state == 'sql':
+                    if con._state == sql_model.SQL:
                         _logger.info("Dropping constraint %s off %s", con._name, self._table)
                         con.drop()
 
@@ -3145,7 +3145,7 @@ class orm(orm_template):
 
                 # then, drop rest of them
                 for idx in schema_table.indices:
-                    if idx._state == 'sql':
+                    if idx._state == sql_model.SQL:
                         _logger.info("Should drop index %s off %s", idx._name, self._table)
                         #idx.drop() ..but we don't
 

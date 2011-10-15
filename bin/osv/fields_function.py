@@ -35,6 +35,7 @@ import logging
 import __builtin__
 from fields_simple import boolean, integer, float
 from tools import config
+from tools import sql_model
 
 _logger = logging.getLogger('orm')
 
@@ -438,7 +439,7 @@ class function(_column):
 
             assert r
 
-            if schema_table._state != 'create':
+            if schema_table._state != sql_model.CREATE:
                 todo = []
                 order = 10
                 if self.store is not True: #is dict
