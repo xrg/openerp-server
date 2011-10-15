@@ -270,7 +270,7 @@ class function(_column):
             args['fields_id'] = False
         elif self._type == 'char':
             args.setdefault('size', 16)
-        self._shadow = get_field_class(self._type)(obj=self._obj, **args)
+        self._shadow = get_field_class(self._type)(obj=self._obj, shadow=True, **args)
 
         if store:
             if self._type != 'many2one':
@@ -476,30 +476,16 @@ class function(_column):
         ret['func_obj'] = self._obj or False
         ret['func_method'] = self._method
 
-        if hasattr(self, 'selection'):
-            # Ugly copy-paste from selection field
-            if isinstance(self.selection, (tuple, list)):
-                translation_obj = obj.pool.get('ir.translation')
-                # translate each selection option
-                sel_vals = []
-                sel2 = []
-                for (key, val) in self.selection:
-                    if val:
-                        sel_vals.append(val)
-
-                if context and context.get('lang', False):
-                    sel_dic =  translation_obj._get_multisource(cr, uid,
-                                obj._name + ',' + name, 'selection',
-                                context['lang'], sel_vals)
-                else:
-                    sel_dic = {}
-
-                for key, val in self.selection:
-                    sel2.append((key, sel_dic.get(val, val)))
-                ret['selection'] = sel2
-            else:
-                # call the 'dynamic selection' function
-                ret['selection'] = self.selection(obj, cr, uid, context)
+        ret2 = {}
+        self._shadow._get_field_def(cr, uid, name, obj, ret2, context=context)
+        for k, val in ret2.items():
+            if k in ('states', 'required', 'change_default',
+                    'select', 'selectable', 'invisible', 'filters'):
+                continue
+            if val is None:
+                continue
+            if k not in ret:
+                ret[k] = val
 
     def _val2browse(self, val, name, parent_bro):
         return self._shadow._val2browse(val, name, parent_bro)

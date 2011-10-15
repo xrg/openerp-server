@@ -519,10 +519,13 @@ class many2many(_rel2many):
             # the default table name is based on the stable alphabetical order of tables
             dest_model = source_model.pool.get(self._obj)
             tables = tuple(sorted([source_model._table, dest_model._table]))
-            if not tbl:
-                assert tables[0] != tables[1], 'Implicit/Canonical naming of m2m relationship table '\
+            if not (tbl or getattr(self, 'shadow', False)):
+                assert tables[0] != tables[1], 'Implicit/Canonical naming of m2m relationship '\
+                                               '"%s" of model %s table "%s" to %s "%s" '\
                                                'is not possible when source and destination models are '\
-                                               'the same'
+                                               'the same' % \
+                                               (self.string, source_model._name, source_model._table,
+                                                dest_model._name, dest_model._table)
                 tbl = '%s_%s_rel' % tables
             if not col1:
                 col1 = '%s_id' % source_model._table
