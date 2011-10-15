@@ -252,6 +252,7 @@ class Schema(object):
         max_epoch = self.epoch + 5000
         while need_more:
             done_actions = False
+            failed_actions = False
             need_more = False
             if self.epoch >= max_epoch: # would we ever need more levels of epochs?
                 logger.error("DB epoch overflow, cannot initialize/update database")
@@ -329,7 +330,8 @@ class Schema(object):
                     cmd.commit_state()
                 except DatabaseError:
                     cr.execute('ROLLBACK TO SAVEPOINT "cmd_run";')
-                    cmd.rollback_state()
+                    cmd.commit_state(failed=True)
+                    failed_actions = True
 
             # TODO: here go indices etc..
             
@@ -374,14 +376,15 @@ class Schema(object):
                     done_actions = True
                     tbl.commit_state()
                 except DatabaseError:
-                    cr.execute('ROLLBACK TO SAVEPOINT "partial_%s";' % tstate)
+                    cr.execute('ROLLBACK TO SAVEPOINT "partial_%s";' % _state_names[tstate])
                     logger.error("Command failed, inspect your data and try to execute it manually: %s +%r", sql, args)
                     logger.debug("Object: %s", pretty_print(tbl))
                     tbl.commit_state(failed=True)
+                    failed_actions = True
             
             # TODO indices, constraints etc. components (partial)
 
-            if need_more and not done_actions:
+            if need_more and not (done_actions or failed_actions):
                 logger.error("Have nothing to do at epoch #%d", self.epoch)
                 raise RuntimeError("Idle at epoch %d" % self.epoch)
             self.epoch += 1
@@ -570,8 +573,13 @@ class _element(object):
             if not child_changes:
                 # If we couldn't identify the single sub-element that failed
                 self._state = FAILED
-            else:
+            elif need_alter:
                 self._state -= AT_STATE # retry
+                # leave last_epoch as is! we shall not retry in this one
+            else:
+                # one of the children has failed, we cannot do
+                # anything more
+                self._state = DONE
         elif self._state == AT_SQL:
             self._state = SQL
         elif self._state in (AT_CREATE, AT_ALTER, AT_RENAME):
@@ -590,7 +598,8 @@ class _element(object):
         """
         if self._state > AT_STATE:
             self._state -= AT_STATE
-            
+            self.last_epoch = None # reset the epoch too, we can retry
+
         for elem in self._sub_elems():
             elem.rollback_state()
 
