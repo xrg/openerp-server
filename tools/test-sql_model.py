@@ -41,6 +41,8 @@ sch.tables['foo'].check_column('r_id', 'INTEGER', not_null=True,
         references=dict(table='brob'))
 sch.tables['foo'].check_column('user_id', 'INTEGER', not_null=True, 
         references=dict(table='res_users'))
+idx = sch.tables['foo'].indices.append(sql_model.Index('foo_frol_r_id_idx',colnames=('frol','r_id'),state='create'))
+idx.set_depends(sch.tables['foo'], on_alter=True)
 print sch.pretty_print()
 
 print
