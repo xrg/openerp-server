@@ -653,11 +653,13 @@ class orm_template(object):
             if k not in cols:
                 cr.execute("""INSERT INTO ir_model_fields (
                         model_id, model, name, field_description, ttype,
-                        relation,view_load,state,select_level,relation_field, translate ) 
-                    VALUES ( %s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s ) RETURNING id""", 
+                        relation,view_load,state,select_level,relation_field, translate,
+                        readonly, required)
+                    VALUES ( %s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s ) RETURNING id""",
                     ( vals['model_id'], vals['model'], vals['name'], vals['field_description'], vals['ttype'],
                      vals['relation'], vals['view_load'], 'base',
-                    vals['select_level'],vals['relation_field'], vals['translate']),
+                    vals['select_level'],vals['relation_field'], vals['translate'],
+                    vals['readonly'], vals['required']),
                     debug=self._debug)
                 id = cr.fetchone()[0]
                 vals['id'] = id
