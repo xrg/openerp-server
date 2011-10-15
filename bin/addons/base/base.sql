@@ -13,8 +13,8 @@ CREATE TABLE ir_values
 (
     id serial PRIMARY KEY,
     name varchar(128) NOT NULL,
-    key varchar(128) NOT NULL,
-    key2 varchar(128) NOT NULL,
+    "key" varchar(128) NOT NULL,
+    key2 varchar(128),
     model varchar(128) NOT NULL,
     "value" text,
     meta text DEFAULT NULL,
@@ -173,7 +173,6 @@ CREATE TABLE res_groups_users_rel (
     UNIQUE("uid","gid")
 ) WITHOUT OIDS;
 
-CREATE INDEX res_groups_users_rel_uid_idx on res_groups_users_rel (uid);
 CREATE INDEX res_groups_users_rel_gid_idx on res_groups_users_rel (gid);
 
 
@@ -336,9 +335,6 @@ CREATE TABLE ir_model_data (
     "source" VARCHAR(16) NOT NULL DEFAULT 'xml',
     res_id integer
 ) WITHOUT OIDS;
-
-CREATE INDEX ir_model_data_name_index ON ir_model_data (name);
-CREATE INDEX ir_model_data_model_index ON ir_model_data (model);
 
 ---------------------------------
 -- Users

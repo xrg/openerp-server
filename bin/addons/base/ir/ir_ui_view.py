@@ -97,6 +97,9 @@ class view(osv.osv):
         (_check_xml, _invalid_xml_message , ['arch'])
     ]
 
+    _indices = {
+        'model_type_idx': index.plain('model', 'type'),
+    }
 
     def write(self, cr, uid, ids, vals, context={}):
         if not isinstance(ids, (list, tuple)):
