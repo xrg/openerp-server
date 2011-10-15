@@ -23,7 +23,7 @@ import re
 import time
 from operator import itemgetter
 
-from osv import fields,osv
+from osv import fields,osv, index
 import ir
 import netsvc
 from osv.orm import except_orm, browse_record
@@ -31,6 +31,7 @@ import tools
 from tools.safe_eval import safe_eval as eval
 from tools import config
 from tools.translate import _
+from tools import sql_model
 import pooler
 
 def _get_fields_type(self, cr, uid, context=None):
@@ -54,6 +55,28 @@ def _in_modules(self, cr, uid, ids, field_name, arg, context=None):
         result[k] = ', '.join(sorted(installed_modules & set(xml_id.split('.')[0] for xml_id in v)))
     return result
 
+def _re_init_model(obj, cr, context):
+    """Re-initialize ORM model, like _auto_init() used to do
+
+        Since the refactoring of orm._auto_init(), that function is a no-op
+        and the steps of this one are needed instead
+    """
+    schema = sql_model.Schema()
+    schema.hints['tables'].append('res_users')
+    obj._auto_init_prefetch(schema, context=context)
+    schema.load_from_db(cr)
+    obj._field_model2db(cr, context=context)
+    obj._auto_init_sql(schema, context=context)
+    if not (getattr(obj._auto_init, 'deferrable', False)):
+        logging.getLogger('init').debug("Commit schema before %s._auto_init()", obj._name)
+        schema.commit_to_db(cr)
+    todo = obj._auto_init(cr, context=context)
+    schema.commit_to_db(cr)
+    if todo:
+        todo.sort()
+        for t in todo:
+            t[1](cr, *t[2])
+        cr.commit()
 
 class ir_model(osv.osv):
     _name = 'ir.model'
@@ -100,7 +123,7 @@ class ir_model(osv.osv):
     }
 
     _defaults = {
-        'model': lambda *a: 'x_',
+        'model': 'x_',
         'state': lambda self,cr,uid,ctx=None: (ctx and ctx.get('manual',False)) and 'manual' or 'base',
     }
     
@@ -161,8 +184,7 @@ class ir_model(osv.osv):
             self.pool.get(vals['model']).__init__(self.pool, cr)
             ctx = context.copy()
             ctx.update({'field_name':vals['name'],'field_state':'manual','select':vals.get('select_level','0')})
-            self.pool.get(vals['model'])._auto_init(cr, ctx)
-            #pooler.restart_pool(cr.dbname)
+            _re_init_model(self.pool.get(vals['model']), cr, ctx)
         return res
 
     def instanciate(self, cr, user, model, context={}):
@@ -296,7 +318,7 @@ class ir_model_fields(osv.osv):
                     #Added context to _auto_init for special treatment to custom field for select_level
                     ctx = context.copy()
                     ctx.update({'field_name':vals['name'],'field_state':'manual','select':vals.get('select_level','0'),'update_custom_fields':True})
-                    self.pool.get(vals['model'])._auto_init(cr, ctx)
+                    _re_init_model(self.pool.get(vals['model']), cr, ctx)
         except Exception, e:
             # we have to behave like _validate() and never let the dirty data in the db.
             cr.rollback()
@@ -414,8 +436,8 @@ class ir_model_fields(osv.osv):
 
         if models:
             # We have to update _columns of the model(s) and then call their 
-            # _auto_init to sync the db with the model. Hopefully, since write()
-            # was called earlier, they will be in-sync before the _auto_init.
+            # _auto_init_xx to sync the db with the model. Hopefully, since write()
+            # was called earlier, they will be in-sync before the _auto_init_xx.
             # Anything we don't update in _columns now will be reset from
             # the model into ir.model.fields (db).
             ctx = context.copy()
@@ -432,7 +454,7 @@ class ir_model_fields(osv.osv):
                     if obj._debug:
                         log.debug('%s: setting %s.%s = %r', mkey, col_name, col_prop, val)
                     setattr(obj._columns[col_name], col_prop, val)
-                obj._auto_init(cr, ctx)
+                _re_init_model(obj, cr, ctx)
         return res
 
 ir_model_fields()
@@ -622,8 +644,8 @@ class ir_model_data(osv.osv):
     __logger = logging.getLogger('addons.base.'+_name)
     _order = 'module,model,name'
     _columns = {
-        'name': fields.char('XML Identifier', required=True, size=128, select=1),
-        'model': fields.char('Object', required=True, size=64, select=1),
+        'name': fields.char('XML Identifier', required=True, size=128, select=False),
+        'model': fields.char('Object', required=True, size=64, select=False),
         'module': fields.char('Module', required=True, size=64, select=False),
         'res_id': fields.integer('Resource ID', select=1),
         'noupdate': fields.boolean('Non Updatable', required=True),
@@ -645,6 +667,10 @@ class ir_model_data(osv.osv):
         ('module_name_uniq', 'unique(module, name)', 'You cannot have multiple records with the same id for the same module !'),
         # note: this also creates the useful (module, name) index
     ]
+
+    _indices = {
+        'model_res_idx': index.plain('model', 'res_id'),
+    }
 
     def __init__(self, pool, cr):
         osv.osv.__init__(self, pool, cr)
