@@ -664,7 +664,7 @@ GNU Public Licence.
         return sql_db.Cursor.get_pgmode()
 
     def exp_set_pgmode(self, pgmode):
-        assert pgmode in ['old', 'sql', 'pgsql', 'pg84', 'pg90']
+        assert pgmode in ['old', 'sql', 'pgsql', 'pg84', 'pg90', 'pg91', 'pg92']
         sql_db.Cursor.set_pgmode(pgmode)
         return True
 

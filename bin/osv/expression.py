@@ -25,6 +25,8 @@ import logging
 
 #.apidoc title: Domain Expressions
 
+PG84_MODES = ('pg92', 'pg91', 'pg90', 'pg84', 'pgsql')
+
 class placeholder(object):
     """ A dummy string, that will substitute the ids array in 
         recursive queries.
@@ -133,7 +135,7 @@ class expression(object):
                 qry = 'SELECT "%s" FROM "%s"'    \
                           ' WHERE "%s" %s %%s' % (s, f, w, op)
                 params = [ids[0], ]
-            elif self.__mode in ('pg90', 'pg84', 'pgsql'):
+            elif self.__mode in PG84_MODES:
                 if isinstance(ids, placeholder):
                     dwc = '= %s' % ids.expr
                     params = []
@@ -165,7 +167,7 @@ class expression(object):
                            '  FROM "%s" where "%s" is not null'  % (s, f, s)
             params = []
            
-        if self.__mode in ('pgsql', 'pg84', 'pg90'):
+        if self.__mode in PG84_MODES:
             return qry, params
         else:
             cr.execute(qry, params, debug=self._debug)
@@ -223,7 +225,7 @@ class expression(object):
                 if null_too:
                     doms = ['|', (left, '=', False)] + doms
                 return doms
-            elif self.__mode in ('pg84', 'pg90'):
+            elif self.__mode in PG84_MODES:
                 # print "Recursive expand for 8.4, for %s" % table._table
                 phname = prefix + table._table
                 phname = phname.replace('.', '_')
