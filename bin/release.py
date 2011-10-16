@@ -3,6 +3,7 @@
 #
 #    OpenERP, Open Source Management Solution
 #    Copyright (C) 2004-TODAY OpenERP S.A. <http://www.openerp.com>
+#    Copyright (C) 2008-2009, 2011 P. Christeas <xrg@hellug.gr>
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -21,7 +22,7 @@
 
 name = 'openerp-server'
 version = '6.0.3'
-major_version = '6.0'
+major_version = '6.0' # are we?
 description = 'OpenERP Server'
 long_desc = '''OpenERP is a complete ERP and CRM. The main features are accounting (analytic
 and financial), stock management, sales and purchases management, tasks
@@ -36,7 +37,7 @@ Programming Language :: Python
 url = 'http://www.openerp.com'
 author = 'OpenERP S.A.'
 author_email = 'info@openerp.com'
-support_email = 'support@openerp.com'
+support_email = 'xrg@hellug.gr' # please bug me for your bugs
 license = 'AGPL-3'
 
 # Keywords of features that this server supports
