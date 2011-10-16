@@ -77,6 +77,7 @@ POSTGRES_CONFDELTYPES = {
     'SET DEFAULT': 'd',
 }
 
+PG84_MODES = ('pg92', 'pg91', 'pg90', 'pg84', 'pgsql')
 
 FIELDS_ONLY_DEFAULT = 'auto'
 """ This controls the "fields_only" feature. The purpose of the feature is to
@@ -1953,7 +1954,7 @@ class orm_template(object):
             if view_ref_res:
                 view_id = view_ref_res[0]
 
-        ok = (cr.pgmode not in ('pg84', 'pg90'))
+        ok = (cr.pgmode not in PG84_MODES)
         model = True
         sql_res = False
         while ok:
@@ -2003,7 +2004,7 @@ class orm_template(object):
             result['name'] = sql_res[1]
             result['field_parent'] = sql_res[2] or False
 
-        if cr.pgmode in ('pg84', 'pg90'):
+        if cr.pgmode in PG84_MODES:
             
             if view_id:
                 # If we had been asked for some particular view id, we have to
@@ -5131,7 +5132,7 @@ class orm(orm_template):
         if isinstance(ids, (long, int)):
             ids = [ids,]
         ids_parent = ids[:]
-        if cr.pgmode in ('pg84', 'pg90'):
+        if cr.pgmode in PG84_MODES:
             # Recursive search, all inside postgres. The first part will fetch all
             # ids, the others will fetch parents, until some path contains the
             # id two times. Then, cycle -> True and not recurse further.
