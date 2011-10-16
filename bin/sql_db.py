@@ -183,12 +183,11 @@ class Cursor(object):
         if not hasattr(self._cnx,'_prepared'):
             self._cnx._prepared = []
         if not self.__pgmode:
-            # No features shall use these modes yet!
-            #if self._cnx.server_version >= 90200:
-            #    self.__pgmode = 'pg92'
-            #elif self._cnx.server_version >= 90100:
-            #    self.__pgmode = 'pg91'
-            if self._cnx.server_version >= 90000:
+            if self._cnx.server_version >= 90200:
+                self.__pgmode = 'pg92'
+            elif self._cnx.server_version >= 90100:
+                self.__pgmode = 'pg91'
+            elif self._cnx.server_version >= 90000:
                 self.__pgmode = 'pg90'
             elif self._cnx.server_version >= 80400:
                 self.__pgmode = 'pg84'
