@@ -46,10 +46,11 @@ license = 'AGPL-3'
 server_options = [ 'base6.0',
         'static-http', 'http-options', 'multi-http',
         'xmlrpc-gzip',
-        'engine-pg84',
+        'engine-pg84', 'engine-f3', # imply several features
         'exec_dict',
         'search-browse', 'virtual-fns',
         'search-read',
+        'fallback-search',
         'root-obj_list',
         'report-job',
         ]
@@ -62,6 +63,7 @@ api_options = [
         'fields_only',
         'browse-browse', 'function_field_browse',
         'fields-inherit',
+        'many2many-auto',
         'date_eval',
         'struct-field',
         'auth-in-cr',
