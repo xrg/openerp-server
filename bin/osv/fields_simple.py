@@ -59,12 +59,20 @@ class integer_big(_column):
     _symbol_set = (_symbol_c, _symbol_f)
     _symbol_get = lambda self,x: x or 0
 
-class char(_column):
+class _string_field(_column):
+    """ Common baseclass for char and text fields
+    """
+    pass
+
+class char(_string_field):
+    """ Limited characters string type
+        Like text, but have a size bound
+    """
     _type = 'char'
     _sql_type = 'varchar'
 
     def __init__(self, string, size, **args):
-        _column.__init__(self, string=string, size=size, **args)
+        _string_field.__init__(self, string=string, size=size, **args)
         self._symbol_set = (self._symbol_c, self._symbol_set_char)
 
     # takes a string (encoded in utf8) and returns a string (encoded in utf8)
@@ -87,7 +95,7 @@ class char(_column):
         """
         return _("%s (copy)") % data[f]
 
-class text(_column):
+class text(_string_field):
     _type = 'text'
     _sql_type = 'text'
 
