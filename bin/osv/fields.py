@@ -278,6 +278,35 @@ class _column(object):
         """
         return val
 
+    def expr_eval(self, cr, uid, obj, lefts, operator, right, pexpr, context):
+        """Evaluate an expression on this field
+        
+            This is the place where each field type can customize its behavior
+            on domain expressions.
+            
+            Typically, the expression will be (lefts[0], operator, right) and
+            must be processed here to provide another, compatible expression.
+            
+            @param obj the model on which the field belongs (applies)
+            @param lefts a list of strings composing the left part. See below
+            @param operator a string, the operator
+            @param right any value to match against
+            @param pexpr parent expression object calling us
+        
+            @return None if the input expression can be used as-is, 
+                tuple-3 for for a classic replacement expression or any
+                expr_utils.sub_expr() object for complex evaluations
+            
+            Use of lefts::
+            
+            In the simplest case, they contain only one element, the name of this
+            field. Used to actually reference the field in the db.
+            On relational fields, may be 'fld1_id','fld2' where it means to
+            operate on `fld2` of the related table.
+            On other fields, lefts[1] may be pseydo-modifiers that allow special
+            expressions, like 'comment', 'len' meaning `len(comment)'.
+        """
+        assert len(lefts) == 1, lefts
 def get_nice_size(a):
     (x,y) = a
     if isinstance(y, (int,long)):

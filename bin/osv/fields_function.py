@@ -36,6 +36,8 @@ import __builtin__
 from fields_simple import boolean, integer, float
 from tools import config
 from tools import sql_model
+from tools.translate import _
+from tools import expr_utils as eu
 
 _logger = logging.getLogger('orm')
 
@@ -463,6 +465,94 @@ class function(_column):
 
     def _val2browse(self, val, name, parent_bro):
         return self._shadow._val2browse(val, name, parent_bro)
+
+
+    def expr_eval(self, cr, uid, obj, lefts, operator, right, pexpr, context):
+        if self.store:
+            # the value of the field is store in the database, so we can use
+            # it as if it were a normal field (hopefully)
+            return self._shadow.expr_eval(cr, uid, obj, lefts, operator, right, pexpr, context)
+        else:
+            # this is a function field that is not stored
+            if self._fnct_search:
+                assert len(lefts) == 1, lefts
+                subexp = self.search(cr, uid, obj, lefts[0], [(lefts[0], operator, right)], context=context)
+                # Reminder: the field.search() API returns an expression, not a dataset,
+                # which means that [] => True clause
+                if not subexp:
+                    return True
+                else:
+                    return subexp
+            else:
+                # we must compute this field in python :'(
+                assert len(lefts) == 1, lefts
+                do_fallback = None
+                if hasattr(obj, '_fallback_search'):
+                    do_fallback = obj._fallback_search
+                else:
+                    do_fallback = config.get_misc('orm', 'fallback_search', None)
+
+                if obj._debug:
+                    logging.getLogger('orm.expression').debug( \
+                                "%s.%s expression (%s %s %r) will fallback to %r",
+                                obj._name, lefts[0], '.'.join(lefts), operator,
+                                right, do_fallback)
+                if do_fallback is None:
+                    # the function field doesn't provide a search function and doesn't store
+                    # values in the database, so we must ignore it : we generate a dummy leaf
+                    return True
+                elif do_fallback:
+                    # Do the slow fallback.
+                    # Try to see if the expression so far is a straight (ANDed)
+                    # combination. In that case, we can restrict the query
+                    # TODO: move to these fields
+                    if self._type == 'many2one':
+                        op_fn = self.FALLBACK_OPS_M2O.get(operator, None)
+                    else:
+                        op_fn = self.FALLBACK_OPS.get(operator, None)
+                    if not op_fn:
+                        raise eu.DomainMsgError(msg=_('Cannot fallback with operator "%s" !') % operator)
+                    
+                    # defer it ;)
+                    ids_so_far = obj.search(cr, uid, [], context=context)
+                    if not ids_so_far:
+                        return False
+                    else:
+                        ids2 = []
+                        if self._multi:
+                            fget_name = [lefts[0],]
+                        else:
+                            fget_name = lefts[0]
+                        for res_id, rval in self.get(cr, obj, ids_so_far,
+                                                    name=fget_name, user=uid,
+                                                    context=context).items():
+                            if self._multi:
+                                rval = rval.get(lefts[0], None)
+                            if rval is None or rval is False:
+                                pass
+                            elif self._type == 'integer':
+                                # workaround the str() of fields.function.get() :(
+                                rval = int(rval)
+                            elif self._type == 'float':
+                                assert isinstance(rval, float), "%s: %r" %(type(rval), rval)
+                                if self.digits:
+                                    rval = round(rval, self.digits[1]) # TODO: shadow!
+
+                            # TODO: relational fields don't work here, must implement
+                            # special operators between their (id, name) and right
+
+                            if op_fn(rval, right):
+                                ids2.append(res_id)
+                        if pexpr._debug:
+                            logging.getLogger('orm.expression').debug( \
+                                        "%s.%s expression yielded %s of %s records",
+                                        obj._name, lefts[0], len(ids2), len(ids_so_far))
+                        return ( 'id', 'in', ids2 )
+                else:
+                    raise NotImplementedError("Cannot compute %s.%s field for filtering" % \
+                                (obj._name, lefts[0]))
+
+        raise RuntimeError("unreachable code")
 
 # ---------------------------------------------------------
 # Related fields

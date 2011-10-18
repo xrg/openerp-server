@@ -19,39 +19,13 @@
 #
 ##############################################################################
 
-from tools import reverse_enumerate, config
-import fields
-import logging
+from tools import reverse_enumerate
+# import logging
+from tools import expr_utils as eu
 
 #.apidoc title: Domain Expressions
 
-PG84_MODES = ('pg92', 'pg91', 'pg90', 'pg84', 'pgsql')
-
-class placeholder(object):
-    """ A dummy string, that will substitute the ids array in 
-        recursive queries.
-        Since this is not a string, nor int, it won't be substituted
-        in expression parsing.
-    """
-    def __init__(self, name, expr = None):
-        self.name = name
-        self.expr = expr
-
-    def __str__(self):
-        return "<placeholder %s>" % self.name
-
-    def __eq__(self, stgr):
-        if isinstance(stgr, basestring) and stgr == self.name:
-            return True
-        return False
-
-class ExpressionError(ValueError):
-    """Error at expression evaluation.
-    
-        This exception will always mean that the expression has a syntax
-        error
-    """
-    pass
+ExpressionError = eu.DomainMsgError
 
 def _m2o_cmp(a, b):
     if a is False:
@@ -117,71 +91,28 @@ class expression(object):
             'not in': lambda a, b: (not a) or bool(a[1] not in b),
             }
     def _is_operator(self, element):
-        return isinstance(element, (str, unicode)) and element in ['&', '|', '!']
+        return isinstance(element, (str, unicode)) and element in ('&', '|', '!')
 
-    def _is_leaf(self, element, internal=False):
+    def _is_leaf_old(self, element, internal=False):
         return (isinstance(element, tuple) or isinstance(element, list)) \
            and len(element) == 3 \
            and (((not internal) and element[1] in self.OPS) \
                 or (internal and element[1] in self.INTERNAL_OPS))
 
-    def __execute_recursive_in(self, cr, s, f, w, ids, op, type):
-        # todo: merge into parent query as sub-query
-        res = []
-        qry = None
-        params = []
-        if ids:
-            if op in ['<','>','>=','<=']:
-                qry = 'SELECT "%s" FROM "%s"'    \
-                          ' WHERE "%s" %s %%s' % (s, f, w, op)
-                params = [ids[0], ]
-            elif self.__mode in PG84_MODES:
-                if isinstance(ids, placeholder):
-                    dwc = '= %s' % ids.expr
-                    params = []
-                elif isinstance(ids, list) and isinstance(ids[0], placeholder):
-                    dwc = '= %s' % ids[0].expr
-                    params = []
-                elif isinstance(ids, (int, long)):
-                    dwc = '= %s'
-                    params = [ids,]
-                else:
-                    dwc = '= ANY(%s)'
-                    params = [ids,]
-                qry = 'SELECT "%s"'    \
-                           '  FROM "%s"'    \
-                           ' WHERE "%s" %s' % (s, f, w, dwc)
-            else:
-                for i in range(0, len(ids), cr.IN_MAX):
-                    subids = ids[i:i+cr.IN_MAX]
-                    cr.execute('SELECT "%s"'    \
-                               '  FROM "%s"'    \
-                               ' WHERE "%s" = ANY(%%s) ' % (s, f, w), (subids,),
-                               debug=self._debug)
-                    res.extend([r[0] for r in cr.fetchall()])
-                # we return early, with the bare results
-                return None, res
+    def _is_leaf(self, element, internal=False):
+        return isinstance(element, (list, tuple)) \
+                and len(element) == 3 \
+                and isinstance(element[1], basestring) \
+                and (isinstance(element[0], basestring) or \
+                        (isinstance(element[0], int) and isinstance(element[2], int)))
 
-        else:
-            qry = 'SELECT distinct("%s")' \
-                           '  FROM "%s" where "%s" is not null'  % (s, f, s)
-            params = []
-           
-        if self.__mode in PG84_MODES:
-            return qry, params
-        else:
-            cr.execute(qry, params, debug=self._debug)
-            res.extend([r[0] for r in cr.fetchall()])
-            return None, res
-        # unreachable code
-        return None, None
-
-    def __init__(self, exp, mode='old', debug=False):
+    def __init__(self, exp, mode=None, debug=False):
         """  Initialize an expression to be evaluated on the object storage
-             Mode can be 'old', 'sql', 'pgsql', 'pg84' or 'pg90', according 
-             to if a db will execute the expression.
-             At pgsql, pg84, pg90, sub-queries are allowed. At pg84, pg90,
-             recursive ones are used for 'child_of' expressions
+        
+            Expression may behave differently according to cr.pgmode:
+            with 'old', 'sql' the db will execute the expression.
+            At pgsql, pg84, pg90, sub-queries are allowed. At pg84, pg90+,
+            recursive ones are used for 'child_of' expressions
         """
         # check if the expression is valid
         if not reduce(lambda acc, val: acc and (self._is_operator(val) or self._is_leaf(val)), exp, True):
@@ -192,6 +123,7 @@ class expression(object):
         self.__joins = []
         self.__main_table = None # 'root' table. set by parse()
         self.__DUMMY_LEAF = (1, '=', 1) # a dummy leaf that must not be parsed or sql generated
+        assert not mode, mode # obsolete
         self.__mode = mode
         self._debug = debug
 
@@ -199,46 +131,49 @@ class expression(object):
     def exp(self):
         return self.__exp[:]
 
-    def parse(self, cr, uid, table, context):
-        """ transform the leafs of the expression """
-        if not self.__exp:
-            return self
-
-        def _rec_get(ids, table, parent=None, left='id', prefix='', null_too=False):
+    def _rec_get(self, cr, uid, model, ids, parent=None, left='id', prefix='', \
+                null_too=False, context=None):
             """ Compute the sub-expression for a recursive field's operator, 
                 typically 'child_of'
                 
-                If null_too is specified, the expression would also stand for left = NULL
+                @param model the model to operate upon
+                @param ids the ids of that model, to start from
+                @param parent the name of the "parent" field
+                @param left
+                @param prefix if we must disambiguate the table name, 
+                        including the dot
+                @param null_too if specified, the expression would also stand 
+                        for left = NULL
             """
-            if table._parent_store and (not table.pool._init): #and False:
-# TODO: Improve where joins are implemented for many with '.', replace by:
-# doms += ['&',(prefix+'.parent_left','<',o.parent_right),(prefix+'.parent_left','>=',o.parent_left)]
+            if model._parent_store and (not model.pool._init): #and False:
+                # TODO: Improve where joins are implemented for many with '.', replace by:
+                # doms += ['&',(prefix+'.parent_left','<',o.parent_right),(prefix+'.parent_left','>=',o.parent_left)]
                 doms = []
-                for o in table.browse(cr, uid, ids, context=context):
+                for o in model.browse(cr, uid, ids, context=context):
                     if doms:
                         doms.insert(0, '|')
                     doms += ['&', ('parent_left', '<', o.parent_right), ('parent_left', '>=', o.parent_left)]
                 if prefix:
                     if null_too:
-                        return ['|', (left, '=', False), (left, 'in', table.search(cr, uid, doms, context=context))]
-                    return [(left, 'in', table.search(cr, uid, doms, context=context))]
+                        return ['|', (left, '=', False), (left, 'in', model.search(cr, uid, doms, context=context))]
+                    return [(left, 'in', model.search(cr, uid, doms, context=context))]
                 if null_too:
                     doms = ['|', (left, '=', False)] + doms
                 return doms
-            elif self.__mode in PG84_MODES:
-                # print "Recursive expand for 8.4, for %s" % table._table
-                phname = prefix + table._table
+            elif self.__mode in eu.PG84_MODES:
+                # print "Recursive expand for 8.4, for %s" % model._table
+                phname = prefix + model._table
                 phname = phname.replace('.', '_')
                 phexpr = '%s_rsrch.id' % phname
                 
-                ttables = ['"%s"' % table._table]
-                dqry = table._where_calc(cr, uid, 
-                        [(parent or table._parent_name, '=', placeholder(phname, phexpr) )], context)
+                ttables = ['"%s"' % model._table]
+                dqry = model._where_calc(cr, uid, 
+                        [(parent or model._parent_name, '=', eu.placeholder(phname, phexpr) )], context)
                 qu1, qu2, qtables = dqry.where_clause, dqry.where_clause_params, dqry.tables
                 if dqry.joins:
                     raise NotImplementedError  # FIXME
 
-                d1, d2, dtables = table.pool.get('ir.rule').domain_get(cr, uid, table._name)
+                d1, d2, dtables = model.pool.get('ir.rule').domain_get(cr, uid, model._name)
                 if d1:
                     if isinstance(d1,list):
                         qu1 += d1
@@ -258,8 +193,8 @@ class expression(object):
                 UNION ALL SELECT "%s".id FROM %s, %s_rsrch WHERE %s )
         SELECT id FROM %s_rsrch
                 ''' %( phname, 
-                        table._table,
-                        table._table, ttables2, phname, ' AND '.join(qu1),
+                        model._table,
+                        model._table, ttables2, phname, ' AND '.join(qu1),
                         phname)
                 
                 # print "INSELECT %s" % qry
@@ -270,17 +205,23 @@ class expression(object):
             # elif self.__mode == 'pgsql':
             #  any way  to do that in pg8.3?
             else:
-                def rg(ids, table, parent):
+                def rg(ids, model, parent):
                     if not ids:
                         return []
-                    ids2 = table.search(cr, uid, [(parent, 'in', ids)], context=context)
-                    return ids + rg(ids2, table, parent)
+                    ids2 = model.search(cr, uid, [(parent, 'in', ids)], context=context)
+                    return ids + rg(ids2, model, parent)
                 if null_too:
                     res = ['|', (left, '=', False)]
                 else:
                     res = []
-                res += [(left, 'in', rg(ids, table, parent or table._parent_name))]
+                res += [(left, 'in', rg(ids, model, parent or model._parent_name))]
                 return res
+
+    def parse(self, cr, uid, table, context):
+        """ transform the leafs of the expression """
+        if not self.__exp:
+            return self
+
 
         self.__main_table = table
         self.__all_tables.add(table)
@@ -312,390 +253,37 @@ class expression(object):
             field = working_table._columns.get(fargs[0], False)
             if not field:
                 if left == 'id' and (operator == 'child_of' or operator == '|child_of'):
-                    dom = _rec_get(right, working_table, null_too=(operator == '|child_of'))
+                    dom = self._rec_get(cr, uid, working_table, right, null_too=(operator == '|child_of'), context=context)
                     self.__exp = self.__exp[:i] + dom + self.__exp[i+1:]
                 continue
 
-            if field._obj:
-                field_obj = table.pool.get(field._obj)
-            if len(fargs) > 1: # TODO pg84 reduce
-                if field._type == 'many2one':
-                    right = field_obj.search(cr, uid, [(fargs[1], operator, right)], context=context)
-                    if right == []:
-                        self.__exp[i] = ( 'id', '=', 0 )
-                    else:
-                        self.__exp[i] = (fargs[0], 'in', right)
-                # Making search easier when there is a left operand as field.o2m or field.m2m
-                if field._type in ['many2many','one2many']:
-                    right = field_obj.search(cr, uid, [(fargs[1], operator, right)], context=context)
-                    right1 = table.search(cr, uid, [(fargs[0],'in', right)], context=dict(context, active_test=False))
-                    if right1 == []:
-                        self.__exp[i] = ( 'id', '=', 0 )
-                    else:
-                        self.__exp[i] = ('id', 'in', right1)
-                
-                if not isinstance(field,fields.property):
-                    continue
-
-            if field._properties and not field.store:
-                # this is a function field that is not stored
-                if not field._fnct_search:
-                    do_fallback = None
-                    if hasattr(table, '_fallback_search'):
-                        do_fallback = table._fallback_search
-                    else:
-                        do_fallback = config.get_misc('orm', 'fallback_search', None)
-
-                    if table._debug:
-                        logging.getLogger('orm.expression').debug( \
-                                    "%s.%s expression (%s %s %r) will fallback to %r",
-                                    table._name, fargs[0], left, operator, right, do_fallback)
-                    if do_fallback is None:
-                        # the function field doesn't provide a search function and doesn't store
-                        # values in the database, so we must ignore it : we generate a dummy leaf
-                        self.__exp[i] = self.__DUMMY_LEAF
-                    elif do_fallback:
-                        # Do the slow fallback.
-                        # Try to see if the expression so far is a straight (ANDed)
-                        # combination. In that case, we can restrict the query
-                        if field._type == 'many2one':
-                            op_fn = self.FALLBACK_OPS_M2O.get(operator, None)
-                        else:
-                            op_fn = self.FALLBACK_OPS.get(operator, None)
-                        if not op_fn:
-                            raise ExpressionError('Cannot fallback with operator "%s" !' % operator)
-                        e_so_far = self.__exp[:i]
-                        for e in e_so_far:
-                            if not self._is_leaf(e, internal=True):
-                                e_so_far = []
-                                break
-                        ids_so_far = table.search(cr, uid, e_so_far, context=context)
-                        if not ids_so_far:
-                            self.__exp[i] = ( 'id', '=', 0 )
-                        else:
-                            ids2 = []
-                            if field._multi:
-                                fget_name = [fargs[0],]
-                            else:
-                                fget_name = fargs[0]
-                            for res_id, rval in field.get(cr, table, ids_so_far,
-                                                        name=fget_name, user=uid,
-                                                        context=context).items():
-                                if field._multi:
-                                    rval = rval.get(fargs[0], None)
-                                if rval is None or rval is False:
-                                    pass
-                                elif field._type == 'integer':
-                                    # workaround the str() of fields.function.get() :(
-                                    rval = int(rval)
-                                elif field._type == 'float':
-                                    assert isinstance(rval, float), "%s: %r" %(type(rval), rval)
-                                    if field.digits:
-                                        rval = round(rval, field.digits[1])
-
-                                # TODO: relational fields don't work here, must implement
-                                # special operators between their (id, name) and right
-
-                                if op_fn(rval, right):
-                                    ids2.append(res_id)
-                            if self._debug:
-                                logging.getLogger('orm.expression').debug( \
-                                            "%s.%s expression yielded %s of %s records",
-                                            table._name, fargs[0], len(ids2), len(ids_so_far))
-                            self.__exp[i] = ( 'id', 'in', ids2 )
-                    else:
-                        raise NotImplementedError("Cannot compute %s.%s field for filtering" % \
-                                    (table._name, left))
+            nex = field.expr_eval(cr, uid, working_table, fargs, operator, right,
+                                self, context=context)
+            if nex is None:
+                continue
+            elif isinstance(nex, eu.sub_expr):
+                continue
+            elif nex is True:
+                self.__exp[i] = self.__DUMMY_LEAF #TODO
+            elif nex is False:
+                self.__exp[i] = ('id', '=', 0) # TODO
+            elif isinstance(nex, tuple) and len(nex) == 3:
+                self.__exp[i] = nex
+            elif isinstance(nex, list):
+                if len(nex) == 0:
+                    self.__exp[i] = self.__DUMMY_LEAF
+                elif len(nex) == 1 and isinstance(nex[0], tuple) and len(nex[0]) == 3:
+                    self.__exp[i] = nex[0]
                 else:
-                    subexp = field.search(cr, uid, table, left, [self.__exp[i]], context=context)
-                    # Reminder: the field.search() API returns an expression, not a dataset,
-                    # which means that [] => True clause
-                    if not subexp:
-                        self.__exp[i] = self.__DUMMY_LEAF
-                    else:
-                        # we assume that the expression is valid
-                        # we create a dummy leaf for forcing the parsing of the resulting expression
-                        self.__exp[i] = '&'
-                        self.__exp.insert(i + 1, self.__DUMMY_LEAF)
-                        for j, se in enumerate(subexp):
-                            self.__exp.insert(i + 2 + j, se)
-            # else, the value of the field is store in the database, so we search on it
-
-            elif field._type == 'one2many':
-                # Applying recursivity on field(one2many)
-                if operator == 'child_of' or operator == '|child_of':
-                    if isinstance(right, basestring):
-                        ids2 = [x[0] for x in field_obj.name_search(cr, uid, right, [], 'like', context=context, limit=None)]
-                    else:
-                        ids2 = list(right)
-                    null_too = (operator == '|child_of')
-                    if field._obj != working_table._name:
-                        dom = _rec_get(ids2, field_obj, left=left, prefix=field._obj, null_too=null_too)
-                    else:
-                        dom = _rec_get(ids2, working_table, parent=left, null_too=null_too)
-                    self.__exp = self.__exp[:i] + dom + self.__exp[i+1:]
-
-                else:
-                    call_null = True
-
-                    if right is not False:
-                        if isinstance(right, basestring):
-                            ids2 = [x[0] for x in field_obj.name_search(cr, uid, right, [], operator, context=context, limit=None)]
-                            if ids2:
-                                operator = 'in'
-                        else:
-                            if not isinstance(right,list):
-                                ids2 = [right]
-                            else:
-                                ids2 = right
-                        if not ids2:
-                            if operator in ['like','ilike','in','=']:
-                                #no result found with given search criteria
-                                call_null = False
-                                self.__exp[i] = ('id','=',0)
-                            else:
-                                call_null = True
-                                operator = 'in' # operator changed because ids are directly related to main object
-                        else:
-                            call_null = False
-                            o2m_op = 'in'
-                            if operator in  ['not like','not ilike','not in','<>','!=']:
-                                o2m_op = 'not in'
-                            erqu, erpa = self.__execute_recursive_in(cr, field._fields_id,
-                                                   field_obj._table, 'id', ids2, operator, field._type)
-                            if not erqu:
-                                self.__exp[i] = ('id', o2m_op, erpa )
-                            else:
-                                if o2m_op in ('in', '='):
-                                    o2m_op = 'inselect'
-                                elif o2m_op in ('not in', '!=', '<>'):
-                                    o2m_op = 'not inselect'
-                                else:
-                                    raise NotImplementedError('operator: %s' % o2m_op)
-                                self.__exp[i] = ('id', o2m_op, (erqu, erpa))
-
-                    if call_null:
-                        o2m_op = 'not in'
-                        if operator in  ['not like','not ilike','not in','<>','!=']:
-                            o2m_op = 'in'
-
-                        erqu, erpa = self.__execute_recursive_in(cr, field._fields_id, 
-                                        field_obj._table, 'id', [], operator, field._type)
-                        if not erqu:
-                            self.__exp[i] = ('id', o2m_op, erpa )
-                        else:
-                            if o2m_op in ('in', '='):
-                                o2m_op = 'inselect'
-                            elif o2m_op in ('not in', '!=', '<>'):
-                                o2m_op = 'not inselect'
-                            else:
-                                raise NotImplementedError('operator: %s' % o2m_op)
-                            self.__exp[i] = ('id', o2m_op, (erqu, erpa))
-
-            elif field._type == 'many2many':
-                #FIXME
-                if operator == 'child_of' or operator == '|child_of':
-                    if isinstance(right, basestring):
-                        ids2 = [x[0] for x in field_obj.name_search(cr, uid, right, [], 'like', context=context, limit=None)]
-                    else:
-                        ids2 = list(right)
-
-                    def _rec_convert(ids):
-                        if field_obj == table:
-                            return ids
-                        erqu, erpa = self.__execute_recursive_in(cr, field._id1, field._rel, field._id2, ids, operator, field._type)
-                        assert(not erqu) # TODO
-                        return erpa
-
-                    dom = _rec_get(ids2, field_obj, null_too=(operator == '|child_of'))
-                    ids2 = field_obj.search(cr, uid, dom, context=context)
-                    self.__exp[i] = ('id', 'in', _rec_convert(ids2))
-                else:
-                    call_null_m2m = True
-                    if right is not False:
-                        if isinstance(right, basestring):
-                            res_ids = [x[0] for x in field_obj.name_search(cr, uid, right, [], operator, context=context)]
-                            if res_ids:
-                                operator = 'in'
-                        else:
-                            if isinstance(right, tuple):
-                                res_ids = list(map(int, right))
-                            elif not isinstance(right, list):
-                                res_ids = [ int(right) ]
-                            else:
-                                res_ids = map(int, right)
-                        if not res_ids:
-                            if operator in ['like','ilike','in','=']:
-                                #no result found with given search criteria
-                                call_null_m2m = False
-                                self.__exp[i] = ('id','=',0)
-                            else:
-                                call_null_m2m = True
-                                operator = 'in' # operator changed because ids are directly related to main object
-                        else:
-                            call_null_m2m = False
-                            m2m_op = 'in'
-                            if operator in  ['not like','not ilike','not in','<>','!=']:
-                                m2m_op = 'not in'
-
-                            erqu, erpa = self.__execute_recursive_in(cr, field._id1, field._rel, field._id2, res_ids, operator, field._type)
-                            if not erqu:
-                                self.__exp[i] = ('id', m2m_op, erpa )
-                            else:
-                                if m2m_op in ('in', '='):
-                                    m2m_op = 'inselect'
-                                elif m2m_op in ('not in', '!=', '<>'):
-                                    m2m_op = 'not inselect'
-                                else:
-                                    raise NotImplementedError('operator: %s' % m2m_op)
-                                self.__exp[i] = ('id', m2m_op, (erqu, erpa))
-                    if call_null_m2m:
-                        m2m_op = 'not in'
-                        if operator in  ['not like','not ilike','not in','<>','!=']:
-                            m2m_op = 'in'
-                        erqu, erpa = self.__execute_recursive_in(cr, field._id1, field._rel, field._id2, [], operator,  field._type)
-                        if not erqu:
-                            self.__exp[i] = ('id', m2m_op, erpa )
-                        else:
-                            if m2m_op in ('in', '='):
-                                m2m_op = 'inselect'
-                            elif m2m_op in ('not in', '!=', '<>'):
-                                m2m_op = 'not inselect'
-                            else:
-                                raise NotImplementedError('operator: %s' % m2m_op)
-                            self.__exp[i] = ('id', m2m_op, (erqu, erpa))
-
-            elif field._type == 'many2one':
-                if isinstance(right, list) and len(right) \
-                        and isinstance(right[0], (tuple, list)) \
-                        and len(right[0]) == 3:
-                    # That's a nested expression
-
-                    assert(operator == 'in') # others not implemented
-                    # Note, we don't actually check access permissions for the
-                    # intermediate object yet. That wouldn't still let us read
-                    # the forbidden record, but just use its id
-
-                    wquery = field_obj._where_calc(cr, uid, right, context)
-                    field_obj._apply_ir_rules(cr, uid, wquery, 'read', context=context)
-                    from_clause, qu1, qu2 = wquery.get_sql()
-                   
-                    if qu1:
-                        qu1 = "WHERE " + qu1
-
-                    qry = "SELECT id FROM %s %s " %( from_clause, qu1)
-
-                    self.__exp[i] = (left,'inselect', (qry, tuple(qu2)))
-
-                elif operator == 'child_of' or operator == '|child_of' :
-                    if isinstance(right, basestring):
-                        ids2 = [x[0] for x in field_obj.name_search(cr, uid, right, [], 'like', limit=None)]
-                    elif isinstance(right, (int, long)):
-                        ids2 = list([right])
-                    else:
-                        ids2 = list(right)
-
-                    self.__operator = 'in'
-                    null_too = (operator == '|child_of')
-                    if field._obj != working_table._name:
-                        dom = _rec_get(ids2, field_obj, left=left, prefix=field._obj, null_too=null_too)
-                    else:
-                        dom = _rec_get(ids2, working_table, parent=left, null_too=null_too)
-                    self.__exp = self.__exp[:i] + dom + self.__exp[i+1:]
-                else:
-                    do_name = False
-                    op2 = operator
-                    if isinstance(right, basestring):
-                            # and not isinstance(field, fields.related):
-                        do_name = True
-                        if operator == 'in':
-                            op2 = '='
-                        elif operator == 'not in':
-                            op2 = '!='
-                        else:
-                            op2 = operator
-                    elif right == []:
-                        do_name = False
-                        if operator in ('not in', '!=', '<>'):
-                            # (many2one not in []) should return all records
-                            self.__exp[i] = self.__DUMMY_LEAF
-                        else:
-                            self.__exp[i] = ('id','=',0)
-                    elif isinstance(right, (list, tuple)) and operator in ('in', 'not in'):
-                        do_name = True
-                        for r in right:
-                            if not isinstance(r, basestring):
-                                do_name = False
-                                break
-                        if do_name and isinstance(right, tuple):
-                                right = list(right)
-
-                    if do_name:
-                        c = context.copy()
-                        c['active_test'] = False
-                        res_ids = field_obj.name_search(cr, uid, right, [], op2, limit=None, context=c)
-                        if not res_ids:
-                            self.__exp[i] = ('id','=',0)
-                        else:
-                            right = map(lambda x: x[0], res_ids)
-                            self.__exp[i] = (left, 'in', right)
-
+                    raise NotImplementedError("Sorry Dave, can't insert %r" % nex)
             else:
-                # other field type
-                # add the time part to datetime field when it's not there:
-                # TODO: handle integer epoch
-                if field._type == 'datetime' and self.__exp[i][2] and len(self.__exp[i][2]) == 10:
-
-                    self.__exp[i] = list(self.__exp[i])
-
-                    if operator in ('>', '>='):
-                        self.__exp[i][2] += ' 00:00:00'
-                    elif operator in ('<', '<='):
-                        self.__exp[i][2] += ' 23:59:59'
-
-                    self.__exp[i] = tuple(self.__exp[i])
-
-                if field.translate:
-                    if operator in ('like', 'ilike', 'not like', 'not ilike'):
-                        right = '%%%s%%' % right
-
-                    operator = operator == '=like' and 'like' or operator
-
-                    query1 = '( SELECT res_id'          \
-                             '    FROM ir_translation'  \
-                             '   WHERE name = %s'       \
-                             '     AND lang = %s'       \
-                             '     AND type = %s'
-                    instr = ' %s'
-                    #Covering in,not in operators with operands (%s,%s) ,etc.
-                    if operator in ['in','not in']:
-                        instr = ','.join(['%s'] * len(right))
-                        query1 += '     AND value ' + operator +  ' ' +" (" + instr + ")"   \
-                             ') UNION ('                \
-                             '  SELECT id'              \
-                             '    FROM "' + working_table._table + '"'       \
-                             '   WHERE "' + left + '" ' + operator + ' ' +" (" + instr + "))"
-                        right = list(right)
-                    else:
-                        query1 += '     AND value ' + operator + instr +   \
-                             ') UNION ('                \
-                             '  SELECT id'              \
-                             '    FROM "' + working_table._table + '"'       \
-                             '   WHERE "' + left + '" ' + operator + instr + ")"
-                        right = [right,]
-
-                    query2 = [working_table._name + ',' + left,
-                              context.get('lang', False) or 'en_US',
-                              'model',
-                             ] + right + right
-
-                    self.__exp[i] = ('id', 'inselect', (query1, query2))
+                raise NotImplementedError("Sorry Dave, can't handle %r" % nex)
 
         return self
 
     def __leaf_to_sql(self, leaf, table):
         if leaf == self.__DUMMY_LEAF:
-            return ('(1=1)', [])
+            return ('(1=1)', []) # true
         left, operator, right = leaf
 
         if operator == 'inselect':
@@ -713,7 +301,7 @@ class expression(object):
 
             len_after = len(params)
             check_nulls = len_after != len_before
-            query = '(1=0)'
+            query = '(1=0)' # false
 
             if len_after:
                 if left == 'id':
@@ -756,7 +344,7 @@ class expression(object):
             elif (operator == 'child_of' or operator == '|child_of'):
                 raise ExpressionError("Cannot compute %s %s %s in sql" %(left, operator, right))
             else:
-                if isinstance(right, placeholder):
+                if isinstance(right, eu.placeholder):
                     assert(right.expr)
                     query = '( %s.%s %s %s)' % (table._table, left, operator, right.expr)
                 elif left == 'id':

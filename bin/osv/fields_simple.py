@@ -62,7 +62,48 @@ class integer_big(_column):
 class _string_field(_column):
     """ Common baseclass for char and text fields
     """
-    pass
+    def expr_eval(self, cr, uid, obj, lefts, operator, right, pexpr, context):
+        """ transform the expression, in case this field is translatable
+        """
+        if self.translate:
+            assert len(lefts) == 1, lefts # we don't support anything else yet
+            if operator in ('like', 'ilike', 'not like', 'not ilike'):
+                right = '%%%s%%' % right
+
+            operator = operator == '=like' and 'like' or operator
+
+            query1 = '( SELECT res_id'          \
+                        '    FROM ir_translation'  \
+                        '   WHERE name = %s'       \
+                        '     AND lang = %s'       \
+                        '     AND type = %s'
+            instr = ' %s'
+            #Covering in,not in operators with operands (%s,%s) ,etc.
+            if operator in ['in','not in']:
+                instr = ','.join(['%s'] * len(right))
+                query1 += '     AND value ' + operator +  ' ' +" (" + instr + ")"   \
+                        ') UNION ('                \
+                        '  SELECT id'              \
+                        '    FROM "' + obj._table + '"'       \
+                        '   WHERE "' + lefts[0] + '" ' + operator + ' ' +" (" + instr + "))"
+                right = list(right)
+            else:
+                query1 += '     AND value ' + operator + instr +   \
+                        ') UNION ('                \
+                        '  SELECT id'              \
+                        '    FROM "' + obj._table + '"'       \
+                        '   WHERE "' + lefts[0] + '" ' + operator + instr + ")"
+                right = [right,]
+
+            query2 = [obj._name + ',' + lefts[0],
+                        context.get('lang', False) or 'en_US',
+                        'model',
+                        ] + right + right
+
+            return ('id', 'inselect', (query1, query2))
+        else:
+            assert len(lefts) == 1, lefts # no extensions yet ;)
+            return None
 
 class char(_string_field):
     """ Limited characters string type
@@ -154,6 +195,19 @@ class datetime(_column):
         """
         return DT.datetime.now().strftime(
             tools.DEFAULT_SERVER_DATETIME_FORMAT)
+
+    def expr_eval(self, cr, uid, obj, lefts, operator, right, pexpr, context):
+        """ In order to keep the 5.0/6.0 convention, we consider timestamps
+            to match the full day of some date, eg:
+                ( '2011-05-30 13:30:00' < '2011-05-30')
+        """
+        
+        assert len(lefts) == 1, lefts
+        if right and len(right) < 11:
+            if operator in ('<', '<='):
+                return (lefts[0], operator, right + ' 23:59:59')
+        
+        return None # or the same expression
 
 class time(_column):
     _type = 'time'

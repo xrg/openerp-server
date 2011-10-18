@@ -64,21 +64,12 @@ import fields
 from query import Query
 import tools
 from tools.safe_eval import safe_eval as eval
+from tools.expr_utils import PG84_MODES
 
 # List of etree._Element subclasses that we choose to ignore when parsing XML.
 from tools import SKIPPED_ELEMENT_TYPES
 
 regex_order = re.compile('^(([a-z0-9_]+|"[a-z0-9_]+")( *desc| *asc)?( *, *|))+$', re.I)
-
-POSTGRES_CONFDELTYPES = {
-    'RESTRICT': 'r',
-    'NO ACTION': 'a',
-    'CASCADE': 'c',
-    'SET NULL': 'n',
-    'SET DEFAULT': 'd',
-}
-
-PG84_MODES = ('pg92', 'pg91', 'pg90', 'pg84', 'pgsql')
 
 FIELDS_ONLY_DEFAULT = 'auto'
 """ This controls the "fields_only" feature. The purpose of the feature is to
@@ -4368,7 +4359,7 @@ class orm(orm_template):
 
         if domain:
             import expression
-            e = expression.expression(domain, mode=cr.pgmode, debug=self._debug)
+            e = expression.expression(domain, debug=self._debug)
             e.parse(cr, user, self, context)
             tables = e.get_tables()
             where_clause, where_params = e.to_sql()
