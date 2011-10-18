@@ -404,43 +404,16 @@ class function(_column):
         
         todo = None
         if self.store:
+            todo = []
+            r = self._shadow._auto_init_sql(name, obj, schema_table, context=context)
 
-            # FIXME: use shadow
-            if self._type == 'many2one':
-                rtype = 'integer'
-                rrefs = None
-                assert self._obj, "%s.%s has no reference" %(obj._name, name)
-                dest_obj = obj.pool.get(self._obj)
-                if not dest_obj:
-                    raise KeyError('There is no reference available for %s' % (self._obj,))
-
-                if self._obj != 'ir.actions.actions':
-                    # on delete/update just remove the stored value and
-                    # cause computation
-                    rrefs = {'table': dest_obj._table, 'on_delete': 'cascade', 'on_update': 'cascade'}
-            else:
-                rfield = get_field_class(self._type)
-
-                if self._type == 'selection':
-                    # they must compute dynamically
-                    rtype, self.size = rfield._get_sql_type(self.selection, getattr(self, 'size', None))
-                else:
-                    rtype = rfield._sql_type
-                rrefs = None
-                if not rtype:
-                    raise NotImplementedError("Why called function<stored>._auto_init_sql() on %s.%s (%s) ?" % \
-                        (obj._name, name, rfield.__name__))
-
-            schema_table.column_or_renamed(name, getattr(self, 'oldname', None))
-
-            r = schema_table.check_column(name, rtype, not_null=None,
-                    default=None, select=self.select, size=self.size,
-                    references=rrefs, comment=self.string)
-
-            assert r
+            if isinstance(r, list):
+                todo += r
+            elif r:
+                todo.append(r)
 
             if schema_table._state != sql_model.CREATE:
-                todo = []
+                
                 order = 10
                 if self.store is not True: #is dict
                     order = self.store[self.store.keys()[0]][2]
@@ -460,6 +433,7 @@ class function(_column):
                 _logger.info('column %s (%s) in table %s removed: converted to a function !',
                     name, self.string, obj._table)
                 schema_table.columns[name].drop()
+        return todo
 
     def _get_field_def(self, cr, uid, name, obj, ret, context=None):
         super(function, self)._get_field_def(cr, uid, name, obj, ret, context=context)
