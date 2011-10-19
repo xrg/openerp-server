@@ -340,7 +340,7 @@ CREATE TABLE ir_model_data (
 -- Users
 ---------------------------------
 
-INSERT INTO res_users (id,login,password,name,active,company_id,context_lang) VALUES (1,'admin','admin','Administrator',True,1,'en_US');
+INSERT INTO res_users (id,login,password,name,active,context_lang) VALUES (1,'admin','admin','Administrator',True,'en_US');
 INSERT INTO ir_model_data (name,module,model,noupdate,res_id) VALUES ('user_root','base','res.users',True,1);
 
 -- Compatibility purpose, to remove V6.0
