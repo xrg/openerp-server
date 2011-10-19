@@ -64,7 +64,7 @@ import fields
 from query import Query
 import tools
 from tools.safe_eval import safe_eval as eval
-from tools.expr_utils import PG84_MODES
+from tools.expr_utils import PG84_MODES, DomainError
 
 # List of etree._Element subclasses that we choose to ignore when parsing XML.
 from tools import SKIPPED_ELEMENT_TYPES
@@ -2579,6 +2579,7 @@ class orm_memory(orm_template):
                     break
                 f = True
                 for arg in result:
+                    #
                      # FIXME: use safe_eval with arg, data in context
                     if arg[1] == '=':
                         val = eval('data[arg[0]]'+'==' +' arg[2]', locals())
@@ -4357,19 +4358,19 @@ class orm(orm_template):
             else:
                 domain = [('active', '=', 1)]
 
+        qry = Query(tables=['"%s"' % self._table,])
         if domain:
             import expression
             e = expression.expression(domain, debug=self._debug)
-            e.parse(cr, user, self, context)
-            tables = e.get_tables()
-            where_clause, where_params = e.to_sql()
-            where_clause = where_clause and [where_clause] or []
-            if self._debug:
-                _logger.debug("where calc of %s: qu1 = %s, qu2 = %s" % (self._table, where_clause, where_params))
-        else:
-            where_clause, where_params, tables = [], [], ['"%s"' % self._table]
-
-        return Query(tables, where_clause, where_params)
+            try:
+                e.parse_into_query(cr, user, self, qry, context)
+                if self._debug:
+                    _logger.debug("where calc of %s: qu1 = %s, qu2 = %s" % 
+                            (self._table, qry.where_clause, qry.where_clause_params))
+            except DomainError, err:
+                raise except_orm(_("Error!"), err.get_msg(cr, user, context))
+        
+        return qry
 
     def _check_qorder(self, word):
         if not regex_order.match(word):

@@ -335,7 +335,7 @@ class many2one(_rel2one):
             assert len(lefts) == 2, lefts
             right = field_obj.search(cr, uid, [(lefts[1], operator, right)], context=context)
             if right == []:
-                return ( 'id', '=', 0 ) # TODO
+                return False
             else:
                 return  (lefts[0], 'in', right) # TODO
 
@@ -377,7 +377,12 @@ class many2one(_rel2one):
             else:
                 dom = pexpr._rec_get(cr, uid, obj, ids2, parent=lefts[0],
                         null_too=null_too, context=context)
-            return dom
+            if len(dom) == 0:
+                return True
+            elif len(dom) == 1:
+                return dom[0]
+            else:
+                return eu.nested_expr(dom)
         else:
             do_name = False
             op2 = operator
@@ -390,6 +395,8 @@ class many2one(_rel2one):
                     op2 = '!='
                 else:
                     op2 = operator
+            elif right is False:
+                return (lefts[0], operator, None)
             elif right == []:
                 do_name = False
                 if operator in ('not in', '!=', '<>'):
@@ -623,8 +630,12 @@ class one2many(_rel2many):
             else:
                 dom = pexpr._rec_get(cr, uid, obj, ids2, parent=lefts[0], 
                         null_too=null_too, context=context)
-            return dom # ?
-
+            if len(dom) == 0:
+                return True
+            elif len(dom) == 1:
+                return dom[0]
+            else:
+                return eu.nested_expr(dom)
         else:
             call_null = True
 

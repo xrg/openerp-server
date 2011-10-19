@@ -33,6 +33,7 @@ import datetime as DT
 import tools
 from tools.translate import _
 import __builtin__
+from tools import expr_utils as eu
 
 class boolean(_column):
     _type = 'boolean'
@@ -40,6 +41,25 @@ class boolean(_column):
     _symbol_c = '%s'
     _symbol_f = lambda x: x and 'True' or 'False'
     _symbol_set = (_symbol_c, _symbol_f)
+
+    def expr_eval(self, cr, uid, obj, lefts, operator, right, pexpr, context):
+        if operator not in ('=', '!=', '<>','==', '!=='):
+            raise eu.DomainInvalidOperator(obj, lefts, operator, right)
+        assert len(lefts) == 1, lefts
+
+        if (not right) and (operator == '='):
+            return eu.nested_expr(['|', (lefts[0], '=', None), (lefts[0], '=', False)])
+        elif (not right) and (operator in ('<>', '!=')):
+            return (lefts[0], '=', True)
+        elif (right is None) and (operator in ('==', '!==')):
+            return (lefts[0], operator[:-1], None)
+        elif (operator in ('==', '!==')):
+            return (lefts[0], operator[:-1], True)
+        elif right and operator == '!=':
+            return eu.nested_expr(['|', (lefts[0], '=', None), (lefts[0], '=', False)])
+        else:
+            return (lefts[0], operator, bool(right))
+        return None # as-is
 
 class integer(_column):
     _type = 'integer'
@@ -58,6 +78,23 @@ class integer_big(_column):
     _symbol_f = _symbol_set_integer
     _symbol_set = (_symbol_c, _symbol_f)
     _symbol_get = lambda self,x: x or 0
+
+class id_field(integer):
+    """ special properties for the 'id' field
+    """
+    
+    def expr_eval(self, cr, uid, obj, lefts, operator, right, pexpr, context):
+
+        if operator == 'child_of' or operator == '|child_of':
+            dom = pexpr._rec_get(cr, uid, obj, right, null_too=(operator == '|child_of'), context=context)
+            if len(dom) == 0:
+                return True
+            elif len(dom) == 1:
+                return dom[0]
+            else:
+                return eu.nested_expr(dom)
+        else:
+            return super(id_field, self).expr_eval(cr, uid, obj, lefts, operator, right, pexpr, context)
 
 class _string_field(_column):
     """ Common baseclass for char and text fields
@@ -103,6 +140,10 @@ class _string_field(_column):
             return ('id', 'inselect', (query1, query2))
         else:
             assert len(lefts) == 1, lefts # no extensions yet ;)
+            if right is False:
+                if operator not in ('=', '!=', '<>'):
+                    raise eu.DomainInvalidOperator(obj, lefts, operator, right)
+                return (lefts[0], operator, None)
             return None
 
 class char(_string_field):
@@ -224,7 +265,7 @@ class time(_column):
         return DT.datetime.now().strftime(
             tools.DEFAULT_SERVER_TIME_FORMAT)
 
-register_field_classes(boolean, integer, integer_big, char, text,
+register_field_classes(boolean, integer, integer_big, id_field, char, text,
         float, date, datetime, time)
 
 #eof

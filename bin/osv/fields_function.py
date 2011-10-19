@@ -481,8 +481,10 @@ class function(_column):
                 # which means that [] => True clause
                 if not subexp:
                     return True
+                elif len(subexp) == 1:
+                    return subexp[0]
                 else:
-                    return subexp
+                    return eu.nested_expr(subexp)
             else:
                 # we must compute this field in python :'(
                 assert len(lefts) == 1, lefts

@@ -28,7 +28,8 @@
     introduce a circular dependency.
 """
 
-from tools.translate import _ # must be loaded late
+from tools.translate import _
+import logging
 
 PG_MODES = ('pg92', 'pg91', 'pg90', 'pg84', 'pgsql')
 PG84_MODES = ('pg92', 'pg91', 'pg90', 'pg84')
@@ -112,7 +113,72 @@ class sub_expr(object):
     """ Sub-expression component
         Any of these, in the domain expression, should be legal.
     """
-    pass
+    def to_sql(self, parent, model, field):
+        """ Return the sql expression
+            @param parent the calling expression() object
+            @param model the current ORM model for this node
+            @param field the field of that node
+            @return expr, params[]
+        """
+        raise NotImplementedError
+
+class nested_expr(sub_expr):
+    """ A nested, Polish, expression
+
+        This is not allowed to contain but pre-parsed elements.
+    """
+    def __init__(self, dom):
+        self._dom = dom
+
+    def to_sql(self, parent, model, field):
+
+        if self._dom == []:
+            return 'TRUE', []
+            
+        run_expr = [] #: string fragments to glue together into where_clause
+        run_params = []
+        stack = [] #: operand stack for Polish -> algebra notation
+        for exp in self._dom:
+            if run_expr and not stack:
+                run_expr.append(' AND ')
+            if exp == '&':
+                run_expr.append('(')
+                stack += [')', ' AND ']
+                continue
+            elif exp == '|':
+                run_expr.append('(')
+                stack += [')', ' OR ']
+                continue
+            elif exp == '!':
+                run_expr.append('NOT (')
+                stack += [')',]
+                continue
+            elif exp is True or exp == (1, '=', 1):
+                run_expr.append('TRUE')
+            elif exp is False:
+                run_expr.append('FALSE')
+            elif isinstance(exp, sub_expr): # more than one components
+                e, p = exp.to_sql(parent, model, field)
+                assert e, exp
+                run_expr.append(e)
+                run_params.extend(p)
+            else:
+                e, p = parent._leaf_to_sql(exp, model, field)
+                run_expr.append(e)
+                run_params.extend(p)
+
+            while stack:
+                p = stack.pop()
+                run_expr.append(p)
+                # continue closing parentheses
+                if p != ')':
+                    break
+
+        if stack:
+            raise DomainMsgError(_("Invalid domain expression, too many operators: %r") %\
+                    self._dom)
+
+        return ''.join(run_expr), run_params
 
 class placeholder(object):
     """ A dummy string, that will substitute the ids array in 

@@ -20,8 +20,9 @@
 ##############################################################################
 
 from tools import reverse_enumerate
-# import logging
+import logging
 from tools import expr_utils as eu
+from tools.translate import _
 
 #.apidoc title: Domain Expressions
 
@@ -90,6 +91,29 @@ class expression(object):
             'in': lambda a, b: a and bool(a[1] in b),
             'not in': lambda a, b: (not a) or bool(a[1] not in b),
             }
+            
+    _implicit_fields = None
+    _implicit_log_fields = None
+    
+    @classmethod
+    def __load_implicit_fields(cls):
+        """ Populate class variables, but late enough to avoid circular imports
+        """
+        if cls._implicit_fields and cls._implicit_log_fields:
+            return
+        import fields
+        cls._implicit_fields = {
+            'id': fields.id_field('Id'),
+            '_vptr': fields._column('Virtual Ptr')
+            }
+        
+        cls._implicit_log_fields = {
+            'create_uid': fields.many2one("res.users", "Create user"),
+            'create_date': fields.datetime("Create date"),
+            'write_uid': fields.many2one("res.users", "Write user"),
+            'write_date':fields.datetime("Write date"),
+            }
+    
     def _is_operator(self, element):
         return isinstance(element, (str, unicode)) and element in ('&', '|', '!')
 
@@ -99,7 +123,7 @@ class expression(object):
            and (((not internal) and element[1] in self.OPS) \
                 or (internal and element[1] in self.INTERNAL_OPS))
 
-    def _is_leaf(self, element, internal=False):
+    def _is_leaf(self, element):
         return isinstance(element, (list, tuple)) \
                 and len(element) == 3 \
                 and isinstance(element[1], basestring) \
@@ -122,10 +146,11 @@ class expression(object):
         self.__all_tables = set()
         self.__joins = []
         self.__main_table = None # 'root' table. set by parse()
-        self.__DUMMY_LEAF = (1, '=', 1) # a dummy leaf that must not be parsed or sql generated
+        self.__DUMMY_LEAF = (1, '=', 1) # FIXME a dummy leaf that must not be parsed or sql generated
         assert not mode, mode # obsolete
         self.__mode = mode
         self._debug = debug
+        self.__load_implicit_fields()
 
     @property
     def exp(self):
@@ -144,6 +169,7 @@ class expression(object):
                         including the dot
                 @param null_too if specified, the expression would also stand 
                         for left = NULL
+                @return domain expression, in list of tuples
             """
             if model._parent_store and (not model.pool._init): #and False:
                 # TODO: Improve where joins are implemented for many with '.', replace by:
@@ -217,6 +243,117 @@ class expression(object):
                 res += [(left, 'in', rg(ids, model, parent or model._parent_name))]
                 return res
 
+    def parse_into_query(self, cr, uid, model, query, context):
+        """ populate Query with this expression, parsed
+        
+            @param query a Query() instance, preferrably empty. It _must_
+                contain the model's table in it's initial `tables`
+        """
+        import orm
+        run_expr = [] #: string fragments to glue together into where_clause 
+        run_params = []
+        stack = [] #: operand stack for Polish -> algebra notation
+        for exp in self.__exp:
+            field = None
+            if exp == '&':
+                run_expr.append('(')
+                stack += [')', ' AND ']
+                continue
+            elif exp == '|':
+                run_expr.append('(')
+                stack += [')', ' OR ']
+                continue
+            elif exp == '!':
+                run_expr.append('NOT (')
+                stack += [')',]
+                continue
+            elif exp == self.__DUMMY_LEAF:
+                exp = True
+            elif self._is_leaf(exp):
+                # This is a regular leaf, we must process
+                left, operator, right = exp
+                operator = operator.lower()
+                if isinstance(right, orm.browse_null):
+                    right = None
+                    exp = (left, operator, right) # rewrite anyway
+                cur_model = model
+                fargs = left.split('.', 1)
+                
+                field = None
+                while not field:
+                    # Try to locate the field the first element of "left" refers to
+                    if fargs[0] in cur_model._columns:
+                        # Note, we can override the implicit columns here,
+                        # because this gets checked first ;)
+                        field = cur_model._columns[fargs[0]]
+                    elif fargs[0] in self._implicit_fields:
+                        field = self._implicit_fields[fargs[0]]
+                    elif cur_model._log_access and fargs[0] in self._implicit_log_fields:
+                        field = self._implicit_log_fields[fargs[0]]
+                    elif fargs[0] in cur_model._inherit_fields:
+                        next_model = cur_model.pool.get(model._inherit_fields[fargs[0]][0])
+                        # join that model and try to find the field there..
+                        query.join((cur_model._table, next_model._table,
+                                        cur_model._inherits[next_model._name],'id'),
+                                    outer=False)
+                        cur_model = next_model
+                        continue
+                    else:
+                        raise eu.DomainLeftError(cur_model, fargs, operator, right)
+
+                nex = field.expr_eval(cr, uid, cur_model, fargs, operator, right,
+                                    self, context=context)
+                if nex is not None:
+                    exp = nex
+                elif isinstance(exp, list):
+                    exp = tuple(exp) # normalize it from RPC
+            else:
+                logging.getLogger('expression').warning("What is %r doing here?", exp)
+                cur_model = model
+
+            # Now, exp, perhaps modified, needs to be converted to sql
+            if exp is True:
+                run_expr.append('TRUE')
+            elif exp is False:
+                run_expr.append('FALSE')
+            elif isinstance(exp, eu.sub_expr): # more than one components
+                e, p = exp.to_sql(self, cur_model, field)
+                assert e, exp
+                run_expr.append(e)
+                run_params.extend(p)
+            else:
+                assert len(exp) == 3, "%s %r invalid: %r" % (cur_model._name, field, exp)
+                e, p = self._leaf_to_sql(exp, cur_model, field)
+                run_expr.append(e)
+                run_params.extend(p)
+            
+            while stack:
+                p = stack.pop()
+                run_expr.append(p)
+                # continue closing parentheses
+                if p != ')':
+                    break
+            if not stack:
+                query.where_clause.append(''.join(run_expr))
+                query.where_clause_params += run_params
+                run_params = []
+                run_expr = []
+
+
+        if stack:
+            raise eu.DomainMsgError(_("Invalid domain expression, too many operators: %r") %\
+                    self.__exp)
+        if self._debug:
+            logging.getLogger('expression').debug("Resulting query: %s", query)
+    
+    def parse_on_data(cr, uid, model, data, context):
+        """ Directly apply expression on memory data
+        
+            @param data the data dict of an orm_memory model
+            @return list of ids, keys of data, that match this expression
+        """
+        pass
+    
     def parse(self, cr, uid, table, context):
         """ transform the leafs of the expression """
         if not self.__exp:
@@ -281,9 +418,9 @@ class expression(object):
 
         return self
 
-    def __leaf_to_sql(self, leaf, table):
-        if leaf == self.__DUMMY_LEAF:
-            return ('(1=1)', []) # true
+    def _leaf_to_sql(self, leaf, table, field):
+        if leaf == self.__DUMMY_LEAF: # y iz dummy leav? FIXME
+            return ('TRUE', [])
         left, operator, right = leaf
 
         if operator == 'inselect':
@@ -293,21 +430,19 @@ class expression(object):
             query = '(%s.%s not in (%s))' % (table._table, left, right[0])
             params = right[1]
         elif operator in ['in', 'not in']:
-            params = right and right[:] or []
-            len_before = len(params)
-            for i in range(len_before)[::-1]:
-                if params[i] == False:
-                    del params[i]
+            if right:
+                len_before = len(right)
+                params = filter(lambda x: x is not False, right)
+            else:
+                len_before = 0
+                params = []
 
             len_after = len(params)
             check_nulls = len_after != len_before
-            query = '(1=0)' # false
+            query = 'false'
 
             if len_after:
-                if left == 'id':
-                    instr = ','.join(['%s'] * len_after)
-                else:
-                    instr = ','.join([table._columns[left]._symbol_set[0]] * len_after)
+                instr = ','.join([field._symbol_set[0]] * len_after)
                 query = '(%s.%s %s (%s))' % (table._table, left, operator, instr)
             else:
                 # the case for [field, 'in', []] or [left, 'not in', []]
@@ -320,42 +455,31 @@ class expression(object):
         else:
             params = []
 
-            if right == False and (leaf[0] in table._columns)  and table._columns[leaf[0]]._type=="boolean"  and (operator == '='):
-                query = '(%s.%s IS NULL or %s.%s = false )' % (table._table, left,table._table, left)
-            elif (((right == False) and (type(right)==bool)) or (right is None)) and (operator == '='):
+            op = operator
+            if (right is None) and (operator == '='):
                 query = '%s.%s IS NULL ' % (table._table, left)
-            elif right == False and (leaf[0] in table._columns)  and table._columns[leaf[0]]._type=="boolean"  and (operator in ['<>', '!=']):
-                query = '(%s.%s IS NOT NULL and %s.%s != false)' % (table._table, left,table._table, left)
-            elif (((right == False) and (type(right)==bool)) or right is None) and (operator in ['<>', '!=']):
+            elif (right is None) and (operator in ['<>', '!=']):
                 query = '%s.%s IS NOT NULL' % (table._table, left)
-            elif (operator == '=?'):
-                op = '='
-                import orm
-                if (right is False or right is None or isinstance(right, orm.browse_null)):
-                    return ( 'TRUE',[])
-                if left in table._columns:
-                        format = table._columns[left]._symbol_set[0]
-                        query = '(%s.%s %s %s)' % (table._table, left, op, format)
-                        params = table._columns[left]._symbol_set[1](right)
-                else:
-                        query = "(%s.%s %s %%s)" % (table._table, left, op)
-                        params = right
-
             elif (operator == 'child_of' or operator == '|child_of'):
                 raise ExpressionError("Cannot compute %s %s %s in sql" %(left, operator, right))
             else:
+                if (operator == '=?'):
+                    op = '='
+                    if (right is False) or (right is None):
+                        return ( 'TRUE',[])
                 if isinstance(right, eu.placeholder):
                     assert(right.expr)
-                    query = '( %s.%s %s %s)' % (table._table, left, operator, right.expr)
+                    query = '( %s.%s %s %s)' % (table._table, left, op, right.expr)
                 elif left == 'id':
-                    query = '%s.id %s %%s' % (table._table, operator)
+                    query = '%s.id %s %%s' % (table._table, op)
                     params = right
                 else:
-                    like = operator in ('like', 'ilike', 'not like', 'not ilike')
+                    like = op in ('like', 'ilike', 'not like', 'not ilike')
+                    if op in ('=like', '=ilike'):
+                        op = op[1:]
 
-                    op = {'=like':'like','=ilike':'ilike'}.get(operator,operator)
-                    if left in table._columns:
-                        format = like and '%s' or table._columns[left]._symbol_set[0]
+                    if field:
+                        format = like and '%s' or field._symbol_set[0]
                         query = '(%s.%s %s %s)' % (table._table, left, op, format)
                     else:
                         query = "(%s.%s %s '%s')" % (table._table, left, op, right)
@@ -370,25 +494,29 @@ class expression(object):
                             str_utf8 = str(right)
                         params = '%%%s%%' % str_utf8
                         add_null = not str_utf8
-                    elif left in table._columns:
-                        params = table._columns[left]._symbol_set[1](right)
+                    elif field:
+                        params = field._symbol_set[1](right)
+                    else:
+                        params = right
 
                     if add_null:
                         query = '(%s OR %s IS NULL)' % (query, left)
 
-        if isinstance(params, basestring):
+        if not isinstance(params, (list, tuple)):
             params = [params]
         return (query, params)
 
 
     def to_sql(self):
+        raise RuntimeError
         stack = []
+        
         params = []
         try:
             for i, e in reverse_enumerate(self.__exp):
                 if self._is_leaf(e, internal=True):
                     table = self.__field_tables.get(i, self.__main_table)
-                    q, p = self.__leaf_to_sql(e, table)
+                    q, p = self._leaf_to_sql(e, table)
                     if isinstance(p, (list, tuple)):
                         params = list(p) + params
                     else:

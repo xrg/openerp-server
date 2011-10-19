@@ -41,6 +41,7 @@ import xmlrpclib
 
 import tools
 from tools.translate import _
+from tools import expr_utils as eu
 import __builtin__
 from tools import sql_model
 
@@ -296,6 +297,10 @@ class _column(object):
             @return None if the input expression can be used as-is, 
                 tuple-3 for for a classic replacement expression or any
                 expr_utils.sub_expr() object for complex evaluations
+                
+                Note1: list-3 is no longer allowed as the output of this fn
+                Note2: False only means false. Return None for "empty", this
+                    helps the next stage a lot.
             
             Use of lefts::
             
@@ -307,6 +312,12 @@ class _column(object):
             expressions, like 'comment', 'len' meaning `len(comment)'.
         """
         assert len(lefts) == 1, lefts
+        if right is False:
+            if operator not in ('=', '!=', '<>'):
+                raise eu.DomainInvalidOperator(obj, lefts, operator, right)
+            return (lefts[0], operator, None)
+        return None # as-is
+
 def get_nice_size(a):
     (x,y) = a
     if isinstance(y, (int,long)):
