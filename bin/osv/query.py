@@ -66,6 +66,9 @@ class Query(object):
         #       SELECT ... FROM "table_a" LEFT JOIN "table_b" ON ("table_a"."table_a_col1" = "table_b"."table_b_col")
         #                                 LEFT JOIN "table_c" ON ("table_a"."table_a_col2" = "table_c"."table_c_col")
         self.joins = joins or {}
+        self.order_by = None
+        self.offset = None
+        self.limit = None
 
     def join(self, connection, outer=False):
         """Adds the JOIN specified in ``connection``.
