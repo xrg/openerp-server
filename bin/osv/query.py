@@ -105,23 +105,28 @@ class Query(object):
             self.joins.setdefault(lhs, []).append((table, lhs_col, col, outer and 'LEFT JOIN' or 'JOIN'))
         return self
 
+    def __add_joins_for_table(self, table, query_from):
+        tables_done = []
+        for (dest_table, lhs_col, col, join) in self.joins.get(table,[]):
+            tables_done.append(dest_table)
+            query_from += ' %s %s ON (%s."%s" = %s."%s")' % \
+                    (join, dest_table, table, lhs_col, dest_table, col)
+            query_from, t_d = self.__add_joins_for_table(dest_table, query_from)
+            tables_done += t_d
+        return query_from, tables_done
+
     def get_sql(self):
         """Returns (query_from, query_where, query_params)"""
         query_from = ''
-        tables_to_process = list(self.tables)
+        tables_done = []
 
-        def add_joins_for_table(table, query_from):
-            for (dest_table, lhs_col, col, join) in self.joins.get(table,[]):
-                tables_to_process.remove(dest_table)
-                query_from += ' %s %s ON (%s."%s" = %s."%s")' % \
-                    (join, dest_table, table, lhs_col, dest_table, col)
-                query_from = add_joins_for_table(dest_table, query_from)
-            return query_from
-
-        for table in tables_to_process:
+        for table in self.tables:
+            if table in tables_done:
+                continue
             query_from += table
             if table in self.joins:
-                query_from = add_joins_for_table(table, query_from)
+                query_from, t_d = self.__add_joins_for_table(table, query_from)
+                tables_done += t_d
             query_from += ','
         query_from = query_from[:-1] # drop last comma
         return (query_from, " AND ".join(self.where_clause), self.where_clause_params)

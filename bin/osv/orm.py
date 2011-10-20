@@ -4388,9 +4388,23 @@ class orm(orm_template):
         """
         if uid == 1: # one more shortcut
             return
-        import expression
-        def apply_rule(adom, parent_model=None, child_object=None):
-            if adom:
+        # apply main rules on the object
+        rule_obj = self.pool.get('ir.rule')
+        rules_list = []
+        
+        dom = rule_obj._compute_domain(cr, uid, self._name, mode)
+        if dom:
+            rules_list.append((dom, None, None))
+            
+        # apply ir.rules from the parents (through _inherits)
+        for inherited_model in self._inherits:
+            dom = rule_obj._compute_domain(cr, uid, inherited_model, mode)
+            if dom:
+                rules_list.append((dom, inherited_model, self))
+
+        if rules_list:
+            import expression
+            for adom, parent_model, child_object in rules_list:
                 if self._debug:
                     mname = self._name
                     if parent_model:
@@ -4404,16 +4418,6 @@ class orm(orm_template):
                 # Rest of computation is done as root, because we don't want to
                 # recurse further into access limitations.
                 aexp.parse_into_query(cr, 1, self, query, context)
-                return True
-            return False
-
-        # apply main rules on the object
-        rule_obj = self.pool.get('ir.rule')
-        apply_rule(rule_obj._compute_domain(cr, uid, self._name, mode))
-
-        # apply ir.rules from the parents (through _inherits)
-        for inherited_model in self._inherits:
-            apply_rule(rule_obj._compute_domain(cr, uid, inherited_model, mode), parent_model=inherited_model, child_object=self)
 
     def _generate_m2o_order_by(self, order_field, query):
         """
