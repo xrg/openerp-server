@@ -879,6 +879,7 @@ class many2many(_rel2many):
                 cr.execute('delete from '+rel+' where ' + id1 + ' = %s', (id,), debug=obj._debug)
             elif act[0] == 6:
 
+                # FIXME: it is safer to call _apply_ir_rules() than domain_get()
                 d1, d2,tables = obj.pool.get('ir.rule').domain_get(cr, user, obj._name, context=context)
                 if d1:
                     d1 = ' and ' + ' and '.join(d1)

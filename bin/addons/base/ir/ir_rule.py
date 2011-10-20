@@ -169,6 +169,8 @@ class ir_rule(osv.osv):
             If needed, tables will contain any tables (including one for the
             model_name) needed in the FROM expression
         """
+        # Deprecated!
+        # raise RuntimeError
         dom = self._compute_domain(cr, uid, model_name, mode=mode)
         if dom:
             # _where_calc is called as superuser. This means that rules can

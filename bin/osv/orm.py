@@ -3313,8 +3313,7 @@ class orm(orm_template):
                 fields.append('_vptr')
 
         query = self._where_calc(cr, user, domain, context=context)
-        # Not needed so far, because _read_flat consults ir.rule.domain_get()
-        # self._apply_ir_rules(cr, user, query, 'read', context=context)
+        self._apply_ir_rules(cr, user, query, 'read', context=context)
         query.order_by = self._generate_order_by(order, query)
         query.limit = limit
         query.offset = offset
@@ -3352,10 +3351,6 @@ class orm(orm_template):
             if self._vtable:
                 fields_to_read.append('_vptr')
 
-        # Construct a clause for the security rules.
-        # 'tables' hold the list of tables necessary for the SELECT including the ir.rule clauses,
-        # or will at least contain self._table.
-        rule_clause, rule_params, tables = self.pool.get('ir.rule').domain_get(cr, user, self._name, 'read', context=context)
 
         # all inherited fields + all non inherited fields for which the attribute whose name is in load is True
         fields_pre = [f for f in fields_to_read if
@@ -3363,13 +3358,23 @@ class orm(orm_template):
                            or f == '_vptr'
                         or (f in self._columns and getattr(self._columns[f], '_classic_write'))
                      ] + self._inherits.values()
+
+        if len(fields_pre) and s_query is None:
+            # Construct a clause for the security rules.
+            # 'tables' hold the list of tables necessary for the SELECT including the ir.rule clauses,
+            # or will at least contain self._table.
+            s_query = Query(tables=['"%s"' % self._table,],
+                    where_clause=['"%s".id = ANY(%%s)' % self._table,],
+                    where_clause_params=[ids,])
+            self._apply_ir_rules(cr, user, s_query, 'read', context=context)
+
         if self._debug:
             _logger.debug('%s.read_flat: tables=%s, fields_pre=%s' %
-                (self._name, tables, fields_pre))
+                (self._name, s_query and s_query.tables or '-', fields_pre))
 
         res = []
-        if s_query or len(fields_pre):
-            if len(tables) > 1 or (s_query and (len(s_query.tables) > 1)):
+        if s_query :
+            if len(s_query.tables) > 1:
                 table_prefix = self._table + '.'
             else:
                 table_prefix = ''
@@ -3389,46 +3394,28 @@ class orm(orm_template):
                     return 'length(%s"%s") as "%s"' % (table_prefix, f, f)
                 return '%s"%s"' % (table_prefix, f,)
                 
-            def quote_tbl(tst):
-                if tst.startswith('"'):
-                    return tst
-                else:
-                    return "%s" % tst
-
             if 'id' not in fields_pre:
                 fields_pre.insert(0, 'id')
             fields_pre2 = map(convert_field, fields_pre)
-            order_by = self._parent_order or self._order
             select_fields = ','.join(fields_pre2)
-            tables = map(quote_tbl, tables)
             params = []
             if s_query:
-                for tbl in s_query.tables:
-                    if tbl in tables:
-                        tables.remove(tbl)
                 qfrom, qwhere, qargs = s_query.get_sql()
-                tables.append(qfrom)
-                tables = ', '.join(set(tables))
+
                 if not qwhere:
                     qwhere = 'true'
                 query = 'SELECT %s FROM %s WHERE %s' % \
-                            (select_fields, tables, qwhere)
+                            (select_fields, qfrom, qwhere)
                 params += qargs
 
                 if s_query.order_by or s_query.order_by is  '':
                     order_by = s_query.order_by
+                elif self._parent_order:
+                    order_by = ' ORDER BY ' + self._parent_order
+                elif self._order:
+                    order_by = ' ORDER BY ' + self._order
             else:
-                tables = ', '.join(set(tables))
-                query = 'SELECT %s FROM %s WHERE %sid = ANY(%%s)' % \
-                            (select_fields, tables, table_prefix)
-                params += [ids,]
-                
-                if order_by:
-                    order_by = ' ORDER BY ' + order_by
-
-            if rule_clause:
-                query += " AND (" + (' OR '.join(rule_clause)) + ") "
-                params += rule_params
+                raise RuntimeError()
 
             if order_by:  # could be '' == no order
                 query += order_by
@@ -3442,7 +3429,8 @@ class orm(orm_template):
             # Perform the big read of the table, fetch the data!
             cr.execute(query, params, debug=self._debug)
 
-            if ids is not None and rule_clause:
+            if ids is not None and s_query and (len(s_query.where_clause) > 1):
+                # if we are searching by ids, and rules have been applied
                 ids = list(set(ids)) # eliminate duplicates
                 if cr.rowcount != len(ids):
                     # Some "access errors" may not be due to rules, but
@@ -3491,6 +3479,7 @@ class orm(orm_template):
             if not cols:
                 continue
             inh_ids = filter(None, [x[col] for x in res])
+            # _read_flat ?
             res2 = self.pool.get(table).read(cr, user, inh_ids , cols, context, load)
 
             res3 = {}
@@ -3678,19 +3667,33 @@ class orm(orm_template):
            :raise except_orm: * if current ir.rules do not permit this operation.
            :return: None if the operation is allowed
         """
-        where_clause, where_params, tables = self.pool.get('ir.rule').domain_get(cr, uid, self._name, operation, context=context)
-        if where_clause:
-            where_clause = ' and ' + ' and '.join(where_clause)
-            for sub_ids in cr.split_for_in_conditions(ids):
-                cr.execute('SELECT ' + self._table + '.id FROM ' + ','.join(tables) +
-                           ' WHERE ' + self._table + '.id IN %s' + where_clause,
-                           [sub_ids] + where_params)
-                if cr.rowcount != len(sub_ids):
-                    opls = {'read': _('read'), 'write': _('write'),
-                        'create': _('create'), 'unlink': _('delete')}
-                    raise except_orm(_('AccessError'),
-                                     _('Operation prohibited by access rules, or performed on an already deleted document (Operation: %s, Document type: %s).')
-                                     % (opls.get(operation, operation), self._description))
+        
+        query = Query(tables=['"%s"' % self._table,])
+        self._apply_ir_rules(cr, uid, query, operation, context=context)
+        if query.where_clause:
+            qfrom, qwhere, qwhere_params = query.get_sql()
+            if qwhere.lower() == 'true':
+                return
+            if self._debug:
+                _logger.debug("Calculating prohibited ids for user %d on %s", uid, self._name)
+            # In this query we negate the rule clause, so that we pick the offending ids
+            cr.execute('SELECT DISTINCT "%s".id FROM %s ' \
+                        ' WHERE id = ANY(%%s) AND NOT (%s) LIMIT 20' % \
+                            (self._table, qfrom, qwhere),
+                        [ids,] + qwhere_params, debug=self._debug)
+            if cr.rowcount:
+                dfrom = ''
+                # TODO
+                # if cr.auth_proxy:
+                #     dfrom = 'from %s ' % cr.auth_proxy.get_short_info()
+                _logger.error("%s: attempted access violation for user #%d@%s %s on records %r",
+                        self._name, uid, cr.dbname, dfrom, [x[0] for x in cr.fetchall()])
+
+                opls = {'read': _('read'), 'write': _('write'),
+                    'create': _('create'), 'unlink': _('delete')}
+                raise except_orm(_('AccessError'),
+                                _('Operation prohibited by access rules, or performed on an already deleted document (Operation: %s, Document type: %s).')
+                                % (opls.get(operation, operation), self._description))
 
     def unlink(self, cr, uid, ids, context=None):
         """
@@ -4383,30 +4386,34 @@ class orm(orm_template):
 
            :param query: the current query object
         """
-        def apply_rule(added_clause, added_params, added_tables, parent_model=None, child_object=None):
-            if added_clause:
+        if uid == 1: # one more shortcut
+            return
+        import expression
+        def apply_rule(adom, parent_model=None, child_object=None):
+            if adom:
                 if self._debug:
-                    _logger.debug("Add clause to %s: %r", self._name, added_clause)
+                    mname = self._name
+                    if parent_model:
+                        mname = "%s (%s)" %(parent_model, self._name)
+                    _logger.debug("Add clause to %s: %r", mname, adom)
                 if parent_model and child_object:
                     # as inherited rules are being applied, we need to add the missing JOIN
                     # to reach the parent table (if it was not JOINed yet in the query)
                     child_object._inherits_join_add(parent_model, query)
-                query.where_clause += added_clause
-                query.where_clause_params += added_params
-                for table in added_tables:
-                    if table not in query.tables:
-                        query.tables.append(table)
+                aexp = expression.expression(adom)
+                # Rest of computation is done as root, because we don't want to
+                # recurse further into access limitations.
+                aexp.parse_into_query(cr, 1, self, query, context)
                 return True
             return False
 
         # apply main rules on the object
         rule_obj = self.pool.get('ir.rule')
-        apply_rule(*rule_obj.domain_get(cr, uid, self._name, mode, context=context))
+        apply_rule(rule_obj._compute_domain(cr, uid, self._name, mode))
 
         # apply ir.rules from the parents (through _inherits)
         for inherited_model in self._inherits:
-            kwargs = dict(parent_model=inherited_model, child_object=self) #workaround for python2.5
-            apply_rule(*rule_obj.domain_get(cr, uid, inherited_model, mode, context=context), **kwargs)
+            apply_rule(rule_obj._compute_domain(cr, uid, inherited_model, mode), parent_model=inherited_model, child_object=self)
 
     def _generate_m2o_order_by(self, order_field, query):
         """

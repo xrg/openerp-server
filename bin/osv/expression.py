@@ -192,26 +192,14 @@ class expression(object):
                 phname = phname.replace('.', '_')
                 phexpr = '%s_rsrch.id' % phname
                 
-                ttables = ['"%s"' % model._table]
                 dqry = model._where_calc(cr, uid, 
                         [(parent or model._parent_name, '=', eu.placeholder(phname, phexpr) )], context)
-                qu1, qu2, qtables = dqry.where_clause, dqry.where_clause_params, dqry.tables
-                if dqry.joins:
-                    raise NotImplementedError  # FIXME
+                rdom = model.pool.get('ir.rule')._compute_domain(cr, uid, model._name, mode='read')
+                if rdom:
+                    rexp = expression(rdom, debug=self._debug)
+                    rexp.parse_into_query(cr, 1, self, dqry, context)
+                qfrom, qu1, qu2 = dqry.get_sql()
 
-                d1, d2, dtables = model.pool.get('ir.rule').domain_get(cr, uid, model._name)
-                if d1:
-                    if isinstance(d1,list):
-                        qu1 += d1
-                    else:
-                        qu1.append(d1)
-                    qu2 += d2
-                    
-                    for dt in dtables:
-                        if dt not in ttables:
-                            ttables.append(dt)
-                
-                ttables2 = ', '.join(ttables)
                 qu2 = [ ids, ] + qu2
                 qry = ''' 
         WITH RECURSIVE %s_rsrch(id) AS (
@@ -220,7 +208,7 @@ class expression(object):
         SELECT id FROM %s_rsrch
                 ''' %( phname, 
                         model._table,
-                        model._table, ttables2, phname, ' AND '.join(qu1),
+                        model._table, qfrom, phname, ' AND '.join(qu1),
                         phname)
                 
                 # print "INSELECT %s" % qry
