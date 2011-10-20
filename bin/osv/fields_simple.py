@@ -94,7 +94,13 @@ class id_field(integer):
             else:
                 return eu.nested_expr(dom)
         else:
-            return super(id_field, self).expr_eval(cr, uid, obj, lefts, operator, right, pexpr, context)
+            # Copy-paste logic from super, save on the function call
+            assert len(lefts) == 1, lefts
+            if right is False:
+                if operator not in ('=', '!=', '<>'):
+                    raise eu.DomainInvalidOperator(obj, lefts, operator, right)
+                return (lefts[0], operator, None)
+            return None # as-is
 
 class _string_field(_column):
     """ Common baseclass for char and text fields
@@ -247,7 +253,11 @@ class datetime(_column):
         if right and len(right) < 11:
             if operator in ('<', '<='):
                 return (lefts[0], operator, right + ' 23:59:59')
-        
+        elif right is False:
+            if operator not in ('=', '!=', '<>'):
+                raise eu.DomainInvalidOperator(obj, lefts, operator, right)
+            return (lefts[0], operator, None)
+
         return None # or the same expression
 
 class time(_column):
