@@ -231,6 +231,14 @@ class Schema(object):
                     pass
                 tbl.constraints.append(OtherTableConstraint(**con))
 
+    def _does_debug(self, tbl_name):
+            if self._debug is True:
+                return True
+            elif not self._debug:
+                return False
+            else:
+                return (tbl_name in self._debug)
+
     def commit_to_db(self, cr, dry_run=False):
         """ Apply the changes of schema on the database
         
@@ -239,15 +247,7 @@ class Schema(object):
         """
         
         logger = self._logger
-        
-        def does_debug(tbl_name):
-            if self._debug is True:
-                return True
-            elif not self._debug:
-                return False
-            else:
-                return (tbl_name in self._debug)
-        
+
         need_more = True
         max_epoch = self.epoch + 5000
         while need_more:
@@ -283,7 +283,7 @@ class Schema(object):
                     if not sql:
                         continue
 
-                    if dry_run or does_debug(tbl._name):
+                    if dry_run or self._does_debug(tbl._name):
                         logger.debug("Command for %s: %s +%r", tbl._name, sql, args)
 
                     if not dry_run:
@@ -293,7 +293,7 @@ class Schema(object):
                     
                     done_actions = True
                     tbl.commit_state()
-                    if does_debug(tbl._name):
+                    if self._does_debug(tbl._name):
                         logger.debug("After %s, state: %s \n %s", _state_names[tstate],
                                 ', '.join(["%s:%s" % (e._name, _state_names[e._state]) \
                                             for e in tbl._sub_elems()]),
@@ -349,7 +349,7 @@ class Schema(object):
                 need_more = True
                 
                 if not tbl.get_depends(partial=True):
-                    if does_debug(tbl._name):
+                    if self._does_debug(tbl._name):
                         logger.debug("skip table %s because of partial depends", tbl._name)
                     continue
 
@@ -365,7 +365,7 @@ class Schema(object):
                     if not sql:
                         continue
 
-                    if dry_run or does_debug(tbl._name):
+                    if dry_run or self._does_debug(tbl._name):
                         logger.debug("Command for %s: %s +%r", tbl._name, sql, args)
 
                     if not dry_run:
@@ -564,7 +564,6 @@ class _element(object):
         child_changes = False
         need_alter = False
         for e in self._sub_elems():
-            pcs = e._state
             if e.commit_state(failed=failed):
                 child_changes = True
             if not e.is_idle():
@@ -621,19 +620,19 @@ class _element(object):
         if on_alter:
             self._depends_on_alter = True
 
+    def __dep_flt(self, d):
+        if not d():
+            return False
+        if d().is_idle():
+            return False
+        if self._depends_on_alter and d()._state in (ALTER, AT_ALTER):
+            return False
+        return True
+
     def get_depends(self, partial=False):
         """Return if we can proceed, dependencies are satisfied
         """
-        def _flt(d):
-            if not d():
-                return False
-            if d().is_idle():
-                return False
-            if self._depends_on_alter and d()._state in (ALTER, AT_ALTER):
-                return False
-            return True
-
-        self._depends = filter( _flt, self._depends)
+        self._depends = filter( self.__dep_flt, self._depends)
         if self._wait_depends:
             if self._depends:
                 return False
@@ -879,15 +878,16 @@ class Column(_element):
                 continue
             ret += ' ' + c._to_create_sql(args)
         return ret
-   
+
     def pop_sql(self, args, epoch=None, partial=False, dry_run=False):
         """ Returns list of commands to adapt the column
         """
         ret = []
         self._old_todo = self._todo_attrs.copy()
-        
+
         def alter_column(cmd):
             ret.append('ALTER COLUMN "%s" %s' % (self._name, cmd))
+
         for t in [True,]:
             # one time loop, allows us to break from it
         
