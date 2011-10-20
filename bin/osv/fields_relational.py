@@ -331,13 +331,24 @@ class many2one(_rel2one):
 
     def expr_eval(self, cr, uid, obj, lefts, operator, right, pexpr, context):
         field_obj = obj.pool.get(self._obj)
-        if len(lefts) > 1: # TODO pg84 reduce
-            assert len(lefts) == 2, lefts
-            right = field_obj.search(cr, uid, [(lefts[1], operator, right)], context=context)
-            if right == []:
-                return False
+        if len(lefts) > 1:
+            wc = field_obj._where_calc(cr, uid, 
+                    [('.'.join(lefts[1:]), operator, right)],
+                    active_test=False, context=context)
+            if isinstance(wc, list):
+                # :( this is an orm_memory object, try again
+                wc = field_obj.search(cr, uid, [('.'.join(lefts), operator, right)], context=context)
+                if not wc:
+                    return False
+                else:
+                    return  (lefts[0], 'in', wc)
             else:
-                return  (lefts[0], 'in', right) # TODO
+                field_obj._apply_ir_rules(cr, uid, wc, 'read', context=context)
+                from_clause, qu1, qu2 = wc.get_sql()
+                qry = 'SELECT "%s".id FROM %s ' % (field_obj._table, from_clause)
+                if qu1:
+                    qry += "WHERE " + qu1
+                return (lefts[0], 'inselect', (qry, qu2))
 
         if isinstance(right, list) and len(right) \
                 and isinstance(right[0], (tuple, list)) \
