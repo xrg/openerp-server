@@ -181,10 +181,10 @@ class expression(object):
                     doms += ['&', ('parent_left', '<', o.parent_right), ('parent_left', '>=', o.parent_left)]
                 if prefix:
                     if null_too:
-                        return ['|', (left, '=', False), (left, 'in', model.search(cr, uid, doms, context=context))]
+                        return ['|', (left, '=', None), (left, 'in', model.search(cr, uid, doms, context=context))]
                     return [(left, 'in', model.search(cr, uid, doms, context=context))]
                 if null_too:
-                    doms = ['|', (left, '=', False)] + doms
+                    doms = ['|', (left, '=', None)] + doms
                 return doms
             elif self.__mode in eu.PG84_MODES:
                 # print "Recursive expand for 8.4, for %s" % model._table
@@ -226,7 +226,7 @@ class expression(object):
                 # print "INSELECT %s" % qry
                 # print "args:", qu2
                 if null_too:
-                    return ['|', (left, '=', False), (left, 'inselect', (qry, qu2))]
+                    return ['|', (left, '=', None), (left, 'inselect', (qry, qu2))]
                 return [(left, 'inselect', (qry, qu2))]
             # elif self.__mode == 'pgsql':
             #  any way  to do that in pg8.3?
@@ -237,7 +237,7 @@ class expression(object):
                     ids2 = model.search(cr, uid, [(parent, 'in', ids)], context=context)
                     return ids + rg(ids2, model, parent)
                 if null_too:
-                    res = ['|', (left, '=', False)]
+                    res = ['|', (left, '=', None)]
                 else:
                     res = []
                 res += [(left, 'in', rg(ids, model, parent or model._parent_name))]
