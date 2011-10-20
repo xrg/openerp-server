@@ -4365,13 +4365,10 @@ class orm(orm_template):
         if domain:
             import expression
             e = expression.expression(domain, debug=self._debug)
-            try:
-                e.parse_into_query(cr, user, self, qry, context)
-                if self._debug:
-                    _logger.debug("where calc of %s: qu1 = %s, qu2 = %s" % 
-                            (self._table, qry.where_clause, qry.where_clause_params))
-            except DomainError, err:
-                raise except_orm(_("Error!"), err.get_msg(cr, user, context))
+            e.parse_into_query(cr, user, self, qry, context)
+            if self._debug:
+                _logger.debug("where calc of %s: qu1 = %s, qu2 = %s" % 
+                        (self._table, qry.where_clause, qry.where_clause_params))
         
         return qry
 

@@ -43,6 +43,9 @@ class DomainError(ValueError):
         """
         raise NotImplementedError(repr(self))
 
+    def get_title(self, cr, uid, context=None):
+        return _("Domain Error")
+
 class DomainMsgError(DomainError):
     """Domain Error with specific message
     
@@ -53,6 +56,9 @@ class DomainMsgError(DomainError):
         self.msg = msg
 
     def get_msg(self, cr, uid, context=None):
+        return self.msg
+        
+    def __str__(self):
         return self.msg
 
 class DomainExpressionError(DomainError):
@@ -66,10 +72,20 @@ class DomainExpressionError(DomainError):
         """
             @param string name of the ORM model involved
         """
-        self._model = model
+        if isinstance(model, basestring):
+            self._model = model
+        else:
+            self._model = model._name
         self._lefts = lefts
         self._operator = operator
         self._right = right
+
+    def __str__(self):
+        return "%s: model %s (%s, '%s', %r)" % (self.__class__.__name__, self._model, \
+                '.'.join(self._lefts or []), self._operator, self._right)
+
+    def get_title(self, cr, uid, context=None):
+        return _("Domain expression Error")
 
     def get_msg(self, cr, uid, context=None):
         return  _("The following domain expression is invalid for %s model: (%s, %r, %r)") % \

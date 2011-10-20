@@ -29,6 +29,7 @@ import copy
 from psycopg2 import IntegrityError, errorcodes
 from tools.func import wraps
 from tools.translate import translate
+from tools import expr_utils
 
 module_list = []
 module_class_list = {}
@@ -181,6 +182,15 @@ class object_proxy(netsvc.Service):
             raise except_osv('Object Error', 'Object %s doesn\'t exist' % str(obj))
         try:
             return getattr(object, method)(cr, uid, *args, **kw)
+        except expr_utils.DomainError, err:
+            if 'context' in kw:
+                context = kw['context']
+            elif isinstance(args[-1], dict):
+                context = args[-1]
+            else:
+                context = {}
+            self.abortResponse(1, err.get_title(cr, uid, context=context),
+                    'error', err.get_msg(cr, uid, context))
         except TypeError:
             try:
                 import inspect
