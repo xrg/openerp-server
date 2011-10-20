@@ -69,6 +69,7 @@ class Query(object):
         self.order_by = None
         self.offset = None
         self.limit = None
+        self._join_wci = 0
 
     def join(self, connection, outer=False):
         """Adds the JOIN specified in ``connection``.
@@ -93,6 +94,11 @@ class Query(object):
         if table in self.tables:
             # already joined, must ignore (promotion to outer and multiple joins not supported yet)
             pass
+        elif not outer:
+            self.tables.append(table)
+            self.where_clause.insert(self._join_wci, '%s."%s" = %s."%s"' % \
+                    (lhs, lhs_col, table, col))
+            self._join_wci += 1
         else:
             # add JOIN
             self.tables.append(table)
