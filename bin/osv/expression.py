@@ -253,6 +253,7 @@ class expression(object):
         run_expr = [] #: string fragments to glue together into where_clause 
         run_params = []
         stack = [] #: operand stack for Polish -> algebra notation
+        joined_fields = {} #: must re-use joins {field-name: model}
         for exp in self.__exp:
             field = None
             if exp == '&':
@@ -290,12 +291,18 @@ class expression(object):
                         field = self._implicit_fields[fargs[0]]
                     elif cur_model._log_access and fargs[0] in self._implicit_log_fields:
                         field = self._implicit_log_fields[fargs[0]]
+                    elif fargs[0] in joined_fields:
+                        cur_model = joined_fields[fargs[0]]
+                        continue
                     elif fargs[0] in cur_model._inherit_fields:
                         next_model = cur_model.pool.get(model._inherit_fields[fargs[0]][0])
                         # join that model and try to find the field there..
                         query.join((cur_model._table, next_model._table,
                                         cur_model._inherits[next_model._name],'id'),
                                     outer=False)
+                        # Keep this join in mind, we don't want to repeat it
+                        # throughout the model of this expression
+                        joined_fields[fargs[0]] = next_model
                         cur_model = next_model
                         continue
                     else:
