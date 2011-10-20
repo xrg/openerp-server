@@ -999,16 +999,14 @@ class many2many(_rel2many):
             else:
                 ids2 = list(right)
 
-            def _rec_convert(ids):
-                if m2m_rel == obj._name:
-                    return ids
-                erqu, erpa = self._expr_rev_lookup(cr, m2m_id1, m2m_rel, m2m_id2, ids, operator, debug=pexpr._debug)
-                assert (not erqu) # TODO
-                return erpa
-
             dom = pexpr._rec_get(cr, uid, field_obj, ids2, null_too=(operator == '|child_of'), context=context)
             ids2 = field_obj.search(cr, uid, dom, context=context)
-            return ('id', 'in', _rec_convert(ids2))
+            if m2m_rel != obj._name:
+                erqu, erpa = self._expr_rev_lookup(cr, m2m_id1, m2m_rel, m2m_id2, ids2, operator, debug=pexpr._debug)
+                assert (not erqu) # TODO
+                ids2 = erpa
+            
+            return ('id', 'in', ids2)
         else:
             call_null_m2m = True
             if right is not False:
