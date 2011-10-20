@@ -153,6 +153,8 @@ class object_proxy(netsvc.Service):
                     self.abortResponse(1, _('Integrity Error'), 'warning', msg)
                 else:
                     self.abortResponse(1, _('Integrity Error'), 'warning', inst[0])
+            except netsvc.OpenERPDispatcherException:
+                raise
             except Exception:
                 self.logger.exception("Uncaught exception")
                 raise
@@ -195,16 +197,15 @@ class object_proxy(netsvc.Service):
     def execute(self, db, uid, obj, method, *args, **kw):
         cr = self._get_cr_auth(db, kw)
         try:
-            try:
-                if method.startswith('_'):
-                    raise except_osv('Access Denied', 'Private methods (such as %s) cannot be called remotely.' % (method,))
-                res = self.execute_cr(cr, uid, obj, method, *args, **kw)
-                if res is None:
-                    self.logger.warning('Method %s.%s can not return a None value (crash in XML-RPC)', obj, method)
-                cr.commit()
-            except Exception:
-                cr.rollback()
-                raise
+            if method.startswith('_'):
+                raise except_osv('Access Denied', 'Private methods (such as %s) cannot be called remotely.' % (method,))
+            res = self.execute_cr(cr, uid, obj, method, *args, **kw)
+            if res is None:
+                self.logger.warning('Method %s.%s can not return a None value (crash in XML-RPC)', obj, method)
+            cr.commit()
+        except Exception:
+            cr.rollback()
+            raise
         finally:
             cr.close()
         return res
@@ -224,16 +225,15 @@ class object_proxy(netsvc.Service):
         
         cr = self._get_cr_auth(db, kw)
         try:
-            try:
-                if method.startswith('_'):
-                    raise except_osv('Access Denied', 'Private methods (such as %s) cannot be called remotely.', method)
-                res = self.execute_cr(cr, uid, obj, method, *args, **kwargs)
-                if res is None:
-                    self.logger.warning('Method %s.%s can not return a None value (crash in XML-RPC)', obj, method)
-                cr.commit()
-            except Exception:
-                cr.rollback()
-                raise
+            if method.startswith('_'):
+                raise except_osv('Access Denied', 'Private methods (such as %s) cannot be called remotely.', method)
+            res = self.execute_cr(cr, uid, obj, method, *args, **kwargs)
+            if res is None:
+                self.logger.warning('Method %s.%s can not return a None value (crash in XML-RPC)', obj, method)
+            cr.commit()
+        except Exception:
+            cr.rollback()
+            raise
         finally:
             cr.close()
         return res
@@ -246,12 +246,11 @@ class object_proxy(netsvc.Service):
     def exec_workflow(self, db, uid, obj, method, *args, **kw):
         cr = self._get_cr_auth(db, kw)
         try:
-            try:
-                res = self.exec_workflow_cr(cr, uid, obj, method, *args)
-                cr.commit()
-            except Exception:
-                cr.rollback()
-                raise
+            res = self.exec_workflow_cr(cr, uid, obj, method, *args)
+            cr.commit()
+        except Exception:
+            cr.rollback()
+            raise
         finally:
             cr.close()
         return res
