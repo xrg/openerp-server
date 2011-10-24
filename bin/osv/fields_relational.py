@@ -367,7 +367,7 @@ class many2one(_rel2one):
             if qu1:
                 qu1 = "WHERE " + qu1
 
-            qry = "SELECT id FROM %s %s " %( from_clause, qu1)
+            qry = 'SELECT "%s".id FROM %s %s ' %( field_obj._table, from_clause, qu1)
 
             return (lefts[0],'inselect', (qry, tuple(qu2)))
 
