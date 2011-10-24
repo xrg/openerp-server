@@ -108,7 +108,7 @@ class _string_field(_column):
     def expr_eval(self, cr, uid, obj, lefts, operator, right, pexpr, context):
         """ transform the expression, in case this field is translatable
         """
-        if self.translate:
+        if self.translate and context and 'lang' in context:
             assert len(lefts) == 1, lefts # we don't support anything else yet
             if operator in ('like', 'ilike', 'not like', 'not ilike'):
                 right = '%%%s%%' % right
