@@ -32,6 +32,24 @@
     !assert {model: res.partner, search: "[('address', '=', False)]"}:
         - address in (False, None, [])
 -
+    Test one2many operator with normal result
+-
+    !assert {model: res.partner, search: "[('address', '=', 'Agrolait')]", count: 1 }:
+        - name in "Fabien Dupont"
+-
+    Test one2many operator with empty result
+-
+    !assert {model: res.partner, search: "[('address', '=', 'Enron')]", count: 0 }
+-
+    Test related field (one2many) with normal result
+-
+    !assert {model: res.partner, search: "[('email', '=', 'contact@syleam.fr')]", count: 1 }:
+        - name in "Syleam"
+-
+    Test related field (one2many) with empty result
+-
+    !assert {model: res.partner, search: "[('email', '=', 'gaddafi@bit.ly')]", count: 0 }
+-
     Test many2many operator with empty search list
 -
     !assert {model: res.partner, search: "[('category_id', 'in', [])]", count: 0, string: "Ids should be empty"}
