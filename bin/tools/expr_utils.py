@@ -138,6 +138,11 @@ class sub_expr(object):
         """
         raise NotImplementedError
 
+class dirty_expr(list):
+    """ Placeholder for expressions that need to be parsed again
+    """
+    pass
+
 class nested_expr(sub_expr):
     """ A nested, Polish, expression
 

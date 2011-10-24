@@ -94,6 +94,7 @@ class expression(object):
             
     _implicit_fields = None
     _implicit_log_fields = None
+    _browse_null_class = None
     
     @classmethod
     def __load_implicit_fields(cls):
@@ -101,6 +102,7 @@ class expression(object):
         """
         if cls._implicit_fields and cls._implicit_log_fields:
             return
+        import orm
         import fields
         cls._implicit_fields = {
             'id': fields.id_field('Id'),
@@ -113,6 +115,7 @@ class expression(object):
             'write_uid': fields.many2one("res.users", "Write user"),
             'write_date':fields.datetime("Write date"),
             }
+        cls._browse_null_class = orm.browse_null
     
     def _is_operator(self, element):
         return isinstance(element, (str, unicode)) and element in ('&', '|', '!')
@@ -151,6 +154,7 @@ class expression(object):
         self.__mode = mode
         self._debug = debug
         self.__load_implicit_fields()
+        self._joined_fields = {}  #: must re-use joins {field-name: model}
 
     @property
     def exp(self):
@@ -231,17 +235,66 @@ class expression(object):
                 res += [(left, 'in', rg(ids, model, parent or model._parent_name))]
                 return res
 
+    def __cleanup(self, cr, uid, exp, model, query, context):
+        """ first-stage parsing of an expression component
+
+            Locate the field and filter the expression through its expr_eval()
+        """
+
+        left, operator, right = exp
+        operator = operator.lower()
+        if isinstance(right, self._browse_null_class):
+            right = None
+            exp = (left, operator, right) # rewrite anyway
+        cur_model = model
+        fargs = left.split('.', 1)
+
+        field = None
+        while not field:
+            # Try to locate the field the first element of "left" refers to
+            if fargs[0] in cur_model._columns:
+                # Note, we can override the implicit columns here,
+                # because this gets checked first ;)
+                field = cur_model._columns[fargs[0]]
+            elif fargs[0] in self._implicit_fields:
+                field = self._implicit_fields[fargs[0]]
+            elif cur_model._log_access and fargs[0] in self._implicit_log_fields:
+                field = self._implicit_log_fields[fargs[0]]
+            elif fargs[0] in self._joined_fields:
+                cur_model = self._joined_fields[fargs[0]]
+                continue
+            elif fargs[0] in cur_model._inherit_fields:
+                next_model = cur_model.pool.get(model._inherit_fields[fargs[0]][0])
+                # join that model and try to find the field there..
+                query.join((cur_model._table, next_model._table,
+                                cur_model._inherits[next_model._name],'id'),
+                            outer=False)
+                # Keep this join in mind, we don't want to repeat it
+                # throughout the model of this expression
+                self._joined_fields[fargs[0]] = next_model
+                cur_model = next_model
+                continue
+            else:
+                raise eu.DomainLeftError(cur_model, fargs, operator, right)
+
+        nex = field.expr_eval(cr, uid, cur_model, fargs, operator, right,
+                            self, context=context)
+        if nex is not None:
+            exp = nex
+        elif isinstance(exp, list):
+            exp = tuple(exp) # normalize it from RPC
+
+        return field, cur_model, exp
+
     def parse_into_query(self, cr, uid, model, query, context):
         """ populate Query with this expression, parsed
         
             @param query a Query() instance, preferrably empty. It _must_
                 contain the model's table in it's initial `tables`
         """
-        import orm
         run_expr = [] #: string fragments to glue together into where_clause 
         run_params = []
         stack = [] #: operand stack for Polish -> algebra notation
-        joined_fields = {} #: must re-use joins {field-name: model}
         for exp in self.__exp:
             field = None
             if exp == '&':
@@ -259,52 +312,32 @@ class expression(object):
             elif exp == self.__DUMMY_LEAF:
                 exp = True
             elif self._is_leaf(exp):
-                # This is a regular leaf, we must process
-                left, operator, right = exp
-                operator = operator.lower()
-                if isinstance(right, orm.browse_null):
-                    right = None
-                    exp = (left, operator, right) # rewrite anyway
-                cur_model = model
-                fargs = left.split('.', 1)
-                
-                field = None
-                while not field:
-                    # Try to locate the field the first element of "left" refers to
-                    if fargs[0] in cur_model._columns:
-                        # Note, we can override the implicit columns here,
-                        # because this gets checked first ;)
-                        field = cur_model._columns[fargs[0]]
-                    elif fargs[0] in self._implicit_fields:
-                        field = self._implicit_fields[fargs[0]]
-                    elif cur_model._log_access and fargs[0] in self._implicit_log_fields:
-                        field = self._implicit_log_fields[fargs[0]]
-                    elif fargs[0] in joined_fields:
-                        cur_model = joined_fields[fargs[0]]
-                        continue
-                    elif fargs[0] in cur_model._inherit_fields:
-                        next_model = cur_model.pool.get(model._inherit_fields[fargs[0]][0])
-                        # join that model and try to find the field there..
-                        query.join((cur_model._table, next_model._table,
-                                        cur_model._inherits[next_model._name],'id'),
-                                    outer=False)
-                        # Keep this join in mind, we don't want to repeat it
-                        # throughout the model of this expression
-                        joined_fields[fargs[0]] = next_model
-                        cur_model = next_model
-                        continue
-                    else:
-                        raise eu.DomainLeftError(cur_model, fargs, operator, right)
-
-                nex = field.expr_eval(cr, uid, cur_model, fargs, operator, right,
-                                    self, context=context)
-                if nex is not None:
-                    exp = nex
-                elif isinstance(exp, list):
-                    exp = tuple(exp) # normalize it from RPC
+                field, cur_model, exp = self.__cleanup(cr, uid, exp, model, query, context)
             else:
                 logging.getLogger('expression').warning("What is %r doing here?", exp)
                 cur_model = model
+
+            while isinstance(exp, eu.dirty_expr):
+                # Must cleanup again
+                if len(exp) == 0:
+                    exp = True
+                elif len(exp) == 1:
+                    if self._is_leaf(exp[0]):
+                        field, cur_model, exp = self.__cleanup(cr, uid, exp[0], model, query, context)
+                    else:
+                        exp = exp[0]
+                else:
+                    new_exp = []
+                    for e in exp:
+                        if self._is_leaf(e) and e != self.__DUMMY_LEAF:
+                            field, cur_model, e2 = self.__cleanup(cr, uid, e, model, query, context)
+                            new_exp.append(e2)
+                            # Note: we assume here that e2 is clean. Don't support
+                            # more levels of 'dirty' expressions. Reason is, this
+                            # whole thing would blow up otherwise.
+                        else:
+                            new_exp.append(e)
+                    exp = eu.sub_expr(new_exp)
 
             # Now, exp, perhaps modified, needs to be converted to sql
             if exp is True:
@@ -333,7 +366,6 @@ class expression(object):
                 query.where_clause_params += run_params
                 run_params = []
                 run_expr = []
-
 
         if stack:
             raise eu.DomainMsgError(_("Invalid domain expression, too many operators: %r") %\
