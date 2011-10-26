@@ -39,7 +39,13 @@ class Query(object):
       - etc.
     """
 
-    def __init__(self, tables=None, where_clause=None, where_clause_params=None, joins=None):
+    def __init__(self, tables=None, where_clause=None, where_clause_params=None,
+                joins=None, allow_where_joins=True):
+        """
+            @param allow_where_joins Allow reduce of INNER joins into WHERE clause,
+                    like " SELECT ... FROM a, b WHERE a.id = b.a_id" . It may be
+                    turned off if we need to keep the WHERE clause separated.
+        """
 
         # holds the list of tables joined using default JOIN.
         # the table names are stored double-quoted (backwards compatibility)
@@ -70,6 +76,7 @@ class Query(object):
         self.offset = None
         self.limit = None
         self._join_wci = 0
+        self._allow_wcj = allow_where_joins
 
     def join(self, connection, outer=False):
         """Adds the JOIN specified in ``connection``.
@@ -94,7 +101,7 @@ class Query(object):
         if table in self.tables:
             # already joined, must ignore (promotion to outer and multiple joins not supported yet)
             pass
-        elif not outer:
+        elif (not outer) and self._allow_wcj:
             self.tables.append(table)
             self.where_clause.insert(self._join_wci, '%s."%s" = %s."%s"' % \
                     (lhs, lhs_col, table, col))

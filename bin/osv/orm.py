@@ -3668,7 +3668,7 @@ class orm(orm_template):
            :return: None if the operation is allowed
         """
         
-        query = Query(tables=['"%s"' % self._table,])
+        query = Query(tables=['"%s"' % self._table,], allow_where_joins=False)
         self._apply_ir_rules(cr, uid, query, operation, context=context)
         if query.where_clause:
             qfrom, qwhere, qwhere_params = query.get_sql()
@@ -3678,8 +3678,8 @@ class orm(orm_template):
                 _logger.debug("Calculating prohibited ids for user %d on %s", uid, self._name)
             # In this query we negate the rule clause, so that we pick the offending ids
             cr.execute('SELECT DISTINCT "%s".id FROM %s ' \
-                        ' WHERE id = ANY(%%s) AND NOT (%s) LIMIT 20' % \
-                            (self._table, qfrom, qwhere),
+                        ' WHERE "%s".id = ANY(%%s) AND NOT (%s) LIMIT 20' % \
+                            (self._table, qfrom, self._table, qwhere),
                         [ids,] + qwhere_params, debug=self._debug)
             if cr.rowcount:
                 dfrom = ''
@@ -4410,7 +4410,10 @@ class orm(orm_template):
                 if parent_model and child_object:
                     # as inherited rules are being applied, we need to add the missing JOIN
                     # to reach the parent table (if it was not JOINed yet in the query)
-                    child_object._inherits_join_add(parent_model, query)
+                    # We must use query.join() because only that method can properly
+                    # handle the where clause.
+                    parent_obj = self.pool.get(parent_model)
+                    query.join((self._table, parent_obj._table, self._inherits[parent_model], 'id'),)
                 aexp = expression.expression(adom)
                 # Rest of computation is done as root, because we don't want to
                 # recurse further into access limitations.
