@@ -42,6 +42,7 @@ import sys
 import xmlrpclib
 from psycopg2 import Binary
 
+import osv
 import tools
 from tools.translate import _
 import __builtin__
@@ -753,7 +754,7 @@ class many2many(_column):
                 if not cr.fetchone():
                     cr.execute('insert into '+self._rel+' ('+self._id1+','+self._id2+') values (%s,%s)', (id, act[1]), debug=obj._debug)
             elif act[0] == 5:
-                cr.execute('update '+self._rel+' set '+self._id2+'=null where '+self._id2+'=%s', (id,), debug=obj._debug)
+                cr.execute('DELETE FROM '+self._rel+' WHERE ' + self._id1 + ' = %s', (id,), debug=obj._debug)
             elif act[0] == 6:
 
                 d1, d2,tables = obj.pool.get('ir.rule').domain_get(cr, user, obj._name, context=context)
@@ -1210,8 +1211,14 @@ class property(function):
             cr.execute('DELETE FROM ir_property WHERE id IN %s', (tuple(nids),))
 
         default_val = self._get_default(obj, cr, uid, prop_name, context)
+        property_create = False
+        if isinstance(default_val, osv.orm.browse_record):
+            if default_val.id != id_val:
+                property_create = True
+        elif default_val != id_val:
+            property_create = True
 
-        if id_val is not default_val:
+        if property_create:
             def_id = self._field_get(cr, uid, obj._name, prop_name)
             company = obj.pool.get('res.company')
             cid = company._company_default_get(cr, uid, obj._name, def_id,
