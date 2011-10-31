@@ -447,7 +447,11 @@ def _email_send(smtp_from, smtp_to_list, message, openobject_id=None, ssl=False,
                  else False (+ exception logged)
     """
     logger = logging.getLogger('email_send')
-    
+
+    if config.get_misc('smtp', 'debug', False):
+        # one more way to set it
+        debug = True
+
     class WriteToLogger(object):
         def __init__(self, logger):
             self.logger = logger
@@ -459,7 +463,7 @@ def _email_send(smtp_from, smtp_to_list, message, openobject_id=None, ssl=False,
         message['Message-Id'] = generate_tracking_message_id(openobject_id)
 
     try:
-        smtp_server = config['smtp_server']
+        smtp_server = config.get_misc('smtp','server', 'localhost')
 
         if smtp_server.startswith('maildir:/'):
             from mailbox import Maildir
@@ -470,7 +474,7 @@ def _email_send(smtp_from, smtp_to_list, message, openobject_id=None, ssl=False,
             return True
 
         oldstderr = smtplib.stderr
-        ssl = ssl or config.get('smtp_ssl', False)
+        ssl = ssl or config.get_misc('smtp','tls', False)
         s = smtplib.SMTP()
         try:
             # in case of debug, the messages are printed to stderr.
@@ -480,14 +484,31 @@ def _email_send(smtp_from, smtp_to_list, message, openobject_id=None, ssl=False,
             logger.debug("Sending Message to %s through %s", ','.join(smtp_to_list), smtp_server)
             s.set_debuglevel(int(bool(debug)))  # 0 or 1
             
-            s.connect(smtp_server, config['smtp_port'])
+            s.connect(smtp_server, int(config.get_misc('smtp','port','25')))
+            s.ehlo()
             if ssl:
-                s.ehlo()
                 s.starttls()
                 s.ehlo()
 
-            if config['smtp_user'] or config['smtp_password']:
-                s.login(config['smtp_user'], config['smtp_password'])
+            if config.get_misc('smtp', 'user', False) \
+                    or config.get_misc('smtp','password',False):
+
+                # some authentication methods may be broken. Avoid them
+                smtp_auths = config.get_misc('smtp', 'auth_mechs', False)
+                if smtp_auths and smtp_auths.lower() != 'all':
+                    smtp_auths = map(str.strip, smtp_auths.upper().split())
+                    if s.esmtp_features.get("auth"):
+                        filtered = filter(lambda x: x in smtp_auths, \
+                                s.esmtp_features["auth"].split())
+                        s.esmtp_features["auth"] = ' '.join(filtered)
+                        if debug:
+                            logger.debug("Filtered allowed autentication mechanisms to: %s", \
+                                    s.esmtp_features["auth"])
+
+                # see os.getlogin() and pwd.getpwuid(os.getuid())[0] as ways to
+                # get the user id in Unix systems. However, they would be too much.
+                s.login(config.get_misc('smtp','user', 'openerp'),
+                        config.get_misc('smtp', 'password', ''))
 
             s.sendmail(smtp_from, smtp_to_list, message.as_string())
             logger.info("1 message sent to %d recepients through %s", len(smtp_to_list), smtp_server)

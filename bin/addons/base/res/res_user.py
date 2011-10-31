@@ -150,10 +150,10 @@ class users(osv.osv):
     def send_welcome_email(self, cr, uid, id, context=None):
         logger = logging.getLogger('mails')
         user = self.pool.get('res.users').read(cr, uid, id, context=context)
-        if not tools.config.get('smtp_server'):
+        if not tools.config.get_misc('smtp', 'server'):
             logger.warning(_('"smtp_server" needs to be set to send mails to users'))
             return False
-        if not tools.config.get('email_from'):
+        if not tools.config.get_misc('smtp', 'email_from'):
             logger.warning(_('"email_from" needs to be set to send welcome mails '
                   'to users'))
             return False

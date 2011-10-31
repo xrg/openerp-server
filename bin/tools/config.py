@@ -41,7 +41,6 @@ def check_ssl():
 class configmanager(object):
     def __init__(self, fname=None):
         self.options = {
-            'email_from':False,
             'db_host': False,
             'db_port': False,
             'db_name': False,
@@ -64,11 +63,6 @@ class configmanager(object):
             'pidfile': None,
             'logfile': None,
             'logrotate': True,
-            'smtp_server': 'localhost',
-            'smtp_user': False,
-            'smtp_port':25,
-            'smtp_ssl':False,
-            'smtp_password': False,
             'stop_after_init': False,   # this will stop the server after initialization
             'syslog' : False,
             'log_level': logging.INFO,
@@ -100,6 +94,12 @@ class configmanager(object):
             'secure_pkey_file': 'httpsd.sslkey',
             'osv_memory_count_limit': 'osv_memory.count_limit',
             'osv_memory_age_limit': 'osv_memory.age_limit',
+            'smtp_server': 'smtp.server',
+            'smtp_user': 'smtp.user',
+            'smtp_port': 'smtp.port',
+            'smtp_ssl': 'smtp.tls',
+            'smtp_password': 'smtp.password',
+            'email_from': 'smtp.email_from',
         }
         
         self.blacklist_for_save = set(["publisher_warranty_url", "load_language"])
@@ -289,8 +289,7 @@ class configmanager(object):
             self.options['pidfile'] = False
 
         keys = [ 'db_name', 'db_user', 'db_password', 'db_host',
-                'db_port', 'logfile', 'pidfile', 'smtp_port', 'cache_timeout',
-                'email_from', 'smtp_server', 'smtp_user', 'smtp_password',
+                'db_port', 'logfile', 'pidfile', 'cache_timeout',
                 'db_maxconn', 'import_partial', 'addons_path',
                 'syslog', 'without_demo', 'timezone',]
 
@@ -298,7 +297,7 @@ class configmanager(object):
             if getattr(opt, arg):
                 self.options[arg] = getattr(opt, arg)
 
-        keys = ['language', 'translate_out', 'translate_in', 'debug_mode', 'smtp_ssl',
+        keys = ['language', 'translate_out', 'translate_in', 'debug_mode',
                 'stop_after_init', 'logrotate', 'without_demo', 'syslog',
                 'list_db', 'test_report_directory' ]
 
