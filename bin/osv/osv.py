@@ -368,7 +368,7 @@ class osv_memory(osv_base, orm.orm_memory):
     def createInstance(cls, pool, module, cr):
         parent_names = getattr(cls, '_inherit', None)
         if parent_names:
-            if isinstance(parent_names, (str, unicode)):
+            if isinstance(parent_names, basestring):
                 name = cls._name or parent_names
                 parent_names = [parent_names]
             else:
@@ -376,30 +376,39 @@ class osv_memory(osv_base, orm.orm_memory):
             if not name:
                 raise TypeError('_name is mandatory in case of multiple inheritance')
 
-            for parent_name in ((type(parent_names)==list) and parent_names or [parent_names]):
-                parent_class = pool.get(parent_name).__class__
+            for parent_name in (isinstance(parent_names, list) and parent_names or [parent_names]):
                 assert pool.get(parent_name), "parent class %s does not exist in module %s !" % (parent_name, module)
+                parent_obj = pool.get(parent_name)
+                parent_class = parent_obj.__class__
                 nattr = {}
                 for s in ('_columns', '_defaults', '_virtuals', '_vtable'):
-                    new = copy.copy(getattr(pool.get(parent_name), s))
-                    if s == '_columns':
-                        new_cols = cls.__dict__.get(s, {})
+                    new = copy.copy(getattr(parent_obj, s))
+                    if not getattr(cls, s, False):
+                        pass
+                    elif s == '_columns':
+                        new_cols = getattr(cls, s)
                         for nn, nc in new_cols.items():
                             if isinstance(nc, orm.fields.inherit):
                                 if parent_name != name:
                                     new[nn] = copy.copy(new[nn])
                                 nc._adapt(new[nn])
+                            elif nc is False:
+                                del new[nn]
                             else:
                                 new[nn] = nc
                     elif s == '_vtable':
                         if not new:
-                            new = cls.__dict__.get(s, False)
-                        elif cls.__dict__.get(s, False):
-                            new.update(cls.__dict__.get(s))
+                            new = getattr(cls, s)
+                        elif getattr(cls, s):
+                            new.update(getattr(cls,s))
                     elif hasattr(new, 'update'):
-                        new.update(cls.__dict__.get(s, {}))
+                        nc = getattr(cls, s)
+                        new.update(nc)
+                        for k in nc.keys():
+                            if nc[k] == False:
+                                del new[k]
                     else:
-                        new.extend(cls.__dict__.get(s, []))
+                        new.extend(getattr(cls, s))
                     nattr[s] = new
                 cls = type(name, (cls, parent_class), nattr)
 
@@ -432,25 +441,29 @@ class osv(osv_base, orm.orm):
                         '_constraints', '_sql_constraints', '_virtuals',
                         '_column_stats', '_vtable'):
                     new = copy.copy(getattr(pool.get(parent_name), s))
-                    if s == '_columns':
-                        new_cols = cls.__dict__.get(s, {})
+                    if not getattr(cls, s, False):
+                        pass
+                    elif s == '_columns':
+                        new_cols = getattr(cls, s)
                         for nn, nc in new_cols.items():
                             if isinstance(nc, orm.fields.inherit):
                                 if parent_name != name:
                                     new[nn] = copy.copy(new[nn])
                                 nc._adapt(new[nn])
+                            elif nc is False:
+                                del new[nn]
                             else:
                                 new[nn] = nc
                     elif s == '_vtable':
                         if not new:
-                            new = cls.__dict__.get(s, False)
-                        elif cls.__dict__.get(s, False):
-                            new.update(cls.__dict__.get(s))
+                            new = getattr(cls, s)
+                        elif getattr(cls, s):
+                            new.update(getattr(cls, s))
                     elif hasattr(new, 'update'):
-                        new.update(cls.__dict__.get(s, {}))
+                        new.update(getattr(cls, s))
                     else:
                         if s=='_constraints':
-                            for c in cls.__dict__.get(s, []):
+                            for c in getattr(cls, s):
                                 exist = False
                                 for c2 in range(len(new)):
                                      #For _constraints, we should check field and methods as well
@@ -466,7 +479,7 @@ class osv(osv_base, orm.orm):
                                 if not exist:
                                     new.append(c)
                         else:
-                            new.extend(cls.__dict__.get(s, []))
+                            new.extend(getattr(cls, s))
                     nattr[s] = new
                 cls = type(name, (cls, parent_class), nattr)
         obj = object.__new__(cls)
