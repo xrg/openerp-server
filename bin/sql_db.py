@@ -209,6 +209,9 @@ class Cursor(object):
             self.__logger.warn(msg)
             self._close(True)
 
+    def __repr__(self):
+        return "<sql_db.Cursor %x %s>" %( id(self), self.__closed and 'closed' or '')
+
     def execute(self, query, params=None, debug=False, log_exceptions=True, _fast=False):
         """ Execute some SQL command
             @param debug   Verbosely log the query being sent (not results, yet)
@@ -219,6 +222,7 @@ class Cursor(object):
             query = query.replace('%d','%s').replace('%f','%s')
 
         if self.__closed:
+            self.__logger.debug("closed cursor: %r", self)
             raise psycopg2.OperationalError('Unable to use the cursor after having closed it')
 
         if self.sql_log or debug:
