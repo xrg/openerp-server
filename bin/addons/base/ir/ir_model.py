@@ -162,6 +162,8 @@ class ir_model(osv.osv):
 
     def unlink(self, cr, user, ids, context=None):
         for model in self.browse(cr, user, ids, context):
+            if not self.pool.get(model.model):
+                continue
             if model.state != 'manual':
                 raise except_orm(_('Error'), _("You can not remove the model '%s' !") %(model.name,))
         res = super(ir_model, self).unlink(cr, user, ids, context)
@@ -281,6 +283,9 @@ class ir_model_fields(osv.osv):
 
     def unlink(self, cr, user, ids, context=None):
         for field in self.browse(cr, user, ids, context):
+            if not self.pool.get(field.model):
+                # may be a model being destroyed at module unlink
+                continue
             if field.name not in self.pool.get(field.model)._columns:
                 continue
             if field.state <> 'manual':
