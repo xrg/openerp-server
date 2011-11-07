@@ -669,8 +669,8 @@ class ir_model_data(osv.osv):
         'source': 'xml',
     }
     _sql_constraints = [
-        ('module_name_uniq', 'unique(module, name)', 'You cannot have multiple records with the same id for the same module !'),
-        # note: this also creates the useful (module, name) index
+        ('source_module_name_uniq', 'unique(source, module, name)', 'You cannot have multiple records with the same id for the same module !'),
+        # note: this also creates the useful (source, module, name) index
     ]
 
     _indices = {
