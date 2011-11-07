@@ -189,7 +189,7 @@ class ir_model(osv.osv):
             _re_init_model(self.pool.get(vals['model']), cr, ctx)
         return res
 
-    def instanciate(self, cr, user, model, context={}):
+    def instanciate(self, cr, user, model, context=None):
         class x_custom_model(osv.osv):
             pass
         x_custom_model._name = model

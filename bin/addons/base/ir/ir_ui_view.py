@@ -101,7 +101,7 @@ class view(osv.osv):
         'model_type_idx': index.plain('model', 'type'),
     }
 
-    def write(self, cr, uid, ids, vals, context={}):
+    def write(self, cr, uid, ids, vals, context=None):
         if not isinstance(ids, (list, tuple)):
             ids = [ids]
         result = super(view, self).write(cr, uid, ids, vals, context)
