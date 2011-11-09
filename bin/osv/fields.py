@@ -335,7 +335,7 @@ invalid_xml_low_bytes = re.compile(r'[\x00-\x08\x0b-\x0c\x0e-\x1f]')
 def sanitize_binary_value(dict_item):
     """ Binary fields should be 7-bit ASCII base64-encoded data,
         but we do additional sanity checks to make sure the values
-        are not something else that won't pass via xmlrpc
+        are not something else that won't pass via XML-RPC
     """
     index, value = dict_item
     if isinstance(value, (xmlrpclib.Binary, tuple, list, dict)):
