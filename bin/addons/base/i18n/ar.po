@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: OpenERP Server 5.0.4\n"
 "Report-Msgid-Bugs-To: support@openerp.com\n"
 "POT-Creation-Date: 2011-01-11 11:14+0000\n"
-"PO-Revision-Date: 2011-11-08 06:06+0000\n"
-"Last-Translator: Ahmad Khayyat <Unknown>\n"
+"PO-Revision-Date: 2011-11-09 05:51+0000\n"
+"Last-Translator: kifcaliph <kifcaliph@hotmail.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-11-09 05:13+0000\n"
+"X-Launchpad-Export-Date: 2011-11-10 05:17+0000\n"
 "X-Generator: Launchpad (build 14263)\n"
 
 #. module: base
@@ -166,7 +166,7 @@ msgstr ""
 #. module: base
 #: model:res.country,name:base.sz
 msgid "Swaziland"
-msgstr ""
+msgstr "سوسرا"
 
 #. module: base
 #: code:addons/orm.py:1993
@@ -209,7 +209,7 @@ msgstr ""
 #. module: base
 #: view:res.partner:0
 msgid "Search Partner"
-msgstr ""
+msgstr "بحث الشركاء"
 
 #. module: base
 #: code:addons/base/res/res_user.py:132
@@ -379,7 +379,7 @@ msgstr ""
 #. module: base
 #: selection:base.language.install,lang:0
 msgid "Greek / Ελληνικά"
-msgstr ""
+msgstr "اليونان / Ελληνικά"
 
 #. module: base
 #: selection:base.language.install,lang:0
@@ -575,12 +575,12 @@ msgstr "نموذج الشريك"
 #. module: base
 #: selection:base.language.install,lang:0
 msgid "Swedish / svenska"
-msgstr ""
+msgstr "السويدية / svenska"
 
 #. module: base
 #: model:res.country,name:base.rs
 msgid "Serbia"
-msgstr ""
+msgstr "صربيا"
 
 #. module: base
 #: selection:ir.translation,type:0
@@ -590,7 +590,7 @@ msgstr "عرض باستخدام المعالج"
 #. module: base
 #: model:res.country,name:base.kh
 msgid "Cambodia, Kingdom of"
-msgstr ""
+msgstr "مملكة كامبوديا"
 
 #. module: base
 #: model:ir.actions.act_window,name:base.ir_sequence_form
@@ -598,7 +598,7 @@ msgstr ""
 #: model:ir.ui.menu,name:base.menu_ir_sequence_form
 #: model:ir.ui.menu,name:base.next_id_5
 msgid "Sequences"
-msgstr ""
+msgstr "المتواليات"
 
 #. module: base
 #: model:ir.model,name:base.model_base_language_import
@@ -628,7 +628,7 @@ msgstr ""
 #. module: base
 #: model:res.country,name:base.pg
 msgid "Papua New Guinea"
-msgstr ""
+msgstr "بابوا غينيا الجديدة"
 
 #. module: base
 #: help:ir.actions.report.xml,report_type:0
@@ -699,7 +699,7 @@ msgstr "الجوال"
 #. module: base
 #: model:res.country,name:base.om
 msgid "Oman"
-msgstr ""
+msgstr "سلطنة عمان"
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_payterm_form
@@ -840,7 +840,7 @@ msgstr "هناك خطأ في بيانات الـ XML للعرض!"
 #. module: base
 #: model:res.country,name:base.ky
 msgid "Cayman Islands"
-msgstr ""
+msgstr "جزر الكايمان"
 
 #. module: base
 #: model:res.country,name:base.kr
@@ -8766,7 +8766,7 @@ msgstr ""
 #. module: base
 #: selection:ir.module.module,state:0
 msgid "Not Installable"
-msgstr ""
+msgstr "لا يمكن تثبيته"
 
 #. module: base
 #: report:ir.module.reference.graph:0
@@ -8921,7 +8921,7 @@ msgstr "خدمات بعد البيع"
 #. module: base
 #: view:ir.actions.todo:0
 msgid "Launch"
-msgstr ""
+msgstr "تشغيل"
 
 #. module: base
 #: field:ir.actions.act_window,limit:0
@@ -9096,7 +9096,7 @@ msgstr "اختر المجموعات"
 #. module: base
 #: view:res.lang:0
 msgid "%X - Appropriate time representation."
-msgstr ""
+msgstr "%X - التمثيل الملائم للوقت"
 
 #. module: base
 #: selection:base.language.install,lang:0
