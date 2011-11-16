@@ -13,7 +13,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-11-15 05:17+0000\n"
+"X-Launchpad-Export-Date: 2011-11-16 05:29+0000\n"
 "X-Generator: Launchpad (build 14291)\n"
 
 #. module: base
@@ -9655,65 +9655,3 @@ msgstr "Sri Lanka"
 #: selection:base.language.install,lang:0
 msgid "Russian / русский язык"
 msgstr "Orosz / русский язык"
-
-#~ msgid ""
-#~ "Invalid date/time format directive specified. Please refer to the list of "
-#~ "allowed directives, displayed when you edit a language."
-#~ msgstr ""
-#~ "Érvénytelen dátum/idő formátum irányelv meghatározás! Kérem hivatkozzon az "
-#~ "engedélyezett irányelvek listájára, megjelenítve, amikor szerkeszt egy "
-#~ "nyelvet."
-
-#~ msgid "Currency sign, to be used when printing amounts"
-#~ msgstr "Valutajel, mennyiségek nyomtatásánál használatos"
-
-#~ msgid "Language Pack"
-#~ msgstr "Nyelvi Csomag"
-
-#~ msgid "Model Overview"
-#~ msgstr "Model Áttekintés"
-
-#~ msgid "Currency Code (ISO 4217)"
-#~ msgstr "Árfolyam kód (ISO 4217)"
-
-#~ msgid "Reconfigure"
-#~ msgstr "Újrakonfigurálás"
-
-#~ msgid "OpenERP Tweets"
-#~ msgstr "OpenERP tweet-ek"
-
-#~ msgid "OPW"
-#~ msgstr "OPW"
-
-#~ msgid "Please verify your publisher warranty serial number and validity."
-#~ msgstr "Kérem, azonosítsa a kiadási jótállás sorozatszámát és érvényességét."
-
-#~ msgid "List of modules in which the object is defined or inherited"
-#~ msgstr ""
-#~ "Olyan modulok listája, melyekben az objektum meghatározott, vagy örökölt."
-
-#~ msgid "List of modules in which the field is defined"
-#~ msgstr "Olyan modulok listája, amelyekben a mező meg van határozva"
-
-#~ msgid ""
-#~ "Your OpenERP Publisher's Warranty Contract unique key, also called serial "
-#~ "number."
-#~ msgstr ""
-#~ "Az OpenERP közzétevő garancia szerződés egyedi kulcsa, sorozatszám néven is "
-#~ "ismert"
-
-#~ msgid ""
-#~ "Checked if this is an OpenERP Publisher's Warranty contract (versus older "
-#~ "contract types"
-#~ msgstr ""
-#~ "Bejelölve, ha ez OpenERP közzétevő garamcia szerződés (szemben a régebbi "
-#~ "szerződéstípusokkal"
-
-#~ msgid "Support Level 1"
-#~ msgstr "1 Támogatási Szint"
-
-#~ msgid "Access Groups"
-#~ msgstr "Hozzáférési csoportok"
-
-#~ msgid "In modules"
-#~ msgstr "Modulokon belül"
