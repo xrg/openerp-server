@@ -335,8 +335,6 @@ def load_information_from_description_file(module):
             finally:
                 desc_f.close()
 
-    #TODO: refactor the logger in this file to follow the logging guidelines
-    #      for 6.0
     logging.getLogger('addons').debug('The module %s does not contain a description file:'\
                                       '__openerp__.py or __terp__.py (deprecated)', module)
     return {}
