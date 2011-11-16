@@ -392,7 +392,7 @@ class osv_memory(osv_base, orm.orm_memory):
                                 if parent_name != name:
                                     new[nn] = copy.copy(new[nn])
                                 nc._adapt(new[nn])
-                            elif nc is False:
+                            elif nc is None:
                                 del new[nn]
                             else:
                                 new[nn] = nc
@@ -405,7 +405,7 @@ class osv_memory(osv_base, orm.orm_memory):
                         nc = getattr(cls, s)
                         new.update(nc)
                         for k in nc.keys():
-                            if nc[k] == False:
+                            if nc[k] is None:
                                 del new[k]
                     else:
                         new.extend(getattr(cls, s))
@@ -450,7 +450,7 @@ class osv(osv_base, orm.orm):
                                 if parent_name != name:
                                     new[nn] = copy.copy(new[nn])
                                 nc._adapt(new[nn])
-                            elif nc is False:
+                            elif nc is None:
                                 del new[nn]
                             else:
                                 new[nn] = nc
@@ -460,7 +460,11 @@ class osv(osv_base, orm.orm):
                         elif getattr(cls, s):
                             new.update(getattr(cls, s))
                     elif hasattr(new, 'update'):
-                        new.update(getattr(cls, s))
+                        nc = getattr(cls, s)
+                        new.update(nc)
+                        for k in nc.keys():
+                            if nc[k] is None:
+                                del new[k]
                     else:
                         if s=='_constraints':
                             for c in getattr(cls, s):

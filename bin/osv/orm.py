@@ -3195,8 +3195,13 @@ class orm(orm_template):
         self._inherits_reload()
         if not self._sequence:
             self._sequence = self._table+'_id_seq'
-        for k in self._defaults:
-            assert (k in self._columns) or (k in self._inherit_fields), 'Default function defined in %s but field %s does not exist !' % (self._name, k,)
+        for k in self._defaults.keys():
+            if self._defaults[k] is None:
+                del self._defaults[k]
+            else:
+                assert (k in self._columns) or (k in self._inherit_fields), \
+                    'Default function defined in %s but field %s does not exist %r !' %\
+                    (self._name, k, self._defaults[k])
 
     #
     # Update objects that uses this one to update their _inherits fields
