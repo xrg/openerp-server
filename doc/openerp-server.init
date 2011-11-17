@@ -44,13 +44,20 @@ else
  exit 0
 fi
 
+# Not all distros have "run-parts"
+if which run-parts > /dev/null ; then
+HAS_RUN_PARTS=true
+else
+HAS_RUN_PARTS=false
+fi
+
 # check the existence of the openerp-server script
 [ -z "/usr/bin/openerp-server" ] && exit 0
 
 RETVAL=0
 
 start() {
-    if [ -d /etc/openerp/start.d ] ; then
+    if [ -d /etc/openerp/start.d ] && $HAS_RUN_PARTS ; then
         echo -n $"Preparing $desc: "
         run-parts /etc/openerp/start.d
         RETVAL=$?
@@ -84,7 +91,7 @@ stop() {
         echo_failure
         echo
     fi
-    if [ -d /etc/openerp/stop.d ] ; then
+    if [ -d /etc/openerp/stop.d ] && $HAS_RUN_PARTS ; then
         echo -n $"Clearing $desc: "
         run-parts /etc/openerp/stop.d
         echo
