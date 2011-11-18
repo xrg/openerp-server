@@ -6,17 +6,19 @@ msgstr ""
 "Project-Id-Version: OpenERP Server 5.0.0\n"
 "Report-Msgid-Bugs-To: support@openerp.com\n"
 "POT-Creation-Date: 2011-01-11 11:14+0000\n"
-"PO-Revision-Date: 2011-01-19 13:31+0000\n"
-"Last-Translator: Dimitris Andavoglou <dimitrisand@gmail.com>\n"
-"Language-Team: nls@hellug.gr <nls@hellug.gr>\n"
+"PO-Revision-Date: 2011-11-18 18:52+0200\n"
+"Last-Translator: P. Christeas <xrg@linux.gr>\n"
+"Language-Team: Greek <openerp@lists.hellug.gr>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Launchpad-Export-Date: 2011-09-15 05:14+0000\n"
-"X-Generator: Launchpad (build 13921)\n"
+"X-Generator: Lokalize 1.2\n"
 "X-Poedit-Country: GREECE\n"
 "X-Poedit-Language: Greek\n"
 "X-Poedit-SourceCharset: utf-8\n"
+"Language: el\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: base
 #: code:addons/__init__.py:859
@@ -2620,7 +2622,7 @@ msgstr "Αποδεκτοί χρήστες "
 #. module: base
 #: field:res.config.users,action_id:0 field:res.users,action_id:0
 msgid "Home Action"
-msgstr "Home Action"
+msgstr "Αρχική Ενέργεια"
 
 #. module: base
 #: field:res.config.users,address_id:0 field:res.users,address_id:0
