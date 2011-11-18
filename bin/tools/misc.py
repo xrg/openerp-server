@@ -582,7 +582,7 @@ def email_send(email_from, email_to, subject, body, email_cc=None, email_bcc=Non
     if not email_bcc: email_bcc = []
     body_charset = 'us-ascii'
     if not body:
-        body = u''
+        txt_body = u''
     else:
         body = ustr(body)
         try:
