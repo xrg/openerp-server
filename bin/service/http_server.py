@@ -664,7 +664,7 @@ class OerpAuthProxy(AuthProxy):
 
         if auth_str and auth_str.startswith('Basic '):
             auth_str=auth_str[len('Basic '):]
-            (user,passwd) = base64.decodestring(auth_str).split(':')
+            (user,passwd) = base64.decodestring(auth_str).split(':',1)
             try:
                 acd = self.provider.authenticate(db,user,passwd,handler.client_address)
                 if handler.client_address and len(handler.client_address) == 4:
