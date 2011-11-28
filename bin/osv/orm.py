@@ -334,8 +334,15 @@ class browse_record(object):
                     
                     assert len(bro) == 1, "Virtual object %s[%s=%s] has %s instances " % \
                             (vobj._name, self._table._name, self._id, len(bro))
-                    return getattr(bro[0], name)
-                    
+                    ret = getattr(bro[0], name, NotImplemented)
+                    # Still, allow it to fail if there is no such attribute
+                    # at the virtual child class. May happen if 2 classes inherits
+                    # from self, but only one defines the attribute.
+                    # Note that we treat None as a valid attribute value, so we
+                    # need something more exotic (NotImplemented) as the placeholder.
+                    if ret is not NotImplemented:
+                        return ret
+
                 # else fetch the old way..
 
             # fetch the definition of the field which was asked for
