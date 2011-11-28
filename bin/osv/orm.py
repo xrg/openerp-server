@@ -167,7 +167,7 @@ class browse_null(object):
     """
 
     def __init__(self):
-        self.id = False
+        self.id = self._id = False
 
     def __getitem__(self, name):
         return None
@@ -216,7 +216,7 @@ def only_ids(ids):
     """ Return the list of ids from either a browse_record_list or plain list
     """
     if isinstance(ids, browse_record_list):
-        return [ id.id for id in ids]
+        return [ id._id for id in ids]
     else:
         return ids
 
@@ -461,6 +461,8 @@ class browse_record(object):
         return ret
 
     def __getattr__(self, name):
+        if name == 'id':
+            return self._id
         try:
             return self[name]
         except KeyError, e:
