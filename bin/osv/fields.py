@@ -318,6 +318,27 @@ class _column(object):
             return (lefts[0], operator, None)
         return None # as-is
 
+    def _verify_model(self, dcol, mname, cname):
+        """Verify that `dcol` is a _column like this one
+
+            This is used to enforce rules of an abstact model on implementing
+            ones. Any significant properties of this column should be checked
+            against `dcol`.
+        """
+
+        if isinstance(dcol, globals()['function']):
+            dcol = dcol._shadow
+
+        if self._type != dcol._type:
+            raise ValueError('Incorrect type %s.%s: not %s' % (mname, cname, self._type))
+
+        if self.required and not dcol.required:
+            raise ValueError('Column %s.%s must be set to required' % (mname, cname))
+
+        #if self.size and (dcol.size > self.size):
+        #    warning ...
+        # etc..
+
 def get_nice_size(a):
     (x,y) = a
     if isinstance(y, (int,long)):

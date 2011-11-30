@@ -792,6 +792,7 @@ def load_module_graph(cr, graph, status=None, perform_checks=True, skip_modules=
     migrations = MigrationManager(cr, graph)
     modobj = None
     logger.debug('loading %d packages..' % len(graph))
+    abstract_models = []
 
     for package in graph:
         if skip_modules and package.name in skip_modules:
@@ -800,9 +801,22 @@ def load_module_graph(cr, graph, status=None, perform_checks=True, skip_modules=
         migrations.migrate_module(package, 'pre')
         register_class(package.name)
         modules = pool.instanciate(package.name, cr)
+        for m in modules:
+            # Discover all abstract models (of all modules)
+            if isinstance(m, osv.orm.orm_abstract):
+                abstract_models.append(m)
         if hasattr(package, 'init') or hasattr(package, 'update') or package.state in ('to install', 'to upgrade'):
             init_module_objects(cr, package.name, modules)
+
+            for am in abstract_models:
+                # check that new models satisfy their abstract definitions
+                # Note that new models may /not/ have the _implements flag,
+                # yet need to implement an abstract through their _inherits.
+                am._verify_implementations(modules)
+
         cr.commit()
+
+    del abstract_models
 
     for package in graph:
         status['progress'] = (float(statusi)+0.1) / len(graph)

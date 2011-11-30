@@ -530,6 +530,7 @@ class orm_template(object):
     _sequence = None
     _description = None
     _inherits = {}
+    _implements = None
     _table = None
     _invalids = set() # FIXME: why persistent?
     _log_create = False
@@ -4996,6 +4997,113 @@ class orm_deprecated(object):
     def unlink(self, *args, **kwargs):
         self.__issue_depr()
         return super(orm_deprecated, self).unlink(*args, **kwargs)
+
+class orm_abstract(orm_template):
+    """ Abstract Model
+
+        See `osv.osv_abstract`
+
+        Most methods in this class iterate over the `_child_models` and perform
+        the operation on each one of them.
+    """
+     #   TODO: write a decorator for that iteration
+
+    _inherit_fields = {}
+
+    def __init__(self, cr):
+        super(orm_abstract, self).__init__(cr)
+        self._child_models = []
+
+        # Load manual fields
+        if True:
+            cr.execute('SELECT * FROM ir_model_fields WHERE model=%s AND state=%s', (self._name, 'manual'))
+            for field in cr.dictfetchall():
+                raise ValueError("Manual fields are not allowed for abstract models!")
+
+    def _check_access(self, uid, object_id, mode):
+        raise NotImplementedError
+
+    def read(self, cr, user, ids, fields_to_read=None, context=None, load='_classic_read'):
+        raise NotImplementedError
+
+    def write(self, cr, user, ids, vals, context=None):
+        raise NotImplementedError
+
+    def create(self, cr, user, vals, context=None):
+        raise NotImplementedError
+
+    def _where_calc(self, cr, user, args, active_test=True, context=None):
+        raise NotImplementedError
+
+    def _search(self, cr, user, args, offset=0, limit=None, order=None, context=None, count=False, access_rights_uid=None):
+        raise NotImplementedError
+
+    def unlink(self, cr, uid, ids, context=None):
+        raise NotImplementedError
+
+    def perm_read(self, cr, user, ids, context=None, details=True):
+        raise NotImplementedError
+
+    def _check_removed_columns(self, cr, log=False):
+        pass
+
+    def exists(self, cr, uid, ids, context=None):
+        raise NotImplementedError
+
+    # Force inheritance (see freaky note above)
+    def _auto_init_prefetch(self, schema, context=None):
+        return orm_template._auto_init_prefetch(self, schema=schema, context=context)
+
+    def _field_model2db(self, cr,context=None):
+        return orm_template._field_model2db(self, cr, context=context)
+
+    def _auto_init(self, cr, context=None):
+        pass
+
+    _auto_init.deferrable = True #: magic attribute for init algorithm
+
+    def _auto_init_sql(self, schema, context=None):
+        return orm_template._auto_init_sql(self, schema, context=context)
+
+    def _append_child(self, cname):
+        """Declare that model `cname` inherits from us
+        """
+
+        if cname not in self._child_models:
+            self._child_models.append(cname)
+
+    def _verify_implementations(self, new_models):
+        """ If any of `new_models` is an implementation of us, verify it
+        """
+        if self._debug:
+            _logger.debug("Verifying potential implementations of %s", self._name)
+        for nmodel in new_models:
+            if nmodel._name in self._child_models:
+                if nmodel._debug:
+                    _logger.debug("Verifying %s implementation of %s", nmodel._name, self._name)
+
+                for cn, col in self._columns.items():
+                    if cn in nmodel._columns:
+                        dcol = nmodel._columns[cn]
+                    elif cn in nmodel._inherit_fields:
+                        dcol = nmodel._inherit_fields[2]
+                    else:
+                        raise KeyError('Model %s doesn\'t implement column "%s" as in %s.' % \
+                                    (nmodel._name, cn, self._name))
+                    col._verify_model(dcol, nmodel._name, cn)
+
+                for fn_name, fn_abs in self.__class__.__dict__.items():
+                    if fn_name in ('_append_child', '_verify_implementations'):
+                        continue
+                    if not callable(fn_abs):
+                        continue
+                    if not hasattr(nmodel.__class__, fn_name):
+                        raise KeyError("Model %s does not define %s(), required for %s" % \
+                                (nmodel._name, fn_name, self._name))
+
+                    #print "Passed function:", fn_name
+                    # TODO check arguments
+        pass
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
 

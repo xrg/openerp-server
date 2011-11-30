@@ -3,6 +3,7 @@
 #
 #    OpenERP, Open Source Management Solution
 #    Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>).
+#    Copyright (C) 2011 P. Christeas <xrg@linux.gr>
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -311,6 +312,19 @@ class osv_pool(object):
     def obj_list(self):
         return self.obj_pool.keys()
 
+    def __get_abstracts(self, obj_inst):
+        """ Return the list of abstract classes obj_inst implements
+
+            Also recurses into all models this one _inherits
+        """
+        ret = []
+        if obj_inst._implements:
+            ret += obj_inst._implements
+        if obj_inst._inherits:
+            for iname in obj_inst._inherits.keys():
+                ret += self.__get_abstracts(self.obj_pool[iname])
+        return ret
+
     # adds a new object instance to the object pool.
     # if it already existed, the instance is replaced
     def add(self, name, obj_inst):
@@ -318,6 +332,15 @@ class osv_pool(object):
         if name in self.obj_pool:
             del self.obj_pool[name]
         self.obj_pool[name] = obj_inst
+
+        if obj_inst._implements or obj_inst._inherits:
+            for ibase in self.__get_abstracts(obj_inst):
+                if not ibase in self.obj_pool:
+                    raise KeyError('Model %s should implement "%s", '
+                            'but the latter does not exist in the pool!' % \
+                            (name, ibase))
+
+                self.obj_pool[ibase]._append_child(name)
 
         module = str(obj_inst.__class__)[6:]
         module = module[:len(module)-1]
@@ -489,6 +512,28 @@ class osv(osv_base, orm.orm):
         obj = object.__new__(cls)
         obj.__init__(pool, cr)
         return obj
+    createInstance = classmethod(createInstance)
+
+
+class osv_abstract(osv_base, orm.orm_abstract):
+    """ Abstract OSV base
+
+        A model of this class is NOT allowed to have records by itself,
+        but rather serve as a basis of abstraction for other models.
+        All `_columns` and methods of the abstract model need to be
+        defined in the models that `_implements` it.
+
+        Then, some elementary operations on the abstract class can be
+        performed, being dispatched to the appropriate implementing classes.
+    """
+
+    def createInstance(cls, pool, module, cr):
+        if getattr(cls, '_inherit', None):
+            raise TypeError("Abstract class %s must not _inherit anything!" % cls._name)
+        obj = object.__new__(cls)
+        obj.__init__(pool, cr) # TODO: needed?
+        return obj
+
     createInstance = classmethod(createInstance)
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
