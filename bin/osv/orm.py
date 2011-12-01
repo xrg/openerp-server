@@ -5065,6 +5065,10 @@ class orm_abstract(orm_template):
     def _auto_init_sql(self, schema, context=None):
         return orm_template._auto_init_sql(self, schema, context=context)
 
+    def browse(self, cr, uid, select, context=None, list_class=None, 
+                fields_process=None, fields_only=FIELDS_ONLY_DEFAULT, cache=None):
+        raise NotImplementedError
+
     def _append_child(self, cname):
         """Declare that model `cname` inherits from us
         """
