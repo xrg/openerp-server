@@ -3224,11 +3224,12 @@ class orm(orm_template):
     def _inherits_reload(self):
         res = {}
         for table in self._inherits:
-            res.update(self.pool.get(table)._inherit_fields)
-            for col in self.pool.get(table)._columns.keys():
-                res[col] = (table, self._inherits[table], self.pool.get(table)._columns[col])
-            for col in self.pool.get(table)._inherit_fields.keys():
-                res[col] = (table, self._inherits[table], self.pool.get(table)._inherit_fields[col][2])
+            tbl_obj = self.pool.get(table)
+            res.update(tbl_obj._inherit_fields)
+            for col in tbl_obj._columns.keys():
+                res[col] = (table, self._inherits[table], tbl_obj._columns[col])
+            for col in tbl_obj._inherit_fields.keys():
+                res[col] = (table, self._inherits[table], tbl_obj._inherit_fields[col][2])
         self._inherit_fields = res
         self._inherits_reload_src()
 
