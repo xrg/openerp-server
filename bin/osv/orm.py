@@ -4086,7 +4086,7 @@ class orm(orm_template):
         for v in vals.keys():
             if v == '_vptr':
                 continue
-            if v in self._inherit_fields:
+            if v in self._inherit_fields and v not in self._columns:
                 (table, col, col_detail) = self._inherit_fields[v]
                 tocreate[table][v] = vals[v]
                 del vals[v]
