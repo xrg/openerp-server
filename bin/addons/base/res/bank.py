@@ -26,6 +26,8 @@ class Bank(osv.osv):
     _description='Bank'
     _name = 'res.bank'
     _order = 'name'
+    _function_field_browse = True
+
     _columns = {
         'name': fields.char('Name', size=128, required=True),
         'code': fields.char('Code', size=64),
@@ -44,7 +46,7 @@ class Bank(osv.osv):
             help="Bank Identifier Code"),
     }
     _defaults = {
-        'active': lambda *a: 1,
+        'active': True,
     }
     def name_get(self, cr, uid, ids, context=None):
         result = []
