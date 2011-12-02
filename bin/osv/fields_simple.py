@@ -82,8 +82,77 @@ class integer_big(_column):
 class id_field(integer):
     """ special properties for the 'id' field
     """
-    
+
     def expr_eval(self, cr, uid, obj, lefts, operator, right, pexpr, context):
+        """ The magic 'id' field has utility expression syntax
+
+            Of course, this syntax is supported::
+
+                [ '|', ('id', '=', 4), ('id', 'in', (1,2,3))]
+
+            but also, ir.model.data queries can be triggered like::
+
+                [('id.ref', '=', 'module.xml_id') ]
+
+            or even, for external refs::
+
+                [('id.ref.magento', '=', 'foo.bar')]
+                or
+                [('id.ref.magento.foo', '=', 'bar')]
+        """
+        if len(lefts) > 1:
+            import expression
+            from query import Query
+            if lefts[1] == 'ref':
+                lop = None
+                sop = 'in'
+                source = ['orm', 'xml']
+                module = False
+                domain = [('model', '=', obj._name)]
+
+                if operator == '=':
+                    lop = 'inselect'
+                elif operator in ('!=', '<>'):
+                    lop = 'not inselect'
+                # elif 'in' => 'inselect', in
+                else:
+                    raise eu.DomainInvalidOperator(obj, lefts, operator, right)
+
+                if len(lefts) > 2:
+                    sop = '='
+                    source = lefts[2]
+                if len(lefts) > 3:
+                    module = lefts[3]
+                if len(lefts) > 4:
+                    raise eu.DomainLeftError(obj, lefts, operator, right)
+
+                if operator in ('=', '!=', '<>'):
+                    if not isinstance(right, basestring):
+                        raise eu.DomainRightError(obj, lefts, operator, right)
+                    if '.' in right:
+                        module, name = right.split('.', 1)
+                    elif module:
+                        name = right
+                    elif context and 'module' in context:
+                        module = context
+                        name = right
+                    else:
+                        raise eu.DomainMsgError(_("Ref Id does not define module, cannot decode: %s") % right)
+
+                    domain += [('module', '=', module), ('name', '=', name),
+                                ('source', sop, source)]
+
+                imd_obj = obj.pool.get('ir.model.data')
+                qry = Query(tables=['"%s"' % imd_obj._table,])
+                e = expression.expression(domain, debug=imd_obj._debug)
+                e.parse_into_query(cr, uid, imd_obj, qry, context)
+
+                from_clause, where_clause, qry_args = qry.get_sql()
+                qry = "SELECT res_id FROM %s WHERE %s" % (from_clause, where_clause)
+
+                return (lefts[0], lop, (qry, qry_args))
+            else:
+                raise eu.DomainLeftError(obj, lefts, operator, right)
 
         if operator == 'child_of' or operator == '|child_of':
             dom = pexpr._rec_get(cr, uid, obj, right, null_too=(operator == '|child_of'), context=context)
