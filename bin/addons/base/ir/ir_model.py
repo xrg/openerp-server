@@ -751,7 +751,10 @@ class ir_model_data(osv.osv):
         context = dict(context, res_log_read=True)
 
         if xml_id and ('.' in xml_id):
-            assert len(xml_id.split('.'))==2, _("'%s' contains too many dots. XML ids should not contain dots ! These are used to refer to other modules data, as in module.reference_id") % (xml_id)
+            assert xml_id.count('.') == 1, \
+                    _("'%s' contains too many dots. XML ids should not "
+                      "contain dots ! These are used to refer to other "
+                      "modules data, as in module.reference_id") % (xml_id)
             module, xml_id = xml_id.split('.')
         if (not xml_id) and (not self.doinit):
             return False
@@ -765,7 +768,9 @@ class ir_model_data(osv.osv):
                     'WHERE module=%s AND name=%s AND source IN (\'orm\', \'xml\') ',
                     (model, module, xml_id), debug=self._debug)
             results = cr.fetchall()
-            for action_id2,res_id2,model2,is_valid2 in results:
+            for action_id2, res_id2, model2, is_valid2 in results:
+                # Only one result is expected, because (module,xml_id) shall
+                # be unique
                 if res_id2 and is_valid2:
                     res_id,action_id = res_id2, action_id2
                 else:
