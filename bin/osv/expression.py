@@ -247,7 +247,7 @@ class expression(object):
             right = None
             exp = (left, operator, right) # rewrite anyway
         cur_model = model
-        fargs = left.split('.', 1)
+        fargs = left.split('.')
 
         field = None
         while not field:
