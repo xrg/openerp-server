@@ -5101,12 +5101,13 @@ class orm_abstract(orm_template):
                         continue
                     if not callable(fn_abs):
                         continue
-                    if not hasattr(nmodel.__class__, fn_name):
+                    dest_fn = getattr(nmodel.__class__, fn_name, False)
+                    if not dest_fn:
                         raise KeyError("Model %s does not define %s(), required for %s" % \
                                 (nmodel._name, fn_name, self._name))
 
-                    #print "Passed function:", fn_name
-                    # TODO check arguments
+                    # Check footprint:
+                    tools.func.fn_implements(dest_fn, fn_abs)
         pass
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
