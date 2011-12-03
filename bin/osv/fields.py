@@ -330,10 +330,10 @@ class _column(object):
             dcol = dcol._shadow
 
         if self._type != dcol._type:
-            raise ValueError('Incorrect type %s.%s: not %s' % (mname, cname, self._type))
+            raise TypeError('Incorrect type %s.%s: not %s' % (mname, cname, self._type))
 
         if self.required and not dcol.required:
-            raise ValueError('Column %s.%s must be set to required' % (mname, cname))
+            raise TypeError('Column %s.%s must be set to required' % (mname, cname))
 
         #if self.size and (dcol.size > self.size):
         #    warning ...
