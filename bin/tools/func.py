@@ -23,8 +23,9 @@
 #.apidoc title: Function tools
 
 __all__ = ['partial', 'wraps', 'update_wrapper', 'synchronized', 
-            'virtual', 'frame_codeinfo']
+            'virtual', 'frame_codeinfo', 'fn_implements']
 
+import inspect
 try:
     from functools import partial, wraps, update_wrapper
 except ImportError:
@@ -135,5 +136,33 @@ def frame_codeinfo(fframe, back=0):
         return (fname, lineno)
     except Exception:
         return ("<unknown>", '')
+
+def fn_implements(fn_dest, fn_base):
+    """Check if `fn_dest` can override `fn_base`
+
+        Just like C++ strict type checking, ensure that fn_dest has the
+        same footprint as fn_base.
+        Of course, we can't be as strict as C++.
+    """
+    bargs, bvars, bkwds, bdefs = inspect.getargspec(fn_base)
+    dargs, dvars, dkwds, ddefs = inspect.getargspec(fn_dest)
+
+    errors = []
+
+    for i, name in enumerate(bargs):
+        if i >= len(dargs):
+            if dvars or dkwds:
+                # rest of arguments are hopefully covered by
+                # variable args in dest
+                pass
+            else:
+                errors.append('args missing "%s"' % name)
+            break
+
+        if dargs[i] != name:
+            errors.append('name mismatch: "%s" should be "%s"' % (dargs[i], name))
+
+    if errors:
+        raise TypeError("%s(): %s" %(fn_dest.func_name, ', '.join(errors)))
 
 #eof
