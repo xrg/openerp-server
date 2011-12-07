@@ -296,10 +296,17 @@ class res_partner_address(osv.osv):
                     help="Uncheck the active field to hide the contact."),
 #        'company_id': fields.related('partner_id','company_id',type='many2one',relation='res.company',string='Company', store=True),
         'company_id': fields.many2one('res.company', 'Company',select=1),
+        'validity': fields.selection([( 'unknown', 'Unknown'),
+                ('verified','Verified'), ('preferred','Preferred'),
+                ('invalid', 'Invalid'), ('deprecated', 'Deprecated')],
+                'Validity', required=True,
+                help="Has this address been verified?"),
+
     }
     _defaults = {
         'active': True,
         'company_id': lambda s,cr,uid,c: s.pool.get('res.company')._company_default_get(cr, uid, 'res.partner.address', context=c),
+        'validity': 'unknown',
     }
 
     def name_get(self, cr, user, ids, context=None):
