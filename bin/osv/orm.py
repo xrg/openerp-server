@@ -4924,6 +4924,8 @@ class orm(orm_template):
 
         :return: map of ids to the list of their fully qualified XML IDs
                  (empty list when there's none).
+        
+        Note: Pending deprecation!
         """
         model_data_obj = self.pool.get('ir.model.data')
         data_ids = model_data_obj.search(cr, uid, [('model', '=', self._name), ('res_id', 'in', ids)])
@@ -4950,6 +4952,8 @@ class orm(orm_template):
         :return: map of ids to their fully qualified XML ID,
                  defaulting to an empty string when there's none
                  (to be usable as a function field).
+        
+        Note: pending deprecation!
         """
         results = self._get_xml_ids(cr, uid, ids)
         for k, v in results.items():
