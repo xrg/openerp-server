@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: OpenERP Server 5.0.4\n"
 "Report-Msgid-Bugs-To: support@openerp.com\n"
 "POT-Creation-Date: 2011-01-11 11:14+0000\n"
-"PO-Revision-Date: 2011-10-06 14:41+0000\n"
+"PO-Revision-Date: 2011-12-13 22:49+0000\n"
 "Last-Translator: Goran Cvijanović <goranc@gmail.com>\n"
 "Language-Team: openerp-translators\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-11-01 05:18+0000\n"
-"X-Generator: Launchpad (build 14197)\n"
+"X-Launchpad-Export-Date: 2011-12-14 05:29+0000\n"
+"X-Generator: Launchpad (build 14487)\n"
 "Language: hr\n"
 
 #. module: base
@@ -48,6 +48,8 @@ msgid ""
 "The second argument of the many2many field %s must be a SQL table !You used "
 "%s, which is not a valid SQL table name."
 msgstr ""
+"Drugi argument u many2many polju %s mora biti SQL tablica ! Upisano %s nije "
+"ime SQL tablice."
 
 #. module: base
 #: view:ir.values:0
@@ -126,6 +128,9 @@ msgid ""
 "specified as a Python expression defining a list of triplets. For example: "
 "[('color','=','red')]"
 msgstr ""
+"Opcionalna domena za ograničavanje mogućih vrijednosti zavisnih polja, "
+"zadana u obliku Python izraza definira listu od tri člana. Na primjer: "
+"[('color','=','red')]"
 
 #. module: base
 #: field:res.partner,ref:0
@@ -1324,7 +1329,7 @@ msgstr "Left parent"
 #: model:ir.actions.act_window,name:base.res_widget_act_window
 #: model:ir.ui.menu,name:base.menu_res_widget_act_window
 msgid "Homepage Widgets"
-msgstr ""
+msgstr "Dodatci na naslovnici"
 
 #. module: base
 #: help:ir.actions.server,message:0
