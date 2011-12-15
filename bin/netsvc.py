@@ -609,8 +609,7 @@ class Agent(object):
 
 agent_runner = threading.Thread(target=Agent.runner, name="netsvc.Agent.runner")
 # the agent runner is a typical daemon thread, that will never quit and must be
-# terminated when the main process exits - with no consequence (the processing
-# threads it spawns are not marked daemon)
+# terminated when the main process exits - with no consequence
 agent_runner.setDaemon(True)
 agent_runner.start()
 
