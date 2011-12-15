@@ -106,7 +106,7 @@ class expression(object):
         import fields
         cls._implicit_fields = {
             'id': fields.id_field('Id'),
-            '_vptr': fields._column('Virtual Ptr')
+            '_vptr': fields.vptr_field('Virtual Ptr'),
             }
         
         cls._implicit_log_fields = {
