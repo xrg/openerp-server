@@ -64,7 +64,7 @@ class ir_cron(osv.osv, netsvc.Agent):
     }
 
     _defaults = {
-        'nextcall' : lambda *a: time.strftime('%Y-%m-%d %H:%M:%S'),
+        'nextcall' : fields.datetime.now,
         'priority' : 5,
         'user_id' : lambda obj,cr,uid,context: uid,
         'interval_number' : 1,
