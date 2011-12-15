@@ -79,29 +79,6 @@ class integer_big(_column):
     _symbol_set = (_symbol_c, _symbol_f)
     _symbol_get = lambda self,x: x or 0
 
-class id_field(integer):
-    """ special properties for the 'id' field
-    """
-    
-    def expr_eval(self, cr, uid, obj, lefts, operator, right, pexpr, context):
-
-        if operator == 'child_of' or operator == '|child_of':
-            dom = pexpr._rec_get(cr, uid, obj, right, null_too=(operator == '|child_of'), context=context)
-            if len(dom) == 0:
-                return True
-            elif len(dom) == 1:
-                return dom[0]
-            else:
-                return eu.nested_expr(dom)
-        else:
-            # Copy-paste logic from super, save on the function call
-            assert len(lefts) == 1, lefts
-            if right is False:
-                if operator not in ('=', '!=', '<>'):
-                    raise eu.DomainInvalidOperator(obj, lefts, operator, right)
-                return (lefts[0], operator, None)
-            return None # as-is
-
 class _string_field(_column):
     """ Common baseclass for char and text fields
     """
@@ -275,7 +252,7 @@ class time(_column):
         return DT.datetime.now().strftime(
             tools.DEFAULT_SERVER_TIME_FORMAT)
 
-register_field_classes(boolean, integer, integer_big, id_field, char, text,
+register_field_classes(boolean, integer, integer_big, char, text,
         float, date, datetime, time)
 
 #eof

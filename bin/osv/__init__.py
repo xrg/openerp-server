@@ -22,6 +22,7 @@
 import osv
 import fields
 import fields_simple
+import fields_framework
 import fields_relational
 import fields_special
 import fields_function
