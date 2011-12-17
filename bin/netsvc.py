@@ -504,6 +504,61 @@ class Agent(object):
     _lock = threading.Condition()
     _alive = True
 
+    class pretty_repr(object):
+        """ The representation of a function
+
+            short-lived object, that will hold data until its `str()` is called
+            to format it
+        """
+
+        def __init__(self, func, args, kwargs, trunc=None):
+            self._func = func
+            self._args = args
+            self._kwargs = kwargs
+            self._trunc = trunc
+
+        def __str__(self):
+            if hasattr(self._func, 'im_class'):
+                return "%s.%s(%s)" % (self._func.im_class.__name__, self._func.func_name,
+                        self.pretty_args(self._args, self._kwargs, self._trunc))
+            else:
+                return "%s(%s)" % (self._func.func_name,
+                        self.pretty_args(self._args, self._kwargs, self._trunc))
+
+        @staticmethod
+        def pretty_args(args, kwargs, trunc=None):
+            """ Format the name and arguments like we would write them at python
+                Truncate at {trunc} chars
+            """
+            oout = []
+            olen = 0
+            if args:
+                for arg in args:
+                    try:
+                        ostr = repr(arg)
+                    except Exception:
+                        ostr = '<???>'
+                    if trunc and (olen >= trunc):
+                        break
+                    oout.append(ostr)
+                    olen += len(ostr) + 2
+
+            if kwargs:
+                for kw, val in kwargs.items():
+                    if trunc and (olen >= trunc):
+                        break
+                    try:
+                        ostr = "%s=%r" %(kw, val)
+                    except Exception:
+                        ostr = "%s=??" % kw
+                    oout.append(ostr)
+                    olen += len(ostr) + 2
+
+            if trunc and (olen >= trunc):
+                oout += '...'
+
+            return ', '.join(oout)
+
     @classmethod
     def setAlarm(cls, function, timestamp, db_name, *args, **kwargs):
         cls._lock.acquire()
@@ -539,38 +594,6 @@ class Agent(object):
         """Neverending function (intended to be ran in a dedicated thread) that
            checks every 60 seconds tasks to run. TODO: make configurable
         """
-        def pretty_args(args, kwargs, trunc=None):
-            """ Format the arguments like we would write them at python
-                Truncate at {trunc} chars
-            """
-            oout = []
-            olen = 0
-            if args:
-                for arg in args:
-                    try:
-                        ostr = repr(arg)
-                    except Exception:
-                        ostr = '<???>'
-                    if trunc and (olen >= trunc):
-                        break
-                    oout.append(ostr)
-                    olen += len(ostr) + 2
-            
-            if kwargs:
-                for kw, val in kwargs.items():
-                    if trunc and (olen >= trunc):
-                        break
-                    try:
-                        ostr = "%s=%r" %(kw, val)
-                    except Exception:
-                        ostr = "%s=??" % kw
-                    oout.append(ostr)
-                    olen += len(ostr) + 2
-
-            if trunc and (olen >= trunc):
-                oout += '...'
-        
-            return ', '.join(oout)
 
         while cls._alive:
             cls._lock.acquire()
@@ -584,9 +607,7 @@ class Agent(object):
                     # null timestamp -> cancelled task
                     continue
                 cls._lock.release()
-                cls._logger.debug("Run %s.%s(%s)",
-                                function.im_class.__name__, function.func_name,
-                                pretty_args(args, kwargs, 120))
+                cls._logger.debug("Run %s", cls.pretty_repr(function, args, kwargs, 120))
                 thr = threading.Thread(target=function, args=args, kwargs=kwargs)
                 thr.setDaemon(True)
                 thr.start()
