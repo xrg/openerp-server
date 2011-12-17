@@ -66,6 +66,20 @@ class module_category(osv.osv):
 module_category()
 
 class module(osv.osv):
+    """ An OpenERP module (addon)
+
+        This table will typically be filled with the contents of the `__openerp__.py`
+        file of each addon. Plus some data about installed version, state etc.
+
+        Note: The default license is changed to *All rights reserved* , when this
+        field is empty in __openerp__.py . This is not what we wish, but what the
+        copyright law tells us: this clause is implied[1] in most countries.
+        The license in this server mandates that addons are GPL-compatible, which
+        means that you *have to* use a GPL-compatible license and explicitly
+        state this in your addon header.
+
+        [1] http://en.wikipedia.org/wiki/All_rights_reserved
+    """
     _name = "ir.module.module"
     _description = "Module"
     __logger = logging.getLogger('base.' + _name)
@@ -197,8 +211,11 @@ class module(osv.osv):
                 ('GPL-3', 'GPL Version 3'),
                 ('GPL-3 or any later version', 'GPL-3 or later version'),
                 ('AGPL-3', 'Affero GPL-3'),
+                ('LGPL-2', 'GNU Lesser Public License v2'),
+                ('LGPL-3', 'GNU Lesser Public License v3'),
                 ('Other OSI approved licence', 'Other OSI Approved Licence'),
-                ('Other proprietary', 'Other Proprietary')
+                ('Other proprietary', 'Other Proprietary'),
+                ('reserved', 'All rights reserved'),
             ], string='License', readonly=True),
         'menus_by_module': fields.function(_get_views, method=True, string='Menus', type='text', multi="meta", store=True),
         'reports_by_module': fields.function(_get_views, method=True, string='Reports', type='text', multi="meta", store=True),
@@ -210,7 +227,7 @@ class module(osv.osv):
     _defaults = {
         'state': 'uninstalled',
         'demo': False,
-        'license': 'AGPL-3',
+        'license': 'reserved', # Default by law, see note
         'web': False,
     }
     _order = 'name'
