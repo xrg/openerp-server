@@ -512,6 +512,19 @@ class browse_record(object):
 
     __repr__ = __str__
 
+    def _invalidate(self):
+        """Purge internal cache for this record, trigger re-read()
+
+            Should be used if this record has been write()n to, and self
+            cannot be discarded safely.
+
+            Best method is to not mix `browse_records` and `write()` calls,
+            anyway.
+        """
+        if self._id not in self._data:
+            raise RuntimeError("Record #%d is already removed from cache" % self._id)
+
+        self._data[self._id] = {'id': self._id}
 
 class orm_template(object):
     """ THE base of all ORM models
