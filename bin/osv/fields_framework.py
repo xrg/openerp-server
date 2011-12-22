@@ -63,6 +63,55 @@ class vptr_field(_column):
     """
     pass
 
-register_field_classes(id_field, vptr_field)
+class vptr_name(_column):
+    """ Exposes the human readable name of the associated class
+
+        This is a pseydo-function field with implied functionality.
+        It will search `ir.model` and yield the corresponding model names,
+        for the records of "our" model requested.
+    """
+    _classic_read = False
+    _classic_write = False
+    _prefetch = False
+    _type = 'char'
+    _properties = True
+
+    def __init__(self, string='Class'):
+        _column.__init__(self, string=string, readonly=True)
+
+    def get(self, cr, obj, ids, name, user=None, context=None, values=None):
+        from orm import browse_record_list, only_ids
+        if not obj._vtable:
+            return dict.fromkeys(only_ids(ids), False)
+
+        res_ids = {}
+        vptrs_resolve = {}
+        if isinstance(ids, browse_record_list):
+            for bro in ids:
+                res_ids[bro.id] = bro._vptr
+                vptrs_resolve[bro._vptr] = False
+        else:
+            # clasic read:
+            for ores in obj.read(cr, user, ids, fields=['_vptr'], context=context):
+                res_ids[ores['id']] = ores['_vptr']
+                vptrs_resolve[ores['_vptr']] = False
+
+        for mres in obj.pool.get('ir.model').search_read(cr, user, \
+                [('model', 'in', vptrs_resolve.keys())], \
+                fields=['model', 'name'], context=context):
+            # context is important, we want mres to be translated
+            vptrs_resolve[mres['model']] = mres['name']
+
+        res = {}
+        for rid, rmod in res_ids.items():
+            res[rid] = vptrs_resolve.get(rmod, False)
+
+        return res
+
+        #if name == '_vptr.name':
+        #    # retrieve the model name, translated
+        #    pass
+
+register_field_classes(id_field, vptr_field, vptr_name)
 
 #eof
