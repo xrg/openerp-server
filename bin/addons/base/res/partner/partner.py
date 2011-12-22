@@ -238,6 +238,49 @@ class res_partner(osv.osv):
             result[a] = adr.get(a, default_address)
         return result
 
+    def _address_browse(self, cr, uid, ids, atype='default', afield=None, context=None):
+        """Retrieve the best matching address for this partner, return browse rec.
+
+            A partner may have multiple addresses. It's often the case that we
+            want to get the best candidate for some use (eg. "email to the company"
+            or "ship to the delivery site").
+
+            It returns a browse object, so that it can be used in reporting expressions,
+            like::
+
+                Email: {{ order.partner_id._address_browse('contact', 'email') }}
+
+            @param atype Type of address being requested. May return another type,
+                if this one doesn't exist
+            @param afield if specified, the field we want to use, eg. "email". Will
+                skip addresses that have this field empty
+        """
+
+        res = {}
+
+        for partner in self.browse(cr, uid, ids, context=context):
+            cur_addr = None
+            cur_valid = 0
+            for addr in partner.address:
+                valid = addr._table._usable_validities.get(addr.validity, False)
+                if not valid:
+                    continue
+                if afield is not None and not getattr(addr, afield, False):
+                    # it doesn't have the info we need (is empty)
+                    continue
+                if addr.type == atype:
+                    valid = 10 + valid
+                if valid > cur_valid:
+                    cur_addr = addr
+            if cur_addr is None:
+                cur_addr = osv.orm.browse_null()
+            res[partner.id] = cur_addr
+
+        if len(ids) > 1:
+            return res
+        else:
+            return res.values()[0]
+
     def gen_next_ref(self, cr, uid, ids):
         if len(ids) != 1:
             return True
@@ -273,6 +316,7 @@ class res_partner_address(osv.osv):
     _description ='Partner Addresses'
     _name = 'res.partner.address'
     _order = 'type, name'
+    _usable_validities = {'unknown': 1, 'verified': 2, 'preferred' : 3 }
     _columns = {
         'partner_id': fields.many2one('res.partner', 'Partner Name', ondelete='set null', select=True, help="Keep empty for a private address, not related to partner."),
         'type': fields.selection( [ ('default','Default'),('invoice','Invoice'), ('delivery','Delivery'), ('contact','Contact'), ('other','Other') ],'Address Type', help="Used to select automatically the right address according to the context in sales and purchases documents."),

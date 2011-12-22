@@ -1,0 +1,14 @@
+-
+  I will test the address_browse feature
+-
+  !python {model: res.partner }: |
+    bro = self.browse(cr, uid, ref('base.res_partner_sednacom'))._address_browse()
+    print bro
+    print bro.country_id.name, bro.email
+-
+  The same, in "Safe eval" context
+-
+  !python {model: res.partner }: |
+    from tools.safe_eval import safe_eval
+    bro = self.browse(cr, uid, ref('base.res_partner_sednacom'))
+    print safe_eval("o._address_browse('default', 'email').email", {'o': bro})
