@@ -553,6 +553,9 @@ class orm_template(object):
     CONCURRENCY_CHECK_FIELD = '__last_update'
     def log(self, cr, uid, id, message, secondary=False, context=None):
         try:
+            if isinstance(id, (list, tuple)):
+                assert len(id) == 1, id
+                id = id[0]
             return self.pool.get('res.log').create(cr, uid,
                 {
                     'name': message,
