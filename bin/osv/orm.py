@@ -526,6 +526,37 @@ class browse_record(object):
 
         self._data[self._id] = {'id': self._id}
 
+    def _invalidate_others(self, ids, model=None):
+        """ Variant of `_invalidate()` that operates on foreign ids
+
+            @param ids List of ids to invalidate
+            @param model string name of model to operate on (if exists in cache)
+
+            This can indirectly be called when we write to some other ids, like::
+
+            for b in self.browse(cr, uid, [(find-domain)]):
+                print b.name
+                # find synonyms
+                res = self.search(cr, uid, [('name', '=', b.name), ('id', '!=', b.id)])
+                if res:
+                    self.write(res, {'description': 'see also %d' % b.id })
+
+                    # make sure we don't affect items cached in `self.browse()`
+                    b._invalidate_others(res)
+        """
+
+        if model is None:
+            data = self._data
+        elif model in self._cache:
+            data = self._cache[model]
+        else:
+            return None
+        for i in ids:
+            if i in data: # only those that are cached
+                data[i] = {'id': i}
+
+        return
+
 class orm_template(object):
     """ THE base of all ORM models
     """
