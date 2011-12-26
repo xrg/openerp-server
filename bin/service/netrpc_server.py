@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 
 #
-# Copyright P. Christeas <p_christ@hol.gr> 2008,2009
+#    Copyright P. Christeas <p_christ@hol.gr> 2008,2009
+#    Copyright P. Christeas <xrg@hellug.gr>, 2011
 #    Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>).
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -128,12 +129,16 @@ class TinySocketServerThread(threading.Thread,netsvc.Server):
                 fd_sets = select.select([self.socket], [], [], timeout)
                 if not fd_sets[0]:
                     continue
-                (clientsocket, address) = self.socket.accept()
-                ct = TinySocketClientThread(clientsocket, self.threads)
-                clientsocket = None
-                # ct.daemon = True
-                self.threads.append(ct)
-                ct.start()
+                try:
+                    (clientsocket, address) = self.socket.accept()
+                    ct = TinySocketClientThread(clientsocket, self.threads)
+                    clientsocket = None
+                    # ct.daemon = True
+                    self.threads.append(ct)
+                    ct.start()
+                except socket.error:
+                    self._log.warning("Netrpc: Could not start request:", exc_info=True)
+                    continue
                 lt = len(self.threads)
                 if (lt > 10) and (lt % 10 == 0):
                      # Not many threads should be serving at the same time, so log
