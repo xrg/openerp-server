@@ -63,6 +63,9 @@ class vptr_field(_column):
     """
     pass
 
+    def _auto_init_sql(self, name, obj, schema_table, context=None):
+        return None
+
 class vptr_name(_column):
     """ Exposes the human readable name of the associated class
 
@@ -111,6 +114,9 @@ class vptr_name(_column):
         #if name == '_vptr.name':
         #    # retrieve the model name, translated
         #    pass
+
+    def _auto_init_sql(self, name, obj, schema_table, context=None):
+        return None
 
 register_field_classes(id_field, vptr_field, vptr_name)
 
