@@ -3453,7 +3453,10 @@ class orm(orm_template):
             if s_query and s_query.limit:
                 query += " LIMIT %s"
                 params.append(s_query.limit)
-                
+
+            if 'for update' in context and tools.server_bool.equals(context['for update'], True):
+                query += ' FOR UPDATE'
+
             # Perform the big read of the table, fetch the data!
             cr.execute(query, params, debug=self._debug)
 
@@ -4606,11 +4609,15 @@ class orm(orm_template):
 
         limit_str = limit and ' LIMIT %d' % limit or ''
         offset_str = offset and ' OFFSET %d' % offset or ''
+        post_str = ''
         where_str = where_clause and (" WHERE %s" % where_clause) or ''
 
+        if 'for update' in context and tools.server_bool.equals(context['for update'], True):
+            post_str = ' FOR UPDATE'
+
         if count:
-            cr.execute('SELECT count("%s".id) FROM ' % self._table + 
-                    from_clause + where_str + limit_str + offset_str, 
+            cr.execute('SELECT count("%s".id) FROM ' % self._table +
+                    from_clause + where_str + limit_str + offset_str + post_str,
                     where_clause_params,
                     debug=self._debug)
             res = cr.fetchall()
@@ -4618,7 +4625,7 @@ class orm(orm_template):
         elif isinstance(order_by, pythonOrderBy):
             # Fall back to pythonic sorting (+ offset, limit)
             cr.execute('SELECT "%s".id FROM ' % self._table + from_clause +
-                    where_str, # no offset or limit
+                    where_str + post_str, # no offset or limit
                     where_clause_params, debug=self._debug)
             res = cr.fetchall()
             data_res = self.read(cr, user, [x[0] for x in res],
@@ -4631,7 +4638,7 @@ class orm(orm_template):
             return [x['id'] for x in data_res]
         else:
             cr.execute('SELECT "%s".id FROM ' % self._table + from_clause +
-                    where_str + order_by + limit_str + offset_str, 
+                    where_str + order_by + limit_str + offset_str + post_str,
                     where_clause_params, debug=self._debug)
             res = cr.fetchall()
             return [x[0] for x in res]
