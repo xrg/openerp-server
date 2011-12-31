@@ -608,8 +608,6 @@ def email_send(email_from, email_to, subject, body, email_cc=None, email_bcc=Non
     msg['To'] = Address_Encoded(email_to, 'To')
     if email_cc:
         msg['Cc'] = Address_Encoded(email_cc, 'Cc')
-    if email_bcc:
-        msg['Bcc'] = Address_Encoded(email_bcc, 'Bcc')
     msg['Date'] = formatdate(localtime=True)
 
     msg['X-Priority'] = priorities.get(priority, '3 (Normal)')
