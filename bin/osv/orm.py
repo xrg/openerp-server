@@ -799,7 +799,7 @@ class orm_template(object):
         for key, ffn in self.__class__.__dict__.items():
             # try to discover the '_virtual' attribute in this class
             # functions (note: an attribute wouldn't work for other
-            # data types.
+            # data types)
             if not callable(ffn):
                 continue
             if hasattr(ffn, '_virtual') and ffn._virtual:
