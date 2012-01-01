@@ -22,9 +22,9 @@
 
 import sys
 import StringIO
-import copy
+# import copy
 from lxml import etree
-import base64
+# import base64
 import logging
 
 import utils
@@ -424,7 +424,7 @@ class _rml_template(object):
         return self.style
 
     def set_next_template(self):
-        self.template = self.template_order[(self.template_order.index(name)+1) % self.template_order]
+        self.template = self.template_order[(self.template_order.index(self.template)+1) % self.template_order]
         self.frame_pos = -1
 
     def set_template(self, name):
