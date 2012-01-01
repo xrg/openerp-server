@@ -4,14 +4,14 @@ msgstr ""
 "Project-Id-Version: OpenERP Server 5.0.4\n"
 "Report-Msgid-Bugs-To: support@openerp.com\n"
 "POT-Creation-Date: 2011-01-11 11:14+0000\n"
-"PO-Revision-Date: 2011-10-06 14:41+0000\n"
+"PO-Revision-Date: 2011-12-14 12:26+0000\n"
 "Last-Translator: Goran Cvijanović <goranc@gmail.com>\n"
 "Language-Team: openerp-translators\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-10-07 05:04+0000\n"
-"X-Generator: Launchpad (build 14085)\n"
+"X-Launchpad-Export-Date: 2011-12-15 06:00+0000\n"
+"X-Generator: Launchpad (build 14487)\n"
 "Language: hr\n"
 
 #. module: base
@@ -3612,8 +3612,12 @@ msgstr "Ostavite 0 ukoliko radnja treba biti vidljiva svugdje."
 
 #. module: base
 #: help:multi_company.default,field_id:0
+#, fuzzy
 msgid "Select field property"
 msgstr ""
+"#-#-#-#-#  .merge_file_b8pdkX (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_re7AP8 (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"Odaberite svojstvo polja"
 
 #. module: base
 #: help:res.bank,bic:0
@@ -7221,8 +7225,12 @@ msgstr ""
 
 #. module: base
 #: selection:ir.actions.server,state:0
+#, fuzzy
 msgid "Write Object"
 msgstr ""
+"#-#-#-#-#  .merge_file_b8pdkX (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_re7AP8 (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"Zapiši objekt"
 
 #. module: base
 #: selection:ir.actions.todo,start_on:0
@@ -11027,8 +11035,12 @@ msgstr ""
 #. module: base
 #: model:ir.actions.act_window,name:base.res_widget_act_window
 #: model:ir.ui.menu,name:base.menu_res_widget_act_window
+#, fuzzy
 msgid "Homepage Widgets"
 msgstr ""
+"#-#-#-#-#  .merge_file_b8pdkX (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_re7AP8 (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"Dodatci na naslovnici"
 
 #. module: base
 #: field:ir.attachment,res_model:0
@@ -11431,10 +11443,15 @@ msgstr ""
 
 #. module: base
 #: view:base.language.import:0
+#, fuzzy
 msgid ""
 "Please double-check that the file encoding is set to UTF-8 (sometimes called "
 "Unicode) when the translator exports it."
 msgstr ""
+"#-#-#-#-#  .merge_file_b8pdkX (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_re7AP8 (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"Molimo provjerite da je kodiranje datoteke postavljeno na UTF-8 (Unicode), "
+"kada je prevoditelj izvozi."
 
 #. module: base
 #: selection:base.language.install,lang:0
@@ -11857,9 +11874,12 @@ msgstr ""
 
 #. module: base
 #: code:addons/base/publisher_warranty/publisher_warranty.py:0
-#, python-format
+#, fuzzy, python-format
 msgid "That contract is already registered in the system."
 msgstr ""
+"#-#-#-#-#  .merge_file_b8pdkX (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_re7AP8 (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"Navedeni ugovor je već registriran u sustavu."
 
 #. module: base
 #: help:ir.sequence,suffix:0
@@ -12146,8 +12166,12 @@ msgstr ""
 
 #. module: base
 #: view:publisher_warranty.contract.wizard:0
+#, fuzzy
 msgid "Please enter the serial key provided in your contract document:"
 msgstr ""
+"#-#-#-#-#  .merge_file_b8pdkX (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_re7AP8 (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"Molimo unesite serijski ključ upisan na vašem ugovoru:"
 
 #. module: base
 #: code:addons/__init__.py:0
@@ -12561,8 +12585,12 @@ msgstr ""
 
 #. module: base
 #: view:res.log:0
+#, fuzzy
 msgid "My Logs"
 msgstr ""
+"#-#-#-#-#  .merge_file_b8pdkX (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_re7AP8 (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"Moji Logovi"
 
 #. module: base
 #: help:ir.sequence,number_next:0
@@ -12575,13 +12603,21 @@ msgstr ""
 
 #. module: base
 #: view:publisher_warranty.contract:0
+#, fuzzy
 msgid "Publisher Warranty Contracts"
 msgstr ""
+"#-#-#-#-#  .merge_file_b8pdkX (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_re7AP8 (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"Ugovori garancije izdavača"
 
 #. module: base
 #: help:res.log,name:0
+#, fuzzy
 msgid "The logging message."
 msgstr ""
+"#-#-#-#-#  .merge_file_b8pdkX (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_re7AP8 (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"Poruka za log."
 
 #. module: base
 #: view:res.log:0 field:res.log,read:0
@@ -12616,8 +12652,12 @@ msgstr ""
 
 #. module: base
 #: help:res.log,read:0
+#, fuzzy
 msgid "If this log item has been read, get() should not send it to the client"
 msgstr ""
+"#-#-#-#-#  .merge_file_b8pdkX (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_re7AP8 (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"Ukoliko je ovaj log zapis pročitan, get() ga neće proslijediti klijentu"
 
 #. module: base
 #: model:ir.actions.act_window,help:base.res_partner_canal-act
@@ -12784,8 +12824,12 @@ msgstr ""
 
 #. module: base
 #: sql_constraint:publisher_warranty.contract:0
+#, fuzzy
 msgid "Your publisher warranty contract is already subscribed in the system !"
 msgstr ""
+"#-#-#-#-#  .merge_file_b8pdkX (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_re7AP8 (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"Vaš garancijski ugovor je već unesen u sustav !"
 
 #. module: base
 #: help:ir.cron,nextcall:0
@@ -12917,8 +12961,12 @@ msgstr ""
 
 #. module: base
 #: field:res.log,secondary:0
+#, fuzzy
 msgid "Secondary Log"
 msgstr ""
+"#-#-#-#-#  .merge_file_b8pdkX (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_re7AP8 (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"Dodatni Log"
 
 #. module: base
 #: model:ir.ui.menu,name:base.menu_crm_case_job_req_main
@@ -13096,9 +13144,12 @@ msgstr ""
 
 #. module: base
 #: code:addons/base/res/res_config.py:0
-#, python-format
+#, fuzzy, python-format
 msgid "Click 'Continue' to configure the next addon..."
 msgstr ""
+"#-#-#-#-#  .merge_file_b8pdkX (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_re7AP8 (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"Odaberite 'Nastavi' za postavke sljedećeg dodatka..."
 
 #. module: base
 #: help:res.config.users,menu_tips:0 help:res.users,menu_tips:0
@@ -13586,9 +13637,12 @@ msgstr ""
 
 #. module: base
 #: code:addons/base/publisher_warranty/publisher_warranty.py:0
-#, python-format
+#, fuzzy, python-format
 msgid "Contract validation error"
 msgstr ""
+"#-#-#-#-#  .merge_file_b8pdkX (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_re7AP8 (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"Graška provjere ugovora"
 
 #. module: base
 #: model:ir.ui.menu,name:base.menu_hr_manager
@@ -14844,11 +14898,15 @@ msgstr ""
 
 #. module: base
 #: code:addons/fields.py:534
-#, python-format
+#, fuzzy, python-format
 msgid ""
 "The second argument of the many2many field %s must be a SQL table !You used "
 "%s, which is not a valid SQL table name."
 msgstr ""
+"#-#-#-#-#  .merge_file_b8pdkX (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_re7AP8 (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"Drugi argument u many2many polju %s mora biti SQL tablica ! Upisano %s nije "
+"ime SQL tablice."
 
 #. module: base
 #: code:addons/base/ir/ir_model.py:339
@@ -15093,11 +15151,15 @@ msgstr ""
 
 #. module: base
 #: code:addons/orm.py:3533
-#, python-format
+#, fuzzy, python-format
 msgid ""
 "You cannot perform this operation. New Record Creation is not allowed for "
 "this object as this object is for reporting purpose."
 msgstr ""
+"#-#-#-#-#  .merge_file_b8pdkX (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_re7AP8 (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"Nije moguće izvršiti radnju. Stvaranje novog zapisa nije dozvoljeno za "
+"objekte namijenjene izvještavanju."
 
 #. module: base
 #: field:ir.ui.menu,web_icon_hover_data:0
@@ -15122,9 +15184,12 @@ msgstr ""
 
 #. module: base
 #: code:addons/orm.py:3199
-#, python-format
+#, fuzzy, python-format
 msgid "Unable to delete this document because it is used as a default property"
 msgstr ""
+"#-#-#-#-#  .merge_file_b8pdkX (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_re7AP8 (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"Nije moguće obrisati dokument jer se koristi kao predefinirana vrijednost"
 
 #. module: base
 #: code:addons/orm.py:1350
@@ -15155,11 +15220,15 @@ msgstr ""
 
 #. module: base
 #: code:addons/orm.py:2307
-#, python-format
+#, fuzzy, python-format
 msgid ""
 "Invalid value for reference field \"%s\" (last part must be a non-zero "
 "integer): \"%s\""
 msgstr ""
+"#-#-#-#-#  .merge_file_b8pdkX (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_re7AP8 (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"Pograšna vrijednost za referencirano polje \"%s\" (zadnji dio mora biti "
+"cijeli broj veći od nule): \"%s\""
 
 #. module: base
 #: code:addons/orm.py:158
@@ -15422,8 +15491,12 @@ msgstr ""
 #. module: base
 #: model:ir.actions.act_window,name:base.res_log_act_window
 #: model:ir.ui.menu,name:base.menu_res_log_act_window
+#, fuzzy
 msgid "Client Logs"
 msgstr ""
+"#-#-#-#-#  .merge_file_b8pdkX (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_re7AP8 (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"Logovi klijenta"
 
 #. module: base
 #: model:res.widget,title:base.google_maps_widget
@@ -15457,11 +15530,17 @@ msgstr ""
 
 #. module: base
 #: help:ir.model.fields,domain:0
+#, fuzzy
 msgid ""
 "The optional domain to restrict possible values for relationship fields, "
 "specified as a Python expression defining a list of triplets. For example: "
 "[('color','=','red')]"
 msgstr ""
+"#-#-#-#-#  .merge_file_b8pdkX (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_re7AP8 (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"Opcionalna domena za ograničavanje mogućih vrijednosti zavisnih polja, "
+"zadana u obliku Python izraza definira listu od tri člana. Na primjer: "
+"[('color','=','red')]"
 
 #. module: base
 #: code:addons/base/res/res_user.py:507
@@ -15552,18 +15631,27 @@ msgstr ""
 
 #. module: base
 #: code:addons/base/ir/ir_model.py:205
-#, python-format
+#, fuzzy, python-format
 msgid ""
 "The Selection Options expression is not a valid Pythonic expression.Please "
 "provide an expression in the [('key','Label'), ...] format."
 msgstr ""
+"#-#-#-#-#  .merge_file_b8pdkX (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_re7AP8 (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"Izraz za opcije odabira nije valjani python izraz. Navedite izraz u formatu "
+"[('key','Label'), ...]."
 
 #. module: base
 #: help:ir.model.fields,relation_field:0
+#, fuzzy
 msgid ""
 "For one2many fields, the field on the target model that implement the "
 "opposite many2one relationship"
 msgstr ""
+"#-#-#-#-#  .merge_file_b8pdkX (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_re7AP8 (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"Za one2many polja, polje u odredišnom modelu koje implementira suprotnu "
+"many2one vezu"
 
 #. module: base
 #: help:ir.model.fields,translate:0
@@ -15578,8 +15666,12 @@ msgstr ""
 
 #. module: base
 #: help:ir.model.fields,relation:0
+#, fuzzy
 msgid "For relationship fields, the technical name of the target model"
 msgstr ""
+"#-#-#-#-#  .merge_file_b8pdkX (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_re7AP8 (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"Za relacijska polja, tehničko ime odredišnog modela"
 
 #. module: base
 #: code:addons/base/res/res_user.py:206
@@ -15594,9 +15686,12 @@ msgstr ""
 
 #. module: base
 #: code:addons/base/ir/ir_model.py:250
-#, python-format
+#, fuzzy, python-format
 msgid "For selection fields, the Selection Options must be given!"
 msgstr ""
+"#-#-#-#-#  .merge_file_b8pdkX (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_re7AP8 (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"Za polja iz odabira, ocije odabira moraju biti zadane!"
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_ui_view_custom
@@ -15621,8 +15716,12 @@ msgstr ""
 
 #. module: base
 #: help:ir.translation,module:0 help:ir.translation,xml_id:0
+#, fuzzy
 msgid "Maps to the ir_model_data for which this translation is provided."
 msgstr ""
+"#-#-#-#-#  .merge_file_b8pdkX (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_re7AP8 (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"Pokazuje na ir_model_data za kojeg je napisan prijevod ."
 
 #. module: base
 #: model:ir.actions.act_window,help:base.action_ui_view_custom

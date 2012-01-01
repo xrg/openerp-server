@@ -148,10 +148,10 @@ def _process_text(self, txt):
                 except Exception:
                     logging.getLogger('report').exception("Exception at: %s" % expr)
                 if isinstance(txt, basestring):
-                    result += str2xml(txt)
+                    result += txt
                 elif txt and (txt is not None) and (txt is not False):
                     result += ustr(txt)
-        return result
+        return str2xml(result)
 
 def text_get(node):
     return ''.join([ustr(n.text) for n in node])
@@ -189,7 +189,9 @@ def tuple_int_get(node, attr_name, default=None):
 def bool_get(value):
     return (str(value)=="1") or (value.lower()=='yes')
 
-def attr_get(node, attrs, dict={}):
+def attr_get(node, attrs, dict=None):
+    if dict is None:
+        dict = {}
     res = {}
     for name in attrs:
         if node.get(name):

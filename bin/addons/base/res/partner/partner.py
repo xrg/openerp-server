@@ -96,7 +96,7 @@ class res_partner_title(osv.osv):
 
 res_partner_title()
 
-def _lang_get(self, cr, uid, context={}):
+def _lang_get(self, cr, uid, context=None):
     obj = self.pool.get('res.lang')
     res = obj.search_read(cr, uid, [], fields=['code', 'name'], context=context)
     return [(r['code'], r['name']) for r in res] + [('','')]
@@ -136,7 +136,9 @@ class res_partner(osv.osv):
         'company_id': fields.many2one('res.company', 'Company', select=1),
     }
 
-    def _default_category(self, cr, uid, context={}):
+    def _default_category(self, cr, uid, context=None):
+        if context is None:
+            context = {}
         if 'category_id' in context and context['category_id']:
             return [context['category_id']]
         return []
@@ -178,6 +180,8 @@ class res_partner(osv.osv):
 #   _constraints = [(_check_ean_key, 'Error: Invalid ean code', ['ean13'])]
 
     def name_get(self, cr, uid, ids, context=None):
+        if context is None:
+            context = {}
         if not len(ids):
             return []
         if context and context.get('show_ref', False):
@@ -222,7 +226,9 @@ class res_partner(osv.osv):
             ids = ids[16:]
         return True
 
-    def address_get(self, cr, uid, ids, adr_pref=['default']):
+    def address_get(self, cr, uid, ids, adr_pref=None):
+        if adr_pref is None:
+            adr_pref = ['default']
         address_obj = self.pool.get('res.partner.address')
         address_rec = address_obj.search_read(cr, uid, [('partner_id', '=', ids)], fields=['type'])
         res = list(tuple(addr.values()) for addr in address_rec)

@@ -184,7 +184,7 @@ class res_company(osv.osv):
         self.cache_restart(cr)
         return super(res_company, self).write(cr, *args, **argv)
 
-    def _get_euro(self, cr, uid, context={}):
+    def _get_euro(self, cr, uid, context=None):
         try:
             return self.pool.get('res.currency').search(cr, uid, [])[0]
         except:

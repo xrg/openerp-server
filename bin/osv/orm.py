@@ -1044,7 +1044,10 @@ class orm_template(object):
             if mode=='.id':
                 id = int(id)
                 obj_model = self.pool.get(model_name)
-                ids = obj_model.search(cr, uid, [('id', '=', int(id))], context=context)
+                dom = [('id', '=', id)]
+                if obj_model._columns.get('active'):
+                    dom.append(('active', 'in', ['True','False']))
+                ids = obj_model.search(cr, uid, dom, context=context)
                 if not len(ids):
                     raise Exception(_("Database ID doesn't exist: %s : %s") %(model_name, id))
             elif mode=='id':
@@ -3272,11 +3275,12 @@ class orm(orm_template):
     def _inherits_reload(self):
         res = {}
         for table in self._inherits:
-            res.update(self.pool.get(table)._inherit_fields)
-            for col in self.pool.get(table)._columns.keys():
-                res[col] = (table, self._inherits[table], self.pool.get(table)._columns[col])
-            for col in self.pool.get(table)._inherit_fields.keys():
-                res[col] = (table, self._inherits[table], self.pool.get(table)._inherit_fields[col][2])
+            tbl_obj = self.pool.get(table)
+            res.update(tbl_obj._inherit_fields)
+            for col in tbl_obj._columns.keys():
+                res[col] = (table, self._inherits[table], tbl_obj._columns[col])
+            for col in tbl_obj._inherit_fields.keys():
+                res[col] = (table, self._inherits[table], tbl_obj._inherit_fields[col][2])
         self._inherit_fields = res
         self._inherits_reload_src()
 
@@ -4136,7 +4140,7 @@ class orm(orm_template):
         for v in vals.keys():
             if v == '_vptr':
                 continue
-            if v in self._inherit_fields:
+            if v in self._inherit_fields and v not in self._columns:
                 (table, col, col_detail) = self._inherit_fields[v]
                 tocreate[table][v] = vals[v]
                 del vals[v]
