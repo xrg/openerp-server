@@ -19,7 +19,7 @@
 #
 ##############################################################################
 
-import copy
+import copy # from python >= 2.5
 import win32
 from config import *
 from misc import *
