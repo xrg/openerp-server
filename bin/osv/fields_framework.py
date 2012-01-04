@@ -149,7 +149,7 @@ class vptr_name(_column):
     _properties = True
 
     def __init__(self, string='Class'):
-        _column.__init__(self, string=string, readonly=True)
+        _column.__init__(self, string=string, size=128, readonly=True)
 
     def get(self, cr, obj, ids, name, user=None, context=None, values=None):
         from orm import browse_record_list, only_ids
