@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: OpenERP Server 5.0.4\n"
 "Report-Msgid-Bugs-To: support@openerp.com\n"
 "POT-Creation-Date: 2011-01-11 11:14+0000\n"
-"PO-Revision-Date: 2012-01-07 23:17+0000\n"
-"Last-Translator: kifcaliph <kifcaliph@hotmail.com>\n"
+"PO-Revision-Date: 2012-01-08 19:58+0000\n"
+"Last-Translator: kifcaliph <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-01-08 05:31+0000\n"
+"X-Launchpad-Export-Date: 2012-01-09 05:12+0000\n"
 "X-Generator: Launchpad (build 14640)\n"
 
 #. module: base
@@ -172,7 +172,7 @@ msgstr "ir.ui.view.custom"
 #. module: base
 #: model:res.country,name:base.sz
 msgid "Swaziland"
-msgstr "سوسرا"
+msgstr "سوازيلاند"
 
 #. module: base
 #: code:addons/orm.py:4171
@@ -209,7 +209,7 @@ msgstr "هيكل الشركة"
 #. module: base
 #: selection:base.language.install,lang:0
 msgid "Inuktitut / ᐃᓄᒃᑎᑐᑦ"
-msgstr ""
+msgstr "إنكتيتوتية / ᐃᓄᒃᑎᑐᑦ"
 
 #. module: base
 #: view:res.partner:0
@@ -522,7 +522,7 @@ msgstr "اسم نموذج اختياري للكائنات التي ينطبق ع
 #. module: base
 #: field:workflow.transition,trigger_expr_id:0
 msgid "Trigger Expression"
-msgstr ""
+msgstr "صيغة المشغل"
 
 #. module: base
 #: model:res.country,name:base.jo
@@ -622,7 +622,7 @@ msgstr "res.config.users"
 #. module: base
 #: selection:base.language.install,lang:0
 msgid "Albanian / Shqip"
-msgstr ""
+msgstr "الألبانية / Shqip"
 
 #. module: base
 #: model:ir.ui.menu,name:base.menu_crm_config_opportunity
@@ -1347,7 +1347,7 @@ msgstr ""
 #. module: base
 #: field:ir.attachment,res_model:0
 msgid "Attached Model"
-msgstr ""
+msgstr "نموذج ملحق"
 
 #. module: base
 #: view:ir.rule:0
@@ -1357,7 +1357,7 @@ msgstr "إعداد النطاق"
 #. module: base
 #: field:ir.actions.server,trigger_name:0
 msgid "Trigger Name"
-msgstr ""
+msgstr "اسم المشغل"
 
 #. module: base
 #: model:ir.model,name:base.model_ir_model_access
@@ -1494,12 +1494,12 @@ msgstr "السجلات"
 #. module: base
 #: selection:base.language.install,lang:0
 msgid "Spanish / Español"
-msgstr ""
+msgstr "الأسبانية / Español"
 
 #. module: base
 #: selection:base.language.install,lang:0
 msgid "Korean (KP) / 한국어 (KP)"
-msgstr ""
+msgstr "الكورية / 한국어 (KP)"
 
 #. module: base
 #: view:base.module.update:0
@@ -1518,7 +1518,7 @@ msgstr "الشعار"
 #. module: base
 #: view:res.partner.address:0
 msgid "Search Contact"
-msgstr ""
+msgstr "بحث جهة الإتصال"
 
 #. module: base
 #: view:ir.module.module:0
@@ -1534,7 +1534,7 @@ msgstr "نافذة جديدة"
 #. module: base
 #: model:res.country,name:base.bs
 msgid "Bahamas"
-msgstr ""
+msgstr "جزر الباهاما"
 
 #. module: base
 #: code:addons/base/res/res_partner.py:272
@@ -2345,7 +2345,7 @@ msgstr "الوصف"
 #: model:ir.actions.act_window,name:base.action_workflow_instance_form
 #: model:ir.ui.menu,name:base.menu_workflow_instance
 msgid "Instances"
-msgstr ""
+msgstr "الأمثلة"
 
 #. module: base
 #: model:res.country,name:base.aq
@@ -2375,7 +2375,7 @@ msgstr "تنسيق الفاصل"
 #. module: base
 #: selection:publisher_warranty.contract,state:0
 msgid "Unvalidated"
-msgstr ""
+msgstr "غير محقق"
 
 #. module: base
 #: model:ir.ui.menu,name:base.next_id_9
@@ -6194,7 +6194,7 @@ msgstr "في الذاكرة"
 #. module: base
 #: view:ir.actions.todo:0
 msgid "Todo"
-msgstr "في انتظار التنفيذ"
+msgstr "قيد التنفيذ"
 
 #. module: base
 #: field:ir.attachment,datas:0
@@ -6879,7 +6879,7 @@ msgstr "طبيعي"
 #: field:res.company,street2:0
 #: field:res.partner.address,street2:0
 msgid "Street2"
-msgstr "الشارع الثاني"
+msgstr "الشارع ٢"
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_view_base_module_update
