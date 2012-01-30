@@ -2,7 +2,8 @@
 ##############################################################################
 #
 #    OpenERP, Open Source Management Solution
-#    Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>).
+#    Copyright (C) 2004-2010 Tiny SPRL (<http://tiny.be>).
+#    Copyright (C) 2009,2011-2012 P. Christeas <xrg@hellug.gr>
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -59,6 +60,7 @@ from lxml import etree
 from tools.config import config
 from tools.translate import _
 from tools import sql_model
+from tools import orm_utils
 
 import fields
 from query import Query
@@ -212,13 +214,9 @@ class browse_record_list(list):
         super(browse_record_list, self).__init__(lst)
         self.context = context
 
-def only_ids(ids):
-    """ Return the list of ids from either a browse_record_list or plain list
-    """
-    if isinstance(ids, browse_record_list):
-        return [ id._id for id in ids]
-    else:
-        return ids
+
+only_ids = orm_utils.only_ids # take it from there..
+orm_utils.browse_record_list = browse_record_list # ..put that one back
 
 class browse_record(object):
     """ An object that behaves like a row of an object's table.
