@@ -26,22 +26,23 @@ import pooler
 from tools.safe_eval import safe_eval as eval
 
 class Env(dict):
-    def __init__(self, cr, uid, model, ids):
+    def __init__(self, cr, uid, model, ids, context):
         self.cr = cr
         self.uid = uid
         self.model = model
         self.ids = ids
+        self.context = context
         self.obj = pooler.get_pool(cr.dbname).get(model)
         self.columns = self.obj._columns.keys() + self.obj._inherit_fields.keys()
 
     def __getitem__(self, key):
         if (key in self.columns) or (key in dir(self.obj)):
-            res = self.obj.browse(self.cr, self.uid, self.ids[0])
+            res = self.obj.browse(self.cr, self.uid, self.ids[0], self.context)
             return res[key]
         else:
             return super(Env, self).__getitem__(key)
 
-def _eval_expr(cr, ident, workitem, action):
+def _eval_expr(cr, ident, workitem, action, context):
     ret=False
     assert action, 'You used a NULL action in a workflow, use dummy node instead.'
     for line in action.split('\n'):
@@ -54,20 +55,22 @@ def _eval_expr(cr, ident, workitem, action):
         elif line =='False':
             ret=False
         else:
-            env = Env(cr, uid, model, ids)
+            env = Env(cr, uid, model, ids, context)
             ret = eval(line, env, nocopy=True)
     return ret
 
-def execute_action(cr, ident, workitem, activity):
+def execute_action(cr, ident, workitem, activity, context):
     obj = pooler.get_pool(cr.dbname).get('ir.actions.server')
-    ctx = {'active_id':ident[2], 'active_ids':[ident[2]]}
+    ctx = {}
+    ctx.update( context )
+    ctx.update( {'active_id':ident[2], 'active_ids':[ident[2]]} )
     result = obj.run(cr, ident[0], [activity['action_id']], ctx)
     return result
 
-def execute(cr, ident, workitem, activity):
-    return _eval_expr(cr, ident, workitem, activity['action'])
+def execute(cr, ident, workitem, activity, context):
+    return _eval_expr(cr, ident, workitem, activity['action'], context)
 
-def check(cr, workitem, ident, transition, signal):
+def check(cr, workitem, ident, transition, signal, context):
     if transition['signal'] and signal != transition['signal']:
         return False
 
@@ -78,7 +81,7 @@ def check(cr, workitem, ident, transition, signal):
         if not transition['group_id'] in user_groups:
             return False
 
-    return _eval_expr(cr, ident, workitem, transition['condition'])
+    return _eval_expr(cr, ident, workitem, transition['condition'], context)
 
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

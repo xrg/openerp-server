@@ -41,25 +41,25 @@ class workflow_service(netsvc.Service):
     def clear_cache(self, cr, uid):
         self.wkf_on_create_cache[cr.dbname]={}
 
-    def trg_write(self, uid, res_type, res_id, cr):
+    def trg_write(self, uid, res_type, res_id, cr, context={}):
         ident = (uid,res_type,res_id)
         cr.execute('select id from wkf_instance where res_id=%s and res_type=%s and state=%s', (res_id or None,res_type or None, 'active'))
         for (id,) in cr.fetchall():
-            instance.update(cr, id, ident)
+            instance.update(cr, id, ident, context)
 
-    def trg_trigger(self, uid, res_type, res_id, cr):
+    def trg_trigger(self, uid, res_type, res_id, cr, context={}):
         cr.execute('select instance_id from wkf_triggers where res_id=%s and model=%s', (res_id,res_type))
         res = cr.fetchall()
         for (instance_id,) in res:
             cr.execute('select %s,res_type,res_id from wkf_instance where id=%s', (uid, instance_id,))
             ident = cr.fetchone()
-            instance.update(cr, instance_id, ident)
+            instance.update(cr, instance_id, ident, context)
 
     def trg_delete(self, uid, res_type, res_id, cr):
         ident = (uid,res_type,res_id)
         instance.delete(cr, ident)
 
-    def trg_create(self, uid, res_type, res_id, cr):
+    def trg_create(self, uid, res_type, res_id, cr, context={}):
         ident = (uid,res_type,res_id)
         self.wkf_on_create_cache.setdefault(cr.dbname, {})
         if res_type in self.wkf_on_create_cache[cr.dbname]:
@@ -69,15 +69,15 @@ class workflow_service(netsvc.Service):
             wkf_ids = cr.fetchall()
             self.wkf_on_create_cache[cr.dbname][res_type] = wkf_ids
         for (wkf_id,) in wkf_ids:
-            instance.create(cr, ident, wkf_id)
+            instance.create(cr, ident, wkf_id, context)
 
-    def trg_validate(self, uid, res_type, res_id, signal, cr):
+    def trg_validate(self, uid, res_type, res_id, signal, cr, context={}):
         result = False
         ident = (uid,res_type,res_id)
         # ids of all active workflow instances for a corresponding resource (id, model_nam)
         cr.execute('select id from wkf_instance where res_id=%s and res_type=%s and state=%s', (res_id, res_type, 'active'))
         for (id,) in cr.fetchall():
-            res2 = instance.validate(cr, id, ident, signal)
+            res2 = instance.validate(cr, id, ident, signal, context=context)
             result = result or res2
         return result
 

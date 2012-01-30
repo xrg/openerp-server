@@ -249,15 +249,15 @@ class object_proxy(netsvc.Service):
             cr.close()
         return res
 
-    def exec_workflow_cr(self, cr, uid, obj, method, *args):
+    def exec_workflow_cr(self, cr, uid, obj, method, id, context=None):
         wf_service = netsvc.LocalService("workflow")
-        return wf_service.trg_validate(uid, obj, args[0], method, cr)
+        return wf_service.trg_validate(uid, obj, id, method, cr, context=context)
 
     @check
-    def exec_workflow(self, db, uid, obj, method, *args, **kw):
+    def exec_workflow(self, db, uid, obj, method, id, context, **kw):
         cr = self._get_cr_auth(db, kw)
         try:
-            res = self.exec_workflow_cr(cr, uid, obj, method, *args)
+            res = self.exec_workflow_cr(cr, uid, obj, method, id, context=context)
             cr.commit()
         except Exception:
             cr.rollback()

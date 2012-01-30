@@ -214,6 +214,36 @@ class browse_record_list(list):
         super(browse_record_list, self).__init__(lst)
         self.context = context
 
+class browse_executer:
+    def __init__(self, table, name, cr, uid, id, context):
+        raise RuntimeError()
+        self._table = table
+        self._name = name
+        self._cr = cr
+        self._uid = uid
+        self._id = id
+        self._context = context
+
+    def __call__(self, *args, **argv):
+        function = getattr(self._table, self._name)
+        # Check if 'context' is one of the possible parameters of the function
+        if 'context' in function.func_code.co_varnames[:function.func_code.co_argcount]:
+            argv['context'] = self._context
+            added = True
+        else:
+            added = False
+
+        try:
+            result = getattr(self._table, self._name)(self._cr, self._uid, [self._id], *args, **argv)
+        except TypeError, e:
+            if not added:
+                raise e
+            # If we got a TypeError and we had added the context, the error might be because the
+            # original call already provided a value for for 'context', which is not very usual
+            # but it might happen
+            del argv['context']
+            result = getattr(self._table, self._name)(self._cr, self._uid, [self._id], *args, **argv)
+        return result
 
 only_ids = orm_utils.only_ids # take it from there..
 orm_utils.browse_record_list = browse_record_list # ..put that one back
