@@ -973,8 +973,7 @@ class _report_spool_job(threading.Thread):
                 self.cr.close()
                 self.cr = None
         return True
-        
-        
+
     def stop(self):
         """Try to kill the job.
         
@@ -1016,7 +1015,7 @@ class report_spool(dbExportDispatch, baseExportService):
     def dispatch(self, method, auth, params):
         (db, uid, passwd ) = params[0:3]
         params = params[3:]
-        if method not in ['report','report_get', 'report_stop']:
+        if method not in ['report','report_get', 'report_stop', 'report_list']:
             raise KeyError("Method not supported %s" % method)
         security.check(db,uid,passwd)
         fn = getattr(self, 'exp_' + method)
@@ -1076,8 +1075,22 @@ class report_spool(dbExportDispatch, baseExportService):
             self.id_protect.release()
         return res
 
+    def exp_report_list(self, db, uid):
+        """Return the list of reports, active or finished
+
+            The list is limited to the calling user, unless called by the admin.
+
+            @return list of tuples: (id, name, running)
+        """
+        ret = []
+        for report in self._reports.values():
+            if uid != 1 and report.uid != uid:
+                continue
+            ret.append((report.id, report.report_obj, report.state))
+        return ret
+
     def exp_report_get(self, db, uid, report_id):
-        if report_id in self._reports:
+        if report_id in self._reports and  self._reports[report_id].db == db:
             if self._reports[report_id].uid == uid:
                 return self._check_report(report_id)
             else:
@@ -1095,7 +1108,7 @@ class report_spool(dbExportDispatch, baseExportService):
             do one more "report_get" to fetch the exception and free
             the job object.
         """
-        if report_id in self._reports:
+        if report_id in self._reports and self._reports[report_id].db == db:
             report = self._reports[report_id]
             if report.uid == uid or uid == 1:
                 if report.is_alive() and not report.state:
