@@ -3,6 +3,8 @@
 #
 #    OpenERP, Open Source Management Solution
 #    Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>).
+#    Copyright (C) 2009 Albert Cervera i Areny <albert@nan-tic.com>
+#    Copyright (C) 2012 P. Christeas <xrg@hellug.gr>
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -25,7 +27,7 @@ import workitem
 import netsvc
 import pooler
 
-def create(cr, ident, wkf_id, context={}):
+def create(cr, ident, wkf_id, context=None):
     (uid,res_type,res_id) = ident
     cr.execute('insert into wkf_instance (res_type,res_id,uid,wkf_id) values (%s,%s,%s,%s) RETURNING id', (res_type,res_id,uid,wkf_id))
     id_new = cr.fetchone()[0]
@@ -40,7 +42,7 @@ def delete(cr, ident):
     (uid,res_type,res_id) = ident
     cr.execute('delete from wkf_instance where res_id=%s and res_type=%s', (res_id,res_type))
 
-def validate(cr, inst_id, ident, signal, force_running=False, context={}):
+def validate(cr, inst_id, ident, signal, force_running=False, context=None):
     cr.execute("select * from wkf_workitem where inst_id=%s", (inst_id,))
     stack = []
     for witem in cr.dictfetchall():
@@ -50,7 +52,7 @@ def validate(cr, inst_id, ident, signal, force_running=False, context={}):
     _update_end(cr, inst_id, ident, context)
     return stack and stack[0] or False
 
-def update(cr, inst_id, ident, context={}):
+def update(cr, inst_id, ident, context=None):
     cr.execute("select * from wkf_workitem where inst_id=%s", (inst_id,))
     for witem in cr.dictfetchall():
         stack = []

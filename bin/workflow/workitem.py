@@ -3,6 +3,8 @@
 #
 #    OpenERP, Open Source Management Solution
 #    Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>).
+#    Copyright (C) 2009 Albert Cervera i Areny <albert@nan-tic.com>
+#    Copyright (C) 2012 P. Christeas <xrg@hellug.gr>
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -30,7 +32,7 @@ import instance
 import wkf_expr
 import wkf_logs
 
-def create(cr, act_datas, inst_id, ident, stack, context={}):
+def create(cr, act_datas, inst_id, ident, stack, context=None):
     for act in act_datas:
         cr.execute("select nextval('wkf_workitem_id_seq')")
         id_new = cr.fetchone()[0]
@@ -40,7 +42,7 @@ def create(cr, act_datas, inst_id, ident, stack, context={}):
         wkf_logs.log(cr,ident,act['id'],'active')
         process(cr, res, ident, stack=stack, context=context)
 
-def process(cr, workitem, ident, signal=None, force_running=False, stack=None, context={}):
+def process(cr, workitem, ident, signal=None, force_running=False, stack=None, context=None):
     if stack is None:
         raise RuntimeError('No stack!')
     result = True
@@ -144,7 +146,7 @@ def _execute(cr, workitem, activity, ident, stack, context):
 
     return result
 
-def _split_test(cr, workitem, split_mode, ident, signal=None, stack=None, context={}):
+def _split_test(cr, workitem, split_mode, ident, signal=None, stack=None, context=None):
     if stack is None:
         raise 'Error !!!'
     cr.execute('select * from wkf_transition where act_from=%s', (workitem['act_id'],))

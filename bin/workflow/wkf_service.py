@@ -3,6 +3,8 @@
 #    
 #    OpenERP, Open Source Management Solution
 #    Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>).
+#    Copyright (C) 2009 Albert Cervera i Areny <albert@nan-tic.com>
+#    Copyright (C) 2012 P. Christeas <xrg@hellug.gr>
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -41,13 +43,13 @@ class workflow_service(netsvc.Service):
     def clear_cache(self, cr, uid):
         self.wkf_on_create_cache[cr.dbname]={}
 
-    def trg_write(self, uid, res_type, res_id, cr, context={}):
+    def trg_write(self, uid, res_type, res_id, cr, context=None):
         ident = (uid,res_type,res_id)
         cr.execute('select id from wkf_instance where res_id=%s and res_type=%s and state=%s', (res_id or None,res_type or None, 'active'))
         for (id,) in cr.fetchall():
             instance.update(cr, id, ident, context)
 
-    def trg_trigger(self, uid, res_type, res_id, cr, context={}):
+    def trg_trigger(self, uid, res_type, res_id, cr, context=None):
         cr.execute('select instance_id from wkf_triggers where res_id=%s and model=%s', (res_id,res_type))
         res = cr.fetchall()
         for (instance_id,) in res:
@@ -59,7 +61,7 @@ class workflow_service(netsvc.Service):
         ident = (uid,res_type,res_id)
         instance.delete(cr, ident)
 
-    def trg_create(self, uid, res_type, res_id, cr, context={}):
+    def trg_create(self, uid, res_type, res_id, cr, context=None):
         ident = (uid,res_type,res_id)
         self.wkf_on_create_cache.setdefault(cr.dbname, {})
         if res_type in self.wkf_on_create_cache[cr.dbname]:
@@ -71,7 +73,7 @@ class workflow_service(netsvc.Service):
         for (wkf_id,) in wkf_ids:
             instance.create(cr, ident, wkf_id, context)
 
-    def trg_validate(self, uid, res_type, res_id, signal, cr, context={}):
+    def trg_validate(self, uid, res_type, res_id, signal, cr, context=None):
         result = False
         ident = (uid,res_type,res_id)
         # ids of all active workflow instances for a corresponding resource (id, model_nam)
