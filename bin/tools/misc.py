@@ -1158,8 +1158,7 @@ def get_languages():
 
 def scan_languages():
     # Now it will take all languages from get languages function without filter it with base module languages
-    lang_dict = get_languages()
-    ret = [(lang, lang_dict.get(lang, lang)) for lang in list(lang_dict)]
+    ret = get_languages().items()
     ret.sort(key=lambda k:k[1])
     return ret
 
