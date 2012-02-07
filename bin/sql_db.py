@@ -96,6 +96,8 @@ re_queries = [
         ('drop db', re.compile(r'drop database "?([a-z_0-9]+)"?', re.I)),
         ('select', re.compile(r'with recursive.*?\sas\s+\(\s*select\s.*?\s+from\s+"?([a-z_0-9]+)"?', re.I|re.DOTALL)),
         ('select', re.compile(r'select (nextval)\(%s\)', re.I)),
+        ('transaction', re.compile(r'(?:release )?savepoint\s+"?([a-z_0-9]+)"?', re.I)),
+        ('transaction', re.compile(r'rollback to savepoint\s+"?([a-z_0-9]+)"?', re.I)),
     ]
 
 sql_counter = 0
