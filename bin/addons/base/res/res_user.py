@@ -4,6 +4,7 @@
 #    OpenERP, Open Source Management Solution
 #    Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>).
 #    Copyright (C) 2010-2011 OpenERP s.a. (<http://openerp.com>).
+#    Copyright (C) 2012 P. Christeas <xrg@hellug.gr>
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -46,6 +47,8 @@ class groups(osv.osv):
         ('name_uniq', 'unique (name)', 'The name of the group must be unique !')
     ]
 
+    _groups_cache = {} #: db/uid cache of groups
+    
     def copy(self, cr, uid, id, default=None, context=None):
         group_name = self.read(cr, uid, [id], ['name'])[0]['name']
         default.update({'name': _('%s (copy)')%group_name})
@@ -56,6 +59,7 @@ class groups(osv.osv):
             if vals['name'].startswith('-'):
                 raise osv.except_osv(_('Error'),
                         _('The name of the group can not start with "-"'))
+        self._groups_cache[cr.dbname] = {}
         res = super(groups, self).write(cr, uid, ids, vals, context=context)
         self.pool.get('ir.model.access').call_cache_clearing_methods(cr)
         return res
@@ -66,6 +70,7 @@ class groups(osv.osv):
                 raise osv.except_osv(_('Error'),
                         _('The name of the group can not start with "-"'))
         gid = super(groups, self).create(cr, uid, vals, context=context)
+        self._groups_cache[cr.dbname] = {}
         if context and context.get('noadmin', False):
             pass
         else:
@@ -75,11 +80,36 @@ class groups(osv.osv):
             if aid:
                 aid.write({'groups_id': [(4, gid)]})
         return gid
+        
+    def unlink(self, cr, uid, ids, context=None):
+        self._groups_cache[cr.dbname] = {}
+        return super(groups, self).unlink(cr, uid, ids, context=context)
 
     def get_extended_interface_group(self, cr, uid, context=None):
         data_obj = self.pool.get('ir.model.data')
         extended_group_data_id = data_obj._get_id(cr, uid, 'base', 'group_extended')
         return data_obj.browse(cr, uid, extended_group_data_id, context=context).res_id
+
+    def check_user_groups(self, cr, user_id, group_ids, context=None):
+        """ Checks if `user_id` belongs to *any* of `group_ids`.
+
+            This method is cached
+        """
+
+        if not group_ids:
+            return False
+
+        if cr.dbname not in self._groups_cache:
+            self._groups_cache[cr.dbname] = {}
+
+        if user_id not in self._groups_cache[cr.dbname]:
+            cr.execute("SELECT gid FROM res_groups_users_rel WHERE uid = %s", user_id, debug=self._debug)
+            self._groups_cache[cr.dbname].setdefault(user_id, [r[0] for r in cr.fetchall()])
+
+        for g in self._groups_cache[cr.dbname][user_id]:
+            if g in group_ids:
+                return True
+        return False
 
 groups()
 
