@@ -386,6 +386,7 @@ class Schema(object):
 
             if need_more and not (done_actions or failed_actions):
                 logger.error("Have nothing to do at epoch #%d", self.epoch)
+                logger.debug("Schema todo: %s", self._dump_todo())
                 raise RuntimeError("Idle at epoch %d" % self.epoch)
             self.epoch += 1
 
