@@ -446,6 +446,7 @@ def init_module_objects(cr, module_name, obj_list):
     
     logger.debug("Loading existing elements from db: %r" , schema.hints)
     schema.load_from_db(cr)
+    wf_engine = None
     
     for obj in obj_list:
         try:
@@ -467,6 +468,10 @@ def init_module_objects(cr, module_name, obj_list):
             todo += result
         if hasattr(obj, 'init'):
             schema.commit_to_db(cr)
+            if not obj._workflow:
+                if not wf_engine:
+                    wf_engine = osv.osv.netsvc.LocalService('workflow')
+                obj._workflow = wf_engine.init_dummy(cr, obj)
             obj.init(cr)
 
     # print "TODO(last):"
@@ -790,9 +795,12 @@ def load_module_graph(cr, graph, status=None, perform_checks=True, skip_modules=
     statusi = 0
     pool = pooler.get_pool(cr.dbname)
     migrations = MigrationManager(cr, graph)
+    wf_engine = osv.osv.netsvc.LocalService('workflow')
     modobj = None
     logger.debug('loading %d packages..' % len(graph))
     abstract_models = []
+
+    wf_engine.freeze(cr)
 
     for package in graph:
         if skip_modules and package.name in skip_modules:
@@ -814,6 +822,7 @@ def load_module_graph(cr, graph, status=None, perform_checks=True, skip_modules=
                 # yet need to implement an abstract through their _inherits.
                 am._verify_implementations(modules)
 
+        wf_engine.reload_models(cr, [m._name for m in modules])
         cr.commit()
 
     del abstract_models
@@ -840,6 +849,7 @@ def load_module_graph(cr, graph, status=None, perform_checks=True, skip_modules=
             mode = 'init'
 
         if hasattr(package, 'init') or hasattr(package, 'update') or package.state in ('to install', 'to upgrade'):
+            wf_engine.thaw_dummy(cr)
             for kind in ('init', 'update'):
                 if package.state == 'to upgrade':
                     # upgrading the module information
@@ -848,6 +858,7 @@ def load_module_graph(cr, graph, status=None, perform_checks=True, skip_modules=
             load_data(cr, m, idref, mode)
             if hasattr(package, 'demo') or (package.dbdemo and package.state != 'installed'):
                 status['progress'] = (float(statusi)+0.75) / len(graph)
+                wf_engine.thaw(cr) # activate workflows, before we put any data
                 load_demo_xml(cr, m, idref, mode)
                 load_demo(cr, m, idref, mode)
                 cr.execute('update ir_module_module set demo=%s where id=%s', (True, mid))
@@ -857,6 +868,7 @@ def load_module_graph(cr, graph, status=None, perform_checks=True, skip_modules=
                 # 'data' section, but should probably not alter the data,
                 # as there is no rollback.
                 load_test(cr, m, idref, mode)
+                wf_engine.freeze(cr)
 
             processed_modules.append(package.name)
 
@@ -878,6 +890,7 @@ def load_module_graph(cr, graph, status=None, perform_checks=True, skip_modules=
 
         statusi += 1
 
+    wf_engine.thaw(cr)
     cr.commit()
 
     return processed_modules

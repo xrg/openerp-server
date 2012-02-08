@@ -3,6 +3,7 @@
 #
 #    OpenERP, Open Source Management Solution
 #    Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>).
+#    Copyright (C) 2012 P. Christeas <xrg@hellug.gr>
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -21,6 +22,7 @@
 
 from osv import fields, osv, index
 import netsvc
+from tools.orm_utils import only_ids
 
 class workflow(osv.osv):
     _name = "workflow"
@@ -40,9 +42,14 @@ class workflow(osv.osv):
     def write(self, cr, user, ids, vals, context=None):
         if not context:
             context={}
-        wf_service = netsvc.LocalService("workflow")
-        wf_service.clear_cache(cr, user)
-        return super(workflow, self).write(cr, user, ids, vals, context=context)
+        
+        res = super(workflow, self).write(cr, user, ids, vals, context=context)
+        
+        rmodels = self.read(cr, user, only_ids(ids), fields=['osv'], context=context)
+        if rmodels:
+            wf_service = netsvc.LocalService("workflow")
+            wf_service.reload_models(cr, [ r['osv'] for r in rmodels])
+        return res
 
     def get_active_workitems(self, cr, uid, res, res_id, context=None):
 
@@ -61,54 +68,23 @@ class workflow(osv.osv):
 
         return {'wkf': wkfinfo, 'workitems':  workitems}
 
-
-    #
-    # scale =  (vertical-distance, horizontal-distance, min-node-width(optional), min-node-height(optional), margin(default=20))
-    #
-
-
-#    def graph_get(self, cr, uid, id, scale, context={}):
-#
-#        nodes= []
-#        nodes_name = []
-#        transitions = []
-#        start = []
-#        tres = {}
-#        no_ancester = []
-#        workflow = self.browse(cr, uid, id, context)
-#        for a in workflow.activities:
-#            nodes_name.append((a.id,a.name))
-#            nodes.append(a.id)
-#            if a.flow_start:
-#                start.append(a.id)
-#            else:
-#                if not a.in_transitions:
-#                    no_ancester.append(a.id)
-#
-#            for t in a.out_transitions:
-#                transitions.append((a.id, t.act_to.id))
-#                tres[t.id] = (a.id, t.act_to.id)
-#
-#
-#        g  = graph(nodes, transitions, no_ancester)
-#        g.process(start)
-#        g.scale(*scale)
-#        result = g.result_get()
-#        results = {}
-#
-#        for node in nodes_name:
-#            results[str(node[0])] = result[node[0]]
-#            results[str(node[0])]['name'] = node[1]
-#
-#        return {'nodes': results, 'transitions': tres}
-
-
     def create(self, cr, user, vals, context=None):
         if not context:
             context={}
-        wf_service = netsvc.LocalService("workflow")
-        wf_service.clear_cache(cr, user)
-        return super(workflow, self).create(cr, user, vals, context=context)
+        
+        res = super(workflow, self).create(cr, user, vals, context=context)
+        if 'osv' in vals: # must be
+            wf_service = netsvc.LocalService("workflow")
+            wf_service.reload_models(cr, [ vals['osv'],])
+        return res
+        
+    def unlink(self, cr, uid, ids, context=None):
+        rmodels = self.read(cr, uid, only_ids(ids), fields=['osv'], context=context)
+        res = super(workflow, self).unlink(cr, uid, ids, context=context)
+        if rmodels:
+            wf_service = netsvc.LocalService("workflow")
+            wf_service.reload_models(cr, [ r['osv'] for r in rmodels])
+        return res
 
 workflow()
 
@@ -139,6 +115,35 @@ class wkf_activity(osv.osv):
         'join_mode': 'XOR',
         'split_mode': 'XOR',
     }
+    
+    def create(self, cr, user, vals, context=None):
+        res = super(wkf_activity, self).create(cr, user, vals, context=context)
+        cr.execute('SELECT wkf.osv FROM wkf, wkf_activity '
+            'WHERE wkf.id = wkf_activity.wkf_id AND wkf_activity.id = %s',
+                (res,), debug=self._debug)
+        r = cr.fetchone()
+        wf_service = netsvc.LocalService("workflow")
+        wf_service.reload_models(cr, [r[0],])
+        return res
+
+    def write(self, cr, user, ids, vals, context=None):
+        res = super(wkf_activity, self).write(cr, user, ids, vals, context=context)
+        cr.execute('SELECT DISTINCT wkf.osv FROM wkf, wkf_activity '
+            'WHERE wkf.id = wkf_activity.wkf_id AND wkf_activity.id = ANY(%s)', 
+                (ids,), debug=self._debug)
+        wf_service = netsvc.LocalService("workflow")
+        wf_service.reload_models(cr, [r[0] for r in cr.fetchall()])
+        return res
+        
+    def unlink(self, cr, uid, ids, context=None):
+        cr.execute('SELECT DISTINCT wkf.osv FROM wkf, wkf_activity '
+            'WHERE wkf.id = wkf_activity.wkf_id AND wkf_activity.id = ANY(%s)',
+                (ids,), debug=self._debug)
+        models = [r[0] for r in cr.fetchall()]
+        res = super(wkf_activity, self).unlink(cr, uid, ids, context=context)
+        wf_service = netsvc.LocalService("workflow")
+        wf_service.reload_models(cr, models)
+        return res
 
 wkf_activity()
 
@@ -167,6 +172,39 @@ class wkf_transition(osv.osv):
     _defaults = {
         'condition': 'True',
     }
+    
+    def create(self, cr, user, vals, context=None):
+        res = super(wkf_transition, self).create(cr, user, vals, context=context)
+        cr.execute('SELECT wkf.osv FROM wkf, wkf_activity, wkf_transition ' \
+            'WHERE wkf.id = wkf_activity.wkf_id AND wkf_activity.id = wkf_transition.act_from' \
+            '  AND wkf_transition.id = %s',
+                (res,), debug=self._debug)
+        r = cr.fetchone()
+        wf_service = netsvc.LocalService("workflow")
+        wf_service.reload_models(cr, [r[0],])
+        return res
+
+    def write(self, cr, user, ids, vals, context=None):
+        res = super(wkf_transition, self).write(cr, user, ids, vals, context=context)
+        cr.execute('SELECT DISTINCT wkf.osv FROM wkf, wkf_activity, wkf_transition '
+                    'WHERE wkf.id = wkf_activity.wkf_id AND wkf_activity.id = wkf_transition.act_from'
+                    '  AND wkf_transition.id = ANY(%s)', 
+                    (ids,), debug=self._debug)
+        wf_service = netsvc.LocalService("workflow")
+        wf_service.reload_models(cr, [r[0] for r in cr.fetchall()])
+        return res
+
+    def unlink(self, cr, uid, ids, context=None):
+        cr.execute('SELECT DISTINCT wkf.osv FROM wkf, wkf_activity '
+                    'WHERE wkf.id = wkf_activity.wkf_id AND wkf_activity.id = wkf_transition.act_from'
+                    '  AND wkf_transition.id = ANY(%s)',
+                    (ids,), debug=self._debug)
+        models = [r[0] for r in cr.fetchall()]
+        res = super(wkf_transition, self).unlink(cr, uid, ids, context=context)
+        wf_service = netsvc.LocalService("workflow")
+        wf_service.reload_models(cr, models)
+        return res
+
 wkf_transition()
 
 class wkf_instance(osv.osv):
@@ -176,9 +214,9 @@ class wkf_instance(osv.osv):
     _log_access = False
 
     _columns = {
-        'wkf_id': fields.many2one('workflow', 'Workflow', ondelete='restrict', select=True),
-        'res_id': fields.integer('Resource ID'),
-        'res_type': fields.char('Resource Object', size=64),
+        'wkf_id': fields.many2one('workflow', 'Workflow', ondelete='restrict'),
+        'res_id': fields.integer('Resource ID', required=True),
+        'res_type': fields.char('Resource Object', size=64, required=True),
         'state': fields.char('State', size=32, required=True),
     }
     _defaults = {
@@ -187,7 +225,7 @@ class wkf_instance(osv.osv):
 
     _indices = {
         'res_type_res_id_state_index': index.plain('res_type', 'res_id', 'state'),
-        'res_id_wkf_id_index': index.plain('res_id', 'wkf_id'),
+        'wkf_id_res_id_index': index.plain('wkf_id', 'res_id'),
     }
 
 wkf_instance()
@@ -218,8 +256,8 @@ class wkf_triggers(osv.osv):
     _log_access = False
 
     _columns = {
-        'res_id': fields.integer('Resource ID', size=128),
-        'model': fields.char('Object', size=128),
+        'res_id': fields.integer('Resource ID', size=128, required=True),
+        'model': fields.char('Object', size=128, required=True),
         'instance_id': fields.many2one('workflow.instance', 'Destination Instance', ondelete="cascade"),
         'workitem_id': fields.many2one('workflow.workitem', 'Workitem', required=True, ondelete="cascade"),
     }

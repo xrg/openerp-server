@@ -211,11 +211,11 @@ CREATE TABLE wkf_transition
     act_to int REFERENCES wkf_activity ON DELETE CASCADE,
     condition varchar(128),
 
-    trigger_type varchar(128),
-    trigger_expr_id varchar(128),
+    trigger_model VARCHAR(128),
+    trigger_expr_id VARCHAR(128),
 
-    signal varchar(64) DEFAULT NULL,
-    group_id int REFERENCES res_groups ON DELETE SET NULL
+    signal VARCHAR(64) DEFAULT NULL,
+    "group_id" int REFERENCES res_groups ON DELETE SET NULL
 ) WITHOUT OIDS;
 
 CREATE TABLE wkf_instance
@@ -245,6 +245,7 @@ CREATE TABLE wkf_witm_trans
 
 CREATE INDEX wkf_witm_trans_inst_idx on wkf_witm_trans (inst_id);
 
+/*
 CREATE TABLE wkf_logs
 (
     id serial,
@@ -256,6 +257,7 @@ CREATE TABLE wkf_logs
     info varchar(128) DEFAULT NULL,
     PRIMARY KEY(id)
 ) WITHOUT OIDS;
+*/
 
 ---------------------------------
 -- Modules

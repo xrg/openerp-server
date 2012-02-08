@@ -569,9 +569,7 @@ form: module.record_id""" % (xml_id,)
 
         uid = self.get_uid(cr, self.uid, data_node, rec)
         wf_service = netsvc.LocalService("workflow")
-        wf_service.trg_validate(uid, model,
-            id,
-            str(rec.get('action','')), cr)
+        wf_service.trg_validate(uid, model, id, str(rec.get('action','')), cr)
 
     #
     # Support two types of notation:

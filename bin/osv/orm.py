@@ -785,6 +785,7 @@ class orm_template(object):
         if not self._table:
             self._table = self._name.replace('.', '_')
         self._debug = config.get_misc('logging_orm', self._name, False)
+        self._workflow = None
         
         # Stats is number of fetches per column. key is the column name, as
         # in self._column.keys()
@@ -2538,9 +2539,9 @@ class orm_memory(orm_template):
             self.datas[object_id]['internal.date_access'] = time.time()
             for field in upd_todo:
                 self._columns[field].set_memory(cr, self, object_id, field, vals[field], user, context)
-        self._validate(cr, user, [object_id], context) # FIXME
-        wf_service = netsvc.LocalService("workflow")
-        wf_service.trg_write(user, self._name, object_id, cr)
+        
+        self._validate(cr, user, ids, context)
+        self._workflow.write(cr, user, ids, context)
         return object_id
 
     def create(self, cr, user, vals, context=None):
@@ -2582,8 +2583,8 @@ class orm_memory(orm_template):
                 self.name_get(cr, user, [id_new], context=context)[0][1] + \
                 "' "+ _("created.")
             self.log(cr, user, id_new, message, True, context=context)
-        wf_service = netsvc.LocalService("workflow")
-        wf_service.trg_create(user, self._name, id_new, cr)
+        
+        self._workflow.create(cr, user, [id_new,], context)
         return id_new
 
     def _where_calc(self, cr, user, args, active_test=True, context=None):
@@ -3793,10 +3794,7 @@ class orm(orm_template):
         if properties.search(cr, uid, domain, context=context):
             raise except_orm(_('Error'), _('Unable to delete this document because it is used as a default property'))
 
-        wf_service = netsvc.LocalService("workflow")
-        for oid in ids:
-            wf_service.trg_delete(uid, self._name, oid, cr)
-
+        self._workflow.delete(cr, uid, ids, context)
 
         # Shall we also remove the inherited records in python, here?
 
@@ -4087,9 +4085,7 @@ class orm(orm_template):
                     todo.append(id)
             self.pool.get(object)._store_set_values(cr, user, todo, fields_r, context)
 
-        wf_service = netsvc.LocalService("workflow")
-        for id in ids:
-            wf_service.trg_write(user, self._name, id, cr)
+        self._workflow.write(cr, user, ids, context)
         return True
 
     #
@@ -4265,8 +4261,7 @@ class orm(orm_template):
                 self.name_get(cr, user, [id_new], context=context)[0][1] + \
                 "' " + _("created.")
             self.log(cr, user, id_new, message, True, context=context)
-        wf_service = netsvc.LocalService("workflow")
-        wf_service.trg_create(user, self._name, id_new, cr)
+        self._workflow.create(cr, user, [id_new,], context)
         return id_new
 
     def _store_get_values(self, cr, uid, ids, fields, context):
