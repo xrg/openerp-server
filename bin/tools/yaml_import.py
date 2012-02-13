@@ -103,6 +103,10 @@ class TestReport(object):
         Records the result of an assertion for the failed/success count.
         Returns success.
         """
+        if isinstance(severity, basestring) and severity.isdigit():
+            severity = int(severity)
+        if isinstance(severity, int):
+            severity = logging.getLevelName(severity)
         if severity in self._report:
             self._report[severity][success] += 1
         else:
@@ -222,7 +226,7 @@ class YamlInterpreter(object):
         return node
 
     def _log_assert_failure(self, severity, msg, *args):
-        if isinstance(severity, types.StringTypes):
+        if isinstance(severity, basestring):
             levelname = severity.strip().upper()
             level = logging.getLevelName(levelname)
         else:
