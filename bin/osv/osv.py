@@ -254,7 +254,7 @@ class object_proxy(netsvc.Service):
         return wf_service.trg_validate(uid, obj, id, method, cr, context=context)
 
     @check
-    def exec_workflow(self, db, uid, obj, method, id, context, **kw):
+    def exec_workflow(self, db, uid, obj, method, id, context=None, **kw):
         cr = self._get_cr_auth(db, kw)
         try:
             res = self.exec_workflow_cr(cr, uid, obj, method, id, context=context)
