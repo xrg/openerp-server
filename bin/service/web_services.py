@@ -1054,7 +1054,13 @@ class report_spool(dbExportDispatch, baseExportService):
         report = self._reports[report_id]
         exc = report.exception
         if exc:
+            self.id_protect.acquire()
+            try:
+                del self._reports[report_id]
+            finally:
+                self.id_protect.release()
             self.abortResponse(1, exc.__class__.__name__, 'warning', exc.message)
+        
         res = {'state': report.state }
         if res['state']:
             if tools.config['reportgz']:
@@ -1071,8 +1077,11 @@ class report_spool(dbExportDispatch, baseExportService):
                 res['result'] = base64.encodestring(res2)
             res['format'] = report.format
             self.id_protect.acquire()
-            del self._reports[report_id]
-            self.id_protect.release()
+            try:
+                del self._reports[report_id]
+            finally:
+                self.id_protect.release()
+        # else: leave report there, return the state only
         return res
 
     def exp_report_list(self, db, uid):
