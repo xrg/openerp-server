@@ -91,7 +91,7 @@ def _get_opcodes(codeobj):
             i += 1
     return opcodes
 
-def test_expr(expr, allowed_codes, mode="eval"):
+def test_expr(expr, allowed_codes, mode="eval", filename=''):
     """test_expr(expression, allowed_codes[, mode]) -> code_object
 
     Test that the expression contains only the allowed opcodes.
@@ -103,7 +103,7 @@ def test_expr(expr, allowed_codes, mode="eval"):
         if mode == 'eval':
             # eval() does not like leading/trailing whitespace
             expr = expr.strip()
-        code_obj = compile(expr, "", mode)
+        code_obj = compile(expr, filename, mode)
     except (SyntaxError, TypeError):
         _logger.debug('Invalid eval expression', exc_info=True)
         raise
@@ -224,7 +224,7 @@ def _import(name, globals=None, locals=None, fromlist=None, level=-1):
         return __import__(name, globals, locals, level)
     raise ImportError(name)
 
-def safe_eval(expr, globals_dict=None, locals_dict=None, mode="eval", nocopy=False):
+def safe_eval(expr, globals_dict=None, locals_dict=None, mode="eval", nocopy=False, filename=''):
     """safe_eval(expression[, globals[, locals[, mode[, nocopy]]]]) -> result
 
     System-restricted Python expression evaluation
@@ -288,7 +288,8 @@ def safe_eval(expr, globals_dict=None, locals_dict=None, mode="eval", nocopy=Fal
                 'set' : set
             }
     )
-    return eval(test_expr(expr,_SAFE_OPCODES, mode=mode), globals_dict, locals_dict)
+    return eval(test_expr(expr,_SAFE_OPCODES, mode=mode, filename=filename),
+                globals_dict, locals_dict)
 
 import logging
 import traceback
@@ -298,7 +299,7 @@ def safe_evalD(expr, *args, **kwargs):
         return safe_eval(expr,*args, **kwargs)
     except Exception:
         log = logging.getLogger('eval')
-        log.exception('safe_eval "%s"' % (expr))
+        log.exception('safe_eval %s "%s"' % (kwargs.get('filename', ''),expr))
         trace = 'Caller Trace:\n' + ''.join(traceback.format_stack(limit=5)[:-1])
         log.warning(trace)
         if len(args) > 0 and isinstance(args[0], dict):
