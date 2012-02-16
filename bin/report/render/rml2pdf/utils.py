@@ -45,7 +45,7 @@ import reportlab
 import sys
 
 if 'openerp-server' in sys.modules['__main__'].__file__:
-    from tools.safe_eval import safe_eval as eval
+    from tools.safe_eval import safe_eval
     from tools import ustr
 else:
     def ustr(value):
@@ -63,6 +63,9 @@ else:
         except Exception:
             pass
         raise UnicodeError('unable to convert %r' % (value,))
+    
+    def safe_eval(expr, globals_dict=None, locals_dict=None, mode="eval", nocopy=False, filename=''):
+        return eval(expr, globals_dict, locals_dict)
 
 _regex = re.compile('\[\[(.+?)\]\]')
 
@@ -76,12 +79,12 @@ def _child_get(node, self=None, tagname=None):
     for n in node:
         if self and self.localcontext and n.get('rml_loop'):
 
-            for ctx in eval(n.get('rml_loop'),{}, self.localcontext):
+            for ctx in safe_eval(n.get('rml_loop'),{}, self.localcontext, filename="rml:%d" % n.sourceline):
                 self.localcontext.update(ctx)
                 if (tagname is None) or (n.tag==tagname):
                     if n.get('rml_except', False):
                         try:
-                            eval(n.get('rml_except'), {}, self.localcontext)
+                            safe_eval(n.get('rml_except'), {}, self.localcontext, filename="<rml_except %r>" %n)
                         except GeneratorExit:
                             continue
                         except Exception, e:
@@ -89,7 +92,7 @@ def _child_get(node, self=None, tagname=None):
                             continue
                     if n.get('rml_tag'):
                         try:
-                            (tag,attr) = eval(n.get('rml_tag'),{}, self.localcontext)
+                            (tag,attr) = safe_eval(n.get('rml_tag'),{}, self.localcontext, filename="<rml_tag: %s>" % n)
                             n2 = copy.deepcopy(n)
                             n2.tag = tag
                             n2.attrib.update(attr)
@@ -104,7 +107,7 @@ def _child_get(node, self=None, tagname=None):
             continue
         if self and self.localcontext and n.get('rml_except'):
             try:
-                eval(n.get('rml_except'), {}, self.localcontext)
+                safe_eval(n.get('rml_except'), {}, self.localcontext, filename="<rml_except %r>" % n)
             except GeneratorExit:
                 continue
             except Exception, e:
@@ -112,7 +115,8 @@ def _child_get(node, self=None, tagname=None):
                 continue
         if self and self.localcontext and n.get('rml_tag'):
             try:
-                (tag,attr) = eval(n.get('rml_tag'),{}, self.localcontext) or (False, False)
+                (tag,attr) = safe_eval(n.get('rml_tag'),{}, self.localcontext, filename="<rml_tag %r>" % n) \
+                        or (False, False)
                 if tag is not False:
                     n2 = copy.deepcopy(n)
                     n2.tag = tag
@@ -127,7 +131,7 @@ def _child_get(node, self=None, tagname=None):
         if (tagname is None) or (n.tag==tagname):
             yield n
 
-def _process_text(self, txt):
+def _process_text(self, txt, lineno=-1):
         if not self.localcontext:
             return str2xml(txt)
         if not txt:
@@ -142,7 +146,7 @@ def _process_text(self, txt):
                 try:
                     txt = None
                     expr = sps.pop(0)
-                    txt = eval(expr, self.localcontext)
+                    txt = safe_eval(expr, self.localcontext, filename="rml: %d" % lineno)
                     if txt and (isinstance(txt, basestring)):
                         txt = ustr(txt)
                 except Exception:

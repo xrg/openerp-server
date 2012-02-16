@@ -376,7 +376,7 @@ class _rml_canvas(object):
 
     def _textual(self, node, x=0, y=0):
         text = node.text and node.text.encode('utf-8') or ''
-        rc = utils._process_text(self, text)
+        rc = utils._process_text(self, text, lineno=node.sourceline)
         for n in node:
             if n.tag == 'seq':
                 from reportlab.lib.sequencer import getSequencer
@@ -390,7 +390,7 @@ class _rml_canvas(object):
                     self.canvas.translate(-x,-y)
             if n.tag == 'pageNumber':
                 rc += str(self.canvas.getPageNumber())
-            rc += utils._process_text(self, n.tail)
+            rc += utils._process_text(self, n.tail, lineno=n.sourceline)
         return rc.replace('\n','')
 
     def _drawString(self, node):
@@ -663,7 +663,7 @@ class _rml_flowable(object):
         self._logger = logging.getLogger('report.rml.flowable')
 
     def _textual(self, node):
-        rc1 = utils._process_text(self, node.text or '')
+        rc1 = utils._process_text(self, node.text or '', lineno=node.sourceline)
         for n in utils._child_get(node,self):
             txt_n = copy.deepcopy(n)
             for key in txt_n.attrib.keys():
@@ -672,7 +672,7 @@ class _rml_flowable(object):
 
             if not n.tag == 'bullet':
                 txt_n.text = utils.xml2str(self._textual(n))
-            txt_n.tail = n.tail and utils.xml2str(utils._process_text(self, n.tail.replace('\n',''))) or ''
+            txt_n.tail = n.tail and utils.xml2str(utils._process_text(self, n.tail.replace('\n',''), lineno=n.sourceline)) or ''
             rc1 += etree.tostring(txt_n)
         return rc1
 
@@ -737,8 +737,9 @@ class _rml_flowable(object):
             posy += 1
 
         if node.get('colWidths'):
-            assert length == len(node.get('colWidths').split(','))
             colwidths = [utils.unit_get(f.strip()) for f in node.get('colWidths').split(',')]
+            assert length == len(colwidths), \
+                "Columns mismatch %d != %d at line: %d" % ( length, len(colwidths), node.sourceline)
         if node.get('rowHeights'):
             rowheights = [utils.unit_get(f.strip()) for f in node.get('rowHeights').split(',')]
             if len(rowheights) == 1:
@@ -855,7 +856,7 @@ class _rml_flowable(object):
                 else:
                     import base64
                     if self.localcontext:
-                        newtext = utils._process_text(self, node.text or '')
+                        newtext = utils._process_text(self, node.text or '', lineno=node.sourceline)
                         node.text = newtext
                     image_data = base64.decodestring(node.text)
                 if not image_data:
