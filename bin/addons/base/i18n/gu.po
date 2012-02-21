@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: openobject-server\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-01-11 11:14+0000\n"
-"PO-Revision-Date: 2012-02-17 13:38+0000\n"
+"PO-Revision-Date: 2012-02-20 13:35+0000\n"
 "Last-Translator: Anup(SerpentCS) <anup.chavda@serpentcs.com>\n"
 "Language-Team: Gujarati <gu@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-02-18 05:27+0000\n"
-"X-Generator: Launchpad (build 14814)\n"
+"X-Launchpad-Export-Date: 2012-02-21 06:16+0000\n"
+"X-Generator: Launchpad (build 14838)\n"
 
 #. module: base
 #: view:ir.filters:0
@@ -500,49 +500,49 @@ msgstr "કસ્ટમ ફિલ્ડ નુ નામ 'x_' થી જ શર�
 #. module: base
 #: help:ir.actions.server,action_id:0
 msgid "Select the Action Window, Report, Wizard to be executed."
-msgstr ""
+msgstr "ચલિત કરવા માટે ની એકશન વિન્ડો, અહેવાલ(રિપોર્ટ) કે વિઝાર્ડ પસંદ કરો."
 
 #. module: base
 #: view:res.config.users:0
 msgid "New User"
-msgstr ""
+msgstr "નવો વપરાશકર્તા"
 
 #. module: base
 #: view:base.language.export:0
 msgid "Export done"
-msgstr ""
+msgstr "નિકાસ સંપુર્ણ"
 
 #. module: base
 #: view:ir.model:0
 #: field:ir.model,name:0
 msgid "Model Description"
-msgstr ""
+msgstr "મોડેલ નુ વર્ણન"
 
 #. module: base
 #: help:ir.actions.act_window,src_model:0
 msgid ""
 "Optional model name of the objects on which this action should be visible"
-msgstr ""
+msgstr "ઓબ્જેક્ટ્સ ન મોડેલ નુ ગૌણ નામ કે જેના પર આ એકશન દ્રશ્યમાન થવુ જોઇયે."
 
 #. module: base
 #: field:workflow.transition,trigger_expr_id:0
 msgid "Trigger Expression"
-msgstr ""
+msgstr "સમીકરણ(એક્સપ્રેશન) ચલિત કરવુ"
 
 #. module: base
 #: model:res.country,name:base.jo
 msgid "Jordan"
-msgstr ""
+msgstr "જોર્ડન"
 
 #. module: base
 #: view:ir.module.module:0
 msgid "Certified"
-msgstr ""
+msgstr "પ્રમાણિત"
 
 #. module: base
 #: model:res.country,name:base.er
 msgid "Eritrea"
-msgstr ""
+msgstr "એરિટ્રીયા"
 
 #. module: base
 #: view:res.config:0
@@ -554,22 +554,22 @@ msgstr "વર્ણન"
 #: model:ir.ui.menu,name:base.menu_base_action_rule
 #: model:ir.ui.menu,name:base.menu_base_action_rule_admin
 msgid "Automated Actions"
-msgstr ""
+msgstr "સ્વયંચાલિતકાર્યો(એકશન્સ)"
 
 #. module: base
 #: model:ir.model,name:base.model_ir_actions_actions
 msgid "ir.actions.actions"
-msgstr ""
+msgstr "ir.actions.actions"
 
 #. module: base
 #: view:partner.wizard.ean.check:0
 msgid "Want to check Ean ? "
-msgstr ""
+msgstr "ઈ.એ.એન(EAN) સંકેત ચેક કરાવવુ છે? "
 
 #. module: base
 #: field:ir.values,key2:0
 msgid "Event Type"
-msgstr ""
+msgstr "કાર્યક્રમ નો પ્રકાર"
 
 #. module: base
 #: view:base.language.export:0
@@ -578,115 +578,122 @@ msgid ""
 "Launchpad.net, our open source project management facility. We use their "
 "online interface to synchronize all translations efforts."
 msgstr ""
+"ઓપન ઈ આર પી ભાષાંતરો(કેન્દ્ર્ભુત,મોડ્યુલો,ક્લાઈન્ટ્સ)  Launchpad.net વડે "
+"સંચાલિત છે, કે જે અમારી ઓપન સોર્સ પ્રોજેક્ટ સંચાલન સુવિધા છે. બધાજ ભાષાંતરો "
+"ના પ્રયત્નો ને સમકાલીન કરવા માટે અમે તેનુ ઓનલાઈન ઇન્ટરફેસ વાપરીયે છે."
 
 #. module: base
 #: field:res.partner,title:0
 msgid "Partner Form"
-msgstr ""
+msgstr "ભાગીદાર નુ ફોર્મ"
 
 #. module: base
 #: selection:base.language.install,lang:0
 msgid "Swedish / svenska"
-msgstr ""
+msgstr "સ્વિડીશ / svenska"
 
 #. module: base
 #: model:res.country,name:base.rs
 msgid "Serbia"
-msgstr ""
+msgstr "સર્બિયા"
 
 #. module: base
 #: selection:ir.translation,type:0
 msgid "Wizard View"
-msgstr ""
+msgstr "વિઝાર્ડ નુ દ્રશ્ય"
 
 #. module: base
 #: model:res.country,name:base.kh
 msgid "Cambodia, Kingdom of"
-msgstr ""
+msgstr "કંબોડિયા, નુ રાજ્ય"
 
 #. module: base
 #: model:ir.actions.act_window,name:base.ir_sequence_form
 #: view:ir.sequence:0
 #: model:ir.ui.menu,name:base.menu_ir_sequence_form
 msgid "Sequences"
-msgstr ""
+msgstr "અનુક્રમો"
 
 #. module: base
 #: model:ir.model,name:base.model_base_language_import
 msgid "Language Import"
-msgstr ""
+msgstr "ભાષા આયાત"
 
 #. module: base
 #: model:ir.model,name:base.model_res_config_users
 msgid "res.config.users"
-msgstr ""
+msgstr "res.config.users"
 
 #. module: base
 #: selection:base.language.install,lang:0
 msgid "Albanian / Shqip"
-msgstr ""
+msgstr "અલ્બેનિયન / Shqip"
 
 #. module: base
 #: model:ir.ui.menu,name:base.menu_crm_config_opportunity
 msgid "Opportunities"
-msgstr ""
+msgstr "તકો"
 
 #. module: base
 #: model:ir.model,name:base.model_base_language_export
 msgid "base.language.export"
-msgstr ""
+msgstr "base.language.export"
 
 #. module: base
 #: model:res.country,name:base.pg
 msgid "Papua New Guinea"
-msgstr ""
+msgstr "પાપુઆ ન્યુ ગુએના"
 
 #. module: base
 #: help:ir.actions.report.xml,report_type:0
 msgid "Report Type, e.g. pdf, html, raw, sxw, odt, html2html, mako2html, ..."
 msgstr ""
+"અહેવાલ પ્રકાર,  ઉદાહરણ તરીકે pdf, html, raw, sxw, odt, html2html, mako2html, "
+"..."
 
 #. module: base
 #: model:res.partner.category,name:base.res_partner_category_4
 msgid "Basic Partner"
-msgstr ""
+msgstr "સામાન્ય ભાગીદાર"
 
 #. module: base
 #: report:ir.module.reference.graph:0
 msgid ","
-msgstr ""
+msgstr ","
 
 #. module: base
 #: view:res.partner:0
 msgid "My Partners"
-msgstr ""
+msgstr "મારા ભાગીદારો"
 
 #. module: base
 #: view:ir.actions.report.xml:0
 msgid "XML Report"
-msgstr ""
+msgstr "એક્સ.એમ.એલ(XML) અહેવાલ"
 
 #. module: base
 #: model:res.country,name:base.es
 msgid "Spain"
-msgstr ""
+msgstr "સ્પેન"
 
 #. module: base
 #: model:ir.ui.menu,name:base.menu_translation_export
 msgid "Import / Export"
-msgstr ""
+msgstr "આયાત / નિકાસ"
 
 #. module: base
 #: help:ir.actions.act_window,domain:0
 msgid ""
 "Optional domain filtering of the destination data, as a Python expression"
 msgstr ""
+"ગૌણ શરતી ક્ષેત્ર(ડોમેઈન) કે જે લક્ષ્યાંક માહિતી(ડેટા) ને ફિલ્ટર કરે છે, "
+"પાયથન સમીકરણ તરીકે."
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_view_base_module_upgrade
 #: model:ir.model,name:base.model_base_module_upgrade
 msgid "Module Upgrade"
-msgstr ""
+msgstr "મોડ્યુલ અદ્યતનીકરણ"
 
 #. module: base
 #: view:res.config.users:0
@@ -694,43 +701,45 @@ msgid ""
 "Groups are used to define access rights on objects and the visibility of "
 "screens and menus"
 msgstr ""
+"સમુદાય નો ઉપયોગ ઓબ્જેકટ્સ ઉપર ઉપયોગ ના અધિકારો આપવા અને મેનુ અને "
+"દ્રશ્યો(વ્યુ) ને દ્રશ્યમાન કરવા માટે થાય છે."
 
 #. module: base
 #: selection:base.language.install,lang:0
 msgid "Spanish (UY) / Español (UY)"
-msgstr ""
+msgstr "સ્પેનિશ (UY) / Español (UY)"
 
 #. module: base
 #: field:res.partner,mobile:0
 #: field:res.partner.address,mobile:0
 msgid "Mobile"
-msgstr ""
+msgstr "મોબાઇલ"
 
 #. module: base
 #: model:res.country,name:base.om
 msgid "Oman"
-msgstr ""
+msgstr "ઓમાન"
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_payterm_form
 #: model:ir.model,name:base.model_res_payterm
 msgid "Payment term"
-msgstr ""
+msgstr "ચુકવણી મુદદ્ત"
 
 #. module: base
 #: model:res.country,name:base.nu
 msgid "Niue"
-msgstr ""
+msgstr "ન્યુએઇ"
 
 #. module: base
 #: selection:ir.cron,interval_type:0
 msgid "Work Days"
-msgstr ""
+msgstr "કાર્ય દિવસો"
 
 #. module: base
 #: selection:ir.module.module,license:0
 msgid "Other OSI Approved Licence"
-msgstr ""
+msgstr "બીજુ ઓ.એસ.આઇ(OSI) માન્ય લાઇસન્સ"
 
 #. module: base
 #: help:res.config.users,context_lang:0
@@ -739,59 +748,61 @@ msgid ""
 "Sets the language for the user's user interface, when UI translations are "
 "available"
 msgstr ""
+"વપરાશ્કર્તા ના યુઝર ઇન્ટરફેસ ની ભાષા ગોઠવે છે કે જ્યારે તે યુઝર ઇન્ટરફેસ ના "
+"ભાષાંતરો ઉપલબ્ધ હોય."
 
 #. module: base
 #: code:addons/orm.py:1043
 #, python-format
 msgid "The unlink method is not implemented on this object !"
-msgstr ""
+msgstr "આ ઓબ્જેક્ટ ઉપર અનલિંક મેથડ પ્રસ્થાપિત કરેલ નથી!"
 
 #. module: base
 #: model:ir.actions.act_window,name:base.act_menu_create
 #: view:wizard.ir.model.menu.create:0
 msgid "Create Menu"
-msgstr ""
+msgstr "મેનુ સર્જન"
 
 #. module: base
 #: model:res.country,name:base.in
 msgid "India"
-msgstr ""
+msgstr "ભારત"
 
 #. module: base
 #: model:ir.actions.act_window,name:base.res_request_link-act
 #: model:ir.ui.menu,name:base.menu_res_request_link_act
 msgid "Request Reference Types"
-msgstr ""
+msgstr "વિનંતી સંદર્ભ પ્રકારો"
 
 #. module: base
 #: view:ir.values:0
 msgid "client_action_multi, client_action_relate"
-msgstr ""
+msgstr "client_action_multi, client_action_relate"
 
 #. module: base
 #: model:res.country,name:base.ad
 msgid "Andorra, Principality of"
-msgstr ""
+msgstr "એન્ડોર્રા, ની હકૂમત"
 
 #. module: base
 #: field:res.partner.category,child_ids:0
 msgid "Child Categories"
-msgstr ""
+msgstr "વંશજ વર્ગ(શ્રેણી)"
 
 #. module: base
 #: model:ir.model,name:base.model_ir_config_parameter
 msgid "ir.config_parameter"
-msgstr ""
+msgstr "ir.config_parameter"
 
 #. module: base
 #: selection:base.language.export,format:0
 msgid "TGZ Archive"
-msgstr ""
+msgstr "TGZ Archive"
 
 #. module: base
 #: view:res.lang:0
 msgid "%B - Full month name."
-msgstr ""
+msgstr "%B - મહિના નુ પુરૂ નામ"
 
 #. module: base
 #: field:ir.actions.todo,type:0
@@ -808,7 +819,7 @@ msgstr ""
 #: view:res.partner:0
 #: view:res.partner.address:0
 msgid "Type"
-msgstr ""
+msgstr "પ્રકાર"
 
 #. module: base
 #: code:addons/orm.py:398
@@ -817,16 +828,18 @@ msgid ""
 "Language with code \"%s\" is not defined in your system !\n"
 "Define it through the Administration menu."
 msgstr ""
+"\"%s\" સંકેત વાળી ભાષા તમારા સિસ્ટમ મા સ્થાપિત નથી.!\n"
+"સંચાલક મેનુ વળે તેને સ્થાપિત કરો."
 
 #. module: base
 #: model:res.country,name:base.gu
 msgid "Guam (USA)"
-msgstr ""
+msgstr "ગુઆમ (યુએસએ)"
 
 #. module: base
 #: model:ir.ui.menu,name:base.menu_hr_project
 msgid "Human Resources Dashboard"
-msgstr ""
+msgstr "માનવ સંશાધન ડેશબોર્ડ"
 
 #. module: base
 #: code:addons/base/res/res_users.py:558
@@ -838,7 +851,7 @@ msgstr ""
 #: selection:ir.actions.server,state:0
 #: selection:workflow.activity,kind:0
 msgid "Dummy"
-msgstr ""
+msgstr "નકલી"
 
 #. module: base
 #: constraint:ir.ui.view:0
@@ -1588,7 +1601,7 @@ msgstr ""
 #. module: base
 #: model:res.country,name:base.ge
 msgid "Georgia"
-msgstr ""
+msgstr "જર્યોજિયા"
 
 #. module: base
 #: model:res.country,name:base.pl
@@ -6648,7 +6661,7 @@ msgstr ""
 #. module: base
 #: model:res.country,name:base.ro
 msgid "Romania"
-msgstr ""
+msgstr "રોમાનિયા"
 
 #. module: base
 #: help:ir.cron,doall:0
@@ -7567,7 +7580,7 @@ msgstr ""
 #. module: base
 #: model:res.country,name:base.jp
 msgid "Japan"
-msgstr ""
+msgstr "જાપાન"
 
 #. module: base
 #: field:ir.cron,numbercall:0
@@ -7992,7 +8005,7 @@ msgstr ""
 #. module: base
 #: model:res.country,name:base.cl
 msgid "Chile"
-msgstr ""
+msgstr "ચિલી"
 
 #. module: base
 #: model:ir.ui.menu,name:base.menu_address_book
@@ -8175,7 +8188,7 @@ msgstr ""
 #. module: base
 #: model:res.country,name:base.hr
 msgid "Croatia"
-msgstr ""
+msgstr "ક્રોએશિઆ"
 
 #. module: base
 #: field:res.bank,bic:0
@@ -8989,7 +9002,7 @@ msgstr ""
 #: selection:ir.ui.view,type:0
 #: selection:wizard.ir.model.menu.create.line,view_type:0
 msgid "Graph"
-msgstr ""
+msgstr "આલેખ"
 
 #. module: base
 #: model:ir.model,name:base.model_ir_actions_server
@@ -9043,7 +9056,7 @@ msgstr ""
 #. module: base
 #: view:ir.cron:0
 msgid "Execution"
-msgstr ""
+msgstr "ચલાવવું"
 
 #. module: base
 #: field:ir.actions.server,condition:0
@@ -9101,7 +9114,7 @@ msgstr ""
 #. module: base
 #: view:base.module.upgrade:0
 msgid "System Update"
-msgstr ""
+msgstr "સિસ્ટમ અપડેટ"
 
 #. module: base
 #: selection:ir.translation,type:0
@@ -9116,7 +9129,7 @@ msgstr ""
 #. module: base
 #: model:res.country,name:base.sc
 msgid "Seychelles"
-msgstr ""
+msgstr "સેશેલ્સ"
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_res_partner_bank_account_form
@@ -9131,18 +9144,18 @@ msgstr ""
 #. module: base
 #: model:res.country,name:base.sl
 msgid "Sierra Leone"
-msgstr ""
+msgstr "સિએરા લિઓન"
 
 #. module: base
 #: view:res.company:0
 #: view:res.partner:0
 msgid "General Information"
-msgstr ""
+msgstr "સામાન્ય માહિતી"
 
 #. module: base
 #: model:res.country,name:base.tc
 msgid "Turks and Caicos Islands"
-msgstr ""
+msgstr "તુર્કસ અને કાઇકોસ ટાપુઓ"
 
 #. module: base
 #: field:res.partner.bank,partner_id:0
@@ -9175,7 +9188,7 @@ msgstr ""
 #: field:res.partner.address,function:0
 #: selection:workflow.activity,kind:0
 msgid "Function"
-msgstr ""
+msgstr "કાર્ય"
 
 #. module: base
 #: view:res.widget:0
@@ -9217,7 +9230,7 @@ msgstr ""
 #. module: base
 #: model:res.country,name:base.kp
 msgid "North Korea"
-msgstr ""
+msgstr "ઉત્તર કોરિયા"
 
 #. module: base
 #: selection:ir.actions.server,state:0
@@ -9228,7 +9241,7 @@ msgstr ""
 #: view:ir.filters:0
 #: field:res.log,context:0
 msgid "Context"
-msgstr ""
+msgstr "સંદર્ભ"
 
 #. module: base
 #: field:res.bank,bic:0
@@ -9260,7 +9273,7 @@ msgstr ""
 #. module: base
 #: model:res.country,name:base.lk
 msgid "Sri Lanka"
-msgstr ""
+msgstr "શ્રીલંકા"
 
 #. module: base
 #: selection:base.language.install,lang:0
