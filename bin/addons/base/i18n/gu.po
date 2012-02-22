@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: openobject-server\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-01-11 11:14+0000\n"
-"PO-Revision-Date: 2012-02-20 13:35+0000\n"
+"PO-Revision-Date: 2012-02-21 12:43+0000\n"
 "Last-Translator: Anup(SerpentCS) <anup.chavda@serpentcs.com>\n"
 "Language-Team: Gujarati <gu@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-02-21 06:16+0000\n"
+"X-Launchpad-Export-Date: 2012-02-22 05:10+0000\n"
 "X-Generator: Launchpad (build 14838)\n"
 
 #. module: base
@@ -845,7 +845,7 @@ msgstr "માનવ સંશાધન ડેશબોર્ડ"
 #: code:addons/base/res/res_users.py:558
 #, python-format
 msgid "Setting empty passwords is not allowed for security reasons!"
-msgstr ""
+msgstr "સુરક્ષા કારણો થી ખાલી પાસવર્ડ સેટ કરવા માન્ય નથી!"
 
 #. module: base
 #: selection:ir.actions.server,state:0
@@ -856,76 +856,76 @@ msgstr "નકલી"
 #. module: base
 #: constraint:ir.ui.view:0
 msgid "Invalid XML for View Architecture!"
-msgstr ""
+msgstr "દ્રશ્ય બંધારણ માટે અમાન્ય એક્સ.એમ.એલ!"
 
 #. module: base
 #: model:res.country,name:base.ky
 msgid "Cayman Islands"
-msgstr ""
+msgstr "કેમેન ટાપુઓ"
 
 #. module: base
 #: model:res.country,name:base.kr
 msgid "South Korea"
-msgstr ""
+msgstr "દક્ષિણ કોરિયા"
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_workflow_transition_form
 #: model:ir.ui.menu,name:base.menu_workflow_transition
 #: view:workflow.activity:0
 msgid "Transitions"
-msgstr ""
+msgstr "ભાષાંતરો"
 
 #. module: base
 #: code:addons/orm.py:4615
 #, python-format
 msgid "Record #%d of %s not found, cannot copy!"
-msgstr ""
+msgstr "રેકોર્ડ #%d  કે જે %s નો છે તે મળેલ નથી, પ્રતિકૃતિ અશક્ય!"
 
 #. module: base
 #: field:ir.module.module,contributors:0
 msgid "Contributors"
-msgstr ""
+msgstr "યોગદાન આપનારાઓ"
 
 #. module: base
 #: selection:ir.property,type:0
 msgid "Char"
-msgstr ""
+msgstr "અક્ષરીય"
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_publisher_warranty_contract_form
 #: model:ir.ui.menu,name:base.menu_publisher_warranty_contract
 msgid "Contracts"
-msgstr ""
+msgstr "કરારો"
 
 #. module: base
 #: selection:base.language.install,lang:0
 msgid "Spanish (AR) / Español (AR)"
-msgstr ""
+msgstr "સ્પેનિશ (AR) / Español (AR)"
 
 #. module: base
 #: model:res.country,name:base.ug
 msgid "Uganda"
-msgstr ""
+msgstr "યુગાન્ડા"
 
 #. module: base
 #: field:ir.model.access,perm_unlink:0
 msgid "Delete Access"
-msgstr ""
+msgstr "એક્સેસ રદ"
 
 #. module: base
 #: model:res.country,name:base.ne
 msgid "Niger"
-msgstr ""
+msgstr "નાઇઝર"
 
 #. module: base
 #: selection:base.language.install,lang:0
 msgid "Chinese (HK)"
-msgstr ""
+msgstr "ચાઇનીસ (HK)"
 
 #. module: base
 #: model:res.country,name:base.ba
 msgid "Bosnia-Herzegovina"
-msgstr ""
+msgstr "બોસ્નિયા-હેર્ઝેગોવિના"
 
 #. module: base
 #: view:base.language.export:0
@@ -958,39 +958,39 @@ msgstr ""
 #. module: base
 #: model:res.country,name:base.gs
 msgid "S. Georgia & S. Sandwich Isls."
-msgstr ""
+msgstr "દ.જોર્જિયા અને દ.સેન્ડવિચ ટાપુઓ"
 
 #. module: base
 #: field:ir.actions.url,url:0
 msgid "Action URL"
-msgstr ""
+msgstr "એકશન યુ.આર.એલ (URL)"
 
 #. module: base
 #: field:base.module.import,module_name:0
 msgid "Module Name"
-msgstr ""
+msgstr "મોડ્યુલ નુ નામ"
 
 #. module: base
 #: model:res.country,name:base.mh
 msgid "Marshall Islands"
-msgstr ""
+msgstr "માર્શલ ટાપુઓ"
 
 #. module: base
 #: code:addons/base/ir/ir_model.py:368
 #, python-format
 msgid "Changing the model of a field is forbidden!"
-msgstr ""
+msgstr "ફિલ્ડ નુ મોડેલ બદલવુ પ્રતિબંધિત છે!"
 
 #. module: base
 #: model:res.country,name:base.ht
 msgid "Haiti"
-msgstr ""
+msgstr "હેઇટી"
 
 #. module: base
 #: view:ir.ui.view:0
 #: selection:ir.ui.view,type:0
 msgid "Search"
-msgstr ""
+msgstr "શોધ"
 
 #. module: base
 #: code:addons/osv.py:132
@@ -1001,72 +1001,77 @@ msgid ""
 "reference it\n"
 "- creation/update: a mandatory field is not correctly set"
 msgstr ""
+"પ્રક્રિયા સંપુર્ણ થઈ શકે તેમ નથી, કદાચ નીચેના કારણોસર:\n"
+"- વિનાશ : તમે જે રેકોર્ડ નો નાશ(ડિલીટ) કરવા માંગો છો તેના પર બીજા રેકોર્ડ "
+"આધારિત છે.\n"
+"- સર્જન/સુધાર : ફરજિયાત ફિલ્ડ ને યોગ્ય રીતે સેટ કરી નથી."
 
 #. module: base
 #: view:ir.rule:0
 msgid ""
 "2. Group-specific rules are combined together with a logical AND operator"
 msgstr ""
+"૨. સમુદાય માટે ના નિયમો તાર્કિક કારક એન્ડ (AND) ની મદદ થી એકસાથે જોડાય છે."
 
 #. module: base
 #: code:addons/base/res/res_users.py:222
 #, python-format
 msgid "Operation Canceled"
-msgstr ""
+msgstr "પ્રક્રિયા રદ્"
 
 #. module: base
 #: help:base.language.export,lang:0
 msgid "To export a new language, do not select a language."
-msgstr ""
+msgstr "નવી ભાષા ને નિકાસ કરવા માટે ભાષા પસંદ ન કરો."
 
 #. module: base
 #: view:res.request:0
 msgid "Request Date"
-msgstr ""
+msgstr "વિનંતી તારિખ"
 
 #. module: base
 #: model:ir.ui.menu,name:base.menu_hr_dasboard
 msgid "Dashboard"
-msgstr ""
+msgstr "ડેશબોર્ડ"
 
 #. module: base
 #: model:ir.ui.menu,name:base.menu_purchase_root
 msgid "Purchases"
-msgstr ""
+msgstr "ખરીદીઓ"
 
 #. module: base
 #: model:res.country,name:base.md
 msgid "Moldavia"
-msgstr ""
+msgstr "મોલ્ડવિયા"
 
 #. module: base
 #: view:ir.module.module:0
 msgid "Features"
-msgstr ""
+msgstr "લાક્ષણિકતાઓ"
 
 #. module: base
 #: view:ir.module.module:0
 #: report:ir.module.reference.graph:0
 msgid "Version"
-msgstr ""
+msgstr "આવૃત્તિ"
 
 #. module: base
 #: view:ir.model.access:0
 #: field:ir.model.access,perm_read:0
 #: view:ir.rule:0
 msgid "Read Access"
-msgstr ""
+msgstr "વાંચન પરવાનગી"
 
 #. module: base
 #: model:ir.model,name:base.model_ir_exports
 msgid "ir.exports"
-msgstr ""
+msgstr "ir.exports"
 
 #. module: base
 #: code:addons/base/module/wizard/base_update_translations.py:38
 #, python-format
 msgid "No language with code \"%s\" exists"
-msgstr ""
+msgstr "\"%s\" સંકેત વાળી કોઇ પણ ભાષા અસ્તિત્વ મા નથી."
 
 #. module: base
 #: code:addons/base/publisher_warranty/publisher_warranty.py:125
@@ -1074,6 +1079,8 @@ msgstr ""
 #, python-format
 msgid "Error during communication with the publisher warranty server."
 msgstr ""
+"પ્રકાશક ખાતરી સહાયક (પબ્લિશર વોરન્ટી સર્વર) સાથે સંદેશાવ્યવહાર કરતી વખતે "
+"આવતી ભૂલ."
 
 #. module: base
 #: help:ir.actions.server,email:0
@@ -1086,12 +1093,12 @@ msgstr ""
 #. module: base
 #: view:res.lang:0
 msgid "%Y - Year with century."
-msgstr ""
+msgstr "%Y - વર્ષ, શતક સાથે."
 
 #. module: base
 #: report:ir.module.reference.graph:0
 msgid "-"
-msgstr ""
+msgstr "-"
 
 #. module: base
 #: view:publisher_warranty.contract.wizard:0
@@ -1105,7 +1112,7 @@ msgstr ""
 #: code:addons/orm.py:1744
 #, python-format
 msgid "The search method is not implemented on this object !"
-msgstr ""
+msgstr "સર્ચ મેથડ આ ઓબ્જેક્ટ પર પ્રસ્થાપિત કરેલ નથી!"
 
 #. module: base
 #: view:wizard.ir.model.menu.create:0
@@ -1127,7 +1134,7 @@ msgstr ""
 #. module: base
 #: model:ir.model,name:base.model_ir_exports_line
 msgid "ir.exports.line"
-msgstr ""
+msgstr "ir.exports.line"
 
 #. module: base
 #: help:base.language.install,overwrite:0
@@ -1135,18 +1142,20 @@ msgid ""
 "If you check this box, your customized translations will be overwritten and "
 "replaced by the official ones."
 msgstr ""
+"જો તમે આ બોક્સ ચેક કરશો તો તમારા પોતાના ભાષાંતરો મુખ્ય ભાષાંતરો વડે બદલાયી "
+"જશે."
 
 #. module: base
 #: field:ir.actions.report.xml,report_rml:0
 msgid "Main report file path"
-msgstr ""
+msgstr "મુખ્ય અહેવાલ ફાઇલ નો પાથ"
 
 #. module: base
 #: model:ir.actions.act_window,name:base.ir_action_report_xml
 #: field:ir.module.module,reports_by_module:0
 #: model:ir.ui.menu,name:base.menu_ir_action_report_xml
 msgid "Reports"
-msgstr ""
+msgstr "અહેવાલો"
 
 #. module: base
 #: help:ir.actions.act_window.view,multi:0
@@ -1155,11 +1164,13 @@ msgid ""
 "If set to true, the action will not be displayed on the right toolbar of a "
 "form view."
 msgstr ""
+"જો ખરુ કરેલ હશે તો એકશન ફોર્મ દ્રશ્ય(વ્યુ) ના જમણી બાજુ ના ટૂલબાર મ દેખાશે "
+"નહી."
 
 #. module: base
 #: field:workflow,on_create:0
 msgid "On Create"
-msgstr ""
+msgstr "સર્જન પર"
 
 #. module: base
 #: code:addons/base/ir/ir_model.py:681
@@ -1168,12 +1179,15 @@ msgid ""
 "'%s' contains too many dots. XML ids should not contain dots ! These are "
 "used to refer to other modules data, as in module.reference_id"
 msgstr ""
+"'%s' ઘણા બધા પૂર્ણવિરામો નો સમાવેશ કરે છે. એક્સ.એમ.એલ ઓળખ (આઇ.ડી.) મા "
+"પૂર્ણવિરામો નો સમાવેશ થવો ન જોઇયે! તેઓ બીજા મોડ્યુલો ના ડેટા ને સંદર્ભે છે, "
+"જેમકે, module.reference_id"
 
 #. module: base
 #: field:partner.sms.send,user:0
 #: field:res.users,login:0
 msgid "Login"
-msgstr ""
+msgstr "લોગ ઇન"
 
 #. module: base
 #: view:ir.actions.server:0
@@ -1181,16 +1195,18 @@ msgid ""
 "Access all the fields related to the current object using expressions, i.e. "
 "object.partner_id.name "
 msgstr ""
+"વર્તમાન ઓબ્જેકટ સાથે સંક્ળાયેલ ફિલ્ડો નો ઉપયોગ સમિકરણ ની મદદ થી કરી શકાય છે. "
+"જેમકે, object.partner_id.name "
 
 #. module: base
 #: model:ir.model,name:base.model_res_country_state
 msgid "Country state"
-msgstr ""
+msgstr "દેશ નુ રાજ્ય"
 
 #. module: base
 #: selection:ir.property,type:0
 msgid "Float"
-msgstr ""
+msgstr "ફ્લોટ"
 
 #. module: base
 #: model:ir.model,name:base.model_res_request_link
