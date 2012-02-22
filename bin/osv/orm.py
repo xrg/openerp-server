@@ -47,7 +47,7 @@ import copy
 import datetime
 import logging
 import warnings
-import operator
+from operator import itemgetter
 import pickle
 import re
 import time
@@ -374,7 +374,7 @@ class browse_record(object):
                 elif self._fields_only == 'auto':
                     stat_fields = [ (ff[0], self._table._column_stats.get(ff[0],0)) \
                                     for ff in fields_to_fetch ]
-                    stat_fields.sort(key=lambda sf: sf[1], reverse=True)
+                    stat_fields.sort(key=itemgetter(1), reverse=True)
                     
                     # Filter out ones that are seldom used:
                     thres = stat_fields[0][1] / AUTO_SELECT_COLS
@@ -394,7 +394,7 @@ class browse_record(object):
                 fields_to_fetch = [(name, col)]
             ids = filter(lambda id: name not in self._data[id], self._data.keys())
             # read the results
-            field_names = map(lambda x: x[0], fields_to_fetch)
+            field_names = map(itemgetter(0), fields_to_fetch)
 
             if self._table._vtable:
                 field_names.append('_vptr')
@@ -2159,7 +2159,7 @@ class orm_template(object):
             resaction = map(clean, resaction)
             resaction = filter(lambda x: not x.get('multi', False), resaction)
             resprint = filter(lambda x: not x.get('multi', False), resprint)
-            resrelate = map(lambda x: x[2], resrelate)
+            resrelate = map(itemgetter(2), resrelate)
 
             for x in resprint + resaction + resrelate:
                 x['string'] = x['name']
@@ -2946,7 +2946,7 @@ class orm(orm_template):
                 cr.execute(update_query, (val, upd_ids), debug=self._debug)
 
         cr.execute('select id from '+self._table, debug=self._debug)
-        ids_lst = map(lambda x: x[0], cr.fetchall())
+        ids_lst = map(itemgetter(0), cr.fetchall())
         while ids_lst:
             iids = ids_lst[:100]
             ids_lst = ids_lst[100:]
@@ -3406,7 +3406,7 @@ class orm(orm_template):
             return []
         s_query = None
         if isinstance(ids, (list, tuple)):
-            ids = map(lambda x:int(x), ids)
+            ids = map(int, ids)
         elif isinstance(ids, Query):
             s_query = ids
             ids = None
@@ -3822,7 +3822,7 @@ class orm(orm_template):
             if object != self._name:
                 obj =  self.pool.get(object)
                 cr.execute('SELECT id FROM '+obj._table+' WHERE id = ANY(%s)', (store_ids,))
-                rids = map(lambda x: x[0], cr.fetchall())
+                rids = map(itemgetter(0), cr.fetchall())
                 if rids:
                     obj._store_set_values(cr, uid, rids, fields, context)
 
@@ -3926,7 +3926,7 @@ class orm(orm_template):
                 query = "SELECT id FROM %s WHERE id IN %%s AND (%s IS NOT NULL)" % \
                                 (self._table, self._parent_name)
                 cr.execute(query, (tuple(ids),))
-            parents_changed = map(operator.itemgetter(0), cr.fetchall())
+            parents_changed = map(itemgetter(0), cr.fetchall())
 
         if self._debug:
             _logger.debug('%s.write(#%s, %r)', self._name, ids, vals)
@@ -4961,7 +4961,7 @@ class orm(orm_template):
                 cr.execute('SELECT distinct "'+parent+'"'+
                     ' FROM "'+self._table+'" ' \
                     'WHERE id = ANY(%s)',(sub_ids_parent,), debug=self._debug)
-                ids_parent2.extend(filter(None, map(lambda x: x[0], cr.fetchall())))
+                ids_parent2.extend(filter(None, map(itemgetter(0), cr.fetchall())))
             ids_parent = ids_parent2
             for i in ids_parent:
                 if i in ids:

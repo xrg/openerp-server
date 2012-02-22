@@ -26,6 +26,8 @@ from tools.translate import _
 import warnings
 from tools import sql_model
 from tools import expr_utils as eu
+from tools.orm_utils import only_ids
+from operator import itemgetter
 
 #.apidoc title: Relationals fields
 
@@ -431,7 +433,7 @@ class many2one(_rel2one):
                 if not res_ids:
                     return False
                 else:
-                    right = map(lambda x: x[0], res_ids)
+                    right = map(itemgetter(0), res_ids)
                     return (lefts[0], 'in', right)
             else:
                 return (lefts[0], operator, right)
@@ -556,7 +558,7 @@ class one2many(_rel2many):
                 obj.write(cr, user, act[2], {self._fields_id:id}, context=context or {})
                 ids2 = act[2] or [0]
                 cr.execute('select id from '+_table+' where '+self._fields_id+'=%s and id <> ALL (%s)', (id,ids2), debug=obj._debug)
-                ids3 = map(lambda x:x[0], cr.fetchall())
+                ids3 = map(itemgetter(0), cr.fetchall())
                 obj.write(cr, user, ids3, {self._fields_id:False}, context=context or {})
         return result
 
@@ -870,7 +872,7 @@ class many2many(_rel2many):
         rel, id1, id2 = self._sql_names(model)
         obj = model.pool.get(self._obj)
         for act in values:
-            if not (isinstance(act, list) or isinstance(act, tuple)) or not act:
+            if not (isinstance(act, (list, tuple)) and act):
                 continue
             if act[0] == 0:
                 idnew = obj.create(cr, user, act[2], context=context)
@@ -893,7 +895,7 @@ class many2many(_rel2many):
                 # FIXME: it is safer to call _apply_ir_rules() than domain_get()
                 d1, d2,tables = obj.pool.get('ir.rule').domain_get(cr, user, obj._name, context=context)
                 if d1:
-                    d1 = ' and ' + ' and '.join(d1)
+                    d1 = ' and (%s)' % ' and '.join(d1)
                 else:
                     d1 = ''
                 cr.execute('delete from '+rel+' where '+id1+'=%s AND '+id2+' IN (SELECT '+rel+'.'+id2+' FROM '+rel+', '+','.join(tables)+' WHERE '+rel+'.'+id1+'=%s AND '+rel+'.'+id2+' = '+obj._table+'.id '+ d1 +')', [id, id]+d2, debug=obj._debug)
