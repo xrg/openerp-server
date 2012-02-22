@@ -466,6 +466,8 @@ class function(_column):
     def _val2browse(self, val, name, parent_bro):
         return self._shadow._val2browse(val, name, parent_bro)
 
+    def _browse2val(self, val, name):
+        return self._shadow._browse2val(val, name)
 
     def expr_eval(self, cr, uid, obj, lefts, operator, right, pexpr, context):
         if self.store:

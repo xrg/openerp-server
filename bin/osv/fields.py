@@ -3,6 +3,7 @@
 #
 #    OpenERP, Open Source Management Solution
 #    Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>).
+#    Copyright (C) 2011-2012 P. Christeas <xrg@hellug.gr>
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -34,8 +35,6 @@
         * size
 """
 
-import base64
-import re
 import warnings
 import xmlrpclib
 
@@ -44,6 +43,7 @@ from tools.translate import _
 from tools import expr_utils as eu
 import __builtin__
 from tools import sql_model
+from tools import orm_utils # must be the full module, not contents
 
 def _symbol_set(symb):
     if symb is None or symb is False:
@@ -82,7 +82,21 @@ def _symbol_set_long(symb):
     #    raise ValueError("Why passed %r to _symbol_set_long?" % symb)
     return long(symb)
 
-
+def is_empty(val):
+    """Checks if `val` is an empty record (aka. Null)
+    
+        This *won't* work for booleans, since False is considered empty
+        for all other types!
+    """
+    if val is None:
+        return True
+    elif val is False:
+        return True
+    elif isinstance(val, orm_utils.browse_null):
+        return True
+    else:
+        return True
+    
 class _column(object):
     """ Base of all fields, a database column
     
@@ -127,7 +141,7 @@ class _column(object):
         self.readonly = readonly
         self.required = required
         self.size = size
-        self.help = args.get('help', '')
+        self.help = args.pop('help', '')
         self.priority = priority
         self.change_default = change_default
         self.ondelete = ondelete or (required and "restrict") or "set null"
@@ -139,7 +153,8 @@ class _column(object):
         self.view_load = 0
         self.select = select
         self.selectable = True
-        self.group_operator = args.get('group_operator', False)
+        self.group_operator = args.pop('group_operator', False)
+        self._split_op = args.pop('split_op', None)
         for a in args:
             if args[a]:
                 setattr(self, a, args[a])
@@ -278,6 +293,12 @@ class _column(object):
                     to cr, uid, context etc.
         """
         return val
+    
+    def _browse2val(self, bro, name):
+        """ Convert browse value to scalar one
+        
+        """
+        return bro
 
     def expr_eval(self, cr, uid, obj, lefts, operator, right, pexpr, context):
         """Evaluate an expression on this field

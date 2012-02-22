@@ -95,6 +95,9 @@ class _rel2one(_relational):
             ret = browse_null()
         return ret
 
+    def _browse2val(self, bro, name):
+        return (bro and bro.id) or False
+
 
 class _rel2many(_relational):
     """ common baseclass for -2many relation fields
@@ -109,6 +112,9 @@ class _rel2many(_relational):
                                 fields_process=parent_bro._fields_process) \
                     for id in val],
                     parent_bro._context)
+
+    def _browse2val(self, bro, name):
+        return only_ids(bro)
 
     def expr_eval(self, cr, uid, obj, lefts, operator, right, pexpr, context):
         if len(lefts) > 1: # TODO pg84 reduce
