@@ -214,6 +214,9 @@ class browse_record_list(list):
         super(browse_record_list, self).__init__(lst)
         self.context = context
 
+    def __add__(self, y):
+        return browse_record_list(list.__add__(self, y), context=self.context)
+
 only_ids = orm_utils.only_ids # take it from there..
 orm_utils.browse_record_list = browse_record_list # ..put that one back
 orm_utils.browse_null = browse_null
