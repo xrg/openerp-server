@@ -551,7 +551,7 @@ class ir_model_access(osv.osv):
 
         if isinstance(model, browse_record):
             assert model._table_name == 'ir.model', 'Invalid model object'
-            model_name = model.name
+            model_name = model.model
             model_obj = model._table
             assert model_obj, "No ORM object for %r" % model
         else:

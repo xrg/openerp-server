@@ -2092,7 +2092,7 @@ msgstr ""
 #. module: base
 #: field:ir.sequence,number_increment:0
 msgid "Increment Number"
-msgstr "增量编号"
+msgstr "编号增量"
 
 #. module: base
 #: field:ir.sequence,number_next:0
@@ -2837,7 +2837,7 @@ msgstr ""
 #. module: base
 #: field:res.partner.address,state_id:0
 msgid "Fed. State"
-msgstr "省／州"
+msgstr "省/州"
 
 #. module: base
 #: field:res.partner.address,type:0
@@ -10414,23 +10414,18 @@ msgstr ""
 
 #. module: base
 #: view:ir.sequence:0
-#, fuzzy
 msgid "Current Year with Century: %(year)s"
-msgstr ""
-"#-#-#-#-#  .merge_file_CUmHnc (OpenERP Server 5.0.4)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_Wv2Z1d (OpenERP Server 5.0.4)  #-#-#-#-#\n"
-"含世纪的年份"
+msgstr "4 位数字表示的当前年份：%(year)s"
 
 #. module: base
 #: view:ir.sequence:0
-#, fuzzy
 msgid "Current Year without Century: %(y)s"
-msgstr "没有世纪的年份%(y)s"
+msgstr "两位数的当前年份：%(y)s"
 
 #. module: base
 #: view:ir.sequence:0
 msgid "Day of the week (0:Monday): %(weekday)s"
-msgstr "日 (0:周一): %(weekday)s"
+msgstr "周日（0：周一）：%(weekday)s"
 
 #. module: base
 #: view:ir.sequence:0
@@ -11185,12 +11180,8 @@ msgstr ""
 
 #. module: base
 #: view:res.users:0
-#, fuzzy
 msgid "Default Filters"
-msgstr ""
-"#-#-#-#-#  .merge_file_O5ynop (OpenERP Server 5.0.4)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_eKjW5O (OpenERP Server 5.0.4)  #-#-#-#-#\n"
-"默认的过滤"
+msgstr "默认过滤器"
 
 #. #-#-#-#-#  .merge_file_9DWUCG (OpenERP Server 5.0.4)  #-#-#-#-#
 #: view:res.users:0
@@ -13376,15 +13367,13 @@ msgstr "警告！"
 
 #. module: base
 #: code:addons/base/ir/ir_model.py:304
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "Properties of base fields cannot be altered in this manner! Please modify "
 "them through Python code, preferably through a custom addon!"
 msgstr ""
-"#-#-#-#-#  .merge_file_5Juj2j (OpenERP Server 5.0.4)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_YAw60u (OpenERP Server 5.0.4)  #-#-#-#-#\n"
-"基本字段的属性不能这样修改，请通过 Python 代码来修改它，最好是制作一个自定义"
-"模块。"
+"基本字段的属性不能这样修改，请通过 Python 代码来修改它们，更好的办法是通过自"
+"定义模块来修改。"
 
 #. module: base
 #: code:addons/base/res/res_user.py:507

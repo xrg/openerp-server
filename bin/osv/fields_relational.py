@@ -1079,6 +1079,7 @@ class many2many(_rel2many):
 class reference(_column):
     _type = 'reference'
     _sql_type = 'varchar'
+    _classic_read = False
 
     @classmethod
     def from_manual(cls, field_dict, attrs):
@@ -1100,6 +1101,21 @@ class reference(_column):
                                 fields_process=parent_bro._fields_process)
 
         return browse_null()
+
+    def get(self, cr, obj, ids, name, uid=None, context=None, values=None):
+        """
+            A late check for referential integrity. Since the DB can't do that
+            for us, we do filter the records ourselves
+        """
+        result = {}
+        # copy initial values fetched previously.
+        for value in values:
+            result[value['id']] = value[name]
+            if value[name]:
+                model, res_id = value[name].split(',')
+                if not obj.pool.get(model).exists(cr, uid, [int(res_id)], context=context):
+                    result[value['id']] = False
+        return result
 
 register_field_classes(one2one, many2one, one2many, many2many, reference)
 

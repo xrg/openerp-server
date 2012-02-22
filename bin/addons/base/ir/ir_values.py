@@ -106,6 +106,10 @@ class ir_values(osv.osv):
         if meta:
             meta = pickle.dumps(meta)
         assert isinstance(models, (tuple, list)), models
+        if company is True:
+            current_user_obj = self.pool.get('res.users').browse(cr, uid, uid, context={})
+            company = current_user_obj.company_id.id
+            
         ids_res = []
         for model in models:
             if isinstance(model, (list, tuple)):
@@ -118,7 +122,9 @@ class ir_values(osv.osv):
                     ('key2', '=', key2),
                     ('model', '=', model),
                     ('res_id', '=', res_id),
-                    ('user_id', '=', preserve_user and uid)
+                    ('user_id', '=', preserve_user and uid),
+                    ('company_id' ,'=', company)
+                    
                 ]
                 if key in ('meta', 'default'):
                     search_criteria.append(('name', '=', name))
@@ -135,12 +141,10 @@ class ir_values(osv.osv):
                 'key2': key2,
                 'meta': meta,
                 'user_id': preserve_user and uid,
+                'company_id':company
             }
-            if company:
-                cid = self.pool.get('res.users').browse(cr, uid, uid, context={}).company_id.id
-                vals['company_id']=cid
             if res_id:
-                vals['res_id']= res_id
+                vals['res_id'] = res_id
             # Note that __ignore_ir_values means vals will not be appended with a recursive
             # lookup using self.ir_get(, model='ir.values') !
             ids_res.append(self.create(cr, uid, vals, context={'__ignore_ir_values': True}))
