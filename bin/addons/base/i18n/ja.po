@@ -51,11 +51,16 @@ msgstr ""
 
 #. module: base
 #: code:addons/base/ir/ir_model.py:0
-#, python-format
+#, fuzzy, python-format
 msgid ""
 "'%s' contains too many dots. XML ids should not contain dots ! These are "
 "used to refer to other modules data, as in module.reference_id"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"'%s' は余分なドットが含まれています。XMLのIDはドットを含んではいけません。 こ"
+"れらは module.reference_id のように、他のモジュールデータに指し示すために使わ"
+"れます。"
 
 #. module: base
 #: code:addons/base/ir/ir_model.py:0
@@ -67,7 +72,7 @@ msgstr ""
 #: code:addons/base/ir/ir_model.py:0
 #, python-format
 msgid "Custom fields must have a name that starts with 'x_' !"
-msgstr "カスタム・フィールドは、x_で始まる名前を持っていなければなりません。"
+msgstr "カスタム項目は、'x_' で始まる名前を持つ必要があります。"
 
 #. module: base
 #: code:addons/base/ir/ir_model.py:0
@@ -191,17 +196,24 @@ msgstr ""
 
 #. module: base
 #: code:addons/base/module/module.py:0
-#, python-format
+#, fuzzy, python-format
 msgid ""
 "Can not create the module file:\n"
 " %s"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"そのモジュールファイルの作成ができません：\n"
+" %s"
 
 #. module: base
 #: code:addons/base/module/module.py:0
-#, python-format
+#, fuzzy, python-format
 msgid "Can not upgrade module '%s'. It is not installed."
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"モジュール '%s' はインストールされていないためアップグレードできません。"
 
 #. module: base
 #: code:addons/base/module/module.py:0
@@ -211,17 +223,25 @@ msgstr ""
 
 #. module: base
 #: code:addons/base/module/module.py:0
-#, python-format
+#, fuzzy, python-format
 msgid "Recursion error in modules dependencies !"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"モジュールの依存関係による再帰エラー。"
 
 #. module: base
 #: code:addons/base/module/module.py:0
-#, python-format
+#, fuzzy, python-format
 msgid ""
 "Some installed modules depend on the module you plan to Uninstall :\n"
 " %s"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"アンインストール対象のモジュールはインストール済モジュールと依存関係がありま"
+"す：\n"
+" %s"
 
 #. module: base
 #: code:addons/base/module/module.py:0
@@ -239,9 +259,12 @@ msgstr ""
 
 #. module: base
 #: code:addons/base/module/module.py:0
-#, python-format
+#, fuzzy, python-format
 msgid "You try to remove a module that is installed or will be installed"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"インストールされるかインストール予定のモジュールを削除しようとしています。"
 
 #. module: base
 #: code:addons/base/module/module.py:0
@@ -253,20 +276,29 @@ msgstr ""
 
 #. module: base
 #: code:addons/base/module/wizard/wizard_export_lang.py:0
-#, python-format
+#, fuzzy, python-format
 msgid ""
 "Save this document to a %s file and edit it with a specific software or a "
 "text editor. The file encoding is UTF-8."
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"このドキュメントを %s として保存し、テキストエディタなどを使って編集して下さ"
+"い。ファイルのエンコードはUTF-8です。"
 
 #. module: base
 #: code:addons/base/module/wizard/wizard_export_lang.py:0
-#, python-format
+#, fuzzy, python-format
 msgid ""
 "Save this document to a .CSV file and open it with your favourite "
 "spreadsheet software. The file encoding is UTF-8. You have to translate the "
 "latest column before reimporting it."
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"このドキュメントを .CSVファイルとして保存し、好みの表計算ソフトウェアで開いて"
+"下さい。ファイルのエンコーディングはUTF-8です。再インポートする前に最新のカラ"
+"ムに翻訳しておく必要があります。"
 
 #. module: base
 #: code:addons/base/module/wizard/wizard_export_lang.py:0
@@ -297,16 +329,23 @@ msgstr ""
 #. module: base
 #: code:addons/base/res/partner/partner.py:0
 #: code:addons/base/res/res_company.py:0 code:addons/base/res/res_user.py:0
-#, python-format
+#, fuzzy, python-format
 msgid " (copy)"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+" （コピー）"
 
 #. module: base
 #: code:addons/base/res/partner/partner.py:0
-#, python-format
+#, fuzzy, python-format
 msgid ""
 "Couldn't generate the next id because some partners have an alphabetic id !"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"幾つかのパートナは英字のIDを持っているため、次となるIDを作成できませんでし"
+"た。"
 
 #. module: base
 #: code:addons/base/res/partner/partner.py:0
@@ -337,9 +376,12 @@ msgstr ""
 
 #. module: base
 #: code:addons/base/res/res_lang.py:0
-#, python-format
+#, fuzzy, python-format
 msgid "User Error"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"ユーザエラー"
 
 #. module: base
 #: code:addons/base/res/res_lang.py:0
@@ -357,15 +399,21 @@ msgstr ""
 
 #. module: base
 #: code:addons/base/res/res_user.py:0
-#, python-format
+#, fuzzy, python-format
 msgid "Can not remove root user!"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"rootユーザは取り除くことはできません。"
 
 #. module: base
 #: code:addons/base/res/res_user.py:0
-#, python-format
+#, fuzzy, python-format
 msgid "The name of the group can not start with \"-\""
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"グループ名は\"-\"で始めることはできません。"
 
 #. module: base
 #: code:addons/base/res/res_user.py:0
@@ -375,11 +423,15 @@ msgstr ""
 
 #. module: base
 #: code:addons/base/res/res_user.py:0
-#, python-format
+#, fuzzy, python-format
 msgid ""
 "You can not remove the admin user as it is used internally for resources "
 "created by OpenERP (updates, module installation, ...)"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"そのユーザはOpenERP（更新、モジュールインストレーションなど）によって作成され"
+"た内部的に利用されるアドミンユーザであるために、取り除くことはできません。"
 
 #. module: base
 #: code:addons/osv/osv.py:0
@@ -392,9 +444,12 @@ msgstr ""
 
 #. module: base
 #: code:addons/osv/osv.py:0
-#, python-format
+#, fuzzy, python-format
 msgid "Constraint Error"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"制約エラー"
 
 #. module: base
 #: code:addons/osv/osv.py:0
@@ -404,13 +459,18 @@ msgstr ""
 
 #. module: base
 #: code:addons/osv/osv.py:0
-#, python-format
+#, fuzzy, python-format
 msgid ""
 "The operation cannot be completed, probably due to the following:\n"
 "- deletion: you may be trying to delete a record while other records still "
 "reference it\n"
 "- creation/update: a mandatory field is not correctly set"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"その操作は完了できません。おそらく、次の理由によります：\n"
+" ・ 削除：他から参照されているレコードの削除を行おうとした\n"
+" ・ 作成 / 更新：必須項目が正しくセットされていない"
 
 #. module: base
 #: constraint:ir.actions.act_window:0
@@ -419,19 +479,31 @@ msgstr ""
 
 #. module: base
 #: constraint:ir.model:0
+#, fuzzy
 msgid ""
 "The Object name must start with x_ and not contain any special character !"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"オブジェクト名は x_ で始める必要があり、特殊文字を含んではなりません。"
 
 #. module: base
 #: constraint:ir.ui.view:0
+#, fuzzy
 msgid "Invalid XML for View Architecture!"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"ビューアーキテクチャにとって無効なXMLです。"
 
 #. module: base
 #: constraint:res.company:0
+#, fuzzy
 msgid "Error! You can not create recursive companies."
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"エラー！再帰的な関係となる会社を作ることはできません。"
 
 #. module: base
 #: constraint:res.partner:0
@@ -440,8 +512,12 @@ msgstr ""
 
 #. module: base
 #: constraint:res.partner.category:0
+#, fuzzy
 msgid "Error ! You can not create recursive categories."
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"エラーです。再帰的な関係となる分類を作ることはできません。"
 
 #. module: base
 #: constraint:res.users:0
@@ -466,13 +542,21 @@ msgstr ""
 #: model:ir.actions.act_window,name:base.action_res_users
 #: model:ir.ui.menu,name:base.menu_action_res_users
 #: model:ir.ui.menu,name:base.menu_users view:res.groups:0 view:res.users:0
+#, fuzzy
 msgid "Users"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"ユーザ"
 
 #. module: base
 #: field:ir.actions.act_window,domain:0
+#, fuzzy
 msgid "Domain Value"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"ドメイン値"
 
 #. module: base
 #: field:ir.actions.act_window,filter:0 field:ir.module.repository,filter:0
@@ -488,8 +572,12 @@ msgstr ""
 #: model:ir.actions.act_window,name:base.action_res_groups
 #: model:ir.ui.menu,name:base.menu_action_res_groups view:res.groups:0
 #: view:res.users:0
+#, fuzzy
 msgid "Groups"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"グループ"
 
 #. module: base
 #: field:ir.actions.act_window,limit:0 field:ir.report.custom,limitt:0
@@ -499,8 +587,12 @@ msgstr ""
 #. module: base
 #: field:ir.actions.act_window,menus:0
 #: field:ir.module.module,menus_by_module:0 view:res.groups:0
+#, fuzzy
 msgid "Menus"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"メニュー"
 
 #. module: base
 #: field:ir.actions.act_window,name:0 field:ir.actions.act_window_close,name:0
@@ -537,12 +629,16 @@ msgstr ""
 #. module: base
 #: field:ir.actions.act_window,src_model:0
 msgid "Source Object"
-msgstr "ソース・オブジェクト"
+msgstr "ソースオブジェクト"
 
 #. module: base
 #: field:ir.actions.act_window,target:0
+#, fuzzy
 msgid "Target Window"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"ターゲットウィンドウ"
 
 #. module: base
 #: field:ir.actions.act_window,type:0 field:ir.actions.act_window_close,type:0
@@ -572,13 +668,21 @@ msgstr ""
 #: model:ir.actions.act_window,name:base.action_ui_view
 #: model:ir.ui.menu,name:base.menu_action_ui_view view:ir.actions.act_window:0
 #: view:ir.ui.view:0 view:wizard.ir.model.menu.create:0
+#, fuzzy
 msgid "Views"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"ビュー"
 
 #. module: base
 #: field:ir.actions.act_window,view_mode:0 field:res.config.view,view:0
+#, fuzzy
 msgid "View Mode"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"表示モード"
 
 #. module: base
 #: field:ir.actions.act_window,view_type:0
@@ -592,8 +696,12 @@ msgstr ""
 #: field:ir.actions.todo,action_id:0 field:ir.ui.menu,action:0
 #: field:ir.values,action_id:0 selection:ir.values,key:0
 #: view:ir.actions.actions:0
+#, fuzzy
 msgid "Action"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"アクション"
 
 #. module: base
 #: field:ir.actions.act_window.view,multi:0
@@ -634,8 +742,12 @@ msgstr ""
 
 #. module: base
 #: field:ir.actions.report.custom,multi:0 field:ir.actions.report.xml,multi:0
+#, fuzzy
 msgid "On multiple doc."
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"多数のドキュメント上"
 
 #. module: base
 #: field:ir.actions.report.custom,name:0 field:ir.report.custom,name:0
@@ -685,8 +797,12 @@ msgstr ""
 #: field:res.partner,name:0 field:res.partner.bank.type,name:0
 #: field:res.request.link,name:0 field:res.users,name:0 field:workflow,name:0
 #: field:workflow.activity,name:0 rml:ir.module.reference:0
+#, fuzzy
 msgid "Name"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"名前"
 
 #. module: base
 #: field:ir.actions.report.xml,report_name:0
@@ -706,14 +822,22 @@ msgstr ""
 
 #. module: base
 #: field:ir.actions.report.xml,report_sxw:0
+#, fuzzy
 msgid "SXW path"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"SXWパス"
 
 #. module: base
 #: field:ir.actions.report.xml,report_sxw_content:0
 #: field:ir.actions.report.xml,report_sxw_content_data:0
+#, fuzzy
 msgid "SXW content"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"SXWコンテンツ"
 
 #. module: base
 #: field:ir.actions.report.xml,report_type:0 field:ir.actions.todo,type:0
@@ -734,8 +858,12 @@ msgstr ""
 
 #. module: base
 #: field:ir.actions.server,action_id:0 selection:ir.actions.server,state:0
+#, fuzzy
 msgid "Client Action"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"顧客行動"
 
 #. module: base
 #: field:ir.actions.server,child_ids:0
@@ -757,8 +885,12 @@ msgstr ""
 
 #. module: base
 #: field:ir.actions.server,email:0
+#, fuzzy
 msgid "Email Address"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"Eメールアドレス"
 
 #. module: base
 #: field:ir.actions.server,expression:0
@@ -767,8 +899,12 @@ msgstr ""
 
 #. module: base
 #: field:ir.actions.server,fields_lines:0
+#, fuzzy
 msgid "Field Mappings."
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"項目マッピング"
 
 #. module: base
 #: field:ir.actions.server,loop_action:0
@@ -798,8 +934,12 @@ msgstr ""
 
 #. module: base
 #: field:ir.actions.server,srcmodel_id:0
+#, fuzzy
 msgid "Model"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"モデル"
 
 #. module: base
 #: field:ir.actions.server,subject:0 field:res.request,name:0
@@ -824,8 +964,12 @@ msgstr ""
 
 #. module: base
 #: field:ir.actions.server,write_id:0
+#, fuzzy
 msgid "Write Id"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"ID書き込み"
 
 #. module: base
 #: field:ir.actions.todo,active:0 field:ir.cron,active:0
@@ -870,13 +1014,21 @@ msgstr ""
 
 #. module: base
 #: field:ir.actions.url,target:0
+#, fuzzy
 msgid "Action Target"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"アクションターゲット"
 
 #. module: base
 #: field:ir.actions.url,url:0
+#, fuzzy
 msgid "Action URL"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"アクションURL"
 
 #. module: base
 #: field:ir.actions.wizard,multi:0
@@ -885,8 +1037,12 @@ msgstr ""
 
 #. module: base
 #: field:ir.actions.wizard,name:0
+#, fuzzy
 msgid "Wizard Info"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"ウィザード情報"
 
 #. module: base
 #: field:ir.actions.wizard,wiz_name:0
@@ -900,13 +1056,21 @@ msgstr ""
 
 #. module: base
 #: field:ir.attachment,create_uid:0
+#, fuzzy
 msgid "Creator"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"作成者"
 
 #. module: base
 #: field:ir.attachment,datas:0 view:ir.attachment:0
+#, fuzzy
 msgid "Data"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"データ"
 
 #. module: base
 #: field:ir.attachment,datas_fname:0 field:wizard.module.lang.export,name:0
@@ -917,8 +1081,12 @@ msgstr ""
 #: field:ir.attachment,description:0 field:ir.module.module,description:0
 #: field:res.partner.bank,name:0 field:res.partner.event,description:0
 #: view:res.partner:0 view:res.partner.event:0 view:res.request:0
+#, fuzzy
 msgid "Description"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"説明"
 
 #. module: base
 #: field:ir.attachment,link:0
@@ -987,8 +1155,12 @@ msgstr ""
 #. module: base
 #: field:ir.cron,priority:0 field:ir.ui.view,priority:0
 #: field:res.request,priority:0 field:res.request.link,priority:0
+#, fuzzy
 msgid "Priority"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"優先度"
 
 #. module: base
 #: field:ir.cron,user_id:0 field:ir.ui.view.custom,user_id:0
@@ -1024,7 +1196,7 @@ msgstr ""
 #. module: base
 #: field:ir.default,value:0
 msgid "Default Value"
-msgstr "既定値"
+msgstr "デフォルト値"
 
 #. module: base
 #: field:ir.exports,export_fields:0
@@ -1050,7 +1222,7 @@ msgstr ""
 #: field:ir.exports.line,name:0 field:ir.translation,name:0
 #: field:res.partner.bank.type.field,name:0
 msgid "Field Name"
-msgstr "フィールド名"
+msgstr "項目名"
 
 #. module: base
 #: field:ir.model,access_ids:0 field:ir.model.grid,access_ids:0
@@ -1124,20 +1296,28 @@ msgstr ""
 
 #. module: base
 #: field:ir.model.data,date_init:0
+#, fuzzy
 msgid "Init Date"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"整数データ"
 
 #. module: base
 #: field:ir.model.data,date_update:0
 msgid "Update Date"
-msgstr "日を更新する"
+msgstr "日付の更新"
 
 #. module: base
 #: field:ir.model.data,module:0 field:ir.module.module.dependency,module_id:0
 #: model:ir.model,name:base.model_ir_module_module rml:ir.module.reference:0
 #: view:ir.module.module:0
+#, fuzzy
 msgid "Module"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"モジュール"
 
 #. module: base
 #: field:ir.model.data,name:0
@@ -1194,13 +1374,21 @@ msgstr ""
 #. module: base
 #: field:ir.model.fields,required:0
 #: field:res.partner.bank.type.field,required:0
+#, fuzzy
 msgid "Required"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"必須"
 
 #. module: base
 #: field:ir.model.fields,select_level:0
+#, fuzzy
 msgid "Searchable"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"検索可能"
 
 #. module: base
 #: field:ir.model.fields,selectable:0
@@ -1214,8 +1402,12 @@ msgstr ""
 
 #. module: base
 #: field:ir.model.fields,size:0
+#, fuzzy
 msgid "Size"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"サイズ"
 
 #. module: base
 #: field:ir.model.fields,translate:0
@@ -1239,8 +1431,12 @@ msgstr "子カテゴリ"
 
 #. module: base
 #: field:ir.module.category,module_nr:0
+#, fuzzy
 msgid "Number of Modules"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"モジュール数"
 
 #. module: base
 #: field:ir.module.category,parent_id:0 field:res.partner.category,parent_id:0
@@ -1249,8 +1445,12 @@ msgstr ""
 
 #. module: base
 #: field:ir.module.module,author:0
+#, fuzzy
 msgid "Author"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"著者"
 
 #. module: base
 #: field:ir.module.module,category_id:0
@@ -1259,18 +1459,30 @@ msgstr ""
 
 #. module: base
 #: field:ir.module.module,certificate:0
+#, fuzzy
 msgid "Quality Certificate"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"品質証明書"
 
 #. module: base
 #: field:ir.module.module,demo:0
+#, fuzzy
 msgid "Demo data"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"デモデータ"
 
 #. module: base
 #: field:ir.module.module,dependencies_id:0 view:ir.module.module:0
+#, fuzzy
 msgid "Dependencies"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"依存"
 
 #. module: base
 #: field:ir.module.module,installed_version:0
@@ -1284,8 +1496,12 @@ msgstr ""
 
 #. module: base
 #: field:ir.module.module,license:0
+#, fuzzy
 msgid "License"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"ライセンス"
 
 #. module: base
 #: field:ir.module.module,published_version:0
@@ -1294,8 +1510,12 @@ msgstr ""
 
 #. module: base
 #: field:ir.module.module,reports_by_module:0
+#, fuzzy
 msgid "Reports"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"レポート"
 
 #. module: base
 #: field:ir.module.module,shortdesc:0
@@ -1337,8 +1557,12 @@ msgstr ""
 #. module: base
 #: field:ir.report.custom,menu_id:0 field:ir.ui.menu,name:0
 #: model:ir.actions.act_window,name:base.action_menu_admin view:ir.ui.menu:0
+#, fuzzy
 msgid "Menu"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"メニュー"
 
 #. module: base
 #: field:ir.report.custom,print_format:0
@@ -1394,8 +1618,12 @@ msgstr ""
 #: field:ir.report.custom.fields,fc2_operande:0
 #: field:ir.report.custom.fields,fc3_operande:0
 #: selection:ir.translation,type:0
+#, fuzzy
 msgid "Constraint"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"制約"
 
 #. module: base
 #: field:ir.report.custom.fields,fc1_condition:0
@@ -1458,8 +1686,12 @@ msgstr ""
 #. module: base
 #: field:ir.rule,field_id:0 field:multi_company.default,field_id:0
 #: selection:ir.translation,type:0
+#, fuzzy
 msgid "Field"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"項目"
 
 #. module: base
 #: field:ir.rule,operand:0
@@ -1493,13 +1725,21 @@ msgstr ""
 
 #. module: base
 #: field:ir.sequence,number_increment:0
+#, fuzzy
 msgid "Increment Number"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"増分値"
 
 #. module: base
 #: field:ir.sequence,number_next:0
+#, fuzzy
 msgid "Next Number"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"次の番号"
 
 #. module: base
 #: field:ir.sequence,padding:0
@@ -1508,8 +1748,12 @@ msgstr ""
 
 #. module: base
 #: field:ir.sequence,prefix:0
+#, fuzzy
 msgid "Prefix"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"プレフィックス"
 
 #. module: base
 #: field:ir.sequence,suffix:0
@@ -1523,8 +1767,12 @@ msgstr ""
 
 #. module: base
 #: field:ir.server.object.lines,col1:0
+#, fuzzy
 msgid "Destination"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"目的地"
 
 #. module: base
 #: field:ir.server.object.lines,server_id:0
@@ -1561,13 +1809,21 @@ msgstr ""
 
 #. module: base
 #: field:ir.ui.menu,parent_id:0 field:wizard.ir.model.menu.create,menu_id:0
+#, fuzzy
 msgid "Parent Menu"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"親メニュー"
 
 #. module: base
 #: field:ir.ui.view,arch:0 field:ir.ui.view.custom,arch:0
+#, fuzzy
 msgid "View Architecture"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"ビューアーキテクチャ"
 
 #. module: base
 #: field:ir.ui.view,inherit_id:0
@@ -1581,23 +1837,39 @@ msgstr ""
 
 #. module: base
 #: field:ir.ui.view.custom,ref_id:0
+#, fuzzy
 msgid "Original View"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"オリジナルビュー"
 
 #. module: base
 #: field:ir.ui.view_sc,name:0
+#, fuzzy
 msgid "Shortcut Name"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"ショートカット名称"
 
 #. module: base
 #: field:ir.ui.view_sc,res_id:0
+#, fuzzy
 msgid "Resource Ref."
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"リソース参照"
 
 #. module: base
 #: field:ir.ui.view_sc,resource:0
+#, fuzzy
 msgid "Resource Name"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"リソース名"
 
 #. module: base
 #: field:ir.ui.view_sc,user_id:0
@@ -1632,8 +1904,12 @@ msgstr ""
 
 #. module: base
 #: field:maintenance.contract,date_stop:0
+#, fuzzy
 msgid "Ending Date"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"終了日"
 
 #. module: base
 #: field:maintenance.contract,kind:0 field:workflow.activity,kind:0
@@ -1652,8 +1928,12 @@ msgstr ""
 
 #. module: base
 #: field:maintenance.contract.module,version:0 rml:ir.module.reference:0
+#, fuzzy
 msgid "Version"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"バージョン"
 
 #. module: base
 #: field:maintenance.contract.wizard,state:0
@@ -1715,13 +1995,21 @@ msgstr ""
 #. module: base
 #: field:res.bank,zip:0 field:res.partner.address,zip:0
 #: field:res.partner.bank,zip:0
+#, fuzzy
 msgid "Zip"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"郵便番号"
 
 #. module: base
 #: field:res.company,child_ids:0
+#, fuzzy
 msgid "Child Companies"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"子会社"
 
 #. module: base
 #: field:res.company,currency_id:0 field:res.company,currency_ids:0
@@ -1733,13 +2021,21 @@ msgstr ""
 
 #. module: base
 #: field:res.company,logo:0
+#, fuzzy
 msgid "Logo"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"ロゴ"
 
 #. module: base
 #: field:res.company,name:0
+#, fuzzy
 msgid "Company Name"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"会社名"
 
 #. module: base
 #: field:res.company,parent_id:0
@@ -1766,8 +2062,12 @@ msgstr ""
 
 #. module: base
 #: field:res.company,rml_header:0
+#, fuzzy
 msgid "RML Header"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"RMLヘッダー"
 
 #. module: base
 #: field:res.company,rml_header1:0
@@ -1807,7 +2107,7 @@ msgstr ""
 #. module: base
 #: field:res.currency,accuracy:0
 msgid "Computational Accuracy"
-msgstr "計算の精度"
+msgstr "計算精度"
 
 #. module: base
 #: field:res.currency,base:0
@@ -1819,18 +2119,30 @@ msgstr ""
 #: field:res.currency,date:0 field:res.currency.rate,name:0
 #: field:res.partner,date:0 field:res.partner.event,date:0
 #: field:res.request,date_sent:0
+#, fuzzy
 msgid "Date"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"日付"
 
 #. module: base
 #: field:res.currency,rate:0
+#, fuzzy
 msgid "Current Rate"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"現在レート"
 
 #. module: base
 #: field:res.currency,rate_ids:0 view:res.currency:0
+#, fuzzy
 msgid "Rates"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"レート"
 
 #. module: base
 #: field:res.currency,rounding:0
@@ -1856,8 +2168,12 @@ msgstr ""
 #: field:res.groups,model_access:0
 #: model:ir.ui.menu,name:base.menu_security_access view:ir.model.access:0
 #: view:res.groups:0
+#, fuzzy
 msgid "Access Controls"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"アクセスコントロール"
 
 #. module: base
 #: field:res.groups,name:0
@@ -1866,8 +2182,12 @@ msgstr ""
 
 #. module: base
 #: field:res.groups,rule_groups:0 field:res.users,rules_id:0 view:res.groups:0
+#, fuzzy
 msgid "Rules"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"ルール"
 
 #. module: base
 #: field:res.lang,code:0
@@ -1881,18 +2201,30 @@ msgstr "日付の書式"
 
 #. module: base
 #: field:res.lang,decimal_point:0
+#, fuzzy
 msgid "Decimal Separator"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"10進数のセパレータ"
 
 #. module: base
 #: field:res.lang,direction:0
+#, fuzzy
 msgid "Direction"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"指示"
 
 #. module: base
 #: field:res.lang,grouping:0
+#, fuzzy
 msgid "Separator Format"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"区切り書式"
 
 #. module: base
 #: field:res.lang,iso_code:0
@@ -1906,8 +2238,12 @@ msgstr ""
 
 #. module: base
 #: field:res.lang,time_format:0
+#, fuzzy
 msgid "Time Format"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"時刻の書式"
 
 #. module: base
 #: field:res.lang,translatable:0
@@ -1928,8 +2264,12 @@ msgstr ""
 
 #. module: base
 #: field:res.partner,category_id:0 view:res.partner:0
+#, fuzzy
 msgid "Categories"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"カテゴリ"
 
 #. module: base
 #: field:res.partner,child_ids:0 field:res.request,ref_partner_id:0
@@ -1944,8 +2284,12 @@ msgstr ""
 
 #. module: base
 #: field:res.partner,credit_limit:0
+#, fuzzy
 msgid "Credit Limit"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"信用限度"
 
 #. module: base
 #: field:res.partner,customer:0
@@ -1962,13 +2306,21 @@ msgstr ""
 #. module: base
 #: field:res.partner,events:0 field:res.partner.event,name:0
 #: model:ir.actions.act_window,name:base.act_res_partner_event
+#, fuzzy
 msgid "Events"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"イベント"
 
 #. module: base
 #: field:res.partner,parent_id:0
+#, fuzzy
 msgid "Parent Partner"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"親パートナ"
 
 #. module: base
 #: field:res.partner,supplier:0
@@ -1979,8 +2331,12 @@ msgstr ""
 #. module: base
 #: field:res.partner,title:0 field:res.partner.address,title:0
 #: field:res.partner.title,name:0
+#, fuzzy
 msgid "Title"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"役職"
 
 #. module: base
 #: field:res.partner,user_id:0
@@ -1994,18 +2350,30 @@ msgstr ""
 
 #. module: base
 #: field:res.partner.address,birthdate:0
+#, fuzzy
 msgid "Birthdate"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"生年月日"
 
 #. module: base
 #: field:res.partner.address,mobile:0
+#, fuzzy
 msgid "Mobile"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"携帯電話"
 
 #. module: base
 #: field:res.partner.address,name:0
+#, fuzzy
 msgid "Contact Name"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"連絡先名"
 
 #. module: base
 #: field:res.partner.address,state_id:0
@@ -2014,8 +2382,12 @@ msgstr ""
 
 #. module: base
 #: field:res.partner.address,type:0
+#, fuzzy
 msgid "Address Type"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"アドレスの種類"
 
 #. module: base
 #: field:res.partner.bank,acc_number:0
@@ -2036,8 +2408,12 @@ msgstr ""
 #. module: base
 #: field:res.partner.bank,state:0
 #: field:res.partner.bank.type.field,bank_type_id:0
+#, fuzzy
 msgid "Bank Type"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"銀行タイプ"
 
 #. module: base
 #: field:res.partner.bank.type,field_ids:0
@@ -2046,8 +2422,12 @@ msgstr ""
 
 #. module: base
 #: field:res.partner.bank.type.field,size:0
+#, fuzzy
 msgid "Max. Size"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"最大サイズ"
 
 #. module: base
 #: field:res.partner.canal,name:0
@@ -2071,8 +2451,12 @@ msgstr ""
 #: model:ir.ui.menu,name:base.menu_base_partner
 #: model:ir.ui.menu,name:base.menu_partner_form view:res.partner:0
 #: view:res.partner.category:0
+#, fuzzy
 msgid "Partners"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"パートナ"
 
 #. module: base
 #: field:res.partner.event,canal_id:0 view:res.partner.canal:0
@@ -2121,8 +2505,12 @@ msgstr ""
 
 #. module: base
 #: field:res.partner.event.type,key:0
+#, fuzzy
 msgid "Key"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"キー"
 
 #. module: base
 #: field:res.partner.function,name:0
@@ -2136,13 +2524,21 @@ msgstr ""
 
 #. module: base
 #: field:res.partner.title,shortcut:0 view:ir.ui.view_sc:0
+#, fuzzy
 msgid "Shortcut"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"ショートカット"
 
 #. module: base
 #: field:res.payterm,name:0
+#, fuzzy
 msgid "Payment Term (short name)"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"支払期間（短期）"
 
 #. module: base
 #: field:res.request,act_from:0 field:res.request.history,act_from:0
@@ -2167,8 +2563,12 @@ msgstr ""
 
 #. module: base
 #: field:res.request,history:0 view:res.partner:0 view:res.request:0
+#, fuzzy
 msgid "History"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"履歴"
 
 #. module: base
 #: field:res.request,ref_doc1:0
@@ -2197,8 +2597,12 @@ msgstr ""
 
 #. module: base
 #: field:res.request.history,name:0
+#, fuzzy
 msgid "Summary"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"要約"
 
 #. module: base
 #: field:res.roles,child_id:0
@@ -2260,8 +2664,12 @@ msgstr ""
 
 #. module: base
 #: field:wizard.ir.model.menu.create,name:0
+#, fuzzy
 msgid "Menu Name"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"メニュー名"
 
 #. module: base
 #: field:wizard.ir.model.menu.create.line,wizard_id:0 view:ir.actions.wizard:0
@@ -2289,8 +2697,12 @@ msgstr ""
 #: model:ir.actions.act_window,name:base.action_module_open_categ
 #: model:ir.actions.act_window,name:base.open_module_tree
 #: model:ir.ui.menu,name:base.menu_module_tree view:ir.module.module:0
+#, fuzzy
 msgid "Modules"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"モジュール"
 
 #. module: base
 #: field:workflow,activities:0
@@ -2301,8 +2713,12 @@ msgstr ""
 
 #. module: base
 #: field:workflow,on_create:0
+#, fuzzy
 msgid "On Create"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"作成時"
 
 #. module: base
 #: field:workflow.activity,action:0
@@ -2311,13 +2727,21 @@ msgstr ""
 
 #. module: base
 #: field:workflow.activity,action_id:0 view:ir.actions.server:0
+#, fuzzy
 msgid "Server Action"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"サーバアクション"
 
 #. module: base
 #: field:workflow.activity,flow_start:0
+#, fuzzy
 msgid "Flow Start"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"フロー開始"
 
 #. module: base
 #: field:workflow.activity,flow_stop:0
@@ -2326,8 +2750,12 @@ msgstr ""
 
 #. module: base
 #: field:workflow.activity,in_transitions:0
+#, fuzzy
 msgid "Incoming Transitions"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"入力変化"
 
 #. module: base
 #: field:workflow.activity,join_mode:0
@@ -2341,8 +2769,12 @@ msgstr ""
 
 #. module: base
 #: field:workflow.activity,signal_send:0
+#, fuzzy
 msgid "Signal (subflow.*)"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"シグナル（サブフロー.*）"
 
 #. module: base
 #: field:workflow.activity,split_mode:0
@@ -2368,8 +2800,12 @@ msgstr ""
 
 #. module: base
 #: field:workflow.transition,act_from:0
+#, fuzzy
 msgid "Source Activity"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"ソースアクティビティ"
 
 #. module: base
 #: field:workflow.transition,act_to:0
@@ -2388,13 +2824,21 @@ msgstr ""
 
 #. module: base
 #: field:workflow.transition,trigger_expr_id:0
+#, fuzzy
 msgid "Trigger Expression"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"トリガー式"
 
 #. module: base
 #: field:workflow.transition,trigger_model:0
+#, fuzzy
 msgid "Trigger Object"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"トリガーオブジェクト"
 
 #. module: base
 #: field:workflow.triggers,instance_id:0
@@ -2403,8 +2847,12 @@ msgstr ""
 
 #. module: base
 #: field:workflow.triggers,workitem_id:0
+#, fuzzy
 msgid "Workitem"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"作業項目"
 
 #. module: base
 #: field:workflow.workitem,act_id:0 view:workflow.activity:0
@@ -2423,16 +2871,25 @@ msgstr ""
 
 #. module: base
 #: help:ir.actions.act_window,limit:0
+#, fuzzy
 msgid "Default limit for the list view"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"リストビューのデフォルト上限"
 
 #. module: base
 #: help:ir.actions.act_window.view,multi:0
 #: help:ir.actions.report.custom,multi:0 help:ir.actions.report.xml,multi:0
+#, fuzzy
 msgid ""
 "If set to true, the action will not be displayed on the right toolbar of a "
 "form view."
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"True にセットすると、このアクションはフォームビューの右のツールバー上に表示さ"
+"れなくなります。"
 
 #. module: base
 #: help:ir.actions.report.xml,attachment:0
@@ -2444,10 +2901,15 @@ msgstr ""
 
 #. module: base
 #: help:ir.actions.report.xml,attachment_use:0
+#, fuzzy
 msgid ""
 "If you check this, then the second time the user prints with same attachment "
 "name, it returns the previous report."
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"ここをチェックした場合、ユーザが同じ名前で２回目も印刷した時は、１回前のレ"
+"ポートを返します。"
 
 #. module: base
 #: help:ir.actions.report.xml,header:0
@@ -2462,8 +2924,12 @@ msgstr ""
 
 #. module: base
 #: help:ir.actions.server,action_id:0
+#, fuzzy
 msgid "Select the Action Window, Report, Wizard to be executed."
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"アクションウィンドウ、レポート、ウィザードから選択して下さい。"
 
 #. module: base
 #: help:ir.actions.server,code:0
@@ -2487,11 +2953,16 @@ msgstr ""
 
 #. module: base
 #: help:ir.actions.server,expression:0
+#, fuzzy
 msgid ""
 "Enter the field/expression that will return the list. E.g. select the sale "
 "order in Object, and you can have loop on the sales order line. Expression = "
 "`object.order_line`."
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"リストが返される項目 / 式を入力して下さい。例えば、 オブジェクトの販売オー"
+"ダーを選択し、販売オーダーの繰り返しができます。式＝`object.order_line`"
 
 #. module: base
 #: help:ir.actions.server,loop_action:0
@@ -2509,11 +2980,17 @@ msgstr ""
 
 #. module: base
 #: help:ir.actions.server,mobile:0
+#, fuzzy
 msgid ""
 "Provides fields that be used to fetch the mobile number, e.g. you select the "
 "invoice, then `object.invoice_address_id.mobile` is the field which gives "
 "the correct mobile number"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"提供項目は携帯電話番号を持ってくるときに使われます。例えば、あなたが請求書を"
+"選択した時に`object.invoice_address_id.mobile`は正しい携帯電話番号を与える項"
+"目です。"
 
 #. module: base
 #: help:ir.actions.server,model_id:0
@@ -2575,10 +3052,15 @@ msgstr ""
 
 #. module: base
 #: help:ir.actions.server,write_id:0
+#, fuzzy
 msgid ""
 "Provide the field name that the record id refers to for the write operation. "
 "If it is empty it will refer to the active id of the object."
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"レコードIDとして書き込み操作のための項目名を指定して下さい。指定されない場合"
+"は、オブジェクトのアクティブIDとなります。"
 
 #. module: base
 #: help:ir.actions.wizard,multi:0
@@ -2603,8 +3085,12 @@ msgstr ""
 
 #. module: base
 #: help:ir.model.fields,on_delete:0
+#, fuzzy
 msgid "On delete property for many2one fields"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"多対1項目のプロパティ削除"
 
 #. module: base
 #: help:ir.module.repository,filter:0
@@ -2678,10 +3164,15 @@ msgstr ""
 
 #. module: base
 #: help:res.country,code:0
+#, fuzzy
 msgid ""
 "The ISO country code in two chars.\n"
 "You can use this field for quick search."
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"ISOの国コードは２文字です。\n"
+"この項目はクイックサーチのために使えます。"
 
 #. module: base
 #: help:res.country,name:0
@@ -2719,15 +3210,25 @@ msgstr "このISOコードが、翻訳に使うpoファイルの名前になり�
 
 #. module: base
 #: help:res.partner,customer:0
+#, fuzzy
 msgid "Check this box if the partner is a customer."
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"パートナが顧客である場合はこのボックスをチェックして下さい。"
 
 #. module: base
 #: help:res.partner,lang:0
+#, fuzzy
 msgid ""
 "If the selected language is loaded in the system, all documents related to "
 "this partner will be printed in this language. If not, it will be english."
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"選択した言語がシステムにロードされるなら、このパートナと関連する全てのドキュ"
+"メントはその言語によって印刷されます。しかし、そうでない場合は英語により印刷"
+"されます。"
 
 #. module: base
 #: help:res.partner,supplier:0
@@ -2738,17 +3239,26 @@ msgstr ""
 
 #. module: base
 #: help:res.partner,user_id:0
+#, fuzzy
 msgid ""
 "The internal user that is in charge of communicating with this partner if "
 "any."
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"その内部ユーザはどんな場合でもこのパートナとの通信に責任を持ちます。"
 
 #. module: base
 #: help:res.partner,vat:0
+#, fuzzy
 msgid ""
 "Value Added Tax number. Check the box if the partner is subjected to the "
 "VAT. Used by the VAT legal statement."
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"付加価値税（VAT）番号。パートナがVATに従属させられる場合はボックスをチェック"
+"して下さい。VATの法的な計算書に使用されます。"
 
 #. module: base
 #: help:res.partner.address,active:0
@@ -2785,20 +3295,28 @@ msgstr ""
 
 #. module: base
 #: help:wizard.module.lang.export,lang:0
+#, fuzzy
 msgid "To export a new language, do not select a language."
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"新しい言語のエクスポートでは言語を選択してはいけません。"
 
 #. module: base
 #: model:ir.actions.act_window,name:base.act_ir_actions_todo_form
 #: model:ir.ui.menu,name:base.menu_ir_actions_todo_form view:ir.actions.todo:0
+#, fuzzy
 msgid "Config Wizard Steps"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"コンフィグウィザードステップ"
 
 #. module: base
 #: model:ir.actions.act_window,name:base.act_menu_create
 #: view:wizard.ir.model.menu.create:0
 msgid "Create Menu"
-msgstr "メニューを作成する"
+msgstr "メニューの作成"
 
 #. module: base
 #: model:ir.actions.act_window,name:base.act_values_form
@@ -2843,8 +3361,12 @@ msgstr ""
 #. module: base
 #: model:ir.actions.act_window,name:base.action_country
 #: model:ir.ui.menu,name:base.menu_country_partner
+#, fuzzy
 msgid "Countries"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"国"
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_country_state
@@ -2899,16 +3421,24 @@ msgstr ""
 #. module: base
 #: model:ir.actions.act_window,name:base.action_partner_addess_tree
 #: view:res.partner:0
+#, fuzzy
 msgid "Partner Contacts"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"パートナ連絡先"
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_partner_address_form
 #: model:ir.model,name:base.model_res_partner_address
 #: model:ir.ui.menu,name:base.menu_partner_address_form
 #: view:res.partner.address:0
+#, fuzzy
 msgid "Partner Addresses"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"パートナの住所"
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_partner_by_category
@@ -2928,8 +3458,12 @@ msgstr ""
 #. module: base
 #: model:ir.actions.act_window,name:base.action_partner_customer_form
 #: view:res.partner:0
+#, fuzzy
 msgid "Customers"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"顧客"
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_partner_customer_form_new
@@ -2957,8 +3491,12 @@ msgstr ""
 #. module: base
 #: model:ir.actions.act_window,name:base.action_partner_title_contact
 #: model:ir.ui.menu,name:base.menu_partner_title_contact
+#, fuzzy
 msgid "Contact Titles"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"役職"
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_partner_title_partner
@@ -2970,8 +3508,12 @@ msgstr ""
 #. module: base
 #: model:ir.actions.act_window,name:base.action_payterm_form
 #: model:ir.model,name:base.model_res_payterm
+#, fuzzy
 msgid "Payment term"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"支払期間"
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_report_custom
@@ -2995,8 +3537,12 @@ msgstr ""
 #. module: base
 #: model:ir.actions.act_window,name:base.action_res_company_tree
 #: model:ir.ui.menu,name:base.menu_action_res_company_tree
+#, fuzzy
 msgid "Company's Structure"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"会社組織"
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_res_roles
@@ -3048,21 +3594,33 @@ msgstr ""
 #. module: base
 #: model:ir.actions.act_window,name:base.action_workflow_form
 #: model:ir.ui.menu,name:base.menu_workflow
+#, fuzzy
 msgid "Workflows"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"ワークフロー"
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_workflow_instance_form
 #: model:ir.ui.menu,name:base.menu_workflow_instance
+#, fuzzy
 msgid "Instances"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"インスタンス"
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_workflow_transition_form
 #: model:ir.ui.menu,name:base.menu_workflow_transition
 #: view:workflow.activity:0
+#, fuzzy
 msgid "Transitions"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"遷移"
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_workflow_workitem_form
@@ -3079,8 +3637,12 @@ msgstr ""
 #. module: base
 #: model:ir.actions.act_window,name:base.ir_access_act
 #: model:ir.ui.menu,name:base.menu_ir_access_act
+#, fuzzy
 msgid "Access Controls List"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"アクセスコントロールリスト"
 
 #. module: base
 #: model:ir.actions.act_window,name:base.ir_action_report_custom
@@ -3109,8 +3671,12 @@ msgstr "ウィザード"
 #. module: base
 #: model:ir.actions.act_window,name:base.ir_cron_act
 #: model:ir.ui.menu,name:base.menu_ir_cron_act view:ir.cron:0
+#, fuzzy
 msgid "Scheduled Actions"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"スケジュールされたアクション"
 
 #. module: base
 #: model:ir.actions.act_window,name:base.ir_property_form
@@ -3174,8 +3740,12 @@ msgstr ""
 #: model:ir.actions.act_window,name:base.res_lang_act_window
 #: model:ir.model,name:base.model_res_lang
 #: model:ir.ui.menu,name:base.menu_res_lang_act_window view:res.lang:0
+#, fuzzy
 msgid "Languages"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"言語"
 
 #. module: base
 #: model:ir.actions.act_window,name:base.res_partner_canal-act
@@ -3248,8 +3818,12 @@ msgstr ""
 #. module: base
 #: model:ir.actions.wizard,name:base.res_partner_mass_mailing_wizard
 #: wizard_view:res.partner.spam_send,init:0
+#, fuzzy
 msgid "Mass Mailing"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"メール一括送信"
 
 #. module: base
 #: model:ir.actions.wizard,name:base.res_partner_send_sms_wizard
@@ -3531,8 +4105,12 @@ msgstr ""
 #. module: base
 #: model:ir.model,name:base.model_res_partner_bank_type
 #: view:res.partner.bank.type:0
+#, fuzzy
 msgid "Bank Account Type"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"銀行口座タイプ"
 
 #. module: base
 #: model:ir.model,name:base.model_res_partner_bank_type_field
@@ -3668,8 +4246,12 @@ msgstr ""
 
 #. module: base
 #: model:ir.ui.menu,name:base.menu_custom
+#, fuzzy
 msgid "Customization"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"カスタマイゼーション"
 
 #. module: base
 #: model:ir.ui.menu,name:base.menu_custom_multicompany
@@ -3693,8 +4275,12 @@ msgstr ""
 
 #. module: base
 #: model:ir.ui.menu,name:base.menu_security view:ir.actions.act_window:0
+#, fuzzy
 msgid "Security"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"セキュリティ"
 
 #. module: base
 #: model:ir.ui.menu,name:base.menu_translation view:ir.translation:0
@@ -3703,13 +4289,21 @@ msgstr ""
 
 #. module: base
 #: model:ir.ui.menu,name:base.menu_translation_app
+#, fuzzy
 msgid "Application Terms"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"アプリケーション用語"
 
 #. module: base
 #: model:ir.ui.menu,name:base.menu_translation_export
+#, fuzzy
 msgid "Import / Export"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"インポート / エクスポート"
 
 #. module: base
 #: model:ir.ui.menu,name:base.menu_workflow_root
@@ -3749,8 +4343,12 @@ msgstr ""
 
 #. module: base
 #: model:ir.ui.menu,name:base.next_id_9
+#, fuzzy
 msgid "Database Structure"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"データベース構造"
 
 #. module: base
 #: model:res.company,overdue_msg:base.main_company
@@ -3762,8 +4360,12 @@ msgstr ""
 
 #. module: base
 #: model:res.country,name:base.ad
+#, fuzzy
 msgid "Andorra, Principality of"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"アンドラ公国"
 
 #. module: base
 #: model:res.country,name:base.ae
@@ -3782,8 +4384,12 @@ msgstr ""
 
 #. module: base
 #: model:res.country,name:base.ai
+#, fuzzy
 msgid "Anguilla"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"アンギラ"
 
 #. module: base
 #: model:res.country,name:base.al
@@ -3792,13 +4398,21 @@ msgstr ""
 
 #. module: base
 #: model:res.country,name:base.am
+#, fuzzy
 msgid "Armenia"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"アルメニア"
 
 #. module: base
 #: model:res.country,name:base.an
+#, fuzzy
 msgid "Netherlands Antilles"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"オランダ領アンチル"
 
 #. module: base
 #: model:res.country,name:base.ao
@@ -3807,8 +4421,12 @@ msgstr ""
 
 #. module: base
 #: model:res.country,name:base.aq
+#, fuzzy
 msgid "Antarctica"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"南極大陸"
 
 #. module: base
 #: model:res.country,name:base.ar
@@ -3822,13 +4440,21 @@ msgstr ""
 
 #. module: base
 #: model:res.country,name:base.at
+#, fuzzy
 msgid "Austria"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"オーストリア"
 
 #. module: base
 #: model:res.country,name:base.au
+#, fuzzy
 msgid "Australia"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"オーストラリア"
 
 #. module: base
 #: model:res.country,name:base.aw
@@ -3847,13 +4473,21 @@ msgstr "ボスニア・ヘルツェゴビナ"
 
 #. module: base
 #: model:res.country,name:base.bb
+#, fuzzy
 msgid "Barbados"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"バルバドス"
 
 #. module: base
 #: model:res.country,name:base.bd
+#, fuzzy
 msgid "Bangladesh"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"バングラデシュ"
 
 #. module: base
 #: model:res.country,name:base.be
@@ -3882,13 +4516,21 @@ msgstr ""
 
 #. module: base
 #: model:res.country,name:base.bj
+#, fuzzy
 msgid "Benin"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"ベナン"
 
 #. module: base
 #: model:res.country,name:base.bm
+#, fuzzy
 msgid "Bermuda"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"バミューダ"
 
 #. module: base
 #: model:res.country,name:base.bn
@@ -3897,18 +4539,30 @@ msgstr ""
 
 #. module: base
 #: model:res.country,name:base.bo
+#, fuzzy
 msgid "Bolivia"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"ボリビア"
 
 #. module: base
 #: model:res.country,name:base.br
+#, fuzzy
 msgid "Brazil"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"ブラジル"
 
 #. module: base
 #: model:res.country,name:base.bs
+#, fuzzy
 msgid "Bahamas"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"バハマ"
 
 #. module: base
 #: model:res.country,name:base.bt
@@ -3917,8 +4571,12 @@ msgstr ""
 
 #. module: base
 #: model:res.country,name:base.bv
+#, fuzzy
 msgid "Bouvet Island"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"ブーベ島"
 
 #. module: base
 #: model:res.country,name:base.bw
@@ -3932,8 +4590,12 @@ msgstr ""
 
 #. module: base
 #: model:res.country,name:base.bz
+#, fuzzy
 msgid "Belize"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"ベリーズ"
 
 #. module: base
 #: model:res.country,name:base.ca
@@ -3952,8 +4614,12 @@ msgstr ""
 
 #. module: base
 #: model:res.country,name:base.cf
+#, fuzzy
 msgid "Central African Republic"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"中央アフリカ共和国"
 
 #. module: base
 #: model:res.country,name:base.cg
@@ -3967,8 +4633,12 @@ msgstr ""
 
 #. module: base
 #: model:res.country,name:base.ci
+#, fuzzy
 msgid "Ivory Coast (Cote D'Ivoire)"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"コートジボワール"
 
 #. module: base
 #: model:res.country,name:base.ck
@@ -4002,13 +4672,21 @@ msgstr ""
 
 #. module: base
 #: model:res.country,name:base.cu
+#, fuzzy
 msgid "Cuba"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"キューバ"
 
 #. module: base
 #: model:res.country,name:base.cv
+#, fuzzy
 msgid "Cape Verde"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"カーボベルデ"
 
 #. module: base
 #: model:res.country,name:base.cx
@@ -4077,8 +4755,12 @@ msgstr ""
 
 #. module: base
 #: model:res.country,name:base.er
+#, fuzzy
 msgid "Eritrea"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"エリトリア"
 
 #. module: base
 #: model:res.country,name:base.es
@@ -4087,18 +4769,30 @@ msgstr "スペイン"
 
 #. module: base
 #: model:res.country,name:base.et
+#, fuzzy
 msgid "Ethiopia"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"エチオピア"
 
 #. module: base
 #: model:res.country,name:base.fi
+#, fuzzy
 msgid "Finland"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"フィンランド"
 
 #. module: base
 #: model:res.country,name:base.fj
+#, fuzzy
 msgid "Fiji"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"フィジー"
 
 #. module: base
 #: model:res.country,name:base.fk
@@ -4107,8 +4801,12 @@ msgstr ""
 
 #. module: base
 #: model:res.country,name:base.fm
+#, fuzzy
 msgid "Micronesia"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"ミクロネシア"
 
 #. module: base
 #: model:res.country,name:base.fo
@@ -4137,13 +4835,21 @@ msgstr ""
 
 #. module: base
 #: model:res.country,name:base.gf
+#, fuzzy
 msgid "French Guyana"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"フランス領ギアナ"
 
 #. module: base
 #: model:res.country,name:base.gh
+#, fuzzy
 msgid "Ghana"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"ガーナ"
 
 #. module: base
 #: model:res.country,name:base.gi
@@ -4167,13 +4873,21 @@ msgstr ""
 
 #. module: base
 #: model:res.country,name:base.gp
+#, fuzzy
 msgid "Guadeloupe (French)"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"グアドループ"
 
 #. module: base
 #: model:res.country,name:base.gq
+#, fuzzy
 msgid "Equatorial Guinea"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"赤道ギニア"
 
 #. module: base
 #: model:res.country,name:base.gr
@@ -4182,18 +4896,30 @@ msgstr ""
 
 #. module: base
 #: model:res.country,name:base.gs
+#, fuzzy
 msgid "S. Georgia & S. Sandwich Isls."
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"サウスジョージア・サウスサンドウィッチ諸島"
 
 #. module: base
 #: model:res.country,name:base.gt
+#, fuzzy
 msgid "Guatemala"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"グアテマラ"
 
 #. module: base
 #: model:res.country,name:base.gu
+#, fuzzy
 msgid "Guam (USA)"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"グアム (アメリカ領)"
 
 #. module: base
 #: model:res.country,name:base.gw
@@ -4232,8 +4958,12 @@ msgstr "ハイチ"
 
 #. module: base
 #: model:res.country,name:base.hu
+#, fuzzy
 msgid "Hungary"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"ハンガリー"
 
 #. module: base
 #: model:res.country,name:base.id
@@ -4242,13 +4972,21 @@ msgstr ""
 
 #. module: base
 #: model:res.country,name:base.ie
+#, fuzzy
 msgid "Ireland"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"アイルランド"
 
 #. module: base
 #: model:res.country,name:base.il
+#, fuzzy
 msgid "Israel"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"イスラエル"
 
 #. module: base
 #: model:res.country,name:base.in
@@ -4257,8 +4995,12 @@ msgstr "インド"
 
 #. module: base
 #: model:res.country,name:base.io
+#, fuzzy
 msgid "British Indian Ocean Territory"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"イギリス領インド洋地域"
 
 #. module: base
 #: model:res.country,name:base.iq
@@ -4297,18 +5039,30 @@ msgstr ""
 
 #. module: base
 #: model:res.country,name:base.ke
+#, fuzzy
 msgid "Kenya"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"ケニア"
 
 #. module: base
 #: model:res.country,name:base.kg
+#, fuzzy
 msgid "Kyrgyz Republic (Kyrgyzstan)"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"キルギス共和国"
 
 #. module: base
 #: model:res.country,name:base.kh
+#, fuzzy
 msgid "Cambodia, Kingdom of"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"カンボジア王国"
 
 #. module: base
 #: model:res.country,name:base.ki
@@ -4342,13 +5096,21 @@ msgstr ""
 
 #. module: base
 #: model:res.country,name:base.ky
+#, fuzzy
 msgid "Cayman Islands"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"ケイマン諸島"
 
 #. module: base
 #: model:res.country,name:base.kz
+#, fuzzy
 msgid "Kazakhstan"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"カザフスタン"
 
 #. module: base
 #: model:res.country,name:base.la
@@ -4367,13 +5129,21 @@ msgstr ""
 
 #. module: base
 #: model:res.country,name:base.li
+#, fuzzy
 msgid "Liechtenstein"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"リヒテンシュタイン"
 
 #. module: base
 #: model:res.country,name:base.lk
+#, fuzzy
 msgid "Sri Lanka"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"スリランカ"
 
 #. module: base
 #: model:res.country,name:base.lr
@@ -4382,13 +5152,21 @@ msgstr ""
 
 #. module: base
 #: model:res.country,name:base.ls
+#, fuzzy
 msgid "Lesotho"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"レソト"
 
 #. module: base
 #: model:res.country,name:base.lt
+#, fuzzy
 msgid "Lithuania"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"リトアニア"
 
 #. module: base
 #: model:res.country,name:base.lu
@@ -4397,13 +5175,21 @@ msgstr ""
 
 #. module: base
 #: model:res.country,name:base.lv
+#, fuzzy
 msgid "Latvia"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"ラトビア"
 
 #. module: base
 #: model:res.country,name:base.ly
+#, fuzzy
 msgid "Libya"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"リビア"
 
 #. module: base
 #: model:res.country,name:base.ma
@@ -4417,18 +5203,30 @@ msgstr ""
 
 #. module: base
 #: model:res.country,name:base.md
+#, fuzzy
 msgid "Moldavia"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"モルダヴィア"
 
 #. module: base
 #: model:res.country,name:base.me
+#, fuzzy
 msgid "Montenegro"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"モンテネグロ"
 
 #. module: base
 #: model:res.country,name:base.mg
+#, fuzzy
 msgid "Madagascar"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"マダガスカル"
 
 #. module: base
 #: model:res.country,name:base.mh
@@ -4437,8 +5235,12 @@ msgstr "マーシャル諸島"
 
 #. module: base
 #: model:res.country,name:base.mk
+#, fuzzy
 msgid "FYROM"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"マケドニア旧ユーゴスラビア共和国"
 
 #. module: base
 #: model:res.country,name:base.ml
@@ -4477,18 +5279,30 @@ msgstr ""
 
 #. module: base
 #: model:res.country,name:base.ms
+#, fuzzy
 msgid "Montserrat"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"モントセラト"
 
 #. module: base
 #: model:res.country,name:base.mt
+#, fuzzy
 msgid "Malta"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"マルタ"
 
 #. module: base
 #: model:res.country,name:base.mu
+#, fuzzy
 msgid "Mauritius"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"モーリシャス"
 
 #. module: base
 #: model:res.country,name:base.mv
@@ -4497,8 +5311,12 @@ msgstr "モルディブ"
 
 #. module: base
 #: model:res.country,name:base.mw
+#, fuzzy
 msgid "Malawi"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"マラウイ"
 
 #. module: base
 #: model:res.country,name:base.mx
@@ -4507,8 +5325,12 @@ msgstr ""
 
 #. module: base
 #: model:res.country,name:base.my
+#, fuzzy
 msgid "Malaysia"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"マレーシア"
 
 #. module: base
 #: model:res.country,name:base.mz
@@ -4517,8 +5339,12 @@ msgstr ""
 
 #. module: base
 #: model:res.country,name:base.na
+#, fuzzy
 msgid "Namibia"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"ナミビア"
 
 #. module: base
 #: model:res.country,name:base.nc
@@ -4527,13 +5353,21 @@ msgstr ""
 
 #. module: base
 #: model:res.country,name:base.ne
+#, fuzzy
 msgid "Niger"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"ニジェール"
 
 #. module: base
 #: model:res.country,name:base.nf
+#, fuzzy
 msgid "Norfolk Island"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"ノーフォーク島"
 
 #. module: base
 #: model:res.country,name:base.ng
@@ -4542,8 +5376,12 @@ msgstr ""
 
 #. module: base
 #: model:res.country,name:base.ni
+#, fuzzy
 msgid "Nicaragua"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"ニカラグア"
 
 #. module: base
 #: model:res.country,name:base.nl
@@ -4562,8 +5400,12 @@ msgstr ""
 
 #. module: base
 #: model:res.country,name:base.nr
+#, fuzzy
 msgid "Nauru"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"ナウル"
 
 #. module: base
 #: model:res.country,name:base.nt
@@ -4572,13 +5414,21 @@ msgstr ""
 
 #. module: base
 #: model:res.country,name:base.nu
+#, fuzzy
 msgid "Niue"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"ニウエ"
 
 #. module: base
 #: model:res.country,name:base.nz
+#, fuzzy
 msgid "New Zealand"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"ニュージーランド"
 
 #. module: base
 #: model:res.country,name:base.om
@@ -4592,8 +5442,12 @@ msgstr ""
 
 #. module: base
 #: model:res.country,name:base.pe
+#, fuzzy
 msgid "Peru"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"ペルー"
 
 #. module: base
 #: model:res.country,name:base.pf
@@ -4603,7 +5457,7 @@ msgstr ""
 #. module: base
 #: model:res.country,name:base.pg
 msgid "Papua New Guinea"
-msgstr "パプア・ニューギニア"
+msgstr "パプアニューギニア"
 
 #. module: base
 #: model:res.country,name:base.ph
@@ -4617,8 +5471,12 @@ msgstr ""
 
 #. module: base
 #: model:res.country,name:base.pl
+#, fuzzy
 msgid "Poland"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"ポーランド"
 
 #. module: base
 #: model:res.country,name:base.pm
@@ -4637,8 +5495,12 @@ msgstr ""
 
 #. module: base
 #: model:res.country,name:base.pt
+#, fuzzy
 msgid "Portugal"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"ポルトガル"
 
 #. module: base
 #: model:res.country,name:base.pw
@@ -4647,8 +5509,12 @@ msgstr ""
 
 #. module: base
 #: model:res.country,name:base.py
+#, fuzzy
 msgid "Paraguay"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"パラグアイ"
 
 #. module: base
 #: model:res.country,name:base.qa
@@ -4662,8 +5528,12 @@ msgstr ""
 
 #. module: base
 #: model:res.country,name:base.ro
+#, fuzzy
 msgid "Romania"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"ルーマニア"
 
 #. module: base
 #: model:res.country,name:base.rs
@@ -4672,8 +5542,12 @@ msgstr "セルビア"
 
 #. module: base
 #: model:res.country,name:base.ru
+#, fuzzy
 msgid "Russian Federation"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"ロシア連邦"
 
 #. module: base
 #: model:res.country,name:base.rw
@@ -4697,13 +5571,21 @@ msgstr ""
 
 #. module: base
 #: model:res.country,name:base.sd
+#, fuzzy
 msgid "Sudan"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"スーダン"
 
 #. module: base
 #: model:res.country,name:base.se
+#, fuzzy
 msgid "Sweden"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"スウェーデン"
 
 #. module: base
 #: model:res.country,name:base.sg
@@ -4713,17 +5595,25 @@ msgstr ""
 #. module: base
 #: model:res.country,name:base.sh
 msgid "Saint Helena"
-msgstr "セント・ヘレナ"
+msgstr "セントヘレナ"
 
 #. module: base
 #: model:res.country,name:base.si
+#, fuzzy
 msgid "Slovenia"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"スロベニア"
 
 #. module: base
 #: model:res.country,name:base.sj
+#, fuzzy
 msgid "Svalbard and Jan Mayen Islands"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"スバールバル諸島･ヤンマイエン島"
 
 #. module: base
 #: model:res.country,name:base.sk
@@ -4737,13 +5627,21 @@ msgstr ""
 
 #. module: base
 #: model:res.country,name:base.sm
+#, fuzzy
 msgid "San Marino"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"サンマリノ"
 
 #. module: base
 #: model:res.country,name:base.sn
+#, fuzzy
 msgid "Senegal"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"セネガル"
 
 #. module: base
 #: model:res.country,name:base.so
@@ -4752,13 +5650,21 @@ msgstr ""
 
 #. module: base
 #: model:res.country,name:base.sr
+#, fuzzy
 msgid "Suriname"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"スリナム"
 
 #. module: base
 #: model:res.country,name:base.st
+#, fuzzy
 msgid "Saint Tome (Sao Tome) and Principe"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"サントメ・プリンシペ"
 
 #. module: base
 #: model:res.country,name:base.sv
@@ -4767,8 +5673,12 @@ msgstr ""
 
 #. module: base
 #: model:res.country,name:base.sy
+#, fuzzy
 msgid "Syria"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"シリア"
 
 #. module: base
 #: model:res.country,name:base.sz
@@ -4802,8 +5712,12 @@ msgstr ""
 
 #. module: base
 #: model:res.country,name:base.tj
+#, fuzzy
 msgid "Tajikistan"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"タジキスタン"
 
 #. module: base
 #: model:res.country,name:base.tk
@@ -4842,8 +5756,12 @@ msgstr ""
 
 #. module: base
 #: model:res.country,name:base.tv
+#, fuzzy
 msgid "Tuvalu"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"ツバル"
 
 #. module: base
 #: model:res.country,name:base.tw
@@ -4872,8 +5790,12 @@ msgstr ""
 
 #. module: base
 #: model:res.country,name:base.um
+#, fuzzy
 msgid "USA Minor Outlying Islands"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"アメリカ領太平洋諸島"
 
 #. module: base
 #: model:res.country,name:base.us
@@ -4882,8 +5804,12 @@ msgstr ""
 
 #. module: base
 #: model:res.country,name:base.uy
+#, fuzzy
 msgid "Uruguay"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"ウルグアイ"
 
 #. module: base
 #: model:res.country,name:base.uz
@@ -4892,8 +5818,12 @@ msgstr ""
 
 #. module: base
 #: model:res.country,name:base.va
+#, fuzzy
 msgid "Holy See (Vatican City State)"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"教皇庁（バチカン市国）"
 
 #. module: base
 #: model:res.country,name:base.vc
@@ -4902,8 +5832,12 @@ msgstr ""
 
 #. module: base
 #: model:res.country,name:base.ve
+#, fuzzy
 msgid "Venezuela"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"ベネズエラ"
 
 #. module: base
 #: model:res.country,name:base.vg
@@ -4942,8 +5876,12 @@ msgstr ""
 
 #. module: base
 #: model:res.country,name:base.yt
+#, fuzzy
 msgid "Mayotte"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"マヨット"
 
 #. module: base
 #: model:res.country,name:base.yu
@@ -4952,13 +5890,21 @@ msgstr ""
 
 #. module: base
 #: model:res.country,name:base.za
+#, fuzzy
 msgid "South Africa"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"南アフリカ"
 
 #. module: base
 #: model:res.country,name:base.zm
+#, fuzzy
 msgid "Zambia"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"ザンビア"
 
 #. module: base
 #: model:res.country,name:base.zr
@@ -4967,13 +5913,21 @@ msgstr ""
 
 #. module: base
 #: model:res.country,name:base.zw
+#, fuzzy
 msgid "Zimbabwe"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"ジンバブエ"
 
 #. module: base
 #: model:res.partner.bank.type,name:base.bank_normal view:res.partner.bank:0
+#, fuzzy
 msgid "Bank account"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"銀行口座"
 
 #. module: base
 #: model:res.partner.bank.type.field,name:base.bank_normal_field
@@ -5022,8 +5976,12 @@ msgstr ""
 
 #. module: base
 #: model:res.partner.category,name:base.res_partner_category_3
+#, fuzzy
 msgid "Starter Partner"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"開始パートナ"
 
 #. module: base
 #: model:res.partner.category,name:base.res_partner_category_4
@@ -5067,8 +6025,12 @@ msgstr ""
 
 #. module: base
 #: model:res.partner.title,name:base.res_partner_title_sir
+#, fuzzy
 msgid "Sir"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"拝啓"
 
 #. module: base
 #: rml:ir.module.reference:0
@@ -5092,18 +6054,30 @@ msgstr ""
 
 #. module: base
 #: rml:ir.module.reference:0
+#, fuzzy
 msgid "Directory"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"ディレクトリ"
 
 #. module: base
 #: rml:ir.module.reference:0
+#, fuzzy
 msgid "Introspection report on objects"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"オブジェクトのイントロスペクションレポート"
 
 #. module: base
 #: rml:ir.module.reference:0
+#, fuzzy
 msgid "Menu :"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"メニュー："
 
 #. module: base
 #: rml:ir.module.reference:0
@@ -5145,30 +6119,46 @@ msgstr ""
 #: selection:ir.actions.act_window.view,view_mode:0
 #: selection:ir.ui.view,type:0
 #: selection:wizard.ir.model.menu.create.line,view_type:0
+#, fuzzy
 msgid "Form"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"フォーム"
 
 #. module: base
 #: selection:ir.actions.act_window,view_type:0
 #: selection:ir.actions.act_window.view,view_mode:0
 #: selection:ir.ui.view,type:0
 #: selection:wizard.ir.model.menu.create.line,view_type:0
+#, fuzzy
 msgid "Tree"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"ツリー"
 
 #. module: base
 #: selection:ir.actions.act_window.view,view_mode:0
 #: selection:ir.ui.view,type:0
 #: selection:wizard.ir.model.menu.create.line,view_type:0
+#, fuzzy
 msgid "Calendar"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"カレンダー"
 
 #. module: base
 #: selection:ir.actions.act_window.view,view_mode:0
 #: selection:ir.ui.view,type:0
 #: selection:wizard.ir.model.menu.create.line,view_type:0
+#, fuzzy
 msgid "Gantt"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"ガント"
 
 #. module: base
 #: selection:ir.actions.act_window.view,view_mode:0
@@ -5224,8 +6214,12 @@ msgstr ""
 
 #. module: base
 #: selection:ir.actions.server,state:0 selection:workflow.activity,kind:0
+#, fuzzy
 msgid "Dummy"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"ダミー"
 
 #. module: base
 #: selection:ir.actions.server,state:0
@@ -5249,8 +6243,12 @@ msgstr ""
 
 #. module: base
 #: selection:ir.actions.server,state:0
+#, fuzzy
 msgid "Write Object"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"書き込みオブジェクト"
 
 #. module: base
 #: selection:ir.actions.todo,start_on:0
@@ -5317,13 +6315,21 @@ msgstr ""
 
 #. module: base
 #: selection:ir.cron,interval_type:0
+#, fuzzy
 msgid "Days"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"日"
 
 #. module: base
 #: selection:ir.cron,interval_type:0
+#, fuzzy
 msgid "Hours"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"時間"
 
 #. module: base
 #: selection:ir.cron,interval_type:0
@@ -5353,7 +6359,7 @@ msgstr ""
 #. module: base
 #: selection:ir.model,state:0 selection:ir.model.grid,state:0
 msgid "Custom Object"
-msgstr "カスタム・オブジェクト"
+msgstr "カスタムオブジェクト"
 
 #. module: base
 #: selection:ir.model.fields,on_delete:0
@@ -5362,8 +6368,12 @@ msgstr ""
 
 #. module: base
 #: selection:ir.model.fields,on_delete:0
+#, fuzzy
 msgid "Set NULL"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"Nullをセット"
 
 #. module: base
 #: selection:ir.model.fields,select_level:0
@@ -5377,13 +6387,21 @@ msgstr ""
 
 #. module: base
 #: selection:ir.model.fields,select_level:0
+#, fuzzy
 msgid "Not Searchable"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"検索可能ではありません"
 
 #. module: base
 #: selection:ir.model.fields,state:0
+#, fuzzy
 msgid "Base Field"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"基本項目"
 
 #. module: base
 #: selection:ir.model.fields,state:0
@@ -5397,8 +6415,12 @@ msgstr ""
 
 #. module: base
 #: selection:ir.module.module,license:0
+#, fuzzy
 msgid "GPL-2 or later version"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"GPL-2 またはそれ以降のバージョン"
 
 #. module: base
 #: selection:ir.module.module,license:0
@@ -5418,8 +6440,12 @@ msgstr ""
 #. module: base
 #: selection:ir.module.module,state:0
 #: selection:ir.module.module.dependency,state:0
+#, fuzzy
 msgid "Installed"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"インストール済み"
 
 #. module: base
 #: selection:ir.module.module,state:0
@@ -5441,14 +6467,22 @@ msgstr ""
 #. module: base
 #: selection:ir.module.module,state:0
 #: selection:ir.module.module.dependency,state:0
+#, fuzzy
 msgid "To be removed"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"対象削除"
 
 #. module: base
 #: selection:ir.module.module,state:0
 #: selection:ir.module.module.dependency,state:0
+#, fuzzy
 msgid "To be upgraded"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"アップグレード対象"
 
 #. module: base
 #: selection:ir.module.module.dependency,state:0
@@ -5627,8 +6661,12 @@ msgstr ""
 
 #. module: base
 #: selection:ir.server.object.lines,type:0
+#, fuzzy
 msgid "Formula"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"式"
 
 #. module: base
 #: selection:ir.translation,type:0 view:wizard.module.lang.export:0
@@ -5642,8 +6680,12 @@ msgstr ""
 
 #. module: base
 #: selection:ir.translation,type:0
+#, fuzzy
 msgid "SQL Constraint"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"SQL制約"
 
 #. module: base
 #: selection:ir.translation,type:0
@@ -5662,8 +6704,12 @@ msgstr ""
 
 #. module: base
 #: selection:ir.translation,type:0
+#, fuzzy
 msgid "Wizard View"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"ウィザードビュー"
 
 #. module: base
 #: selection:ir.translation,type:0
@@ -6227,18 +7273,30 @@ msgstr ""
 
 #. module: base
 #: selection:maintenance.contract,state:0
+#, fuzzy
 msgid "Valid"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"有効"
 
 #. module: base
 #: selection:maintenance.contract.wizard,state:0
+#, fuzzy
 msgid "Draft"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"ドラフト"
 
 #. module: base
 #: selection:maintenance.contract.wizard,state:0
+#, fuzzy
 msgid "Unvalidated"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"確認未済"
 
 #. module: base
 #: selection:maintenance.contract.wizard,state:0
@@ -6257,8 +7315,12 @@ msgstr ""
 
 #. module: base
 #: selection:module.lang.install,init,lang:0
+#, fuzzy
 msgid "Bosnian / bosanski jezik"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"ボスニア語"
 
 #. module: base
 #: selection:module.lang.install,init,lang:0
@@ -6307,13 +7369,21 @@ msgstr ""
 
 #. module: base
 #: selection:module.lang.install,init,lang:0
+#, fuzzy
 msgid "English (CA)"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"英語（カナダ）"
 
 #. module: base
 #: selection:module.lang.install,init,lang:0
+#, fuzzy
 msgid "English (UK)"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"英語（イギリス）"
 
 #. module: base
 #: selection:module.lang.install,init,lang:0
@@ -6332,8 +7402,12 @@ msgstr ""
 
 #. module: base
 #: selection:module.lang.install,init,lang:0
+#, fuzzy
 msgid "French (BE) / Français (BE)"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"フランス語（ベルギー）"
 
 #. module: base
 #: selection:module.lang.install,init,lang:0
@@ -6342,13 +7416,21 @@ msgstr ""
 
 #. module: base
 #: selection:module.lang.install,init,lang:0
+#, fuzzy
 msgid "French / Français"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"フランス語"
 
 #. module: base
 #: selection:module.lang.install,init,lang:0
+#, fuzzy
 msgid "German / Deutsch"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"ドイツ語"
 
 #. module: base
 #: selection:module.lang.install,init,lang:0
@@ -6357,8 +7439,12 @@ msgstr ""
 
 #. module: base
 #: selection:module.lang.install,init,lang:0
+#, fuzzy
 msgid "Hungarian / Magyar"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"ハンガリー語 / マジャール語"
 
 #. module: base
 #: selection:module.lang.install,init,lang:0
@@ -6402,8 +7488,12 @@ msgstr ""
 
 #. module: base
 #: selection:module.lang.install,init,lang:0
+#, fuzzy
 msgid "Russian / русский язык"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"ロシア"
 
 #. module: base
 #: selection:module.lang.install,init,lang:0
@@ -6412,18 +7502,30 @@ msgstr ""
 
 #. module: base
 #: selection:module.lang.install,init,lang:0
+#, fuzzy
 msgid "Spanish (AR) / Español (AR)"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"スペイン語（アルゼンチン）"
 
 #. module: base
 #: selection:module.lang.install,init,lang:0
+#, fuzzy
 msgid "Spanish / Español"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"スペイン語"
 
 #. module: base
 #: selection:module.lang.install,init,lang:0
+#, fuzzy
 msgid "Swedish / svenska"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"スウェーデン語"
 
 #. module: base
 #: selection:module.lang.install,init,lang:0
@@ -6462,8 +7564,12 @@ msgstr ""
 
 #. module: base
 #: selection:res.lang,direction:0
+#, fuzzy
 msgid "Right-to-Left"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"右から左"
 
 #. module: base
 #: selection:res.partner.address,type:0 selection:res.partner.title,domain:0
@@ -6477,8 +7583,12 @@ msgstr ""
 
 #. module: base
 #: selection:res.partner.address,type:0
+#, fuzzy
 msgid "Invoice"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"請求書"
 
 #. module: base
 #: selection:res.partner.event,partner_type:0
@@ -6507,8 +7617,12 @@ msgstr ""
 
 #. module: base
 #: selection:res.request,priority:0
+#, fuzzy
 msgid "High"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"高"
 
 #. module: base
 #: selection:res.request,priority:0
@@ -6522,8 +7636,12 @@ msgstr ""
 
 #. module: base
 #: selection:res.request,state:0
+#, fuzzy
 msgid "active"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"アクティブ"
 
 #. module: base
 #: selection:res.request,state:0
@@ -6532,8 +7650,12 @@ msgstr ""
 
 #. module: base
 #: selection:res.request,state:0
+#, fuzzy
 msgid "draft"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"ドラフト"
 
 #. module: base
 #: selection:res.request,state:0
@@ -6557,8 +7679,12 @@ msgstr ""
 
 #. module: base
 #: selection:wizard.module.lang.export,format:0
+#, fuzzy
 msgid "TGZ Archive"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"TGZアーカイブ"
 
 #. module: base
 #: selection:wizard.module.lang.export,state:0
@@ -6567,8 +7693,12 @@ msgstr ""
 
 #. module: base
 #: selection:wizard.module.lang.export,state:0
+#, fuzzy
 msgid "get"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"取得"
 
 #. module: base
 #: selection:workflow.activity,join_mode:0
@@ -6604,8 +7734,12 @@ msgstr ""
 
 #. module: base
 #: sql_constraint:ir.module.module:0
+#, fuzzy
 msgid "The certificate ID of the module must be unique !"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"証明書IDは固有である必要があります。"
 
 #. module: base
 #: sql_constraint:ir.module.module:0 sql_constraint:ir.module.web:0
@@ -6614,8 +7748,12 @@ msgstr ""
 
 #. module: base
 #: sql_constraint:ir.ui.view_sc:0
+#, fuzzy
 msgid "Shortcut for this menu already exists!"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"このメニューのショートカットは既に存在しています。"
 
 #. module: base
 #: sql_constraint:maintenance.contract:0
@@ -6644,8 +7782,12 @@ msgstr ""
 
 #. module: base
 #: sql_constraint:res.lang:0
+#, fuzzy
 msgid "The name of the language must be unique !"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"言語の名前は固有でなければいけません。"
 
 #. module: base
 #: sql_constraint:res.partner:0
@@ -6674,8 +7816,12 @@ msgstr ""
 
 #. module: base
 #: view:ir.actions.act_window:0
+#, fuzzy
 msgid "Open a Window"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"ウィンドウを開く"
 
 #. module: base
 #: view:ir.actions.act_window:0
@@ -6704,8 +7850,12 @@ msgstr ""
 
 #. module: base
 #: view:ir.actions.report.xml:0
+#, fuzzy
 msgid "Report xml"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"レポートXML"
 
 #. module: base
 #: view:ir.actions.server:0
@@ -6728,8 +7878,12 @@ msgstr ""
 
 #. module: base
 #: view:ir.actions.server:0
+#, fuzzy
 msgid "Client Action Configuration"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"クライアントアクションのコンフィギュレーション"
 
 #. module: base
 #: view:ir.actions.server:0
@@ -6738,8 +7892,12 @@ msgstr ""
 
 #. module: base
 #: view:ir.actions.server:0
+#, fuzzy
 msgid "Email Configuration"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"Eメール設定"
 
 #. module: base
 #: view:ir.actions.server:0
@@ -6748,30 +7906,50 @@ msgstr ""
 
 #. module: base
 #: view:ir.actions.server:0
+#, fuzzy
 msgid "Field Mappings"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"項目マッピング"
 
 #. module: base
 #: view:ir.actions.server:0
+#, fuzzy
 msgid "Fields Mapping"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"項目マッピング"
 
 #. module: base
 #: view:ir.actions.server:0
+#, fuzzy
 msgid ""
 "If you use a formula type, use a python expression using the variable "
 "'object'."
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"式表現を使う場合は、可変的な'object'によるPython表現を使って下さい。"
 
 #. module: base
 #: view:ir.actions.server:0
+#, fuzzy
 msgid "Iteration Action Configuration"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"繰り返しの設定"
 
 #. module: base
 #: view:ir.actions.server:0
+#, fuzzy
 msgid "Iteration Actions"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"反復アクション"
 
 #. module: base
 #: view:ir.actions.server:0
@@ -6787,8 +7965,12 @@ msgstr ""
 
 #. module: base
 #: view:ir.actions.server:0
+#, fuzzy
 msgid "SMS Configuration"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"SMSコンフィギュレーション"
 
 #. module: base
 #: view:ir.actions.server:0
@@ -6797,13 +7979,21 @@ msgstr ""
 
 #. module: base
 #: view:ir.attachment:0
+#, fuzzy
 msgid "Attached To"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"添付先"
 
 #. module: base
 #: view:ir.attachment:0
+#, fuzzy
 msgid "Attachment"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"添付"
 
 #. module: base
 #: view:ir.attachment:0
@@ -6812,13 +8002,21 @@ msgstr ""
 
 #. module: base
 #: view:ir.cron:0
+#, fuzzy
 msgid "Action to Trigger"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"トリガーとなるアクション"
 
 #. module: base
 #: view:ir.cron:0
+#, fuzzy
 msgid "Technical Data"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"技術データ"
 
 #. module: base
 #: view:ir.model:0 view:res.groups:0
@@ -6832,8 +8030,12 @@ msgstr ""
 
 #. module: base
 #: view:ir.model:0
+#, fuzzy
 msgid "Create a Menu"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"メニューの作成"
 
 #. module: base
 #: view:ir.model:0
@@ -6867,8 +8069,12 @@ msgstr ""
 
 #. module: base
 #: view:ir.module.module:0
+#, fuzzy
 msgid "Cancel Upgrade"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"更新のキャンセル"
 
 #. module: base
 #: view:ir.module.module:0
@@ -6877,18 +8083,26 @@ msgstr ""
 
 #. module: base
 #: view:ir.module.module:0
+#, fuzzy
 msgid "Created Views"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"作成済ビュー"
 
 #. module: base
 #: view:ir.module.module:0
+#, fuzzy
 msgid "Defined Reports"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"レポートの定義"
 
 #. module: base
 #: view:ir.module.module:0
 msgid "Features"
-msgstr "特徴"
+msgstr "機能"
 
 #. module: base
 #: view:ir.module.module:0
@@ -6902,8 +8116,12 @@ msgstr ""
 
 #. module: base
 #: view:ir.module.module:0
+#, fuzzy
 msgid "Uninstall (beta)"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"アンインストール（beta）"
 
 #. module: base
 #: view:ir.module.repository:0
@@ -6912,8 +8130,12 @@ msgstr ""
 
 #. module: base
 #: view:ir.property:0
+#, fuzzy
 msgid "Property"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"プロパティ"
 
 #. module: base
 #: view:ir.report.custom:0
@@ -6957,8 +8179,12 @@ msgstr ""
 
 #. module: base
 #: view:ir.rule.group:0
+#, fuzzy
 msgid "Record rules"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"レコード規則"
 
 #. module: base
 #: view:ir.rule.group:0
@@ -6977,8 +8203,12 @@ msgstr ""
 
 #. module: base
 #: view:ir.sequence:0
+#, fuzzy
 msgid "Day: %(day)s"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"日: %(day)s"
 
 #. module: base
 #: view:ir.sequence:0
@@ -6992,8 +8222,12 @@ msgstr ""
 
 #. module: base
 #: view:ir.sequence:0
+#, fuzzy
 msgid "Legend (for prefix, suffix)"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"凡例（prefix、suffix用）"
 
 #. module: base
 #: view:ir.sequence:0
@@ -7027,8 +8261,12 @@ msgstr ""
 
 #. module: base
 #: view:ir.sequence.type:0
+#, fuzzy
 msgid "Sequence Type"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"順序タイプ"
 
 #. module: base
 #: view:ir.values:0
@@ -7117,8 +8355,12 @@ msgstr ""
 
 #. module: base
 #: view:res.company:0
+#, fuzzy
 msgid "Header/Footer"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"ヘッダ/フッタ"
 
 #. module: base
 #: view:res.company:0
@@ -7193,11 +8435,16 @@ msgstr ""
 
 #. module: base
 #: view:res.lang:0
+#, fuzzy
 msgid ""
 "%W - Week number of the year (Monday as the first day of the week) as a "
 "decimal number [00,53]. All days in a new year preceding the first Monday "
 "are considered to be in week 0."
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"%W - これは年における週の番号（週の初めは月曜）の数値です[00,53]。年初の最初"
+"の月曜日の前の数日は週0にあると認識されます。"
 
 #. module: base
 #: view:res.lang:0
@@ -7221,8 +8468,12 @@ msgstr ""
 
 #. module: base
 #: view:res.lang:0
+#, fuzzy
 msgid "%c - Appropriate date and time representation."
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"%c - 日付と時間の表現を割り当てて下さい。"
 
 #. module: base
 #: view:res.lang:0
@@ -7241,8 +8492,12 @@ msgstr ""
 
 #. module: base
 #: view:res.lang:0
+#, fuzzy
 msgid "%p - Equivalent of either AM or PM."
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"%p - AMやPMと同等なもの"
 
 #. module: base
 #: view:res.lang:0
@@ -7251,8 +8506,12 @@ msgstr ""
 
 #. module: base
 #: view:res.lang:0
+#, fuzzy
 msgid "%x - Appropriate date representation."
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"%x - 日付表示の割り当て"
 
 #. module: base
 #: view:res.lang:0
@@ -7276,8 +8535,12 @@ msgstr ""
 
 #. module: base
 #: view:res.lang:0
+#, fuzzy
 msgid "12. %w              ==> 5 ( Friday is the 6th day)"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"12. %w ==> 5（金曜日は第6番目の日）"
 
 #. module: base
 #: view:res.lang:0
@@ -7341,8 +8604,12 @@ msgstr ""
 
 #. module: base
 #: view:res.partner:0
+#, fuzzy
 msgid "My Partners"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"Myパートナ"
 
 #. module: base
 #: view:res.partner:0 view:res.partner.address:0
@@ -7351,13 +8618,21 @@ msgstr ""
 
 #. module: base
 #: view:res.partner:0
+#, fuzzy
 msgid "Sales & Purchases"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"セールスと購入"
 
 #. module: base
 #: view:res.partner:0
+#, fuzzy
 msgid "Search Partner"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"パートナ検索"
 
 #. module: base
 #: view:res.partner.address:0
@@ -7371,8 +8646,12 @@ msgstr ""
 
 #. module: base
 #: view:res.partner.bank:0
+#, fuzzy
 msgid "Bank Account Owner"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"銀行口座所有者"
 
 #. module: base
 #: view:res.partner.category:0
@@ -7386,8 +8665,12 @@ msgstr ""
 
 #. module: base
 #: view:res.partner.event:0
+#, fuzzy
 msgid "General Description"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"一般的な説明"
 
 #. module: base
 #: view:res.partner.som:0
@@ -7396,8 +8679,12 @@ msgstr ""
 
 #. module: base
 #: view:res.payterm:0
+#, fuzzy
 msgid "Payment Term"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"支払期間"
 
 #. module: base
 #: view:res.request:0
@@ -7406,8 +8693,12 @@ msgstr ""
 
 #. module: base
 #: view:res.request:0
+#, fuzzy
 msgid "References"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"リファレンス"
 
 #. module: base
 #: view:res.request:0
@@ -7615,8 +8906,12 @@ msgstr ""
 
 #. module: base
 #: wizard_field:base.module.import,init,module_file:0
+#, fuzzy
 msgid "Module .ZIP file"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"モジュール .ZIPファイル"
 
 #. module: base
 #: wizard_field:module.lang.import,init,code:0
@@ -7635,13 +8930,21 @@ msgstr ""
 
 #. module: base
 #: wizard_field:module.module.update,update,add:0
+#, fuzzy
 msgid "Number of modules added"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"モジュールの追加数"
 
 #. module: base
 #: wizard_field:module.module.update,update,update:0
+#, fuzzy
 msgid "Number of modules updated"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"複数のモジュールが更新されました。"
 
 #. module: base
 #: wizard_field:module.upgrade,next,module_download:0
@@ -7695,8 +8998,12 @@ msgstr ""
 
 #. module: base
 #: wizard_view:base.module.import,init:0
+#, fuzzy
 msgid "Module Import"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"モジュールインポート"
 
 #. module: base
 #: wizard_view:base.module.import,init:0
@@ -7826,28 +9133,48 @@ msgstr "SMS - ゲートウェイ：clickatell"
 
 #. module: base
 #: view:ir.actions.report.xml:0
+#, fuzzy
 msgid "Other Configuration"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"その他コンフィギュレーション"
 
 #. module: base
 #: selection:ir.property,type:0
+#, fuzzy
 msgid "DateTime"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"日時"
 
 #. module: base
 #: selection:base.language.install,lang:0
+#, fuzzy
 msgid "Spanish (VE) / Español (VE)"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"スペイン語（ベネズエラ）"
 
 #. module: base
 #: field:ir.actions.act_window,display_menu_tip:0
+#, fuzzy
 msgid "Display Menu Tips"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"ヒントのメニューを表示"
 
 #. module: base
 #: field:res.partner,ref:0
+#, fuzzy
 msgid "Reference"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"参照"
 
 #. module: base
 #: model:res.partner.category,name:base.res_partner_category_woodsuppliers0
@@ -7856,8 +9183,12 @@ msgstr ""
 
 #. module: base
 #: selection:base.language.install,lang:0
+#, fuzzy
 msgid "Inuktitut / ᐃᓄᒃᑎᑐᑦ"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"イヌクウティトット語 / ……"
 
 #. module: base
 #: code:addons/base/res/res_user.py:0
@@ -7867,18 +9198,30 @@ msgstr ""
 
 #. module: base
 #: help:multi_company.default,company_dest_id:0
+#, fuzzy
 msgid "Company to store the current record"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"会社を現在のレコードに保存します。"
 
 #. module: base
 #: view:ir.attachment:0
+#, fuzzy
 msgid "Owner"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"所有者"
 
 #. module: base
 #: field:res.widget.user,widget_id:0 field:res.widget.wizard,widget_id:0
+#, fuzzy
 msgid "Widget"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"ウィジット"
 
 #. module: base
 #: field:ir.ui.menu,web_icon_data:0
@@ -7902,13 +9245,21 @@ msgstr ""
 
 #. module: base
 #: view:ir.translation:0
+#, fuzzy
 msgid "Untranslated"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"未翻訳"
 
 #. module: base
 #: help:ir.actions.act_window,context:0
+#, fuzzy
 msgid "Context dictionary as Python expression, empty by default (Default: {})"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"Pythonのコンテキスト辞書においてデフォルトの空は（デフォルト: {}）"
 
 #. module: base
 #: model:res.partner.category,name:base.res_partner_category_miscellaneoussuppliers0
@@ -7922,9 +9273,13 @@ msgstr ""
 
 #. module: base
 #: help:ir.actions.act_window,src_model:0
+#, fuzzy
 msgid ""
 "Optional model name of the objects on which this action should be visible"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"このアクションが可視化されるべきオブジェクトの任意のモデル名"
 
 #. module: base
 #: view:ir.module.module:0
@@ -7933,26 +9288,44 @@ msgstr ""
 
 #. module: base
 #: view:res.config:0 view:res.config.installer:0
+#, fuzzy
 msgid "description"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"説明"
 
 #. module: base
 #: model:ir.ui.menu,name:base.menu_base_action_rule
+#, fuzzy
 msgid "Automated Actions"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"自動的なアクション"
 
 #. module: base
 #: view:partner.wizard.ean.check:0
+#, fuzzy
 msgid "Want to check Ean ? "
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"Eanをチェックしますか？ "
 
 #. module: base
 #: view:base.language.export:0
+#, fuzzy
 msgid ""
 "OpenERP translations (core, modules, clients) are managed through Launchpad."
 "net, our open source project management facility. We use their online "
 "interface to synchronize all translations efforts."
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"OpenERP翻訳（core, modules, clients）は、Launchpad.netで、我々のオープンソー"
+"スプロジェクト管理機構によって管理されます。すべての翻訳作業はそれらのオンラ"
+"インインタフェースを使って同期されます。"
 
 #. module: base
 #: field:res.partner,title:0
@@ -7961,8 +9334,12 @@ msgstr ""
 
 #. module: base
 #: model:ir.model,name:base.model_base_language_import
+#, fuzzy
 msgid "Language Import"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"言語のインポート"
 
 #. module: base
 #: model:ir.model,name:base.model_res_config_users
@@ -7971,13 +9348,21 @@ msgstr ""
 
 #. module: base
 #: selection:base.language.install,lang:0
+#, fuzzy
 msgid "Albanian / Shqip"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"アルバニア語"
 
 #. module: base
 #: model:ir.ui.menu,name:base.menu_crm_config_opportunity
+#, fuzzy
 msgid "Opportunities"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"オポチュニティ"
 
 #. module: base
 #: model:ir.model,name:base.model_base_language_export
@@ -7986,25 +9371,41 @@ msgstr ""
 
 #. module: base
 #: help:ir.actions.report.xml,report_type:0
+#, fuzzy
 msgid "Report Type, e.g. pdf, html, raw, sxw, odt, html2html, mako2html, ..."
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"レポートタイプ、例 pdf, html, raw, sxw, odt, html2html, mako2html, …"
 
 #. module: base
 #: view:ir.actions.report.xml:0
+#, fuzzy
 msgid "XML Report"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"XMLレポート"
 
 #. module: base
 #: help:ir.actions.act_window,domain:0
+#, fuzzy
 msgid ""
 "Optional domain filtering of the destination data, as a Python expression"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"Python表現による目的データの任意のドメインフィルタリング"
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_view_base_module_upgrade
 #: model:ir.model,name:base.model_base_module_upgrade
+#, fuzzy
 msgid "Module Upgrade"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"モジュール更新"
 
 #. module: base
 #: view:res.config.users:0
@@ -8015,13 +9416,21 @@ msgstr ""
 
 #. module: base
 #: selection:base.language.install,lang:0
+#, fuzzy
 msgid "Spanish (UY) / Español (UY)"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"スペイン語（ウルグアイ）"
 
 #. module: base
 #: selection:ir.module.module,license:0
+#, fuzzy
 msgid "Other OSI Approved Licence"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"他のOSI認証ライセンス"
 
 #. module: base
 #: help:res.config.users,context_lang:0 help:res.users,context_lang:0
@@ -8033,8 +9442,12 @@ msgstr ""
 #. module: base
 #: model:ir.actions.act_window,name:base.res_request_link-act
 #: model:ir.ui.menu,name:base.menu_res_request_link_act
+#, fuzzy
 msgid "Request Reference Types"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"参照タイプの要求"
 
 #. module: base
 #: model:ir.model,name:base.model_ir_config_parameter
@@ -8048,13 +9461,21 @@ msgstr ""
 
 #. module: base
 #: field:ir.module.module,contributors:0
+#, fuzzy
 msgid "Contributors"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"貢献者"
 
 #. module: base
 #: selection:ir.property,type:0
+#, fuzzy
 msgid "Char"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"文字"
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_publisher_warranty_contract_form
@@ -8064,26 +9485,44 @@ msgstr ""
 
 #. module: base
 #: field:ir.model.access,perm_unlink:0
+#, fuzzy
 msgid "Delete Access"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"削除アクセス"
 
 #. module: base
 #: selection:base.language.install,lang:0
+#, fuzzy
 msgid "Chinese (HK)"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"中国語（香港）"
 
 #. module: base
 #: view:base.language.export:0
+#, fuzzy
 msgid ""
 "To improve or expand the official translations, you should use directly "
 "Lauchpad's web interface (Rosetta). If you need to perform mass translation, "
 "Launchpad also allows uploading full .po files at once"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"公式の翻訳を改良、拡張するには、直接LauchpadのWebインタフェース（Rosetta）を"
+"使うべきです。もし大量の翻訳を行うのであれば、.poファイルをアップロードする方"
+"式も可能です。"
 
 #. module: base
 #: selection:base.language.install,lang:0
+#, fuzzy
 msgid "Spanish (GT) / Español (GT)"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"スペイン語（グアテマラ）"
 
 #. module: base
 #: field:base.module.import,module_name:0
@@ -8098,8 +9537,12 @@ msgstr ""
 
 #. module: base
 #: view:res.request:0
+#, fuzzy
 msgid "Request Date"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"リクエスト日"
 
 #. module: base
 #: model:ir.ui.menu,name:base.menu_hr_dasboard
@@ -8108,72 +9551,120 @@ msgstr ""
 
 #. module: base
 #: model:ir.ui.menu,name:base.menu_purchase_root
+#, fuzzy
 msgid "Purchases"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"購入"
 
 #. module: base
 #: code:addons/base/module/wizard/base_update_translations.py:0
-#, python-format
+#, fuzzy, python-format
 msgid "No language with code \"%s\" exists"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"コード \"%s\" を持つ言語が存在しません。"
 
 #. module: base
 #: code:addons/base/publisher_warranty/publisher_warranty.py:0
-#, python-format
+#, fuzzy, python-format
 msgid "Error during communication with the publisher warranty server."
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"発行人保証サーバとの通信途中のエラー"
 
 #. module: base
 #: view:res.lang:0
+#, fuzzy
 msgid "%Y - Year with century."
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"%Y - 世紀を含む年"
 
 #. module: base
 #: view:publisher_warranty.contract.wizard:0
+#, fuzzy
 msgid ""
 "This wizard helps you register a publisher warranty contract in your OpenERP "
 "system. After the contract has been registered, you will be able to send "
 "issues directly to OpenERP."
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"このウィザードはあなたのOpenERPシステムに発行人保証契約を登録するのを手伝いま"
+"す。契約が登録された以降、あなたはOpenERPに直接問題事項を送信することができま"
+"す。"
 
 #. module: base
 #: view:wizard.ir.model.menu.create:0
+#, fuzzy
 msgid "Create _Menu"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"メニュー作成"
 
 #. module: base
 #: help:base.language.install,overwrite:0
+#, fuzzy
 msgid ""
 "If you check this box, your customized translations will be overwritten and "
 "replaced by the official ones."
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"このチェックボックスをクリックすると、カスタマイズされた翻訳は公式のそれに"
+"よって置き換えられ上書きされます。"
 
 #. module: base
 #: field:ir.actions.report.xml,report_rml:0
+#, fuzzy
 msgid "Main report file path"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"主要のレポートファイルのパス"
 
 #. module: base
 #: view:ir.actions.server:0
+#, fuzzy
 msgid ""
 "Access all the fields related to the current object using expressions, i.e. "
 "object.partner_id.name "
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"現在のオブジェクトと関連する全ての項目は式、すなわち、object.partner_id.name "
+"を使って、アクセスして下さい。 "
 
 #. module: base
 #: selection:ir.property,type:0
+#, fuzzy
 msgid "Float"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"実数"
 
 #. module: base
 #: help:res.log,secondary:0
+#, fuzzy
 msgid ""
 "Do not display this log if it belongs to the same object the user is working "
 "on"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"もしそれが、ユーザが作業中の同じオブジェクトに属しているなら、このログを表示"
+"しないで下さい。"
 
 #. module: base
 #: model:res.company,follow_up_msg:base.main_company
+#, fuzzy
 msgid ""
 "Date : %(date)s\n"
 "\n"
@@ -8189,6 +9680,20 @@ msgid ""
 "%(user_signature)s\n"
 "%(company_name)s"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"日付 : %(date)s\n"
+"\n"
+"%(partner_name)s 様、\n"
+"\n"
+"お支払いいただいていない請求書を添付いたしました。合計金額をご確認下さい。\n"
+"\n"
+"%(followup_amount).2f %(company_currency)s\n"
+"\n"
+"それではよろしくお願いいたします。\n"
+"--\n"
+"%(user_signature)s\n"
+"%(company_name)s"
 
 #. module: base
 #: selection:base.language.install,lang:0
@@ -8197,8 +9702,12 @@ msgstr ""
 
 #. module: base
 #: field:ir.attachment,res_id:0
+#, fuzzy
 msgid "Attached ID"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"添付ID"
 
 #. module: base
 #: model:ir.actions.act_window,help:base.open_module_tree
@@ -8213,8 +9722,12 @@ msgstr ""
 
 #. module: base
 #: field:res.partner.category,parent_left:0
+#, fuzzy
 msgid "Left parent"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"左括弧"
 
 #. module: base
 #: model:ir.actions.act_window,name:base.res_widget_act_window
@@ -8224,8 +9737,12 @@ msgstr ""
 
 #. module: base
 #: field:ir.attachment,res_model:0
+#, fuzzy
 msgid "Attached Model"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"添付モデル"
 
 #. module: base
 #: view:ir.rule:0
@@ -8240,13 +9757,21 @@ msgstr ""
 
 #. module: base
 #: view:ir.ui.menu:0
+#, fuzzy
 msgid "Full Path"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"フルパス"
 
 #. module: base
 #: view:ir.ui.view:0
+#, fuzzy
 msgid "Advanced"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"高度"
 
 #. module: base
 #: view:ir.actions.server:0
@@ -8260,33 +9785,55 @@ msgstr ""
 
 #. module: base
 #: view:base.language.import:0
+#, fuzzy
 msgid ""
 "When using CSV format, please also check that the first line of your file is "
 "one of the following:"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"CSV形式を使う場合、ファイルの最初の行が以下のどれかであるかをチェックして下さ"
+"い："
 
 #. module: base
 #: model:ir.actions.act_window,name:base.res_log_act_window
 #: model:ir.ui.menu,name:base.menu_res_log_act_window view:res.log:0
+#, fuzzy
 msgid "Logs"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"ログ"
 
 #. module: base
 #: selection:base.language.install,lang:0
+#, fuzzy
 msgid "Korean (KP) / 한국어 (KP)"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"北朝鮮"
 
 #. module: base
 #: view:base.module.update:0
+#, fuzzy
 msgid ""
 "This wizard will scan all module repositories on the server side to detect "
 "newly added modules as well as any change to existing modules."
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"このウィザードは、既存のモジュールに対してどんな変更や新たなモジュールの追加"
+"を、サーバサイドの全てのモジュールレポジトリを走査して検出します。"
 
 #. module: base
 #: view:workflow.activity:0
+#, fuzzy
 msgid "Workflow Activity"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"ワークフローアクティビティ"
 
 #. module: base
 #: view:ir.rule:0
@@ -8297,15 +9844,24 @@ msgstr ""
 
 #. module: base
 #: model:ir.actions.act_window,help:base.action_ui_view
+#, fuzzy
 msgid ""
 "Views allows you to personalize each view of OpenERP. You can add new "
 "fields, move fields, rename them or delete the ones that you do not need."
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"OpenERPの各ビューはパーソナライズできます。項目の追加、移動、名称変更、必要で"
+"ないものの削除ができます。"
 
 #. module: base
 #: selection:base.language.install,lang:0
+#, fuzzy
 msgid "Spanish (CL) / Español (CL)"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"スペイン語（チリ）"
 
 #. module: base
 #: view:res.config.users:0
@@ -8317,36 +9873,61 @@ msgstr ""
 
 #. module: base
 #: help:ir.actions.act_window,view_mode:0
+#, fuzzy
 msgid ""
 "Comma-separated list of allowed view modes, such as 'form', 'tree', "
 "'calendar', etc. (Default: tree,form)"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"'form'、'tree'、'calendar'など（デフォルト：tree、form）のようなビューモード"
+"の許されたカンマ区切りのリスト"
 
 #. module: base
 #: view:workflow:0
+#, fuzzy
 msgid "Workflow Editor"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"ワークフローエディタ"
 
 #. module: base
 #: view:ir.rule:0
+#, fuzzy
 msgid "Groups (no group = global)"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"グループ（クループなし＝全体）"
 
 #. module: base
 #: selection:res.config.users,view:0 selection:res.config.view,view:0
 #: selection:res.users,view:0
+#, fuzzy
 msgid "Simplified"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"簡易化"
 
 #. module: base
 #: selection:base.language.install,lang:0
+#, fuzzy
 msgid "Portugese (BR) / Português (BR)"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"ポルトガル語（ブラジル）"
 
 #. module: base
 #: view:base.module.update:0
+#, fuzzy
 msgid "Please be patient, as this operation may take a few seconds..."
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"もうしばらくお待ち下さい。この操作は多少時間がかかります。"
 
 #. module: base
 #: view:base.language.export:0
@@ -8356,8 +9937,12 @@ msgstr ""
 #. module: base
 #: model:ir.actions.act_window,name:base.action_view_partner_clear_ids
 #: model:ir.model,name:base.model_partner_clear_ids view:partner.clear.ids:0
+#, fuzzy
 msgid "Clear IDs"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"IDのクリア"
 
 #. module: base
 #: help:ir.cron,model:0
@@ -8368,8 +9953,12 @@ msgstr ""
 
 #. module: base
 #: view:res.lang:0
+#, fuzzy
 msgid "%y - Year without century [00,99]."
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"%y - ２桁の年[00,99]."
 
 #. module: base
 #: model:ir.ui.menu,name:base.menu_email_gateway_form
@@ -8378,27 +9967,44 @@ msgstr ""
 
 #. module: base
 #: code:addons/base/module/wizard/base_update_translations.py:0
-#, python-format
+#, fuzzy, python-format
 msgid "Error!"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"エラー"
 
 #. module: base
 #: help:multi_company.default,company_id:0
+#, fuzzy
 msgid "Company where the user is connected"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"ユーザが関連している会社"
 
 #. module: base
 #: model:ir.actions.act_window,help:base.action_country
+#, fuzzy
 msgid ""
 "Display and manage the list of all countries that can be assigned to your "
 "partner records. You can create or delete countries to make sure the ones "
 "you are working on will be maintained."
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"あなたのパートナのレコードに割り当てることができる全ての国のリストを表示、管"
+"理して下さい。あなたは維持を行うためにこれらの国の作成や削除をすることができ"
+"ます。"
 
 #. module: base
 #: selection:base.language.install,lang:0
+#, fuzzy
 msgid "Korean (KR) / 한국어 (KR)"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"韓国"
 
 #. module: base
 #: model:res.widget,title:base.matrixise_twitter_widget
@@ -8408,13 +10014,21 @@ msgstr ""
 #. module: base
 #: model:ir.actions.act_window,name:base.ir_property_form
 #: model:ir.ui.menu,name:base.menu_ir_property_form_all
+#, fuzzy
 msgid "Configuration Parameters"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"構成のパラメータ"
 
 #. module: base
 #: constraint:ir.cron:0
+#, fuzzy
 msgid "Invalid arguments"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"無効な引数"
 
 #. module: base
 #: model:res.partner.title,shortcut:base.res_partner_title_miss
@@ -8433,13 +10047,21 @@ msgstr ""
 #: field:publisher_warranty.contract.wizard,config_logo:0
 #: field:res.config,config_logo:0 field:res.config.installer,config_logo:0
 #: field:res.config.users,config_logo:0 field:res.config.view,config_logo:0
+#, fuzzy
 msgid "Image"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"イメージ"
 
 #. module: base
 #: selection:publisher_warranty.contract,state:0
+#, fuzzy
 msgid "Canceled"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"キャンセル済み"
 
 #. module: base
 #: selection:base.language.install,state:0
@@ -8449,64 +10071,109 @@ msgstr ""
 
 #. module: base
 #: field:res.partner.address,partner_id:0
+#, fuzzy
 msgid "Partner Name"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"パートナ名"
 
 #. module: base
 #: model:res.partner.category,name:base.res_partner_category_17
+#, fuzzy
 msgid "HR sector"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"HR部門"
 
 #. module: base
 #: selection:res.config.users,view:0 selection:res.config.view,view:0
 #: selection:res.users,view:0
+#, fuzzy
 msgid "Extended"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"拡張"
 
 #. module: base
 #: model:ir.actions.act_window,help:base.action_partner_title_contact
+#, fuzzy
 msgid ""
 "Manage the contact titles you want to have available in your system and the "
 "way you want to print them in letters and other documents. Some example: "
 "Mr., Mrs. "
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"手紙や他のドキュメントの印刷において利用する際の適切な役職を管理して下さい。 "
 
 #. module: base
 #: field:multi_company.default,company_id:0
+#, fuzzy
 msgid "Main Company"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"主要な会社"
 
 #. module: base
 #: view:base.language.import:0
+#, fuzzy
 msgid ""
 "Please double-check that the file encoding is set to UTF-8 (sometimes called "
 "Unicode) when the translator exports it."
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"翻訳者がエクスポートする際に、ファイルのエンコードがUTF-8（Unicode）となって"
+"いることを再確認して下さい。"
 
 #. module: base
 #: selection:base.language.install,lang:0
+#, fuzzy
 msgid "Spanish (DO) / Español (DO)"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"スペイン語（ドミニカ共和国）"
 
 #. module: base
 #: selection:base.language.install,lang:0
+#, fuzzy
 msgid "Finnish / Suomi"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"フィンランド語"
 
 #. module: base
 #: field:ir.rule,perm_write:0
+#, fuzzy
 msgid "Apply For Write"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"書き込みの申し込み"
 
 #. module: base
 #: selection:base.language.install,lang:0
+#, fuzzy
 msgid "Portugese / Português"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"ポルトガル語"
 
 #. module: base
 #: view:base.module.import:0
+#, fuzzy
 msgid "Select module package to import (.zip file):"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"インポートする（.zipファイル）モジュールパッケージを選択して下さい。"
 
 #. module: base
 #: model:ir.actions.server,name:base.action_start_configurator
@@ -8516,60 +10183,102 @@ msgstr ""
 
 #. module: base
 #: field:ir.actions.report.xml,auto:0
+#, fuzzy
 msgid "Custom python parser"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"カスタムPythonパーサ"
 
 #. module: base
 #: view:base.language.import:0
+#, fuzzy
 msgid "_Import"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"インポート"
 
 #. module: base
 #: view:ir.actions.act_window:0
 #: model:ir.actions.act_window,name:base.actions_ir_filters_view
 #: view:ir.filters:0 model:ir.model,name:base.model_ir_filters
 #: model:ir.ui.menu,name:base.menu_ir_filters
+#, fuzzy
 msgid "Filters"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"フィルタ"
 
 #. module: base
 #: help:ir.property,res_id:0
+#, fuzzy
 msgid "If not set, acts as a default value for new resources"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"セットされない場合、デフォルト値を仮定します。"
 
 #. module: base
 #: view:base.language.install:0
+#, fuzzy
 msgid ""
 "This wizard helps you add a new language to your OpenERP system. After "
 "loading a new language it becomes available as default interface language "
 "for users and partners."
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"このウィザードはあなたのOpenERPシステムに新しい言語を追加するのを助けます。新"
+"しい言語をローディングした後にユーザとパートナのデフォルトのインタフェース言"
+"語として利用可能になります。"
 
 #. module: base
 #: selection:base.language.install,lang:0
+#, fuzzy
 msgid "Urdu / اردو"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"ウルドゥー語"
 
 #. module: base
 #: selection:ir.translation,type:0
+#, fuzzy
 msgid "RML  (deprecated - use Report)"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"RML（非難された - レポート使用のこと）"
 
 #. module: base
 #: view:ir.property:0
+#, fuzzy
 msgid "Field Information"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"項目情報"
 
 #. module: base
 #: view:ir.actions.todo:0
+#, fuzzy
 msgid "Search Actions"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"検索アクション"
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_view_partner_wizard_ean_check
 #: view:partner.wizard.ean.check:0
+#, fuzzy
 msgid "Ean check"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"EANチェック"
 
 #. module: base
 #: field:ir.ui.menu,web_icon_hover_data:0
@@ -8578,16 +10287,25 @@ msgstr ""
 
 #. module: base
 #: view:res.lang:0
+#, fuzzy
 msgid "%d - Day of the month [01,31]."
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"%d - 月の日 [01,31]."
 
 #. module: base
 #: view:base.language.import:0
+#, fuzzy
 msgid ""
 "If you need another language than the official ones available, you can "
 "import a language pack from here. Other OpenERP languages than the official "
 "ones can be found on launchpad."
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"正式に利用可能な言語と別の言語を必要とする場合は、ここから言語パックをイン"
+"ポートして下さい。正式なもの以外の言語はLaunchpad上にあります。"
 
 #. module: base
 #: field:res.config.users,date:0 field:res.users,date:0
@@ -8596,13 +10314,21 @@ msgstr ""
 
 #. module: base
 #: field:ir.actions.act_window,help:0
+#, fuzzy
 msgid "Action description"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"アクション説明"
 
 #. module: base
 #: view:publisher_warranty.contract:0
+#, fuzzy
 msgid "Validate"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"確認"
 
 #. module: base
 #: field:ir.actions.todo,restart:0
@@ -8617,20 +10343,33 @@ msgstr ""
 
 #. module: base
 #: view:res.users:0
+#, fuzzy
 msgid "Default Filters"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"ドラフトフィルタ"
 
 #. module: base
 #: field:multi_company.default,expression:0
+#, fuzzy
 msgid "Expression"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"式"
 
 #. module: base
 #: help:ir.actions.act_window,help:0
+#, fuzzy
 msgid ""
 "Optional help text for the users with a description of the target view, such "
 "as its usage and purpose."
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"ユーザのために、用途や目的といった目的となるビューの説明を伴った任意のヘルプ"
+"テキスト"
 
 #. module: base
 #: field:ir.ui.view,xml_id:0
@@ -8639,8 +10378,12 @@ msgstr ""
 
 #. module: base
 #: model:res.partner.category,name:base.res_partner_category_16
+#, fuzzy
 msgid "Telecom sector"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"遠距離通信部門"
 
 #. module: base
 #: view:res.users:0
@@ -8649,13 +10392,21 @@ msgstr ""
 
 #. module: base
 #: model:ir.ui.menu,name:base.marketing_menu
+#, fuzzy
 msgid "Marketing"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"マーケティング"
 
 #. module: base
 #: selection:base.language.install,lang:0
+#, fuzzy
 msgid "Spanish (HN) / Español (HN)"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"スペイン語（ホンジュラス）"
 
 #. module: base
 #: selection:base.language.install,lang:0
@@ -8664,8 +10415,12 @@ msgstr ""
 
 #. module: base
 #: field:ir.attachment,url:0
+#, fuzzy
 msgid "Url"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"URL"
 
 #. module: base
 #: selection:ir.actions.todo,restart:0
@@ -8674,34 +10429,56 @@ msgstr ""
 
 #. module: base
 #: view:base.language.install:0
+#, fuzzy
 msgid ""
 "The selected language has been successfully installed. You must change the "
 "preferences of the user and open a new menu to view the changes."
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"選択した言語のインストールに成功しました。ユーザのプリファレンスを変更して、"
+"新しいメニューを開くと、変更結果が確認できます。"
 
 #. module: base
 #: sql_constraint:ir.config_parameter:0
+#, fuzzy
 msgid "Key must be unique."
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"キーは固有であるべきです。"
 
 #. module: base
 #: code:addons/base/res/res_config.py:0
-#, python-format
+#, fuzzy, python-format
 msgid ""
 "Your database is now fully configured.\n"
 "\n"
 "Click 'Continue' and enjoy your OpenERP experience..."
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"データベースは今、完全に構成されます。\n"
+"\n"
+"’続ける’をクリックして、OpenERPを体験して下さい。"
 
 #. module: base
 #: selection:base.language.install,lang:0
+#, fuzzy
 msgid "Hebrew / עִבְרִי"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"ヘブライ語"
 
 #. module: base
 #: selection:base.language.install,lang:0
+#, fuzzy
 msgid "Spanish (PR) / Español (PR)"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"スペイン語（プエルトリコ）"
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_config_user_form
@@ -8710,54 +10487,93 @@ msgstr ""
 
 #. module: base
 #: model:res.partner.category,name:base.res_partner_category_retailers0
+#, fuzzy
 msgid "Retailers"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"小売業者"
 
 #. module: base
 #: view:res.partner.event:0
+#, fuzzy
 msgid "Event"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"イベント"
 
 #. module: base
 #: model:ir.ui.menu,name:base.menu_custom_reports
+#, fuzzy
 msgid "Custom Reports"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"カスタムレポート"
 
 #. module: base
 #: selection:base.language.install,lang:0
+#, fuzzy
 msgid "Abkhazian / аҧсуа"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"アブハジア語"
 
 #. module: base
 #: view:base.module.configuration:0
+#, fuzzy
 msgid "System Configuration Done"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"システムコンフィギュレーション完了"
 
 #. module: base
 #: view:ir.property:0
+#, fuzzy
 msgid "Generic"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"一般的"
 
 #. module: base
 #: code:addons/base/publisher_warranty/publisher_warranty.py:0
-#, python-format
+#, fuzzy, python-format
 msgid "That contract is already registered in the system."
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"この契約は既にシステムに登録されています。"
 
 #. module: base
 #: help:ir.sequence,suffix:0
+#, fuzzy
 msgid "Suffix value of the record for the sequence"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"順序のためのレコードのサフィックス値"
 
 #. module: base
 #: selection:base.language.install,lang:0
+#, fuzzy
 msgid "Spanish (PY) / Español (PY)"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"スペイン語（パラグアイ）"
 
 #. module: base
 #: view:ir.model.access:0 view:ir.rule:0
+#, fuzzy
 msgid "Full Access"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"フルアクセス"
 
 #. module: base
 #: model:res.widget,title:base.openerp_favorites_twitter_widget
@@ -8766,8 +10582,12 @@ msgstr ""
 
 #. module: base
 #: selection:base.language.install,lang:0
+#, fuzzy
 msgid "Ukrainian / українська"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"ウクライナ語"
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_translation
@@ -8777,8 +10597,12 @@ msgstr ""
 
 #. module: base
 #: view:res.lang:0
+#, fuzzy
 msgid "%M - Minute [00,59]."
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"%M - 分[00,59]."
 
 #. module: base
 #: selection:ir.module.module,license:0
@@ -8787,26 +10611,43 @@ msgstr ""
 
 #. module: base
 #: help:workflow.transition,condition:0
+#, fuzzy
 msgid "Expression to be satisfied if we want the transition done."
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"変化させることを望む場合、満足させるための表現"
 
 #. module: base
 #: selection:base.language.install,lang:0
+#, fuzzy
 msgid "Spanish (PA) / Español (PA)"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"スペイン語（パナマ）"
 
 #. module: base
 #: view:base.module.upgrade:0
+#, fuzzy
 msgid "System update completed"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"システム更新の終了"
 
 #. module: base
 #: field:ir.rule,perm_unlink:0
+#, fuzzy
 msgid "Apply For Delete"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"削除申請"
 
 #. module: base
 #: model:ir.actions.act_window,help:base.action_res_groups
+#, fuzzy
 msgid ""
 "A group is a set of functional areas that will be assigned to the user in "
 "order to give them access and rights to specific applications and tasks in "
@@ -8815,11 +10656,23 @@ msgid ""
 "to see. Whether they can have a read, write, create and delete access right "
 "can be managed from here."
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"グループはシステムの特定のアプリケーションとタスクにアクセスと権利を与えるた"
+"めユーザに割り当てられる機能エリアのセットです。ユーザが見ることのできるメ"
+"ニューのビューをカスタマイズするために、カスタムグループを作成したり、デフォ"
+"ルトで存在するグループを編集できます。\r\n"
+"彼らが読み込み、書き込み、作成、削除のアクセス権限を持つかどうかをここから管"
+"理することができます。"
 
 #. module: base
 #: model:ir.ui.menu,name:base.menu_base_config_plugins
+#, fuzzy
 msgid "Plugins"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"プラグイン"
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_config_simple_view_form
@@ -8829,15 +10682,24 @@ msgstr ""
 
 #. module: base
 #: view:res.lang:0
+#, fuzzy
 msgid "%w - Weekday number [0(Sunday),6]."
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"%w - 曜日番号 [0(日曜),6]."
 
 #. module: base
 #: help:ir.actions.act_window,multi:0
+#, fuzzy
 msgid ""
 "If set to true, the action will not be displayed on the right toolbar of a "
 "form view"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"Trueをセットした場合、アクションはフォームビューの右のツールバー上に表示され"
+"ません。"
 
 #. module: base
 #: help:res.config.users,context_tz:0 help:res.users,context_tz:0
@@ -8853,15 +10715,24 @@ msgstr ""
 
 #. module: base
 #: help:workflow.transition,act_from:0
+#, fuzzy
 msgid ""
 "Source activity. When this activity is over, the condition is tested to "
 "determine if we can start the ACT_TO activity."
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"ソースアクティビティ。そのアクティビティを終えた時に、ACT_TO活動を始めるかど"
+"うか条件がテストされます。"
 
 #. module: base
 #: view:base.module.upgrade:0
+#, fuzzy
 msgid "Your system will be updated."
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"あなたのシステムは更新されます。"
 
 #. module: base
 #: model:ir.model,name:base.model_publisher_warranty_contract
@@ -8870,45 +10741,76 @@ msgstr ""
 
 #. module: base
 #: view:res.config:0 view:res.config.installer:0
+#, fuzzy
 msgid "title"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"タイトル"
 
 #. module: base
 #: model:ir.model,name:base.model_base_language_install
+#, fuzzy
 msgid "Install Language"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"インストール言語"
 
 #. module: base
 #: view:ir.translation:0
+#, fuzzy
 msgid "Translation"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"翻訳"
 
 #. module: base
 #: model:ir.ui.menu,name:base.menu_product
+#, fuzzy
 msgid "Products"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"製品"
 
 #. module: base
 #: selection:base.language.install,lang:0
+#, fuzzy
 msgid "Spanish (BO) / Español (BO)"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"スペイン語（ボリビア）"
 
 #. module: base
 #: selection:base.language.install,lang:0
+#, fuzzy
 msgid "Gujarati / ગુજરાતી"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"グジャラート語"
 
 #. module: base
 #: code:addons/base/module/module.py:0
-#, python-format
+#, fuzzy, python-format
 msgid ""
 "Unable to process module \"%s\" because an external dependency is not met: %s"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"外部依存が解決されないため、モジュール\"%s\"の処理ができません： %s"
 
 #. module: base
 #: view:publisher_warranty.contract.wizard:0
+#, fuzzy
 msgid "Please enter the serial key provided in your contract document:"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"契約書類にあるシリアルキーを入力して下さい。"
 
 #. module: base
 #: code:addons/__init__.py:0
@@ -8918,47 +10820,81 @@ msgstr ""
 
 #. module: base
 #: help:workflow.transition,signal:0
+#, fuzzy
 msgid ""
 "When the operation of transition comes from a button pressed in the client "
 "form, signal tests the name of the pressed button. If signal is NULL, no "
 "button is necessary to validate this transition."
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"顧客フォームの押されたボタンにより移行を実行した時に、その合図は押されたボタ"
+"ンの名前をテストします。合図がNULLの時、この移行を確認するためにはどのボタン"
+"も必要ではありません。"
 
 #. module: base
 #: help:multi_company.default,object_id:0
+#, fuzzy
 msgid "Object affected by this rule"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"このルールにより影響を受けたオブジェクト"
 
 #. module: base
 #: view:ir.module.module:0
+#, fuzzy
 msgid "Author Website"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"著者のWebサイト"
 
 #. module: base
 #: view:ir.attachment:0
+#, fuzzy
 msgid "Month"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"月"
 
 #. module: base
 #: view:base.language.install:0
 #: model:ir.actions.act_window,name:base.action_view_base_language_install
+#, fuzzy
 msgid "Load Official Translation"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"公式な翻訳のロード"
 
 #. module: base
 #: view:res.lang:0
+#, fuzzy
 msgid "%S - Seconds [00,61]."
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"%S - 秒[00,61]"
 
 #. module: base
 #: view:res.currency:0
+#, fuzzy
 msgid "Price Accuracy"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"価格精度"
 
 #. module: base
 #: selection:base.language.install,lang:0
+#, fuzzy
 msgid "Latvian / latviešu valoda"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"ラトビア語"
 
 #. module: base
 #: view:res.config:0 view:res.config.installer:0
@@ -8972,23 +10908,39 @@ msgstr ""
 
 #. module: base
 #: view:ir.sequence:0
+#, fuzzy
 msgid "Current Year without Century: %(y)s"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"世紀なしの現在年： %(y)s"
 
 #. module: base
 #: sql_constraint:ir.rule:0
+#, fuzzy
 msgid "Rule must have at least one checked access right !"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"ルールは少なくとも一つのチェック済みのアクセス権限を持たねばなりません。"
 
 #. module: base
 #: view:base.module.upgrade:0
+#, fuzzy
 msgid "The selected modules have been updated / installed !"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"選択されたモジュールは更新あるいはインストールされました。"
 
 #. module: base
 #: selection:base.language.install,lang:0
+#, fuzzy
 msgid "Serbian (Latin) / srpski"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"セルビア語"
 
 #. module: base
 #: model:ir.model,name:base.model_res_config
@@ -9298,8 +11250,12 @@ msgstr ""
 
 #. module: base
 #: field:res.widget,content:0
+#, fuzzy
 msgid "Content"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"コンテンツ"
 
 #. module: base
 #: help:ir.rule,global:0
@@ -9333,11 +11289,17 @@ msgstr ""
 
 #. module: base
 #: help:ir.ui.menu,groups_id:0
+#, fuzzy
 msgid ""
 "If you have groups, the visibility of this menu will be based on these "
 "groups. If this field is empty, OpenERP will compute visibility based on the "
 "related object's read access."
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"グループを持つ場合、このメニューはそのグループを基にした表示となります。この"
+"項目が空の場合は、OpenERPは関連するオブジェクトの読み込み権限を基にした表示を"
+"行います。"
 
 #. module: base
 #: code:addons/base/module/module.py:0
@@ -9348,13 +11310,19 @@ msgstr ""
 
 #. module: base
 #: code:addons/base/res/res_user.py:0
-#, python-format
+#, fuzzy, python-format
 msgid ""
 "Please keep in mind that documents currently displayed may not be relevant "
 "after switching to another company. If you have unsaved changes, please make "
 "sure to save and close all forms before switching to a different company. "
 "(You can click on Cancel in the User Preferences now)"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"現在表示されているドキュメントは、会社を切り替えた後では、適切でないかもしれ"
+"ないことを忘れないで下さい。変更を保存していなかったのなら、会社を切り替える"
+"前に全てのフォームを保存し、フォームを閉じたことを確認して下さい（ユーザプリ"
+"ファレンスでキャンセルをクリックすることもできます）。"
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_view_base_module_upgrade_install
@@ -9389,8 +11357,12 @@ msgstr ""
 
 #. module: base
 #: field:res.log,secondary:0
+#, fuzzy
 msgid "Secondary Log"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"セカンダリログ"
 
 #. module: base
 #: model:ir.ui.menu,name:base.menu_crm_case_job_req_main
@@ -9630,9 +11602,14 @@ msgstr ""
 
 #. module: base
 #: view:base.module.upgrade:0
+#, fuzzy
 msgid ""
 "We suggest to reload the menu tab to see the new menus (Ctrl+T then Ctrl+R)."
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"新しいメニューを見るためにはメニュータブをリロードして下さい。（Ctrl+T の後 "
+"Ctrl+R）。"
 
 #. module: base
 #: field:res.config.users,name:0 field:res.users,name:0
@@ -9709,8 +11686,12 @@ msgstr ""
 
 #. module: base
 #: model:ir.ui.menu,name:base.menu_tools
+#, fuzzy
 msgid "Tools"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"ツール"
 
 #. module: base
 #: code:addons/base/res/res_currency.py:0
@@ -9728,8 +11709,12 @@ msgstr ""
 
 #. module: base
 #: view:ir.actions.todo:0
+#, fuzzy
 msgid "Set as Todo"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"ToDoとしてセット"
 
 #. module: base
 #: view:base.language.install:0 view:base.module.import:0
@@ -9763,8 +11748,12 @@ msgstr ""
 #: model:ir.ui.menu,name:base.menu_reporting
 #: model:ir.ui.menu,name:base.next_id_64 model:ir.ui.menu,name:base.next_id_73
 #: model:ir.ui.menu,name:base.reporting_menu
+#, fuzzy
 msgid "Reporting"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"レポート"
 
 #. module: base
 #: selection:ir.module.module,license:0
@@ -9870,8 +11859,12 @@ msgstr ""
 
 #. module: base
 #: help:res.config.users,name:0 help:res.users,name:0
+#, fuzzy
 msgid "The new user's real name, used for searching and most listings"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"検索に利用され最もリストされている新ユーザの実際の名前"
 
 #. module: base
 #: selection:publisher_warranty.contract,state:0
@@ -9922,13 +11915,21 @@ msgstr ""
 #: view:base.language.export:0
 #: model:ir.actions.act_window,name:base.action_wizard_lang_export
 #: model:ir.ui.menu,name:base.menu_wizard_lang_export
+#, fuzzy
 msgid "Export Translation"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"エクスポート翻訳"
 
 #. module: base
 #: field:res.partner.category,parent_right:0
+#, fuzzy
 msgid "Right parent"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"右括弧"
 
 #. module: base
 #: selection:ir.actions.server,state:0
@@ -10075,8 +12076,12 @@ msgstr ""
 
 #. module: base
 #: field:base.language.install,overwrite:0
+#, fuzzy
 msgid "Overwrite Existing Terms"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"既存の用語の上書き"
 
 #. module: base
 #: model:ir.ui.menu,name:base.menu_project_management_time_tracking
@@ -10186,8 +12191,12 @@ msgstr ""
 
 #. module: base
 #: selection:base.language.install,lang:0
+#, fuzzy
 msgid "Slovak / Slovenský jazyk"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"スロバキア語"
 
 #. module: base
 #: field:res.currency,symbol:0
@@ -10322,8 +12331,12 @@ msgstr ""
 #. module: base
 #: field:base.language.install,state:0 field:base.module.import,state:0
 #: field:base.module.update,state:0
+#, fuzzy
 msgid "state"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"状態"
 
 #. module: base
 #: selection:base.language.install,lang:0
@@ -10348,9 +12361,12 @@ msgstr ""
 
 #. module: base
 #: code:addons/base/ir/ir_ui_menu.py:0
-#, python-format
+#, fuzzy, python-format
 msgid "Error ! You can not create recursive Menu."
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"エラーです。再帰的な関係となるメニューを作ることはできません。"
 
 #. module: base
 #: view:ir.rule:0
@@ -10563,8 +12579,12 @@ msgstr ""
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_res_widget_wizard
+#, fuzzy
 msgid "Homepage Widgets Management"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"ホームページウィジット管理"
 
 #. module: base
 #: help:ir.sequence,number_increment:0
@@ -10628,31 +12648,45 @@ msgstr ""
 
 #. module: base
 #: code:addons/fields.py:534
-#, python-format
+#, fuzzy, python-format
 msgid ""
 "The second argument of the many2many field %s must be a SQL table !You used "
 "%s, which is not a valid SQL table name."
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"多対多項目 %s の第2引数はSQLテーブルでなければなりません。あなたが使った %s "
+"は正しいSQLテーブル名ではありません。"
 
 #. module: base
 #: code:addons/base/ir/ir_model.py:339
-#, python-format
+#, fuzzy, python-format
 msgid ""
 "You can not write in this document (%s) ! Be sure your user belongs to one "
 "of these groups: %s."
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"あなたはこの文書の書き込みはできません（%s）。あなたがこのグループに所属して"
+"いることを確認して下さい。：%s"
 
 #. module: base
 #: code:addons/orm.py:1993 code:addons/orm.py:3653
-#, python-format
+#, fuzzy, python-format
 msgid "created."
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"作成済"
 
 #. module: base
 #: code:addons/orm.py:2160
-#, python-format
+#, fuzzy, python-format
 msgid "Invalid group_by"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"不適正なgroup_by"
 
 #. module: base
 #: code:addons/orm.py:904
@@ -10662,9 +12696,12 @@ msgstr ""
 
 #. module: base
 #: code:addons/orm.py:838
-#, python-format
+#, fuzzy, python-format
 msgid "Key/value '%s' not found in selection field '%s'"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"選択した項目 '%s' の中にキー / バリュー '%s' がありません。"
 
 #. module: base
 #: code:addons/orm.py:1043
@@ -10674,11 +12711,15 @@ msgstr ""
 
 #. module: base
 #: code:addons/orm.py:210
-#, python-format
+#, fuzzy, python-format
 msgid ""
 "Language with code \"%s\" is not defined in your system !\n"
 "Define it through the Administration menu."
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"コード \"%s\" に対する言語がシステムに定義されていません。\n"
+"アドミニストレーションメニューを使ってそれを定義してください。"
 
 #. module: base
 #: code:addons/orm.py:4018
@@ -10706,9 +12747,12 @@ msgstr ""
 
 #. module: base
 #: code:addons/orm.py:3147
-#, python-format
+#, fuzzy, python-format
 msgid "A document was modified since you last viewed it (%s:%d)"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"このドキュメントはあなたの前回参照時から更新されています（%s:%d）"
 
 #. module: base
 #: code:addons/orm.py:1040
@@ -10718,37 +12762,55 @@ msgstr ""
 
 #. module: base
 #: code:addons/orm.py:1350
-#, python-format
+#, fuzzy, python-format
 msgid "Invalid Object Architecture!"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"無効なオブジェクトアーキテクチャです。"
 
 #. module: base
 #: code:addons/orm.py:3366
-#, python-format
+#, fuzzy, python-format
 msgid ""
 "One of the records you are trying to modify has already been deleted "
 "(Document type: %s)."
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"更新しようとしたレコードの一つは既に削除されています（ドキュメントタイプ： "
+"%s）。"
 
 #. module: base
 #: code:addons/orm.py:3817
-#, python-format
+#, fuzzy, python-format
 msgid ""
 "Invalid \"order\" specified. A valid \"order\" specification is a comma-"
 "separated list of valid field names (optionally followed by asc/desc for the "
 "direction)"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"無効な注文が指定されました。正しい注文の仕様は正しい項目名によるカンマ区切り"
+"のリストです（オプションで asc / desc が続きます）。"
 
 #. module: base
 #: field:ir.ui.menu,web_icon_hover:0
+#, fuzzy
 msgid "Web Icon File (hover)"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"Webアイコンファイル（hover）"
 
 #. module: base
 #: code:addons/orm.py:1622
-#, python-format
+#, fuzzy, python-format
 msgid "There is no view of type '%s' defined for the structure!"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"構造のために定義されたビューのタイプ’%s’がありません。"
 
 #. module: base
 #: code:addons/orm.py:758
@@ -10758,37 +12820,54 @@ msgstr ""
 
 #. module: base
 #: code:addons/orm.py:3448
-#, python-format
+#, fuzzy, python-format
 msgid "Recursivity Detected."
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"再帰状態を検出しました。"
 
 #. module: base
 #: code:addons/orm.py:2973
-#, python-format
+#, fuzzy, python-format
 msgid ""
 "Operation prohibited by access rules, or performed on an already deleted "
 "document (Operation: read, Document type: %s)."
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"その操作はアクセス規制あるいは既にドキュメントが削除されたため実行できません"
+"（操作：read、ドキュメントタイプ： %s）。"
 
 #. module: base
 #: code:addons/orm.py:1622
-#, python-format
+#, fuzzy, python-format
 msgid "Invalid Architecture!"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"無効なアーキテクチャです。"
 
 #. module: base
 #: code:addons/orm.py:929
-#, python-format
+#, fuzzy, python-format
 msgid "Error occurred while validating the field(s) %s: %s"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"項目の確認中にエラーが発生しました %s： %s"
 
 #. module: base
 #: code:addons/base/ir/ir_model.py:340
-#, python-format
+#, fuzzy, python-format
 msgid ""
 "You can not create this document (%s) ! Be sure your user belongs to one of "
 "these groups: %s."
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"あなたはこのドキュメントの作成ができません（%s）。あなたのユーザがこのグルー"
+"プに属していることを確認して下さい： %s"
 
 #. module: base
 #: code:addons/orm.py:1046
@@ -11000,6 +13079,7 @@ msgstr ""
 
 #. module: base
 #: model:ir.actions.act_window,help:base.action_partner_form
+#, fuzzy
 msgid ""
 "A customer is an entity you do business with, like a company or an "
 "organization. A customer can have several contacts or addresses which are "
@@ -11009,11 +13089,23 @@ msgid ""
 "plugin, don't forget to register emails to each contact so that the gateway "
 "will automatically attach incoming emails to the right partner."
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"顧客は会社または組織といったビジネス対象の存在です。会社で働く人々のため顧客"
+"は複数のコンタクト者や住所を管理できます。顧客と関係する全てのトランザクショ"
+"ンをたどるために履歴タブが利用できます：受注、Eメール、オポチュニティ、クレー"
+"ムなど。もし、OutlookやThunderbirdプラグインのEメールゲートウェイを使う場合、"
+"ゲートウェイが自動的に入ってくるEメールを正しいパートナに結びつけるように各コ"
+"ンタクトにEメールを登録することを忘れないで下さい。"
 
 #. module: base
 #: model:res.widget,title:base.currency_converter_widget
+#, fuzzy
 msgid "Currency Converter"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"通貨変換器"
 
 #. module: base
 #: field:change.user.password,current_password:0
@@ -11059,8 +13151,12 @@ msgstr ""
 #. module: base
 #: model:ir.actions.act_window,name:base.res_log_act_window
 #: model:ir.ui.menu,name:base.menu_res_log_act_window
+#, fuzzy
 msgid "Client Logs"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"顧客ログ"
 
 #. module: base
 #: model:res.widget,title:base.google_maps_widget
@@ -11090,60 +13186,94 @@ msgstr ""
 
 #. module: base
 #: help:ir.model.fields,domain:0
+#, fuzzy
 msgid ""
 "The optional domain to restrict possible values for relationship fields, "
 "specified as a Python expression defining a list of triplets. For example: "
 "[('color','=','red')]"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"項目間の関係のために値を限定するための任意のドメインは、Python表現で定義され"
+"た三択のリストとして定義されています。例えば：[('color','=','red')]"
 
 #. module: base
 #: code:addons/base/res/res_user.py:507
-#, python-format
+#, fuzzy, python-format
 msgid "Warning!"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"警告！"
 
 #. module: base
 #: code:addons/base/ir/ir_model.py:304
-#, python-format
+#, fuzzy, python-format
 msgid ""
 "Properties of base fields cannot be altered in this manner! Please modify "
 "them through Python code, preferably through a custom addon!"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"この方法では基本項目の属性を置き換えることはできません。Pythonコードやむしろ"
+"カスタムアドオンを通してそれを修正して下さい。"
 
 #. module: base
 #: code:addons/base/res/res_user.py:507
-#, python-format
+#, fuzzy, python-format
 msgid "Setting empty passwords is not allowed for security reasons!"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"空のパスワードの設定はセキュリティ上の理由から許可されていません。"
 
 #. module: base
 #: code:addons/base/ir/ir_model.py:328
-#, python-format
+#, fuzzy, python-format
 msgid "Changing the model of a field is forbidden!"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"項目のモデルを変更することは禁じられています。"
 
 #. module: base
 #: code:addons/base/res/res_user.py:206
-#, python-format
+#, fuzzy, python-format
 msgid "Operation Canceled"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"操作はキャンセルされました。"
 
 #. module: base
 #: help:ir.model.fields,model:0
+#, fuzzy
 msgid "The technical name of the model this field belongs to"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"この項目が属するモデルの専門的名前"
 
 #. module: base
 #: help:ir.ui.view_sc,res_id:0
+#, fuzzy
 msgid ""
 "Reference of the target resource, whose model/table depends on the 'Resource "
 "Name' field."
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"目的リソースのリファレンス。そのモデルとテーブルはリソース名の項目で依存す"
+"る。"
 
 #. module: base
 #: view:ir.ui.view.custom:0
+#, fuzzy
 msgid "Customized Architecture"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"カスタマイズされたアーキテクチャ"
 
 #. module: base
 #: field:ir.translation,xml_id:0
@@ -11152,24 +13282,35 @@ msgstr ""
 
 #. module: base
 #: code:addons/base/ir/ir_model.py:319
-#, python-format
+#, fuzzy, python-format
 msgid "Cannot rename column to %s, because that column already exists!"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"既にそのカラムは存在しています。列のリネームはできません %s。"
 
 #. module: base
 #: code:addons/base/ir/ir_model.py:205
-#, python-format
+#, fuzzy, python-format
 msgid ""
 "The Selection Options expression is not a valid Pythonic expression.Please "
 "provide an expression in the [('key','Label'), ...] format."
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"この選択オプションは正しいPython表現ではありません。[('key','Label'), ...] の"
+"書式で記述して下さい。"
 
 #. module: base
 #: help:ir.model.fields,relation_field:0
+#, fuzzy
 msgid ""
 "For one2many fields, the field on the target model that implement the "
 "opposite many2one relationship"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"１対多項目のため、目的モデル上のその項目は正反対の多対１関係を実装します。"
 
 #. module: base
 #: help:ir.model.fields,translate:0
@@ -11193,9 +13334,12 @@ msgstr ""
 
 #. module: base
 #: code:addons/base/ir/ir_model.py:250
-#, python-format
+#, fuzzy, python-format
 msgid "For selection fields, the Selection Options must be given!"
 msgstr ""
+"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
+"項目選択のために選択オプションを指定して下さい。"
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_ui_view_custom

@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: OpenERP Server 5.0.4\n"
 "Report-Msgid-Bugs-To: support@openerp.com\n"
 "POT-Creation-Date: 2011-01-11 11:14+0000\n"
-"PO-Revision-Date: 2011-12-16 21:12+0000\n"
-"Last-Translator: Ferdinand @ Camptocamp <Unknown>\n"
+"PO-Revision-Date: 2012-02-07 19:42+0000\n"
+"Last-Translator: Mustufa Rangwala (Open ERP) <mra@tinyerp.com>\n"
 "Language-Team: German <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-12-17 05:38+0000\n"
-"X-Generator: Launchpad (build 14525)\n"
+"X-Launchpad-Export-Date: 2012-02-17 05:18+0000\n"
+"X-Generator: Launchpad (build 14814)\n"
 
 #. module: base
 #: view:ir.filters:0 field:ir.model.fields,domain:0 field:ir.rule,domain:0
@@ -36,7 +36,7 @@ msgstr "Andere Konfigurationen"
 #. module: base
 #: selection:ir.property,type:0
 msgid "DateTime"
-msgstr "Datum Zeit"
+msgstr "Datum mit Uhrzeit"
 
 #. module: base
 #: code:addons/fields.py:534
@@ -68,7 +68,7 @@ msgstr "Kurzbez. (z.B.: de__DE)"
 #: field:workflow.instance,wkf_id:0 field:workflow.transition,wkf_id:0
 #: field:workflow.workitem,wkf_id:0
 msgid "Workflow"
-msgstr "Workflow"
+msgstr "Arbeitsablauf"
 
 #. module: base
 #: view:partner.sms.send:0
@@ -134,13 +134,13 @@ msgstr "Referenz"
 #. module: base
 #: field:ir.actions.act_window,target:0
 msgid "Target Window"
-msgstr "Target Window"
+msgstr "Ziel Fenster"
 
 #. module: base
 #: code:addons/base/res/res_user.py:507
 #, python-format
 msgid "Warning!"
-msgstr "Warnung!"
+msgstr "Achtung!"
 
 #. module: base
 #: code:addons/base/ir/ir_model.py:304
@@ -2465,8 +2465,8 @@ msgid ""
 "Value Added Tax number. Check the box if the partner is subjected to the "
 "VAT. Used by the VAT legal statement."
 msgstr ""
-"Umsatzsteuer Identifikationsnummer. Aktivieren Sie die Option, wenn der "
-"Partner Ust-pflichtig ist. Wird von der Ust-Voranmeldung verwendet."
+"Umsatzsteuer Identifikationsnummer. Häckchen setzen, wenn der Partner Ust-"
+"pflichtig ist. Wird von der Ust-Voranmeldung verwendet."
 
 #. module: base
 #: model:ir.model,name:base.model_maintenance_contract
@@ -2523,7 +2523,7 @@ msgstr "EAN Prüfung"
 #. module: base
 #: field:res.partner,vat:0
 msgid "VAT"
-msgstr "USt."
+msgstr "USt-IdNr. / UID"
 
 #. module: base
 #: view:res.lang:0
@@ -7254,7 +7254,7 @@ msgstr "Report Type"
 #: view:res.request:0 field:res.request,state:0
 #: field:workflow.instance,state:0 field:workflow.workitem,state:0
 msgid "State"
-msgstr "Status"
+msgstr "Bundesland/Kanton/Region/Provinz"
 
 #. module: base
 #: selection:base.language.install,lang:0

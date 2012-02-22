@@ -10520,8 +10520,13 @@ msgstr ""
 
 #. module: base
 #: help:ir.actions.act_window,context:0
+#, fuzzy
 msgid "Context dictionary as Python expression, empty by default (Default: {})"
 msgstr ""
+"#-#-#-#-#  .merge_file_8wWknA (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_iBs3ax (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"Riječnik konteksta kao Python izraz, početna vrijednost je prazno (Default: "
+"{})"
 
 #. module: base
 #: model:res.partner.category,name:base.res_partner_category_miscellaneoussuppliers0
@@ -10589,11 +10594,17 @@ msgstr ""
 
 #. module: base
 #: view:base.language.export:0
+#, fuzzy
 msgid ""
 "OpenERP translations (core, modules, clients) are managed through Launchpad."
 "net, our open source project management facility. We use their online "
 "interface to synchronize all translations efforts."
 msgstr ""
+"#-#-#-#-#  .merge_file_8wWknA (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_iBs3ax (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"OpenERP prijevodi (core, modules, clients) vode se na Launchpad.net, naš "
+"open source usluga upravljanja resursima. Koristimo javno dostupno sučelje "
+"za sinhronizaciju prijevedenih termina."
 
 #. module: base
 #: field:res.partner,title:0
@@ -11138,10 +11149,15 @@ msgstr ""
 
 #. module: base
 #: view:base.module.update:0
+#, fuzzy
 msgid ""
 "This wizard will scan all module repositories on the server side to detect "
 "newly added modules as well as any change to existing modules."
 msgstr ""
+"#-#-#-#-#  .merge_file_8wWknA (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_iBs3ax (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"Ovaj potprogram će pretražiti sve repozitorije modula na serveru kako bi "
+"pronašao novo dodane module, kao i promjene na postojećim."
 
 #. module: base
 #: view:workflow.activity:0
@@ -11510,8 +11526,12 @@ msgstr ""
 
 #. module: base
 #: field:ir.actions.report.xml,auto:0
+#, fuzzy
 msgid "Custom python parser"
 msgstr ""
+"#-#-#-#-#  .merge_file_8wWknA (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_iBs3ax (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"Korisnički python parser"
 
 #. module: base
 #: view:base.language.import:0
@@ -14800,8 +14820,12 @@ msgstr ""
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_res_widget_wizard
+#, fuzzy
 msgid "Homepage Widgets Management"
 msgstr ""
+"#-#-#-#-#  .merge_file_8wWknA (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_iBs3ax (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"Upravljanje ekranskim dodacima na naslovnici"
 
 #. module: base
 #: help:ir.sequence,number_increment:0
@@ -15553,11 +15577,15 @@ msgstr ""
 
 #. module: base
 #: code:addons/base/ir/ir_model.py:304
-#, python-format
+#, fuzzy, python-format
 msgid ""
 "Properties of base fields cannot be altered in this manner! Please modify "
 "them through Python code, preferably through a custom addon!"
 msgstr ""
+"#-#-#-#-#  .merge_file_8wWknA (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_iBs3ax (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"Svojstva osnovnih polja ne mogu se ovdje mijenjati. Potrebno ih je "
+"promijeniti u Python kodu, najbolje u korisničkom modulu."
 
 #. module: base
 #: code:addons/base/res/res_user.py:507

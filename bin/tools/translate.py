@@ -32,6 +32,7 @@ import logging
 import shutil
 import tarfile
 import tempfile
+import sys
 from os.path import join
 
 from datetime import datetime
@@ -919,6 +920,8 @@ def trans_load_data(cr, fileobj, fileformat, lang, lang_name=None, verbose=True,
         # now, the serious things: we read the language file
         fileobj.seek(0)
         if fileformat == 'csv':
+            #Setting the limit of data while loading a CSV
+            csv.field_size_limit(sys.maxint)
             reader = csv.reader(fileobj, quotechar='"', delimiter=',')
             # read the first line of the file (it contains columns titles)
             f = reader.next()

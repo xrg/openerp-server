@@ -168,6 +168,7 @@ class MultiHandler2(HttpLogHandler, MultiHTTPHandler):
     wbufsize = WRITE_BUFFER_SIZE
     
     def setup(self):
+        self.request.setsockopt(socket.SOL_SOCKET, socket.SO_KEEPALIVE, 1)
         self.server.regHandler(self)
         return MultiHTTPHandler.setup(self)
 
@@ -187,6 +188,7 @@ class SecureMultiHandler2(HttpLogHandler, SecureMultiHTTPHandler):
         return (fcert,fkey)
 
     def setup(self):
+        self.request.setsockopt(socket.SOL_SOCKET, socket.SO_KEEPALIVE, 1)
         self.server.regHandler(self)
         return SecureMultiHTTPHandler.setup(self)
 
