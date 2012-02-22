@@ -915,6 +915,7 @@ def load_modules(db, force_demo=False, status=None, update_module=False, languag
 
     cr = db.cursor()
     if cr:
+        # Check if this core table exists. If not, do first-time DB initialisation
         cr.execute("SELECT relname FROM pg_class WHERE relkind='r' AND relname='ir_module_module'")
         if len(cr.fetchall())==0:
             logger.info("init db")
