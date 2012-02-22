@@ -28,6 +28,7 @@
 """
 
 browse_record_list = None # MUST be set by orm.py!
+browse_record_null = None
 
 def only_ids(ids):
     """ Return the list of ids from either a browse_record_list or plain list
