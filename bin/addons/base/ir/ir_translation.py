@@ -301,9 +301,7 @@ class ir_translation(osv.osv):
                         "AND value IS NOT NULL AND value <> '' ",
                     (lang, tt, tools.ustr(name), src_list), debug=self._debug)
         
-        res = {}
-        for row in cr.fetchall():
-            res[row[0]] = row[1]
+        res = dict(map(tuple, cr.fetchall()))
         
         return res
 
@@ -336,10 +334,7 @@ class ir_translation(osv.osv):
                        "AND value IS NOT NULL AND value <> '' ",
                     (nlen, lang, tuple(fl2)), debug=self._debug)
         
-        res = []
-        for row in cr.fetchall():
-            res.append(tuple(row))
-        
+        res = map(tuple, cr.fetchall())
         return res
 
 
@@ -371,10 +366,7 @@ class ir_translation(osv.osv):
                     "AND value IS NOT NULL AND value <> '' ",
                     (nlen, lang, ttype, fl2, ids), debug=self._debug)
         
-        res = []
-        for row in cr.fetchall():
-            res.append(tuple(row))
-        
+        res = map(tuple, cr.fetchall())
         return res
 
     def create(self, cursor, user, vals, context=None):
