@@ -462,6 +462,39 @@ class ir_model_fields(osv.osv):
                 _re_init_model(obj, cr, ctx)
         return res
 
+    def _merge_ids(self, cr, uid, model, id_dest, ids_src, context=None):
+        """ Make sure no records in db still reference model.ids_src , map them to id_dest
+
+            This is a helper for `orm.merge_records()`, that updates all
+            reverse references of the records to be deleted.
+
+            For example, if we are about to merge res.partner[2,3,4] into [1],
+            this should locate 'res.partner.address.partner_id' and also
+            'account.invoice.partner_id' and re-map all refs to [2,3,4] to [1].
+
+            It is here because, some day, a custom field could defy this logic
+            and need to amend the algorithm.
+        """
+
+        ids_src = list(ids_src)
+        for fld in self.search_read(cr, 1, [('ttype', 'in', ('many2one', 'many2many')), ('relation', '=', model)],
+                fields=['model', 'name', 'ttype'], context=context):
+            obj = self.pool.get(fld['model'])
+            assert obj, "Strange, relation %s is missing!" % (fld['model'],)
+
+            # Should a remote object block us from updating?
+            # Consider the res.partner -> account.invoice example. Does merging the
+            # partners need write permission on invoices? (and all other records)
+
+            # obj.check_access_rule(cr, uid, old_ids, 'write', context=context)
+
+            rcom = obj._columns[fld['name']]._move_refs(cr, uid, obj, fld['name'], \
+                        id_dest, ids_src, context=context)
+
+            assert rcom is None, rcom # if it ever becomes store-update command
+
+        return True
+
 ir_model_fields()
 
 class ir_model_access(osv.osv):

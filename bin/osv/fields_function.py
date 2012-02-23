@@ -233,6 +233,7 @@ class function(_column):
     _prefetch = False
     _type = 'function'
     _properties = True
+    merge_op = True # ignore them, that is
 
     def __init__(self, fnct, arg=None, fnct_inv=None, fnct_inv_arg=None, type='float', fnct_search=None, obj=None, method=False, store=False, multi=False, **args):
         """

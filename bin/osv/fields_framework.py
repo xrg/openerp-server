@@ -34,6 +34,7 @@ from tools import expr_utils as eu
 class id_field(integer):
     """ special properties for the 'id' field
     """
+    merge_op = True
 
     def expr_eval(self, cr, uid, obj, lefts, operator, right, pexpr, context):
         """ The magic 'id' field has utility expression syntax
@@ -147,6 +148,7 @@ class vptr_name(_column):
     _prefetch = False
     _type = 'char'
     _properties = True
+    merge_op = True
 
     def __init__(self, string='Class'):
         _column.__init__(self, string=string, size=128, readonly=True)

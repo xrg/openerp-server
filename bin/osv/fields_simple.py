@@ -41,6 +41,7 @@ class boolean(_column):
     _symbol_c = '%s'
     _symbol_f = lambda x: x and 'True' or 'False'
     _symbol_set = (_symbol_c, _symbol_f)
+    merge_op = 'eq'
 
     def expr_eval(self, cr, uid, obj, lefts, operator, right, pexpr, context):
         if operator not in ('=', '!=', '<>','==', '!=='):
@@ -60,6 +61,28 @@ class boolean(_column):
         else:
             return (lefts[0], operator, bool(right))
         return None # as-is
+
+    def calc_merge(self, cr, uid, obj, name, b_dest, b_src, context):
+        if b_dest :
+            if self.merge_op == 'empty':
+                if b_src[name]:
+                    raise ValueError(_("Cannot merge because field %s is not empty.") % \
+                        (name,))
+            elif self.merge_op in ('any', 'or'):
+                if b_dest[name]: # will also discard 0.0 value
+                    return None
+                elif b_src[name] is not None:
+                    return b_src[name]
+                elif self.merge_op == 'any':
+                    return False
+                else: # or
+                    raise ValueError(_("Must have at least one value "
+                                        "in field %s to proceed with merge of %s.") % \
+                                        (name, obj._name)) # TODO translate them!
+            elif self.merge_op == 'and':
+                return bool(b_dest[name] and b_src[name])
+
+        return super(boolean, self).calc_merge(cr, uid, obj, name=name, b_dest=b_dest, b_src=b_src, context=context)
 
 class integer(_column):
     _type = 'integer'
@@ -129,12 +152,36 @@ class _string_field(_column):
                 return (lefts[0], operator, None)
             return None
 
+    def calc_merge(self, cr, uid, obj, name, b_dest, b_src, context):
+        """
+            For text fields, 'join' merge-op means to concatenate the text,
+            *if* the text is different. `merge_param` may contain the delimiter
+        """
+        if b_dest:
+            if self.merge_op == 'join':
+                if not b_src[name]:
+                    return None
+                elif not b_dest[name]:
+                    return b_src[name]
+                else:
+                    if isinstance(self.merge_param, basestring):
+                        # also works for empty string
+                        delim = self.merge_param
+                    else:
+                        delim = ' '
+                    if b_dest[name] == b_src[name]:
+                        return None
+                    else:
+                        return b_dest[name] + delim + b_src[name]
+        return super(_string_field, self).calc_merge(cr, uid, obj, name, b_dest=b_dest, b_src=b_src, context=context)
+
 class char(_string_field):
     """ Limited characters string type
         Like text, but have a size bound
     """
     _type = 'char'
     _sql_type = 'varchar'
+    merge_op = 'eq'
 
     def __init__(self, string, size, **args):
         _string_field.__init__(self, string=string, size=size, **args)
@@ -163,6 +210,8 @@ class char(_string_field):
 class text(_string_field):
     _type = 'text'
     _sql_type = 'text'
+    merge_op = 'join'
+    merge_param = '\n'
 
 class float(_column):
     _type = 'float'
@@ -171,6 +220,7 @@ class float(_column):
     _symbol_f = _symbol_set_float
     _symbol_set = (_symbol_c, _symbol_f)
     _symbol_get = None
+    merge_op = 'eq'
 
     def __init__(self, string='unknown', digits=None, digits_compute=None, **args):
         _column.__init__(self, string=string, **args)
@@ -193,6 +243,7 @@ class float(_column):
 class date(_column):
     _type = 'date'
     _sql_type = 'date'
+    merge_op = '|eq'
 
     @staticmethod
     def today(*args):
@@ -208,6 +259,7 @@ class date(_column):
 class datetime(_column):
     _type = 'datetime'
     _sql_type = 'timestamp'
+    merge_op = '|eq'
 
     @staticmethod
     def now(*args):
@@ -240,6 +292,7 @@ class datetime(_column):
 class time(_column):
     _type = 'time'
     _sql_type = 'time'
+    merge_op = '|eq'
 
     @staticmethod
     def now( *args):

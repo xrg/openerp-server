@@ -2382,6 +2382,110 @@ class orm_template(object):
             values = defaults
         return values
 
+    def check_split_record(self, cr, uid, id, args=None, context=None):
+        """Check if these record can be split to multiple ones
+
+            @param id a single record to split
+            @param args a dict? indicating the split type
+            @return boolean True if this record can be split
+        """
+        return False
+
+    def split_record(self, cr, uid, id, args=None, context=None):
+        """ Split this record into multiple ones
+
+            @param id a single record to split
+            @param args a dict? indicating the split type
+            @return list of new ids (including `id` )
+        """
+        return [id,]
+
+    def merge_get_values(self, cr, uid, ids, fields_ignore=None, context=None):
+        """Compute the values for merging these records
+
+            @param ids records to merge (see below)
+            @param fields_ignore Fields to consider equal and skip
+            @return dictionary, values
+
+            Before a merge is possible, we have to check that the values are
+            eligible for a merge, and then compute those of the remaining
+            record. *By default* ids[0] is the one that will be preserved,
+            while ids[1:] will be merged and discarded.
+
+            May raise an exception if records cannot be merged.
+        """
+
+        if not ids:
+            # Make sure the user never sees this!
+            raise ValueError("ids must be at least 2")
+
+        if self._inherits:
+            raise NotImplementedError # TODO
+
+        if len(ids) < 2:
+            raise ValueError("ids must be at least 2")
+
+        vals = {}
+        touched = set()
+        if fields_ignore is None:
+            fields_ignore = []
+        for bres in self.browse(cr, uid, ids, context=context):
+            upd = {}
+            if not 'id' in vals:
+                # must happen at the end of first record
+                upd['id'] = bres.id
+            for cname, col in self._columns.items():
+                if cname in fields_ignore:
+                    continue
+                rv = col.calc_merge(cr, uid, self, cname, vals, bres, context=context)
+                if rv is not None:
+                    upd[cname] = rv
+                    if vals:
+                        touched.add(cname)
+
+            vals.update(upd)
+
+        ret = {}
+        for fld in touched:
+            ret[fld] = self._columns[fld]._browse2val(vals[fld], fld)
+
+        return ret
+
+    def merge_records(self, cr, uid, ids, fields_ignore=[], vals=None, context=None):
+        """ Merge these records into a common one
+
+            TODO: doc
+            @param fields_ignore Skip these fields ( `as in merge_get_values()` )
+            @param vals if given, pre-computed values from `merge_get_values()`
+        """
+        if not ids:
+            # Make sure the user never sees this!
+            raise ValueError("ids must be at least 2")
+
+        if self._inherits:
+            raise NotImplementedError # TODO
+
+        if len(ids) < 2:
+            raise ValueError("ids must be at least 2")
+
+        if self._debug:
+            _logger.debug("%s: merge records %s into %s", only_ids(ids[1:]), only_ids(ids[:1])[0])
+        if vals is None:
+            vals = self.merge_get_values(cr, uid, ids, fields_ignore=fields_ignore, context=context)
+        
+        # Switch to read/write part
+        if isinstance(ids, browse_record_list):
+            ids[0]._invalidate_others(ids, model=self._name)
+            ids = only_ids(ids)
+        
+        self.write(cr, uid, ids[0], vals, context=context)
+        
+        # find all the reverse references
+        self.pool.get('ir.model.fields')._merge_ids(cr, uid, self._name, ids[0], ids[1:], context=context)
+        self.unlink(cr, uid, ids[1:], context=context)
+        
+        return ids[0]
+
 class orm_memory(orm_template):
     """ Memory-based objects
     

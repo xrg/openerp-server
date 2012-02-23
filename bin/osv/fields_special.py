@@ -73,6 +73,7 @@ class binary(_column):
 class selection(_column):
     _type = 'selection'
     _sql_type = None
+    merge_op = 'eq'
 
     @classmethod
     def _get_sql_type(cls, selection, def_size):
@@ -165,6 +166,7 @@ class struct(_column):
     """
     _type = 'struct'
     _sql_type = 'text'
+    merge_op = 'eq'
 
     _symbol_c = '%s'
     _symbol_f = _symbol_set_struct
@@ -174,6 +176,7 @@ class struct(_column):
 # TODO: review completly this class for speed improvement
 
 class property(function):
+    merge_op = '|eq'
 
     def _get_default(self, obj, cr, uid, prop_name, context=None):
         return self._get_defaults(obj, cr, uid, [prop_name], context=None)[0][prop_name]

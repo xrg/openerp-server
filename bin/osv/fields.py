@@ -116,6 +116,8 @@ class _column(object):
     _symbol_f = _symbol_set
     _symbol_set = (_symbol_c, _symbol_f)
     _symbol_get = None
+    merge_op = False
+    merge_param = None
 
     @classmethod
     def from_manual(cls, field_dict, attrs):
@@ -131,7 +133,27 @@ class _column(object):
                     domain=None, context=None, states=None, priority=0,
                     change_default=False, size=None, ondelete=None,
                     translate=False, select=False, **args):
-        # TODO docstring
+        """
+            @param string The human-readable name of the field
+            @param required won't allow the field to be saved empty
+            @param readonly will not allow user to edit the field
+            @param translate will convert the field to a translatable string
+            @param select If true, will have an index on the field
+            @param merge_op control behavior of the field when merging records:
+                False means forbid the merge.
+                'or' use any non-empty value, require that one exists
+                'xor' use one non-empty value, require others to be empty
+                'eq' require all records to have the same value
+                'min' use minimum of all values
+                'max' use maximum of all values
+                'any' use any non-empty value. Similar to 'or', but no requirement
+                'join' concatenate strings, lists. /May/ suppress identical ones
+                'sum' arithmetic sum. May behave like 'join' for non-scalar
+                'mustbe' require all records to have a specific value
+                callable: call that fn TODO
+            @param merge_param Params to some merge operators
+            @param split_op Callable when split is requested TODO think about it
+        """
         if domain is None:
             domain = []
         if context is None:
@@ -359,6 +381,108 @@ class _column(object):
         #if self.size and (dcol.size > self.size):
         #    warning ...
         # etc..
+
+    def calc_merge(self, cr, uid, obj, name, b_dest, b_src, context):
+        """ Compute the merge of 2 records (id1, id2), return it or bork
+
+        Try to find some value that would allow id_src to be merged into id_dest.
+        Typically, id_dest will be lower.
+
+
+        @param obj The parent orm object
+        @param b_dest The object (browse record) of the record to keep
+            May be None if id_src is the first record to consider
+        @param b_src record to merge and discard
+        @param name The name of the field
+        @return The raw value, or None, if this field needs no change. If merge
+            cannot proceed, should raise an exception
+        """
+
+        if self.merge_op == 'mustbe':
+            if isinstance(self._merge_param, tuple):
+                if b_src[name] not in self._merge_param:
+                    raise ValueError(_("Cannot merge a record when %s = %r") % \
+                        (name, b_src[name]))
+            elif b_src[name] != self._merge_param:
+                    raise ValueError(_("Cannot merge a record when %s = %r") % \
+                        (name, b_src[name]))
+            return None
+
+        if not b_dest:
+            # the first iteration, save values and continue
+            return b_src[name]
+
+        elif callable(self.merge_op):
+            return self.merge_op(obj, name, b_dest, b_src, context=context)
+        else:
+            if self.merge_op is True:
+                return None
+            elif self.merge_op is False:
+                raise ValueError(_("Cannot merge %s, because %s field cannot merge") %\
+                        (obj._name, name))
+            elif self.merge_op == 'empty':
+                if b_src[name]:
+                    raise ValueError(_("Cannot merge because field %s is not empty.") % \
+                        (name,))
+            elif self.merge_op in ('any', 'or'):
+                if b_dest[name]: # will also discard 0.0 value
+                    return None
+                elif not is_empty(b_src[name]): # here, 0.0 counts as valid
+                    return b_src[name]
+                elif self.merge_op == 'any':
+                    return False
+                else: # or
+                    raise ValueError(_("Must have at least one value "
+                                        "in field %s to proceed with merge of %s.") % \
+                                        (name, obj._name)) # TODO translate them!
+
+            elif self.merge_op == '+':
+                if is_empty(b_src[name]):
+                    return None
+                elif is_empty(b_dest[name]):
+                    return b_src[name]
+                else:
+                    return b_dest[name] + b_src[name]
+            elif self.merge_op == 'min':
+                if is_empty(b_src[name]):
+                    return None
+                elif is_empty(b_dest[name]):
+                    return b_src[name]
+                elif b_dest[name] > b_src[name]:
+                    return b_src[name]
+                else:
+                    return None
+            elif self.merge_op == 'max':
+                if is_empty(b_src[name]):
+                    return None
+                elif is_empty(b_dest[name]):
+                    return b_src[name]
+                elif b_dest[name] < b_src[name]:
+                    return b_src[name]
+                else:
+                    return None
+            elif self.merge_op == 'eq':
+                if (not b_dest[name]) and ( not b_src[name]):
+                    # both are empty
+                    return None
+                elif b_dest[name] and b_src[name] and (b_dest[name] == b_src[name]):
+                    return None
+                else:
+                    raise ValueError(_("All records must have an equal %s, in order to merge") % \
+                            (name,))
+            elif self.merge_op == '|eq':
+                if not b_dest[name]:
+                    return b_src[name]
+                elif not b_src[name]:
+                    return None
+                elif b_dest[name] == b_src[name]:
+                    return None
+                else:
+                    raise ValueError(_("All records must have an equal %s, in order to merge") % \
+                            (name,))
+            else:
+                raise NotImplementedError("Why does %s need to merge as %s?"  % \
+                    (self.__class__.__name__, self.merge_op))
 
 def get_nice_size(a):
     (x,y) = a

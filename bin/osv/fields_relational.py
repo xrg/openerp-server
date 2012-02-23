@@ -98,6 +98,14 @@ class _rel2one(_relational):
     def _browse2val(self, bro, name):
         return (bro and bro.id) or False
 
+    def _move_refs(self, cr, uid, obj, name, dest_id, src_ids, context):
+        """Move references to [src_ids] to point to dest_id
+        """
+        # BIG TODO: do stored fields at `obj` need to be recomputed?
+        cr.execute("UPDATE \"%s\" SET %s = %%s WHERE %s = ANY(%%s)" % \
+                (obj._table, name, name),
+                (dest_id, list(src_ids)), debug=obj._debug)
+        return None
 
 class _rel2many(_relational):
     """ common baseclass for -2many relation fields
@@ -242,6 +250,7 @@ class many2one(_rel2one):
     _symbol_c = '%s'
     _symbol_f = lambda x: x or None
     _symbol_set = (_symbol_c, _symbol_f)
+    merge_op = '|eq'
 
     @classmethod
     def from_manual(cls, field_dict, attrs):
@@ -448,6 +457,7 @@ class one2many(_rel2many):
     _classic_write = False
     _prefetch = False
     _type = 'one2many'
+    merge_op = True # it's the other side we care about
 
     @classmethod
     def from_manual(cls, field_dict, attrs):
@@ -745,6 +755,7 @@ class many2many(_rel2many):
     _classic_write = False
     _prefetch = False
     _type = 'many2many'
+    merge_op = 'join'
 
     @classmethod
     def from_manual(cls, field_dict, attrs):
@@ -1084,10 +1095,33 @@ class many2many(_rel2many):
 
         raise RuntimeError("unreachable code")
 
+    def calc_merge(self, cr, uid, obj, name, b_dest, b_src, context):
+        if b_dest and self.merge_op == 'join':
+            if not b_dest[name]:
+                return b_src[name]
+            elif not b_src[name]:
+                return None
+            else:
+                print "type:", type(b_dest[name]), type(b_src[name])
+                return b_dest[name] + b_src[name]
+        return super(many2many, self).calc_merge(cr, uid, obj, name, b_dest=b_dest, b_src=b_src, context=context)
+
+    def _move_refs(self, cr, uid, obj, name, dest_id, src_ids, context):
+        """Move references to [src_ids] to point to dest_id
+
+        """
+        rel, id1, id2 = self._sql_names(obj)
+        # BIG TODO: do stored fields at `obj` need to be recomputed?
+        cr.execute("UPDATE \"%s\" SET %s = %%s WHERE %s = ANY(%%s)" % \
+                (rel, id2, id2),
+                (dest_id, list(src_ids)), debug=obj._debug)
+        return None
+
 class reference(_column):
     _type = 'reference'
     _sql_type = 'varchar'
     _classic_read = False
+    merge_op = True
 
     @classmethod
     def from_manual(cls, field_dict, attrs):

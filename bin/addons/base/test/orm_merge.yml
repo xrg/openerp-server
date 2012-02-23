@@ -1,0 +1,56 @@
+-
+  In order to test the merge_records() support in ORM
+-
+  I create three partners
+-
+  !record {model: res.partner, id: test_merge_partner_1 }:
+    name: Luis Falcon
+    address:
+      - street: Luis-Street 1
+        street2: Luis-Street 2
+        city: Luis-City
+- !record {model: res.partner, id: test_merge_partner_2 }:
+    name: Lu-is Falcon
+    address:
+      - street: Luis-Street 2.1
+        street2: Luis-Street 2.2
+- !record {model: res.partner, id: test_merge_partner_3 }:
+    name: Luis Falcon
+    address:
+      - street: Luis-Street 3.1
+        street2: Luis-Street 3.2
+
+-
+  I will now calculate the merge values of these three (first try)
+-
+  !python {model: res.partner  }: |
+    ids = map(ref, ['test_merge_partner_1', 'test_merge_partner_2', 'test_merge_partner_3'])
+    try:
+        vals = self.merge_get_values(cr, uid, ids, context=context)
+        raise AssertionError("should NOT be possible, name doesn't match")
+    except ValueError:
+        pass
+-
+  I will now calculate the merge values of these three (second try)
+-
+  !python {model: res.partner  }: |
+    ids = map(ref, ['test_merge_partner_1', 'test_merge_partner_2', 'test_merge_partner_3'])
+    vals = self.merge_get_values(cr, uid, ids, fields_ignore=['name'], context=context)
+-
+  I will now try to merge them
+-
+  !python {model: res.partner }: |
+    ids = map(ref, ['test_merge_partner_1', 'test_merge_partner_2', 'test_merge_partner_3'])
+    self.merge_records(cr, uid, ids, fields_ignore=['name'], context=context)
+-
+  I will test the resulting record
+-
+    !assert {model: res.partner, id: test_merge_partner_1}:
+      - name in "Luis Falcon"
+-
+  Check the addresses, too
+-
+  !python {model: res.partner, id: test_merge_partner_1 }: |
+     r = self.read(cr, uid, ref('test_merge_partner_1'), context=context)
+
+     assert len(r['address']) == 3, r['address']
