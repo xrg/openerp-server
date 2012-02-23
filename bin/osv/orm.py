@@ -1833,12 +1833,11 @@ class orm_template(object):
         if not context:
             context = {}
 
-        def encode(s):
-            #if isinstance(s, unicode):
-            #    return s.encode('utf8')
-            return s
-
         def _inherit_apply(src, inherit, base_id=0, apply_id=0):
+            # FIXME: it would be interesting if moving this fn() out of the parent
+            # fields_view_get() has any performance impact.
+            # It is not trivial, though, as (self, cr, uid, .. context) need to be
+            # passed, to the expense of a detached version.
             def _find(node, node2):
                 if node2.tag == 'xpath':
                     res = node.xpath(node2.get('expr'))
@@ -1870,7 +1869,7 @@ class orm_template(object):
 
             # End: _find(node, node2)
 
-            doc_dest = etree.fromstring(encode(inherit))
+            doc_dest = etree.fromstring(inherit)
             toparse = [ doc_dest ]
 
             while len(toparse):
@@ -2006,7 +2005,7 @@ class orm_template(object):
                     result = _inherit_apply_rec(result, id)
                 return result
 
-            inherit_result = etree.fromstring(encode(result['arch']))
+            inherit_result = etree.fromstring(result['arch'])
             result['arch'] = _inherit_apply_rec(inherit_result, sql_res[3])
 
             result['name'] = sql_res[1]
@@ -2058,7 +2057,7 @@ class orm_template(object):
             for res in cr.fetchall():
                 if not last_res:   # first, non-inheriting view
                     sql_res = True
-                    result['arch'] = etree.fromstring(encode(res[0]))
+                    result['arch'] = etree.fromstring(res[0])
                     result['name'] = res[1]
                     result['field_parent'] = res[2] or False
                     result['view_id'] = res[3]
@@ -2105,7 +2104,7 @@ class orm_template(object):
             else:
                 xml = '<?xml version="1.0"?>' # what happens here, graph case?
                 raise except_orm(_('Invalid Architecture!'), _("There is no view of type '%s' defined for the structure!") % view_type)
-            result['arch'] = etree.fromstring(encode(xml))
+            result['arch'] = etree.fromstring(xml)
             result['name'] = 'default'
             result['field_parent'] = False
             result['view_id'] = 0
@@ -2954,7 +2953,7 @@ class orm(orm_template):
         data = self.read(cr, uid, data_ids, groupby and [groupby] or ['id'], context=context)
         # restore order of the search as read() uses the default _order 
         # (this is only for groups, so the size of data_read shoud be small):
-        data.sort(lambda x,y: cmp(data_ids.index(x['id']), data_ids.index(y['id'])))
+        data.sort(key=lambda x: data_ids.index(x['id']))
 
         for d in data:
             if groupby:
@@ -4404,6 +4403,7 @@ class orm(orm_template):
                 result[fncts[fnct][0]].setdefault(id, [])
                 result[fncts[fnct][0]][id].append(fnct)
         dict = {}
+        l_fnct = lambda x: fncts[x][1]
         for object in result:
             k2 = {}
             for id, fnct in result[object].items():
@@ -4411,7 +4411,7 @@ class orm(orm_template):
                 k2[tuple(fnct)].append(id)
             for fnct, id in k2.items():
                 dict.setdefault(fncts[fnct[0]][4], [])
-                dict[fncts[fnct[0]][4]].append((fncts[fnct[0]][4], object, id, map(lambda x: fncts[x][1], fnct)))
+                dict[fncts[fnct[0]][4]].append((fncts[fnct[0]][4], object, id, map(l_fnct, fnct)))
         result2 = []
         tmp = dict.keys()
         tmp.sort()
