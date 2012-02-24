@@ -111,7 +111,7 @@ class db(baseExportService):
         return fn(*params)
 
     def _create_empty_database(self, name):
-        db = sql_db.db_connect('template1')
+        db = sql_db.db_connect('template1', temp=True)
         cr = db.cursor()
         ## We check if we can use geospatial enable database directly
         cr.execute("SELECT datname from pg_database where datistemplate = true and datname = 'template_postgis';")
@@ -208,7 +208,7 @@ class db(baseExportService):
         sql_db.close_db(db_name)
         logger = logging.getLogger()
 
-        db = sql_db.db_connect('template1')
+        db = sql_db.db_connect('template1', temp=True)
         cr = db.cursor()
         cr.autocommit(True) # avoid transaction block
         if tools.config.get_misc('debug', 'drop_guard', False):
@@ -328,7 +328,7 @@ class db(baseExportService):
                 "Please turn off the databases.allowed setting at the conf file.")
             raise Exception("Database renaming is forbiden because the names are restricted")
 
-        db = sql_db.db_connect('template1')
+        db = sql_db.db_connect('template1', temp=True)
         cr = db.cursor()
         cr.autocommit(True) # avoid transaction block
         try:
@@ -349,13 +349,13 @@ class db(baseExportService):
 
     def exp_db_exist(self, db_name):
         ## Not True: in fact, check if connection to database is possible. The database may exists
-        return bool(sql_db.db_connect(db_name))
+        return bool(sql_db.db_connect(db_name, temp=True))
 
     def exp_list(self, document=False):
         if not tools.config['list_db'] and not document:
             raise Exception('AccessDenied')
 
-        db = sql_db.db_connect('template1')
+        db = sql_db.db_connect('postgres', temp=True)
         cr = db.cursor()
         try:
             try:
@@ -371,12 +371,14 @@ class db(baseExportService):
                 if db_user:
                     cr.execute("""select decode(datname, 'escape') from pg_database 
                                     where datdba=(select usesysid from pg_user where usename=%s) 
-                                      and datname not in %s order by datname""", (db_user, cr.sys_and_template_db))
+                                      and datname not in %s order by datname""", (db_user, sql_db.get_template_dbnames()))
                 else:
                     cr.execute("""select decode(datname, 'escape') from pg_database
-                                    where datname not in %s order by datname""", (cr.sys_and_template_db,))
+                                    where datname not in %s order by datname""", (sql_db.get_template_dbnames(),))
                 res = [str(name) for (name,) in cr.fetchall()]
             except Exception:
+                logger = logging.getLogger('web-services')
+                logger.warning("Cannot query the list of dbs", exc_info=True)
                 res = []
         finally:
             cr.close()
@@ -714,7 +716,7 @@ GNU Public Licence.
         return http_server.list_http_services(*args)
 
     def exp_check_connectivity(self):
-        return bool(sql_db.db_connect('template1'))
+        return bool(sql_db.db_connect('template1', temp=True))
         
     def exp_get_os_time(self):
         return os.times()
