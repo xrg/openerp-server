@@ -159,7 +159,7 @@ class Cursor(object):
             return f(self, *args, **kwargs)
         return wrapper
 
-    def __init__(self, pool, dbname, serialized=False):
+    def __init__(self, pool, dbname, serialized=False, temp=False):
         self.sql_stats_log = {}
         # stats log will be a dictionary of 
         # { (table, kind-of-qry): (num, delay, {queries?: num}) }
@@ -175,7 +175,7 @@ class Cursor(object):
         self.dbname = dbname
         self.auth_proxy = None
         self._serialized = serialized
-        self._cnx, self._obj = pool.borrow(dsn(dbname), True)
+        self._cnx, self._obj = pool.borrow(dsn(dbname), True, temp=temp)
         self.__closed = False   # real initialisation value
         self.autocommit(False)
         if self.sql_log:
@@ -367,8 +367,7 @@ class Cursor(object):
         if leak:
             self._cnx.leaked = True
         else:
-            keep_in_pool = self.dbname not in ('template1', 'template0', 'postgres')
-            self._pool.give_back(self._cnx, keep_in_pool=keep_in_pool)
+            self._pool.give_back(self._cnx)
 
     @check
     def autocommit(self, on):
@@ -486,7 +485,7 @@ class ConnectionPool(object):
         self.__logger.info("Debugging set to %s" % str(do_debug))
 
     @locked
-    def borrow(self, dsn, do_cursor=False):
+    def borrow(self, dsn, do_cursor=False, temp=False):
         self._debug_dsn('Borrow connection to %r', dsn)
 
         # free leaked connections
@@ -515,6 +514,8 @@ class ConnectionPool(object):
                     continue
                 
                 self._debug('Existing connection found at index %d', i)
+                # Note, we ignore the 'temp' flag here, this connection will
+                # return to the pool anyway
                 if do_cursor:
                     try:
                         cur = cnx.cursor(cursor_factory=psycopg1cursor)
@@ -550,7 +551,11 @@ class ConnectionPool(object):
         except psycopg2.Error, e:
             self.__logger.exception('Connection to the database failed')
             raise
-        self._connections.append((result, True))
+        if not temp:
+            result.is_temp = False
+            self._connections.append((result, True))
+        else:
+            result.is_temp = True
         self._debug('Create new connection')
         if do_cursor:
             cur = result.cursor(cursor_factory=psycopg1cursor)
@@ -563,14 +568,15 @@ class ConnectionPool(object):
         for i, (cnx, used) in enumerate(self._connections):
             if cnx is connection:
                 self._connections.pop(i)
-                if keep_in_pool and not (cnx.closed or not cnx.status):
+                if keep_in_pool and not (cnx.closed or cnx.is_temp or not cnx.status):
                     self._connections.insert(i,(cnx, False))
                     self._debug_dsn('Put connection to %r back in pool', cnx.dsn)
                 else:
                     self._debug_dsn('Forgot connection to %r', cnx.dsn)
                 break
         else:
-            raise PoolError('This connection does not below to the pool')
+            if not connection.is_temp:
+                raise PoolError('This connection does not below to the pool')
 
     @locked
     def close_all(self, dsn):
@@ -590,14 +596,15 @@ class Connection(object):
     """
     __logger = logging.getLogger('db.connection')
 
-    def __init__(self, pool, dbname):
+    def __init__(self, pool, dbname, temp=False):
         self.dbname = dbname
         self._pool = pool
+        self._temp = temp
 
     def cursor(self, serialized=False):
         cursor_type = serialized and 'serialized ' or ''
         self.__logger.log(logging.DEBUG_SQL, 'create %scursor to %r', cursor_type, self.dbname)
-        return Cursor(self._pool, self.dbname, serialized=serialized)
+        return Cursor(self._pool, self.dbname, serialized=serialized, temp=self._temp)
 
     def serialized_cursor(self):
         return self.cursor(True)
@@ -634,8 +641,19 @@ def dsn_are_equals(first, second):
 _Pool = ConnectionPool(int(tools.config['db_maxconn']), 
                 tools.config.get_misc('postgres','mode', False))
 
-def db_connect(db_name):
-    return Connection(_Pool, db_name)
+def db_connect(db_name, temp=False):
+    """ Return a connection to that database
+        
+        @param temp means this connection will not enter the pool,
+            once released
+    """
+    return Connection(_Pool, db_name, temp=temp)
+
+def get_template_dbnames():
+    """ List of special databases, which we should ignore
+    """
+    temp_dbs = filter(bool, tools.config.get_misc('databases', 'template','').split(' '))
+    return ('template1', 'template0', 'postgres') + tuple(temp_dbs)
 
 def close_db(db_name):
     _Pool.close_all(dsn(db_name))
