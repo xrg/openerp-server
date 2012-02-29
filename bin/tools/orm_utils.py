@@ -52,4 +52,19 @@ def copy_value(value):
     """Use this default value. Will yield a function"""
     return lambda *a, **kw: value
 
+def copy_default(self, cr, uid, obj, id, f, data, context):
+    """Use the default value at copying
+    
+        So far, this method uses *only* the value of _defaults. It does
+        not consult ir.values or so.
+    """
+    val = obj._defaults.get(f, NotImplemented)
+    if val is NotImplemented:
+        raise KeyError("At %s.%s copy_default is specified, but no value in _defaults!" %\
+                        (obj._name,f))
+    if callable(val):
+        return val(obj, cr, uid, context)
+    else:
+        return val
+
 #eof
