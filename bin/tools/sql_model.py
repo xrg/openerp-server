@@ -843,6 +843,9 @@ class Column(_element):
         if cstr == 'NULL':
             return None
 
+        if not isinstance(cstr, basestring):
+            return cstr
+
         v = cls._common_constants.get(cstr, NotImplemented)
         if v is not NotImplemented:
             return v
