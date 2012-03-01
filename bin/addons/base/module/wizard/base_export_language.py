@@ -76,13 +76,13 @@ class base_language_export(osv.osv_memory):
             'modules': fields.many2many('ir.module.module', 'rel_modules_langexport', 'wiz_id', 'module_id', 'Modules', domain=[('state','=','installed')]),
             'data': fields.binary('File', readonly=True),
             'advice': fields.text('Advice', readonly=True),
-            'state': fields.selection( ( ('choose','choose'),   # choose language
+            'state': fields.selection( [('choose','choose'),   # choose language
                                          ('get','get'),         # get the file
-                                       ) ),
+                                       ], 'State' ),
     }
     _defaults = { 
-        'state': lambda *a: 'choose',
-        'name': lambda *a: 'lang.tar.gz'
+        'state': 'choose',
+        'name': 'lang.tar.gz'
     }
 base_language_export()
 

@@ -275,7 +275,7 @@ class publisher_warranty_contract_wizard(osv.osv_memory):
 
     _columns = {
         'name' : fields.char('Serial Key', size=256, required=True, help="Your OpenERP Publisher's Warranty Contract unique key, also called serial number."),
-        'state' : fields.selection([("draft", "Draft"), ("finished", "Finished")])
+        'state' : fields.selection([("draft", "Draft"), ("finished", "Finished")], 'State')
     }
 
     _defaults = {
