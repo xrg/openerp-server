@@ -416,7 +416,7 @@ class osv_memory(osv_base, orm.orm_memory):
                                     new[nn] = copy.copy(new[nn])
                                 nc._adapt(new[nn])
                             elif nc is None:
-                                del new[nn]
+                                new.pop(nn, None)
                             else:
                                 new[nn] = nc
                     elif s == '_vtable':
@@ -429,7 +429,7 @@ class osv_memory(osv_base, orm.orm_memory):
                         new.update(nc)
                         for k in nc.keys():
                             if nc[k] is None:
-                                del new[k]
+                                new.pop(k, None)
                     else:
                         new.extend(getattr(cls, s))
                     nattr[s] = new
@@ -474,7 +474,7 @@ class osv(osv_base, orm.orm):
                                     new[nn] = copy.copy(new[nn])
                                 nc._adapt(new[nn])
                             elif nc is None:
-                                del new[nn]
+                                new.pop(nn, None)
                             else:
                                 new[nn] = nc
                     elif s == '_vtable':
@@ -487,7 +487,7 @@ class osv(osv_base, orm.orm):
                         new.update(nc)
                         for k in nc.keys():
                             if nc[k] is None:
-                                del new[k]
+                                new.pop(k, None)
                     else:
                         if s=='_constraints':
                             for c in getattr(cls, s):
