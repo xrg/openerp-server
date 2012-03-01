@@ -1568,7 +1568,13 @@ class orm_template(object):
                     children = False
                     views = {}
                     for f in node:
-                        if f.tag in ('form', 'tree', 'graph'):
+                        if f.tag in ('form', 'tree', 'graph'): # TODO: expand ;)
+                            # That's a nested view, lookup its fields, too
+                            if not relation:
+                                _logger.error("Cannot find nested object %r "
+                                            "for view #%d , at node <%s %r>",
+                                            column._obj, view_id, node.tag, node_name)
+                                raise ValueError("View %d: cannot locate %r for <%s %r>" % (view_id, column._obj, node.tag, node_name))
                             node.remove(f)
                             ctx = context.copy()
                             ctx['base_model_name'] = self._name
