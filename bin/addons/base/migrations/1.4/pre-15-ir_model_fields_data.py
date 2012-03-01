@@ -3,14 +3,7 @@
 
 __name__ = "ir.model.fields: add field_data column"
 
-def column_exists(cr, table, column):
-    cr.execute("SELECT count(1)"
-               "  FROM pg_class c, pg_attribute a"
-               " WHERE c.relname=%s"
-               "   AND c.oid=a.attrelid"
-               "   AND a.attname=%s",
-               (table, column))
-    return cr.fetchone()[0] != 0
+from tools.sql import column_exists
 
 def migrate(cr, version):
     if not column_exists(cr, 'ir_model_fields', 'field_data'):
