@@ -782,7 +782,9 @@ class act_window_close(osv.osv):
     _inherit = 'ir.actions.actions'
     _table = 'ir_actions'
     _defaults = {
-        'type': 'ir.actions.act_window_close',
+        # Need a lambda here, because otherwise the default will go
+        # to SQL and change the parent 'ir_actions' table!
+        'type': lambda *a: 'ir.actions.act_window_close',
     }
 act_window_close()
 
