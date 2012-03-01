@@ -800,11 +800,17 @@ class Column(_element):
     """
     
     _elem_attrs = ['constraints',]
-    
+
     class now(object):
         """ Placeholder for the "now()" default value function
         """
-        pass
+
+        def __eq__(self, other):
+            return isinstance(other, self.__class__)
+
+        def __ne__(self, other):
+            return not isinstance(other, self.__class__)
+
     # TODO perhaps more functions
     
     def __init__(self, name, ctype, num=None, size=None, has_def=None,
@@ -814,7 +820,7 @@ class Column(_element):
         self.ctype = ctype
         self.size = size
         self.has_def = has_def or (default is not None)
-        self.default = default
+        self.default = self._decode_constant(default)
         self.primary_key = primary_key
         self.constraints = collection('constraints', ColumnConstraint, self)
         # self.constraints._wait_for_me = False # We can do things without them ?
@@ -822,6 +828,45 @@ class Column(_element):
         self._todo_attrs = {}
         if constraint:
             self.constraints.append(constraint)
+
+    _common_constants = {
+        'NULL': None,
+        'true': 'True', # match the _symbol_set of booleans
+        'false': 'False',
+        'now()': now(),
+    }
+
+    @classmethod
+    def _decode_constant(cls, cstr):
+        if not cstr:
+            return None
+        if cstr == 'NULL':
+            return None
+
+        v = cls._common_constants.get(cstr, NotImplemented)
+        if v is not NotImplemented:
+            return v
+
+        cstr2 = cstr3 = cstr
+        if cstr.startswith('(-') and cstr[-1] == ')':
+            # detect the "(-123.4)" negative numbers
+            cstr3 = cstr[1:-1]
+            cstr2 = cstr[2:-1]
+
+        if cstr2.isdigit():
+            return int(cstr3)
+        elif cstr.count('.') == 1:
+            a, b = cstr2.split('.', 1)
+            if a.isdigit() and b.isdigit():
+                return float(cstr3)
+
+        if cstr.endswith('::character varying') or cstr.endswith('::text'):
+            cstr = cstr.rsplit('::', 1)[0]
+            if cstr == 'NULL':
+                return None
+            elif cstr[0] == "'" and cstr[-1] == "'":
+                return cstr[1:-1]
+        return cstr
 
     PG_TYPE_ALIASES = {
         'CHAR': 'char',
@@ -1278,6 +1323,8 @@ class Table(Relation):
                     col._todo_attrs.pop('size', None)
             if plain_default is not None:
                 if plain_default != col.default:
+                    self._logger.debug("default mismatch for %s.%s: (%s) %r != %r",
+                            (self._name, colname, type(plain_default), plain_default, col.default))
                     col._todo_attrs['default'] = default
                 else:
                     col._todo_attrs.pop('default', None)
