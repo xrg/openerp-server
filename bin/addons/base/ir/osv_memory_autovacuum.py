@@ -20,7 +20,6 @@
 ##############################################################################
 
 from osv import osv
-from osv.orm import orm_memory
 
 class osv_memory_autovacuum(osv.osv_memory):
     _name = 'osv_memory.autovacuum'
@@ -28,7 +27,7 @@ class osv_memory_autovacuum(osv.osv_memory):
     def power_on(self, cr, uid, context=None):
         for model in self.pool.obj_list():
             obj = self.pool.get(model)
-            if isinstance(obj, orm_memory):
+            if isinstance(obj, osv.orm.orm_memory):
                 obj.vaccum(cr, uid)
         return True
 

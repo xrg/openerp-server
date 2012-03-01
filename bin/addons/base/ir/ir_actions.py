@@ -32,7 +32,7 @@ import copy
 import os
 from xml import dom
 from report.report_sxw import report_sxw, report_rml
-from osv.orm import only_ids
+from tools.orm_utils import only_ids
 
 class actions(osv.osv):
     _name = 'ir.actions.actions'
