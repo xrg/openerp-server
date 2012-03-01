@@ -139,8 +139,9 @@ class Schema(object):
                     a.attnum AS num, t.typname AS ctype,
                     a.attnotnull AS not_null,
                     a.atthasdef AS has_def, pg_get_expr(d.adbin, a.attrelid) AS "default",
-                    CASE WHEN a.attlen=-1 THEN a.atttypmod-4 
-                        ELSE a.attlen END AS size
+                    CASE WHEN a.attlen != -1 THEN a.attlen
+                        WHEN a.atttypmod = -1 THEN 0
+                        ELSE a.atttypmod-4 END AS size
                 FROM pg_attribute a LEFT JOIN pg_type t ON (a.atttypid=t.oid)
                                 LEFT JOIN pg_attrdef d ON (d.adrelid = a.attrelid AND d.adnum = a.attnum)
                 WHERE a.attrelid = ANY(%s) AND a.attisdropped = false
@@ -916,7 +917,7 @@ class Column(_element):
                 newtype = self._todo_attrs.pop('type', self.ctype)
                 newsize = self._todo_attrs.pop('size', self.size)
                 if newsize and newtype.lower() in ('char', 'varchar', 'character varying'):
-                    alter_column('TYPE %s(%s)' % (newtype, newsize))
+                    alter_column('TYPE %s(%s)' % (newtype, newsize or 16))
                 else:
                     alter_column('TYPE %s' % newtype)
             
@@ -1148,7 +1149,7 @@ class Table(Relation):
             col = self.columns[colname]
             if col.ctype.lower() not in (ctype.lower(), Column.PG_TYPE_ALIASES.get(ctype.upper(), 'any')):
                 self._logger.info("Column %s.%s must change type from %s to %s aka. %s",
-                        self._name, colname, col.ctype, ctype, Column.PG_TYPE_ALIASES.get(ctype, '-'))
+                        self._name, colname, col.ctype, ctype, Column.PG_TYPE_ALIASES.get(ctype, '""'))
                 # TODO code for non-trivial casting
                 allowed_casts = casts.get(col.ctype.lower(),())
                 if not allowed_casts:
