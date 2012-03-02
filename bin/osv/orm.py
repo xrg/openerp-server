@@ -1567,6 +1567,11 @@ class orm_template(object):
 
                     children = False
                     views = {}
+                    if relation and node.get('view_ids'):
+                        iview_ids = [int(x.strip()) for x in node.get('view_ids').split(',')]
+                        for iview_id in iview_ids:
+                            ires = relation.fields_view_get(cr, user, iview_id, context=context, toolbar=False, submenu=False)
+                            views[ires['type']] = { 'arch': ires['arch'], 'fields': ires['fields']}
                     for f in node:
                         if f.tag in ('form', 'tree', 'graph'): # TODO: expand ;)
                             # That's a nested view, lookup its fields, too

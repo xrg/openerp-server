@@ -460,6 +460,8 @@
             <optional><attribute name="selection"/></optional>
             <optional><attribute name="default_focus"/></optional>
             <optional><attribute name="filters"/></optional>
+            <!-- view_ids is comma-separated list of nested views (ir.ui.view ids) to use -->
+            <optional><attribute name="view_ids"/></optional>
             <zeroOrMore>
                 <choice>
                     <ref name="diagram"/>
