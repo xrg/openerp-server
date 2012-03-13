@@ -147,6 +147,8 @@ _fields_process = {
 # Context: {'node': node.dom}
 #
 class browse_record_list(list):
+    """ A *different* browse list
+    """
     def __init__(self, lst, context):
         super(browse_record_list, self).__init__(lst)
         self.context = context
@@ -159,6 +161,8 @@ class browse_record_list(list):
         return "browse_record_list("+str(len(self))+")"
 
 class rml_parse(object):
+    _transl_regex = re.compile('(\[\[.+?\]\])')
+
     def __init__(self, cr, uid, name, parents=rml_parents, tag=rml_tag, context=None):
         if not context:
             context={}
@@ -197,7 +201,6 @@ class rml_parse(object):
         self.lang_dict = {}
         self.default_lang = {}
         self.lang_dict_called = False
-        self._transl_regex = re.compile('(\[\[.+?\]\])')
 
     def setTag(self, oldtag, newtag, attrs=None):
         return newtag, attrs
@@ -271,7 +274,7 @@ class rml_parse(object):
             if ids:
                 d = decimal_precision_obj.browse(self.cr, self.uid, ids)[0].digits
         elif obj and f:
-            res_digits = getattr(obj._columns[f], 'digits', lambda x: ((16, DEFAULT_DIGITS)))
+            res_digits = getattr(obj._columns[f], 'digits', (16, DEFAULT_DIGITS))
             if isinstance(res_digits, tuple):
                 d = res_digits[1]
             else:
@@ -423,11 +426,9 @@ class report_sxw(report_rml, preprocess.report):
             try:
                 rml = report_file.read()
                 report_type= data.get('report_type', 'pdf')
-                class a(object):
-                    def __init__(self, *args, **argv):
-                        for key,arg in argv.items():
-                            setattr(self, key, arg)
-                report_xml = a(title=title, report_type=report_type, report_rml_content=rml, name=title, attachment=False, header=self.header)
+                report_xml = tools.misc.attrob(dict(title=title, 
+                            report_type=report_type, report_rml_content=rml,
+                            name=title, attachment=False, header=self.header))
             finally:
                 report_file.close()
         if report_xml.header:
