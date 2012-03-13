@@ -1327,7 +1327,7 @@ class Table(Relation):
             if plain_default is not None:
                 if plain_default != col.default:
                     self._logger.debug("default mismatch for %s.%s: (%s) %r != %r",
-                            (self._name, colname, type(plain_default), plain_default, col.default))
+                            self._name, colname, type(plain_default), plain_default, col.default)
                     col._todo_attrs['default'] = default
                 else:
                     col._todo_attrs.pop('default', None)
