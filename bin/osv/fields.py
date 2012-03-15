@@ -22,7 +22,9 @@
 
 #.apidoc title: Fields for ORM models
 
-""" Fields:
+""" The 'C' component in openobject's MVC
+
+    Fields:
       - simple
       - relations (one2many, many2one, many2many)
       - function

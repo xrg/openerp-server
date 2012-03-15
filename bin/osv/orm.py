@@ -23,7 +23,8 @@
 #.apidoc title: Object Relational Mapping
 #.apidoc module-mods: member-order: bysource
 
-"""
+"""The 'M' component in OpenObject's MVC
+
   Object relational mapping to database (postgresql) module
      * Hierarchical structure
      * Constraints consistency, validations
@@ -63,6 +64,7 @@ from tools import sql_model
 from tools import orm_utils
 
 import fields
+from views import oo_view
 from query import Query
 import tools
 from tools.safe_eval import safe_eval as eval
@@ -1749,127 +1751,6 @@ class orm_template(object):
                 raise except_orm('View error', msg)
         return arch, fields
 
-    def __get_default_form_view(self, cr, user, context=None):
-        """ Generates a default single-line form view using all fields
-        of the current model except the m2m and o2m ones.
-
-        :param cr: database cursor
-        :param int user: user id
-        :param dict context: connection context
-        :returns: a form view as an lxml document
-        :rtype: etree._Element
-        """
-        view = etree.Element('form', string=self._description)
-        # TODO it seems fields_get can be replaced by _all_columns (no need for translation)
-        for field, descriptor in self.fields_get(cr, user, context=context).iteritems():
-            if descriptor['type'] in ('one2many', 'many2many'):
-                continue
-            etree.SubElement(view, 'field', name=field)
-            if descriptor['type'] == 'text':
-                etree.SubElement(view, 'newline')
-        return view
-
-    def __get_default_tree_view(self, cr, user, context=None):
-        """ Generates a single-field tree view, using _rec_name if
-        it's one of the columns or the first column it finds otherwise
-
-        :param cr: database cursor
-        :param int user: user id
-        :param dict context: connection context
-        :returns: a tree view as an lxml document
-        :rtype: etree._Element
-        """
-        _rec_name = self._rec_name
-        if _rec_name not in self._columns:
-            _rec_name = self._columns.keys()[0]
-
-        view = etree.Element('tree', string=self._description)
-        etree.SubElement(view, 'field', name=_rec_name)
-        return view
-
-    def __get_default_calendar_view(self):
-        """ Generates a default calendar view by trying to infer
-        calendar fields from a number of pre-set attribute names
-        
-        :param cr: database cursor
-        :param int user: user id
-        :param dict context: connection context
-        :returns: a calendar view
-        :rtype: etree._Element
-        """
-        def set_first_of(seq, in_, to):
-            """Sets the first value of ``set`` also found in ``in`` to
-            the ``to`` attribute of the view being closed over.
-
-            Returns whether it's found a suitable value (and set it on
-            the attribute) or not
-            """
-            for item in seq:
-                if item in in_:
-                    view.set(to, item)
-                    return True
-            return False
-
-        view = etree.Element('calendar', string=self._description)
-        etree.SubElement(view, 'field', name=self._rec_name)
-
-        if (self._date_name not in self._columns):
-            date_found = False
-            for dt in ['date', 'date_start', 'x_date', 'x_date_start']:
-                if dt in self._columns:
-                    self._date_name = dt
-                    date_found = True
-                    break
-
-            if not date_found:
-                raise except_orm(_('Invalid Object Architecture!'),_("Insufficient fields for Calendar View!"))
-        view.set('date_start', self._date_name)
-
-        set_first_of(["user_id", "partner_id", "x_user_id", "x_partner_id"],
-                     self._columns, 'color')
-
-        if not set_first_of(["date_stop", "date_end", "x_date_stop", "x_date_end"],
-                            self._columns, 'date_stop'):
-            if not set_first_of(["date_delay", "planned_hours", "x_date_delay", "x_planned_hours"],
-                                self._columns, 'date_delay'):
-                raise except_orm(
-                    _('Invalid Object Architecture!'),
-                    _("Insufficient fields to generate a Calendar View for %s, missing a date_stop or a date_delay" % (self._name)))
-
-        return view
-
-    def __get_default_search_view(self, cr, uid, context=None):
-        """
-        :param cr: database cursor
-        :param int user: user id
-        :param dict context: connection context
-        :returns: an lxml document of the view
-        :rtype: etree._Element
-        """
-        form_view = self.fields_view_get(cr, uid, False, 'form', context=context)
-        tree_view = self.fields_view_get(cr, uid, False, 'tree', context=context)
-
-        fields_to_search = set()
-        fields = self.fields_get(cr, uid, context=context)
-        for field in fields:
-            if fields[field].get('select'):
-                fields_to_search.add(field)
-
-        for view in (form_view, tree_view):
-            view_root = etree.fromstring(view['arch'])
-            # Only care about select=1 in xpath below, because select=2 is covered
-            # by the custom advanced search in clients
-            fields_to_search.update(view_root.xpath("//field[@select=1]/@name"))
-
-        tree_view_root = view_root # as provided by loop above
-        search_view = etree.Element("search", string=tree_view_root.get("string", ""))
-
-        field_group = etree.SubElement(search_view, "group")
-        for field_name in fields_to_search:
-            etree.SubElement(field_group, "field", name=field_name))
-
-        return search_view
-
     #
     # if view_id, view_type is not required
     #
@@ -2135,24 +2016,11 @@ class orm_template(object):
                         last_res.append(res[3])
 
         if not sql_res:
-
             # otherwise, build some kind of default view
-            if view_type == 'form':
-                xml = self.__get_default_form_view(cr, user, context)
-
-            elif view_type == 'tree':
-                xml = self.__get_default_tree_view(cr, user, context)
-
-            elif view_type == 'calendar':
-                xml = self.__get_default_calendar_view()
-
-            elif view_type == 'search':
-                xml = self.__get_default_search_view(cr, user, context)
-
-            else:
-                xml = '<?xml version="1.0"?>' # what happens here, graph case?
+            try:
+                result['arch'] = oo_view.get_default_view(cr, user, view_type, self, context=context)
+            except KeyError:
                 raise except_orm(_('Invalid Architecture!'), _("There is no view of type '%s' defined for the structure!") % view_type)
-            result['arch'] = etree.fromstring(xml)
             result['name'] = 'default'
             result['field_parent'] = False
             result['view_id'] = 0

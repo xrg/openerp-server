@@ -30,6 +30,9 @@ import fields_inherit
 
 import index
 
+import views
+import views_classic
+
 #.apidoc title: Object Services and Relational Mapping
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

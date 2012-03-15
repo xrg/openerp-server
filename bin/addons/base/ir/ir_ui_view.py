@@ -19,30 +19,17 @@
 #
 ##############################################################################
 
-from osv import fields,osv, index
-from lxml import etree
+from osv import fields, osv, index, views
 from tools import graph
 from tools.safe_eval import safe_eval as eval
 from tools.translate import _
 import tools
 import os
-import logging
 
 def _check_xml(self, cr, uid, ids, context=None):
-    logger = logging.getLogger('init')
-    try:
-        frng = None
-        frng = tools.file_open(os.path.join('base','rng','view.rng'))
-        relaxng_doc = etree.parse(frng)
-        for view in self.browse(cr, uid, ids, context):
-            relaxng = etree.RelaxNG(relaxng_doc)
-            eview = etree.fromstring(view.arch.encode('utf8'))
-            if not relaxng.validate(eview):
-                for error in relaxng.error_log:
-                    logger.error(tools.ustr(error))
-                return False
-    finally:
-        frng.close()
+    for view in self.browse(cr, uid, ids, context):
+        if not views.oo_view.check_xml(view.arch, view_type=view.type, errors=None):
+            return False
     return True
 
 class view_custom(osv.osv):
@@ -65,15 +52,7 @@ class view(osv.osv):
         'name': fields.char('View Name',size=64,  required=True),
         'model': fields.char('Object', size=64, required=True, select=True),
         'priority': fields.integer('Sequence', required=True),
-        'type': fields.selection((
-            ('tree','Tree'),
-            ('form','Form'),
-            ('mdx','mdx'),
-            ('graph', 'Graph'),
-            ('calendar', 'Calendar'),
-            ('diagram','Diagram'),
-            ('gantt', 'Gantt'),
-            ('search','Search')), 'View Type', required=True, select=True),
+        'type': fields.selection(views.oo_view.get_view_types, 'View Type', required=True, select=True),
         'arch': fields.text('View Architecture', required=True),
         'inherit_id': fields.many2one('ir.ui.view', 'Inherited View', ondelete='cascade', select=True),
         'field_parent': fields.char('Child Field',size=64),
@@ -101,20 +80,6 @@ class view(osv.osv):
     _indices = {
         'model_type_idx': index.plain('model', 'type'),
     }
-
-    def write(self, cr, uid, ids, vals, context=None):
-        if not isinstance(ids, (list, tuple)):
-            ids = [ids]
-        result = super(view, self).write(cr, uid, ids, vals, context)
-
-        # drop the corresponding view customizations (used for dashboards for example), otherwise
-        # not all users would see the updated views
-        # RFC. Keep the customized views
-        # custom_view_ids = self.pool.get('ir.ui.view.custom').search(cr, uid, [('ref_id','in',ids)])
-        # if custom_view_ids:
-        #     self.pool.get('ir.ui.view.custom').unlink(cr, uid, custom_view_ids)
-
-        return result
 
     def graph_get(self, cr, uid, id, model, node_obj, conn_obj, src_node, des_node,label,scale,context=None):
         if not label:
