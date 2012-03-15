@@ -1806,7 +1806,7 @@ class orm_template(object):
             """
             for item in seq:
                 if item in in_:
-                    view.set(key, item)
+                    view.set(to, item)
                     return True
             return False
 
@@ -1854,11 +1854,12 @@ class orm_template(object):
         for field in fields:
             if fields[field].get('select'):
                 fields_to_search.add(field)
+
         for view in (form_view, tree_view):
             view_root = etree.fromstring(view['arch'])
             # Only care about select=1 in xpath below, because select=2 is covered
             # by the custom advanced search in clients
-            fields_to_search = fields_to_search.union(view_root.xpath("//field[@select=1]/@name"))
+            fields_to_search.update(view_root.xpath("//field[@select=1]/@name"))
 
         tree_view_root = view_root # as provided by loop above
         search_view = etree.Element("search", attrib={'string': tree_view_root.get("string", "")})
