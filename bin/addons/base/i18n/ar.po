@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: OpenERP Server 5.0.4\n"
 "Report-Msgid-Bugs-To: support@openerp.com\n"
 "POT-Creation-Date: 2011-01-11 11:14+0000\n"
-"PO-Revision-Date: 2012-01-20 20:03+0000\n"
-"Last-Translator: Mohamed M. Hagag <Unknown>\n"
+"PO-Revision-Date: 2012-03-19 09:51+0000\n"
+"Last-Translator: Abdulwhhab A. Al-Shehri <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-03-07 05:42+0000\n"
-"X-Generator: Launchpad (build 14907)\n"
+"X-Launchpad-Export-Date: 2012-03-20 05:18+0000\n"
+"X-Generator: Launchpad (build 14969)\n"
 
 #. module: base
 #: view:ir.filters:0
@@ -995,6 +995,9 @@ msgid ""
 "reference it\n"
 "- creation/update: a mandatory field is not correctly set"
 msgstr ""
+"لا يمكن إكمال العملية، ربما بسبب أحد الاسباب التالية:\n"
+"-الحذف: ربما تكون تحاول حذف سجل بينما هناك سجلات اخرى تشير اليه.\n"
+"الانشاء/التحديث: حقل أساسي لم يتم ادخاله بشكل صحيح."
 
 #. module: base
 #: view:ir.rule:0
@@ -1607,7 +1610,7 @@ msgstr "المجموعات"
 #. module: base
 #: selection:base.language.install,lang:0
 msgid "Spanish (CL) / Español (CL)"
-msgstr ""
+msgstr "الأسبانية / Español (CL)"
 
 #. module: base
 #: view:res.config.users:0
@@ -1806,7 +1809,7 @@ msgstr "عنوان البريد الإلكتروني"
 #. module: base
 #: selection:base.language.install,lang:0
 msgid "French (BE) / Français (BE)"
-msgstr ""
+msgstr "الفرنسية / Français (BE)"
 
 #. module: base
 #: view:ir.actions.server:0
@@ -1981,7 +1984,7 @@ msgstr "جزيرة نورفولك"
 #. module: base
 #: selection:base.language.install,lang:0
 msgid "Korean (KR) / 한국어 (KR)"
-msgstr ""
+msgstr "الكورية / 한국어 (KR)"
 
 #. module: base
 #: help:ir.model.fields,model:0
@@ -2256,7 +2259,7 @@ msgstr "اوروغواي"
 #. module: base
 #: selection:base.language.install,lang:0
 msgid "Finnish / Suomi"
-msgstr ""
+msgstr "الفنلندية / Suomi"
 
 #. module: base
 #: field:ir.rule,perm_write:0
@@ -2271,7 +2274,7 @@ msgstr "اللقب"
 #. module: base
 #: selection:base.language.install,lang:0
 msgid "German / Deutsch"
-msgstr ""
+msgstr "الألمانية / Deutsch"
 
 #. module: base
 #: help:ir.actions.server,trigger_name:0
@@ -2479,6 +2482,8 @@ msgid ""
 "Value Added Tax number. Check the box if the partner is subjected to the "
 "VAT. Used by the VAT legal statement."
 msgstr ""
+"رقم ضريبة القيمة المضافة. ضع علامة في هذا المربع اذا كان الشريك خاضع لضريبة "
+"القيمة المضافة. تستخدم بواسطة كشف ضريبة القيمة المضافة القانونية."
 
 #. module: base
 #: model:ir.model,name:base.model_maintenance_contract
@@ -2550,7 +2555,7 @@ msgstr "خطأ! لا يمكنك إنشاء فئات متداخلة."
 #. module: base
 #: view:res.lang:0
 msgid "%x - Appropriate date representation."
-msgstr ""
+msgstr "%x - صيغة التاريخ المناسب"
 
 #. module: base
 #: view:res.lang:0
@@ -8672,7 +8677,7 @@ msgstr "الفرص والفرص المحتملة"
 #. module: base
 #: selection:base.language.install,lang:0
 msgid "Romanian / română"
-msgstr ""
+msgstr "الرومانية / română"
 
 #. module: base
 #: view:res.log:0
@@ -8715,7 +8720,7 @@ msgstr "تنفيذ للإنشاء"
 #. module: base
 #: model:res.country,name:base.vi
 msgid "Virgin Islands (USA)"
-msgstr ""
+msgstr "جزيرة فيرجين - (الولايات المتحدة اﻻمريكية)"
 
 #. module: base
 #: model:res.country,name:base.tw
@@ -8744,7 +8749,7 @@ msgstr ""
 #. module: base
 #: field:ir.ui.view,field_parent:0
 msgid "Child Field"
-msgstr ""
+msgstr "حقل فرعي."
 
 #. module: base
 #: field:ir.actions.act_window,usage:0
@@ -8775,7 +8780,7 @@ msgstr "عرض:"
 #. module: base
 #: field:ir.model.fields,view_load:0
 msgid "View Auto-Load"
-msgstr ""
+msgstr "عرض التحميل التلقائي"
 
 #. module: base
 #: code:addons/base/ir/ir_model.py:264
@@ -8794,7 +8799,7 @@ msgstr "المورِد"
 #. module: base
 #: field:ir.ui.menu,web_icon:0
 msgid "Web Icon File"
-msgstr ""
+msgstr "ملف ايقونة الويب"
 
 #. module: base
 #: selection:base.language.install,lang:0
@@ -8804,7 +8809,7 @@ msgstr "Persian / فارسي"
 #. module: base
 #: view:ir.actions.act_window:0
 msgid "View Ordering"
-msgstr ""
+msgstr "عرض الطلبات"
 
 #. module: base
 #: code:addons/base/module/wizard/base_module_upgrade.py:95
@@ -8911,7 +8916,7 @@ msgstr "عقد ضمان الناشر"
 #. module: base
 #: selection:base.language.install,lang:0
 msgid "Bulgarian / български език"
-msgstr ""
+msgstr "البلغارية / български език"
 
 #. module: base
 #: model:ir.ui.menu,name:base.menu_aftersale
@@ -8978,7 +8983,7 @@ msgstr "المحددات"
 #. module: base
 #: selection:base.language.install,lang:0
 msgid "Czech / Čeština"
-msgstr ""
+msgstr "التشيكية / Čeština"
 
 #. module: base
 #: view:ir.actions.server:0
