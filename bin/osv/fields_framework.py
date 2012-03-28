@@ -136,6 +136,67 @@ class vptr_field(_column):
     def _auto_init_sql(self, name, obj, schema_table, context=None):
         return None
 
+    def expr_eval(self, cr, uid, obj, lefts, operator, right, pexpr, context):
+        """ Operations on the virtual model
+
+            Examples::
+
+                ('_vptr', '=', 'foo.bar'), ('_vptr', '!=', 'foo.bar')
+                ('_vptr', '=', False) # only base class
+                ('_vptr."foo.bar",'=', 4) # self.id points to a record that has id 4 in foo.bar
+                ('_vptr."foo.bar".code', '=', 'f-oo')
+                ('_vptr."foo.bar",'in', ['|',('code', '=', 'foo'), ('code', '=', 'bar')])
+        """
+
+        if len(lefts) == 1:
+            if operator not in ('=', '!='):
+                return eu.DomainInvalidOperator(obj, lefts, operator, right)
+            if right is False:
+                return (lefts[0], operator, None)
+            else:
+                return (lefts[0], operator, right)
+        elif len(lefts) >= 2 and lefts[1].startswith('"'):
+            import expression
+            from query import Query
+
+            i = 1
+            ml = []
+            while i < len(lefts):
+                ml.append(lefts[i])
+                if lefts[i].endswith('"'):
+                    break
+                i += 1
+            if not ml[-1].endswith('"'):
+                raise eu.DomainLeftError(obj, lefts, operator, right)
+            model = '.'.join(ml)[1:-1] # remove the quotes, too
+
+            # Now, we have the destination model, in which we have to query.
+            vobj = obj.pool.get(model)
+            if not vobj:
+                raise eu.DomainMsgError(_("Cannot locate model \"%s\" for virtual resolution") % model)
+            inh_field = vobj._inherits.get(obj._name, False)
+            if not inh_field:
+                raise eu.DomainMsgError(_("Model \"%s\" does not seem to inherit %s") % (model, obj._name))
+
+            qry = Query(tables=['"%s"' % vobj._table,])
+            if i >= len(lefts):
+                if operator == 'in' and isinstance(right, list) and not isinstance(right[0], (int, long)):
+                    domain = right # transparently nested
+                else:
+                    domain = ('', operator, right)
+            else:
+                domain = [('.'.join(lefts[i+1:]), operator, right),]
+            e = expression.expression(domain, debug=vobj._debug)
+            e.parse_into_query(cr, uid, vobj, qry, context)
+
+            from_clause, where_clause, qry_args = qry.get_sql()
+            qry = "SELECT %s FROM %s WHERE %s" % (inh_field, from_clause, where_clause)
+
+            return ('id', "inselect", (qry, qry_args))
+
+            # The result should match our side
+        raise eu.DomainLeftError(obj, lefts, operator, right)
+
 class vptr_name(_column):
     """ Exposes the human readable name of the associated class
 
