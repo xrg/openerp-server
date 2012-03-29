@@ -21,9 +21,9 @@
 ##############################################################################
 
 name = 'openerp-server'
-version = '6.0.3'
-major_version = '6.0' # are we?
-description = 'OpenERP Server'
+version = '6.9.0'
+major_version = '6.9'
+description = 'OpenERP-F3 Server'
 long_desc = '''OpenERP is a complete ERP and CRM. The main features are accounting (analytic
 and financial), stock management, sales and purchases management, tasks
 automation, marketing campaigns, help desk, POS, etc. Technical features include
