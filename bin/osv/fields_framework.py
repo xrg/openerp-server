@@ -143,7 +143,7 @@ class vptr_field(_column):
 
                 ('_vptr', '=', 'foo.bar'), ('_vptr', '!=', 'foo.bar')
                 ('_vptr', '=', False) # only base class
-                ('_vptr."foo.bar",'=', 4) # self.id points to a record that has id 4 in foo.bar
+                ('_vptr."foo.bar".id','=', 4) # self.id points to a record that has id 4 in foo.bar
                 ('_vptr."foo.bar".code', '=', 'f-oo')
                 ('_vptr."foo.bar",'in', ['|',('code', '=', 'foo'), ('code', '=', 'bar')])
         """
@@ -179,11 +179,11 @@ class vptr_field(_column):
                 raise eu.DomainMsgError(_("Model \"%s\" does not seem to inherit %s") % (model, obj._name))
 
             qry = Query(tables=['"%s"' % vobj._table,])
-            if i >= len(lefts):
+            if i >= len(lefts)-1:
                 if operator == 'in' and isinstance(right, list) and not isinstance(right[0], (int, long)):
                     domain = right # transparently nested
                 else:
-                    domain = ('', operator, right)
+                    raise eu.DomainLeftError(obj, lefts, operator, right)
             else:
                 domain = [('.'.join(lefts[i+1:]), operator, right),]
             e = expression.expression(domain, debug=vobj._debug)
