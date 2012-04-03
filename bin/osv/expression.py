@@ -28,22 +28,6 @@ from tools.translate import _
 
 ExpressionError = eu.DomainMsgError
 
-def _m2o_cmp(a, b):
-    if a is False:
-        if b:
-            return -1
-        return 0
-    else:
-        if not b:
-            return 1
-        elif isinstance(b, (int, long)):
-            return cmp(a[0], b)
-        elif isinstance(b, basestring):
-            return cmp(a[1], b)
-        else:
-            # Arbitrary: unknown b is greater than all record values
-            return -1
-
 class expression(object):
     """ Parse a domain expression into objects and SQL syntax
     use a real polish notation
@@ -56,42 +40,6 @@ class expression(object):
             'child_of', '|child_of' )
     INTERNAL_OPS = OPS + ('inselect', 'not inselect')
 
-    FALLBACK_OPS = {'=': lambda a, b: bool(a == b),
-            '!=': lambda a, b: bool(a != b),
-            '<>': lambda a, b: bool(a != b),
-            '<=': lambda a, b: bool(a <= b),
-            '<': lambda a, b: bool(a < b),
-            '>': lambda a, b: bool(a > b),
-            '>=': lambda a, b: bool(a >= b),
-            '=?': lambda a, b: b is None or b is False or bool(a == b),
-            #'=like': lambda a, b: , need regexp?
-            #'=ilike': lambda a, b: ,
-            'like': lambda a, b: bool(b in a),
-            'not like': lambda a, b: bool(b not in a),
-            'ilike': lambda a, b: (not b) or (a and bool(b.lower() in a.lower())),
-            'not ilike': lambda a, b: b and ((not a) or bool(b.lower() not in a.lower())),
-            'in': lambda a, b: bool(a in b),
-            'not in': lambda a, b: bool(a not in b),
-            }
-
-    FALLBACK_OPS_M2O = {'=': lambda a, b: _m2o_cmp(a,b) == 0,
-            '!=': _m2o_cmp ,
-            '<>': _m2o_cmp,
-            '<=': lambda a, b: _m2o_cmp(a,b) <= 0,
-            '<': lambda a, b: _m2o_cmp(a, b) < 0,
-            '>': lambda a, b: _m2o_cmp(a, b) > 0,
-            '>=': lambda a, b: _m2o_cmp(a, b) >= 0,
-            '=?': lambda a, b: b is None or b is False or _m2o_cmp(a, b) == 0,
-            #'=like': lambda a, b: , need regexp?
-            #'=ilike': lambda a, b: ,
-            'like': lambda a, b: (not b) or (a and bool(b in a[1])),
-            'not like': lambda a, b: b and ((not a) or (b not in a[1])),
-            'ilike': lambda a, b: (not b) or (a and bool(b.lower() in a[1].lower())),
-            'not ilike': lambda a, b: b and ((not a) or bool(b.lower() not in a[1].lower())),
-            'in': lambda a, b: a and bool(a[1] in b),
-            'not in': lambda a, b: (not a) or bool(a[1] not in b),
-            }
-            
     _implicit_fields = None
     _implicit_log_fields = None
     _browse_null_class = None
