@@ -173,7 +173,7 @@ class Schema(object):
         
         if tbl_reloids and True:
             # Scan constraints
-            cr.execute("""SELECT conname AS name, conrelid AS reloid,
+            qry = """SELECT conname AS name, conrelid AS reloid,
                         contype, conindid AS idx_oid,
                         confupdtype, confdeltype, conkey, fc.relname AS fcname,
                         (SELECT array_agg(attname) FROM (SELECT attname FROM pg_attribute
@@ -186,7 +186,11 @@ class Schema(object):
                     WHERE s.connamespace IN (SELECT oid from pg_namespace 
                             WHERE nspname = ANY(current_schemas(false)))
                       AND s.conrelid = ANY(%s)
-                     """,
+                     """
+            if cr.pgmode not in ('pg92', 'pg91', 'pg90'):
+                # This column was added after pg 8.4 :(
+                qry = qry.replace('conindid AS idx_oid,','')
+            cr.execute(qry,
                     (tbl_reloids.keys(), ), debug=self._debug)
             for con in cr.dictfetchall():
                 tbl = self.tables[tbl_reloids[con['reloid']]]
