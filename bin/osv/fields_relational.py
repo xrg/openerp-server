@@ -186,8 +186,9 @@ class _rel2many(_relational):
                 return None, res
 
         else:
-            # FIXME: shouldn't depend on operator???
-            print "operator:", op
+            # FIXME: shouldn't it depend on operator???
+            if op != '=':
+                warnings.warn("Operator is: %s" % op)
             qry = 'SELECT distinct("%s")' \
                            '  FROM "%s" where "%s" is not null'  % (sid1, reltable, sid1)
             params = []
