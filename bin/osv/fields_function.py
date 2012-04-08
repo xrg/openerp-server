@@ -740,6 +740,11 @@ class related(function):
                 obj_name = f['relation']
                 self._relations[-1]['relation'] = f['relation']
 
+    def _move_refs(self, cr, uid, obj, name, dest_id, src_ids, context):
+        """Move references to [src_ids] to point to dest_id
+        """
+        return None
+
 class dummy(function):
     """ Dummy fields
     """

@@ -101,6 +101,14 @@ class _rel2one(_relational):
     def _move_refs(self, cr, uid, obj, name, dest_id, src_ids, context):
         """Move references to [src_ids] to point to dest_id
         """
+        from orm import orm_memory
+        if isinstance(obj, orm_memory):
+            return None
+        if not getattr(obj, '_auto', True):
+            # FIXME! we assume that all non-auto models are Views, which
+            # may be false...
+            return None
+
         # BIG TODO: do stored fields at `obj` need to be recomputed?
         cr.execute("UPDATE \"%s\" SET %s = %%s WHERE %s = ANY(%%s)" % \
                 (obj._table, name, name),

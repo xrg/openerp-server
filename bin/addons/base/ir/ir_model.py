@@ -3,6 +3,7 @@
 #
 #    OpenERP, Open Source Management Solution
 #    Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>).
+#    Copyright (C) 2011-2012 P. Christeas <xrg@hellug.gr>
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -689,7 +690,7 @@ class ir_model_data(osv.osv):
         'noupdate': fields.boolean('Non Updatable', required=True),
         'date_update': fields.datetime('Update Date'),
         'date_init': fields.datetime('Init Date'),
-        'source': fields.selection([('orm', 'Internal'), ('xml', 'XML data')],
+        'source': fields.selection([('orm', 'Internal'), ('xml', 'XML data'), ('merged', 'Merged records')],
                 string="Source Domain", required=True, select=True,
                 help="Specifies where this record has come from. " \
                     "Used to coordinate synchronization algorithms."),

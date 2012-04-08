@@ -2399,6 +2399,13 @@ class orm_template(object):
         self.pool.get('ir.model.fields')._merge_ids(cr, uid, self._name, ids[0], ids[1:], context=context)
         self.unlink(cr, uid, ids[1:], context=context)
         
+        # Add a reference in ir.model.data for every id removed
+        imd_obj = self.pool.get('ir.model.data')
+        for i in ids[1:]:
+            imd_obj.create(cr, uid, dict(name='merged#%d' %i, model=self._name,
+                            res_id=ids[0], noupdate=True, source='merged'),
+                        context=context)
+        
         return ids[0]
 
 class orm_memory(orm_template):
