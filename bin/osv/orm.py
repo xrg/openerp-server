@@ -222,6 +222,7 @@ class browse_record_list(list):
 only_ids = orm_utils.only_ids # take it from there..
 orm_utils.browse_record_list = browse_record_list # ..put that one back
 orm_utils.browse_null = browse_null
+orm_utils.except_orm = except_orm
 
 class browse_record(object):
     """ An object that behaves like a row of an object's table.
@@ -559,6 +560,8 @@ class browse_record(object):
                 data[i] = {'id': i}
 
         return
+
+orm_utils.browse_record = browse_record
 
 class orm_template(object):
     """ THE base of all ORM models

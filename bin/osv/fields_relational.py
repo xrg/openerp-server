@@ -26,7 +26,7 @@ from tools.translate import _
 import warnings
 from tools import sql_model
 from tools import expr_utils as eu
-from tools.orm_utils import only_ids
+from tools import orm_utils
 from operator import itemgetter
 
 #.apidoc title: Relationals fields
@@ -60,7 +60,6 @@ class _relational(_column):
 
 class _rel2one(_relational):
     def _val2browse(self, val, name, parent_bro):
-        from orm import browse_null, browse_record, except_orm
         if val:
             obj = parent_bro._table.pool.get(self._obj)
             if isinstance(val, (list, tuple)):
@@ -71,7 +70,7 @@ class _rel2one(_relational):
             value = False
 
         if value:
-            assert not isinstance(value, browse_record)
+            assert not isinstance(value, orm_utils.browse_record)
             if obj is None:
                 # In some cases the target model is not available yet,
                 # but this resolution is late enough to let the model
@@ -84,15 +83,15 @@ class _rel2one(_relational):
                 context = parent_bro._context
                 global __hush_pyflakes
                 __hush_pyflakes= (cr, context)
-                raise except_orm(_('Error'), _('%s: ORM model %s cannot be found for %s field!') % \
+                raise orm_utils.except_orm(_('Error'), _('%s: ORM model %s cannot be found for %s field!') % \
                             (parent_bro._table_name, self._obj, name))
-            ret = browse_record(parent_bro._cr,
+            ret = orm_utils.browse_record(parent_bro._cr,
                         parent_bro._uid, value, obj, parent_bro._cache,
                         context=parent_bro._context,
                         list_class=parent_bro._list_class,
                         fields_process=parent_bro._fields_process)
         else:
-            ret = browse_null()
+            ret = orm_utils.browse_null()
         return ret
 
     def _browse2val(self, bro, name):
@@ -119,18 +118,17 @@ class _rel2many(_relational):
     """ common baseclass for -2many relation fields
     """
     def _val2browse(self, val, name, parent_bro):
-        from orm import browse_record
 
         obj = parent_bro._table.pool.get(self._obj)
         return parent_bro._list_class([
-                    browse_record(parent_bro._cr, parent_bro._uid, id, obj,
+                    orm_utils.browse_record(parent_bro._cr, parent_bro._uid, id, obj,
                                 parent_bro._cache, context=parent_bro._context, list_class=parent_bro._list_class,
                                 fields_process=parent_bro._fields_process) \
                     for id in val],
                     parent_bro._context)
 
     def _browse2val(self, bro, name):
-        return only_ids(bro)
+        return orm_utils.only_ids(bro)
 
     def expr_eval(self, cr, uid, obj, lefts, operator, right, pexpr, context):
         if len(lefts) > 1: # TODO pg84 reduce
@@ -1140,18 +1138,17 @@ class reference(_column):
         _column.__init__(self, string=string, size=size, selection=selection, **args)
 
     def _val2browse(self, val, name, parent_bro):
-        from orm import browse_null, browse_record
         if not val:
-            return browse_null()
+            return orm_utils.browse_null()
         ref_obj, ref_id = val.split(',')
         ref_id = long(ref_id)
         if ref_id:
             obj = parent_bro._table.pool.get(ref_obj)
-            return browse_record(parent_bro._cr, parent_bro._uid, ref_id, obj, parent_bro._cache,
+            return orm_utils.browse_record(parent_bro._cr, parent_bro._uid, ref_id, obj, parent_bro._cache,
                                 context=parent_bro._context, list_class=parent_bro._list_class,
                                 fields_process=parent_bro._fields_process)
 
-        return browse_null()
+        return orm_utils.browse_null()
 
     def get(self, cr, obj, ids, name, uid=None, context=None, values=None):
         """
