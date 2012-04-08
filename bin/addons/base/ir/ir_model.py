@@ -180,19 +180,23 @@ class ir_model(osv.osv):
         if  context is None:
             context = {}
         if context and context.get('manual',False):
-            vals['state']='manual'
+            vals['state'] = 'manual'
         res = super(ir_model,self).create(cr, user, vals, context)
-        if vals.get('state','base')=='manual':
+        wf_engine = osv.netsvc.LocalService('workflow')
+        if vals.get('state','base') == 'manual':
+            wf_engine.freeze(cr)
             self.instanciate(cr, user, vals['model'], context)
             self.pool.get(vals['model']).__init__(self.pool, cr)
             ctx = context.copy()
             ctx.update({'field_name':vals['name'],'field_state':'manual','select':vals.get('select_level','0')})
             _re_init_model(self.pool.get(vals['model']), cr, ctx)
+            wf_engine.thaw(cr)
         return res
 
     def instanciate(self, cr, user, model, context=None):
         class x_custom_model(osv.osv):
             pass
+        wf_engine = osv.netsvc.LocalService('workflow')
         x_custom_model._name = model
         x_custom_model._module = False
         a = x_custom_model.createInstance(self.pool, '', cr)
@@ -201,6 +205,7 @@ class ir_model(osv.osv):
         else:
             x_name = a._columns.keys()[0]
         x_custom_model._rec_name = x_name
+        wf_engine.reload_models(cr, [model,])
 ir_model()
 
 class ir_model_fields(osv.osv):
