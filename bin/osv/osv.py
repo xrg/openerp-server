@@ -30,7 +30,7 @@ import copy
 from psycopg2 import IntegrityError, errorcodes
 from tools.func import wraps
 from tools.translate import translate
-from tools import expr_utils
+from tools import expr_utils, config
 
 module_list = []
 module_class_list = {}
@@ -53,6 +53,8 @@ class object_proxy(netsvc.Service):
         self.exportMethod(self.exec_dict)
         self.exportMethod(self.set_debug)
         self.exportMethod(self.obj_list)
+        self.exportMethod(self.method_list)
+        self.exportMethod(self.method_explain)
 
     def check(f):
         @wraps(f)
@@ -279,6 +281,70 @@ class object_proxy(netsvc.Service):
     def obj_list(self, **kw):
         return []
 
+    def method_list(self, db, obj, **kw):
+        """ Lists the available methods for ORM model `obj` through RPC
+        """
+        if not config.get_misc('debug', 'introspection', False):
+            raise except_osv('Access Error', 'Introspection is not enabled')
+
+        obj2 = pooler.get_pool(db).get(obj)
+        if not obj2:
+            raise except_osv('Object Error', 'Object %s doesn\'t exist' % str(obj))
+        try:
+            import inspect
+            ret = []
+            for fnn, x in inspect.getmembers(obj2, inspect.ismethod):
+                if fnn.startswith('_'):
+                    continue
+                ret.append(fnn)
+            return ret
+        except Exception:
+            raise
+
+    def method_explain(self, db, obj, method, **kw):
+        """Return introspection information for ORM method `obj`.`method`
+
+            @return a Dict with 'name', 'pretty' as the pythonic definition,
+                'doc' with the docstring, 'ctype' with a keyword describing
+                ORM conformance of the method
+        """
+        if not config.get_misc('debug', 'introspection', False):
+            raise except_osv('Access Error', 'Introspection is not enabled')
+
+        obj2 = pooler.get_pool(db).get(obj)
+        if not object:
+            raise except_osv('Object Error', 'Object %s doesn\'t exist' % str(obj))
+        try:
+            import inspect
+            assert isinstance(method, basestring), method
+            if method.startswith('_'):
+                raise ValueError("Protected methods cannot be inspected")
+            ifn = getattr(obj2, method, False)
+            if not ifn:
+                raise KeyError("No \"%s\" attribute in %s" % (method, obj2._name))
+            if not inspect.ismethod(ifn):
+                raise ValueError("Attribute \"%s\" is not a function" % method)
+            argspec = inspect.getargspec(ifn)
+            ctype = 'unknown'
+            if argspec.args[0] != 'self':
+                ctype = 'non-standard'
+            elif argspec.args[:3] == ['self', 'cr', 'uid'] or argspec.args[:3] == ['self', 'cr', 'user']:
+                if argspec.args[3] == 'id' and argspec.args[-1] == 'context':
+                    ctype = 'record-context'
+                elif argspec.args[3] == 'ids' and argspec.args[-1] == 'context':
+                    ctype = 'record-multi-context'
+                elif argspec.args[3] == 'id':
+                    ctype = 'record'
+                elif argspec.args[3] == 'ids':
+                    ctype = 'record-multi'
+                elif argspec.args[-1] == 'context':
+                    ctype = 'other-context'
+
+            doc = inspect.getdoc(ifn) or ''
+            return dict(name=ifn.__name__, pretty=ifn.__name__ + inspect.formatargspec(*argspec),
+                doc=doc.rstrip(), ctype=ctype)
+        except Exception:
+            raise
 object_proxy()
 
 class osv_pool(object):
