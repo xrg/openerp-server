@@ -781,6 +781,11 @@ class orm_template(object):
         """
         pass
 
+    def _load_manual_fields(self, cr):
+        """Performs initialization of manual fields. Called through __init__()
+        """
+        pass
+
     def __init__(self, cr):
         if not self._name and not hasattr(self, '_inherit'):
             name = type(self).__name__.split('.')[0]
@@ -2437,6 +2442,9 @@ class orm_memory(orm_template):
         cr.execute('DELETE FROM wkf_instance WHERE res_type=%s', 
                 (self._name,), debug=self._debug)
 
+        self._load_manual_fields(cr)
+
+    def _load_manual_fields(self, cr):
         # Load manual fields
         if True:
             cr.execute('SELECT * FROM ir_model_fields WHERE model=%s AND state=%s', (self._name, 'manual'))
@@ -3253,8 +3261,27 @@ class orm(orm_template):
             self._log_access = getattr(self, "_auto", True)
 
         self._columns = self._columns.copy() # AAArrgh!
-        
-        # Load manual fields
+
+        self._load_manual_fields(cr)
+
+        for (key, _, msg) in self._sql_constraints:
+            if self._debug:
+                _logger.debug("Installing sql error \"%s\" for %s", key, self._name)
+            self.pool._sql_error[self._table+'_'+key] = msg
+
+        self._inherits_check()
+        self._inherits_reload()
+        if not self._sequence:
+            self._sequence = self._table+'_id_seq'
+        for k in self._defaults.keys():
+            if self._defaults[k] is None:
+                del self._defaults[k]
+            else:
+                assert (k in self._columns) or (k in self._inherit_fields), \
+                    'Default function defined in %s but field %s does not exist %r !' %\
+                    (self._name, k, self._defaults[k])
+
+    def _load_manual_fields(self, cr):
         if True:
             cr.execute('SELECT * FROM ir_model_fields WHERE model=%s AND state=%s', (self._name, 'manual'))
             for field in cr.dictfetchall():
@@ -3276,23 +3303,6 @@ class orm(orm_template):
 
         for name, field in self._columns.items():
             field.post_init(cr, name, self)
-
-        for (key, _, msg) in self._sql_constraints:
-            if self._debug:
-                _logger.debug("Installing sql error \"%s\" for %s", key, self._name)
-            self.pool._sql_error[self._table+'_'+key] = msg
-
-        self._inherits_check()
-        self._inherits_reload()
-        if not self._sequence:
-            self._sequence = self._table+'_id_seq'
-        for k in self._defaults.keys():
-            if self._defaults[k] is None:
-                del self._defaults[k]
-            else:
-                assert (k in self._columns) or (k in self._inherit_fields), \
-                    'Default function defined in %s but field %s does not exist %r !' %\
-                    (self._name, k, self._defaults[k])
 
     #
     # Update objects that uses this one to update their _inherits fields

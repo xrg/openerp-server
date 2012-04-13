@@ -325,7 +325,7 @@ class ir_model_fields(osv.osv):
                     raise except_orm(_('Error'), _("Model %s does not exist!") % vals['relation'])
 
                 if self.pool.get(vals['model']):
-                    self.pool.get(vals['model']).__init__(self.pool, cr)
+                    self.pool.get(vals['model'])._load_manual_fields(cr)
                     #Added context to _auto_init for special treatment to custom field for select_level
                     ctx = context.copy()
                     ctx.update({'field_name':vals['name'],'field_state':'manual','select':vals.get('select_level','0'),'update_custom_fields':True})
