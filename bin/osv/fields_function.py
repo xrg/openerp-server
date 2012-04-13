@@ -609,6 +609,10 @@ class function(_column):
 
         raise RuntimeError("unreachable code")
 
+    def _move_refs(self, cr, uid, obj, name, dest_id, src_ids, context):
+        # Would we ever need to act when moving records (for merge)?
+        return None
+
 # ---------------------------------------------------------
 # Related fields
 # ---------------------------------------------------------
