@@ -13,6 +13,14 @@
         <field name="name">Administration / Access Rights</field>
     </record>
 
+    <record model="res.groups" id="group_records_merge">
+        <field name="name">Administration / Merge Records</field>
+	<field name="comment">Members of this group are allowed to merge records.
+		Since this is an advanced operation (may create side-effects), this
+		special permission is needed.
+	</field>
+    </record>
+
     <record model="res.groups" id="group_user">
         <field name="name">Employee</field>
     </record>
@@ -65,6 +73,17 @@
             <field name="name">ir.ui.view_custom rule</field>
             <field name="model_id" ref="model_ir_ui_view_custom"/>
             <field name="domain_force">[('user_id','=',user.id)]</field>
+        </record>
+
+        <record model="ir.rule" id="rule_ir_model_data_merge">
+            <field name="name">ir.model.data Merge</field>
+            <field name="model_id" ref="model_ir_model_data"/>
+            <field name="domain_force">[('source','=','merged')]</field>
+            <field name="perm_read" eval="False" />
+                <!-- we skip the Read permission, which is True for everybody,
+                     since we don't want to slow down all read operations
+                     on ir.model.data -->
+            <field name="groups" eval="[(6,0,[ref(group_records_merge)])]" />
         </record>
 
     </data>
