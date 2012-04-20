@@ -695,7 +695,8 @@ class ir_model_data(osv.osv):
         'noupdate': fields.boolean('Non Updatable', required=True),
         'date_update': fields.datetime('Update Date'),
         'date_init': fields.datetime('Init Date'),
-        'source': fields.selection([('orm', 'Internal'), ('xml', 'XML data'), ('merged', 'Merged records')],
+        'source': fields.selection([('orm', 'Internal'), ('xml', 'XML data'), \
+                ('merged', 'Merged records'), ('custom', 'Custom')],
                 string="Source Domain", required=True, select=True,
                 help="Specifies where this record has come from. " \
                     "Used to coordinate synchronization algorithms."),
