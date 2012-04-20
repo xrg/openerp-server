@@ -527,7 +527,7 @@ class MultiHTTPHandler(FixSendError, HttpOptions, BaseHTTPRequestHandler):
                 if err.errno in (errno.ETIMEDOUT, errno.ECONNRESET, 
                                 errno.ECONNABORTED):
                     pass
-                elif 'timed out' in err.args[0]:
+                elif 'timed out' in err.args[0] or '[Errno 110]' in err.args[0]:
                     # sadly, the SSLError does not have some code or errno
                     pass
                 else:
