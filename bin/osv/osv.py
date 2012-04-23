@@ -328,14 +328,17 @@ class object_proxy(netsvc.Service):
             ctype = 'unknown'
             if argspec.args[0] != 'self':
                 ctype = 'non-standard'
-            elif argspec.args[:3] == ['self', 'cr', 'uid'] or argspec.args[:3] == ['self', 'cr', 'user']:
-                if argspec.args[3] == 'id' and argspec.args[-1] == 'context':
+            elif argspec.args[:3] == ['self', 'cr', 'uid'] \
+                    or argspec.args[:3] == ['self', 'cr', 'user']:
+                
+                args3 = (len(argspec.args) > 3  and argspec.args[3]) or False
+                if args3 == 'id' and argspec.args[-1] == 'context':
                     ctype = 'record-context'
-                elif argspec.args[3] == 'ids' and argspec.args[-1] == 'context':
+                elif args3 == 'ids' and argspec.args[-1] == 'context':
                     ctype = 'record-multi-context'
-                elif argspec.args[3] == 'id':
+                elif args3 == 'id':
                     ctype = 'record'
-                elif argspec.args[3] == 'ids':
+                elif args3 == 'ids':
                     ctype = 'record-multi'
                 elif argspec.args[-1] == 'context':
                     ctype = 'other-context'
