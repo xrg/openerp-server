@@ -1017,7 +1017,7 @@ class _report_spool_job(threading.Thread):
         return True
 
 class report_spool(dbExportDispatch, baseExportService):
-    _auth_commands = { 'db': ['report','report_get', 'report_stop'] }
+    _auth_commands = { 'db': ['report','report_get', 'report_stop', 'report_list'] }
     def __init__(self, name='report'):
         netsvc.ExportService.__init__(self, name)
         self.joinGroup('web-services')
