@@ -310,6 +310,7 @@ class Http6Daemon(BaseHttpDaemon):
 class Http6SDaemon(BaseHttpDaemon):
     _RealProto = 'HTTP6S'
     _ClientProto = 'https'
+    _IsSecure = True
     def __init__(self, interface, port):
         try:
             super(Http6SDaemon, self).__init__(address=(interface, port),
@@ -377,7 +378,7 @@ def init_servers():
     if ipv6_missing:
         logging.getLogger('http6d').warning("HTTPd servers for IPv6 specified, but not supported at this platform.")
 
-def reg_http_service(hts, secure_only = False):
+def reg_http_service(hts, secure_only=False):
     """ Register some handler to httpd.
         hts must be an HTTPDir
     """
