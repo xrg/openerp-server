@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: openobject-addons\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-01-11 11:14+0000\n"
-"PO-Revision-Date: 2012-05-11 00:30+0000\n"
+"PO-Revision-Date: 2012-05-12 23:06+0000\n"
 "Last-Translator: Bjorn Thor <Unknown>\n"
 "Language-Team: Icelandic <is@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-05-12 05:56+0000\n"
+"X-Launchpad-Export-Date: 2012-05-13 04:54+0000\n"
 "X-Generator: Launchpad (build 15225)\n"
 
 #. module: base
@@ -64,7 +64,7 @@ msgstr ""
 #. module: base
 #: field:base.language.import,code:0
 msgid "Code (eg:en__US)"
-msgstr ""
+msgstr "Kóði (t.d.: is_IS)"
 
 #. module: base
 #: view:workflow:0
@@ -74,7 +74,7 @@ msgstr ""
 #: field:workflow.transition,wkf_id:0
 #: field:workflow.workitem,wkf_id:0
 msgid "Workflow"
-msgstr ""
+msgstr "Vinnuflæði"
 
 #. module: base
 #: view:partner.sms.send:0
@@ -89,7 +89,7 @@ msgstr ""
 #. module: base
 #: selection:ir.model.fields,select_level:0
 msgid "Not Searchable"
-msgstr ""
+msgstr "Ekki leitanlegt"
 
 #. module: base
 #: selection:base.language.install,lang:0
@@ -104,7 +104,7 @@ msgstr ""
 #. module: base
 #: field:ir.actions.act_window,display_menu_tip:0
 msgid "Display Menu Tips"
-msgstr ""
+msgstr "Sýna ábendingar í valmynd"
 
 #. module: base
 #: view:ir.module.module:0
@@ -130,7 +130,7 @@ msgstr ""
 #. module: base
 #: field:res.partner,ref:0
 msgid "Reference"
-msgstr ""
+msgstr "Tilvísun"
 
 #. module: base
 #: field:ir.actions.act_window,target:0
@@ -141,7 +141,7 @@ msgstr ""
 #: code:addons/base/res/res_users.py:558
 #, python-format
 msgid "Warning!"
-msgstr ""
+msgstr "Aðvörun!"
 
 #. module: base
 #: code:addons/base/ir/ir_model.py:344
@@ -165,7 +165,7 @@ msgstr ""
 #. module: base
 #: model:res.country,name:base.sz
 msgid "Swaziland"
-msgstr ""
+msgstr "Svasíland"
 
 #. module: base
 #: code:addons/orm.py:4206
@@ -185,17 +185,19 @@ msgid ""
 "Some installed modules depend on the module you plan to Uninstall :\n"
 " %s"
 msgstr ""
+"Sumar viðbætur eru háðar viðbótinni sem þú áætlar að fjarlægja:\n"
+" %s"
 
 #. module: base
 #: field:ir.sequence,number_increment:0
 msgid "Increment Number"
-msgstr ""
+msgstr "Hækka tölu"
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_res_company_tree
 #: model:ir.ui.menu,name:base.menu_action_res_company_tree
 msgid "Company's Structure"
-msgstr ""
+msgstr "Skipulag fyrirtækis"
 
 #. module: base
 #: selection:base.language.install,lang:0
@@ -205,7 +207,7 @@ msgstr ""
 #. module: base
 #: view:res.partner:0
 msgid "Search Partner"
-msgstr ""
+msgstr "Leita að Viðskiptaaðila"
 
 #. module: base
 #: code:addons/base/res/res_user.py:132
@@ -217,17 +219,17 @@ msgstr "stilla þarf SMTP þjón til að geta sent fjöldapóst."
 #: code:addons/base/module/wizard/base_export_language.py:60
 #, python-format
 msgid "new"
-msgstr ""
+msgstr "nýtt"
 
 #. module: base
 #: field:ir.actions.report.xml,multi:0
 msgid "On multiple doc."
-msgstr ""
+msgstr "Á mörgum skjölum."
 
 #. module: base
 #: field:ir.module.category,module_nr:0
 msgid "Number of Modules"
-msgstr ""
+msgstr "Fjöldi Viðbóta"
 
 #. module: base
 #: help:multi_company.default,company_dest_id:0
@@ -237,7 +239,7 @@ msgstr ""
 #. module: base
 #: field:res.partner.bank.type.field,size:0
 msgid "Max. Size"
-msgstr ""
+msgstr "Hámarks stærð"
 
 #. module: base
 #: view:res.partner:0
@@ -278,17 +280,17 @@ msgstr ""
 #. module: base
 #: field:res.partner,credit_limit:0
 msgid "Credit Limit"
-msgstr ""
+msgstr "Hámarks skuld"
 
 #. module: base
 #: field:ir.model.data,date_update:0
 msgid "Update Date"
-msgstr ""
+msgstr "Uppfæra dags"
 
 #. module: base
 #: view:ir.attachment:0
 msgid "Owner"
-msgstr ""
+msgstr "Eigandi"
 
 #. module: base
 #: field:ir.actions.act_window,src_model:0
@@ -315,7 +317,7 @@ msgstr ""
 #: view:ir.model.access:0
 #: field:ir.model.access,group_id:0
 msgid "Group"
-msgstr ""
+msgstr "Hópur"
 
 #. module: base
 #: field:ir.exports.line,name:0
@@ -333,7 +335,7 @@ msgstr ""
 #. module: base
 #: model:res.country,name:base.tv
 msgid "Tuvalu"
-msgstr ""
+msgstr "Túvalú"
 
 #. module: base
 #: selection:ir.model,state:0
@@ -343,7 +345,7 @@ msgstr ""
 #. module: base
 #: field:res.lang,date_format:0
 msgid "Date Format"
-msgstr ""
+msgstr "Snið á dagsetningu"
 
 #. module: base
 #: field:res.bank,email:0
@@ -354,7 +356,7 @@ msgstr "Netfang"
 #. module: base
 #: model:res.country,name:base.an
 msgid "Netherlands Antilles"
-msgstr ""
+msgstr "Hollensku Antillaeyjar"
 
 #. module: base
 #: code:addons/base/res/res_users.py:396
@@ -400,13 +402,13 @@ msgstr ""
 #. module: base
 #: view:base.module.upgrade:0
 msgid "Your system will be updated."
-msgstr ""
+msgstr "Kerfið þitt verður uppfært."
 
 #. module: base
 #: field:ir.actions.todo,note:0
 #: selection:ir.property,type:0
 msgid "Text"
-msgstr ""
+msgstr "Texti"
 
 #. module: base
 #: field:res.country,name:0
@@ -416,7 +418,7 @@ msgstr "Nafn Lands"
 #. module: base
 #: model:res.country,name:base.co
 msgid "Colombia"
-msgstr ""
+msgstr "Kólumbía"
 
 #. module: base
 #: view:ir.module.module:0
@@ -435,11 +437,13 @@ msgid ""
 "The ISO country code in two chars.\n"
 "You can use this field for quick search."
 msgstr ""
+"ISO lands kóði í tveimur bókstöfum\n"
+"Þú getur notað þetta svæði fyrir snögga leit"
 
 #. module: base
 #: model:res.country,name:base.pw
 msgid "Palau"
-msgstr ""
+msgstr "Palá"
 
 #. module: base
 #: view:res.partner:0
@@ -449,7 +453,7 @@ msgstr "Sala og Innkaup"
 #. module: base
 #: view:ir.translation:0
 msgid "Untranslated"
-msgstr ""
+msgstr "Óþýtt"
 
 #. module: base
 #: help:ir.actions.act_window,context:0
@@ -467,13 +471,13 @@ msgstr ""
 #. module: base
 #: model:res.partner.category,name:base.res_partner_category_miscellaneoussuppliers0
 msgid "Miscellaneous Suppliers"
-msgstr ""
+msgstr "Ýmsir birgjar"
 
 #. module: base
 #: code:addons/base/ir/ir_model.py:287
 #, python-format
 msgid "Custom fields must have a name that starts with 'x_' !"
-msgstr ""
+msgstr "Sérsniðið svæði verður að hafa nafn sem byrjar á 'x_'!"
 
 #. module: base
 #: help:ir.actions.server,action_id:0
@@ -494,7 +498,7 @@ msgstr ""
 #: view:ir.model:0
 #: field:ir.model,name:0
 msgid "Model Description"
-msgstr ""
+msgstr "Lýsing viðbótar"
 
 #. module: base
 #: help:ir.actions.act_window,src_model:0
@@ -510,7 +514,7 @@ msgstr ""
 #. module: base
 #: model:res.country,name:base.jo
 msgid "Jordan"
-msgstr ""
+msgstr "Jórdanía"
 
 #. module: base
 #: view:ir.module.module:0
@@ -520,7 +524,7 @@ msgstr ""
 #. module: base
 #: model:res.country,name:base.er
 msgid "Eritrea"
-msgstr ""
+msgstr "Erítrea"
 
 #. module: base
 #: view:res.config:0
@@ -532,7 +536,7 @@ msgstr "lýsing"
 #: model:ir.ui.menu,name:base.menu_base_action_rule
 #: model:ir.ui.menu,name:base.menu_base_action_rule_admin
 msgid "Automated Actions"
-msgstr ""
+msgstr "Sjálfvirkar aðgerðir"
 
 #. module: base
 #: model:ir.model,name:base.model_ir_actions_actions
@@ -556,6 +560,8 @@ msgid ""
 "Launchpad.net, our open source project management facility. We use their "
 "online interface to synchronize all translations efforts."
 msgstr ""
+"OpenERP þýðingar (kjarni, viðbætur, viðmót) eru stýrðar í gegnum "
+"Launchpad.net, Þær þýðingar eru samhæfðar við framtíðar útgáfur sjálfkrafa."
 
 #. module: base
 #: field:res.partner,title:0
@@ -565,12 +571,12 @@ msgstr ""
 #. module: base
 #: selection:base.language.install,lang:0
 msgid "Swedish / svenska"
-msgstr ""
+msgstr "Sænska / svenska"
 
 #. module: base
 #: model:res.country,name:base.rs
 msgid "Serbia"
-msgstr ""
+msgstr "Serbía"
 
 #. module: base
 #: selection:ir.translation,type:0
@@ -607,7 +613,7 @@ msgstr ""
 #. module: base
 #: model:ir.ui.menu,name:base.menu_crm_config_opportunity
 msgid "Opportunities"
-msgstr ""
+msgstr "Tækifæri"
 
 #. module: base
 #: model:ir.model,name:base.model_base_language_export
@@ -623,31 +629,32 @@ msgstr ""
 #: help:ir.actions.report.xml,report_type:0
 msgid "Report Type, e.g. pdf, html, raw, sxw, odt, html2html, mako2html, ..."
 msgstr ""
+"Tegund skýrslu, t.d. pdf, html, raw, sxw, odt, html2html, mako2html, ..."
 
 #. module: base
 #: model:res.partner.category,name:base.res_partner_category_4
 msgid "Basic Partner"
-msgstr ""
+msgstr "Grunn viðskiptaaðili"
 
 #. module: base
 #: report:ir.module.reference.graph:0
 msgid ","
-msgstr ""
+msgstr ","
 
 #. module: base
 #: view:res.partner:0
 msgid "My Partners"
-msgstr ""
+msgstr "Mínir viðskiptaaðilar"
 
 #. module: base
 #: view:ir.actions.report.xml:0
 msgid "XML Report"
-msgstr ""
+msgstr "XML skýrsla"
 
 #. module: base
 #: model:res.country,name:base.es
 msgid "Spain"
-msgstr ""
+msgstr "Spánn"
 
 #. module: base
 #: model:ir.ui.menu,name:base.menu_translation_export
@@ -664,7 +671,7 @@ msgstr ""
 #: model:ir.actions.act_window,name:base.action_view_base_module_upgrade
 #: model:ir.model,name:base.model_base_module_upgrade
 msgid "Module Upgrade"
-msgstr ""
+msgstr "Uppfærsla á viðbót"
 
 #. module: base
 #: view:res.config.users:0
@@ -682,12 +689,12 @@ msgstr ""
 #: field:res.partner,mobile:0
 #: field:res.partner.address,mobile:0
 msgid "Mobile"
-msgstr ""
+msgstr "Farsími"
 
 #. module: base
 #: model:res.country,name:base.om
 msgid "Oman"
-msgstr ""
+msgstr "Óman"
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_payterm_form
@@ -698,7 +705,7 @@ msgstr ""
 #. module: base
 #: model:res.country,name:base.nu
 msgid "Niue"
-msgstr ""
+msgstr "Niue"
 
 #. module: base
 #: selection:ir.cron,interval_type:0
@@ -708,7 +715,7 @@ msgstr ""
 #. module: base
 #: selection:ir.module.module,license:0
 msgid "Other OSI Approved Licence"
-msgstr ""
+msgstr "Önnur OSI samþykkt leyfi."
 
 #. module: base
 #: help:res.config.users,context_lang:0
@@ -728,12 +735,12 @@ msgstr ""
 #: model:ir.actions.act_window,name:base.act_menu_create
 #: view:wizard.ir.model.menu.create:0
 msgid "Create Menu"
-msgstr ""
+msgstr "Búa til valmynd"
 
 #. module: base
 #: model:res.country,name:base.in
 msgid "India"
-msgstr ""
+msgstr "Indland"
 
 #. module: base
 #: model:ir.actions.act_window,name:base.res_request_link-act
@@ -754,7 +761,7 @@ msgstr ""
 #. module: base
 #: field:res.partner.category,child_ids:0
 msgid "Child Categories"
-msgstr ""
+msgstr "Undirflokkar"
 
 #. module: base
 #: model:ir.model,name:base.model_ir_config_parameter
@@ -786,7 +793,7 @@ msgstr ""
 #: view:res.partner:0
 #: view:res.partner.address:0
 msgid "Type"
-msgstr ""
+msgstr "Gerð"
 
 #. module: base
 #: code:addons/orm.py:398
@@ -810,13 +817,13 @@ msgstr ""
 #: code:addons/base/res/res_users.py:558
 #, python-format
 msgid "Setting empty passwords is not allowed for security reasons!"
-msgstr ""
+msgstr "Ekki er leyfilegt að hafa tómt lykilorð af öryggis ásætðum!"
 
 #. module: base
 #: selection:ir.actions.server,state:0
 #: selection:workflow.activity,kind:0
 msgid "Dummy"
-msgstr ""
+msgstr "Plat"
 
 #. module: base
 #: constraint:ir.ui.view:0
@@ -826,12 +833,12 @@ msgstr ""
 #. module: base
 #: model:res.country,name:base.ky
 msgid "Cayman Islands"
-msgstr ""
+msgstr "Cayman-eyjar"
 
 #. module: base
 #: model:res.country,name:base.kr
 msgid "South Korea"
-msgstr ""
+msgstr "Suður-Kórea"
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_workflow_transition_form
@@ -849,12 +856,12 @@ msgstr ""
 #. module: base
 #: field:ir.module.module,contributors:0
 msgid "Contributors"
-msgstr ""
+msgstr "Höfundar"
 
 #. module: base
 #: selection:ir.property,type:0
 msgid "Char"
-msgstr ""
+msgstr "Stafur"
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_publisher_warranty_contract_form
@@ -870,17 +877,17 @@ msgstr ""
 #. module: base
 #: model:res.country,name:base.ug
 msgid "Uganda"
-msgstr ""
+msgstr "Úganda"
 
 #. module: base
 #: field:ir.model.access,perm_unlink:0
 msgid "Delete Access"
-msgstr ""
+msgstr "Eyða aðgangi"
 
 #. module: base
 #: model:res.country,name:base.ne
 msgid "Niger"
-msgstr ""
+msgstr "Níger"
 
 #. module: base
 #: selection:base.language.install,lang:0
@@ -899,6 +906,9 @@ msgid ""
 "Lauchpad's web interface (Rosetta). If you need to perform mass translation, "
 "Launchpad also allows uploading full .po files at once"
 msgstr ""
+"Til að bæta viðurkenndar þýðingar, ætti að nota þýðingarvef á lauchpad.net. "
+"Ef þú þarf að framkvæma viðamikla þýðingu leyfir lauchpad að upphala .po "
+"skrár."
 
 #. module: base
 #: selection:base.language.install,lang:0
@@ -933,12 +943,12 @@ msgstr ""
 #. module: base
 #: field:base.module.import,module_name:0
 msgid "Module Name"
-msgstr ""
+msgstr "Heiti Viðbótar"
 
 #. module: base
 #: model:res.country,name:base.mh
 msgid "Marshall Islands"
-msgstr ""
+msgstr "Marshall-eyjar"
 
 #. module: base
 #: code:addons/base/ir/ir_model.py:368
@@ -949,13 +959,13 @@ msgstr ""
 #. module: base
 #: model:res.country,name:base.ht
 msgid "Haiti"
-msgstr ""
+msgstr "Haítí"
 
 #. module: base
 #: view:ir.ui.view:0
 #: selection:ir.ui.view,type:0
 msgid "Search"
-msgstr ""
+msgstr "Leita"
 
 #. module: base
 #: code:addons/osv.py:132
@@ -966,6 +976,10 @@ msgid ""
 "reference it\n"
 "- creation/update: a mandatory field is not correctly set"
 msgstr ""
+"Aðgerðin getur ekki klárað, eflaust vegna eftirfarandi\n"
+"- eyða, þú gætir verið að reyna að eyða skrá sem enn er verið að vísa í "
+"annarstaðar frá.\n"
+"- bæta við/uppfæra: svæði sem er skilt að fylla út er ekki rétt útfyllt."
 
 #. module: base
 #: view:ir.rule:0
@@ -977,12 +991,12 @@ msgstr ""
 #: code:addons/base/res/res_users.py:222
 #, python-format
 msgid "Operation Canceled"
-msgstr ""
+msgstr "Aðgerð afturkölluð"
 
 #. module: base
 #: help:base.language.export,lang:0
 msgid "To export a new language, do not select a language."
-msgstr ""
+msgstr "Til að flytja út nýtt tungumál, ekki velja tungumál."
 
 #. module: base
 #: view:res.request:0
@@ -997,7 +1011,7 @@ msgstr ""
 #. module: base
 #: model:ir.ui.menu,name:base.menu_purchase_root
 msgid "Purchases"
-msgstr ""
+msgstr "Innkaup"
 
 #. module: base
 #: model:res.country,name:base.md
@@ -1007,13 +1021,13 @@ msgstr ""
 #. module: base
 #: view:ir.module.module:0
 msgid "Features"
-msgstr ""
+msgstr "Eiginleikar"
 
 #. module: base
 #: view:ir.module.module:0
 #: report:ir.module.reference.graph:0
 msgid "Version"
-msgstr ""
+msgstr "Útgáfa"
 
 #. module: base
 #: view:ir.model.access:0
@@ -1031,7 +1045,7 @@ msgstr ""
 #: code:addons/base/module/wizard/base_update_translations.py:38
 #, python-format
 msgid "No language with code \"%s\" exists"
-msgstr ""
+msgstr "Ekkert tungumál með kóða \"%s\" er til"
 
 #. module: base
 #: code:addons/base/publisher_warranty/publisher_warranty.py:125
@@ -1051,12 +1065,12 @@ msgstr ""
 #. module: base
 #: view:res.lang:0
 msgid "%Y - Year with century."
-msgstr ""
+msgstr "%Y - Ár með öld"
 
 #. module: base
 #: report:ir.module.reference.graph:0
 msgid "-"
-msgstr ""
+msgstr "-"
 
 #. module: base
 #: view:publisher_warranty.contract.wizard:0
@@ -1075,7 +1089,7 @@ msgstr ""
 #. module: base
 #: view:wizard.ir.model.menu.create:0
 msgid "Create _Menu"
-msgstr ""
+msgstr "Búa til _Valmynd"
 
 #. module: base
 #: field:res.payterm,name:0
@@ -1087,7 +1101,7 @@ msgstr "Greiðslu skilmálar (stutt nafn)"
 #: view:res.bank:0
 #: field:res.partner.bank,bank:0
 msgid "Bank"
-msgstr ""
+msgstr "Banki"
 
 #. module: base
 #: model:ir.model,name:base.model_ir_exports_line
@@ -1100,18 +1114,20 @@ msgid ""
 "If you check this box, your customized translations will be overwritten and "
 "replaced by the official ones."
 msgstr ""
+"Ef þú hakar í þetta box verða sér aðlagaðar þýðingar yfirskrifaðar með "
+"opinberri útgáfu."
 
 #. module: base
 #: field:ir.actions.report.xml,report_rml:0
 msgid "Main report file path"
-msgstr ""
+msgstr "Slóð að skrá aðal skýrslu"
 
 #. module: base
 #: model:ir.actions.act_window,name:base.ir_action_report_xml
 #: field:ir.module.module,reports_by_module:0
 #: model:ir.ui.menu,name:base.menu_ir_action_report_xml
 msgid "Reports"
-msgstr ""
+msgstr "Skýrslur"
 
 #. module: base
 #: help:ir.actions.act_window.view,multi:0
@@ -1138,7 +1154,7 @@ msgstr ""
 #: field:partner.sms.send,user:0
 #: field:res.users,login:0
 msgid "Login"
-msgstr ""
+msgstr "Innskráningar nafn"
 
 #. module: base
 #: view:ir.actions.server:0
@@ -1172,7 +1188,7 @@ msgstr ""
 #: model:ir.actions.act_window,name:base.action_wizard_lang_export
 #: model:ir.ui.menu,name:base.menu_wizard_lang_export
 msgid "Export Translation"
-msgstr ""
+msgstr "flytja út þýðingu"
 
 #. module: base
 #: help:res.log,secondary:0
@@ -1184,7 +1200,7 @@ msgstr ""
 #. module: base
 #: model:res.country,name:base.tp
 msgid "East Timor"
-msgstr ""
+msgstr "Austur-Tímor"
 
 #. module: base
 #: model:res.company,follow_up_msg:base.main_company
@@ -1207,7 +1223,7 @@ msgstr ""
 #. module: base
 #: field:res.currency,accuracy:0
 msgid "Computational Accuracy"
-msgstr ""
+msgstr "Nákvæmni útreikninga"
 
 #. module: base
 #: selection:base.language.install,lang:0
@@ -1227,12 +1243,12 @@ msgstr ""
 #. module: base
 #: view:ir.sequence:0
 msgid "Day: %(day)s"
-msgstr ""
+msgstr "Dagur: %(dag)ar"
 
 #. module: base
 #: model:res.country,name:base.mv
 msgid "Maldives"
-msgstr ""
+msgstr "Maldíveyjar"
 
 #. module: base
 #: help:ir.values,res_id:0
@@ -1247,7 +1263,7 @@ msgstr ""
 #. module: base
 #: selection:ir.cron,interval_type:0
 msgid "Days"
-msgstr ""
+msgstr "Dagar"
 
 #. module: base
 #: help:ir.actions.server,condition:0
@@ -1261,7 +1277,7 @@ msgstr ""
 #: code:addons/base/res/res_partner.py:175
 #, python-format
 msgid " (copy)"
-msgstr ""
+msgstr " (afrita)"
 
 #. module: base
 #: view:res.lang:0
@@ -1273,7 +1289,7 @@ msgstr ""
 #: view:res.partner.category:0
 #: field:res.partner.category,partner_ids:0
 msgid "Partners"
-msgstr ""
+msgstr "Viðskiptaaðilar"
 
 #. module: base
 #: field:res.partner.category,parent_left:0
@@ -1319,7 +1335,7 @@ msgstr ""
 #: field:res.request,priority:0
 #: field:res.request.link,priority:0
 msgid "Priority"
-msgstr ""
+msgstr "Forgangur"
 
 #. module: base
 #: field:workflow.transition,act_from:0
@@ -1334,18 +1350,18 @@ msgstr ""
 #. module: base
 #: selection:ir.server.object.lines,type:0
 msgid "Formula"
-msgstr ""
+msgstr "Formúla"
 
 #. module: base
 #: code:addons/base/res/res_users.py:396
 #, python-format
 msgid "Can not remove root user!"
-msgstr ""
+msgstr "Get ekki fjarlægt rótar notanda!"
 
 #. module: base
 #: model:res.country,name:base.mw
 msgid "Malawi"
-msgstr ""
+msgstr "Malaví"
 
 #. module: base
 #: code:addons/base/ir/ir_filters.py:38
@@ -1353,7 +1369,7 @@ msgstr ""
 #: code:addons/base/res/res_users.py:420
 #, python-format
 msgid "%s (copy)"
-msgstr ""
+msgstr "%s (afrita)"
 
 #. module: base
 #: field:res.partner.address,type:0
@@ -1363,12 +1379,12 @@ msgstr ""
 #. module: base
 #: view:ir.ui.menu:0
 msgid "Full Path"
-msgstr ""
+msgstr "Full slóð"
 
 #. module: base
 #: view:res.request:0
 msgid "References"
-msgstr ""
+msgstr "Tilvitnanir"
 
 #. module: base
 #: view:res.lang:0
@@ -1381,12 +1397,12 @@ msgstr ""
 #. module: base
 #: view:ir.ui.view:0
 msgid "Advanced"
-msgstr ""
+msgstr "Ítarlegra"
 
 #. module: base
 #: model:res.country,name:base.fi
 msgid "Finland"
-msgstr ""
+msgstr "Finnland"
 
 #. module: base
 #: selection:ir.actions.act_window,view_type:0
@@ -1395,7 +1411,7 @@ msgstr ""
 #: selection:ir.ui.view,type:0
 #: selection:wizard.ir.model.menu.create.line,view_type:0
 msgid "Tree"
-msgstr ""
+msgstr "Tré"
 
 #. module: base
 #: help:res.config.users,password:0
@@ -1406,7 +1422,7 @@ msgstr ""
 #. module: base
 #: view:ir.actions.server:0
 msgid "Create / Write / Copy"
-msgstr ""
+msgstr "Búa til / Skrifa / Afrita"
 
 #. module: base
 #: view:base.language.export:0
@@ -1434,12 +1450,12 @@ msgstr ""
 #. module: base
 #: view:res.log:0
 msgid "Logs"
-msgstr ""
+msgstr "Atburðaskrá"
 
 #. module: base
 #: selection:base.language.install,lang:0
 msgid "Spanish / Español"
-msgstr ""
+msgstr "Spænska / Español"
 
 #. module: base
 #: selection:base.language.install,lang:0
@@ -1456,7 +1472,7 @@ msgstr ""
 #. module: base
 #: field:res.company,logo:0
 msgid "Logo"
-msgstr ""
+msgstr "Lógó"
 
 #. module: base
 #: view:res.partner.address:0
@@ -1466,7 +1482,7 @@ msgstr ""
 #. module: base
 #: view:ir.module.module:0
 msgid "Uninstall (beta)"
-msgstr ""
+msgstr "Fjarlægja: (beta)"
 
 #. module: base
 #: selection:ir.actions.act_window,target:0
@@ -1699,7 +1715,7 @@ msgstr ""
 #. module: base
 #: model:res.country,name:base.ai
 msgid "Anguilla"
-msgstr ""
+msgstr "Angvíla"
 
 #. module: base
 #: field:ir.ui.view_sc,name:0
@@ -1726,7 +1742,7 @@ msgstr ""
 #. module: base
 #: view:base.module.update:0
 msgid "Please be patient, as this operation may take a few seconds..."
-msgstr ""
+msgstr "Verið þolinmóð, þessi aðgerð gæti tekið örfáar sekúndur."
 
 #. module: base
 #: help:ir.values,action_id:0
@@ -2006,7 +2022,7 @@ msgstr ""
 #: field:res.partner.bank,state:0
 #: view:res.partner.bank.type:0
 msgid "Bank Account Type"
-msgstr ""
+msgstr "Gerð banka reiknings"
 
 #. module: base
 #: field:base.language.export,config_logo:0
@@ -2178,7 +2194,7 @@ msgstr ""
 #. module: base
 #: field:ir.model.fields,select_level:0
 msgid "Searchable"
-msgstr ""
+msgstr "Leitanlegt"
 
 #. module: base
 #: model:res.country,name:base.uy
@@ -2474,7 +2490,7 @@ msgstr ""
 #. module: base
 #: constraint:res.partner.category:0
 msgid "Error ! You can not create recursive categories."
-msgstr ""
+msgstr "Villa! Þú getur ekki búið til endurkvæma flokka."
 
 #. module: base
 #: view:res.lang:0
@@ -2556,7 +2572,7 @@ msgstr ""
 #: view:res.partner:0
 #: field:res.partner,category_id:0
 msgid "Categories"
-msgstr ""
+msgstr "Flokkar"
 
 #. module: base
 #: view:base.language.import:0
@@ -2675,7 +2691,7 @@ msgstr ""
 #: model:ir.ui.menu,name:base.menu_partner_form
 #: view:res.partner:0
 msgid "Customers"
-msgstr ""
+msgstr "Viðskiptavinir"
 
 #. module: base
 #: model:res.country,name:base.au
@@ -2787,7 +2803,7 @@ msgstr ""
 #. module: base
 #: model:res.country,name:base.va
 msgid "Holy See (Vatican City State)"
-msgstr ""
+msgstr "Borgríkið Vatíkanið"
 
 #. module: base
 #: field:base.module.import,module_file:0
@@ -2835,7 +2851,7 @@ msgstr ""
 #. module: base
 #: view:res.partner.bank:0
 msgid "Bank account"
-msgstr ""
+msgstr "Banka reikningur"
 
 #. module: base
 #: selection:base.language.install,lang:0
@@ -3695,7 +3711,7 @@ msgstr ""
 #. module: base
 #: field:res.partner.bank.type.field,bank_type_id:0
 msgid "Bank Type"
-msgstr ""
+msgstr "Gerð banka"
 
 #. module: base
 #: code:addons/base/res/res_users.py:87
@@ -3747,7 +3763,7 @@ msgstr ""
 #. module: base
 #: view:res.partner.bank:0
 msgid "Bank Account Owner"
-msgstr ""
+msgstr "Eigandi bankareiknings"
 
 #. module: base
 #: model:ir.actions.act_window,name:base.act_values_form
@@ -4078,7 +4094,7 @@ msgstr ""
 #: view:res.bank:0
 #: field:res.partner,bank_ids:0
 msgid "Banks"
-msgstr ""
+msgstr "Bankar"
 
 #. module: base
 #: view:res.log:0
@@ -4824,7 +4840,7 @@ msgstr ""
 #. module: base
 #: help:ir.cron,interval_number:0
 msgid "Repeat every x."
-msgstr ""
+msgstr "Endurtaka í hvert x."
 
 #. module: base
 #: wizard_view:server.action.create,step_1:0
@@ -5029,7 +5045,7 @@ msgstr ""
 #. module: base
 #: selection:ir.model.fields,select_level:0
 msgid "Always Searchable"
-msgstr ""
+msgstr "Ávalt leitanlegt"
 
 #. module: base
 #: model:res.country,name:base.hk
@@ -6223,7 +6239,7 @@ msgstr ""
 #: field:res.partner.address,city:0
 #: field:res.partner.bank,city:0
 msgid "City"
-msgstr ""
+msgstr "Staður"
 
 #. module: base
 #: model:res.country,name:base.qa
@@ -6370,7 +6386,7 @@ msgstr ""
 #. module: base
 #: model:ir.ui.menu,name:base.menu_tools
 msgid "Tools"
-msgstr ""
+msgstr "Tól"
 
 #. module: base
 #: model:res.country,name:base.kn
@@ -6545,7 +6561,7 @@ msgstr ""
 #: field:res.company,email:0
 #: field:res.users,user_email:0
 msgid "Email"
-msgstr "Tölvupóstfang"
+msgstr "Tölvupóstur"
 
 #. module: base
 #: field:res.users,action_id:0
@@ -6627,7 +6643,7 @@ msgstr ""
 #. module: base
 #: model:res.country,name:base.ro
 msgid "Romania"
-msgstr ""
+msgstr "Rúmenía"
 
 #. module: base
 #: help:ir.cron,doall:0
@@ -6864,7 +6880,7 @@ msgstr ""
 #. module: base
 #: model:res.partner.category,name:base.res_partner_category_13
 msgid "Important customers"
-msgstr ""
+msgstr "Mikilvægir viðskiptavinir"
 
 #. module: base
 #: view:res.lang:0
@@ -7284,7 +7300,7 @@ msgstr ""
 #. module: base
 #: view:ir.attachment:0
 msgid "Created"
-msgstr ""
+msgstr "Búið til"
 
 #. module: base
 #: help:ir.actions.wizard,multi:0
@@ -7422,7 +7438,7 @@ msgstr ""
 #. module: base
 #: field:res.country,code:0
 msgid "Country Code"
-msgstr ""
+msgstr "Lands Kóði"
 
 #. module: base
 #: model:ir.model,name:base.model_workflow_instance
@@ -7600,7 +7616,7 @@ msgstr ""
 #. module: base
 #: sql_constraint:res.country:0
 msgid "The code of the country must be unique !"
-msgstr ""
+msgstr "Lands kóðinn verður að vera einstakur !"
 
 #. module: base
 #: selection:ir.module.module.dependency,state:0
@@ -8240,7 +8256,7 @@ msgstr ""
 #. module: base
 #: selection:ir.model.fields,select_level:0
 msgid "Advanced Search (deprecated)"
-msgstr ""
+msgstr "Ýtarleg leit"
 
 #. module: base
 #: model:res.country,name:base.cx
@@ -8888,7 +8904,7 @@ msgstr ""
 #: field:res.partner.address,country_id:0
 #: field:res.partner.bank,country_id:0
 msgid "Country"
-msgstr ""
+msgstr "Land"
 
 #. module: base
 #: field:ir.model.fields,complete_name:0
@@ -9075,7 +9091,7 @@ msgstr ""
 #: model:ir.ui.menu,name:base.menu_partner_category_form
 #: view:res.partner.category:0
 msgid "Partner Categories"
-msgstr ""
+msgstr "Viðskipta aðila flokkar"
 
 #. module: base
 #: view:base.module.upgrade:0
@@ -9126,7 +9142,7 @@ msgstr ""
 #. module: base
 #: field:res.partner.bank,partner_id:0
 msgid "Account Owner"
-msgstr ""
+msgstr "Eigandi reiknings"
 
 #. module: base
 #: code:addons/base/res/res_users.py:270
