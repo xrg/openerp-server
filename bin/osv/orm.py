@@ -2483,6 +2483,7 @@ class orm_memory(orm_template):
                         r[f] = len(r[f])
                 result.append(r)
                 self.datas[id]['internal.date_access'] = time.time()
+            # all non inherited fields for which the attribute whose name is in load is False
             fields_post = filter(lambda x: x in self._columns and not getattr(self._columns[x], load), fields_to_read)
             for f in fields_post:
                 res2 = self._columns[f].get_memory(cr, self, ids, f, user, context=context, values=result)
@@ -2613,14 +2614,13 @@ class orm_memory(orm_template):
             return self.datas.keys()
 
         res=[]
-        counter=0
+        counter = 1
         #Find the value of dict
         f=False
         if result:
             for id, data in self.datas.items():
-                counter=counter+1
                 data['id'] = id
-                if limit and (counter > int(limit)):
+                if limit and (counter > int(limit) + int(offset)):
                     break
                 f = True
                 for arg in result:
@@ -2631,11 +2631,11 @@ class orm_memory(orm_template):
                         val = eval('data[arg[0]]'+arg[1] +' arg[2]', locals())
                     elif arg[1] in ['ilike']:
                         val = (str(data[arg[0]]).find(str(arg[2]))!=-1)
-
                     f = f and val
-
                 if f:
-                    res.append(id)
+                    if counter > offset:
+                        res.append(id)
+                    counter += 1
         if count:
             return len(res)
         return res or []
@@ -2852,7 +2852,7 @@ class orm(orm_template):
         while field in current_table._inherit_fields and not field in current_table._columns:
             parent_model_name = current_table._inherit_fields[field][0]
             parent_table = self.pool.get(parent_model_name)
-            self._inherits_join_add(parent_model_name, query)
+            current_table._inherits_join_add(parent_model_name, query)
             current_table = parent_table
         return '"%s".%s' % (current_table._table, field)
 
@@ -3450,14 +3450,17 @@ class orm(orm_template):
             f = self._columns[store_field]
             if hasattr(f, 'digits_change'):
                 f.digits_change(cr)
+            def not_this_field(stored_func):
+                x, y, z, e, f, l = stored_func
+                return x != self._name or y != store_field
+            self.pool._store_function[self._name] = filter(not_this_field, self.pool._store_function.get(self._name, []))
             if not isinstance(f, fields.function):
                 continue
             if not f.store:
                 continue
-            if self._columns[store_field].store is True:
+            sm = f.store
+            if sm is True:
                 sm = {self._name:(lambda self,cr, uid, ids, c={}: ids, None, 10, None)}
-            else:
-                sm = self._columns[store_field].store
             for object, aa in sm.items():
                 if len(aa)==4:
                     (fnct,fields2,order,length)=aa
@@ -3539,9 +3542,9 @@ class orm(orm_template):
         for table in self._inherits:
             res.update(self.pool.get(table)._inherit_fields)
             for col in self.pool.get(table)._columns.keys():
-                res[col] = (table, self._inherits[table], self.pool.get(table)._columns[col])
+                res[col] = (table, self._inherits[table], self.pool.get(table)._columns[col], table)
             for col in self.pool.get(table)._inherit_fields.keys():
-                res[col] = (table, self._inherits[table], self.pool.get(table)._inherit_fields[col][2])
+                res[col] = (table, self._inherits[table], self.pool.get(table)._inherit_fields[col][2], self.pool.get(table)._inherit_fields[col][3])
         self._inherit_fields = res
         self._inherits_reload_src()
 
@@ -4396,7 +4399,7 @@ class orm(orm_template):
             if v == '_vptr':
                 continue
             if v in self._inherit_fields:
-                (table, col, col_detail) = self._inherit_fields[v]
+                (table, col, col_detail, original_parent) = self._inherit_fields[v]
                 tocreate[table][v] = vals[v]
                 del vals[v]
             else:
@@ -4811,7 +4814,7 @@ class orm(orm_template):
                     else:
                         continue # ignore non-readable or "non-joinable" fields
                 elif order_field in self._inherit_fields:
-                    parent_obj = self.pool.get(self._inherit_fields[order_field][0])
+                    parent_obj = self.pool.get(self._inherit_fields[order_field][3])
                     order_column = parent_obj._columns[order_field]
                     if order_column._classic_read:
                         inner_clause = self._inherits_join_calc(order_field, query)

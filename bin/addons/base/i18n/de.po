@@ -7254,7 +7254,7 @@ msgstr "Report Type"
 #: view:res.request:0 field:res.request,state:0
 #: field:workflow.instance,state:0 field:workflow.workitem,state:0
 msgid "State"
-msgstr "Bundesland/Kanton/Region/Provinz"
+msgstr "Status"
 
 #. module: base
 #: selection:base.language.install,lang:0

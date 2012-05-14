@@ -611,7 +611,7 @@ msgstr ""
 #: code:addons/osv/osv.py:0
 #, python-format
 msgid "Constraint Error"
-msgstr "Erreur de contrainte"
+msgstr "Violation de contrainte"
 
 #. module: base
 #: code:addons/osv/osv.py:0
@@ -1598,7 +1598,7 @@ msgstr "Groupe"
 #. module: base
 #: field:ir.model.access,perm_create:0
 msgid "Create Access"
-msgstr "Accès en création"
+msgstr "Créer des accès"
 
 #. module: base
 #: field:ir.model.access,perm_read:0 view:ir.model.access:0 view:ir.rule:0
@@ -1608,7 +1608,7 @@ msgstr "Accès en lecture"
 #. module: base
 #: field:ir.model.access,perm_unlink:0
 msgid "Delete Access"
-msgstr "Accès en suppression"
+msgstr "Supprimer l'accès"
 
 #. module: base
 #: field:ir.model.access,perm_unlink:0
@@ -1988,7 +1988,7 @@ msgstr ""
 #: view:ir.actions.report.xml:0 view:ir.actions.server:0 view:ir.filters:0
 #: view:res.request:0
 msgid "Group By"
-msgstr "Grouper par"
+msgstr "Regrouper par"
 
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: field:ir.report.custom.fields,report_id:0
@@ -2038,9 +2038,8 @@ msgstr "Applicable en lecture"
 
 #. module: base
 #: field:ir.rule,perm_unlink:0
-#, fuzzy
 msgid "Apply For Delete"
-msgstr "Appliquer pour supprimer"
+msgstr "Applicable en suppression"
 
 #. module: base
 #: field:ir.rule,perm_write:0
@@ -2159,7 +2158,7 @@ msgstr "XML ID"
 #. module: base
 #: field:ir.ui.view.custom,ref_id:0
 msgid "Original View"
-msgstr "Vue originale"
+msgstr "Vue originelle"
 
 #. module: base
 #: field:ir.ui.view_sc,name:0
@@ -2645,9 +2644,8 @@ msgstr "Lecture"
 
 #. module: base
 #: field:res.log,secondary:0
-#, fuzzy
 msgid "Secondary Log"
-msgstr "Journal de bord secondaire"
+msgstr "Journal secondaire"
 
 #. module: base
 #: field:res.partner,address:0
@@ -2698,9 +2696,8 @@ msgstr "EAN13"
 
 #. module: base
 #: field:res.partner,employee:0
-#, fuzzy
 msgid "Employee"
-msgstr "Employée"
+msgstr "Employé"
 
 #. module: base
 #: field:res.partner,events:0 field:res.partner.event,name:0
@@ -3002,7 +2999,7 @@ msgstr ""
 #. module: base
 #: field:res.widget.user,widget_id:0
 msgid "Widget"
-msgstr "Widget"
+msgstr "Composant graphique"
 
 #. module: base
 #: field:wizard.ir.model.menu.create,name:0
@@ -3082,7 +3079,7 @@ msgstr "Sous-flux"
 #: field:workflow.transition,wkf_id:0 field:workflow.workitem,wkf_id:0
 #: view:workflow:0 view:workflow.activity:0
 msgid "Workflow"
-msgstr "Flux métier"
+msgstr "Workflow"
 
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: field:workflow.instance,uid:0
@@ -3174,8 +3171,7 @@ msgstr "Ajouter un rafraichissement automatique sur la vue"
 #: help:ir.actions.act_window,context:0
 msgid "Context dictionary as Python expression, empty by default (Default: {})"
 msgstr ""
-"Dictionnaire de contexte comme une expression Python, vide par défaut "
-"(Défaut: {})"
+"Dictionnaire de contexte, expression Python vide par défaut (Défaut: {})"
 
 #. module: base
 #: help:ir.actions.act_window,display_menu_tip:0
@@ -3415,10 +3411,9 @@ msgid ""
 "invoice, then `object.invoice_address_id.mobile` is the field which gives "
 "the correct mobile number"
 msgstr ""
-"Fournissez les champs qui seront utilisés pour récupérer le numéro du "
-"portable. Exemple: vous sélectionnez une facture, alors, `object."
-"invoice_address_id.mobile` est le champ qui représente le numéro du portable "
-"correct."
+"Fournit les champs qui seront utilisés pour récupérer le numéro du portable. "
+"Exemple: vous sélectionnez une facture, alors, `object.invoice_address_id."
+"mobile` est le champ qui représente le numéro du portable correct."
 
 #. module: base
 #: help:ir.actions.server,model_id:0
@@ -3641,13 +3636,9 @@ msgstr ""
 
 #. module: base
 #: help:ir.property,res_id:0
-#, fuzzy
 msgid "If not set, acts as a default value for new resources"
 msgstr ""
-"#-#-#-#-#  .merge_file_JIEKs3 (OpenERP Server 5.0.4)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_PE7OcV (OpenERP Server 5.0.4)  #-#-#-#-#\n"
-"Si non positionné, il devient la valeur par défaut pour les nouvelles "
-"ressources"
+"Si non renseigné, devient la valeur par défaut pour les nouvelles ressources"
 
 #. module: base
 #: help:ir.rule,global:0
@@ -3944,7 +3935,7 @@ msgid ""
 "The ISO country code in two chars.\n"
 "You can use this field for quick search."
 msgstr ""
-"Le code ISO du pays, sur deux caractères.\n"
+"Le code ISO du pays en deux caractères.\n"
 "Vous pouvez utiliser ce champ pour effectuer une recherche rapide."
 
 #. module: base
@@ -4162,7 +4153,7 @@ msgstr ""
 #: model:ir.actions.act_window,name:base.act_ir_actions_todo_form
 #: model:ir.ui.menu,name:base.menu_ir_actions_todo_form view:ir.actions.todo:0
 msgid "Config Wizard Steps"
-msgstr "Étapes de la configuration de l'assistant"
+msgstr "Étapes de l'assistant de configuration"
 
 #. module: base
 #: model:ir.actions.act_window,name:base.act_ir_actions_todo_form
@@ -4531,12 +4522,8 @@ msgstr ""
 #. module: base
 #: model:ir.actions.act_window,name:base.action_view_base_module_upgrade
 #: model:ir.model,name:base.model_base_module_upgrade
-#, fuzzy
 msgid "Module Upgrade"
-msgstr ""
-"#-#-#-#-#  .merge_file_XyNbut (OpenERP Server 5.0.4)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_Pz0sVY (OpenERP Server 5.0.4)  #-#-#-#-#\n"
-"Mise à jour de module"
+msgstr "Mise à jour de module(s)"
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_view_base_module_upgrade_install
@@ -4615,7 +4602,7 @@ msgstr ""
 #: model:ir.ui.menu,name:base.menu_workflow
 #: model:ir.ui.menu,name:base.menu_workflow_root
 msgid "Workflows"
-msgstr "Processus"
+msgstr "Workflows"
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_workflow_instance_form
@@ -5212,7 +5199,7 @@ msgstr ""
 #. #-#-#-#-#  .merge_file_47q2SR (OpenERP Server 5.0.4)  #-#-#-#-#
 #: model:ir.model,name:base.model_multi_company_default
 msgid "Default multi company"
-msgstr "Multi société par défaut"
+msgstr "Multi-société par défaut"
 
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: model:ir.model,name:base.model_multi_company_default
@@ -5406,7 +5393,7 @@ msgstr ""
 #. module: base
 #: model:ir.model,name:base.model_workflow
 msgid "workflow"
-msgstr "processus"
+msgstr "workflow"
 
 #. module: base
 #: model:ir.model,name:base.model_workflow_activity
@@ -5602,12 +5589,8 @@ msgstr ""
 #. module: base
 #: model:ir.ui.menu,name:base.menu_event_association
 #: model:ir.ui.menu,name:base.menu_event_main
-#, fuzzy
 msgid "Events Organisation"
-msgstr ""
-"#-#-#-#-#  .merge_file_WYjTqn (OpenERP Server 5.0.4)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_6WwxWq (OpenERP Server 5.0.4)  #-#-#-#-#\n"
-"Organisation des evènements"
+msgstr "Organisation d'évènements"
 
 #. module: base
 #: model:ir.ui.menu,name:base.menu_fundrising
@@ -5663,12 +5646,8 @@ msgstr ""
 #: model:ir.ui.menu,name:base.menu_reporting
 #: model:ir.ui.menu,name:base.next_id_64 model:ir.ui.menu,name:base.next_id_73
 #: model:ir.ui.menu,name:base.reporting_menu
-#, fuzzy
 msgid "Reporting"
-msgstr ""
-"#-#-#-#-#  .merge_file_JIEKs3 (OpenERP Server 5.0.4)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_PE7OcV (OpenERP Server 5.0.4)  #-#-#-#-#\n"
-"Rapports"
+msgstr "Suivi d'activité"
 
 #. module: base
 #: model:ir.ui.menu,name:base.menu_main_pm
@@ -5687,7 +5666,7 @@ msgstr ""
 #. module: base
 #: model:ir.ui.menu,name:base.menu_mrp_root
 msgid "Manufacturing"
-msgstr "GPAO"
+msgstr "Fabrication"
 
 #. module: base
 #: model:ir.ui.menu,name:base.menu_product
@@ -5880,7 +5859,7 @@ msgstr "Antigua et Barbuda"
 #. module: base
 #: model:res.country,name:base.ai
 msgid "Anguilla"
-msgstr "Anguille"
+msgstr "Anguilla"
 
 #. module: base
 #: model:res.country,name:base.al
@@ -6405,7 +6384,7 @@ msgstr "République Kirghize (Kirghizistan)"
 #. module: base
 #: model:res.country,name:base.kh
 msgid "Cambodia, Kingdom of"
-msgstr "République du Cambodge"
+msgstr "Royaume du Cambodge"
 
 #. module: base
 #: model:res.country,name:base.ki
@@ -6870,7 +6849,7 @@ msgstr "Syrie"
 #. module: base
 #: model:res.country,name:base.sz
 msgid "Swaziland"
-msgstr "Souaziland"
+msgstr "Swaziland"
 
 #. module: base
 #: model:res.country,name:base.tc
@@ -9597,20 +9576,17 @@ msgstr "Exporter les traductions"
 #. module: base
 #: view:base.language.export:0 view:wizard.module.lang.export:0
 msgid "Export done"
-msgstr "Export effectué"
+msgstr "Export terminé"
 
 #. module: base
 #: view:base.language.export:0
-#, fuzzy
 msgid ""
 "OpenERP translations (core, modules, clients) are managed through Launchpad."
 "net, our open source project management facility. We use their online "
 "interface to synchronize all translations efforts."
 msgstr ""
-"#-#-#-#-#  .merge_file_JIEKs3 (OpenERP Server 5.0.4)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_PE7OcV (OpenERP Server 5.0.4)  #-#-#-#-#\n"
 "Les traductions d'OpenERP (cœur, modules, clients) sont gérées sur Launchpad."
-"net, notre site de gestion de projet. Nous utilisons leur interface "
+"net, le site de gestion du projet OpenERP. Nous utilisons son interface "
 "interactive pour synchroniser toutes les contributions à la traduction."
 
 #. module: base
@@ -9625,18 +9601,15 @@ msgstr ""
 
 #. module: base
 #: view:base.language.export:0
-#, fuzzy
 msgid ""
 "To improve or expand the official translations, you should use directly "
 "Lauchpad's web interface (Rosetta). If you need to perform mass translation, "
 "Launchpad also allows uploading full .po files at once"
 msgstr ""
-"#-#-#-#-#  .merge_file_WYjTqn (OpenERP Server 5.0.4)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_6WwxWq (OpenERP Server 5.0.4)  #-#-#-#-#\n"
 "Pour améliorer ou étendre les traductions officielles, utilisez directement "
 "l'interface web de Lauchpad (Rosetta). Si vous souhaitez effectuer une "
 "traduction globale, Launchpad permet de télécharger la totalité des "
-"fichiers .po en une opération."
+"fichiers .po en une seule opération."
 
 #. module: base
 #: view:base.language.export:0 view:base.language.import:0
@@ -9687,27 +9660,21 @@ msgstr ""
 
 #. module: base
 #: view:base.language.import:0
-#, fuzzy
 msgid ""
 "Please double-check that the file encoding is set to UTF-8 (sometimes called "
 "Unicode) when the translator exports it."
 msgstr ""
-"#-#-#-#-#  .merge_file_JIEKs3 (OpenERP Server 5.0.4)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_PE7OcV (OpenERP Server 5.0.4)  #-#-#-#-#\n"
 "Veuillez vérifier que l'encodage du fichier soit UTF-8 (également appelé "
-"Unicode) lorsque le traducteur l'exporte"
+"Unicode) lorsque le traducteur l'exporte."
 
 #. module: base
 #: view:base.language.import:0
-#, fuzzy
 msgid ""
 "Supported file formats: *.csv (Comma-separated values) or *.po (GetText "
 "Portable Objects)"
 msgstr ""
-"#-#-#-#-#  .merge_file_WYjTqn (OpenERP Server 5.0.4)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_6WwxWq (OpenERP Server 5.0.4)  #-#-#-#-#\n"
-"Formats de fichier supportés: *.csv (Valeur séparé par des virgules) ou *.po "
-"(Objet portable GetText)"
+"Formats de fichier supportés: *.csv (valeurs séparées par des virgules) ou *."
+"po (objets portables GetText)"
 
 #. module: base
 #: view:base.language.import:0
@@ -9778,17 +9745,14 @@ msgstr ""
 
 #. module: base
 #: view:base.language.install:0
-#, fuzzy
 msgid ""
 "This wizard helps you add a new language to your OpenERP system. After "
 "loading a new language it becomes available as default interface language "
 "for users and partners."
 msgstr ""
-"#-#-#-#-#  .merge_file_WYjTqn (OpenERP Server 5.0.4)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_6WwxWq (OpenERP Server 5.0.4)  #-#-#-#-#\n"
 "Cet assistant permet d'ajouter une nouvelle langue à OpenERP. Après le "
-"chargement d'une nouvelle langue, celle-ci devient celle par défaut pour les "
-"utilisateurs et partenaires."
+"chargement d'une nouvelle langue, celle-ci devient la langue par défaut pour "
+"les utilisateurs et partenaires."
 
 #. module: base
 #: view:base.module.configuration:0
@@ -9988,17 +9952,14 @@ msgstr ""
 
 #. module: base
 #: view:base.update.translations:0
-#, fuzzy
 msgid ""
 "This wizard will detect new terms to translate in the application, so that "
 "you can then add translations manually or perform a complete export (as a "
 "template for a new language example)."
 msgstr ""
-"#-#-#-#-#  .merge_file_WYjTqn (OpenERP Server 5.0.4)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_6WwxWq (OpenERP Server 5.0.4)  #-#-#-#-#\n"
-"Cet assistant détectera les nouveaux termes à traduire de l'application, "
-"vous pouvez donc ajouter manuellement frd traductions ou faire un export "
-"complet (à titre de modèle pour une nouvelle langue par exemple)."
+"Cet assistant détectera les nouveaux termes à traduire dans l'application "
+"pour que vous puissiez ajouter manuellement des traductions ou faire un "
+"export complet (à titre de modèle pour une nouvelle langue par exemple)."
 
 #. module: base
 #: view:ir.actions.act_window:0
@@ -10279,7 +10240,7 @@ msgstr ""
 #: view:ir.rule:0 view:ir.ui.view:0 view:ir.values:0 view:res.partner:0
 #: view:res.partner.address:0 view:workflow.activity:0
 msgid "Group By..."
-msgstr "Grouper par..."
+msgstr "Regrouper par..."
 
 #. module: base
 #: view:ir.attachment:0
@@ -11265,7 +11226,7 @@ msgstr "Adresse postale"
 #. module: base
 #: view:res.partner:0
 msgid "Sales & Purchases"
-msgstr "Ventes & Achats"
+msgstr "Achats-Ventes"
 
 #. module: base
 #: view:res.partner:0
@@ -11557,12 +11518,8 @@ msgstr ""
 
 #. module: base
 #: view:workflow:0
-#, fuzzy
 msgid "Workflow Editor"
-msgstr ""
-"#-#-#-#-#  .merge_file_JIEKs3 (OpenERP Server 5.0.4)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_PE7OcV (OpenERP Server 5.0.4)  #-#-#-#-#\n"
-"Editeur de Flux"
+msgstr "Éditeur de workflow"
 
 #. module: base
 #: view:workflow.activity:0
@@ -11585,17 +11542,13 @@ msgstr ""
 
 #. module: base
 #: view:workflow.activity:0
-#, fuzzy
 msgid "Workflow Activity"
-msgstr ""
-"#-#-#-#-#  .merge_file_JIEKs3 (OpenERP Server 5.0.4)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_PE7OcV (OpenERP Server 5.0.4)  #-#-#-#-#\n"
-"Activité du flux"
+msgstr "Activité du workflow"
 
 #. module: base
 #: view:workflow.instance:0
 msgid "Workflow Instances"
-msgstr "Instances du processus"
+msgstr "Instances de workflow"
 
 #. module: base
 #: view:workflow.transition:0
@@ -11605,7 +11558,7 @@ msgstr "Transition"
 #. module: base
 #: view:workflow.workitem:0
 msgid "Workflow Workitems"
-msgstr "Workflow Workitems"
+msgstr "Tâches de Workflow"
 
 #. #-#-#-#-#  .merge_file_Fph2Np (OpenERP Server 5.0.4)  #-#-#-#-#
 #: wizard_button:module.lang.import,init,finish:0
@@ -12575,11 +12528,11 @@ msgid ""
 "categories have a hierarchy structure: a partner belonging to a category "
 "also belong to his parent category."
 msgstr ""
-"Gère les catégories de partenaires dans le but de ranger au mieux ces "
-"dernières, de les suivre et d'en faire des statistiques. Un partenaire peut "
-"avoir plusieurs catégories et les catégories ont une structure hiérarchique "
-"entre elles : un partenaire appartenant à une catégorie appartient de fait à "
-"sa catégorie parente."
+"Gère les catégories de partenaires dans le but de les classifier, de les "
+"suivre et d'en faire des statistiques. Un partenaire peut avoir plusieurs "
+"catégories et les catégories ont une structure hiérarchique entre elles : un "
+"partenaire appartenant à une catégorie appartient de fait à sa catégorie "
+"parente."
 
 #. module: base
 #: selection:base.language.install,lang:0
@@ -12856,16 +12809,13 @@ msgstr ""
 
 #. module: base
 #: view:publisher_warranty.contract.wizard:0
-#, fuzzy
 msgid ""
 "This wizard helps you register a publisher warranty contract in your OpenERP "
 "system. After the contract has been registered, you will be able to send "
 "issues directly to OpenERP."
 msgstr ""
-"#-#-#-#-#  .merge_file_vbvo8r (OpenERP Server 5.0.4)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_ReJNDB (OpenERP Server 5.0.4)  #-#-#-#-#\n"
-"Cette aide vous aide à enregistrer un contrat de garantie éditeur dans votre "
-"système OpenERP. Après que le contrat ait été enregistré, vous pourrez "
+"Cet assistant vous aide à enregistrer un contrat de garantie éditeur dans "
+"votre système OpenERP. Après que le contrat ait été enregistré, vous pourrez "
 "envoyer des rapports d'erreur directement à OpenERP."
 
 #. module: base
@@ -12991,12 +12941,8 @@ msgstr ""
 
 #. module: base
 #: view:publisher_warranty.contract.wizard:0
-#, fuzzy
 msgid "Please enter the serial key provided in your contract document:"
-msgstr ""
-"#-#-#-#-#  .merge_file_3aoEnA (OpenERP Server 5.0.4)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_uLnyWA (OpenERP Server 5.0.4)  #-#-#-#-#\n"
-"Veuillez saisir le numéro de série fournit dans votre contrat :"
+msgstr "Veuillez saisir le numéro de série fourni dans votre contrat :"
 
 #. module: base
 #: view:res.lang:0
@@ -13270,7 +13216,7 @@ msgid ""
 "of these groups: %s."
 msgstr ""
 "Vous ne pouvez pas écrire dans ce document (%s) ! Êtes-vous sûr que votre "
-"utilisateur fait partie d'un de ces groupes : %s."
+"utilisateur fasse partie d'un de ces groupes : %s."
 
 #. module: base
 #: code:addons/orm.py:1993 code:addons/orm.py:3653
@@ -13793,15 +13739,13 @@ msgstr ""
 
 #. module: base
 #: code:addons/base/ir/ir_model.py:304
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "Properties of base fields cannot be altered in this manner! Please modify "
 "them through Python code, preferably through a custom addon!"
 msgstr ""
-"#-#-#-#-#  .merge_file_hVt3ke (OpenERP Server 5.0.4)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_IJz4z4 (OpenERP Server 5.0.4)  #-#-#-#-#\n"
-"Les propriétés des champs de la base ne peuvent être modifiées de cette "
-"façon ! Veuillez les modifier dans le code Python, de préférence par un "
+"Les propriétés des champs de la base ne peuvent pas être modifiées de cette "
+"façon ! Veuillez les modifier dans le code Python, de préférence dans un "
 "module personnalisé !"
 
 #. module: base

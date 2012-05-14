@@ -2555,7 +2555,7 @@ msgstr "计算精度"
 #: model:ir.module.module,shortdesc:base.module_meta_information
 #: view:ir.model:0
 msgid "Base"
-msgstr "基本信息"
+msgstr "本位币"
 
 #. module: base
 #: field:res.currency,date:0 field:res.currency.rate,name:0
@@ -4233,7 +4233,7 @@ msgstr "国家"
 #: model:ir.actions.act_window,name:base.action_country_state
 #: model:ir.ui.menu,name:base.menu_country_state_partner
 msgid "Fed. States"
-msgstr "联邦州"
+msgstr "省"
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_currency_form
