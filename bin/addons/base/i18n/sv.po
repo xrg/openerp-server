@@ -544,12 +544,8 @@ msgstr "Felaktig XML för vyarkitektur."
 
 #. module: base
 #: constraint:res.company:0
-#, fuzzy
 msgid "Error! You can not create recursive companies."
-msgstr ""
-"#-#-#-#-#  .merge_file_LN9yti (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_q28zqL (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"Fel! Du kan inte skapa rekursiva företag."
+msgstr "Fel! Du kan inte skapa rekursiva bolagsstrukturer."
 
 #. module: base
 #: constraint:res.partner:0
@@ -1334,7 +1330,7 @@ msgstr "Användare"
 #: field:res.partner.address,company_id:0 field:res.users,company:0
 #: field:res.users,company_id:0 view:res.company:0 view:res.users:0
 msgid "Company"
-msgstr "Företag"
+msgstr "Bolag"
 
 #. module: base
 #: field:ir.default,field_name:0
@@ -2337,7 +2333,7 @@ msgstr "Logotyp"
 #. module: base
 #: field:res.company,name:0
 msgid "Company Name"
-msgstr "Företagsnamn"
+msgstr "Bolagsnamn"
 
 #. module: base
 #: field:res.company,parent_id:0
@@ -3358,8 +3354,8 @@ msgid ""
 "order in Object, and you can have loop on the sales order line. Expression = "
 "`object.order_line`."
 msgstr ""
-"Skriv in de fält/uttryck som returnernar listan. Välj t ex 'säljorder' i "
-"'Object', och du kan loopa över säljordrar. Uttryck är av formen object."
+"Skriv in de fält/uttryck som returnernar listan. Välj t ex 'sale.order' i "
+"'Object', och du kan loopa över kundordrar. Uttryck är av formen object."
 "order_line."
 
 #. module: base
@@ -4042,7 +4038,7 @@ msgstr "Företag"
 #: model:ir.actions.act_window,name:base.action_res_company_tree
 #: model:ir.ui.menu,name:base.menu_action_res_company_tree
 msgid "Company's Structure"
-msgstr "Företagsstruktur"
+msgstr "Bolagsstruktur"
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_res_roles
@@ -6342,12 +6338,8 @@ msgstr ""
 
 #. module: base
 #: model:res.partner.category,name:base.res_partner_category_10
-#, fuzzy
 msgid "Open Source Service Company"
-msgstr ""
-"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"Tjänsteföretag inom open source"
+msgstr "Tjänsteföretag inom fri programvara"
 
 #. module: base
 #: model:res.partner.category,name:base.res_partner_category_11
@@ -8342,12 +8334,8 @@ msgstr ""
 
 #. module: base
 #: view:ir.actions.act_window:0
-#, fuzzy
 msgid "General Settings"
-msgstr ""
-"#-#-#-#-#  .merge_file_LN9yti (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_q28zqL (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"Generella inställningar"
+msgstr "Globala inställningar"
 
 #. module: base
 #: view:ir.actions.act_window:0
@@ -9292,12 +9280,8 @@ msgstr ""
 
 #. module: base
 #: view:res.partner:0
-#, fuzzy
 msgid "Sales & Purchases"
-msgstr ""
-"#-#-#-#-#  .merge_file_LN9yti (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_q28zqL (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"Försäljning och inköp"
+msgstr "Kundorder och inköp"
 
 #. module: base
 #: view:res.partner:0
@@ -10524,12 +10508,8 @@ msgstr "Fel"
 
 #. module: base
 #: help:multi_company.default,company_id:0
-#, fuzzy
 msgid "Company where the user is connected"
-msgstr ""
-"#-#-#-#-#  .merge_file_EiefvT (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_ssZMfU (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"Företag där användaren är kopplad"
+msgstr "Bolag användaren är knuten till"
 
 #. module: base
 #: model:ir.actions.act_window,help:base.action_country
@@ -10630,7 +10610,7 @@ msgstr ""
 #. module: base
 #: field:multi_company.default,company_id:0
 msgid "Main Company"
-msgstr "Huvudföretag"
+msgstr "Huvudbolag"
 
 #. module: base
 #: view:base.language.import:0
@@ -11473,12 +11453,8 @@ msgstr ""
 
 #. module: base
 #: help:res.config.users,company_id:0 help:res.users,company_id:0
-#, fuzzy
 msgid "The company this user is currently working for."
-msgstr ""
-"#-#-#-#-#  .merge_file_YXLxsr (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_xbbHTK (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"Företaget som användaren arbetar för."
+msgstr "Bolaget användaren arbetar för"
 
 #. module: base
 #: selection:base.language.install,lang:0
@@ -11684,7 +11660,6 @@ msgstr ""
 
 #. module: base
 #: model:ir.actions.act_window,help:base.action_partner_address_form
-#, fuzzy
 msgid ""
 "Customers (also called Partners in other areas of the system) helps you "
 "manage your address book of companies whether they are prospects, customers "
@@ -11694,13 +11669,11 @@ msgid ""
 "installed the CRM, with the history tab, you can track all the interactions "
 "with a partner such as opportunities, emails, or sales orders issued."
 msgstr ""
-"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"Kunder (de kallas även partners på andra ställen i systemet) hjälper diga "
-"att underhålla adresserna till företagen oavsett om de är prospekts, kunder "
-"och/eller leverantörer. Kundsidan används för att visa information för att "
+"Kunder (de kallas även företag på andra ställen i systemet) hjälper diga att "
+"underhålla adresserna till företagen oavsett om de är prospekts, kunder och/"
+"eller leverantörer. Kundsidan används för att visa information för att "
 "kommunicera med dina kunder i form av adresser, kontakter, prislistor och "
-"mycket annat? Om du installerat CRM-modulen så visas en historikflik där kan "
+"mycket annat. Om du installerat CRM-modulen så visas en historikflik där kan "
 "du följa kommunikation med kunden i form av oppurtunities, mail och "
 "kundorder mm."
 
@@ -11790,12 +11763,8 @@ msgstr "Moduluppgradering"
 
 #. module: base
 #: field:multi_company.default,company_dest_id:0
-#, fuzzy
 msgid "Default Company"
-msgstr ""
-"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"Standardföretag"
+msgstr "Standardbolag"
 
 #. module: base
 #: selection:base.language.install,lang:0
@@ -12080,12 +12049,8 @@ msgstr ""
 
 #. module: base
 #: constraint:res.config.users:0 constraint:res.users:0
-#, fuzzy
 msgid "The chosen company is not in the allowed companies for this user"
-msgstr ""
-"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"Det valda företaget är inte bland de tillåtna företagen för denna användaren"
+msgstr "Detta bolag är inte tillåtet för den här användaren"
 
 #. module: base
 #: field:ir.actions.report.xml,report_name:0
@@ -13019,12 +12984,8 @@ msgstr ""
 
 #. module: base
 #: model:ir.model,name:base.model_multi_company_default
-#, fuzzy
 msgid "Default multi company"
-msgstr ""
-"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"Standard flerföretag"
+msgstr "Standard flerbolag"
 
 #. module: base
 #: field:res.config.users,menu_tips:0 field:res.users,menu_tips:0
@@ -13386,9 +13347,12 @@ msgstr ""
 
 #. module: base
 #: code:addons/base/res/res_user.py:0
-#, python-format
+#, fuzzy, python-format
 msgid "Company Switch Warning"
 msgstr ""
+"#-#-#-#-#  .merge_file_q5pixl (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_n7yYRH (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Varning bolagsbyte"
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_res_widget_wizard
@@ -13473,12 +13437,9 @@ msgstr "Kontrakt"
 
 #. module: base
 #: code:addons/base/publisher_warranty/publisher_warranty.py:0
-#, fuzzy, python-format
+#, python-format
 msgid "Error during communication with the publisher warranty server."
-msgstr ""
-"#-#-#-#-#  .merge_file_TeFBO8 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_0Wr6ZC (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"Fel vid kommunikation med servern för 'publisher warranty'."
+msgstr "Fel vid kommunikation med servern för 'utgivarens underhållsavtal'."
 
 #. module: base
 #: view:res.lang:0
@@ -13492,7 +13453,7 @@ msgid ""
 "system. After the contract has been registered, you will be able to send "
 "issues directly to OpenERP."
 msgstr ""
-"Denna guide hjälper dig att registrera ett garantikontrakt från utgivaren i "
+"Denna guide hjälper dig att registrera ett utgivarens underhållsavtal för "
 "ditt OpenERP-system. Sedan kontraktet registrerats kan du skicka ärenden "
 "direkt till utgivaren."
 
@@ -13673,8 +13634,12 @@ msgstr ""
 
 #. module: base
 #: view:publisher_warranty.contract:0
+#, fuzzy
 msgid "Publisher Warranty Contracts"
 msgstr ""
+"#-#-#-#-#  .merge_file_q5pixl (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_n7yYRH (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Utgivarens underhållsavtal"
 
 #. module: base
 #: sql_constraint:publisher_warranty.contract:0
@@ -13798,12 +13763,8 @@ msgstr ""
 
 #. module: base
 #: view:publisher_warranty.contract.wizard:0
-#, fuzzy
 msgid "Publisher warranty contract successfully registered!"
-msgstr ""
-"#-#-#-#-#  .merge_file_x4k48P (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_hc7Dz8 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"Utgivarens underhållskontrakt registrerat, inga fel."
+msgstr "Utgivarens underhållsavtal registrerat, inga fel."
 
 #. module: base
 #: model:res.partner.title,shortcut:base.res_partner_title_sir
@@ -13830,17 +13791,17 @@ msgstr ""
 
 #. module: base
 #: model:ir.ui.menu,name:base.publisher_warranty
+#, fuzzy
 msgid "Publisher Warranty"
 msgstr ""
+"#-#-#-#-#  .merge_file_q5pixl (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_n7yYRH (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Utgivarens underhållsavtal"
 
 #. module: base
 #: view:publisher_warranty.contract:0
-#, fuzzy
 msgid "Publisher Warranty Contract"
-msgstr ""
-"#-#-#-#-#  .merge_file_x4k48P (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_hc7Dz8 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"Utgivarens garantikontrakt"
+msgstr "Utgivarens underhållsavtal"
 
 #. module: base
 #: view:res.config.view:0
@@ -14381,7 +14342,6 @@ msgstr ""
 
 #. module: base
 #: model:ir.actions.act_window,help:base.action_partner_form
-#, fuzzy
 msgid ""
 "A customer is an entity you do business with, like a company or an "
 "organization. A customer can have several contacts or addresses which are "
@@ -14391,14 +14351,12 @@ msgid ""
 "plugin, don't forget to register emails to each contact so that the gateway "
 "will automatically attach incoming emails to the right partner."
 msgstr ""
-"#-#-#-#-#  .merge_file_x4k48P (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_hc7Dz8 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
 "En kund är någon du gör affärer med, ett företag eller en organisation. En "
 "kund kan ha flera kontakter eller adresser för de personer som arbetar där. "
-"Du kan använda historiefliken för att följa alla transaktioner relaterade "
-"till en viss kund: säljordrar, e-post, offerter, krav etc. Om du använder "
+"Du kan använda historikfliken för att följa alla händelser relaterade till "
+"en viss kund: ordrar, e-post, offerter, krav etc. Om du använder "
 "epostbryggan, eller Thunderbird-plugin, glöm inte att registrera så att "
-"inkommande epost hamnar hos rätt kund,"
+"inkommande epost hamnar hos rätt kund."
 
 #. module: base
 #: model:res.widget,title:base.currency_converter_widget

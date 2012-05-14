@@ -27,7 +27,7 @@ class res_log(osv.osv):
         'name': fields.char('Message', size=250, help='The logging message.', required=True, select=1),
         'user_id': fields.many2one('res.users','User'),
         'res_model': fields.char('Object', size=128, select=1),
-        'context': fields.text('Context'),
+        'context': fields.char('Context', size=250),
         'res_id': fields.integer('Object ID'),
         'secondary': fields.boolean('Secondary Log', help='Do not display this log if it belongs to the same object the user is working on'),
         'create_date': fields.datetime('Creation Date', readonly=True, select=1),
@@ -45,11 +45,29 @@ class res_log(osv.osv):
     }
 
     def create(self, cr, uid, vals, context=None):
+
+        def filter_context_value(c):
+            """filter unrequired value from context"""
+            # We remove user context and web client related value as those
+            # values will be re-set when accessing res.log item, depending
+            # on user or client settings
+            if isinstance(c, dict):
+                FILTER_OUT_KEYS = ['tz', 'lang', 'client', 'bin_size', '_terp_view_name']
+                for context_key in FILTER_OUT_KEYS:
+                    c.pop(context_key, None)
+            return c
         create_context = context and dict(context) or {}
         if 'res_log_read' in create_context:
             vals['read'] = create_context.pop('res_log_read')
         if create_context and not vals.get('context'):
             vals['context'] = create_context
+        log_context = filter_context_value(vals.get('context',{}))
+        if len(str(log_context)) > 250:
+            # if context is still bigger that field size, better lose the
+            # context completly instead of breaking later when user access
+            # res.log item
+            log_context = "{}"
+        vals['context'] = log_context
         return super(res_log, self).create(cr, uid, vals, context=context)
 
     # TODO: do not return secondary log if same object than in the model (but unlink it)
