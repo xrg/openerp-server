@@ -3,6 +3,7 @@
 #
 #    OpenERP, Open Source Management Solution
 #    Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>).
+#    Copyright (C) 2011-2012 P. Christeas <xrg@hellug.gr>
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -25,6 +26,7 @@ from osv import fields,osv
 import tools
 import pooler
 from tools.translate import _
+from tools.orm_utils import copy_empty
 
 class res_payterm(osv.osv):
     _description = 'Payment term'
@@ -107,7 +109,7 @@ class res_partner(osv.osv):
     _name = "res.partner"
     _order = "name"
     _columns = {
-        'name': fields.char('Name', size=128, required=True, select=True),
+        'name': fields.char('Name', size=128, required=True, select=True, copy_data='copy_copy'),
         'date': fields.date('Date', select=1),
         'title': fields.many2one('res.partner.title','Partner Form'),
         'parent_id': fields.many2one('res.partner','Parent Partner', select=2),
@@ -121,7 +123,7 @@ class res_partner(osv.osv):
         'comment': fields.text('Notes'),
         'address': fields.one2many('res.partner.address', 'partner_id', 'Contacts'),
         'category_id': fields.many2many('res.partner.category', 'res_partner_category_rel', 'partner_id', 'category_id', 'Categories'),
-        'events': fields.one2many('res.partner.event', 'partner_id', 'Events'),
+        'events': fields.one2many('res.partner.event', 'partner_id', 'Events', copy_data=copy_empty),
         'credit_limit': fields.float(string='Credit Limit'),
         'ean13': fields.char('EAN13', size=13),
         'active': fields.boolean('Active', select=True, required=True),
@@ -149,14 +151,6 @@ class res_partner(osv.osv):
         'category_id': _default_category,
         'company_id': lambda s,cr,uid,c: s.pool.get('res.company')._company_default_get(cr, uid, 'res.partner', context=c),
     }
-
-    def copy(self, cr, uid, id, default=None, context=None):
-        if default is None:
-            default = {}
-        # todo: exploit copy-cols
-        name = self.read(cr, uid, [id], ['name'])[0]['name']
-        default.update({'name': name+ _(' (copy)'), 'events':[]})
-        return super(res_partner, self).copy(cr, uid, id, default, context)
 
     def do_share(self, cr, uid, ids, *args):
         return True
