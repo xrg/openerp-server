@@ -33,18 +33,17 @@ class ir_filters(osv.osv):
         cr.execute("SELECT model, name from ir_model")
         return cr.fetchall()
 
-    def get_filters(self, cr, uid, model):
-        act_ids = self.search(cr,uid,[('model_id','=',model),('user_id','=',uid)])
-        my_acts = self.read(cr, uid, act_ids, ['name', 'domain','context'])
-        return my_acts
+    def get_filters(self, cr, uid, model, context=None):
+        act_ids = self.search_read(cr, uid, [('model_id','=',model),
+                '|', ('user_id', '=', False),('user_id','=',uid)], context=context)
+        return act_ids
 
     def create_or_replace(self, cr, uid, vals, context=None):
         filter_id = None
-        lower_name = vals['name'].lower()
-        matching_filters = [x for x in self.get_filters(cr, uid, vals['model_id'])
-                                if x['name'].lower() == lower_name]
-        if matching_filters:
-            self.write(cr, uid, matching_filters[0]['id'], vals, context)
+        can_haz = self.search(cr, uid, [('model_id', '=', vals['model_id']), \
+                ('name', '=ilike', vals['name'].lower())], limit=1, context=context)
+        if can_haz:
+            self.write(cr, uid, can_haz[0], vals, context)
             return False
         return self.create(cr, uid, vals, context)
 
