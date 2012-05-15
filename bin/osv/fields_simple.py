@@ -112,8 +112,8 @@ class _string_field(_column):
             assert len(lefts) == 1, lefts # we don't support anything else yet
             if operator in ('like', 'ilike', 'not like', 'not ilike'):
                 right = '%%%s%%' % right
-
-            operator = operator == '=like' and 'like' or operator
+            elif operator in ('=like', '=ilike'):
+                operator = operator[1:]
 
             query1 = '( SELECT res_id'          \
                         '    FROM ir_translation'  \
