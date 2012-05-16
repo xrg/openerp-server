@@ -4,7 +4,7 @@
 #    OpenERP, Open Source Management Solution
 #    Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>).
 #    Copyright (C) 2010-2011 OpenERP SA. (www.openerp.com)
-#    Copyright (C) 2008-2011 P. Christeas <xrg@hellug.gr>
+#    Copyright (C) 2008-2012 P. Christeas <xrg@hellug.gr>
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -144,6 +144,22 @@ class _string_field(_column):
                         ] + right + right
 
             return ('id', 'inselect', (query1, query2))
+        elif len(lefts) == 2 :
+            if lefts[1] in ('len', 'length'):
+                if operator not in ('=', '!=', '<>', '<', '<=', '>', '>='):
+                    raise eu.DomainInvalidOperator(obj, lefts, operator, right)
+                return eu.function_expr('char_length(%s)', lefts[0], operator, right)
+            elif lefts[1] in ('upper', 'lower', 'title'):
+                if operator not in ('=', '!=', '<>', 'like', '=like'):
+                    raise eu.DomainInvalidOperator(obj, lefts, operator, right)
+                if operator == 'like':
+                    right = '%%%s%%' % right
+                elif operator == '=like':
+                    operator = 'like'
+                func = lefts[1]
+                if lefts[1] == 'title':
+                    func = 'initcap'
+                return eu.function_expr(func +'(%s)', lefts[0], operator, right)
         else:
             assert len(lefts) == 1, lefts # no extensions yet ;)
             if right is False:
