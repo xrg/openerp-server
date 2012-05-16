@@ -201,6 +201,39 @@ class nested_expr(sub_expr):
 
         return ''.join(run_expr), run_params
 
+class function_expr(sub_expr):
+    """ SQL-function expression
+
+        This will call arbitrary SQL functions against operator + right
+    """
+    def __init__(self, func, left=False, operator=None, right=None, params=None):
+        """
+            @param left the "left" column in the model table. It will be
+                decorated with the table name
+            @param operator outside the function
+            @param right Expression value right of the operator. It will
+                NOT be passed through "symbol_set"
+
+            The result will be like:
+
+                "func(%s) <operator> <right>" % (_table.left)
+        """
+        self.func = func
+        self.left = left
+        self.operator = operator
+        self.right = right
+        self.params = params or []
+
+    def to_sql(self, parent, model, field):
+        expr = self.func
+        params = self.params
+        if self.left:
+            expr = expr % ('"%s".%s' % (model._table, self.left))
+        if self.operator:
+            expr = "%s %s %%s" %(expr, self.operator)
+            params = params + [self.right,]
+        return expr, params
+
 class placeholder(object):
     """ A dummy string, that will substitute the ids array in 
         recursive queries.
