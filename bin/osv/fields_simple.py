@@ -144,6 +144,41 @@ class _string_field(_column):
                         ] + right + right
 
             return ('id', 'inselect', (query1, query2))
+        elif len(lefts) >= 2 and lefts[1] == 'ldist':
+            if operator not in ('=', '!=', '=i', '!=i'):
+                raise eu.DomainInvalidOperator(obj, lefts, operator, right)
+            ldist = 0
+            if len(lefts) == 3:
+                ldist = int(lefts[2])
+            # or we seek a reasonable distance
+            elif len(right) > 10:
+                ldist = 2 + (len(right)/10)
+            elif len(right) > 5:
+                ldist = 2
+            elif len(right) > 3:
+                ldist = 1
+
+            insensitive = (operator[-1] == 'i')
+            if insensitive:
+                operator = operator[:-1]
+            if ldist:
+                if operator == '=':
+                    lop = '<='
+                else:
+                    lop = '>'
+                if insensitive:
+                    return eu.function_expr('levenshtein_less_equal(lower(%s), lower(%%s), '+'%d)' % ldist, \
+                            lefts[0], lop, ldist, params=[right,])
+                else:
+                    return eu.function_expr('levenshtein_less_equal(%s, %%s, ' +'%d)' % ldist, \
+                            lefts[0], lop, ldist, params=[right,])
+            else:
+                # no need to Levenshtein, use plain matching
+                if insensitive:
+                    return eu.function_expr('lower(%s)', lefts[0], operator, right.lower())
+                else:
+                    return (lefts[0], operator, right)
+
         elif len(lefts) == 2 :
             if lefts[1] in ('len', 'length'):
                 if operator not in ('=', '!=', '<>', '<', '<=', '>', '>='):
