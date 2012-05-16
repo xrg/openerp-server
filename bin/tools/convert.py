@@ -877,6 +877,8 @@ form: module.record_id""" % (xml_id,)
     def id_get(self, cr, id_str):
         if id_str in self.idref:
             return self.idref[id_str]
+        elif isinstance(id_str, (int, long)):
+            return id_str
         mid = self.model_id_get(cr, id_str)
         if not mid:
             raise KeyError("Id %s not found in db" %(id_str, ))
