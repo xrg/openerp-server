@@ -3619,6 +3619,10 @@ class orm(orm_template):
 
         # all non inherited fields for which the attribute whose name is in load is False
         fields_post = filter(lambda x: x in self._columns and not getattr(self._columns[x], load), fields_to_read)
+        if not ids:
+            # If we are not going to return any result, don't bother doing all this
+            # function field calculations
+            fields_post = []
 
         # Compute POST fields
         todo = {}
