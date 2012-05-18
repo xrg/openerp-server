@@ -3925,7 +3925,7 @@ class orm(orm_template):
             + For a reference field, use a string with the model name, a comma, and the target object id (example: ``'product.product, 5'``)
 
         """
-        for field in vals.copy():
+        for field in vals:
             fobj = None
             if field == '_vptr':
                 continue
@@ -3938,9 +3938,11 @@ class orm(orm_template):
             groups = fobj.write
 
             if groups:
-                edit = self.pool.get('ir.model.access').check_groups(cr, user, groups)
-                if not edit:
-                    vals.pop(field)
+                if not self.pool.get('ir.model.access').check_groups(cr, user, groups):
+                    _logger.warning("Access error for %s.%s by user #%d: not in group %s",
+                            self._name, field, user, groups)
+                    raise except_orm(_('AccessError'),
+                                     _('You are not permitted to write into column %s.%s.') % (self._name, field))
 
         if not context:
             context = {}
