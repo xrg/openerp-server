@@ -463,9 +463,9 @@ class report_sxw(report_rml, preprocess.report):
             context={}
         pool = pooler.get_pool(cr.dbname)
         attach = report_xml.attachment
-        results = []
-        if ids and attach:
+        if attach:
             objs = self.getObjects(cr, uid, ids, context)
+            results = []
             for obj in objs:
                 aname = eval(attach, {'object':obj, 'time':time})
                 result = False
@@ -481,7 +481,7 @@ class report_sxw(report_rml, preprocess.report):
                 # else, create the pdf again
                 result = self.create_single_pdf(cr, uid, [obj.id], data, report_xml, context)
                 if not result:
-                    continue
+                    return False
                 if aname:
                     try:
                         name = aname+'.'+result[1]
@@ -497,29 +497,18 @@ class report_sxw(report_rml, preprocess.report):
                         #TODO: should probably raise a proper osv_except instead, shouldn't we? see LP bug #325632
                         logging.getLogger('report').error('Could not create saved report attachment', exc_info=True)
                 results.append(result)
-        else:
-            if ids:
-                for id in ids:
-                    result = self.create_single_pdf(cr, uid, [id], data, report_xml, context)
-                    if result:
-                        results.append(result)
-            else:
-                # we could have a report with no ids specified
-                result = self.create_single_pdf(cr, uid, ids, data, report_xml, context)
-                if result:
-                    results.append(result)
-        if results:
-            if results[0][1] == 'pdf':
-                from pyPdf import PdfFileWriter, PdfFileReader
-                output = PdfFileWriter()
-                for r in results:
-                    reader = PdfFileReader(cStringIO.StringIO(r[0]))
-                    for page in range(reader.getNumPages()):
-                        output.addPage(reader.getPage(page))
-                s = cStringIO.StringIO()
-                output.write(s)
-                return s.getvalue(), results[0][1]
-        return False
+            if results:
+                if results[0][1] == 'pdf':
+                    from pyPdf import PdfFileWriter, PdfFileReader
+                    output = PdfFileWriter()
+                    for r in results:
+                        reader = PdfFileReader(cStringIO.StringIO(r[0]))
+                        for page in range(reader.getNumPages()):
+                            output.addPage(reader.getPage(page))
+                    s = cStringIO.StringIO()
+                    output.write(s)
+                    return s.getvalue(), results[0][1]
+        return self.create_single_pdf(cr, uid, ids, data, report_xml, context)
 
     def create_single_pdf(self, cr, uid, ids, data, report_xml, context=None):
         if not context:
