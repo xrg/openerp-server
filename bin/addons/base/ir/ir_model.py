@@ -348,6 +348,7 @@ class ir_model_fields(osv.osv):
         obj = None
         models = {}    # structs of (obj, [(field, prop, change_to),..])
                        # data to be updated on the orm model
+        models_gacl = set()
 
         # static table of properties
         model_props = [ # (our-name, fields.prop, set_fn)
@@ -376,7 +377,7 @@ class ir_model_fields(osv.osv):
                 else:
                     for prop in ['name', 'model_id', 'ttype', 'relation', 'relation_field',
                         'size', 'selection', 'required', 'readonly', 'translate', 
-                        'domain', 'groups']:
+                        'domain']:
                             if prop in vals and getattr(item, prop) != vals[prop]:
                                 raise except_orm(_('Error!'),
                                     _('Properties of base fields cannot be set here! '
@@ -414,6 +415,9 @@ class ir_model_fields(osv.osv):
                 
                 if obj:
                     models.setdefault(obj._name, (obj,[]))
+                    if 'groups' in vals and vals['groups']:
+                        models_gacl.add(obj._name)
+
                     # find out which values (per model) we need to update there
                     for vname, fprop, set_fn in model_props:
                         if vname in vals:
@@ -466,6 +470,16 @@ class ir_model_fields(osv.osv):
                         log.debug('%s: setting %s.%s = %r', mkey, col_name, col_prop, val)
                     setattr(obj._columns[col_name], col_prop, val)
                 _re_init_model(obj, cr, ctx)
+
+        if models_gacl:
+            # Reset the field permissions for these models
+            # We don't reuse 'obj' or groups, because we want to perform this
+            # operation late enough, after all has been written into the db
+            for m in models_gacl:
+                obj = self.pool.get(m)
+                if not obj:
+                    continue
+                obj._reload_field_acls(cr)
         return res
 
     def _merge_ids(self, cr, uid, model, id_dest, ids_src, context=None):

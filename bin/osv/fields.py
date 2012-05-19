@@ -172,13 +172,14 @@ class _column(object):
         self.translate = translate
         self._domain = domain
         self._context = context
-        self.write = False
         self.read = False
         self.view_load = 0
         self.select = select
         self.selectable = True
         self.group_operator = args.pop('group_operator', False)
         self._split_op = args.pop('split_op', None)
+        if 'write' in args:
+            raise AttributeError("Don't use 'write' any more!")
         for a in args:
             if args[a]:
                 setattr(self, a, args[a])

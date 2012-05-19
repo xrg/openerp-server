@@ -52,7 +52,6 @@ CREATE TABLE ir_model_fields (
   required boolean NOT NULL DEFAULT False
 ) WITHOUT OIDS;
 
-
 -------------------------------------------------------------------------
 -- Actions
 -------------------------------------------------------------------------
@@ -175,6 +174,11 @@ CREATE TABLE res_groups_users_rel (
 
 CREATE INDEX res_groups_users_rel_gid_idx on res_groups_users_rel (gid);
 
+CREATE TABLE ir_model_fields_group_rel (
+  "field_id" INTEGER REFERENCES ir_model_fields(id) ON DELETE CASCADE,
+  "group_id" INTEGER REFERENCES res_groups(id) ON DELETE CASCADE,
+  UNIQUE(field_id, group_id)
+);
 
 ---------------------------------
 -- Workflows

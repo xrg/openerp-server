@@ -103,7 +103,7 @@ class groups(osv.osv):
             self._groups_cache[cr.dbname] = {}
 
         if user_id not in self._groups_cache[cr.dbname]:
-            cr.execute("SELECT gid FROM res_groups_users_rel WHERE uid = %s", user_id, debug=self._debug)
+            cr.execute("SELECT gid FROM res_groups_users_rel WHERE uid = %s", (user_id,), debug=self._debug)
             self._groups_cache[cr.dbname].setdefault(user_id, [r[0] for r in cr.fetchall()])
 
         for g in self._groups_cache[cr.dbname][user_id]:

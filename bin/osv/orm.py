@@ -2758,10 +2758,16 @@ class orm(orm_template):
                     None    the default 'ignore' behavior,
                     True    use the slow method
                     False   stop and raise an exception on those fields
+        @attribute _field_group_acl defines group ACLs per field. The key to
+                this dictionary is the field name, the value is a set of
+                integer group ids .
+                It is stored here instead of the fields, because there is a
+                rare case that field objects can be shared among models/dbs.
     """
     _sql_constraints = []
     _indices = {}
     _table = None
+    _field_group_acl = {} # per field access control
     _protected = ['read','write','create','default_get','perm_read','unlink','fields_get','fields_view_get','search','name_get','distinct_field_get','name_search','copy','import_data','search_count', 'exists']
     __logger = logging.getLogger('orm')
     __schema = NotImplemented   # please don't use this logger
@@ -3271,6 +3277,7 @@ class orm(orm_template):
 
         self._inherits_check()
         self._inherits_reload()
+        self._reload_field_acls(cr)
         if not self._sequence:
             self._sequence = self._table+'_id_seq'
         for k in self._defaults.keys():
@@ -3303,6 +3310,15 @@ class orm(orm_template):
 
         for name, field in self._columns.items():
             field.post_init(cr, name, self)
+
+
+    def _reload_field_acls(self, cr):
+        self._field_group_acl = {}
+        # Read field-specificic permissions from db:
+        cr.execute('SELECT imf.name AS field, group_id FROM ir_model_fields AS imf, ir_model_fields_group_rel AS imgr '
+                    'WHERE imf.id = imgr.field_id AND imf.model=%s', (self._name,), debug=self._debug)
+        for field, group_id in cr.fetchall():
+            self._field_group_acl.setdefault(field, set()).add(group_id)
 
     #
     # Update objects that uses this one to update their _inherits fields
@@ -3925,22 +3941,22 @@ class orm(orm_template):
             + For a reference field, use a string with the model name, a comma, and the target object id (example: ``'product.product, 5'``)
 
         """
-        for field in vals:
+        for field in vals.keys():
             fobj = None
             if field == '_vptr':
                 continue
-            if field in self._columns:
-                fobj = self._columns[field]
-            elif field in self._inherit_fields:
-                fobj = self._inherit_fields[field][2]
-            if not fobj:
-                continue
-            groups = fobj.write
 
-            if groups:
-                if not self.pool.get('ir.model.access').check_groups(cr, user, groups):
+            if self._field_group_acl.get(field, False):
+                groups = list(self._field_group_acl[field])
+                if not self.pool.get('res.groups').check_user_groups(cr, user, groups):
+                    if vals[field] == []:
+                        # Special case for 'control' values of o2m, m2o, m2m , where
+                        # an empty list means no modification
+                        vals.pop(field)
+                        continue
                     _logger.warning("Access error for %s.%s by user #%d: not in group %s",
                             self._name, field, user, groups)
+                    _logger.debug("Value for field %s.%s: %r", self._name, field, vals[field])
                     raise except_orm(_('AccessError'),
                                      _('You are not permitted to write into column %s.%s.') % (self._name, field))
 
@@ -4166,6 +4182,24 @@ class orm(orm_template):
             context = {}
         self.pool.get('ir.model.access').check(cr, user, self._name, 'create', context=context)
 
+        for field in vals.keys():
+            fobj = None
+            if field == '_vptr':
+                continue
+            if self._field_group_acl.get(field, False):
+                if not self.pool.get('res.groups').\
+                        check_user_groups(cr, user, list(self._field_group_acl[field])):
+                    if not vals[field] :
+                        # Empty values are still permitted, we remove them and
+                        # let the default be used
+                        vals.pop(field)
+                        continue
+                    _logger.warning("Access error for %s.%s by user #%d: not in group %s",
+                            self._name, field, user, list(self._field_group_acl[field]))
+                    _logger.debug("Value for field %s.%s: %r", self._name, field, vals[field])
+                    raise except_orm(_('AccessError'),
+                                     _('You are not permitted to create column %s.%s.') % (self._name, field))
+
         vals = self._add_missing_default_values(cr, user, vals, context)
 
         tocreate = {}
@@ -4216,22 +4250,7 @@ class orm(orm_template):
             if bool_field not in vals:
                 vals[bool_field] = False
         #End
-        for field in vals.keys():
-            fobj = None
-            if field == '_vptr':
-                continue
-            if field in self._columns:
-                fobj = self._columns[field]
-            else:
-                fobj = self._inherit_fields[field][2]
-            if not fobj:
-                continue
-            groups = fobj.write
-            if groups:
-                edit = self.pool.get('ir.model.access').check_groups(cr, user, groups)
-                if not edit:
-                    # RFC: shall we only silently ignore the fields?
-                    vals.pop(field)
+
         for field in vals:
             if field == '_vptr':
                 upd0.append('_vptr')

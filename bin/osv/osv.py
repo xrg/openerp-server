@@ -531,7 +531,7 @@ class osv(osv_base, orm.orm):
                 nattr = {}
                 for s in ('_columns', '_defaults', '_inherits', '_indices',
                         '_constraints', '_sql_constraints', '_virtuals',
-                        '_column_stats', '_vtable'):
+                        '_column_stats', '_vtable', '_field_group_acl'):
                     new = copy.copy(getattr(pool.get(parent_name), s))
                     if not getattr(cls, s, False):
                         pass
