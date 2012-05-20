@@ -2219,6 +2219,9 @@ class orm_template(object):
         res = self.name_get(cr, access_rights_uid, ids, context)
         return res
 
+    name_search.original_orm = True # Mark this simple implementation
+    _name_search.original_orm = True # Sigh! some models override this one...
+
     def copy(self, cr, uid, id, default=None, context=None):
         raise NotImplementedError(_('The copy method is not implemented on this object !'))
 
@@ -2643,9 +2646,9 @@ class orm_memory(orm_template):
                     if a[0] == 'active':
                         active_in_args = True
                 if not active_in_args:
-                    args.insert(0, ('active', '=', 1))
+                    args.insert(0, ('active', '=', True))
             else:
-                args = [('active', '=', 1)]
+                args = [('active', '=', True)]
         if args:
             import expression
             e = expression.expression(args, debug=self._debug)

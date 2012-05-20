@@ -4,7 +4,7 @@
 #    OpenERP, Open Source Management Solution
 #    Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>).
 #    Copyright (C) 2010-2011 OpenERP SA. (www.openerp.com)
-#    Copyright (C) 2008-2011 P. Christeas <xrg@hellug.gr>
+#    Copyright (C) 2008-2012 P. Christeas <xrg@hellug.gr>
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -28,6 +28,7 @@ from tools import sql_model
 from tools import expr_utils as eu
 from tools import orm_utils
 from operator import itemgetter
+import logging
 
 #.apidoc title: Relationals fields
 
@@ -130,83 +131,113 @@ class _rel2many(_relational):
     def _browse2val(self, bro, name):
         return orm_utils.only_ids(bro)
 
-    def expr_eval(self, cr, uid, obj, lefts, operator, right, pexpr, context):
-        if len(lefts) > 1: # TODO pg84 reduce
-            field_obj = obj.pool.get(self._obj)
-            # Making search easier when there is a left operand as field.o2m or field.m2m
-            assert len(lefts) == 2, lefts
-            right = field_obj.search(cr, uid, [(lefts[1], operator, right)], context=context)
-            right1 = obj.search(cr, uid, [(lefts[0],'in', right)], context=dict(context, active_test=False))
-            if right1 == []:
-                return False
-            else:
-                return ('id', 'in', right1)
-        else:
-            return None
+    def _expr_rev_lookup(self, cr, uid, obj, pexpr, lefts, op, field_obj, right_expr, context=None):
+        """ Translate remote `right_expr` into native query
 
-    def _expr_rev_lookup(self, cr, sid1, reltable, sid2, ids, op, debug=False):
-        """ Lookup the remote model expression
-            
             _rel2many have reverse-reference functionality, so we may
             need to lookup the remote table.
-            
-            @param s sid1 id referring to the left side of the expression
-            @param f reltable Table that implements the relation (think m2m)
-            @param w sid2 referring to the right side of the expression
-            
+
+            @param obj model in which this field belongs
+            @param pexpr parent expression
+            @param lefts list of left operands
+            @param op operator, either 'child_of' or 'in'
+            @param field_obj remote ORM model
+            @param right_expr domain expression to apply on field_obj
+
             @return (qrystring, params) or (None, ids)
         """
-        # todo: merge into parent query as sub-query
-        res = []
-        qry = None
-        params = []
-        if ids:
-            if op in ['<','>','>=','<=']:
-                qry = 'SELECT "%s" FROM "%s"'    \
-                          ' WHERE "%s" %s %%s' % (sid1, reltable, sid2, op)
-                params = [ids[0], ]
-            elif cr.pgmode in eu.PG_MODES:
-                if isinstance(ids, eu.placeholder):
-                    dwc = '= %s' % ids.expr
-                    params = []
-                elif isinstance(ids, list) and isinstance(ids[0], eu.placeholder):
-                    dwc = '= %s' % ids[0].expr
-                    params = []
-                elif isinstance(ids, (int, long)):
-                    dwc = '= %s'
-                    params = [ids,]
-                else:
-                    dwc = '= ANY(%s)'
-                    params = [ids,]
-                qry = 'SELECT "%s"'    \
-                           '  FROM "%s"'    \
-                           ' WHERE "%s" %s' % (sid1, reltable, sid2, dwc)
-            else:
-                cr.execute('SELECT "%s"'    \
-                            '  FROM "%s"'    \
-                            ' WHERE "%s" = ANY(%%s) ' % (sid1, reltable, sid2),
-                            (ids,),
-                            debug=debug)
-                res.extend([r[0] for r in cr.fetchall()])
-                # we return early, with the bare results
-                return None, res
 
+        raise NotImplementedError
+
+    def expr_eval(self, cr, uid, obj, lefts, operator, right, pexpr, context):
+        """ Expressions in one2many can be like:
+
+            [('this', '=', 1)] [('this','=', 'name of 1')]
+            [('this.name', '=', 'name of 1')] # but avoid name_search()
+            ...
+        """
+        field_obj = obj.pool.get(self._obj)
+        right_expr = None
+
+        if len(lefts) > 1:
+            # All operators here resolve to 'in' for lefts[0],
+            # negation will apply to lefts[-1] only!
+            right_expr = [('.'.join(lefts[1:]), operator, right)]
+            operator = 'in'
+        elif right is False:
+            # False means to return those records that have no 2many entries
+            right_expr = [] # = all records
+            if operator in ('=', 'like',):
+                operator = 'not in'
+            elif operator in ('!=', '<>', 'not like'):
+                operator = 'in'
+            else:
+                raise eu.DomainInvalidOperator(obj, lefts, operator, right)
+        elif isinstance(right, eu.placeholder):
+            right_expr = [('id', operator, right)]
+            operator = 'in'
+        elif right == []:
+            # empty set of results
+            # immediately return, no need to reverse lookup or anything
+            return False
+        elif isinstance(right, basestring):
+            # First, push the operator away, in case of 'child_of'
+            if operator in ('child_of', '|child_of'):
+                popop = operator
+                operator = '='
+            else:
+                popop = 'in'
+
+            if getattr(field_obj._name_search, 'original_orm', False) \
+                    and getattr(field_obj.name_search, 'original_orm', False):
+                # Then, see if we can short-cut around expensive _name_search()
+                right_expr = [(field_obj._rec_name, operator, right)]
+            else:
+                # has custom name_search, use it the expensive way
+                ids2 = [x[0] for x in field_obj.name_search(cr, uid, right, [], operator, context=context, limit=None)]
+                right_expr = [('id', 'in', ids2)]
+
+            # Since 'wc' already contains the right logic, pop the operator
+            operator = popop
+        elif operator in ('in', 'not in') and right \
+                and isinstance(right, (list, tuple)) \
+                and all([isinstance(x, basestring) for x in right]):
+            if getattr(field_obj._name_search, 'original_orm', False) \
+                    and getattr(field_obj.name_search, 'original_orm', False):
+                # Then, see if we can short-cut around expensive _name_search()
+                right_expr = [(field_obj._rec_name, '=', right)]
+            else:
+                # has custom name_search, use it the expensive way
+                ids2 = [x[0] for x in field_obj.name_search(cr, uid, right, [], '=', context=context, limit=None)]
+                right_expr = [('id', 'in', ids2)]
+        elif isinstance(right, list) and len(right) and not isinstance(right[0], (int, long)):
+            # nested right expression
+            if operator in ('=', 'in'):
+                operator = 'in'
+            elif operator in ('!=', '<>', 'not in'):
+                operator = 'not in'
+            else:
+                raise eu.DomainInvalidOperator(obj, lefts, operator)
+            right_expr = right
         else:
-            # FIXME: shouldn't it depend on operator???
-            if op != '=':
-                warnings.warn("Operator is: %s" % op)
-            qry = 'SELECT distinct("%s")' \
-                           '  FROM "%s" where "%s" is not null'  % (sid1, reltable, sid1)
-            params = []
-           
-        if cr.pgmode in eu.PG_MODES:
-            return qry, params
+            if not isinstance(right, (list, tuple)):
+                raise eu.DomainRightError(obj, lefts, operator, right)
+            right_expr = [('id', 'in', right)]
+
+
+        if pexpr._debug:
+            logging.getLogger('fields.x2many').debug("%s.%s expression right: %r", \
+                    obj._name, lefts[0], right_expr)
+        erqu, erpa = self._expr_rev_lookup(cr, uid, obj, pexpr, lefts, operator,
+                    field_obj, right_expr, context=context)
+        if operator in ('child_of', '|child_of'):
+            operator = 'in'
+
+        if not erqu:
+            return ('id', operator, erpa )
         else:
-            cr.execute(qry, params, debug=debug)
-            res.extend([r[0] for r in cr.fetchall()])
-            return None, res
-        # unreachable code
-        return None, None
+            operator += 'select'
+            return ('id', operator, (erqu, erpa))
 
 class one2one(_rel2one):
     _type = 'one2one'
@@ -356,7 +387,7 @@ class many2one(_rel2one):
     def expr_eval(self, cr, uid, obj, lefts, operator, right, pexpr, context):
         field_obj = obj.pool.get(self._obj)
         if len(lefts) > 1:
-            wc = field_obj._where_calc(cr, uid, 
+            wc = field_obj._where_calc(cr, uid,
                     [('.'.join(lefts[1:]), operator, right)],
                     active_test=False, context=context)
             if isinstance(wc, list):
@@ -375,8 +406,7 @@ class many2one(_rel2one):
                 return (lefts[0], 'inselect', (qry, qu2))
 
         if isinstance(right, list) and len(right) \
-                and isinstance(right[0], (tuple, list)) \
-                and len(right[0]) == 3:
+                and any([isinstance(x, (list, tuple)) for x in right]):
             # That's a nested expression
 
             assert(operator == 'in') # others not implemented
@@ -387,7 +417,7 @@ class many2one(_rel2one):
             wquery = field_obj._where_calc(cr, uid, right, context)
             field_obj._apply_ir_rules(cr, uid, wquery, 'read', context=context)
             from_clause, qu1, qu2 = wquery.get_sql()
-            
+
             if qu1:
                 qu1 = "WHERE " + qu1
 
@@ -397,11 +427,12 @@ class many2one(_rel2one):
 
         elif operator == 'child_of' or operator == '|child_of' :
             if isinstance(right, basestring):
-                # TODO: sql version?
                 ids2 = [x[0] for x in field_obj.name_search(cr, uid, right, [], 'like', limit=None)]
             elif isinstance(right, (int, long)):
                 ids2 = list([right])
             else:
+                # Here, right can still contain tuples, which make it a
+                # nested domain expression
                 ids2 = list(right)
 
             # TODO verify!
@@ -622,7 +653,7 @@ class one2many(_rel2many):
                 dobj2 = obj.pool.get(diname)
                 if self._fields_id in dobj2._columns:
                     rev_column = dobj2._columns[self._fields_id]
-        
+
         if rev_column:
             if rev_column._type != 'many2one' or rev_column._obj != obj._name:
                 # This happens in mail_gateway, crm. Keep this warning until they're fixed
@@ -634,7 +665,7 @@ class one2many(_rel2many):
             assert obj._name != 'ir.actions.actions'
             assert not self.required
             assert not self._sql_default_for(name,obj), self._sql_default_for(name,obj)
-            
+
             dest_table = schema_table.parent()[dest_obj._table]
             references = {'table': obj._table }
 
@@ -646,88 +677,39 @@ class one2many(_rel2many):
             assert r
         return None
 
-    def expr_eval(self, cr, uid, obj, lefts, operator, right, pexpr, context):
-                # Applying recursivity on field(one2many)
-        ret = super(one2many, self).expr_eval(cr, uid, obj, lefts, operator, right, pexpr, context)
-        if ret is not None:
-            return ret
-        
-        field_obj = obj.pool.get(self._obj)
-        assert len(lefts) == 1, lefts
-        if operator == 'child_of' or operator == '|child_of':
-            if isinstance(right, basestring):
-                ids2 = [x[0] for x in obj.name_search(cr, uid, right, [], 'like', context=context, limit=None)]
-            else:
-                ids2 = list(right)
-            null_too = (operator == '|child_of')
-            if self._obj != obj._name:
-                dom = pexpr._rec_get(cr, uid, field_obj, ids2, left=lefts[0], 
+
+    def _expr_rev_lookup(self, cr, uid, obj, pexpr, lefts, op, field_obj, right_expr, context=None):
+
+        if op == 'child_of' or op == '|child_of':
+            null_too = (op == '|child_of')
+            if self._obj != field_obj._name:
+                dom = pexpr._rec_get(cr, uid, obj, right_expr, left=lefts[0],
                         prefix=self._obj, null_too=null_too, context=context)
             else:
-                dom = pexpr._rec_get(cr, uid, obj, ids2, parent=lefts[0], 
+                dom = pexpr._rec_get(cr, uid, field_obj, right_expr, parent=lefts[0],
                         null_too=null_too, context=context)
-            if len(dom) == 0:
-                return True
-            elif len(dom) == 1:
-                return dom[0]
-            else:
-                return eu.nested_expr(dom)
+            right_expr = dom
+            op = 'in'
+
+        wc = field_obj._where_calc(cr, uid, right_expr, context=context)
+        assert not isinstance(wc, list), field_obj # :( this is an orm_memory object
+        field_obj._apply_ir_rules(cr, uid, wc, 'read', context=context)
+
+        from_clause, where_c, params = wc.get_sql()
+        qry = 'SELECT "%s".%s FROM %s WHERE "%s".%s IS NOT NULL' % \
+                (field_obj._table, self._fields_id, from_clause, field_obj._table, self._fields_id)
+        if where_c:
+            qry += ' AND ' + where_c
+
+        if pexpr._debug:
+            logging.getLogger('fields.many2many').debug("Resulting query: %s", qry)
+
+        if cr.pgmode in eu.PG_MODES:
+            return qry, params
         else:
-            call_null = True
-
-            if right is not False:
-                if isinstance(right, basestring):
-                    ids2 = [x[0] for x in obj.name_search(cr, uid, right, [], operator, context=context, limit=None)]
-                    if ids2:
-                        operator = 'in'
-                else:
-                    if not isinstance(right, list):
-                        ids2 = [right]
-                    else:
-                        ids2 = right
-                if not ids2:
-                    if operator in ['like','ilike','in','=']:
-                        #no result found with given search criteria
-                        call_null = False
-                        return False
-                    else:
-                        call_null = True
-                        operator = 'in' # operator changed because ids are directly related to main object
-                else:
-                    call_null = False
-                    o2m_op = 'in'
-                    if operator in  ['not like','not ilike','not in','<>','!=']:
-                        o2m_op = 'not in'
-                    erqu, erpa = self._expr_rev_lookup(cr, self._fields_id,
-                                            field_obj._table, 'id', ids2, operator, debug=pexpr._debug)
-                    if not erqu:
-                        return ('id', o2m_op, erpa )
-                    else:
-                        if o2m_op in ('in', '='):
-                            o2m_op = 'inselect'
-                        elif o2m_op in ('not in', '!=', '<>'):
-                            o2m_op = 'not inselect'
-                        else:
-                            raise NotImplementedError('operator: %s' % o2m_op)
-                        return ('id', o2m_op, (erqu, erpa))
-
-            if call_null:
-                o2m_op = 'not in'
-                if operator in  ['not like','not ilike','not in','<>','!=']:
-                    o2m_op = 'in'
-
-                erqu, erpa = self._expr_rev_lookup(cr, self._fields_id, 
-                                field_obj._table, 'id', [], operator, debug=pexpr._debug)
-                if not erqu:
-                    return ('id', o2m_op, erpa )
-                else:
-                    if o2m_op in ('in', '='):
-                        o2m_op = 'inselect'
-                    elif o2m_op in ('not in', '!=', '<>'):
-                        o2m_op = 'not inselect'
-                    else:
-                        raise NotImplementedError('operator: %s' % o2m_op)
-                    return ('id', o2m_op, (erqu, erpa))
+            cr.execute(qry, params, debug=pexpr._debug)
+            res = map(itemgetter(0), cr.fetchall())
+            return None, res
 
 
 class many2many(_rel2many):
@@ -795,7 +777,7 @@ class many2many(_rel2many):
         self._id1 = id1
         self._id2 = id2
         self._limit = limit
-        
+
         if 'copy_data' not in args:
             self.copy_data = 'shallow_copy'
 
@@ -805,7 +787,7 @@ class many2many(_rel2many):
             Note: by default, a m2m is symmetrical among source and destination models.
             This means that if a m2m field is declared at both models, it will use
             the same relation table and keep the same data entered from either end.
-            
+
             :return: (m2m_table, local_col, dest_col) where m2m_table is the table name,
                      local_col is the name of the column holding the current model's FK, and
                      dest_col is the name of the column holding the destination model's FK, and
@@ -1023,84 +1005,29 @@ class many2many(_rel2many):
         ret['related_columns'] = list((m2m_id1, m2m_id2))
         ret['third_table'] = m2m_rel
 
-    def expr_eval(self, cr, uid, obj, lefts, operator, right, pexpr, context):
-        ret = super(many2many, self).expr_eval(cr, uid, obj, lefts, operator, right, pexpr, context)
-        if ret is not None:
-            return ret
-
+    def _expr_rev_lookup(self, cr, uid, obj, pexpr, lefts, op, field_obj, right_expr, context=None):
         m2m_rel, m2m_id1, m2m_id2 = self._sql_names(obj)
-        field_obj = obj.pool.get(self._obj)
-        if operator == 'child_of' or operator == '|child_of':
-            if isinstance(right, basestring):
-                ids2 = [x[0] for x in field_obj.name_search(cr, uid, right, [], 'like', context=context, limit=None)]
-            else:
-                ids2 = list(right)
+        if op == 'child_of' or op == '|child_of':
+            right_expr = pexpr._rec_get(cr, uid, field_obj, right_expr,
+                    null_too=(op == '|child_of'), context=context)
 
-            dom = pexpr._rec_get(cr, uid, field_obj, ids2, null_too=(operator == '|child_of'), context=context)
-            ids2 = field_obj.search(cr, uid, dom, context=context)
-            if m2m_rel != obj._name:
-                erqu, erpa = self._expr_rev_lookup(cr, m2m_id1, m2m_rel, m2m_id2, ids2, operator, debug=pexpr._debug)
-                assert (not erqu) # TODO
-                ids2 = erpa
-            
-            return ('id', 'in', ids2)
+        wc = field_obj._where_calc(cr, uid, right_expr, context=context)
+        assert not isinstance(wc, list), field_obj # :( this is an orm_memory object
+        field_obj._apply_ir_rules(cr, uid, wc, 'read', context=context)
+
+        wc.join((field_obj._table, m2m_rel, 'id', m2m_id2))
+        from_clause, where_c, params = wc.get_sql()
+        qry = 'SELECT "%s".%s FROM %s WHERE %s ' % (m2m_rel, m2m_id1, from_clause, where_c)
+
+        if pexpr._debug:
+            logging.getLogger('fields.many2many').debug("Resulting query: %s", qry)
+
+        if cr.pgmode in eu.PG_MODES:
+            return qry, params
         else:
-            call_null_m2m = True
-            if right is not False:
-                if isinstance(right, basestring):
-                    # TODO sql version?
-                    res_ids = [x[0] for x in field_obj.name_search(cr, uid, right, [], operator, context=context)]
-                    if res_ids:
-                        operator = 'in'
-                else:
-                    if isinstance(right, tuple):
-                        res_ids = list(map(int, right))
-                    elif not isinstance(right, list):
-                        res_ids = [ int(right) ]
-                    else:
-                        res_ids = map(int, right)
-                if not res_ids:
-                    if operator in ['like','ilike','in','=']:
-                        #no result found with given search criteria
-                        call_null_m2m = False
-                        return False
-                    else:
-                        call_null_m2m = True
-                        operator = 'in' # operator changed because ids are directly related to main object
-                else:
-                    call_null_m2m = False
-                    m2m_op = 'in'
-                    if operator in  ['not like','not ilike','not in','<>','!=']:
-                        m2m_op = 'not in'
-
-                    erqu, erpa = self._expr_rev_lookup(cr, m2m_id1, m2m_rel, m2m_id2, res_ids, operator, debug=pexpr._debug)
-                    if not erqu:
-                        return ('id', m2m_op, erpa )
-                    else:
-                        if m2m_op in ('in', '='):
-                            m2m_op = 'inselect'
-                        elif m2m_op in ('not in', '!=', '<>'):
-                            m2m_op = 'not inselect'
-                        else:
-                            raise NotImplementedError('operator: %s' % m2m_op)
-                        return ('id', m2m_op, (erqu, erpa))
-            if call_null_m2m:
-                m2m_op = 'not in'
-                if operator in  ['not like','not ilike','not in','<>','!=']:
-                    m2m_op = 'in'
-                erqu, erpa = self._expr_rev_lookup(cr, m2m_id1, m2m_rel, m2m_id2, [], operator, debug=pexpr._debug)
-                if not erqu:
-                    return ('id', m2m_op, erpa )
-                else:
-                    if m2m_op in ('in', '='):
-                        m2m_op = 'inselect'
-                    elif m2m_op in ('not in', '!=', '<>'):
-                        m2m_op = 'not inselect'
-                    else:
-                        raise NotImplementedError('operator: %s' % m2m_op)
-                    return ('id', m2m_op, (erqu, erpa))
-
-        raise RuntimeError("unreachable code")
+            cr.execute(qry, params, debug=pexpr._debug)
+            res = map(itemgetter(0), cr.fetchall())
+            return None, res
 
     def calc_merge(self, cr, uid, obj, name, b_dest, b_src, context):
         if b_dest and self.merge_op == 'join':
@@ -1109,7 +1036,7 @@ class many2many(_rel2many):
             elif not b_src[name]:
                 return None
             else:
-                print "type:", type(b_dest[name]), type(b_src[name])
+                # print "type:", type(b_dest[name]), type(b_src[name])
                 return b_dest[name] + b_src[name]
         return super(many2many, self).calc_merge(cr, uid, obj, name, b_dest=b_dest, b_src=b_src, context=context)
 
