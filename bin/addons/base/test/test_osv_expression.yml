@@ -35,7 +35,7 @@
     Test one2many operator with normal result
 -
     !assert {model: res.partner, search: "[('address', '=', 'Agrolait')]", count: 1 }:
-        - name in "Fabien Dupont"
+        - name in "Agrolait"
 -
     Test one2many operator with empty result
 -
