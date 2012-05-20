@@ -3,6 +3,7 @@
 #
 #    OpenERP, Open Source Management Solution
 #    Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>).
+#    Copyright (C) 2011-2012 P. Christeas <xrg@hellug.gr>
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -112,7 +113,8 @@ class expression(object):
                 typically 'child_of'
                 
                 @param model the model to operate upon
-                @param ids the ids of that model, to start from
+                @param ids the ids of that model, to start from. Can also be a
+                        domain expression, to be searched upon
                 @param parent the name of the "parent" field
                 @param left
                 @param prefix if we must disambiguate the table name, 
@@ -125,6 +127,7 @@ class expression(object):
                 # TODO: Improve where joins are implemented for many with '.', replace by:
                 # doms += ['&',(prefix+'.parent_left','<',o.parent_right),(prefix+'.parent_left','>=',o.parent_left)]
                 doms = []
+                # Note: browse /does/ work with domain expressions as 'ids'
                 for o in model.browse(cr, uid, ids, context=context):
                     if doms:
                         doms.insert(0, '|')
@@ -150,17 +153,33 @@ class expression(object):
                     rexp.parse_into_query(cr, 1, model, dqry, context)
                 qfrom, qu1, qu2 = dqry.get_sql()
 
-                qu2 = [ ids, ] + qu2
+                if not ids:
+                    qidexpr = 'FALSE'
+                    qifrom = '"%s"' % model._table
+                elif isinstance(ids[0], (int, long)):
+                    qifrom = '"%s"' % model._table
+                    qidexpr = 'id = ANY(%s)'
+                    qu2 = [ ids, ] + qu2
+                else:
+                    # domain expression!
+                    qiqry = model._where_calc(cr, uid, ids, context)
+                    # No need to apply ir.rules here, since the outer part of the
+                    # recursive query will impose the same clause on the very
+                    # same ids.
+                    qifrom, qiu1, qiu2 = qiqry.get_sql()
+                    qidexpr = qiu1 or 'TRUE'
+                    qu2 = qiu2 + qu2
+
                 qry = ''' 
         WITH RECURSIVE %s_rsrch(id) AS (
-                SELECT id FROM "%s" WHERE id = ANY(%%s)
+                SELECT id FROM %s WHERE %s
                 UNION ALL SELECT "%s".id FROM %s, %s_rsrch WHERE %s )
         SELECT id FROM %s_rsrch
                 ''' %( phname, 
-                        model._table,
-                        model._table, qfrom, phname, ' AND '.join(qu1),
+                        qifrom, qidexpr,
+                        model._table, qfrom, phname, qu1 or 'TRUE',
                         phname)
-                
+
                 # print "INSELECT %s" % qry
                 # print "args:", qu2
                 if null_too:
@@ -172,8 +191,14 @@ class expression(object):
                 def rg(ids, model, parent):
                     if not ids:
                         return []
+                    if isinstance(ids[0], (int, long)):
+                        # list of integer ids
+                        ids3 = ids
+                    else:
+                        # should be a domain expression
+                        ids3 = model.search(cr, uid, ids, context=context)
                     ids2 = model.search(cr, uid, [(parent, 'in', ids)], context=context)
-                    return ids + rg(ids2, model, parent)
+                    return ids3 + rg(ids2, model, parent)
                 if null_too:
                     res = ['|', (left, '=', None)]
                 else:
