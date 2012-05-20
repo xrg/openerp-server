@@ -81,7 +81,7 @@ class expression(object):
                 and (isinstance(element[0], basestring) or \
                         (isinstance(element[0], int) and isinstance(element[2], int)))
 
-    def __init__(self, exp, mode=None, debug=False):
+    def __init__(self, exp, debug=False):
         """  Initialize an expression to be evaluated on the object storage
         
             Expression may behave differently according to cr.pgmode:
@@ -98,8 +98,6 @@ class expression(object):
         self.__joins = []
         self.__main_table = None # 'root' table. set by parse()
         self.__DUMMY_LEAF = (1, '=', 1) # FIXME a dummy leaf that must not be parsed or sql generated
-        assert not mode, mode # obsolete
-        self.__mode = mode
         self._debug = debug
         self.__load_implicit_fields()
         self._joined_fields = {}  #: must re-use joins {field-name: model}
@@ -138,7 +136,7 @@ class expression(object):
                 if null_too:
                     doms = ['|', (left, '=', None)] + doms
                 return doms
-            elif self.__mode in eu.PG84_MODES:
+            elif cr.pgmode in eu.PG84_MODES:
                 # print "Recursive expand for 8.4, for %s" % model._table
                 phname = prefix + model._table
                 phname = phname.replace('.', '_')
@@ -149,7 +147,7 @@ class expression(object):
                 rdom = model.pool.get('ir.rule')._compute_domain(cr, uid, model._name, mode='read')
                 if rdom:
                     rexp = expression(rdom, debug=self._debug)
-                    rexp.parse_into_query(cr, 1, self, dqry, context)
+                    rexp.parse_into_query(cr, 1, model, dqry, context)
                 qfrom, qu1, qu2 = dqry.get_sql()
 
                 qu2 = [ ids, ] + qu2
