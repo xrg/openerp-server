@@ -220,6 +220,8 @@ class _rel2many(_relational):
                 raise eu.DomainInvalidOperator(obj, lefts, operator)
             right_expr = right
         else:
+            if isinstance(right, (long, int)):
+                right = [right,]
             if not isinstance(right, (list, tuple)):
                 raise eu.DomainRightError(obj, lefts, operator, right)
             right_expr = [('id', 'in', right)]
