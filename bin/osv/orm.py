@@ -113,51 +113,57 @@ class except_orm(Exception):
         self.value = value
         self.args = (name, value)
 
-class pythonOrderBy(list):
+class pythonOrderBy(object):
     """ Placeholder class for _generate_order_by() requesting python sorting
     """
 
-    def get_sort_key(self):
-        """ returns a function to use in sort(key=...)
+    def __init__(self, inlist):
         """
-        if len(self) != 1:
-            raise NotImplementedError("Cannot sort by: %s" % ','.join(self))
+            @param inlist is a list of column + direction, which we parse
 
-        _getters = []
-        for x in [ x.split(' ', 1)[0] for x in self]:
-            if x.endswith(':'):
-                _getters.append(lambda k: (k[x[:-1]] and k[x[:-1]][1]) or None) # the visual string of m2o
+            Creates self.plist which will be (direction, [getters])
+        """
+        old_direction = 3 # neither True or False
+        self.plist = []
+        self.fields = []
+        for x in inlist:
+            if ' ' in x:
+                nkey, ndir = x.split(' ', 1)
+                ndir = (ndir.lower() != 'desc')
             else:
-                _getters.append(lambda k: k[x])
+                nkey = x
+                ndir = True
+
+            if nkey.endswith(':'):
+                ngetter = lambda k: ((k[nkey[:-1]] and k[nkey[:-1]][1]) or None) # the visual string of m2o
+                self.fields.append(nkey[:-1])
+            else:
+                ngetter = itemgetter(nkey)
+                self.fields.append(nkey)
+
+            if ndir != old_direction:
+                self.plist.append((ndir, []))
+            self.plist[-1][1].append(ngetter)
+
+    def needs_more(self):
+        return bool(self.plist)
+
+    def get_next_sort(self):
+        """ returns direction + function to use in sort(key=...)
+        """
+        if not self.plist:
+            raise IndexError("List exhausted already")
+
+        direction, getters = self.plist.pop()
         def sort_key(k):
-            return tuple([ g(k) for g in _getters])
-        return sort_key
+            return tuple([ g(k) for g in getters])
+        return direction, sort_key
+
 
     def get_fields(self):
         """Return the field components of this order-by list
         """
-        def _clean(x):
-            x = x.split(' ',1)[0]
-            if x.endswith(':'):
-                x = x[:-1]
-            return x
-        return map(_clean, self)
-
-    def get_direction(self):
-        """ returns the order direction
-            True if ascending (default)
-        """
-        ascending = None
-        for x in self:
-            if ' ' in x:
-                adir = (x.split(' ', 1)[1].lower() != 'desc' )
-            else:
-                adir = True
-            if ascending is None:
-                ascending = adir
-            elif ascending != adir:
-                raise NotImplementedError("Cannot use multiple order directions on python sorting!")
-        return ascending
+        return self.fields
 
 class BrowseRecordError(Exception):
     pass
@@ -4732,7 +4738,10 @@ class orm(orm_template):
             res = cr.fetchall()
             data_res = self.read(cr, user, [x[0] for x in res],
                         fields=order_by.get_fields(), context=context)
-            data_res.sort(key=order_by.get_sort_key(), reverse=not order_by.get_direction())
+            # Repeat sorting in passes until all columns are satisfied
+            while order_by.needs_more():
+                ndir, nkey = order_by.get_next_sort()
+                data_res.sort(key=nkey, reverse=not ndir)
             if offset:
                 data_res = data_res[offset:]
             if limit:
