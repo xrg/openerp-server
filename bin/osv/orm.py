@@ -141,8 +141,9 @@ class pythonOrderBy(object):
                 nkey = nkey.rsplit('.',1)[-1]
                
             if nkey.endswith(':'):
-                ngetter = lambda k: ((k[nkey[:-1]] and k[nkey[:-1]][1]) or None) # the visual string of m2o
-                self.fields.append(nkey[:-1])
+                nkey = nkey[:-1]
+                ngetter = lambda k: ((k[nkey] and k[nkey][1]) or None) # the visual string of m2o
+                self.fields.append(nkey)
             else:
                 ngetter = itemgetter(nkey)
                 self.fields.append(nkey)
