@@ -134,6 +134,12 @@ class pythonOrderBy(object):
                 nkey = x
                 ndir = True
 
+            if '.' in nkey:
+                # For regular fields, _generate_order_by will give us
+                # "table_name".field_name . But we operate on the read()
+                # results, which typically only have the `field_name`
+                nkey = nkey.rsplit('.',1)[-1]
+               
             if nkey.endswith(':'):
                 ngetter = lambda k: ((k[nkey[:-1]] and k[nkey[:-1]][1]) or None) # the visual string of m2o
                 self.fields.append(nkey[:-1])
