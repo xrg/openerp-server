@@ -4,6 +4,7 @@
 #    OpenERP, Open Source Management Solution
 #    Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>).
 #    Copyright (C) 2010-2011 OpenERP s.a. (<http://openerp.com>).
+#    Copyright (C) 2009,2011-2012 P.Christeas <xrg@hellug.gr>
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -41,6 +42,7 @@ from tools import sql_model
 from tools.safe_eval import safe_eval as eval
 import pooler
 from tools.translate import _
+from tools.expr_utils import PG84_MODES
 
 import zipfile
 import release
@@ -1041,18 +1043,38 @@ def load_modules(db, force_demo=False, status=None, update_module=False, languag
 
         cr.commit()
         if update_module:
-            cr.execute("SELECT id, name FROM ir_module_module WHERE state=%s", ('to remove',))
+            cr.execute("SELECT id, name FROM ir_module_module WHERE state=%s ORDER BY id desc", ('to remove',))
             for mod_id, mod_name in cr.fetchall():
-                cr.execute('SELECT model, res_id FROM ir_model_data '
-                        'WHERE noupdate=%s AND module=%s AND model <> \'ir.module.module\' '
-                        'ORDER BY id DESC', (False, mod_name,))
-                for rmod, rid in cr.fetchall():
+                mod_dict = {}
+                if cr.pgmode in PG84_MODES:
+                    # array_agg() appeared in 8.4, but does exactly the job we want
+                    cr.execute('SELECT model, array_agg(res_id) FROM ir_model_data AS imd '
+                            ' WHERE noupdate=%s AND module=%s AND model <> \'ir.module.module\' '
+                            '    AND source in (\'xml\', \'orm\') '
+                            '    AND NOT EXISTS (SELECT 1 FROM ir_model_data AS imd2, ir_module_module AS mo '
+                                                'WHERE mo.state != \'to remove\' AND mo.name = imd2.module '
+                                                '  AND imd2.model = imd.model AND imd2.res_id = imd.res_id) '
+                            'GROUP BY model ', (False, mod_name,), debug=True)
+                    mod_dict = dict(cr.fetchall())
+                else:
+                    # We have to fetch distinct rows and aggregate them ourselves
+                    cr.execute('SELECT model, res_id FROM ir_model_data AS imd '
+                            'WHERE noupdate=%s AND module=%s AND model <> \'ir.module.module\' '
+                            '    AND source in (\'xml\', \'orm\') '
+                            '    AND NOT EXISTS (SELECT 1 FROM ir_model_data AS imd2, ir_module_module AS mo '
+                                                'WHERE mo.state != \'to remove\' AND mo.name = imd2.module '
+                                                '  AND imd2.model = imd.model AND imd2.res_id = imd.res_id) '
+                            'ORDER BY model, id DESC', (False, mod_name,), debug=True)
+                    for model, res_id in cr.fetchall():
+                        mod_dict.setdefault(model, []).append(res_id)
+
+                for rmod, rids in mod_dict.items():
                     uid = 1
                     rmod_module= pool.get(rmod)
                     if rmod_module:
-                        rmod_module.unlink(cr, uid, [rid])
+                        rmod_module.unlink(cr, uid, rids)
                     else:
-                        logger.error('Could not locate %s to remove res=%d' % (rmod,rid))
+                        logger.error('Could not locate %s to remove res=%s' % (rmod,rids))
                 cr.execute('DELETE FROM ir_model_data WHERE noupdate=%s AND module=%s', (False, mod_name,))
                 cr.commit()
             #

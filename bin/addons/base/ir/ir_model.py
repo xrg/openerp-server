@@ -288,7 +288,9 @@ class ir_model_fields(osv.osv):
     ]
 
     def unlink(self, cr, user, ids, context=None):
-        for field in self.browse(cr, user, ids, context):
+        for field in self.browse(cr, user, [('id', 'in', ids)], context):
+            # browse-search will remove any non-existing ids
+
             if not self.pool.get(field.model):
                 # may be a model being destroyed at module unlink
                 continue
