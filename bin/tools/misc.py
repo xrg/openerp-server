@@ -186,8 +186,6 @@ def exec_command_pipe(name, *args):
 #----------------------------------------------------------
 # File paths
 #----------------------------------------------------------
-#file_path_root = os.getcwd()
-#file_path_addons = os.path.join(file_path_root, 'addons')
 
 def file_open(name, mode="r", subdir='addons', pathinfo=False):
     """Open a file from the OpenERP root, using a subdir folder.
