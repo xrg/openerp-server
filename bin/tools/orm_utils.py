@@ -69,4 +69,29 @@ def copy_default(self, cr, uid, obj, id, f, data, context):
     else:
         return val
 
+# Closure functions
+
+def cl_user_id(self, cr, uid, context):
+    """ Returns `uid` for column _defaults
+
+        A trivial operation, but makes the _defaults section more readable,
+        w/o lambdas.
+    """
+    return uid
+
+def cl_company_default_get(model):
+    """Return closure function for _company_default_get
+
+        Sometimes, we want to set the `company_id` as::
+
+            _defaults = { 'company_id': lambda s,c,u,ct: ..._company_default_get(...,'foo.model',) }
+
+        we can replace it now with::
+
+            _defaults = { 'company_id': cl_company_default_get('foo.model'), }
+
+        @param model The model being passed to _company_default_get()
+    """
+    return lambda self, cr, uid, context: \
+            self.pool.get('res.company')._company_default_get(cr, uid, model, context=context)
 #eof
