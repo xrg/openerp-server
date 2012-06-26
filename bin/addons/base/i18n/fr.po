@@ -4673,7 +4673,7 @@ msgstr ""
 #: model:ir.actions.act_window,name:base.ir_action_window
 #: model:ir.ui.menu,name:base.menu_ir_action_window
 msgid "Window Actions"
-msgstr "Actions de la fênetre"
+msgstr "Actions de fênetres"
 
 #. module: base
 #: model:ir.actions.act_window,name:base.ir_action_wizard
