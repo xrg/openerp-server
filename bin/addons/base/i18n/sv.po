@@ -779,8 +779,12 @@ msgstr ""
 
 #. module: base
 #: field:ir.actions.act_window.view,multi:0
+#, fuzzy
 msgid "On Multiple Doc."
 msgstr ""
+"#-#-#-#-#  .merge_file_hkGlkT (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_ehaxIQ (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"På flera dokument"
 
 #. module: base
 #: field:ir.actions.act_window.view,sequence:0
@@ -1811,8 +1815,12 @@ msgstr ""
 
 #. module: base
 #: field:ir.report.custom,field_parent:0 field:ir.ui.view,field_parent:0
+#, fuzzy
 msgid "Child Field"
 msgstr ""
+"#-#-#-#-#  .merge_file_hkGlkT (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_ehaxIQ (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Underfält"
 
 #. module: base
 #: field:ir.report.custom,footer:0
@@ -3595,12 +3603,8 @@ msgstr ""
 
 #. module: base
 #: help:res.bank,bic:0
-#, fuzzy
 msgid "Bank Identifier Code"
-msgstr ""
-"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"Bank identifieringskod"
+msgstr "Bankidentifieringskod"
 
 #. module: base
 #: help:res.country,code:0
@@ -4397,7 +4401,7 @@ msgstr ""
 #: model:ir.actions.wizard,name:base.wizard_upgrade
 #: model:ir.ui.menu,name:base.menu_wizard_upgrade
 msgid "Apply Scheduled Upgrades"
-msgstr "Inför uppgraderingar"
+msgstr "Inför planerade uppgraderingar"
 
 #. module: base
 #: model:ir.model,name:base.model_ir_actions_act_window
@@ -4674,12 +4678,8 @@ msgstr ""
 
 #. module: base
 #: model:ir.model,name:base.model_res_partner_bank_type_field
-#, fuzzy
 msgid "Bank type fields"
-msgstr ""
-"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"Banktyp fält"
+msgstr "Banktypfält"
 
 #. module: base
 #: model:ir.model,name:base.model_res_partner_event
@@ -6393,12 +6393,8 @@ msgstr ""
 
 #. module: base
 #: model:res.partner.category,name:base.res_partner_category_4
-#, fuzzy
 msgid "Basic Partner"
-msgstr ""
-"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"Baspartner"
+msgstr "Basföretag"
 
 #. module: base
 #: model:res.partner.category,name:base.res_partner_category_5
@@ -6941,12 +6937,8 @@ msgstr ""
 #. module: base
 #: selection:ir.module.module,state:0
 #: selection:ir.module.module.dependency,state:0
-#, fuzzy
 msgid "To be upgraded"
-msgstr ""
-"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"Kommer att uppgraderas"
+msgstr "Att uppgradera"
 
 #. module: base
 #: selection:ir.module.module.dependency,state:0
@@ -9262,12 +9254,8 @@ msgstr "Allmänt"
 
 #. module: base
 #: view:res.partner:0
-#, fuzzy
 msgid "My Partners"
-msgstr ""
-"#-#-#-#-#  .merge_file_4pW6P4 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_rqPRRf (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"Mina partners"
+msgstr "Mina företag"
 
 #. module: base
 #: view:res.partner:0 view:res.partner.address:0
@@ -9305,7 +9293,7 @@ msgstr ""
 #. module: base
 #: view:res.partner.bank:0
 msgid "Bank Account Owner"
-msgstr "Bankkonto ägare"
+msgstr "Bankkontoägare"
 
 #. module: base
 #: view:res.partner.category:0
@@ -9434,12 +9422,8 @@ msgstr ""
 #: wizard_button:module.upgrade,start,end:0
 #: wizard_button:server.action.create,init,end:0
 #: wizard_button:server.action.create,step_1,end:0
-#, fuzzy
 msgid "Close"
-msgstr ""
-"#-#-#-#-#  .merge_file_LN9yti (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_q28zqL (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"Stäng"
+msgstr "Avbryt"
 
 #. module: base
 #: view:wizard.module.lang.export:0
@@ -10752,16 +10736,13 @@ msgstr ""
 
 #. module: base
 #: view:base.language.import:0
-#, fuzzy
 msgid ""
 "If you need another language than the official ones available, you can "
 "import a language pack from here. Other OpenERP languages than the official "
 "ones can be found on launchpad."
 msgstr ""
-"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"Om du behöver ett annat språk än de officiella sp kan du importera "
-"språkpaket här. Andra OpenERP språk än de officiella finns på launchpad."
+"Om du behöver ett annat språk än de officiella språken kan du importera nya "
+"språkpaket här. Andra OpenERP-språk än de officiella finns på launchpad."
 
 #. module: base
 #: field:res.config.users,date:0 field:res.users,date:0
@@ -11174,12 +11155,8 @@ msgstr ""
 
 #. module: base
 #: view:ir.module.module:0
-#, fuzzy
 msgid "Author Website"
-msgstr ""
-"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"Författare hemsida"
+msgstr "Upphovsmannens webbplats"
 
 #. module: base
 #: view:ir.attachment:0
@@ -11360,8 +11337,12 @@ msgstr "Kopia av"
 
 #. module: base
 #: field:ir.model,osv_memory:0
+#, fuzzy
 msgid "In-memory model"
 msgstr ""
+"#-#-#-#-#  .merge_file_hkGlkT (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_ehaxIQ (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Minnesobjekt"
 
 #. module: base
 #: view:partner.clear.ids:0
@@ -12216,12 +12197,8 @@ msgstr ""
 
 #. module: base
 #: view:ir.actions.todo:0
-#, fuzzy
 msgid "Set as Todo"
-msgstr ""
-"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"Sätt till att göra"
+msgstr "Ange som 'att göra'"
 
 #. module: base
 #: view:base.language.install:0 view:base.module.import:0
@@ -12273,12 +12250,8 @@ msgstr ""
 #: model:ir.ui.menu,name:base.menu_reporting
 #: model:ir.ui.menu,name:base.next_id_64 model:ir.ui.menu,name:base.next_id_73
 #: model:ir.ui.menu,name:base.reporting_menu
-#, fuzzy
 msgid "Reporting"
-msgstr ""
-"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"Rapportering"
+msgstr "Rapporter"
 
 #. module: base
 #: selection:ir.module.module,license:0
@@ -12941,17 +12914,17 @@ msgstr ""
 #. module: base
 #: model:ir.ui.menu,name:base.menu_event_association
 #: model:ir.ui.menu,name:base.menu_event_main
-#, fuzzy
 msgid "Events Organisation"
-msgstr ""
-"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"Händelseorganisation"
+msgstr "Evenemangsadministration"
 
 #. module: base
 #: help:workflow.transition,act_to:0
+#, fuzzy
 msgid "The destination activity."
 msgstr ""
+"#-#-#-#-#  .merge_file_hkGlkT (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_ehaxIQ (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Destinationsaktivitet."
 
 #. module: base
 #: view:res.config.installer:0
@@ -14374,17 +14347,14 @@ msgstr ""
 
 #. module: base
 #: model:ir.actions.act_window,help:base.act_ir_actions_todo_form
-#, fuzzy
 msgid ""
 "The configuration wizards are used to help you configure a new instance of "
 "OpenERP. They are launched during the installation of new modules, but you "
 "can choose to restart some wizards manually from this menu."
 msgstr ""
-"#-#-#-#-#  .merge_file_x4k48P (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_hc7Dz8 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"Konfigurationsguiderna hjälper dig att konfigurera en ny OpenEREP-instans. "
-"De startas under modulinstallationer, men du kan återstarta vissa guider "
-"från denna meny."
+"Konfigurationsguiderna hjälper dig att konfigurera en ny OpenERP-instans. De "
+"startas under modulinstallationer, men du kan återstarta vissa guider från "
+"denna meny."
 
 #. module: base
 #: code:addons/base/res/res_user.py:605

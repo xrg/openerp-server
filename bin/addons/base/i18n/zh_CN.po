@@ -874,7 +874,7 @@ msgstr "显示菜单提示"
 #. module: base
 #: field:ir.actions.act_window,domain:0 field:ir.filters,domain:0
 msgid "Domain Value"
-msgstr "所有权价值"
+msgstr "过滤条件值"
 
 #. module: base
 #: field:ir.actions.act_window,filter:0 field:ir.module.repository,filter:0
@@ -1699,7 +1699,7 @@ msgstr "完整名称"
 #: field:ir.rule,domain_force:0 field:res.partner.title,domain:0
 #: view:ir.filters:0
 msgid "Domain"
-msgstr "域"
+msgstr "过滤条件"
 
 #. module: base
 #: field:ir.model.fields,field_description:0
@@ -2772,7 +2772,7 @@ msgstr "上级业务伙伴"
 #. module: base
 #: field:res.partner,ref:0
 msgid "Reference"
-msgstr "引用"
+msgstr "关联单号"
 
 #. module: base
 #: field:res.partner,supplier:0 field:res.partner.address,is_supplier_add:0
@@ -3275,12 +3275,8 @@ msgstr ""
 
 #. module: base
 #: help:ir.actions.act_window,res_model:0
-#, fuzzy
 msgid "Model name of the object to open in the view window"
-msgstr ""
-"#-#-#-#-#  .merge_file_CUmHnc (OpenERP Server 5.0.4)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_Wv2Z1d (OpenERP Server 5.0.4)  #-#-#-#-#\n"
-"模型对象的名称打开视图窗口"
+msgstr "在视图中打开的模型对象的名称"
 
 #. module: base
 #: help:ir.actions.act_window,src_model:0
@@ -3298,15 +3294,12 @@ msgstr ""
 
 #. module: base
 #: help:ir.actions.act_window,view_type:0
-#, fuzzy
 msgid ""
 "View type: set to 'tree' for a hierarchical tree view, or 'form' for other "
 "views"
 msgstr ""
-"#-#-#-#-#  .merge_file_SQnvkB (OpenERP Server 5.0.4)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_mmSLH2 (OpenERP Server 5.0.4)  #-#-#-#-#\n"
-"视图类型：设为“tree”来使用树形控件显示层次数据，或者设为“form”使用其他类型视"
-"图。"
+"视图类型：设为“树形列表”来使用树形控件显示层次数据，或者设为“表单”使用其他类"
+"型视图。"
 
 #. module: base
 #: help:ir.actions.act_window.view,multi:0
@@ -3314,7 +3307,7 @@ msgstr ""
 msgid ""
 "If set to true, the action will not be displayed on the right toolbar of a "
 "form view."
-msgstr "如果设为真，该动作将不会显示表单右侧的工具栏中。"
+msgstr "如果设为真，该动作将不会显示于表单右侧的工具栏中。"
 
 #. module: base
 #: help:ir.actions.report.xml,attachment:0
@@ -5140,7 +5133,7 @@ msgstr "ir.ui.view"
 #. module: base
 #: model:ir.model,name:base.model_ir_ui_view_custom
 msgid "ir.ui.view.custom"
-msgstr "自定义视图"
+msgstr "ir.ui.view.custom"
 
 #. module: base
 #: model:ir.model,name:base.model_ir_ui_view_sc
@@ -5612,7 +5605,7 @@ msgstr ""
 #: model:ir.ui.menu,name:base.next_id_64 model:ir.ui.menu,name:base.next_id_73
 #: model:ir.ui.menu,name:base.reporting_menu
 msgid "Reporting"
-msgstr "报告"
+msgstr "报表"
 
 #. module: base
 #: model:ir.ui.menu,name:base.menu_main_pm
