@@ -3557,14 +3557,17 @@ class orm(orm_template):
             else:
                 raise RuntimeError()
 
-            if order_by:  # could be '' == no order
-                query += order_by
-            if s_query and s_query.offset:
-                query += " OFFSET %s"
-                params.append(s_query.offset)
-            if s_query and s_query.limit:
-                query += " LIMIT %s"
-                params.append(s_query.limit)
+            if isinstance(order_by, pythonOrderBy):
+                pass
+            else:
+                if order_by:  # could be '' == no order
+                    query += order_by
+                if s_query and s_query.offset:
+                    query += " OFFSET %s"
+                    params.append(s_query.offset)
+                if s_query and s_query.limit:
+                    query += " LIMIT %s"
+                    params.append(s_query.limit)
 
             if 'for update' in context and tools.server_bool.equals(context['for update'], True):
                 query += ' FOR UPDATE'
@@ -3709,6 +3712,14 @@ class orm(orm_template):
                         else:
                             record[f] = []
 
+        if s_query and isinstance(order_by, pythonOrderBy):
+            while order_by.needs_more():
+                ndir, nkey = order_by.get_next_sort()
+                res.sort(key=nkey, reverse=not ndir)
+            if s_query and s_query.offset:
+                res = res[s_query.offset:]
+            if s_query and s_query.limit:
+                res = res[:s_query.limit]
         ima_obj = self.pool.get('ir.model.access')
         no_perm = "=No Permission=" # TODO translate, outside of this fn
         for vals in res:
