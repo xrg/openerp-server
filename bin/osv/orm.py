@@ -139,7 +139,8 @@ class pythonOrderBy(object):
                 # "table_name".field_name . But we operate on the read()
                 # results, which typically only have the `field_name`
                 nkey = nkey.rsplit('.',1)[-1]
-               
+            nkey = nkey.strip('"')
+
             if nkey.endswith(':'):
                 nkey = nkey[:-1]
                 ngetter = lambda k: ((k[nkey] and k[nkey][1]) or None) # the visual string of m2o
