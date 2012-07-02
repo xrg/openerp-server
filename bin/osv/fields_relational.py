@@ -1104,6 +1104,32 @@ class reference(_column):
                     result[value['id']] = False
         return result
 
+    def _get_field_def(self, cr, uid, name, obj, ret, context=None):
+        # Function copied from fields.selection
+        super(reference, self)._get_field_def(cr, uid, name, obj, ret, context=context)
+        if isinstance(self.selection, (tuple, list)):
+            translation_obj = obj.pool.get('ir.translation')
+            # translate each selection option
+            sel_vals = []
+            sel2 = []
+            for (key, val) in self.selection:
+                if val:
+                    sel_vals.append(val)
+
+            if context and context.get('lang', False):
+                sel_dic =  translation_obj._get_multisource(cr, uid,
+                            obj._name + ',' + name, 'selection',
+                            context['lang'], sel_vals)
+            else:
+                sel_dic = {}
+
+            for key, val in self.selection:
+                sel2.append((key, sel_dic.get(val, val)))
+            ret['selection'] = sel2
+        else:
+            # call the 'dynamic selection' function
+            ret['selection'] = self.selection(obj, cr, uid, context)
+
 register_field_classes(one2one, many2one, one2many, many2many, reference)
 
 #eof
