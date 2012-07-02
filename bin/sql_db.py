@@ -171,6 +171,10 @@ class Cursor(object):
         self.sql_log_count = 0
         self.__closed = True    # avoid the call of close() (by __del__) if an exception
                                 # is raised by any of the following initialisations
+        if self.sql_log:
+            self.__caller = frame_codeinfo(currentframe(),2)
+        else:
+            self.__caller = False
         self._pool = pool
         self.dbname = dbname
         self.auth_proxy = None
@@ -178,10 +182,6 @@ class Cursor(object):
         self._cnx, self._obj = pool.borrow(dsn(dbname), True, temp=temp)
         self.__closed = False   # real initialisation value
         self.autocommit(False)
-        if self.sql_log:
-            self.__caller = frame_codeinfo(currentframe(),2)
-        else:
-            self.__caller = False
         if not hasattr(self._cnx,'_prepared'):
             self._cnx._prepared = []
         if not self.__pgmode:
