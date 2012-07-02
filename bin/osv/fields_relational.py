@@ -1130,6 +1130,44 @@ class reference(_column):
             # call the 'dynamic selection' function
             ret['selection'] = self.selection(obj, cr, uid, context)
 
+    @staticmethod
+    def orm_all_selection(this, cr, uid, context=None):
+        """ Selection of /all/ ORM models
+
+            @param this the parent model object
+
+            Note: it will only yield regular orm classes, not orm_memory or
+            abstract ones
+        """
+        import orm
+        return [ (r['model'], r['name']) for r in this.pool.get('ir.model').\
+                search_read(cr, uid, [], fields=['model', 'name'], \
+                        order='name', context=context) \
+                if isinstance(this.pool.get(r['model']), orm.orm)]
+
+    _orm_still_include = [ 'res.partner', 'res.partner.address', 'res.request']
+
+    @classmethod
+    def orm_user_selection(cls, this, cr, uid, context=None):
+        """User-ORM models. That is, not the framework ones
+
+            This fn() uses some crude heuristics to guess which models are
+            actually of 'user' interest rather than secondary/hidden objects.
+
+            Also skips orm_memory models, reports.
+        """
+        import orm
+        return [ (r['model'], r['name']) for r in this.pool.get('ir.model').\
+                search_read(cr, uid, ['|', '&', '&', '!', ('model', '=like', 'res.%'),
+                    '!', ('model', '=like', 'ir.%'), '!', ('model', '=like', 'workflow.%'),
+                    ('model', 'in', cls._orm_still_include)], \
+                    fields=['model', 'name'], order='name', context=context) \
+                if isinstance(this.pool.get(r['model']), orm.orm) \
+                    and not isinstance(this.pool.get(r['model']), orm.orm_memory)
+                    and r['model'] != r['name'] ]
+            # Note: Due to (osv.osv) habit, some models inherit both orm
+            # and orm_memory. We have to take these out.
+
 register_field_classes(one2one, many2one, one2many, many2many, reference)
 
 #eof
