@@ -1370,12 +1370,9 @@ class orm_template(object):
                     continue
             if fld_def._type in ('many2many'):
                 obj = self.pool.get(fld_def._obj)
-                field_value2 = []
-                for i in range(len(field_value)):
-                    if not obj.search(cr, uid, [('id', '=',
-                        field_value[i])]):
-                        continue
-                    field_value2.append(field_value[i])
+                # make sure all the values exist
+                # Side effect: this will also sort them!
+                field_value2 = obj.search(cr, uid, [('id', 'in', field_value)])
                 field_value = field_value2
             if fld_def._type in ('one2many'):
                 obj = self.pool.get(fld_def._obj)
