@@ -9423,7 +9423,7 @@ msgstr ""
 #: wizard_button:server.action.create,init,end:0
 #: wizard_button:server.action.create,step_1,end:0
 msgid "Close"
-msgstr "Avbryt"
+msgstr "Stäng"
 
 #. module: base
 #: view:wizard.module.lang.export:0
@@ -11380,12 +11380,8 @@ msgstr ""
 
 #. module: base
 #: model:ir.ui.menu,name:base.menu_project_long_term
-#, fuzzy
 msgid "Long Term Planning"
-msgstr ""
-"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"Långsiktig planering"
+msgstr "Långtidsplanering"
 
 #. module: base
 #: view:res.partner:0 field:res.partner,user_id:0
@@ -12598,12 +12594,8 @@ msgstr ""
 
 #. module: base
 #: model:ir.ui.menu,name:base.dashboard
-#, fuzzy
 msgid "Dashboards"
-msgstr ""
-"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"Startsidor"
+msgstr "Infopaneler"
 
 #. module: base
 #: help:ir.attachment,type:0

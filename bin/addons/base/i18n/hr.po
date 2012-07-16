@@ -2666,7 +2666,7 @@ msgstr ""
 #. module: base
 #: field:res.partner,vat:0
 msgid "VAT"
-msgstr "VAT"
+msgstr "PDV"
 
 #. module: base
 #: field:res.partner.address,birthdate:0
@@ -3734,15 +3734,12 @@ msgstr ""
 
 #. module: base
 #: help:res.partner,vat:0
-#, fuzzy
 msgid ""
 "Value Added Tax number. Check the box if the partner is subjected to the "
 "VAT. Used by the VAT legal statement."
 msgstr ""
-"#-#-#-#-#  .merge_file_KrvnlO (OpenERP Server 5.0.4)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_9yX8dG (OpenERP Server 5.0.4)  #-#-#-#-#\n"
-"PDV broj. Označite ako je partner podvrgnut PDV-u. Korišteno pri zakonskim "
-"PDV izvještajima."
+"PDV broj. Označite ako je partner obveznik PDV-a. Koristi se u nekim "
+"izvještajima."
 
 #. module: base
 #: help:res.partner.address,active:0
@@ -10428,12 +10425,8 @@ msgstr ""
 
 #. module: base
 #: field:res.partner,ref:0
-#, fuzzy
 msgid "Reference"
-msgstr ""
-"#-#-#-#-#  .merge_file_mEc9RP (OpenERP Server 5.0.4)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_hWrO8B (OpenERP Server 5.0.4)  #-#-#-#-#\n"
-"Referenca"
+msgstr "Šifra"
 
 #. module: base
 #: model:res.partner.category,name:base.res_partner_category_woodsuppliers0
