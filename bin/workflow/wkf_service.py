@@ -74,6 +74,41 @@ class workflow_service(netsvc.Service):
                 raise RuntimeError("orm %s doesn't have an initialized workflow" % obj._name)
         return obj._workflow
 
+    def install_workflow(self, obj, wkf, replace=False, default=False):
+        """Install `wkf` onto ORM model `obj`
+        
+            @param obj an ORM model instance
+            @param wkf a WorkflowEngine instance, or a list of those
+            @param replace if set, existing engines will be replaced
+            @param default if true, the no-op default workflow will be
+                installed in empty models
+        """
+        if wkf is None:
+            # Just install a no-op engine
+            if default and (replace or obj._workflow is None):
+                obj._workflow = WorkflowEngine(obj)
+            # else: do nothing
+        elif (not replace) and obj._workflow and isinstance(obj._workflow, WorkflowCompositeEngine):
+            # Model already has a composite engine, append it accordingly
+            if isinstance(wkf, list):
+                obj._workflow._engines.extend(wkf)
+            else:
+                obj._workflow._engines.append(wkf)
+        elif replace or (not obj._workflow) or obj._workflow.__class__ == WorkflowEngine:
+            # Model doesn't have an active workflow, replace that
+            if isinstance(wkf, list):
+                obj._workflow = WorkflowCompositeEngine(obj, wkf)
+            else:
+                obj._workflow = wkf
+        else:
+            # Model has some other (single) engine, put it in a composite
+            # engine together with the new ones
+            obj._workflow = WorkflowCompositeEngine(obj, [obj._workflow])
+            if isinstance(wkf, list):
+                obj._workflow._engines.extend(wkf)
+            else:
+                obj._workflow._engines.append(wkf)
+
     def reload_models(self, cr, models):
         """Reloads workflow for the specified models
             
@@ -88,6 +123,7 @@ class workflow_service(netsvc.Service):
             return
     
         pool = pooler.get_pool(cr.dbname)
+        replace = True
         wkfs = dict.fromkeys(models) # all to None, because [] is mutable
         wkf_subflows = dict()
         self._logger.debug("Reloading %d models: %s ...", len(wkfs.keys()), ','.join(wkfs.keys()[:20]))
@@ -112,15 +148,10 @@ class workflow_service(netsvc.Service):
             obj = pool.get(model)
             if not obj:
                 continue
-            if not engs:
-                obj._workflow = WorkflowEngine(obj)
-            elif len(engs) > 1:
-                obj._workflow = WorkflowCompositeEngine(obj, engs)
-            elif len(engs) > 0:
-                obj._workflow = engs[0]
+            if engs and len(engs) == 1:
+                self.install_workflow(obj, engs[0], replace=replace)
             else:
-                self._logger.warning("engs: %r", engs)
-                raise RuntimeError("unreachable code")
+                self.install_workflow(obj, engs, replace=replace, default=True)
 
             if model in wkf_subflows:
                 obj._workflow._subflows = wkf_subflows.pop(model)
