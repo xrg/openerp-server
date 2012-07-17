@@ -1421,10 +1421,9 @@ class orm_template(object):
                 else:
                     if f not in defaults:
                         defaults_props[f] = False
-        
-        
+
         remaining_fields = [ f for f in fields_list if f not in defaults ]
-        
+
         if remaining_fields:
             # get the default values for the inherited fields
             for t in self._inherits.keys():
@@ -4035,18 +4034,19 @@ class orm(orm_template):
                 upd0.append('_vptr=%s')
                 upd1.append(vals[field] or None)
             elif field in self._columns:
-                if self._columns[field]._classic_write and not (hasattr(self._columns[field], '_fnct_inv')):
-                    if (not totranslate) or not self._columns[field].translate:
-                        upd0.append('"'+field+'"='+self._columns[field]._symbol_set[0])
-                        upd1.append(self._columns[field]._symbol_set[1](vals[field]))
+                cf = self._columns[field]
+                if cf._classic_write and not (hasattr(cf, '_fnct_inv')):
+                    if (not totranslate) or not cf.translate:
+                        upd0.append('"'+field+'"=' + cf._symbol_set[0])
+                        upd1.append(cf._symbol_set[1](vals[field]))
                     direct.append(field)
                 else:
                     upd_todo.append(field)
             else:
                 updend.append(field)
             if field in self._columns \
-                    and hasattr(self._columns[field], 'selection') \
-                    and vals[field]:
+                    and vals[field] \
+                    and hasattr(self._columns[field], 'selection'):
                 self._check_selection_field_value(cr, user, field, vals[field], context=context)
 
         if self._log_access:
@@ -4056,10 +4056,9 @@ class orm(orm_template):
 
         if len(upd0):
             self.check_access_rule(cr, user, ids, 'write', context=context)
-            for sub_ids in cr.split_for_in_conditions(ids):
-                cr.execute('update ' + self._table + ' set ' + ','.join(upd0) + ' ' \
-                           'where id in %s', upd1 + [sub_ids], debug=self._debug) # TODO
-                if cr.rowcount != len(sub_ids):
+            cr.execute('UPDATE "%s" SET %s WHERE id = ANY(%%s)' % (self._table, ','.join(upd0)),
+                           upd1 + [ids,], debug=self._debug)
+            if cr.rowcount != len(ids):
                     raise except_orm(_('AccessError'),
                                      _('One of the records you are trying to modify has already been deleted (Document type: %s).') % self._description)
 
