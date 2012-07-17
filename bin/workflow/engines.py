@@ -139,6 +139,13 @@ class WorkflowEngine(object):
         global _loadables
         return _loadables
 
+    def inspect(self):
+        """Human-readable description of this engine instance
+
+            Subclasses should override this to provide meaningful descriptions
+        """
+        return "<%s>" % self.__class__.__name__
+
 class WorkflowCompositeEngine(WorkflowEngine):
     """ Binds >1 Engines to one ORM object
     
@@ -214,4 +221,8 @@ class WorkflowCompositeEngine(WorkflowEngine):
             if ret is not None:
                 return ret
         return None
+
+    def inspect(self):
+        return '[ ' + ','.join([e.inspect() for e in self._engines]) + ' ]'
+
 # eof

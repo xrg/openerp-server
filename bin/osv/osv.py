@@ -55,6 +55,7 @@ class object_proxy(netsvc.Service):
         self.exportMethod(self.obj_list)
         self.exportMethod(self.method_list)
         self.exportMethod(self.method_explain)
+        self.exportMethod(self.list_workflow)
 
     def check(f):
         @wraps(f)
@@ -348,6 +349,25 @@ class object_proxy(netsvc.Service):
                 doc=doc.rstrip(), ctype=ctype)
         except Exception:
             raise
+
+    def list_workflow(self, db, obj, **kw):
+        """ Lists installed workflows for ORM model `obj` through RPC
+        """
+        if not config.get_misc('debug', 'introspection', False):
+            raise except_osv('Access Error', 'Introspection is not enabled')
+
+        cr = self._get_cr_auth(db, kw)
+        try:
+            wf_service = netsvc.LocalService("workflow")
+            res = wf_service.inspect(cr, [obj,])
+            cr.commit()
+        except Exception:
+            cr.rollback()
+            raise
+        finally:
+            cr.close()
+        return res
+
 object_proxy()
 
 class osv_pool(object):

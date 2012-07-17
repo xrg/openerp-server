@@ -776,7 +776,8 @@ GNU Public Licence.
 common()
 
 class objects_proxy(baseExportService):
-    _auth_commands = { 'db': ['execute','exec_workflow', 'exec_dict'], 'root': ['obj_list', 'method_list', 'method_explain'] }
+    _auth_commands = { 'db': ['execute','exec_workflow', 'exec_dict'], 
+            'root': ['obj_list', 'method_list', 'method_explain', 'list_workflow'] }
     def __init__(self, name="object"):
         netsvc.ExportService.__init__(self,name)
         self.joinGroup('web-services')

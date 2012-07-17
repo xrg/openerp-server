@@ -52,6 +52,7 @@ class workflow_service(netsvc.Service):
         self.exportMethod(self.thaw)
         self.exportMethod(self.init_dummy)
         self.exportMethod(self.thaw_dummy)
+        self.exportMethod(self.inspect)
         self._logger = logging.getLogger('workflow.service')
         self._freezer = {}
         
@@ -72,6 +73,31 @@ class workflow_service(netsvc.Service):
             else:
                 raise RuntimeError("orm %s doesn't have an initialized workflow" % obj._name)
         return obj._workflow
+
+    def inspect(self, cr, models):
+        """Human-readable lines describing workflows installed on models
+
+            @return list of string lines
+        """
+        if cr.dbname in self._freezer:
+            raise RuntimeError("Database %s is in the workflow freezer, cannot inspect!" % cr.dbname)
+        out = []
+        pool = pooler.get_pool(cr.dbname)
+
+        for model in models:
+            mobj = pool.get(model)
+            if not mobj:
+                continue
+            if mobj._workflow is None:
+                out.append("%s: Not initialized!" % mobj._name)
+                continue
+            elif mobj._workflow.__class__ == WorkflowEngine:
+                # skip reporting this no-op class
+                continue
+
+            out.append("%s: %s" %(mobj._name, mobj._workflow.inspect()))
+
+        return out
 
     def install_workflow(self, obj, wkf, default=False):
         """Install `wkf` onto ORM model `obj`

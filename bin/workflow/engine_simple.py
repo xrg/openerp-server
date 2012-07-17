@@ -36,7 +36,7 @@ class WorkflowSimpleEngine(WorkflowEngine):
     """
     _logger = logging.getLogger('workflow.simple')
     
-    def __init__(self, parent_obj, wkf_id):
+    def __init__(self, parent_obj, wkf_id, wkf_name=''):
         """
             @param wkf_id   record id in the wkf table
         """
@@ -49,6 +49,7 @@ class WorkflowSimpleEngine(WorkflowEngine):
         self._subflows = {}
         self._act_starters = []
         self._transitions = []
+        self._wkf_name = wkf_name
     
     def _reload(self, cr):
         """ reload?
@@ -242,15 +243,15 @@ class WorkflowSimpleEngine(WorkflowEngine):
 
         wkfs = dict.fromkeys(models) # all to None, because [] is mutable
         wkf_subflows = dict()
-        cr.execute('SELECT osv, id, on_create FROM wkf WHERE osv=ANY(%s)', (models,))
-        for r_osv, r_id, r_onc in cr.fetchall():
+        cr.execute('SELECT osv, id, name, on_create FROM wkf WHERE osv=ANY(%s)', (models,))
+        for r_osv, r_id, r_name, r_onc in cr.fetchall():
             obj = pool.get(r_osv)
             if not obj:
                 cls._logger.warning("Object '%s' referenced in workflow #%d, but doesn't exist in pooler!",
                         r_osv, r_id)
                 continue
             if True:
-                neng = WorkflowSimpleEngine(obj, r_id)
+                neng = WorkflowSimpleEngine(obj, r_id, r_name)
             if r_onc:
                 if wkfs[r_osv] is None:
                     wkfs[r_osv] = []
@@ -278,6 +279,13 @@ class WorkflowSimpleEngine(WorkflowEngine):
                 eng._reload(cr)
 
         return
+
+    def inspect(self):
+        ret = "Simple#%d %s(%d acts" % (self._id, self._wkf_name, len(self._activities))
+        if self._subflows:
+            ret += ", %d subflows" % len(self._subflows)
+        ret += ')'
+        return ret
 
 WorkflowSimpleEngine.set_loadable()
 #eof
