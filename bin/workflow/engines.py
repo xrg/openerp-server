@@ -97,6 +97,19 @@ class WorkflowEngine(object):
         pass
 
 
+    def get_instance(self, klass):
+        """Get `self` or any contained engine, of `klass` type
+        
+            Useful when checking if an ORM model already contains some
+            workflow definition. First use this function to obtain the
+            object instance, then use class-specific functions to check
+            or modify the workflow.
+        """
+        if isinstance(self, klass):
+            return self
+        else:
+            return None
+
 class WorkflowCompositeEngine(WorkflowEngine):
     """ Binds >1 Engines to one ORM object
     
@@ -161,4 +174,15 @@ class WorkflowCompositeEngine(WorkflowEngine):
         for e in self._engines:
             e.redirect(cr, uid, old_id, new_id, context)
 
+    def get_instance(self, klass):
+        """Recursively check for klass instance in contained engines
+        """
+        ret = super(WorkflowCompositeEngine, self).get_instance(klass)
+        if ret is not None:
+            return ret
+        for e in self._engines:
+            ret = e.get_instance(klass)
+            if ret is not None:
+                return ret
+        return None
 # eof
