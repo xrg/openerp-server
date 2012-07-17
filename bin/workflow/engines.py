@@ -52,7 +52,30 @@ class WorkflowEngine(object):
     def create(self, cr, uid, ids, context):
         pass
 
-    def write(self, cr, uid, ids, context,):
+    def pre_write(self, cr, uid, ids, vals, signals, context):
+        """Populate `signals` with triggers for write()
+
+            In orm.write(), the WorkflowEngine.write() will be called
+            last, after the values are updated in the database. That
+            means that the engine would have no means of knowing the
+            `old` values of the records. We couldn't implement a rule
+            like "when state goes from draft to open do..." .
+            So, this function is called early. It knows the `ids` and
+            `vals`, so can figure out which fields do any transition.
+
+            @param ids A list of record IDs
+            @param vals A dict of name:value data to write to all ids.
+            @param signals an empty dict that will be populated with
+                    'signal': [sub-ids,] entries for any records that
+                    need to trigger a subsequent wkf transition.
+        """
+        pass
+
+    def write(self, cr, uid, ids, signals, context):
+        """
+            @param signals coming from pre_write(), a dictionary of
+                    'signal': [ids,] triggers to execute.
+        """
         pass
 
     def validate(self, cr, uid, id, signal, context):

@@ -2584,6 +2584,8 @@ class orm_memory(orm_template):
         if self._debug:
             _logger.debug('%s.write(#%s, %r)', self._name, ids, vals)
 
+        wkf_signals = {}
+        self._workflow.pre_write(cr, user, ids, vals, wkf_signals, context)
         for object_id in ids:
             self._check_access(user, object_id, mode='write')
             if object_id not in self.datas:
@@ -2597,7 +2599,7 @@ class orm_memory(orm_template):
                 self._columns[field].set_memory(cr, self, object_id, field, vals[field], user, context)
         
         self._validate(cr, user, ids, context)
-        self._workflow.write(cr, user, ids, context)
+        self._workflow.write(cr, user, ids, wkf_signals, context)
         return object_id
 
     def create(self, cr, user, vals, context=None):
@@ -3995,6 +3997,8 @@ class orm(orm_template):
         self._check_concurrency(cr, ids, context)
         self.pool.get('ir.model.access').check(cr, user, self._name, 'write', context=context)
 
+        wkf_signals = {}
+        self._workflow.pre_write(cr, user, ids, vals, wkf_signals, context)
         result = self._store_get_values(cr, user, ids, vals.keys(), context) or []
 
         # No direct update of parent_left/right
@@ -4175,7 +4179,7 @@ class orm(orm_template):
                     todo.append(id)
             self.pool.get(object)._store_set_values(cr, user, todo, fields_r, context)
 
-        self._workflow.write(cr, user, ids, context)
+        self._workflow.write(cr, user, ids, wkf_signals, context)
         return True
 
     #

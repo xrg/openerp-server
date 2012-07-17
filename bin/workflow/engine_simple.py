@@ -111,7 +111,7 @@ class WorkflowSimpleEngine(WorkflowEngine):
             ret.append(id_new)
         return ret
 
-    def write(self, cr, uid, ids, context):
+    def write(self, cr, uid, ids, signals, context):
         """
             @param instance_id If given, points to a specific instance, rather than
                 those of current model+ids

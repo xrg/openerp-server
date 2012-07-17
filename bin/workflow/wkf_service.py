@@ -168,7 +168,7 @@ class workflow_service(netsvc.Service):
         :param res_id: the model instance id the workflow belongs to
         :param cr: a database cursor
         """
-        self._instance(cr, res_type).write(cr, uid, [res_id,], context)
+        self._instance(cr, res_type).write(cr, uid, [res_id,], {}, context)
 
     def trg_trigger(self, uid, res_type, res_id, cr, context=None):
         """
