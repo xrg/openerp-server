@@ -95,21 +95,25 @@ class WorkflowCompositeEngine(WorkflowEngine):
         super(WorkflowCompositeEngine, self)._reload(cr)
         # TODO check base type
         
-        for e in self._engs:
+        for e in self._engines:
             e._reload(cr)
 
     def create(self, cr, uid, ids, context):
-        for e in self._engs:
-            e._create(cr, uid, ids, context)
+        for e in self._engines:
+            e.create(cr, uid, ids, context)
 
-    def write(self, cr, uid, ids, context):
-        for e in self._engs:
-            e._write(cr, uid, ids, context)
+    def pre_write(self, cr, uid, ids, vals, signals, context):
+        for e in self._engines:
+            e.pre_write(cr, uid, ids, vals, signals, context)
+
+    def write(self, cr, uid, ids, signals, context):
+        for e in self._engines:
+            e.write(cr, uid, ids, signals, context)
 
     def validate(self, cr, uid, id, signal, context):
         first_result = False
-        for e in self._engs:
-            res = e._validate(cr, uid, id, signal, context)
+        for e in self._engines:
+            res = e.validate(cr, uid, id, signal, context)
             first_result = first_result or res
         return first_result
 
@@ -117,8 +121,8 @@ class WorkflowCompositeEngine(WorkflowEngine):
         """ Validate a specific wkf_instance (inst_id)
         """
         first_result = False
-        for e in self._engs:
-            res = e._validate_byid(cr, uid, id, inst_id, signal=signal, context=context, force_running=force_running)
+        for e in self._engines:
+            res = e.validate_byid(cr, uid, id, inst_id, signal=signal, context=context, force_running=force_running)
             first_result = first_result or res
         return first_result
 
@@ -128,12 +132,12 @@ class WorkflowCompositeEngine(WorkflowEngine):
 
 
     def delete(self, cr, uid, ids, context):
-        for e in self._engs:
-            e._delete(cr, uid, ids, context)
+        for e in self._engines:
+            e.delete(cr, uid, ids, context)
 
 
     def redirect(self, cr, uid, old_id, new_id, context):
-        for e in self._engs:
-            e._redirect(cr, uid, old_id, new_id, context)
+        for e in self._engines:
+            e.redirect(cr, uid, old_id, new_id, context)
 
 # eof
