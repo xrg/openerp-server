@@ -237,4 +237,47 @@ class WorkflowSimpleEngine(WorkflowEngine):
                     (self._id, old_id, self._id, new_id),
                     debug=self._debug)
 
+    @classmethod
+    def reload_models(cls, service, pool, cr, models):
+
+        wkfs = dict.fromkeys(models) # all to None, because [] is mutable
+        wkf_subflows = dict()
+        cr.execute('SELECT osv, id, on_create FROM wkf WHERE osv=ANY(%s)', (models,))
+        for r_osv, r_id, r_onc in cr.fetchall():
+            obj = pool.get(r_osv)
+            if not obj:
+                cls._logger.warning("Object '%s' referenced in workflow #%d, but doesn't exist in pooler!",
+                        r_osv, r_id)
+                continue
+            if True:
+                neng = WorkflowSimpleEngine(obj, r_id)
+            if r_onc:
+                if wkfs[r_osv] is None:
+                    wkfs[r_osv] = []
+                wkfs[r_osv].append(neng)
+            else:
+                wkf_subflows.setdefault(r_osv, {})[r_id] = neng
+
+        for model, engs in wkfs.items():
+            obj = pool.get(model)
+            if not obj:
+                continue
+            if not engs:
+                assert model not in wkf_subflows, "Subflow but not simple workflow for %s!" % model
+                continue
+            if len(engs) == 1:
+                service.install_workflow(obj, engs[0])
+            else:
+                service.install_workflow(obj, engs, default=True)
+
+            if model in wkf_subflows:
+                # This line will bork if we have a subflow on a model
+                # without a simple workflow
+                engs[0]._subflows = wkf_subflows.pop(model)
+            for eng in engs:
+                eng._reload(cr)
+
+        return
+
+WorkflowSimpleEngine.set_loadable()
 #eof

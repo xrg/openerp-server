@@ -25,7 +25,6 @@ import netsvc
 import pooler
 import warnings
 from engines import WorkflowEngine, WorkflowCompositeEngine
-from engine_simple import WorkflowSimpleEngine
 import logging
 
 class workflow_service(netsvc.Service):
@@ -74,7 +73,7 @@ class workflow_service(netsvc.Service):
                 raise RuntimeError("orm %s doesn't have an initialized workflow" % obj._name)
         return obj._workflow
 
-    def install_workflow(self, obj, wkf, replace=False, default=False):
+    def install_workflow(self, obj, wkf, default=False):
         """Install `wkf` onto ORM model `obj`
         
             @param obj an ORM model instance
@@ -85,16 +84,16 @@ class workflow_service(netsvc.Service):
         """
         if wkf is None:
             # Just install a no-op engine
-            if default and (replace or obj._workflow is None):
+            if default and obj._workflow is None:
                 obj._workflow = WorkflowEngine(obj)
             # else: do nothing
-        elif (not replace) and obj._workflow and isinstance(obj._workflow, WorkflowCompositeEngine):
+        elif obj._workflow and isinstance(obj._workflow, WorkflowCompositeEngine):
             # Model already has a composite engine, append it accordingly
             if isinstance(wkf, list):
                 obj._workflow._engines.extend(wkf)
             else:
                 obj._workflow._engines.append(wkf)
-        elif replace or (not obj._workflow) or obj._workflow.__class__ == WorkflowEngine:
+        elif (not obj._workflow) or obj._workflow.__class__ == WorkflowEngine:
             # Model doesn't have an active workflow, replace that
             if isinstance(wkf, list):
                 obj._workflow = WorkflowCompositeEngine(obj, wkf)
@@ -111,51 +110,36 @@ class workflow_service(netsvc.Service):
 
     def reload_models(self, cr, models):
         """Reloads workflow for the specified models
-            
+
             It will replace existing workflows for them.
 
             @param models list of orm model names
-            
+
             If the service is `frozen`, reloading for the models will be deferred.
         """
         if cr.dbname in self._freezer:
             self._freezer[cr.dbname].extend(models)
             return
-    
+
+        self._logger.debug("Reloading %d models: %s ...", len(models), ','.join(models[:20]))
         pool = pooler.get_pool(cr.dbname)
-        replace = True
-        wkfs = dict.fromkeys(models) # all to None, because [] is mutable
-        wkf_subflows = dict()
-        self._logger.debug("Reloading %d models: %s ...", len(wkfs.keys()), ','.join(wkfs.keys()[:20]))
-        
-        cr.execute('SELECT osv, id, on_create FROM wkf WHERE osv=ANY(%s)', (models,))
-        for r_osv, r_id, r_onc in cr.fetchall():
+
+        for r_osv in models:
+            obj = pool.get(r_osv)
+            if obj:
+                obj._workflow = None
+
+        for lmod in WorkflowEngine.get_loadables():
+            lmod.reload_models(self, pool, cr, models)
+
+        # After all loadables are called, initialize empty models with
+        # no-op engine
+        for r_osv in models:
             obj = pool.get(r_osv)
             if not obj:
-                self._logger.warning("Object '%s' referenced in workflow #%d, but doesn't exist in pooler!",
-                        r_osv, r_id)
                 continue
-            if True:
-                neng = WorkflowSimpleEngine(obj, r_id)
-            if r_onc:
-                if wkfs[r_osv] is None:
-                    wkfs[r_osv] = []
-                wkfs[r_osv].append(neng)
-            else:
-                wkf_subflows.setdefault(r_osv, {})[r_id] = neng
-        
-        for model, engs in wkfs.items():
-            obj = pool.get(model)
-            if not obj:
-                continue
-            if engs and len(engs) == 1:
-                self.install_workflow(obj, engs[0], replace=replace)
-            else:
-                self.install_workflow(obj, engs, replace=replace, default=True)
-
-            if model in wkf_subflows:
-                obj._workflow._subflows = wkf_subflows.pop(model)
-            obj._workflow._reload(cr)
+            if obj._workflow is None:
+                obj._workflow = WorkflowEngine(obj)
 
         self._logger.debug("Workflows reloaded")
 
@@ -163,7 +147,7 @@ class workflow_service(netsvc.Service):
         self._logger.debug("Workflow service freeze for updates of %s", cr.dbname)
         if cr.dbname not in self._freezer:
             self._freezer[cr.dbname] = []
-    
+
     def thaw(self, cr):
         if cr.dbname in self._freezer:
             self._logger.debug("Workflow service thawing of %s", cr.dbname)

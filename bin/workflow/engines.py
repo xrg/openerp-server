@@ -27,6 +27,8 @@
 
 from tools import config
 
+_loadables = [] # set of subclasses that need to be called on reload_models()
+
 class WorkflowEngine(object):
     """A workflow definition, for a particular ORM object
     
@@ -35,6 +37,7 @@ class WorkflowEngine(object):
         This class is the 'dummy' engine, which defaults to a NoOp for any of
         the API calls.
     """
+
     def __init__(self, parent_obj):
         """
             @param parent_obj The ORM object holding this engine. May keep it in weakref
@@ -109,6 +112,32 @@ class WorkflowEngine(object):
             return self
         else:
             return None
+
+    @classmethod
+    def reload_models(cls, service, pool, cr, models):
+        """ Reload this engine's workflows for models
+
+            @param pool the ORM pooler to get model objects from
+            @param service the calling workflow_service instance
+            @param models list of orm model names (strings)
+
+            This method shall NOT touch the orm._workflow member, but instead
+            use get_instance() and install_workflow() methods in order to
+            test or add workflow instances.
+        """
+        raise NotImplementedError
+
+    @classmethod
+    def set_loadable(cls):
+        """Registers this class as a loadable workflow engine
+        """
+        global _loadables
+        _loadables.append(cls)
+
+    @staticmethod
+    def get_loadables():
+        global _loadables
+        return _loadables
 
 class WorkflowCompositeEngine(WorkflowEngine):
     """ Binds >1 Engines to one ORM object

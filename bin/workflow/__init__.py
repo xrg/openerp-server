@@ -21,6 +21,7 @@
 ##############################################################################
 
 import wkf_service
+import engine_simple
 
 #.apidoc title: Workflow objects
 
