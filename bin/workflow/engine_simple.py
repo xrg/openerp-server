@@ -46,6 +46,7 @@ class WorkflowSimpleEngine(WorkflowEngine):
         assert parent_obj
         self._obj = weakref.ref(parent_obj)
         self._activities = {}
+        self._subflows = {}
         self._act_starters = []
         self._transitions = []
     
@@ -53,6 +54,9 @@ class WorkflowSimpleEngine(WorkflowEngine):
         """ reload?
         """
         super(WorkflowSimpleEngine, self)._reload(cr)
+        for sf in self._subflows.values():
+            sf._reload(cr)
+
         self._act_starters = []
         self._activities = {}
         # Activities:

@@ -41,15 +41,13 @@ class WorkflowEngine(object):
         """
     
         self._debug = config.get_misc('debug', 'workflows', False)
-        self._subflows = {}
 
     def _reload(self, cr):
         """Called when the ir model has any changes
         
             Will NOT work if the workflow has changed base type
         """
-        for sf in self._subflows.values():
-            sf._reload(cr)
+        pass
 
     def create(self, cr, uid, ids, context):
         pass
