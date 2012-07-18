@@ -71,6 +71,34 @@ class module(osv.osv):
         This table will typically be filled with the contents of the `__openerp__.py`
         file of each addon. Plus some data about installed version, state etc.
 
+        _External dependencies_
+        
+          Modules can declare their dependencies on software installed at the
+          openerp server machine. If any of them are not satisfied, the module
+          will be marked as un-installable.
+          
+          It is mandatory that any non-standard requirement is declared here,
+          in the 'external_dependencies' section. Otherwise, the openerp-server
+          may be tricked to load the module first, and then have an exception
+          loading the Database. In such a scenario, the (production) server may
+          be unavailable until the administrator manually removes the addon
+          in SQL.
+          
+          python: Python modules necessary for the code in this addon.
+            
+            eg. 'python': ['json',] # means 'import json' must work
+            
+          bin: Binary programs that must be executable and accessible in the
+            openerp-server's path.
+            
+            eg. 'bin': ['wkhtmltopdf'] # means the latter must be in server's path
+          
+          postgres: Postgres server features needed by the addon. May be 
+            like 'lang:plpgsql', 'version:9.2' or simply 'foo' which means a
+            postgres >= 9.1 `extension`.
+            
+            See: http://www.postgresql.org/docs/9.1/static/extend-extensions.html
+          
         Note: The default license is changed to *All rights reserved* , when this
         field is empty in __openerp__.py . This is not what we wish, but what the
         copyright law tells us: this clause is implied[1] in most countries.
@@ -262,10 +290,11 @@ class module(osv.osv):
         return super(module, self).unlink(cr, uid, ids, context=context)
 
     @staticmethod
-    def _check_external_dependencies(terp):
+    def _check_external_dependencies(terp, cr):
         depends = terp.get('external_dependencies')
         if not depends:
             return
+        __logger = logging.getLogger('base.ir.module')
         for pydep in depends.get('python', []):
             parts = pydep.split('.')
             parts.reverse()
@@ -281,11 +310,65 @@ class module(osv.osv):
             if tools.find_in_path(binary) is None:
                 raise Exception('Unable to find %r in path' % (binary,))
 
+        if 'postgres' in depends:
+            pglangs = set()
+            pgextens = set()
+            for pge in depends['postgres']:
+                assert isinstance(pge, basestring), "Only string dependencies are supported so far, not %r" % pge
+                if pge.startswith('version:'):
+                    # Immediately check postgres version
+                    vstr = pge[8:]
+                    vver = None
+                    if len(vstr) >= 5 and vstr.isdigit:
+                        # version like 90100
+                        vver = int(vstr)
+                    elif vstr.count('.') == 1:
+                        m,s = map(int, vstr.split('.',1))
+                        vver = m*10000 + s*100
+                    else:
+                        raise ValueError('Unsupported PG version string: "%s"' % vstr)
+
+                    if cr.server_version < vver:
+                        raise Exception("Postgres ver. %d (server is %d)" % \
+                                (vver, cr.server_version))
+                elif pge.startswith('lang:'):
+                    pglangs.add(pge[5:].lower())
+                #elif pge.startswith('function:'):
+                    #pgfuncs.add(pge[9:])
+                elif ':' in pge:
+                    raise ValueError("Unsupported dependency type: \"%s\" for postgres" %\
+                            pge.split(':',1)[0])
+                else:
+                    pgextens.add(pge.lower())
+
+            if pglangs:
+                __logger.debug("Checking Postgres for %s languages", ', '.join(pglangs))
+                cr.execute('SELECT lanname FROM pg_language WHERE lanname = ANY(%s)',
+                        ( list(pglangs),), debug=True)
+                for lang, in cr.fetchall():
+                    pglangs.remove(lang)
+                if pglangs:
+                    raise Exception('PgLanguage %s' % (', '.join(pglangs)))
+
+            if pgextens and cr.server_version < 90100:
+                __logger.warning("Postgres may need extensions, but server is < 9.1")
+                __logger.warning("Extensions needed are: %s", ', '.join(pgextens))
+            elif pgextens:
+                __logger.debug("Checking Postgres for extensions: %s ", ', '.join(pgextens))
+                cr.execute('SELECT extname FROM pg_extension WHERE extname = ANY(%s)',
+                        (list(pgextens),), debug=True)
+                for lang, in cr.fetchall():
+                    pgextens.remove(lang)
+                if pgextens:
+                    raise Exception('PgExtension %s' % (', '.join(pgextens)))
+
     @classmethod
-    def check_external_dependencies(cls, module_name, newstate='to install'):
+    def check_external_dependencies(cls, module_name, cr, newstate='to install'):
         terp = cls.get_module_info(module_name)
         try:
-            cls._check_external_dependencies(terp)
+            cls._check_external_dependencies(terp, cr)
+        except ValueError:
+            raise
         except Exception, e:
             if newstate == 'to install':
                 msg = _('Unable to install module "%s" because an external dependency is not met: %s')
@@ -311,7 +394,7 @@ class module(osv.osv):
                     od = self.browse(cr, uid, ids2)[0]
                     mdemo = od.demo or mdemo
 
-            self.check_external_dependencies(module.name, newstate)
+            self.check_external_dependencies(module.name, cr, newstate)
             if not module.dependencies_id:
                 mdemo = module.demo
             if module.state in states_to_update:
@@ -355,7 +438,7 @@ class module(osv.osv):
             if mod.state not in ('installed','to upgrade'):
                 raise orm.except_orm(_('Error'),
                         _("Can not upgrade module '%s'. It is not installed.") % (mod.name,))
-            self.check_external_dependencies(mod.name, 'to upgrade')
+            self.check_external_dependencies(mod.name, cr, 'to upgrade')
             iids = depobj.search(cr, uid, [('name', '=', mod.name)], context=context)
             for dep in depobj.browse(cr, uid, iids, context=context):
                 if dep.module_id.state=='installed' and dep.module_id not in todo:
