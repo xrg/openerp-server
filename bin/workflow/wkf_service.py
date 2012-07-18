@@ -53,6 +53,7 @@ class workflow_service(netsvc.Service):
         self.exportMethod(self.init_dummy)
         self.exportMethod(self.thaw_dummy)
         self.exportMethod(self.inspect)
+        self.exportMethod(self.install_workflow)
         self._logger = logging.getLogger('workflow.service')
         self._freezer = {}
         
