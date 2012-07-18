@@ -3,6 +3,7 @@
 #
 #    OpenERP, Open Source Management Solution
 #    Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>).
+#    Copyright (C) 2011-2012 P. Christeas <xrg@hellug.gr>
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -19,9 +20,17 @@
 #
 ##############################################################################
 
+#.apidoc title: Pool of Objects functions
+
 pool_dic = {}
 
 def get_db_and_pool(db_name, force_demo=False, status=None, update_module=False, pooljobs=True, languages=False):
+    """Get an active Database and its pool of objects
+    
+        May *load* the database, if it is not active.
+        
+        @return db,pool
+    """
     if not status:
         status={}
 
@@ -70,12 +79,18 @@ def get_db_and_pool(db_name, force_demo=False, status=None, update_module=False,
 
 
 def restart_pool(db_name, force_demo=False, status=None, update_module=False, languages=False):
+    """ Unload and reload a Database
+    
+        @return db,pool as in `get_db_and_pool()`
+    """
     if db_name in pool_dic:
         del pool_dic[db_name]
     return get_db_and_pool(db_name, force_demo, status, update_module=update_module, languages=languages)
 
 
 def get_db_only(db_name):
+    """SQL connect to a database and return that
+    """
     # ATTENTION:
     # do not put this import outside this function
     # sql_db must not be loaded before the logger is initialized.
@@ -87,10 +102,14 @@ def get_db_only(db_name):
 
 
 def get_db(db_name):
+    """Return a Database, first part of `get_db_and_pool()`
+    """
     return get_db_and_pool(db_name)[0]
 
 
 def get_pool(db_name, force_demo=False, status=None, update_module=False):
+    """Return the pool of objects, second part of `get_db_and_pool()`
+    """
     pool = get_db_and_pool(db_name, force_demo, status, update_module)[1]
     return pool
 
