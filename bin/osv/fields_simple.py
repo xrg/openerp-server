@@ -105,6 +105,30 @@ class integer_big(_column):
 class _string_field(_column):
     """ Common baseclass for char and text fields
     """
+
+    def _ext_length(self, cr, uid, obj, lefts, operator, right):
+        if len(lefts) != 2:
+            raise eu.DomainLeftError(obj, lefts, operator, right)
+        if operator not in ('=', '!=', '<>', '<', '<=', '>', '>='):
+            raise eu.DomainInvalidOperator(obj, lefts, operator, right)
+        return eu.function_expr('char_length(%s)', lefts[0], operator, right)
+
+    def _ext_chgcase(self, cr, uid, obj, lefts, operator, right):
+        if operator not in ('=', '!=', '<>', 'like', '=like'):
+            raise eu.DomainInvalidOperator(obj, lefts, operator, right)
+        if operator == 'like':
+            right = '%%%s%%' % right
+        elif operator == '=like':
+            operator = 'like'
+        func = lefts[1]
+        if lefts[1] == 'title':
+            func = 'initcap'
+        return eu.function_expr(func +'(%s)', lefts[0], operator, right)
+
+    extension_fns = { 'len': _ext_length, 'length': _ext_length,
+                    'upper': _ext_chgcase, 'lower': _ext_chgcase,
+                    'title': _ext_chgcase}
+
     def expr_eval(self, cr, uid, obj, lefts, operator, right, pexpr, context):
         """ transform the expression, in case this field is translatable
         """
@@ -144,59 +168,13 @@ class _string_field(_column):
                         ] + right + right
 
             return ('id', 'inselect', (query1, query2))
-        elif len(lefts) >= 2 and lefts[1] == 'ldist':
-            if operator not in ('=', '!=', '=i', '!=i'):
-                raise eu.DomainInvalidOperator(obj, lefts, operator, right)
-            ldist = 0
-            if len(lefts) == 3:
-                ldist = int(lefts[2])
-            # or we seek a reasonable distance
-            elif len(right) > 10:
-                ldist = 2 + (len(right)/10)
-            elif len(right) > 5:
-                ldist = 2
-            elif len(right) > 3:
-                ldist = 1
-
-            insensitive = (operator[-1] == 'i')
-            if insensitive:
-                operator = operator[:-1]
-            if ldist:
-                if operator == '=':
-                    lop = '<='
-                else:
-                    lop = '>'
-                if insensitive:
-                    return eu.function_expr('levenshtein_less_equal(lower(%s), lower(%%s), '+'%d)' % ldist, \
-                            lefts[0], lop, ldist, params=[right,])
-                else:
-                    return eu.function_expr('levenshtein_less_equal(%s, %%s, ' +'%d)' % ldist, \
-                            lefts[0], lop, ldist, params=[right,])
+        elif len(lefts) > 1:
+            if lefts[1] in self.extension_fns:
+                fn = self.extension_fns[lefts[1]]
+                return fn(self, cr, uid, obj, lefts, operator, right)
             else:
-                # no need to Levenshtein, use plain matching
-                if insensitive:
-                    return eu.function_expr('lower(%s)', lefts[0], operator, right.lower())
-                else:
-                    return (lefts[0], operator, right)
-
-        elif len(lefts) == 2 :
-            if lefts[1] in ('len', 'length'):
-                if operator not in ('=', '!=', '<>', '<', '<=', '>', '>='):
-                    raise eu.DomainInvalidOperator(obj, lefts, operator, right)
-                return eu.function_expr('char_length(%s)', lefts[0], operator, right)
-            elif lefts[1] in ('upper', 'lower', 'title'):
-                if operator not in ('=', '!=', '<>', 'like', '=like'):
-                    raise eu.DomainInvalidOperator(obj, lefts, operator, right)
-                if operator == 'like':
-                    right = '%%%s%%' % right
-                elif operator == '=like':
-                    operator = 'like'
-                func = lefts[1]
-                if lefts[1] == 'title':
-                    func = 'initcap'
-                return eu.function_expr(func +'(%s)', lefts[0], operator, right)
+                raise eu.DomainLeftError(obj, lefts, operator, right)
         else:
-            assert len(lefts) == 1, lefts # no extensions yet ;)
             if right is False:
                 if operator not in ('=', '!=', '<>'):
                     raise eu.DomainInvalidOperator(obj, lefts, operator, right)
