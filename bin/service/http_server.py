@@ -388,11 +388,13 @@ def reg_http_service(hts, secure_only=False):
         logging.getLogger('httpd').warning("No httpd available to register service %s" % hts.path)
         return False
 
+    ret = False
     for httpd in http_daemons:
         if secure_only and not httpd._IsSecure:
             continue
         httpd.append_svc(hts)
-    return True
+        ret = True
+    return ret
 
 def list_http_services(protocol=None):
     global http_daemons
@@ -400,7 +402,7 @@ def list_http_services(protocol=None):
         if protocol is not None and protocol != httpd._RealProto.lower():
             continue
         return httpd.list_services()
-    raise Exception("Incorrect protocol or no http services")
+    raise Exception("Incorrect protocol or no http services: %s" % protocol)
 
 import SimpleXMLRPCServer
 import gzip
