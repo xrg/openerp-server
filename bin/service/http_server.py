@@ -712,6 +712,15 @@ class OerpAuthProxy(AuthProxy):
         self.auth_tries += 1
         raise AuthRequiredExc(atype='Basic', realm=self.provider.realm)
 
+    def get_uid(self, dbname):
+        """Retrieve the authenticated user id for a database
+
+            @return uid or False if not authenticated
+        """
+        if self.last_auth and dbname in self.auth_creds:
+            return self.auth_creds[dbname][3]
+        return False
+
 import security
 class OpenERPAuthProvider(AuthProvider):
     def __init__(self,realm='OpenERP User', domain='db'):
