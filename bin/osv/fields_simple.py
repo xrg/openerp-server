@@ -23,7 +23,7 @@
 
 #.apidoc title: Simple fields
 
-""" Linear flields, with direct db storage
+""" Linear fields, with direct db storage
 """
 
 from fields import _column, _symbol_set_long, _symbol_set_integer, \
