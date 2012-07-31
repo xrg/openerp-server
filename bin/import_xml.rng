@@ -128,6 +128,7 @@
             <rng:optional><rng:attribute name="search"/></rng:optional>
             <rng:optional><rng:attribute name="model"/></rng:optional>
             <rng:optional><rng:attribute name="use"/></rng:optional>
+            <rng:optional><rng:attribute name="file"/></rng:optional>
             <rng:oneOrMore>
                 <rng:choice>
                     <rng:ref name="any"/>

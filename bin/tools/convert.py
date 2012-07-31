@@ -823,6 +823,7 @@ form: module.record_id""" % (xml_id,)
             f_ref = field.get("ref",'')
             f_search = field.get("search",'')
             f_model = field.get("model",'')
+            f_fname = field.get("file", None)
             if not f_model and model._columns.get(f_name,False):
                 f_model = model._columns[f_name]._obj
             f_use = field.get("use",'') or 'id'
@@ -856,6 +857,10 @@ form: module.record_id""" % (xml_id,)
                         f_val = val[0] + ',' + str(val[1])
                     else:
                         f_val = self.id_get(cr, f_ref)
+            elif f_fname:
+                fp = misc.file_open(self.module+'/' + f_fname)
+                f_val = fp.read()
+                fp.close()
             else:
                 f_val = _eval_xml(self,field, self.pool, cr, self.uid, self.idref)
                 if model._columns.has_key(f_name):
