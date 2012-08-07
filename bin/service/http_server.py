@@ -609,6 +609,8 @@ class StaticHTTPHandler(HttpLogHandler, FixSendError, HttpOptions, HTTPHandler):
         for word in words:
             if word in (os.curdir, os.pardir): continue
             path = os.path.join(path, word)
+        if not os.path.exists(path):
+            self._logger.warning('Path not found: "%s"', path)
         return path
 
 def init_static_http():
