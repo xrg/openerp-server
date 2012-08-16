@@ -35,6 +35,7 @@ import sys
 import threading
 import time
 import tools
+from operator import itemgetter
 from tools.translate import _
 from cStringIO import StringIO
 
@@ -114,14 +115,25 @@ class db(baseExportService):
         db = sql_db.db_connect('template1', temp=True)
         cr = db.cursor()
         ## We check if we can use geospatial enable database directly
-        cr.execute("SELECT datname from pg_database where datistemplate = true and datname = 'template_postgis';")
-        postgis_tpl = cr.fetchone()
+        tmpls = tools.config.get_misc('databases', 'template','').split(' ')
+        if 'template0' not in tmpls:
+            # always add template0 as a failover
+            # could have been template1, too
+            tmpls.append('template0')
+        cr.execute("SELECT datname FROM pg_database WHERE datistemplate = true " \
+                "AND datname = ANY(%s);", (tmpls,))
+
+        found_tmpls = map(itemgetter(0), cr.fetchall())
+        # Filter the templates, but preserve their order!
+        tmpls = filter(lambda x: x in found_tmpls, tmpls)
+        assert ';' not in tmpls[0]
+
         try:
             cr.autocommit(True) # avoid transaction block
-            if postgis_tpl:
-                cr.execute("""CREATE DATABASE "%s" ENCODING 'unicode' TEMPLATE "template_postgis" """ % name)
-            else:
-                cr.execute("""CREATE DATABASE "%s" ENCODING 'unicode' TEMPLATE "template0" """ % name)
+            cr.execute("""CREATE DATABASE "%s" ENCODING 'unicode' TEMPLATE %s """ % (name, tmpls[0]))
+
+            logger = logging.getLogger('web-services')
+            logger.info('CREATE DATABASE: %s template %s' % (name.lower(), tmpls[0]))
 
         finally:
             cr.close()
@@ -180,8 +192,7 @@ class db(baseExportService):
                     serv.actions[id]['traceback'] = traceback_str
                     if cr:
                         cr.close()
-        logger = logging.getLogger('web-services')
-        logger.info('CREATE DATABASE: %s' % (db_name.lower()))
+
         dbi = DBInitialize()
         create_thread = threading.Thread(target=dbi,
                 args=(self, id, db_name, demo, lang, user_password))
