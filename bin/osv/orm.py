@@ -856,7 +856,7 @@ class orm_template(object):
         :param context: context arguments, like lang, time zone
         :rtype: object or list of objects requested
 
-        :param cache: The parent's cache. Pleas ONLY use it when the caller is
+        :param cache: The parent's cache. Please ONLY use it when the caller is
             itself a browse object, and within a single transaction. If unsure,
             just don't use!
         """
@@ -2110,6 +2110,10 @@ class orm_template(object):
     _view_look_dom_arch = __view_look_dom_arch
 
     def search_count(self, cr, user, args, context=None):
+        """ Old-style API equvalent to self.search(..., count=True)
+
+            Returns the number of db records matching the criteria.
+        """
         if not context:
             context = {}
         res = self.search(cr, user, args, context=context, count=True)
@@ -2741,6 +2745,8 @@ class orm_memory(orm_template):
         pass
 
     def exists(self, cr, uid, ids, context=None):
+        """Return if `ids` are valid records in the temporary storage
+        """
         if isinstance(ids, (int,long)):
             ids = [ids]
         return all(( id in self.datas for id in ids ))
@@ -5011,6 +5017,8 @@ class orm(orm_template):
         return new_id
 
     def exists(self, cr, uid, ids, context=None):
+        """ Validate that all `ids` exist as database records
+        """
         if type(ids) in (int, long):
             ids = [ids]
         query = 'SELECT COUNT(id) FROM "%s"  WHERE ID = ANY(%%s)' % (self._table)
