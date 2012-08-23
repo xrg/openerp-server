@@ -124,7 +124,6 @@ class ir_values(osv.osv):
                     ('res_id', '=', res_id),
                     ('user_id', '=', preserve_user and uid),
                     ('company_id' ,'=', company)
-                    
                 ]
                 if key in ('meta', 'default'):
                     search_criteria.append(('name', '=', name))
@@ -196,26 +195,38 @@ class ir_values(osv.osv):
         if not result:
             return []
 
-        def _result_get(x, keys):
+        keys = []
+        res = []
+        fields_by_model = {}
+
+        for x in result:
             if x[1] in keys:
-                return False
+                continue
             keys.append(x[1])
+            if not x[2]:
+                continue
             if x[3]:
                 model,id = x[2].split(',')
                 # FIXME: It might be a good idea to opt-in that kind of stuff
                 # FIXME: instead of arbitrarily removing random fields
-                fields = [
-                    field
-                    for field in self.pool.get(model).fields_get_keys(cr, uid)
-                    if field not in EXCLUDED_FIELDS]
+                if model not in fields_by_model:
+                    fields = [
+                        field
+                        for field in self.pool.get(model).fields_get_keys(cr, uid)
+                        if field not in EXCLUDED_FIELDS]
+                    fields_by_model[model] = fields
+
+                fields = fields_by_model[model]
 
                 try:
+                    # FIXME: this is still sub-optimal, but we don't usually expect
+                    # many ids at get() calls
                     datas = self.pool.get(model).read(cr, uid, [int(id)], fields, context)
                 except except_orm:
-                    return False
+                    continue
                 datas = datas and datas[0]
                 if not datas:
-                    return False
+                    continue
                 if model ==  'ir.actions.act_window' \
                         and 'search_view_id' in datas \
                         and datas['search_view_id']:
@@ -225,18 +236,17 @@ class ir_values(osv.osv):
             else:
                 datas = pickle.loads(x[2].encode('utf-8'))
             if meta:
-                return (x[0], x[1], datas, pickle.loads(x[4]))
-            return (x[0], x[1], datas)
-        keys = []
-        res = filter(None, map(lambda x: _result_get(x, keys), result))
+                res.append( (x[0], x[1], datas, pickle.loads(x[4])) )
+            else:
+                res.append( (x[0], x[1], datas) )
+
         res2 = res[:]
+        group_obj = self.pool.get('res.groups')
         for r in res:
             if isinstance(r[2], dict) and r[2].get('type') in ('ir.actions.report.xml','ir.actions.act_window','ir.actions.wizard'):
                 groups = r[2].get('groups_id')
-                if groups: #TODO: optimize, perhaps get all groups and process pythonic
-                    cr.execute('SELECT COUNT(1) FROM res_groups_users_rel WHERE gid = ANY(%s) AND uid=%s',(groups, uid), debug=self._debug)
-                    cnt = cr.fetchone()[0]
-                    if not cnt:
+                if groups:
+                    if not group_obj.check_user_groups(cr, uid, groups, context):
                         res2.remove(r)
                     if r[1] == 'Menuitem' and not res2:
                         raise osv.except_osv('Error !','You do not have the permission to perform this operation!')
