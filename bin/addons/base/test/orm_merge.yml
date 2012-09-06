@@ -1,21 +1,35 @@
 -
   In order to test the merge_records() support in ORM
 -
+  I create 3 categories
+-
+  !record {model: res.partner.category, id: test_merge_cat1}:
+    name: Category 1
+-
+  !record {model: res.partner.category, id: test_merge_cat2}:
+    name: Category 2
+-
+  !record {model: res.partner.category, id: test_merge_cat3}:
+    name: Category 3
+-
   I create three partners
 -
   !record {model: res.partner, id: test_merge_partner_1 }:
     name: Luis Falcon
+    category_id: [test_merge_cat1, test_merge_cat2]
     address:
       - street: Luis-Street 1
         street2: Luis-Street 2
         city: Luis-City
 - !record {model: res.partner, id: test_merge_partner_2 }:
     name: Lu-is Falcon
+    category_id: [test_merge_cat2,]
     address:
       - street: Luis-Street 2.1
         street2: Luis-Street 2.2
 - !record {model: res.partner, id: test_merge_partner_3 }:
     name: Luis Falcon
+    category_id: [test_merge_cat1, test_merge_cat3]
     address:
       - street: Luis-Street 3.1
         street2: Luis-Street 3.2
@@ -54,3 +68,8 @@
      r = self.read(cr, uid, ref('test_merge_partner_1'), context=context)
 
      assert len(r['address']) == 3, r['address']
+     assert ref('test_merge_cat1') in r['category_id'] \
+            and ref('test_merge_cat2') in r['category_id'] \
+            and ref('test_merge_cat3') in r['category_id'], "Categories only: %r" % r['category_id']
+     print "result:", r
+
