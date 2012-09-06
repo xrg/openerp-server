@@ -1058,6 +1058,12 @@ class many2many(_rel2many):
         """
         rel, id1, id2 = self._sql_names(obj)
         # BIG TODO: do stored fields at `obj` need to be recomputed?
+
+        # remove duplicates
+        cr.execute("DELETE FROM \"%s\" WHERE %s = ANY(%%s) " \
+               "AND %s in (SELECT %s FROM \"%s\" WHERE %s = %%s) " % \
+                   (rel, id2, id1, id1, rel, id2),
+               (list(src_ids), dest_id), debug=obj._debug)
         cr.execute("UPDATE \"%s\" SET %s = %%s WHERE %s = ANY(%%s)" % \
                 (rel, id2, id2),
                 (dest_id, list(src_ids)), debug=obj._debug)
