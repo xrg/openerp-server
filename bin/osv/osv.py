@@ -397,9 +397,17 @@ class osv_pool(object):
         self._ready = True
         return different
 
-
     def obj_list(self):
         return self.obj_pool.keys()
+
+    def stat_string(self):
+        """Return a string describing current state of the pool
+        """
+        ret = '%s, %d models, %d objects' % \
+                (self._ready and 'ready' or 'loading',
+                    len(self.module_object_list),
+                    len(self.obj_pool))
+        return ret
 
     def __get_abstracts(self, obj_inst):
         """ Return the list of abstract classes obj_inst implements
@@ -414,9 +422,11 @@ class osv_pool(object):
                 ret += self.__get_abstracts(self.obj_pool[iname])
         return ret
 
-    # adds a new object instance to the object pool.
-    # if it already existed, the instance is replaced
     def add(self, name, obj_inst):
+        """Adds a new object instance to the object pool.
+
+            If it already exists, the instance is replaced
+        """
         assert isinstance(name, basestring)
         if name in self.obj_pool:
             del self.obj_pool[name]
@@ -436,8 +446,9 @@ class osv_pool(object):
         module = module.split('.')[0][2:]
         self.module_object_list.setdefault(module, []).append(obj_inst)
 
-    # Return None if object does not exist
     def get(self, name):
+        """ Returns None if object does not exist
+        """
         if not name:
             return None
         assert isinstance(name, basestring), repr(name)

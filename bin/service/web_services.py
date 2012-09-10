@@ -438,6 +438,15 @@ class db(baseExportService):
                 l.exception("Migrate database %s failed" % db)
                 raise
         return True
+
+    def stats(self, _pre_msg=None):
+        """ The "db" service will list all loaded databases
+        """
+        ret = baseExportService.stats(self, _pre_msg='%d databases' % len(pooler.pool_dic))
+        for name, pool in pooler.pool_dic.iteritems():
+            ret += '\n    "%s": %s' % (name, pool.stat_string())
+        return ret
+
 db()
 
 class _ObjectService(baseExportService):
