@@ -1315,8 +1315,10 @@ class orm_template(object):
                 self._invalids.update(fields)
         if error_msgs:
             cr.rollback()
+            # TODO: perhaps return the invalid fields here...
             raise except_orm('ValidateError', '\n'.join(error_msgs))
         else:
+            # FIXME: invalid fields should be stored per session, if ever one
             self._invalids.clear()
 
     def default_get(self, cr, uid, fields_list, context=None):

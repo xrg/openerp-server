@@ -29,6 +29,10 @@ def _links_get(self, cr, uid, context=None):
     return [(r['object'], r['name']) for r in res]
 
 class res_request(osv.osv):
+    """
+       Note: this model should be replaced by messaging.message, once the latter
+       addon (base_messaging) is installed in the database.
+    """
     _name = 'res.request'
 
     def request_send(self, cr, uid, ids, *args):
