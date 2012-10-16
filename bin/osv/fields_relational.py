@@ -30,7 +30,7 @@ from tools import orm_utils
 from operator import itemgetter
 import logging
 
-#.apidoc title: Relationals fields
+#.apidoc title: Relational fields
 
 #
 # Values: (0, 0,  { fields })    create
