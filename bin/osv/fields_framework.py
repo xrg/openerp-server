@@ -52,6 +52,12 @@ class id_field(integer):
                 [('id.ref.magento', '=', 'foo.bar')]
                 or
                 [('id.ref.magento.foo', '=', 'bar')]
+
+            A special syntax for synchronising records is also supported::
+
+                [('id.ref.somemodule', '=', False)] # meaning row is not in-sync
+                [('id.ref.somemodule', 'like', 'remote_')] # meaning in sync
+                                    # with some name like 'remote_123'
         """
         if len(lefts) > 1:
             import expression
@@ -87,7 +93,7 @@ class id_field(integer):
                     elif module:
                         name = right
                     elif context and 'module' in context:
-                        module = context
+                        module = context['module']
                         name = right
                     else:
                         raise eu.DomainMsgError(_("Ref Id does not define module, cannot decode: %s") % right)
@@ -104,6 +110,47 @@ class id_field(integer):
                 qry = "SELECT res_id FROM %s WHERE %s" % (from_clause, where_clause)
 
                 return (lefts[0], lop, (qry, qry_args))
+            elif lefts[1] == 'sync' and len(lefts) == 3:
+                lop = None
+                equery = None
+                imd_obj = obj.pool.get('ir.model.data')
+
+                if operator not in ('=', 'like', 'not like'):
+                    # We only accept this one!
+                    raise eu.DomainInvalidOperator(obj, lefts, operator, right)
+
+                if obj._log_access:
+                    equery = ' AND (GREATEST("%s".write_date, "%s".create_date) >= ' \
+                        ' GREATEST("%s".write_date, "%s".create_date)) ' % \
+                            (imd_obj._table, imd_obj._table, obj._table, obj._table )
+
+                domain = [('model', '=', obj._name), ('module', '=', lefts[2]),
+                        ('source', '=', 'sync')]
+                if right is True:
+                    lop = 'inselect'
+                elif right is False:
+                    lop = 'not inselect'
+                elif operator in ('like', 'not like') and \
+                            isinstance(right, basestring):
+                    if operator == 'like':
+                        lop = 'inselect'
+                    else:
+                        lop = 'not inselect'
+                    domain += [('name', '=like', right + '%')]
+                else:
+                    raise eu.DomainRightError(obj, lefts, operator, right)
+
+                qry = Query(tables=['"%s"' % imd_obj._table,])
+                e = expression.expression(domain, debug=imd_obj._debug)
+                e.parse_into_query(cr, uid, imd_obj, qry, context)
+
+                from_clause, where_clause, qry_args = qry.get_sql()
+                qry = "SELECT res_id FROM %s WHERE %s" % (from_clause, where_clause)
+                if equery:
+                    qry += equery
+
+                return (lefts[0], lop, (qry, qry_args))
+
             else:
                 raise eu.DomainLeftError(obj, lefts, operator, right)
 
