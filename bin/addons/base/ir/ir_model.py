@@ -510,6 +510,8 @@ class ir_model_fields(osv.osv):
 
             # obj.check_access_rule(cr, uid, old_ids, 'write', context=context)
 
+            assert fld['name'] in obj._columns, "ORM in a mess: model \"%s\" doesn't have column: %s as expected!" % \
+                        (obj._name, fld['name'])
             rcom = obj._columns[fld['name']]._move_refs(cr, uid, obj, fld['name'], \
                         id_dest, ids_src, context=context)
 
