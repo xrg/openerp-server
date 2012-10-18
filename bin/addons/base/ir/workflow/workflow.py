@@ -195,7 +195,7 @@ class wkf_transition(osv.osv):
         return res
 
     def unlink(self, cr, uid, ids, context=None):
-        cr.execute('SELECT DISTINCT wkf.osv FROM wkf, wkf_activity '
+        cr.execute('SELECT DISTINCT wkf.osv FROM wkf, wkf_activity, wkf_transition '
                     'WHERE wkf.id = wkf_activity.wkf_id AND wkf_activity.id = wkf_transition.act_from'
                     '  AND wkf_transition.id = ANY(%s)',
                     (ids,), debug=self._debug)
