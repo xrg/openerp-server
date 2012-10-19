@@ -2,6 +2,7 @@
 # This file contains the translation of the following modules:
 # 
 # Translators:
+# Georgios Pap <georgios.pap@gmx.de>, 2012.
 # P. Christeas <p_christ@hol.gr>, 2010-2011.
 # P. Christeas <xrg@linux.gr>, 2011.
 msgid ""
@@ -9,8 +10,8 @@ msgstr ""
 "Project-Id-Version: OpenERP-F3\n"
 "Report-Msgid-Bugs-To: xrg@hellug.gr\n"
 "POT-Creation-Date: 2012-09-16 11:37+0000\n"
-"PO-Revision-Date: 2012-09-16 11:41+0000\n"
-"Last-Translator: xrg <xrg@hellug.gr>\n"
+"PO-Revision-Date: 2012-10-14 16:54+0000\n"
+"Last-Translator: Georgios Pap <georgios.pap@gmx.de>\n"
 "Language-Team: Greek (http://www.transifex.com/projects/p/openerp-f3/language/el/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -4621,7 +4622,7 @@ msgstr "Ισπανικά (MX) / Español (MX)"
 #: code:addons/base/publisher_warranty/publisher_warranty.py:145
 #, python-format
 msgid "Please verify your publisher warranty serial number and validity."
-msgstr ""
+msgstr "Παρακαλώ επικυρώστε τον σειριακό αριθμό εγγύησης του εκδότη και την ισχύ του."
 
 #. module: base
 #: view:res.log:0
