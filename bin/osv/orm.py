@@ -1293,6 +1293,8 @@ class orm_template(object):
         lng = context.get('lang', False)
         trans = self.pool.get('ir.translation')
         error_msgs = []
+        if getattr(self, '_function_field_browse', False):
+            ids = self.browse(cr, uid, ids, context=context)
         for constraint in self._constraints:
             fun, msg, fields = constraint
             if not fun(self, cr, uid, ids):
