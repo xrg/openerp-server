@@ -1045,6 +1045,7 @@ def load_modules(db, force_demo=False, status=None, update_module=False, languag
         if update_module:
             cr.execute("SELECT id, name FROM ir_module_module WHERE state=%s ORDER BY id desc", ('to remove',))
             for mod_id, mod_name in cr.fetchall():
+                logger.info("Removing module '%s' data",  mod_name)
                 mod_dict = {}
                 if cr.pgmode in PG84_MODES:
                     # array_agg() appeared in 8.4, but does exactly the job we want
