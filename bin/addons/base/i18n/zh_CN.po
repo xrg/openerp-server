@@ -1481,7 +1481,7 @@ msgstr "重做错过的动作"
 #: field:ir.cron,function:0 field:res.partner.address,function:0
 #: selection:workflow.activity,kind:0
 msgid "Function"
-msgstr "功能"
+msgstr "职能"
 
 #. module: base
 #: field:ir.cron,interval_number:0
@@ -2772,7 +2772,7 @@ msgstr "上级业务伙伴"
 #. module: base
 #: field:res.partner,ref:0
 msgid "Reference"
-msgstr "关联单号"
+msgstr "编号"
 
 #. module: base
 #: field:res.partner,supplier:0 field:res.partner.address,is_supplier_add:0
@@ -2847,7 +2847,7 @@ msgstr "地址类型"
 #. module: base
 #: field:res.partner.bank,acc_number:0
 msgid "Account Number"
-msgstr "科目编号"
+msgstr "银行账号"
 
 #. module: base
 #: field:res.partner.bank,bank:0 model:ir.model,name:base.model_res_bank

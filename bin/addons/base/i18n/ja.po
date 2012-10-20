@@ -5,14 +5,14 @@ msgstr ""
 "Project-Id-Version: openobject-server\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-01-11 11:14+0000\n"
-"PO-Revision-Date: 2011-01-19 13:31+0000\n"
-"Last-Translator: Harry (Open ERP) <hmo@tinyerp.com>\n"
+"PO-Revision-Date: 2012-07-08 03:34+0000\n"
+"Last-Translator: Akira Hiyama <Unknown>\n"
 "Language-Team: Japanese <ja@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-01-20 06:09+0000\n"
-"X-Generator: Launchpad (build 12177)\n"
+"X-Launchpad-Export-Date: 2012-10-11 05:28+0000\n"
+"X-Generator: Launchpad (build 16118)\n"
 
 #. module: base
 #: code:addons/base/ir/ir_actions.py:0 code:addons/base/ir/ir_model.py:0
@@ -2386,12 +2386,8 @@ msgstr ""
 #. module: base
 #: field:res.bank,city:0 field:res.partner,city:0
 #: field:res.partner.address,city:0 field:res.partner.bank,city:0
-#, fuzzy
 msgid "City"
-msgstr ""
-"#-#-#-#-#  .merge_file_gITufd (openobject-server)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_5fZFcx (openobject-server)  #-#-#-#-#\n"
-"市"
+msgstr "市区町村"
 
 #. module: base
 #: field:res.bank,code:0 field:res.currency,code:0 field:res.partner,ref:0
@@ -2442,13 +2438,21 @@ msgstr ""
 #. module: base
 #: field:res.bank,street:0 field:res.partner.address,street:0
 #: field:res.partner.bank,street:0
+#, fuzzy
 msgid "Street"
 msgstr ""
+"#-#-#-#-#  .merge_file_wEDsGc (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_GqATBI (openobject-server)  #-#-#-#-#\n"
+"町名番地"
 
 #. module: base
 #: field:res.bank,street2:0 field:res.partner.address,street2:0
+#, fuzzy
 msgid "Street2"
 msgstr ""
+"#-#-#-#-#  .merge_file_wEDsGc (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_GqATBI (openobject-server)  #-#-#-#-#\n"
+"町名番地2"
 
 #. module: base
 #: field:res.bank,zip:0 field:res.partner.address,zip:0
@@ -2923,8 +2927,12 @@ msgstr ""
 
 #. module: base
 #: field:res.partner.address,state_id:0
+#, fuzzy
 msgid "Fed. State"
 msgstr ""
+"#-#-#-#-#  .merge_file_wEDsGc (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_GqATBI (openobject-server)  #-#-#-#-#\n"
+"都道府県"
 
 #. module: base
 #: field:res.partner.address,type:0
@@ -3117,8 +3125,12 @@ msgstr ""
 
 #. module: base
 #: field:res.request,act_to:0 field:res.request.history,act_to:0
+#, fuzzy
 msgid "To"
 msgstr ""
+"#-#-#-#-#  .merge_file_wEDsGc (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_GqATBI (openobject-server)  #-#-#-#-#\n"
+"宛先"
 
 #. module: base
 #: field:res.request,body:0 field:res.request.history,req_id:0
@@ -3338,12 +3350,8 @@ msgstr ""
 #: field:workflow,activities:0
 #: model:ir.actions.act_window,name:base.action_workflow_activity_form
 #: model:ir.ui.menu,name:base.menu_workflow_activity view:workflow:0
-#, fuzzy
 msgid "Activities"
-msgstr ""
-"#-#-#-#-#  .merge_file_gITufd (openobject-server)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_5fZFcx (openobject-server)  #-#-#-#-#\n"
-"アクティビティ"
+msgstr "活動"
 
 #. module: base
 #: field:workflow,on_create:0
@@ -3450,17 +3458,13 @@ msgstr ""
 
 #. module: base
 #: field:workflow.transition,act_from:0
-#, fuzzy
 msgid "Source Activity"
-msgstr ""
-"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
-"ソースアクティビティ"
+msgstr "元の活動"
 
 #. module: base
 #: field:workflow.transition,act_to:0
 msgid "Destination Activity"
-msgstr "行先のアクティビティ"
+msgstr "宛先の活動"
 
 #. module: base
 #: field:workflow.transition,role_id:0
@@ -3514,12 +3518,8 @@ msgstr ""
 
 #. module: base
 #: field:workflow.workitem,act_id:0 view:workflow.activity:0
-#, fuzzy
 msgid "Activity"
-msgstr ""
-"#-#-#-#-#  .merge_file_gITufd (openobject-server)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_5fZFcx (openobject-server)  #-#-#-#-#\n"
-"アクティビティ"
+msgstr "活動"
 
 #. module: base
 #: field:workflow.workitem,inst_id:0
@@ -5175,12 +5175,8 @@ msgstr ""
 
 #. module: base
 #: model:ir.ui.menu,name:base.menu_custom
-#, fuzzy
 msgid "Customization"
-msgstr ""
-"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
-"カスタマイゼーション"
+msgstr "カスタム化"
 
 #. module: base
 #: model:ir.ui.menu,name:base.menu_custom_multicompany
@@ -7465,12 +7461,8 @@ msgstr ""
 
 #. module: base
 #: model:res.partner.category,name:base.res_partner_category_12
-#, fuzzy
 msgid "Segmentation"
-msgstr ""
-"#-#-#-#-#  .merge_file_gITufd (openobject-server)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_5fZFcx (openobject-server)  #-#-#-#-#\n"
-"分割"
+msgstr "分類"
 
 #. module: base
 #: model:res.partner.category,name:base.res_partner_category_13
@@ -8112,12 +8104,8 @@ msgstr ""
 #. module: base
 #: selection:ir.module.module,state:0
 #: selection:ir.module.module.dependency,state:0
-#, fuzzy
 msgid "Not Installed"
-msgstr ""
-"#-#-#-#-#  .merge_file_gITufd (openobject-server)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_5fZFcx (openobject-server)  #-#-#-#-#\n"
-"インストールされていません。"
+msgstr "未インストール"
 
 #. module: base
 #: selection:ir.module.module,state:0
@@ -11210,12 +11198,8 @@ msgstr ""
 
 #. module: base
 #: field:res.widget.user,widget_id:0 field:res.widget.wizard,widget_id:0
-#, fuzzy
 msgid "Widget"
-msgstr ""
-"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
-"ウィジット"
+msgstr "ウィジェット"
 
 #. module: base
 #: field:ir.ui.menu,web_icon_data:0
@@ -11351,12 +11335,8 @@ msgstr "アルバニア語 / Shqip"
 
 #. module: base
 #: model:ir.ui.menu,name:base.menu_crm_config_opportunity
-#, fuzzy
 msgid "Opportunities"
-msgstr ""
-"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
-"オポチュニティ"
+msgstr "商談"
 
 #. module: base
 #: model:ir.model,name:base.model_base_language_export
@@ -11728,12 +11708,8 @@ msgstr ""
 #. module: base
 #: model:ir.actions.act_window,name:base.res_widget_act_window
 #: model:ir.ui.menu,name:base.menu_res_widget_act_window
-#, fuzzy
 msgid "Homepage Widgets"
-msgstr ""
-"#-#-#-#-#  .merge_file_gITufd (openobject-server)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_5fZFcx (openobject-server)  #-#-#-#-#\n"
-"ホームページウィジット"
+msgstr "ホームページウィジェット"
 
 #. module: base
 #: field:ir.attachment,res_model:0
@@ -11835,12 +11811,8 @@ msgstr ""
 
 #. module: base
 #: view:workflow.activity:0
-#, fuzzy
 msgid "Workflow Activity"
-msgstr ""
-"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
-"ワークフローアクティビティ"
+msgstr "ワークフロー活動"
 
 #. module: base
 #: view:ir.rule:0
@@ -12634,24 +12606,17 @@ msgstr ""
 
 #. module: base
 #: selection:base.language.install,lang:0
-#, fuzzy
 msgid "Japanese / 日本語"
-msgstr ""
-"#-#-#-#-#  .merge_file_5Tw0C1 (openobject-server)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_8zWwMP (openobject-server)  #-#-#-#-#\n"
-"Japanese / 日本語"
+msgstr "日本語 / Japanese"
 
 #. module: base
 #: help:workflow.transition,act_from:0
-#, fuzzy
 msgid ""
 "Source activity. When this activity is over, the condition is tested to "
 "determine if we can start the ACT_TO activity."
 msgstr ""
-"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
-"ソースアクティビティ。そのアクティビティを終えた時に、ACT_TO活動を始めるかど"
-"うか条件がテストされます。"
+"元の活動。その活動を終えた時に、ACT_TO活動を始めるかどうか条件がテストされま"
+"す。"
 
 #. module: base
 #: view:base.module.upgrade:0
@@ -13046,12 +13011,8 @@ msgstr ""
 
 #. module: base
 #: view:res.widget.wizard:0
-#, fuzzy
 msgid "Widget Wizard"
-msgstr ""
-"#-#-#-#-#  .merge_file_gITufd (openobject-server)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_5fZFcx (openobject-server)  #-#-#-#-#\n"
-"ウィジットウィザード"
+msgstr "ウィジェットウィザード"
 
 #. module: base
 #: selection:ir.property,type:0
@@ -13303,7 +13264,6 @@ msgstr ""
 
 #. module: base
 #: model:ir.actions.act_window,help:base.action_partner_address_form
-#, fuzzy
 msgid ""
 "Customers (also called Partners in other areas of the system) helps you "
 "manage your address book of companies whether they are prospects, customers "
@@ -13313,14 +13273,12 @@ msgid ""
 "installed the CRM, with the history tab, you can track all the interactions "
 "with a partner such as opportunities, emails, or sales orders issued."
 msgstr ""
-"#-#-#-#-#  .merge_file_gITufd (openobject-server)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_5fZFcx (openobject-server)  #-#-#-#-#\n"
 "顧客（システムの他のエリアではパートナと呼ばれる）は、彼らが見込み客、顧客で"
 "あるのか、仕入先であるのかどうか会社の住所録の管理するのを手助けします。パー"
 "トナのフォームは、会社のアドレスから、価格リストなどの多くの情報、パートナの"
 "連絡先まで相互に必要なすべての情報を追跡し、記録することができます。\r\n"
-"CRMをインストールした場合は、履歴タブでパートナと共にオポチュニティ、電子メー"
-"ル、発行された受注など全ての対話を追跡することができます。"
+"CRMをインストールした場合は、履歴タブでパートナと共に商談、電子メール、発行さ"
+"れた受注など全ての対話を追跡することができます。"
 
 #. module: base
 #: field:res.widget,content:0
@@ -14473,12 +14431,8 @@ msgstr ""
 
 #. module: base
 #: model:ir.model,name:base.model_res_widget_wizard
-#, fuzzy
 msgid "Add a widget for User"
-msgstr ""
-"#-#-#-#-#  .merge_file_gITufd (openobject-server)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_5fZFcx (openobject-server)  #-#-#-#-#\n"
-"ユーザのウィジットを追加"
+msgstr "ユーザのウィジェットを追加"
 
 #. module: base
 #: selection:base.language.install,lang:0
@@ -14686,12 +14640,8 @@ msgstr ""
 #. module: base
 #: model:ir.actions.act_window,name:base.res_widget_user_act_window
 #: model:ir.ui.menu,name:base.menu_res_widget_user_act_window
-#, fuzzy
 msgid "Widgets per User"
-msgstr ""
-"#-#-#-#-#  .merge_file_gITufd (openobject-server)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_5fZFcx (openobject-server)  #-#-#-#-#\n"
-"ユーザ当りのウィジット"
+msgstr "ユーザ当りのウィジェット"
 
 #. module: base
 #: selection:base.language.install,lang:0
@@ -14765,12 +14715,8 @@ msgstr ""
 
 #. module: base
 #: view:res.widget.user:0
-#, fuzzy
 msgid "User Widgets"
-msgstr ""
-"#-#-#-#-#  .merge_file_gITufd (openobject-server)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_5fZFcx (openobject-server)  #-#-#-#-#\n"
-"ユーザウィジット"
+msgstr "ユーザウィジェット"
 
 #. module: base
 #: view:base.module.update:0
@@ -14840,7 +14786,7 @@ msgstr ""
 #. module: base
 #: help:workflow.transition,act_to:0
 msgid "The destination activity."
-msgstr "行先のアクティビティ"
+msgstr "宛先の活動"
 
 #. module: base
 #: view:res.config.installer:0
@@ -14980,12 +14926,8 @@ msgstr ""
 
 #. module: base
 #: model:ir.ui.menu,name:base.menu_crm_config_lead
-#, fuzzy
 msgid "Leads & Opportunities"
-msgstr ""
-"#-#-#-#-#  .merge_file_gITufd (openobject-server)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_5fZFcx (openobject-server)  #-#-#-#-#\n"
-"リードとオポチュニティ"
+msgstr "リードと商談"
 
 #. module: base
 #: selection:base.language.install,lang:0
@@ -15285,12 +15227,8 @@ msgstr ""
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_res_widget_wizard
-#, fuzzy
 msgid "Homepage Widgets Management"
-msgstr ""
-"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
-"ホームページウィジット管理"
+msgstr "ホームページウィジェット管理"
 
 #. module: base
 #: help:ir.sequence,number_increment:0
@@ -15303,12 +15241,8 @@ msgstr ""
 
 #. module: base
 #: view:res.widget:0
-#, fuzzy
 msgid "Search Widget"
-msgstr ""
-"#-#-#-#-#  .merge_file_gITufd (openobject-server)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_5fZFcx (openobject-server)  #-#-#-#-#\n"
-"ウィジットの検索"
+msgstr "ウィジェットの検索"
 
 #. module: base
 #: selection:ir.actions.todo,restart:0
@@ -15869,7 +15803,6 @@ msgstr ""
 
 #. module: base
 #: model:ir.actions.act_window,help:base.action_partner_form
-#, fuzzy
 msgid ""
 "A customer is an entity you do business with, like a company or an "
 "organization. A customer can have several contacts or addresses which are "
@@ -15879,14 +15812,12 @@ msgid ""
 "plugin, don't forget to register emails to each contact so that the gateway "
 "will automatically attach incoming emails to the right partner."
 msgstr ""
-"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
 "顧客は会社または組織といったビジネス対象の存在です。会社で働く人々のため顧客"
 "は複数のコンタクト者や住所を管理できます。顧客と関係する全てのトランザクショ"
-"ンをたどるために履歴タブが利用できます：受注、Eメール、オポチュニティ、クレー"
-"ムなど。もし、OutlookやThunderbirdプラグインのEメールゲートウェイを使う場合、"
-"ゲートウェイが自動的に入ってくるEメールを正しいパートナに結びつけるように各コ"
-"ンタクトにEメールを登録することを忘れないで下さい。"
+"ンをたどるために履歴タブが利用できます：受注、Eメール、商談、クレームなど。も"
+"し、OutlookやThunderbirdプラグインのEメールゲートウェイを使う場合、ゲートウェ"
+"イが自動的に入ってくるEメールを正しいパートナに結びつけるように各コンタクトに"
+"Eメールを登録することを忘れないで下さい。"
 
 #. module: base
 #: model:res.widget,title:base.currency_converter_widget
