@@ -4,6 +4,7 @@
 #
 #    OpenERP, Open Source Management Solution
 #    Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>).
+#    Copyright (C) 2011-2012 P. Christeas <xrg@hellug.gr>
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -27,7 +28,8 @@ OpenERP is an ERP+CRM program for small and medium businesses.
 The whole source code is distributed under the terms of the
 GNU Public Licence.
 
-(c) 2003-TODAY, Fabien Pinckaers - OpenERP s.a.
+(c) 2003-2011, Fabien Pinckaers - OpenERP s.a.
+(c) 2011-2012, P. Christeas
 """
 
 #----------------------------------------------------------
@@ -35,7 +37,6 @@ GNU Public Licence.
 #----------------------------------------------------------
 import os
 import signal
-import pwd
 import logging
 import sys
 import threading
@@ -130,7 +131,8 @@ def sigusr1_handler(signum, _):
 for signum in SIGNALS:
     signal.signal(signum, handler)
 
-signal.signal(signal.SIGUSR1, sigusr1_handler)
+if os.name == 'posix':
+    signal.signal(signal.SIGUSR1, sigusr1_handler)
 
 #----------------------------------------------------------
 # init net service
