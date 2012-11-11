@@ -4,6 +4,7 @@
 #    OpenERP, Open Source Management Solution
 #    Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>).
 #    Copyright (C) 2010-2011 OpenERP s.a. (<http://openerp.com>).
+#    Copyright (C) 2011-2012 P. Christeas <xrg@hellug.gr>
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -37,12 +38,12 @@ __all__ = ['db_connect', 'close_db']
 
 import logging
 from psycopg2.extensions import ISOLATION_LEVEL_AUTOCOMMIT, ISOLATION_LEVEL_READ_COMMITTED, ISOLATION_LEVEL_SERIALIZABLE
-from psycopg2.psycopg1 import cursor as psycopg1cursor
 from psycopg2.pool import PoolError
 
 from psycopg2 import OperationalError
 import psycopg2.extensions
 import warnings
+from operator import itemgetter
 
 psycopg2.extensions.register_type(psycopg2.extensions.UNICODE)
 
@@ -195,6 +196,10 @@ class Cursor(object):
                 self.__pgmode = 'pg84'
             else:
                 self.__pgmode = 'pgsql'
+        
+        for verb in ('fetchone', 'fetchmany', 'fetchall'):
+            # map the *bound* functions, bypass @check
+            setattr(self, verb, getattr(self._obj, verb))
 
     def __del__(self):
         if not self.__closed:
@@ -219,7 +224,6 @@ class Cursor(object):
             @param debug   Verbosely log the query being sent (not results, yet)
             @param log_exceptions ignored, left there mainly for API compatibility with trunk
         """
-            
         if params and not _fast:
             query = query.replace('%d','%s').replace('%f','%s')
 
@@ -386,6 +390,29 @@ class Cursor(object):
         """
         return self._cnx.rollback()
 
+    def __build_cols(self):
+        return map(itemgetter(0), self.description)
+
+    # check
+    def dictfetchone(self):
+        row = self._obj.fetchone()
+        if row:
+            return dict(zip(self.__build_cols(), row))
+        else:
+            return row
+
+    # check
+    def dictfetchmany(self, size):
+        rows = self._obj.fetchmany(size)
+        cols = self.__build_cols()
+        return [ dict(zip(cols, row)) for row in rows]
+
+    # check
+    def dictfetchall(self):
+        rows = self._obj.fetchall()
+        cols = self.__build_cols()
+        return [ dict(zip(cols, row)) for row in rows]
+
     @check
     def __getattr__(self, name):
         if name == 'server_version':
@@ -440,6 +467,7 @@ class ConnectionPool(object):
         self._lock = threading.Lock()
         self._debug_pool = tools.config.get_misc('debug', 'db_pool', False)
         self.sql_stats = {}
+        self._cursor_factory = psycopg2.extensions.cursor
         if pgmode: # not None or False
             Cursor.set_pgmode(pgmode)
 
@@ -518,7 +546,7 @@ class ConnectionPool(object):
                 # return to the pool anyway
                 if do_cursor:
                     try:
-                        cur = cnx.cursor(cursor_factory=psycopg1cursor)
+                        cur = cnx.cursor(cursor_factory=self._cursor_factory)
                         if psycopg2.__version__ < '2.2' and not cur.isready():
                             continue
                         if cur.closed:
@@ -558,7 +586,7 @@ class ConnectionPool(object):
             result.is_temp = True
         self._debug('Create new connection')
         if do_cursor:
-            cur = result.cursor(cursor_factory=psycopg1cursor)
+            cur = result.cursor(cursor_factory=self._cursor_factory)
             return (result, cur)
         return result
 
@@ -631,6 +659,8 @@ def dsn(db_name):
     return '%sdbname=%s' % (_dsn, db_name)
 
 def dsn_are_equals(first, second):
+    if first == second:
+        return True
     def key(dsn):
         k = dict(x.split('=', 1) for x in dsn.strip().split())
         k.pop('password', None) # password is not relevant
