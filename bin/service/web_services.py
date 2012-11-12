@@ -464,7 +464,7 @@ class _ObjectService(baseExportService):
         return res
 
 class common(_ObjectService):
-    _auth_commands = { 'db-broken': [ 'ir_set','ir_del', 'ir_get' ],
+    _auth_commands = { # 'db-broken': [ 'ir_set','ir_del', 'ir_get' ], 5.0 interface
                 'pub': ['about', 'timezone_get', 'get_server_environment',
                         'login_message','get_stats', 'check_connectivity',
                         'list_http_services', 'get_options'],
