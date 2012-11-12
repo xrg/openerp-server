@@ -4,6 +4,7 @@
 #    OpenERP, Open Source Management Solution
 #    Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>).
 #    Copyright (C) 2010 OpenERP s.a. (<http://openerp.com>).
+#    Copyright (C) 2011-2012 P. Christeas <xrg@hellug.gr>
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -72,33 +73,33 @@ class module(osv.osv):
         file of each addon. Plus some data about installed version, state etc.
 
         _External dependencies_
-        
+
           Modules can declare their dependencies on software installed at the
           openerp server machine. If any of them are not satisfied, the module
           will be marked as un-installable.
-          
+
           It is mandatory that any non-standard requirement is declared here,
           in the 'external_dependencies' section. Otherwise, the openerp-server
           may be tricked to load the module first, and then have an exception
           loading the Database. In such a scenario, the (production) server may
           be unavailable until the administrator manually removes the addon
           in SQL.
-          
+
           python: Python modules necessary for the code in this addon.
-            
+
             eg. 'python': ['json',] # means 'import json' must work
-            
+
           bin: Binary programs that must be executable and accessible in the
             openerp-server's path.
-            
+
             eg. 'bin': ['wkhtmltopdf'] # means the latter must be in server's path
-          
-          postgres: Postgres server features needed by the addon. May be 
+
+          postgres: Postgres server features needed by the addon. May be
             like 'lang:plpgsql', 'version:9.2' or simply 'foo' which means a
             postgres >= 9.1 `extension`.
-            
+
             See: http://www.postgresql.org/docs/9.1/static/extend-extensions.html
-          
+
         Note: The default license is changed to *All rights reserved* , when this
         field is empty in __openerp__.py . This is not what we wish, but what the
         copyright law tells us: this clause is implied[1] in most countries.
