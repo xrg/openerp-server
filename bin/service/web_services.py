@@ -474,6 +474,7 @@ class common(_ObjectService):
                         'get_loglevel', 'get_sqlcount', 'get_sql_stats',
                         'reset_sql_stats',
                         'get_garbage_stats',
+                        'get_export_services',
                         'get_os_time']
                 }
     def __init__(self,name="common"):
@@ -793,6 +794,51 @@ GNU Public Licence.
             raise NotImplementedError('No module-specific options yet')
         return release.server_options
 
+    def exp_get_export_services(self, group=None, service=None, method=None):
+        """Return the available netsvc.ExportService methods
+            
+            @param group if specified, lists services of that group
+            @param service if specified, lists methods of that service
+            @param method if specified (and service is set), introspects that method
+        """
+        from osv.osv import except_osv
+        import inspect
+        if not tools.config.get_misc('debug', 'introspection', False):
+            raise except_osv('Access Error', 'Introspection is not enabled')
+
+        if (not group) and (not service):
+            return {'groups': netsvc.ExportService._groups.keys(),
+                    'services': netsvc.ExportService._services.keys() }
+        elif service and service in netsvc.ExportService._services:
+            svc = netsvc.ExportService._services[service]
+            ret = {'services': [service,] , }
+            if isinstance(svc, baseExportService):
+                ret['methods'] = {}
+                if not method:
+                    for key, vals in svc._auth_commands.items():
+                        vals2 = filter( lambda v: callable(getattr(svc, 'exp_' + v)), vals)
+                        ret['methods'][key] = vals2
+                else:
+                    # introspect some method
+                    for key, vals in svc._auth_commands.items():
+                        if method in vals:
+                            m_fn = getattr(svc, 'exp_' + method)
+                            if m_fn and callable(m_fn):
+                                ret['methods'][key] = [method,]
+                                # now, introspect!
+                                argspec = inspect.getargspec(m_fn)
+                                doc = inspect.getdoc(m_fn) or ''
+                                ret['service_method'] = method + inspect.formatargspec(*argspec)
+                                ret['service_method_doc'] = doc.rstrip()
+                            else:
+                                ret['methods'] = False
+                            break
+            return ret
+        elif group and group in netsvc.ExportService._groups:
+            grp = netsvc.ExportService._groups[group]
+            return {'groups': [group,], 'services': grp.keys() }
+        else:
+            return {}
 common()
 
 class objects_proxy(baseExportService):
