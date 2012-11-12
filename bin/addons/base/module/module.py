@@ -793,16 +793,19 @@ module()
 class module_dependency(osv.osv):
     _name = "ir.module.module.dependency"
     _description = "Module dependency"
+    _function_field_browse = True
 
     def _state(self, cr, uid, ids, name, args, context=None):
         result = {}
         mod_obj = self.pool.get('ir.module.module')
-        for md in self.browse(cr, uid, ids):
-            ids = mod_obj.search(cr, uid, [('name', '=', md.name)])
-            if ids:
-                result[md.id] = mod_obj.read(cr, uid, [ids[0]], ['state'])[0]['state']
-            else:
-                result[md.id] = 'unknown'
+        module_states = {}
+        mds = self.browse(cr, uid, ids, context=context)
+        for mod in mod_obj.search_read(cr, uid, [('name', 'in', [ md.name for md in mds])], \
+                    fields=['name', 'state'], context=context):
+            module_states[mod['name']] = mod['state']
+
+        for md in mds:
+            result[md.id] = module_states.get(md.name, 'unknown')
         return result
 
     _columns = {
