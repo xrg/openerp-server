@@ -88,7 +88,7 @@ class db(baseExportService):
                 'change_admin_password', 'migrate_databases' ],
             'pub': [ 'db_exist', 'list', 'list_lang', 'server_version' ],
             }
-            
+
     def __init__(self, name="db"):
         netsvc.ExportService.__init__(self, name)
         self.joinGroup("web-services")
@@ -491,13 +491,13 @@ class db(baseExportService):
                     import pwd
                     db_user = pwd.getpwuid(os.getuid())[0]
                 if not db_user:
-                    cr.execute("""select decode(usename, 'escape') from pg_user 
+                    cr.execute("""select decode(usename, 'escape') from pg_user
                                     where usesysid=(select datdba from pg_database where datname=%s)""", (tools.config["db_name"],))
                     res = cr.fetchone()
                     db_user = res and str(res[0])
                 if db_user:
-                    cr.execute("""select decode(datname, 'escape') from pg_database 
-                                    where datdba=(select usesysid from pg_user where usename=%s) 
+                    cr.execute("""select decode(datname, 'escape') from pg_database
+                                    where datdba=(select usesysid from pg_user where usename=%s)
                                       and datname not in %s order by datname""", (db_user, sql_db.get_template_dbnames()))
                 else:
                     cr.execute("""select decode(datname, 'escape') from pg_database
@@ -517,7 +517,7 @@ class db(baseExportService):
             for s in res_o:
                 if s in dbs_allowed:
                     res.append(s)
-        
+
         res.sort()
         return res
 
@@ -1043,7 +1043,7 @@ GNU Public Licence.
 common()
 
 class objects_proxy(baseExportService):
-    _auth_commands = { 'db': ['execute','exec_workflow', 'exec_dict'], 
+    _auth_commands = { 'db': ['execute','exec_workflow', 'exec_dict'],
             'root': ['obj_list', 'method_list', 'method_explain', 'list_workflow'] }
     def __init__(self, name="object"):
         netsvc.ExportService.__init__(self,name)
