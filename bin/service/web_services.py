@@ -83,8 +83,8 @@ class baseExportService(netsvc.ExportService):
 class db(baseExportService):
     """ Commands to manipulate OpenERP databases
     """
-    _auth_commands = { 'root': [ 'create', 'get_progress', 'drop', 'dump', 
-                'restore', 'rename', 
+    _auth_commands = { 'root': [ 'create', 'get_progress', 'drop', 'dump',
+                'restore', 'rename', 'db_copy',
                 'change_admin_password', 'migrate_databases' ],
             'pub': [ 'db_exist', 'list', 'list_lang', 'server_version' ],
             }
@@ -225,6 +225,38 @@ class db(baseExportService):
         create_thread.start()
         self.actions[id]['thread'] = create_thread
         return id
+
+    def exp_db_copy(self, source_db_name, dest_db_name, user_password=False):
+        """Copy an OpenERP database to a new name.
+
+            Optionally, the "admin" user's password of the new database can be reset.
+
+            Note: according to a Postgres limitation, the source database must be *locked*
+            to enable this operation! So, it cannot copy a /live/ OpenERP database.
+        """
+        logger = logging.getLogger('web-services')
+        template_dbs = tools.config.get_misc('databases', 'template','').split(' ')
+        no_copy_dbs = tools.config.get_misc('databases', 'no_copy','').split(' ')
+        if (source_db_name in no_copy_dbs) or (not self._check_db_allowed(source_db_name) \
+                and source_db_name not in template_dbs):
+            logger.critical("Asked to copy forbidden source database: %s", source_db_name)
+            raise Exception("Database %s is not allowed to be copied!" % source_db_name)
+        if not self._check_db_allowed(dest_db_name):
+            logger.critical("Asked to copy to forbidden destination database: %s", dest_db_name)
+            raise Exception("Database %s is not allowed to be created!" % dest_db_name)
+
+        try:
+            cr = None
+            db = sql_db.db_connect('template1', temp=True)
+            cr = db.cursor()
+            cr.autocommit(True) # avoid transaction block
+            cr.execute("""CREATE DATABASE "%s" ENCODING 'unicode' TEMPLATE %s """ % (dest_db_name, source_db_name))
+            logger.info('CREATE DATABASE: %s template %s' % (dest_db_name.lower(), source_db_name))
+
+            return dest_db_name
+        finally:
+            if cr is not None:
+                cr.close()
 
     def exp_get_progress(self, id):
         """Report progress on the "create database" action
