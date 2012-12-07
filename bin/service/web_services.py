@@ -114,6 +114,16 @@ class db(baseExportService):
         fn = getattr(self, 'exp_'+method)
         return fn(*params)
 
+    def _check_db_allowed(self, dbname):
+        """ Check if dbname is allowed to be used (for anything)
+        """
+        allowed_res = tools.config.get_misc('databases', 'allowed')
+        if allowed_res:
+            dbs_allowed = [ x.strip() for x in allowed_res.split(' ')]
+            return bool(dbname in dbs_allowed)
+        else:
+            return True # all databases allowed
+
     def _create_empty_database(self, name):
         db = sql_db.db_connect('template1', temp=True)
         cr = db.cursor()
@@ -255,6 +265,9 @@ class db(baseExportService):
         cr.autocommit(True) # avoid transaction block
         if tools.config.get_misc('debug', 'drop_guard', False):
             raise Exception("Not dropping database %s because guard is set!" % db_name)
+        if not self._check_db_allowed(db_name):
+            logger.critical("Asked to drop illegal database: %s", db_name)
+            raise Exception("Database %s is not allowed to be dropped!" % db_name)
         try:
             cr.execute('DROP DATABASE "%s"' % db_name)
             logger.info('DROP DB: %s' % (db_name))
@@ -300,11 +313,8 @@ class db(baseExportService):
         if tools.config.get_misc('databases', 'dump_guard', False):
             logger.error("Prevented dump of database %s, because guard is set!", db_name)
             raise Exception("Not dropping database %s because guard is set!" % db_name)
-        
-        allowed_res = tools.config.get_misc('databases', 'allowed')
-        if allowed_res:
-            dbs_allowed = [ x.strip() for x in allowed_res.split(' ')]
-            if not db_name in dbs_allowed:
+
+        if not self._check_db_allowed(db_name):
                 logger.critical("Asked to dump illegal database: %s", db_name)
                 raise Exception("Database %s is not allowed to be dumped!" % db_name)
 
@@ -428,7 +438,10 @@ class db(baseExportService):
     def exp_db_exist(self, db_name):
         """Check connection to database `db_name`
         """
-        ## Not True: in fact, check if connection to database is possible. The database may exists
+        if not self._check_db_allowed(db_name):
+            logger = logging.getLogger('web-services')
+            logger.critical("Asked to connect to illegal database: %s", db_name)
+            raise Exception("Database %s is not allowed to be used!" % db_name)
         return bool(sql_db.db_connect(db_name, temp=True))
 
     def exp_list(self, document=False):
@@ -499,6 +512,9 @@ class db(baseExportService):
 
         l = logging.getLogger('migration')
         for db in databases:
+            if not self._check_db_allowed(db):
+                l.critical("Asked to migrate illegal database: %s", db)
+                raise Exception("Database %s is not allowed to be migrated!" % db)
             try:
                 l.info('migrate database %s' % (db,))
                 tools.config['update']['base'] = True
