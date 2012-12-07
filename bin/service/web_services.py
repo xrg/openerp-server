@@ -1016,6 +1016,8 @@ GNU Public Licence.
             if isinstance(svc, baseExportService):
                 ret['methods'] = {}
                 if not method:
+                    doc = inspect.getdoc(svc) or ''
+                    ret['service_doc'] = doc
                     for key, vals in svc._auth_commands.items():
                         vals2 = filter( lambda v: callable(getattr(svc, 'exp_' + v)), vals)
                         ret['methods'][key] = vals2
