@@ -391,10 +391,12 @@ class Cursor(object):
         return self._cnx.rollback()
 
     def __build_cols(self):
-        return map(itemgetter(0), self.description)
+        return map(itemgetter(0), self._obj.description)
 
     # check
-    def dictfetchone(self):
+    def _dictfetchone_compat(self):
+        """Fetch one row in a dict, compatible with psycopg 2.x versions
+        """
         row = self._obj.fetchone()
         if row:
             return dict(zip(self.__build_cols(), row))
@@ -402,16 +404,42 @@ class Cursor(object):
             return row
 
     # check
-    def dictfetchmany(self, size):
+    def _dictfetchone_Caccel(self):
+        """C-accelerated version of dictfetchone()
+        """
+        self._obj.row_factory = dict
+        row = self._obj.fetchone()
+        self._obj.row_factory = None
+        return row
+
+    # check
+    def _dictfetchmany_compat(self, size):
         rows = self._obj.fetchmany(size)
         cols = self.__build_cols()
         return [ dict(zip(cols, row)) for row in rows]
 
     # check
-    def dictfetchall(self):
+    def _dictfetchmany_Caccel(self, size):
+        self._obj.row_factory = dict
+        rows = self._obj.fetchmany(size)
+        self._obj.row_factory = None
+        return rows
+
+    # check
+    def _dictfetchall_compat(self):
+        """Fetch in dict, compatible with all psycopg 2.x versions
+        """
         rows = self._obj.fetchall()
         cols = self.__build_cols()
         return [ dict(zip(cols, row)) for row in rows]
+
+    def _dictfetchall_Caccel(self):
+        """Fetch in dict, with C acceleration from psycopg2
+        """
+        self._obj.row_factory = dict
+        ret = self._obj.fetchall()
+        self._obj.row_factory = None
+        return ret
 
     @check
     def __getattr__(self, name):
@@ -470,6 +498,14 @@ class ConnectionPool(object):
         self._cursor_factory = psycopg2.extensions.cursor
         if pgmode: # not None or False
             Cursor.set_pgmode(pgmode)
+        if 'dfc' in psycopg2.__version__:
+            Cursor.dictfetchone = Cursor._dictfetchone_Caccel
+            Cursor.dictfetcmany = Cursor._dictfetchmany_Caccel
+            Cursor.dictfetchall = Cursor._dictfetchall_Caccel
+        else:
+            Cursor.dictfetchone = Cursor._dictfetchone_compat
+            Cursor.dictfetchmany = Cursor._dictfetchmany_compat
+            Cursor.dictfetchall = Cursor._dictfetchall_compat
 
     def __del__(self):
         # explicitly free them
