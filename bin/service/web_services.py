@@ -3,6 +3,7 @@
 #
 #    OpenERP, Open Source Management Solution
 #    Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>).
+#    Copyright (C) 2009-2010, 2011-2012 P. Christeas <xrg@hellug.gr>
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -80,6 +81,8 @@ class baseExportService(netsvc.ExportService):
 
 
 class db(baseExportService):
+    """ Commands to manipulate OpenERP databases
+    """
     _auth_commands = { 'root': [ 'create', 'get_progress', 'drop', 'dump', 
                 'restore', 'rename', 
                 'change_admin_password', 'migrate_databases' ],
@@ -139,6 +142,19 @@ class db(baseExportService):
             cr.close()
 
     def exp_create(self, db_name, demo, lang, user_password='admin'):
+        """Create a new OpenERP database, with just the core tables
+
+            @param db_name The name of the new database, must be valid Postgres "name"
+            @param demo  If set, db will be populated with demo data, and all subsequent
+                        module installations will use demo data, too.
+            @param lang the language to initialize the database to. Can be empty.
+            @param user_password Some string to set the "admin" user's password to.
+
+            @return id  A "thread" number which can be polled by get_progress() call
+
+            Note: this RPC call will return immediately, before the new database is ready.
+            You have to poll the `id` to see when the operation is complete.
+        """
         self.id_protect.acquire()
         self.id += 1
         id = self.id
@@ -201,6 +217,11 @@ class db(baseExportService):
         return id
 
     def exp_get_progress(self, id):
+        """Report progress on the "create database" action
+
+            May return a tuple (<float progress>, users) or throw an Exception
+            for any error during creation.
+        """
         if self.actions[id]['thread'].isAlive():
 #           return addons.init_progress[db_name]
             return (min(self.actions[id].get('progress', 0),0.95), [])
@@ -216,6 +237,16 @@ class db(baseExportService):
                 raise Exception, e
 
     def exp_drop(self, db_name):
+        """ Drop (=destroy, erase) a database
+
+            Needless to say: use with extreme care!
+
+            Remove the database from the disk, and all its data. This will merely issue
+            a 'DROP DATABASE' on the Postgres cluster.
+
+            As a security measure, the "debug.drop_guard" config option can disable this
+            feature. But, by default, a drop is allowed!
+        """
         sql_db.close_db(db_name)
         logger = logging.getLogger()
 
@@ -244,6 +275,26 @@ class db(baseExportService):
             os.environ['PGPASSWORD'] = ''
 
     def exp_dump(self, db_name):
+        """Dump (take backup) the contents of a database to the caller
+
+            This should return the contents of database `db_name` as an SQL block. It
+            calls 'pg_dump' and returns the dump base64-encoded.
+
+            But is a bad idea! Don't use this call!
+
+            Please, set "databases.dump_guard=True" in the config file to ensure this
+            feature remains banned.
+
+            If your database is anything above a few MB, the RPC protocol will not be
+            able to transfer the dump, or just be clogged in the best case. Most probably,
+            you may receive a *partial*, unusable dump!
+
+            In addition, allowing remote retrieval of the full database is a security risk,
+            meaning that all your data could end up in the wrong place.
+
+            So, you should better directly backup your database at server-side, using
+            any of the supplied Postgres methods.
+        """
         logger = logging.getLogger('web-services')
 
         if tools.config.get_misc('databases', 'dump_guard', False):
@@ -282,6 +333,14 @@ class db(baseExportService):
         return base64.encodestring(data)
 
     def exp_restore(self, db_name, data):
+        """Restore a database, inverse of 'dump()' operation
+
+            @param db_name A new database name, which will be created
+            @param data base64-encoded SQL 'pg_dump' chunk
+
+            Note: this function suffers the same protocol limitations as the `dump()`
+            operation.
+        """
         logger = logging.getLogger('web-services')
 
         self._set_pg_psw_env_var()
@@ -323,6 +382,14 @@ class db(baseExportService):
         return True
 
     def exp_rename(self, old_name, new_name):
+        """ Rename a Postgres/OpenERP database
+
+            Changes the name of the database, you will be able to re-connect to the
+            new name right after this call.
+
+            Note: existing clients will be interrupted and will have to re-login to
+            the new name.
+        """
         sql_db.close_db(old_name)
         logger = logging.getLogger('web-services')
 
@@ -359,10 +426,14 @@ class db(baseExportService):
         return True
 
     def exp_db_exist(self, db_name):
+        """Check connection to database `db_name`
+        """
         ## Not True: in fact, check if connection to database is possible. The database may exists
         return bool(sql_db.db_connect(db_name, temp=True))
 
     def exp_list(self, document=False):
+        """List available OpenERP databases (names) at this server
+        """
         if not tools.config['list_db'] and not document:
             raise Exception('AccessDenied')
 
@@ -411,6 +482,8 @@ class db(baseExportService):
         return True
 
     def exp_list_lang(self):
+        """List available languages (system-wide) for a new database
+        """
         return tools.scan_languages()
 
     def exp_server_version(self):
@@ -464,6 +537,8 @@ class _ObjectService(baseExportService):
         return res
 
 class common(_ObjectService):
+    """Services applying to the whole server instance, irrespective of db.
+    """
     _auth_commands = { # 'db-broken': [ 'ir_set','ir_del', 'ir_get' ], 5.0 interface
                 'pub': ['about', 'timezone_get', 'get_server_environment',
                         'login_message','get_stats', 'check_connectivity',
@@ -505,7 +580,7 @@ class common(_ObjectService):
             security.check_super(passwd)
         else:
             raise Exception("Method not found: %s" % method)
-        
+
         fn = getattr(self, 'exp_'+method)
         return fn(*params)
 
@@ -654,6 +729,10 @@ GNU Public Licence.
             raise
 
     def exp_get_server_environment(self):
+        """Return a paragraph of string, the environment of the server process
+
+            This should be enough to identify the platform of the server.
+        """
         os_lang = '.'.join( [x for x in locale.getdefaultlocale() if x] )
         if not os_lang:
             os_lang = 'NOT SET'
@@ -681,6 +760,16 @@ GNU Public Licence.
         return tools.config.get('login_message', False)
 
     def exp_set_loglevel(self, loglevel, logger=None):
+        """Adjust the logging level of some pythonic logger
+
+            If `logger` is not specified, the level of the root logger (possibly affecting
+            many others) will be set. If specified, it can be any existing or /not/ existing
+            logger. The latter is needed in order to set levels for messages that are not
+            yet issued.
+
+            In a twist, `loglevel` can be a dict, like `{logger: level, ...}` setting
+            several loggers at once.
+        """
         l = netsvc.Logger()
         l.set_loglevel(loglevel, logger)
         return True
@@ -691,18 +780,53 @@ GNU Public Licence.
         return True
 
     def exp_get_loglevel(self, logger=None):
+        """Get logging level of some logger(s)
+
+            If `logger==None`, the main logging level will be returned.
+            If it is any of the *existing* loggers, it will return its level. It will
+            raise a KeyError if the logger doesn't exist.
+            If it is the special '*' string, all loggers and their levels will be
+            returned in a dict.
+        """
         l = netsvc.Logger()
         return l.get_loglevel(logger)
 
     def exp_get_pgmode(self):
+        """Returns the Postgres operation mode.
+
+            see. set_pgmode()
+        """
         return sql_db.Cursor.get_pgmode()
 
     def exp_set_pgmode(self, pgmode):
+        """Set postgres operation mode
+
+            The mode of operation affects usage of advanced Postgres features by the ORM.
+            It can be changed in runtime, in order to test the older or newer algorithms.
+        """
         assert pgmode in ['old', 'sql', 'pgsql', 'pg84', 'pg90', 'pg91', 'pg92']
         sql_db.Cursor.set_pgmode(pgmode)
         return True
 
     def exp_set_obj_debug(self,db, obj, do_debug):
+        """Set ORM object debug
+
+            @param db the database to set at (name)
+            @param obj the ORM object to set (like 'res.partner')
+            @param do_debug boolean to have debugging or not
+
+            Per-object debug allows terse messages on the operations for some specific
+            ORM model. Rather than flooding the logs with all low-level ops, this feature
+            allows focused logging of only a few objects.
+
+            Setting one object does not clear any others.
+
+            Object debugging typically prints all SQL calls, ORM methods like read() or
+            write(), domain expressions on the object and browse() field statistics. It
+            is up to the developer to add more messages in custom methods.
+
+            All these messages are issued at the `DEBUG` log-level.
+        """
         log = logging.getLogger('web-services')
         log.info("setting debug for %s@%s to %s" %(obj, db, do_debug))
         ls = netsvc.LocalService('object_proxy')
@@ -710,10 +834,21 @@ GNU Public Licence.
         return res
 
     def exp_set_pool_debug(self,db, do_debug):
+        """Activate debugging on the pool of Postgres connections
+
+            This will debug opening/closing/release of database cursors, for each
+            transaction happening inside the server.
+        """
         sql_db._Pool.set_pool_debug(do_debug)
         return None
 
     def exp_get_stats(self):
+        """Return statistics about the server and internal services
+
+            Several subsystems of the OpenERP server are registered as 'services'.
+            These should fill this paragraph with info about their current state,
+            like threads, counts etc.
+        """
         import threading
         res = "OpenERP server: %d threads\n" % threading.active_count()
         res += netsvc.Server.allStats()
@@ -733,16 +868,30 @@ GNU Public Licence.
         return res
 
     def exp_list_http_services(self, *args):
+        """List HTTP paths the embedded server is serving
+        """
         from service import http_server
         return http_server.list_http_services(*args)
 
     def exp_check_connectivity(self):
+        """This will test if the openerp server can connect to Postgres.
+        """
         return bool(sql_db.db_connect('template1', temp=True))
-        
+
     def exp_get_os_time(self):
+        """Return time elapsed in the server process
+
+            This includes real and CPU time on the server, useful for timing the
+            performance of our operations.
+        """
         return os.times()
 
     def exp_get_sqlcount(self):
+        """Get current count (sum) of SQL calls
+
+            Counters advance only when the 'db.cursor' logger is at DEBUG_SQL level.
+            This can be adjusted at runtime.
+        """
         logger = logging.getLogger('db.cursor')
         if not logger.isEnabledFor(logging.DEBUG_SQL):
             logger.warning("Counters of SQL will not be reliable unless DEBUG_SQL is set at the server's config.")
@@ -750,9 +899,11 @@ GNU Public Licence.
 
     def exp_get_sql_stats(self):
         """Retrieve the sql statistics from the pool.
-        
-        Unfortunately, XML-RPC won't allow tuple indexes, so we have to 
+
+        Unfortunately, XML-RPC won't allow tuple indexes, so we have to
         rearrange the dict.
+
+        Returns a dict of `table:operation:(count, time)` .
         """
         ret = {}
         for skey, val in sql_db._Pool.sql_stats.items():
@@ -764,6 +915,8 @@ GNU Public Licence.
         return ret
 
     def exp_reset_sql_stats(self):
+        """Resets the SQL statistics table
+        """
         sql_db._Pool.sql_stats = {}
         return True
 
@@ -779,7 +932,7 @@ GNU Public Licence.
                 print "Exception:", e
                 continue
             # Perhaps list the attributes of garb that are instances of object
-        
+
         return garbage_count
 
     def exp_get_options(self, module=None):
@@ -796,7 +949,7 @@ GNU Public Licence.
 
     def exp_get_export_services(self, group=None, service=None, method=None):
         """Return the available netsvc.ExportService methods
-            
+
             @param group if specified, lists services of that group
             @param service if specified, lists methods of that service
             @param method if specified (and service is set), introspects that method
@@ -954,7 +1107,7 @@ class wizard(dbExportDispatch,baseExportService):
         fn = getattr(self, 'exp_'+method)
         res = fn(db, uid, *params)
         return res
-    
+
 
     def _execute(self, db, uid, wiz_id, datas, action, context):
         self.wiz_datas[wiz_id].update(datas)
@@ -1056,8 +1209,8 @@ class _report_spool_job(threading.Thread):
 
     def stop(self):
         """Try to kill the job.
-        
-        So far there is no genuinely good way to stop the thread (is there?), 
+
+        So far there is no genuinely good way to stop the thread (is there?),
         so we can at least kill the cursor, so that the rest of the job borks.
         """
         self.must_stop = True
@@ -1065,7 +1218,7 @@ class _report_spool_job(threading.Thread):
             self.cr.rollback()
             self.cr.close()
             self.cr = None
-        
+
     def __repr__(self):
         """Readable name of report job
         """
@@ -1116,6 +1269,8 @@ class report_spool(dbExportDispatch, baseExportService):
         return ret
 
     def exp_report(self, db, uid, object, ids, datas=None, context=None):
+        """Request, start preparing a report
+        """
         if not datas:
             datas={}
         if not context:
@@ -1140,7 +1295,7 @@ class report_spool(dbExportDispatch, baseExportService):
             finally:
                 self.id_protect.release()
             self.abortResponse(1, exc.__class__.__name__, 'warning', exc.message)
-        
+
         res = {'state': report.state }
         if res['state']:
             if tools.config['reportgz']:
@@ -1179,6 +1334,10 @@ class report_spool(dbExportDispatch, baseExportService):
         return ret
 
     def exp_report_get(self, db, uid, report_id):
+        """ Get a prepared report, pop it from the queue
+
+            If the report is still running, it will return False
+        """
         if report_id in self._reports and  self._reports[report_id].db == db:
             if self._reports[report_id].uid == uid:
                 return self._check_report(report_id)
@@ -1189,10 +1348,10 @@ class report_spool(dbExportDispatch, baseExportService):
 
     def exp_report_stop(self, db, uid, report_id, timeout=5.0):
         """ Stop a running report, wait for it to finish
-        
+
             @return True if stopped, False if alredy finished,
                     Exception('Timeout') if cannot stop
-            
+
             Note that after a "report_stop" request, the caller shall
             do one more "report_get" to fetch the exception and free
             the job object.
@@ -1205,7 +1364,7 @@ class report_spool(dbExportDispatch, baseExportService):
                     report.join(timeout=timeout)
                     if report.is_alive():
                         raise Exception('Timeout')
-                    
+
                     return True
                 else:
                     return False
