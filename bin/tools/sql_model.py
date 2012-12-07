@@ -687,7 +687,7 @@ class collection(_element):
         _element.__init__(self, name)
         self.parent = weakref.ref(parent)
         assert parent
-        self._d = dict()
+        self._d = {}
         assert issubclass(klass, _element), klass
         self._baseclass = klass
     

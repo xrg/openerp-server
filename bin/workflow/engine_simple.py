@@ -242,7 +242,7 @@ class WorkflowSimpleEngine(WorkflowEngine):
     def reload_models(cls, service, pool, cr, models):
 
         wkfs = dict.fromkeys(models) # all to None, because [] is mutable
-        wkf_subflows = dict()
+        wkf_subflows = {}
         cr.execute('SELECT osv, id, name, on_create FROM wkf WHERE osv=ANY(%s)', (models,))
         for r_osv, r_id, r_name, r_onc in cr.fetchall():
             obj = pool.get(r_osv)
