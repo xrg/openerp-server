@@ -853,9 +853,11 @@ def replace_request_password(args):
     return args
 
 class OpenERPDispatcher:
-    def log(self, title, msg):
+    def log(self, title, msg, is_passwd=False):
         logger = logging.getLogger(title)
         if logger.isEnabledFor(logging.DEBUG_RPC):
+            if is_passwd:
+                msg = replace_request_password(msg)
             for line in pformat(msg).split('\n'):
                 logger.log(logging.DEBUG_RPC, line)
 
@@ -863,7 +865,7 @@ class OpenERPDispatcher:
         try:
             self.log('service', service_name)
             self.log('method', method)
-            self.log('params', replace_request_password(params))
+            self.log('params', params, is_passwd=True)
             auth = getattr(self, 'auth_proxy', None)
             result = ExportService.getService(service_name).dispatch(method, auth, params)
             self.log('result', result)
