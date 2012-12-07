@@ -889,22 +889,28 @@ class OpenERPDispatcher:
 class OpenERPDispatcher2:
     _logger = logging.getLogger('rpc')
     
+    @classmethod
+    def _dbg_log(cls, title, params):
+        cls.logger.log(logging.DEBUG_RPC,'%s: %s', title, pformat(params))
+
+    @classmethod
+    def _fake_log(cls, title, params):
+        pass
+
     def dispatch(self, service_name, method, params):
-        
-        def _real_log(title, msg):
-            self._logger.log(logging.DEBUG_RPC,'%s: %s' %(title, pformat(msg)))
-        
+        """ send method+params to the web_services layer
+        """
         try:
             if self._logger.isEnabledFor(logging.DEBUG_RPC):
-                log = _real_log
+                log = self._dbg_log
             else:
-                log = lambda *a: None
+                log = self._fake_log
             log('service', service_name)
             log('method', method)
             log('params', params)
             auth = getattr(self, 'auth_proxy', None)
             if not auth:
-                self._logger.warn("No Authentication!")
+                self._logger.debug("No Authentication!")
             result = ExportService.getService(service_name).new_dispatch(method, auth, params)
             log('result', result)
             # We shouldn't marshall None,
