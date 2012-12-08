@@ -377,16 +377,13 @@ msgstr ""
 #, python-format
 msgid ""
 "Couldn't generate the next id because some partners have an alphabetic id !"
-msgstr "Kan inte skapa nästa id eftersom partnern har ett alfanumeriskt id."
+msgstr "Kan inte skapa nästa id eftersom företaget har ett alfanumeriskt id."
 
 #. module: base
 #: code:addons/base/res/partner/partner.py:0
-#, fuzzy, python-format
+#, python-format
 msgid "Partners: "
-msgstr ""
-"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"Partners "
+msgstr "Företag: "
 
 #. module: base
 #: code:addons/base/res/partner/partner.py:0
@@ -2353,12 +2350,8 @@ msgstr ""
 #: field:res.partner.bank,partner_id:0 field:res.partner.event,partner_id:0
 #: model:ir.model,name:base.model_res_partner
 #: selection:res.partner.title,domain:0 view:res.users:0
-#, fuzzy
 msgid "Partner"
-msgstr ""
-"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"Partner"
+msgstr "Företag"
 
 #. module: base
 #: field:res.company,rml_footer1:0
@@ -2623,12 +2616,8 @@ msgstr ""
 
 #. module: base
 #: field:res.partner,child_ids:0 field:res.request,ref_partner_id:0
-#, fuzzy
 msgid "Partner Ref."
-msgstr ""
-"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"Partnerref."
+msgstr "Företagsreferense"
 
 #. module: base
 #: field:res.partner,comment:0 field:res.partner.function,ref:0
@@ -2665,12 +2654,8 @@ msgstr "Händelser"
 
 #. module: base
 #: field:res.partner,parent_id:0
-#, fuzzy
 msgid "Parent Partner"
-msgstr ""
-"#-#-#-#-#  .merge_file_x4k48P (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_hc7Dz8 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"Överliggande partner"
+msgstr "Överliggande företag"
 
 #. module: base
 #: field:res.partner,supplier:0
@@ -2793,12 +2778,8 @@ msgstr "Kategorinamn"
 #: model:ir.ui.menu,name:base.menu_base_partner
 #: model:ir.ui.menu,name:base.menu_partner_form view:res.partner:0
 #: view:res.partner.category:0
-#, fuzzy
 msgid "Partners"
-msgstr ""
-"#-#-#-#-#  .merge_file_EiefvT (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_ssZMfU (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"Partners"
+msgstr "Företag"
 
 #. module: base
 #: field:res.partner.event,canal_id:0 view:res.partner.canal:0
@@ -3663,59 +3644,43 @@ msgstr ""
 
 #. module: base
 #: help:res.partner,customer:0
-#, fuzzy
 msgid "Check this box if the partner is a customer."
-msgstr ""
-"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"Markera denna om partnern är en kund."
+msgstr "Markera denna om företaget är en kund."
 
 #. module: base
 #: help:res.partner,lang:0
-#, fuzzy
 msgid ""
 "If the selected language is loaded in the system, all documents related to "
 "this partner will be printed in this language. If not, it will be english."
 msgstr ""
-"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"Om det valda språket has installerats i systemet skriva alla dokumnet "
-"relaterade till partnern i detta språk. Annars används engelska."
+"Om det valda språket has installerats i systemet används detta språk för "
+"alla dokument till företaget. Annars används engelska."
 
 #. module: base
 #: help:res.partner,supplier:0
-#, fuzzy
 msgid ""
 "Check this box if the partner is a supplier. If it's not checked, purchase "
 "people will not see it when encoding a purchase order."
 msgstr ""
-"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"Markera den här rutan om partnern är en leverantör. Om den inte är markerar "
-"så kommer partnern inte visas när man väljer leverantör på en inköpsorder."
+"Markera den här rutan om företaget är en leverantör. Om den inte är markerar "
+"så kommer företaget inte visas när man väljer leverantör på en inköpsorder."
 
 #. module: base
 #: help:res.partner,user_id:0
-#, fuzzy
 msgid ""
 "The internal user that is in charge of communicating with this partner if "
 "any."
 msgstr ""
-"#-#-#-#-#  .merge_file_x4k48P (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_hc7Dz8 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"Den interna användare som hanterar kommunikationen med denna partner, om "
+"Den interna användare som hanterar kommunikationen med detta företag, om "
 "sådan finns."
 
 #. module: base
 #: help:res.partner,vat:0
-#, fuzzy
 msgid ""
 "Value Added Tax number. Check the box if the partner is subjected to the "
 "VAT. Used by the VAT legal statement."
 msgstr ""
-"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"Momsnummer. Markera denna om partnern skall ha moms. Används av "
+"Momsnummer. Markera denna om företaget skall debiteras moms. Används av "
 "momsrapporten."
 
 #. module: base
@@ -3729,12 +3694,9 @@ msgstr ""
 
 #. module: base
 #: help:res.partner.address,partner_id:0
-#, fuzzy
 msgid "Keep empty for a private address, not related to partner."
 msgstr ""
-"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"Lämna blank om det är en privat adress som inte ska kopplas till en partner."
+"Lämna blank om det är en privatadress som inte ska kopplas till ett företag."
 
 #. module: base
 #: help:res.partner.address,type:0
@@ -3934,12 +3896,8 @@ msgstr ""
 #: model:ir.model,name:base.model_res_partner_category
 #: model:ir.ui.menu,name:base.menu_partner_category_form
 #: view:res.partner.category:0
-#, fuzzy
 msgid "Partner Categories"
-msgstr ""
-"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"Partnerkategorier"
+msgstr "Företagskategorier"
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_partner_category
@@ -3971,12 +3929,8 @@ msgstr ""
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_partner_other_form
-#, fuzzy
 msgid "Other Partners"
-msgstr ""
-"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"Övriga partners"
+msgstr "Övriga företag"
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_partner_supplier_form
@@ -4002,12 +3956,8 @@ msgstr ""
 #: model:ir.actions.act_window,name:base.action_partner_title_partner
 #: model:ir.ui.menu,name:base.menu_partner_title_partner
 #: view:res.partner.title:0
-#, fuzzy
 msgid "Partner Titles"
-msgstr ""
-"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"Partnertitlar"
+msgstr "Företagstitlar"
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_payterm_form
@@ -6379,17 +6329,17 @@ msgstr ""
 
 #. module: base
 #: model:res.partner.category,name:base.res_partner_category_2
-#, fuzzy
 msgid "OpenERP Partners"
-msgstr ""
-"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"OpenERP Partners"
+msgstr "OpenERP-partner"
 
 #. module: base
 #: model:res.partner.category,name:base.res_partner_category_3
+#, fuzzy
 msgid "Starter Partner"
 msgstr ""
+"#-#-#-#-#  .merge_file_eBMv0A (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_ew6MQ8 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Startföretag"
 
 #. module: base
 #: model:res.partner.category,name:base.res_partner_category_4
@@ -9297,12 +9247,8 @@ msgstr "Bankkontoägare"
 
 #. module: base
 #: view:res.partner.category:0
-#, fuzzy
 msgid "Partner Category"
-msgstr ""
-"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"Partnerkategori"
+msgstr "Företagskategori"
 
 #. module: base
 #: view:res.partner.event:0
@@ -10173,15 +10119,12 @@ msgstr ""
 
 #. module: base
 #: view:ir.actions.server:0
-#, fuzzy
 msgid ""
 "Access all the fields related to the current object using expressions, i.e. "
 "object.partner_id.name "
 msgstr ""
-"#-#-#-#-#  .merge_file_x4k48P (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_hc7Dz8 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"represenrerar ett blanksteg. Skriver in ett blanksteg i motsvarande position "
-"i översättningen "
+"Tillgång till alla fält relaterade till aktuellt objekt via uttryck, "
+"exempelvis object.partner_id.name "
 
 #. module: base
 #: selection:ir.property,type:0
@@ -10497,17 +10440,14 @@ msgstr "Bolag användaren är knuten till"
 
 #. module: base
 #: model:ir.actions.act_window,help:base.action_country
-#, fuzzy
 msgid ""
 "Display and manage the list of all countries that can be assigned to your "
 "partner records. You can create or delete countries to make sure the ones "
 "you are working on will be maintained."
 msgstr ""
-"#-#-#-#-#  .merge_file_EiefvT (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_ssZMfU (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"Visa och hantera listan av alla länder som kan bli tilldelade dina partners "
-"uppgifter. Du kan skapa eller ta bort länder så att du är säker på att de "
-"som du jobbar på kommer att underhållas."
+"Visa och hantera listan av alla länder som kan bli tilldelade dina "
+"företagsuppgifter. Du kan skapa eller ta bort länder så att du är säker på "
+"att de som du jobbar på kommer att underhållas."
 
 #. module: base
 #: selection:base.language.install,lang:0
@@ -10565,7 +10505,7 @@ msgstr "klar"
 #. module: base
 #: field:res.partner.address,partner_id:0
 msgid "Partner Name"
-msgstr "Partnernamn"
+msgstr "Företagsnamn"
 
 #. module: base
 #: model:res.partner.category,name:base.res_partner_category_17
@@ -10674,17 +10614,14 @@ msgstr ""
 
 #. module: base
 #: view:base.language.install:0
-#, fuzzy
 msgid ""
 "This wizard helps you add a new language to your OpenERP system. After "
 "loading a new language it becomes available as default interface language "
 "for users and partners."
 msgstr ""
-"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"Den har wizarden hjälper dig med att lägga till ett nytt språk i ditt "
-"OpenERP system. Efter att språket laddats in blir det tillgängligt för "
-"användare och partners."
+"Den har guiden hjälper dig med att lägga till ett nytt språk i ditt OpenERP-"
+"system. Efter att språket laddats in blir det tillgängligt för användare och "
+"företag."
 
 #. module: base
 #: selection:base.language.install,lang:0
@@ -11272,12 +11209,8 @@ msgstr ""
 
 #. module: base
 #: help:res.partner,employee:0
-#, fuzzy
 msgid "Check this box if the partner is an Employee."
-msgstr ""
-"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"Markera denna om partnern är en anställd."
+msgstr "Markera denna om företaget också är en anställd."
 
 #. module: base
 #: view:base.language.import:0
@@ -11404,12 +11337,8 @@ msgstr ""
 
 #. module: base
 #: view:res.widget.wizard:0
-#, fuzzy
 msgid "Widget Wizard"
-msgstr ""
-"#-#-#-#-#  .merge_file_TtNMvP (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_CEjO84 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"Widget Wizard"
+msgstr "Komponentguide"
 
 #. module: base
 #: selection:ir.property,type:0
@@ -12108,15 +12037,12 @@ msgstr ""
 
 #. module: base
 #: model:ir.actions.act_window,help:base.action_partner_title_partner
-#, fuzzy
 msgid ""
 "Manage the partner titles you want to have available in your system. The "
 "partner titles is the legal status of the company: Private Limited, SA, etc."
 msgstr ""
-"#-#-#-#-#  .merge_file_x4k48P (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_hc7Dz8 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"Hantera titlarna på systemets partner, som avspeglar deras legala status: "
-"AB, kommun, stiftelse etc."
+"Hantera systemets företagsformer, som avspeglar deras legala status: AB, "
+"kommun, stiftelse etc."
 
 #. module: base
 #: view:base.language.export:0
@@ -12628,12 +12554,8 @@ msgstr ""
 
 #. module: base
 #: field:base.language.install,overwrite:0
-#, fuzzy
 msgid "Overwrite Existing Terms"
-msgstr ""
-"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"Skriv över existerande villkor"
+msgstr "Skriv över nuvarande fraser"
 
 #. module: base
 #: model:ir.ui.menu,name:base.menu_project_management_time_tracking
@@ -13059,12 +12981,8 @@ msgstr ""
 
 #. module: base
 #: model:ir.ui.menu,name:base.menu_crm_config_lead
-#, fuzzy
 msgid "Leads & Opportunities"
-msgstr ""
-"#-#-#-#-#  .merge_file_wdxUui (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_QpqqAI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"Leads & Opportunities"
+msgstr "Kundämnen och affärsmöjligheter"
 
 #. module: base
 #: selection:base.language.install,lang:0
@@ -13185,12 +13103,19 @@ msgstr ""
 
 #. module: base
 #: model:ir.actions.act_window,help:base.action_partner_category_form
+#, fuzzy
 msgid ""
 "Manage the partner categories in order to better classify them for tracking "
 "and analysis purposes. A partner may belong to several categories and "
 "categories have a hierarchy structure: a partner belonging to a category "
 "also belong to his parent category."
 msgstr ""
+"#-#-#-#-#  .merge_file_eBMv0A (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_ew6MQ8 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Hantera företagskategorier för att bättre klassificera dem för spårning och "
+"analyssyften. Ett företag kan tillhöra flera kategorier och kategorier har "
+"en hierarkisk struktur: en företag som tillhör en kategori hör också till "
+"överordnade kategorin."
 
 #. module: base
 #: view:ir.property:0 model:ir.ui.menu,name:base.next_id_15
@@ -13383,7 +13308,7 @@ msgstr "Ny användare"
 #. module: base
 #: model:ir.ui.menu,name:base.menu_crm_config_opportunity
 msgid "Opportunities"
-msgstr "Opportunities"
+msgstr "Affärsmöjligheter"
 
 #. module: base
 #: model:ir.model,name:base.model_ir_config_parameter
@@ -14409,12 +14334,19 @@ msgstr ""
 
 #. module: base
 #: model:ir.actions.act_window,help:base.action_partner_supplier_form
+#, fuzzy
 msgid ""
 "You can access all information regarding your suppliers from the supplier "
 "form: accounting data, history of emails, meetings, purchases, etc. You can "
 "uncheck the 'Suppliers' filter button in order to search in all your "
 "partners, including customers and prospects."
 msgstr ""
+"#-#-#-#-#  .merge_file_eBMv0A (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_ew6MQ8 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+"Du kan komma åt all information om dina leverantörer från "
+"leverantörsformuläret: redovisningsdata, historik av e-post, möten, inköp "
+"etc. Du kan avmarkera  leverantörsfilterknappen för att söka i alla dina "
+"företag, däribland kunder och kundämnen."
 
 #. module: base
 #: help:ir.model.fields,domain:0

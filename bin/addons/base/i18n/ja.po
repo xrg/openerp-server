@@ -11,8 +11,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-07-09 04:59+0000\n"
-"X-Generator: Launchpad (build 15558)\n"
+"X-Launchpad-Export-Date: 2012-10-11 05:28+0000\n"
+"X-Generator: Launchpad (build 16118)\n"
 
 #. module: base
 #: code:addons/base/ir/ir_actions.py:0 code:addons/base/ir/ir_model.py:0
@@ -2386,12 +2386,8 @@ msgstr ""
 #. module: base
 #: field:res.bank,city:0 field:res.partner,city:0
 #: field:res.partner.address,city:0 field:res.partner.bank,city:0
-#, fuzzy
 msgid "City"
-msgstr ""
-"#-#-#-#-#  .merge_file_gITufd (openobject-server)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_5fZFcx (openobject-server)  #-#-#-#-#\n"
-"市"
+msgstr "市区町村"
 
 #. module: base
 #: field:res.bank,code:0 field:res.currency,code:0 field:res.partner,ref:0
@@ -2442,13 +2438,21 @@ msgstr ""
 #. module: base
 #: field:res.bank,street:0 field:res.partner.address,street:0
 #: field:res.partner.bank,street:0
+#, fuzzy
 msgid "Street"
 msgstr ""
+"#-#-#-#-#  .merge_file_wEDsGc (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_GqATBI (openobject-server)  #-#-#-#-#\n"
+"町名番地"
 
 #. module: base
 #: field:res.bank,street2:0 field:res.partner.address,street2:0
+#, fuzzy
 msgid "Street2"
 msgstr ""
+"#-#-#-#-#  .merge_file_wEDsGc (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_GqATBI (openobject-server)  #-#-#-#-#\n"
+"町名番地2"
 
 #. module: base
 #: field:res.bank,zip:0 field:res.partner.address,zip:0
@@ -2923,8 +2927,12 @@ msgstr ""
 
 #. module: base
 #: field:res.partner.address,state_id:0
+#, fuzzy
 msgid "Fed. State"
 msgstr ""
+"#-#-#-#-#  .merge_file_wEDsGc (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_GqATBI (openobject-server)  #-#-#-#-#\n"
+"都道府県"
 
 #. module: base
 #: field:res.partner.address,type:0
@@ -3117,8 +3125,12 @@ msgstr ""
 
 #. module: base
 #: field:res.request,act_to:0 field:res.request.history,act_to:0
+#, fuzzy
 msgid "To"
 msgstr ""
+"#-#-#-#-#  .merge_file_wEDsGc (openobject-server)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_GqATBI (openobject-server)  #-#-#-#-#\n"
+"宛先"
 
 #. module: base
 #: field:res.request,body:0 field:res.request.history,req_id:0
@@ -5163,12 +5175,8 @@ msgstr ""
 
 #. module: base
 #: model:ir.ui.menu,name:base.menu_custom
-#, fuzzy
 msgid "Customization"
-msgstr ""
-"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
-"カスタマイゼーション"
+msgstr "カスタム化"
 
 #. module: base
 #: model:ir.ui.menu,name:base.menu_custom_multicompany
@@ -8096,12 +8104,8 @@ msgstr ""
 #. module: base
 #: selection:ir.module.module,state:0
 #: selection:ir.module.module.dependency,state:0
-#, fuzzy
 msgid "Not Installed"
-msgstr ""
-"#-#-#-#-#  .merge_file_gITufd (openobject-server)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_5fZFcx (openobject-server)  #-#-#-#-#\n"
-"インストールされていません。"
+msgstr "未インストール"
 
 #. module: base
 #: selection:ir.module.module,state:0
@@ -11194,12 +11198,8 @@ msgstr ""
 
 #. module: base
 #: field:res.widget.user,widget_id:0 field:res.widget.wizard,widget_id:0
-#, fuzzy
 msgid "Widget"
-msgstr ""
-"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
-"ウィジット"
+msgstr "ウィジェット"
 
 #. module: base
 #: field:ir.ui.menu,web_icon_data:0
@@ -11708,12 +11708,8 @@ msgstr ""
 #. module: base
 #: model:ir.actions.act_window,name:base.res_widget_act_window
 #: model:ir.ui.menu,name:base.menu_res_widget_act_window
-#, fuzzy
 msgid "Homepage Widgets"
-msgstr ""
-"#-#-#-#-#  .merge_file_gITufd (openobject-server)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_5fZFcx (openobject-server)  #-#-#-#-#\n"
-"ホームページウィジット"
+msgstr "ホームページウィジェット"
 
 #. module: base
 #: field:ir.attachment,res_model:0
@@ -12610,12 +12606,8 @@ msgstr ""
 
 #. module: base
 #: selection:base.language.install,lang:0
-#, fuzzy
 msgid "Japanese / 日本語"
-msgstr ""
-"#-#-#-#-#  .merge_file_5Tw0C1 (openobject-server)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_8zWwMP (openobject-server)  #-#-#-#-#\n"
-"Japanese / 日本語"
+msgstr "日本語 / Japanese"
 
 #. module: base
 #: help:workflow.transition,act_from:0
@@ -13019,12 +13011,8 @@ msgstr ""
 
 #. module: base
 #: view:res.widget.wizard:0
-#, fuzzy
 msgid "Widget Wizard"
-msgstr ""
-"#-#-#-#-#  .merge_file_gITufd (openobject-server)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_5fZFcx (openobject-server)  #-#-#-#-#\n"
-"ウィジットウィザード"
+msgstr "ウィジェットウィザード"
 
 #. module: base
 #: selection:ir.property,type:0
@@ -14443,12 +14431,8 @@ msgstr ""
 
 #. module: base
 #: model:ir.model,name:base.model_res_widget_wizard
-#, fuzzy
 msgid "Add a widget for User"
-msgstr ""
-"#-#-#-#-#  .merge_file_gITufd (openobject-server)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_5fZFcx (openobject-server)  #-#-#-#-#\n"
-"ユーザのウィジットを追加"
+msgstr "ユーザのウィジェットを追加"
 
 #. module: base
 #: selection:base.language.install,lang:0
@@ -14656,12 +14640,8 @@ msgstr ""
 #. module: base
 #: model:ir.actions.act_window,name:base.res_widget_user_act_window
 #: model:ir.ui.menu,name:base.menu_res_widget_user_act_window
-#, fuzzy
 msgid "Widgets per User"
-msgstr ""
-"#-#-#-#-#  .merge_file_gITufd (openobject-server)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_5fZFcx (openobject-server)  #-#-#-#-#\n"
-"ユーザ当りのウィジット"
+msgstr "ユーザ当りのウィジェット"
 
 #. module: base
 #: selection:base.language.install,lang:0
@@ -14735,12 +14715,8 @@ msgstr ""
 
 #. module: base
 #: view:res.widget.user:0
-#, fuzzy
 msgid "User Widgets"
-msgstr ""
-"#-#-#-#-#  .merge_file_gITufd (openobject-server)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_5fZFcx (openobject-server)  #-#-#-#-#\n"
-"ユーザウィジット"
+msgstr "ユーザウィジェット"
 
 #. module: base
 #: view:base.module.update:0
@@ -15251,12 +15227,8 @@ msgstr ""
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_res_widget_wizard
-#, fuzzy
 msgid "Homepage Widgets Management"
-msgstr ""
-"#-#-#-#-#  .merge_file_eztces (openobject-server)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_06oQKp (openobject-server)  #-#-#-#-#\n"
-"ホームページウィジット管理"
+msgstr "ホームページウィジェット管理"
 
 #. module: base
 #: help:ir.sequence,number_increment:0
@@ -15269,12 +15241,8 @@ msgstr ""
 
 #. module: base
 #: view:res.widget:0
-#, fuzzy
 msgid "Search Widget"
-msgstr ""
-"#-#-#-#-#  .merge_file_gITufd (openobject-server)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_5fZFcx (openobject-server)  #-#-#-#-#\n"
-"ウィジットの検索"
+msgstr "ウィジェットの検索"
 
 #. module: base
 #: selection:ir.actions.todo,restart:0
