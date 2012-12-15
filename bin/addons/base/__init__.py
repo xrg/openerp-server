@@ -3,6 +3,7 @@
 #    
 #    OpenERP, Open Source Management Solution
 #    Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>).
+#    Copyright (C) 2012 P. Christeas <xrg@hellug.gr>
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -23,6 +24,88 @@ import ir
 import module
 import res
 import publisher_warranty
+
+from tools.service_meta import _ServiceMeta, abstractmethod
+
+class _pool_actor(object):
+    """ Helper that exposes ORM verbs within an ExecContext sandbox
+
+        A requirement is that the ExecContext instance has been launched
+        like `ectx = ExecContext(cr=cr, uid=uid, pool=self.pool, context=context, ...)`
+    """
+    def __init__(self, verb, parent):
+        assert isinstance(verb, str), "Invalid verb: %r" % verb
+        self._verb = verb
+        self._parent = parent
+
+    def __call__(self, model, *args, **kwargs):
+        obj = self._parent.pool.get(model)
+        if not obj:
+            raise KeyError("No such model: %s" % model)
+        fn = getattr(obj, self._verb)
+        if 'context' not in kwargs:
+            kwargs['context'] = self._parent.context
+        return fn(self._parent.cr, self._parent.uid, *args, **kwargs)
+
+class _pool_actor_browse(object):
+    """ Actor for the `orm.browse()` verb, that also preserves the cache
+    """
+    def __init__(self, parent):
+        self._parent = parent
+
+    def __call__(self, model, *args, **kwargs):
+        obj = self._parent.pool.get(model)
+        if not obj:
+            raise KeyError("No such model: %s" % model)
+        if 'context' not in kwargs:
+            kwargs['context'] = self._parent.context
+        bro_cache = getattr(self._parent, 'browse_cache', None)
+        if bro_cache is not None:
+            kwargs['cache'] = bro_cache
+        return obj.browse(self._parent.cr, self._parent.uid, *args, **kwargs)
+
+class ExecContext(object):
+    """Intermediate object which will prepare an eval() context
+
+        A generic implementation of an interface class from pythonic functions to
+        the (sandboxed) context for a safe_eval().
+    """
+    __metaclass__ = _ServiceMeta
+
+    def __init__(self, **kwargs):
+        """ Keep unsafe `kwargs` in this object, let it be used by our methods
+        """
+        self._kwargs = kwargs
+
+    def update(self, *args, **kwargs):
+        """ Update, as if this class were a dict()
+        """
+        self._kwargs.update(*args, **kwargs)
+
+    def __getattr__(self, name):
+        if not name in self._kwargs:
+            raise AttributeError(name)
+        return self._kwargs[name]
+
+    @abstractmethod
+    def prepare_context(self, context):
+        pass
+
+    def _prepare_orm(self, context):
+        """Call this from your class if you want ORM methods within the context
+        """
+        context['uid'] = self._kwargs['uid']
+        context['context'] = self._kwargs.get('context', {})
+
+        context['browse'] = _pool_actor_browse(self)
+        for verb in ('search', 'read', 'search_read', 'create', 'write'):
+            context[verb] = _pool_actor(verb=verb, parent=self)
+
+    def _prepare_logger(self, context):
+        """ Put a logger in the context, from this class'es `_logger_name`
+        """
+        import logging
+        context['log'] = logging.getLogger(self._logger_name)
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
 
