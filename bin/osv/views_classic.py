@@ -35,7 +35,7 @@ class tree_view(oo_view):
     def _default_view(self, cr, uid, obj, context=None):
         """ Generates a single-field tree view, using _rec_name if
         it's one of the columns or the first column it finds otherwise
-        
+
         :returns: a tree view as an lxml document
         :rtype: etree._Element
         """
@@ -120,7 +120,7 @@ class calendar_view(oo_view):
     def _default_view(self, cr, uid, obj, context=None):
         """ Generates a default calendar view by trying to infer
         calendar fields from a number of pre-set attribute names
-        
+
         :returns: a calendar view
         :rtype: etree._Element
         """

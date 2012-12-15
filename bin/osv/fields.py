@@ -86,7 +86,7 @@ def _symbol_set_long(symb):
 
 def is_empty(val):
     """Checks if `val` is an empty record (aka. Null)
-    
+
         This *won't* work for booleans, since False is considered empty
         for all other types!
     """
@@ -98,10 +98,10 @@ def is_empty(val):
         return True
     else:
         return True
-    
+
 class _column(object):
     """ Base of all fields, a database column
-    
+
         An instance of this object is a *description* of a database column. It will
         not hold any data, but only provide the methods to manipulate data of an
         ORM record or even prepare/update the database to hold such a field of data.
@@ -124,7 +124,7 @@ class _column(object):
     @classmethod
     def from_manual(cls, field_dict, attrs):
         """create a field instance for manual fields (from DB)
-        
+
             @param field_dict the corresponding line in ir.model.fields
             @param attrs pre-processed attributes from that line, may
                     be passed directly to class constructor
@@ -186,7 +186,7 @@ class _column(object):
 
     def post_init(self, cr, name, obj):
         """ Called when the ORM model `obj` is being initialized
-            
+
             May involve any operations that are dependent on the db and/or
             the ORM model.
         """
@@ -217,7 +217,7 @@ class _column(object):
         """ Sample function for copying the data of this column.
         If some column needs to override the conventional copying of
         its data, it should define a copy_data() like this function.
-        
+
         @param obj The parent orm object
         @param id  The id of the record in the parent orm object
         @param f The name of the field
@@ -225,7 +225,7 @@ class _column(object):
                 the source object (for the later fields) or the copied data
                 for the fields that have been already computed
         @return The raw value, or None, if this field should not be set.
-        
+
         Note: please respect the pythonic need to bind the function to an
         object. Functions outside this object are permitted on the constructor
         of the field, thus binding is not implied. For convenience, instead
@@ -235,7 +235,7 @@ class _column(object):
             def my_copy_fn(cr, uid, ...): pass
             _columns={ 'sfield': fields.char('aaa', copy_data=my_copy_fn) }
                 # OK, because my_copy_fn is unbound
-            
+
             def copy_fn(self, cr, uid): pass
             _columns={ 'sfield': fields.char('aaa', copy_data=copy_fn) }
               # Wrong: copy_fn should have been bound
@@ -281,7 +281,7 @@ class _column(object):
 
             If this column has a scalar, stable, default, this will be returned.
             May also work for some special functions (like "now()")
-            
+
             @param context may be passed to the default-computing function
         """
 
@@ -318,38 +318,38 @@ class _column(object):
                     to cr, uid, context etc.
         """
         return val
-    
+
     def _browse2val(self, bro, name):
         """ Convert browse value to scalar one
-        
+
         """
         return bro
 
     def expr_eval(self, cr, uid, obj, lefts, operator, right, pexpr, context):
         """Evaluate an expression on this field
-        
+
             This is the place where each field type can customize its behavior
             on domain expressions.
-            
+
             Typically, the expression will be (lefts[0], operator, right) and
             must be processed here to provide another, compatible expression.
-            
+
             @param obj the model on which the field belongs (applies)
             @param lefts a list of strings composing the left part. See below
             @param operator a string, the operator
             @param right any value to match against
             @param pexpr parent expression object calling us
-        
-            @return None if the input expression can be used as-is, 
+
+            @return None if the input expression can be used as-is,
                 tuple-3 for for a classic replacement expression or any
                 expr_utils.sub_expr() object for complex evaluations
-                
+
                 Note1: list-3 is no longer allowed as the output of this fn
                 Note2: False only means false. Return None for "empty", this
                     helps the next stage a lot.
-            
+
             Use of lefts::
-            
+
             In the simplest case, they contain only one element, the name of this
             field. Used to actually reference the field in the db.
             On relational fields, may be 'fld1_id','fld2' where it means to
@@ -529,15 +529,15 @@ def sanitize_binary_value(dict_item):
     return index, tools.ustr(value)
 def register_field_classes(*args):
     """ register another module's class as if it were defined here, in fields.py
-    
+
         Used so that field classes defined elsewhere can appear as if they
         were originally included in this module (like the 6.0 days)
-        
+
         Use like::
-        
+
             register_field_classes(boolean, many2one, selection)
     """
-    
+
     for klass in args:
         assert issubclass(klass, _column), klass
         assert klass.__name__ not in globals(), klass.__name__
@@ -545,11 +545,11 @@ def register_field_classes(*args):
 
 def register_any_classes(*args):
     """ register another module's class as if it were defined here, in fields.py
-    
+
         Like register_field_classes, but accepts any class
         Use with care!
     """
-    
+
     for klass in args:
         assert klass.__name__ not in globals(), klass.__name__
         globals()[klass.__name__] = klass

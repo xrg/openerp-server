@@ -36,7 +36,7 @@ _ = str
 
 class oo_view(object):
     """A view *type* definition.
-    
+
     An instance of this object will be a _singleton_ in the server process,
     so far valid for all loaded databases
     """
@@ -46,7 +46,7 @@ class oo_view(object):
     __validator = None #: XML representation of the RNG definition, cached
     __rng_paths = [['base','rng','view.rng'],] #: list of paths to open. Order matters!
     _rng_path = False
-    
+
     def __init__(self):
         """Initialise the singleton """
         assert self._view_type and self._view_name, \
@@ -74,14 +74,14 @@ class oo_view(object):
             finally:
                 if frng:
                     frng.close()
-            
+
             cls.__validator = relaxng
             break # until I implement the inheritance
-    
+
     @classmethod
     def _unload_validator(cls):
         """Clears the validator from the memory
-        
+
             The validator is cached. This will force it to unload, to save that
             memory
         """
@@ -90,7 +90,7 @@ class oo_view(object):
     @classmethod
     def check_xml(cls, view_xml, view_type=None, errors=None):
         """ Check if view_xml is valid and conforms to view definition
-        
+
             @params errors pass a list there and it will be filled with the
                 RNG error messages
         """
@@ -104,7 +104,7 @@ class oo_view(object):
             eview = view_xml
         else:
             raise TypeError("Cannot use %s for view_xml" %type(view_xml))
-        
+
         logger = logging.getLogger('init')
         relaxng = cls.__validator
         if not relaxng.validate(eview):
@@ -126,10 +126,10 @@ class oo_view(object):
         """Retrieve the default view for type `vtype`
             @param obj the ORM model object
         """
-        
+
         if vtype not in cls.__registry:
             raise KeyError("No view support for %s" % vtype)
-        
+
         return cls.__registry[vtype]._default_view(cr, uid, obj, context=context)
 
     @classmethod
