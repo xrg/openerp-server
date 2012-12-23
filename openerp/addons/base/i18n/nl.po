@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: OpenERP Server 5.0.0\n"
 "Report-Msgid-Bugs-To: support@openerp.com\n"
 "POT-Creation-Date: 2012-12-21 17:04+0000\n"
-"PO-Revision-Date: 2012-12-21 19:49+0000\n"
+"PO-Revision-Date: 2012-12-22 07:41+0000\n"
 "Last-Translator: Erwin van der Ploeg (Endian Solutions) <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-12-22 05:02+0000\n"
+"X-Launchpad-Export-Date: 2012-12-23 04:39+0000\n"
 "X-Generator: Launchpad (build 16378)\n"
 
 #. module: base
@@ -24,6 +24,10 @@ msgid ""
 "================================================\n"
 "    "
 msgstr ""
+"\n"
+"Module voor het maken en afdrukken van cheques. \n"
+"================================================\n"
+"    "
 
 #. module: base
 #: model:res.country,name:base.sh
@@ -504,7 +508,7 @@ msgstr "Relatie naam"
 #. module: base
 #: view:ir.rule:0
 msgid "Create Access Right"
-msgstr ""
+msgstr "Toegangsrechten aanmaken"
 
 #. module: base
 #: model:res.country,name:base.tv
@@ -693,7 +697,7 @@ msgstr "Onvertaald"
 #. module: base
 #: view:ir.mail_server:0
 msgid "Outgoing Mail Server"
-msgstr ""
+msgstr "Uitgaande mailserver"
 
 #. module: base
 #: help:ir.actions.act_window,context:0
@@ -706,7 +710,7 @@ msgstr ""
 #. module: base
 #: field:res.company,logo_web:0
 msgid "Logo Web"
-msgstr ""
+msgstr "Web logo"
 
 #. module: base
 #: code:addons/base/ir/ir_model.py:339
@@ -824,7 +828,7 @@ msgstr "Jordanië"
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_l10n_hr
 msgid "Croatia - RRIF 2012 COA"
-msgstr ""
+msgstr "Kroatië  - RRIF 2012 COA"
 
 #. module: base
 #: help:ir.cron,nextcall:0
@@ -859,7 +863,7 @@ msgstr "Roemenië  - Boekhouding"
 #. module: base
 #: model:ir.model,name:base.model_res_config_settings
 msgid "res.config.settings"
-msgstr ""
+msgstr "res.config.settings"
 
 #. module: base
 #: help:res.partner,image_small:0
@@ -902,7 +906,7 @@ msgstr "Zweeds / svenska"
 #: field:base.language.export,name:0
 #: field:ir.attachment,datas_fname:0
 msgid "File Name"
-msgstr ""
+msgstr "Bestandsnaam"
 
 #. module: base
 #: model:res.country,name:base.rs
@@ -994,7 +998,7 @@ msgstr "E-mail voorkeuren"
 #: code:addons/base/ir/ir_fields.py:195
 #, python-format
 msgid "'%s' does not seem to be a valid date for field '%%(field)s'"
-msgstr ""
+msgstr "'%s' is geen geldige datum '%%(field)s'"
 
 #. module: base
 #: view:res.partner:0
@@ -1091,7 +1095,7 @@ msgstr "Andere OSI erkende licentie"
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_web_gantt
 msgid "Web Gantt"
-msgstr ""
+msgstr "Web Gantt"
 
 #. module: base
 #: model:ir.actions.act_window,name:base.act_menu_create
@@ -1197,12 +1201,12 @@ msgstr ""
 #: code:addons/base/ir/ir_model.py:728
 #, python-format
 msgid "Document model"
-msgstr ""
+msgstr "Document model"
 
 #. module: base
 #: view:res.users:0
 msgid "Change the user password."
-msgstr ""
+msgstr "Gebruikers wachtwoord wijzigen."
 
 #. module: base
 #: view:res.lang:0
@@ -1299,12 +1303,12 @@ msgstr "De landnaam moet uniek zijn !"
 #. module: base
 #: field:ir.module.module,installed_version:0
 msgid "Latest Version"
-msgstr ""
+msgstr "Nieuwste versie"
 
 #. module: base
 #: view:ir.rule:0
 msgid "Delete Access Right"
-msgstr ""
+msgstr "Tegangsrechten verwijderen."
 
 #. module: base
 #: code:addons/base/ir/ir_mail_server.py:212
@@ -1664,7 +1668,7 @@ msgstr ""
 #. module: base
 #: model:res.country,name:base.mf
 msgid "Saint Martin (French part)"
-msgstr ""
+msgstr "Sint-Maarten (Franse Antillen)"
 
 #. module: base
 #: model:ir.model,name:base.model_ir_exports
@@ -1695,7 +1699,7 @@ msgstr "Taal met code \"%s\" bestaat niet"
 #: model:ir.module.category,name:base.module_category_social_network
 #: model:ir.module.module,shortdesc:base.module_mail
 msgid "Social Network"
-msgstr ""
+msgstr "Sociaal netwerk"
 
 #. module: base
 #: view:res.lang:0
@@ -1836,7 +1840,7 @@ msgstr ""
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_portal_project_issue
 msgid "Portal Issue"
-msgstr ""
+msgstr "Portaal Issue"
 
 #. module: base
 #: model:ir.ui.menu,name:base.menu_tools
@@ -1971,7 +1975,7 @@ msgstr "Nederland"
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_portal_event
 msgid "Portal Event"
-msgstr ""
+msgstr "Portaal Event"
 
 #. module: base
 #: selection:ir.translation,state:0
@@ -2254,7 +2258,7 @@ msgstr "Maken / Schrijven / Kopiëren"
 #. module: base
 #: view:ir.sequence:0
 msgid "Second: %(sec)s"
-msgstr ""
+msgstr "Seconde: %(sec)s"
 
 #. module: base
 #: field:ir.actions.act_window,view_mode:0
@@ -2283,7 +2287,7 @@ msgstr "Koreans (KP) / Korea (KP)"
 #. module: base
 #: model:res.country,name:base.ax
 msgid "Åland Islands"
-msgstr ""
+msgstr "Åland-eilanden"
 
 #. module: base
 #: field:res.company,logo:0
@@ -2357,7 +2361,7 @@ msgstr "Methode"
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_auth_crypt
 msgid "Password Encryption"
-msgstr ""
+msgstr "Wachtwoord encryptie"
 
 #. module: base
 #: view:workflow.activity:0
@@ -2401,7 +2405,7 @@ msgstr ""
 #. module: base
 #: field:change.password.user,new_passwd:0
 msgid "New Password"
-msgstr ""
+msgstr "Nieuw wachtwoord"
 
 #. module: base
 #: model:ir.actions.act_window,help:base.action_ui_view
@@ -2960,7 +2964,7 @@ msgstr "Fiji"
 #. module: base
 #: view:ir.actions.report.xml:0
 msgid "Report Xml"
-msgstr ""
+msgstr "Rapport Xml"
 
 #. module: base
 #: model:ir.module.module,description:base.module_purchase
@@ -3031,7 +3035,7 @@ msgstr "Overgeërfd"
 #: code:addons/base/ir/ir_fields.py:146
 #, python-format
 msgid "yes"
-msgstr ""
+msgstr "Ja"
 
 #. module: base
 #: field:ir.model.fields,serialization_field_id:0
@@ -3241,7 +3245,7 @@ msgstr ""
 #. module: base
 #: field:res.company,rml_header1:0
 msgid "Company Tagline"
-msgstr ""
+msgstr "Bedrijfs slogan"
 
 #. module: base
 #: code:addons/base/res/res_users.py:668
@@ -3444,7 +3448,7 @@ msgstr "Agenda"
 #. module: base
 #: model:ir.module.category,name:base.module_category_knowledge_management
 msgid "Knowledge"
-msgstr ""
+msgstr "Kennis"
 
 #. module: base
 #: field:workflow.activity,signal_send:0
@@ -3587,7 +3591,7 @@ msgstr "workflow.activity"
 #. module: base
 #: view:base.language.export:0
 msgid "Export Complete"
-msgstr ""
+msgstr "Export voltooid"
 
 #. module: base
 #: help:ir.ui.view_sc,res_id:0
@@ -3660,7 +3664,7 @@ msgstr "Selecteer te importeren modulepakket (.zip bestand):"
 #. module: base
 #: view:ir.filters:0
 msgid "Personal"
-msgstr ""
+msgstr "Persoonlijk"
 
 #. module: base
 #: field:base.language.export,modules:0
@@ -3769,7 +3773,7 @@ msgstr "Antarctica"
 #. module: base
 #: view:res.partner:0
 msgid "Persons"
-msgstr ""
+msgstr "Personen"
 
 #. module: base
 #: view:base.language.import:0
@@ -3839,7 +3843,7 @@ msgstr "Rechts-naar-links"
 #. module: base
 #: model:res.country,name:base.sx
 msgid "Sint Maarten (Dutch part)"
-msgstr ""
+msgstr "Sint Maarten (Nederlands deel)"
 
 #. module: base
 #: view:ir.actions.act_window:0
@@ -3884,7 +3888,7 @@ msgstr "Recursiviteit ontdekt."
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_l10n_et
 msgid "Ethiopia - Accounting"
-msgstr ""
+msgstr "Boekhouding - Ethiopië"
 
 #. module: base
 #: code:addons/base/module/module.py:366
@@ -3953,7 +3957,7 @@ msgstr "Urdu / اردو"
 #: code:addons/orm.py:3901
 #, python-format
 msgid "Access Denied"
-msgstr ""
+msgstr "Toegang geweigerd"
 
 #. module: base
 #: field:res.company,name:0
@@ -4103,7 +4107,7 @@ msgstr ""
 #. module: base
 #: model:res.country,name:base.sk
 msgid "Slovakia"
-msgstr ""
+msgstr "Slowakije"
 
 #. module: base
 #: model:res.country,name:base.nr
@@ -4372,7 +4376,7 @@ msgstr "Rekeningschema's"
 #. module: base
 #: model:ir.ui.menu,name:base.menu_event_main
 msgid "Events Organization"
-msgstr ""
+msgstr "Evenementen organiseren"
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_partner_customer_form
@@ -4652,7 +4656,7 @@ msgstr "Soort reeks"
 #. module: base
 #: view:base.language.export:0
 msgid "Unicode/UTF-8"
-msgstr ""
+msgstr "Unicode/UTF-8"
 
 #. module: base
 #: selection:base.language.install,lang:0
@@ -4669,7 +4673,7 @@ msgstr "Laad een vertaling"
 #. module: base
 #: field:ir.module.module,latest_version:0
 msgid "Installed Version"
-msgstr ""
+msgstr "Geïnstalleerde versie"
 
 #. module: base
 #: model:ir.module.module,description:base.module_account_test
@@ -4784,7 +4788,7 @@ msgstr "Weergave"
 #: code:addons/base/ir/ir_fields.py:146
 #, python-format
 msgid "no"
-msgstr ""
+msgstr "Nee"
 
 #. module: base
 #: model:ir.module.module,description:base.module_crm_partner_assign
@@ -4818,7 +4822,7 @@ msgstr "Equatoriaal Guinea"
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_web_api
 msgid "OpenERP Web API"
-msgstr ""
+msgstr "OpenERP Web API"
 
 #. module: base
 #: model:ir.module.module,description:base.module_l10n_fr_rib
@@ -4866,7 +4870,7 @@ msgstr ""
 #. module: base
 #: model:res.country,name:base.ps
 msgid "Palestinian Territory, Occupied"
-msgstr ""
+msgstr "Palestijns Gebied, Bezet"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_l10n_ch
@@ -5025,7 +5029,7 @@ msgstr "Workflows"
 #. module: base
 #: model:ir.ui.menu,name:base.next_id_73
 msgid "Purchase"
-msgstr ""
+msgstr "Inkoop"
 
 #. module: base
 #: selection:base.language.install,lang:0
@@ -5035,7 +5039,7 @@ msgstr ""
 #. module: base
 #: model:ir.model,name:base.model_ir_needaction_mixin
 msgid "ir.needaction_mixin"
-msgstr ""
+msgstr "ir.needaction_mixin"
 
 #. module: base
 #: view:base.language.export:0
@@ -5066,7 +5070,7 @@ msgstr ""
 #: code:addons/base/ir/ir_fields.py:327
 #, python-format
 msgid "name"
-msgstr ""
+msgstr "naam"
 
 #. module: base
 #: model:ir.module.module,description:base.module_mrp_operations
@@ -5189,12 +5193,12 @@ msgstr "Stel in op NULL"
 #. module: base
 #: view:res.users:0
 msgid "Save"
-msgstr ""
+msgstr "Opslaan"
 
 #. module: base
 #: field:ir.actions.report.xml,report_xml:0
 msgid "XML Path"
-msgstr ""
+msgstr "XML Path"
 
 #. module: base
 #: model:res.country,name:base.bj
@@ -5383,7 +5387,7 @@ msgstr "Wisselkoersen"
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_email_template
 msgid "Email Templates"
-msgstr ""
+msgstr "Email-sjablonen"
 
 #. module: base
 #: model:res.country,name:base.sy
@@ -5483,12 +5487,12 @@ msgstr ""
 #. module: base
 #: model:ir.ui.menu,name:base.menu_partner_category_form
 msgid "Partner Tags"
-msgstr ""
+msgstr "Relatie labels"
 
 #. module: base
 #: view:res.company:0
 msgid "Preview Header/Footer"
-msgstr ""
+msgstr "Bekijk kop/voet"
 
 #. module: base
 #: field:ir.ui.menu,parent_id:0
@@ -5563,7 +5567,7 @@ msgstr "Historie"
 #. module: base
 #: model:res.country,name:base.im
 msgid "Isle of Man"
-msgstr ""
+msgstr "Eiland Man"
 
 #. module: base
 #: help:ir.actions.client,res_model:0
@@ -5723,7 +5727,7 @@ msgstr ""
 #. module: base
 #: model:res.groups,name:base.group_sale_salesman_all_leads
 msgid "See all Leads"
-msgstr ""
+msgstr "Bekijk alle leads"
 
 #. module: base
 #: model:res.country,name:base.ci
@@ -5806,7 +5810,7 @@ msgstr "Decimale precisie configuratie"
 #: model:ir.model,name:base.model_ir_actions_act_url
 #: selection:ir.ui.menu,action:0
 msgid "ir.actions.act_url"
-msgstr ""
+msgstr "ir.actions.act_url"
 
 #. module: base
 #: model:ir.ui.menu,name:base.menu_translation_app
@@ -5959,7 +5963,7 @@ msgstr ""
 #. module: base
 #: view:ir.translation:0
 msgid "Comments"
-msgstr ""
+msgstr "Reacties"
 
 #. module: base
 #: model:res.country,name:base.et
@@ -5969,7 +5973,7 @@ msgstr "Ethiopië"
 #. module: base
 #: model:ir.module.category,name:base.module_category_authentication
 msgid "Authentication"
-msgstr ""
+msgstr "Authenticatie"
 
 #. module: base
 #: model:res.country,name:base.sj
@@ -6003,7 +6007,7 @@ msgstr "titel"
 #: code:addons/base/ir/ir_fields.py:146
 #, python-format
 msgid "true"
-msgstr ""
+msgstr "waar"
 
 #. module: base
 #: model:ir.model,name:base.model_base_language_install
@@ -6013,7 +6017,7 @@ msgstr "Taal installeren"
 #. module: base
 #: model:res.partner.category,name:base.res_partner_category_11
 msgid "Services"
-msgstr ""
+msgstr "Diensten"
 
 #. module: base
 #: view:ir.translation:0
@@ -6126,7 +6130,7 @@ msgstr ""
 #: code:addons/base/ir/workflow/workflow.py:99
 #, python-format
 msgid "Operation forbidden"
-msgstr ""
+msgstr "Verwerking niet toegestaan"
 
 #. module: base
 #: view:ir.actions.server:0
@@ -6248,12 +6252,12 @@ msgstr "Geen categorie"
 #. module: base
 #: view:res.partner:0
 msgid "Phone:"
-msgstr ""
+msgstr "Telefoon:"
 
 #. module: base
 #: field:res.partner,is_company:0
 msgid "Is a Company"
-msgstr ""
+msgstr "Is een bedrijf"
 
 #. module: base
 #: selection:ir.cron,interval_type:0
@@ -6333,7 +6337,7 @@ msgstr ""
 #. module: base
 #: field:ir.filters,is_default:0
 msgid "Default filter"
-msgstr ""
+msgstr "Standaard filter"
 
 #. module: base
 #: report:ir.module.reference:0
@@ -6693,7 +6697,7 @@ msgstr "ir.cron"
 #. module: base
 #: model:res.country,name:base.cw
 msgid "Curaçao"
-msgstr ""
+msgstr "Curaçao"
 
 #. module: base
 #: view:ir.sequence:0
@@ -6705,7 +6709,7 @@ msgstr "Huidig jaar zonder eeuw: %(y)s"
 #: view:ir.config_parameter:0
 #: model:ir.ui.menu,name:base.ir_config_menu
 msgid "System Parameters"
-msgstr ""
+msgstr "Systeem parameters"
 
 #. module: base
 #: help:ir.actions.client,tag:0
@@ -6859,7 +6863,7 @@ msgstr "Soms BIC of Swift genoemd."
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_l10n_in
 msgid "Indian - Accounting"
-msgstr ""
+msgstr "Boekhouding - India"
 
 #. module: base
 #: field:res.lang,time_format:0
@@ -7217,7 +7221,7 @@ msgstr "Somalië"
 #. module: base
 #: model:res.partner.title,shortcut:base.res_partner_title_doctor
 msgid "Dr."
-msgstr ""
+msgstr "Dr."
 
 #. module: base
 #: model:res.groups,name:base.group_user
@@ -7281,7 +7285,7 @@ msgstr "Kopie van"
 #. module: base
 #: field:ir.model.data,display_name:0
 msgid "Record Name"
-msgstr ""
+msgstr "Record naam"
 
 #. module: base
 #: model:ir.model,name:base.model_ir_actions_client
@@ -7297,7 +7301,7 @@ msgstr "Brits Territorium in de Indische Oceaan"
 #. module: base
 #: model:ir.actions.server,name:base.action_server_module_immediate_install
 msgid "Module Immediate Install"
-msgstr ""
+msgstr "Module directie installatie"
 
 #. module: base
 #: view:ir.actions.server:0
@@ -7367,7 +7371,7 @@ msgstr "Volledige naam"
 #. module: base
 #: view:ir.attachment:0
 msgid "on"
-msgstr ""
+msgstr "aan"
 
 #. module: base
 #: view:ir.property:0
@@ -7419,7 +7423,7 @@ msgstr "Op meerdere doc."
 #: view:res.users:0
 #: view:wizard.ir.model.menu.create:0
 msgid "or"
-msgstr ""
+msgstr "of"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_account_accountant
@@ -7493,7 +7497,7 @@ msgstr "Noordelijke Marianaeilanden"
 #. module: base
 #: field:change.password.user,user_login:0
 msgid "User Login"
-msgstr ""
+msgstr "Gebruikersnaam"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_l10n_hn
@@ -7572,7 +7576,7 @@ msgstr ""
 #. module: base
 #: model:res.partner.category,name:base.res_partner_category_14
 msgid "Manufacturer"
-msgstr ""
+msgstr "Fabrikant"
 
 #. module: base
 #: help:res.users,company_id:0
@@ -7716,7 +7720,7 @@ msgstr "Volgend nummer in deze reeks"
 #. module: base
 #: view:res.partner:0
 msgid "at"
-msgstr ""
+msgstr "op"
 
 #. module: base
 #: view:ir.rule:0
@@ -7973,7 +7977,7 @@ msgstr "Canada"
 #. module: base
 #: view:base.language.export:0
 msgid "Launchpad"
-msgstr ""
+msgstr "Launchpad"
 
 #. module: base
 #: help:res.currency.rate,currency_rate_type_id:0
@@ -8052,7 +8056,7 @@ msgstr "init"
 #: view:res.partner:0
 #: field:res.partner,user_id:0
 msgid "Salesperson"
-msgstr ""
+msgstr "Verkoper"
 
 #. module: base
 #: view:res.lang:0
@@ -8205,7 +8209,7 @@ msgstr "Frans (CH) / Français (CH)"
 #. module: base
 #: model:res.partner.category,name:base.res_partner_category_13
 msgid "Distributor"
-msgstr ""
+msgstr "Distributeur"
 
 #. module: base
 #: help:ir.actions.server,subject:0
@@ -8306,7 +8310,7 @@ msgstr "Volgnummers bij boekingen"
 #. module: base
 #: view:base.language.export:0
 msgid "POEdit"
-msgstr ""
+msgstr "POEdit"
 
 #. module: base
 #: view:ir.values:0
@@ -8316,7 +8320,7 @@ msgstr "Cliënt acties"
 #. module: base
 #: field:res.partner.bank.type,field_ids:0
 msgid "Type Fields"
-msgstr ""
+msgstr "Type velden"
 
 #. module: base
 #: model:ir.module.module,summary:base.module_hr_recruitment
@@ -8374,7 +8378,7 @@ msgstr "Finland"
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_web_shortcuts
 msgid "Web Shortcuts"
-msgstr ""
+msgstr "Webkoppelingen"
 
 #. module: base
 #: view:res.partner:0
@@ -8387,7 +8391,7 @@ msgstr "Contactpersoon"
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_l10n_at
 msgid "Austria - Accounting"
-msgstr ""
+msgstr "Boekhouding - Oostenrijk"
 
 #. module: base
 #: model:ir.model,name:base.model_ir_ui_menu
@@ -8417,12 +8421,12 @@ msgstr "Kostenplaatsen"
 #. module: base
 #: model:ir.model,name:base.model_ir_model_constraint
 msgid "ir.model.constraint"
-msgstr ""
+msgstr "ir.model.constraint"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_web_graph
 msgid "Graph Views"
-msgstr ""
+msgstr "Grafiek weergaves"
 
 #. module: base
 #: help:ir.model.relation,name:0
@@ -8450,7 +8454,7 @@ msgstr "België  - Boekhouding"
 #. module: base
 #: view:ir.model.access:0
 msgid "Access Control"
-msgstr ""
+msgstr "Toegangscontrole"
 
 #. module: base
 #: model:res.country,name:base.kw
@@ -8672,7 +8676,7 @@ msgstr "Zelfcontrole op rapporten en objecten"
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_web_analytics
 msgid "Google Analytics"
-msgstr ""
+msgstr "Google Analytics"
 
 #. module: base
 #: model:ir.module.module,description:base.module_note
@@ -8700,7 +8704,7 @@ msgstr "Dominica"
 #. module: base
 #: field:ir.translation,name:0
 msgid "Translated field"
-msgstr ""
+msgstr "Vertaald veld"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_stock_location
@@ -8720,17 +8724,17 @@ msgstr "Nepal"
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_document_page
 msgid "Document Page"
-msgstr ""
+msgstr "Document pagina"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_l10n_ar
 msgid "Argentina Localization Chart Account"
-msgstr ""
+msgstr "Boekhoudschema - Argentinië"
 
 #. module: base
 #: field:ir.module.module,description_html:0
 msgid "Description HTML"
-msgstr ""
+msgstr "Omschrijving HTML"
 
 #. module: base
 #: help:res.groups,implied_ids:0
@@ -8887,7 +8891,7 @@ msgstr "Sloveens / slovenščina"
 #. module: base
 #: field:res.currency,position:0
 msgid "Symbol Position"
-msgstr ""
+msgstr "Symbool positie"
 
 #. module: base
 #: model:ir.module.module,description:base.module_l10n_de
@@ -8925,7 +8929,7 @@ msgstr ""
 #. module: base
 #: view:base.language.export:0
 msgid "documentation"
-msgstr ""
+msgstr "documentatie"
 
 #. module: base
 #: help:ir.model,osv_memory:0
@@ -9043,7 +9047,7 @@ msgstr "Amerikaans Samoa"
 #. module: base
 #: view:ir.attachment:0
 msgid "My Document(s)"
-msgstr ""
+msgstr "Mijn document(en)"
 
 #. module: base
 #: help:ir.actions.act_window,res_model:0
@@ -9120,12 +9124,12 @@ msgstr ""
 #. module: base
 #: model:res.partner.category,name:base.res_partner_category_5
 msgid "Silver"
-msgstr ""
+msgstr "Zilver"
 
 #. module: base
 #: field:res.partner.title,shortcut:0
 msgid "Abbreviation"
-msgstr ""
+msgstr "Afkorting"
 
 #. module: base
 #: model:ir.ui.menu,name:base.menu_crm_case_job_req_main
@@ -9322,7 +9326,7 @@ msgstr ""
 #. module: base
 #: model:ir.module.category,name:base.module_category_warehouse_management
 msgid "Warehouse"
-msgstr ""
+msgstr "Magazijn"
 
 #. module: base
 #: field:ir.exports,resource:0
@@ -9371,7 +9375,7 @@ msgstr "Overzicht"
 #. module: base
 #: model:res.partner.title,shortcut:base.res_partner_title_prof
 msgid "Prof."
-msgstr ""
+msgstr "Prof."
 
 #. module: base
 #: code:addons/base/ir/ir_mail_server.py:238
@@ -9447,7 +9451,7 @@ msgstr "Mali"
 #. module: base
 #: model:ir.ui.menu,name:base.menu_project_config_project
 msgid "Stages"
-msgstr ""
+msgstr "Fases"
 
 #. module: base
 #: selection:base.language.install,lang:0
@@ -9659,7 +9663,7 @@ msgstr "%H - Uur (24-uur klok) [00,23]."
 #. module: base
 #: field:ir.model.fields,on_delete:0
 msgid "On Delete"
-msgstr ""
+msgstr "Bij het verwijderen"
 
 #. module: base
 #: code:addons/base/ir/ir_model.py:342
@@ -9811,7 +9815,7 @@ msgstr ""
 #: code:addons/base/ir/ir_fields.py:316
 #, python-format
 msgid "external id"
-msgstr ""
+msgstr "Externe id"
 
 #. module: base
 #: view:ir.model:0
@@ -14408,6 +14412,11 @@ msgid ""
 "Web pages\n"
 "    "
 msgstr ""
+"\n"
+"Pagina's\n"
+"=====\n"
+"Web pagina's\n"
+"    "
 
 #. module: base
 #: help:ir.actions.server,code:0
@@ -14548,6 +14557,9 @@ msgid ""
 "If this field is empty, the view applies to all users. Otherwise, the view "
 "applies to the users of those groups only."
 msgstr ""
+"Als di veld leeg is, dan is de weergave beschikbaar voor alle gebruikers. "
+"Indien niet leeg dan is de weergave alleen beschikbaar voor de gebruikers "
+"van die groepen alleen."
 
 #. module: base
 #: selection:base.language.install,lang:0
@@ -14582,6 +14594,7 @@ msgstr "Niet voldane afhankelijkheid !"
 #, python-format
 msgid "Administrator access is required to uninstall a module"
 msgstr ""
+"Administrator toegang is nodig om een module te kunnen deinstalleren."
 
 #. module: base
 #: model:ir.model,name:base.model_base_module_configuration
@@ -14694,7 +14707,7 @@ msgstr "Toegang"
 #: field:res.partner,vat:0
 #, python-format
 msgid "TIN"
-msgstr ""
+msgstr "TIN"
 
 #. module: base
 #: model:res.country,name:base.aw
@@ -14756,7 +14769,7 @@ msgstr "Geavanceerde overzichten"
 #. module: base
 #: model:ir.module.module,summary:base.module_purchase
 msgid "Purchase Orders, Receptions, Supplier Invoices"
-msgstr ""
+msgstr "Inkoopporders, inkomende Leveringen, inkoopfacturen."
 
 #. module: base
 #: model:ir.module.module,description:base.module_hr_payroll
@@ -14907,7 +14920,7 @@ msgstr ""
 #: code:addons/base/ir/ir_model.py:164
 #, python-format
 msgid "Model '%s' contains module data and cannot be removed!"
-msgstr ""
+msgstr "Model '%s' bevat module gegevens die niet verwijderd kunnen worden!"
 
 #. module: base
 #: model:res.country,name:base.az
@@ -14969,6 +14982,9 @@ msgid ""
 "Allow users to login through OpenID.\n"
 "====================================\n"
 msgstr ""
+"\n"
+"Geeft gebruikers de mogelijkheid om in te loggen met  OpenID.\n"
+"====================================\n"
 
 #. module: base
 #: help:ir.mail_server,smtp_port:0
@@ -15023,6 +15039,7 @@ msgstr "Thunderbird-plugin"
 #: model:ir.module.module,summary:base.module_event
 msgid "Trainings, Conferences, Meetings, Exhibitions, Registrations"
 msgstr ""
+"Trainingen, conferenties, afspraken, tentoonstellingen, registraties."
 
 #. module: base
 #: model:ir.model,name:base.model_res_country
@@ -15204,7 +15221,7 @@ msgstr "Canada  - Boekhouding"
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_l10n_co
 msgid "Colombian - Accounting"
-msgstr ""
+msgstr "Boekhouding - Colombia"
 
 #. module: base
 #: model:ir.module.module,description:base.module_account_voucher
@@ -15281,7 +15298,7 @@ msgstr "Chili"
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_web_view_editor
 msgid "View Editor"
-msgstr ""
+msgstr "Weergave bewerkingsprogramma"
 
 #. module: base
 #: view:ir.cron:0
@@ -15361,6 +15378,8 @@ msgid ""
 "Do you confirm the uninstallation of this module? This will permanently "
 "erase all data currently stored by the module!"
 msgstr ""
+"Wilt u de deinstllatie van deze module bevestigen? Dit zal alle gegevens "
+"opgeslagen door de module verwijderen!"
 
 #. module: base
 #: field:ir.actions.server,mobile:0
@@ -15384,7 +15403,7 @@ msgstr "Systeem bijwerken"
 #: field:ir.actions.report.xml,report_sxw_content:0
 #: field:ir.actions.report.xml,report_sxw_content_data:0
 msgid "SXW Content"
-msgstr ""
+msgstr "SXW Inhoud"
 
 #. module: base
 #: field:ir.attachment,file_size:0
@@ -15431,7 +15450,7 @@ msgstr "Algemene informatie"
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_l10n_pt
 msgid "Portugal - Chart of Accounts"
-msgstr ""
+msgstr "Grootboekschema - Portugal"
 
 #. module: base
 #: field:ir.model.data,complete_name:0

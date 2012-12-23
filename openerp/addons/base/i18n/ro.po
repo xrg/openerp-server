@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: OpenERP Server 5.0.4\n"
 "Report-Msgid-Bugs-To: support@openerp.com\n"
 "POT-Creation-Date: 2012-12-21 17:04+0000\n"
-"PO-Revision-Date: 2012-12-20 20:38+0000\n"
+"PO-Revision-Date: 2012-12-22 20:35+0000\n"
 "Last-Translator: Fekete Mihai <mihai@erpsystems.ro>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-12-22 05:06+0000\n"
+"X-Launchpad-Export-Date: 2012-12-23 04:39+0000\n"
 "X-Generator: Launchpad (build 16378)\n"
 
 #. module: base
@@ -696,6 +696,23 @@ msgid ""
 "    A + B + C -> D + E\n"
 "    "
 msgstr ""
+"\n"
+"Acest modul va permite sa produceti mai multe produse dintr-o singura "
+"comanda de productie.\n"
+" "
+"============================================================================="
+"\n"
+" \n"
+"Puteti configura produse secundare in lista de materiale.\n"
+" \n"
+"Fara acest modul:\n"
+" --------------------\n"
+"    A + B + C -> D\n"
+" \n"
+"Cu acest modul:\n"
+" -----------------\n"
+"    A + B + C -> D + E\n"
+"    "
 
 #. module: base
 #: selection:base.language.install,lang:0
@@ -774,7 +791,7 @@ msgstr ""
 #. module: base
 #: field:res.company,logo_web:0
 msgid "Logo Web"
-msgstr ""
+msgstr "Logo Web"
 
 #. module: base
 #: code:addons/base/ir/ir_model.py:339
@@ -923,7 +940,7 @@ msgstr "Iordania"
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_l10n_hr
 msgid "Croatia - RRIF 2012 COA"
-msgstr ""
+msgstr "Croatia - RRIF 2012 COA"
 
 #. module: base
 #: help:ir.cron,nextcall:0
@@ -1139,6 +1156,7 @@ msgstr "Zimbabwe"
 msgid ""
 "Type of the constraint: `f` for a foreign key, `u` for other constraints."
 msgstr ""
+"Tipul constrangerii: `f` pentru o cheie externa, `u` pentru alte constrangeri"
 
 #. module: base
 #: view:ir.actions.report.xml:0
@@ -1219,7 +1237,7 @@ msgstr "Alte licente OSI aprobate"
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_web_gantt
 msgid "Web Gantt"
-msgstr ""
+msgstr "Diagrama Gantt Web"
 
 #. module: base
 #: model:ir.actions.act_window,name:base.act_menu_create
@@ -1236,7 +1254,7 @@ msgstr "India"
 #: model:ir.actions.act_window,name:base.res_request_link-act
 #: model:ir.ui.menu,name:base.menu_res_request_link_act
 msgid "Request Reference Types"
-msgstr "Cerere Tipuri de Referinta"
+msgstr "Tipuri de Referinta Cerere"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_google_base_account
@@ -1246,7 +1264,7 @@ msgstr "Utilizatori Google"
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_fleet
 msgid "Fleet Management"
-msgstr ""
+msgstr "Managementul Parcului Auto"
 
 #. module: base
 #: help:ir.server.object.lines,value:0
@@ -1271,7 +1289,7 @@ msgstr "Principatul Andorra"
 #. module: base
 #: field:ir.rule,perm_read:0
 msgid "Apply for Read"
-msgstr ""
+msgstr "Se aplica pentru Citit"
 
 #. module: base
 #: model:res.country,name:base.mn
@@ -1311,6 +1329,36 @@ msgid ""
 "* Planned Revenue by Stage and User (graph)\n"
 "* Opportunities by Stage (graph)\n"
 msgstr ""
+"\n"
+"Managementul general OpenERP al Relatiilor cu Clientii\n"
+" ====================================================\n"
+" \n"
+"Aceasta aplicatie permite unui grup de oameni sa gestioneze in mod "
+"inteligent si eficient piste, oportunitati, intalniri si apeluri "
+"telefonice.\n"
+" \n"
+"Gestioneaza sarcini cheie precum comunicarea, identificarea, prioritizarea, "
+"atribuirea, rezolvarea si notificarea.\n"
+" \n"
+"OpenERP se asigura ca toate cazurile sunt urmarite cu succes de catre "
+"utilizatori, clienti si furnizori. Poate sa trimita automat memento-uri, sa "
+"prioritizeze cererea, sa declanseze metode specifice si multe alte actiuni "
+"bazate pe regulile companiei.\n"
+" \n"
+"Cel mai bun lucru referitor la acst sistem este faptul ca utilizatorii nu "
+"trebuie sa faca nimic special. Modulul MRC are o email gateway pentru "
+"interfata de sincronizare intre email-uri si OpenERP. In aces fel, "
+"utilizatorii pot sa trimita pur si simplu email-uri la urmaritorul cererii.\n"
+" \n"
+"OpenERP se va asigura ca le multumeste pentru mesaj, directionandu-l automat "
+"catre personalul adecvat si se va asigura ca toata corespondenta viitoare "
+"ajunge in locul potrivit. \n"
+" \n"
+"\n"
+"Tabloul de bord pentru MRC va include:\n"
+" -------------------------------\n"
+" * Veniturile Planificate dupa Etapa si Utilizator (grafic)\n"
+" * Oportunitati dupa Etapa (grafic)\n"
 
 #. module: base
 #: selection:base.language.export,format:0
@@ -1330,12 +1378,12 @@ msgstr ""
 #: code:addons/base/ir/ir_model.py:728
 #, python-format
 msgid "Document model"
-msgstr ""
+msgstr "Model document"
 
 #. module: base
 #: view:res.users:0
 msgid "Change the user password."
-msgstr ""
+msgstr "Schimba parola utilizatorului."
 
 #. module: base
 #: view:res.lang:0
