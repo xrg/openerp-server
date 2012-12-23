@@ -94,4 +94,71 @@ def cl_company_default_get(model):
     """
     return lambda self, cr, uid, context: \
             self.pool.get('res.company')._company_default_get(cr, uid, model, context=context)
+
+class ORM_stat_fields(object):
+    """Statistic-collecting object of ORM fields access
+
+        To be used by the browse object, this class shall behave like the previous dict(),
+        but also implictly maintain the statistics.
+
+        The selection threshold, so far, is a simple heuristic: we take all fields whose
+        access count is greater than 1/THRESHOLD_DIV * most_used one .
+    """
+    THRESHOLD_DIV = 3
+    COUNT_THRES = 10
+
+    def __init__(self):
+        self.flds = []
+
+    def touch(self, name):
+        """ Increment the counter of "name" by +1
+        """
+        c = 0
+        for i, f in enumerate(self.flds):
+            if f[0] == name:
+                c = self.flds.pop(i)[1]
+                break
+        else:
+            i = len(self.flds)
+        c += 1
+        while i and self.flds[i-1][1] < c:
+            i -= 1
+        self.flds.insert(i, (name, c))
+
+    def most_common(self, n=None):
+        """Return most common *names* of fields
+
+            @param n if given, only the `n` most common ones, else use the built-in
+            heuristic.
+
+            Note: it will also return an empty set if the most common field has not
+            been touched at least COUNT_THRES times. This is used to force full fetch
+            until considerable statistics are available.
+        """
+        if (not self.flds) or (self.flds[0][1] < self.COUNT_THRES):
+            return []
+        elif n is None:
+            ret = []
+            thres = self.flds[0][1] / self.THRESHOLD_DIV
+            for name, c in self.flds:
+                if c >= thres:
+                    ret.append(name)
+                else:
+                    break
+            return ret
+        else:
+            return [f[0] for f in self.flds[:n]]
+
+    def stats(self):
+        """Return string of current values
+        """
+        return ', '.join([ '%s: %s' % x for x in self.flds ] )
+    
+    def extend(self, other):
+        """ Needed for osv.createInstance(), take values of `other`
+        """
+        assert not self.flds, self.flds
+        self.flds = other.flds
+        other.flds = None # don't let it be used again
+
 #eof

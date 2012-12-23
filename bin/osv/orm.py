@@ -89,7 +89,7 @@ FIELDS_ONLY_DEFAULT = 'auto'
           field that was asked in the browse()
         - [f1, f2..]:  Will prefetch the fields of the list/tuple, is used for
           manually tuning the optimization
-        - 'auto':   Will use the _column_stats{} of the table to select the
+        - 'auto':   Will use the _column_stats of the table to select the
           most popular fields (AUTO_SELECT_COLS) to prefetch
 """
 
@@ -392,23 +392,18 @@ class browse_record(object):
                 if isinstance(self._fields_only, (tuple, list)):
                     fields_to_fetch = filter(lambda f: f[0] == name or f[0] in self._fields_only, fields_to_fetch)
                 elif self._fields_only == 'auto':
-                    stat_fields = [ (ff[0], self._table._column_stats.get(ff[0],0)) \
-                                    for ff in fields_to_fetch ]
-                    stat_fields.sort(key=itemgetter(1), reverse=True)
-                    
-                    # Filter out ones that are seldom used:
-                    thres = stat_fields[0][1] / AUTO_SELECT_COLS
-                    stat_fields = filter(lambda sf: sf[1] > thres, stat_fields)
                     if self._table._debug:
-                        self.__logger.debug("Stats for %s are: %s " ,
-                                self._table._name,
-                                ', '.join([ '%s: %s' % x for x in stat_fields ] ))
-                    
-                    stat_field_names = [ x[0] for x in stat_fields[:AUTO_SELECT_COLS]]
-                    fields_to_fetch = filter(lambda f: f[0] == name or f[0] in stat_field_names, fields_to_fetch)
-                    if self._table._debug:
-                        self.__logger.debug("Auto selecting columns %s of %s for table %s",
-                                [x[0] for x in fields_to_fetch], stat_field_names, self._table._name)
+                        self.__logger.debug("Stats for %s are: %s " , self._table._name, self._table._column_stats.stats())
+                    stat_fields = self._table._column_stats.most_common()
+                    if stat_fields:
+                        # Filter out ones that are seldom used:
+                        fields_to_fetch = filter(lambda f: f[0] == name or f[0] in stat_fields, fields_to_fetch)
+                        if self._table._debug:
+                            self.__logger.debug("Auto selecting columns %s of %s for table %s",
+                                    [x[0] for x in fields_to_fetch], stat_fields, self._table._name)
+                    else:
+                        # len(_column) first calls should return all fields!
+                        pass
             # otherwise we fetch only that field
             else:
                 fields_to_fetch = [(name, col)]
@@ -464,8 +459,7 @@ class browse_record(object):
             # asked to browse. It is better to advance by 1, since many single
             # fetches of the name is the ones we need to optimize (as opposed
             # to using len(ids) which would prefer the list browses).
-            self._table._column_stats.setdefault(name,0)
-            self._table._column_stats[name] += 1
+            self._table._column_stats.touch(name)
 
         # Process the return value and convert from raw data into
         # browse records, where applicable. 
@@ -814,11 +808,10 @@ class orm_template(object):
             self._table = self._name.replace('.', '_')
         self._debug = config.get_misc('logging_orm', self._name, False)
         self._workflow = None
-        
-        # Stats is number of fetches per column. key is the column name, as
-        # in self._column.keys()
-        self._column_stats = {}
-        
+
+        # Keep statistics of fields access
+        self._column_stats = orm_utils.ORM_stat_fields()
+
         # code for virtual functions:
         if not self._virtuals:
             self._virtuals = []
