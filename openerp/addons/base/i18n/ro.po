@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: OpenERP Server 5.0.4\n"
 "Report-Msgid-Bugs-To: support@openerp.com\n"
 "POT-Creation-Date: 2012-12-21 17:04+0000\n"
-"PO-Revision-Date: 2012-12-27 19:36+0000\n"
+"PO-Revision-Date: 2012-12-28 18:51+0000\n"
 "Last-Translator: Fekete Mihai <mihai@erpsystems.ro>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-12-28 05:10+0000\n"
+"X-Launchpad-Export-Date: 2012-12-29 05:01+0000\n"
 "X-Generator: Launchpad (build 16378)\n"
 
 #. module: base
@@ -6113,7 +6113,7 @@ msgstr "Acest fisier a fost generat folosind universal"
 #. module: base
 #: model:res.partner.category,name:base.res_partner_category_7
 msgid "IT Services"
-msgstr ""
+msgstr "Asistenta IT"
 
 #. module: base
 #: model:ir.module.category,name:base.module_category_specific_industry_applications
@@ -6123,18 +6123,18 @@ msgstr "Aplicatii Specifice Industriei"
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_google_docs
 msgid "Google Docs integration"
-msgstr ""
+msgstr "Integrarea documentelor Google"
 
 #. module: base
 #: help:ir.attachment,res_model:0
 msgid "The database object this attachment will be attached to"
-msgstr ""
+msgstr "Obiectul bazei de date la care va fi atasat acest atasament"
 
 #. module: base
 #: code:addons/base/ir/ir_fields.py:327
 #, python-format
 msgid "name"
-msgstr ""
+msgstr "nume"
 
 #. module: base
 #: model:ir.module.module,description:base.module_mrp_operations
@@ -6171,6 +6171,43 @@ msgid ""
 "So, that we can compare the theoretic delay and real delay. \n"
 "    "
 msgstr ""
+"\n"
+"Acest modul adauga starea, data_inceput, data_sfarsit la liniile "
+"operationale ale comenzii de fabricatie (in tabul 'Comenzi de lucru').\n"
+"============================================================================="
+"===================================\n"
+"\n"
+"Status: ciorna, confirmata, efectuata, anulata\n"
+"\n"
+"Atunci cand terminati/confirmati/anulati comenzile de productie setati toate "
+"liniile starii\n"
+"conform starii potrivite.\n"
+"\n"
+"Creeaza meniuri:\n"
+"-------------\n"
+"    **Productie** > **Productie** > **Comenzi de lucru**\n"
+"\n"
+"Care este o vizualizare a liniilor 'Comenzi de lucru' din comanda de "
+"productie.\n"
+"\n"
+"Adauga butoane in vizualizarea formularului a comenzii de productie sub "
+"tabul comenzidelucru:\n"
+"-------------------------------------------------------------------------\n"
+"    * inceput (seteaza starea pe confirma), seteaza data_de_inceput\n"
+"    * efectuat (seteaza starea pe efectueaza), seteaza data_de_sfarsit\n"
+"    * seteaza ca ciorna (seteaza starea pe ciorna)\n"
+"    * anuleaza seteaza starea pe anuleaza\n"
+"\n"
+"Atunci cand comanda de productie devine 'gata de productie', operatiunile "
+"trebuie\n"
+"sa devina 'confirmate'. Atunci cand comanda de productie este efectuata, "
+"toate operatiunile\n"
+"trebuie sa devina efectuate.\n"
+"\n"
+"Campul 'Program de lucru' este intarziere(data de sfatsit - data de "
+"inceput).\n"
+"Astfel, putem compara intarzierea teoretica cu intarzierea reala. \n"
+"    "
 
 #. module: base
 #: view:res.config.installer:0
@@ -6180,7 +6217,7 @@ msgstr "Omite"
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_event_sale
 msgid "Events Sales"
-msgstr ""
+msgstr "Evenimente Vanzari"
 
 #. module: base
 #: model:res.country,name:base.ls
@@ -6190,7 +6227,7 @@ msgstr "Lesotho"
 #. module: base
 #: view:base.language.export:0
 msgid ", or your preferred text editor"
-msgstr ""
+msgstr ", sau editorul dumneavoastra de text preferat"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_crm_partner_assign
@@ -6257,12 +6294,12 @@ msgstr "Setati NULL"
 #. module: base
 #: view:res.users:0
 msgid "Save"
-msgstr ""
+msgstr "Salveaza"
 
 #. module: base
 #: field:ir.actions.report.xml,report_xml:0
 msgid "XML Path"
-msgstr ""
+msgstr "Ruta XML"
 
 #. module: base
 #: model:res.country,name:base.bj
@@ -6345,12 +6382,12 @@ msgstr "Mauritius"
 #. module: base
 #: view:ir.model.access:0
 msgid "Full Access"
-msgstr "Acces nelimitat"
+msgstr "Acces Nelimitat"
 
 #. module: base
 #: model:ir.module.module,description:base.module_l10n_pt
 msgid "Plano de contas SNC para Portugal"
-msgstr ""
+msgstr "Plan de conturi SNC pentru Portugalia"
 
 #. module: base
 #: view:ir.actions.act_window:0
@@ -6362,7 +6399,7 @@ msgstr "Siguranta"
 #. module: base
 #: selection:base.language.install,lang:0
 msgid "Portuguese / Português"
-msgstr ""
+msgstr "Portugheza / Português"
 
 #. module: base
 #: code:addons/base/ir/ir_model.py:366
@@ -6380,7 +6417,7 @@ msgstr "Numai daca acest cont bancar apartine companiei d-voastra"
 #: code:addons/base/ir/ir_fields.py:337
 #, python-format
 msgid "Unknown sub-field '%s'"
-msgstr ""
+msgstr "Sub-camp '%s' necunoscut"
 
 #. module: base
 #: model:res.country,name:base.za
@@ -6419,11 +6456,17 @@ msgid ""
 "Collects web application usage with Google Analytics.\n"
 "    "
 msgstr ""
+"\n"
+"Google Analytics.\n"
+"================\n"
+"\n"
+"Colecteaza utilizarea aplicatiei web cu Google Analytics.\n"
+"    "
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_hr_recruitment
 msgid "Recruitment Process"
-msgstr "Procesul recrutarii"
+msgstr "Procesul de Recrutare"
 
 #. module: base
 #: model:res.country,name:base.br
@@ -6465,7 +6508,7 @@ msgstr "Tarife"
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_email_template
 msgid "Email Templates"
-msgstr ""
+msgstr "Sabloane e-mail"
 
 #. module: base
 #: model:res.country,name:base.sy
@@ -6496,6 +6539,12 @@ msgid ""
 "================\n"
 "\n"
 msgstr ""
+"\n"
+"OpenERP Web API.\n"
+"================\n"
+"\n"
+"E\n"
+"\n"
 
 #. module: base
 #: selection:res.request,state:0
@@ -6514,7 +6563,7 @@ msgstr "Data"
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_event_moodle
 msgid "Event Moodle"
-msgstr ""
+msgstr "Eveniment Moodle"
 
 #. module: base
 #: model:ir.module.module,description:base.module_email_template
@@ -6561,16 +6610,57 @@ msgid ""
 "Email by Openlabs was kept.\n"
 "    "
 msgstr ""
+"\n"
+"Sablon Email (versiunea simplificata a lui Power Email by Openlabs "
+"original).\n"
+"============================================================================="
+"=\n"
+"\n"
+"Va permite sa creati sabloane complete de email-uri legate de orice document "
+"OpenERP (Comenzi de\n"
+"Vanzare, Facturi si asa mai departe), incluzand expeditorul, destinatarul, "
+"subiectul, continutul (HTML si\n"
+"Text). De asemenea, puteti atasa automat fisiere sabloanelor dumneavoastra, "
+"sau puteti tipari si\n"
+"atasa un raport.\n"
+"\n"
+"Pentru utilizare avansata, sabloanele pot include atribute dinamice ale "
+"documentului\n"
+"la care fac referire. De exemplu, puteti utiliza numele Tarii Unui Partener\n"
+"atunci cand ii scrieti, ofering de asemenea un conditii implicite de "
+"siguranta in cazul in care atributul nu\n"
+"este definit. Fiecare sablonare incorpotat un asistent care ajuta cu\n"
+"includerea acestor alori dinamice.\n"
+"\n"
+"Daca activati optiunea, un asistent de compunere va apare de asemenea in "
+"bara laterala\n"
+"a documentelor OpenERP carora li se aplica sablonul (de ex. Facturi).\n"
+"Aceasta este o modalitate rapida de a trimite un email nou pe baza "
+"sablonului, dupa\n"
+"verificarea si adaptarea continutului, daca este necesar.\n"
+"Acest asistent de compunere se va transforma intr-un sistem de trimitere de "
+"email-uri in masa atunci cand este\n"
+"vorba de mai multe documente odata.\n"
+"\n"
+"Aceste sabloane de email stau in centrul sistemului campaniilor de "
+"marketing\n"
+"(vezi aplicatia 'campanie_marketing), daca doriti automatizarea unor "
+"campanii\n"
+"mai mari in orice document OpenERP.\n"
+"\n"
+"    **Nota tehnica:** a fost pastrat doar sistemul de sabloane al lui Power "
+"Email by Openlabs original.\n"
+"    "
 
 #. module: base
 #: model:ir.ui.menu,name:base.menu_partner_category_form
 msgid "Partner Tags"
-msgstr ""
+msgstr "Etichete Partener"
 
 #. module: base
 #: view:res.company:0
 msgid "Preview Header/Footer"
-msgstr ""
+msgstr "Previzualizare Antet/Subsol pagina"
 
 #. module: base
 #: field:ir.ui.menu,parent_id:0
@@ -6592,7 +6682,7 @@ msgstr "Coloana nu se poate redenumi %s, deoarece acea coloana deja exista!"
 #. module: base
 #: view:ir.attachment:0
 msgid "Attached To"
-msgstr "Anexati la"
+msgstr "Anexat la"
 
 #. module: base
 #: field:res.lang,decimal_point:0
@@ -6603,12 +6693,12 @@ msgstr "Separator Zecimal"
 #: code:addons/orm.py:5318
 #, python-format
 msgid "Missing required value for the field '%s'."
-msgstr ""
+msgstr "Lipseste valoarea solicitata pentru campul '%s'."
 
 #. module: base
 #: view:ir.rule:0
 msgid "Write Access Right"
-msgstr ""
+msgstr "Scrie Dreptul de Acces"
 
 #. module: base
 #: model:ir.actions.act_window,help:base.action_res_groups
@@ -6643,12 +6733,12 @@ msgstr "Istoric"
 #. module: base
 #: model:res.country,name:base.im
 msgid "Isle of Man"
-msgstr ""
+msgstr "Insula Man"
 
 #. module: base
 #: help:ir.actions.client,res_model:0
 msgid "Optional model, mostly used for needactions."
-msgstr ""
+msgstr "Model optional, folosit mai ales pentru actiuni"
 
 #. module: base
 #: code:addons/base/module/module.py:306
@@ -6664,7 +6754,7 @@ msgstr "Insula Bouvet"
 #. module: base
 #: field:ir.model.constraint,type:0
 msgid "Constraint Type"
-msgstr ""
+msgstr "Tipul Restrictiei"
 
 #. module: base
 #: field:res.company,child_ids:0
@@ -6688,6 +6778,13 @@ msgid ""
 "wizard if the delivery is to be invoiced.\n"
 "    "
 msgstr ""
+"\n"
+"Wizard facturi pentru Livrare.\n"
+"============================\n"
+"\n"
+"Atunci cand livrati bunuri, acest modul lanseaza automat wizardul de\n"
+"facturare daca livrarea urmeaza a fi facturata.\n"
+"    "
 
 #. module: base
 #: selection:ir.translation,type:0
@@ -6730,7 +6827,7 @@ msgstr "Lansati Wizard-ul de Configurare"
 #. module: base
 #: model:ir.module.module,summary:base.module_mrp
 msgid "Manufacturing Orders, Bill of Materials, Routing"
-msgstr ""
+msgstr "Comenzi de Productie, Lista de Materiale, Distribuire"
 
 #. module: base
 #: field:ir.attachment,name:0
@@ -6799,11 +6896,65 @@ msgid ""
 "    * Zip return for separated PDF\n"
 "    * Web client WYSIWYG\n"
 msgstr ""
+"\n"
+"Acest modul adauga un nou Motor Raport bazat pe biblioteca WebKit "
+"(wkhtmltopdf) pentru a accepta rapoarte efectuate in HTML + CSS.\n"
+"============================================================================="
+"========================================\n"
+"\n"
+"Structura modulului si unele coduri sunt inspirate din modulul "
+"report_openoffice.\n"
+"\n"
+"Modulul permite:\n"
+"------------------\n"
+"    - Definirea raportului HTML\n"
+"    - Suport antete multiple\n"
+"    - Sigle multiple\n"
+"    - Suport companii multiple\n"
+"    - Suport HTML si CSS-3 (limitat la versiunie WebKIT reala)\n"
+"    - Suport JavaScript\n"
+"    - Depanare HTML\n"
+"    - Capacitati de tiparire carte\n"
+"    - Definirea marginilor\n"
+"    - Definirea dimensiunii hartiei\n"
+"\n"
+"Antete si sigle multiple pot fi definite pe companie. Stilul CSS, continutul "
+"antetului si\n"
+"al subsolului paginii sunt definite pe companie.\n"
+"\n"
+"Pentru un raport model vedeti si modulul webkit_report_sample, si acest "
+"video:\n"
+"    http://files.me.com/nbessi/06n92k.mov\n"
+"\n"
+"Cerinte si Instalare:\n"
+"------------------------------\n"
+"Acest modul necesita biblioteca ``wkthtmltopdf`` pentru a reda documente "
+"HTML in\n"
+"PDF. Este necesara versiunea 0.9.9 sau ulterioara, iar aceasta poate fi "
+"gasita la adresa\n"
+"http://code.google.com/p/wkhtmltopdf/ pentru Linux, Mac OS X (i386) si "
+"Windows (32biti).\n"
+"\n"
+"Dupa instalarea bibliotecii pe Serverul OpenERP, trebuie sa configurati\n"
+"ruta catre fisierul executabil ``wkthtmltopdf`` in fiecare Companie.\n"
+"\n"
+"Daca aveti probleme de genul lipsa antet/subsol pagina in Linux, asigurati-"
+"va\n"
+"ca ati instalat o versiune 'statica' a bibliotecii. Se stie ca "
+"``wkhtmltopdf`` implicit din\n"
+"Ubuntu are aceasta problema.\n"
+"\n"
+"DE EFECTUAT:\n"
+"-----\n"
+"    * Activare dezactivare suport JavaScript\n"
+"    * Suport format colationat si carte\n"
+"    * Retur cod postal pentru PDF separat\n"
+"    * Client Web WYSIWYG\n"
 
 #. module: base
 #: model:res.groups,name:base.group_sale_salesman_all_leads
 msgid "See all Leads"
-msgstr ""
+msgstr "Vezi toate Pistele"
 
 #. module: base
 #: model:res.country,name:base.ci
@@ -6829,7 +6980,7 @@ msgstr "Numele resursei"
 #. module: base
 #: model:ir.ui.menu,name:base.menu_ir_filters
 msgid "User-defined Filters"
-msgstr ""
+msgstr "Filtre definite de utilizator"
 
 #. module: base
 #: field:ir.actions.act_window_close,name:0
@@ -6870,7 +7021,7 @@ msgid ""
 "form view"
 msgstr ""
 "Daca este setat pe adevarat, actiunea nu va fi afisata in bara de "
-"instrumente din dreapta a unui formular de vizualizare"
+"instrumente din dreapta a vizualizarii unui formular"
 
 #. module: base
 #: model:res.country,name:base.ms
@@ -6886,7 +7037,7 @@ msgstr "Configurarea Preciziei Zecimale"
 #: model:ir.model,name:base.model_ir_actions_act_url
 #: selection:ir.ui.menu,action:0
 msgid "ir.actions.act_url"
-msgstr ""
+msgstr "ir.actions.act_url"
 
 #. module: base
 #: model:ir.ui.menu,name:base.menu_translation_app
@@ -6900,6 +7051,9 @@ msgid ""
 "              <p>You should try others search criteria.</p>\n"
 "            "
 msgstr ""
+"<p><b>Nu a fost gasit nici un modul!</b></p>\n"
+"              <p>Ar trebui sa incercati si alte criterii de cautare.</p>\n"
+"            "
 
 #. module: base
 #: model:ir.model,name:base.model_ir_module_module
@@ -6988,6 +7142,46 @@ msgid ""
 "only the country code will be validated.\n"
 "    "
 msgstr ""
+"\n"
+"Validarea TVA pentru numerele de TVA ale Parntenerului.\n"
+"=========================================\n"
+"\n"
+"Dupa instalarea acestui modul, valorile introduse in campul TVA al "
+"Partenerilor va fi\n"
+"validat pentru toate tarile acceptate. Tara este dedusa din\n"
+"codul de 2 litere al tarii care precede numarul TVA, de exemplu "
+"``BE0477472701``\n"
+"va fi validat folosind normele belgiene.\n"
+"\n"
+"Exista doua niveluri diferite de validare a numarului TVA:\n"
+"--------------------------------------------------------\n"
+"    * Implicit, este efectuata o simpla verificare off-line folosind normele "
+"de validare\n"
+"      cunoscute ale tarii, de obicei o cifra simpla de verificare. Aceasta "
+"este rapida \n"
+"      si intotdeauna disponibila, dar permite numere care poate nu sunt "
+"alocate corect,\n"
+"      sau care nu mai sunt valabile.\n"
+"      \n"
+"    * Atunci cand este activata optiunea \"Verificare TVA VIES\" (in "
+"configurarea Companiei\n"
+"      utilizatorului), numerele TVA vor fi trimise la baza de date online\n"
+"      UE VIES, care va verifica cu adevarat daca numarul este valabil si "
+"alocat\n"
+"      in prezent unei companii din UE. Aceasta este putin mai inceata decat "
+"simpla\n"
+"      verificare off-line, necesita o conexiune la Internet, si este posibil "
+"sa nu fie disponibila\n"
+"      tot timpul. Daca serviciul nu este disponibil sau nu accepta\n"
+"      tara solicitata (de exemplu pentru tarile non-UE), va fi efectuata o "
+"verificare simpla\n"
+"      in schimb.\n"
+"\n"
+"Tarile acceptate includ in prezent tarile UE, si cateva tari non-UE\n"
+"precum Chile, Columbia, Mexic, Norvegia sau Rusia. Pentru tarile care nu "
+"sunt acceptate,\n"
+"va fi validat doar codul tarii.\n"
+"    "
 
 #. module: base
 #: model:ir.model,name:base.model_ir_actions_act_window_view
@@ -7003,7 +7197,7 @@ msgstr "Internet"
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_lunch
 msgid "Lunch Orders"
-msgstr "Comenzi pranz"
+msgstr "Comenzi Pranz"
 
 #. module: base
 #: selection:base.language.install,lang:0
@@ -7035,11 +7229,27 @@ msgid ""
 "    Replica of Democratic Congo, Senegal, Chad, Togo.\n"
 "    "
 msgstr ""
+"\n"
+"Acest modul implementeaza planul de conturi pentru zona OHADA.\n"
+"===========================================================\n"
+"    \n"
+"Permite oricarei companii sau asociatii sa isi gestioneze contabilitatea "
+"financiara.\n"
+"\n"
+"Tarile care folosesc OHADA sunt urmatoarele:\n"
+"-------------------------------------------\n"
+"    Benin, Burkina Faso, Camerun, Republica Centrafricana, Comoros, Congo,\n"
+"    \n"
+"    Coasta de Azur, Gabon, Guineea, Guineea Bissau, Guineea Ecuatoriala, "
+"Mali, Niger,\n"
+"    \n"
+"    Republica Democratica Congo, Senegal, Ciad, Togo.\n"
+"    "
 
 #. module: base
 #: view:ir.translation:0
 msgid "Comments"
-msgstr ""
+msgstr "Comentarii"
 
 #. module: base
 #: model:res.country,name:base.et
@@ -7049,7 +7259,7 @@ msgstr "Etiopia"
 #. module: base
 #: model:ir.module.category,name:base.module_category_authentication
 msgid "Authentication"
-msgstr ""
+msgstr "Autentificare"
 
 #. module: base
 #: model:res.country,name:base.sj
@@ -7072,7 +7282,7 @@ msgstr "Baza Kanban"
 #: view:ir.actions.report.xml:0
 #: view:ir.actions.server:0
 msgid "Group By"
-msgstr "Grupati dupa"
+msgstr "Grupeaza dupa"
 
 #. module: base
 #: view:res.config.installer:0
@@ -7083,17 +7293,17 @@ msgstr "titlu"
 #: code:addons/base/ir/ir_fields.py:146
 #, python-format
 msgid "true"
-msgstr ""
+msgstr "adevarat"
 
 #. module: base
 #: model:ir.model,name:base.model_base_language_install
 msgid "Install Language"
-msgstr "Instaleaza limba"
+msgstr "Instaleaza Limba"
 
 #. module: base
 #: model:res.partner.category,name:base.res_partner_category_11
 msgid "Services"
-msgstr ""
+msgstr "Servicii"
 
 #. module: base
 #: view:ir.translation:0
@@ -7123,7 +7333,7 @@ msgstr "Contabilitate si Finante"
 #. module: base
 #: field:ir.actions.server,write_id:0
 msgid "Write Id"
-msgstr "Scrieti Id"
+msgstr "Scrie Id"
 
 #. module: base
 #: model:ir.ui.menu,name:base.menu_product
@@ -7145,6 +7355,10 @@ msgid ""
 "===============================================\n"
 "    "
 msgstr ""
+"\n"
+"Permite utilizatorilor sa se inregistreze si sa isi reseteze parola\n"
+"===============================================\n"
+"    "
 
 #. module: base
 #: model:ir.module.category,name:base.module_category_usability
@@ -7169,6 +7383,15 @@ msgid ""
 "membership products (schemes).\n"
 "    "
 msgstr ""
+"\n"
+"Acest modul este pentru configurarea modulelor care au legatura cu o "
+"asociatie.\n"
+"==============================================================\n"
+"\n"
+"Instaleaza profilul pentru ca asociatiile sa gestioneze evenimente, "
+"inregistrari, aderari ca membru, \n"
+"produse aderare (scheme).\n"
+"    "
 
 #. module: base
 #: model:ir.ui.menu,name:base.menu_base_config
@@ -7201,12 +7424,25 @@ msgid ""
 "documentation at http://doc.openerp.com.\n"
 "    "
 msgstr ""
+"\n"
+"Ofera o platforma comuna EDI pe care o pot folosi si alte Aplicatii.\n"
+"===============================================================\n"
+"\n"
+"OpenERP specifica un format general EDI pentru schimbul de documente de "
+"afaceri intre \n"
+"diferite sisteme, si ofera mecanisme generale pentru a le importa si "
+"exporta.\n"
+"\n"
+"Mai multe detalii despre formatul EDI al lui OpenERP poate fi gasit in "
+"documentatia \n"
+"tehnica OpenERP la adresa http://doc.openerp.com.\n"
+"    "
 
 #. module: base
 #: code:addons/base/ir/workflow/workflow.py:99
 #, python-format
 msgid "Operation forbidden"
-msgstr ""
+msgstr "Operatiune interzisa"
 
 #. module: base
 #: view:ir.actions.server:0
@@ -7220,6 +7456,9 @@ msgid ""
 "deleting it (if you delete a native record rule, it may be re-created when "
 "you reload the module."
 msgstr ""
+"Daca nu lasati bifati campul activ, va dezactiva regula de inregistrare fara "
+"a o sterge (daca stergeti o regula originara de inregistrare, poate fi "
+"recreata atunci cadn reincarcati modulul."
 
 #. module: base
 #: selection:base.language.install,lang:0
@@ -7236,6 +7475,12 @@ msgid ""
 "Allows users to create custom dashboard.\n"
 "    "
 msgstr ""
+"\n"
+"Permite utilizatorului sa creeze un tablou de bord personalizat.\n"
+"========================================\n"
+"\n"
+"Permite utilizatorilor sa creeze un tablou de bord personalizat.\n"
+"    "
 
 #. module: base
 #: model:ir.actions.act_window,name:base.ir_access_act
@@ -7309,7 +7554,7 @@ msgstr "Belgia - Stat de plata"
 #: view:workflow.activity:0
 #: field:workflow.activity,flow_start:0
 msgid "Flow Start"
-msgstr "Fluxul de start"
+msgstr "Start Flux"
 
 #. module: base
 #: model:ir.model,name:base.model_res_partner_title
@@ -7329,12 +7574,12 @@ msgstr "Neclasificat"
 #. module: base
 #: view:res.partner:0
 msgid "Phone:"
-msgstr ""
+msgstr "Telefon:"
 
 #. module: base
 #: field:res.partner,is_company:0
 msgid "Is a Company"
-msgstr ""
+msgstr "Este o Companie"
 
 #. module: base
 #: selection:ir.cron,interval_type:0
@@ -7379,18 +7624,24 @@ msgid ""
 "========================\n"
 "\n"
 msgstr ""
+"\n"
+"Vizualizare OpenERP Web kanban.\n"
+"========================\n"
+"\n"
 
 #. module: base
 #: code:addons/base/ir/ir_fields.py:182
 #, python-format
 msgid "'%s' does not seem to be a number for field '%%(field)s'"
-msgstr ""
+msgstr "'%s' nu pare a fi un numar pentru campul '%%(field)s'"
 
 #. module: base
 #: help:res.country.state,name:0
 msgid ""
 "Administrative divisions of a country. E.g. Fed. State, Departement, Canton"
 msgstr ""
+"Diviziunile administrative ale unei tari. De exemplu Stat federal, "
+"Departament, Canton"
 
 #. module: base
 #: view:res.partner.bank:0
@@ -7400,7 +7651,7 @@ msgstr "Bancile mele"
 #. module: base
 #: sql_constraint:ir.filters:0
 msgid "Filter names must be unique"
-msgstr ""
+msgstr "Numele filtrelor trebuie sa fie unice"
 
 #. module: base
 #: help:multi_company.default,object_id:0
