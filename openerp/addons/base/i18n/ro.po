@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: OpenERP Server 5.0.4\n"
 "Report-Msgid-Bugs-To: support@openerp.com\n"
 "POT-Creation-Date: 2012-12-21 17:04+0000\n"
-"PO-Revision-Date: 2012-12-28 18:51+0000\n"
+"PO-Revision-Date: 2012-12-30 16:05+0000\n"
 "Last-Translator: Fekete Mihai <mihai@erpsystems.ro>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-12-29 05:01+0000\n"
+"X-Launchpad-Export-Date: 2012-12-31 04:40+0000\n"
 "X-Generator: Launchpad (build 16378)\n"
 
 #. module: base
@@ -7661,12 +7661,12 @@ msgstr "Obiectul influentat de aceasta regula"
 #. module: base
 #: selection:ir.actions.act_window,target:0
 msgid "Inline View"
-msgstr ""
+msgstr "Vizualizare in linie"
 
 #. module: base
 #: field:ir.filters,is_default:0
 msgid "Default filter"
-msgstr ""
+msgstr "Filtru implicit"
 
 #. module: base
 #: report:ir.module.reference:0
@@ -7779,6 +7779,101 @@ msgid ""
 "If required, you can manually adjust the descriptions via the CODA "
 "configuration menu.\n"
 msgstr ""
+"\n"
+"Modul pentru importul extraselor de cont CODA.\n"
+"======================================\n"
+"\n"
+"Sunt acceptate fisierele stabile CODA in format V2 din conturile bancare "
+"belgiene.\n"
+"----------------------------------------------------------------------\n"
+"    * Suport CODA v1.\n"
+"    * Suport CODA v2.2.\n"
+"    * Suport Valuta straina.\n"
+"    * Suport pentru toate tipurile de inregistrare a datelor (0, 1, 2, 3, 4, "
+"8, 9).\n"
+"    * Derivare si inregistrare a tuturor Codurilor Tranzactiilor si a "
+"Comunicatiilor in Format\n"
+"      Structurat.\n"
+"    * Atribuire Registru Financiar Automat prin intermediul parametrilor de "
+"configurare CODA.\n"
+"    * Suport pentru Registre multiple per Numar de Cont bancar.\n"
+"    * Suport pentru extrase multiple din conturi bancare diferite intr-un "
+"singur\n"
+"      fisier CODA.\n"
+"    * Suport pentru 'doar derivarea' Conturilor bancare CODA (definit ca "
+"tip='info' in \n"
+"      inregistrarile configurarii Contului bancar CODA).\n"
+"    * Derivare limbi multiple CODA, derivarea datelor de configurare oferite "
+"pentru EN, \n"
+"      NL, FR.\n"
+"\n"
+"Fisierele CODA are pot fi citite de aparate sunt derivate si stocate in "
+"format lizibil in \n"
+"Extrasele de cont CODA. De asemenea, Extrasele de cont sunt generate "
+"continand un subset din \n"
+"informatiile CODA (doar acele linii ale tranzactiei care sunt necesare "
+"pentru \n"
+"crearea inregistrarilor Contabilitatii Financiare). Extrasul de cont CODA "
+"este un \n"
+"obiect 'read-only' ('doar-citire'), prin urmare ramane o reprezentare "
+"fiabila a fisierului\n"
+"CODA original, in schimb Extrasul de cont va fi modificat dupa cum va fi "
+"necesar de catre procesele \n"
+"contabile.\n"
+"\n"
+"Conturile bancare CODA configurate ca tip 'Info' vor genera doar Extrase de "
+"cont CODA.\n"
+"\n"
+"Stergerea unui obiect din procesarea CODA are ca rezultat stergerea \n"
+"obiectelor asociate. Stergerea unui Fisier CODA care contine Extrase de Cont "
+"\n"
+"multiple va avea ca rezultat stergerea extraselor de cont asociate.\n"
+"\n"
+"A fost implementata urmatoarea logica de reconciliere in procesarea CODA:\n"
+"-----------------------------------------------------------------------------"
+"--\n"
+"    1) Numarul de Cont bancar al Companiei din extrasul de cont CODA este "
+"comparat cu \n"
+"      campul Numarului de Cont Bancar din inregistrarile de configurare ale "
+"Contului Bancar \n"
+"      CODA al Companiei (in timp ce conturile bancare definite in "
+"inregistrarile configurarii de tip='info' \n"
+"      sunt ignorate). Daca este cazul, este generata o tranzactie de tipul \n"
+"      'transfer intern' folosind campul 'Cont Transfer Intern' in wizardul \n"
+"      Import Fisier CODA.\n"
+"    2) Al doilea pas il reprezinta potrivirea campului  'Comunicare "
+"Structurata' al liniei tranzactiei CODA\n"
+"      cu campul de referinta al facturilor de intrare si de iesire \n"
+"      (acceptat: Tipul de Comunicare Structurata belgiana).\n"
+"    3) In cazul in care pasul precedent nu gaseste o potrivire, omologul "
+"tranzactiei este \n"
+"      gasit prin intermediul Numarullui Contului Bancar configurat in "
+"inregistrarile \n"
+"      Client si Furnizor OpenERP.\n"
+"    4) In cazul in care pasii precedenti nu au succes, tranzactia este "
+"generata \n"
+"      folosind campul 'Default Account for Unrecognized Movement' ('Cont "
+"Implicit pentru Miscare Nerecunoscuta') al \n"
+"      wizard-ului Importa Fisiere CODA pentru a permite in continuare "
+"prelucrarea manuala.\n"
+"\n"
+"In loc de o reglare manuala a Extraselor de Cont generate, puteti de "
+"asemenea sa \n"
+"reimportati CODA dupa ce actualizati baza de date OpenERP cu informatiile "
+"care \n"
+"lipseau pentru a permite reconcilierea automata.\n"
+"\n"
+"Nota la suport CODA V1:\n"
+"~~~~~~~~~~~~~~~~~~~~~~~~~~\n"
+"In unele cazuri, unui cod al tranzactiei, unei categorie a tranzactiei sau "
+"unui cod al \n"
+"comunicarii structurate li s-a dat o descriere noua sau mai clara in CODA "
+"V2. Descrierea\n"
+"oferita de catre tabelele de configurare CODA este bazata pe specificatiile "
+"\n"
+"CODA V2.2.\n"
+"Daca este necesar, puteti ajusta manual descrierile prin intermediul "
+"meniului de configurare CODA.\n"
 
 #. module: base
 #: view:ir.attachment:0
@@ -7795,7 +7890,7 @@ msgstr "Malaezia"
 #: code:addons/base/ir/ir_sequence.py:130
 #, python-format
 msgid "Increment number must not be zero."
-msgstr ""
+msgstr "Numarul crescator nu poate sa fie zero."
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_account_cancel
@@ -7805,7 +7900,7 @@ msgstr "Anuleaza Inregistrarile in registru"
 #. module: base
 #: field:res.partner,tz_offset:0
 msgid "Timezone offset"
-msgstr ""
+msgstr "Decalaj fus orar"
 
 #. module: base
 #: model:ir.module.module,description:base.module_marketing_campaign
@@ -7844,6 +7939,41 @@ msgid ""
 "      CRM Leads.\n"
 "    "
 msgstr ""
+"\n"
+"Acest modul ofera automatizarea pistelor prin campanii de marketing "
+"(campaniile pot de fapt sa fie definite in orice resursa, nu doar ca Piste "
+"MRC).\n"
+"============================================================================="
+"============================================================\n"
+" \n"
+"Campaniile sunt dinamice si pe canale multiple. Procesul este dupa cum "
+"urmeaza:\n"
+"------------------------------------------------------------------------\n"
+"    * Concepeti campanii de marketing precum fluxurile de lucru, inclusiv "
+"sabloane de email de\n"
+"      trimis, rapoarte de tiparit si de trimis prin email, actiuni "
+"personalizate\n"
+"    * Definiti segmnte input care vor selecta elementele care ar trebui sa "
+"intre in\n"
+"      campanie (de exemplu piste din anumite tari.)\n"
+"    * Executati campania in modul de simulare pentru a o testa in timp real "
+"sau accelerat,\n"
+"      si a o regla\n"
+"    * Puteti de asemenea sa porniti campania reala in modul manual, unde "
+"fiecare actiune\n"
+"      necesita validare manuala\n"
+"    * In cele din urma, va lansati campania in direct, si vedeti "
+"statisticile, campania\n"
+"      facand totul complet automat.\n"
+"\n"
+"In timp ce campania ruleaza, puteti continua sa reglati parametrii,\n"
+"segmentele input, fluxul de lucru.\n"
+"\n"
+"**Nota:** Daca aveti nevoie de date demo, puteti instala modulul\n"
+"      marketing_campaign_crm_demo, dar astfel veti instala si aplicatia MRC "
+"(Managementul Relatiei cu Clientii) pentru ca\n"
+"      aceasta depinde de Pistele MRC.\n"
+"    "
 
 #. module: base
 #: help:ir.mail_server,smtp_debug:0
@@ -7866,6 +7996,13 @@ msgid ""
 "Price and Cost Price.\n"
 "    "
 msgstr ""
+"\n"
+"Acest modul adauga 'Marja' la comanda de vanzare.\n"
+"=============================================\n"
+"\n"
+"Astfel se obtine profitabilitatea calculand diferenta dintre Pretul\n"
+"Unitar si Pretul de Cost.\n"
+"    "
 
 #. module: base
 #: selection:ir.actions.todo,type:0
@@ -7895,6 +8032,7 @@ msgstr "Capul Verde"
 #: model:res.groups,comment:base.group_sale_salesman
 msgid "the user will have access to his own data in the sales application."
 msgstr ""
+"utilizatorul va avea acces la propriile date din aplicatia de vanzari."
 
 #. module: base
 #: model:res.groups,comment:base.group_user
@@ -7902,6 +8040,9 @@ msgid ""
 "the user will be able to manage his own human resources stuff (leave "
 "request, timesheets, ...), if he is linked to an employee in the system."
 msgstr ""
+"utilizatorul va putea sa isi gestioneze propriile resurse umane (cereri de "
+"concediu, fise de pontaj, ...), daca este relationat la un angajat din "
+"sistem."
 
 #. module: base
 #: code:addons/orm.py:2246
@@ -7926,7 +8067,7 @@ msgstr "Numarul modulelor adaugate"
 #. module: base
 #: view:res.currency:0
 msgid "Price Accuracy"
-msgstr "Acuratete pret"
+msgstr "Acuratetea Pretului"
 
 #. module: base
 #: selection:base.language.install,lang:0
@@ -8002,6 +8143,34 @@ msgid ""
 " http://www.rrif.hr/dok/preuzimanje/rrif-rp2012.rar\n"
 "\n"
 msgstr ""
+"\n"
+"Localizare croata.\n"
+"======================\n"
+" \n"
+"Author: Goran Kliska, Programe gratuite d.o.o., Zagreb\n"
+"        http://www.slobodni-programi.hr\n"
+"\n"
+"Contributii\n"
+"  Tomislav Bošnjaković, Storm Computers: tipuri de conturi\n"
+"  Ivan Vađić, Programe gratuite: tipuri de conturi\n"
+"\n"
+"Descriere:\n"
+"\n"
+"Plan de Conturi croat (RRIF ver.2012)\n"
+"\n"
+"RRIF-planul de conturi pentru antreprenori pentru 2012.\n"
+"Tipuri de conturi\n"
+"Planul de Conturi in RRIF, dezvoltat in ceea ce priveste scurtarea numelui "
+"si adaugarea Google Analytics\n"
+"Grup de impozitare impozit pe\n"
+"Forme taxe TVA\n"
+"Alte impozite \n"
+"Pozitia fiscala de baza\n"
+"\n"
+"Surse de date:\n"
+" http://www.rrif.hr/dok/preuzimanje/rrif-rp2011.rar\n"
+" http://www.rrif.hr/dok/preuzimanje/rrif-rp2012.rar\n"
+"\n"
 
 #. module: base
 #: view:ir.actions.act_window:0
@@ -8026,19 +8195,19 @@ msgstr "ir.cron"
 #. module: base
 #: model:res.country,name:base.cw
 msgid "Curaçao"
-msgstr ""
+msgstr "Curaçao"
 
 #. module: base
 #: view:ir.sequence:0
 msgid "Current Year without Century: %(y)s"
-msgstr "Anul curent fara secol: %(y)s"
+msgstr "Anul curent fara Secol: %(y)s"
 
 #. module: base
 #: model:ir.actions.act_window,name:base.ir_config_list_action
 #: view:ir.config_parameter:0
 #: model:ir.ui.menu,name:base.ir_config_menu
 msgid "System Parameters"
-msgstr ""
+msgstr "Parametrii Sistemului"
 
 #. module: base
 #: help:ir.actions.client,tag:0
@@ -8097,7 +8266,7 @@ msgstr "Pista de audit"
 #: code:addons/base/ir/ir_fields.py:264
 #, python-format
 msgid "Value '%s' not found in selection field '%%(field)s'"
-msgstr ""
+msgstr "Valoarea '%s' nu a fost gasita in campul de selectie '%%(field)s'"
 
 #. module: base
 #: model:res.country,name:base.sd
@@ -8148,6 +8317,39 @@ msgid ""
 "\n"
 "**Credits:** Sistheo, Zeekom, CrysaLEAD, Akretion and Camptocamp.\n"
 msgstr ""
+"\n"
+"Acesta este modulul pentru gestionarea planului de conturi pentru Franta in "
+"OpenERP.\n"
+"========================================================================\n"
+"\n"
+"Acest modul este valabil pentru companiile care isi au sediul in Franta "
+"continentala. Nu este valabil\n"
+"pentru companiile care isi au sediul in Guadelupa, Martinica, Guyana, "
+"Réunion, Mayotte).\n"
+"\n"
+"Acest modul de localizare creeaza taxele TVA de tipul 'taxe incluse' pentru "
+"achizitii\n"
+"(este necesar in special cand folositi modulul 'hr_expense' "
+"(ru_cheltuieli'). Dar fiti atenti pentru ca aceste\n"
+"taxe TVA de tipul 'taxe incluse' nu sunt gestionate de pozitiile fiscale "
+"furnizate de acest\n"
+"modul (pentru ca este complexa gestionarea scenariilor 'impozitare exclusa' "
+"si 'taxe incluse'\n"
+"in pozitiile fiscale).\n"
+"\n"
+"Acest modul de localizare nu gestioneaza propiu zis scenariul in care o "
+"companie cu sediul in Franta\n"
+"continentala vinde servicii unei companii cu sediul in fostele colonii "
+"franceze. Am putea gestiona\n"
+"pozitiile fiscale, dar ar trebui facuta diferenta intre impozitul TVA pe "
+"'produs'\n"
+"si impozitul TVA pe 'servicii'. Credem ca este prea 'greoi' sa avem aceasta "
+"implicit\n"
+"in l10n_fr; companiile care vand servicii companiilor cu sediul in fostele "
+"colonii franceze ar trebui sa isi actualizeze\n"
+"manual configuratia taxelor lor si a pozitiilor fiscale.\n"
+"\n"
+"**Multumiri:** Sistheo, Zeekom, CrysaLEAD, Akretion si Camptocamp.\n"
 
 #. module: base
 #: model:res.country,name:base.fm
@@ -8189,7 +8391,7 @@ msgstr "Israel"
 #: code:addons/base/res/res_config.py:443
 #, python-format
 msgid "Cannot duplicate configuration!"
-msgstr ""
+msgstr "Configuratia nu poate fi copiata!"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_l10n_syscohada
@@ -8204,7 +8406,7 @@ msgstr "Uneori numit BIC sau Swift."
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_l10n_in
 msgid "Indian - Accounting"
-msgstr ""
+msgstr "Indiana - Contabilitate"
 
 #. module: base
 #: field:res.lang,time_format:0
@@ -8214,12 +8416,12 @@ msgstr "Format ora"
 #. module: base
 #: field:res.company,rml_header3:0
 msgid "RML Internal Header for Landscape Reports"
-msgstr ""
+msgstr "Antet RML Intern pentru Rapoartele Landscape"
 
 #. module: base
 #: model:res.groups,name:base.group_partner_manager
 msgid "Contact Creation"
-msgstr ""
+msgstr "Creare Contact"
 
 #. module: base
 #: view:ir.module.module:0
@@ -8271,11 +8473,17 @@ msgid ""
 "This module provides the core of the OpenERP Web Client.\n"
 "        "
 msgstr ""
+"\n"
+"Modulul central OpenERP Web.\n"
+"========================\n"
+"\n"
+"Acest modul ofera nucleul pentru OpenERP Client Web.\n"
+"        "
 
 #. module: base
 #: view:ir.sequence:0
 msgid "Week of the Year: %(woy)s"
-msgstr ""
+msgstr "Saptamana din An: %(sda)s"
 
 #. module: base
 #: field:res.users,id:0
@@ -8317,7 +8525,7 @@ msgstr "Marea Britanie"
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_l10n_pa
 msgid "Panama Localization Chart Account"
-msgstr ""
+msgstr "Localizare Panama Plan de Conturi"
 
 #. module: base
 #: help:res.partner.category,active:0
@@ -8344,7 +8552,7 @@ msgstr "Titluri Partener"
 #: code:addons/base/ir/ir_fields.py:227
 #, python-format
 msgid "Use the format '%s'"
-msgstr ""
+msgstr "Foloseste formatul '%s'"
 
 #. module: base
 #: help:ir.actions.act_window,auto_refresh:0
@@ -8376,12 +8584,12 @@ msgstr "Elemente ale activitatii"
 #: code:addons/base/res/res_bank.py:195
 #, python-format
 msgid "Invalid Bank Account Type Name format."
-msgstr ""
+msgstr "Format Cont Bancar Tip Nume nevalid."
 
 #. module: base
 #: view:ir.filters:0
 msgid "Filters visible only for one user"
-msgstr ""
+msgstr "Filtre vizibile doar pentru un utilizator"
 
 #. module: base
 #: model:ir.model,name:base.model_ir_attachment
@@ -8422,6 +8630,30 @@ msgid ""
 "* In a module, so that administrators and users of OpenERP who do not\n"
 "  need or want an online import can avoid it being available to users.\n"
 msgstr ""
+"\n"
+"Export fisier extensibil nou pentru OpenERP\n"
+"======================================\n"
+"\n"
+"Re-implementeaza sistemul de import fisiere al lui openerp:\n"
+" \n"
+"* Partea de server, sistemul anterior pune mare parte a logicii in\n"
+"  client care isi dubleaza efortul (intre clienti), face sistemul\n"
+"  de import mult mai greu de utilizat fara un client (RPC direct sau\n"
+"  alte forme de automatizare) si face mult mai grea adunarea\n"
+"  cunostintelor despre sistemul de import/export deoarece se intinde\n"
+"  peste 3+ proiecte diferite.\n"
+"\n"
+"*Intr-un mod mai extensibil, astfel ca utilizatorii si partenerii isi pot "
+"construi propriul\n"
+"  front-end pentru a importa din alte formate de fisier (de exemplu fisiere\n"
+"  OpenDocument) care poate fi mai simplu de gestionat in lor de fluxul munca "
+"sau din\n"
+"  sursele lor de productie de date.\n"
+"\n"
+"*Intr-un modul, astfel incat administratorii si utilizatorii OpenERP care "
+"nu\n"
+"  au nevoie de sau nu doresc un import online pot evita sa il faca "
+"disponibil utilizatorilor.\n"
 
 #. module: base
 #: selection:res.currency,position:0
@@ -8446,12 +8678,12 @@ msgstr ""
 #. module: base
 #: model:res.groups,comment:base.group_hr_user
 msgid "the user will be able to approve document created by employees."
-msgstr ""
+msgstr "utilizatorul va putea sa aprobe documentul creat de angajati."
 
 #. module: base
 #: field:ir.ui.menu,needaction_enabled:0
 msgid "Target model uses the need action mechanism"
-msgstr ""
+msgstr "Modelul tinta utilizeaza mecanismul nevoia de actiune"
 
 #. module: base
 #: help:ir.model.fields,relation:0
@@ -8505,7 +8737,7 @@ msgstr "Fisierul modul importat cu succes!"
 #: view:ir.model.constraint:0
 #: model:ir.ui.menu,name:base.ir_model_constraint_menu
 msgid "Model Constraints"
-msgstr ""
+msgstr "Restrictii Model"
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_workflow_transition_form
@@ -8535,6 +8767,14 @@ msgid ""
 "============================================================\n"
 "    "
 msgstr ""
+"\n"
+"添加中文省份数据 (Pentru a adauga date din provinciile din China)\n"
+"科目类型\\会计科目表模板\\增值税\\辅助核算类别\\管理会计凭证簿\\财务会计凭证簿 (Tipul de cont \\ Planul de "
+"Conturi sablon \\ Corectat cu TVA \\ Categoria contabila auxiliara \\ "
+"Contabilitate de rezerva gestiune documente \\ Certificat de rezerva "
+"Contabilitate Financiara)\n"
+"============================================================\n"
+"    "
 
 #. module: base
 #: model:res.country,name:base.lc
@@ -8560,7 +8800,7 @@ msgstr "Somalia"
 #. module: base
 #: model:res.partner.title,shortcut:base.res_partner_title_doctor
 msgid "Dr."
-msgstr ""
+msgstr "Dr."
 
 #. module: base
 #: model:res.groups,name:base.group_user
@@ -8582,6 +8822,16 @@ msgid ""
 "their status quickly as they evolve.\n"
 "    "
 msgstr ""
+"\n"
+"Tine evidenta Managementului Problemelor/Depanarilor pentru Proiecte\n"
+"=========================================\n"
+"Acesta aplicatie va permite sa gestionati problemele pe care le-ati putea "
+"intalni intr-un proiect, cum ar fi erori in sistem, reclamatii clienti sau "
+"pana materiale. \n"
+"\n"
+"Ii permite managerului sa verifice rapid problemele, sa le atribuie si sa le "
+"decida statusul repede pe masura ce ele evolueaza.\n"
+"    "
 
 #. module: base
 #: field:ir.model.access,perm_create:0
@@ -8608,6 +8858,22 @@ msgid ""
 "up a management by affair.\n"
 "    "
 msgstr ""
+"\n"
+"Acest modul implementeaza un sistem al fisei de pontaj.\n"
+"==========================================\n"
+"\n"
+"Fiecare angajat isi poate inregistra si poate sa tina evidenta timpului "
+"petrecut cu diferite proiecte.\n"
+"Un proiect este un cont analitic, iar timpul petrecut cu un proiect "
+"genereaza costuri in\n"
+"contul analitic.\n"
+"\n"
+"Este oferita raportarea timpului si tinerea evidentei angajatilor.\n"
+"\n"
+"Este integrat complet cu modulul de contabilitate a costurilor. Va permite "
+"sa setati\n"
+"o gestionare a afacerii.\n"
+"    "
 
 #. module: base
 #: field:res.bank,state:0
@@ -8624,7 +8890,7 @@ msgstr "Copie a"
 #. module: base
 #: field:ir.model.data,display_name:0
 msgid "Record Name"
-msgstr ""
+msgstr "Numele Inregistrarii"
 
 #. module: base
 #: model:ir.model,name:base.model_ir_actions_client
@@ -8640,7 +8906,7 @@ msgstr "Teritoriile Britanice din Oceanul Indian"
 #. module: base
 #: model:ir.actions.server,name:base.action_server_module_immediate_install
 msgid "Module Immediate Install"
-msgstr ""
+msgstr "Modul de Instalare Imediata"
 
 #. module: base
 #: view:ir.actions.server:0
@@ -8674,6 +8940,13 @@ msgid ""
 "includes\n"
 "taxes and the Quetzal currency."
 msgstr ""
+"\n"
+"Acesta este modulul de baza pentru gestionarea planului de conturi pentru "
+"Guatemala.\n"
+"=====================================================================\n"
+"\n"
+"Adauga planul de conturi pentru Guatemala. Include, de asemenea,\n"
+"taxele si moneda Quetzal."
 
 #. module: base
 #: selection:res.lang,direction:0
@@ -8690,7 +8963,7 @@ msgstr "Traductibil"
 #. module: base
 #: help:base.language.import,code:0
 msgid "ISO Language and Country code, e.g. en_US"
-msgstr ""
+msgstr "Limba ISO si Codul tarii, de exemplu en_US"
 
 #. module: base
 #: model:res.country,name:base.vn
@@ -8710,7 +8983,7 @@ msgstr "Numele Complet"
 #. module: base
 #: view:ir.attachment:0
 msgid "on"
-msgstr ""
+msgstr "activat"
 
 #. module: base
 #: view:ir.property:0
