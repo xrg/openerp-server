@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: OpenERP Server 5.0.4\n"
 "Report-Msgid-Bugs-To: support@openerp.com\n"
 "POT-Creation-Date: 2012-02-08 00:44+0000\n"
-"PO-Revision-Date: 2012-12-30 18:05+0000\n"
+"PO-Revision-Date: 2012-12-31 17:40+0000\n"
 "Last-Translator: Patrick Schmucki <Unknown>\n"
 "Language-Team: German <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-12-31 04:56+0000\n"
+"X-Launchpad-Export-Date: 2013-01-01 04:57+0000\n"
 "X-Generator: Launchpad (build 16378)\n"
 
 #. module: base
@@ -4221,7 +4221,7 @@ msgstr "Personalwesen"
 #: model:ir.actions.act_window,name:base.action_country
 #: model:ir.ui.menu,name:base.menu_country_partner
 msgid "Countries"
-msgstr "Partner Nationen"
+msgstr "Länder"
 
 #. module: base
 #: selection:ir.translation,type:0
@@ -4402,6 +4402,12 @@ msgid ""
 "Italian accounting chart and localization.\n"
 "    "
 msgstr ""
+"\n"
+"Dieses Modul enthält den italienischen Kontenrahmen für OpenERP.\n"
+"================================================\n"
+"\n"
+"Italian accounting chart and localization.\n"
+"    "
 
 #. module: base
 #: model:res.country,name:base.me
@@ -6511,7 +6517,9 @@ msgstr ""
 #. module: base
 #: help:res.country.state,code:0
 msgid "The state code in three chars.\n"
-msgstr "Der 3 stellige Staatencode\n"
+msgstr ""
+"Die 2 oder 3 stellige Abkürzung für das Bundesland/den Kanton/die Region "
+"oder Provinz\n"
 
 #. module: base
 #: model:res.country,name:base.sj
@@ -7349,6 +7357,12 @@ msgid ""
 "Mexican accounting chart and localization.\n"
 "    "
 msgstr ""
+"\n"
+"Dieses Modul enthält den mexikanischen Kontenrahmen für OpenERP.\n"
+"========================================================================\n"
+"\n"
+"Mexican accounting chart and localization.\n"
+"    "
 
 #. module: base
 #: field:res.lang,time_format:0
@@ -7750,7 +7764,7 @@ msgstr "Zusätzliche Argumente"
 #. module: base
 #: field:res.users,view:0
 msgid "Interface"
-msgstr "Schnittstelle"
+msgstr "Benutzeroberfläche"
 
 #. module: base
 #: view:ir.actions.server:0
@@ -7770,7 +7784,7 @@ msgstr "Typfeld-Text"
 #. module: base
 #: field:res.country.state,code:0
 msgid "State Code"
-msgstr "Landescode"
+msgstr "Bundesland Abkürzung"
 
 #. module: base
 #: field:ir.model.fields,on_delete:0
@@ -7974,6 +7988,9 @@ msgid ""
 "        United States - Chart of accounts\n"
 "    "
 msgstr ""
+"\n"
+"        Dieses Modul enthält den amerikanischen Kontenrahmen für OpenERP.\n"
+"    "
 
 #. module: base
 #: view:res.widget.wizard:0
@@ -8549,6 +8566,13 @@ msgid ""
 "Romanian accounting chart and localization.\n"
 "    "
 msgstr ""
+"\n"
+"Dieses Modul enthält den rumänischen Kontenrahmen, Umsatzsteuer und "
+"Registrierungs-Nummer für OpenERP\n"
+"======================================================================\n"
+"\n"
+"Romanian accounting chart and localization.\n"
+"    "
 
 #. module: base
 #: model:res.country,name:base.cm
@@ -8593,11 +8617,11 @@ msgid ""
 "interface, which has less features but is easier to use. You can switch to "
 "the other interface from the User/Preferences menu at any time."
 msgstr ""
-"OpenERP stellt eine einfache und erweiterte Benutzerschnittstelle zur "
-"Verfügung. Wenn Sie OpenERP das erste Mal verwenden sollten Sie die einfache "
-"Benutzerschnittstelle verwenden. Diese hat weniger Funktionalitäten, ist "
-"dafür aber auch leichter zu bedienen. Sie können die andere "
-"Benutzerschnittstelle jederzeit in Benutzer - Einstellungs Menü ändern."
+"OpenERP stellt eine einfache und eine erweiterte Benutzeroberfläche zur "
+"Verfügung. Wenn Sie OpenERP das erste Mal benutzen, sollten Sie die einfache "
+"Benutzeroberfläche verwenden. Diese hat weniger Funktionalitäten, ist dafür "
+"aber auch leichter zu bedienen. Sie können jederzeit im Menu Einstellungen "
+"zur anderen Benutzeroberfläche wechseln."
 
 #. module: base
 #: model:res.country,name:base.cc
@@ -10162,6 +10186,12 @@ msgid ""
 "Greek accounting chart and localization.\n"
 "    "
 msgstr ""
+"\n"
+"Dieses Modul enthält den griechischen Kontenrahmen für OpenERP.\n"
+"===========================================\n"
+"\n"
+"Greek accounting chart and localization.\n"
+"    "
 
 #. module: base
 #: view:ir.values:0
@@ -11453,6 +11483,12 @@ msgid ""
 "Indian accounting chart and localization.\n"
 "    "
 msgstr ""
+"\n"
+"Dieses Modul enthält den indischen Kontenrahmen für OpenERP.\n"
+"=========================================\n"
+"\n"
+"Indian accounting chart and localization.\n"
+"    "
 
 #. module: base
 #: view:ir.model:0
@@ -15578,8 +15614,8 @@ msgid ""
 "are available. To add a new language, you can use the 'Load an Official "
 "Translation' wizard available from the 'Administration' menu."
 msgstr ""
-"Die Standardsprache der Benutzerschnittstelle, wenn die entsprechende "
-"Übersetzungen vorhanden sind. Mit dem Assistenen \"Lade offizielle "
+"Die Standardsprache der Benutzeroberfläche, wenn die entsprechenden "
+"Übersetzungen vorhanden sind. Mit dem Assistenten \"Lade offizielle "
 "Übersetzung\" können Sie weitere Sprachen hinzufügen."
 
 #. module: base
@@ -17369,39 +17405,39 @@ msgstr ""
 "\n"
 "Dieses System ermöglicht einer Gruppe von Menschen (Mitarbeiter, Abteilung) "
 "die\n"
-"intilligente, effiziente Verwaltung von Vorverhandlungen (Leads), "
+"intelligente, effiziente Verwaltung von Vorverhandlungen (Leads), "
 "Gelegenheiten\n"
 "(opportunities), Terminen (meeting), Anrufen (phonecall), ...\n"
-"Es werden Hauptaufgaben, wie z. B. Kommunikation, Erfassung, Pririsierung,\n"
+"Es werden Hauptaufgaben, wie z. B. Kommunikation, Erfassung, Priorisierung,\n"
 "Zuständigkeit, Problemklärung und Mitteilungsdienste umgesetzt.\n"
 "\n"
 "OpenERP stellt dabei sicher, dass alle Fälle durch Benutzer, Kunden und "
 "Lieferanten\n"
 "erfolgreich nachvollzogen werden können. Es werden automatisch Erinnerungen\n"
 "verschickt, Anfragen werden eskaliert (an Vorgesetzte hoch-delegiert), "
-"besondere \n"
+"besondere\n"
 "Aufgaben und Methoden ausgelöst und viele andere Aktionen, die auch von "
 "Ihren\n"
 "Unternehmensregeln abhängen, ausgelöst.\n"
 "\n"
-"Das schönste an diesem System ist die Tatsache, dass der Anwender nicht "
-"besonderes \n"
+"Das schönste an diesem System ist die Tatsache, dass der Anwender nichts "
+"besonderes\n"
 "tun muss. Dieser sendet nur eine EMail an die Anfrageverfolgung. OpenERP "
 "kümmert\n"
 "sich um eine dankende Antwort und die automatische Weiterleitung an das "
-"richtige \n"
+"richtige\n"
 "Personal. Das System stellt darüber hinaus sicher, dass auch künftiger "
 "Schriftverkehr\n"
 "an den richtigen Empfänger gelangt.\n"
 "\n"
 "Das Kundenverwaltungsmodul enthält eine EMail-Schnittstelle zur "
-"Synchrnonisierung\n"
+"Synchronisierung\n"
 "von empfangenen Mails mit OpenERP.\n"
 "\n"
 "Es wird eine Pinnwand der Kundenverwaltung angelegt. Sie enthält:\n"
-"    * Gelegenheiten nach Kategorie (Diagramm)\n"
-"    * Gelegenheiten nach Entwicklungsstand (Diagramm)\n"
-"    * Plan-Umsätze nach Entwicklung und Bearbeiter (Diagramm)\n"
+"* Gelegenheiten nach Kategorie (Diagramm)\n"
+"* Gelegenheiten nach Entwicklungsstand (Diagramm)\n"
+"* Plan-Umsätze nach Entwicklung und Bearbeiter (Diagramm)\n"
 
 #. module: base
 #: model:ir.module.category,description:base.module_category_accounting_and_finance
