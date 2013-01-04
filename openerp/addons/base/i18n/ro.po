@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: OpenERP Server 5.0.4\n"
 "Report-Msgid-Bugs-To: support@openerp.com\n"
 "POT-Creation-Date: 2012-12-21 17:04+0000\n"
-"PO-Revision-Date: 2013-01-02 19:24+0000\n"
+"PO-Revision-Date: 2013-01-03 19:28+0000\n"
 "Last-Translator: Fekete Mihai <mihai@erpsystems.ro>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-01-03 04:47+0000\n"
+"X-Launchpad-Export-Date: 2013-01-04 04:47+0000\n"
 "X-Generator: Launchpad (build 16393)\n"
 
 #. module: base
@@ -11954,12 +11954,36 @@ msgid ""
 "Accounting/Invoicing settings.\n"
 "    "
 msgstr ""
+"\n"
+"Acest modul adauga un meniu Vanzari portalului dumneavoastra de indata ce "
+"vanzari si portal sunt instalate.\n"
+"============================================================================="
+"=========\n"
+"\n"
+"Dupa instalarea acestui modul, utilizatorii portalului vor putea sa isi "
+"acceseze propriile documente\n"
+"prin intermediul urmatoarelor meniuri:\n"
+"\n"
+"  - Cotatii\n"
+"  - Comenzi de Vanzare\n"
+"  - Comenzi de Livrare\n"
+"  - Produse (cele publice)\n"
+"  - Facturi\n"
+"  - Plati/Rambursari\n"
+"\n"
+"Daca sunt configurati beneficiarii platii online, utilizatorii portalului "
+"vor avea posibilitatea de a-si\n"
+"plati online Comenzile de Vanzari si Facturile care nu au fost platite inca. "
+"Paypal este inclus\n"
+"implicit, trebuie doar sa configurati un cont Paypal in setarile "
+"Contabilitate/Facturare.\n"
+"    "
 
 #. module: base
 #: code:addons/base/ir/ir_fields.py:316
 #, python-format
 msgid "external id"
-msgstr ""
+msgstr "id extern"
 
 #. module: base
 #: view:ir.model:0
@@ -11979,7 +12003,7 @@ msgstr "Managementul achizitiilor"
 #. module: base
 #: field:ir.module.module,published_version:0
 msgid "Published Version"
-msgstr "Versiune publicata"
+msgstr "Versiunea Publicata"
 
 #. module: base
 #: model:res.country,name:base.is
@@ -12002,6 +12026,12 @@ msgid ""
 "=====================\n"
 "    "
 msgstr ""
+"\n"
+"Acest modul adauga meniul probleme si caracteristici portalului "
+"dumneavoastra daca sunt instalate project_issue si portal.\n"
+"============================================================================="
+"=====================\n"
+"    "
 
 #. module: base
 #: view:res.lang:0
@@ -12011,7 +12041,7 @@ msgstr "%I - Ora (12 ore)  [01,12]."
 #. module: base
 #: view:res.config:0
 msgid "res_config_contents"
-msgstr "res_config_continuturi"
+msgstr "res_config_contents (res_config_continuturi)"
 
 #. module: base
 #: model:res.country,name:base.de
@@ -12021,7 +12051,7 @@ msgstr "Germania"
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_auth_oauth
 msgid "OAuth2 Authentication"
-msgstr ""
+msgstr "Autentificare OAuth2"
 
 #. module: base
 #: view:workflow:0
@@ -12032,6 +12062,12 @@ msgid ""
 "default value. If you don't do that, your customization will be overwrited "
 "at the next update or upgrade to a future version of OpenERP."
 msgstr ""
+"Atunci cand personaizati un flux de lucru, asigurati-va ca nu modificati un "
+"nod sau o sageata existenta, ci ca adaugati noduri sau sageti noi. Daca "
+"trebuie neaparat sa modificati un nod sau o sageata, puteti modifica numai "
+"campurile care sunt necompletate sau puteti seta valoarea implicita. Daca nu "
+"faceti acest lucru, personalizarea dumneavoastra va fi suprascrisa la "
+"urmatoarea actualizare sau upgrade a unei versiuni viitoare a lui OpenERP."
 
 #. module: base
 #: report:ir.module.reference:0
@@ -12051,7 +12087,7 @@ msgstr ""
 "\n"
 "Acest modul este pentru gestionarea unui mediu multicorporatist.\n"
 "=======================================================\n"
-" \n"
+"\n"
 "Acesta este modulul de baza pentru alte module multicorporatiste.\n"
 "    "
 
@@ -12064,7 +12100,7 @@ msgstr "Codul monedei trebuie sa fie unic per companie!"
 #: code:addons/base/module/wizard/base_export_language.py:39
 #, python-format
 msgid "New Language (Empty translation template)"
-msgstr ""
+msgstr "Limba noua (sablon gol traducere)"
 
 #. module: base
 #: help:ir.actions.server,email:0
@@ -12073,9 +12109,9 @@ msgid ""
 "same values as for the condition field.\n"
 "Example: object.invoice_address_id.email, or 'me@example.com'"
 msgstr ""
-"Expresie care intoarce edresa de e-mail la care se trimite e-mail. Poate fi "
-"bazata pe aceleasi valori ca si pentru campul conditie.\n"
-"Exemplu: obiect.factura_adresa_id.e-mail, sau 'me@exemplu.com'"
+"Expresie care intoarce adresa de e-mail la trimite catre. Poate fi bazata pe "
+"aceleasi valori ca si pentru campul conditie.\n"
+"Exemplu: obiect.id_adresa_factura.e-mail, sau 'me@exemplu.com'"
 
 #. module: base
 #: model:ir.module.module,description:base.module_project_issue_sheet
@@ -12095,7 +12131,7 @@ msgstr ""
 "Problemelor/Virusilor in Proiect.\n"
 "============================================================================="
 "====\n"
-" \n"
+"\n"
 "Jurnalele de lucru pot fi pastrate pentru a indica numarul de ore petrecut "
 "de catre utilizatori pentru a se ocupa de o problema.\n"
 "                "
@@ -12134,7 +12170,7 @@ msgstr "Egipt"
 #. module: base
 #: view:ir.attachment:0
 msgid "Creation"
-msgstr ""
+msgstr "Creare"
 
 #. module: base
 #: help:ir.actions.server,model_id:0
@@ -12165,11 +12201,11 @@ msgid ""
 "(default: 465)"
 msgstr ""
 "Alegeti planul conectarii codificate:\n"
-"- Nici unul: Sesiunile SMTP sunt realizate in celartext.\n"
+"- Nici unul: Sesiunile SMTP sunt realizate in cleartext.\n"
 "- TLS (STARTTLS): Codificarea TLS este solicitata la inceputul sesiunii SMTP "
 "(Recomandat)\n"
 "- SSL/TLS: Sesiunile SMTP sunt codificate cu SSL/TLS printr-un port dedicat "
-")implicit: 465)"
+"(implicit: 465)"
 
 #. module: base
 #: view:ir.model:0
@@ -12179,7 +12215,7 @@ msgstr "Descriere Campuri"
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_analytic_contract_hr_expense
 msgid "Contracts Management: hr_expense link"
-msgstr ""
+msgstr "Managementul Contractelor: linkul hr_expense (ru_cheltuieli)"
 
 #. module: base
 #: view:ir.attachment:0
@@ -12193,12 +12229,12 @@ msgstr ""
 #: view:res.partner:0
 #: view:workflow.activity:0
 msgid "Group By..."
-msgstr "Grupati dupa..."
+msgstr "Grupeaza dupa..."
 
 #. module: base
 #: view:base.module.update:0
 msgid "Module Update Result"
-msgstr ""
+msgstr "Rezultat Actualizare Modul"
 
 #. module: base
 #: model:ir.module.module,description:base.module_analytic_contract_hr_expense
@@ -12209,21 +12245,26 @@ msgid ""
 "============================================================================="
 "=========================\n"
 msgstr ""
+"\n"
+"Acs modul este pentru modificarea vizualizarii contului analitic pentru a "
+"afisa niste date referitoare la modulul hr_expense (ru_cheltuieli).\n"
+"============================================================================="
+"=========================\n"
 
 #. module: base
 #: field:ir.attachment,store_fname:0
 msgid "Stored Filename"
-msgstr ""
+msgstr "Numele Fisierului Stocat"
 
 #. module: base
 #: field:res.partner,use_parent_address:0
 msgid "Use Company Address"
-msgstr ""
+msgstr "Foloseste Adresa Companiei"
 
 #. module: base
 #: model:ir.module.module,summary:base.module_hr_holidays
 msgid "Holidays, Allocation and Leave Requests"
-msgstr ""
+msgstr "Cereri de Concediu, Alocare si Zile Libere"
 
 #. module: base
 #: model:ir.module.module,description:base.module_web_hello
@@ -12233,6 +12274,10 @@ msgid ""
 "===========================\n"
 "\n"
 msgstr ""
+"\n"
+"Modul exemplu OpenERP Web.\n"
+"===========================\n"
+"\n"
 
 #. module: base
 #: selection:ir.module.module,state:0
@@ -12270,6 +12315,16 @@ msgid ""
 "              </p>\n"
 "            "
 msgstr ""
+"<clasa p=\"creeaza_niciuncontinut_vizualizare_oe\">\n"
+"                Faceti click pentru a adauga un contact in agenda "
+"dumneavoastra.\n"
+"              </p><p>\n"
+"                OpenERP va ajuta sa tineti evidenta cu usurinta a tuturor "
+"activitatilor asociate\n"
+"                unui furnizor: discutii, istoric al achizitiilor,\n"
+"                documente, etc.\n"
+"              </p>\n"
+"            "
 
 #. module: base
 #: model:res.country,name:base.lr
@@ -12284,6 +12339,10 @@ msgid ""
 "=======================\n"
 "\n"
 msgstr ""
+"\n"
+"Test suita OpenERP Web.\n"
+"=======================\n"
+"\n"
 
 #. module: base
 #: view:ir.model:0
@@ -12352,7 +12411,7 @@ msgstr ""
 #. module: base
 #: model:ir.actions.report.xml,name:base.preview_report
 msgid "Preview Report"
-msgstr "Previzualizare Raport"
+msgstr "Previzualizeaza Raportul"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_purchase_analytic_plans
@@ -12363,7 +12422,7 @@ msgstr "Planuri Analitice Achizitionare"
 #: model:ir.actions.act_window,name:base.ir_sequence_type
 #: model:ir.ui.menu,name:base.menu_ir_sequence_type
 msgid "Sequence Codes"
-msgstr "Coduri secventa"
+msgstr "Secventa Coduri"
 
 #. module: base
 #: selection:base.language.install,lang:0
@@ -12377,7 +12436,7 @@ msgid ""
 "individual wizards via the list of configuration wizards."
 msgstr ""
 "Toti asistentii de configurare aflati in asteptare au fost executati. Puteti "
-"restarta asistentii individual prin lista de configurare asistenti."
+"restarta asistentii individuali prin lista de configurare asistenti."
 
 #. module: base
 #: view:ir.sequence:0
@@ -12387,7 +12446,7 @@ msgstr "Anul curent cu Secol: %(an)s"
 #. module: base
 #: field:ir.exports,export_fields:0
 msgid "Export ID"
-msgstr "Export ID"
+msgstr "ID Export"
 
 #. module: base
 #: model:res.country,name:base.fr
@@ -12428,6 +12487,7 @@ msgstr "Campanie de Marketing - Demo"
 msgid ""
 "Can not create Many-To-One records indirectly, import the field separately"
 msgstr ""
+"Nu pot fi create inregistrari Many-To-One indirect, importati campul separat"
 
 #. module: base
 #: field:ir.cron,interval_type:0
@@ -12437,7 +12497,7 @@ msgstr "Interval Unitate"
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_portal_stock
 msgid "Portal Stock"
-msgstr ""
+msgstr "Portal Stoc"
 
 #. module: base
 #: field:workflow.activity,kind:0
@@ -12470,12 +12530,12 @@ msgstr "Data crearii"
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_l10n_cn
 msgid "中国会计科目表 - Accounting"
-msgstr "中国会计科目表 - Contabilitate"
+msgstr "Plan de Conturi chinezesc - Contabilitate"
 
 #. module: base
 #: sql_constraint:ir.model.constraint:0
 msgid "Constraints with the same name are unique per module."
-msgstr ""
+msgstr "Restrictiile cu acelari nume sunt unice per modul."
 
 #. module: base
 #: model:ir.module.module,description:base.module_report_intrastat
@@ -12487,6 +12547,13 @@ msgid ""
 "This module gives the details of the goods traded between the countries of\n"
 "European Union."
 msgstr ""
+"\n"
+"Un modul care adauga rapoarte intrastat.\n"
+"=====================================\n"
+"\n"
+"Acest modul ofera detalii cu privire la marfurile tranzactionate intre "
+"tarile\n"
+"Uniunii Europene."
 
 #. module: base
 #: help:ir.actions.server,loop_action:0
@@ -12520,12 +12587,12 @@ msgstr "res.cerere"
 #. module: base
 #: field:res.partner,image_medium:0
 msgid "Medium-sized image"
-msgstr ""
+msgstr "Imagine de dimensiune mijlocie"
 
 #. module: base
 #: view:ir.model:0
 msgid "In Memory"
-msgstr "In memorie"
+msgstr "In memoria"
 
 #. module: base
 #: view:ir.actions.todo:0
@@ -12535,7 +12602,7 @@ msgstr "De efectuat"
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_product_visible_discount
 msgid "Prices Visible Discounts"
-msgstr "Preturi Reduceri Vizibile"
+msgstr "Reduceri Vizibile Preturi"
 
 #. module: base
 #: field:ir.attachment,datas:0
@@ -12547,7 +12614,7 @@ msgstr "Continut Fisier"
 #: view:ir.model.relation:0
 #: model:ir.ui.menu,name:base.ir_model_relation_menu
 msgid "ManyToMany Relations"
-msgstr ""
+msgstr "Relatii ManyToMany"
 
 #. module: base
 #: model:res.country,name:base.pa
@@ -12586,7 +12653,7 @@ msgstr "Insula Pitcairn"
 #. module: base
 #: field:res.partner,category_id:0
 msgid "Tags"
-msgstr ""
+msgstr "Etichete"
 
 #. module: base
 #: view:base.module.upgrade:0
@@ -12606,7 +12673,7 @@ msgstr "Reguli Inregistrare"
 #. module: base
 #: view:multi_company.default:0
 msgid "Multi Company"
-msgstr ""
+msgstr "Multi Companie"
 
 #. module: base
 #: model:ir.module.category,name:base.module_category_portal
@@ -12617,13 +12684,13 @@ msgstr "Portal"
 #. module: base
 #: selection:ir.translation,state:0
 msgid "To Translate"
-msgstr ""
+msgstr "De Tradus"
 
 #. module: base
 #: code:addons/base/ir/ir_fields.py:294
 #, python-format
 msgid "See all possible values"
-msgstr ""
+msgstr "Vezi toate valorile posibile"
 
 #. module: base
 #: model:ir.module.module,description:base.module_claim_from_delivery
@@ -12658,12 +12725,12 @@ msgstr ""
 #. module: base
 #: help:ir.model.constraint,name:0
 msgid "PostgreSQL constraint or foreign key name."
-msgstr ""
+msgstr "Restrictie PostgreSQL sau nume cheie straina."
 
 #. module: base
 #: view:res.company:0
 msgid "Click to set your company logo."
-msgstr ""
+msgstr "Faceti click pentru a configura sigla companiei."
 
 #. module: base
 #: view:res.lang:0
@@ -12685,12 +12752,12 @@ msgstr "Guineea Bissau"
 #. module: base
 #: field:ir.actions.report.xml,header:0
 msgid "Add RML Header"
-msgstr ""
+msgstr "Adauga Antet RML"
 
 #. module: base
 #: help:res.company,rml_footer:0
 msgid "Footer text displayed at the bottom of all reports."
-msgstr ""
+msgstr "Textul subsol afisat in partea de jos a tuturor rapoartelor."
 
 #. module: base
 #: field:ir.module.module,icon:0
@@ -12700,7 +12767,7 @@ msgstr "Pictograma URL"
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_note_pad
 msgid "Memos pad"
-msgstr ""
+msgstr "Bloc notes"
 
 #. module: base
 #: model:ir.module.module,description:base.module_pad
@@ -12714,11 +12781,19 @@ msgid ""
 "pads (by default, http://ietherpad.com/).\n"
 "    "
 msgstr ""
+"\n"
+"Adauga suport marit pentru atasamentele (Ether)Pad in clientul web.\n"
+"===================================================================\n"
+"\n"
+"Permite companiei sa personalizeze instalatia Pad care ar trebui folosita "
+"pentru a se conecta\n"
+"la pad-uri noi (implicit, http://ietherpad.com/).\n"
+"    "
 
 #. module: base
 #: sql_constraint:res.lang:0
 msgid "The code of the language must be unique !"
-msgstr "Codul limbii trebuie sa fie unic!"
+msgstr "Codul limbii trebuie sa fie unic !"
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_attachment
@@ -12752,7 +12827,7 @@ msgstr "Alte actiuni"
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_l10n_be_coda
 msgid "Belgium - Import Bank CODA Statements"
-msgstr ""
+msgstr "Belgia - Importa Extrase de cont CODA"
 
 #. module: base
 #: selection:ir.actions.todo,state:0
