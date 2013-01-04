@@ -243,7 +243,7 @@ class Cursor(object):
             self.status = False
             raise
         except psycopg2.ProgrammingError, pe:
-            self.__logger.exception("Programming error: %s, in query %s" % (pe, query))
+            self.__logger.error("Programming error: %s, in query %s" % (pe, query))
             self.__logger.error("bad query: %s" % query)
             self.__logger.error("params: %s" % (params,))
             raise
