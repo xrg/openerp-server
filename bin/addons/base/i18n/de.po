@@ -129,7 +129,7 @@ msgstr ""
 #. module: base
 #: field:res.partner,ref:0
 msgid "Reference"
-msgstr "Referenz"
+msgstr "Kundennummer"
 
 #. module: base
 #: field:ir.actions.act_window,target:0
@@ -4288,7 +4288,7 @@ msgstr "Ursprungsbezeichnung"
 #. module: base
 #: model:ir.ui.menu,name:base.menu_main_pm
 msgid "Project"
-msgstr "Projekt"
+msgstr "Projekte"
 
 #. module: base
 #: field:ir.ui.menu,web_icon_hover_data:0
@@ -4846,7 +4846,7 @@ msgstr "Übersprungen"
 #. module: base
 #: selection:ir.model.fields,state:0
 msgid "Custom Field"
-msgstr "benutzerdefiniertes Feld"
+msgstr "Benutzerdefiniertes Feld"
 
 #. module: base
 #: field:ir.module.module,web:0
@@ -7149,7 +7149,7 @@ msgstr "Synchronisiere Übersetzungen"
 #. module: base
 #: model:ir.ui.menu,name:base.next_id_10
 msgid "Scheduler"
-msgstr "Planungsassistent"
+msgstr "Scheduler"
 
 #. module: base
 #: help:ir.cron,numbercall:0

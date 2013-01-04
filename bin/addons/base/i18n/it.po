@@ -7078,7 +7078,7 @@ msgstr "Hindi / हिंदी"
 #. module: base
 #: selection:base.language.install,lang:0
 msgid "Hungarian / Magyar"
-msgstr "Ungherese / Magiaro"
+msgstr "Hungarian / Magyar"
 
 #. module: base
 #: selection:base.language.install,lang:0

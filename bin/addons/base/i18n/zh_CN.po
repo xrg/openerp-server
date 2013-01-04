@@ -2555,7 +2555,7 @@ msgstr "计算精度"
 #: model:ir.module.module,shortdesc:base.module_meta_information
 #: view:ir.model:0
 msgid "Base"
-msgstr "本位币"
+msgstr "base 模块"
 
 #. module: base
 #: field:res.currency,date:0 field:res.currency.rate,name:0
@@ -3104,7 +3104,7 @@ msgstr "工作流停止"
 #. module: base
 #: field:workflow.activity,in_transitions:0 view:workflow.activity:0
 msgid "Incoming Transitions"
-msgstr "传入转换"
+msgstr "转入迁移"
 
 #. module: base
 #: field:workflow.activity,join_mode:0
@@ -3114,7 +3114,7 @@ msgstr "合并模式"
 #. module: base
 #: field:workflow.activity,out_transitions:0 view:workflow.activity:0
 msgid "Outgoing Transitions"
-msgstr "传出转换"
+msgstr "传出迁移"
 
 #. module: base
 #: field:workflow.activity,signal_send:0
@@ -4111,13 +4111,9 @@ msgstr ""
 
 #. module: base
 #: help:workflow.transition,group_id:0
-#, fuzzy
 msgid ""
 "The group that a user must have to be authorized to validate this transition."
-msgstr ""
-"#-#-#-#-#  .merge_file_h1CveI (OpenERP Server 5.0.4)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_DU8Ro3 (OpenERP Server 5.0.4)  #-#-#-#-#\n"
-"用户组中的用户需要授权才能确认此转换。"
+msgstr "用户组中的用户需要授权才能确认此迁移。"
 
 #. module: base
 #: help:workflow.transition,signal:0
@@ -4594,7 +4590,7 @@ msgstr "实例"
 #: model:ir.ui.menu,name:base.menu_workflow_transition
 #: view:workflow.activity:0
 msgid "Transitions"
-msgstr "转移"
+msgstr "迁移"
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_workflow_workitem_form
@@ -5555,12 +5551,8 @@ msgstr ""
 #. module: base
 #: model:ir.ui.menu,name:base.menu_event_association
 #: model:ir.ui.menu,name:base.menu_event_main
-#, fuzzy
 msgid "Events Organisation"
-msgstr ""
-"#-#-#-#-#  .merge_file_SQnvkB (OpenERP Server 5.0.4)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_mmSLH2 (OpenERP Server 5.0.4)  #-#-#-#-#\n"
-"事件组织"
+msgstr "活动组织"
 
 #. module: base
 #: model:ir.ui.menu,name:base.menu_fundrising
@@ -11348,7 +11340,7 @@ msgstr "工作流实例"
 #. module: base
 #: view:workflow.transition:0
 msgid "Transition"
-msgstr "转换"
+msgstr "迁移"
 
 #. module: base
 #: view:workflow.workitem:0

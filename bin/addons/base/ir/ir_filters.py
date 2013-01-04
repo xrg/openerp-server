@@ -34,6 +34,8 @@ class ir_filters(osv.osv):
         return cr.fetchall()
 
     def get_filters(self, cr, uid, model, context=None):
+        if context is None:
+            context = self.pool.get('res.users').context_get(cr, uid)
         act_ids = self.search_read(cr, uid, [('model_id','=',model),
                 '|', ('user_id', '=', False),('user_id','=',uid)], context=context)
         return act_ids
