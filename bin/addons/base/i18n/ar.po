@@ -2,14 +2,15 @@
 # This file contains the translation of the following modules:
 # 
 # Translators:
+# Mustafa Al-Rawi <thetruefact@gmail.com>, 2012.
 msgid ""
 msgstr ""
 "Project-Id-Version: OpenERP-F3\n"
 "Report-Msgid-Bugs-To: xrg@hellug.gr\n"
 "POT-Creation-Date: 2012-09-16 11:37+0000\n"
-"PO-Revision-Date: 2012-09-16 11:41+0000\n"
-"Last-Translator: xrg <xrg@hellug.gr>\n"
-"Language-Team: \n"
+"PO-Revision-Date: 2012-12-13 15:02+0000\n"
+"Last-Translator: Mustafa Al-Rawi <thetruefact@gmail.com>\n"
+"Language-Team: Arabic (http://www.transifex.com/projects/p/openerp-f3/language/ar/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -75,7 +76,7 @@ msgstr "بوابة خدمة الرسائل القصيرة: كليكاتل (click
 #. module: base
 #: selection:res.partner.address,validity:0
 msgid "Preferred"
-msgstr ""
+msgstr "مُفضَّل"
 
 #. module: base
 #: selection:base.language.install,lang:0
@@ -97,7 +98,7 @@ msgstr "الأسبانية"
 msgid ""
 "Specifies where this record has come from. Used to coordinate "
 "synchronization algorithms."
-msgstr ""
+msgstr "يحدد من أين أتى هذا السجل. يستخدم لتوجيه خورازميات المزامنة."
 
 #. module: base
 #: field:ir.actions.server,wkf_model_id:0
@@ -195,7 +196,7 @@ msgstr "ثمّة وحدات برمجية تعتمد على الوحدة التي
 #: code:addons/orm.py:296
 #, python-format
 msgid "Wrong ID for the %s browse record, got %r, expected an integer."
-msgstr ""
+msgstr "معرف خاطئ لسجل التصفح %s، حصلنا على %r، وتوقعنا عدد صحيح."
 
 #. module: base
 #: field:ir.sequence,number_increment:0
@@ -287,7 +288,7 @@ msgstr "تجميع غير ممكن"
 #. module: base
 #: model:ir.actions.act_window,name:0
 msgid "Wiki Groups"
-msgstr ""
+msgstr "مجموعات ويكي"
 
 #. module: base
 #: field:res.partner,credit_limit:0
@@ -335,12 +336,12 @@ msgstr "المجموعة"
 msgid ""
 "Invalid date/time format directive specified. Please refer to the list of "
 "allowed directives, displayed when you edit a language."
-msgstr ""
+msgstr "صيغة موجه التاريخ/وقت المحددة غير صالحة. الرجاء الرجوع إلى قائمة الموجهات المسموح بها، والمعروضة أثناء تحرير اللغة."
 
 #. module: base
 #: model:ir.model,name:0
 msgid "Wiki History"
-msgstr ""
+msgstr "تاريخ ويكي"
 
 #. module: base
 #: field:ir.exports.line,name:0 field:ir.translation,name:0
@@ -465,7 +466,7 @@ msgstr "قيمة/ مفتاح  '%s'  غير موجود في الحقول المخ
 #. module: base
 #: model:res.partner.title,name:base.res_partner_title_sir
 msgid "Mister"
-msgstr ""
+msgstr "السيد"
 
 #. module: base
 #: help:res.country,code:0
@@ -487,7 +488,7 @@ msgstr "المبيعات و المشتريات"
 #. module: base
 #: model:res.partner.title,name:base.res_partner_title_pvt_ltd
 msgid "Corporation"
-msgstr ""
+msgstr "الشركة"
 
 #. module: base
 #: view:ir.translation:0
@@ -525,7 +526,7 @@ msgstr "اختر نافذة الإجراء والتقرير والمعالج ا�
 #. module: base
 #: help:res.currency,symbol:0
 msgid "Currency sign, to be used when printing amounts"
-msgstr ""
+msgstr "علامة العملة، لاستخدامها عند طباعة المبالغ المالية"
 
 #. module: base
 #: view:res.config.users:0
@@ -571,7 +572,7 @@ msgstr "إريتريا"
 #. module: base
 #: sql_constraint:res.company:0
 msgid "The company name must be unique !"
-msgstr ""
+msgstr "يجب أن يكون اسم الشركة فريد وغير مكرر!"
 
 #. module: base
 #: view:res.config:0 view:res.config.installer:0
@@ -642,7 +643,7 @@ msgstr "المتواليات"
 #: code:addons/fields.py:424
 #, python-format
 msgid "Cannot merge %s, because %s field cannot merge"
-msgstr ""
+msgstr "لا يمكن دمج %s، لأن الحقل %s لا يمكن دمجه"
 
 #. module: base
 #: model:ir.model,name:base.model_base_language_import
@@ -965,7 +966,7 @@ msgstr "%W - رقم الأسبوع في السنة (باعتبار يوم الإ
 #: code:addons/base/module/wizard/base_language_install.py:55
 #, python-format
 msgid "Language Pack"
-msgstr ""
+msgstr "حزمة لغة"
 
 #. module: base
 #: model:res.country,name:base.gs
@@ -1094,7 +1095,7 @@ msgstr ""
 #. module: base
 #: field:res.roles,name:0
 msgid "Role Name"
-msgstr ""
+msgstr "اسم الدور"
 
 #. module: base
 #: view:res.lang:0
@@ -1370,7 +1371,7 @@ msgstr "النشاط المصدر"
 #. module: base
 #: view:ir.sequence:0
 msgid "Legend (for prefix, suffix)"
-msgstr ""
+msgstr "الدليل (للبادئة واللاحقة)"
 
 #. module: base
 #: selection:ir.server.object.lines,type:0
@@ -1428,7 +1429,7 @@ msgstr "متقدم"
 msgid ""
 "If set, sequence will only be used in case this python expression matches, "
 "and will precede other sequences."
-msgstr ""
+msgstr "عند ضبطه، سيتم استخدام التتابع فقط في حالة مطابقة تعبير بايثون، وسيسبق غيره من التتابعات."
 
 #. module: base
 #: model:res.country,name:base.fi
@@ -1463,7 +1464,7 @@ msgstr "https://www.facebook.com/#!/pages/OpenERP-Arabic-Team/270243976333404 أ
 #: code:addons/orm.py:2580 code:addons/orm.py:2630
 #, python-format
 msgid "Integrity Error!"
-msgstr ""
+msgstr "خطأ - غير سليم!"
 
 #. module: base
 #: field:ir.actions.act_window,view_mode:0
@@ -1716,12 +1717,12 @@ msgstr "طريقة العرض الأصلية"
 #. module: base
 #: view:ir.values:0
 msgid "Action To Launch"
-msgstr ""
+msgstr "إطلاق إجراء"
 
 #. module: base
 #: field:ir.actions.url,target:0
 msgid "Action Target"
-msgstr ""
+msgstr "هدف الإجراء"
 
 #. module: base
 #: model:res.country,name:base.ai
@@ -1861,7 +1862,7 @@ msgstr "سلوفينيا"
 #. module: base
 #: help:res.currency,name:0
 msgid "Currency Code (ISO 4217)"
-msgstr ""
+msgstr "رمز العمل (آيزو 4217)"
 
 #. module: base
 #: model:res.country,name:base.pk
@@ -1969,7 +1970,7 @@ msgstr "صحيح"
 #. module: base
 #: selection:ir.translation,type:0
 msgid "XSL"
-msgstr ""
+msgstr "XSL"
 
 #. module: base
 #: code:addons/base/module/module.py:440
@@ -2011,7 +2012,7 @@ msgstr "معطيات غير سليمة"
 #. module: base
 #: model:res.partner.title,shortcut:base.res_partner_title_miss
 msgid "Mss."
-msgstr ""
+msgstr "السيدة"
 
 #. module: base
 #: model:res.country,name:0 model:res.country,name:base.se
@@ -2171,7 +2172,7 @@ msgstr ""
 #: code:addons/fields.py:428 code:addons/fields_simple.py:69
 #, python-format
 msgid "Cannot merge because field %s is not empty."
-msgstr ""
+msgstr "لا يمكن الدمج لأن الحقل %s غير فارغ."
 
 #. module: base
 #: field:res.partner.address,birthdate:0
@@ -2262,7 +2263,7 @@ msgstr ""
 #. module: base
 #: view:base.module.import:0
 msgid "Select module package to import (.zip file):"
-msgstr ""
+msgstr "اختر حزمة موديول لاستيرادها (ملف ZIP):"
 
 #. module: base
 #: field:ir.default,ref_id:0
@@ -2422,7 +2423,7 @@ msgstr "إنشاء قائمة"
 #. module: base
 #: model:ir.model,name:base.model_publisher_warranty_contract
 msgid "publisher_warranty.contract"
-msgstr ""
+msgstr "publisher_warranty.contract"
 
 #. module: base
 #: help:res.partner,vat:0
@@ -2471,7 +2472,7 @@ msgstr ""
 #. module: base
 #: sql_constraint:ir.translation:0
 msgid "Language code of translation item must be among known languages"
-msgstr ""
+msgstr "رمز اللغة لعنصر الترجمة يجب أن يكون ضمن اللغات المعروفة"
 
 #. module: base
 #: view:ir.rule:0
@@ -2737,7 +2738,7 @@ msgstr "المعالج"
 #. module: base
 #: view:ir.cron:0
 msgid "Action to Trigger"
-msgstr ""
+msgstr "الإجراء الذي سيطلق"
 
 #. module: base
 #: code:addons/base/res/res_user.py:187
@@ -2818,7 +2819,7 @@ msgstr "قطاع الاتصالات"
 #. module: base
 #: field:workflow.transition,trigger_model:0
 msgid "Trigger Object"
-msgstr ""
+msgstr "كائن الإطلاق"
 
 #. module: base
 #: view:res.users:0
@@ -2829,7 +2830,7 @@ msgstr "النشاط الحالي"
 #: code:addons/orm.py:2595
 #, python-format
 msgid "ID not found!"
-msgstr ""
+msgstr "لم يتم العثور على المعرف!"
 
 #. module: base
 #: code:addons/fields.py:205
@@ -2856,12 +2857,12 @@ msgstr "الحساب المصرفي"
 #: code:addons/orm.py:3854
 #, python-format
 msgid "write"
-msgstr ""
+msgstr "كتابة"
 
 #. module: base
 #: model:ir.ui.menu,name:base.menu_view_base_module_configuration
 msgid "Reconfigure"
-msgstr ""
+msgstr "إعادة ضبط"
 
 #. module: base
 #: selection:base.language.install,lang:0
@@ -2928,7 +2929,7 @@ msgstr "غينيا الاستوائية"
 #. module: base
 #: selection:ir.model.data,source:0
 msgid "XML data"
-msgstr ""
+msgstr "بيانات XML"
 
 #. module: base
 #: view:partner.sms.send:0
@@ -3009,7 +3010,7 @@ msgstr "القواعد"
 #: code:addons/base/module/module.py:282
 #, python-format
 msgid "You try to remove a module that is installed or will be installed"
-msgstr ""
+msgstr "أنت تحاول إزالة موديول منصب أو سيتم تنصيبه"
 
 #. module: base
 #: help:ir.values,key2:0
@@ -3049,7 +3050,7 @@ msgstr "res.partner.title"
 #. module: base
 #: model:ir.actions.act_window,name:0
 msgid "Wiki Pages"
-msgstr ""
+msgstr "صفحات ويكي"
 
 #. module: base
 #: view:ir.values:0
@@ -3064,7 +3065,7 @@ msgstr "تجار التجزئة"
 #. module: base
 #: model:ir.model,name:base.model_res_roles
 msgid "res.roles"
-msgstr ""
+msgstr "res.roles"
 
 #. module: base
 #: help:ir.cron,priority:0
@@ -3148,7 +3149,7 @@ msgstr ""
 #. module: base
 #: selection:ir.model.data,source:0
 msgid "Document Sync."
-msgstr ""
+msgstr "مزامنة المستندات"
 
 #. module: base
 #: model:res.country,name:base.bj
@@ -3180,7 +3181,7 @@ msgstr "المفتاح"
 #. module: base
 #: field:res.company,rml_header:0
 msgid "RML Header"
-msgstr ""
+msgstr "ترويسة RML"
 
 #. module: base
 #: field:partner.sms.send,app_id:0
@@ -3326,7 +3327,7 @@ msgstr "التاريخ"
 #. module: base
 #: field:ir.actions.report.xml,report_sxw:0
 msgid "SXW path"
-msgstr ""
+msgstr "مسار SXW"
 
 #. module: base
 #: view:ir.attachment:0
@@ -3385,7 +3386,7 @@ msgstr "المُنشِئ"
 msgid ""
 "Please note that the following payments are now due. If your payment                         has been sent, kindly forward your payment details. If payment will be                         delayed further, please contact us to discuss.                         \n"
 "Would your payment have been carried out after this mail was sent, please consider the present one as void."
-msgstr ""
+msgstr "يرجى ملاحظة أن الدفعات التالية هي الآن الواجبة. إذا تم إرسال دفعتك، التكرم بتقديم تفاصيل الدفع. إذا سيتم تأجيل دفع مزيد من المعلومات يرجى الاتصال بنا لمناقشة.\nوأجريت الدفع خارج بعد طرد هذا البريد، يرجى النظر في واحدة بوصفها باطلة."
 
 #. module: base
 #: model:res.country,name:base.mx
@@ -3427,7 +3428,7 @@ msgstr "إعدادات الواجهة"
 #. module: base
 #: field:ir.values,meta:0
 msgid "Meta Datas"
-msgstr ""
+msgstr "البيانات الدلالية"
 
 #. module: base
 #: field:ir.property,fields_id:0 selection:ir.translation,type:0
@@ -3453,7 +3454,7 @@ msgstr "زامبيا"
 #. module: base
 #: view:ir.actions.todo:0
 msgid "Launch Configuration Wizard"
-msgstr ""
+msgstr "تشغيل معالج الضبط"
 
 #. module: base
 #: help:res.partner,user_id:0
@@ -3502,7 +3503,7 @@ msgid ""
 "claims, etc. If you use the email gateway, the Outlook or the Thunderbird "
 "plugin, don't forget to register emails to each contact so that the gateway "
 "will automatically attach incoming emails to the right partner."
-msgstr ""
+msgstr "العميل هو كيان تؤدي له الأعمال، كشركة أو منظمة. قد يكون للعميل الواحد عدة جهات اتصال أو عناوين وهم الأناس الذين يعملون بتلك الشركة. يمكنك أن تستخدم لسان التبويب التاريخ لمتابعة كافة المعلومات المتعلقة بالعميل: أوامر الشراء، المراسلات، فرص البيع، الدعاوى، وغيرها. إذا كنت تستخدم البوابة البريدية - إضافات Outlook وThunderbird - لا تنسى أن تسجل عناوين البريد لكل جهة اتصال بحيث تقوم بوابة البريد آلياً بربط البريد الوارد بالشريك الصحيح."
 
 #. module: base
 #: field:ir.actions.report.xml,name:0 field:ir.actions.todo,name:0
@@ -3598,7 +3599,7 @@ msgstr "الإنترنت"
 #. module: base
 #: selection:base.language.install,lang:0
 msgid "English (CA)"
-msgstr ""
+msgstr "الإنجليزية (كندا)"
 
 #. module: base
 #: code:addons/fields_function.py:569
@@ -3666,7 +3667,7 @@ msgstr ""
 #. module: base
 #: field:ir.actions.server,write_id:0
 msgid "Write Id"
-msgstr ""
+msgstr "كتابة المعرف"
 
 #. module: base
 #: model:ir.ui.menu,name:base.menu_product
@@ -3676,7 +3677,7 @@ msgstr "المنتجات"
 #. module: base
 #: field:ir.actions.act_window,domain:0 field:ir.filters,domain:0
 msgid "Domain Value"
-msgstr ""
+msgstr "قيمة النطاق"
 
 #. module: base
 #: view:ir.actions.server:0
@@ -3719,7 +3720,7 @@ msgstr "اختصار"
 #. module: base
 #: field:ir.model.data,date_init:0
 msgid "Init Date"
-msgstr ""
+msgstr "تاريخ البدء"
 
 #. module: base
 #: selection:base.language.install,lang:0
@@ -3742,7 +3743,7 @@ msgstr "فضلاً أدخل المفتاح التسلسلي الموجود في 
 #. module: base
 #: view:workflow.activity:0 field:workflow.activity,flow_start:0
 msgid "Flow Start"
-msgstr ""
+msgstr "بداية التدفق"
 
 #. module: base
 #: code:addons/__init__.py:953
@@ -3758,7 +3759,7 @@ msgstr "مالِك الحساب المصرفي"
 #. module: base
 #: model:ir.actions.act_window,name:base.act_values_form
 msgid "Client Actions Connections"
-msgstr ""
+msgstr "ارتباطات إجراءات العميل"
 
 #. module: base
 #: field:ir.attachment,res_name:0 field:ir.ui.view_sc,resource:0
@@ -3798,12 +3799,12 @@ msgstr "الكائن المتأثر بهذه القاعدة"
 #. module: base
 #: sql_constraint:res.currency:0
 msgid "The currency code must be unique !"
-msgstr ""
+msgstr "يجب أن يكون رمز العملة فريداً!"
 
 #. module: base
 #: model:ir.ui.menu,name:0
 msgid "Survey Requests"
-msgstr ""
+msgstr "طلبات الاستطلاع"
 
 #. module: base
 #: report:ir.module.reference.graph:0
@@ -3844,7 +3845,7 @@ msgstr "res.request.history"
 #. module: base
 #: view:ir.actions.server:0
 msgid "Client Action Configuration"
-msgstr ""
+msgstr "ضبط إجراء العميل"
 
 #. module: base
 #: model:ir.model,name:base.model_res_partner_address
@@ -3935,7 +3936,7 @@ msgstr "الفرنسية / Français"
 #: code:addons/orm.py:1450
 #, python-format
 msgid "The create method is not implemented on this object !"
-msgstr ""
+msgstr "لا تنطبق وظيفة الإنشاء على هذا الكائن!"
 
 #. module: base
 #: field:workflow.triggers,workitem_id:0
@@ -4083,7 +4084,7 @@ msgstr "الوحدات البرمجية"
 #: view:workflow.activity:0 selection:workflow.activity,kind:0
 #: field:workflow.activity,subflow_id:0 field:workflow.workitem,subflow_id:0
 msgid "Subflow"
-msgstr ""
+msgstr "تدفق فرعي"
 
 #. module: base
 #: model:ir.model,name:base.model_res_config
@@ -4132,7 +4133,7 @@ msgstr "سعر العملة باستخدام العملة ذات السعر 1"
 #: code:addons/orm.py:4235
 #, python-format
 msgid "You are not permitted to create column %s.%s."
-msgstr ""
+msgstr "غير مسموح لك بإنشاء العمود %s.%s."
 
 #. module: base
 #: model:res.country,name:base.uk
@@ -4179,7 +4180,7 @@ msgstr "اختر إذا كان الشريك موظفاً"
 #. module: base
 #: field:res.partner.address,validity:0
 msgid "Validity"
-msgstr ""
+msgstr "الصلاحية"
 
 #. module: base
 #: model:res.partner.title,name:base.res_partner_title_ltd
@@ -4275,7 +4276,7 @@ msgstr "ملغي"
 #. module: base
 #: model:ir.model,name:0
 msgid "Wiki Page"
-msgstr ""
+msgstr "صفحة الموسوعة"
 
 #. module: base
 #: view:res.config.users:0
@@ -4372,7 +4373,7 @@ msgstr "نوع الحقل"
 #. module: base
 #: field:res.country.state,code:0
 msgid "State Code"
-msgstr ""
+msgstr "رمز الولاية"
 
 #. module: base
 #: field:ir.model.fields,on_delete:0
@@ -4438,7 +4439,7 @@ msgstr "يجب أن يكون اسم الوحدة البرمجية فريداً!"
 #. module: base
 #: view:ir.property:0
 msgid "Parameters that are used by all resources."
-msgstr ""
+msgstr "المتغيرات التي تستخدمها كافة الموارد."
 
 #. module: base
 #: model:res.country,name:base.mz
@@ -4469,12 +4470,12 @@ msgstr "مندوب المبيعات"
 #. module: base
 #: view:ir.module.module:0
 msgid "Upgrade"
-msgstr ""
+msgstr "ترقية"
 
 #. module: base
 #: selection:res.partner.address,validity:0
 msgid "Verified"
-msgstr ""
+msgstr "تمت مصادقته"
 
 #. module: base
 #: field:res.partner,address:0 view:res.partner.address:0
@@ -4489,12 +4490,12 @@ msgstr "جزر فارو"
 #. module: base
 #: selection:ir.module.module,license:0
 msgid "GNU Lesser Public License v2"
-msgstr ""
+msgstr "رخصة GNU Lesser Public الإصدار 2"
 
 #. module: base
 #: selection:ir.module.module,license:0
 msgid "GNU Lesser Public License v3"
-msgstr ""
+msgstr "رخصة GNU Lesser Public الإصدار 3"
 
 #. module: base
 #: view:res.widget.wizard:0
@@ -4542,7 +4543,7 @@ msgstr "فضلاً استخدم معالج تغيير كلمة المرور (ف�
 #. module: base
 #: view:workflow.activity:0 field:workflow.activity,in_transitions:0
 msgid "Incoming Transitions"
-msgstr ""
+msgstr "الانتقالات الواردة"
 
 #. module: base
 #: code:addons/views_classic.py:152
@@ -4570,7 +4571,7 @@ msgstr "الشركة التي يعمل هذا المستخدم لصالحها ح
 #. module: base
 #: model:ir.model,name:base.model_wizard_ir_model_menu_create
 msgid "wizard.ir.model.menu.create"
-msgstr ""
+msgstr "wizard.ir.model.menu.create"
 
 #. module: base
 #: view:workflow.transition:0
@@ -4595,7 +4596,7 @@ msgstr "منغوليا"
 #. module: base
 #: model:res.widget,title:base.openerp_favorites_twitter_widget
 msgid "OpenERP Tweets"
-msgstr ""
+msgstr "تغريدات OpenERP"
 
 #. module: base
 #: model:res.country,name:base.bi
@@ -4634,7 +4635,7 @@ msgstr "مملكة بوتان"
 #. module: base
 #: help:ir.sequence,number_next:0
 msgid "Next number of this sequence"
-msgstr ""
+msgstr "الرقم التالي لهذا التسلسل"
 
 #. module: base
 #: model:res.partner.category,name:base.res_partner_category_11
@@ -4670,7 +4671,7 @@ msgstr "صيغة الملف"
 #. module: base
 #: field:res.lang,iso_code:0
 msgid "ISO code"
-msgstr ""
+msgstr "رمز ISO"
 
 #. module: base
 #: model:ir.model,name:base.model_res_config_view
@@ -4703,7 +4704,7 @@ msgstr "إذا كنت تعمل في السوق الأمريكي، يمكنك ت�
 #. module: base
 #: view:workflow.workitem:0
 msgid "Workflow Workitems"
-msgstr ""
+msgstr "عناصر أعمال خارطة التدفق"
 
 #. module: base
 #: model:res.country,name:base.vc
@@ -4736,7 +4737,7 @@ msgstr ""
 #. module: base
 #: field:res.company,rml_header2:0 field:res.company,rml_header3:0
 msgid "RML Internal Header"
-msgstr ""
+msgstr "ترويسة RML الداخلية"
 
 #. module: base
 #: field:ir.actions.act_window,search_view_id:0
@@ -4760,12 +4761,12 @@ msgstr ""
 #. module: base
 #: selection:ir.module.module,license:0
 msgid "All rights reserved"
-msgstr ""
+msgstr "كافة الحقوق محفوظة"
 
 #. module: base
 #: model:res.partner.bank.type.field,name:base.bank_normal_field
 msgid "acc_number"
-msgstr ""
+msgstr "acc_number"
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_partner_address_form
@@ -4781,7 +4782,7 @@ msgstr "ميانمار"
 #. module: base
 #: help:ir.model.fields,modules:0
 msgid "List of modules in which the field is defined"
-msgstr ""
+msgstr "قائمة الموديولات التي تحدد فيها الحقل"
 
 #. module: base
 #: selection:base.language.install,lang:0
@@ -4802,12 +4803,12 @@ msgstr "يوغوسلافيا"
 #. module: base
 #: view:ir.attachment:0
 msgid "Filter on my documents"
-msgstr ""
+msgstr "عوامل التصفية على مستنداتي"
 
 #. module: base
 #: field:ir.model.data,name:0
 msgid "XML Identifier"
-msgstr ""
+msgstr "معرف XML"
 
 #. module: base
 #: model:res.country,name:base.ca
@@ -4826,7 +4827,7 @@ msgstr "غير معروف"
 msgid ""
 "\n"
 " <no view found>"
-msgstr ""
+msgstr "\n<لم يتم العثور على طريقة العرض>"
 
 #. module: base
 #: code:addons/base/ir/ir_actions.py:169
@@ -4865,12 +4866,12 @@ msgstr "حقل مخصص"
 msgid ""
 "Your OpenERP Publisher's Warranty Contract unique key, also called serial "
 "number."
-msgstr ""
+msgstr "مفتاح عقد ضمان الناشر الفريد من OpenERP، والمسمى أيضاً بالرقم التسلسلي."
 
 #. module: base
 #: field:ir.module.module,web:0
 msgid "Has a web component"
-msgstr ""
+msgstr "لديه مكون ويب"
 
 #. module: base
 #: model:res.country,name:base.cc
@@ -4979,13 +4980,13 @@ msgstr "إذا تمّ تحديد هذا الإجراء فسيتم تنفيذه �
 #. module: base
 #: view:ir.values:0
 msgid "Client Actions"
-msgstr ""
+msgstr "إجراءات العميل"
 
 #. module: base
 #: code:addons/orm.py:2243
 #, python-format
 msgid "The exists method is not implemented on this object !"
-msgstr ""
+msgstr "وظيفة exists لا تنطبق على هذا الكائن!"
 
 #. module: base
 #: code:addons/base/module/module.py:454
@@ -4998,7 +4999,7 @@ msgstr "أنت تحاول ترقية وحدة برمجية تتطلب وحدة �
 #. module: base
 #: field:workflow.transition,act_to:0
 msgid "Destination Activity"
-msgstr ""
+msgstr "نشاط الهدف"
 
 #. module: base
 #: view:ir.values:0
@@ -5008,7 +5009,7 @@ msgstr "اربط الأحداث بالإجراءات"
 #. module: base
 #: model:ir.model,name:base.model_base_update_translations
 msgid "base.update.translations"
-msgstr ""
+msgstr "base.update.translations"
 
 #. module: base
 #: field:ir.module.category,parent_id:0 field:res.partner.category,parent_id:0
@@ -5029,7 +5030,7 @@ msgstr "جهة الاتصال"
 #. module: base
 #: model:ir.model,name:base.model_ir_ui_menu
 msgid "ir.ui.menu"
-msgstr ""
+msgstr "ir.ui.menu"
 
 #. module: base
 #: model:res.country,name:base.us
@@ -5056,7 +5057,7 @@ msgstr ""
 #. module: base
 #: view:ir.actions.report.xml:0
 msgid "RML Report"
-msgstr ""
+msgstr "تقرير RML"
 
 #. module: base
 #: model:ir.model,name:base.model_ir_server_object_lines
@@ -5083,7 +5084,7 @@ msgstr "الكويت"
 #. module: base
 #: selection:ir.model.data,source:0
 msgid "Merged records"
-msgstr ""
+msgstr "السجلات المدمجة"
 
 #. module: base
 #: field:workflow.workitem,inst_id:0
@@ -5101,7 +5102,7 @@ msgstr ""
 #. module: base
 #: selection:ir.property,type:0
 msgid "Many2One"
-msgstr ""
+msgstr "متعدد لفردي"
 
 #. module: base
 #: model:res.country,name:base.ng
@@ -5497,7 +5498,7 @@ msgstr "جزر سليمان"
 #: code:addons/orm.py:4546
 #, python-format
 msgid "AccessError"
-msgstr ""
+msgstr "خطأ الوصول"
 
 #. module: base
 #: view:res.request:0
@@ -5514,7 +5515,7 @@ msgstr "لم يمكن تحميل الوحدة البرمجية الأساسية 
 #: code:addons/orm.py:3993
 #, python-format
 msgid "You are not permitted to write into column %s.%s."
-msgstr ""
+msgstr "لا يمكنك الكتابة إلى العمود %s.%s."
 
 #. module: base
 #: view:res.lang:0
@@ -5540,7 +5541,7 @@ msgstr "الترجمات"
 #. module: base
 #: field:ir.sequence,padding:0
 msgid "Number padding"
-msgstr ""
+msgstr "ملئ العدد"
 
 #. module: base
 #: view:ir.actions.report.xml:0
@@ -5712,7 +5713,7 @@ msgstr "%H - الساعة (24 ساعة) [00،23]"
 #. module: base
 #: sql_constraint:res.country:0
 msgid "The VAT code of a country must be unique!"
-msgstr ""
+msgstr "رمز VAT للدولة يجب أن يكون فريداً غير مكرر!"
 
 #. module: base
 #: model:ir.model,name:base.model_res_widget
@@ -6038,7 +6039,7 @@ msgstr "حملة تبرعات"
 #: model:ir.actions.act_window,name:base.ir_sequence_type
 #: model:ir.ui.menu,name:base.menu_ir_sequence_type
 msgid "Sequence Codes"
-msgstr ""
+msgstr "رموز التتابعات"
 
 #. module: base
 #: selection:base.language.install,lang:0
@@ -6081,12 +6082,12 @@ msgstr "res.log"
 #: code:addons/base/ir/ir_model.py:148
 #, python-format
 msgid "Object must be unique"
-msgstr ""
+msgstr "يجب أن يكون الكائن فريداً"
 
 #. module: base
 #: view:workflow.activity:0 field:workflow.activity,flow_stop:0
 msgid "Flow Stop"
-msgstr ""
+msgstr "توقف التدفق"
 
 #. module: base
 #: selection:ir.cron,interval_type:0
@@ -6112,7 +6113,7 @@ msgstr "اسم المجموعة"
 #. module: base
 #: model:res.partner.bank.type.field,name:base.bank_normal_field_contry
 msgid "country_id"
-msgstr ""
+msgstr "هوية_البلد"
 
 #. module: base
 #: field:ir.cron,interval_type:0
@@ -6128,7 +6129,7 @@ msgstr "النوع"
 #: code:addons/orm.py:4505
 #, python-format
 msgid "This method does not exist anymore"
-msgstr ""
+msgstr "هذه الوظيفة لم تعد موجودة"
 
 #. module: base
 #: field:res.bank,fax:0 field:res.partner.address,fax:0
@@ -6165,7 +6166,7 @@ msgstr "res.request"
 #. module: base
 #: model:ir.model,name:0
 msgid "wiz open page"
-msgstr ""
+msgstr "افتح صفحة وز"
 
 #. module: base
 #: view:ir.model:0
@@ -6218,7 +6219,7 @@ msgstr ""
 #: code:addons/orm.py:3855
 #, python-format
 msgid "create"
-msgstr ""
+msgstr "إنشاء"
 
 #. module: base
 #: view:base.module.upgrade:0
@@ -6252,7 +6253,7 @@ msgstr "الخصائص"
 msgid ""
 "OpenERP will automatically adds some '0' on the left of the 'Next Number' to"
 " get the required padding size."
-msgstr ""
+msgstr "يضيف OpenERP تلقائيًا بعض ‘0‘ على شمال ‘العدد التالي‘ للحصول على مقاس الحشو المطلوب."
 
 #. module: base
 #: view:res.lang:0
@@ -6349,7 +6350,7 @@ msgstr ""
 #. module: base
 #: selection:res.partner.address,validity:0
 msgid "Invalid"
-msgstr ""
+msgstr "غير صالح"
 
 #. module: base
 #: selection:base.language.install,lang:0
@@ -6388,7 +6389,7 @@ msgstr "مُعرِّفات الكائنات"
 msgid ""
 "Manage the partner titles you want to have available in your system. The "
 "partner titles is the legal status of the company: Private Limited, SA, etc."
-msgstr ""
+msgstr "إدارة مسميات الشريك التي ترغب بها في نظامك. مسميات الشريك هي الأشكال القانونية للشركة، مثل مسئولية محدودة، مساهمة، وغيرها."
 
 #. module: base
 #: view:base.language.export:0
@@ -6528,7 +6529,7 @@ msgstr "غير مثبّت"
 #. module: base
 #: view:workflow.activity:0 field:workflow.activity,out_transitions:0
 msgid "Outgoing Transitions"
-msgstr ""
+msgstr "الانتقالات الصادرة"
 
 #. module: base
 #: field:ir.ui.menu,icon:0
@@ -6554,7 +6555,7 @@ msgstr ""
 #. module: base
 #: view:ir.sequence.type:0
 msgid "Sequences Type"
-msgstr ""
+msgstr "نوع التتابعات"
 
 #. module: base
 #: model:ir.actions.act_window,name:base.res_request-act
@@ -6577,7 +6578,7 @@ msgstr "أو"
 #: model:ir.actions.act_window,name:base.res_log_act_window
 #: model:ir.ui.menu,name:base.menu_res_log_act_window
 msgid "Client Logs"
-msgstr ""
+msgstr "سجلات العميل"
 
 #. module: base
 #: model:res.country,name:base.al
@@ -6619,7 +6620,7 @@ msgstr ""
 #: code:addons/orm.py:3088 code:addons/orm.py:3098
 #, python-format
 msgid "ValidateError"
-msgstr ""
+msgstr "التحقق من صلاحية الخطأ"
 
 #. module: base
 #: view:base.module.import:0 view:base.module.update:0
@@ -6696,7 +6697,7 @@ msgstr ""
 #. module: base
 #: help:res.amount_to_text,currency_id:0
 msgid "If specified, the value is amount of that currency"
-msgstr ""
+msgstr "عند تحديدها، فالقيمة هي المبلغ بتلك العملة"
 
 #. module: base
 #: selection:workflow.activity,kind:0
@@ -6770,12 +6771,12 @@ msgstr "اسم المحافظة"
 #. module: base
 #: view:res.lang:0
 msgid "Update Languague Terms"
-msgstr ""
+msgstr "تحديث مصطلحات اللغة"
 
 #. module: base
 #: field:workflow.activity,join_mode:0
 msgid "Join Mode"
-msgstr ""
+msgstr "وضع الانضمام"
 
 #. module: base
 #: field:res.config.users,context_tz:0 field:res.users,context_tz:0
@@ -6801,7 +6802,7 @@ msgstr "خطأ! لا يمكنك إنشاء أعضاء ذوي ارتباطات م
 #. module: base
 #: help:res.lang,code:0
 msgid "This field is used to set/get locales for user"
-msgstr ""
+msgstr "يستخدم هذا الحقل لجلب/ضبط الواجهة المحلية للمستخدم"
 
 #. module: base
 #: model:res.partner.category,name:base.res_partner_category_2
@@ -6816,7 +6817,7 @@ msgstr "لوحة معلومات مدير الموارد البشرية"
 #. module: base
 #: field:ir.model.data,source:0
 msgid "Source Domain"
-msgstr ""
+msgstr "النطاق المصدر"
 
 #. module: base
 #: code:addons/base/module/module.py:374
@@ -6846,7 +6847,7 @@ msgstr "اسم الإجراء"
 #. module: base
 #: help:res.partner.address,validity:0
 msgid "Has this address been verified?"
-msgstr ""
+msgstr "هل تمت المصادقة على العنوان؟"
 
 #. module: base
 #: selection:res.request,priority:0
@@ -6906,7 +6907,7 @@ msgstr "السيدة"
 #. module: base
 #: model:res.partner.title,shortcut:base.res_partner_title_ltd
 msgid "Ltd."
-msgstr ""
+msgstr "المحدودة"
 
 #. module: base
 #: model:res.country,name:base.ch
@@ -7156,7 +7157,7 @@ msgstr ""
 #. module: base
 #: field:res.roles,parent_id:0
 msgid "Parent"
-msgstr ""
+msgstr "الرئيسي"
 
 #. module: base
 #: field:ir.actions.act_window,res_model:0 field:ir.actions.report.xml,model:0
@@ -7179,7 +7180,7 @@ msgid ""
 "\n"
 "\n"
 "[object with reference: %s - %s]"
-msgstr ""
+msgstr "\n\n[الكائن بإشارة إلى: %s - %s]"
 
 #. module: base
 #: model:ir.model,name:base.model_ir_default
@@ -7207,14 +7208,14 @@ msgstr "المُجدوِل"
 #: code:addons/orm.py:1286
 #, python-format
 msgid "The search_read method is not implemented on this object !"
-msgstr ""
+msgstr "وظيفة search_read لا تنطبق على هذا الكائن!"
 
 #. module: base
 #: help:ir.cron,numbercall:0
 msgid ""
 "Number of time the function is called,\n"
 "a negative number indicates no limit"
-msgstr ""
+msgstr "عدد مرات استدعاء الدالة،\nالأرقام السالبة تعني بلا حدود"
 
 #. module: base
 #: code:addons/base/ir/ir_model.py:412
@@ -7364,13 +7365,13 @@ msgstr "ملف التقرير"
 #. module: base
 #: model:ir.model,name:base.model_workflow_triggers
 msgid "workflow.triggers"
-msgstr ""
+msgstr "workflow.triggers"
 
 #. module: base
 #: code:addons/base/ir/ir_model.py:99
 #, python-format
 msgid "Invalid search criterions"
-msgstr ""
+msgstr "شروط البحث غير صالحة"
 
 #. module: base
 #: view:ir.attachment:0
@@ -7412,7 +7413,7 @@ msgstr "رأس التقرير"
 #. module: base
 #: field:res.roles,child_id:0
 msgid "Children"
-msgstr ""
+msgstr "الادلة الداخلية"
 
 #. module: base
 #: field:ir.actions.act_window,type:0 field:ir.actions.actions,type:0
@@ -7459,7 +7460,7 @@ msgstr "العد الثنائي"
 msgid ""
 "Group(s) %s cannot be deleted, because some user(s) still belong to them: %s"
 " !"
-msgstr ""
+msgstr "لا يمكن حذف المجموعة(ات) %s، لأن مستخدم(ين) ينتمون إليها: %s!"
 
 #. module: base
 #: field:ir.actions.server,sms:0 selection:ir.actions.server,state:0
@@ -7499,7 +7500,7 @@ msgid ""
 "can create a new document that can be linked to one or several applications "
 "(CRM, Sales, etc.). You can use keywords to ease access to your wiki pages. "
 "There is a basic wiki editing for text format."
-msgstr ""
+msgstr "باستخدام صفحات الموسوعة يمكنك مشاركة الأفكار والأسئلة مع زملائك. يمكنك إنشاء مستندات جديدة يمكن ربطها بتطبيق أو أكثر (خدمة العملاء، المبيعات، وغيرها). يمكنك استخدام الكلمات الدلالية لتسهيل الوصول إلى صفحات الموسوعة. يوجد محرر نصوص بسيطة لتحرير الموسوعة."
 
 #. module: base
 #: view:ir.sequence:0
@@ -7535,7 +7536,7 @@ msgstr "workflow.instance"
 #: code:addons/orm.py:459
 #, python-format
 msgid "Unknown attribute %s in %s "
-msgstr ""
+msgstr "سمة غير معروفة %s في %s"
 
 #. module: base
 #: view:res.lang:0
@@ -7573,12 +7574,12 @@ msgstr "لوحات المعلومات"
 #: code:addons/fields.py:474 code:addons/fields.py:484
 #, python-format
 msgid "All records must have an equal %s, in order to merge"
-msgstr ""
+msgstr "يجب أن تتساوى السجلات في %s ليتم دمجها"
 
 #. module: base
 #: help:ir.attachment,type:0
 msgid "Binary File or external URL"
-msgstr ""
+msgstr "ملف تنفيذي أو رابط خارجي"
 
 #. module: base
 #: field:res.config.users,new_password:0 field:res.users,new_password:0
@@ -7588,7 +7589,7 @@ msgstr "تغيير كلمة المرور"
 #. module: base
 #: view:ir.attachment:0
 msgid "Creation Month"
-msgstr ""
+msgstr "شهر الإنشاء"
 
 #. module: base
 #: model:res.country,name:base.nl
@@ -7598,7 +7599,7 @@ msgstr "هولندا"
 #. module: base
 #: model:ir.ui.menu,name:base.next_id_4
 msgid "Low Level Objects"
-msgstr ""
+msgstr "كائنات منخفضة المستوى"
 
 #. module: base
 #: view:res.company:0
@@ -7670,7 +7671,7 @@ msgstr ""
 #. module: base
 #: field:ir.actions.report.xml,header:0
 msgid "Add RML header"
-msgstr ""
+msgstr "أضف ترويسة RML"
 
 #. module: base
 #: model:res.country,name:base.gr
@@ -7680,13 +7681,13 @@ msgstr "اليونان"
 #. module: base
 #: field:res.request,trigger_date:0
 msgid "Trigger Date"
-msgstr ""
+msgstr "تاريخ تريجر"
 
 #. module: base
 #: code:addons/expression.py:342
 #, python-format
 msgid "Invalid domain expression, too many operators: %r"
-msgstr ""
+msgstr "تعبير نطاق غير صالح، المعاملات كثيرة جداً: %r"
 
 #. module: base
 #: selection:base.language.install,lang:0
@@ -7701,13 +7702,13 @@ msgstr "استبدل المصطلحات الموجودة"
 #. module: base
 #: help:ir.actions.server,code:0
 msgid "Python code to be executed"
-msgstr ""
+msgstr "كود بايثون لتنفيذه"
 
 #. module: base
 #: code:addons/fields.py:407 code:addons/fields.py:410
 #, python-format
 msgid "Cannot merge a record when %s = %r"
-msgstr ""
+msgstr "لا يمكن دمج السجل عندما يكون %s = %r"
 
 #. module: base
 #: sql_constraint:res.country:0
@@ -7717,7 +7718,7 @@ msgstr "يجب أن يكون رمز الدولة فريداً!"
 #. module: base
 #: model:ir.ui.menu,name:base.menu_project_management_time_tracking
 msgid "Time Tracking"
-msgstr ""
+msgstr "تعقب الوقت"
 
 #. module: base
 #: view:res.partner.category:0
@@ -7727,7 +7728,7 @@ msgstr "فئة الشريك"
 #. module: base
 #: view:ir.actions.server:0 selection:ir.actions.server,state:0
 msgid "Trigger"
-msgstr ""
+msgstr "المطلق"
 
 #. module: base
 #: model:ir.model,name:base.model_base_module_update
@@ -7777,7 +7778,7 @@ msgstr ""
 #. module: base
 #: field:res.partner,child_ids:0 field:res.request,ref_partner_id:0
 msgid "Partner Ref."
-msgstr ""
+msgstr "مرجع الشريك"
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_partner_supplier_form
@@ -7794,7 +7795,7 @@ msgstr "تسجيل"
 #. module: base
 #: model:ir.ui.menu,name:0
 msgid "Answer a Survey"
-msgstr ""
+msgstr "إجابة استطلاع"
 
 #. module: base
 #: field:res.request,ref_doc1:0
@@ -7836,7 +7837,7 @@ msgstr "رقم الحساب"
 #: help:res.roles,description:0
 msgid ""
 "Description of this role and where it is relevant in workflows and processes"
-msgstr ""
+msgstr "وصف هذا الدور وأين يكون مقترن بخرائط التدفق والعمليات"
 
 #. module: base
 #: view:res.lang:0
@@ -7892,7 +7893,7 @@ msgstr "التالي"
 msgid ""
 "Name of the method to be called on the object when this scheduler is "
 "executed."
-msgstr ""
+msgstr "اسم الطريقة لاستدعائها على الكائن متى تم تنفيذ هذا المُجدوِّل."
 
 #. module: base
 #: code:addons/base/ir/ir_model.py:280
@@ -7900,7 +7901,7 @@ msgstr ""
 msgid ""
 "The Selection Options expression is must be in the [('key','Label'), ...] "
 "format!"
-msgstr ""
+msgstr "تعبير خيارات التحديد يجب أن تكون على هيئة [('key','Label'), ...]."
 
 #. module: base
 #: view:ir.actions.report.xml:0
@@ -7918,7 +7919,7 @@ msgstr "الصّين"
 msgid ""
 "--\n"
 "%(name)s %(email)s\n"
-msgstr ""
+msgstr "--\n%(name)s %(email)s\n"
 
 #. module: base
 #: model:res.country,name:base.eh
@@ -7955,7 +7956,7 @@ msgstr "يقوم هذا المعالج باكتشاف المصطلحات الج�
 msgid ""
 "Expression, must be True to match\n"
 "use context.get or user (browse)"
-msgstr ""
+msgstr "يجب أن يكون التعبير True لينطبق\nاستخدم context.get أو استخدم (تصفح)"
 
 #. module: base
 #: model:res.country,name:base.bg
@@ -8024,7 +8025,7 @@ msgstr "إيران"
 #: model:ir.actions.act_window,name:base.res_widget_user_act_window
 #: model:ir.ui.menu,name:base.menu_res_widget_user_act_window
 msgid "Widgets per User"
-msgstr ""
+msgstr "لوحة واجهة لكل مستخدم"
 
 #. module: base
 #: selection:base.language.install,lang:0
@@ -8075,12 +8076,12 @@ msgstr "الارتباط"
 #. module: base
 #: view:ir.actions.server:0
 msgid "Action to Launch"
-msgstr ""
+msgstr "الإجراء لإطلاقه"
 
 #. module: base
 #: selection:res.partner.address,validity:0
 msgid "Deprecated"
-msgstr ""
+msgstr "هالك"
 
 #. module: base
 #: model:ir.ui.menu,name:base.menu_address_book
@@ -8268,7 +8269,7 @@ msgstr "تصدير"
 #. module: base
 #: model:ir.ui.menu,name:0
 msgid "Survey Pages"
-msgstr ""
+msgstr "صفحات الإستفتاء"
 
 #. module: base
 #: view:res.lang:0
@@ -8365,7 +8366,7 @@ msgstr "لا يمكن التثبيت"
 #. module: base
 #: view:res.partner:0
 msgid "Supplier Partners"
-msgstr ""
+msgstr "الشركاء الموردين"
 
 #. module: base
 #: view:res.config.installer:0
@@ -8389,7 +8390,7 @@ msgstr "معلومات إضافية"
 #: model:ir.actions.act_window,name:base.act_values_form_action
 #: model:ir.ui.menu,name:base.menu_values_form_action
 msgid "Client Events"
-msgstr ""
+msgstr "أحداث العميل"
 
 #. module: base
 #: view:ir.module.module:0
@@ -8820,7 +8821,7 @@ msgstr "الأرجنتين"
 #. module: base
 #: constraint:res.currency:0
 msgid "The rounding factor cannot be 0 !"
-msgstr ""
+msgstr "معامل التقريب لا يمكن أن يكون 0!"
 
 #. module: base
 #: model:res.country,name:base.bh
@@ -8830,7 +8831,7 @@ msgstr "مملكة البحرين"
 #. module: base
 #: model:res.partner.category,name:base.res_partner_category_12
 msgid "Segmentation"
-msgstr ""
+msgstr "انقسام"
 
 #. module: base
 #: view:ir.attachment:0 field:ir.attachment,company_id:0
@@ -9035,7 +9036,7 @@ msgstr "اختر المجموعات"
 #. module: base
 #: field:ir.sequence,weight:0
 msgid "Weight"
-msgstr ""
+msgstr "وزن"
 
 #. module: base
 #: view:res.lang:0
@@ -9094,7 +9095,7 @@ msgstr "ir.actions.server"
 #. module: base
 #: selection:ir.model.data,source:0
 msgid "Internal"
-msgstr ""
+msgstr "داخلي"
 
 #. module: base
 #: field:ir.actions.configuration.wizard,progress:0
@@ -9159,7 +9160,7 @@ msgstr "اسم طريقة العرض"
 #. module: base
 #: model:ir.model,name:base.model_res_groups
 msgid "Access Groups"
-msgstr ""
+msgstr "مجموعات الوصول"
 
 #. module: base
 #: selection:base.language.install,lang:0
@@ -9225,7 +9226,7 @@ msgstr "الحسابات المصرفية"
 #. module: base
 #: field:ir.model,modules:0 field:ir.model.fields,modules:0
 msgid "In modules"
-msgstr ""
+msgstr " الموديولات"
 
 #. module: base
 #: model:res.country,name:base.sl
@@ -9333,7 +9334,7 @@ msgstr "كود السويفت"
 #. module: base
 #: model:res.partner.category,name:base.res_partner_category_1
 msgid "Prospect"
-msgstr ""
+msgstr "عميل محتمل"
 
 #. module: base
 #: selection:base.language.install,lang:0
