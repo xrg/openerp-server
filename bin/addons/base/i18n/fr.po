@@ -13726,12 +13726,9 @@ msgstr ""
 
 #. module: base
 #: code:addons/base/res/res_user.py:507
-#, fuzzy, python-format
+#, python-format
 msgid "Warning!"
-msgstr ""
-"#-#-#-#-#  .merge_file_hVt3ke (OpenERP Server 5.0.4)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_IJz4z4 (OpenERP Server 5.0.4)  #-#-#-#-#\n"
-"Avertissement !"
+msgstr "Attention !"
 
 #. module: base
 #: code:addons/base/ir/ir_model.py:304
