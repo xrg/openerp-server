@@ -325,10 +325,10 @@ class db(baseExportService):
             This should return the contents of database `db_name` as an SQL block. It
             calls 'pg_dump' and returns the dump base64-encoded.
 
-            But is a bad idea! Don't use this call!
+            But is a bad idea! Don't use this call! (it is now disabled by default)
 
-            Please, set "databases.dump_guard=True" in the config file to ensure this
-            feature remains banned.
+            If you still insist, set "databases.dump_guard=False" in the config file to 
+            activate the feature again. Use at your own risk.
 
             If your database is anything above a few MB, the RPC protocol will not be
             able to transfer the dump, or just be clogged in the best case. Most probably,
@@ -342,7 +342,7 @@ class db(baseExportService):
         """
         logger = logging.getLogger('web-services')
 
-        if tools.config.get_misc('databases', 'dump_guard', False):
+        if tools.config.get_misc('databases', 'dump_guard', True):
             logger.error("Prevented dump of database %s, because guard is set!", db_name)
             raise Exception("Not dropping database %s because guard is set!" % db_name)
 
