@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: OpenERP Server 5.0.4\n"
 "Report-Msgid-Bugs-To: support@openerp.com\n"
 "POT-Creation-Date: 2012-12-21 17:04+0000\n"
-"PO-Revision-Date: 2013-01-03 19:28+0000\n"
+"PO-Revision-Date: 2013-01-04 14:29+0000\n"
 "Last-Translator: Fekete Mihai <mihai@erpsystems.ro>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-01-04 04:47+0000\n"
+"X-Launchpad-Export-Date: 2013-01-05 05:03+0000\n"
 "X-Generator: Launchpad (build 16393)\n"
 
 #. module: base
@@ -12880,7 +12880,7 @@ msgstr "Italia"
 #. module: base
 #: model:res.groups,name:base.group_sale_salesman
 msgid "See Own Leads"
-msgstr ""
+msgstr "Vezi Propriile Piste"
 
 #. module: base
 #: view:ir.actions.todo:0
@@ -12891,7 +12891,7 @@ msgstr "De efectuat"
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_portal_hr_employees
 msgid "Portal HR employees"
-msgstr ""
+msgstr "Portal RU angajati"
 
 #. module: base
 #: selection:base.language.install,lang:0
@@ -12920,6 +12920,8 @@ msgid ""
 "Insufficient fields to generate a Calendar View for %s, missing a date_stop "
 "or a date_delay"
 msgstr ""
+"Campuri insuficiente pentru generarea unei Vizualizari Calendar pentru %s, "
+"lipseste stop_data sau intarziere_data"
 
 #. module: base
 #: field:workflow.activity,action:0
@@ -12974,6 +12976,17 @@ msgid ""
 "associated to every resource. It also manages the leaves of every resource.\n"
 "    "
 msgstr ""
+"\n"
+"Modul pentru mangementul resurselor.\n"
+"===============================\n"
+"\n"
+"O resursa reprezinta ceva care poate fi programat (un dezvoltator pe o "
+"sarcina sau un\n"
+"centru de lucru pe comenzi de productie). Acest modul gestioneaza un "
+"calendar de resurse\n"
+"asociat fiecarei resurse. De asemenea, gestioneaza concediile fiecarei "
+"resurse.\n"
+"    "
 
 #. module: base
 #: model:ir.module.module,description:base.module_account_followup
@@ -13011,6 +13024,8 @@ msgstr ""
 msgid ""
 "Please contact your system administrator if you think this is an error."
 msgstr ""
+"Va rugam sa va contactati administratorul de sistem daca credeti ca aceasta "
+"este o eroare."
 
 #. module: base
 #: code:addons/base/module/module.py:546
@@ -13018,7 +13033,7 @@ msgstr ""
 #: model:ir.actions.act_window,name:base.action_view_base_module_upgrade
 #, python-format
 msgid "Apply Schedule Upgrade"
-msgstr ""
+msgstr "Aplica Programeaza Actualizarea"
 
 #. module: base
 #: view:workflow.activity:0
@@ -13058,6 +13073,8 @@ msgid ""
 "One of the documents you are trying to access has been deleted, please try "
 "again after refreshing."
 msgstr ""
+"Unul dintre documentele pe care incercati sa le accesati a fost sters, va "
+"rugam sa incercati din nou dupa ce dati refresh."
 
 #. module: base
 #: model:ir.model,name:base.model_ir_mail_server
@@ -13077,11 +13094,11 @@ msgid ""
 "the bounds of global ones. The first group rules restrict further than "
 "global rules, but any additional group rule will add more permissions"
 msgstr ""
-"Regulile globale (nespecifice unui grup) sunt restrictiile si nu pot fi "
-"evitate. Regulile locale ale grupului ofera permisiuni suplimentare, dar "
-"sunt constranse in limitele celor globale. Regulile primului grup limiteaza "
-"mai miult decat regulile globale, dar orice regula suplimentara a grupului "
-"va adauga mai multe permisiuni"
+"Regulile globale (nespecifice unui grup) sunt restrictii si nu pot fi "
+"evitate. Regulile grupului local ofera permisiuni suplimentare, dar sunt "
+"constranse in limitele celor globale. Regulile primului grup limiteaza mai "
+"mult decat regulile globale, dar orice regula suplimentara a grupului va "
+"adauga mai multe permisiuni"
 
 #. module: base
 #: field:res.currency.rate,rate:0
@@ -13096,7 +13113,7 @@ msgstr "Congo"
 #. module: base
 #: view:res.lang:0
 msgid "Examples"
-msgstr "Exemplu"
+msgstr "Exemple"
 
 #. module: base
 #: field:ir.default,value:0
@@ -13159,7 +13176,7 @@ msgstr ""
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_sale_stock
 msgid "Sales and Warehouse Management"
-msgstr ""
+msgstr "Managementul Vanzarilor si al Depozitului"
 
 #. module: base
 #: model:ir.module.module,description:base.module_hr_recruitment
@@ -13180,6 +13197,22 @@ msgid ""
 "You can define the different phases of interviews and easily rate the "
 "applicant from the kanban view.\n"
 msgstr ""
+"\n"
+"Gestioneaza locurile de munca si procesul de recrutare\n"
+"================================================\n"
+"\n"
+"Aceasta aplicatie va permite sa tineti evidenta cu usurinta a locurilor de "
+"munca, a posturilor libere, a aplicatiilor,  a interviurilor...\n"
+"\n"
+"Este integrat cu mail gateway pentru a gasi automat email-urile trimise la "
+"<jobs@yourcompany.com> (locuri_de_munca@companiadumneavoastra.com) din lista "
+"aplicatiilor. De asemenea, este integrat cu sistemul de management al "
+"documentelor pentru a stoca si a cauta in baza de CV-uri si a gasi "
+"candidatul pe care il cautati. De asemenea, este integrat cu modulul de "
+"sondaje pentru a va permite sa definiti interviuri pentru diferite locuri de "
+"munca.\n"
+"Puteti defini diferitele etape ale interviurilor si puteti evalua candidatul "
+"cu usurinta din vizualizarea kanban.\n"
 
 #. module: base
 #: field:ir.model.fields,model:0
@@ -13206,7 +13239,7 @@ msgstr "Nu este instalat(a)"
 #: view:workflow.activity:0
 #: field:workflow.activity,out_transitions:0
 msgid "Outgoing Transitions"
-msgstr "Tranzitii iesire"
+msgstr "Tranzitii de iesire"
 
 #. module: base
 #: field:ir.module.module,icon_image:0
@@ -13220,14 +13253,14 @@ msgid ""
 "Helps you manage your human resources by encoding your employees structure, "
 "generating work sheets, tracking attendance and more."
 msgstr ""
-"Va ajuta sa va gestionati resurse umane prin inregistrarea structurii "
+"Va ajuta sa va gestionati resursele umane prin inregistrarea structurii "
 "angajatilor d-voastra, generarea de pontaje, tinerea evidentei prezentei si "
 "multe altele."
 
 #. module: base
 #: help:res.partner,ean13:0
 msgid "BarCode"
-msgstr ""
+msgstr "Cod de bare"
 
 #. module: base
 #: help:ir.model.fields,model_id:0
@@ -13249,6 +13282,7 @@ msgstr "Martinica (Franceza)"
 #: help:res.partner,is_company:0
 msgid "Check if the contact is a company, otherwise it is a person"
 msgstr ""
+"Bifati daca contactul este o companie, in caz contrar este o persoana"
 
 #. module: base
 #: view:ir.sequence.type:0
@@ -13258,13 +13292,13 @@ msgstr "Tip Secvente"
 #. module: base
 #: view:res.partner:0
 msgid "Mobile:"
-msgstr ""
+msgstr "Mobil:"
 
 #. module: base
 #: code:addons/base/res/res_bank.py:195
 #, python-format
 msgid "Formating Error"
-msgstr ""
+msgstr "Eroare de formatare"
 
 #. module: base
 #: model:res.country,name:base.ye
@@ -13303,7 +13337,7 @@ msgstr ""
 "achizitiile, marjele si alti indicatori interesanti bazati pe facturi.\n"
 "============================================================================="
 "================================================\n"
-" \n"
+"\n"
 "Wizardul pentru lansarea raportului are mai multe optiuni pentru a va ajuta "
 "sa obtineti datele de care aveti nevoie.\n"
 
@@ -13333,7 +13367,7 @@ msgstr ""
 #: code:addons/base/ir/ir_model.py:1024
 #, python-format
 msgid "Permission Denied"
-msgstr ""
+msgstr "Permisiune refuzata"
 
 #. module: base
 #: field:ir.ui.menu,child_id:0
@@ -13404,12 +13438,12 @@ msgstr "E-mail"
 #. module: base
 #: model:res.partner.category,name:base.res_partner_category_12
 msgid "Office Supplies"
-msgstr ""
+msgstr "Echipament de birou"
 
 #. module: base
 #: field:ir.attachment,res_model:0
 msgid "Resource Model"
-msgstr ""
+msgstr "Model de Resursa"
 
 #. module: base
 #: code:addons/custom.py:555
@@ -13466,7 +13500,7 @@ msgstr ""
 #. module: base
 #: model:res.country,name:base.bl
 msgid "Saint Barthélémy"
-msgstr ""
+msgstr "Saint Barthélémy"
 
 #. module: base
 #: selection:ir.module.module,license:0
@@ -13486,12 +13520,12 @@ msgstr "flux de lucru"
 #. module: base
 #: view:ir.rule:0
 msgid "Read Access Right"
-msgstr ""
+msgstr "Citeste Dreptul de Acces"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_analytic_user_function
 msgid "Jobs on Contracts"
-msgstr "Locuri de munca cu Contracte"
+msgstr ""
 
 #. module: base
 #: code:addons/base/res/res_lang.py:187
@@ -13517,7 +13551,7 @@ msgstr "In serie"
 #. module: base
 #: model:ir.module.module,summary:base.module_crm
 msgid "Leads, Opportunities, Phone Calls"
-msgstr ""
+msgstr "Piste, Oportunitati, Apeluri telefonice"
 
 #. module: base
 #: model:ir.module.category,description:base.module_category_knowledge_management
@@ -13536,13 +13570,13 @@ msgstr "Araba / الْعَرَبيّة"
 #. module: base
 #: selection:ir.translation,state:0
 msgid "Translated"
-msgstr ""
+msgstr "Tradus"
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_inventory_form
 #: model:ir.ui.menu,name:base.menu_action_inventory_form
 msgid "Default Company per Object"
-msgstr ""
+msgstr "Compania Implicita per Obiect"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_web_hello
@@ -13557,7 +13591,7 @@ msgstr "Urmatorul Pas de Configurare"
 #. module: base
 #: field:res.groups,comment:0
 msgid "Comment"
-msgstr "Observatie"
+msgstr "Comentariu"
 
 #. module: base
 #: field:ir.filters,domain:0
@@ -13572,7 +13606,7 @@ msgstr "Domeniu"
 #: code:addons/base/ir/ir_fields.py:166
 #, python-format
 msgid "Use '1' for yes and '0' for no"
-msgstr ""
+msgstr "Foloseste '1' pentru da si '0' pentru nu"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_marketing_campaign
@@ -13587,18 +13621,18 @@ msgstr "Numele starii"
 #. module: base
 #: help:ir.attachment,type:0
 msgid "Binary File or URL"
-msgstr ""
+msgstr "Fisier Binar sau URL"
 
 #. module: base
 #: code:addons/base/ir/ir_fields.py:313
 #, python-format
 msgid "Invalid database id '%s' for the field '%%(field)s'"
-msgstr ""
+msgstr "Id '%s' nevalid al bazei de date pentru campul '%%(field)s'"
 
 #. module: base
 #: view:res.lang:0
 msgid "Update Languague Terms"
-msgstr "Actualizare Termeni Limbaj"
+msgstr "Actualizeaza Termenii Lingvistici"
 
 #. module: base
 #: field:workflow.activity,join_mode:0
@@ -13633,7 +13667,7 @@ msgstr ""
 #. module: base
 #: view:ir.filters:0
 msgid "Shared"
-msgstr ""
+msgstr "Partajat(e)"
 
 #. module: base
 #: code:addons/base/module/module.py:357
@@ -13642,12 +13676,12 @@ msgid ""
 "Unable to install module \"%s\" because an external dependency is not met: %s"
 msgstr ""
 "Modulul \"%s\" nu poate fi instalat deoarece nu este indeplinita o "
-"dependenta externe: %s"
+"dependenta externa: %s"
 
 #. module: base
 #: view:ir.module.module:0
 msgid "Search modules"
-msgstr "Cautati module"
+msgstr "Cauta module"
 
 #. module: base
 #: model:res.country,name:base.by
@@ -13710,6 +13744,9 @@ msgid ""
 "Allow users to sign up through OAuth2 Provider.\n"
 "===============================================\n"
 msgstr ""
+"\n"
+"Permite utilizatorilor sa se conecteze prin OAuth2 Provider.\n"
+"===============================================\n"
 
 #. module: base
 #: field:change.password.user,user_id:0
@@ -13732,12 +13769,12 @@ msgstr "Puerto Rico"
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_web_tests_demo
 msgid "Demonstration of web/javascript tests"
-msgstr ""
+msgstr "Demonstratie a testelor web/javascript"
 
 #. module: base
 #: field:workflow.transition,signal:0
 msgid "Signal (Button Name)"
-msgstr ""
+msgstr "Semnal (Numele Butonului)"
 
 #. module: base
 #: view:ir.actions.act_window:0
@@ -13767,7 +13804,7 @@ msgstr "Grenada"
 #. module: base
 #: help:res.partner,customer:0
 msgid "Check this box if this contact is a customer."
-msgstr ""
+msgstr "Bifati aceasta casuta daca acest contact este un client."
 
 #. module: base
 #: view:ir.actions.server:0
@@ -13777,7 +13814,7 @@ msgstr "Declansati Configurarea"
 #. module: base
 #: view:base.language.install:0
 msgid "Load"
-msgstr "Incarcare"
+msgstr "Incarca"
 
 #. module: base
 #: model:ir.module.module,description:base.module_warning
@@ -13795,7 +13832,7 @@ msgstr ""
 "Modul pentru declansarea avertizarilor in obiectele OpenERP.\n"
 "==============================================\n"
 " \n"
-"Mesajele de avertizarevor fi afisate pentru obiecte precum comanda de "
+"Mesajele de avertizare vor fi afisate pentru obiecte precum comanda de "
 "vanzare, comanda de achizitie,\n"
 "ridicare si facturare. Mesajul este declansat de formularul evenimentului.\n"
 "    "
@@ -13803,7 +13840,7 @@ msgstr ""
 #. module: base
 #: field:res.users,partner_id:0
 msgid "Related Partner"
-msgstr ""
+msgstr "Partener Asociat"
 
 #. module: base
 #: code:addons/osv.py:153
@@ -13825,6 +13862,15 @@ msgid ""
 "\n"
 "    "
 msgstr ""
+"\n"
+"Plan de conturi panamez si localizare taxe.\n"
+"\n"
+"Plan de conturi panamez si impozite conform dispozitiilor in vigoare\n"
+"\n"
+"Cu participarea \n"
+"- AHMNET CORP http://www.ahmnet.com\n"
+"\n"
+"    "
 
 #. module: base
 #: code:addons/base/ir/ir_model.py:293
@@ -13840,18 +13886,18 @@ msgstr "Operatiuni de productie"
 #. module: base
 #: view:base.language.export:0
 msgid "Here is the exported translation file:"
-msgstr ""
+msgstr "Iata fisierul traducerii exportate:"
 
 #. module: base
 #: field:ir.actions.report.xml,report_rml_content:0
 #: field:ir.actions.report.xml,report_rml_content_data:0
 msgid "RML Content"
-msgstr ""
+msgstr "Continut RML"
 
 #. module: base
 #: view:res.lang:0
 msgid "Update Terms"
-msgstr "Actualizati termenii"
+msgstr "Actualizeaza Termenii"
 
 #. module: base
 #: field:res.request,act_to:0
