@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: openobject-addons\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2012-02-08 00:44+0000\n"
-"PO-Revision-Date: 2012-02-17 09:21+0000\n"
-"Last-Translator: ekodaq <ceo@ekosdaq.com>\n"
+"PO-Revision-Date: 2013-02-13 06:33+0000\n"
+"Last-Translator: Josh Kim <joshkkim@gmail.com>\n"
 "Language-Team: Korean <ko@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-02-08 04:53+0000\n"
-"X-Generator: Launchpad (build 16482)\n"
+"X-Launchpad-Export-Date: 2013-02-14 05:09+0000\n"
+"X-Generator: Launchpad (build 16491)\n"
 
 #. module: base
 #: model:res.country,name:base.sh
@@ -711,7 +711,7 @@ msgstr "요르단"
 #. module: base
 #: help:ir.cron,nextcall:0
 msgid "Next planned execution date for this job."
-msgstr ""
+msgstr "이 업무에 대한 다음 실행 계획일"
 
 #. module: base
 #: code:addons/base/ir/ir_model.py:139
@@ -727,7 +727,7 @@ msgstr "에리트레아"
 #. module: base
 #: sql_constraint:res.company:0
 msgid "The company name must be unique !"
-msgstr ""
+msgstr "회사명은 유일해야 함!"
 
 #. module: base
 #: view:res.config:0
@@ -1452,7 +1452,7 @@ msgstr ""
 msgid ""
 "Helps you manage your purchase-related processes such as requests for "
 "quotations, supplier invoices, etc..."
-msgstr ""
+msgstr "견적 요청, 공급업체 송장 요청 등과 같은 구매 관련 프로세스를 관리하는데 도움을 줍니다."
 
 #. module: base
 #: help:base.language.install,overwrite:0
@@ -7494,6 +7494,12 @@ msgid ""
 "Contains the installer for marketing-related modules.\n"
 "    "
 msgstr ""
+"\n"
+"마케팅 메뉴.\n"
+"===================\n"
+"\n"
+"마케팅 관련 모듈의 설치 파일을 포함하고 있음.\n"
+"    "
 
 #. module: base
 #: model:ir.module.category,name:base.module_category_knowledge_management
@@ -7623,6 +7629,12 @@ msgid ""
 "actions(Sign in/Sign out) performed by them.\n"
 "       "
 msgstr ""
+"\n"
+"이 모듈은 직원의 출근(근태)관리를 목적으로 합니다.\n"
+"==================================================\n"
+"\n"
+"직원의 계정의 활동 상황(로그인/로그아웃)에 기반하여 근태를 관리합니다.\n"
+"       "
 
 #. module: base
 #: field:ir.module.module,maintainer:0
