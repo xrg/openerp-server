@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: openobject-addons\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-01-11 11:14+0000\n"
-"PO-Revision-Date: 2011-09-06 09:46+0000\n"
-"Last-Translator: David_Lee <Unknown>\n"
+"PO-Revision-Date: 2013-02-21 05:28+0000\n"
+"Last-Translator: Josh Kim <joshkkim@gmail.com>\n"
 "Language-Team: Korean <ko@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-01-10 05:00+0000\n"
-"X-Generator: Launchpad (build 16412)\n"
+"X-Launchpad-Export-Date: 2013-02-21 05:31+0000\n"
+"X-Generator: Launchpad (build 16491)\n"
 
 #. module: base
 #: field:ir.filters,domain:0
@@ -34,7 +34,7 @@ msgstr "세인트 헬레나"
 #. module: base
 #: view:ir.actions.report.xml:0
 msgid "Other Configuration"
-msgstr "기타 설정"
+msgstr "기타 구성"
 
 #. module: base
 #: selection:ir.property,type:0
@@ -48,20 +48,20 @@ msgid ""
 "The second argument of the many2many field %s must be a SQL table !You used "
 "%s, which is not a valid SQL table name."
 msgstr ""
-"many2many 필드 %s 의 두번째 매개변수는 SQL테이블이어야 합니다.\r\n"
-"당신은 SQL테이블이름이 아닌 %s를 사용했습니다."
+"many2many 필드인 %s 의 두 번째 매개변수는 SQL테이블이어야 합니다! 당신은 유효한 SQL테이블 이름이 아닌 %s를 "
+"사용했습니다."
 
 #. module: base
 #: view:ir.values:0
 #: field:ir.values,meta_unpickle:0
 msgid "Metadata"
-msgstr "메타데이타"
+msgstr "메타 데이터"
 
 #. module: base
 #: field:ir.ui.view,arch:0
 #: field:ir.ui.view.custom,arch:0
 msgid "View Architecture"
-msgstr "아키텍처 보기"
+msgstr ""
 
 #. module: base
 #: field:base.language.import,code:0
@@ -76,12 +76,12 @@ msgstr "코드 (eg:en__US)"
 #: field:workflow.transition,wkf_id:0
 #: field:workflow.workitem,wkf_id:0
 msgid "Workflow"
-msgstr "워크플로우"
+msgstr "업무 흐름"
 
 #. module: base
 #: view:partner.sms.send:0
 msgid "SMS - Gateway: clickatell"
-msgstr "SMS - 게이트웨이:clickatell"
+msgstr "SMS - 게이트웨이: clickatell"
 
 #. module: base
 #: selection:base.language.install,lang:0
@@ -106,12 +106,12 @@ msgstr "워크플로우"
 #. module: base
 #: field:ir.actions.act_window,display_menu_tip:0
 msgid "Display Menu Tips"
-msgstr "메뉴 팁 나타내기"
+msgstr "메뉴 팁 보여주기"
 
 #. module: base
 #: view:ir.module.module:0
 msgid "Created Views"
-msgstr "생성된 뷰"
+msgstr "생성된 화면"
 
 #. module: base
 #: code:addons/base/ir/ir_model.py:532
@@ -119,7 +119,7 @@ msgstr "생성된 뷰"
 msgid ""
 "You can not write in this document (%s) ! Be sure your user belongs to one "
 "of these groups: %s."
-msgstr "이 문서(%s)안에 쓸 수 있는 권한이 없습니다. 당신의 계정이 그룹 %s 에 속해 있는 멤버인지 확인하세요."
+msgstr "이 문서(%s)에 쓰기 권한이 없습니다! 귀하의 계정이  %s 그룹에 속해 있는 구성원인지 확인하세요."
 
 #. module: base
 #: help:ir.model.fields,domain:0
@@ -137,7 +137,7 @@ msgstr "참조"
 #. module: base
 #: field:ir.actions.act_window,target:0
 msgid "Target Window"
-msgstr "타겟 윈도우"
+msgstr "대상 창"
 
 #. module: base
 #: code:addons/base/ir/ir_sequence.py:104
@@ -145,7 +145,7 @@ msgstr "타겟 윈도우"
 #: code:addons/base/res/res_users.py:467
 #, python-format
 msgid "Warning!"
-msgstr "경고!"
+msgstr ""
 
 #. module: base
 #: code:addons/base/ir/ir_model.py:399
@@ -159,17 +159,17 @@ msgstr "기본 필드의 속성은 이 방법으로 변경이 안됩니다. 가�
 #: code:addons/osv.py:132
 #, python-format
 msgid "Constraint Error"
-msgstr "제한에러"
+msgstr "제한 오류"
 
 #. module: base
 #: model:ir.model,name:base.model_ir_ui_view_custom
 msgid "ir.ui.view.custom"
-msgstr ""
+msgstr "ir.ui.view.custom"
 
 #. module: base
 #: model:res.country,name:base.sz
 msgid "Swaziland"
-msgstr "스와질랜드"
+msgstr "스와질란드"
 
 #. module: base
 #: code:addons/orm.py:4485
@@ -189,7 +189,7 @@ msgid ""
 "Some installed modules depend on the module you plan to Uninstall :\n"
 " %s"
 msgstr ""
-"인스톨된 모듈이 언인스톨 하는 모듈에 의존합니다:\n"
+"설치된 모듈이 제거 대상 모듈에 의존합니다 :\n"
 " %s"
 
 #. module: base
@@ -206,39 +206,39 @@ msgstr "회사 구조"
 #. module: base
 #: selection:base.language.install,lang:0
 msgid "Inuktitut / ᐃᓄᒃᑎᑐᑦ"
-msgstr "이뉴잇"
+msgstr "이뉴잇어 / ᐃᓄᒃᑎᑐᑦ"
 
 #. module: base
 #: view:res.partner:0
 msgid "Search Partner"
-msgstr "거래처 검색"
+msgstr "협력업체 검색"
 
 #. module: base
 #: code:addons/base/res/res_user.py:132
 #, python-format
 msgid "\"smtp_server\" needs to be set to send mails to users"
-msgstr "\"smtp_server\"는 사용자에게 메일을 보내기 위해 필요하다."
+msgstr "사용자에게 메일을 보내기 위해 \"smtp_server\" 설정이 필요합니다"
 
 #. module: base
 #: code:addons/base/module/wizard/base_export_language.py:60
 #, python-format
 msgid "new"
-msgstr "새로"
+msgstr "신규"
 
 #. module: base
 #: field:ir.actions.report.xml,multi:0
 msgid "On multiple doc."
-msgstr "여러 문서상"
+msgstr "여러 문서 성"
 
 #. module: base
 #: field:ir.module.category,module_nr:0
 msgid "Number of Modules"
-msgstr "모듈 수"
+msgstr "모듈 갯수"
 
 #. module: base
 #: help:multi_company.default,company_dest_id:0
 msgid "Company to store the current record"
-msgstr "현재 레코드를 저장할 회사"
+msgstr "현재 기록을 저장할 회사"
 
 #. module: base
 #: field:res.partner.bank.type.field,size:0
@@ -248,7 +248,7 @@ msgstr "최대 크기"
 #. module: base
 #: field:res.partner.address,name:0
 msgid "Contact Name"
-msgstr "연락처 이름"
+msgstr "담당자 이름"
 
 #. module: base
 #: code:addons/base/module/wizard/base_export_language.py:56
@@ -256,12 +256,12 @@ msgstr "연락처 이름"
 msgid ""
 "Save this document to a %s file and edit it with a specific software or a "
 "text editor. The file encoding is UTF-8."
-msgstr "이 문서를 %s 파일로 저장하고, 특별한 소프트웨어 또는 문서 편집기로 편집하십시오. 이 파일 인코딩은 UTF-8입니다."
+msgstr "이 문서를 %s 파일로 저장하고, 특정 소프트웨어 또는 문서 편집기로 편집하세요. 파일 인코딩은 UTF-8입니다."
 
 #. module: base
 #: sql_constraint:res.lang:0
 msgid "The name of the language must be unique !"
-msgstr "언어 명은 유일해아 한다."
+msgstr "언어 이름은 유일해야 합니다 !"
 
 #. module: base
 #: selection:res.request,state:0
@@ -271,13 +271,13 @@ msgstr "활성"
 #. module: base
 #: field:ir.actions.wizard,wiz_name:0
 msgid "Wizard Name"
-msgstr "위저드 이름"
+msgstr "마법사 이름"
 
 #. module: base
 #: code:addons/orm.py:2648
 #, python-format
 msgid "Invalid group_by"
-msgstr "잘못된 group_by"
+msgstr "유효하지 않은 group_by"
 
 #. module: base
 #: field:res.partner,credit_limit:0
@@ -305,12 +305,12 @@ msgstr "소스 오브젝트"
 #. module: base
 #: view:ir.actions.todo:0
 msgid "Config Wizard Steps"
-msgstr "구성 위저드 단계"
+msgstr "구성 마법사 단계"
 
 #. module: base
 #: model:ir.model,name:base.model_ir_ui_view_sc
 msgid "ir.ui.view_sc"
-msgstr ""
+msgstr "ir.ui.view_sc"
 
 #. module: base
 #: field:res.widget.user,widget_id:0
@@ -336,7 +336,7 @@ msgstr "필드 이름"
 #: wizard_view:server.action.create,init:0
 #: wizard_field:server.action.create,init,type:0
 msgid "Select Action Type"
-msgstr "액션 타입 선택"
+msgstr "액션 유형 선택"
 
 #. module: base
 #: model:res.country,name:base.tv
@@ -346,12 +346,12 @@ msgstr "투발루어"
 #. module: base
 #: selection:ir.model,state:0
 msgid "Custom Object"
-msgstr "고객화 오브젝트"
+msgstr "사용자 정의 오브젝트"
 
 #. module: base
 #: field:res.lang,date_format:0
 msgid "Date Format"
-msgstr "날짜 포맷"
+msgstr "날짜 형식"
 
 #. module: base
 #: field:res.bank,email:0
@@ -362,7 +362,7 @@ msgstr "이메일"
 #. module: base
 #: model:res.country,name:base.an
 msgid "Netherlands Antilles"
-msgstr "네덜란드령 안틸레스"
+msgstr "네덜란드령 안틸 제도"
 
 #. module: base
 #: code:addons/base/res/res_users.py:307
@@ -371,7 +371,7 @@ msgid ""
 "You can not remove the admin user as it is used internally for resources "
 "created by OpenERP (updates, module installation, ...)"
 msgstr ""
-"OpenERP에 의해 생성된 리소스 (업데이트, 모듈 설치...)를 위해 내부적으로 사용되는 관리자 사용자를 삭제할 수는 없습니다."
+"OpenERP에 의해 생성된 리소스(업데이트, 모듈 설치,...)를 위해 내부적으로 사용되는 관리자 사용자를 삭제할 수 없습니다."
 
 #. module: base
 #: model:res.country,name:base.gf
@@ -381,35 +381,35 @@ msgstr "프랑스 가이아나"
 #. module: base
 #: selection:base.language.install,lang:0
 msgid "Greek / Ελληνικά"
-msgstr "그리스"
+msgstr "그리스어 / Ελληνικά"
 
 #. module: base
 #: selection:base.language.install,lang:0
 msgid "Bosnian / bosanski jezik"
-msgstr "보스니아"
+msgstr "보스니아어 / bosanski jezik"
 
 #. module: base
 #: help:ir.actions.report.xml,attachment_use:0
 msgid ""
 "If you check this, then the second time the user prints with same attachment "
 "name, it returns the previous report."
-msgstr "여기를 체크하면, 동일한 첨부 이름으로 사용자가 인쇄할 다음 번에, 이전 리포트를 제공합니다."
+msgstr "여기를 체크할 경우, 사용자가 동일한 첨부 파일 이름으로 두 번째로 인쇄할 때 이전 보고서를 제공합니다"
 
 #. module: base
 #: code:addons/orm.py:904
 #, python-format
 msgid "The read method is not implemented on this object !"
-msgstr "이 읽기 방식은 이 오브젝트에 적용되지 않음!"
+msgstr "해당 읽기 방식은 이 오브젝트에 적용되지 않음!"
 
 #. module: base
 #: help:res.lang,iso_code:0
 msgid "This ISO code is the name of po files to use for translations"
-msgstr "이 ISO 코드는 번역에 사용될 po 파일이름 입니다."
+msgstr "해당 ISO 코드는 번역에 사용될 po 파일 이름 입니다"
 
 #. module: base
 #: view:base.module.upgrade:0
 msgid "Your system will be updated."
-msgstr "시스템이 업데이트 됩니다"
+msgstr "시스템이 업데이트 됩니다."
 
 #. module: base
 #: field:ir.actions.todo,note:0
@@ -425,25 +425,25 @@ msgstr "국가 이름"
 #. module: base
 #: model:res.country,name:base.co
 msgid "Colombia"
-msgstr "콜롬비아"
+msgstr "컬럼비아"
 
 #. module: base
 #: view:ir.module.module:0
 msgid "Schedule Upgrade"
-msgstr "스케줄 업그레이드"
+msgstr "일정 업그레이드"
 
 #. module: base
 #: code:addons/orm.py:1390
 #, python-format
 msgid "Key/value '%s' not found in selection field '%s'"
-msgstr "'%s' 값이 '%s' 필드에 없습니다"
+msgstr "'%s' 키/값을 선택 필드 '%s' 에서 찾을 수 없습니다."
 
 #. module: base
 #: help:res.country,code:0
 msgid ""
 "The ISO country code in two chars.\n"
 "You can use this field for quick search."
-msgstr "두 문자로된 ISO 국가 코드"
+msgstr "두 문자로 구성된 ISO 국가 코드"
 
 #. module: base
 #: model:res.country,name:base.pw
@@ -453,7 +453,7 @@ msgstr "팔라우"
 #. module: base
 #: view:res.partner:0
 msgid "Sales & Purchases"
-msgstr "판매 및 구매"
+msgstr "판매 & 구매"
 
 #. module: base
 #: view:ir.translation:0
@@ -465,40 +465,40 @@ msgstr "번역되지 않음"
 #: help:ir.actions.client,context:0
 msgid ""
 "Context dictionary as Python expression, empty by default (Default: {})"
-msgstr "파이썬 문법의 컨텍스트 사전, 디폴트: 비움 (Default:{})"
+msgstr "파이썬 문법의 컨텍스트 사전, 기본적으로 비어 있음 (Default:{})"
 
 #. module: base
 #: model:ir.actions.act_window,name:base.ir_action_wizard
 #: view:ir.actions.wizard:0
 #: model:ir.ui.menu,name:base.menu_ir_action_wizard
 msgid "Wizards"
-msgstr "위저드"
+msgstr "마법사"
 
 #. module: base
 #: model:res.partner.category,name:base.res_partner_category_miscellaneoussuppliers0
 msgid "Miscellaneous Suppliers"
-msgstr "기타 공급처"
+msgstr "기타 공급업체"
 
 #. module: base
 #: code:addons/base/ir/ir_model.py:339
 #, python-format
 msgid "Custom fields must have a name that starts with 'x_' !"
-msgstr "고객화 필드 이름은 'x_'로 시작해야 합니다!"
+msgstr "사용자 지정 필드 이름은 'x_'로 시작해야 합니다 !"
 
 #. module: base
 #: help:ir.actions.server,action_id:0
 msgid "Select the Action Window, Report, Wizard to be executed."
-msgstr "액션 창, 리포트, 실행할 위저드를 선택하십시오."
+msgstr "액션 창, 보고서, 실행할 마법사를 선택하세요."
 
 #. module: base
 #: view:res.config.users:0
 msgid "New User"
-msgstr "새 사용자"
+msgstr "신규 사용자"
 
 #. module: base
 #: view:base.language.export:0
 msgid "Export done"
-msgstr "익스포트 완료"
+msgstr "내보내기 완료"
 
 #. module: base
 #: view:ir.model:0
@@ -510,7 +510,7 @@ msgstr "모델 설명"
 #: help:ir.actions.act_window,src_model:0
 msgid ""
 "Optional model name of the objects on which this action should be visible"
-msgstr "이 액션이 노출되는 오브젝트의 모델이름 (옵션)"
+msgstr "이 액션이 노출되는 오브젝트의 선택적 모델 이름"
 
 #. module: base
 #: field:workflow.transition,trigger_expr_id:0
@@ -546,17 +546,17 @@ msgstr "자동화 액션"
 #. module: base
 #: model:ir.model,name:base.model_ir_actions_actions
 msgid "ir.actions.actions"
-msgstr ""
+msgstr "ir.actions.actions"
 
 #. module: base
 #: view:partner.wizard.ean.check:0
 msgid "Want to check Ean ? "
-msgstr "Ean을 체크하시겠습니까? "
+msgstr "Ean을 확인하시겠습니까 ? "
 
 #. module: base
 #: field:ir.values,key2:0
 msgid "Event Type"
-msgstr "이벤트 타입"
+msgstr "이벤트 유형"
 
 #. module: base
 #: view:base.language.export:0
@@ -565,18 +565,18 @@ msgid ""
 "Launchpad.net, our open source project management facility. We use their "
 "online interface to synchronize all translations efforts."
 msgstr ""
-"OpenERP 번역(코어, 모듈들, 클라이언트)은 Launchpad.net에 의해 이루어지며,\r\n"
-"Launchpad.net은 오픈소스 프로젝트 관리기능입니다."
+"OpenERP 번역(코어, 모듈, 클라이언트)은 오픈소스 프로젝트 관리 기관인 Launchpad.net에 의해 관리됩니다. 저희는 해당 "
+"기관의 온라인 인터페이스를 사용하여 모든 번역 결과를 동기화합니다."
 
 #. module: base
 #: field:res.partner,title:0
 msgid "Partner Form"
-msgstr "거래처 양식"
+msgstr "협력업체 양식"
 
 #. module: base
 #: selection:base.language.install,lang:0
 msgid "Swedish / svenska"
-msgstr "스웨덴"
+msgstr "스웨덴어 / svenska"
 
 #. module: base
 #: model:res.country,name:base.rs
@@ -586,7 +586,7 @@ msgstr "세르비아"
 #. module: base
 #: selection:ir.translation,type:0
 msgid "Wizard View"
-msgstr "위저드 뷰"
+msgstr "마법사 화면"
 
 #. module: base
 #: model:res.country,name:base.kh
@@ -598,7 +598,7 @@ msgstr "캄보디아"
 #: view:ir.sequence:0
 #: model:ir.ui.menu,name:base.menu_ir_sequence_form
 msgid "Sequences"
-msgstr "시퀀스"
+msgstr "순서"
 
 #. module: base
 #: model:ir.model,name:base.model_base_language_import
@@ -608,7 +608,7 @@ msgstr "언어 불러오기"
 #. module: base
 #: model:ir.model,name:base.model_res_config_users
 msgid "res.config.users"
-msgstr ""
+msgstr "res.config.users"
 
 #. module: base
 #: selection:base.language.install,lang:0
@@ -618,12 +618,12 @@ msgstr "아라비안"
 #. module: base
 #: model:ir.ui.menu,name:base.menu_crm_config_opportunity
 msgid "Opportunities"
-msgstr "기회"
+msgstr "영업기회"
 
 #. module: base
 #: model:ir.model,name:base.model_base_language_export
 msgid "base.language.export"
-msgstr ""
+msgstr "base.language.export"
 
 #. module: base
 #: model:res.country,name:base.pg
@@ -638,7 +638,7 @@ msgstr "보고서 유형, 예: pdf, html, raw, sxw, odt, html2html, mako2html, .
 #. module: base
 #: model:res.partner.category,name:base.res_partner_category_4
 msgid "Basic Partner"
-msgstr "기본 파트너"
+msgstr "기본 협력업체"
 
 #. module: base
 #: report:ir.module.reference.graph:0
@@ -648,7 +648,7 @@ msgstr ","
 #. module: base
 #: view:res.partner:0
 msgid "My Partners"
-msgstr "내 거래처"
+msgstr "내 협력업체"
 
 #. module: base
 #: view:ir.actions.report.xml:0
@@ -669,7 +669,7 @@ msgstr "가져오기 / 내보내기"
 #: help:ir.actions.act_window,domain:0
 msgid ""
 "Optional domain filtering of the destination data, as a Python expression"
-msgstr "최종 데이타의 도메일 필터링 - 파이썬 문법 (선택)"
+msgstr ""
 
 #. module: base
 #: model:ir.model,name:base.model_base_module_upgrade
@@ -681,7 +681,7 @@ msgstr "모듈 업그레이드"
 msgid ""
 "Groups are used to define access rights on objects and the visibility of "
 "screens and menus"
-msgstr "그룹은 오브젝트의 접근권한 및 화면과 메뉴 노출 관리를 위해 사용됩니다"
+msgstr "그룹은 오브젝트의 접근 권한 및 화면과 메뉴 노출 여부 설정을 위해 사용됩니다"
 
 #. module: base
 #: selection:base.language.install,lang:0
@@ -691,7 +691,7 @@ msgstr "스페인어"
 #. module: base
 #: field:res.partner,mobile:0
 msgid "Mobile"
-msgstr "모바일"
+msgstr "휴대전화"
 
 #. module: base
 #: model:res.country,name:base.om
@@ -707,12 +707,12 @@ msgstr "결제 조건"
 #. module: base
 #: model:res.country,name:base.nu
 msgid "Niue"
-msgstr "나우에섬"
+msgstr "니우에섬"
 
 #. module: base
 #: selection:ir.cron,interval_type:0
 msgid "Work Days"
-msgstr "근로일"
+msgstr "근무일"
 
 #. module: base
 #: selection:ir.module.module,license:0
@@ -731,7 +731,7 @@ msgstr "UI 번역 가용시 사용자 인터페이스의 언어를 설정합니�
 #: code:addons/orm.py:1043
 #, python-format
 msgid "The unlink method is not implemented on this object !"
-msgstr "링크해제 방법은 이 오브젝트에 적용되지 않습니다."
+msgstr "링크 해제 방식은 해당 오브젝트에 적용되지 않습니다 !"
 
 #. module: base
 #: model:ir.actions.act_window,name:base.act_menu_create
@@ -753,7 +753,7 @@ msgstr "번호 유형을 요청"
 #. module: base
 #: view:ir.values:0
 msgid "client_action_multi, client_action_relate"
-msgstr ""
+msgstr "client_action_multi, client_action_relate"
 
 #. module: base
 #: model:res.country,name:base.ad
@@ -763,12 +763,12 @@ msgstr "안도라"
 #. module: base
 #: field:res.partner.category,child_ids:0
 msgid "Child Categories"
-msgstr "자식 카테고리"
+msgstr "하위 분류"
 
 #. module: base
 #: model:ir.model,name:base.model_ir_config_parameter
 msgid "ir.config_parameter"
-msgstr ""
+msgstr "ir.config_parameter"
 
 #. module: base
 #: selection:base.language.export,format:0
@@ -778,7 +778,7 @@ msgstr "TGZ 아카이브"
 #. module: base
 #: view:res.lang:0
 msgid "%B - Full month name."
-msgstr "%B - 월 이름"
+msgstr "%B - 월 이름."
 
 #. module: base
 #: field:ir.actions.todo,type:0
@@ -793,7 +793,7 @@ msgstr "%B - 월 이름"
 #: view:ir.values:0
 #: field:ir.values,key:0
 msgid "Type"
-msgstr "타입"
+msgstr "유형"
 
 #. module: base
 #: code:addons/orm.py:406
@@ -801,9 +801,7 @@ msgstr "타입"
 msgid ""
 "Language with code \"%s\" is not defined in your system !\n"
 "Define it through the Administration menu."
-msgstr ""
-"'%s' 코드로 된 언어는 시스템에 정의 되어있지 않습니다!\n"
-"어드민 메뉴를 통해 정의하십시오"
+msgstr "%s' 코드의 언어는 시스템에 정의 되어있지 않습니다 !"
 
 #. module: base
 #: model:res.country,name:base.gu
@@ -819,18 +817,18 @@ msgstr "인사관리 대시보드"
 #: code:addons/base/res/res_users.py:467
 #, python-format
 msgid "Setting empty passwords is not allowed for security reasons!"
-msgstr "보안을 위해 패스워드는 반드시 입력해야 합니다!"
+msgstr "보안을 이유로 암호를 비워두고 설정하는 것을 허용하지 않습니다!"
 
 #. module: base
 #: selection:ir.actions.server,state:0
 #: selection:workflow.activity,kind:0
 msgid "Dummy"
-msgstr "더미"
+msgstr "모형"
 
 #. module: base
 #: constraint:ir.ui.view:0
 msgid "Invalid XML for View Architecture!"
-msgstr "유효하지 않은 뷰 아키텍처를 위한 XML !"
+msgstr "화면 아키텍처에 유효하지 않은 XML"
 
 #. module: base
 #: model:res.country,name:base.ky
@@ -847,13 +845,13 @@ msgstr "대한민국"
 #: model:ir.ui.menu,name:base.menu_workflow_transition
 #: view:workflow.activity:0
 msgid "Transitions"
-msgstr "트랜지션"
+msgstr "전환"
 
 #. module: base
 #: code:addons/orm.py:4917
 #, python-format
 msgid "Record #%d of %s not found, cannot copy!"
-msgstr "레코드 #%d (%s) 가 발견되지 않아서 복사될 수 없습니다."
+msgstr "레코드 #%d (%s) 가 발견되지 않아 복사할 수 없습니다!"
 
 #. module: base
 #: field:ir.module.module,contributors:0
@@ -863,7 +861,7 @@ msgstr "도움을 주신 분들"
 #. module: base
 #: selection:ir.property,type:0
 msgid "Char"
-msgstr "Char"
+msgstr "문자"
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_publisher_warranty_contract_form
@@ -874,7 +872,7 @@ msgstr "계약서"
 #. module: base
 #: selection:base.language.install,lang:0
 msgid "Spanish (AR) / Español (AR)"
-msgstr "스페인어"
+msgstr "스페인어 (AR) / Español (AR)"
 
 #. module: base
 #: model:res.country,name:base.ug
@@ -884,12 +882,12 @@ msgstr "우간다"
 #. module: base
 #: field:ir.model.access,perm_unlink:0
 msgid "Delete Access"
-msgstr "접근 삭제"
+msgstr "삭제 접근"
 
 #. module: base
 #: model:res.country,name:base.ne
 msgid "Niger"
-msgstr "나이제르"
+msgstr "니제르"
 
 #. module: base
 #: selection:base.language.install,lang:0
@@ -908,13 +906,13 @@ msgid ""
 "Lauchpad's web interface (Rosetta). If you need to perform mass translation, "
 "Launchpad also allows uploading full .po files at once"
 msgstr ""
-"공식적인 번역을 확장하거나 개선하기 위해, 당신은 Lauchpad의 웹인터페이스를 사용할 있습니다.\r\n"
-"당신이 대량의 번역을 적용하기 원한다면 Lauchpad의 .po파일을 다운로드/업로드기능을 사용하시면 됩니다."
+"공식적인 번역을 개선하거나 확장하기 위해서는 Lauchpad의 웹인터페이스(로제타)를 사용하기 바랍니다. 대량 번역을 할 경우, "
+"Lauchpad는 또한 한 번에 .po파일을 업로드하는 작업을 허용합니다."
 
 #. module: base
 #: selection:base.language.install,lang:0
 msgid "Spanish (GT) / Español (GT)"
-msgstr "스페인"
+msgstr "스페인어 (GT) / Español (GT)"
 
 #. module: base
 #: view:res.lang:0
@@ -923,8 +921,8 @@ msgid ""
 "decimal number [00,53]. All days in a new year preceding the first Monday "
 "are considered to be in week 0."
 msgstr ""
-"%W - 십진수로 표기된 1년에 포함된 주 (week)의 수 (월요일이 주의 첫째 날)[00,53]. 첫째 월요일 이전의 모든 날짜들은 "
-"'주 0'에 포함되는 걸로 간주함."
+"%W - 십진수로 표기된 한 해의 주수 (월요일이 일주일 중 첫 번째 날) [00,53]. 새해 첫 번째 월요일 이전의 모든 날짜들은 "
+"'주 0'으로 간주됨."
 
 #. module: base
 #: code:addons/base/res/res_company.py:164
@@ -938,7 +936,7 @@ msgstr "웹 사이트"
 #. module: base
 #: model:res.country,name:base.gs
 msgid "S. Georgia & S. Sandwich Isls."
-msgstr "세인트 조지아와 세이트 샌드위치 섬"
+msgstr "세인트 조지아 & 세이트 샌드위치 섬"
 
 #. module: base
 #: field:ir.actions.act_url,url:0
@@ -954,7 +952,7 @@ msgstr "모듈 이름"
 #. module: base
 #: model:res.country,name:base.mh
 msgid "Marshall Islands"
-msgstr "마셜 제도"
+msgstr "마샬 군도"
 
 #. module: base
 #: code:addons/base/ir/ir_model.py:423
@@ -971,7 +969,7 @@ msgstr "아이티"
 #: view:ir.ui.view:0
 #: selection:ir.ui.view,type:0
 msgid "Search"
-msgstr "찾아보기"
+msgstr "검색"
 
 #. module: base
 #: code:addons/osv.py:135
@@ -990,28 +988,28 @@ msgstr ""
 #: view:ir.rule:0
 msgid ""
 "2. Group-specific rules are combined together with a logical AND operator"
-msgstr "2. 그룹 정의 규칙은 논리 And 연산자와 함께 결합되어 있습니다."
+msgstr "2. 그룹 특수적 규칙은 논리와 연산자와 함께 결합되어 있습니다"
 
 #. module: base
 #: code:addons/base/res/res_users.py:131
 #, python-format
 msgid "Operation Canceled"
-msgstr "오퍼레이션 취소"
+msgstr "작업이 취소됨"
 
 #. module: base
 #: help:base.language.export,lang:0
 msgid "To export a new language, do not select a language."
-msgstr "새 언어를 내보낼려면, 언어를 선택하지 마십시오."
+msgstr "새 언어를 내보내려면, 언어를 선택하지 마세요."
 
 #. module: base
 #: view:res.request:0
 msgid "Request Date"
-msgstr "요청한 날짜"
+msgstr "요청일"
 
 #. module: base
 #: model:ir.ui.menu,name:base.menu_hr_dasboard
 msgid "Dashboard"
-msgstr "대쉬보드"
+msgstr "대시보드"
 
 #. module: base
 #: model:ir.module.category,name:base.module_category_purchase_management
@@ -1022,12 +1020,12 @@ msgstr "구매"
 #. module: base
 #: model:res.country,name:base.md
 msgid "Moldavia"
-msgstr "몰디브"
+msgstr "몰다비아"
 
 #. module: base
 #: view:ir.module.module:0
 msgid "Features"
-msgstr "기능"
+msgstr "특징"
 
 #. module: base
 #: report:ir.module.reference:0
@@ -1043,20 +1041,20 @@ msgstr "읽기 접근"
 #. module: base
 #: model:ir.model,name:base.model_ir_exports
 msgid "ir.exports"
-msgstr ""
+msgstr "ir.exports"
 
 #. module: base
 #: code:addons/base/module/wizard/base_update_translations.py:39
 #, python-format
 msgid "No language with code \"%s\" exists"
-msgstr "코드 \"%s\"를 가진 언어가 존재하지 않습니다."
+msgstr "코드 \"%s\"의 언어가 존재하지 않습니다"
 
 #. module: base
 #: code:addons/base/publisher_warranty/publisher_warranty.py:125
 #: code:addons/base/publisher_warranty/publisher_warranty.py:163
 #, python-format
 msgid "Error during communication with the publisher warranty server."
-msgstr "퍼블리셔 보증 서버와 통신할 수 없습니다."
+msgstr "발행자 보증 서버와 통신 중 오류가 발생했습니다."
 
 #. module: base
 #: help:ir.actions.server,email:0
@@ -1065,13 +1063,13 @@ msgid ""
 "you select the invoice, then `object.invoice_address_id.email` is the field "
 "which gives the correct address"
 msgstr ""
-"이메일 주소를 가져오기 위해 사용할 필드를 제공하세요.\r\n"
-"예) 송장을 선택할 때, 올바를 이메일 주소를 가져오기 위한 필드는 `object.invoice_address_id.email`입니다."
+"이메일 주소를 가져오기 위해 사용할 필드를 제공함, 예: 송장 선택 시 `object.invoice_address_id.email`은 "
+"정확한 주소를 제공하는 필드입니다."
 
 #. module: base
 #: view:res.lang:0
 msgid "%Y - Year with century."
-msgstr "%Y - 년도"
+msgstr "%Y - 세기로 표기하는 년도"
 
 #. module: base
 #: report:ir.module.reference.graph:0
@@ -1085,14 +1083,14 @@ msgid ""
 "system. After the contract has been registered, you will be able to send "
 "issues directly to OpenERP."
 msgstr ""
-"이 마법사기능은 당신의 OpenERP시스템에서 퍼블리셔 보증 연락처를 등록할 수 있도록 도와줍니다.\r\n"
-"연락처가 등록된 후, OpenERP에 직접 문제점,이슈를 보낼 수 있습니다."
+"이 마법사는 귀하의 OpenERP 시스템에 발행자 보증 계약서를 등록할 수 있도록 도움을 줍니다. 계약서가 등록된 후에는, "
+"OpenERP에 직접 문제점을 보낼 수 있습니다."
 
 #. module: base
 #: code:addons/orm.py:1744
 #, python-format
 msgid "The search method is not implemented on this object !"
-msgstr "이 검색 방식은 이 오브젝트에 적용되지 않음!"
+msgstr "이 검색 방식은 이 오브젝트에 적용되지 않음 !"
 
 #. module: base
 #: view:wizard.ir.model.menu.create:0
@@ -1102,7 +1100,7 @@ msgstr "메뉴 생성"
 #. module: base
 #: field:res.payterm,name:0
 msgid "Payment Term (short name)"
-msgstr "결제 조건 (짧은 이름)"
+msgstr "결제 조건 (약식 이름)"
 
 #. module: base
 #: model:ir.model,name:base.model_res_bank
@@ -1114,14 +1112,14 @@ msgstr "은행"
 #. module: base
 #: model:ir.model,name:base.model_ir_exports_line
 msgid "ir.exports.line"
-msgstr ""
+msgstr "ir.exports.line"
 
 #. module: base
 #: help:base.language.install,overwrite:0
 msgid ""
 "If you check this box, your customized translations will be overwritten and "
 "replaced by the official ones."
-msgstr "이 박스를 체크하면, 당신의 커스터마이즈된 번역를 공식적인 번역으로 대체될 것입니다."
+msgstr "이 상자를 체크하면, 귀하의 사용자 정의 번역이 공식 번역으로 덮어쓰기 되고 대체될 것입니다."
 
 #. module: base
 #: field:ir.actions.report.xml,report_rml:0
@@ -1133,7 +1131,7 @@ msgstr "주요 보고서 파일 경로"
 #: field:ir.module.module,reports_by_module:0
 #: model:ir.ui.menu,name:base.menu_ir_action_report_xml
 msgid "Reports"
-msgstr "리포트"
+msgstr "보고서"
 
 #. module: base
 #: help:ir.actions.act_window.view,multi:0
@@ -1141,12 +1139,12 @@ msgstr "리포트"
 msgid ""
 "If set to true, the action will not be displayed on the right toolbar of a "
 "form view."
-msgstr "참으로 설정하면, 이 액션이 양식 뷰의 오른쪽 툴바에 나타나지 않습니다."
+msgstr "참으로 설정할 경우, 해당 액션이 양식 화면의 오른쪽 툴바에 나타나지 않을 것입니다."
 
 #. module: base
 #: field:workflow,on_create:0
 msgid "On Create"
-msgstr "생성"
+msgstr "생성 시"
 
 #. module: base
 #: code:addons/base/ir/ir_model.py:906
@@ -1155,8 +1153,8 @@ msgid ""
 "'%s' contains too many dots. XML ids should not contain dots ! These are "
 "used to refer to other modules data, as in module.reference_id"
 msgstr ""
-"'%s'는 너무 많은 점들 포함하고 있다. XML id들에 점이 포함되서는 안된다.\r\n"
-"그것들은 다른 모듈의 자료를 참조하기 위해 사용된다."
+"'%s'는 너무 많은 점을 포함하고 있습니다. XML id에는 점이 포함되서는 안됩니다 ! 해당 부호는 "
+"module.reference_id와 같이 다른 모듈 데이터를 참조하기 위해 사용됩니다."
 
 #. module: base
 #: field:res.users,login:0
@@ -1168,7 +1166,7 @@ msgstr "로그인"
 msgid ""
 "Access all the fields related to the current object using expressions, i.e. "
 "object.partner_id.name "
-msgstr "표현식을 사용하는 현재 객체에 관련된 필드를 액세스하라. 가령  object.partner_id.name "
+msgstr "표현식을 사용하는 현재 객체에 관련된 모든 필드에 접근함. 예: object.partner_id.name "
 
 #. module: base
 #: model:ir.model,name:base.model_res_country_state
@@ -1178,30 +1176,30 @@ msgstr "국가 상태"
 #. module: base
 #: selection:ir.property,type:0
 msgid "Float"
-msgstr "부동소수"
+msgstr "부동 소수"
 
 #. module: base
 #: model:ir.model,name:base.model_res_request_link
 msgid "res.request.link"
-msgstr ""
+msgstr "res.request.link"
 
 #. module: base
 #: field:ir.actions.wizard,name:0
 msgid "Wizard Info"
-msgstr "위저드 정보"
+msgstr "마법사 정보"
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_wizard_lang_export
 #: model:ir.ui.menu,name:base.menu_wizard_lang_export
 msgid "Export Translation"
-msgstr "번역을 내보내기"
+msgstr "번역 내보내기"
 
 #. module: base
 #: help:res.log,secondary:0
 msgid ""
 "Do not display this log if it belongs to the same object the user is working "
 "on"
-msgstr "만약 로그가 현 사용자가 동작하고 있는 객체에 속해 있다면, 로그를 표시하지 마십시오."
+msgstr "만약 로그가 사용자가 작업하고 있는 객체에 속해 있을 경우, 로그를 표시하지 마세요."
 
 #. module: base
 #: model:res.country,name:base.tp
@@ -1226,16 +1224,16 @@ msgid ""
 "%(company_name)s"
 msgstr ""
 "날짜 : %(date)s\n"
-"%(파트너 이름)s 님께\n"
+"%(partner_name)s 귀하\n"
 "\n"
-"당신이 아직 지불하지 않는 송장을 첨부파일에서 확인하시길 부탁드립니다.\n"
-"해당 금액은 다음과 같습니다.\n"
+"다음 총 지불액에 해당하는 귀하의 미납 송장을 첨부 파일에서 확인하시기 바랍니다:\n"
+"\n"
 "%(followup_amount).2f %(company_currency)s\n"
 "\n"
 "감사합니다.\n"
 "\n"
-"%(사용자 서명)s\n"
-"%(회사명)s"
+"%(user_signature)s\n"
+"%(company_name)s"
 
 #. module: base
 #: field:res.currency,accuracy:0
@@ -1245,12 +1243,12 @@ msgstr "계산 정확성"
 #. module: base
 #: selection:base.language.install,lang:0
 msgid "Sinhalese / සිංහල"
-msgstr "신할라어"
+msgstr "신할라어 / සිංහල"
 
 #. module: base
 #: model:ir.model,name:base.model_wizard_ir_model_menu_create_line
 msgid "wizard.ir.model.menu.create.line"
-msgstr ""
+msgstr "wizard.ir.model.menu.create.line"
 
 #. module: base
 #: field:ir.attachment,res_id:0
@@ -1270,12 +1268,12 @@ msgstr "몰디브"
 #. module: base
 #: help:ir.values,res_id:0
 msgid "Keep 0 if the action must appear on all resources."
-msgstr "이 액션이 모든 리소스에 나타나려면, 0으로 설정"
+msgstr "해당 액션이 모든 리소스에 나타나야 할 경우, 0을 유지하세요."
 
 #. module: base
 #: model:ir.model,name:base.model_ir_rule
 msgid "ir.rule"
-msgstr ""
+msgstr "ir.rule"
 
 #. module: base
 #: selection:ir.cron,interval_type:0
@@ -1287,7 +1285,7 @@ msgstr "일"
 msgid ""
 "Condition that is to be tested before action is executed, e.g. "
 "object.list_price > object.cost_price"
-msgstr "액션이 실행되기 전에 테스트될 조건. e.g. object.list_price > object.cost_price"
+msgstr "액션이 실행되기 전에 시험될조건. 예: object.list_price > object.cost_price"
 
 #. module: base
 #: code:addons/base/res/res_company.py:68
@@ -1298,18 +1296,18 @@ msgstr " (사본)"
 #. module: base
 #: view:res.lang:0
 msgid "7.  %H:%M:%S      ==> 18:25:20"
-msgstr ""
+msgstr "7. %H:%M:%S ==> 18:25:20"
 
 #. module: base
 #: view:res.partner:0
 #: field:res.partner.category,partner_ids:0
 msgid "Partners"
-msgstr "파트너"
+msgstr "협력업체"
 
 #. module: base
 #: field:res.partner.category,parent_left:0
 msgid "Left parent"
-msgstr "왼쪽 여백"
+msgstr "좌측 모체"
 
 #. module: base
 #: model:ir.actions.act_window,name:base.res_widget_act_window
@@ -1322,8 +1320,7 @@ msgstr "홈페이지 위젯"
 msgid ""
 "Specify the message. You can use the fields from the object. e.g. `Dear [[ "
 "object.partner_id.name ]]`"
-msgstr ""
-"메시지를 지정하세요. 오브젝트 필드를 잉요할 수 있습니다 .e.g. `[[ object.partner_id.name ]]님, 안녕하세요`"
+msgstr "메시지를 명시하세요. 객체 필드를 사용할 수 있습니다. 예: `[[ object.partner_id.name ]] 귀하`"
 
 #. module: base
 #: field:ir.attachment,res_model:0
@@ -1343,7 +1340,7 @@ msgstr "트리거 이름"
 #. module: base
 #: model:ir.model,name:base.model_ir_model_access
 msgid "ir.model.access"
-msgstr ""
+msgstr "ir.model.access"
 
 #. module: base
 #: field:ir.cron,priority:0
@@ -1351,7 +1348,7 @@ msgstr ""
 #: field:res.request,priority:0
 #: field:res.request.link,priority:0
 msgid "Priority"
-msgstr "우선순위"
+msgstr "우선 순위"
 
 #. module: base
 #: field:workflow.transition,act_from:0
@@ -1361,18 +1358,18 @@ msgstr "소스 활동"
 #. module: base
 #: view:ir.sequence:0
 msgid "Legend (for prefix, suffix)"
-msgstr ""
+msgstr "범례 (접두사, 접미사용)"
 
 #. module: base
 #: selection:ir.server.object.lines,type:0
 msgid "Formula"
-msgstr "공식"
+msgstr "수식"
 
 #. module: base
 #: code:addons/base/res/res_users.py:307
 #, python-format
 msgid "Can not remove root user!"
-msgstr "루트 사용자를 제거할 수는 없음!"
+msgstr "루트 사용자를 제거할 수 없음!"
 
 #. module: base
 #: model:res.country,name:base.mw
@@ -1392,7 +1389,7 @@ msgstr "%s (사본)"
 #. module: base
 #: field:res.partner,type:0
 msgid "Address Type"
-msgstr "주소 타입"
+msgstr "주소 형식"
 
 #. module: base
 #: field:ir.ui.menu,complete_name:0
@@ -1411,13 +1408,13 @@ msgid ""
 "decimal number [00,53]. All days in a new year preceding the first Sunday "
 "are considered to be in week 0."
 msgstr ""
-"%U - 십진수로 표시된 특정 년도의 '주' 숫자 (일요일이 해당 주의 첫째 날) [00,53]. 첫째 일요일에 앞서는 모든 날짜들은 "
-"'주 0'에 속하는 것으로 간주."
+"%U - 십진수로 표시된 년도의 '주' 번호 (일요일이 일주일 중 첫 번째 날) [00,53]. 첫째 일요일 이전의 모든 날들은 '주 "
+"0'에 속하는 것으로 간주함."
 
 #. module: base
 #: view:ir.ui.view:0
 msgid "Advanced"
-msgstr "고급 기능"
+msgstr "고급"
 
 #. module: base
 #: model:res.country,name:base.fi
@@ -1436,7 +1433,7 @@ msgstr "트리"
 #: help:res.config.users,password:0
 msgid ""
 "Keep empty if you don't want the user to be able to connect on the system."
-msgstr "이 사용자가 시스템에 접속하지 못하도록 하려면 체크하십시오."
+msgstr "해당 사용자가 시스템에 접속하지 못하길 원할 경우 비워두세요."
 
 #. module: base
 #: view:ir.actions.server:0
@@ -1446,7 +1443,7 @@ msgstr "생성 / 쓰기 / 복사"
 #. module: base
 #: view:base.language.export:0
 msgid "https://help.launchpad.net/Translations"
-msgstr ""
+msgstr "https://help.launchpad.net/Translations"
 
 #. module: base
 #: field:ir.actions.act_window,view_mode:0
@@ -1458,13 +1455,13 @@ msgstr "보기 모드"
 msgid ""
 "When using CSV format, please also check that the first line of your file is "
 "one of the following:"
-msgstr "CSV형식를 사용할 때, 파일의 첫째 줄이 다음과 같은지 확인하십시오."
+msgstr "CSV형식를 사용할 때, 해당 파일의 첫째 줄이 다음 중 하나인지 확인하세요:"
 
 #. module: base
 #: code:addons/fields.py:114
 #, python-format
 msgid "Not implemented search_memory method !"
-msgstr "search_memory 방식이 구현되지 않음"
+msgstr "search_memory 방식이 구현되지 않음 !"
 
 #. module: base
 #: view:res.log:0
@@ -1474,12 +1471,12 @@ msgstr "로그"
 #. module: base
 #: selection:base.language.install,lang:0
 msgid "Spanish / Español"
-msgstr "스페인어"
+msgstr "스페인어 / Español"
 
 #. module: base
 #: selection:base.language.install,lang:0
 msgid "Korean (KP) / 한국어 (KP)"
-msgstr ""
+msgstr "Korean (KP) / 한국어 (KP)"
 
 #. module: base
 #: view:base.module.update:0
@@ -1487,8 +1484,7 @@ msgid ""
 "This wizard will scan all module repositories on the server side to detect "
 "newly added modules as well as any change to existing modules."
 msgstr ""
-"이 마법사기능은 서버측의 모든 모듈 레포지터리를 검색할 것입니다.\r\n"
-"왜냐하면 기존 모듈의 변경뿐 아니라 새로운 모듈이 있는지를 알아내기 위해서입니다."
+"이 마법사는 기존 모듈의 변경사항 뿐만 아니라 새로 추가된 모듈을 탐지하기 위해 서버 측의 모든 모듈 저장소를 검사할 것입니다."
 
 #. module: base
 #: field:res.company,logo:0
@@ -1498,12 +1494,12 @@ msgstr "로고"
 #. module: base
 #: view:res.partner.address:0
 msgid "Search Contact"
-msgstr "연락처 찾기"
+msgstr "연락처 검색"
 
 #. module: base
 #: view:ir.module.module:0
 msgid "Uninstall (beta)"
-msgstr "설치 해제 (베타)"
+msgstr "삭제 (베타)"
 
 #. module: base
 #: selection:ir.actions.act_url,target:0
@@ -1514,19 +1510,19 @@ msgstr "새 창"
 #. module: base
 #: model:res.country,name:base.bs
 msgid "Bahamas"
-msgstr "바하마제도"
+msgstr "바하마"
 
 #. module: base
 #: code:addons/base/res/res_partner.py:522
 #, python-format
 msgid ""
 "Couldn't generate the next id because some partners have an alphabetic id !"
-msgstr "일부 파트너들이 알파벳 ID를 가지고 있으므로 다음 ID를 생성하지 못했음!"
+msgstr "일부 협력업체들이 알파벳 ID를 보유하고 있어 다음 ID를 생성하지 못했음 !"
 
 #. module: base
 #: view:ir.attachment:0
 msgid "Attachment"
-msgstr "첨부"
+msgstr "첨부 파일"
 
 #. module: base
 #: model:res.country,name:base.ie
@@ -1542,12 +1538,12 @@ msgstr "갱신된 모듈들의 수"
 #: code:addons/fields.py:100
 #, python-format
 msgid "Not implemented set_memory method !"
-msgstr "set_memory method를 수행 못함 !"
+msgstr "set_memory 방식을 수행하지 못함 !"
 
 #. module: base
 #: view:workflow.activity:0
 msgid "Workflow Activity"
-msgstr "워크플로어 활동"
+msgstr "업무 흐름 활동"
 
 #. module: base
 #: view:ir.rule:0
@@ -1564,8 +1560,8 @@ msgid ""
 "Views allows you to personalize each view of OpenERP. You can add new "
 "fields, move fields, rename them or delete the ones that you do not need."
 msgstr ""
-"뷰 기능은 OpenERP의 각 뷰를 개인화하도록 한다. \r\n"
-"새로운 필드를 추가, 이동, 변경, 삭제할 수 있다."
+"화면 기능은 OpenERP의 각 화면을 개인화할 수 있도록 허용합니다. 새로운 필드를 추가, 이동, 이름 변경 또는 필요하지 않은 필드를 "
+"삭제할 수 있습니다."
 
 #. module: base
 #: field:ir.actions.act_window,groups_id:0
@@ -1590,7 +1586,7 @@ msgstr "그룹"
 #. module: base
 #: selection:base.language.install,lang:0
 msgid "Spanish (CL) / Español (CL)"
-msgstr "스페인어"
+msgstr "스페인어 (CL) / Español (CL)"
 
 #. module: base
 #: view:res.config.users:0
@@ -1599,18 +1595,18 @@ msgid ""
 "access to selected functionalities within the system. Click on 'Done' if you "
 "do not wish to add more users at this stage, you can always do this later."
 msgstr ""
-"추가 사용자를 생성하고, 시스템내 적당한 기능을 할 수 있는 권한을 부여하기 위해 적당한 그룹에 할당하세요. 이 단계에서 더이상의 사용자 "
-"생성을 원하지 않으면 \"완료\"를 클릭하세요."
+"추가 사용자를 생성하고, 시스템 내에서 선택한 기능에 접근을 허용할 수 있는 그룹에 할당하세요. 이 단계에서 더 이상의 사용자 생성을 "
+"원하지 않으면 \"완료\"를 클릭하세요. 나중에 언제나 할 수 있습니다."
 
 #. module: base
 #: model:res.country,name:base.bz
 msgid "Belize"
-msgstr "벨리제"
+msgstr "벨리즈"
 
 #. module: base
 #: model:res.country,name:base.ge
 msgid "Georgia"
-msgstr "그루지아"
+msgstr "조지아"
 
 #. module: base
 #: model:res.country,name:base.pl
@@ -1622,29 +1618,29 @@ msgstr "폴란드"
 msgid ""
 "Comma-separated list of allowed view modes, such as 'form', 'tree', "
 "'calendar', etc. (Default: tree,form)"
-msgstr "'폼', '트리', '달력'과 같은 보기 모드를 구분하기 위한 쉼표,구분 리스트"
+msgstr "'양식', '트리', '달력' 등과 같은 화면 모드를 구분하기 위한 쉼표 구분 목록 (기본: 트리,양식)"
 
 #. module: base
 #: code:addons/orm.py:3842
 #, python-format
 msgid "A document was modified since you last viewed it (%s:%d)"
-msgstr "문서는 당신이 마지막으로 본 시점이후에 수정되었다. (%s:%d)"
+msgstr "(%s:%d) 마지막으로 본 이후에 수정되었습니다."
 
 #. module: base
 #: view:workflow:0
 msgid "Workflow Editor"
-msgstr "워크플로어 편집기"
+msgstr "업무 흐름 편집기"
 
 #. module: base
 #: selection:ir.module.module,state:0
 #: selection:ir.module.module.dependency,state:0
 msgid "To be removed"
-msgstr "지울 것"
+msgstr "제거 예정"
 
 #. module: base
 #: model:ir.model,name:base.model_ir_sequence
 msgid "ir.sequence"
-msgstr ""
+msgstr "ir.sequence"
 
 #. module: base
 #: help:ir.actions.server,expression:0
@@ -1653,8 +1649,8 @@ msgid ""
 "order in Object, and you can have loop on the sales order line. Expression = "
 "`object.order_line`."
 msgstr ""
-"리스트를 돌려 줄 필드/표현식을 입력하십시오. 가령, 오브젝트에서 판매 주문을 선택하면, 판매 주문 라인 상의 루프를 얻을 수 있습니다 "
-"표현식 = `object.order_line`."
+"목록을 보여줄 필드/표현식을 입력하세요. 예: 객체에서 판매 주문을 선택하면, 판매 주문 입력줄 상의 루프를 얻을 수 있습니다 표현식 = "
+"`object.order_line`."
 
 #. module: base
 #: view:ir.model.fields:0
@@ -1667,12 +1663,12 @@ msgstr "필드"
 #. module: base
 #: view:ir.rule:0
 msgid "Groups (no group = global)"
-msgstr "그룹 ( 그룹없음 = 전체 )"
+msgstr "그룹 ( 그룹 없음 = 전체 )"
 
 #. module: base
 #: model:res.country,name:base.fo
 msgid "Faroe Islands"
-msgstr "페어로우섬"
+msgstr "패로 제도"
 
 #. module: base
 #: selection:res.users,view:0
@@ -1682,7 +1678,7 @@ msgstr "간체"
 #. module: base
 #: model:res.country,name:base.st
 msgid "Saint Tome (Sao Tome) and Principe"
-msgstr "세인트 톰 (사오 톰) 과 프린시프섬"
+msgstr "사웅투메(상토메) 프린시페"
 
 #. module: base
 #: selection:res.partner,type:0
@@ -1692,7 +1688,7 @@ msgstr "송장"
 #. module: base
 #: selection:base.language.install,lang:0
 msgid "Portugese (BR) / Português (BR)"
-msgstr "포루트칼"
+msgstr "포루트칼어 (BR) / Português (BR)"
 
 #. module: base
 #: model:res.country,name:base.bb
@@ -1709,12 +1705,12 @@ msgstr "마다가스카르"
 #, python-format
 msgid ""
 "The Object name must start with x_ and not contain any special character !"
-msgstr "오브젝트 이름은 x_로 시작해야 하며, 특수 문자를 포함해서는 안 됩니다 !"
+msgstr "객체 이름은 x_로 시작해야 하며, 특수 문자를 포함해서는 안 됩니다 !"
 
 #. module: base
 #: field:ir.actions.configuration.wizard,note:0
 msgid "Next Wizard"
-msgstr "다음 위저드"
+msgstr "다음 마법사"
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_menu_admin
@@ -1731,7 +1727,7 @@ msgstr "현재 비율"
 #. module: base
 #: field:ir.ui.view.custom,ref_id:0
 msgid "Original View"
-msgstr "원래 뷰"
+msgstr "원본 화면"
 
 #. module: base
 #: view:ir.values:0
@@ -1741,7 +1737,7 @@ msgstr "시작할 액션"
 #. module: base
 #: field:ir.actions.act_url,target:0
 msgid "Action Target"
-msgstr "액션 타깃"
+msgstr "액션 대상"
 
 #. module: base
 #: model:res.country,name:base.ai
@@ -1751,19 +1747,19 @@ msgstr "앙골라"
 #. module: base
 #: field:ir.ui.view_sc,name:0
 msgid "Shortcut Name"
-msgstr "단축키 명"
+msgstr "단축키 이름"
 
 #. module: base
 #: help:ir.actions.act_window,limit:0
 msgid "Default limit for the list view"
-msgstr "리스트 뷰를 위한 기본 제한"
+msgstr "목록 화면의 기본 제한"
 
 #. module: base
 #: help:ir.actions.server,write_id:0
 msgid ""
 "Provide the field name that the record id refers to for the write operation. "
 "If it is empty it will refer to the active id of the object."
-msgstr "쓰기 오퍼레이션을 위해 레코드 ID가 참조하는 필드 이름을 기입하십시오. 비워두면, 이 오브젝트의 활성 ID를 참조합니다."
+msgstr "쓰기 작업을 위해 레코드 ID가 참조하는 필드 이름을 제공하세요. 비었을 경우, 해당 객체의 활성 ID를 참조합니다."
 
 #. module: base
 #: model:res.country,name:base.zw
@@ -1773,7 +1769,7 @@ msgstr "짐바브웨"
 #. module: base
 #: view:base.module.update:0
 msgid "Please be patient, as this operation may take a few seconds..."
-msgstr "오퍼레이션이 끝날 때까지 기다리세요."
+msgstr "작업이 끝날 때까지 조금만 기다려주세요..."
 
 #. module: base
 #: help:ir.values,action_id:0
@@ -1788,7 +1784,7 @@ msgstr "이메일 주소"
 #. module: base
 #: selection:base.language.install,lang:0
 msgid "French (BE) / Français (BE)"
-msgstr "프랑스어"
+msgstr "프랑스어 (BE) / Français (BE)"
 
 #. module: base
 #: view:ir.actions.server:0
@@ -1799,7 +1795,7 @@ msgstr "서버 액션"
 #. module: base
 #: model:res.country,name:base.tt
 msgid "Trinidad and Tobago"
-msgstr "트리니다드 토바고"
+msgstr "트리니다드토바고"
 
 #. module: base
 #: model:res.country,name:base.lv
@@ -1824,7 +1820,7 @@ msgstr "번역 내보내기"
 #. module: base
 #: model:ir.ui.menu,name:base.menu_custom
 msgid "Customization"
-msgstr "고객화"
+msgstr "사용자 지정"
 
 #. module: base
 #: model:res.country,name:base.py
@@ -1834,7 +1830,7 @@ msgstr "파라과이"
 #. module: base
 #: model:ir.model,name:base.model_ir_actions_act_window_close
 msgid "ir.actions.act_window_close"
-msgstr ""
+msgstr "ir.actions.act_window_close"
 
 #. module: base
 #: field:ir.server.object.lines,col1:0
@@ -1858,18 +1854,18 @@ msgstr ""
 msgid ""
 "Name of object whose function will be called when this scheduler will run. "
 "e.g. 'res.partener'"
-msgstr "이 스케줄러가 수행될 때, 함수가 호출되는 객체의 이름 예)  'res.partener'"
+msgstr "이 스케줄러가 수행될 때, 함수가 호출되는 객체의 이름. 예:  'res.partener'"
 
 #. module: base
 #: code:addons/orm.py:1040
 #, python-format
 msgid "The perm_read method is not implemented on this object !"
-msgstr "perm_read 메쏘드는 이 오브젝트에 적용되지 않음!"
+msgstr "perm_read 방식은 이 객체에 적용되지 않습니다 !"
 
 #. module: base
 #: view:res.lang:0
 msgid "%y - Year without century [00,99]."
-msgstr "2자리수 연도"
+msgstr "%y - 세기에 해당되지 않는 연도 [00,99]."
 
 #. module: base
 #: model:res.country,name:base.si
@@ -1886,12 +1882,12 @@ msgstr "파키스탄"
 #: code:addons/orm.py:2031
 #, python-format
 msgid "Invalid Object Architecture!"
-msgstr "잘못된 객체 아키텍쳐"
+msgstr "유효하지 않은 객체 아키텍처"
 
 #. module: base
 #: model:ir.ui.menu,name:base.menu_email_gateway_form
 msgid "Messages"
-msgstr "메세지"
+msgstr "메시지"
 
 #. module: base
 #: code:addons/base/ir/ir_model.py:366
@@ -1915,7 +1911,7 @@ msgstr "%p - AM 또는 PM의 등가물"
 #. module: base
 #: view:ir.actions.server:0
 msgid "Iteration Actions"
-msgstr "반복형 동작들"
+msgstr "반복 액션"
 
 #. module: base
 #: help:multi_company.default,company_id:0
@@ -1925,7 +1921,7 @@ msgstr "사용자가 연결된 회사"
 #. module: base
 #: field:publisher_warranty.contract,date_stop:0
 msgid "Ending Date"
-msgstr "종료 날짜"
+msgstr "종료일"
 
 #. module: base
 #: model:res.country,name:base.nz
@@ -1938,7 +1934,7 @@ msgstr "뉴질랜드"
 msgid ""
 "One of the records you are trying to modify has already been deleted "
 "(Document type: %s)."
-msgstr "당신이 수정하려고 하는 레코드중의 하나는 이미 삭제되었습니다.( 자료 유형 : %s)."
+msgstr "귀하께서 수정을 시도하는 레코드 중의 하나는 이미 삭제되었습니다. (자료 유형: %s)."
 
 #. module: base
 #: model:ir.actions.act_window,help:base.action_country
@@ -1947,23 +1943,23 @@ msgid ""
 "partner records. You can create or delete countries to make sure the ones "
 "you are working on will be maintained."
 msgstr ""
-"당신의 파트너 기록에 할당될 수 있는 모든 나라들의 목록을 나타내고 관리하세요.\r\n"
-"당신이 일하고 있는 나라가 유지될 것인지 확실시하기 위하여 나라를 생성하고 삭제할 수 있습니다."
+"귀하의 협력업체 기록에 할당될 수 있는 모든 나라들의 목록을 나타내고 관리하세요. 당신이 사용 중인 나라가 유지되는지 확인하기 위해 "
+"나라를 생성 또는 삭제할 수 있습니다."
 
 #. module: base
 #: model:res.partner.category,name:base.res_partner_category_7
 msgid "Openstuff.net"
-msgstr ""
+msgstr "Openstuff.net"
 
 #. module: base
 #: model:res.country,name:base.nf
 msgid "Norfolk Island"
-msgstr "노퍽 제도"
+msgstr "노퍽 섬"
 
 #. module: base
 #: selection:base.language.install,lang:0
 msgid "Korean (KR) / 한국어 (KR)"
-msgstr ""
+msgstr "Korean (KR) / 한국어 (KR)"
 
 #. module: base
 #: help:ir.model.fields,model:0
@@ -1975,7 +1971,7 @@ msgstr "이 필드가 속한 모델의 기술적 명칭"
 #: selection:ir.actions.server,state:0
 #: view:ir.values:0
 msgid "Client Action"
-msgstr "클라이언트 액션ㅇ"
+msgstr "클라이언트 액션"
 
 #. module: base
 #: model:res.country,name:base.bd
@@ -1985,7 +1981,7 @@ msgstr "방글라데시"
 #. module: base
 #: constraint:res.company:0
 msgid "Error! You can not create recursive companies."
-msgstr "에러! 재귀적 기업들을 생성할 수는 없습니다."
+msgstr "에러! 재귀적 기업들을 생성할 수 없습니다."
 
 #. module: base
 #: selection:publisher_warranty.contract,state:0
@@ -1995,13 +1991,13 @@ msgstr "유효함"
 #. module: base
 #: selection:ir.translation,type:0
 msgid "XSL"
-msgstr ""
+msgstr "XSL"
 
 #. module: base
 #: code:addons/base/module/module.py:526
 #, python-format
 msgid "Can not upgrade module '%s'. It is not installed."
-msgstr "모듈 '%s' 을 업그레이드할 수 없습니다. 설치 안됨."
+msgstr "'%s' 모듈을 업그레이드할 수 없음. 설치되지 않음."
 
 #. module: base
 #: model:res.country,name:base.cu
@@ -2011,7 +2007,7 @@ msgstr "쿠바"
 #. module: base
 #: model:ir.model,name:base.model_res_partner_event
 msgid "res.partner.event"
-msgstr ""
+msgstr "res.partner.event"
 
 #. module: base
 #: model:res.widget,title:base.facebook_widget
@@ -2027,12 +2023,12 @@ msgstr "아르메니아"
 #: model:ir.actions.act_window,name:base.ir_property_form
 #: model:ir.ui.menu,name:base.menu_ir_property_form_all
 msgid "Configuration Parameters"
-msgstr "구성 파라메터"
+msgstr "구성 파라미터"
 
 #. module: base
 #: constraint:ir.cron:0
 msgid "Invalid arguments"
-msgstr "인자가 잘못되었습니다"
+msgstr "유효하지 않은 인자"
 
 #. module: base
 #: model:res.country,name:base.se
@@ -2048,14 +2044,14 @@ msgstr "간트"
 #. module: base
 #: view:ir.property:0
 msgid "Property"
-msgstr "속성"
+msgstr "부동산"
 
 #. module: base
 #: model:ir.model,name:base.model_res_partner_bank_type
 #: field:res.partner.bank,state:0
 #: view:res.partner.bank.type:0
 msgid "Bank Account Type"
-msgstr "은행 계정 타입"
+msgstr "은행 계정 유형"
 
 #. module: base
 #: field:res.partner,image:0
@@ -2065,12 +2061,12 @@ msgstr "이미지"
 #. module: base
 #: view:ir.actions.server:0
 msgid "Iteration Action Configuration"
-msgstr "반복형 동작 구성"
+msgstr "반복 액션 구성"
 
 #. module: base
 #: selection:publisher_warranty.contract,state:0
 msgid "Canceled"
-msgstr "취소"
+msgstr "취소됨"
 
 #. module: base
 #: model:res.country,name:base.at
@@ -4050,7 +4046,7 @@ msgstr ""
 #. module: base
 #: model:res.country,name:base.fj
 msgid "Fiji"
-msgstr ""
+msgstr "피지"
 
 #. module: base
 #: field:ir.model.fields,size:0
@@ -4602,7 +4598,7 @@ msgstr ""
 #. module: base
 #: model:res.country,name:base.mn
 msgid "Mongolia"
-msgstr ""
+msgstr "몽고"
 
 #. module: base
 #: view:ir.module.module:0
@@ -4691,7 +4687,7 @@ msgstr ""
 #. module: base
 #: sql_constraint:res.country:0
 msgid "The name of the country must be unique !"
-msgstr ""
+msgstr "국가명은 유일해야 합니다!"
 
 #. module: base
 #: model:ir.actions.act_window,help:base.action_country_state
@@ -6442,7 +6438,7 @@ msgstr "디폴트 값"
 #. module: base
 #: model:ir.ui.menu,name:base.menu_tools
 msgid "Tools"
-msgstr ""
+msgstr "도구"
 
 #. module: base
 #: model:res.country,name:base.kn
@@ -7537,7 +7533,7 @@ msgstr ""
 #. module: base
 #: model:res.country,name:base.nl
 msgid "Netherlands"
-msgstr ""
+msgstr "네덜란드"
 
 #. module: base
 #: model:ir.ui.menu,name:base.next_id_4
