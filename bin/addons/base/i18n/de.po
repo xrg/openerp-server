@@ -178,7 +178,7 @@ msgstr "erstellt."
 #. module: base
 #: model:res.partner.category,name:base.res_partner_category_woodsuppliers0
 msgid "Wood Suppliers"
-msgstr "Holzlieferaten"
+msgstr "Holzlieferanten"
 
 #. module: base
 #: code:addons/base/module/module.py:303
@@ -1796,7 +1796,7 @@ msgstr "Dieses Feld wird nicht gebraucht es hilft lediglich bei der Auswahl."
 #. module: base
 #: field:ir.actions.server,email:0
 msgid "Email Address"
-msgstr "Email Addresse"
+msgstr "E-Mail-Adresse"
 
 #. module: base
 #: selection:base.language.install,lang:0
@@ -2378,7 +2378,7 @@ msgstr "Datenbankstruktur"
 #: model:ir.model,name:base.model_partner_wizard_spam
 #: view:partner.wizard.spam:0
 msgid "Mass Mailing"
-msgstr "EMail senden"
+msgstr "Massen Mailing"
 
 #. module: base
 #: model:res.country,name:base.yt
@@ -2492,7 +2492,7 @@ msgstr "Unternehmen"
 #: model:ir.actions.act_window,name:base.action_country
 #: model:ir.ui.menu,name:base.menu_country_partner
 msgid "Countries"
-msgstr "Partner Nationen"
+msgstr "Länder"
 
 #. module: base
 #: selection:ir.translation,type:0
@@ -3674,7 +3674,9 @@ msgstr "Äthiopien"
 #. module: base
 #: help:res.country.state,code:0
 msgid "The state code in three chars.\n"
-msgstr "Der 3 stellige Staatencode\n"
+msgstr ""
+"Die 2 oder 3 stellige Abkürzung für das Bundesland/den Kanton/die Region "
+"oder Provinz\n"
 
 #. module: base
 #: model:res.country,name:base.sj
@@ -4014,7 +4016,7 @@ msgstr "Aktion"
 #. module: base
 #: view:ir.actions.server:0
 msgid "Email Configuration"
-msgstr "Email Konfiguration"
+msgstr "E-Mail Konfiguration"
 
 #. module: base
 #: model:ir.model,name:base.model_ir_cron
@@ -4385,7 +4387,7 @@ msgstr "Britisches Territorium im Indischen Ozean"
 #: field:res.config.users,view:0 field:res.config.view,view:0
 #: field:res.users,view:0
 msgid "Interface"
-msgstr "Schnittstelle"
+msgstr "Benutzeroberfläche"
 
 #. module: base
 #: view:ir.actions.server:0
@@ -4405,7 +4407,7 @@ msgstr "Typfeld-Text"
 #. module: base
 #: field:res.country.state,code:0
 msgid "State Code"
-msgstr "Landescode"
+msgstr "Bundesland Abkürzung"
 
 #. module: base
 #: field:ir.model.fields,on_delete:0
@@ -6474,7 +6476,7 @@ msgstr ""
 #: view:ir.module.module:0 selection:ir.module.module,state:0
 #: selection:ir.module.module.dependency,state:0
 msgid "Not Installed"
-msgstr "nicht installiert"
+msgstr "Nicht installiert"
 
 #. module: base
 #: view:workflow.activity:0 field:workflow.activity,out_transitions:0
@@ -6609,7 +6611,7 @@ msgstr "Laos"
 #: selection:ir.actions.server,state:0 field:res.config.users,user_email:0
 #: field:res.users,user_email:0
 msgid "Email"
-msgstr "EMail"
+msgstr "E-Mail Adresse"
 
 #. module: base
 #: field:res.config.users,action_id:0 field:res.users,action_id:0

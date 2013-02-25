@@ -25,17 +25,17 @@ msgstr "Ограничение"
 #. module: base
 #: model:res.country,name:base.sh
 msgid "Saint Helena"
-msgstr "Остров Святой Елены"
+msgstr "Остров Св. Елены"
 
 #. module: base
 #: view:ir.actions.report.xml:0
 msgid "Other Configuration"
-msgstr "Другие настройки"
+msgstr "Прочие настройки"
 
 #. module: base
 #: selection:ir.property,type:0
 msgid "DateTime"
-msgstr "DateTime"
+msgstr "Дата и время"
 
 #. module: base
 #: code:addons/fields.py:534
@@ -129,7 +129,7 @@ msgstr ""
 #. module: base
 #: field:res.partner,ref:0
 msgid "Reference"
-msgstr "Ссылка"
+msgstr "Обозначение"
 
 #. module: base
 #: field:ir.actions.act_window,target:0
@@ -140,7 +140,7 @@ msgstr "Окно назначения"
 #: code:addons/base/res/res_user.py:507
 #, python-format
 msgid "Warning!"
-msgstr "Предупреждение!"
+msgstr "Внимание!"
 
 #. module: base
 #: code:addons/base/ir/ir_model.py:304
