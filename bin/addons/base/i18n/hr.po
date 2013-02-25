@@ -9831,7 +9831,7 @@ msgstr ""
 #. module: base
 #: view:res.partner:0
 msgid "Sales & Purchases"
-msgstr "Prodaja i naručivanje"
+msgstr "Prodaja i nabava"
 
 #. module: base
 #: view:res.partner:0
@@ -10867,12 +10867,8 @@ msgstr ""
 
 #. module: base
 #: model:ir.ui.menu,name:base.menu_purchase_root
-#, fuzzy
 msgid "Purchases"
-msgstr ""
-"#-#-#-#-#  .merge_file_KrvnlO (OpenERP Server 5.0.4)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_9yX8dG (OpenERP Server 5.0.4)  #-#-#-#-#\n"
-"Nabave"
+msgstr "Nabava"
 
 #. module: base
 #: code:addons/base/module/wizard/base_update_translations.py:0

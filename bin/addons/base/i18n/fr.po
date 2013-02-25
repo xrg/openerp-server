@@ -5670,12 +5670,8 @@ msgstr "Fabrication"
 
 #. module: base
 #: model:ir.ui.menu,name:base.menu_product
-#, fuzzy
 msgid "Products"
-msgstr ""
-"#-#-#-#-#  .merge_file_JIEKs3 (OpenERP Server 5.0.4)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_PE7OcV (OpenERP Server 5.0.4)  #-#-#-#-#\n"
-"Produits"
+msgstr "Articles"
 
 #. module: base
 #: model:ir.ui.menu,name:base.menu_project_long_term
