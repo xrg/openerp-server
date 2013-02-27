@@ -419,7 +419,15 @@ class many2one(_rel2one):
                 and any([isinstance(x, (list, tuple)) for x in right]):
             # That's a nested expression
 
-            assert(operator == 'in') # others not implemented
+            if operator in ('in', '='):
+                op2 = 'inselect'
+            #elif operator in ('not in', '!=', '<>'):
+            #    op2 = 'not inselect'
+            #    Won't work: we have to inverse the 'right' expression alone, rather
+            #    than the inner query, because the access rules need apply transparently.
+            else:
+                # others not implemented
+                raise eu.DomainRightError(obj, lefts, operator, right)
             # Note, we don't actually check access permissions for the
             # intermediate object yet. That wouldn't still let us read
             # the forbidden record, but just use its id
@@ -433,7 +441,7 @@ class many2one(_rel2one):
 
             qry = 'SELECT "%s".id FROM %s %s ' %( field_obj._table, from_clause, qu1)
 
-            return (lefts[0],'inselect', (qry, tuple(qu2)))
+            return (lefts[0], op2, (qry, tuple(qu2)))
 
         elif operator == 'child_of' or operator == '|child_of' :
             if isinstance(right, basestring):
