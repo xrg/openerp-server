@@ -573,7 +573,7 @@ class MultiHTTPHandler(FixSendError, HttpOptions, BaseHTTPRequestHandler):
             self.wfile.flush()
             return
         # self.parse_request(): # Do NOT parse here. the first line should be the only
-        
+
         if self.path == '*' and self.command == 'OPTIONS':
             # special handling of path='*', must not use any vdir at all.
             if not self.parse_request():
@@ -581,11 +581,18 @@ class MultiHTTPHandler(FixSendError, HttpOptions, BaseHTTPRequestHandler):
             self.do_OPTIONS()
             self.wfile.flush()
             return
-            
+
         for vdir in self.server.vdirs:
             p = vdir.matches(self.path)
-            if p == False:
-                continue
+            if p:
+                break
+        else:
+            # if no match:
+            self.send_error(404, "Path not found: %s" % self.path)
+            self.wfile.flush()
+            return
+
+        if True:
             npath = self.path[len(p):]
             if not npath.startswith('/'):
                 npath = '/' + npath
@@ -614,10 +621,6 @@ class MultiHTTPHandler(FixSendError, HttpOptions, BaseHTTPRequestHandler):
                 # at python2.7/socket.py:303 flush()
                 self.close_connection = 1
             return
-        # if no match:
-        self.send_error(404, "Path not found: %s" % self.path)
-        self.wfile.flush()
-        return
 
     def _get_ignore_body(self,fore):
         if not fore.headers.has_key("content-length"):
@@ -720,21 +723,24 @@ class ConnThreadingMixIn:
         if not self.socket:
             return
         ct = threading and threading.currentThread()
+        request = None
         try:
             self._mark_start(ct)
-            request, client_address = self.get_request()
-        except (socket_error, socket.timeout):
-            self._mark_end(ct)
-            return
-        if self.verify_request(request, client_address):
             try:
+                request, client_address = self.get_request()
+            except (socket_error, socket.timeout):
+                return
+
+            if self.verify_request(request, client_address):
                 self.process_request(request, client_address)
-            except Exception, e:
+        except Exception, e:
+            if request is not None:
                 try:
                     self.handle_error(request, client_address)
                     self.close_request(request)
                 except Exception:
                     pass
-        self._mark_end(ct)
+        finally:
+            self._mark_end(ct)
 
 #eof
