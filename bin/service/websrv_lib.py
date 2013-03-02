@@ -117,7 +117,6 @@ class BasicAuthProxy(AuthProxy):
 class HTTPHandler(SimpleHTTPRequestHandler):
     def __init__(self,request, client_address, server):
         SimpleHTTPRequestHandler.__init__(self,request,client_address,server)
-        # print "Handler for %s inited" % str(client_address)
         self.protocol_version = 'HTTP/1.1'
         self.connection = dummyconn()
 
@@ -148,7 +147,7 @@ class HTTPDir:
         if request.startswith(self.path):
             return self.path
         return False
-    
+
     def __repr__(self):
         return "<http %r on %s>" %(self.handler, self.path)
 
@@ -181,7 +180,7 @@ def _quote_html(html):
 class BoundStream(object):
     """Wraps around a stream, reads a determined length of data
     """
-    
+
     def __init__(self, stream, length, chunk_size=None):
         self._stream = stream
         self._rem_length = length
@@ -220,7 +219,7 @@ class BoundStream(object):
             return data
         if not self._stream or self._fpos != 0L:
             raise IOError(errno.EBADF, "read() without stream")
-        
+
         if self._rem_length == 0:
             return ''
         elif self._rem_length < 0:
@@ -231,7 +230,7 @@ class BoundStream(object):
             rsize = size
         if self._chunk_size and self._chunk_size < rsize:
             rsize = self._chunk_size
-        
+
         data = self._stream.read(rsize)
         self._rem_length -= len(data)
         if len(data) > 32:
@@ -244,9 +243,9 @@ class BoundStream(object):
 
     def tell(self):
         return self._fpos
-    
+
     def seek(self, pos, whence=os.SEEK_SET):
-        """ Dummy seek to some pos. 
+        """ Dummy seek to some pos.
         It does nothing, in fact, but merely fool the gzip code
         """
         if whence == os.SEEK_SET:
@@ -260,7 +259,6 @@ class BoundStream(object):
                 self._fpos = pos
 
 class FixSendError:
-    #error_message_format = """ """
     def send_error(self, code, message=None):
         #overriden from BaseHTTPRequestHandler, we also send the content-length
         try:
@@ -281,7 +279,7 @@ class FixSendError:
         self.end_headers()
         if hasattr(self, '_flush'):
             self._flush()
-        
+
         if self.command != 'HEAD' and code >= 200 and code not in (204, 304):
             self.wfile.write(content)
 
@@ -299,7 +297,7 @@ class HttpOptions:
         self.send_response(200)
         self.send_header("Content-Length", 0)
         if 'Microsoft' in self.headers.get('User-Agent', ''):
-            self.send_header('MS-Author-Via', 'DAV') 
+            self.send_header('MS-Author-Via', 'DAV')
             # Microsoft's webdav lib ass-umes that the server would
             # be a FrontPage(tm) one, unless we send a non-standard
             # header that we are not an elephant.
@@ -314,12 +312,12 @@ class HttpOptions:
 
     def _prep_OPTIONS(self, opts):
         """Prepare the OPTIONS response, if needed
-        
+
         Sometimes, like in special DAV folders, the OPTIONS may contain
-        extra keywords, perhaps also dependant on the request url. 
+        extra keywords, perhaps also dependant on the request url.
         @param the options already. MUST be copied before being altered
         @return the updated options.
-        
+
         """
         return opts
 
@@ -334,7 +332,7 @@ class MultiHTTPHandler(FixSendError, HttpOptions, BaseHTTPRequestHandler):
     protocol_version = "HTTP/1.1"
     default_request_version = "HTTP/1.1"    # compatibility with py2.5
 
-    auth_required_msg = """ <html><head><title>Authorization required</title></head>
+    auth_required_msg = """<html><head><title>Authorization required</title></head>
     <body>You must authenticate to use this service</body><html>\r\r"""
 
     def __init__(self, request, client_address, server):
@@ -364,7 +362,7 @@ class MultiHTTPHandler(FixSendError, HttpOptions, BaseHTTPRequestHandler):
                 self.sec_realms[auth_provider.realm].checkRequest(fore,path)
             except AuthRequiredExc,ae:
                 # Darwin 9.x.x webdav clients will report "HTTP/1.0" to us, while they support (and need) the
-                # authorisation features of HTTP/1.1 
+                # authorisation features of HTTP/1.1
                 if self.request_version != 'HTTP/1.1' and ('Darwin/9.' not in fore.headers.get('User-Agent', '')):
                     # TODO the same for IE.8
                     self.log_error("Cannot require auth at %s", self.request_version)
@@ -412,7 +410,7 @@ class MultiHTTPHandler(FixSendError, HttpOptions, BaseHTTPRequestHandler):
             if hasattr(fore, '_flush'):
                 fore._flush()
             return
-        
+
         if fore.close_connection:
             # print "Closing connection because of handler"
             self.close_connection = fore.close_connection
@@ -497,7 +495,7 @@ class MultiHTTPHandler(FixSendError, HttpOptions, BaseHTTPRequestHandler):
 
     def _greadline(self):
         """ Graceful readline, that detects a closed handler.
-        
+
             Since the self.rfile is a dup()'ed handler of the socket,
             it would not automatically close when the socket does.
             So, we need to set a timeout and take care that we don't
@@ -525,7 +523,7 @@ class MultiHTTPHandler(FixSendError, HttpOptions, BaseHTTPRequestHandler):
             except socket.timeout:
                 pass
             except SSLError, err:
-                if err.errno in (errno.ETIMEDOUT, errno.ECONNRESET, 
+                if err.errno in (errno.ETIMEDOUT, errno.ECONNRESET,
                                 errno.ECONNABORTED):
                     pass
                 elif 'timed out' in err.args[0] or '[Errno 110]' in err.args[0]:
@@ -703,7 +701,7 @@ class ConnThreadingMixIn:
         if self.daemon_threads:
             t.daemon = True
         t.start()
-    
+
     def _mark_start(self, thread):
         """ Mark the start of a request thread """
         pass

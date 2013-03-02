@@ -32,7 +32,7 @@
     extendable HTTP protocols.
 
     The OpenERP server defines a single instance of a HTTP server, listening at
-    the standard 8069, 8071 ports (well, it is 2 servers, and ports are 
+    the standard 8069, 8071 ports (well, it is 2 servers, and ports are
     configurable, of course). This "single" server then uses a `MultiHTTPHandler`
     to dispatch requests to the appropriate channel protocol, like the XML-RPC,
     static HTTP, DAV or other.
@@ -89,7 +89,7 @@ class ThreadedHTTPServer(ConnThreadingMixIn, SimpleXMLRPCDispatcher, HTTPServer)
 
         SimpleXMLRPCDispatcher.__init__(self, allow_none, encoding)
         HTTPServer.__init__(self, addr, requestHandler)
-        
+
         self.proto = proto
         self._threads = []
         self.__handlers = []
@@ -107,7 +107,6 @@ class ThreadedHTTPServer(ConnThreadingMixIn, SimpleXMLRPCDispatcher, HTTPServer)
     def handle_error(self, request, client_address):
         """ Override the error handler
         """
-        
         logging.getLogger("init").exception("Server error in request from %s:" % (client_address,))
 
     def _mark_start(self, thread):
@@ -117,7 +116,7 @@ class ThreadedHTTPServer(ConnThreadingMixIn, SimpleXMLRPCDispatcher, HTTPServer)
         try:
             self._threads.remove(thread)
         except ValueError: pass
-    
+
     def stop(self):
         self.socket.close()
         h = self.__handlers[:]  # copy the list
@@ -149,24 +148,24 @@ class HttpLogHandler:
     Please define self._logger at each class that is derived from this
     """
     _logger = None
-    
+
     def log_message(self, format, *args):
         self._logger.debug(format % args) # todo: perhaps other level
 
     def log_error(self, format, *args):
         self._logger.error(format % args)
-        
+
     def log_exception(self, format, *args):
         self._logger.exception(format, *args)
 
     def log_request(self, code='-', size='-'):
         self._logger.log(netsvc.logging.DEBUG_RPC, '"%s" %s %s',
                         self.requestline, str(code), str(size))
-    
+
 class MultiHandler2(HttpLogHandler, MultiHTTPHandler):
     _logger = logging.getLogger('http')
     wbufsize = WRITE_BUFFER_SIZE
-    
+
     def setup(self):
         self.request.setsockopt(socket.SOL_SOCKET, socket.SO_KEEPALIVE, 1)
         self.server.regHandler(self)
@@ -255,7 +254,7 @@ class BaseHttpDaemon(threading.Thread, netsvc.Server):
     def append_svc(self, service):
         if not isinstance(service, HTTPDir):
             raise Exception("Wrong class for http service")
-        
+
         pos = len(self.server.vdirs)
         lastpos = pos
         while pos > 0:
@@ -271,7 +270,7 @@ class BaseHttpDaemon(threading.Thread, netsvc.Server):
         ret = []
         for svc in self.server.vdirs:
             ret.append( ( svc.path, str(svc.handler)) )
-        
+
         return ret
 
 
@@ -329,7 +328,7 @@ def init_servers():
     global http_daemons
     ipv4_re = re.compile('^([0-9]{1,3}(?:\.(?:[0-9]{1,3})){3})(?::(\d{1,5}))?$')
     ipv6_re = re.compile('^\[([0-9a-f:]+)\](?::(\d{1,5}))?$')
-    
+
     ipv6_missing = False
     if tools.config.get_misc('httpd','enable', True):
         ifaces = tools.config.get_misc('httpd','interface', '')
@@ -484,7 +483,7 @@ class xrBaseRequestHandler(FixSendError, HttpLogHandler, SimpleXMLRPCServer.Simp
             # got a valid XML RPC response
             self.send_response(200)
             self.send_header("Content-type", "text/xml")
-            
+
             if response \
                     and 'gzip' in self.headers.get('Accept-Encoding', '').split(',') \
                     and len(response) > 512:
@@ -525,9 +524,6 @@ class XMLRPCRequestHandler2_Pub(netsvc.OpenERPDispatcher2,xrBaseRequestHandler):
     _auth_domain = 'pub'
     def setup(self):
         self.connection = dummyconn()
-        #if not len(XMLRPCRequestHandler.rpc_paths):
-        #    XMLRPCRequestHandler.rpc_paths = map(lambda s: '/%s' % s, netsvc.ExportService._services.keys())
-        pass
 
     def get_db_from_path(self, path):
         return False
@@ -539,9 +535,6 @@ class XMLRPCRequestHandler2_Root(netsvc.OpenERPDispatcher2,xrBaseRequestHandler)
     _auth_domain = 'root'
     def setup(self):
         self.connection = dummyconn()
-        #if not len(XMLRPCRequestHandler.rpc_paths):
-        #    XMLRPCRequestHandler.rpc_paths = map(lambda s: '/%s' % s, netsvc.ExportService._services.keys())
-        pass
 
     def get_db_from_path(self, path):
         return True
@@ -553,9 +546,6 @@ class XMLRPCRequestHandler2_Db(netsvc.OpenERPDispatcher2,xrBaseRequestHandler):
     _auth_domain = 'db'
     def setup(self):
         self.connection = dummyconn()
-        #if not len(XMLRPCRequestHandler.rpc_paths):
-        #    XMLRPCRequestHandler.rpc_paths = map(lambda s: '/%s' % s, netsvc.ExportService._services.keys())
-        pass
 
     def get_db_from_path(self, path):
         if path.startswith('/'):
@@ -571,13 +561,13 @@ def init_xmlrpc():
 
     if tools.config.get_misc('xmlrpc2','enable', True):
         sso = tools.config.get_misc('xmlrpc2','ssl_require', False)
-        if reg_http_service(HTTPDir('/xmlrpc2/pub/',XMLRPCRequestHandler2_Pub), 
+        if reg_http_service(HTTPDir('/xmlrpc2/pub/',XMLRPCRequestHandler2_Pub),
                         secure_only=sso) \
             and reg_http_service(HTTPDir('/xmlrpc2/root/',XMLRPCRequestHandler2_Root,
                             OpenERPRootProvider(realm="OpenERP Admin", domain='root')),
                         secure_only=sso) \
             and reg_http_service(HTTPDir('/xmlrpc2/db/',XMLRPCRequestHandler2_Db,
-                            OpenERPAuthProvider()), 
+                            OpenERPAuthProvider()),
                         secure_only=sso):
             logging.getLogger("web-services").info( "Registered XML-RPC 2.0 over HTTP")
 
@@ -616,12 +606,12 @@ class StaticHTTPHandler(HttpLogHandler, FixSendError, HttpOptions, HTTPHandler):
 def init_static_http():
     if not tools.config.get_misc('static-http','enable', False):
         return
-    
+
     dir_path = tools.config.get_misc('static-http', 'dir_path', False)
     assert dir_path
-    
+
     base_path = tools.config.get_misc('static-http', 'base_path', '/')
-    
+
     if reg_http_service(HTTPDir(base_path,StaticHTTPHandler)):
         logging.getLogger("web-services").info("Registered HTTP dir %s for %s" % \
                         (dir_path, base_path))
@@ -644,11 +634,11 @@ class OerpAuthProxy(AuthProxy):
         """ Check authorization of request to path.
             First, we must get the "db" from the path, because it could
             need different authorization per db.
-            
+
             The handler could help us dissect the path, or even return
             True for the super user or False for an allways-allowed path.
-            
-            Then, we see if we have cached that authorization for this 
+
+            Then, we see if we have cached that authorization for this
             proxy (= session)
          """
         try:
