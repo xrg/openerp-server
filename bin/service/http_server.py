@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# Copyright P. Christeas <p_christ@hol.gr> 2008-2010
+# Copyright P. Christeas <xrg@hellug.gr> 2008-2013
 # Copyright 2010 OpenERP SA. (http://www.openerp.com)
 #
 #
@@ -134,6 +134,10 @@ class ThreadedHTTPServer(ConnThreadingMixIn, SimpleXMLRPCDispatcher, HTTPServer)
             self.__handlers.remove(handler)
         except ValueError: pass
 
+    @property
+    def len_handlers(self):
+        return len(self.__handlers)
+
     def _get_next_name(self):
         self.__threadno += 1
         return 'http-client-%d' % self.__threadno
@@ -248,7 +252,7 @@ class BaseHttpDaemon(threading.Thread, netsvc.Server):
     def stats(self):
         res = "%sd: " % self._RealProto + ((self.running and "running") or  "stopped")
         if self.server:
-            res += ", %d threads" % (len(self.server._threads),)
+            res += ", %d threads, %d handlers" % (len(self.server._threads), self.server.len_handlers)
         return res
 
     def append_svc(self, service):
