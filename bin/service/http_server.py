@@ -52,6 +52,7 @@ import socket
 import re
 import xmlrpclib
 import StringIO
+import weakref
 
 from SimpleXMLRPCServer import SimpleXMLRPCDispatcher
 
@@ -94,6 +95,7 @@ class ThreadedHTTPServer(ConnThreadingMixIn, SimpleXMLRPCDispatcher, HTTPServer)
         self._threads = []
         self.__handlers = []
         self.__threadno = 0
+        self._cleancount = 0
 
         # [Bug #1222790] If possible, set close-on-exec flag; if a
         # method spawns a subprocess, the subprocess shouldn't have
@@ -110,29 +112,37 @@ class ThreadedHTTPServer(ConnThreadingMixIn, SimpleXMLRPCDispatcher, HTTPServer)
         logging.getLogger("init").exception("Server error in request from %s:" % (client_address,))
 
     def _mark_start(self, thread):
-        self._threads.append(thread)
+        self._threads.append(weakref.ref(thread))
+
+    def _cleanup_refs(self):
+        self._threads = [ r for r in self._threads if r() is not None]
+        self.__handlers = [ r for r in self.__handlers if r() is not None]
 
     def _mark_end(self, thread):
-        try:
-            self._threads.remove(thread)
-        except ValueError: pass
+        if self._cleancount > 100:
+            self._cleanup_refs()
+            self._cleancount = 0
+        else:
+            self._cleancount += 1
 
     def stop(self):
         self.socket.close()
-        h = self.__handlers[:]  # copy the list
+        handlers = [ h() for h in self.__handlers if h() is not None ]  # copy the refs of the list
         self.socket = None
-        for hnd in h:
+        for hnd in handlers:
             hnd.close_connection=1
             hnd.finish()
 
     def regHandler(self, handler):
         """Register a handler instance, so that we can keep count """
-        self.__handlers.append(handler)
+        self.__handlers.append(weakref.ref(handler))
 
     def unregHandler(self, handler):
-        try:
-            self.__handlers.remove(handler)
-        except ValueError: pass
+        if self._cleancount > 100:
+            self._cleanup_refs()
+            self._cleancount = 0
+        else:
+            self._cleancount += 1
 
     @property
     def len_handlers(self):
@@ -175,11 +185,6 @@ class MultiHandler2(HttpLogHandler, MultiHTTPHandler):
         self.server.regHandler(self)
         return MultiHTTPHandler.setup(self)
 
-    def finish(self):
-        res = MultiHTTPHandler.finish(self)
-        self.server.unregHandler(self)
-        return res
-
 class SecureMultiHandler2(HttpLogHandler, SecureMultiHTTPHandler):
     _logger = logging.getLogger('https')
     wbufsize = WRITE_BUFFER_SIZE
@@ -194,11 +199,6 @@ class SecureMultiHandler2(HttpLogHandler, SecureMultiHTTPHandler):
         self.request.setsockopt(socket.SOL_SOCKET, socket.SO_KEEPALIVE, 1)
         self.server.regHandler(self)
         return SecureMultiHTTPHandler.setup(self)
-
-    def finish(self):
-        res = SecureMultiHTTPHandler.finish(self)
-        self.server.unregHandler(self)
-        return res
 
 class BaseHttpDaemon(threading.Thread, netsvc.Server):
     _RealProto = '??'
@@ -235,8 +235,10 @@ class BaseHttpDaemon(threading.Thread, netsvc.Server):
         self.server.stop()
 
     def join(self, timeout=None):
-        for thr in self.server._threads:
-            thr.join(timeout)
+        for t in self.server._threads:
+            thr = t()
+            if thr is not None:
+                thr.join(timeout)
         threading.Thread.join(self, timeout)
 
     def run(self):
@@ -252,6 +254,7 @@ class BaseHttpDaemon(threading.Thread, netsvc.Server):
     def stats(self):
         res = "%sd: " % self._RealProto + ((self.running and "running") or  "stopped")
         if self.server:
+            self.server._cleanup_refs()
             res += ", %d threads, %d handlers" % (len(self.server._threads), self.server.len_handlers)
         return res
 
