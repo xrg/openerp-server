@@ -187,6 +187,29 @@ class _ServiceMeta(ABCMeta):
             raise TypeError("No service class with name: %s" % name)
         return base_class
 
+    def list_classes(cls, prefix=None):
+        """List the names of registered named services.
+
+            @param prefix       if given, limit the output to services named like `prefix%`
+                or, if set to True, all services excluding the '*' one.
+        """
+        svc_classes = getattr(cls, '__service_classes', None)
+        if svc_classes is None:
+            for b in cls.__mro__:
+                svc_classes = getattr(b, '__service_classes', None)
+                if svc_classes is not None:
+                    break
+        if svc_classes is None:
+            # it shall never reach here, because _ServiceMeta ensures inheritance
+            # from one base class...
+            raise RuntimeError("No base service class for %s" % cls.__name__)
+        if prefix is True:
+            return [ k for k in svc_classes.keys() if k != '*']
+        elif prefix:
+            return [ k for k in svc_classes.keys() if k.startswith(prefix)]
+        else:
+            return svc_classes.keys()
+
     def __getitem__(cls, name):
         """ Access some class, through the name
 
