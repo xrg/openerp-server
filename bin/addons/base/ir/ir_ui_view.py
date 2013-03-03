@@ -28,7 +28,7 @@ import os
 
 def _check_xml(self, cr, uid, ids, context=None):
     for view in self.browse(cr, uid, ids, context):
-        if not views.oo_view.check_xml(view.arch, view_type=view.type, errors=None):
+        if not views.oo_view[view.type].check_xml(view.arch, errors=None):
             return False
     return True
 

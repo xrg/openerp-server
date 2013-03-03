@@ -2,7 +2,7 @@
 ##############################################################################
 #
 #    OpenERP, Open Source Management Solution
-#    Copyright (C) 2012 P. Christeas <xrg@hellug.gr>
+#    Copyright (C) 2012-2013 P. Christeas <xrg@hellug.gr>
 #    Parts Copyright (C) 2004-2011 OpenERP SA. (www.openerp.com)
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -22,6 +22,7 @@
 
 from lxml import etree
 import tools
+from tools.service_meta import _ServiceMeta, abstractmethod
 import os
 import logging
 
@@ -39,19 +40,20 @@ class oo_view(object):
 
     An instance of this object will be a _singleton_ in the server process,
     so far valid for all loaded databases
+    
+    Only class methods are utilized at the moment, leaving some space for
+    future tricks with view instances.
     """
-    _view_type = False
+    __metaclass__ = _ServiceMeta
     _view_name = False
-    __registry = {}
     __validator = None #: XML representation of the RNG definition, cached
     __rng_paths = [['base','rng','view.rng'],] #: list of paths to open. Order matters!
     _rng_path = False
 
     def __init__(self):
         """Initialise the singleton """
-        assert self._view_type and self._view_name, \
+        assert self._name and self._view_name, \
                 "Invalid usage for class: %s" % self.__class__.__name__
-        oo_view.__registry[self._view_type] = self
         if self._rng_path and self._rng_path not in oo_view.__rng_paths:
             oo_view.__rng_paths.append(self._rng_path)
         oo_view.__validator = None
@@ -88,7 +90,7 @@ class oo_view(object):
         cls.__validator = None
 
     @classmethod
-    def check_xml(cls, view_xml, view_type=None, errors=None):
+    def check_xml(cls, view_xml, errors=None):
         """ Check if view_xml is valid and conforms to view definition
 
             @params errors pass a list there and it will be filled with the
@@ -116,29 +118,18 @@ class oo_view(object):
             return False
         return True
 
-    def _default_view(self, cr, uid, obj, context=None):
+    @abstractmethod
+    def default_view(cr, uid, obj, context=None):
         """ Devise a default view for `obj`
         """
-        raise NotImplementedError
-
-    @classmethod
-    def get_default_view(cls, cr, uid, vtype, obj, context=None):
-        """Retrieve the default view for type `vtype`
-            @param obj the ORM model object
-        """
-
-        if vtype not in cls.__registry:
-            raise KeyError("No view support for %s" % vtype)
-
-        return cls.__registry[vtype]._default_view(cr, uid, obj, context=context)
 
     @classmethod
     def get_view_types(cls, obj, cr, uid, context=None):
         """for the ir.ui.view.type selection
         """
         ret = []
-        for vtype, vclass in cls.__registry.items():
-            ret.append((vtype, vclass._view_name))
+        for vtype in cls.list_classes():
+            ret.append((vtype, cls[vtype]._view_name))
 
         # if cr and uid and context: TODO
         #       # Try to translate them

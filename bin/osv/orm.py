@@ -2033,7 +2033,7 @@ class orm_template(object):
         if not sql_res:
             # otherwise, build some kind of default view
             try:
-                result['arch'] = oo_view.get_default_view(cr, user, view_type, self, context=context)
+                result['arch'] = oo_view[view_type].default_view(cr, user, self, context=context)
             except KeyError:
                 raise except_orm(_('Invalid Architecture!'), _("There is no view of type '%s' defined for the structure!") % view_type)
             result['name'] = 'default'

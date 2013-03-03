@@ -2,7 +2,7 @@
 ##############################################################################
 #
 #    OpenERP, Open Source Management Solution
-#    Copyright (C) 2012 P. Christeas <xrg@hellug.gr>
+#    Copyright (C) 2012-2013 P. Christeas <xrg@hellug.gr>
 #    Parts Copyright (C) 2004-2011 OpenERP SA. (www.openerp.com)
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -29,10 +29,11 @@ from lxml import etree
 from orm import except_orm # which prohibits this module to load inside orm
 
 class tree_view(oo_view):
-    _view_type = 'tree'
+    _name = 'tree'
     _view_name = _('Tree')
 
-    def _default_view(self, cr, uid, obj, context=None):
+    @classmethod
+    def default_view(cls, cr, uid, obj, context=None):
         """ Generates a single-field tree view, using _rec_name if
         it's one of the columns or the first column it finds otherwise
 
@@ -47,13 +48,12 @@ class tree_view(oo_view):
         etree.SubElement(view, 'field', name=_rec_name)
         return view
 
-tree_view()
-
 class form_view(oo_view):
-    _view_type = 'form'
+    _name = 'form'
     _view_name = _('Form')
 
-    def _default_view(self, cr, uid, obj, context=None):
+    @classmethod
+    def default_view(cls, cr, uid, obj, context=None):
         """ Generates a default single-line form view using all fields
         of the current model except the m2m and o2m ones.
 
@@ -70,13 +70,13 @@ class form_view(oo_view):
                 etree.SubElement(view, 'newline')
         return view
 
-form_view()
 
 class search_view(oo_view):
-    _view_type = 'search'
+    _name = 'search'
     _view_name = _('Search')
 
-    def _default_view(self, cr, uid, obj, context=None):
+    @classmethod
+    def default_view(cls, cr, uid, obj, context=None):
         """
         :returns: an lxml document of the view
         :rtype: etree._Element
@@ -105,19 +105,24 @@ class search_view(oo_view):
 
         return search_view
 
-search_view()
-
 class graph_view(oo_view):
-    _view_type = 'graph'
+    _name = 'graph'
     _view_name = _('Graph')
 
-graph_view()
+    @classmethod
+    def default_view(cls, cr, uid, obj, context=None):
+        """
+        """
+        view = etree.Element('graph', string=obj._description)
+        # TODO!
+        return view
 
 class calendar_view(oo_view):
-    _view_type = 'calendar'
+    _name = 'calendar'
     _view_name = _('Calendar')
 
-    def _default_view(self, cr, uid, obj, context=None):
+    @classmethod
+    def default_view(cls, cr, uid, obj, context=None):
         """ Generates a default calendar view by trying to infer
         calendar fields from a number of pre-set attribute names
 
@@ -165,19 +170,29 @@ class calendar_view(oo_view):
 
         return view
 
-calendar_view()
-
 class diagram_view(oo_view):
-    _view_type = 'diagram'
+    _name = 'diagram'
     _view_name = _('Diagram')
 
-diagram_view()
+    @classmethod
+    def default_view(cls, cr, uid, obj, context=None):
+        """
+        """
+        view = etree.Element('diagram', string=obj._description)
+        # TODO!
+        return view
 
 class gantt_view(oo_view):
-    _view_type = 'gantt'
+    _name = 'gantt'
     _view_name = _('Gantt')
 
-gantt_view()
+    @classmethod
+    def default_view(cls, cr, uid, obj, context=None):
+        """
+        """
+        view = etree.Element('gantt', string=obj._description)
+        # TODO!
+        return view
 
 # WARNING: the 'mdx' view type is obsoleted!
 
