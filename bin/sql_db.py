@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
-#    
+#
 #    OpenERP, Open Source Management Solution
 #    Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>).
 #    Copyright (C) 2010-2011 OpenERP s.a. (<http://openerp.com>).
@@ -17,7 +17,7 @@
 #    GNU Affero General Public License for more details.
 #
 #    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.     
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
 
@@ -104,11 +104,11 @@ re_queries = [
 sql_counter = 0
 
 def print_stats(stats, logger):
-    """ Print the statistics at the stats dict 
-    
+    """ Print the statistics at the stats dict
+
         It will print sums per database TABLE, and then per
         SQL verb (like SELECT, INSERT, UPDATE etc)
-        
+
         @param logger is used for output, at level `debug`
         @return None
     """
@@ -119,7 +119,7 @@ def print_stats(stats, logger):
         st = stats[(table, kind)]
         logger.debug("Operations: %s ON %s: %s/%s", kind.upper(), table,
                         st[0], timedelta(microseconds=st[1]))
-        
+
         sum_tbl.setdefault(table, [0,0])
         sum_tbl[table][0] += st[0]
         sum_tbl[table][1] += st[1]
@@ -128,7 +128,7 @@ def print_stats(stats, logger):
         sum_kind[kind][1] += st[1]
         all_sum[0] += st[0]
         all_sum[1] += st[1]
-        
+
     for table, st in sum_tbl.items():
         logger.debug("Sum of ops ON %s: %s/%s", table,
                         st[0], timedelta(microseconds=st[1]))
@@ -142,9 +142,9 @@ def print_stats(stats, logger):
 
 class Cursor(object):
     """ Cursor is an open transaction to Postgres, utilizing a TCP connection
-    
+
         A lightweight wrapper around psycopg2's `psycopg1cursor` objects
-        
+
         This is the object behind the `cr` variable used all over the OpenERP
         code.
     """
@@ -162,7 +162,7 @@ class Cursor(object):
 
     def __init__(self, pool, dbname, serialized=False, temp=False):
         self.sql_stats_log = {}
-        # stats log will be a dictionary of 
+        # stats log will be a dictionary of
         # { (table, kind-of-qry): (num, delay, {queries?: num}) }
 
         # default log level determined at cursor creation, could be
@@ -196,7 +196,7 @@ class Cursor(object):
                 self.__pgmode = 'pg84'
             else:
                 self.__pgmode = 'pgsql'
-        
+
         for verb in ('fetchone', 'fetchmany', 'fetchall'):
             # map the *bound* functions, bypass @check
             setattr(self, verb, getattr(self._obj, verb))
@@ -294,7 +294,7 @@ class Cursor(object):
 
         self.__logger.debug("SQL Sums for current cursor:")
         print_stats(self.sql_stats_log, self.__logger)
-        
+
         # Merge stats at pool stats
         for skey in self.sql_stats_log:
             if skey in self._pool.sql_stats:
@@ -317,14 +317,14 @@ class Cursor(object):
         """
         assert ( (not datatypes) or len(datatypes) == len(params or []))
         assert (name)
-        
+
         if name not in self._cnx._prepared:
             if '%d' in query or '%f' in query:
                 self.__logger.warn(query)
                 self.__logger.warn("SQL queries cannot contain %d or %f anymore. Use only %s")
                 if params:
                     query = query.replace('%d', '%s').replace('%f', '%s')
-            
+
             args = ''
             if params and len(params):
                 query = query % tuple(map(lambda x: '$%d' % (x+1) , range(len(params))))
@@ -333,12 +333,12 @@ class Cursor(object):
                 else:
                     dtt = [ 'UNKNOWN' for x in range(len(params)) ]
                 args = '(' + ', '.join(dtt) + ')'
-        
+
             qry = 'PREPARE ' + name + args + ' AS ' + query + ';'
-            
+
             self.execute(qry, debug=debug, _fast=True)
             self._cnx._prepared.append(name)
-        
+
         args = ''
         if params and len(params):
                 args = [ '%s' for x in range(len(params)) ]
@@ -469,10 +469,10 @@ class PsycoConnection(psycopg2.extensions.connection):
 
 class ConnectionPool(object):
     """ The pool of connections to database(s)
-    
+
         Keep a set of connections to pg databases open, and reuse them
         to open cursors for all transactions.
-        
+
         The connections are *not* automatically closed. Only a close_db()
         can trigger that.
     """
@@ -525,7 +525,7 @@ class ConnectionPool(object):
 
     def _debug_dsn(self, msg, *args, **kwargs):
         """Debug function, that will decode the dsn_pos'th argument as dsn
-        
+
             @param kwargs may only contain 'dsn_pos'
         """
         if not self._debug_pool:
@@ -571,12 +571,12 @@ class ConnectionPool(object):
                 except OperationalError, e:
                     self._debug("Error in poll: %s" % e)
                     continue
-                
+
                 if cnx.closed or not cnx.status:
                     # something is wrong with that connection, let it out
                     self._debug("Troubled connection ")
                     continue
-                
+
                 self._debug('Existing connection found at index %d', i)
                 # Note, we ignore the 'temp' flag here, this connection will
                 # return to the pool anyway
@@ -704,12 +704,12 @@ def dsn_are_equals(first, second):
     return key(first) == key(second)
 
 
-_Pool = ConnectionPool(int(tools.config['db_maxconn']), 
+_Pool = ConnectionPool(int(tools.config['db_maxconn']),
                 tools.config.get_misc('postgres','mode', False))
 
 def db_connect(db_name, temp=False):
     """ Return a connection to that database
-        
+
         @param temp means this connection will not enter the pool,
             once released
     """
@@ -728,4 +728,3 @@ def close_db(db_name):
 
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
-
