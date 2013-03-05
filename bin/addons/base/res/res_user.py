@@ -150,51 +150,11 @@ class users(osv.osv):
     _name = "res.users"
     _order = 'name'
 
-    WELCOME_MAIL_SUBJECT = u"Welcome to OpenERP"
-    WELCOME_MAIL_BODY = u"An OpenERP account has been created for you, "\
-        "\"%(name)s\".\n\nYour login is %(login)s, "\
-        "you should ask your supervisor or system administrator if you "\
-        "haven't been given your password yet.\n\n"\
-        "If you aren't %(name)s, this email reached you errorneously, "\
-        "please delete it."
-
-    def get_welcome_mail_subject(self, cr, uid, context=None):
-        """ Returns the subject of the mail new users receive (when
-        created via the res.config.users wizard), default implementation
-        is to return config_users.WELCOME_MAIL_SUBJECT
-        """
-        return self.WELCOME_MAIL_SUBJECT
-    def get_welcome_mail_body(self, cr, uid, context=None):
-        """ Returns the subject of the mail new users receive (when
-        created via the res.config.users wizard), default implementation
-        is to return config_users.WELCOME_MAIL_BODY
-        """
-        return self.WELCOME_MAIL_BODY
-
     def get_current_company(self, cr, uid):
         cr.execute('SELECT company_id, res_company.name FROM res_users '
                     'LEFT JOIN res_company ON res_company.id = company_id '
                     'WHERE res_users.id=%s',(uid,))
         return cr.fetchall()
-
-    def send_welcome_email(self, cr, uid, id, context=None):
-        logger = logging.getLogger('mails')
-        user = self.pool.get('res.users').read(cr, uid, id, context=context)
-        if not tools.config.get_misc('smtp', 'server'):
-            logger.warning(_('"smtp_server" needs to be set to send mails to users'))
-            return False
-        if not tools.config.get_misc('smtp', 'email_from'):
-            logger.warning(_('"email_from" needs to be set to send welcome mails '
-                  'to users'))
-            return False
-        if not user.get('email'):
-            return False
-
-        return tools.email_send(email_from=None, email_to=[user['email']],
-                                subject=self.get_welcome_mail_subject(
-                                    cr, uid, context=context),
-                                body=self.get_welcome_mail_body(
-                                    cr, uid, context=context) % user)
 
     def _set_interface_type(self, cr, uid, ids, name, value, arg, context=None):
         """Implementation of 'view' function field setter, sets the type of interface of the users.
@@ -608,7 +568,7 @@ class config_users(osv.osv_memory):
             )
         new_user = self.pool.get('res.users').create(
             cr, uid, user_data, context)
-        self.send_welcome_email(cr, uid, new_user, context=context)
+
     def execute(self, cr, uid, ids, context=None):
         'Do nothing on execution, just launch the next action/todo'
         pass
