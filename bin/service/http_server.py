@@ -491,9 +491,7 @@ class xrBaseRequestHandler(FixSendError, HttpLogHandler, SimpleXMLRPCServer.Simp
             self.send_response(200)
             self.send_header("Content-type", "text/xml")
 
-            if response \
-                    and 'gzip' in self.headers.get('Accept-Encoding', '').split(',') \
-                    and len(response) > 512:
+            if self.can_send_gzip(response):
                 buffer = StringIO.StringIO()
                 output = gzip.GzipFile(mode='wb', fileobj=buffer)
                 if isinstance(response, (str, unicode)):
