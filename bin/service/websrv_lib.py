@@ -36,6 +36,7 @@ import socket
 import base64
 import errno
 import os
+import re
 import SocketServer
 from BaseHTTPServer import *
 from SimpleHTTPServer import SimpleHTTPRequestHandler
@@ -259,6 +260,11 @@ class BoundStream(object):
                 self._fpos = pos
 
 class FixSendError:
+    _aepattern = re.compile(r"""
+                            \s* ([^\s;,]+) \s*            #content-coding
+                            (;\s* q \s*=\s* ([0-9\.]+))? #q
+                            ,?
+                            """, re.VERBOSE | re.IGNORECASE)
     def send_error(self, code, message=None):
         #overriden from BaseHTTPRequestHandler, we also send the content-length
         try:
@@ -282,6 +288,16 @@ class FixSendError:
 
         if self.command != 'HEAD' and code >= 200 and code not in (204, 304):
             self.wfile.write(content)
+
+    def can_send_gzip(self, response):
+        """ Check if our request allows gzipping the response
+        """
+        aeh = self.headers.get('Accept-Encoding', False)
+        if response and aeh and len(response) > 512:
+            for m in self._aepattern.finditer(aeh):
+                if m and m.group(1) == 'gzip':
+                    return True
+        return False
 
 class HttpOptions:
     _HTTP_OPTIONS = {'Allow': ['OPTIONS' ] }
