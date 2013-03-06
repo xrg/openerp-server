@@ -594,6 +594,7 @@ class ir_model_access(osv.osv):
         return False
 
     def check(self, cr, uid, model, mode='read', raise_exception=True, context=None):
+        assert isinstance(uid, (int, long)), "invalid uid: %r" % uid
         if uid==1:
             # User root have all accesses
             # TODO: exclude xml-rpc requests
