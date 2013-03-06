@@ -1,26 +1,26 @@
 # Translation of OpenERP Server.
 # This file contains the translation of the following modules:
-#	* base
+# 	* base
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: OpenERP Server 5.0.4\n"
-"Report-Msgid-Bugs-To: support@openerp.com\n"
-"POT-Creation-Date: 2011-01-11 11:14+0000\n"
-"PO-Revision-Date: 2012-03-19 09:51+0000\n"
-"Last-Translator: Abdulwhhab A. Al-Shehri <Unknown>\n"
-"Language-Team: \n"
+"Project-Id-Version: OpenERP-F3\n"
+"Report-Msgid-Bugs-To: xrg@hellug.gr\n"
+"POT-Creation-Date: 2012-09-16 11:37+0000\n"
+"PO-Revision-Date: 2012-12-13 15:02+0000\n"
+"Last-Translator: Mustafa Al-Rawi <thetruefact@gmail.com>\n"
+"Language-Team: Arabic (http://www.transifex.com/projects/p/openerp-f3/"
+"language/ar/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-01-10 04:57+0000\n"
-"X-Generator: Launchpad (build 16412)\n"
+"Content-Transfer-Encoding: \n"
+"Language: ar\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
+"&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
 
 #. module: base
-#: field:ir.filters,domain:0
-#: field:ir.model.fields,domain:0
-#: field:ir.rule,domain:0
-#: field:ir.rule,domain_force:0
+#: field:ir.filters,domain:0 field:ir.model.fields,domain:0
+#: field:ir.rule,domain:0 field:ir.rule,domain_force:0
 #: field:res.partner.title,domain:0
 msgid "Domain"
 msgstr "نطاق"
@@ -51,14 +51,12 @@ msgstr ""
 "%s المسجل  غير صحيح"
 
 #. module: base
-#: view:ir.values:0
-#: field:ir.values,meta_unpickle:0
+#: view:ir.values:0 field:ir.values,meta_unpickle:0
 msgid "Metadata"
 msgstr "بيانات وصفية"
 
 #. module: base
-#: field:ir.ui.view,arch:0
-#: field:ir.ui.view.custom,arch:0
+#: field:ir.ui.view,arch:0 field:ir.ui.view.custom,arch:0
 msgid "View Architecture"
 msgstr "عرض المنصة (الهيكلة)"
 
@@ -68,11 +66,8 @@ msgid "Code (eg:en__US)"
 msgstr "الترميز (مثل: ar_EG)"
 
 #. module: base
-#: view:workflow:0
-#: view:workflow.activity:0
-#: field:workflow.activity,wkf_id:0
-#: field:workflow.instance,wkf_id:0
-#: field:workflow.transition,wkf_id:0
+#: view:workflow:0 view:workflow.activity:0 field:workflow.activity,wkf_id:0
+#: field:workflow.instance,wkf_id:0 field:workflow.transition,wkf_id:0
 #: field:workflow.workitem,wkf_id:0
 msgid "Workflow"
 msgstr "مسار العمل"
@@ -292,15 +287,13 @@ msgid "Credit Limit"
 msgstr "حد الائتمان"
 
 #. module: base
-#: field:ir.model.constraint,date_update:0
-#: field:ir.model.data,date_update:0
+#: field:ir.model.constraint,date_update:0 field:ir.model.data,date_update:0
 #: field:ir.model.relation,date_update:0
 msgid "Update Date"
 msgstr "تاريخ التحديث"
 
 #. module: base
-#: view:ir.attachment:0
-#: field:ir.attachment,create_uid:0
+#: view:ir.attachment:0 field:ir.attachment,create_uid:0
 msgid "Owner"
 msgstr "المالِك"
 
@@ -320,21 +313,17 @@ msgid "ir.ui.view_sc"
 msgstr "ir.ui.view_sc"
 
 #. module: base
-#: field:res.widget.user,widget_id:0
-#: field:res.widget.wizard,widgets_list:0
+#: field:res.widget.user,widget_id:0 field:res.widget.wizard,widgets_list:0
 msgid "Widget"
 msgstr "عنصر واجهة مستخدم"
 
 #. module: base
-#: view:ir.model.access:0
-#: field:ir.model.access,group_id:0
-#: view:res.groups:0
+#: view:ir.model.access:0 field:ir.model.access,group_id:0 view:res.groups:0
 msgid "Group"
 msgstr "المجموعة"
 
 #. module: base
-#: field:ir.exports.line,name:0
-#: view:ir.model.fields:0
+#: field:ir.exports.line,name:0 view:ir.model.fields:0
 #: field:res.partner.bank.type.field,name:0
 msgid "Field Name"
 msgstr "اسم الحقل"
@@ -361,8 +350,7 @@ msgid "Date Format"
 msgstr "تنسيق التاريخ"
 
 #. module: base
-#: field:res.bank,email:0
-#: field:res.partner.address,email:0
+#: field:res.bank,email:0 field:res.partner.address,email:0
 msgid "E-Mail"
 msgstr "البريد الإلكتروني"
 
@@ -422,8 +410,7 @@ msgid "Your system will be updated."
 msgstr "سوف يتمّ تحديث نظامك"
 
 #. module: base
-#: field:ir.actions.todo,note:0
-#: selection:ir.property,type:0
+#: field:ir.actions.todo,note:0 selection:ir.property,type:0
 msgid "Text"
 msgstr "النّص"
 
@@ -473,16 +460,13 @@ msgid "Untranslated"
 msgstr "غير مترجم"
 
 #. module: base
-#: help:ir.actions.act_window,context:0
-#: help:ir.actions.client,context:0
-msgid ""
-"Context dictionary as Python expression, empty by default (Default: {})"
+#: help:ir.actions.act_window,context:0 help:ir.actions.client,context:0
+msgid "Context dictionary as Python expression, empty by default (Default: {})"
 msgstr "القيمة الافتراضية فارغة (Default: {})"
 
 #. module: base
 #: model:ir.actions.act_window,name:base.ir_action_wizard
-#: view:ir.actions.wizard:0
-#: model:ir.ui.menu,name:base.menu_ir_action_wizard
+#: view:ir.actions.wizard:0 model:ir.ui.menu,name:base.menu_ir_action_wizard
 msgid "Wizards"
 msgstr "المعالجات"
 
@@ -513,8 +497,7 @@ msgid "Export done"
 msgstr "تمّت عملية التصدير"
 
 #. module: base
-#: view:ir.model:0
-#: field:ir.model,name:0
+#: view:ir.model:0 field:ir.model,name:0
 msgid "Model Description"
 msgstr "وصف النموذج"
 
@@ -545,8 +528,7 @@ msgid "Eritrea"
 msgstr "إريتريا"
 
 #. module: base
-#: view:res.config:0
-#: view:res.config.installer:0
+#: view:res.config:0 view:res.config.installer:0
 msgid "description"
 msgstr "الوصف"
 
@@ -573,9 +555,9 @@ msgstr "نوع الحدث"
 #. module: base
 #: view:base.language.export:0
 msgid ""
-"OpenERP translations (core, modules, clients) are managed through "
-"Launchpad.net, our open source project management facility. We use their "
-"online interface to synchronize all translations efforts."
+"OpenERP translations (core, modules, clients) are managed through Launchpad."
+"net, our open source project management facility. We use their online "
+"interface to synchronize all translations efforts."
 msgstr ""
 "تتمّ إدارة ترجمة OpenERP عن طريق الموقع الإلكتروني Launchpad.net، والذي يمثل "
 "وسيلتنا لإدارة البرمجة مفتوحة المصدر. كذلك نستخدم الواجهة الإلكتروني للموقع "
@@ -607,8 +589,7 @@ msgid "Cambodia, Kingdom of"
 msgstr "مملكة كامبوديا"
 
 #. module: base
-#: model:ir.actions.act_window,name:base.ir_sequence_form
-#: view:ir.sequence:0
+#: model:ir.actions.act_window,name:base.ir_sequence_form view:ir.sequence:0
 #: model:ir.ui.menu,name:base.menu_ir_sequence_form
 msgid "Sequences"
 msgstr "المتواليات"
@@ -646,8 +627,7 @@ msgstr "بابوا غينيا الجديدة"
 #. module: base
 #: help:ir.actions.report.xml,report_type:0
 msgid "Report Type, e.g. pdf, html, raw, sxw, odt, html2html, mako2html, ..."
-msgstr ""
-"نوع التقرير. أمثلة: pdf, html, raw, sxw, odt, html2html, mako2htm, ..."
+msgstr "نوع التقرير. أمثلة: pdf, html, raw, sxw, odt, html2html, mako2htm, ..."
 
 #. module: base
 #: model:res.partner.category,name:base.res_partner_category_4
@@ -734,8 +714,7 @@ msgid "Other OSI Approved Licence"
 msgstr "رخص أخرى تعترف بها الـ (OSI)"
 
 #. module: base
-#: help:res.config.users,context_lang:0
-#: help:res.users,context_lang:0
+#: help:res.config.users,context_lang:0 help:res.users,context_lang:0
 msgid ""
 "Sets the language for the user's user interface, when UI translations are "
 "available"
@@ -795,17 +774,11 @@ msgid "%B - Full month name."
 msgstr "%B - اسم الشهر كاملاً"
 
 #. module: base
-#: field:ir.actions.todo,type:0
-#: view:ir.attachment:0
-#: field:ir.attachment,type:0
-#: field:ir.model,state:0
-#: field:ir.model.fields,state:0
-#: field:ir.property,type:0
-#: field:ir.server.object.lines,type:0
-#: field:ir.translation,type:0
-#: view:ir.ui.view:0
-#: view:ir.values:0
-#: field:ir.values,key:0
+#: field:ir.actions.todo,type:0 view:ir.attachment:0
+#: field:ir.attachment,type:0 field:ir.model,state:0
+#: field:ir.model.fields,state:0 field:ir.property,type:0
+#: field:ir.server.object.lines,type:0 field:ir.translation,type:0
+#: view:ir.ui.view:0 view:ir.values:0 field:ir.values,key:0
 msgid "Type"
 msgstr "النوع"
 
@@ -836,8 +809,7 @@ msgid "Setting empty passwords is not allowed for security reasons!"
 msgstr "لا يمكن استخدام كلمات مرور فارغة لأسباب أمنية!"
 
 #. module: base
-#: selection:ir.actions.server,state:0
-#: selection:workflow.activity,kind:0
+#: selection:ir.actions.server,state:0 selection:workflow.activity,kind:0
 msgid "Dummy"
 msgstr "وهمي"
 
@@ -943,10 +915,8 @@ msgstr ""
 "الأسبوع 0."
 
 #. module: base
-#: code:addons/base/res/res_company.py:164
-#: field:ir.module.module,website:0
-#: field:res.company,website:0
-#: field:res.partner,website:0
+#: code:addons/base/res/res_company.py:164 field:ir.module.module,website:0
+#: field:res.company,website:0 field:res.partner,website:0
 #, python-format
 msgid "Website"
 msgstr "الموقع الإلكتروني"
@@ -962,8 +932,7 @@ msgid "Action URL"
 msgstr "العنوان الإلكتروني (URL) للإجراء"
 
 #. module: base
-#: field:base.module.import,module_name:0
-#: field:ir.module.module,shortdesc:0
+#: field:base.module.import,module_name:0 field:ir.module.module,shortdesc:0
 msgid "Module Name"
 msgstr "اسم الوحدة البرمجية"
 
@@ -984,8 +953,7 @@ msgid "Haiti"
 msgstr "هاييتي"
 
 #. module: base
-#: view:ir.ui.view:0
-#: selection:ir.ui.view,type:0
+#: view:ir.ui.view:0 selection:ir.ui.view,type:0
 msgid "Search"
 msgstr "بحث"
 
@@ -1051,8 +1019,7 @@ msgid "Version"
 msgstr "الإصدار"
 
 #. module: base
-#: view:ir.model.access:0
-#: field:ir.model.access,perm_read:0
+#: view:ir.model.access:0 field:ir.model.access,perm_read:0
 msgid "Read Access"
 msgstr "صلاحيات القراءة"
 
@@ -1119,8 +1086,7 @@ msgid "Payment Term (short name)"
 msgstr "أجل الدفع (اسم قصير)"
 
 #. module: base
-#: model:ir.model,name:base.model_res_bank
-#: view:res.bank:0
+#: model:ir.model,name:base.model_res_bank view:res.bank:0
 #: field:res.partner.bank,bank:0
 msgid "Bank"
 msgstr "المصرف"
@@ -1135,8 +1101,7 @@ msgstr "ir.exports.line"
 msgid ""
 "If you check this box, your customized translations will be overwritten and "
 "replaced by the official ones."
-msgstr ""
-"عند اختيار هذا الخيار، سيتمّ استبدال ترجمتك المخصصة بالترجمة الرسمية."
+msgstr "عند اختيار هذا الخيار، سيتمّ استبدال ترجمتك المخصصة بالترجمة الرسمية."
 
 #. module: base
 #: field:ir.actions.report.xml,report_rml:0
@@ -1151,8 +1116,7 @@ msgid "Reports"
 msgstr "التقارير"
 
 #. module: base
-#: help:ir.actions.act_window.view,multi:0
-#: help:ir.actions.report.xml,multi:0
+#: help:ir.actions.act_window.view,multi:0 help:ir.actions.report.xml,multi:0
 msgid ""
 "If set to true, the action will not be displayed on the right toolbar of a "
 "form view."
@@ -1302,8 +1266,8 @@ msgstr "الأيام"
 #. module: base
 #: help:ir.actions.server,condition:0
 msgid ""
-"Condition that is to be tested before action is executed, e.g. "
-"object.list_price > object.cost_price"
+"Condition that is to be tested before action is executed, e.g. object."
+"list_price > object.cost_price"
 msgstr ""
 "الشرط الذي يجب أن يتحقق لكي يتمّ تنفيذ الإجراء. مثال: object.list_price > "
 "object.cost_price"
@@ -1320,8 +1284,7 @@ msgid "7.  %H:%M:%S      ==> 18:25:20"
 msgstr "7.  %H:%M:%S      ==> 18:25:20"
 
 #. module: base
-#: view:res.partner:0
-#: field:res.partner.category,partner_ids:0
+#: view:res.partner:0 field:res.partner.category,partner_ids:0
 msgid "Partners"
 msgstr "الشركاء"
 
@@ -1339,11 +1302,11 @@ msgstr "عناصر واجهة المستخدم للصفحة الرئيسية"
 #. module: base
 #: help:ir.actions.server,message:0
 msgid ""
-"Specify the message. You can use the fields from the object. e.g. `Dear [[ "
-"object.partner_id.name ]]`"
+"Specify the message. You can use the fields from the object. e.g. `Dear "
+"[[ object.partner_id.name ]]`"
 msgstr ""
-"حدّد الرسالة. يمكنك استخدام حقول الكائن. مثال: 'عزيزي [[ "
-"object.partner_id.name ]]'"
+"حدّد الرسالة. يمكنك استخدام حقول الكائن. مثال: 'عزيزي [[ object.partner_id."
+"name ]]'"
 
 #. module: base
 #: field:ir.attachment,res_model:0
@@ -1366,10 +1329,8 @@ msgid "ir.model.access"
 msgstr "ir.model.access"
 
 #. module: base
-#: field:ir.cron,priority:0
-#: field:ir.mail_server,sequence:0
-#: field:res.request,priority:0
-#: field:res.request.link,priority:0
+#: field:ir.cron,priority:0 field:ir.mail_server,sequence:0
+#: field:res.request,priority:0 field:res.request.link,priority:0
 msgid "Priority"
 msgstr "الأولوية"
 
@@ -1380,8 +1341,13 @@ msgstr "النشاط المصدر"
 
 #. module: base
 #: view:ir.sequence:0
+#, fuzzy
 msgid "Legend (for prefix, suffix)"
-msgstr "وسيلة الايضاح (وصف مختصر Prefix، لاحقة (Suffix)"
+msgstr ""
+"#-#-#-#-#  .merge_file_Ac6v4C (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"وسيلة الايضاح (وصف مختصر Prefix، لاحقة (Suffix)\n"
+"#-#-#-#-#  .merge_file_YhAcE8 (OpenERP-F3)  #-#-#-#-#\n"
+"الدليل (للبادئة واللاحقة)"
 
 #. module: base
 #: selection:ir.server.object.lines,type:0
@@ -1402,8 +1368,7 @@ msgstr "مالاوي"
 #. module: base
 #: code:addons/base/ir/ir_filters.py:36
 #: code:addons/base/res/res_partner.py:314
-#: code:addons/base/res/res_users.py:92
-#: code:addons/base/res/res_users.py:331
+#: code:addons/base/res/res_users.py:92 code:addons/base/res/res_users.py:331
 #: code:addons/base/res/res_users.py:333
 #, python-format
 msgid "%s (copy)"
@@ -1444,8 +1409,7 @@ msgstr "فنلندا"
 
 #. module: base
 #: selection:ir.actions.act_window,view_type:0
-#: selection:ir.actions.act_window.view,view_mode:0
-#: view:ir.ui.view:0
+#: selection:ir.actions.act_window.view,view_mode:0 view:ir.ui.view:0
 #: selection:ir.ui.view,type:0
 msgid "Tree"
 msgstr "الشجرة"
@@ -1590,20 +1554,12 @@ msgstr ""
 #. module: base
 #: field:ir.actions.act_window,groups_id:0
 #: model:ir.actions.act_window,name:base.action_res_groups
-#: field:ir.actions.report.xml,groups_id:0
-#: view:ir.actions.todo:0
-#: field:ir.actions.todo,groups_id:0
-#: field:ir.actions.wizard,groups_id:0
-#: view:ir.model:0
-#: field:ir.model.fields,groups:0
-#: field:ir.rule,groups:0
-#: view:ir.ui.menu:0
-#: field:ir.ui.menu,groups_id:0
-#: model:ir.ui.menu,name:base.menu_action_res_groups
-#: view:ir.ui.view:0
-#: field:ir.ui.view,groups_id:0
-#: view:res.groups:0
-#: field:res.users,groups_id:0
+#: field:ir.actions.report.xml,groups_id:0 view:ir.actions.todo:0
+#: field:ir.actions.todo,groups_id:0 field:ir.actions.wizard,groups_id:0
+#: view:ir.model:0 field:ir.model.fields,groups:0 field:ir.rule,groups:0
+#: view:ir.ui.menu:0 field:ir.ui.menu,groups_id:0
+#: model:ir.ui.menu,name:base.menu_action_res_groups view:ir.ui.view:0
+#: field:ir.ui.view,groups_id:0 view:res.groups:0 field:res.users,groups_id:0
 msgid "Groups"
 msgstr "المجموعات"
 
@@ -1620,8 +1576,8 @@ msgid ""
 "do not wish to add more users at this stage, you can always do this later."
 msgstr ""
 "أنشئ متخدمين إضافيين وعين لهم مجموعات تعرف صلاحياتهم في النظام. عند انتهائك، "
-"أو في حالة عدم رغبتك في إضافة مستخدمين، انقر 'تمّ'. يمكنك إضافة مستخدين "
-"لاحقاً وقتما تشاء."
+"أو في حالة عدم رغبتك في إضافة مستخدمين، انقر 'تمّ'. يمكنك إضافة مستخدين لاحقاً "
+"وقتما تشاء."
 
 #. module: base
 #: model:res.country,name:base.bz
@@ -1678,10 +1634,8 @@ msgid ""
 msgstr ""
 
 #. module: base
-#: view:ir.model.fields:0
-#: field:ir.property,fields_id:0
-#: selection:ir.translation,type:0
-#: field:multi_company.default,field_id:0
+#: view:ir.model.fields:0 field:ir.property,fields_id:0
+#: selection:ir.translation,type:0 field:multi_company.default,field_id:0
 msgid "Field"
 msgstr "حقل"
 
@@ -1738,8 +1692,7 @@ msgid "Next Wizard"
 msgstr "المعالج التالي"
 
 #. module: base
-#: model:ir.actions.act_window,name:base.action_menu_admin
-#: view:ir.ui.menu:0
+#: model:ir.actions.act_window,name:base.action_menu_admin view:ir.ui.menu:0
 #: field:ir.ui.menu,name:0
 msgid "Menu"
 msgstr "القائمة"
@@ -1756,13 +1709,22 @@ msgstr "طريقة العرض الأصلية"
 
 #. module: base
 #: view:ir.values:0
+#, fuzzy
 msgid "Action To Launch"
 msgstr ""
+"#-#-#-#-#  .merge_file_Ac6v4C (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_YhAcE8 (OpenERP-F3)  #-#-#-#-#\n"
+"إطلاق إجراء"
 
 #. module: base
 #: field:ir.actions.act_url,target:0
+#, fuzzy
 msgid "Action Target"
-msgstr "هذف الإجراء"
+msgstr ""
+"#-#-#-#-#  .merge_file_Ac6v4C (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"هذف الإجراء\n"
+"#-#-#-#-#  .merge_file_YhAcE8 (OpenERP-F3)  #-#-#-#-#\n"
+"هدف الإجراء"
 
 #. module: base
 #: model:res.country,name:base.ai
@@ -1801,8 +1763,7 @@ msgstr "فضلاً انتظر. هذه العملية يمكن أن تستغرق 
 #. module: base
 #: help:ir.values,action_id:0
 msgid "This field is not used, it only helps you to select the right action."
-msgstr ""
-"هذا الحقل غير مستخدم، ولكنه موجود ليساعدك على اختيار الإجراء المناسب."
+msgstr "هذا الحقل غير مستخدم، ولكنه موجود ليساعدك على اختيار الإجراء المناسب."
 
 #. module: base
 #: field:ir.actions.server,email:0
@@ -1815,8 +1776,7 @@ msgid "French (BE) / Français (BE)"
 msgstr "الفرنسية / Français (BE)"
 
 #. module: base
-#: view:ir.actions.server:0
-#: field:workflow.activity,action_id:0
+#: view:ir.actions.server:0 field:workflow.activity,action_id:0
 msgid "Server Action"
 msgstr "إجراء الخادم"
 
@@ -1872,16 +1832,15 @@ msgstr "ليثوانيا"
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_view_partner_clear_ids
-#: model:ir.model,name:base.model_partner_clear_ids
-#: view:partner.clear.ids:0
+#: model:ir.model,name:base.model_partner_clear_ids view:partner.clear.ids:0
 msgid "Clear IDs"
 msgstr "إزالة المعرفات"
 
 #. module: base
 #: help:ir.cron,model:0
 msgid ""
-"Name of object whose function will be called when this scheduler will run. "
-"e.g. 'res.partener'"
+"Name of object whose function will be called when this scheduler will run. e."
+"g. 'res.partener'"
 msgstr ""
 
 #. module: base
@@ -1906,8 +1865,7 @@ msgid "Pakistan"
 msgstr "باكستان"
 
 #. module: base
-#: code:addons/orm.py:2020
-#: code:addons/orm.py:2031
+#: code:addons/orm.py:2020 code:addons/orm.py:2031
 #, python-format
 msgid "Invalid Object Architecture!"
 msgstr "هيكل الكائن غير صحيح!"
@@ -1918,14 +1876,10 @@ msgid "Messages"
 msgstr "الرسائل"
 
 #. module: base
-#: code:addons/base/ir/ir_model.py:366
-#: code:addons/base/ir/ir_model.py:368
-#: code:addons/base/ir/ir_model.py:398
-#: code:addons/base/ir/ir_model.py:412
-#: code:addons/base/ir/ir_model.py:414
-#: code:addons/base/ir/ir_model.py:416
-#: code:addons/base/ir/ir_model.py:423
-#: code:addons/base/ir/ir_model.py:426
+#: code:addons/base/ir/ir_model.py:366 code:addons/base/ir/ir_model.py:368
+#: code:addons/base/ir/ir_model.py:398 code:addons/base/ir/ir_model.py:412
+#: code:addons/base/ir/ir_model.py:414 code:addons/base/ir/ir_model.py:416
+#: code:addons/base/ir/ir_model.py:423 code:addons/base/ir/ir_model.py:426
 #: code:addons/base/module/wizard/base_update_translations.py:39
 #, python-format
 msgid "Error!"
@@ -1995,8 +1949,7 @@ msgid "The technical name of the model this field belongs to"
 msgstr "الاسم التقني للنموذج الذي يحتوي هذا الحقل"
 
 #. module: base
-#: field:ir.actions.server,action_id:0
-#: selection:ir.actions.server,state:0
+#: field:ir.actions.server,action_id:0 selection:ir.actions.server,state:0
 #: view:ir.values:0
 msgid "Client Action"
 msgstr "إجراء العميل"
@@ -2018,8 +1971,12 @@ msgstr "صحيح"
 
 #. module: base
 #: selection:ir.translation,type:0
+#, fuzzy
 msgid "XSL"
 msgstr ""
+"#-#-#-#-#  .merge_file_Ac6v4C (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_YhAcE8 (OpenERP-F3)  #-#-#-#-#\n"
+"XSL"
 
 #. module: base
 #: code:addons/base/module/module.py:526
@@ -2076,8 +2033,7 @@ msgstr "الخاصية"
 
 #. module: base
 #: model:ir.model,name:base.model_res_partner_bank_type
-#: field:res.partner.bank,state:0
-#: view:res.partner.bank.type:0
+#: field:res.partner.bank,state:0 view:res.partner.bank.type:0
 msgid "Bank Account Type"
 msgstr "نوع الحساب المصرفي"
 
@@ -2103,8 +2059,7 @@ msgstr "النمسا"
 
 #. module: base
 #: selection:base.language.install,state:0
-#: selection:base.module.import,state:0
-#: selection:base.module.update,state:0
+#: selection:base.module.import,state:0 selection:base.module.update,state:0
 msgid "done"
 msgstr "تمّ"
 
@@ -2174,15 +2129,12 @@ msgid "Report Footer 2"
 msgstr "تذييل تقرير 2"
 
 #. module: base
-#: view:ir.model.access:0
-#: view:res.groups:0
-#: field:res.groups,model_access:0
+#: view:ir.model.access:0 view:res.groups:0 field:res.groups,model_access:0
 msgid "Access Controls"
 msgstr "التحكم في الصلاحيات"
 
 #. module: base
-#: view:ir.module.module:0
-#: field:ir.module.module,dependencies_id:0
+#: view:ir.module.module:0 field:ir.module.module,dependencies_id:0
 msgid "Dependencies"
 msgstr "المتطلبات"
 
@@ -2219,8 +2171,7 @@ msgstr "ألقاب جهات الاتصال"
 msgid ""
 "Please double-check that the file encoding is set to UTF-8 (sometimes called "
 "Unicode) when the translator exports it."
-msgstr ""
-"فضلاً تأكد أن الملف يستخدم ترميز UTF-8 (Unicode) عند تصديره من المترجم."
+msgstr "فضلاً تأكد أن الملف يستخدم ترميز UTF-8 (Unicode) عند تصديره من المترجم."
 
 #. module: base
 #: selection:base.language.install,lang:0
@@ -2319,24 +2270,17 @@ msgstr "ارتباطات الحقول."
 
 #. module: base
 #: model:ir.model,name:base.model_ir_module_module
-#: field:ir.model.constraint,module:0
-#: view:ir.model.data:0
-#: field:ir.model.data,module:0
-#: field:ir.model.relation,module:0
-#: view:ir.module.module:0
-#: field:ir.module.module.dependency,module_id:0
-#: report:ir.module.reference:0
-#: field:ir.translation,module:0
+#: field:ir.model.constraint,module:0 view:ir.model.data:0
+#: field:ir.model.data,module:0 field:ir.model.relation,module:0
+#: view:ir.module.module:0 field:ir.module.module.dependency,module_id:0
+#: report:ir.module.reference:0 field:ir.translation,module:0
 msgid "Module"
 msgstr "الوحدة البرمجية"
 
 #. module: base
-#: view:ir.attachment:0
-#: field:ir.attachment,description:0
-#: field:ir.mail_server,name:0
-#: field:ir.module.category,description:0
-#: view:ir.module.module:0
-#: field:ir.module.module,description:0
+#: view:ir.attachment:0 field:ir.attachment,description:0
+#: field:ir.mail_server,name:0 field:ir.module.category,description:0
+#: view:ir.module.module:0 field:ir.module.module,description:0
 msgid "Description"
 msgstr "الوصف"
 
@@ -2410,8 +2354,7 @@ msgstr "من اليمين إلى اليسار"
 #. module: base
 #: view:ir.actions.act_window:0
 #: model:ir.actions.act_window,name:base.actions_ir_filters_view
-#: view:ir.filters:0
-#: model:ir.model,name:base.model_ir_filters
+#: view:ir.filters:0 model:ir.model,name:base.model_ir_filters
 msgid "Filters"
 msgstr "مرشحات الفرز"
 
@@ -2422,15 +2365,13 @@ msgid "Please check that all your lines have %d columns."
 msgstr "فضلاً تأكد من أن كل سطر يحتوي %d عموداً."
 
 #. module: base
-#: model:ir.actions.act_window,name:base.ir_cron_act
-#: view:ir.cron:0
+#: model:ir.actions.act_window,name:base.ir_cron_act view:ir.cron:0
 #: model:ir.ui.menu,name:base.menu_ir_cron_act
 msgid "Scheduled Actions"
 msgstr "الإجراءات المعدّة للتنفيذ"
 
 #. module: base
-#: field:res.partner,title:0
-#: field:res.partner.title,name:0
+#: field:res.partner,title:0 field:res.partner.title,name:0
 msgid "Title"
 msgstr "اللقب"
 
@@ -2606,8 +2547,7 @@ msgstr "ir.property"
 
 #. module: base
 #: selection:ir.actions.act_window,view_type:0
-#: selection:ir.actions.act_window.view,view_mode:0
-#: view:ir.ui.view:0
+#: selection:ir.actions.act_window.view,view_mode:0 view:ir.ui.view:0
 #: selection:ir.ui.view,type:0
 msgid "Form"
 msgstr "النموذج"
@@ -2618,14 +2558,12 @@ msgid "Montenegro"
 msgstr "الجبل الأسود"
 
 #. module: base
-#: view:ir.cron:0
-#: view:ir.module.module:0
+#: view:ir.cron:0 view:ir.module.module:0
 msgid "Technical Data"
 msgstr "بيانات تقنية"
 
 #. module: base
-#: view:res.partner:0
-#: field:res.partner,category_id:0
+#: view:res.partner:0 field:res.partner,category_id:0
 msgid "Categories"
 msgstr "الفئات"
 
@@ -2661,8 +2599,7 @@ msgid "Liechtenstein"
 msgstr "ليشتنشتاين"
 
 #. module: base
-#: model:ir.model,name:base.model_partner_sms_send
-#: view:partner.sms.send:0
+#: model:ir.model,name:base.model_partner_sms_send view:partner.sms.send:0
 msgid "Send SMS"
 msgstr "إرسال رسالة قصيرة (SMS)"
 
@@ -2684,8 +2621,7 @@ msgstr "البرتغال"
 
 #. module: base
 #: sql_constraint:ir.model.data:0
-msgid ""
-"You cannot have multiple records with the same id for the same module !"
+msgid "You cannot have multiple records with the same id for the same module !"
 msgstr "لا يمكن استخدام المعرّف نفسه لأكثر من سجل في وحدة برمجية واحدة!"
 
 #. module: base
@@ -2699,20 +2635,15 @@ msgid "6.  %d, %m         ==> 05, 12"
 msgstr ""
 
 #. module: base
-#: field:res.config.users,date:0
-#: field:res.users,date:0
+#: field:res.config.users,date:0 field:res.users,date:0
 msgid "Last Connection"
 msgstr "الاتصال الأخير"
 
 #. module: base
-#: field:ir.actions.act_url,help:0
-#: field:ir.actions.act_window,help:0
-#: field:ir.actions.act_window_close,help:0
-#: field:ir.actions.actions,help:0
-#: field:ir.actions.client,help:0
-#: field:ir.actions.report.xml,help:0
-#: field:ir.actions.server,help:0
-#: field:ir.actions.wizard,help:0
+#: field:ir.actions.act_url,help:0 field:ir.actions.act_window,help:0
+#: field:ir.actions.act_window_close,help:0 field:ir.actions.actions,help:0
+#: field:ir.actions.client,help:0 field:ir.actions.report.xml,help:0
+#: field:ir.actions.server,help:0 field:ir.actions.wizard,help:0
 msgid "Action description"
 msgstr "وصف الإجراء"
 
@@ -2724,8 +2655,7 @@ msgstr "اختر إذا كان الشريك عميلاً."
 #. module: base
 #: model:ir.actions.act_window,name:base.res_lang_act_window
 #: model:ir.model,name:base.model_res_lang
-#: model:ir.ui.menu,name:base.menu_res_lang_act_window
-#: view:res.lang:0
+#: model:ir.ui.menu,name:base.menu_res_lang_act_window view:res.lang:0
 msgid "Languages"
 msgstr "اللغات"
 
@@ -2755,8 +2685,7 @@ msgstr ""
 #. module: base
 #: model:ir.actions.act_window,name:base.action_partner_customer_form
 #: model:ir.actions.act_window,name:base.action_partner_form
-#: model:ir.ui.menu,name:base.menu_partner_form
-#: view:res.partner:0
+#: model:ir.ui.menu,name:base.menu_partner_form view:res.partner:0
 msgid "Customers"
 msgstr "العملاء"
 
@@ -2801,15 +2730,18 @@ msgid "SXW content"
 msgstr ""
 
 #. module: base
-#: field:change.password.user,wizard_id:0
-#: view:ir.actions.wizard:0
+#: field:change.password.user,wizard_id:0 view:ir.actions.wizard:0
 msgid "Wizard"
 msgstr "المعالج"
 
 #. module: base
 #: view:ir.cron:0
+#, fuzzy
 msgid "Action to Trigger"
 msgstr ""
+"#-#-#-#-#  .merge_file_Ac6v4C (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_YhAcE8 (OpenERP-F3)  #-#-#-#-#\n"
+"الإجراء الذي سيطلق"
 
 #. module: base
 #: code:addons/base/res/res_user.py:136
@@ -2820,20 +2752,17 @@ msgstr ""
 "المستخدمين"
 
 #. module: base
-#: field:ir.model.constraint,name:0
-#: selection:ir.translation,type:0
+#: field:ir.model.constraint,name:0 selection:ir.translation,type:0
 msgid "Constraint"
 msgstr "تقييد"
 
 #. module: base
-#: selection:ir.values,key:0
-#: selection:res.partner,type:0
+#: selection:ir.values,key:0 selection:res.partner,type:0
 msgid "Default"
 msgstr "القيمة الافتراضية"
 
 #. module: base
-#: view:ir.model.fields:0
-#: field:ir.model.fields,required:0
+#: view:ir.model.fields:0 field:ir.model.fields,required:0
 #: field:res.partner.bank.type.field,required:0
 msgid "Required"
 msgstr "مطلوب"
@@ -2844,8 +2773,7 @@ msgid "Default Filters"
 msgstr "مرشحات الفرز الافتراضية"
 
 #. module: base
-#: field:ir.module.module,summary:0
-#: field:res.request.history,name:0
+#: field:ir.module.module,summary:0 field:res.request.history,name:0
 msgid "Summary"
 msgstr "الملخّص"
 
@@ -2857,11 +2785,11 @@ msgstr "صيغة"
 #. module: base
 #: help:ir.actions.server,subject:0
 msgid ""
-"Specify the subject. You can use fields from the object, e.g. `Hello [[ "
-"object.partner_id.name ]]`"
+"Specify the subject. You can use fields from the object, e.g. `Hello "
+"[[ object.partner_id.name ]]`"
 msgstr ""
-"حدد الموضوع. يمكنك استخدام حقول الكائن، مثل: 'مرحباً [[ "
-"object.partner_id.name ]]'"
+"حدد الموضوع. يمكنك استخدام حقول الكائن، مثل: 'مرحباً [[ object.partner_id."
+"name ]]'"
 
 #. module: base
 #: view:res.company:0
@@ -2869,20 +2797,16 @@ msgid "Header/Footer"
 msgstr "رأس/تذييل"
 
 #. module: base
-#: help:ir.actions.act_url,help:0
-#: help:ir.actions.act_window,help:0
-#: help:ir.actions.act_window_close,help:0
-#: help:ir.actions.actions,help:0
-#: help:ir.actions.client,help:0
-#: help:ir.actions.report.xml,help:0
-#: help:ir.actions.server,help:0
-#: help:ir.actions.wizard,help:0
+#: help:ir.actions.act_url,help:0 help:ir.actions.act_window,help:0
+#: help:ir.actions.act_window_close,help:0 help:ir.actions.actions,help:0
+#: help:ir.actions.client,help:0 help:ir.actions.report.xml,help:0
+#: help:ir.actions.server,help:0 help:ir.actions.wizard,help:0
 msgid ""
 "Optional help text for the users with a description of the target view, such "
 "as its usage and purpose."
 msgstr ""
-"نصّ مساعد اختياري للمستخدمين يشمل وصفاً للعرض المرجو. مثلاً: طريقة "
-"الاستخدام، والهدف من الإنشاء."
+"نصّ مساعد اختياري للمستخدمين يشمل وصفاً للعرض المرجو. مثلاً: طريقة الاستخدام، "
+"والهدف من الإنشاء."
 
 #. module: base
 #: model:res.country,name:base.va
@@ -2906,8 +2830,12 @@ msgstr "قطاع الاتصالات"
 
 #. module: base
 #: field:workflow.transition,trigger_model:0
+#, fuzzy
 msgid "Trigger Object"
 msgstr ""
+"#-#-#-#-#  .merge_file_Ac6v4C (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_YhAcE8 (OpenERP-F3)  #-#-#-#-#\n"
+"كائن الإطلاق"
 
 #. module: base
 #: view:res.users:0
@@ -2915,10 +2843,13 @@ msgid "Current Activity"
 msgstr "النشاط الحالي"
 
 #. module: base
-#: view:workflow.activity:0
-#: field:workflow.activity,in_transitions:0
+#: view:workflow.activity:0 field:workflow.activity,in_transitions:0
+#, fuzzy
 msgid "Incoming Transitions"
 msgstr ""
+"#-#-#-#-#  .merge_file_Ac6v4C (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_YhAcE8 (OpenERP-F3)  #-#-#-#-#\n"
+"الانتقالات الواردة"
 
 #. module: base
 #: model:res.country,name:base.sr
@@ -2974,13 +2905,9 @@ msgid "SQL Constraint"
 msgstr "قيود الـ SQL"
 
 #. module: base
-#: field:ir.actions.server,srcmodel_id:0
-#: field:ir.filters,model_id:0
-#: view:ir.model:0
-#: field:ir.model,model:0
-#: field:ir.model.constraint,model:0
-#: field:ir.model.fields,model_id:0
-#: field:ir.model.relation,model:0
+#: field:ir.actions.server,srcmodel_id:0 field:ir.filters,model_id:0
+#: view:ir.model:0 field:ir.model,model:0 field:ir.model.constraint,model:0
+#: field:ir.model.fields,model_id:0 field:ir.model.relation,model:0
 #: view:ir.values:0
 msgid "Model"
 msgstr "النموذج"
@@ -3016,16 +2943,13 @@ msgid "Module Import"
 msgstr "استيراد وحدة برمجية"
 
 #. module: base
-#: field:res.bank,zip:0
-#: field:res.company,zip:0
-#: field:res.partner,zip:0
+#: field:res.bank,zip:0 field:res.company,zip:0 field:res.partner,zip:0
 #: field:res.partner.bank,zip:0
 msgid "Zip"
 msgstr "ألبريدي"
 
 #. module: base
-#: view:ir.module.module:0
-#: field:ir.module.module,author:0
+#: view:ir.module.module:0 field:ir.module.module,author:0
 msgid "Author"
 msgstr "المؤلف"
 
@@ -3074,29 +2998,27 @@ msgstr "الاتجاه"
 #. module: base
 #: view:ir.actions.act_window:0
 #: model:ir.actions.act_window,name:base.action_ui_view
-#: field:ir.actions.act_window,view_ids:0
-#: field:ir.actions.act_window,views:0
-#: view:ir.model:0
-#: field:ir.model,view_ids:0
+#: field:ir.actions.act_window,view_ids:0 field:ir.actions.act_window,views:0
+#: view:ir.model:0 field:ir.model,view_ids:0
 #: field:ir.module.module,views_by_module:0
-#: model:ir.ui.menu,name:base.menu_action_ui_view
-#: view:ir.ui.view:0
-#: view:res.groups:0
-#: field:res.groups,view_access:0
+#: model:ir.ui.menu,name:base.menu_action_ui_view view:ir.ui.view:0
+#: view:res.groups:0 field:res.groups,view_access:0
 msgid "Views"
 msgstr "طرق العرض"
 
 #. module: base
-#: view:res.groups:0
-#: field:res.groups,rule_groups:0
+#: view:res.groups:0 field:res.groups,rule_groups:0
 msgid "Rules"
 msgstr "القواعد"
 
 #. module: base
 #: code:addons/base/module/module.py:320
-#, python-format
+#, fuzzy, python-format
 msgid "You try to remove a module that is installed or will be installed"
 msgstr ""
+"#-#-#-#-#  .merge_file_Ac6v4C (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_YhAcE8 (OpenERP-F3)  #-#-#-#-#\n"
+"أنت تحاول إزالة موديول منصب أو سيتم تنصيبه"
 
 #. module: base
 #: view:base.module.upgrade:0
@@ -3247,15 +3169,18 @@ msgid "Spanish (PY) / Español (PY)"
 msgstr "الأسبانية / Español (PY)"
 
 #. module: base
-#: view:ir.config_parameter:0
-#: field:ir.config_parameter,key:0
+#: view:ir.config_parameter:0 field:ir.config_parameter,key:0
 msgid "Key"
 msgstr "المفتاح"
 
 #. module: base
 #: field:res.company,rml_header:0
+#, fuzzy
 msgid "RML Header"
 msgstr ""
+"#-#-#-#-#  .merge_file_Ac6v4C (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_YhAcE8 (OpenERP-F3)  #-#-#-#-#\n"
+"ترويسة RML"
 
 #. module: base
 #: field:partner.sms.send,app_id:0
@@ -3282,8 +3207,7 @@ msgid "Full Access"
 msgstr "صلاحيات كاملة"
 
 #. module: base
-#: view:ir.actions.act_window:0
-#: view:ir.actions.report.xml:0
+#: view:ir.actions.act_window:0 view:ir.actions.report.xml:0
 #: model:ir.ui.menu,name:base.menu_security
 msgid "Security"
 msgstr "الأمن"
@@ -3299,8 +3223,7 @@ msgid "South Africa"
 msgstr "جنوب إفريقيا"
 
 #. module: base
-#: view:ir.module.module:0
-#: selection:ir.module.module,state:0
+#: view:ir.module.module:0 selection:ir.module.module,state:0
 #: selection:ir.module.module.dependency,state:0
 msgid "Installed"
 msgstr "مثبَّت"
@@ -3362,8 +3285,7 @@ msgid "Spanish (PA) / Español (PA)"
 msgstr "الأسبانية / Español (PA)"
 
 #. module: base
-#: view:res.currency:0
-#: field:res.currency,rate_ids:0
+#: view:res.currency:0 field:res.currency,rate_ids:0
 msgid "Rates"
 msgstr "الأسعار"
 
@@ -3396,18 +3318,20 @@ msgid "draft"
 msgstr "مسودة"
 
 #. module: base
-#: selection:ir.property,type:0
-#: field:res.currency,date:0
-#: field:res.currency.rate,name:0
-#: field:res.partner,date:0
+#: selection:ir.property,type:0 field:res.currency,date:0
+#: field:res.currency.rate,name:0 field:res.partner,date:0
 #: field:res.request,date_sent:0
 msgid "Date"
 msgstr "التاريخ"
 
 #. module: base
 #: field:ir.actions.report.xml,report_sxw:0
+#, fuzzy
 msgid "SXW path"
 msgstr ""
+"#-#-#-#-#  .merge_file_Ac6v4C (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_YhAcE8 (OpenERP-F3)  #-#-#-#-#\n"
+"مسار SXW"
 
 #. module: base
 #: view:ir.attachment:0
@@ -3415,8 +3339,7 @@ msgid "Data"
 msgstr "البيانات"
 
 #. module: base
-#: field:ir.ui.menu,parent_id:0
-#: field:wizard.ir.model.menu.create,menu_id:0
+#: field:ir.ui.menu,parent_id:0 field:wizard.ir.model.menu.create,menu_id:0
 msgid "Parent Menu"
 msgstr "القائمة الرئيسية"
 
@@ -3453,9 +3376,7 @@ msgid ""
 msgstr ""
 
 #. module: base
-#: view:ir.attachment:0
-#: view:res.partner:0
-#: field:res.request,history:0
+#: view:ir.attachment:0 view:res.partner:0 field:res.request,history:0
 msgid "History"
 msgstr "المحفوظات"
 
@@ -3466,14 +3387,21 @@ msgstr "المُنشِئ"
 
 #. module: base
 #: model:res.company,overdue_msg:base.main_company
+#, fuzzy
 msgid ""
-"Please note that the following payments are now due. If your payment         "
-"                has been sent, kindly forward your payment details. If "
-"payment will be                         delayed further, please contact us "
-"to discuss.                         \n"
+"Please note that the following payments are now due. If your "
+"payment                         has been sent, kindly forward your payment "
+"details. If payment will be                         delayed further, please "
+"contact us to discuss.                         \n"
 "Would your payment have been carried out after this mail was sent, please "
 "consider the present one as void."
 msgstr ""
+"#-#-#-#-#  .merge_file_Ac6v4C (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_YhAcE8 (OpenERP-F3)  #-#-#-#-#\n"
+"يرجى ملاحظة أن الدفعات التالية هي الآن الواجبة. إذا تم إرسال دفعتك، التكرم "
+"بتقديم تفاصيل الدفع. إذا سيتم تأجيل دفع مزيد من المعلومات يرجى الاتصال بنا "
+"لمناقشة.\n"
+"وأجريت الدفع خارج بعد طرد هذا البريد، يرجى النظر في واحدة بوصفها باطلة."
 
 #. module: base
 #: model:res.country,name:base.mx
@@ -3519,8 +3447,12 @@ msgstr "إعدادات الواجهة"
 
 #. module: base
 #: field:ir.values,meta:0
+#, fuzzy
 msgid "Meta Datas"
 msgstr ""
+"#-#-#-#-#  .merge_file_Ac6v4C (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_YhAcE8 (OpenERP-F3)  #-#-#-#-#\n"
+"البيانات الدلالية"
 
 #. module: base
 #: sql_constraint:ir.ui.view_sc:0
@@ -3576,6 +3508,7 @@ msgstr "%w - رقم اليوم في الأسبوع [0 (الأحد)،6]"
 
 #. module: base
 #: model:ir.actions.act_window,help:base.action_partner_form
+#, fuzzy
 msgid ""
 "A customer is an entity you do business with, like a company or an "
 "organization. A customer can have several contacts or addresses which are "
@@ -3585,36 +3518,29 @@ msgid ""
 "plugin, don't forget to register emails to each contact so that the gateway "
 "will automatically attach incoming emails to the right partner."
 msgstr ""
+"#-#-#-#-#  .merge_file_Ac6v4C (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_YhAcE8 (OpenERP-F3)  #-#-#-#-#\n"
+"العميل هو كيان تؤدي له الأعمال، كشركة أو منظمة. قد يكون للعميل الواحد عدة "
+"جهات اتصال أو عناوين وهم الأناس الذين يعملون بتلك الشركة. يمكنك أن تستخدم "
+"لسان التبويب التاريخ لمتابعة كافة المعلومات المتعلقة بالعميل: أوامر الشراء، "
+"المراسلات، فرص البيع، الدعاوى، وغيرها. إذا كنت تستخدم البوابة البريدية - "
+"إضافات Outlook وThunderbird - لا تنسى أن تسجل عناوين البريد لكل جهة اتصال "
+"بحيث تقوم بوابة البريد آلياً بربط البريد الوارد بالشريك الصحيح."
 
 #. module: base
-#: field:ir.actions.act_window_close,name:0
-#: field:ir.actions.actions,name:0
-#: field:ir.actions.report.xml,name:0
-#: field:ir.actions.todo,name:0
-#: field:ir.cron,name:0
-#: field:ir.model.access,name:0
-#: field:ir.model.fields,name:0
-#: field:ir.module.category,name:0
-#: field:ir.module.module.dependency,name:0
-#: report:ir.module.reference:0
-#: view:ir.property:0
-#: field:ir.property,name:0
-#: field:ir.rule,name:0
-#: field:ir.sequence,name:0
-#: field:ir.sequence.type,name:0
-#: field:ir.values,name:0
-#: view:multi_company.default:0
-#: field:multi_company.default,name:0
-#: field:res.bank,name:0
-#: view:res.currency.rate.type:0
-#: field:res.currency.rate.type,name:0
-#: field:res.groups,name:0
-#: field:res.lang,name:0
-#: field:res.partner,name:0
-#: field:res.partner.bank.type,name:0
-#: field:res.request.link,name:0
-#: field:workflow,name:0
-#: field:workflow.activity,name:0
+#: field:ir.actions.act_window_close,name:0 field:ir.actions.actions,name:0
+#: field:ir.actions.report.xml,name:0 field:ir.actions.todo,name:0
+#: field:ir.cron,name:0 field:ir.model.access,name:0
+#: field:ir.model.fields,name:0 field:ir.module.category,name:0
+#: field:ir.module.module.dependency,name:0 report:ir.module.reference:0
+#: view:ir.property:0 field:ir.property,name:0 field:ir.rule,name:0
+#: field:ir.sequence,name:0 field:ir.sequence.type,name:0
+#: field:ir.values,name:0 view:multi_company.default:0
+#: field:multi_company.default,name:0 field:res.bank,name:0
+#: view:res.currency.rate.type:0 field:res.currency.rate.type,name:0
+#: field:res.groups,name:0 field:res.lang,name:0 field:res.partner,name:0
+#: field:res.partner.bank.type,name:0 field:res.request.link,name:0
+#: field:workflow,name:0 field:workflow.activity,name:0
 msgid "Name"
 msgstr "الاسم"
 
@@ -3700,13 +3626,21 @@ msgstr "الإنترنت"
 
 #. module: base
 #: selection:base.language.install,lang:0
+#, fuzzy
 msgid "English (CA)"
 msgstr ""
+"#-#-#-#-#  .merge_file_Ac6v4C (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_YhAcE8 (OpenERP-F3)  #-#-#-#-#\n"
+"الإنجليزية (كندا)"
 
 #. module: base
 #: model:ir.model,name:base.model_publisher_warranty_contract
+#, fuzzy
 msgid "publisher_warranty.contract"
 msgstr ""
+"#-#-#-#-#  .merge_file_Ac6v4C (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_YhAcE8 (OpenERP-F3)  #-#-#-#-#\n"
+"publisher_warranty.contract"
 
 #. module: base
 #: model:res.country,name:base.et
@@ -3730,8 +3664,7 @@ msgid "ir.actions.wizard"
 msgstr "ir.actions.wizard"
 
 #. module: base
-#: view:ir.actions.act_window:0
-#: view:ir.actions.report.xml:0
+#: view:ir.actions.act_window:0 view:ir.actions.report.xml:0
 #: view:ir.actions.server:0
 msgid "Group By"
 msgstr "تجميع حسب"
@@ -3768,8 +3701,12 @@ msgstr ""
 
 #. module: base
 #: field:ir.actions.server,write_id:0
+#, fuzzy
 msgid "Write Id"
 msgstr ""
+"#-#-#-#-#  .merge_file_Ac6v4C (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_YhAcE8 (OpenERP-F3)  #-#-#-#-#\n"
+"كتابة المعرف"
 
 #. module: base
 #: model:ir.ui.menu,name:base.menu_product
@@ -3778,8 +3715,12 @@ msgstr "المنتجات"
 
 #. module: base
 #: field:ir.actions.act_window,domain:0
+#, fuzzy
 msgid "Domain Value"
 msgstr ""
+"#-#-#-#-#  .merge_file_Ac6v4C (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_YhAcE8 (OpenERP-F3)  #-#-#-#-#\n"
+"قيمة النطاق"
 
 #. module: base
 #: view:ir.actions.server:0
@@ -3820,8 +3761,12 @@ msgstr "اختصار"
 
 #. module: base
 #: field:ir.model.data,date_init:0
+#, fuzzy
 msgid "Init Date"
 msgstr ""
+"#-#-#-#-#  .merge_file_Ac6v4C (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_YhAcE8 (OpenERP-F3)  #-#-#-#-#\n"
+"تاريخ البدء"
 
 #. module: base
 #: selection:base.language.install,lang:0
@@ -3842,10 +3787,13 @@ msgid "Please enter the serial key provided in your contract document:"
 msgstr "فضلاً أدخل المفتاح التسلسلي الموجود في مستند العقد:"
 
 #. module: base
-#: view:workflow.activity:0
-#: field:workflow.activity,flow_start:0
+#: view:workflow.activity:0 field:workflow.activity,flow_start:0
+#, fuzzy
 msgid "Flow Start"
 msgstr ""
+"#-#-#-#-#  .merge_file_Ac6v4C (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_YhAcE8 (OpenERP-F3)  #-#-#-#-#\n"
+"بداية التدفق"
 
 #. module: base
 #: code:addons/__init__.py:834
@@ -3862,12 +3810,15 @@ msgstr "مالِك الحساب المصرفي"
 
 #. module: base
 #: model:ir.actions.act_window,name:base.act_values_form
+#, fuzzy
 msgid "Client Actions Connections"
 msgstr ""
+"#-#-#-#-#  .merge_file_Ac6v4C (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_YhAcE8 (OpenERP-F3)  #-#-#-#-#\n"
+"ارتباطات إجراءات العميل"
 
 #. module: base
-#: field:ir.attachment,res_name:0
-#: field:ir.ui.view_sc,resource:0
+#: field:ir.attachment,res_name:0 field:ir.ui.view_sc,resource:0
 msgid "Resource Name"
 msgstr "إسم المصدر"
 
@@ -3882,8 +3833,7 @@ msgid "Guadeloupe (French)"
 msgstr ""
 
 #. module: base
-#: code:addons/base/res/res_lang.py:185
-#: code:addons/base/res/res_lang.py:187
+#: code:addons/base/res/res_lang.py:185 code:addons/base/res/res_lang.py:187
 #: code:addons/base/res/res_lang.py:189
 #, python-format
 msgid "User Error"
@@ -3940,8 +3890,12 @@ msgstr "res.request.history"
 
 #. module: base
 #: view:ir.actions.server:0
+#, fuzzy
 msgid "Client Action Configuration"
 msgstr ""
+"#-#-#-#-#  .merge_file_Ac6v4C (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_YhAcE8 (OpenERP-F3)  #-#-#-#-#\n"
+"ضبط إجراء العميل"
 
 #. module: base
 #: model:ir.model,name:base.model_res_partner_address
@@ -3968,21 +3922,23 @@ msgstr "الرأس الأخضر"
 
 #. module: base
 #: view:base.module.import:0
+#, fuzzy
 msgid "Select module package to import (.zip file):"
 msgstr ""
+"#-#-#-#-#  .merge_file_Ac6v4C (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_YhAcE8 (OpenERP-F3)  #-#-#-#-#\n"
+"اختر حزمة موديول لاستيرادها (ملف ZIP):"
 
 #. module: base
 #: model:ir.actions.act_window,name:base.act_res_partner_event
 #: model:ir.ui.menu,name:base.menu_event_association
-#: field:res.partner,events:0
-#: field:res.partner.event,name:0
+#: field:res.partner,events:0 field:res.partner.event,name:0
 #: model:res.widget,title:base.events_widget
 msgid "Events"
 msgstr "الأحداث"
 
 #. module: base
-#: model:ir.model,name:base.model_ir_actions_url
-#: selection:ir.ui.menu,action:0
+#: model:ir.model,name:base.model_ir_actions_url selection:ir.ui.menu,action:0
 msgid "ir.actions.url"
 msgstr "ir.actions.url"
 
@@ -4019,8 +3975,7 @@ msgid "Latvian / latviešu valoda"
 msgstr ""
 
 #. module: base
-#: view:res.config:0
-#: view:res.config.installer:0
+#: view:res.config:0 view:res.config.installer:0
 msgid "vsep"
 msgstr ""
 
@@ -4031,9 +3986,12 @@ msgstr "الفرنسية / Français"
 
 #. module: base
 #: code:addons/orm.py:1049
-#, python-format
+#, fuzzy, python-format
 msgid "The create method is not implemented on this object !"
 msgstr ""
+"#-#-#-#-#  .merge_file_Ac6v4C (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_YhAcE8 (OpenERP-F3)  #-#-#-#-#\n"
+"لا تنطبق وظيفة الإنشاء على هذا الكائن!"
 
 #. module: base
 #: field:workflow.triggers,workitem_id:0
@@ -4047,10 +4005,8 @@ msgstr "اجعل في انتظار التنفيذ"
 
 #. module: base
 #: view:ir.actions.act_window:0
-#: field:ir.actions.act_window.view,act_window_id:0
-#: view:ir.actions.actions:0
-#: field:ir.actions.todo,action_id:0
-#: field:ir.ui.menu,action:0
+#: field:ir.actions.act_window.view,act_window_id:0 view:ir.actions.actions:0
+#: field:ir.actions.todo,action_id:0 field:ir.ui.menu,action:0
 #: selection:ir.values,key:0
 msgid "Action"
 msgstr "إجراء"
@@ -4111,8 +4067,7 @@ msgid "Request History"
 msgstr "الطلبات السابقة"
 
 #. module: base
-#: field:ir.module.module,menus_by_module:0
-#: view:res.groups:0
+#: field:ir.module.module,menus_by_module:0 view:res.groups:0
 msgid "Menus"
 msgstr "القوائم"
 
@@ -4156,19 +4111,20 @@ msgstr "تقرير XML"
 #. module: base
 #: model:ir.actions.act_window,name:base.action_module_open_categ
 #: model:ir.actions.act_window,name:base.open_module_tree
-#: field:ir.module.category,module_ids:0
-#: view:ir.module.module:0
+#: field:ir.module.category,module_ids:0 view:ir.module.module:0
 #: model:ir.ui.menu,name:base.menu_management
 msgid "Modules"
 msgstr "الوحدات البرمجية"
 
 #. module: base
-#: view:workflow.activity:0
-#: selection:workflow.activity,kind:0
-#: field:workflow.activity,subflow_id:0
-#: field:workflow.workitem,subflow_id:0
+#: view:workflow.activity:0 selection:workflow.activity,kind:0
+#: field:workflow.activity,subflow_id:0 field:workflow.workitem,subflow_id:0
+#, fuzzy
 msgid "Subflow"
 msgstr ""
+"#-#-#-#-#  .merge_file_Ac6v4C (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_YhAcE8 (OpenERP-F3)  #-#-#-#-#\n"
+"تدفق فرعي"
 
 #. module: base
 #: model:ir.model,name:base.model_res_config
@@ -4182,8 +4138,7 @@ msgstr ""
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_res_bank_form
-#: model:ir.ui.menu,name:base.menu_action_res_bank_form
-#: view:res.bank:0
+#: model:ir.ui.menu,name:base.menu_action_res_bank_form view:res.bank:0
 #: field:res.partner,bank_ids:0
 msgid "Banks"
 msgstr "المصارف"
@@ -4387,8 +4342,7 @@ msgid "Select the object from the model on which the workflow will executed."
 msgstr ""
 
 #. module: base
-#: model:res.groups,name:base.group_user
-#: field:res.partner,employee:0
+#: model:res.groups,name:base.group_user field:res.partner,employee:0
 #: model:res.partner.category,name:base.res_partner_category_3
 msgid "Employee"
 msgstr "الموظف"
@@ -4399,8 +4353,7 @@ msgid "Create Access"
 msgstr "صلاحيات الإنشاء"
 
 #. module: base
-#: field:res.bank,state:0
-#: field:res.company,state_id:0
+#: field:res.bank,state:0 field:res.company,state_id:0
 #: field:res.partner.bank,state_id:0
 msgid "Fed. State"
 msgstr "المحافظة / الولاية"
@@ -4447,8 +4400,12 @@ msgstr "نوع الحقل"
 
 #. module: base
 #: field:res.country.state,code:0
+#, fuzzy
 msgid "State Code"
 msgstr ""
+"#-#-#-#-#  .merge_file_Ac6v4C (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_YhAcE8 (OpenERP-F3)  #-#-#-#-#\n"
+"رمز الولاية"
 
 #. module: base
 #: field:ir.model.fields,on_delete:0
@@ -4461,8 +4418,7 @@ msgid "Left-to-Right"
 msgstr "من اليسار إلى اليمين"
 
 #. module: base
-#: field:ir.model.fields,translate:0
-#: view:res.lang:0
+#: field:ir.model.fields,translate:0 view:res.lang:0
 #: field:res.lang,translatable:0
 msgid "Translatable"
 msgstr "قابل للترجمة"
@@ -4478,12 +4434,9 @@ msgid "Signature"
 msgstr "التوقيع"
 
 #. module: base
-#: code:addons/fields.py:456
-#: code:addons/fields.py:654
-#: code:addons/fields.py:656
-#: code:addons/fields.py:658
-#: code:addons/fields.py:660
-#: code:addons/fields.py:662
+#: code:addons/fields.py:456 code:addons/fields.py:654
+#: code:addons/fields.py:656 code:addons/fields.py:658
+#: code:addons/fields.py:660 code:addons/fields.py:662
 #: code:addons/fields.py:664
 #, python-format
 msgid "Not Implemented"
@@ -4537,22 +4490,19 @@ msgid "On Multiple Doc."
 msgstr ""
 
 #. module: base
-#: view:res.partner:0
-#: field:res.partner,user_id:0
+#: view:res.partner:0 field:res.partner,user_id:0
 msgid "Salesman"
 msgstr "مندوب المبيعات"
 
 #. module: base
-#: view:res.partner:0
-#: field:res.partner,child_ids:0
+#: view:res.partner:0 field:res.partner,child_ids:0
 msgid "Contacts"
 msgstr "جهات الاتصال"
 
 #. module: base
 #: code:addons/orm.py:3960
 #, python-format
-msgid ""
-"Unable to delete this document because it is used as a default property"
+msgid "Unable to delete this document because it is used as a default property"
 msgstr "لا يمكن حذف هذا المستند لأنه مستخدم كخاصية افتراضية"
 
 #. module: base
@@ -4626,8 +4576,12 @@ msgstr "الشركة التي يعمل هذا المستخدم لصالحها ح
 
 #. module: base
 #: model:ir.model,name:base.model_wizard_ir_model_menu_create
+#, fuzzy
 msgid "wizard.ir.model.menu.create"
 msgstr ""
+"#-#-#-#-#  .merge_file_Ac6v4C (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_YhAcE8 (OpenERP-F3)  #-#-#-#-#\n"
+"wizard.ir.model.menu.create"
 
 #. module: base
 #: view:workflow.transition:0
@@ -4665,10 +4619,8 @@ msgid "Burundi"
 msgstr "بوروندي"
 
 #. module: base
-#: view:base.language.export:0
-#: view:base.language.install:0
-#: view:base.module.configuration:0
-#: view:base.module.update:0
+#: view:base.language.export:0 view:base.language.install:0
+#: view:base.module.configuration:0 view:base.module.update:0
 msgid "Close"
 msgstr "إغلاق"
 
@@ -4689,8 +4641,12 @@ msgstr "مملكة بوتان"
 
 #. module: base
 #: help:ir.sequence,number_next:0
+#, fuzzy
 msgid "Next number of this sequence"
 msgstr ""
+"#-#-#-#-#  .merge_file_Ac6v4C (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_YhAcE8 (OpenERP-F3)  #-#-#-#-#\n"
+"الرقم التالي لهذا التسلسل"
 
 #. module: base
 #: model:res.partner.category,name:base.res_partner_category_11
@@ -4719,8 +4675,12 @@ msgstr "صيغة الملف"
 
 #. module: base
 #: field:res.lang,iso_code:0
+#, fuzzy
 msgid "ISO code"
 msgstr ""
+"#-#-#-#-#  .merge_file_Ac6v4C (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_YhAcE8 (OpenERP-F3)  #-#-#-#-#\n"
+"رمز ISO"
 
 #. module: base
 #: model:ir.model,name:base.model_res_config_view
@@ -4728,8 +4688,7 @@ msgid "res.config.view"
 msgstr "res.config.view"
 
 #. module: base
-#: view:res.log:0
-#: field:res.log,read:0
+#: view:res.log:0 field:res.log,read:0
 msgid "Read"
 msgstr "قراءة"
 
@@ -4750,8 +4709,12 @@ msgstr ""
 
 #. module: base
 #: view:workflow.workitem:0
+#, fuzzy
 msgid "Workflow Workitems"
 msgstr ""
+"#-#-#-#-#  .merge_file_Ac6v4C (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_YhAcE8 (OpenERP-F3)  #-#-#-#-#\n"
+"عناصر أعمال خارطة التدفق"
 
 #. module: base
 #: model:res.country,name:base.vc
@@ -4759,18 +4722,14 @@ msgid "Saint Vincent & Grenadines"
 msgstr ""
 
 #. module: base
-#: field:ir.mail_server,smtp_pass:0
-#: field:res.users,password:0
+#: field:ir.mail_server,smtp_pass:0 field:res.users,password:0
 msgid "Password"
 msgstr "كلمة المرور"
 
 #. module: base
-#: model:ir.actions.act_window,name:base.action_model_fields
-#: view:ir.model:0
-#: field:ir.model,field_id:0
-#: model:ir.model,name:base.model_ir_model_fields
-#: view:ir.model.fields:0
-#: model:ir.ui.menu,name:base.ir_model_model_fields
+#: model:ir.actions.act_window,name:base.action_model_fields view:ir.model:0
+#: field:ir.model,field_id:0 model:ir.model,name:base.model_ir_model_fields
+#: view:ir.model.fields:0 model:ir.ui.menu,name:base.ir_model_model_fields
 msgid "Fields"
 msgstr "الحقول"
 
@@ -4781,14 +4740,17 @@ msgstr "الموظفون"
 
 #. module: base
 #: help:res.log,read:0
-msgid ""
-"If this log item has been read, get() should not send it to the client"
+msgid "If this log item has been read, get() should not send it to the client"
 msgstr ""
 
 #. module: base
 #: field:res.company,rml_header2:0
+#, fuzzy
 msgid "RML Internal Header"
 msgstr ""
+"#-#-#-#-#  .merge_file_Ac6v4C (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_YhAcE8 (OpenERP-F3)  #-#-#-#-#\n"
+"ترويسة RML الداخلية"
 
 #. module: base
 #: field:ir.actions.act_window,search_view_id:0
@@ -4810,8 +4772,12 @@ msgstr ""
 
 #. module: base
 #: model:res.partner.bank.type.field,name:base.bank_normal_field
+#, fuzzy
 msgid "acc_number"
 msgstr ""
+"#-#-#-#-#  .merge_file_Ac6v4C (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_YhAcE8 (OpenERP-F3)  #-#-#-#-#\n"
+"acc_number"
 
 #. module: base
 #: field:res.partner,address:0
@@ -4829,10 +4795,8 @@ msgid "Chinese (CN) / 简体中文"
 msgstr "الصينية / 简体中文"
 
 #. module: base
-#: field:res.bank,street:0
-#: field:res.company,street:0
-#: field:res.partner,street:0
-#: field:res.partner.bank,street:0
+#: field:res.bank,street:0 field:res.company,street:0
+#: field:res.partner,street:0 field:res.partner.bank,street:0
 msgid "Street"
 msgstr "الشارع"
 
@@ -4843,8 +4807,12 @@ msgstr "يوغوسلافيا"
 
 #. module: base
 #: field:ir.model.data,name:0
+#, fuzzy
 msgid "XML Identifier"
 msgstr ""
+"#-#-#-#-#  .merge_file_Ac6v4C (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_YhAcE8 (OpenERP-F3)  #-#-#-#-#\n"
+"معرف XML"
 
 #. module: base
 #: model:res.country,name:base.ca
@@ -4894,8 +4862,12 @@ msgstr "حقل مخصص"
 
 #. module: base
 #: field:ir.module.module,web:0
+#, fuzzy
 msgid "Has a web component"
 msgstr ""
+"#-#-#-#-#  .merge_file_Ac6v4C (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_YhAcE8 (OpenERP-F3)  #-#-#-#-#\n"
+"لديه مكون ويب"
 
 #. module: base
 #: model:res.country,name:base.cc
@@ -4904,8 +4876,7 @@ msgstr "جزر الكوكوس"
 
 #. module: base
 #: selection:base.language.install,state:0
-#: selection:base.module.import,state:0
-#: selection:base.module.update,state:0
+#: selection:base.module.import,state:0 selection:base.module.update,state:0
 msgid "init"
 msgstr ""
 
@@ -5003,14 +4974,21 @@ msgstr ""
 
 #. module: base
 #: view:ir.values:0
+#, fuzzy
 msgid "Client Actions"
 msgstr ""
+"#-#-#-#-#  .merge_file_Ac6v4C (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_YhAcE8 (OpenERP-F3)  #-#-#-#-#\n"
+"إجراءات العميل"
 
 #. module: base
 #: code:addons/orm.py:1806
-#, python-format
+#, fuzzy, python-format
 msgid "The exists method is not implemented on this object !"
 msgstr ""
+"#-#-#-#-#  .merge_file_Ac6v4C (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_YhAcE8 (OpenERP-F3)  #-#-#-#-#\n"
+"وظيفة exists لا تنطبق على هذا الكائن!"
 
 #. module: base
 #: code:addons/base/module/module.py:540
@@ -5024,8 +5002,12 @@ msgstr ""
 
 #. module: base
 #: field:workflow.transition,act_to:0
+#, fuzzy
 msgid "Destination Activity"
 msgstr ""
+"#-#-#-#-#  .merge_file_Ac6v4C (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_YhAcE8 (OpenERP-F3)  #-#-#-#-#\n"
+"نشاط الهدف"
 
 #. module: base
 #: view:ir.values:0
@@ -5034,8 +5016,12 @@ msgstr "اربط الأحداث بالإجراءات"
 
 #. module: base
 #: model:ir.model,name:base.model_base_update_translations
+#, fuzzy
 msgid "base.update.translations"
 msgstr ""
+"#-#-#-#-#  .merge_file_Ac6v4C (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_YhAcE8 (OpenERP-F3)  #-#-#-#-#\n"
+"base.update.translations"
 
 #. module: base
 #: field:res.partner.category,parent_id:0
@@ -5048,17 +5034,19 @@ msgid "Integer Big"
 msgstr ""
 
 #. module: base
-#: view:res.partner:0
-#: selection:res.partner,type:0
-#: selection:res.partner.title,domain:0
-#: view:res.users:0
+#: view:res.partner:0 selection:res.partner,type:0
+#: selection:res.partner.title,domain:0 view:res.users:0
 msgid "Contact"
 msgstr "جهة الاتصال"
 
 #. module: base
 #: model:ir.model,name:base.model_ir_ui_menu
+#, fuzzy
 msgid "ir.ui.menu"
 msgstr ""
+"#-#-#-#-#  .merge_file_Ac6v4C (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_YhAcE8 (OpenERP-F3)  #-#-#-#-#\n"
+"ir.ui.menu"
 
 #. module: base
 #: model:res.country,name:base.us
@@ -5077,8 +5065,12 @@ msgstr "التواصل"
 
 #. module: base
 #: view:ir.actions.report.xml:0
+#, fuzzy
 msgid "RML Report"
 msgstr ""
+"#-#-#-#-#  .merge_file_Ac6v4C (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_YhAcE8 (OpenERP-F3)  #-#-#-#-#\n"
+"تقرير RML"
 
 #. module: base
 #: model:ir.model,name:base.model_ir_server_object_lines
@@ -5111,8 +5103,12 @@ msgstr ""
 
 #. module: base
 #: selection:ir.property,type:0
+#, fuzzy
 msgid "Many2One"
 msgstr ""
+"#-#-#-#-#  .merge_file_Ac6v4C (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_YhAcE8 (OpenERP-F3)  #-#-#-#-#\n"
+"متعدد لفردي"
 
 #. module: base
 #: model:res.country,name:base.ng
@@ -5229,8 +5225,7 @@ msgstr "دومينيكا"
 
 #. module: base
 #: sql_constraint:publisher_warranty.contract:0
-msgid ""
-"Your publisher warranty contract is already subscribed in the system !"
+msgid "Your publisher warranty contract is already subscribed in the system !"
 msgstr "قد تمّ إشراك هذا النظام في عقد ضمان الناشر سابقاً!"
 
 #. module: base
@@ -5239,8 +5234,7 @@ msgid "Next planned execution date for this scheduler"
 msgstr "تاريخ التنفيذ القادم لهذا المُجدوِل"
 
 #. module: base
-#: help:res.config.users,view:0
-#: help:res.users,view:0
+#: help:res.config.users,view:0 help:res.users,view:0
 msgid "Choose between the simplified interface and the extended one"
 msgstr "اختر من بين الواجهة المبسطة والواجهة المفصلة"
 
@@ -5346,8 +5340,7 @@ msgid "Attachment Name"
 msgstr "اسم المرفق"
 
 #. module: base
-#: field:base.language.export,data:0
-#: field:base.language.import,data:0
+#: field:base.language.export,data:0 field:base.language.import,data:0
 msgid "File"
 msgstr "الملف"
 
@@ -5378,14 +5371,12 @@ msgid "Supplier"
 msgstr "مورِّد"
 
 #. module: base
-#: view:ir.actions.server:0
-#: selection:ir.actions.server,state:0
+#: view:ir.actions.server:0 selection:ir.actions.server,state:0
 msgid "Multi Actions"
 msgstr ""
 
 #. module: base
-#: view:base.language.export:0
-#: view:base.language.import:0
+#: view:base.language.export:0 view:base.language.import:0
 #: view:wizard.ir.model.menu.create:0
 msgid "_Close"
 msgstr "إ_غلاق"
@@ -5436,8 +5427,7 @@ msgid "Request Link"
 msgstr "اطلب الرابط"
 
 #. module: base
-#: view:ir.attachment:0
-#: selection:ir.attachment,type:0
+#: view:ir.attachment:0 selection:ir.attachment,type:0
 #: field:ir.module.module,url:0
 msgid "URL"
 msgstr "العنوان الإلكتروني (URL)"
@@ -5453,8 +5443,7 @@ msgid "Iteration"
 msgstr ""
 
 #. module: base
-#: code:addons/orm.py:4245
-#: code:addons/orm.py:4346
+#: code:addons/orm.py:4245 code:addons/orm.py:4346
 #, python-format
 msgid "UserError"
 msgstr "خطأ مستخدم"
@@ -5482,9 +5471,7 @@ msgid ""
 msgstr "الاسم الجديد للعمود يجب أن يبدأ بـ x_ أيضاً لأن الحقل مخصص!"
 
 #. module: base
-#: view:ir.model.access:0
-#: view:ir.rule:0
-#: field:ir.rule,global:0
+#: view:ir.model.access:0 view:ir.rule:0 field:ir.rule,global:0
 msgid "Global"
 msgstr "شامل"
 
@@ -5499,11 +5486,13 @@ msgid "Solomon Islands"
 msgstr "جزر سليمان"
 
 #. module: base
-#: code:addons/orm.py:4151
-#: code:addons/orm.py:4684
-#, python-format
+#: code:addons/orm.py:4151 code:addons/orm.py:4684
+#, fuzzy, python-format
 msgid "AccessError"
 msgstr ""
+"#-#-#-#-#  .merge_file_Ac6v4C (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_YhAcE8 (OpenERP-F3)  #-#-#-#-#\n"
+"خطأ الوصول"
 
 #. module: base
 #: view:res.request:0
@@ -5533,15 +5522,18 @@ msgid "Creation Date"
 msgstr "تاريخ الإنشاء"
 
 #. module: base
-#: view:ir.translation:0
-#: model:ir.ui.menu,name:base.menu_translation
+#: view:ir.translation:0 model:ir.ui.menu,name:base.menu_translation
 msgid "Translations"
 msgstr "الترجمات"
 
 #. module: base
 #: field:ir.sequence,padding:0
+#, fuzzy
 msgid "Number padding"
 msgstr ""
+"#-#-#-#-#  .merge_file_Ac6v4C (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_YhAcE8 (OpenERP-F3)  #-#-#-#-#\n"
+"ملئ العدد"
 
 #. module: base
 #: view:ir.actions.report.xml:0
@@ -5584,8 +5576,7 @@ msgid "Mali"
 msgstr "مالي"
 
 #. module: base
-#: help:res.config.users,email:0
-#: help:res.users,email:0
+#: help:res.config.users,email:0 help:res.users,email:0
 msgid ""
 "If an email is provided, the user will be sent a message welcoming him.\n"
 "\n"
@@ -5594,8 +5585,8 @@ msgid ""
 msgstr ""
 "في حالة ذكر بريد إلكتروني، سيتمّ إرسالة رسالة ترحيبية للمستخدم.\n"
 "\n"
-"تحذير: إذا لم يكن قد تمّ إعداد كل من الإعدادات \"email_from\" و "
-"\"smtp_server\"، فلن يكون من الممكن إرسال بريد إلكتروني."
+"تحذير: إذا لم يكن قد تمّ إعداد كل من الإعدادات \"email_from\" و \"smtp_server"
+"\"، فلن يكون من الممكن إرسال بريد إلكتروني."
 
 #. module: base
 #: selection:base.language.install,lang:0
@@ -5623,10 +5614,8 @@ msgid "Brunei Darussalam"
 msgstr "بروناي دار السّلام"
 
 #. module: base
-#: view:ir.actions.act_window:0
-#: field:ir.actions.act_window,view_type:0
-#: field:ir.actions.act_window.view,view_mode:0
-#: field:ir.ui.view,type:0
+#: view:ir.actions.act_window:0 field:ir.actions.act_window,view_type:0
+#: field:ir.actions.act_window.view,view_mode:0 field:ir.ui.view,type:0
 msgid "View Type"
 msgstr "عرض النوع"
 
@@ -5682,12 +5671,9 @@ msgid "osv_memory.autovacuum"
 msgstr "osv_memory.autovacuum"
 
 #. module: base
-#: field:base.language.export,lang:0
-#: field:base.language.install,lang:0
-#: field:base.update.translations,lang:0
-#: field:ir.translation,lang:0
-#: view:res.lang:0
-#: field:res.partner,lang:0
+#: field:base.language.export,lang:0 field:base.language.install,lang:0
+#: field:base.update.translations,lang:0 field:ir.translation,lang:0
+#: view:res.lang:0 field:res.partner,lang:0
 msgid "Language"
 msgstr "اللغة"
 
@@ -5701,10 +5687,8 @@ msgstr "غامبيا"
 #: model:ir.actions.act_window,name:base.company_normal_action_tree
 #: model:ir.model,name:base.model_res_company
 #: model:ir.ui.menu,name:base.menu_action_res_company_form
-#: model:ir.ui.menu,name:base.menu_res_company_global
-#: view:res.company:0
-#: view:res.partner:0
-#: field:res.users,company_ids:0
+#: model:ir.ui.menu,name:base.menu_res_company_global view:res.company:0
+#: view:res.partner:0 field:res.users,company_ids:0
 msgid "Companies"
 msgstr "الشركات"
 
@@ -5737,8 +5721,7 @@ msgid "Not implemented get_memory method !"
 msgstr ""
 
 #. module: base
-#: view:ir.actions.server:0
-#: field:ir.actions.server,code:0
+#: view:ir.actions.server:0 field:ir.actions.server,code:0
 #: selection:ir.actions.server,state:0
 msgid "Python Code"
 msgstr "كود بايثون"
@@ -5755,17 +5738,11 @@ msgid "The kernel of OpenERP, needed for all installation."
 msgstr "نواة نظام OpenERP. لازم لكل نسخة من النظام."
 
 #. module: base
-#: view:base.language.export:0
-#: view:base.language.import:0
-#: view:base.language.install:0
-#: view:base.module.import:0
-#: view:base.module.update:0
-#: view:base.module.upgrade:0
-#: view:base.update.translations:0
-#: view:change.password.wizard:0
-#: view:ir.actions.configuration.wizard:0
-#: view:res.config:0
-#: view:res.users:0
+#: view:base.language.export:0 view:base.language.import:0
+#: view:base.language.install:0 view:base.module.import:0
+#: view:base.module.update:0 view:base.module.upgrade:0
+#: view:base.update.translations:0 view:change.password.wizard:0
+#: view:ir.actions.configuration.wizard:0 view:res.config:0 view:res.users:0
 #: view:wizard.ir.model.menu.create:0
 msgid "Cancel"
 msgstr "إلغاء"
@@ -5801,17 +5778,12 @@ msgid "Components Supplier"
 msgstr "مورّد المكوّنات"
 
 #. module: base
-#: view:change.password.user:0
-#: field:change.password.wizard,user_ids:0
+#: view:change.password.user:0 field:change.password.wizard,user_ids:0
 #: model:ir.actions.act_window,name:base.action_res_users
-#: field:ir.default,uid:0
-#: model:ir.model,name:base.model_res_users
+#: field:ir.default,uid:0 model:ir.model,name:base.model_res_users
 #: model:ir.ui.menu,name:base.menu_action_res_users
-#: model:ir.ui.menu,name:base.menu_users
-#: view:res.groups:0
-#: field:res.groups,users:0
-#: field:res.partner,user_ids:0
-#: view:res.users:0
+#: model:ir.ui.menu,name:base.menu_users view:res.groups:0
+#: field:res.groups,users:0 field:res.partner,user_ids:0 view:res.users:0
 msgid "Users"
 msgstr "المستخدمون"
 
@@ -5909,8 +5881,7 @@ msgstr "اطلب صلاحية القراءة"
 
 #. module: base
 #: help:ir.actions.server,model_id:0
-msgid ""
-"Select the object on which the action will work (read, write, create)."
+msgid "Select the object on which the action will work (read, write, create)."
 msgstr "اختر الكائن الذي سيطبّق عليه الإجراء (قراءة، كتابة، إنشاء)."
 
 #. module: base
@@ -5935,31 +5906,22 @@ msgid "Fields Description"
 msgstr "وصف الحقول"
 
 #. module: base
-#: view:ir.attachment:0
-#: view:ir.cron:0
-#: view:ir.model.access:0
-#: view:ir.model.data:0
-#: view:ir.model.fields:0
-#: view:ir.module.module:0
-#: view:ir.ui.view:0
-#: view:ir.values:0
-#: view:res.partner:0
+#: view:ir.attachment:0 view:ir.cron:0 view:ir.model.access:0
+#: view:ir.model.data:0 view:ir.model.fields:0 view:ir.module.module:0
+#: view:ir.ui.view:0 view:ir.values:0 view:res.partner:0
 #: view:workflow.activity:0
 msgid "Group By..."
 msgstr "تجميع حسب ..."
 
 #. module: base
-#: view:ir.model.fields:0
-#: field:ir.model.fields,readonly:0
+#: view:ir.model.fields:0 field:ir.model.fields,readonly:0
 #: field:res.partner.bank.type.field,readonly:0
 msgid "Readonly"
 msgstr "للقراءة فقط"
 
 #. module: base
-#: field:ir.actions.act_window.view,view_id:0
-#: field:ir.default,page:0
-#: selection:ir.translation,type:0
-#: view:ir.ui.view:0
+#: field:ir.actions.act_window.view,view_id:0 field:ir.default,page:0
+#: selection:ir.translation,type:0 view:ir.ui.view:0
 msgid "View"
 msgstr "طريقة العرض"
 
@@ -5977,8 +5939,7 @@ msgid ""
 msgstr ""
 
 #. module: base
-#: view:ir.model:0
-#: model:ir.module.module,shortdesc:base.module_base
+#: view:ir.model:0 model:ir.module.module,shortdesc:base.module_base
 #: field:res.currency,base:0
 msgid "Base"
 msgstr "الأساس"
@@ -5994,32 +5955,23 @@ msgid "Liberia"
 msgstr "ليبيريا"
 
 #. module: base
-#: view:ir.model:0
-#: model:ir.module.module,shortdesc:base.module_note
-#: view:res.groups:0
-#: field:res.partner,comment:0
+#: view:ir.model:0 model:ir.module.module,shortdesc:base.module_note
+#: view:res.groups:0 field:res.partner,comment:0
 msgid "Notes"
 msgstr "ملاحظات"
 
 #. module: base
-#: field:ir.config_parameter,value:0
-#: field:ir.property,value_binary:0
-#: field:ir.property,value_datetime:0
-#: field:ir.property,value_float:0
-#: field:ir.property,value_integer:0
-#: field:ir.property,value_reference:0
-#: field:ir.property,value_text:0
-#: selection:ir.server.object.lines,type:0
-#: field:ir.server.object.lines,value:0
-#: field:ir.values,value:0
+#: field:ir.config_parameter,value:0 field:ir.property,value_binary:0
+#: field:ir.property,value_datetime:0 field:ir.property,value_float:0
+#: field:ir.property,value_integer:0 field:ir.property,value_reference:0
+#: field:ir.property,value_text:0 selection:ir.server.object.lines,type:0
+#: field:ir.server.object.lines,value:0 field:ir.values,value:0
 msgid "Value"
 msgstr "القيمة"
 
 #. module: base
-#: view:base.language.import:0
-#: field:ir.sequence,code:0
-#: field:ir.sequence.type,code:0
-#: selection:ir.translation,type:0
+#: view:base.language.import:0 field:ir.sequence,code:0
+#: field:ir.sequence.type,code:0 selection:ir.translation,type:0
 #: field:res.partner.bank.type,code:0
 msgid "Code"
 msgstr "الرمز"
@@ -6040,15 +5992,13 @@ msgid "Minutes"
 msgstr "الدقائق"
 
 #. module: base
-#: view:ir.actions.act_window:0
-#: selection:ir.translation,type:0
+#: view:ir.actions.act_window:0 selection:ir.translation,type:0
 msgid "Help"
 msgstr "مساعدة"
 
 #. module: base
 #: help:res.users,menu_id:0
-msgid ""
-"If specified, the action will replace the standard menu for this user."
+msgid "If specified, the action will replace the standard menu for this user."
 msgstr "في حالة التحديد، سيحلّ الإجراء محل القائمة القياسية لهذا المستخدم."
 
 #. module: base
@@ -6064,8 +6014,12 @@ msgstr "حملة تبرعات"
 #. module: base
 #: model:ir.actions.act_window,name:base.ir_sequence_type
 #: model:ir.ui.menu,name:base.menu_ir_sequence_type
+#, fuzzy
 msgid "Sequence Codes"
 msgstr ""
+"#-#-#-#-#  .merge_file_Ac6v4C (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_YhAcE8 (OpenERP-F3)  #-#-#-#-#\n"
+"رموز التتابعات"
 
 #. module: base
 #: selection:base.language.install,lang:0
@@ -6107,16 +6061,18 @@ msgid "res.log"
 msgstr "res.log"
 
 #. module: base
-#: help:ir.translation,module:0
-#: help:ir.translation,xml_id:0
+#: help:ir.translation,module:0 help:ir.translation,xml_id:0
 msgid "Maps to the ir_model_data for which this translation is provided."
 msgstr ""
 
 #. module: base
-#: view:workflow.activity:0
-#: field:workflow.activity,flow_stop:0
+#: view:workflow.activity:0 field:workflow.activity,flow_stop:0
+#, fuzzy
 msgid "Flow Stop"
 msgstr ""
+"#-#-#-#-#  .merge_file_Ac6v4C (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_YhAcE8 (OpenERP-F3)  #-#-#-#-#\n"
+"توقف التدفق"
 
 #. module: base
 #: selection:ir.cron,interval_type:0
@@ -6137,8 +6093,12 @@ msgstr "خطأ !"
 
 #. module: base
 #: model:res.partner.bank.type.field,name:base.bank_normal_field_contry
+#, fuzzy
 msgid "country_id"
 msgstr ""
+"#-#-#-#-#  .merge_file_Ac6v4C (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_YhAcE8 (OpenERP-F3)  #-#-#-#-#\n"
+"هوية_البلد"
 
 #. module: base
 #: field:ir.cron,interval_type:0
@@ -6152,15 +6112,16 @@ msgstr "النوع"
 
 #. module: base
 #: code:addons/orm.py:4646
-#, python-format
+#, fuzzy, python-format
 msgid "This method does not exist anymore"
 msgstr ""
+"#-#-#-#-#  .merge_file_Ac6v4C (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_YhAcE8 (OpenERP-F3)  #-#-#-#-#\n"
+"هذه الوظيفة لم تعد موجودة"
 
 #. module: base
-#: code:addons/base/res/res_company.py:162
-#: field:res.bank,fax:0
-#: field:res.company,fax:0
-#: field:res.partner,fax:0
+#: code:addons/base/res/res_company.py:162 field:res.bank,fax:0
+#: field:res.company,fax:0 field:res.partner,fax:0
 #, python-format
 msgid "Fax"
 msgstr "فاكس"
@@ -6226,8 +6187,7 @@ msgstr ""
 #. module: base
 #: constraint:res.users:0
 msgid "The chosen company is not in the allowed companies for this user"
-msgstr ""
-"الشركة المختارة غير مدرجة ضمن قائمة الشركات المسموح بها لهذا المستخدم"
+msgstr "الشركة المختارة غير مدرجة ضمن قائمة الشركات المسموح بها لهذا المستخدم"
 
 #. module: base
 #: model:res.country,name:base.gi
@@ -6248,12 +6208,10 @@ msgstr ""
 #: view:base.module.upgrade:0
 msgid ""
 "We suggest to reload the menu tab to see the new menus (Ctrl+T then Ctrl+R)."
-msgstr ""
-"نقترح إعادة تحميل القائمة لكي تظهر القوائم الجديدة (Ctrl+T ثم Ctrl+R)."
+msgstr "نقترح إعادة تحميل القائمة لكي تظهر القوائم الجديدة (Ctrl+T ثم Ctrl+R)."
 
 #. module: base
-#: model:ir.actions.act_window,name:base.action_rule
-#: view:ir.rule:0
+#: model:ir.actions.act_window,name:base.action_rule view:ir.rule:0
 #: model:ir.ui.menu,name:base.menu_action_rule
 msgid "Record Rules"
 msgstr "قواعد السجلات"
@@ -6269,17 +6227,21 @@ msgid "Day of the year: %(doy)s"
 msgstr "اليوم من السنة: %(doy)s"
 
 #. module: base
-#: view:ir.model:0
-#: view:workflow.activity:0
+#: view:ir.model:0 view:workflow.activity:0
 msgid "Properties"
 msgstr "الخصائص"
 
 #. module: base
 #: help:ir.sequence,padding:0
+#, fuzzy
 msgid ""
 "OpenERP will automatically adds some '0' on the left of the 'Next Number' to "
 "get the required padding size."
 msgstr ""
+"#-#-#-#-#  .merge_file_Ac6v4C (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_YhAcE8 (OpenERP-F3)  #-#-#-#-#\n"
+"يضيف OpenERP تلقائيًا بعض ‘0‘ على شمال ‘العدد التالي‘ للحصول على مقاس الحشو "
+"المطلوب."
 
 #. module: base
 #: view:res.lang:0
@@ -6303,8 +6265,7 @@ msgstr "يجب أن يكون رمز اللغة فريداً!"
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_attachment
-#: view:ir.actions.report.xml:0
-#: view:ir.attachment:0
+#: view:ir.actions.report.xml:0 view:ir.attachment:0
 #: model:ir.ui.menu,name:base.menu_action_attachment
 msgid "Attachments"
 msgstr "المُرفقات"
@@ -6314,8 +6275,7 @@ msgstr "المُرفقات"
 #: model:ir.ui.menu,name:base.menu_base_partner
 #: model:ir.ui.menu,name:base.menu_sale_config
 #: model:ir.ui.menu,name:base.menu_sale_config_sales
-#: model:ir.ui.menu,name:base.menu_sales
-#: model:ir.ui.menu,name:base.next_id_64
+#: model:ir.ui.menu,name:base.menu_sales model:ir.ui.menu,name:base.next_id_64
 #: view:res.users:0
 msgid "Sales"
 msgstr "المبيعات"
@@ -6337,8 +6297,7 @@ msgid "Miss"
 msgstr "الآنسة"
 
 #. module: base
-#: view:ir.model.access:0
-#: field:ir.model.access,perm_write:0
+#: view:ir.model.access:0 field:ir.model.access,perm_write:0
 msgid "Write Access"
 msgstr "صلاحيات الكتابة"
 
@@ -6348,9 +6307,7 @@ msgid "%m - Month number [01,12]."
 msgstr "%m - رقم الشهر [01،12]."
 
 #. module: base
-#: field:res.bank,city:0
-#: field:res.company,city:0
-#: field:res.partner,city:0
+#: field:res.bank,city:0 field:res.company,city:0 field:res.partner,city:0
 #: field:res.partner.bank,city:0
 msgid "City"
 msgstr "المدينة"
@@ -6366,8 +6323,7 @@ msgid "Italy"
 msgstr "ايطاليا"
 
 #. module: base
-#: view:ir.actions.todo:0
-#: selection:ir.actions.todo,state:0
+#: view:ir.actions.todo:0 selection:ir.actions.todo,state:0
 msgid "To Do"
 msgstr "في انتظار التنفيذ"
 
@@ -6398,17 +6354,21 @@ msgstr "الإنجليزية (الولايات المتحدة)"
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_model_data
-#: view:ir.model.data:0
-#: model:ir.ui.menu,name:base.ir_model_data_menu
+#: view:ir.model.data:0 model:ir.ui.menu,name:base.ir_model_data_menu
 msgid "Object Identifiers"
 msgstr "مُعرِّفات الكائنات"
 
 #. module: base
 #: model:ir.actions.act_window,help:base.action_partner_title_partner
+#, fuzzy
 msgid ""
 "Manage the partner titles you want to have available in your system. The "
 "partner titles is the legal status of the company: Private Limited, SA, etc."
 msgstr ""
+"#-#-#-#-#  .merge_file_Ac6v4C (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_YhAcE8 (OpenERP-F3)  #-#-#-#-#\n"
+"إدارة مسميات الشريك التي ترغب بها في نظامك. مسميات الشريك هي الأشكال "
+"القانونية للشركة، مثل مسئولية محدودة، مساهمة، وغيرها."
 
 #. module: base
 #: view:base.language.export:0
@@ -6425,11 +6385,8 @@ msgstr ""
 "لا يمكنك قراءة هذا المستند (%s)! تأكد من أنك تنتمي لإحدى هذه المجموعات: %s."
 
 #. module: base
-#: view:res.bank:0
-#: view:res.company:0
-#: view:res.partner:0
-#: view:res.partner.bank:0
-#: view:res.users:0
+#: view:res.bank:0 view:res.company:0 view:res.partner:0
+#: view:res.partner.bank:0 view:res.users:0
 msgid "Address"
 msgstr "العنوان"
 
@@ -6459,14 +6416,12 @@ msgid "Module update result"
 msgstr "نتيجة تحديث الوحدة البرمجية"
 
 #. module: base
-#: view:workflow.activity:0
-#: field:workflow.workitem,act_id:0
+#: view:workflow.activity:0 field:workflow.workitem,act_id:0
 msgid "Activity"
 msgstr "النشاط"
 
 #. module: base
-#: view:res.partner:0
-#: view:res.partner.address:0
+#: view:res.partner:0 view:res.partner.address:0
 msgid "Postal Address"
 msgstr "العنوان البريدي"
 
@@ -6544,21 +6499,22 @@ msgid ""
 msgstr ""
 
 #. module: base
-#: view:ir.module.module:0
-#: selection:ir.module.module,state:0
+#: view:ir.module.module:0 selection:ir.module.module,state:0
 #: selection:ir.module.module.dependency,state:0
 msgid "Not Installed"
 msgstr "غير مثبّت"
 
 #. module: base
-#: view:workflow.activity:0
-#: field:workflow.activity,out_transitions:0
+#: view:workflow.activity:0 field:workflow.activity,out_transitions:0
+#, fuzzy
 msgid "Outgoing Transitions"
 msgstr ""
+"#-#-#-#-#  .merge_file_Ac6v4C (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_YhAcE8 (OpenERP-F3)  #-#-#-#-#\n"
+"الانتقالات الصادرة"
 
 #. module: base
-#: field:ir.module.module,icon_image:0
-#: field:ir.ui.menu,icon:0
+#: field:ir.module.module,icon_image:0 field:ir.ui.menu,icon:0
 msgid "Icon"
 msgstr "الأيقونة"
 
@@ -6574,14 +6530,17 @@ msgstr ""
 
 #. module: base
 #: view:ir.sequence.type:0
+#, fuzzy
 msgid "Sequences Type"
 msgstr ""
+"#-#-#-#-#  .merge_file_Ac6v4C (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_YhAcE8 (OpenERP-F3)  #-#-#-#-#\n"
+"نوع التتابعات"
 
 #. module: base
 #: model:ir.actions.act_window,name:base.res_request-act
 #: model:ir.ui.menu,name:base.menu_res_request_act
-#: model:ir.ui.menu,name:base.menu_resquest_ref
-#: view:res.request:0
+#: model:ir.ui.menu,name:base.menu_resquest_ref view:res.request:0
 msgid "Requests"
 msgstr "الطلبات"
 
@@ -6598,8 +6557,12 @@ msgstr "أو"
 #. module: base
 #: model:ir.actions.act_window,name:base.res_log_act_window
 #: model:ir.ui.menu,name:base.menu_res_log_act_window
+#, fuzzy
 msgid "Client Logs"
 msgstr ""
+"#-#-#-#-#  .merge_file_Ac6v4C (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_YhAcE8 (OpenERP-F3)  #-#-#-#-#\n"
+"سجلات العميل"
 
 #. module: base
 #: model:res.country,name:base.al
@@ -6636,22 +6599,22 @@ msgid "Child IDs"
 msgstr "معرفات الفرعي"
 
 #. module: base
-#: code:addons/base/ir/ir_actions.py:702
-#: code:addons/base/ir/ir_actions.py:705
+#: code:addons/base/ir/ir_actions.py:702 code:addons/base/ir/ir_actions.py:705
 #, python-format
 msgid "Problem in configuration `Record Id` in Server Action!"
 msgstr ""
 
 #. module: base
-#: code:addons/orm.py:2806
-#: code:addons/orm.py:2816
-#, python-format
+#: code:addons/orm.py:2806 code:addons/orm.py:2816
+#, fuzzy, python-format
 msgid "ValidateError"
 msgstr ""
+"#-#-#-#-#  .merge_file_Ac6v4C (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_YhAcE8 (OpenERP-F3)  #-#-#-#-#\n"
+"التحقق من صلاحية الخطأ"
 
 #. module: base
-#: view:base.module.import:0
-#: view:base.module.update:0
+#: view:base.module.import:0 view:base.module.update:0
 msgid "Open Modules"
 msgstr "فتح الوحدات البرمجية"
 
@@ -6683,12 +6646,9 @@ msgid "Laos"
 msgstr "لاوس"
 
 #. module: base
-#: code:addons/base/res/res_company.py:163
-#: selection:ir.actions.server,state:0
-#: model:ir.ui.menu,name:base.menu_email
-#: field:res.bank,email:0
-#: field:res.company,email:0
-#: field:res.partner,email:0
+#: code:addons/base/res/res_company.py:163 selection:ir.actions.server,state:0
+#: model:ir.ui.menu,name:base.menu_email field:res.bank,email:0
+#: field:res.company,email:0 field:res.partner,email:0
 #, python-format
 msgid "Email"
 msgstr "البريد الإلكتروني"
@@ -6794,8 +6754,12 @@ msgstr "اسم المحافظة"
 
 #. module: base
 #: field:workflow.activity,join_mode:0
+#, fuzzy
 msgid "Join Mode"
 msgstr ""
+"#-#-#-#-#  .merge_file_Ac6v4C (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_YhAcE8 (OpenERP-F3)  #-#-#-#-#\n"
+"وضع الانضمام"
 
 #. module: base
 #: field:res.partner,tz:0
@@ -6825,8 +6789,12 @@ msgstr "خطأ! لا يمكنك إنشاء أعضاء ذوي ارتباطات م
 
 #. module: base
 #: help:res.lang,code:0
+#, fuzzy
 msgid "This field is used to set/get locales for user"
 msgstr ""
+"#-#-#-#-#  .merge_file_Ac6v4C (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_YhAcE8 (OpenERP-F3)  #-#-#-#-#\n"
+"يستخدم هذا الحقل لجلب/ضبط الواجهة المحلية للمستخدم"
 
 #. module: base
 #: model:res.partner.category,name:base.res_partner_category_2
@@ -6856,10 +6824,8 @@ msgid "Belarus"
 msgstr "روسيا البيضاء"
 
 #. module: base
-#: field:ir.actions.act_url,name:0
-#: field:ir.actions.act_window,name:0
-#: field:ir.actions.client,name:0
-#: field:ir.actions.server,name:0
+#: field:ir.actions.act_url,name:0 field:ir.actions.act_window,name:0
+#: field:ir.actions.client,name:0 field:ir.actions.server,name:0
 msgid "Action Name"
 msgstr "اسم الإجراء"
 
@@ -6881,8 +6847,7 @@ msgid "Normal"
 msgstr "طبيعي"
 
 #. module: base
-#: field:res.bank,street2:0
-#: field:res.company,street2:0
+#: field:res.bank,street2:0 field:res.company,street2:0
 #: field:res.partner,street2:0
 msgid "Street2"
 msgstr "الشارع ٢"
@@ -6899,15 +6864,10 @@ msgid "Following modules are not installed or unknown: %s"
 msgstr "الوحدات البرمجية التالية غير مثبّتة أو غير معروفة: %s"
 
 #. module: base
-#: field:change.password.user,user_id:0
-#: view:ir.cron:0
-#: field:ir.cron,user_id:0
-#: field:ir.filters,user_id:0
-#: field:ir.ui.view.custom,user_id:0
-#: field:ir.values,user_id:0
-#: model:res.groups,name:base.group_document_user
-#: model:res.groups,name:base.group_tool_user
-#: view:res.users:0
+#: field:change.password.user,user_id:0 view:ir.cron:0 field:ir.cron,user_id:0
+#: field:ir.filters,user_id:0 field:ir.ui.view.custom,user_id:0
+#: field:ir.values,user_id:0 model:res.groups,name:base.group_document_user
+#: model:res.groups,name:base.group_tool_user view:res.users:0
 msgid "User"
 msgstr "المستخدم"
 
@@ -6972,8 +6932,7 @@ msgid "The new user's real name, used for searching and most listings"
 msgstr "الاسم الحقيقي للمستخدم الجديد. يستخدم في البحث والعرض."
 
 #. module: base
-#: code:addons/osv.py:153
-#: code:addons/osv.py:155
+#: code:addons/osv.py:153 code:addons/osv.py:155
 #, python-format
 msgid "Integrity Error"
 msgstr ""
@@ -7010,8 +6969,7 @@ msgid "Update Terms"
 msgstr "تحديث المصطلحات"
 
 #. module: base
-#: field:res.request,act_to:0
-#: field:res.request.history,act_to:0
+#: field:res.request,act_to:0 field:res.request.history,act_to:0
 msgid "To"
 msgstr "إلى"
 
@@ -7069,8 +7027,7 @@ msgid "Short Description"
 msgstr "وصف قصير"
 
 #. module: base
-#: field:ir.actions.act_window,context:0
-#: field:ir.actions.client,context:0
+#: field:ir.actions.act_window,context:0 field:ir.actions.client,context:0
 msgid "Context Value"
 msgstr ""
 
@@ -7101,17 +7058,11 @@ msgstr "الشهر: %(month)s"
 
 #. module: base
 #: field:ir.actions.act_window.view,sequence:0
-#: field:ir.actions.server,sequence:0
-#: field:ir.actions.todo,sequence:0
-#: view:ir.cron:0
-#: field:ir.module.category,sequence:0
-#: field:ir.module.module,sequence:0
-#: view:ir.sequence:0
-#: field:ir.ui.menu,sequence:0
-#: view:ir.ui.view:0
-#: field:ir.ui.view,priority:0
-#: field:ir.ui.view_sc,sequence:0
-#: field:multi_company.default,sequence:0
+#: field:ir.actions.server,sequence:0 field:ir.actions.todo,sequence:0
+#: view:ir.cron:0 field:ir.module.category,sequence:0
+#: field:ir.module.module,sequence:0 view:ir.sequence:0
+#: field:ir.ui.menu,sequence:0 view:ir.ui.view:0 field:ir.ui.view,priority:0
+#: field:ir.ui.view_sc,sequence:0 field:multi_company.default,sequence:0
 #: field:res.partner.bank,sequence:0
 msgid "Sequence"
 msgstr "مسلسل"
@@ -7135,8 +7086,7 @@ msgstr "جزر القمر"
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_server_action
-#: view:ir.actions.server:0
-#: model:ir.ui.menu,name:base.menu_server_action
+#: view:ir.actions.server:0 model:ir.ui.menu,name:base.menu_server_action
 msgid "Server Actions"
 msgstr "إجراءات الخادم"
 
@@ -7179,8 +7129,7 @@ msgid "Fed. States"
 msgstr ""
 
 #. module: base
-#: view:ir.model:0
-#: view:res.groups:0
+#: view:ir.model:0 view:res.groups:0
 msgid "Access Rules"
 msgstr "قواعد الصلاحيات"
 
@@ -7190,34 +7139,30 @@ msgid "Table Ref."
 msgstr ""
 
 #. module: base
-#: view:ir.actions.act_window:0
-#: field:ir.actions.report.xml,model:0
-#: field:ir.actions.server,model_id:0
-#: field:ir.actions.wizard,model:0
-#: field:ir.cron,model:0
-#: field:ir.default,field_tbl:0
-#: view:ir.model.access:0
-#: field:ir.model.access,model_id:0
-#: view:ir.model.data:0
-#: view:ir.model.fields:0
-#: field:ir.rule,model_id:0
-#: selection:ir.translation,type:0
-#: view:ir.ui.view:0
-#: field:ir.ui.view,model:0
-#: field:multi_company.default,object_id:0
-#: field:res.request.link,object:0
+#: view:ir.actions.act_window:0 field:ir.actions.report.xml,model:0
+#: field:ir.actions.server,model_id:0 field:ir.actions.wizard,model:0
+#: field:ir.cron,model:0 field:ir.default,field_tbl:0 view:ir.model.access:0
+#: field:ir.model.access,model_id:0 view:ir.model.data:0
+#: view:ir.model.fields:0 field:ir.rule,model_id:0
+#: selection:ir.translation,type:0 view:ir.ui.view:0 field:ir.ui.view,model:0
+#: field:multi_company.default,object_id:0 field:res.request.link,object:0
 #: field:workflow.triggers,model:0
 msgid "Object"
 msgstr "كائن"
 
 #. module: base
 #: code:addons/osv.py:150
-#, python-format
+#, fuzzy, python-format
 msgid ""
 "\n"
 "\n"
 "[object with reference: %s - %s]"
 msgstr ""
+"#-#-#-#-#  .merge_file_Ac6v4C (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_YhAcE8 (OpenERP-F3)  #-#-#-#-#\n"
+"\n"
+"\n"
+"[الكائن بإشارة إلى: %s - %s]"
 
 #. module: base
 #: model:ir.model,name:base.model_ir_default
@@ -7243,10 +7188,15 @@ msgstr "المُجدوِل"
 
 #. module: base
 #: help:ir.cron,numbercall:0
+#, fuzzy
 msgid ""
 "Number of time the function is called,\n"
 "a negative number indicates no limit"
 msgstr ""
+"#-#-#-#-#  .merge_file_Ac6v4C (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_YhAcE8 (OpenERP-F3)  #-#-#-#-#\n"
+"عدد مرات استدعاء الدالة،\n"
+"الأرقام السالبة تعني بلا حدود"
 
 #. module: base
 #: code:addons/base/ir/ir_model.py:426
@@ -7280,8 +7230,7 @@ msgstr "خرائط Google"
 #: model:ir.ui.menu,name:base.menu_lunch_survey_root
 #: model:ir.ui.menu,name:base.menu_marketing_config_association
 #: model:ir.ui.menu,name:base.menu_marketing_config_root
-#: model:ir.ui.menu,name:base.menu_reporting_config
-#: view:res.company:0
+#: model:ir.ui.menu,name:base.menu_reporting_config view:res.company:0
 #: view:res.config:0
 msgid "Configuration"
 msgstr "الإعدادات"
@@ -7312,8 +7261,7 @@ msgid "Gold Partner"
 msgstr "شريك ذهبي"
 
 #. module: base
-#: model:ir.model,name:base.model_res_partner
-#: field:res.company,partner_id:0
+#: model:ir.model,name:base.model_res_partner field:res.company,partner_id:0
 #: model:res.partner.category,name:base.res_partner_category_0
 #: selection:res.partner.title,domain:0
 #: model:res.request.link,name:base.req_link_partner
@@ -7336,14 +7284,12 @@ msgid "Lebanon"
 msgstr "لبنان"
 
 #. module: base
-#: view:ir.actions.report.xml:0
-#: field:ir.actions.report.xml,report_type:0
+#: view:ir.actions.report.xml:0 field:ir.actions.report.xml,report_type:0
 msgid "Report Type"
 msgstr "نوع التقرير"
 
 #. module: base
-#: view:res.country.state:0
-#: field:res.partner,state_id:0
+#: view:res.country.state:0 field:res.partner,state_id:0
 msgid "State"
 msgstr "المحافظة"
 
@@ -7395,14 +7341,21 @@ msgstr "ملف التقرير"
 
 #. module: base
 #: model:ir.model,name:base.model_workflow_triggers
+#, fuzzy
 msgid "workflow.triggers"
 msgstr ""
+"#-#-#-#-#  .merge_file_Ac6v4C (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_YhAcE8 (OpenERP-F3)  #-#-#-#-#\n"
+"workflow.triggers"
 
 #. module: base
 #: code:addons/base/ir/ir_model.py:84
-#, python-format
+#, fuzzy, python-format
 msgid "Invalid search criterions"
 msgstr ""
+"#-#-#-#-#  .merge_file_Ac6v4C (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_YhAcE8 (OpenERP-F3)  #-#-#-#-#\n"
+"شروط البحث غير صالحة"
 
 #. module: base
 #: view:ir.attachment:0
@@ -7444,16 +7397,11 @@ msgid "Report Header"
 msgstr "رأس التقرير"
 
 #. module: base
-#: field:ir.actions.act_url,type:0
-#: field:ir.actions.act_window,type:0
-#: field:ir.actions.act_window_close,type:0
-#: field:ir.actions.actions,type:0
-#: field:ir.actions.client,type:0
-#: field:ir.actions.report.xml,type:0
-#: view:ir.actions.server:0
-#: field:ir.actions.server,state:0
-#: field:ir.actions.server,type:0
-#: field:ir.actions.wizard,type:0
+#: field:ir.actions.act_url,type:0 field:ir.actions.act_window,type:0
+#: field:ir.actions.act_window_close,type:0 field:ir.actions.actions,type:0
+#: field:ir.actions.client,type:0 field:ir.actions.report.xml,type:0
+#: view:ir.actions.server:0 field:ir.actions.server,state:0
+#: field:ir.actions.server,type:0 field:ir.actions.wizard,type:0
 msgid "Action Type"
 msgstr "نوع الإجراء"
 
@@ -7480,21 +7428,18 @@ msgid "Type fields"
 msgstr ""
 
 #. module: base
-#: view:ir.module.module:0
-#: field:ir.module.module,category_id:0
+#: view:ir.module.module:0 field:ir.module.module,category_id:0
 msgid "Category"
 msgstr "الفئة"
 
 #. module: base
-#: view:ir.attachment:0
-#: selection:ir.attachment,type:0
+#: view:ir.attachment:0 selection:ir.attachment,type:0
 #: selection:ir.property,type:0
 msgid "Binary"
 msgstr "العد الثنائي"
 
 #. module: base
-#: field:ir.actions.server,sms:0
-#: selection:ir.actions.server,state:0
+#: field:ir.actions.server,sms:0 selection:ir.actions.server,state:0
 msgid "SMS"
 msgstr "رسالة قصيرة (SMS)"
 
@@ -7515,8 +7460,7 @@ msgstr "شركاء آخرون"
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_currency_form
-#: model:ir.ui.menu,name:base.menu_action_currency_form
-#: view:res.currency:0
+#: model:ir.ui.menu,name:base.menu_action_currency_form view:res.currency:0
 msgid "Currencies"
 msgstr "العملات"
 
@@ -7557,9 +7501,12 @@ msgstr "workflow.instance"
 
 #. module: base
 #: code:addons/orm.py:479
-#, python-format
+#, fuzzy, python-format
 msgid "Unknown attribute %s in %s "
 msgstr ""
+"#-#-#-#-#  .merge_file_Ac6v4C (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_YhAcE8 (OpenERP-F3)  #-#-#-#-#\n"
+"سمة غير معروفة %s في %s"
 
 #. module: base
 #: view:res.lang:0
@@ -7578,8 +7525,7 @@ msgid "Norwegian Bokmål / Norsk bokmål"
 msgstr ""
 
 #. module: base
-#: help:res.config.users,new_password:0
-#: help:res.users,new_password:0
+#: help:res.config.users,new_password:0 help:res.users,new_password:0
 msgid ""
 "Only specify a value if you want to change the user password. This user will "
 "have to logout and login again!"
@@ -7605,8 +7551,12 @@ msgstr "لوحات المعلومات"
 
 #. module: base
 #: help:ir.attachment,type:0
+#, fuzzy
 msgid "Binary File or external URL"
 msgstr ""
+"#-#-#-#-#  .merge_file_Ac6v4C (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_YhAcE8 (OpenERP-F3)  #-#-#-#-#\n"
+"ملف تنفيذي أو رابط خارجي"
 
 #. module: base
 #: view:res.users:0
@@ -7620,8 +7570,12 @@ msgstr "هولندا"
 
 #. module: base
 #: model:ir.ui.menu,name:base.next_id_4
+#, fuzzy
 msgid "Low Level Objects"
 msgstr ""
+"#-#-#-#-#  .merge_file_Ac6v4C (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_YhAcE8 (OpenERP-F3)  #-#-#-#-#\n"
+"كائنات منخفضة المستوى"
 
 #. module: base
 #: view:res.company:0
@@ -7667,8 +7621,7 @@ msgid "Malayalam / മലയാളം"
 msgstr ""
 
 #. module: base
-#: field:res.request,body:0
-#: field:res.request.history,req_id:0
+#: field:res.request,body:0 field:res.request.history,req_id:0
 msgid "Request"
 msgstr "اطلب"
 
@@ -7683,8 +7636,7 @@ msgid "Number of Calls"
 msgstr "عدد المكالمات"
 
 #. module: base
-#: view:base.module.upgrade:0
-#: field:base.module.upgrade,module_info:0
+#: view:base.module.upgrade:0 field:base.module.upgrade,module_info:0
 msgid "Modules to update"
 msgstr "الوحدات البرمجية في انتظار التحديث"
 
@@ -7697,8 +7649,12 @@ msgstr ""
 
 #. module: base
 #: field:ir.actions.report.xml,header:0
+#, fuzzy
 msgid "Add RML header"
 msgstr ""
+"#-#-#-#-#  .merge_file_Ac6v4C (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_YhAcE8 (OpenERP-F3)  #-#-#-#-#\n"
+"أضف ترويسة RML"
 
 #. module: base
 #: model:res.country,name:base.gr
@@ -7707,8 +7663,12 @@ msgstr "اليونان"
 
 #. module: base
 #: field:res.request,trigger_date:0
+#, fuzzy
 msgid "Trigger Date"
 msgstr ""
+"#-#-#-#-#  .merge_file_Ac6v4C (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_YhAcE8 (OpenERP-F3)  #-#-#-#-#\n"
+"تاريخ تريجر"
 
 #. module: base
 #: selection:base.language.install,lang:0
@@ -7723,8 +7683,12 @@ msgstr "استبدل المصطلحات الموجودة"
 
 #. module: base
 #: help:ir.actions.server,code:0
+#, fuzzy
 msgid "Python code to be executed"
 msgstr ""
+"#-#-#-#-#  .merge_file_Ac6v4C (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_YhAcE8 (OpenERP-F3)  #-#-#-#-#\n"
+"كود بايثون لتنفيذه"
 
 #. module: base
 #: sql_constraint:res.country:0
@@ -7742,10 +7706,13 @@ msgid "Partner Category"
 msgstr "فئة الشريك"
 
 #. module: base
-#: view:ir.actions.server:0
-#: selection:ir.actions.server,state:0
+#: view:ir.actions.server:0 selection:ir.actions.server,state:0
+#, fuzzy
 msgid "Trigger"
 msgstr ""
+"#-#-#-#-#  .merge_file_Ac6v4C (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_YhAcE8 (OpenERP-F3)  #-#-#-#-#\n"
+"المطلق"
 
 #. module: base
 #: model:ir.model,name:base.model_base_module_update
@@ -7776,8 +7743,8 @@ msgstr "إجراء القائمة"
 #: help:ir.model.fields,selection:0
 msgid ""
 "List of options for a selection field, specified as a Python expression "
-"defining a list of (key, label) pairs. For example: "
-"[('blue','Blue'),('yellow','Yellow')]"
+"defining a list of (key, label) pairs. For example: [('blue','Blue'),"
+"('yellow','Yellow')]"
 msgstr ""
 
 #. module: base
@@ -7794,8 +7761,12 @@ msgstr ""
 
 #. module: base
 #: field:res.request,ref_partner_id:0
+#, fuzzy
 msgid "Partner Ref."
 msgstr ""
+"#-#-#-#-#  .merge_file_Ac6v4C (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_YhAcE8 (OpenERP-F3)  #-#-#-#-#\n"
+"مرجع الشريك"
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_partner_supplier_form
@@ -7830,11 +7801,8 @@ msgid "ir.model.data"
 msgstr "ir.model.data"
 
 #. module: base
-#: view:ir.model:0
-#: view:ir.rule:0
-#: view:res.groups:0
-#: model:res.groups,name:base.group_erp_manager
-#: view:res.users:0
+#: view:ir.model:0 view:ir.rule:0 view:res.groups:0
+#: model:res.groups,name:base.group_erp_manager view:res.users:0
 msgid "Access Rights"
 msgstr "الصلاحيات"
 
@@ -7874,15 +7842,13 @@ msgstr ""
 "جديدة ستصبح متاحة كلغة افتراضية للمستخدمين والشركاء."
 
 #. module: base
-#: field:ir.actions.server,subject:0
-#: field:res.request,name:0
+#: field:ir.actions.server,subject:0 field:res.request,name:0
 #: view:res.request.link:0
 msgid "Subject"
 msgstr "الموضوع"
 
 #. module: base
-#: field:res.request,act_from:0
-#: field:res.request.history,act_from:0
+#: field:res.request,act_from:0 field:res.request.history,act_from:0
 msgid "From"
 msgstr "مِن"
 
@@ -7897,29 +7863,34 @@ msgid "Consumers"
 msgstr "المستهلكون"
 
 #. module: base
-#: view:res.config:0
-#: wizard_button:server.action.create,init,step_1:0
+#: view:res.config:0 wizard_button:server.action.create,init,step_1:0
 msgid "Next"
 msgstr "التالي"
 
 #. module: base
 #: help:ir.cron,function:0
+#, fuzzy
 msgid ""
 "Name of the method to be called on the object when this scheduler is "
 "executed."
 msgstr ""
+"#-#-#-#-#  .merge_file_Ac6v4C (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_YhAcE8 (OpenERP-F3)  #-#-#-#-#\n"
+"اسم الطريقة لاستدعائها على الكائن متى تم تنفيذ هذا المُجدوِّل."
 
 #. module: base
 #: code:addons/base/ir/ir_model.py:289
-#, python-format
+#, fuzzy, python-format
 msgid ""
 "The Selection Options expression is must be in the [('key','Label'), ...] "
 "format!"
 msgstr ""
+"#-#-#-#-#  .merge_file_Ac6v4C (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_YhAcE8 (OpenERP-F3)  #-#-#-#-#\n"
+"تعبير خيارات التحديد يجب أن تكون على هيئة [('key','Label'), ...]."
 
 #. module: base
-#: view:ir.actions.report.xml:0
-#: view:res.currency:0
+#: view:ir.actions.report.xml:0 view:res.currency:0
 msgid "Miscellaneous"
 msgstr "متفرقات"
 
@@ -7930,11 +7901,15 @@ msgstr "الصّين"
 
 #. module: base
 #: code:addons/base/res/res_user.py:516
-#, python-format
+#, fuzzy, python-format
 msgid ""
 "--\n"
 "%(name)s %(email)s\n"
 msgstr ""
+"#-#-#-#-#  .merge_file_Ac6v4C (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_YhAcE8 (OpenERP-F3)  #-#-#-#-#\n"
+"--\n"
+"%(name)s %(email)s\n"
 
 #. module: base
 #: model:res.country,name:base.eh
@@ -7967,15 +7942,20 @@ msgid ""
 "you can then add translations manually or perform a complete export (as a "
 "template for a new language example)."
 msgstr ""
-"يقوم هذا المعالج باكتشاف المصطلحات الجديدة في التطبيق لترجمتها، ومن ثَمّ "
-"يمكنك إضافة الترجمات يدوياً، أو  تصدير الترجمة كاملة (كقالب للغة جديدة)."
+"يقوم هذا المعالج باكتشاف المصطلحات الجديدة في التطبيق لترجمتها، ومن ثَمّ يمكنك "
+"إضافة الترجمات يدوياً، أو  تصدير الترجمة كاملة (كقالب للغة جديدة)."
 
 #. module: base
 #: help:multi_company.default,expression:0
+#, fuzzy
 msgid ""
 "Expression, must be True to match\n"
 "use context.get or user (browse)"
 msgstr ""
+"#-#-#-#-#  .merge_file_Ac6v4C (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_YhAcE8 (OpenERP-F3)  #-#-#-#-#\n"
+"يجب أن يكون التعبير True لينطبق\n"
+"استخدم context.get أو استخدم (تصفح)"
 
 #. module: base
 #: model:res.country,name:base.bg
@@ -7998,12 +7978,9 @@ msgid "French Southern Territories"
 msgstr "الأقاليم الشمالية الفرنسية"
 
 #. module: base
-#: model:ir.model,name:base.model_res_currency
-#: field:res.company,currency_id:0
-#: field:res.company,currency_ids:0
-#: field:res.country,currency_id:0
-#: view:res.currency:0
-#: field:res.currency,name:0
+#: model:ir.model,name:base.model_res_currency field:res.company,currency_id:0
+#: field:res.company,currency_ids:0 field:res.country,currency_id:0
+#: view:res.currency:0 field:res.currency,name:0
 #: field:res.currency.rate,currency_id:0
 msgid "Currency"
 msgstr "العملة"
@@ -8051,8 +8028,12 @@ msgstr "إيران"
 #. module: base
 #: model:ir.actions.act_window,name:base.res_widget_user_act_window
 #: model:ir.ui.menu,name:base.menu_res_widget_user_act_window
+#, fuzzy
 msgid "Widgets per User"
 msgstr ""
+"#-#-#-#-#  .merge_file_Ac6v4C (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_YhAcE8 (OpenERP-F3)  #-#-#-#-#\n"
+"لوحة واجهة لكل مستخدم"
 
 #. module: base
 #: selection:base.language.install,lang:0
@@ -8060,10 +8041,8 @@ msgid "Slovak / Slovenský jazyk"
 msgstr "السلوفاكية / Slovenský jazyk"
 
 #. module: base
-#: field:base.language.export,state:0
-#: field:ir.ui.menu,icon_pict:0
-#: field:res.partner,has_image:0
-#: field:res.users,user_email:0
+#: field:base.language.export,state:0 field:ir.ui.menu,icon_pict:0
+#: field:res.partner,has_image:0 field:res.users,user_email:0
 msgid "unknown"
 msgstr "غير معروف"
 
@@ -8182,15 +8161,13 @@ msgid "Zaire"
 msgstr "زائير"
 
 #. module: base
-#: field:ir.attachment,res_id:0
-#: field:workflow.instance,res_id:0
+#: field:ir.attachment,res_id:0 field:workflow.instance,res_id:0
 #: field:workflow.triggers,res_id:0
 msgid "Resource ID"
 msgstr "معرف المصدر"
 
 #. module: base
-#: view:ir.cron:0
-#: field:ir.model,info:0
+#: view:ir.cron:0 field:ir.model,info:0
 msgid "Information"
 msgstr "المعلومات"
 
@@ -8205,10 +8182,8 @@ msgid "Update Module List"
 msgstr "تحديث قائمة الوحدات البرمجية"
 
 #. module: base
-#: code:addons/base/res/res_users.py:679
-#: code:addons/base/res/res_users.py:819
-#: selection:res.partner,type:0
-#: view:res.users:0
+#: code:addons/base/res/res_users.py:679 code:addons/base/res/res_users.py:819
+#: selection:res.partner,type:0 view:res.users:0
 #, python-format
 msgid "Other"
 msgstr "غير ذلك"
@@ -8270,8 +8245,7 @@ msgstr "تنظيم الأحداث"
 #. module: base
 #: model:ir.actions.act_window,name:base.ir_sequence_actions
 #: model:ir.ui.menu,name:base.menu_ir_sequence_actions
-#: model:ir.ui.menu,name:base.next_id_6
-#: view:workflow.activity:0
+#: model:ir.ui.menu,name:base.next_id_6 view:workflow.activity:0
 msgid "Actions"
 msgstr "الإجراءات"
 
@@ -8281,8 +8255,7 @@ msgid "High"
 msgstr "مرتفع"
 
 #. module: base
-#: view:base.language.export:0
-#: field:ir.exports.line,export_id:0
+#: view:base.language.export:0 field:ir.exports.line,export_id:0
 msgid "Export"
 msgstr "تصدير"
 
@@ -8292,8 +8265,7 @@ msgid "Croatia"
 msgstr "كرواتيا"
 
 #. module: base
-#: field:res.bank,bic:0
-#: field:res.partner.bank,bank_bic:0
+#: field:res.bank,bic:0 field:res.partner.bank,bank_bic:0
 msgid "Bank Identifier Code"
 msgstr "رمز مُعرِّف المصرف"
 
@@ -8303,30 +8275,19 @@ msgid "Turkmenistan"
 msgstr "توركمنستان"
 
 #. module: base
-#: code:addons/base/ir/ir_actions.py:606
-#: code:addons/base/ir/ir_actions.py:702
-#: code:addons/base/ir/ir_actions.py:705
-#: code:addons/base/ir/ir_model.py:164
-#: code:addons/base/ir/ir_model.py:274
-#: code:addons/base/ir/ir_model.py:288
-#: code:addons/base/ir/ir_model.py:318
-#: code:addons/base/ir/ir_model.py:334
-#: code:addons/base/ir/ir_model.py:339
-#: code:addons/base/ir/ir_model.py:342
+#: code:addons/base/ir/ir_actions.py:606 code:addons/base/ir/ir_actions.py:702
+#: code:addons/base/ir/ir_actions.py:705 code:addons/base/ir/ir_model.py:164
+#: code:addons/base/ir/ir_model.py:274 code:addons/base/ir/ir_model.py:288
+#: code:addons/base/ir/ir_model.py:318 code:addons/base/ir/ir_model.py:334
+#: code:addons/base/ir/ir_model.py:339 code:addons/base/ir/ir_model.py:342
 #: code:addons/base/ir/ir_translation.py:341
-#: code:addons/base/module/module.py:320
-#: code:addons/base/module/module.py:362
-#: code:addons/base/module/module.py:366
-#: code:addons/base/module/module.py:372
-#: code:addons/base/module/module.py:500
-#: code:addons/base/module/module.py:526
-#: code:addons/base/module/module.py:540
-#: code:addons/base/module/module.py:645
+#: code:addons/base/module/module.py:320 code:addons/base/module/module.py:362
+#: code:addons/base/module/module.py:366 code:addons/base/module/module.py:372
+#: code:addons/base/module/module.py:500 code:addons/base/module/module.py:526
+#: code:addons/base/module/module.py:540 code:addons/base/module/module.py:645
 #: code:addons/base/res/res_currency.py:193
-#: code:addons/base/res/res_users.py:98
-#: code:addons/custom.py:555
-#: code:addons/orm.py:785
-#: code:addons/orm.py:3960
+#: code:addons/base/res/res_users.py:98 code:addons/custom.py:555
+#: code:addons/orm.py:785 code:addons/orm.py:3960
 #, python-format
 msgid "Error"
 msgstr "خطأ"
@@ -8347,8 +8308,7 @@ msgid "The destination activity."
 msgstr ""
 
 #. module: base
-#: view:base.module.update:0
-#: view:base.module.upgrade:0
+#: view:base.module.update:0 view:base.module.upgrade:0
 #: view:base.update.translations:0
 msgid "Update"
 msgstr "تحديث"
@@ -8404,8 +8364,12 @@ msgstr "معلومات إضافية"
 #. module: base
 #: model:ir.actions.act_window,name:base.act_values_form_action
 #: model:ir.ui.menu,name:base.menu_values_form_action
+#, fuzzy
 msgid "Client Events"
 msgstr ""
+"#-#-#-#-#  .merge_file_Ac6v4C (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_YhAcE8 (OpenERP-F3)  #-#-#-#-#\n"
+"أحداث العميل"
 
 #. module: base
 #: view:ir.module.module:0
@@ -8464,8 +8428,8 @@ msgid ""
 "Save this document to a .tgz file. This archive containt UTF-8 %s files and "
 "may be uploaded to launchpad."
 msgstr ""
-"احفظ هذا المستند في ملف .tgz. سيحتوي هذا الأرشيف على %s ملفات ذات ترميز UTF-"
-"8 ويمكن رفعه إلى موقع Launchpad."
+"احفظ هذا المستند في ملف .tgz. سيحتوي هذا الأرشيف على %s ملفات ذات ترميز "
+"UTF-8 ويمكن رفعه إلى موقع Launchpad."
 
 #. module: base
 #: view:base.module.upgrade:0
@@ -8478,8 +8442,7 @@ msgid "_Export"
 msgstr "ت_صدير"
 
 #. module: base
-#: field:base.language.install,state:0
-#: field:base.module.import,state:0
+#: field:base.language.install,state:0 field:base.module.import,state:0
 #: field:base.module.update,state:0
 msgid "state"
 msgstr "الولاية"
@@ -8518,8 +8481,8 @@ msgid ""
 "Check this box if the partner is a supplier. If it's not checked, purchase "
 "people will not see it when encoding a purchase order."
 msgstr ""
-"اختر إذا كان الشريك مُورِّداً. إذا لم تختر، لن يظهر الشربك لقسم المشتريات "
-"أثناء إعدادهم لأمر شراء."
+"اختر إذا كان الشريك مُورِّداً. إذا لم تختر، لن يظهر الشربك لقسم المشتريات أثناء "
+"إعدادهم لأمر شراء."
 
 #. module: base
 #: field:ir.actions.server,trigger_obj_id:0
@@ -8544,8 +8507,7 @@ msgid "Destination Instance"
 msgstr ""
 
 #. module: base
-#: field:ir.actions.act_window,multi:0
-#: field:ir.actions.wizard,multi:0
+#: field:ir.actions.act_window,multi:0 field:ir.actions.wizard,multi:0
 msgid "Action on Multiple Doc."
 msgstr ""
 
@@ -8612,28 +8574,19 @@ msgid "El Salvador"
 msgstr "السّلفادور"
 
 #. module: base
-#: code:addons/base/res/res_company.py:161
-#: field:res.bank,phone:0
-#: field:res.company,phone:0
-#: field:res.partner,phone:0
+#: code:addons/base/res/res_company.py:161 field:res.bank,phone:0
+#: field:res.company,phone:0 field:res.partner,phone:0
 #, python-format
 msgid "Phone"
 msgstr "هاتف"
 
 #. module: base
-#: field:ir.cron,active:0
-#: field:ir.model.access,active:0
-#: field:ir.rule,active:0
-#: field:ir.sequence,active:0
-#: field:res.bank,active:0
-#: field:res.currency,active:0
-#: field:res.lang,active:0
-#: field:res.partner,active:0
-#: field:res.partner.category,active:0
-#: field:res.request,active:0
-#: field:res.users,active:0
-#: view:workflow.instance:0
-#: view:workflow.workitem:0
+#: field:ir.cron,active:0 field:ir.model.access,active:0
+#: field:ir.rule,active:0 field:ir.sequence,active:0 field:res.bank,active:0
+#: field:res.currency,active:0 field:res.lang,active:0
+#: field:res.partner,active:0 field:res.partner.category,active:0
+#: field:res.request,active:0 field:res.users,active:0
+#: view:workflow.instance:0 view:workflow.workitem:0
 msgid "Active"
 msgstr "نشِط"
 
@@ -8724,14 +8677,10 @@ msgid "Child Field"
 msgstr "حقل فرعي."
 
 #. module: base
-#: field:ir.actions.act_url,usage:0
-#: field:ir.actions.act_window,usage:0
-#: field:ir.actions.act_window_close,usage:0
-#: field:ir.actions.actions,usage:0
-#: field:ir.actions.client,usage:0
-#: field:ir.actions.report.xml,usage:0
-#: field:ir.actions.server,usage:0
-#: field:ir.actions.wizard,usage:0
+#: field:ir.actions.act_url,usage:0 field:ir.actions.act_window,usage:0
+#: field:ir.actions.act_window_close,usage:0 field:ir.actions.actions,usage:0
+#: field:ir.actions.client,usage:0 field:ir.actions.report.xml,usage:0
+#: field:ir.actions.server,usage:0 field:ir.actions.wizard,usage:0
 msgid "Action Usage"
 msgstr ""
 
@@ -8812,14 +8761,12 @@ msgid "base.module.configuration"
 msgstr "base.module.configuration"
 
 #. module: base
-#: field:base.language.export,name:0
-#: field:ir.attachment,datas_fname:0
+#: field:base.language.export,name:0 field:ir.attachment,datas_fname:0
 msgid "Filename"
 msgstr "اسم الملف"
 
 #. module: base
-#: field:ir.model,access_ids:0
-#: view:ir.model.access:0
+#: field:ir.model,access_ids:0 view:ir.model.access:0
 msgid "Access"
 msgstr ""
 
@@ -8855,23 +8802,20 @@ msgstr "مملكة البحرين"
 
 #. module: base
 #: model:res.partner.category,name:base.res_partner_category_12
+#, fuzzy
 msgid "Segmentation"
 msgstr ""
+"#-#-#-#-#  .merge_file_Ac6v4C (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_YhAcE8 (OpenERP-F3)  #-#-#-#-#\n"
+"انقسام"
 
 #. module: base
-#: view:ir.attachment:0
-#: field:ir.attachment,company_id:0
-#: field:ir.default,company_id:0
-#: field:ir.property,company_id:0
-#: field:ir.sequence,company_id:0
-#: field:ir.values,company_id:0
-#: view:res.company:0
-#: field:res.currency,company_id:0
-#: view:res.partner:0
-#: field:res.partner,company_id:0
-#: field:res.partner.bank,company_id:0
-#: view:res.users:0
-#: field:res.users,company_id:0
+#: view:ir.attachment:0 field:ir.attachment,company_id:0
+#: field:ir.default,company_id:0 field:ir.property,company_id:0
+#: field:ir.sequence,company_id:0 field:ir.values,company_id:0
+#: view:res.company:0 field:res.currency,company_id:0 view:res.partner:0
+#: field:res.partner,company_id:0 field:res.partner.bank,company_id:0
+#: view:res.users:0 field:res.users,company_id:0
 msgid "Company"
 msgstr "الشركة"
 
@@ -8947,8 +8891,7 @@ msgid "Virgin Islands (British)"
 msgstr "جزر العذراء (بريطانيا)"
 
 #. module: base
-#: view:ir.property:0
-#: model:ir.ui.menu,name:base.menu_ir_property
+#: view:ir.property:0 model:ir.ui.menu,name:base.menu_ir_property
 msgid "Parameters"
 msgstr "المحددات"
 
@@ -8970,10 +8913,10 @@ msgid ""
 "uncheck the 'Suppliers' filter button in order to search in all your "
 "partners, including customers and prospects."
 msgstr ""
-"يمكنك الحصول على كافة المعلومات المتعلقة بالمُورِّدين من نموذج المُورِّد: "
-"بيانات الحسابات، الرسائل الألكترونية السابقة، الاجتماعات، عمليات الشراء، "
-"إلخ. يمكنك إزالة اختيار مرشح الفرز 'المُورِّدون' لكي يتمّ بحث كافة الشركاء "
-"بما فيهم العملاء والمستقبليون."
+"يمكنك الحصول على كافة المعلومات المتعلقة بالمُورِّدين من نموذج المُورِّد: بيانات "
+"الحسابات، الرسائل الألكترونية السابقة، الاجتماعات، عمليات الشراء، إلخ. يمكنك "
+"إزالة اختيار مرشح الفرز 'المُورِّدون' لكي يتمّ بحث كافة الشركاء بما فيهم العملاء "
+"والمستقبليون."
 
 #. module: base
 #: model:res.country,name:base.rw
@@ -9027,14 +8970,10 @@ msgstr ""
 "من تفضيلات المستخدم."
 
 #. module: base
-#: model:ir.model,name:base.model_res_country
-#: field:res.bank,country:0
-#: field:res.company,country_id:0
-#: view:res.country:0
-#: field:res.country.state,country_id:0
-#: field:res.partner,country:0
-#: field:res.partner,country_id:0
-#: field:res.partner.bank,country_id:0
+#: model:ir.model,name:base.model_res_country field:res.bank,country:0
+#: field:res.company,country_id:0 view:res.country:0
+#: field:res.country.state,country_id:0 field:res.partner,country:0
+#: field:res.partner,country_id:0 field:res.partner.bank,country_id:0
 msgid "Country"
 msgstr "الدولة"
 
@@ -9124,10 +9063,8 @@ msgstr "ir.actions.server"
 
 #. module: base
 #: field:ir.actions.configuration.wizard,progress:0
-#: field:res.config,progress:0
-#: field:res.config.installer,progress:0
-#: field:res.config.users,progress:0
-#: field:res.config.view,progress:0
+#: field:res.config,progress:0 field:res.config.installer,progress:0
+#: field:res.config.users,progress:0 field:res.config.view,progress:0
 msgid "Configuration Progress"
 msgstr "تقدم الإعدادات"
 
@@ -9161,8 +9098,12 @@ msgstr "التهيئة المحلية"
 
 #. module: base
 #: view:ir.actions.server:0
+#, fuzzy
 msgid "Action to Launch"
 msgstr ""
+"#-#-#-#-#  .merge_file_Ac6v4C (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_YhAcE8 (OpenERP-F3)  #-#-#-#-#\n"
+"الإجراء لإطلاقه"
 
 #. module: base
 #: view:ir.cron:0
@@ -9170,8 +9111,7 @@ msgid "Execution"
 msgstr "تنفيذ"
 
 #. module: base
-#: field:ir.actions.server,condition:0
-#: view:ir.values:0
+#: field:ir.actions.server,condition:0 view:ir.values:0
 #: field:workflow.transition,condition:0
 msgid "Condition"
 msgstr "شرط"
@@ -9246,9 +9186,7 @@ msgstr "سيشيل"
 #: model:ir.actions.act_window,name:base.action_res_partner_bank_account_form
 #: model:ir.model,name:base.model_res_partner_bank
 #: model:ir.ui.menu,name:base.menu_action_res_partner_bank_form
-#: view:res.company:0
-#: field:res.company,bank_ids:0
-#: view:res.partner.bank:0
+#: view:res.company:0 field:res.company,bank_ids:0 view:res.partner.bank:0
 #, python-format
 msgid "Bank Accounts"
 msgstr "الحسابات المصرفية"
@@ -9285,8 +9223,7 @@ msgid "Homepage Widgets Management"
 msgstr "إدارة عناصر واجهة المستخدم الخاصة بالصفحة الرئيسية"
 
 #. module: base
-#: field:workflow,osv:0
-#: view:workflow.instance:0
+#: field:workflow,osv:0 view:workflow.instance:0
 #: field:workflow.instance,res_type:0
 msgid "Resource Object"
 msgstr "مصدر الكائن"
@@ -9360,8 +9297,12 @@ msgstr "كود السويفت"
 
 #. module: base
 #: model:res.partner.category,name:base.res_partner_category_2
+#, fuzzy
 msgid "Prospect"
 msgstr ""
+"#-#-#-#-#  .merge_file_Ac6v4C (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_YhAcE8 (OpenERP-F3)  #-#-#-#-#\n"
+"عميل محتمل"
 
 #. module: base
 #: selection:base.language.install,lang:0
@@ -9379,8 +9320,8 @@ msgid ""
 "Used to select automatically the right address according to the context in "
 "sales and purchases documents."
 msgstr ""
-"تستخدم للإختيار التلقائي العنوان الصحيح بناءاً علي سياق المستندات في "
-"المبيعات و المشتريات."
+"تستخدم للإختيار التلقائي العنوان الصحيح بناءاً علي سياق المستندات في المبيعات "
+"و المشتريات."
 
 #. module: base
 #: model:res.country,name:base.lk
@@ -9391,3 +9332,423 @@ msgstr "سريلانكا"
 #: selection:base.language.install,lang:0
 msgid "Russian / русский язык"
 msgstr "الروسية / русский язык"
+
+#. module: base
+#: selection:res.partner.address,validity:0
+msgid "Preferred"
+msgstr "مُفضَّل"
+
+#. module: base
+#: help:ir.model.data,source:0
+msgid ""
+"Specifies where this record has come from. Used to coordinate "
+"synchronization algorithms."
+msgstr "يحدد من أين أتى هذا السجل. يستخدم لتوجيه خورازميات المزامنة."
+
+#. module: base
+#: code:addons/orm.py:296
+#, python-format
+msgid "Wrong ID for the %s browse record, got %r, expected an integer."
+msgstr "معرف خاطئ لسجل التصفح %s، حصلنا على %r، وتوقعنا عدد صحيح."
+
+#. module: base
+#: model:ir.actions.act_window,name:0
+msgid "Wiki Groups"
+msgstr "مجموعات ويكي"
+
+#. module: base
+#: constraint:res.lang:0
+msgid ""
+"Invalid date/time format directive specified. Please refer to the list of "
+"allowed directives, displayed when you edit a language."
+msgstr ""
+"صيغة موجه التاريخ/وقت المحددة غير صالحة. الرجاء الرجوع إلى قائمة الموجهات "
+"المسموح بها، والمعروضة أثناء تحرير اللغة."
+
+#. module: base
+#: model:ir.model,name:0
+msgid "Wiki History"
+msgstr "تاريخ ويكي"
+
+#. module: base
+#: model:res.partner.title,name:base.res_partner_title_sir
+msgid "Mister"
+msgstr "السيد"
+
+#. module: base
+#: model:res.partner.title,name:base.res_partner_title_pvt_ltd
+msgid "Corporation"
+msgstr "الشركة"
+
+#. module: base
+#: help:res.currency,symbol:0
+msgid "Currency sign, to be used when printing amounts"
+msgstr "علامة العملة، لاستخدامها عند طباعة المبالغ المالية"
+
+#. module: base
+#: sql_constraint:res.company:0
+msgid "The company name must be unique !"
+msgstr "يجب أن يكون اسم الشركة فريد وغير مكرر!"
+
+#. module: base
+#: code:addons/fields.py:424
+#, python-format
+msgid "Cannot merge %s, because %s field cannot merge"
+msgstr "لا يمكن دمج %s، لأن الحقل %s لا يمكن دمجه"
+
+#. module: base
+#: code:addons/base/module/wizard/base_language_install.py:55
+#, python-format
+msgid "Language Pack"
+msgstr "حزمة لغة"
+
+#. module: base
+#: field:res.roles,name:0
+msgid "Role Name"
+msgstr "اسم الدور"
+
+#. module: base
+#: help:ir.sequence,condition:0
+msgid ""
+"If set, sequence will only be used in case this python expression matches, "
+"and will precede other sequences."
+msgstr ""
+"عند ضبطه، سيتم استخدام التتابع فقط في حالة مطابقة تعبير بايثون، وسيسبق غيره "
+"من التتابعات."
+
+#. module: base
+#: code:addons/orm.py:2580 code:addons/orm.py:2630
+#, python-format
+msgid "Integrity Error!"
+msgstr "خطأ - غير سليم!"
+
+#. module: base
+#: help:res.currency,name:0
+msgid "Currency Code (ISO 4217)"
+msgstr "رمز العمل (آيزو 4217)"
+
+#. module: base
+#: model:res.partner.title,shortcut:base.res_partner_title_miss
+msgid "Mss."
+msgstr "السيدة"
+
+#. module: base
+#: code:addons/fields.py:428 code:addons/fields_simple.py:69
+#, python-format
+msgid "Cannot merge because field %s is not empty."
+msgstr "لا يمكن الدمج لأن الحقل %s غير فارغ."
+
+#. module: base
+#: sql_constraint:ir.translation:0
+msgid "Language code of translation item must be among known languages"
+msgstr "رمز اللغة لعنصر الترجمة يجب أن يكون ضمن اللغات المعروفة"
+
+#. module: base
+#: code:addons/orm.py:2595
+#, python-format
+msgid "ID not found!"
+msgstr "لم يتم العثور على المعرف!"
+
+#. module: base
+#: code:addons/orm.py:3854
+#, python-format
+msgid "write"
+msgstr "كتابة"
+
+#. module: base
+#: model:ir.ui.menu,name:base.menu_view_base_module_configuration
+msgid "Reconfigure"
+msgstr "إعادة ضبط"
+
+#. module: base
+#: selection:ir.model.data,source:0
+msgid "XML data"
+msgstr "بيانات XML"
+
+#. module: base
+#: model:ir.actions.act_window,name:0
+msgid "Wiki Pages"
+msgstr "صفحات ويكي"
+
+#. module: base
+#: model:ir.model,name:base.model_res_roles
+msgid "res.roles"
+msgstr "res.roles"
+
+#. module: base
+#: selection:ir.model.data,source:0
+msgid "Document Sync."
+msgstr "مزامنة المستندات"
+
+#. module: base
+#: view:ir.actions.todo:0
+msgid "Launch Configuration Wizard"
+msgstr "تشغيل معالج الضبط"
+
+#. module: base
+#: sql_constraint:res.currency:0
+msgid "The currency code must be unique !"
+msgstr "يجب أن يكون رمز العملة فريداً!"
+
+#. module: base
+#: model:ir.ui.menu,name:0
+msgid "Survey Requests"
+msgstr "طلبات الاستطلاع"
+
+#. module: base
+#: code:addons/orm.py:4235
+#, python-format
+msgid "You are not permitted to create column %s.%s."
+msgstr "غير مسموح لك بإنشاء العمود %s.%s."
+
+#. module: base
+#: field:res.partner.address,validity:0
+msgid "Validity"
+msgstr "الصلاحية"
+
+#. module: base
+#: model:ir.model,name:0
+msgid "Wiki Page"
+msgstr "صفحة الموسوعة"
+
+#. module: base
+#: view:ir.property:0
+msgid "Parameters that are used by all resources."
+msgstr "المتغيرات التي تستخدمها كافة الموارد."
+
+#. module: base
+#: view:ir.module.module:0
+msgid "Upgrade"
+msgstr "ترقية"
+
+#. module: base
+#: selection:res.partner.address,validity:0
+msgid "Verified"
+msgstr "تمت مصادقته"
+
+#. module: base
+#: selection:ir.module.module,license:0
+msgid "GNU Lesser Public License v2"
+msgstr "رخصة GNU Lesser Public الإصدار 2"
+
+#. module: base
+#: selection:ir.module.module,license:0
+msgid "GNU Lesser Public License v3"
+msgstr "رخصة GNU Lesser Public الإصدار 3"
+
+#. module: base
+#: model:res.widget,title:base.openerp_favorites_twitter_widget
+msgid "OpenERP Tweets"
+msgstr "تغريدات OpenERP"
+
+#. module: base
+#: selection:ir.module.module,license:0
+msgid "All rights reserved"
+msgstr "كافة الحقوق محفوظة"
+
+#. module: base
+#: help:ir.model.fields,modules:0
+msgid "List of modules in which the field is defined"
+msgstr "قائمة الموديولات التي تحدد فيها الحقل"
+
+#. module: base
+#: view:ir.attachment:0
+msgid "Filter on my documents"
+msgstr "عوامل التصفية على مستنداتي"
+
+#. module: base
+#: code:addons/orm.py:1762
+#, python-format
+msgid ""
+"\n"
+" <no view found>"
+msgstr ""
+"\n"
+"<لم يتم العثور على طريقة العرض>"
+
+#. module: base
+#: help:publisher_warranty.contract,name:0
+#: help:publisher_warranty.contract.wizard,name:0
+msgid ""
+"Your OpenERP Publisher's Warranty Contract unique key, also called serial "
+"number."
+msgstr "مفتاح عقد ضمان الناشر الفريد من OpenERP، والمسمى أيضاً بالرقم التسلسلي."
+
+#. module: base
+#: selection:ir.model.data,source:0
+msgid "Merged records"
+msgstr "السجلات المدمجة"
+
+#. module: base
+#: code:addons/orm.py:3993
+#, python-format
+msgid "You are not permitted to write into column %s.%s."
+msgstr "لا يمكنك الكتابة إلى العمود %s.%s."
+
+#. module: base
+#: sql_constraint:res.country:0
+msgid "The VAT code of a country must be unique!"
+msgstr "رمز VAT للدولة يجب أن يكون فريداً غير مكرر!"
+
+#. module: base
+#: code:addons/base/ir/ir_model.py:148
+#, python-format
+msgid "Object must be unique"
+msgstr "يجب أن يكون الكائن فريداً"
+
+#. module: base
+#: model:ir.model,name:0
+msgid "wiz open page"
+msgstr "افتح صفحة وز"
+
+#. module: base
+#: code:addons/orm.py:3855
+#, python-format
+msgid "create"
+msgstr "إنشاء"
+
+#. module: base
+#: selection:res.partner.address,validity:0
+msgid "Invalid"
+msgstr "غير صالح"
+
+#. module: base
+#: help:res.amount_to_text,currency_id:0
+msgid "If specified, the value is amount of that currency"
+msgstr "عند تحديدها، فالقيمة هي المبلغ بتلك العملة"
+
+#. module: base
+#: view:res.lang:0
+msgid "Update Languague Terms"
+msgstr "تحديث مصطلحات اللغة"
+
+#. module: base
+#: field:ir.model.data,source:0
+msgid "Source Domain"
+msgstr "النطاق المصدر"
+
+#. module: base
+#: help:res.partner.address,validity:0
+msgid "Has this address been verified?"
+msgstr "هل تمت المصادقة على العنوان؟"
+
+#. module: base
+#: model:res.partner.title,shortcut:base.res_partner_title_ltd
+msgid "Ltd."
+msgstr "المحدودة"
+
+#. module: base
+#: field:res.roles,parent_id:0
+msgid "Parent"
+msgstr "الرئيسي"
+
+#. module: base
+#: code:addons/orm.py:1286
+#, python-format
+msgid "The search_read method is not implemented on this object !"
+msgstr "وظيفة search_read لا تنطبق على هذا الكائن!"
+
+#. module: base
+#: field:res.roles,child_id:0
+msgid "Children"
+msgstr "الادلة الداخلية"
+
+#. module: base
+#: code:addons/base/res/res_user.py:647
+#, python-format
+msgid ""
+"Group(s) %s cannot be deleted, because some user(s) still belong to them: "
+"%s !"
+msgstr "لا يمكن حذف المجموعة(ات) %s، لأن مستخدم(ين) ينتمون إليها: %s!"
+
+#. module: base
+#: model:ir.actions.act_window,help:0
+msgid ""
+"With Wiki Pages you can share ideas and questions with your coworkers. You "
+"can create a new document that can be linked to one or several applications "
+"(CRM, Sales, etc.). You can use keywords to ease access to your wiki pages. "
+"There is a basic wiki editing for text format."
+msgstr ""
+"باستخدام صفحات الموسوعة يمكنك مشاركة الأفكار والأسئلة مع زملائك. يمكنك إنشاء "
+"مستندات جديدة يمكن ربطها بتطبيق أو أكثر (خدمة العملاء، المبيعات، وغيرها). "
+"يمكنك استخدام الكلمات الدلالية لتسهيل الوصول إلى صفحات الموسوعة. يوجد محرر "
+"نصوص بسيطة لتحرير الموسوعة."
+
+#. module: base
+#: code:addons/fields.py:474 code:addons/fields.py:484
+#, python-format
+msgid "All records must have an equal %s, in order to merge"
+msgstr "يجب أن تتساوى السجلات في %s ليتم دمجها"
+
+#. module: base
+#: view:ir.attachment:0
+msgid "Creation Month"
+msgstr "شهر الإنشاء"
+
+#. module: base
+#: code:addons/expression.py:342
+#, python-format
+msgid "Invalid domain expression, too many operators: %r"
+msgstr "تعبير نطاق غير صالح، المعاملات كثيرة جداً: %r"
+
+#. module: base
+#: code:addons/fields.py:407 code:addons/fields.py:410
+#, python-format
+msgid "Cannot merge a record when %s = %r"
+msgstr "لا يمكن دمج السجل عندما يكون %s = %r"
+
+#. module: base
+#: model:ir.ui.menu,name:base.menu_project_management_time_tracking
+msgid "Time Tracking"
+msgstr "تعقب الوقت"
+
+#. module: base
+#: model:ir.ui.menu,name:0
+msgid "Answer a Survey"
+msgstr "إجابة استطلاع"
+
+#. module: base
+#: help:res.roles,description:0
+msgid ""
+"Description of this role and where it is relevant in workflows and processes"
+msgstr "وصف هذا الدور وأين يكون مقترن بخرائط التدفق والعمليات"
+
+#. module: base
+#: selection:res.partner.address,validity:0
+msgid "Deprecated"
+msgstr "هالك"
+
+#. module: base
+#: model:ir.ui.menu,name:0
+msgid "Survey Pages"
+msgstr "صفحات الإستفتاء"
+
+#. module: base
+#: view:res.partner:0
+msgid "Supplier Partners"
+msgstr "الشركاء الموردين"
+
+#. module: base
+#: constraint:res.currency:0
+msgid "The rounding factor cannot be 0 !"
+msgstr "معامل التقريب لا يمكن أن يكون 0!"
+
+#. module: base
+#: field:ir.sequence,weight:0
+msgid "Weight"
+msgstr "وزن"
+
+#. module: base
+#: selection:ir.model.data,source:0
+msgid "Internal"
+msgstr "داخلي"
+
+#. module: base
+#: model:ir.model,name:base.model_res_groups
+msgid "Access Groups"
+msgstr "مجموعات الوصول"
+
+#. module: base
+#: field:ir.model,modules:0 field:ir.model.fields,modules:0
+msgid "In modules"
+msgstr " الموديولات"
