@@ -738,7 +738,7 @@ class OpenERPAuthProvider(AuthProvider):
                 return False
             return (user, passwd, db, uid)
         except Exception,e:
-            logging.getLogger("auth").debug("Fail auth: %s" % e )
+            logging.getLogger("auth").debug("Fail auth: %s", e )
             return False
         return False
 
