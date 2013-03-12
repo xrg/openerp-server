@@ -1064,6 +1064,9 @@ class many2many(_rel2many):
         """Move references to [src_ids] to point to dest_id
 
         """
+        from orm import orm_memory
+        if isinstance(obj, orm_memory):
+            return None
         rel, id1, id2 = self._sql_names(obj)
         # BIG TODO: do stored fields at `obj` need to be recomputed?
 
