@@ -510,6 +510,9 @@ class ir_model_fields(osv.osv):
 
             assert fld['name'] in obj._columns, "ORM in a mess: model \"%s\" doesn't have column: %s as expected!" % \
                         (obj._name, fld['name'])
+            if self._debug or obj._debug:
+                logging.getLogger('orm').debug("%s: merging refs of %s.%s to id=%s",
+                        self._name, obj._name, fld['name'], id_dest)
             rcom = obj._columns[fld['name']]._move_refs(cr, uid, obj, fld['name'], \
                         id_dest, ids_src, context=context)
 
