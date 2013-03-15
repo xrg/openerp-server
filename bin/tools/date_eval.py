@@ -42,7 +42,7 @@ re_dateeval = re.compile(r"(?P<abs>" + '|'.join(re_abstimes) +")"
         r"|(?: ?\bat ?(?P<time>[0-9]{1,2}(?::[0-9]{2}(?::[0-9]{2})?)?))"
         r"| +", re.I)
 
-def date_eval(rstr):
+def date_eval(rstr, cur_time=None):
     """ Evaluate an textual representation of date/time into a datetime structure
     
         @param rstr the string representation
@@ -84,7 +84,12 @@ def date_eval(rstr):
             on 15-04 at 13:45
             today +1year at 12:30
     """
-    cur_time = datetime.datetime.now()
+    if cur_time is None:
+        cur_time = datetime.datetime.now()
+    else:
+        if not isinstance(cur_time, datetime.datetime):
+            raise TypeError("current date must be given in datetime.datetime")
+
     for m in re_dateeval.finditer(rstr):
         if m.group('abs'):
             cur_time = re_abstimes[m.group('abs')]()
