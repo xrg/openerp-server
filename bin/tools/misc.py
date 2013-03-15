@@ -39,6 +39,8 @@ import time
 import warnings
 import zipfile
 from datetime import datetime
+from datetime import date as date_DT
+from datetime import time as time_DT
 from email.MIMEText import MIMEText
 from email.MIMEBase import MIMEBase
 from email.MIMEMultipart import MIMEMultipart
@@ -1579,6 +1581,37 @@ def server_to_local_timestamp(src_tstamp_str, src_format, dst_format, dst_tz_nam
                 return False
     return res
 
+def to_datetime(dt):
+    """Convert dt to datetime, compatibility with string timestamps
+    """
+    if (dt is None) or (dt is False):
+        return None
+    elif isinstance(dt, datetime):
+        return dt
+    elif isinstance(dt, date_DT):
+        return datetime.combine(dt, time_DT())
+    else:
+        return datetime.strptime(dt, DEFAULT_SERVER_DATETIME_FORMAT)
+
+def to_date(dt):
+    if (dt is None) or (dt is False):
+        return None
+    elif isinstance(dt, datetime):
+        return dt.date()
+    elif isinstance(dt, date_DT):
+        return dt
+    else:
+        return datetime.strptime(dt, DEFAULT_SERVER_DATE_FORMAT).date()
+
+def to_time(dt):
+    if (dt is None) or (dt is False):
+        return None
+    elif isinstance(dt, time_DT):
+        return dt
+    elif isinstance(dt, datetime):
+        return dt.time()
+    else:
+        return time_DT.strptime(dt, DEFAULT_SERVER_TIME_FORMAT).time()
 
 def split_every(n, iterable, piece_maker=tuple):
     """Splits an iterable into length-n pieces. The last piece will be shorter
