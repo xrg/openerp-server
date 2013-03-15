@@ -42,6 +42,14 @@ re_dateeval = re.compile(r"(?P<abs>" + '|'.join(re_abstimes) +")"
         r"|(?: ?\bat ?(?P<time>[0-9]{1,2}(?::[0-9]{2}(?::[0-9]{2})?)?))"
         r"| +", re.I)
 
+__out_fmt_fns = {'datetime': lambda dt: dt,
+        'date': lambda dt: dt.date(),
+        'time': lambda dt: dt.time(),
+        'datetime_str': lambda dt: dt.strftime('%Y-%m-%d %H:%M:%S'),
+        'date_str': lambda dt: dt.strftime('%Y-%m-%d'),
+        'time_str': lambda dt: dt.strftime('%H:%M:%S'),
+        }
+
 def date_eval(rstr, cur_time=None):
     """ Evaluate an textual representation of date/time into a datetime structure
     
@@ -129,5 +137,71 @@ def date_eval(rstr, cur_time=None):
             pass
 
     return cur_time
+
+def lazy_date_eval(rstr, out_fmt='datetime'):
+    """Lazy version of date_eval(), returning a callable function
+    
+        This one will parse and compute the expression, but at the end produce a *callable*
+        that will yield datetimes based on the callable execution's current timestamp
+    """
+    
+    steps = []
+    for m in re_dateeval.finditer(rstr):
+        if m.group('abs'):
+            steps.append(('abs',re_abstimes[m.group('abs')]))
+        elif m.group('rel'):
+            mrel = int(m.group('rel')[1:])
+            if m.group('rel')[0] == '-':
+                mrel = 0 - mrel
+            mun = rel_units[m.group('rel_unit')]
+            if mun == 'Y':
+                drel = relativedelta(years=mrel)
+            elif mun == 'M':
+                drel = relativedelta(months=mrel)
+            elif mun == 'D':
+                drel = datetime.timedelta(days=mrel)
+            else:
+                drel = mrel * datetime.timedelta(seconds=mun)
+            steps.append(('rel', drel))
+        elif m.group('date'):
+            dli = map(int, m.group('date').split('/'))
+            steps.append(('date', dli))
+        elif m.group('time'):
+            dli = map(int, m.group('time').split(':'))
+            steps.append(('time', dli))
+        else:
+            pass
+
+    out_fn = __out_fmt_fns[out_fmt]
+
+    def __lazy(*args, **kwargs):
+        cur_time = kwargs.get('cur_time', datetime.datetime.now())
+        for r1, r2 in steps:
+            if r1 == 'abs':
+                cur_time = r2()
+                if not isinstance(cur_time, datetime.datetime):
+                    cur_time = datetime.datetime.fromordinal(cur_time.toordinal())
+            elif r1 == 'rel':
+                cur_time = cur_time + r2
+            elif r1 == 'date':
+                dli = list(r2) # copy it!
+                if len(dli) == 2:
+                    dli += [cur_time.year,]
+                elif len(dli) == 1:
+                    dli += [cur_time.month, cur_time.year]
+                cur_time = datetime.datetime.combine(datetime.date(dli[2],dli[1],dli[0]), cur_time.time())
+            elif  r1 == 'time':
+                dli = list(r2)
+                if len(dli) == 2:
+                    dli += [cur_time.second,]
+                elif len(dli) == 1:
+                    dli += [cur_time.minute, cur_time.second]
+                cur_time = datetime.datetime.combine(cur_time.date(), datetime.time(dli[0],dli[1],dli[2]))
+            else:
+                raise RuntimeError("Incorrect step: %s" % r1)
+        
+        return out_fn(cur_time)
+
+    return __lazy
 
 #eof
