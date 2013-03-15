@@ -3,6 +3,7 @@
 #
 #    OpenERP, Open Source Management Solution
 #    Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>).
+#    Copyright (C) 2013 P. Christeas <xrg@hellug.gr>
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -49,6 +50,7 @@ import osv
 import pooler
 from config import config
 from tools.translate import _
+from tools.date_eval import date_eval
 from yaml_import import convert_yaml_import
 
 # List of etree._Element subclasses that we choose to ignore when parsing XML.
@@ -79,6 +81,9 @@ def _get_idref(self, cr, uid, model_str, context, idref):
     idref2 = dict(idref,
                   time=time,
                   DateTime=datetime,
+                  date_eval=lambda rstr: date_eval(rstr).date(),
+                  datetime_eval=date_eval,
+                  time_eval=lambda rstr: date_eval(rstr).time(),
                   timedelta=timedelta,
                   version=release.major_version,
                   ref=_ref(self, cr),
@@ -145,6 +150,12 @@ def _eval_xml(self, node, pool, cr, uid, idref, context=None):
                 logger = logging.getLogger('init')
                 logger.warning('could not eval(%s) for %s in %s' % (a_eval, node.get('name'), context), exc_info=True)
                 return ""
+        elif node.get('datetime', False):
+            return date_eval(node.get('datetime'))
+        elif node.get('date', False):
+            return date_eval(node.get('date')).date()
+        elif node.get('time', False):
+            return date_eval(node.get('time')).time()
         if t == 'xml':
             def _process(s, idref):
                 m = re.findall('[^%]%\((.*?)\)[ds]', s)
