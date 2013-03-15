@@ -61,9 +61,7 @@ def undecimalize(symb, cr):
     if symb is None: return None
     return float(symb)
 
-for name, typeoid in types_mapping.items():
-    psycopg2.extensions.register_type(psycopg2.extensions.new_type(typeoid, name, lambda x, cr: x))
-psycopg2.extensions.register_type(psycopg2.extensions.new_type((700, 701, 1700,), 'float', undecimalize))
+psycopg2.extensions.register_type(psycopg2.extensions.new_type((1700,), 'float', undecimalize))
 
 
 import tools

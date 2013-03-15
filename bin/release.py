@@ -3,7 +3,7 @@
 #
 #    OpenERP, Open Source Management Solution
 #    Copyright (C) 2004-TODAY OpenERP S.A. <http://www.openerp.com>
-#    Copyright (C) 2008-2009, 2011 P. Christeas <xrg@hellug.gr>
+#    Copyright (C) 2008-2009, 2011-2013 P. Christeas <xrg@hellug.gr>
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -65,6 +65,7 @@ api_options = [
         'fields-inherit',
         'many2many-auto',
         'date_eval',
+        'cdatetime', 'ndatetime',
         'struct-field',
         'auth-in-cr',
         ]
