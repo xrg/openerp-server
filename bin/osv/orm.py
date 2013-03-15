@@ -4424,21 +4424,29 @@ class orm(orm_template):
         field_flag = False
         field_dict = {}
         if self._log_access:
-            cr.execute('SELECT id,write_date FROM '+self._table+' WHERE id = ANY (%s)', (map(int, ids),))
-            res = cr.fetchall()
+            store_fns = []
+            for sfn in self.pool._store_function.get(self._name, []):
+                if sfn[5] and sfn[1] in fields:
+                    store_fns.append(sfn)
+
+            if store_fns:
+                cr.execute('SELECT id,write_date FROM '+self._table+' WHERE id = ANY (%s) and write_date IS NOT NULL', (map(int, ids),), debug=self._debug)
+                res = cr.fetchall()
+            else:
+                # just suppress the loop below
+                res = []
+
+            # we try to compute which fields have a cache persistence more than
+            # dt = now - last write
+            dt_now = datetime.datetime.now()
             for r in res:
-                if r[1]:
-                    field_dict.setdefault(r[0], [])
-                    res_date = time.strptime((r[1])[:19], '%Y-%m-%d %H:%M:%S')
-                    write_date = datetime.datetime.fromtimestamp(time.mktime(res_date))
-                    for i in self.pool._store_function.get(self._name, []):
-                        if i[5]:
-                            up_write_date = write_date + datetime.timedelta(hours=i[5])
-                            if datetime.datetime.now() < up_write_date:
-                                if i[1] in fields:
-                                    field_dict[r[0]].append(i[1])
-                                    if not field_flag:
-                                        field_flag = True
+                field_dict.setdefault(r[0], [])
+                write_ago = dt_now - r[1] # a timedelta
+                write_hours = write_ago.seconds / 3600
+                for sfn in store_fns:
+                    if write_hours < sfn[5]:
+                        field_dict[r[0]].append(sfn[1])
+                        field_flag = True
         todo = {}
         keys = []
         for f in fields:
