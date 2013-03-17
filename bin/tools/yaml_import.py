@@ -20,7 +20,7 @@ except ImportError:
         pass
 
 # YAML import needs both safe and unsafe eval, but let's
-# default to /safe/.
+# default to /safe/. But always debug, YAML is for tests.
 unsafe_eval = eval
 from tools.safe_eval import safe_evalD as eval
 
