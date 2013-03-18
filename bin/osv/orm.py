@@ -4474,8 +4474,10 @@ class orm(orm_template):
                                 value[v] = value[v][0]
                             except:
                                 pass
-                        upd0.append('"'+v+'"='+self._columns[v]._symbol_set[0])
-                        upd1.append(self._columns[v]._symbol_set[1](value[v]))
+                        # prefer the _shadow of a function field, rather than the field itself
+                        sset = getattr(self._columns[v], '_shadow', self._columns[v])._symbol_set
+                        upd0.append('"'+v+'"='+sset[0])
+                        upd1.append(sset[1](value[v]))
                     upd1.append(id)
                     if upd0 and upd1:
                         cr.execute('UPDATE "' + self._table + '" SET ' + \

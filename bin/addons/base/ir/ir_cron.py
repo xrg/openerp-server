@@ -127,7 +127,7 @@ class ir_cron(osv.osv, netsvc.Agent):
                     if not numbercall:
                         addsql = ', active=False'
                     cr.execute("UPDATE ir_cron "
-                                "SET nextcall=%s, numbercall=%s"+addsql+ \
+                                "SET nextcall=%s::TIMESTAMP, numbercall=%s"+addsql+ \
                                 " WHERE id=%s", 
                                 (nextcall, numbercall, job['id']),
                                 debug=self._debug)

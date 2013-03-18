@@ -4,7 +4,7 @@
 #    OpenERP, Open Source Management Solution
 #    Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>).
 #    Copyright (C) 2010-2011 OpenERP SA. (www.openerp.com)
-#    Copyright (C) 2008-2012 P. Christeas <xrg@hellug.gr>
+#    Copyright (C) 2008-2013 P. Christeas <xrg@hellug.gr>
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -34,6 +34,7 @@ import tools
 from tools.translate import _
 import __builtin__
 from tools import expr_utils as eu
+from tools.misc import to_date, to_datetime, to_time
 from tools.date_eval import lazy_date_eval
 
 class boolean(_column):
@@ -274,6 +275,10 @@ class date(_column):
     _type = 'date'
     _sql_type = 'date'
     merge_op = '|eq'
+    _symbol_c = '%s'
+    _symbol_f = to_date
+    _symbol_set = (_symbol_c, _symbol_f)
+
 
     @staticmethod
     def today(*args):
@@ -299,6 +304,9 @@ class datetime(_column):
     _type = 'datetime'
     _sql_type = 'timestamp'
     merge_op = '|eq'
+    _symbol_c = '%s'
+    _symbol_f = to_datetime
+    _symbol_set = (_symbol_c, _symbol_f)
 
     @staticmethod
     def now(*args):
@@ -341,6 +349,9 @@ class time(_column):
     _type = 'time'
     _sql_type = 'time'
     merge_op = '|eq'
+    _symbol_c = '%s'
+    _symbol_f = to_time
+    _symbol_set = (_symbol_c, _symbol_f)
 
     @staticmethod
     def now( *args):
