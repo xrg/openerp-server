@@ -40,7 +40,8 @@ class res_currency(osv.osv):
                 id, rate = cr.fetchone()
                 res[id] = rate
             else:
-                res[id] = 0
+                # should we return anything at all?
+                res[id] = False
         return res
 
     def _check_rounding(self, cr, uid, ids, context=None):
@@ -67,10 +68,11 @@ class res_currency(osv.osv):
 
     }
     _defaults = {
-        'active': lambda *a: 1,
+        'active': True,
         'company_id': lambda self,cr,uid,c: self.pool.get('res.company')._company_default_get(cr, uid, 'res.currency', context=c),
         'rounding': 0.01,
     }
+
     _sql_constraints = [
         ('currency_name_uniq', 'unique (name, company_id)', 'The currency code must be unique !'),
     ]

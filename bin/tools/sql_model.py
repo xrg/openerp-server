@@ -835,8 +835,8 @@ class Column(_element):
 
     _common_constants = {
         'NULL': None,
-        'true': 'True', # match the _symbol_set of booleans
-        'false': 'False',
+        'true': True, # match the _symbol_set of booleans
+        'false': False,
         'now()': now(),
     }
 

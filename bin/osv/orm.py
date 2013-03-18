@@ -4533,9 +4533,9 @@ class orm(orm_template):
                     if a[0] == 'active':
                         active_in_args = True
                 if not active_in_args:
-                    domain.insert(0, ('active', '=', 1))
+                    domain.insert(0, ('active', '=', True))
             else:
-                domain = [('active', '=', 1)]
+                domain = [('active', '=', True)]
 
         qry = Query(tables=['"%s"' % self._table,])
         if domain:

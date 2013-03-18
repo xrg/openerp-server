@@ -50,9 +50,10 @@ from tools import orm_utils # must be the full module, not contents
 def _symbol_set(symb):
     if symb is None or symb is False:
         return None
-    elif isinstance(symb, unicode):
-        return symb.encode('utf-8')
-    return str(symb)
+    #elif isinstance(symb, unicode):
+    #    return symb.encode('utf-8')
+    #return str(symb)
+    return symb
 
 
 def _symbol_set_float(symb):
@@ -321,7 +322,6 @@ class _column(object):
 
     def _browse2val(self, bro, name):
         """ Convert browse value to scalar one
-
         """
         return bro
 

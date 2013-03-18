@@ -41,7 +41,7 @@ class boolean(_column):
     _type = 'boolean'
     _sql_type = 'bool'
     _symbol_c = '%s'
-    _symbol_f = lambda x: x and 'True' or 'False'
+    _symbol_f = lambda x: x and True or False
     _symbol_set = (_symbol_c, _symbol_f)
     merge_op = 'eq'
 
