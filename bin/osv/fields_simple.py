@@ -267,9 +267,17 @@ class float(_column):
         super(float, self).post_init(cr, name, obj)
         if self.digits_compute:
             t = self.digits_compute(cr)
-            self._symbol_set=('%s', lambda x: ('%.'+str(t[1])+'f') % (__builtin__.float(x or 0.0),))
+            def __sset(x):
+                if x is None or x is False:
+                    return None
+                # TODO Decimal
+                if isinstance(x, basestring):
+                    x = __builtin__.float(x)
+                return __builtin__.round(x, t[1])
+            self._symbol_set=('%s', __sset)
             self.digits = t
             self._sql_type = 'numeric'
+
 
 class date(_column):
     _type = 'date'
@@ -299,6 +307,7 @@ class date(_column):
                 _defaults = { 'date': lazy_eval('yesterday'), }
         """
         return lazy_date_eval(estr, out_fmt='date')
+
 
 class datetime(_column):
     _type = 'datetime'
