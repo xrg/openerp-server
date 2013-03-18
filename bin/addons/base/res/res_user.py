@@ -4,7 +4,7 @@
 #    OpenERP, Open Source Management Solution
 #    Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>).
 #    Copyright (C) 2010-2011 OpenERP s.a. (<http://openerp.com>).
-#    Copyright (C) 2012 P. Christeas <xrg@hellug.gr>
+#    Copyright (C) 2012-2013 P. Christeas <xrg@hellug.gr>
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -29,7 +29,7 @@ import pytz
 import pooler
 from tools.translate import _
 from service import security
-import logging
+#import logging
 
 class groups(osv.osv):
     _name = "res.groups"
@@ -566,12 +566,12 @@ class config_users(osv.osv_memory):
                 cr, base_data['name'], base_data['email'], context=context),
             address_id=address,
             )
-        new_user = self.pool.get('res.users').create(
-            cr, uid, user_data, context)
+        self.pool.get('res.users').create(cr, uid, user_data, context)
 
     def execute(self, cr, uid, ids, context=None):
         'Do nothing on execution, just launch the next action/todo'
         pass
+
     def action_add(self, cr, uid, ids, context=None):
         'Create a user, and re-display the view'
         self.create_user(cr, uid, ids[0], context=context)
