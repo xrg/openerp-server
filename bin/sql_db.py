@@ -493,7 +493,12 @@ class ConnectionPool(object):
         self._lock = threading.Lock()
         self._debug_pool = tools.config.get_misc('debug', 'db_pool', False)
         self.sql_stats = {}
-        self._cursor_factory = psycopg2.extensions.cursor
+        if tools.config.get_misc('postgres', 'binary_cursor', False):
+            # Binary cursor, experimental
+            self._cursor_factory = psycopg2.extensions.cursor_bin
+        else:
+            # default, compatible one, using ASCII SQL expansion
+            self._cursor_factory = psycopg2.extensions.cursor
         if pgmode: # not None or False
             Cursor.set_pgmode(pgmode)
         if 'dfc' in psycopg2.__version__:
