@@ -128,7 +128,7 @@ class oo_view(object):
         """for the ir.ui.view.type selection
         """
         ret = []
-        for vtype in cls.list_classes():
+        for vtype in cls.list_classes(prefix=True):
             ret.append((vtype, cls[vtype]._view_name))
 
         # if cr and uid and context: TODO
