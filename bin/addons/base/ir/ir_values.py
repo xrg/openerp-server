@@ -185,7 +185,7 @@ class ir_values(osv.osv):
             cr.execute('SELECT id,name,value,object,meta, key ' \
                 'FROM ir_values ' \
                 'WHERE ' + ' AND '.join(where) + \
-                'ORDER BY user_id, id', params, debug=self._debug)
+                ' ORDER BY user_id, id', params, debug=self._debug)
             # Note: by default, ordering is "BY user_id NULLS LAST", and
             # we would only be allowed to explicitly use that in pg >= 8.3
             result = cr.fetchall()
