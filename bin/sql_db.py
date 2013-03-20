@@ -66,10 +66,11 @@ psycopg2.extensions.register_type(psycopg2.extensions.new_type((1700,), 'float',
 
 import tools
 from tools.func import wraps, frame_codeinfo
-from netsvc import Agent
+from netsvc import Agent, Server
 from datetime import datetime as mdt
 from datetime import timedelta
 import threading
+import time
 from inspect import currentframe
 
 import re
@@ -465,7 +466,7 @@ class Cursor(object):
 class PsycoConnection(psycopg2.extensions.connection):
     pass
 
-class ConnectionPool(object):
+class ConnectionPool(threading.Thread, Server):
     """ The pool of connections to database(s)
 
         Keep a set of connections to pg databases open, and reuse them
@@ -475,6 +476,8 @@ class ConnectionPool(object):
         can trigger that.
     """
     __logger = logging.getLogger('db.connection_pool')
+    EXPIRE_AFTER = 300.0 # 5min
+    CLEAN_EVERY = 300.0 # 5min
 
     def locked(fun):
         @wraps(fun)
@@ -488,11 +491,14 @@ class ConnectionPool(object):
 
 
     def __init__(self, maxconn=64, pgmode=None):
+        threading.Thread.__init__(self, name='ConnectionPool')
+        Server.__init__(self)
         self._connections = []
         self._maxconn = max(maxconn, 1)
         self._lock = threading.Lock()
         self._debug_pool = tools.config.get_misc('debug', 'db_pool', False)
         self.sql_stats = {}
+        self.daemon = True # for the thread, we can stop at any time
         if tools.config.get_misc('postgres', 'binary_cursor', False):
             # Binary cursor, experimental
             self._cursor_factory = psycopg2.extensions.cursor_bin
@@ -517,7 +523,7 @@ class ConnectionPool(object):
             self.print_all_stats()
 
     def __repr__(self):
-        used = len([1 for c, u in self._connections[:] if u])
+        used = len([1 for c, u, t in self._connections[:] if u])
         count = len(self._connections)
         return "ConnectionPool(used=%d/count=%d/max=%d)" % (used, count, self._maxconn)
 
@@ -552,19 +558,47 @@ class ConnectionPool(object):
         self.__logger.info("Debugging set to %s" % str(do_debug))
 
     @locked
+    def stats(self):
+        return repr(self)
+
+    @locked
+    def _clear_old_ones(self):
+        last_time = time.time() - self.EXPIRE_AFTER
+        self._connections = [ (c, u, t) for c, u, t in self._connections if u or t > last_time]
+
+    def run(self):
+        self.running = True
+        while self.running:
+            try:
+                time.sleep(self.CLEAN_EVERY)
+                self._clear_old_ones()
+            except Exception:
+                self.__logger.warning("Could not clean old connections:", exc_info=True)
+                time.sleep(6.0) # an arbitrary delay..
+
+        return True
+
+    def stop(self):
+        self.running = False
+
+    def join(self, dt=None):
+        # No need to join() this thread.
+        pass
+
+    @locked
     def borrow(self, dsn, do_cursor=False, temp=False):
         self._debug_dsn('Borrow connection to %r', dsn)
 
         # free leaked connections
-        for i, (cnx, _) in tools.reverse_enumerate(self._connections):
+        for i, (cnx, u, t) in tools.reverse_enumerate(self._connections):
             if getattr(cnx, 'leaked', False):
                 delattr(cnx, 'leaked')
                 self._connections.pop(i)
-                self._connections.append((cnx, False))
+                self._connections.append((cnx, False, time.time()))
                 self._debug_dsn('Free leaked connection to %r', cnx.dsn)
 
         result = None
-        for i, (cnx, used) in enumerate(self._connections):
+        for i, (cnx, used, t) in enumerate(self._connections):
             if not used and dsn_are_equals(cnx.dsn, dsn):
                 self._connections.pop(i)
                 try:
@@ -590,13 +624,13 @@ class ConnectionPool(object):
                             continue
                         if cur.closed:
                             continue
-                        self._connections.insert(i,(cnx, True))
+                        self._connections.insert(i,(cnx, True, 0.0))
 
                         result = (cnx, cur)
                     except OperationalError:
                         continue
                 else:
-                    self._connections.insert(i,(cnx, True))
+                    self._connections.insert(i,(cnx, True, 0.0))
                     result = cnx
                 break
         if result:
@@ -604,7 +638,7 @@ class ConnectionPool(object):
 
         if len(self._connections) >= self._maxconn:
             # try to remove the oldest connection not used
-            for i, (cnx, used) in enumerate(self._connections):
+            for i, (cnx, used, t) in enumerate(self._connections):
                 if not used:
                     self._connections.pop(i)
                     self._debug_dsn('Removing old connection at index %d: %r', i, cnx.dsn, dsn_pos=1)
@@ -620,7 +654,7 @@ class ConnectionPool(object):
             raise
         if not temp:
             result.is_temp = False
-            self._connections.append((result, True))
+            self._connections.append((result, True, 0.0))
         else:
             result.is_temp = True
         self._debug('Create new connection')
@@ -632,11 +666,11 @@ class ConnectionPool(object):
     @locked
     def give_back(self, connection, keep_in_pool=True):
         self._debug_dsn('Give back connection to %r', connection.dsn)
-        for i, (cnx, used) in enumerate(self._connections):
+        for i, (cnx, used, t) in enumerate(self._connections):
             if cnx is connection:
                 self._connections.pop(i)
                 if keep_in_pool and not (cnx.closed or cnx.is_temp or not cnx.status):
-                    self._connections.insert(i,(cnx, False))
+                    self._connections.insert(i,(cnx, False, time.time()))
                     self._debug_dsn('Put connection to %r back in pool', cnx.dsn)
                 else:
                     self._debug_dsn('Forgot connection to %r', cnx.dsn)
@@ -648,7 +682,7 @@ class ConnectionPool(object):
     @locked
     def close_all(self, dsn):
         self._debug_dsn('Close all connections to %r', dsn)
-        for i, (cnx, used) in tools.reverse_enumerate(self._connections):
+        for i, (cnx, used, t) in tools.reverse_enumerate(self._connections):
             if dsn_are_equals(cnx.dsn, dsn):
                 cnx.close()
                 self._connections.pop(i)
