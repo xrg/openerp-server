@@ -4376,44 +4376,42 @@ class orm(orm_template):
 
            :return: [(priority, model_name, [record_ids,], [function_fields,])]
         """
-        # FIXME: rewrite, cleanup, use real variable names
-        # e.g.: http://pastie.org/1222060
         result = {}
         fncts = self.pool._store_function.get(self._name, [])
-        for fnct in range(len(fncts)):
-            if fncts[fnct][3]:
+        for i, fnct in enumerate(fncts):
+            if fnct[3]:
                 ok = False
                 if not fields:
                     ok = True
                 for f in (fields or []):
-                    if f in fncts[fnct][3]:
+                    if f in fnct[3]:
                         ok = True
                         break
                 if not ok:
                     continue
 
-            result.setdefault(fncts[fnct][0], {})
+            result.setdefault(fnct[0], {})
 
             # uid == 1 for accessing objects having rules defined on store fields
-            ids2 = fncts[fnct][2](self, cr, 1, ids, context)
+            ids2 = fnct[2](self, cr, 1, ids, context)
             for id in filter(None, ids2):
-                result[fncts[fnct][0]].setdefault(id, [])
-                result[fncts[fnct][0]][id].append(fnct)
-        dict = {}
+                result[fnct[0]].setdefault(id, [])
+                result[fnct[0]][id].append(i)
+        rdict = {}
         l_fnct = lambda x: fncts[x][1]
-        for object in result:
+        for obj in result:
             k2 = {}
-            for id, fnct in result[object].items():
+            for id, fnct in result[obj].items():
                 k2.setdefault(tuple(fnct), [])
                 k2[tuple(fnct)].append(id)
             for fnct, id in k2.items():
-                dict.setdefault(fncts[fnct[0]][4], [])
-                dict[fncts[fnct[0]][4]].append((fncts[fnct[0]][4], object, id, map(l_fnct, fnct)))
+                rdict.setdefault(fncts[fnct[0]][4], [])
+                rdict[fncts[fnct[0]][4]].append((fncts[fnct[0]][4], obj, id, map(l_fnct, fnct)))
         result2 = []
-        tmp = dict.keys()
+        tmp = rdict.keys()
         tmp.sort()
         for k in tmp:
-            result2 += dict[k]
+            result2 += rdict[k]
         return result2
 
     def _store_set_values(self, cr, uid, ids, fields, context):
@@ -4469,11 +4467,9 @@ class orm(orm_template):
                     for v in value:
                         if v not in val:
                             continue
-                        if self._columns[v]._type in ('many2one', 'one2one'):
-                            try:
-                                value[v] = value[v][0]
-                            except:
-                                pass
+                        if self._columns[v]._type in ('many2one', 'one2one') \
+                                    and isinstance(value[v], tuple):
+                            value[v] = value[v][0]
                         # prefer the _shadow of a function field, rather than the field itself
                         sset = getattr(self._columns[v], '_shadow', self._columns[v])._symbol_set
                         upd0.append('"'+v+'"='+sset[0])
@@ -4494,11 +4490,14 @@ class orm(orm_template):
                                 if f in field_dict[r]:
                                     result.pop(r)
                     for id, value in result.items():
-                        if self._columns[f]._type in ('many2one', 'one2one'):
-                            try:
-                                value = value[0]
-                            except:
-                                pass
+                        if self._columns[f]._type in ('many2one', 'one2one') \
+                                and isinstance(value, tuple):
+                            value = value[0]
+                        if self._debug:
+                            _logger.debug('%s: %s %r=%r  (%r %s|%r)', 
+                                    self._name, f, id, value,
+                                    self._columns[f], self._columns[f]._type,
+                                    self._columns[f]._symbol_set)
                         cr.execute('UPDATE "' + self._table + '" SET ' + \
                             '"'+f+'"='+self._columns[f]._symbol_set[0] + ' WHERE id = %s', 
                                 (self._columns[f]._symbol_set[1](value),id),
