@@ -39,7 +39,7 @@ class ir_values(osv.osv):
             if not report.object and value:
                 try:
                     value = str(pickle.loads(value))
-                except:
+                except Exception:
                     pass
             res[report.id] = value
         return res
