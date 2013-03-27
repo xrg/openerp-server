@@ -12270,12 +12270,9 @@ msgstr ""
 
 #. module: base
 #: code:addons/base/module/wizard/base_module_upgrade.py:0
-#, fuzzy, python-format
+#, python-format
 msgid "Following modules are not installed or unknown: %s"
-msgstr ""
-"#-#-#-#-#  .merge_file_CUmHnc (OpenERP Server 5.0.4)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_Wv2Z1d (OpenERP Server 5.0.4)  #-#-#-#-#\n"
-"一下模块不能安装或未知:'%s'"
+msgstr "以下模块不能安装或未知:'%s'"
 
 #. module: base
 #: code:addons/base/ir/ir_model.py:0
