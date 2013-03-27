@@ -9831,7 +9831,7 @@ msgstr ""
 #. module: base
 #: view:res.partner:0
 msgid "Sales & Purchases"
-msgstr "Prodaja i nabava"
+msgstr "Prodaja i Nabava"
 
 #. module: base
 #: view:res.partner:0
@@ -14324,9 +14324,12 @@ msgstr ""
 
 #. module: base
 #: code:addons/base/ir/ir_model.py:0
-#, python-format
+#, fuzzy, python-format
 msgid "The osv_memory field can only be compared with = and != operator."
 msgstr ""
+"#-#-#-#-#  .merge_file_8rRC7O (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"#-#-#-#-#  .merge_file_EZtCNZ (OpenERP Server 5.0.4)  #-#-#-#-#\n"
+"Polje osv_memory može se upoređivati samo sa = ili =! operatorima."
 
 #. module: base
 #: selection:ir.ui.view,type:0

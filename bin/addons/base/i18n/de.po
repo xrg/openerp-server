@@ -3316,7 +3316,7 @@ msgstr "Spanish (PA) / Español (PA)"
 #. module: base
 #: view:res.currency:0 field:res.currency,rate_ids:0
 msgid "Rates"
-msgstr "Raten"
+msgstr "Kurse"
 
 #. module: base
 #: model:res.country,name:base.sy
@@ -6161,8 +6161,8 @@ msgstr ""
 #: constraint:res.config.users:0 constraint:res.users:0
 msgid "The chosen company is not in the allowed companies for this user"
 msgstr ""
-"Das gewählte Unternehmen ist nicht in der Liste der beliebtesten Unternehmen "
-"für diesen Benutzer"
+"Das ausgewählte Unternehmen gehört nicht zu den zulässigen Unternehmen für "
+"diesen Benutzer"
 
 #. module: base
 #: model:res.country,name:base.gi

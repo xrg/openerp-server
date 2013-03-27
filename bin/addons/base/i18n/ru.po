@@ -129,7 +129,7 @@ msgstr ""
 #. module: base
 #: field:res.partner,ref:0
 msgid "Reference"
-msgstr "Обозначение"
+msgstr "Ссылка"
 
 #. module: base
 #: field:ir.actions.act_window,target:0
@@ -2422,7 +2422,7 @@ msgstr "Запланированные действия"
 #: field:res.partner.address,title:0 field:res.partner.title,name:0
 #: field:res.widget,title:0
 msgid "Title"
-msgstr "Название"
+msgstr "Обращение"
 
 #. module: base
 #: help:ir.property,res_id:0
@@ -5616,7 +5616,7 @@ msgstr "Невозможно найти предыдущее ir.actions.todo"
 #. module: base
 #: view:ir.actions.act_window:0
 msgid "General Settings"
-msgstr "Основные параметры"
+msgstr "Общие настройки"
 
 #. module: base
 #: model:ir.ui.menu,name:base.menu_administration_shortcut
