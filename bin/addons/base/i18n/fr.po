@@ -3816,7 +3816,7 @@ msgstr ""
 #. module: base
 #: help:res.bank,bic:0
 msgid "Bank Identifier Code"
-msgstr "Code d'indentification bancaire"
+msgstr "Code d'identification bancaire"
 
 #. module: base
 #: help:res.config.users,action_id:0 help:res.users,action_id:0
@@ -8135,12 +8135,8 @@ msgstr ""
 
 #. module: base
 #: selection:ir.property,type:0
-#, fuzzy
 msgid "DateTime"
-msgstr ""
-"#-#-#-#-#  .merge_file_XyNbut (OpenERP Server 5.0.4)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_Pz0sVY (OpenERP Server 5.0.4)  #-#-#-#-#\n"
-"Horodatage"
+msgstr "Date/Heure"
 
 #. module: base
 #: selection:ir.property,type:0
