@@ -3,7 +3,7 @@
 #
 #    OpenERP, Open Source Management Solution
 #    Copyright (C) 2004-2010 Tiny SPRL (<http://tiny.be>).
-#    Copyright (C) 2009,2011-2012 P. Christeas <xrg@hellug.gr>
+#    Copyright (C) 2009,2011-2013 P. Christeas <xrg@hellug.gr>
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -4983,9 +4983,8 @@ class orm(orm_template):
         """
         Duplicate record with given id updating it with default values
 
-        :param cr: database cursor
-        :param uid: current user id
-        :param id: id of the record to copy
+        :param id: id of the record to copy. Must be a single one. For compatibility with
+                browse methods, this fn accepts list/tuple of ids, but length must be 1.
         :param default: dictionary of field values to override in the original values of the copied record, e.g: ``{'field_name': overriden_value, ...}``
         :type default: dictionary
         :param context: context arguments, like lang, time zone
@@ -4995,6 +4994,10 @@ class orm(orm_template):
         """
         if context is None:
             context = {}
+        if isinstance(id, (tuple, list)):
+            if len(id) != 1:
+                raise ValueError("Invalid number (%s) of ids for the orm.copy() method" % len(id))
+            id = id[0]
         context = context.copy()
         data = self.copy_data(cr, uid, id, default, context)
         if self._vtable and data.get('_vptr', False) and data['_vptr'] != self._name:
