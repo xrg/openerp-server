@@ -1601,7 +1601,7 @@ def to_date(dt):
     elif isinstance(dt, date_DT):
         return dt
     else:
-        return datetime.strptime(dt, DEFAULT_SERVER_DATE_FORMAT).date()
+        return datetime.strptime(dt[:10], DEFAULT_SERVER_DATE_FORMAT).date()
 
 def to_time(dt):
     if (dt is None) or (dt is False):
