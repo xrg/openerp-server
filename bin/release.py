@@ -65,6 +65,7 @@ api_options = [
         'fields-inherit',
         'many2many-auto',
         'date_eval',
+        'cdatetime',
         'struct-field',
         'auth-in-cr',
         ]
