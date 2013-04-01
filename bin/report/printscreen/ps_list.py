@@ -3,6 +3,7 @@
 #
 #    OpenERP, Open Source Management Solution
 #    Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>).
+#    Copyright (C) 2013 P. Christeas <xrg@hellug.gr>
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -22,6 +23,7 @@
 from report.interface import report_int
 import pooler
 import tools
+from tools.misc import to_datetime, to_date, to_time
 from tools.safe_eval import safe_eval as eval
 from lxml  import etree
 from report import render
@@ -200,7 +202,7 @@ class report_printscreen_list(report_int):
                     new_d1 = line[f]
                     if not line.get('__group'):
                         format = str(locale.nl_langinfo(locale.D_FMT).replace('%y', '%Y'))
-                        d1 = datetime.strptime(line[f],'%Y-%m-%d')
+                        d1 = to_date(line[f])
                         new_d1 = d1.strftime(format)
                     line[f] = new_d1
 
@@ -208,7 +210,7 @@ class report_printscreen_list(report_int):
                     new_d1 = line[f]
                     if not line.get('__group'):
                         format = str(locale.nl_langinfo(locale.T_FMT))
-                        d1 = datetime.strptime(line[f], '%H:%M:%S')
+                        d1 = to_time(line[f])
                         new_d1 = d1.strftime(format)
                     line[f] = new_d1
 
@@ -216,7 +218,7 @@ class report_printscreen_list(report_int):
                     new_d1 = line[f]
                     if not line.get('__group'):
                         format = str(locale.nl_langinfo(locale.D_FMT).replace('%y', '%Y'))+' '+str(locale.nl_langinfo(locale.T_FMT))
-                        d1 = datetime.strptime(line[f], '%Y-%m-%d %H:%M:%S')
+                        d1 = to_datetime(line[f])
                         new_d1 = d1.strftime(format)
                     line[f] = new_d1
 
