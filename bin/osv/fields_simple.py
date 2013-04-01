@@ -34,6 +34,7 @@ import tools
 from tools.translate import _
 import __builtin__
 from tools import expr_utils as eu
+from tools.date_eval import lazy_date_eval
 
 class boolean(_column):
     _type = 'boolean'
@@ -285,6 +286,16 @@ class date(_column):
         return DT.date.today().strftime(
             tools.DEFAULT_SERVER_DATE_FORMAT)
 
+    @staticmethod
+    def lazy_eval(estr):
+        """ Returns a callable that performs date_eval(estr) for a date
+
+            Example usage is in column _defaults , like::
+
+                _defaults = { 'date': lazy_eval('yesterday'), }
+        """
+        return lazy_date_eval(estr, out_fmt='date_str')
+
 class datetime(_column):
     _type = 'datetime'
     _sql_type = 'timestamp'
@@ -300,6 +311,16 @@ class datetime(_column):
         """
         return DT.datetime.now().strftime(
             tools.DEFAULT_SERVER_DATETIME_FORMAT)
+
+    @staticmethod
+    def lazy_eval(estr):
+        """ Returns a callable that performs date_eval(estr)
+
+            Example usage is in column _defaults , like::
+
+                _defaults = { 'cur_tstamp': lazy_eval('now -5min'), }
+        """
+        return lazy_date_eval(estr, out_fmt='datetime_str')
 
     def expr_eval(self, cr, uid, obj, lefts, operator, right, pexpr, context):
         """ In order to keep the 5.0/6.0 convention, we consider timestamps
@@ -333,6 +354,16 @@ class time(_column):
         """
         return DT.datetime.now().strftime(
             tools.DEFAULT_SERVER_TIME_FORMAT)
+
+    @staticmethod
+    def lazy_eval(estr):
+        """ Returns a callable that performs date_eval(estr) for a time
+
+            Example usage is in column _defaults , like::
+
+                _defaults = { 'dtime': lazy_eval('-1hour'), }
+        """
+        return lazy_date_eval(estr, out_fmt='time_str')
 
 register_field_classes(boolean, integer, integer_big, char, text,
         float, date, datetime, time)
