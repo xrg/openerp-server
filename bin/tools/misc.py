@@ -1629,26 +1629,6 @@ if __name__ == '__main__':
     import doctest
     doctest.testmod()
 
-class upload_data_thread(threading.Thread):
-    def __init__(self, email, data, type):
-        self.args = [('email',email),('type',type),('data',data)]
-        super(upload_data_thread,self).__init__()
-    def run(self):
-        try:
-            import urllib
-            args = urllib.urlencode(self.args)
-            fp = urllib.urlopen('http://www.openerp.com/scripts/survey.php', args)
-            fp.read()
-            fp.close()
-        except Exception:
-            pass
-
-def upload_data(email, data, type='SURVEY'):
-    a = upload_data_thread(email, data, type)
-    a.start()
-    return True
-
-
 # port of python 2.6's attrgetter with support for dotted notation
 def resolve_attr(obj, attr):
     for name in attr.split("."):
