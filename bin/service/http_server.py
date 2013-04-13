@@ -669,12 +669,7 @@ class OerpAuthProxy(AuthProxy):
             (user,passwd) = base64.decodestring(auth_str).split(':',1)
             try:
                 acd = self.provider.authenticate(db,user,passwd,handler.client_address)
-                if handler.client_address and len(handler.client_address) == 4:
-                    addr_str = "[%s]:%s" % (handler.client_address[:2])
-                elif handler.client_address:
-                    addr_str = "%s:%s" % handler.client_address
-                else:
-                    addr_str = '?'
+                addr_str = self._get_addr_str(handler.client_address)
                 if acd:
                     self.provider.log("Auth user=\"%s@%s\" from %s" %(user, db, addr_str), lvl=logging.INFO)
                 else:
@@ -720,13 +715,15 @@ class OerpAuthProxy(AuthProxy):
 
 import security
 class OpenERPAuthProvider(AuthProvider):
+    proxyFactory = OerpAuthProxy
+
     def __init__(self,realm='OpenERP User', domain='db'):
         self.realm = realm
         self.domain=domain
 
     def setupAuth(self, multi, handler):
         if not multi.sec_realms.has_key(self.realm):
-            multi.sec_realms[self.realm] = OerpAuthProxy(self)
+            multi.sec_realms[self.realm] = self.proxyFactory(self)
         handler.auth_proxy = multi.sec_realms[self.realm]
 
     def authenticate(self, db, user, passwd, client_address):

@@ -56,7 +56,22 @@ class AuthRequiredExc(Exception):
 class AuthRejectedExc(Exception):
     pass
 
+class AuthRedirectExc(Exception):
+    """Redirect (302) response instead of content
+    
+        We also keep a few `extra_headers` so that additional info (such as Cookies)
+        can be sent along with the redirection
+    """
+    def __init__(self, message, target, extra_headers=False):
+        Exception.__init__(self, message)
+        self.target = target
+        self.extra_headers = extra_headers or []
+
 class AuthProvider:
+    """A provider object is persistent, sets up the "proxy" for each handler
+    
+        There is just one provider per service, per authentication domain
+    """
     def __init__(self,realm):
         self.realm = realm
 
@@ -77,7 +92,7 @@ class BasicAuthProvider(AuthProvider):
             multi.sec_realms[self.realm] = BasicAuthProxy(self)
 
 
-class AuthProxy:
+class AuthProxy(object):
     """ This class will hold authentication information for a handler,
         i.e. a connection
     """
@@ -88,6 +103,16 @@ class AuthProxy:
         """ Check if we are allowed to process that request
         """
         pass
+
+    def _get_addr_str(self, client_address):
+        """ Convert IPv4 or IPv6 address into a readable string
+        """
+        if client_address and len(client_address) == 4:
+            return "[%s]:%s" % (client_address[:2])
+        elif client_address:
+            return "%s:%s" % client_address
+        else:
+            return '?'
 
 class BasicAuthProxy(AuthProxy):
     """ Require basic authentication..
@@ -397,6 +422,24 @@ class MultiHTTPHandler(FixSendError, HttpOptions, BaseHTTPRequestHandler):
                 self.log_error("Rejected auth: %s" % e.args[0])
                 self.send_error(403,e.args[0])
                 self.close_connection = 1
+                return
+            except AuthRedirectExc, e:
+                if fore.command not in ('GET', 'POST', 'PUT'):
+                    self.log_error("No auth for %s request: %s", fore.command,  e.args[0])
+                    self.send_error(403, e.args[0])
+                    self.close_connection = 1
+                    return
+                self.log_message("Redirecting to login page: %s", e.target )
+                self._get_ignore_body(fore)
+                self.send_response(302, e.args[0])
+                target = e.target # TODO
+                self.send_header('Location', target)
+                self.send_header('Connection', 'keep-alive')
+                self.send_header('Content-Length', 0)
+                self.send_header('Cache-Control', 'no-cache')
+                for eh in e.extra_headers:
+                    self.send_header(eh[0], eh[1])
+                self.end_headers()
                 return
         mname = 'do_' + fore.command
         if not hasattr(fore, mname):
