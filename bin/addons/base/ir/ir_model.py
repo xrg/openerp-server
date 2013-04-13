@@ -421,6 +421,9 @@ class ir_model_fields(osv.osv):
                         models_gacl.add(obj._name)
 
                     # find out which values (per model) we need to update there
+                    if item.name not in obj._columns:
+                        raise NotImplementedError("object %s does not have column %s yet!" \
+                                (obj._name, item.name))
                     for vname, fprop, set_fn in model_props:
                         if vname in vals:
                             prop_val = set_fn(vals[vname])
