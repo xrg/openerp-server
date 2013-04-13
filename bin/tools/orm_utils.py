@@ -95,6 +95,17 @@ def cl_company_default_get(model):
     return lambda self, cr, uid, context: \
             self.pool.get('res.company')._company_default_get(cr, uid, model, context=context)
 
+def cl_sequence_next(seq_name, default=None):
+    """Retrieve the next number of a named ir.sequence
+    """
+    return lambda self,cr,uid,ctx=None: \
+            self.pool.get('ir.sequence').get(cr, uid, seq_name, ctx) or default
+
+def cl_company_id(self, cr, uid, ctx=None):
+    """ Get the company_id of the current user
+    """
+    return self.pool.get('res.users').browse(cr, uid, uid, ctx).company_id.id
+
 class ORM_stat_fields(object):
     """Statistic-collecting object of ORM fields access
 
