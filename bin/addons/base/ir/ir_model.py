@@ -288,6 +288,8 @@ class ir_model_fields(osv.osv):
     ]
 
     def unlink(self, cr, user, ids, context=None):
+        if isinstance(ids, (int, long)):
+            ids = [ids,]
         for field in self.browse(cr, user, [('id', 'in', ids)], context):
             # browse-search will remove any non-existing ids
 
