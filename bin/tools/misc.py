@@ -1591,7 +1591,7 @@ def to_datetime(dt):
     elif isinstance(dt, date_DT):
         return datetime.combine(dt, time_DT())
     else:
-        return datetime.strptime(dt, DEFAULT_SERVER_DATETIME_FORMAT)
+        return datetime.strptime(dt[:19], DEFAULT_SERVER_DATETIME_FORMAT)
 
 def to_date(dt):
     if (dt is None) or (dt is False):
