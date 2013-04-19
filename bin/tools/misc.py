@@ -53,10 +53,8 @@ from lxml import etree
 from which import which
 from threading import local
 
-_hush_pyflakes = []
 try:
     from html2text import html2text
-    _hush_pyflakes.append(html2text)
 except ImportError:
     html2text = None
 
@@ -377,7 +375,6 @@ def html2plaintext(html, body_id=None, encoding='utf-8'):
     try:
         from lxml.html.soupparser import fromstring
         kwargs = {}
-        _hush_pyflakes += [fromstring,]
     except ImportError:
         _logger.debug('tools.misc.html2plaintext: cannot use BeautifulSoup, fallback to lxml.etree.HTMLParser')
         from lxml.etree import fromstring, HTMLParser
@@ -1258,7 +1255,7 @@ def debug(what):
     """
         This method allow you to debug your code without print
         Example:
-        >>> def func_foo(bar)
+        >>> def func_foo(bar):
         ...     baz = bar
         ...     debug(baz)
         ...     qnx = (baz, bar)
@@ -1357,7 +1354,6 @@ def detect_ip_addr():
 
         try:
             import fcntl
-            _hush_pyflakes += [ fcntl, ]
         except ImportError:
             fcntl = None
 
