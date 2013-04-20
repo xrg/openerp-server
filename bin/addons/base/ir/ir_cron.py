@@ -111,7 +111,7 @@ class ir_cron(osv.osv, netsvc.Agent):
                         'WHERE numbercall<>0 AND active AND nextcall<=now() '
                         'ORDER BY priority', debug=self._debug)
                 for job in cr.dictfetchall():
-                    nextcall = datetime.strptime(job['nextcall'], '%Y-%m-%d %H:%M:%S')
+                    nextcall = datetime.strptime(job['nextcall'][:19], '%Y-%m-%d %H:%M:%S')
                     numbercall = job['numbercall']
 
                     ok = False
@@ -138,7 +138,7 @@ class ir_cron(osv.osv, netsvc.Agent):
                         'WHERE numbercall<>0 AND active ', debug=self._debug)
             next_call = cr.dictfetchone()['min_next_call']
             if next_call:
-                next_call = time.mktime(time.strptime(next_call, '%Y-%m-%d %H:%M:%S'))
+                next_call = time.mktime(time.strptime(next_call[:19], '%Y-%m-%d %H:%M:%S'))
             else:
                 next_call = int(time.time()) + 3600   # if do not find active cron job from database, it will run again after 1 day
 
