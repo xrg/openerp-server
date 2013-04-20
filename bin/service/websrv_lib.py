@@ -38,7 +38,7 @@ import errno
 import os
 import re
 import SocketServer
-from BaseHTTPServer import *
+from BaseHTTPServer import BaseHTTPRequestHandler, HTTPServer
 from SimpleHTTPServer import SimpleHTTPRequestHandler
 
 try:
