@@ -233,7 +233,7 @@ class HTTPModified:
                 time.gmtime(time.mktime(expires.timetuple())), lang=False))
 
 
-class HTTPHandler(SimpleHTTPRequestHandler):
+class HTTPHandler(HTTPModified, SimpleHTTPRequestHandler):
     def __init__(self,request, client_address, server):
         SimpleHTTPRequestHandler.__init__(self,request,client_address,server)
         self.protocol_version = 'HTTP/1.1'
@@ -251,6 +251,55 @@ class HTTPHandler(SimpleHTTPRequestHandler):
 
     def setup(self):
         pass
+
+    def send_head(self):
+        """Common code for GET and HEAD commands.
+
+            Copied from python2.7 SimpleHTTPServer.py
+        """
+        path = self.translate_path(self.path)
+        f = None
+        if os.path.isdir(path):
+            if not self.path.endswith('/'):
+                # redirect browser - doing basically what apache does
+                self.send_response(301)
+                self.send_header("Location", self.path + "/")
+                self.end_headers()
+                return None
+            for index in "index.html", "index.htm":
+                index = os.path.join(path, index)
+                if os.path.exists(index):
+                    path = index
+                    break
+            else:
+                return self.list_directory(path)
+        try:
+            fs = os.stat(path)
+            mtime = datetime.datetime.fromtimestamp(fs.st_mtime)
+            if self.not_modified_since(mtime):
+                return None
+        except EnvironmentError:
+            self.send_error(404, "File not found")
+            return None
+
+        ctype = self.guess_type(path)
+        try:
+            # Always read in binary mode. Opening files in text mode may cause
+            # newline translations, making the actual size of the content
+            # transmitted *less* than the content-length!
+            f = open(path, 'rb')
+        except IOError:
+            self.send_error(404, "File not found")
+            return None
+
+        self.send_response(200)
+        self.send_header("Content-type", ctype)
+        self.send_header("Cache-Control", "public")
+        self.send_header("Content-Length", str(fs[6]))
+        self._send_expires(mtime)
+        self.send_header("Last-Modified", self.date_time_string(fs.st_mtime))
+        self.end_headers()
+        return f
 
 class HTTPDir:
     """ A dispatcher class, like a virtual folder in httpd
