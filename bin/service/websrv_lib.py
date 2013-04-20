@@ -47,6 +47,24 @@ except ImportError:
     class SSLError(socket.error):
         pass
 
+import datetime
+import calendar
+import time
+try:
+    # A little issue with dependencies: although 'time_lc' has the correct
+    # version of language-independent 'strptime()', we CANNOT have a hard
+    # dependency from F3-server to openerp_libclient.
+    from openerp_libclient.time_lc import strptime_time, strftime
+except ImportError:
+    # if we don't have openerp_libclient, we could use the stock strptime(),
+    # which /should/ work if the locale is 'C' or 'en_US'
+    def strptime_time(data_string, format, lang=None):
+        return time.strptime(data_string, format)
+
+    def strftime(format, stime, lang=None):
+        return time.strftime(format, stime)
+
+
 class AuthRequiredExc(Exception):
     def __init__(self,atype,realm):
         Exception.__init__(self)
@@ -138,6 +156,81 @@ class BasicAuthProxy(AuthProxy):
             raise AuthRejectedExc("Authorization failed.")
         self.auth_tries += 1
         raise AuthRequiredExc(atype = 'Basic', realm=self.provider.realm)
+
+class HTTPModified:
+    """ Mixin that helps use 'If-Modified-Since' http header
+    
+        This mixin will NOT override any handler methods, will not decode
+        the header by default. Instead, your code shall call the methods
+        provided here, whenever they could make any sense.
+    """
+    _expire_max_age = 3600 # one hour, enough for developers
+
+    def decode_if_modified(self):
+        """Locate and decode the 'If-Modified-Since' header, set attribute
+
+            We will parse the header and set `self._if_modified_since`, if
+            appropriate. Then, return True if the header has any content.
+        """
+        try:
+            if 'If-Modified-Since' not in self.headers:
+                self._if_modified_since = None
+                return False
+
+            # here, we assume that fromtimestamp() will convert from UTC to
+            # our local timestamp
+            self._if_modified_since = datetime.datetime.fromtimestamp(calendar.timegm(strptime_time( \
+                        self.headers['If-Modified-Since'], "%a, %d %b %Y %H:%M:%S GMT", lang="C")))
+            return True
+        except Exception, e:
+            raise
+            self.log_message("Cannot parse If-Modified-Since: %s %s", 
+                        self.headers['If-Modified-Since'], e)
+            self._if_modified_since = None
+            return False
+
+    def not_modified_since(self, edate):
+        """Check if the HTTP request already has the object at `edate`
+
+            We check for *equality*, not edate being less than If-Modified-Since
+
+            If the client is upt to date, send the 304 header and return True
+        """
+        if not edate:
+            return False
+        edate2 = edate.replace(microsecond=0)
+        if self.decode_if_modified() and self._if_modified_since == edate2:
+            self.send_response(304, "Not modified")
+            self.send_header('Connection', 'keep-alive')
+            self.send_header('Content-Length', 0)
+            self._send_expires(edate)
+            self.end_headers()
+            return True
+        return False
+
+    def _send_expires(self, edate):
+        """Send 'Expires' HTTP header, using heuristics 
+
+            @param edate the last modification date of the object
+
+            We are using a crude heuristic, that expiration must be half the
+            distance from now() to the objects last MT, but always less than
+            _expire_max_age in the future
+        """
+        expires = None
+        delta = datetime.datetime.now() - edate
+        if delta.total_seconds() < 0:
+            # something is wrong, we'd better expire just now
+            expires = datetime.datetime.now()
+        elif delta.total_seconds() > self._expire_max_age:
+            expires = datetime.datetime.now() + datetime.timedelta(seconds=self._expire_max_age)
+        else:
+            expires = datetime.datetime.now() + (delta / 2)
+        # Since `expires` is naive (no timezone), datetime itself cannot convert
+        # it to UTC. So, we use the time.gmtime() to assume local and convert it
+        # for us.
+        self.send_header('Expires', strftime("%a, %d %b %Y %H:%M:%S GMT", \
+                time.gmtime(time.mktime(expires.timetuple())), lang=False))
 
 
 class HTTPHandler(SimpleHTTPRequestHandler):
