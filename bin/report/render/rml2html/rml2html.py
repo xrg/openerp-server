@@ -24,7 +24,7 @@ import sys
 import cStringIO
 from lxml import etree
 import copy
-import utils
+# import utils
 from report.render.rml2pdf import utils
 
 class _flowable(object):
@@ -305,7 +305,7 @@ class _rml_template(object):
         return self.style
 
     def set_next_template(self):
-        self.template = self.template_order[(self.template_order.index(name)+1) % self.template_order]
+        self.template = self.template_order[(self.template_order.index(self.template)+1) % self.template_order]
         self.frame_pos = -1
 
     def set_template(self, name):
