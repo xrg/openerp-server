@@ -1,7 +1,7 @@
 import yaml
 import logging
 from date_eval import date_eval
-from misc import DEFAULT_SERVER_DATE_FORMAT, DEFAULT_SERVER_DATETIME_FORMAT
+# from misc import DEFAULT_SERVER_DATE_FORMAT, DEFAULT_SERVER_DATETIME_FORMAT
 
 class YamlTag(object):
     """
