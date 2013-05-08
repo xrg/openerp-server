@@ -308,4 +308,39 @@ def safe_evalD(expr, *args, **kwargs):
             log.debug('Locals: %r', args[1].keys())
         raise
 
+from service_meta import _ServiceMeta, abstractmethod
+
+class ExecContext(object):
+    """Intermediate object which will prepare an eval() context
+
+        A generic implementation of an interface class from pythonic functions to
+        the (sandboxed) context for a safe_eval().
+    """
+    _logger_name = 'eval'
+    __metaclass__ = _ServiceMeta
+
+    def __init__(self, **kwargs):
+        """ Keep unsafe `kwargs` in this object, let it be used by our methods
+        """
+        self._kwargs = kwargs
+
+    def update(self, *args, **kwargs):
+        """ Update, as if this class were a dict()
+        """
+        self._kwargs.update(*args, **kwargs)
+
+    def __getattr__(self, name):
+        if not name in self._kwargs:
+            raise AttributeError(name)
+        return self._kwargs[name]
+
+    @abstractmethod
+    def prepare_context(self, context):
+        pass
+
+    def _prepare_logger(self, context):
+        """ Put a logger in the context, from this class'es `_logger_name`
+        """
+        context['log'] = logging.getLogger(self._logger_name)
+
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
