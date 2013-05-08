@@ -1307,6 +1307,7 @@ class Table(Relation):
                             i += 1
                             if i > 3:
                                 break
+                        del i
                         new_con = col.constraints.append(FkColumnConstraint(new_name, references['table'],
                                 references.get('column', 'id'), 
                                 on_delete=references.get('on_delete', None),
@@ -1354,8 +1355,8 @@ class Table(Relation):
                         nnc = col.constraints.append(NotNullColumnConstraint())
                         nnc.set_depends(default)
             if select is not None:
-                found_indices = [ i for i in self.indices \
-                        if len(i.columns) == 1 and colname in i.columns]
+                found_indices = [ ix for ix in self.indices \
+                        if len(ix.columns) == 1 and colname in ix.columns]
                 if select:
                     # add index, if needed
                     if not found_indices:
