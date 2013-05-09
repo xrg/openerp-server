@@ -239,6 +239,8 @@ class _XMLloader(DataLoader):
         self.update_mode = bool(self.noupdate and self.mode != 'init')
         self.exec_context = ExecContext['loader_xml'](parent=self)
         self.data_node = None
+        if self.context is None:
+            self.context = {}
 
     def parse(self, cr, fname, fp):
         
