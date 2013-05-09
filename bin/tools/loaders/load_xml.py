@@ -143,7 +143,8 @@ class _LoaderExecContext(ExecContext):
     def prepare_context(self, context):
      
         context.update(self.parent.idref)
-        context.update(time=time,
+        context.update(int=int, str=str, bool=bool, unicode=unicode, float=float,
+                    time=time,
                     DateTime=datetime,
                     datetime=datetime,
                     date_eval=lambda rstr: date_eval(rstr).date(),
