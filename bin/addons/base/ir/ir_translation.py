@@ -171,8 +171,8 @@ class ir_translation(osv.osv):
         'src': fields.text('Source'),
         'value': fields.text('Translation Value'),
     }
-    
-    _sql_constraints = [ ('lang_fkey_res_lang', 'FOREIGN KEY(lang) REFERENCES res_lang(code)', 
+
+    _sql_constraints = [ ('lang_fkey_res_lang', 'FOREIGN KEY(lang) REFERENCES res_lang(code)',
         'Language code of translation item must be among known languages' ), ]
 
     _indices = {
@@ -184,7 +184,7 @@ class ir_translation(osv.osv):
         if field == 'lang':
             return
         return super(ir_translation, self)._check_selection_field_value(cr, uid, field, value, context=context)
-    
+
     @tools.cache(skiparg=3, multi='ids')
     def _get_ids(self, cr, uid, name, tt, lang, ids):
         translations = dict.fromkeys(ids, False)
@@ -299,24 +299,24 @@ class ir_translation(osv.osv):
                         'AND src = ANY(%s) ' \
                         "AND value IS NOT NULL AND value <> '' ",
                     (lang, tt, tools.ustr(name), src_list), debug=self._debug)
-        
+
         res = dict(map(tuple, cr.fetchall()))
-        
+
         return res
 
     def _get_multifield(self, cr, user, fld_list, lang, prepend=None):
         """ return multiple (field) results, for a list of (name, type) tuples,
             where language is constant.
             If prepend is specified, prepend that to the name of each tuple.
-            
+
             Returns a list of (name, type, trans) tuples, where the name does
             not contain the prepend string.
         """
         assert(lang)
-        
+
         if not fld_list:
             return []
-        
+
         if prepend:
             fl2 = []
             for name, tt in fld_list:
@@ -325,14 +325,14 @@ class ir_translation(osv.osv):
         else:
             fl2 = fld_list
             nlen = 1
-            
+
         cr.execute('SELECT substr(name, %s) as name, type, value ' \
                     'FROM ir_translation ' \
                     'WHERE lang=%s ' \
                        'AND  (name, type) IN %s ' \
                        "AND value IS NOT NULL AND value <> '' ",
                     (nlen, lang, tuple(fl2)), debug=self._debug)
-        
+
         res = map(tuple, cr.fetchall())
         return res
 
@@ -341,7 +341,7 @@ class ir_translation(osv.osv):
         """ return multiple results, for a CROSS of names and ids
             where language and type is constant.
             If prepend is specified, prepend that to the name of each tuple.
-            
+
             name_list and ids are simple lists of strings and ints, respectively.
             Returns a list of (name, id, trans) tuples, where the name does
             not contain the prepend string.
@@ -349,14 +349,14 @@ class ir_translation(osv.osv):
             some translations are not available.
         """
         assert(lang)
-        
+
         if prepend:
             fl2 = map(lambda x: prepend + x, name_list)
             nlen = (len(prepend) + 1)
         else:
             fl2 = name_list
             nlen = 1
-            
+
         cr.execute_prepared('ir_trans_get_mids',
                     'SELECT substr(name, %s) as name, res_id, value ' \
                     'FROM ir_translation ' \
@@ -364,7 +364,7 @@ class ir_translation(osv.osv):
                     ' AND name = ANY(%s) AND res_id = ANY(%s) '
                     "AND value IS NOT NULL AND value <> '' ",
                     (nlen, lang, ttype, fl2, ids), debug=self._debug)
-        
+
         res = map(tuple, cr.fetchall())
         return res
 
