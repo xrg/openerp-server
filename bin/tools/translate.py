@@ -945,7 +945,7 @@ def trans_load_data(cr, fileobj, fileformat, lang, lang_name=None, verbose=True,
             # dictionary which holds values for this line of the csv file
             # {'lang': ..., 'type': ..., 'name': ..., 'res_id': ...,
             #  'src': ..., 'value': ...}
-            dic = {'lang': lang}
+            dic = {'lang': lang, 'imd_model': None, 'imd_module': None, 'imd_name': None}
             dic_module = False
             for i, fld in enumerate(f):
                 if fld in ('module',):

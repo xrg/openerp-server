@@ -3,6 +3,7 @@
 #
 #    OpenERP, Open Source Management Solution
 #    Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>).
+#    Copyright (C) 2013 P. Christeas <xrg@hellug.gr>
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -80,10 +81,8 @@ class ir_translation_import_cursor(object):
         self._cr.execute("INSERT INTO " + self._table_name \
                 + """(name, lang, res_id, src, type,
                         imd_model, imd_module, imd_name, value)
-                VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s)""",
-                (ddict['name'], ddict['lang'], ddict.get('res_id'), ddict['src'], ddict['type'],
-                    ddict.get('imd_model'), ddict.get('imd_module'), ddict.get('imd_name'),
-                    ddict['value']),
+                VALUES(%(name)s, %(lang)s, %(res_id)s, %(src)s, %(type)s, %(imd_model)s, %(imd_module)s, %(imd_name)s, %(value)s)""",
+                ddict,
                 debug=self._debug)
 
     def finish(self):
