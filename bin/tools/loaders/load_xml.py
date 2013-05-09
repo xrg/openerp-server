@@ -136,10 +136,6 @@ class _LoaderExecContext(ExecContext):
     #    super(_LoaderExecContext
     _name = 'loader_xml'
 
-    def _obj(self, ids):
-        return self.parent.pool.get(self.model).browse(self.cr, self.parent.uid, ids, \
-                            context=self.parent.context)
-
     def prepare_context(self, context):
      
         context.update(self.parent.idref)
@@ -153,8 +149,11 @@ class _LoaderExecContext(ExecContext):
                     timedelta=timedelta,
                     version=release.major_version,
                     pytz=pytz)
-        if getattr(self, 'model', None):
-            context['obj'] = self._obj
+        if getattr(self, 'model', None) and getattr(self, 'cr', None):
+            model = self.model
+            cr = self.cr
+            context['obj'] = lambda ids: model.browse(cr, self.parent.uid, ids, \
+                                        context=self.parent.context)
         if getattr(self, 'cr', None):
             cr = self.cr # copy, because we will delete it now
             context['ref'] = lambda x: self.parent.id_get(cr, x)
@@ -737,8 +736,11 @@ class _tag_workflow(_subtag_Mixin, _TagService):
                 'Only one child node is accepted (%d given)' % number_children
 
             node = rec[0]
+            obj = None
+            if model:
+                obj = self.parent.pool.get(model)
             rtag = self._get_subtag(node)
-            new_id = rtag.eval_xml(cr, node)
+            new_id = rtag.eval_xml(cr, node, obj)
 
         uid = self.parent.get_uid(cr, rec)
         wf_service = netsvc.LocalService("workflow")
@@ -1085,7 +1087,10 @@ class _tag_value(_TagService):
                 else:
                     return self.parent.id_get(cr, f_ref)
         elif rec.get('eval'):
-            return self.eval(rec.get('eval'), cr=cr, model=parent_model)
+            model = parent_model
+            if f_model:
+                model = self.parent.pool.get(f_model)
+            return self.eval(rec.get('eval'), cr=cr, model=model)
         elif rec.get('datetime', False):
             return date_eval(rec.get('datetime'))
         elif rec.get('date', False):
@@ -1099,11 +1104,14 @@ class _tag_value(_TagService):
             finally:
                 fp.close()
         else:
-            return self.eval_literal(cr, rec, parent_model, context)
+            model = parent_model
+            if f_model:
+                model = self.parent.pool.get(f_model)
+            return self.eval_literal(cr, rec, model, context)
 
     __xml_reference_re = re.compile(r'(?<!%)%\((.*?)\)[ds]')
 
-    def eval_literal(self, cr, rec, parent_model=None, context=None):
+    def eval_literal(self, cr, rec, model=None, context=None):
         """ Parse the contained elements of <value> into some value
 
             In the most common text, the text of the element is literally
@@ -1135,7 +1143,7 @@ class _tag_value(_TagService):
         elif t in ('list','tuple'):
             res=[]
             for n in rec.findall('./value'):
-                res.append(self.eval_xml(cr, n, parent_model, context))
+                res.append(self.eval_xml(cr, n, model, context))
             if t == 'tuple':
                 return tuple(res)
             return res
