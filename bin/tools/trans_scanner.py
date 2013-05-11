@@ -22,6 +22,7 @@
 
 from tools.service_meta import _ServiceMeta, abstractmethod
 import logging
+import itertools
 
 
 class TranslationScanner(object):
@@ -57,9 +58,21 @@ class TranslationScanner(object):
         out = [["module","type","name","res_id","src","value"]] # header
 
         if lang:
+            trans_obj = self.pool.get('ir.translation')
             logger.debug("Filling the translated strings (%d) from DB...", len(_to_translate))
             # translate strings marked as to be translated
-            raise NotImplementedError
+            key_fn = lambda l: (l[0], l[4], l[2])
+
+            # First, sort:
+            _to_translate.sort(key=key_fn)
+            for key, g_iter in itertools.groupby(_to_translate, key=key_fn):
+                module, tt, name = key
+                res_src = set([(l[3], l[1]) for l in g_iter ])
+                src_val = trans_obj._get_multisource(self.cr, self.uid, name, tt, lang, [r[1] for r in res_src])
+                # logger.debug("Got %d translations for %d sources for %s %s %s ",
+                #                len(src_val), len(res_src), module, tt, name)
+                for res_id, src in res_src:
+                    out.append([module, tt, name, res_id, src, src_val.get(src,'')])
         else:
             logger.debug("Sorting the full list, %d entries", len(_to_translate))
             _to_translate.sort()

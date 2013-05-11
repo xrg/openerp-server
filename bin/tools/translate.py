@@ -501,7 +501,7 @@ def trans_generate(lang, modules, cr):
     from trans_scanner import TranslationScanner
     pool = pooler.get_pool(cr.dbname)
     ts = TranslationScanner(pool, cr, 1, modules)
-    return ts.scan()
+    return ts.scan(lang=lang)
 
 def trans_load(cr, filename, lang, verbose=True, context=None):
     logger = logging.getLogger('i18n')
