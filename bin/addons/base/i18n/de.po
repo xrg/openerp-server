@@ -5,17 +5,18 @@
 # Ferdinand Gassauer <f.gassauer@chricar.at>, 2010.
 msgid ""
 msgstr ""
-"Project-Id-Version: OpenERP Server 5.0.4\n"
-"Report-Msgid-Bugs-To: support@openerp.com\n"
-"POT-Creation-Date: 2011-01-11 11:14+0000\n"
-"PO-Revision-Date: 2012-02-07 19:42+0000\n"
-"Last-Translator: Mustufa Rangwala (Open ERP) <mra@tinyerp.com>\n"
-"Language-Team: German <kde-i18n-doc@kde.org>\n"
+"Project-Id-Version: OpenERP-F3\n"
+"Report-Msgid-Bugs-To: xrg@hellug.gr\n"
+"POT-Creation-Date: 2012-09-16 11:37+0000\n"
+"PO-Revision-Date: 2013-05-13 11:00+0000\n"
+"Last-Translator: xrg <xrg@hellug.gr>\n"
+"Language-Team: German (http://www.transifex.com/projects/p/openerp-f3/"
+"language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-02-17 05:18+0000\n"
-"X-Generator: Launchpad (build 14814)\n"
+"Content-Transfer-Encoding: \n"
+"Language: de\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: base
 #: view:ir.filters:0 field:ir.model.fields,domain:0 field:ir.rule,domain:0
@@ -9257,3 +9258,76 @@ msgstr "Sri Lanka"
 #: selection:base.language.install,lang:0
 msgid "Russian / русский язык"
 msgstr "Russisch / русский язык"
+
+#. module: base
+#: model:ir.actions.act_window,name:0
+msgid "Wiki Groups"
+msgstr "Wiki Gruppen"
+
+#. module: base
+#: model:ir.model,name:0
+msgid "Wiki History"
+msgstr "Wiki Historie"
+
+#. module: base
+#: model:ir.actions.act_window,name:0
+msgid "Wiki Pages"
+msgstr "Wiki Seiten"
+
+#. module: base
+#: model:ir.ui.menu,name:0
+msgid "Survey Requests"
+msgstr "Antwort Umfrage"
+
+#. module: base
+#: model:ir.model,name:0
+msgid "wiz open page"
+msgstr "wiz open page"
+
+#. module: base
+#: field:res.roles,parent_id:0
+msgid "Parent"
+msgstr "Hauptprojekt"
+
+#. module: base
+#: field:res.roles,child_id:0
+msgid "Children"
+msgstr "Kindelemente"
+
+#. module: base
+#: model:ir.actions.act_window,help:0
+msgid ""
+"With Wiki Pages you can share ideas and questions with your coworkers. You "
+"can create a new document that can be linked to one or several applications "
+"(CRM, Sales, etc.). You can use keywords to ease access to your wiki pages. "
+"There is a basic wiki editing for text format."
+msgstr ""
+"Wiki Seiten erlauben Ideen und Fragen mit Mitarbeitern gemeinsam zu "
+"bearbeiten. Dokumente können mit mehreren Anwendungen verlinkt werden. "
+"Schüsselwörter können verwendet werden. Bitte verwenden Sie die OpenERP WEB-"
+"Anwendung. Es gibt eine einfache Editiermöglichkeit im Textformat"
+
+#. module: base
+#: model:ir.ui.menu,name:base.menu_project_management_time_tracking
+msgid "Time Tracking"
+msgstr "Zeiterfassung"
+
+#. module: base
+#: model:ir.ui.menu,name:0
+msgid "Answer a Survey"
+msgstr "Beantworte eine Umfrage"
+
+#. module: base
+#: field:ir.sequence,weight:0
+msgid "Weight"
+msgstr "Gewicht"
+
+#. module: base
+#: selection:ir.model.data,source:0
+msgid "Internal"
+msgstr "Umlagerung"
+
+#. module: base
+#: model:ir.model,name:base.model_res_groups
+msgid "Access Groups"
+msgstr "Berechtigungsgruppen"
