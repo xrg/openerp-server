@@ -2,15 +2,15 @@
 # This file contains the translation of the following modules:
 # 
 # Translators:
-# Ferdinand Gassauer <f.gassauer@chricar.at>, 2010.
+# Ferdinand Gassauer <f.gassauer@chricar.at>, 2010
 msgid ""
 msgstr ""
 "Project-Id-Version: OpenERP-F3\n"
 "Report-Msgid-Bugs-To: xrg@hellug.gr\n"
 "POT-Creation-Date: 2012-09-16 11:37+0000\n"
-"PO-Revision-Date: 2012-09-16 11:41+0000\n"
+"PO-Revision-Date: 2013-05-13 11:00+0000\n"
 "Last-Translator: xrg <xrg@hellug.gr>\n"
-"Language-Team: \n"
+"Language-Team: German (http://www.transifex.com/projects/p/openerp-f3/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -288,7 +288,7 @@ msgstr "Fehler bei group_by Argument"
 #. module: base
 #: model:ir.actions.act_window,name:0
 msgid "Wiki Groups"
-msgstr ""
+msgstr "Wiki Gruppen"
 
 #. module: base
 #: field:res.partner,credit_limit:0
@@ -341,7 +341,7 @@ msgstr ""
 #. module: base
 #: model:ir.model,name:0
 msgid "Wiki History"
-msgstr ""
+msgstr "Wiki Historie"
 
 #. module: base
 #: field:ir.exports.line,name:0 field:ir.translation,name:0
@@ -3050,7 +3050,7 @@ msgstr "res.partner.title"
 #. module: base
 #: model:ir.actions.act_window,name:0
 msgid "Wiki Pages"
-msgstr ""
+msgstr "Wiki Seiten"
 
 #. module: base
 #: view:ir.values:0
@@ -3804,7 +3804,7 @@ msgstr ""
 #. module: base
 #: model:ir.ui.menu,name:0
 msgid "Survey Requests"
-msgstr ""
+msgstr "Antwort Umfrage"
 
 #. module: base
 #: report:ir.module.reference.graph:0
@@ -6166,7 +6166,7 @@ msgstr "res.request"
 #. module: base
 #: model:ir.model,name:0
 msgid "wiz open page"
-msgstr ""
+msgstr "wiz open page"
 
 #. module: base
 #: view:ir.model:0
@@ -7157,7 +7157,7 @@ msgstr "Table Ref."
 #. module: base
 #: field:res.roles,parent_id:0
 msgid "Parent"
-msgstr ""
+msgstr "Hauptprojekt"
 
 #. module: base
 #: field:ir.actions.act_window,res_model:0 field:ir.actions.report.xml,model:0
@@ -7413,7 +7413,7 @@ msgstr "Report Kopf (Header)"
 #. module: base
 #: field:res.roles,child_id:0
 msgid "Children"
-msgstr ""
+msgstr "Kindelemente"
 
 #. module: base
 #: field:ir.actions.act_window,type:0 field:ir.actions.actions,type:0
@@ -7500,7 +7500,7 @@ msgid ""
 "can create a new document that can be linked to one or several applications "
 "(CRM, Sales, etc.). You can use keywords to ease access to your wiki pages. "
 "There is a basic wiki editing for text format."
-msgstr ""
+msgstr "Wiki Seiten erlauben Ideen und Fragen mit Mitarbeitern gemeinsam zu bearbeiten. Dokumente können mit mehreren Anwendungen verlinkt werden. Schüsselwörter können verwendet werden. Bitte verwenden Sie die OpenERP WEB-Anwendung. Es gibt eine einfache Editiermöglichkeit im Textformat"
 
 #. module: base
 #: view:ir.sequence:0
@@ -7718,7 +7718,7 @@ msgstr "Der Code des Landes muss eindeutig sein!"
 #. module: base
 #: model:ir.ui.menu,name:base.menu_project_management_time_tracking
 msgid "Time Tracking"
-msgstr ""
+msgstr "Zeiterfassung"
 
 #. module: base
 #: view:res.partner.category:0
@@ -7795,7 +7795,7 @@ msgstr "Registrieren"
 #. module: base
 #: model:ir.ui.menu,name:0
 msgid "Answer a Survey"
-msgstr ""
+msgstr "Beantworte eine Umfrage"
 
 #. module: base
 #: field:res.request,ref_doc1:0
@@ -9036,7 +9036,7 @@ msgstr "Gruppen auswählen"
 #. module: base
 #: field:ir.sequence,weight:0
 msgid "Weight"
-msgstr ""
+msgstr "Gewicht"
 
 #. module: base
 #: view:res.lang:0
@@ -9095,7 +9095,7 @@ msgstr "ir.actions.server"
 #. module: base
 #: selection:ir.model.data,source:0
 msgid "Internal"
-msgstr ""
+msgstr "Umlagerung"
 
 #. module: base
 #: field:ir.actions.configuration.wizard,progress:0
@@ -9160,7 +9160,7 @@ msgstr "Ansicht Bezeichnung"
 #. module: base
 #: model:ir.model,name:base.model_res_groups
 msgid "Access Groups"
-msgstr ""
+msgstr "Berechtigungsgruppen"
 
 #. module: base
 #: selection:base.language.install,lang:0
