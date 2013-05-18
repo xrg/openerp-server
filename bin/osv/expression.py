@@ -308,7 +308,7 @@ class expression(object):
                             # whole thing would blow up otherwise.
                         else:
                             new_exp.append(e)
-                    exp = eu.sub_expr(new_exp)
+                    exp = eu.nested_expr(new_exp)
 
             # Now, exp, perhaps modified, needs to be converted to sql
             if exp is True:
