@@ -5064,23 +5064,23 @@ class orm(orm_template):
             parent = self._parent_name
         if isinstance(ids, (long, int)):
             ids = [ids,]
-        ids_parent = ids[:]
         if cr.pgmode in PG84_MODES:
             # Recursive search, all inside postgres. The first part will fetch all
             # ids, the others will fetch parents, until some path contains the
             # id two times. Then, cycle -> True and not recurse further.
-            cr.execute("""WITH RECURSIVE %(t)s_crsrc(parent_id, path, cycle) AS
+            cr.execute("""WITH RECURSIVE %(t)s_crsrc(parent_id, _rsrc_path, _rsrc_cycle) AS
             ( SELECT "%(t)s"."%(p)s" AS parent_id, ARRAY[id], False
                 FROM "%(t)s"  WHERE id = ANY(%%s)
-             UNION ALL SELECT "%(t)s"."%(p)s" AS parent_id, path || id, id = ANY(path)
+             UNION ALL SELECT "%(t)s"."%(p)s" AS parent_id, _rsrc_path || id, id = ANY(_rsrc_path)
                 FROM "%(t)s", %(t)s_crsrc
                 WHERE "%(t)s".id = %(t)s_crsrc.parent_id
-                  AND %(t)s_crsrc.cycle = False)
-            SELECT 1 from %(t)s_crsrc WHERE cycle = True; """ %  \
+                  AND %(t)s_crsrc._rsrc_cycle = False)
+            SELECT 1 from %(t)s_crsrc WHERE _rsrc_cycle = True; """ %  \
                 { 't':self._table, 'p': parent},
-                (ids[:],), debug=self._debug)
+                (only_ids(ids),), debug=self._debug)
             res = cr.fetchone()
             return not (res and res[0])
+        ids_parent = ids[:]
         while len(ids_parent):
             ids_parent2 = []
             for i in range(0, len(ids), cr.IN_MAX):
