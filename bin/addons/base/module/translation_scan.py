@@ -23,7 +23,6 @@
 from tools.trans_scanner import _TScanWorker, abstractmethod
 
 import fnmatch
-import itertools
 from lxml import etree
 from tools.misc import UpdateableStr
 from tools.misc import SKIPPED_ELEMENT_TYPES
@@ -83,7 +82,7 @@ class _IMD_method(_TScanWorker):
             # handling wrt. translation
             try:
                 proc = _TScanWorker['model.'+model](self.parent)
-            except TypeError, e:
+            except TypeError:
                 proc = None
 
             if proc is not None:
