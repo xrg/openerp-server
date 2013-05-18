@@ -31,9 +31,10 @@
 from tools.translate import _
 import logging
 
-PG_MODES = ('pg92', 'pg91', 'pg90', 'pg84', 'pgsql')
-PG84_MODES = ('pg92', 'pg91', 'pg90', 'pg84')
-PG90_MODES = ('pg92', 'pg91', 'pg90')
+PG_MODES = ('pg93', 'pg92', 'pg91', 'pg90', 'pg84', 'pgsql')
+PG84_MODES = ('pg93', 'pg92', 'pg91', 'pg90', 'pg84')
+PG90_MODES = ('pg93', 'pg92', 'pg91', 'pg90')
+# PG93+ modes?
 
 class DomainError(ValueError):
     """ An exception regarding an ORM domain expression
