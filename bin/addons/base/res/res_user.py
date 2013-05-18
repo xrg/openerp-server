@@ -456,7 +456,6 @@ class users(osv.osv):
         data_id = dataobj._get_id(cr, 1, 'base', 'action_res_users_my')
         return dataobj.browse(cr, uid, data_id, context=context).res_id
 
-
     def login(self, db, login, password):
         if not password:
             return False

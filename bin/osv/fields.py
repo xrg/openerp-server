@@ -527,6 +527,7 @@ def sanitize_binary_value(dict_item):
     # just a safety mechanism (in these cases base64 data or
     # xmlrpc.Binary values should be used instead)
     return index, tools.ustr(value)
+
 def register_field_classes(*args):
     """ register another module's class as if it were defined here, in fields.py
 
