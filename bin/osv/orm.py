@@ -3802,7 +3802,7 @@ class orm(orm_template):
             return
         if not (context.get(self.CONCURRENCY_CHECK_FIELD) and self._log_access):
             return
-        check_clause = "(id = %s AND %s < COALESCE(write_date, create_date, now())::timestamp)"
+        check_clause = "(id = %s AND %s < date_trunc('second', COALESCE(write_date, create_date, now())::timestamp))"
         for sub_ids in cr.split_for_in_conditions(ids):
             ids_to_check = []
             for id in sub_ids:
