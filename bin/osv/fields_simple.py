@@ -317,6 +317,21 @@ class datetime(_column):
     _symbol_f = to_datetime
     _symbol_set = (_symbol_c, _symbol_f)
 
+    _part_fns = {
+            'day': 'extract(DAY FROM %s)',
+            'decade': 'extract(DECADE FROM %s)',
+            'dow': 'extract(DOW FROM %s)',
+            'doy': 'extract(DOY FROM %s)',
+            'epoch': 'extract(EPOCH FROM %s)',
+            'hour': 'extract(HOUR FROM %s)',
+            'milliseconds': 'extract(MILLISECONDS FROM %s)',
+            'month': 'extract(MONTH FROM %s)',
+            'minute': 'extract(MINUTE FROM %s)',
+            'second': 'extract(SECOND FROM %s)',
+            'week': 'extract(WEEK FROM %s)',
+            'year': 'extract(YEAR FROM %s)',
+        }
+
     @staticmethod
     def now(*args):
         """ Returns the current datetime in a format fit for being a
@@ -341,12 +356,27 @@ class datetime(_column):
         """ In order to keep the 5.0/6.0 convention, we consider timestamps
             to match the full day of some date, eg:
                 ( '2011-05-30 13:30:00' < '2011-05-30')
+
+            Since the datetime API, also supports lefts like .month, .day etc!
         """
-        
-        assert len(lefts) == 1, lefts
-        if right and len(right) < 11:
+        left = None
+        if len(lefts) == 2:
+            fn = self._part_fns.get(lefts[1], None)
+            if fn is None:
+                raise eu.DomainLeftError(obj, lefts, operator, right)
+            if operator not in ('=', '!=', '<>'):
+                raise eu.DomainInvalidOperator(obj, lefts, operator, right)
+            return  eu.function_expr(fn, lefts[0], operator, right)
+        elif len(lefts) == 1:
+            pass
+        else:
+            raise eu.DomainLeftError(obj, lefts, operator, right)
+
+        if right and isinstance(right, basestring) and len(right) < 11:
             if operator in ('<', '<='):
                 return (lefts[0], operator, right + ' 23:59:59')
+            elif operator in ('>', '>='):
+                return (lefts[0], operator, right + ' 00:00:00')
         elif right is False:
             if operator not in ('=', '!=', '<>'):
                 raise eu.DomainInvalidOperator(obj, lefts, operator, right)
