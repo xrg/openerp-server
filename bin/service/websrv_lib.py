@@ -661,6 +661,7 @@ class MultiHTTPHandler(FixSendError, HttpOptions, BaseHTTPRequestHandler):
                 if vdir.auth_provider:
                     vdir.auth_provider.setupAuth(self, self.in_handlers[p])
             hnd = self.in_handlers[p]
+            hnd.super_path = p # the part that matched
             hnd.rfile = self.rfile
             hnd.wfile = self.wfile
             self.rlpath = self.raw_requestline
