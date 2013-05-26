@@ -49,6 +49,7 @@ import datetime
 import logging
 import warnings
 from operator import itemgetter
+import itertools
 import pickle
 import re
 import time
@@ -64,6 +65,7 @@ from tools import sql_model
 from tools import orm_utils
 
 import fields
+import fields_relational
 from views import oo_view
 from query import Query
 import tools
@@ -446,7 +448,23 @@ class browse_record(object):
                 res_id = result_line['id']
                 del result_line['id']
                 self._data[res_id].update(result_line)
-        
+
+            # Prefetch logic: When we fetch the IDs of some relational field,
+            # preset these IDs in the browse_cache. Then, any read() of the
+            # remote object will fetch *all* these IDs on the first query.
+            for rn, rc in fields_to_fetch:
+                if isinstance(rc, fields_relational._rel2many):
+                    rcache = self._cache.setdefault(rc._obj, {})
+                    for rid in itertools.chain.from_iterable(map(itemgetter(rn), field_values)):
+                        if rid:
+                            rcache.setdefault(rid, {})
+                elif isinstance(rc, fields_relational._rel2one):
+                    rcache = self._cache.setdefault(rc._obj, {})
+                    for rid in map(itemgetter(rn), field_values):
+                        if rid:
+                            rcache.setdefault(rid, {})
+            del rn, rc
+
         if not name in self._data[self._id]:
             # How did this happen? Could be a missing model due to custom fields used too soon, see above.
             self.__logger.error( "Ffields: %s, datas: %s"%(field_names, field_values))
