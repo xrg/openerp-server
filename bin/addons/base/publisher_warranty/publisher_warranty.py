@@ -103,8 +103,10 @@ class publisher_warranty_contract(osv.osv):
 
 
             add_arg = {"timeout":30} if sys.version_info >= (2,6) else {}
-            uo = urllib2.urlopen(config.get("publisher_warranty_url"),
-                                    urllib.urlencode({'arg0': msg, "action": "send",}),**add_arg)
+            url = config.get("publisher_warranty_url")
+            if not url:
+                return False
+            uo = urllib2.urlopen(url, urllib.urlencode({'arg0': msg, "action": "send",}),**add_arg)
             try:
                 submit_result = uo.read()
             finally:
@@ -348,6 +350,8 @@ def get_sys_logs(cr, uid):
     arguments = {'arg0': msg, "action": "update",}
     arguments_raw = urllib.urlencode(arguments)
     url = config.get("publisher_warranty_url")
+    if not url:
+        return False
     uo = urllib2.urlopen(url, arguments_raw, **add_arg)
     try:
         submit_result = uo.read()

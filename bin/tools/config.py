@@ -74,7 +74,7 @@ class configmanager(object):
             'test_report_directory' : False,
             'test_disable' : False,
             'test_commit' : False,
-            'publisher_warranty_url': 'http://services.openerp.com/publisher-warranty/',
+            'publisher_warranty_url': False,
             'osv_memory_count_limit': None, # number of records in each osv_memory virtual table
             'osv_memory_age_limit': 1, # hours
         }
