@@ -205,7 +205,7 @@ class _XMLloader(DataLoader):
         """Preloads the RNG validator for XML parsing
         """
         if not cls._xml_parser:
-            cls._xml_parser = etree.XMLParser(remove_blank_text=True, remove_comments=True)
+            cls._xml_parser = etree.XMLParser(remove_blank_text=False, remove_comments=True)
         if cls._relaxng_validator:
             return
         
