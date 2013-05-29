@@ -68,7 +68,7 @@ class _TagService(object):
     """Parsers for each XML tag we support in the <data> element
     """
     __metaclass__ = _ServiceMeta
-    
+
     def __init__(self, parent):
         """ Parent is the DataLoader instance
         """
@@ -77,7 +77,7 @@ class _TagService(object):
     @abstractmethod
     def parse_xml(self, cr, rec):
         """Parse `rec` DOM element
-        
+
             This function shall not return any result, since it will store
             any modifications in the database.
             Remember that it is called for all elements under the `<data>`
@@ -87,10 +87,10 @@ class _TagService(object):
 
     def eval_xml(self, cr, rec, parent_model=None, context=None):
         """Like parse_xml, but returning the result
-        
+
             It is called for elements inside others, like the <field>s
             or <function> contents.
-            
+
             The base class is /not/ abstract, but raises an error if
             this unexpected element tries to eval_xml() .
         """
@@ -103,7 +103,7 @@ class _TagService(object):
             return None
         if code in _eval_consts:
             return _eval_consts[code]
-        
+
         ctx = self.parent._get_eval_context(cr=cr, model=model)
         return safe_eval(code, ctx)
 
@@ -137,7 +137,7 @@ class _LoaderExecContext(ExecContext):
     _name = 'loader_xml'
 
     def prepare_context(self, context):
-     
+
         context.update(self.parent.idref)
         context.update(int=int, str=str, bool=bool, unicode=unicode, float=float,
                     time=time,
@@ -199,7 +199,7 @@ class _XMLloader(DataLoader):
     _xml_parser = None
     _relaxng_validator = None
     logger = logging.getLogger('tools.convert.xml_import')
-    
+
     @classmethod
     def _load_validator(cls):
         """Preloads the RNG validator for XML parsing
@@ -208,7 +208,7 @@ class _XMLloader(DataLoader):
             cls._xml_parser = etree.XMLParser(remove_blank_text=False, remove_comments=True)
         if cls._relaxng_validator:
             return
-        
+
         try:
             frng = None
             frng = file_open(os.path.join(config['root_path'],'import_xml.rng' ))
@@ -243,10 +243,10 @@ class _XMLloader(DataLoader):
             self.context = {}
 
     def parse(self, cr, fname, fp):
-        
+
         # load the file into a lXML eTree
         doc = etree.parse(fp, parser=self._xml_parser)
-        
+
         try:
             self._relaxng_validator.assert_(doc)
             # TODO: perhaps explicitly catch only RelaxNG exceptions
@@ -296,7 +296,7 @@ class _XMLloader(DataLoader):
                         self.logger.warning("Parsing %s:%d: Unknown tag \"%s\" ",
                                     fname, rec.sourceline, rec.tag)
                         continue
-                
+
                 try:
                     self._tags[rec.tag].parse_xml(cr, rec)
                 except Exception:
@@ -305,10 +305,10 @@ class _XMLloader(DataLoader):
                                         fname, rec.sourceline,
                                         etree.tostring(rec).strip(), exc_info=True)
                     raise
-        
+
         self.noupdate = self._orig_noupdate
         return True
-    
+
     @classmethod
     def unload(cls):
         cls._xml_parser = None
@@ -321,7 +321,7 @@ class _XMLloader(DataLoader):
 maximum one dot. They are used to refer to other modules ID, in the
 form: module.record_id""" % (xml_id,)
             if module not in self._known_modules:
-                if self.pool.get('ir.module.module').search(cr, self.uid, 
+                if self.pool.get('ir.module.module').search(cr, self.uid,
                                 ['&', ('name', '=', module), ('state', 'in', ['installed'])],
                                 count=True, limit=1):
                     self._known_modules.add(module)
@@ -368,7 +368,7 @@ form: module.record_id""" % (xml_id,)
 
     def make_record(self, cr, dmodel, res, xml_id, res_id=None, skip_check=False, context=None):
         """Create or update a database record
-        
+
             @param dmodel string name of ORM model
             @param res dictionary of record values
             @param xml_id 'ir.model.data' identifier
@@ -378,7 +378,7 @@ form: module.record_id""" % (xml_id,)
         if (not skip_check) and xml_id:
             self._test_xml_id(cr, xml_id)
 
-        new_id = self.pool.get('ir.model.data')._update(cr, self.uid, dmodel, 
+        new_id = self.pool.get('ir.model.data')._update(cr, self.uid, dmodel,
                 self.module_name, res, xml_id, noupdate=self.noupdate, res_id=res_id,
                 mode=self.mode, context=context or self.context)
         if xml_id and new_id:
@@ -389,7 +389,7 @@ form: module.record_id""" % (xml_id,)
         """ """
         self.exec_context.cr = cr
         self.exec_context.model = model
-        
+
         ret = {}
         self.exec_context.prepare_context(ret)
         return ret
@@ -423,7 +423,7 @@ form: module.record_id""" % (xml_id,)
 class _tag_function(_subtag_Mixin, _TagService):
     _name = 'function'
     _subtag_prefix = 'val.'
-    
+
     def parse_xml(self, cr, rec):
         if self.parent.update_mode:
             return
@@ -453,7 +453,7 @@ class _tag_function(_subtag_Mixin, _TagService):
 
 class _tag_function_val(_TagService):
     """ A `<function>` can be met as an argument to another function
-    
+
         Then, the inner function will be evaluated and result fed into
         the outer one.
         This can only work by inheritance, since the caller will look
@@ -464,7 +464,7 @@ class _tag_function_val(_TagService):
 
 class _tag_delete(_TagService):
     _name = 'delete'
-    
+
     def parse_xml(self, cr, rec):
         d_model = rec.get("model",'')
         d_search = rec.get("search",'')
@@ -488,7 +488,7 @@ class _tag_delete(_TagService):
 
 class _tag_report(_TagService):
     _name = 'report'
-    
+
     def parse_xml(self, cr, rec):
         res = {}
         for dest,f in (('name','string'),('model','model'),('report_name','name')):
@@ -544,7 +544,7 @@ class _tag_report(_TagService):
 
 class _tag_wizard(_TagService):
     _name = 'wizard'
-    
+
     def parse_xml(self, cr, rec):
         string = rec.get("string",'')
         model = rec.get("model",'')
@@ -567,7 +567,7 @@ class _tag_wizard(_TagService):
             res['groups_id'] = groups_value
 
         new_id = self.parent.make_record(cr, "ir.actions.wizard", res, xml_id)
-        
+
         # ir_set
         if (not rec.get('menu') or self.eval(rec.get('menu','False'))) and id:
             keyword = str(rec.get('keyword','') or 'client_action_multi')
@@ -583,7 +583,7 @@ class _tag_wizard(_TagService):
 
 class _tag_url(_TagService):
     _name = 'url'
-    
+
     def parse_xml(self, cr, rec):
         url = rec.get("string",'')
         target = rec.get("target",'')
@@ -592,14 +592,14 @@ class _tag_url(_TagService):
         res = {'name': name, 'url': url, 'target':target}
 
         new_id = self.parent.make_record(cr, "ir.actions.url", res, xml_id,)
-        
+
         # ir_set
         if (not rec.get('menu') or self.eval(rec.get('menu','False'))) and id:
             keyword = str(rec.get('keyword','') or 'client_action_multi')
             value = 'ir.actions.url,%s' % new_id
             replace = rec.get("replace",'') or True
-            self.ir_model_data.ir_set(cr, self.parent.uid, 
-                    'action', keyword, url, ["ir.actions.url"], value, 
+            self.ir_model_data.ir_set(cr, self.parent.uid,
+                    'action', keyword, url, ["ir.actions.url"], value,
                     replace=replace, isobject=True, xml_id=xml_id)
         elif self.parent.mode=='update' and (rec.get('menu') and self.eval(rec.get('menu','False'))==False):
             # Special check for URL having attribute menu=False on update
@@ -608,7 +608,7 @@ class _tag_url(_TagService):
 
 class _tag_act_window(_TagService):
     _name = 'act_window'
-    
+
     def parse_xml(self, cr, rec):
         name = rec.get('name','')
         xml_id = rec.get('id','')
@@ -689,7 +689,7 @@ class _tag_act_window(_TagService):
             res['target'] = rec.get('target','')
         if rec.get('multi'):
             res['multi'] = rec.get('multi', False)
-        
+
         new_id = self.parent.make_record(cr, 'ir.actions.act_window',res, xml_id)
         if src_model:
             #keyword = 'client_action_relate'
@@ -704,7 +704,7 @@ class _tag_act_window(_TagService):
 class _tag_ir_set(_subtag_Mixin, _TagService):
     _name = 'ir_set'
     _subtag_prefix = 'fld.'
-    
+
     def parse_xml(self, cr, rec):
         if self.parent.mode != 'init':
             return
@@ -751,7 +751,7 @@ class _tag_workflow(_subtag_Mixin, _TagService):
 
 class _tag_menuitem(_TagService):
     """
-    
+
     Support two types of notation:
         name="Inventory Control/Sending Goods"
     or
@@ -759,7 +759,7 @@ class _tag_menuitem(_TagService):
         parent="parent_id"
     """
     _name = 'menuitem'
-    
+
     __escape_re = re.compile(r'(?<!\\)/')
     @staticmethod
     def __escape(x):
@@ -878,20 +878,20 @@ class _tag_menuitem(_TagService):
         xml_id = rec.get('id','')
         pid = self.parent.make_record(cr, 'ir.ui.menu', values, xml_id,
                     res_id=res and res[0] or False)
-        
+
         if rec.get('action') and pid:
             a_action = rec.get('action')
             a_type = rec.get('type','') or 'act_window'
             a_id = id_get(cr, a_action)
             action = "ir.actions.%s,%d" % (a_type, a_id)
-            self.ir_model_data.ir_set(cr, self.parent.uid, 'action', 
+            self.ir_model_data.ir_set(cr, self.parent.uid, 'action',
                         'tree_but_open', 'Menuitem', [('ir.ui.menu', int(pid))],
                         action, True, True, xml_id=xml_id)
         return ('ir.ui.menu', pid)
 
 class _tag_assert(_TagService):
     """ An assertion tag triggers a data check while XML is loading
-    
+
         Otherwise, it should store no modification in the database.
     """
     _name = 'assert'
@@ -982,7 +982,7 @@ class _tag_record(_subtag_Mixin, _TagService):
     """
     _name = 'record'
     _subtag_prefix = 'fld.'
-    
+
     def parse_xml(self, cr, rec):
         rec_model = rec.get("model")
         model = self.parent.pool.get(rec_model)
@@ -991,7 +991,7 @@ class _tag_record(_subtag_Mixin, _TagService):
         rec_context = self.parent.context.copy()
         if rec.get("context", None):
             rec_context.update(unsafe_eval(rec.get('context')))
-            
+
         if self.parent.noupdate and self.parent.mode != 'init':
             # check if the xml record has an id string
             if rec_id:
@@ -1027,7 +1027,7 @@ class _tag_record(_subtag_Mixin, _TagService):
 
 class _tag_value(_TagService):
     """Set a value in a list, literal or computed one
-    
+
         A value, so far, is an argument in a `<function>` element or
         a `<workflow>` one
     """
@@ -1155,9 +1155,9 @@ class _tag_value(_TagService):
 
 class _tag_field(_TagService):
     """Process the <field> tag
-    
+
         A 'field' tag is found in a `<record>` element or an `<ir_set>` one.
-        
+
         It behaves mostly like the `<value>` one, accepts the same attributes
         and inner elements. But it returns a `(name, value)` pair instead,
         since the field represents a `dictionary entry`.
