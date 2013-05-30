@@ -353,6 +353,7 @@ class WorkerHTTP(Worker):
 
     def start(self):
         Worker.start(self)
+        self.multi.long_polling_socket.close()
         self.server = WorkerBaseWSGIServer(self.multi.app)
 
 class WorkerLongPolling(Worker):
@@ -361,6 +362,15 @@ class WorkerLongPolling(Worker):
         super(WorkerLongPolling, self).__init__(multi)
         # Disable the watchdog feature for this kind of worker.
         self.watchdog_timeout = None
+
+    def watch_parent(self):
+        import gevent
+        while True:
+            if self.ppid != os.getppid():
+                _logger.info("WorkerLongPolling (%s) Parent changed", self.pid)
+                os.kill(os.getpid(), signal.SIGTERM)
+                return
+            gevent.sleep(self.multi.beat)
 
     def start(self):
         openerp.evented = True
@@ -371,8 +381,16 @@ class WorkerLongPolling(Worker):
         gevent_psycopg2.monkey_patch()
 
         Worker.start(self)
+        self.multi.socket.close()
+
+        import gevent
+        watcher = gevent.spawn(self.watch_parent)
+
+        log = _logger.getChild(self.__class__.__name__)
+        log.write = lambda msg: log.info(msg.strip())
+
         from gevent.wsgi import WSGIServer
-        self.server = WSGIServer(self.multi.long_polling_socket, self.multi.app)
+        self.server = WSGIServer(self.multi.long_polling_socket, self.multi.app, log=log)
         self.server.serve_forever()
 
 class WorkerBaseWSGIServer(werkzeug.serving.BaseWSGIServer):
@@ -447,6 +465,8 @@ class WorkerCron(Worker):
 
     def start(self):
         Worker.start(self)
+        self.multi.socket.close()
+        self.multi.long_polling_socket.close()
         openerp.service.start_internal()
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
