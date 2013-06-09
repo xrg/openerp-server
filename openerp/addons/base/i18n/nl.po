@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: openobject-server\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2013-06-07 19:35+0000\n"
-"PO-Revision-Date: 2013-03-16 17:51+0000\n"
+"PO-Revision-Date: 2013-06-08 11:09+0000\n"
 "Last-Translator: Erwin van der Ploeg (Endian Solutions) <Unknown>\n"
 "Language-Team: Dutch <nl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-06-08 06:53+0000\n"
+"X-Launchpad-Export-Date: 2013-06-09 06:15+0000\n"
 "X-Generator: Launchpad (build 16667)\n"
 
 #. module: base
@@ -486,7 +486,7 @@ msgstr "Kredietlimiet"
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_portal_project_long_term
 msgid "Portal Project Long Term"
-msgstr ""
+msgstr "Portaal project long term"
 
 #. module: base
 #: field:ir.model.constraint,date_update:0
@@ -1000,7 +1000,7 @@ msgstr "Bestaande vertalingen overschrijven"
 #: code:addons/base/res/res_currency.py:52
 #, python-format
 msgid "No currency rate associated for currency %d for the given period"
-msgstr ""
+msgstr "Geen valutakoers ingevoerd voor de valuta %d op de ingegeven periode"
 
 #. module: base
 #: model:ir.module.module,description:base.module_hr_holidays
@@ -1920,7 +1920,7 @@ msgstr ""
 #: code:addons/base/ir/ir_model.py:85
 #, python-format
 msgid "Invalid Search Criteria"
-msgstr ""
+msgstr "Ongeldige zoekcreieria"
 
 #. module: base
 #: field:res.users,login:0
@@ -3455,7 +3455,7 @@ msgstr ""
 #: code:addons/base/ir/ir_mail_server.py:222
 #, python-format
 msgid "Connection Test Succeeded!"
-msgstr ""
+msgstr "Connectie test geslaagd!"
 
 #. module: base
 #: field:ir.actions.client,params_store:0
@@ -3815,7 +3815,7 @@ msgstr "Velden koppeling"
 #: code:addons/base/module/wizard/base_module_upgrade.py:84
 #, python-format
 msgid "Unmet Dependency!"
-msgstr ""
+msgstr "Afhankelijkheid niet voldaan!"
 
 #. module: base
 #: model:res.partner.title,name:base.res_partner_title_sir
@@ -4029,7 +4029,7 @@ msgstr "Filters"
 #: code:addons/base/module/wizard/base_module_import.py:67
 #, python-format
 msgid "Can not create the module file: %s!"
-msgstr ""
+msgstr "Niet mogelijk het module bestand aan te maken: %s!"
 
 #. module: base
 #: model:ir.actions.act_window,name:base.ir_cron_act
@@ -4758,7 +4758,7 @@ msgstr "`code`moet uniek zijn."
 #: code:addons/base/ir/workflow/workflow.py:99
 #, python-format
 msgid "Operation Forbidden"
-msgstr ""
+msgstr "Niet toegestane bewerking"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_knowledge
@@ -5110,6 +5110,8 @@ msgid ""
 "Next number that will be used. This number can be incremented frequently so "
 "the displayed value might already be obsolete"
 msgstr ""
+"Volgende nummer dat wordt gebruikt. Dit nummer kan kan veelvuldig worden "
+"verhoogd, zodoende kan de weergegeven waarde alweer achterhaald zijn."
 
 #. module: base
 #: model:ir.module.category,description:base.module_category_marketing
@@ -5140,7 +5142,7 @@ msgstr "Richting"
 #: code:addons/orm.py:4815
 #, python-format
 msgid "Sorting field %s not found on model %s"
-msgstr ""
+msgstr "Sorteerveld %s niet gevonden bij model %s"
 
 #. module: base
 #: view:ir.actions.act_window:0
@@ -6902,7 +6904,7 @@ msgstr "Database anonimisatie"
 #. module: base
 #: field:res.partner,commercial_partner_id:0
 msgid "Commercial Entity"
-msgstr ""
+msgstr "Commerciële entiteit"
 
 #. module: base
 #: selection:ir.mail_server,smtp_encryption:0
@@ -7051,6 +7053,8 @@ msgid ""
 "You cannot delete the language which is Active!\n"
 "Please de-activate the language first."
 msgstr ""
+"Het is niet toegestaan een taal te verwijderen welke nog actief is!\n"
+"Maak de taal eerts inactief."
 
 #. module: base
 #: model:ir.module.module,description:base.module_l10n_fr
@@ -7930,7 +7934,7 @@ msgstr "Fout"
 #: code:addons/base/res/res_partner.py:566
 #, python-format
 msgid "Couldn't create contact without email address!"
-msgstr ""
+msgstr "Niet mogelijk een contactpersoon aan te maken zonder e-mail adres"
 
 #. module: base
 #: help:res.partner,tz:0
@@ -8379,7 +8383,7 @@ msgstr "Regels kunnen niet worden toegewezen aan Transient models."
 #: code:addons/base/ir/ir_mail_server.py:215
 #, python-format
 msgid "Connection Test Failed!"
-msgstr ""
+msgstr "Connectie test niet geslaagd!"
 
 #. module: base
 #: selection:base.language.install,lang:0
@@ -10252,7 +10256,7 @@ msgstr "Nieuwe taal (lege vertaling sjabloon)"
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_account_report_company
 msgid "Invoice Analysis per Company"
-msgstr ""
+msgstr "Factuuranalyse per bedrijf"
 
 #. module: base
 #: help:ir.actions.server,email:0
@@ -10767,7 +10771,7 @@ msgstr ""
 #. module: base
 #: sql_constraint:ir.model.constraint:0
 msgid "Constraints with the same name are unique per module."
-msgstr ""
+msgstr "Beperkingen met dezelfde naam zijn uniek per module."
 
 #. module: base
 #: model:ir.module.module,description:base.module_report_intrastat
@@ -11162,6 +11166,8 @@ msgid ""
 "Insufficient fields to generate a Calendar View for %s, missing a date_stop "
 "or a date_delay"
 msgstr ""
+"Onvoldoende velden om een kalenderweergave te maken voor %s. Er ontbreekt "
+"een einddatum of een tijdsduur."
 
 #. module: base
 #: field:workflow.activity,action:0
@@ -11980,6 +11986,17 @@ msgid ""
 "              </p>\n"
 "            "
 msgstr ""
+"<p class=\"oe_view_nocontent_create\">\n"
+"                Klik voor het aanmaken van een nieuwe relatiecategorie..\n"
+"              </p><p>\n"
+"                Koppel uw relaties aan een categorie om ze zo beter te "
+"kunnen classificeren, te volgen en te analyseren.\n"
+"                Een relatie kan behoren tot meerdere categorieën en "
+"categorieën hebben een Hiërarchische structuur.Een relatie     \n"
+"                welke toehoort aan een categorie behoort ook toe aan de "
+"bovenliggende categorie.\n"
+"              </p>\n"
+"            "
 
 #. module: base
 #: field:ir.actions.act_window,filter:0
@@ -12000,6 +12017,11 @@ msgid ""
 "a new contact should be created under that new company. You can use the "
 "\"Discard\" button to abandon this change."
 msgstr ""
+"Het wijzigen van het bedrijf van een contactpersoon doet u alleen als dit "
+"een foutieve instelling was. Indien een bestaand contactpersoon start met "
+"werken bij een nieuw bedrijf, dan dient u een nieuw contactpersoon aan te "
+"maken onder dit nieuwe bedrijf. U kunt klikken op 'Negeren' om deze "
+"wijziging af te breken."
 
 #. module: base
 #: help:res.partner,customer:0
@@ -12564,6 +12586,8 @@ msgstr ""
 msgid ""
 "Please make sure no workitems refer to an activity before deleting it!"
 msgstr ""
+"Zorg ervoor dat er geen workitems verwijzen naar een activiteit voordat ze "
+"worden verwijderd!"
 
 #. module: base
 #: model:res.country,name:base.tr
@@ -12579,7 +12603,7 @@ msgstr "Falkland-eilanden"
 #: code:addons/base/ir/ir_actions.py:606
 #, python-format
 msgid "Please specify an action to launch!"
-msgstr ""
+msgstr "Specificeer een actie om te starten!"
 
 #. module: base
 #: model:res.country,name:base.lb
@@ -12995,7 +13019,7 @@ msgstr "Adres formaat"
 #. module: base
 #: constraint:res.partner:0
 msgid "You cannot create recursive Partner hierarchies."
-msgstr ""
+msgstr "Het is niet mogelijk een recursieve relatie hiërarchie te maken"
 
 #. module: base
 #: model:ir.model,name:base.model_change_password_user
@@ -13171,7 +13195,7 @@ msgstr ""
 #: code:addons/base/ir/ir_model.py:295
 #, python-format
 msgid "Size of the field can never be less than 0 !"
-msgstr ""
+msgstr "Grootte van het veld kan nooit minder dan 0!"
 
 #. module: base
 #: help:ir.actions.server,sequence:0
@@ -14152,6 +14176,8 @@ msgstr ""
 #, python-format
 msgid "You cannot delete the language which is User's Preferred Language!"
 msgstr ""
+"Het is niet toegestaan een taal te verwijderen welke de gebruikers voorkeur "
+"taal is!"
 
 #. module: base
 #: view:ir.model.data:0
@@ -14620,7 +14646,7 @@ msgstr "Luxemburg"
 #. module: base
 #: view:res.partner:0
 msgid "(edit company address)"
-msgstr ""
+msgstr "(bijwerken adres bedrijf)"
 
 #. module: base
 #: model:ir.module.module,summary:base.module_base_calendar
@@ -15953,7 +15979,7 @@ msgstr "Bankrekeningen"
 #: code:addons/base/res/res_lang.py:185
 #, python-format
 msgid "Base Language 'en_US' can not be deleted!"
-msgstr ""
+msgstr "Standaard taal 'en_US' kan niet worden verwijderd!"
 
 #. module: base
 #: model:res.country,name:base.sl
@@ -16236,7 +16262,7 @@ msgstr "Exportnaam"
 #: code:addons/base/ir/ir_sequence.py:259
 #, python-format
 msgid "Invalid prefix or suffix for sequence '%s'"
-msgstr ""
+msgstr "Ongeldige voor- of navoegsel voor reeks '%s'"
 
 #. module: base
 #: help:res.partner,type:0
