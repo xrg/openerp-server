@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: openobject-server\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2013-06-07 19:35+0000\n"
-"PO-Revision-Date: 2013-06-14 07:03+0000\n"
-"Last-Translator: krnkris <Unknown>\n"
+"PO-Revision-Date: 2013-06-14 11:19+0000\n"
+"Last-Translator: Csaba TOTH <csaba.toth@i3rendszerhaz.hu>\n"
 "Language-Team: Hungarian <hu@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-06-14 07:04+0000\n"
+"X-Launchpad-Export-Date: 2013-06-15 06:13+0000\n"
 "X-Generator: Launchpad (build 16667)\n"
 
 #. module: base
@@ -4749,7 +4749,7 @@ msgstr "Szűrők"
 #: code:addons/base/module/wizard/base_module_import.py:67
 #, python-format
 msgid "Can not create the module file: %s!"
-msgstr "Nem hozható létre a modul fájl:: %s!"
+msgstr "Nem hozható létre a modul fájl: %s!"
 
 #. module: base
 #: model:ir.actions.act_window,name:base.ir_cron_act
@@ -9481,7 +9481,7 @@ msgstr "Hiba"
 #: code:addons/base/res/res_partner.py:566
 #, python-format
 msgid "Couldn't create contact without email address!"
-msgstr "Nem hozható létre kapcsolat e-mail címek nélkül!"
+msgstr "Nem hozható létre Kontakt e-mail cím nélkül!"
 
 #. module: base
 #: help:res.partner,tz:0
@@ -10014,7 +10014,7 @@ msgstr "Szabályok nem érvényesíthetőek az ideiglenes medel-en."
 #: code:addons/base/ir/ir_mail_server.py:215
 #, python-format
 msgid "Connection Test Failed!"
-msgstr "Kapcsolódási teszt meghiusult!"
+msgstr "Kapcsolódási teszt meghiúsult!"
 
 #. module: base
 #: selection:base.language.install,lang:0
@@ -14934,7 +14934,7 @@ msgstr "Falkland-szigetek"
 #: code:addons/base/ir/ir_actions.py:606
 #, python-format
 msgid "Please specify an action to launch!"
-msgstr "Kérem egy elindítani kívánt művelet meghatározását!"
+msgstr "Kérem válassza ki az elindítani kívánt műveletet!"
 
 #. module: base
 #: model:res.country,name:base.lb
@@ -15371,7 +15371,7 @@ msgstr "Címek létrehozása"
 #. module: base
 #: constraint:res.partner:0
 msgid "You cannot create recursive Partner hierarchies."
-msgstr "Nem hozhat létre visszahivatkozó/rekúrzív partner rangsorokat."
+msgstr "Nem hozhat létre rekurzív partner hierarchiákat."
 
 #. module: base
 #: model:ir.model,name:base.model_change_password_user
@@ -17350,7 +17350,7 @@ msgstr "Luxemburg"
 #. module: base
 #: view:res.partner:0
 msgid "(edit company address)"
-msgstr "(vállalati cím szerkesztés)"
+msgstr "(vállalati cím szerkesztése)"
 
 #. module: base
 #: model:ir.module.module,summary:base.module_base_calendar
