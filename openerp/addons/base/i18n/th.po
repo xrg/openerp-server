@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: openobject-server\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2013-06-07 19:35+0000\n"
-"PO-Revision-Date: 2012-12-21 23:09+0000\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"PO-Revision-Date: 2013-06-17 04:03+0000\n"
+"Last-Translator: Sumonchai ( เหลา ) <sumonchai@gmail.com>\n"
 "Language-Team: Thai <th@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-06-08 06:58+0000\n"
+"X-Launchpad-Export-Date: 2013-06-17 06:20+0000\n"
 "X-Generator: Launchpad (build 16667)\n"
 
 #. module: base
@@ -34,17 +34,17 @@ msgstr ""
 #. module: base
 #: model:res.country,name:base.sh
 msgid "Saint Helena"
-msgstr ""
+msgstr "เซนต์เฮเลนา"
 
 #. module: base
 #: view:ir.actions.report.xml:0
 msgid "Other Configuration"
-msgstr ""
+msgstr "การกำหนดค่าอื่น ๆ"
 
 #. module: base
 #: selection:ir.property,type:0
 msgid "DateTime"
-msgstr ""
+msgstr "วันที่เวลา"
 
 #. module: base
 #: code:addons/fields.py:652
@@ -58,27 +58,27 @@ msgstr ""
 #: field:ir.ui.view,arch:0
 #: field:ir.ui.view.custom,arch:0
 msgid "View Architecture"
-msgstr ""
+msgstr "มุมมองออกแบบ"
 
 #. module: base
 #: model:ir.module.module,summary:base.module_sale_stock
 msgid "Quotation, Sale Orders, Delivery & Invoicing Control"
-msgstr ""
+msgstr "ใบเสนอราคา, คำสั่งซื้อขาย, จัดส่งสินค้า และการควบคุมการออกใบแจ้งหนี้"
 
 #. module: base
 #: selection:ir.sequence,implementation:0
 msgid "No gap"
-msgstr ""
+msgstr "ไม่มีช่องว่าง"
 
 #. module: base
 #: selection:base.language.install,lang:0
 msgid "Hungarian / Magyar"
-msgstr ""
+msgstr "ฮังการี / Hungarian"
 
 #. module: base
 #: selection:base.language.install,lang:0
 msgid "Spanish (PY) / Español (PY)"
-msgstr ""
+msgstr "สเปน / Spanish (PY)"
 
 #. module: base
 #: model:ir.module.category,description:base.module_category_project_management
@@ -86,11 +86,12 @@ msgid ""
 "Helps you manage your projects and tasks by tracking them, generating "
 "plannings, etc..."
 msgstr ""
+"ช่วยคุณในการจัดการโครงการและงาน โดยการติดตาม การเสนอการวางแผน และอื่นๆ"
 
 #. module: base
 #: model:ir.module.module,summary:base.module_point_of_sale
 msgid "Touchscreen Interface for Shops"
-msgstr ""
+msgstr "อินเตอร์เฟซหน้าจอสัมผัสสำหรับร้านค้า"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_l10n_in_hr_payroll
@@ -101,12 +102,12 @@ msgstr ""
 #: help:ir.cron,model:0
 msgid ""
 "Model name on which the method to be called is located, e.g. 'res.partner'."
-msgstr ""
+msgstr "ชื่อ model ที่ซึ่ง method ที่ถูกเรียกวางอยู่ เช่น 'res.partner'."
 
 #. module: base
 #: view:ir.module.module:0
 msgid "Created Views"
-msgstr ""
+msgstr "มุมมองที่สร้างไว้"
 
 #. module: base
 #: model:ir.module.module,description:base.module_product_manufacturer
@@ -123,6 +124,18 @@ msgid ""
 "    * Product Attributes\n"
 "    "
 msgstr ""
+"\n"
+"โมดูลที่เพิ่มผู้ผลิตและคุณสมบัติในรูปแบบผลิตภัณฑ์\n"
+"====================================================================\n"
+"\n"
+"ขณะนี้คุณสามารถกำหนดดังต่อไปนี้สำหรับสินค้า:\n"
+"-----------------------------------------------\n"
+"\n"
+"     * ผู้ผลิต \n"
+"     * ชื่อสินค้าของผู้ผลิต\n"
+"     * รหัสสินค้าของผู้ผลิต\n"
+"     * คุณสมบัติผลิตภัณฑ์\n"
+"    "
 
 #. module: base
 #: field:ir.actions.client,params:0
@@ -140,7 +153,7 @@ msgstr ""
 #. module: base
 #: help:res.partner,employee:0
 msgid "Check this box if this contact is an Employee."
-msgstr ""
+msgstr "ทำเครื่องหมายที่ช่องนี้ถ้ารายชื่อนี้เป็นพนักงาน."
 
 #. module: base
 #: help:ir.model.fields,domain:0
@@ -153,7 +166,7 @@ msgstr ""
 #. module: base
 #: field:res.partner,ref:0
 msgid "Reference"
-msgstr ""
+msgstr "ข้อมูลอ้างอิง"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_l10n_be_invoice_bba
@@ -163,7 +176,7 @@ msgstr ""
 #. module: base
 #: field:ir.actions.act_window,target:0
 msgid "Target Window"
-msgstr ""
+msgstr "หน้าต่างเป้าหมาย"
 
 #. module: base
 #: field:ir.actions.report.xml,report_rml:0
@@ -196,7 +209,7 @@ msgstr ""
 #: code:addons/base/res/res_users.py:473
 #, python-format
 msgid "Warning!"
-msgstr ""
+msgstr "คำเตือน!"
 
 #. module: base
 #: code:addons/base/ir/ir_model.py:405
@@ -253,7 +266,7 @@ msgstr ""
 #: model:ir.actions.act_window,name:base.action_res_company_tree
 #: model:ir.ui.menu,name:base.menu_action_res_company_tree
 msgid "Company's Structure"
-msgstr ""
+msgstr "โครงสร้างบริษัท"
 
 #. module: base
 #: selection:base.language.install,lang:0
@@ -328,7 +341,7 @@ msgstr ""
 #. module: base
 #: view:res.partner:0
 msgid "Search Partner"
-msgstr ""
+msgstr "ค้นหาคู่ค้า"
 
 #. module: base
 #: field:ir.module.category,module_nr:0
@@ -376,7 +389,7 @@ msgstr "ใช้งาน"
 #. module: base
 #: field:ir.actions.wizard,wiz_name:0
 msgid "Wizard Name"
-msgstr ""
+msgstr "ซื่อตัวช่วย"
 
 #. module: base
 #: model:ir.module.module,description:base.module_knowledge
@@ -1311,7 +1324,7 @@ msgstr ""
 #. module: base
 #: model:res.country,name:base.kr
 msgid "South Korea"
-msgstr ""
+msgstr "เกาหลีใต้"
 
 #. module: base
 #: model:ir.module.module,description:base.module_l10n_si
@@ -6779,7 +6792,7 @@ msgstr ""
 #: field:workflow.transition,wkf_id:0
 #: field:workflow.workitem,wkf_id:0
 msgid "Workflow"
-msgstr ""
+msgstr "เวิร์คโฟลว์"
 
 #. module: base
 #: selection:base.language.install,lang:0
@@ -7109,7 +7122,7 @@ msgstr ""
 #: model:ir.ui.menu,name:base.menu_workflow_transition
 #: view:workflow.activity:0
 msgid "Transitions"
-msgstr ""
+msgstr "การแปล"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_hr_timesheet
@@ -15542,7 +15555,7 @@ msgstr ""
 #. module: base
 #: selection:base.language.install,lang:0
 msgid "Russian / русский язык"
-msgstr ""
+msgstr "รัสเซีย / Russian"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_auth_signup
