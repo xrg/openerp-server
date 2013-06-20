@@ -14,7 +14,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-06-19 05:44+0000\n"
+"X-Launchpad-Export-Date: 2013-06-20 05:47+0000\n"
 "X-Generator: Launchpad (build 16673)\n"
 
 #. module: base
@@ -802,7 +802,7 @@ msgstr "Cambodia, Kingdom of"
 #: field:base.language.import,overwrite:0
 #: field:base.language.install,overwrite:0
 msgid "Overwrite Existing Terms"
-msgstr "เขียนทับ ข้อตกลงและเงื่อนไขที่มีอยู่"
+msgstr "ข้อตกลงและเงื่อนไขที่มีอยู่จะถูกเขียนทับ"
 
 #. module: base
 #: model:ir.model,name:base.model_base_language_import
@@ -936,7 +936,7 @@ msgstr "MRP"
 #. module: base
 #: report:ir.module.reference:0
 msgid "1cm 28cm 20cm 28cm"
-msgstr ""
+msgstr "1cm 28cm 20cm 28cm"
 
 #. module: base
 #: model:res.country,name:base.nu
@@ -993,7 +993,7 @@ msgstr ""
 #. module: base
 #: field:res.partner.category,child_ids:0
 msgid "Child Categories"
-msgstr ""
+msgstr "กลุ่มย่อย"
 
 #. module: base
 #: model:ir.model,name:base.model_ir_config_parameter
@@ -1065,7 +1065,7 @@ msgstr ""
 #: selection:ir.actions.server,state:0
 #: selection:workflow.activity,kind:0
 msgid "Dummy"
-msgstr ""
+msgstr "ตัวจำลอง"
 
 #. module: base
 #: constraint:ir.ui.view:0
@@ -1154,7 +1154,7 @@ msgstr "ไนเจอร์"
 #. module: base
 #: selection:base.language.install,lang:0
 msgid "Chinese (HK)"
-msgstr ""
+msgstr "จีน (HK)"
 
 #. module: base
 #: model:res.country,name:base.ba
@@ -1532,7 +1532,7 @@ msgstr "การบริหารสินค้าคงคลัง"
 #. module: base
 #: model:ir.model,name:base.model_res_request_link
 msgid "res.request.link"
-msgstr ""
+msgstr "res.request.link"
 
 #. module: base
 #: field:ir.actions.wizard,name:0
@@ -1677,7 +1677,7 @@ msgstr ""
 #. module: base
 #: view:ir.sequence:0
 msgid "Day: %(day)s"
-msgstr ""
+msgstr "วัน: %(day)"
 
 #. module: base
 #: model:ir.module.category,description:base.module_category_point_of_sale
@@ -1690,7 +1690,7 @@ msgstr ""
 #. module: base
 #: model:res.country,name:base.mv
 msgid "Maldives"
-msgstr ""
+msgstr "มัลดิฟ"
 
 #. module: base
 #: model:ir.module.module,description:base.module_idea
@@ -1816,7 +1816,7 @@ msgstr "ir.model.access"
 #: field:res.request,priority:0
 #: field:res.request.link,priority:0
 msgid "Priority"
-msgstr ""
+msgstr "ระดับความสำคัญ"
 
 #. module: base
 #: field:workflow.transition,act_from:0
@@ -1948,7 +1948,7 @@ msgstr ""
 #. module: base
 #: model:res.country,name:base.fi
 msgid "Finland"
-msgstr ""
+msgstr "ฟินแลนด์"
 
 #. module: base
 #: code:addons/base/res/res_company.py:156
@@ -2012,7 +2012,7 @@ msgstr "ภาษาสเปน / Español"
 #. module: base
 #: selection:base.language.install,lang:0
 msgid "Korean (KP) / 한국어 (KP)"
-msgstr ""
+msgstr "เกาหลี (KP) / 한국어 (KP)"
 
 #. module: base
 #: view:base.module.update:0
@@ -2440,7 +2440,7 @@ msgstr "ซิมบับเว"
 #. module: base
 #: model:res.country,name:base.io
 msgid "British Indian Ocean Territory"
-msgstr ""
+msgstr "เขตปกครองบริติชอินเดียนโอเชียน"
 
 #. module: base
 #: model:ir.ui.menu,name:base.menu_translation_export
@@ -2514,7 +2514,7 @@ msgstr ""
 #. module: base
 #: model:res.country,name:base.tt
 msgid "Trinidad and Tobago"
-msgstr ""
+msgstr "ตรินิแดดและโตเบโก"
 
 #. module: base
 #: model:res.country,name:base.lv
@@ -3075,7 +3075,7 @@ msgstr "พบข้อผิดพลาด! คุณไม่สามาร�
 #: field:res.partner,user_ids:0
 #: view:res.users:0
 msgid "Users"
-msgstr ""
+msgstr "ผู้ใช้งาน"
 
 #. module: base
 #: field:res.partner,birthdate:0
@@ -3120,7 +3120,7 @@ msgstr ""
 #. module: base
 #: model:res.country,name:base.na
 msgid "Namibia"
-msgstr ""
+msgstr "นามิเบีย"
 
 #. module: base
 #: model:ir.model,name:base.model_workflow_activity
@@ -3321,7 +3321,7 @@ msgstr "รายละเอียด"
 #: model:ir.actions.act_window,name:base.action_workflow_instance_form
 #: model:ir.ui.menu,name:base.menu_workflow_instance
 msgid "Instances"
-msgstr ""
+msgstr "อินสแตนซ์"
 
 #. module: base
 #: help:ir.mail_server,smtp_host:0
@@ -3346,7 +3346,7 @@ msgstr "_นำเข้า"
 #. module: base
 #: selection:ir.translation,type:0
 msgid "XSL"
-msgstr ""
+msgstr "XSL"
 
 #. module: base
 #: field:res.lang,grouping:0
@@ -3361,7 +3361,7 @@ msgstr ""
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_report_webkit
 msgid "Webkit Report Engine"
-msgstr ""
+msgstr "Webkit Report Engine"
 
 #. module: base
 #: selection:publisher_warranty.contract,state:0
@@ -3644,7 +3644,7 @@ msgstr ""
 #. module: base
 #: constraint:res.partner.category:0
 msgid "Error ! You can not create recursive categories."
-msgstr ""
+msgstr "ผิดพลาด ! คุณไม่สามารถกำหนดประเภทสินค้าซ้อนกันได้"
 
 #. module: base
 #: view:res.lang:0
@@ -3747,7 +3747,7 @@ msgstr ""
 #. module: base
 #: model:res.country,name:base.me
 msgid "Montenegro"
-msgstr ""
+msgstr "มอนเตเนโกร"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_document_ics
@@ -3877,7 +3877,7 @@ msgstr "โปรตุเกส"
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_share
 msgid "Share any Document"
-msgstr ""
+msgstr "แบ่งปันเอกสาร"
 
 #. module: base
 #: field:ir.module.module,certificate:0
@@ -3887,7 +3887,7 @@ msgstr ""
 #. module: base
 #: view:res.lang:0
 msgid "6.  %d, %m         ==> 05, 12"
-msgstr ""
+msgstr "6.  %d, %m         ==> 05, 12"
 
 #. module: base
 #: model:ir.module.module,description:base.module_analytic_multicurrency
@@ -3939,7 +3939,7 @@ msgstr ""
 #: field:ir.actions.server,help:0
 #: field:ir.actions.wizard,help:0
 msgid "Action description"
-msgstr ""
+msgstr "รายละเอียดการกระทำ"
 
 #. module: base
 #: help:res.partner,customer:0
@@ -3980,7 +3980,7 @@ msgstr ""
 #: selection:workflow.activity,join_mode:0
 #: selection:workflow.activity,split_mode:0
 msgid "Xor"
-msgstr ""
+msgstr "Xor"
 
 #. module: base
 #: model:ir.module.category,name:base.module_category_localization_account_charts
@@ -4236,7 +4236,7 @@ msgstr ""
 #. module: base
 #: model:res.country,name:base.sr
 msgid "Suriname"
-msgstr ""
+msgstr "ซูรินาเม"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_project_timesheet
@@ -4343,7 +4343,7 @@ msgstr ""
 #: field:ir.model.relation,model:0
 #: view:ir.values:0
 msgid "Model"
-msgstr ""
+msgstr "โมเดล"
 
 #. module: base
 #: view:base.language.install:0
@@ -4370,13 +4370,13 @@ msgstr "อิเควทอเรียลกินี"
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_warning
 msgid "Warning Messages and Alerts"
-msgstr ""
+msgstr "คำเตือน ข้อความ และการแจ้งเตือน"
 
 #. module: base
 #: view:base.module.import:0
 #: model:ir.actions.act_window,name:base.action_view_base_module_import
 msgid "Module Import"
-msgstr ""
+msgstr "นำเข้าโมดูล"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_l10n_ch
@@ -4559,7 +4559,7 @@ msgstr "เคนยา"
 #: model:ir.actions.act_window,name:base.action_translation
 #: model:ir.ui.menu,name:base.menu_action_translation
 msgid "Translated Terms"
-msgstr ""
+msgstr "ข้อตกลงและเงื่อนไขที่แปล"
 
 #. module: base
 #: view:res.partner.event:0
@@ -4821,7 +4821,7 @@ msgstr "ขั้นตอนการสรรหา"
 #. module: base
 #: model:res.country,name:base.br
 msgid "Brazil"
-msgstr ""
+msgstr "บราซิล"
 
 #. module: base
 #: view:res.lang:0
@@ -4831,7 +4831,7 @@ msgstr ""
 #. module: base
 #: selection:ir.module.module,license:0
 msgid "Affero GPL-3"
-msgstr ""
+msgstr "Affero GPL-3"
 
 #. module: base
 #: field:ir.sequence,number_next:0
@@ -4868,7 +4868,7 @@ msgstr "ซีเรีย"
 #. module: base
 #: view:res.lang:0
 msgid "======================================================"
-msgstr ""
+msgstr "======================================================"
 
 #. module: base
 #: view:base.module.upgrade:0
@@ -4948,7 +4948,7 @@ msgstr ""
 #. module: base
 #: field:res.partner.bank,owner_name:0
 msgid "Account Owner Name"
-msgstr ""
+msgstr "ชื่อเจ้าของบัญชี"
 
 #. module: base
 #: field:ir.rule,perm_unlink:0
@@ -5493,7 +5493,7 @@ msgstr ""
 #. module: base
 #: model:res.country,name:base.sj
 msgid "Svalbard and Jan Mayen Islands"
-msgstr ""
+msgstr "หมู่เกาะสฟาลบาร์ และ ยานไมเอน"
 
 #. module: base
 #: model:ir.module.category,name:base.module_category_hidden_test
@@ -5635,7 +5635,7 @@ msgstr ""
 #: model:ir.actions.act_window,name:base.ir_access_act
 #: model:ir.ui.menu,name:base.menu_ir_access_act
 msgid "Access Controls List"
-msgstr ""
+msgstr "ควบคุมการเข้าถึงการใช้งาน"
 
 #. module: base
 #: model:res.country,name:base.um
@@ -5670,7 +5670,7 @@ msgstr "แอพ"
 #. module: base
 #: view:ir.ui.view_sc:0
 msgid "Shortcut"
-msgstr ""
+msgstr "ทางลัด"
 
 #. module: base
 #: field:ir.model.data,date_init:0
@@ -5729,7 +5729,7 @@ msgstr ""
 #. module: base
 #: model:ir.model,name:base.model_ir_default
 msgid "ir.default"
-msgstr ""
+msgstr "ir.default"
 
 #. module: base
 #: model:ir.module.module,description:base.module_hr_payroll
@@ -6054,13 +6054,13 @@ msgstr "ตั้งค่าอีเมล์"
 #. module: base
 #: model:ir.model,name:base.model_ir_cron
 msgid "ir.cron"
-msgstr ""
+msgstr "ir.cron"
 
 #. module: base
 #: field:res.request,act_to:0
 #: field:res.request.history,act_to:0
 msgid "To"
-msgstr ""
+msgstr "ถึง"
 
 #. module: base
 #: view:ir.sequence:0
@@ -6224,7 +6224,7 @@ msgstr ""
 #. module: base
 #: view:ir.actions.report.xml:0
 msgid "Report xml"
-msgstr ""
+msgstr "รายงาน xml"
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_module_open_categ
@@ -6268,7 +6268,7 @@ msgstr ""
 #. module: base
 #: field:res.users,id:0
 msgid "ID"
-msgstr "ID"
+msgstr "รหัส"
 
 #. module: base
 #: field:ir.cron,doall:0
@@ -6290,7 +6290,7 @@ msgstr ""
 #: field:ir.module.category,xml_id:0
 #: field:ir.ui.view,xml_id:0
 msgid "External ID"
-msgstr ""
+msgstr "รหัสจากภายนอก"
 
 #. module: base
 #: help:res.currency.rate,rate:0
@@ -6305,7 +6305,7 @@ msgstr "อังกฤษ"
 #. module: base
 #: view:res.config:0
 msgid "res_config_contents"
-msgstr ""
+msgstr "res_config_contents"
 
 #. module: base
 #: help:res.partner.category,active:0
@@ -6325,7 +6325,7 @@ msgstr "โบทสวานา"
 #. module: base
 #: view:res.partner.title:0
 msgid "Partner Titles"
-msgstr ""
+msgstr "ชื่อ Partner"
 
 #. module: base
 #: help:ir.actions.act_window,auto_refresh:0
@@ -6355,7 +6355,7 @@ msgstr "วันทำงาน"
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_multi_company
 msgid "Multi-Company"
-msgstr ""
+msgstr "หลาย-บริษัท"
 
 #. module: base
 #: field:ir.actions.report.xml,report_rml_content:0
@@ -6451,12 +6451,12 @@ msgstr ""
 #. module: base
 #: field:ir.ui.view,inherit_id:0
 msgid "Inherited View"
-msgstr ""
+msgstr "มุมมองสืบทอด"
 
 #. module: base
 #: view:ir.translation:0
 msgid "Source Term"
-msgstr ""
+msgstr "ที่มา ระยะเวลา"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_hr_timesheet_sheet
@@ -6479,12 +6479,12 @@ msgstr ""
 #. module: base
 #: view:base.module.import:0
 msgid "Module file successfully imported!"
-msgstr ""
+msgstr "ไฟล์โมดูลนำเข้าสำเร็จ!"
 
 #. module: base
 #: model:res.country,name:base.ws
 msgid "Samoa"
-msgstr ""
+msgstr "ซามัว"
 
 #. module: base
 #: field:publisher_warranty.contract,name:0
@@ -6496,7 +6496,7 @@ msgstr ""
 #: model:ir.module.module,shortdesc:base.module_hr_timesheet
 #: model:ir.module.module,shortdesc:base.module_hr_timesheet_sheet
 msgid "Timesheets"
-msgstr ""
+msgstr "ตารางเวลา"
 
 #. module: base
 #: field:res.partner,function:0
@@ -6541,7 +6541,7 @@ msgstr "พนักงาน"
 #. module: base
 #: field:ir.model.access,perm_create:0
 msgid "Create Access"
-msgstr ""
+msgstr "สร้างการเข้าถึง"
 
 #. module: base
 #: field:res.bank,state:0
@@ -6553,7 +6553,7 @@ msgstr ""
 #. module: base
 #: field:ir.actions.server,copy_object:0
 msgid "Copy Of"
-msgstr ""
+msgstr "สำเนาของ"
 
 #. module: base
 #: field:ir.model,osv_memory:0
@@ -6599,7 +6599,7 @@ msgstr ""
 #. module: base
 #: field:res.country.state,code:0
 msgid "State Code"
-msgstr ""
+msgstr "รหัสสถานะ"
 
 #. module: base
 #: field:ir.model.fields,on_delete:0
@@ -6614,14 +6614,14 @@ msgstr ""
 #. module: base
 #: selection:res.lang,direction:0
 msgid "Left-to-Right"
-msgstr ""
+msgstr "จากซ้ายไปขวา"
 
 #. module: base
 #: field:ir.model.fields,translate:0
 #: view:res.lang:0
 #: field:res.lang,translatable:0
 msgid "Translatable"
-msgstr ""
+msgstr "แปลได้"
 
 #. module: base
 #: model:ir.module.module,description:base.module_analytic
@@ -6641,7 +6641,7 @@ msgstr ""
 #. module: base
 #: field:res.users,signature:0
 msgid "Signature"
-msgstr ""
+msgstr "ลายเซ็น"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_crm_caldav
@@ -6662,7 +6662,7 @@ msgstr ""
 #. module: base
 #: field:res.partner.category,complete_name:0
 msgid "Full Name"
-msgstr ""
+msgstr "ชื่อเต็ม"
 
 #. module: base
 #: view:base.module.configuration:0
@@ -6719,7 +6719,7 @@ msgstr ""
 #. module: base
 #: model:res.country,name:base.mz
 msgid "Mozambique"
-msgstr ""
+msgstr "โมแซมบิก"
 
 #. module: base
 #: help:ir.values,action_id:0
@@ -6736,7 +6736,7 @@ msgstr ""
 #. module: base
 #: field:ir.actions.server,message:0
 msgid "Message"
-msgstr ""
+msgstr "ข้อความ"
 
 #. module: base
 #: field:ir.actions.act_window.view,multi:0
@@ -6758,23 +6758,23 @@ msgstr ""
 #. module: base
 #: view:ir.module.module:0
 msgid "Upgrade"
-msgstr ""
+msgstr "อัพเกรด"
 
 #. module: base
 #: view:res.partner:0
 #: field:res.partner,child_ids:0
 msgid "Contacts"
-msgstr ""
+msgstr "ที่อยู่ติดต่อ"
 
 #. module: base
 #: model:res.country,name:base.fo
 msgid "Faroe Islands"
-msgstr ""
+msgstr "หมู่เกาะแฟโร"
 
 #. module: base
 #: field:ir.mail_server,smtp_encryption:0
 msgid "Connection Security"
-msgstr ""
+msgstr "ความปลอดภัยการเชื่อมต่อ"
 
 #. module: base
 #: code:addons/base/ir/ir_actions.py:606
@@ -6803,7 +6803,7 @@ msgstr ""
 #. module: base
 #: field:res.partner.category,name:0
 msgid "Category Name"
-msgstr ""
+msgstr "ชื่อประเภท"
 
 #. module: base
 #: view:res.widget:0
@@ -6813,7 +6813,7 @@ msgstr ""
 #. module: base
 #: model:res.country,name:base.cz
 msgid "Czech Republic"
-msgstr ""
+msgstr "สาธารณรัฐเช็ก"
 
 #. module: base
 #: model:ir.module.module,description:base.module_hr
@@ -6862,7 +6862,7 @@ msgstr ""
 #. module: base
 #: selection:ir.property,type:0
 msgid "Integer"
-msgstr ""
+msgstr "ตัวเลขจำนวนเต็ม"
 
 #. module: base
 #: selection:base.language.install,lang:0
@@ -6900,7 +6900,7 @@ msgstr ""
 #: view:workflow.instance:0
 #: view:workflow.workitem:0
 msgid "Active"
-msgstr ""
+msgstr "เปิดใช้งาน"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_l10n_ma
@@ -6964,7 +6964,7 @@ msgstr ""
 #. module: base
 #: model:res.country,name:base.bi
 msgid "Burundi"
-msgstr ""
+msgstr "บุรุนดี"
 
 #. module: base
 #: view:base.language.export:0
@@ -6972,7 +6972,7 @@ msgstr ""
 #: view:base.module.configuration:0
 #: view:base.module.update:0
 msgid "Close"
-msgstr ""
+msgstr "ปิด"
 
 #. module: base
 #: selection:base.language.install,lang:0
@@ -6993,7 +6993,7 @@ msgstr ""
 #. module: base
 #: model:res.country,name:base.bt
 msgid "Bhutan"
-msgstr ""
+msgstr "ภูฏาน"
 
 #. module: base
 #: help:ir.sequence,number_next:0
@@ -7008,7 +7008,7 @@ msgstr ""
 #. module: base
 #: selection:ir.actions.act_url,target:0
 msgid "This Window"
-msgstr ""
+msgstr "หน้าต่างนี้"
 
 #. module: base
 #: view:publisher_warranty.contract:0
@@ -7023,12 +7023,12 @@ msgstr ""
 #. module: base
 #: field:base.language.export,format:0
 msgid "File Format"
-msgstr ""
+msgstr "รูปแบบแฟ้ม"
 
 #. module: base
 #: field:res.lang,iso_code:0
 msgid "ISO code"
-msgstr ""
+msgstr "ISO code"
 
 #. module: base
 #: view:res.log:0
@@ -7039,7 +7039,7 @@ msgstr ""
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_association
 msgid "Associations Management"
-msgstr ""
+msgstr "การบริหาร Associations"
 
 #. module: base
 #: help:ir.model,modules:0
@@ -7050,7 +7050,7 @@ msgstr ""
 #: model:ir.module.category,name:base.module_category_localization_payroll
 #: model:ir.module.module,shortdesc:base.module_hr_payroll
 msgid "Payroll"
-msgstr ""
+msgstr "เงินเดือน"
 
 #. module: base
 #: model:ir.actions.act_window,help:base.action_country_state
@@ -7088,7 +7088,7 @@ msgstr ""
 #: field:ir.mail_server,smtp_pass:0
 #: field:res.users,password:0
 msgid "Password"
-msgstr ""
+msgstr "รหัสผ่าน"
 
 #. module: base
 #: model:ir.module.module,description:base.module_account_anglo_saxon
@@ -7126,12 +7126,12 @@ msgstr ""
 #: view:ir.model.fields:0
 #: model:ir.ui.menu,name:base.ir_model_model_fields
 msgid "Fields"
-msgstr ""
+msgstr "ช่องข้อมูล"
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_partner_employee_form
 msgid "Employees"
-msgstr ""
+msgstr "พนักงาน"
 
 #. module: base
 #: field:ir.exports.line,name:0
@@ -7185,7 +7185,7 @@ msgstr ""
 #. module: base
 #: model:res.country,name:base.mm
 msgid "Myanmar"
-msgstr ""
+msgstr "พม่า"
 
 #. module: base
 #: help:ir.model.fields,modules:0
@@ -7195,7 +7195,7 @@ msgstr ""
 #. module: base
 #: selection:base.language.install,lang:0
 msgid "Chinese (CN) / 简体中文"
-msgstr ""
+msgstr "จีน (CN) / 简体中文"
 
 #. module: base
 #: field:res.bank,street:0
@@ -7204,12 +7204,12 @@ msgstr ""
 #: view:res.partner.bank:0
 #: field:res.partner.bank,street:0
 msgid "Street"
-msgstr ""
+msgstr "ถนน"
 
 #. module: base
 #: model:res.country,name:base.yu
 msgid "Yugoslavia"
-msgstr ""
+msgstr "ยูโกสลาเวีย"
 
 #. module: base
 #: model:ir.module.module,description:base.module_purchase_double_validation
@@ -7231,7 +7231,7 @@ msgstr ""
 #. module: base
 #: model:res.country,name:base.ca
 msgid "Canada"
-msgstr ""
+msgstr "แคนาดา"
 
 #. module: base
 #: code:addons/base/res/res_company.py:158
@@ -7249,12 +7249,12 @@ msgstr ""
 #. module: base
 #: selection:ir.module.module.dependency,state:0
 msgid "Unknown"
-msgstr ""
+msgstr "ไม่ทราบ"
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_res_users_my
 msgid "Change My Preferences"
-msgstr ""
+msgstr "เปลี่ยนการตั้งค่าส่วนตัว"
 
 #. module: base
 #: code:addons/base/ir/ir_actions.py:171
@@ -7283,12 +7283,12 @@ msgstr ""
 #. module: base
 #: model:res.country,name:base.cm
 msgid "Cameroon"
-msgstr ""
+msgstr "แคเมอรูน"
 
 #. module: base
 #: model:res.country,name:base.bf
 msgid "Burkina Faso"
-msgstr ""
+msgstr "เบอร์กินาฟาโซ"
 
 #. module: base
 #: selection:ir.model.fields,state:0
@@ -7319,7 +7319,7 @@ msgstr ""
 #. module: base
 #: model:res.country,name:base.cc
 msgid "Cocos (Keeling) Islands"
-msgstr ""
+msgstr "หมู่เกาะ (คีลิง) โคโคส"
 
 #. module: base
 #: selection:base.language.install,state:0
@@ -7331,7 +7331,7 @@ msgstr ""
 #. module: base
 #: view:res.lang:0
 msgid "11. %U or %W       ==> 48 (49th week)"
-msgstr ""
+msgstr "11. %U or %W       ==> 48 (49th week)"
 
 #. module: base
 #: model:ir.model,name:base.model_res_partner_bank_type_field
@@ -7346,7 +7346,7 @@ msgstr ""
 #. module: base
 #: selection:res.company,paper_format:0
 msgid "US Letter"
-msgstr ""
+msgstr "กระดาษจดหมาย US (8.5x11\")"
 
 #. module: base
 #: model:ir.module.module,description:base.module_stock_location
@@ -7587,17 +7587,17 @@ msgstr ""
 #. module: base
 #: field:ir.sequence,suffix:0
 msgid "Suffix"
-msgstr ""
+msgstr "คำลงท้าย"
 
 #. module: base
 #: model:res.country,name:base.mo
 msgid "Macau"
-msgstr ""
+msgstr "มาเก๊า"
 
 #. module: base
 #: model:ir.actions.report.xml,name:base.res_partner_address_report
 msgid "Labels"
-msgstr ""
+msgstr "ป้ายชื่อ"
 
 #. module: base
 #: field:partner.massmail.wizard,email_from:0
@@ -7648,7 +7648,7 @@ msgstr ""
 #. module: base
 #: model:res.country,name:base.to
 msgid "Tonga"
-msgstr ""
+msgstr "ตองก้า"
 
 #. module: base
 #: help:ir.model.fields,serialization_field_id:0
@@ -7710,7 +7710,7 @@ msgstr ""
 #. module: base
 #: model:ir.model,name:base.model_base_update_translations
 msgid "base.update.translations"
-msgstr ""
+msgstr "base.update.translations"
 
 #. module: base
 #: field:res.partner.category,parent_id:0
@@ -7728,7 +7728,7 @@ msgstr ""
 #: selection:res.partner.title,domain:0
 #: view:res.users:0
 msgid "Contact"
-msgstr ""
+msgstr "ที่อยู่ติดต่อ"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_l10n_at
@@ -7738,17 +7738,17 @@ msgstr ""
 #. module: base
 #: model:ir.model,name:base.model_ir_ui_menu
 msgid "ir.ui.menu"
-msgstr ""
+msgstr "ir.ui.menu"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_project
 msgid "Project Management"
-msgstr ""
+msgstr "การบริหารโครงการ"
 
 #. module: base
 #: model:res.country,name:base.us
 msgid "United States"
-msgstr ""
+msgstr "สหรัฐอเมริกา"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_crm_fundraising
@@ -7763,7 +7763,7 @@ msgstr "ยกเลิก การถอดถอน"
 #. module: base
 #: view:res.bank:0
 msgid "Communication"
-msgstr ""
+msgstr "การติดต่อสื่อสาร"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_analytic
@@ -7778,7 +7778,7 @@ msgstr ""
 #. module: base
 #: model:ir.model,name:base.model_ir_server_object_lines
 msgid "ir.server.object.lines"
-msgstr ""
+msgstr "ir.server.object.lines"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_l10n_be
@@ -7794,7 +7794,7 @@ msgstr ""
 #. module: base
 #: model:res.country,name:base.kw
 msgid "Kuwait"
-msgstr ""
+msgstr "คูเวต"
 
 #. module: base
 #: field:workflow.workitem,inst_id:0
@@ -7819,12 +7819,12 @@ msgstr ""
 #. module: base
 #: selection:ir.property,type:0
 msgid "Many2One"
-msgstr ""
+msgstr "Many2One"
 
 #. module: base
 #: model:res.country,name:base.ng
 msgid "Nigeria"
-msgstr ""
+msgstr "ไนจีเรีย"
 
 #. module: base
 #: model:ir.module.module,description:base.module_crm_caldav
@@ -7864,12 +7864,12 @@ msgstr ""
 #. module: base
 #: model:res.country,name:base.hk
 msgid "Hong Kong"
-msgstr ""
+msgstr "ฮ่องกง"
 
 #. module: base
 #: field:ir.default,ref_id:0
 msgid "ID Ref."
-msgstr ""
+msgstr "ID Ref."
 
 #. module: base
 #: model:ir.actions.act_window,help:base.action_partner_address_form
@@ -7886,12 +7886,12 @@ msgstr ""
 #. module: base
 #: model:res.country,name:base.ph
 msgid "Philippines"
-msgstr ""
+msgstr "ฟิลิปปินส์"
 
 #. module: base
 #: model:res.country,name:base.ma
 msgid "Morocco"
-msgstr ""
+msgstr "โมร็อกโก"
 
 #. module: base
 #: help:ir.values,model_id:0
@@ -7903,7 +7903,7 @@ msgstr ""
 #. module: base
 #: view:res.lang:0
 msgid "2.  %a ,%A         ==> Fri, Friday"
-msgstr ""
+msgstr "2.  %a ,%A         ==> ศุกร์, วันศุกร์"
 
 #. module: base
 #: view:res.request.history:0
@@ -7930,7 +7930,7 @@ msgstr ""
 #. module: base
 #: model:ir.model,name:base.model_workflow_transition
 msgid "workflow.transition"
-msgstr ""
+msgstr "workflow.transition"
 
 #. module: base
 #: view:res.lang:0
@@ -7955,7 +7955,7 @@ msgstr ""
 #. module: base
 #: model:res.country,name:base.dm
 msgid "Dominica"
-msgstr ""
+msgstr "โดมินิกา"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_base_module_record
@@ -8033,7 +8033,7 @@ msgstr ""
 #. module: base
 #: model:res.country,name:base.np
 msgid "Nepal"
-msgstr ""
+msgstr "เนปาล"
 
 #. module: base
 #: help:res.groups,implied_ids:0
@@ -8056,7 +8056,7 @@ msgstr "ปรากฏ"
 #: model:ir.ui.menu,name:base.menu_action_ui_view_custom
 #: view:ir.ui.view.custom:0
 msgid "Customized Views"
-msgstr ""
+msgstr "ปรับแต่ง มุมมอง"
 
 #. module: base
 #: view:partner.sms.send:0
@@ -8080,7 +8080,7 @@ msgstr ""
 #: model:ir.ui.menu,name:base.menu_values_form_action
 #: view:ir.values:0
 msgid "Action Bindings"
-msgstr ""
+msgstr "ประสานการกระทำ"
 
 #. module: base
 #: view:ir.sequence:0
@@ -8090,7 +8090,7 @@ msgstr ""
 #. module: base
 #: model:ir.ui.menu,name:base.menu_view_base_module_update
 msgid "Update Modules List"
-msgstr ""
+msgstr "ปรับปรุงรายการโมดูล"
 
 #. module: base
 #: code:addons/base/module/module.py:359
@@ -8125,12 +8125,12 @@ msgstr ""
 #. module: base
 #: view:ir.actions.configuration.wizard:0
 msgid "Continue"
-msgstr ""
+msgstr "ดำเนินการต่อ"
 
 #. module: base
 #: selection:base.language.install,lang:0
 msgid "Thai / ภาษาไทย"
-msgstr ""
+msgstr "Thai / ภาษาไทย"
 
 #. module: base
 #: code:addons/orm.py:343
@@ -8200,7 +8200,7 @@ msgstr ""
 #. module: base
 #: model:res.country,name:base.mx
 msgid "Mexico"
-msgstr ""
+msgstr "เม็กซิโก"
 
 #. module: base
 #: code:addons/base/ir/ir_mail_server.py:445
@@ -8217,12 +8217,12 @@ msgstr "ชื่อที่แนบมาด้วย"
 #: field:base.language.export,data:0
 #: field:base.language.import,data:0
 msgid "File"
-msgstr ""
+msgstr "แฟ้ม"
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_view_base_module_upgrade_install
 msgid "Module Upgrade Install"
-msgstr ""
+msgstr "ติดตั้ง อัพเกรดโมดูล"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_email_template
@@ -8232,7 +8232,7 @@ msgstr ""
 #. module: base
 #: model:ir.model,name:base.model_ir_actions_configuration_wizard
 msgid "ir.actions.configuration.wizard"
-msgstr ""
+msgstr "ir.actions.configuration.wizard"
 
 #. module: base
 #: model:ir.module.module,description:base.module_report_webkit
@@ -8317,7 +8317,7 @@ msgstr ""
 #: field:res.partner,supplier:0
 #: model:res.partner.category,name:base.res_partner_category_1
 msgid "Supplier"
-msgstr ""
+msgstr "ผู้จัดจำหน่าย"
 
 #. module: base
 #: view:ir.actions.server:0
@@ -8350,7 +8350,7 @@ msgstr ""
 #. module: base
 #: model:ir.model,name:base.model_base_module_import
 msgid "Import Module"
-msgstr ""
+msgstr "นำเข้า โมดูล"
 
 #. module: base
 #: model:res.country,name:base.as
@@ -8428,7 +8428,7 @@ msgstr ""
 #: selection:ir.attachment,type:0
 #: field:ir.module.module,url:0
 msgid "URL"
-msgstr ""
+msgstr "ที่อยู่ URL"
 
 #. module: base
 #: help:res.users,context_tz:0
@@ -8442,7 +8442,7 @@ msgstr ""
 #. module: base
 #: help:res.country,name:0
 msgid "The full name of the country."
-msgstr ""
+msgstr "ชื่อเต็มของประเทศ"
 
 #. module: base
 #: selection:ir.actions.server,state:0
@@ -8494,7 +8494,7 @@ msgstr ""
 #. module: base
 #: model:res.country,name:base.ae
 msgid "United Arab Emirates"
-msgstr ""
+msgstr "สหรัฐอาหรับเอมิเรส"
 
 #. module: base
 #: code:addons/orm.py:3961
@@ -8506,7 +8506,7 @@ msgstr ""
 #. module: base
 #: model:ir.ui.menu,name:base.menu_crm_case_job_req_main
 msgid "Recruitment"
-msgstr ""
+msgstr "รับสมัครงาน"
 
 #. module: base
 #: model:ir.module.module,description:base.module_l10n_gr
@@ -8550,19 +8550,19 @@ msgstr ""
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_mrp_repair
 msgid "Repairs Management"
-msgstr ""
+msgstr "การจัดการการซ่อมบำรุง"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_account_asset
 msgid "Assets Management"
-msgstr ""
+msgstr "การจัดการสินทรัพย์"
 
 #. module: base
 #: view:ir.model.access:0
 #: view:ir.rule:0
 #: field:ir.rule,global:0
 msgid "Global"
-msgstr ""
+msgstr "โกลบอล"
 
 #. module: base
 #: model:ir.module.module,description:base.module_stock_planning
@@ -8821,7 +8821,7 @@ msgstr ""
 #. module: base
 #: model:res.country,name:base.mp
 msgid "Northern Mariana Islands"
-msgstr ""
+msgstr "หมู่เกาะนอร์เทิร์นมาเรียนา"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_claim_from_delivery
@@ -8831,7 +8831,7 @@ msgstr ""
 #. module: base
 #: model:res.country,name:base.sb
 msgid "Solomon Islands"
-msgstr ""
+msgstr "หมู่เกาะโซโลมอน"
 
 #. module: base
 #: code:addons/orm.py:4152
@@ -8850,7 +8850,7 @@ msgstr ""
 #: model:ir.module.module,shortdesc:base.module_resource
 #: field:ir.property,res_id:0
 msgid "Resource"
-msgstr ""
+msgstr "ทรัพยากร"
 
 #. module: base
 #: view:res.lang:0
@@ -8882,7 +8882,7 @@ msgstr ""
 #: view:ir.translation:0
 #: model:ir.ui.menu,name:base.menu_translation
 msgid "Translations"
-msgstr ""
+msgstr "การแปลภาษา"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_project_gtd
@@ -8892,7 +8892,7 @@ msgstr ""
 #. module: base
 #: view:ir.actions.report.xml:0
 msgid "Report"
-msgstr ""
+msgstr "รายงาน"
 
 #. module: base
 #: code:addons/base/ir/ir_mail_server.py:241
@@ -8906,7 +8906,7 @@ msgstr ""
 #. module: base
 #: model:res.country,name:base.ua
 msgid "Ukraine"
-msgstr ""
+msgstr "ยูเครน"
 
 #. module: base
 #: code:addons/base/res/res_company.py:164
@@ -8915,7 +8915,7 @@ msgstr ""
 #: field:res.partner,website:0
 #, python-format
 msgid "Website"
-msgstr ""
+msgstr "เว็บไซต์"
 
 #. module: base
 #: selection:ir.mail_server,smtp_encryption:0
@@ -8945,12 +8945,12 @@ msgstr ""
 #. module: base
 #: view:ir.ui.view:0
 msgid "Architecture"
-msgstr ""
+msgstr "สถาปัตยกรรม"
 
 #. module: base
 #: model:res.country,name:base.ml
 msgid "Mali"
-msgstr ""
+msgstr "เมาริ"
 
 #. module: base
 #: model:ir.module.module,description:base.module_l10n_at
@@ -9008,7 +9008,7 @@ msgstr ""
 #. module: base
 #: model:res.country,name:base.bn
 msgid "Brunei Darussalam"
-msgstr ""
+msgstr "บรูไนดารุสซาลาม"
 
 #. module: base
 #: model:ir.module.module,description:base.module_fetchmail_crm
@@ -9026,12 +9026,12 @@ msgstr ""
 #: field:ir.actions.act_window.view,view_mode:0
 #: field:ir.ui.view,type:0
 msgid "View Type"
-msgstr ""
+msgstr "ประเภทมุมมอง"
 
 #. module: base
 #: model:ir.ui.menu,name:base.next_id_2
 msgid "User Interface"
-msgstr ""
+msgstr "ส่วนติดต่อผู้ใช้"
 
 #. module: base
 #: field:res.request,ref_partner_id:0
@@ -9041,7 +9041,7 @@ msgstr ""
 #. module: base
 #: field:ir.attachment,create_date:0
 msgid "Date Created"
-msgstr ""
+msgstr "วันที่สร้าง"
 
 #. module: base
 #: help:ir.actions.server,trigger_name:0
@@ -9102,12 +9102,12 @@ msgstr ""
 #: selection:base.module.import,state:0
 #: selection:base.module.update,state:0
 msgid "done"
-msgstr ""
+msgstr "เสร็จสิ้น"
 
 #. module: base
 #: view:ir.actions.act_window:0
 msgid "General Settings"
-msgstr ""
+msgstr "การตั้งค่าทั่วไป"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_l10n_uy
@@ -9117,7 +9117,7 @@ msgstr ""
 #. module: base
 #: model:ir.ui.menu,name:base.menu_administration_shortcut
 msgid "Custom Shortcuts"
-msgstr ""
+msgstr "ทางลัดกำหนดเอง"
 
 #. module: base
 #: selection:base.language.install,lang:0
@@ -9127,7 +9127,7 @@ msgstr ""
 #. module: base
 #: model:res.country,name:base.dz
 msgid "Algeria"
-msgstr ""
+msgstr "แอลจีเรีย"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_plugin
@@ -9139,7 +9139,7 @@ msgstr ""
 #: model:ir.model,name:base.model_ir_model
 #: model:ir.ui.menu,name:base.ir_model_model_menu
 msgid "Models"
-msgstr ""
+msgstr "โมเดล"
 
 #. module: base
 #: code:addons/base/ir/ir_cron.py:262
@@ -9155,7 +9155,7 @@ msgstr ""
 #. module: base
 #: model:res.country,name:base.be
 msgid "Belgium"
-msgstr ""
+msgstr "เบลเยียม"
 
 #. module: base
 #: view:res.company:0
@@ -9180,7 +9180,7 @@ msgstr "ภาษา"
 #. module: base
 #: model:res.country,name:base.gm
 msgid "Gambia"
-msgstr ""
+msgstr "แกมเบีย"
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_res_company_form
@@ -9202,7 +9202,7 @@ msgstr ""
 #. module: base
 #: view:res.lang:0
 msgid "%H - Hour (24-hour clock) [00,23]."
-msgstr ""
+msgstr "%H - ชัวโมง (24-hour clock) [00,23]."
 
 #. module: base
 #: code:addons/base/ir/ir_mail_server.py:482
@@ -9247,7 +9247,7 @@ msgstr ""
 #: field:ir.actions.server,code:0
 #: selection:ir.actions.server,state:0
 msgid "Python Code"
-msgstr ""
+msgstr "Python Code"
 
 #. module: base
 #: help:ir.actions.server,state:0
@@ -9262,7 +9262,7 @@ msgstr ""
 #. module: base
 #: model:ir.model,name:base.model_osv_memory_autovacuum
 msgid "osv_memory.autovacuum"
-msgstr ""
+msgstr "osv_memory.autovacuum"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_l10n_us
@@ -9288,17 +9288,17 @@ msgstr "ยกเลิก"
 #. module: base
 #: selection:base.language.export,format:0
 msgid "PO File"
-msgstr ""
+msgstr "ไฟล์ PO"
 
 #. module: base
 #: model:res.country,name:base.nt
 msgid "Neutral Zone"
-msgstr ""
+msgstr "เขตเป็นกลาง"
 
 #. module: base
 #: view:ir.model:0
 msgid "Custom"
-msgstr ""
+msgstr "ที่กำหนดเอง"
 
 #. module: base
 #: view:res.request:0
@@ -9333,7 +9333,7 @@ msgstr ""
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_purchase
 msgid "Purchase Management"
-msgstr ""
+msgstr "การบริหารการจัดซื้อ"
 
 #. module: base
 #: field:ir.module.module,published_version:0
@@ -9343,7 +9343,7 @@ msgstr ""
 #. module: base
 #: model:res.country,name:base.is
 msgid "Iceland"
-msgstr ""
+msgstr "ไอซ์แลนด์"
 
 #. module: base
 #: model:ir.actions.act_window,name:base.ir_action_window
@@ -9364,7 +9364,7 @@ msgstr ""
 #. module: base
 #: model:res.country,name:base.de
 msgid "Germany"
-msgstr ""
+msgstr "เยอรมันนี"
 
 #. module: base
 #: view:ir.sequence:0
@@ -9379,7 +9379,7 @@ msgstr ""
 #. module: base
 #: report:ir.module.reference:0
 msgid "Reports :"
-msgstr ""
+msgstr "รายงาน :"
 
 #. module: base
 #: model:ir.module.module,description:base.module_multi_company
@@ -9458,12 +9458,12 @@ msgstr ""
 #. module: base
 #: model:res.country,name:base.gy
 msgid "Guyana"
-msgstr ""
+msgstr "กายอานา"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_product_expiry
 msgid "Products Expiry Date"
-msgstr ""
+msgstr "วันหมดอายุสินค้า"
 
 #. module: base
 #: model:ir.module.module,description:base.module_account
@@ -9514,12 +9514,12 @@ msgstr ""
 #. module: base
 #: field:ir.actions.server,record_id:0
 msgid "Create Id"
-msgstr ""
+msgstr "สร้าง รหัส"
 
 #. module: base
 #: model:res.country,name:base.hn
 msgid "Honduras"
-msgstr ""
+msgstr "ฮอนดูรัส"
 
 #. module: base
 #: help:res.users,menu_tips:0
@@ -9530,7 +9530,7 @@ msgstr ""
 #. module: base
 #: model:res.country,name:base.eg
 msgid "Egypt"
-msgstr ""
+msgstr "อียิปต์"
 
 #. module: base
 #: field:ir.rule,perm_read:0
@@ -9551,7 +9551,7 @@ msgstr "ชื่อภาษา"
 #. module: base
 #: selection:ir.property,type:0
 msgid "Boolean"
-msgstr ""
+msgstr "Boolean"
 
 #. module: base
 #: help:ir.mail_server,smtp_encryption:0
@@ -9610,7 +9610,7 @@ msgstr ""
 #: view:res.partner:0
 #: view:workflow.activity:0
 msgid "Group By..."
-msgstr ""
+msgstr "จัดกลุ่มตาม..."
 
 #. module: base
 #: view:ir.model.fields:0
@@ -9644,7 +9644,7 @@ msgstr ""
 #: selection:ir.module.module,state:0
 #: selection:ir.module.module.dependency,state:0
 msgid "To be installed"
-msgstr ""
+msgstr "กำลังจะติดตั้ง"
 
 #. module: base
 #: help:ir.actions.act_window,display_menu_tip:0
@@ -9658,13 +9658,13 @@ msgstr ""
 #: model:ir.module.module,shortdesc:base.module_base
 #: field:res.currency,base:0
 msgid "Base"
-msgstr ""
+msgstr "Base"
 
 #. module: base
 #: field:ir.model.data,model:0
 #: field:ir.values,model:0
 msgid "Model Name"
-msgstr ""
+msgstr "ชื่อโมเดล"
 
 #. module: base
 #: selection:base.language.install,lang:0
@@ -9686,7 +9686,7 @@ msgstr ""
 #. module: base
 #: model:res.country,name:base.lr
 msgid "Liberia"
-msgstr ""
+msgstr "ไลบีเรีย"
 
 #. module: base
 #: model:ir.module.module,description:base.module_l10n_in
@@ -9705,7 +9705,7 @@ msgstr ""
 #: view:res.groups:0
 #: field:res.partner,comment:0
 msgid "Notes"
-msgstr ""
+msgstr "บันทึกย่อ"
 
 #. module: base
 #: field:ir.config_parameter,value:0
@@ -9719,7 +9719,7 @@ msgstr ""
 #: field:ir.server.object.lines,value:0
 #: field:ir.values,value:0
 msgid "Value"
-msgstr ""
+msgstr "ค่า"
 
 #. module: base
 #: view:base.language.import:0
@@ -9728,17 +9728,17 @@ msgstr ""
 #: selection:ir.translation,type:0
 #: field:res.partner.bank.type,code:0
 msgid "Code"
-msgstr ""
+msgstr "รหัส"
 
 #. module: base
 #: model:ir.model,name:base.model_res_config_installer
 msgid "res.config.installer"
-msgstr ""
+msgstr "res.config.installer"
 
 #. module: base
 #: model:res.country,name:base.mc
 msgid "Monaco"
-msgstr ""
+msgstr "โมนาโก"
 
 #. module: base
 #: view:base.module.import:0
@@ -9748,18 +9748,18 @@ msgstr ""
 #. module: base
 #: selection:ir.cron,interval_type:0
 msgid "Minutes"
-msgstr ""
+msgstr "นาที"
 
 #. module: base
 #: view:res.currency:0
 msgid "Display"
-msgstr ""
+msgstr "แสดงผล"
 
 #. module: base
 #: view:ir.actions.act_window:0
 #: selection:ir.translation,type:0
 msgid "Help"
-msgstr ""
+msgstr "ช่วยเหลือ"
 
 #. module: base
 #: help:res.users,menu_id:0
@@ -9838,7 +9838,7 @@ msgstr ""
 #. module: base
 #: model:res.country,name:base.fr
 msgid "France"
-msgstr ""
+msgstr "ฝรั่งเศส"
 
 #. module: base
 #: model:ir.model,name:base.model_res_log
@@ -9854,7 +9854,7 @@ msgstr ""
 #. module: base
 #: selection:ir.cron,interval_type:0
 msgid "Weeks"
-msgstr ""
+msgstr "สัปดาห์"
 
 #. module: base
 #: code:addons/base/res/res_company.py:157
@@ -9918,7 +9918,7 @@ msgstr ""
 #. module: base
 #: field:res.lang,thousands_sep:0
 msgid "Thousands Separator"
-msgstr ""
+msgstr "ตัวคั่น หลักพัน"
 
 #. module: base
 #: field:res.request,create_date:0
@@ -9956,17 +9956,17 @@ msgstr ""
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_account_analytic_analysis
 msgid "Contracts Management"
-msgstr ""
+msgstr "การจัดการสัญญา"
 
 #. module: base
 #: selection:base.language.install,lang:0
 msgid "Chinese (TW) / 正體字"
-msgstr ""
+msgstr "จีน (TW) / 正體字"
 
 #. module: base
 #: model:ir.model,name:base.model_res_request
 msgid "res.request"
-msgstr ""
+msgstr "res.request"
 
 #. module: base
 #: view:ir.model:0
@@ -9976,7 +9976,7 @@ msgstr ""
 #. module: base
 #: view:ir.actions.todo:0
 msgid "Todo"
-msgstr ""
+msgstr "สิ่งที่จะทำ"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_product_visible_discount
@@ -9991,7 +9991,7 @@ msgstr ""
 #. module: base
 #: model:res.country,name:base.pa
 msgid "Panama"
-msgstr ""
+msgstr "ปานามา"
 
 #. module: base
 #: model:ir.module.module,description:base.module_account_bank_statement_extensions
@@ -10059,12 +10059,12 @@ msgstr "บริษัทที่เลือกไม่ได้อยู่
 #. module: base
 #: model:res.country,name:base.gi
 msgid "Gibraltar"
-msgstr ""
+msgstr "ยิบรอลตาร์"
 
 #. module: base
 #: field:ir.actions.report.xml,report_name:0
 msgid "Service Name"
-msgstr ""
+msgstr "ชื่อบริการ"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_import_base
@@ -10125,7 +10125,7 @@ msgstr ""
 #: view:ir.model:0
 #: view:workflow.activity:0
 msgid "Properties"
-msgstr ""
+msgstr "คุณสมบัติ"
 
 #. module: base
 #: help:ir.sequence,padding:0
@@ -10145,7 +10145,7 @@ msgstr ""
 #. module: base
 #: view:res.lang:0
 msgid "%A - Full weekday name."
-msgstr ""
+msgstr "%A - ชื่อเต็ม ในวันทำงาน."
 
 #. module: base
 #: help:ir.values,user_id:0
@@ -10155,12 +10155,12 @@ msgstr ""
 #. module: base
 #: model:res.country,name:base.gw
 msgid "Guinea Bissau"
-msgstr ""
+msgstr "กินีบิสเซา"
 
 #. module: base
 #: field:ir.actions.act_window,search_view:0
 msgid "Search View"
-msgstr ""
+msgstr "มุมมอง ค้นหา"
 
 #. module: base
 #: view:base.language.import:0
@@ -10178,7 +10178,7 @@ msgstr "รหัสของภาษาที่ต้องไม่ซ้ำ
 #: view:ir.attachment:0
 #: model:ir.ui.menu,name:base.menu_action_attachment
 msgid "Attachments"
-msgstr ""
+msgstr "แนบไฟล์"
 
 #. module: base
 #: model:ir.module.module,description:base.module_l10n_uy
@@ -10204,7 +10204,7 @@ msgstr ""
 #: model:ir.ui.menu,name:base.menu_sales
 #: model:ir.ui.menu,name:base.next_id_64
 msgid "Sales"
-msgstr ""
+msgstr "การขาย"
 
 #. module: base
 #: field:ir.actions.server,child_ids:0
@@ -10214,7 +10214,7 @@ msgstr ""
 #. module: base
 #: selection:ir.actions.todo,state:0
 msgid "Done"
-msgstr ""
+msgstr "เสร็จสมบูรณ์"
 
 #. module: base
 #: help:ir.cron,doall:0
@@ -10226,7 +10226,7 @@ msgstr ""
 #: model:res.partner.title,name:base.res_partner_title_miss
 #: model:res.partner.title,shortcut:base.res_partner_title_miss
 msgid "Miss"
-msgstr ""
+msgstr "นางสาว"
 
 #. module: base
 #: view:ir.model.access:0
@@ -10237,7 +10237,7 @@ msgstr ""
 #. module: base
 #: view:res.lang:0
 msgid "%m - Month number [01,12]."
-msgstr ""
+msgstr "%m - หมายเลข เดือน [01,12]."
 
 #. module: base
 #: view:res.bank:0
@@ -10250,23 +10250,23 @@ msgstr ""
 #: field:res.partner.bank,city:0
 #: view:res.users:0
 msgid "City"
-msgstr ""
+msgstr "จังหวัด"
 
 #. module: base
 #: model:res.country,name:base.qa
 msgid "Qatar"
-msgstr ""
+msgstr "กาตาร์"
 
 #. module: base
 #: model:res.country,name:base.it
 msgid "Italy"
-msgstr ""
+msgstr "อิตาลี"
 
 #. module: base
 #: view:ir.actions.todo:0
 #: selection:ir.actions.todo,state:0
 msgid "To Do"
-msgstr ""
+msgstr "สิ่งที่จะทำ"
 
 #. module: base
 #: selection:base.language.install,lang:0
@@ -10281,7 +10281,7 @@ msgstr ""
 #. module: base
 #: selection:ir.module.module,license:0
 msgid "GPL-3 or later version"
-msgstr ""
+msgstr "GPL-3 or later version"
 
 #. module: base
 #: model:ir.module.module,description:base.module_google_map
@@ -10296,7 +10296,7 @@ msgstr ""
 #. module: base
 #: field:workflow.activity,action:0
 msgid "Python Action"
-msgstr ""
+msgstr "Python Action"
 
 #. module: base
 #: model:ir.module.module,description:base.module_report_webkit_sample
@@ -10317,7 +10317,7 @@ msgstr ""
 #. module: base
 #: selection:base.language.install,lang:0
 msgid "English (US)"
-msgstr ""
+msgstr "ภาษาอังกฤษ (สหรัฐ)"
 
 #. module: base
 #: model:ir.actions.act_window,help:base.action_partner_title_partner
@@ -10346,7 +10346,7 @@ msgstr ""
 #: view:res.partner.bank:0
 #: view:res.users:0
 msgid "Address"
-msgstr ""
+msgstr "ที่อยู่"
 
 #. module: base
 #: code:addons/base/module/module.py:372
@@ -10369,7 +10369,7 @@ msgstr ""
 #. module: base
 #: model:res.country,name:base.mr
 msgid "Mauritania"
-msgstr ""
+msgstr "มอริทาเนีย"
 
 #. module: base
 #: model:ir.model,name:base.model_ir_translation
@@ -10405,7 +10405,7 @@ msgstr ""
 #: view:workflow.activity:0
 #: field:workflow.workitem,act_id:0
 msgid "Activity"
-msgstr ""
+msgstr "กิจกรรม"
 
 #. module: base
 #: view:res.partner:0
@@ -10435,7 +10435,7 @@ msgstr ""
 #. module: base
 #: model:ir.model,name:base.model_ir_mail_server
 msgid "ir.mail_server"
-msgstr ""
+msgstr "ir.mail_server"
 
 #. module: base
 #: selection:base.language.install,lang:0
@@ -10454,22 +10454,22 @@ msgstr ""
 #. module: base
 #: field:res.currency.rate,rate:0
 msgid "Rate"
-msgstr ""
+msgstr "อัตรา"
 
 #. module: base
 #: model:res.country,name:base.cg
 msgid "Congo"
-msgstr ""
+msgstr "คองโก"
 
 #. module: base
 #: view:res.lang:0
 msgid "Examples"
-msgstr ""
+msgstr "ตัวอย่าง"
 
 #. module: base
 #: field:ir.default,value:0
 msgid "Default Value"
-msgstr ""
+msgstr "ค่าปริยาย"
 
 #. module: base
 #: model:ir.model,name:base.model_res_country_state
@@ -10479,7 +10479,7 @@ msgstr ""
 #. module: base
 #: model:ir.ui.menu,name:base.next_id_5
 msgid "Sequences & Identifiers"
-msgstr ""
+msgstr "ลำดับและตัวบ่งชี้"
 
 #. module: base
 #: model:ir.module.module,description:base.module_l10n_th
@@ -10574,7 +10574,7 @@ msgstr ""
 #: selection:ir.module.module,state:0
 #: selection:ir.module.module.dependency,state:0
 msgid "Not Installed"
-msgstr ""
+msgstr "ยังไม่ได้ติดตั้ง"
 
 #. module: base
 #: view:workflow.activity:0
@@ -10586,7 +10586,7 @@ msgstr ""
 #: field:ir.module.module,icon_image:0
 #: field:ir.ui.menu,icon:0
 msgid "Icon"
-msgstr ""
+msgstr "ไอคอน"
 
 #. module: base
 #: model:ir.module.category,description:base.module_category_human_resources
@@ -10620,7 +10620,7 @@ msgstr ""
 #. module: base
 #: view:ir.sequence.type:0
 msgid "Sequences Type"
-msgstr ""
+msgstr "ประเภทลำดับ"
 
 #. module: base
 #: model:ir.module.module,description:base.module_base_action_rule
@@ -10650,12 +10650,12 @@ msgstr ""
 #. module: base
 #: model:res.country,name:base.ye
 msgid "Yemen"
-msgstr ""
+msgstr "เยเมน"
 
 #. module: base
 #: selection:workflow.activity,split_mode:0
 msgid "Or"
-msgstr ""
+msgstr "หรือ"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_l10n_br
@@ -10665,7 +10665,7 @@ msgstr ""
 #. module: base
 #: model:res.country,name:base.pk
 msgid "Pakistan"
-msgstr ""
+msgstr "ปากีสถาน"
 
 #. module: base
 #: model:ir.module.module,description:base.module_product_margin
@@ -10683,7 +10683,7 @@ msgstr ""
 #. module: base
 #: model:res.country,name:base.al
 msgid "Albania"
-msgstr ""
+msgstr "อัลเเบเนีย"
 
 #. module: base
 #: help:ir.module.module,complexity:0
@@ -10730,7 +10730,7 @@ msgstr ""
 #: view:base.module.import:0
 #: view:base.module.update:0
 msgid "Open Modules"
-msgstr ""
+msgstr "เปิด โมดุล"
 
 #. module: base
 #: model:ir.module.module,description:base.module_sale_margin
@@ -10752,7 +10752,7 @@ msgstr ""
 #. module: base
 #: view:base.module.import:0
 msgid "Import module"
-msgstr ""
+msgstr "นำเข้า โมดูล"
 
 #. module: base
 #: field:ir.actions.server,loop_action:0
@@ -10769,7 +10769,7 @@ msgstr ""
 #. module: base
 #: model:res.country,name:base.la
 msgid "Laos"
-msgstr ""
+msgstr "ลาว"
 
 #. module: base
 #: code:addons/base/res/res_company.py:163
@@ -10780,7 +10780,7 @@ msgstr ""
 #: field:res.partner,email:0
 #, python-format
 msgid "Email"
-msgstr ""
+msgstr "อีเมล์"
 
 #. module: base
 #: field:res.users,action_id:0
@@ -10851,7 +10851,7 @@ msgstr ""
 #. module: base
 #: model:res.country,name:base.ec
 msgid "Ecuador"
-msgstr ""
+msgstr "เอกวาดอร์"
 
 #. module: base
 #: selection:workflow.activity,kind:0
@@ -10892,17 +10892,17 @@ msgstr ""
 #. module: base
 #: view:ir.model.data:0
 msgid "Updatable"
-msgstr ""
+msgstr "แก้ไขได้"
 
 #. module: base
 #: view:res.lang:0
 msgid "3.  %x ,%X         ==> 12/05/08, 18:25:20"
-msgstr ""
+msgstr "3.  %x ,%X         ==> 12/05/08, 18:25:20"
 
 #. module: base
 #: selection:ir.model.fields,on_delete:0
 msgid "Cascade"
-msgstr ""
+msgstr "เรียงลดหลั่น"
 
 #. module: base
 #: field:workflow.transition,group_id:0
@@ -10924,17 +10924,17 @@ msgstr ""
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_web_hello
 msgid "Hello"
-msgstr ""
+msgstr "Hello"
 
 #. module: base
 #: view:ir.actions.configuration.wizard:0
 msgid "Next Configuration Step"
-msgstr ""
+msgstr "ขั้นตอนการตั้งค่าถัดไป"
 
 #. module: base
 #: field:res.groups,comment:0
 msgid "Comment"
-msgstr ""
+msgstr "ความคิดเห็น"
 
 #. module: base
 #: model:res.groups,name:base.group_hr_manager
@@ -10948,7 +10948,7 @@ msgstr ""
 #: field:ir.rule,domain_force:0
 #: field:res.partner.title,domain:0
 msgid "Domain"
-msgstr ""
+msgstr "โดเมน"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_marketing_campaign
@@ -10974,7 +10974,7 @@ msgstr ""
 #. module: base
 #: view:res.lang:0
 msgid "Update Languague Terms"
-msgstr ""
+msgstr "ปรับปรุงข้อตกลงและเงื่อนไข ภาษา"
 
 #. module: base
 #: field:workflow.activity,join_mode:0
@@ -10984,7 +10984,7 @@ msgstr ""
 #. module: base
 #: field:res.partner,tz:0
 msgid "Timezone"
-msgstr ""
+msgstr "เขตเวลา"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_wiki_faq
@@ -10995,7 +10995,7 @@ msgstr ""
 #: model:ir.model,name:base.model_ir_actions_report_xml
 #: selection:ir.ui.menu,action:0
 msgid "ir.actions.report.xml"
-msgstr ""
+msgstr "ir.actions.report.xml"
 
 #. module: base
 #: model:ir.module.module,description:base.module_project_issue_sheet
@@ -11053,7 +11053,7 @@ msgstr ""
 #. module: base
 #: model:res.country,name:base.by
 msgid "Belarus"
-msgstr ""
+msgstr "เบลารุส"
 
 #. module: base
 #: field:ir.actions.act_url,name:0
@@ -11061,7 +11061,7 @@ msgstr ""
 #: field:ir.actions.client,name:0
 #: field:ir.actions.server,name:0
 msgid "Action Name"
-msgstr ""
+msgstr "ชื่อการกระทำ"
 
 #. module: base
 #: model:ir.actions.act_window,help:base.action_res_users
@@ -11075,7 +11075,7 @@ msgstr ""
 #. module: base
 #: selection:res.request,priority:0
 msgid "Normal"
-msgstr ""
+msgstr "ปกติ"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_purchase_double_validation
@@ -11092,7 +11092,7 @@ msgstr ""
 #. module: base
 #: model:ir.actions.act_window,name:base.action_view_base_module_update
 msgid "Module Update"
-msgstr ""
+msgstr "ปรับปรุงโมดูล"
 
 #. module: base
 #: code:addons/base/module/wizard/base_module_upgrade.py:85
@@ -11112,12 +11112,12 @@ msgstr ""
 #: model:res.groups,name:base.group_tool_user
 #: view:res.users:0
 msgid "User"
-msgstr ""
+msgstr "ผู้ใช้งาน"
 
 #. module: base
 #: model:res.country,name:base.pr
 msgid "Puerto Rico"
-msgstr ""
+msgstr "เปอร์โตริโก"
 
 #. module: base
 #: view:ir.actions.act_window:0
@@ -11127,12 +11127,12 @@ msgstr ""
 #. module: base
 #: field:ir.actions.act_window,auto_search:0
 msgid "Auto Search"
-msgstr ""
+msgstr "ค้นหาอัตโนมัติ"
 
 #. module: base
 #: field:ir.actions.act_window,filter:0
 msgid "Filter"
-msgstr ""
+msgstr "ตัวกรอง"
 
 #. module: base
 #: model:res.partner.title,shortcut:base.res_partner_title_madam
@@ -11150,7 +11150,7 @@ msgstr ""
 #. module: base
 #: model:res.country,name:base.ch
 msgid "Switzerland"
-msgstr ""
+msgstr "สวิตเซอร์แลนด์"
 
 #. module: base
 #: model:res.country,name:base.gd
@@ -11165,7 +11165,7 @@ msgstr ""
 #. module: base
 #: view:base.language.install:0
 msgid "Load"
-msgstr ""
+msgstr "โหลด"
 
 #. module: base
 #: model:ir.module.module,description:base.module_warning
@@ -11226,7 +11226,7 @@ msgstr ""
 #. module: base
 #: view:res.lang:0
 msgid "Update Terms"
-msgstr ""
+msgstr "ปรับปรุงข้อตกลงและเงื่อนไข"
 
 #. module: base
 #: model:ir.module.module,description:base.module_project_messages
@@ -11248,7 +11248,7 @@ msgstr ""
 #. module: base
 #: field:ir.cron,args:0
 msgid "Arguments"
-msgstr ""
+msgstr "อาร์กิวเมนต์"
 
 #. module: base
 #: code:addons/orm.py:1260
@@ -11259,12 +11259,12 @@ msgstr ""
 #. module: base
 #: selection:ir.module.module,license:0
 msgid "GPL Version 2"
-msgstr ""
+msgstr "GPL Version 2"
 
 #. module: base
 #: selection:ir.module.module,license:0
 msgid "GPL Version 3"
-msgstr ""
+msgstr "GPL Version 3"
 
 #. module: base
 #: model:ir.module.module,description:base.module_report_intrastat
@@ -11309,7 +11309,7 @@ msgstr ""
 #. module: base
 #: selection:res.company,paper_format:0
 msgid "A4"
-msgstr ""
+msgstr "กระดาษ A4"
 
 #. module: base
 #: field:publisher_warranty.contract,check_support:0
@@ -11319,7 +11319,7 @@ msgstr ""
 #. module: base
 #: field:res.partner,customer:0
 msgid "Customer"
-msgstr ""
+msgstr "ลูกค้า"
 
 #. module: base
 #: selection:base.language.install,lang:0
@@ -11361,7 +11361,7 @@ msgstr ""
 #. module: base
 #: view:ir.sequence:0
 msgid "Hour 00->24: %(h24)s"
-msgstr ""
+msgstr "ชั่วโมง 00->24: %(h24)s"
 
 #. module: base
 #: field:ir.cron,nextcall:0
@@ -11381,12 +11381,12 @@ msgstr ""
 #. module: base
 #: field:res.request.history,date_sent:0
 msgid "Date sent"
-msgstr ""
+msgstr "วันส่ง"
 
 #. module: base
 #: view:ir.sequence:0
 msgid "Month: %(month)s"
-msgstr ""
+msgstr "เดือน: %(month)"
 
 #. module: base
 #: field:ir.actions.act_window.view,sequence:0
@@ -11403,12 +11403,12 @@ msgstr ""
 #: field:multi_company.default,sequence:0
 #: field:res.partner.bank,sequence:0
 msgid "Sequence"
-msgstr ""
+msgstr "กำหนดเลขที่เอกสาร"
 
 #. module: base
 #: model:res.country,name:base.tn
 msgid "Tunisia"
-msgstr ""
+msgstr "ตูนีเซีย"
 
 #. module: base
 #: view:ir.actions.todo:0
@@ -11420,12 +11420,12 @@ msgstr ""
 #: model:ir.ui.menu,name:base.menu_mrp_config
 #: model:ir.ui.menu,name:base.menu_mrp_root
 msgid "Manufacturing"
-msgstr ""
+msgstr "การผลิต"
 
 #. module: base
 #: model:res.country,name:base.km
 msgid "Comoros"
-msgstr ""
+msgstr "คอโมโรส"
 
 #. module: base
 #: view:res.request:0
@@ -11578,7 +11578,7 @@ msgstr ""
 #: field:res.request.link,object:0
 #: field:workflow.triggers,model:0
 msgid "Object"
-msgstr ""
+msgstr "อ็อบเจกต์"
 
 #. module: base
 #: code:addons/osv.py:169
@@ -11612,12 +11612,12 @@ msgstr ""
 #. module: base
 #: view:ir.sequence:0
 msgid "Minute: %(min)s"
-msgstr ""
+msgstr "นาที: %(min)"
 
 #. module: base
 #: model:ir.ui.menu,name:base.menu_ir_cron
 msgid "Scheduler"
-msgstr ""
+msgstr "ตารางเวลา"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_base_tools
@@ -11765,7 +11765,7 @@ msgstr ""
 #: selection:res.partner.title,domain:0
 #: model:res.request.link,name:base.req_link_partner
 msgid "Partner"
-msgstr ""
+msgstr "คู่ค้า"
 
 #. module: base
 #: field:ir.model.fields,complete_name:0
@@ -11775,17 +11775,17 @@ msgstr ""
 #. module: base
 #: model:res.country,name:base.tr
 msgid "Turkey"
-msgstr ""
+msgstr "ตุรกี"
 
 #. module: base
 #: model:res.country,name:base.fk
 msgid "Falkland Islands"
-msgstr ""
+msgstr "หมู่เกาะฟอร์คแลนด์"
 
 #. module: base
 #: model:res.country,name:base.lb
 msgid "Lebanon"
-msgstr ""
+msgstr "เลบานอน"
 
 #. module: base
 #: view:ir.actions.report.xml:0
@@ -11829,7 +11829,7 @@ msgstr ""
 #. module: base
 #: model:res.country,name:base.no
 msgid "Norway"
-msgstr ""
+msgstr "นอร์เวย์"
 
 #. module: base
 #: view:res.lang:0
@@ -11860,7 +11860,7 @@ msgstr ""
 #. module: base
 #: selection:res.request,state:0
 msgid "waiting"
-msgstr ""
+msgstr "กำลังรอ"
 
 #. module: base
 #: field:ir.actions.report.xml,report_file:0
@@ -11870,7 +11870,7 @@ msgstr ""
 #. module: base
 #: model:ir.model,name:base.model_workflow_triggers
 msgid "workflow.triggers"
-msgstr ""
+msgstr "workflow.triggers"
 
 #. module: base
 #: code:addons/base/ir/ir_model.py:85
@@ -11881,7 +11881,7 @@ msgstr ""
 #. module: base
 #: view:ir.mail_server:0
 msgid "Connection Information"
-msgstr ""
+msgstr "ข้อมูลการเชื่อมต่อ"
 
 #. module: base
 #: view:ir.attachment:0
@@ -11903,7 +11903,7 @@ msgstr ""
 #. module: base
 #: model:res.country,name:base.hm
 msgid "Heard and McDonald Islands"
-msgstr ""
+msgstr "เกาะเฮิร์ดและหมู่เกาะแมกดอนัลด์"
 
 #. module: base
 #: help:ir.model.data,name:0
@@ -12023,7 +12023,7 @@ msgstr ""
 #. module: base
 #: selection:ir.translation,type:0
 msgid "Selection"
-msgstr ""
+msgstr "เลือก"
 
 #. module: base
 #: field:ir.module.module,icon:0
@@ -12042,12 +12042,12 @@ msgstr ""
 #: field:ir.actions.server,type:0
 #: field:ir.actions.wizard,type:0
 msgid "Action Type"
-msgstr ""
+msgstr "ชนิดการทำงาน"
 
 #. module: base
 #: model:res.country,name:base.vn
 msgid "Vietnam"
-msgstr ""
+msgstr "เวียดนาม"
 
 #. module: base
 #: model:ir.module.module,description:base.module_l10n_syscohada
@@ -12069,7 +12069,7 @@ msgstr ""
 #: model:ir.actions.act_window,name:base.action_view_base_import_language
 #: model:ir.ui.menu,name:base.menu_view_base_import_language
 msgid "Import Translation"
-msgstr ""
+msgstr "นำเข้าการแปล"
 
 #. module: base
 #: field:res.partner.bank.type,field_ids:0
@@ -12080,25 +12080,25 @@ msgstr ""
 #: view:ir.module.module:0
 #: field:ir.module.module,category_id:0
 msgid "Category"
-msgstr ""
+msgstr "หมวดหมู่"
 
 #. module: base
 #: view:ir.attachment:0
 #: selection:ir.attachment,type:0
 #: selection:ir.property,type:0
 msgid "Binary"
-msgstr ""
+msgstr "Binary"
 
 #. module: base
 #: field:ir.actions.server,sms:0
 #: selection:ir.actions.server,state:0
 msgid "SMS"
-msgstr ""
+msgstr "ข้อความ SMS"
 
 #. module: base
 #: model:res.country,name:base.cr
 msgid "Costa Rica"
-msgstr ""
+msgstr "คอสตาริกา"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_base_module_doc_rst
@@ -12124,12 +12124,12 @@ msgstr ""
 #. module: base
 #: view:workflow.activity:0
 msgid "Conditions"
-msgstr ""
+msgstr "เงื่อนไข"
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_partner_other_form
 msgid "Other Partners"
-msgstr ""
+msgstr "คู่ค้า อื่นๆ"
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_currency_form
@@ -12142,7 +12142,7 @@ msgstr ""
 #: model:ir.model,name:base.model_ir_actions_client
 #: selection:ir.ui.menu,action:0
 msgid "ir.actions.client"
-msgstr ""
+msgstr "ir.actions.client"
 
 #. module: base
 #: help:ir.values,value:0
@@ -12169,7 +12169,7 @@ msgstr ""
 #. module: base
 #: view:ir.sequence:0
 msgid "Hour 00->12: %(h12)s"
-msgstr ""
+msgstr "ชัวโมง 00->12: %(h12)s"
 
 #. module: base
 #: help:res.partner.address,active:0
@@ -12184,7 +12184,7 @@ msgstr ""
 #. module: base
 #: model:res.country,name:base.dk
 msgid "Denmark"
-msgstr ""
+msgstr "เดนมาร์ก"
 
 #. module: base
 #: model:ir.module.module,description:base.module_base_calendar
@@ -12211,7 +12211,7 @@ msgstr ""
 #. module: base
 #: model:ir.model,name:base.model_workflow_instance
 msgid "workflow.instance"
-msgstr ""
+msgstr "workflow.instance"
 
 #. module: base
 #: code:addons/orm.py:479
@@ -12222,7 +12222,7 @@ msgstr ""
 #. module: base
 #: view:res.lang:0
 msgid "10. %S              ==> 20"
-msgstr ""
+msgstr "10. %S              ==> 20"
 
 #. module: base
 #: code:addons/fields.py:130
@@ -12243,23 +12243,23 @@ msgstr ""
 #. module: base
 #: model:res.country,name:base.ee
 msgid "Estonia"
-msgstr ""
+msgstr "เอสโตเนีย"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_board
 #: model:ir.ui.menu,name:base.menu_reporting_dashboard
 msgid "Dashboards"
-msgstr ""
+msgstr "Dashboards"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_procurement
 msgid "Procurements"
-msgstr ""
+msgstr "จัดซื้อจัดจ้าง"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_hr_payroll_account
 msgid "Payroll Accounting"
-msgstr ""
+msgstr "บัญชีเงินเดือน"
 
 #. module: base
 #: help:ir.attachment,type:0
@@ -12269,7 +12269,7 @@ msgstr ""
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_sale_order_dates
 msgid "Dates on Sales Order"
-msgstr ""
+msgstr "วันที่สั่งซื้อสินค้า"
 
 #. module: base
 #: view:ir.attachment:0
@@ -12310,17 +12310,17 @@ msgstr ""
 #. module: base
 #: field:res.country,address_format:0
 msgid "Address Format"
-msgstr ""
+msgstr "รูปแบบ ที่อยุ่"
 
 #. module: base
 #: model:ir.model,name:base.model_ir_values
 msgid "ir.values"
-msgstr ""
+msgstr "ir.values"
 
 #. module: base
 #: model:res.groups,name:base.group_no_one
 msgid "Technical Features"
-msgstr ""
+msgstr "Technical Features"
 
 #. module: base
 #: selection:base.language.install,lang:0
@@ -12361,7 +12361,7 @@ msgstr ""
 #: field:res.request,body:0
 #: field:res.request.history,req_id:0
 msgid "Request"
-msgstr ""
+msgstr "ความต้องการ"
 
 #. module: base
 #: model:ir.actions.act_window,help:base.act_ir_actions_todo_form
@@ -12422,7 +12422,7 @@ msgstr ""
 #. module: base
 #: view:res.config:0
 msgid "Apply"
-msgstr ""
+msgstr "นำไปใช้"
 
 #. module: base
 #: field:res.request,trigger_date:0
@@ -12455,13 +12455,13 @@ msgstr ""
 #. module: base
 #: view:res.partner.category:0
 msgid "Partner Category"
-msgstr ""
+msgstr "ประเภทบริษัทคู่ค้า"
 
 #. module: base
 #: view:ir.actions.server:0
 #: selection:ir.actions.server,state:0
 msgid "Trigger"
-msgstr ""
+msgstr "ตัวกระตุ้น"
 
 #. module: base
 #: model:ir.module.category,description:base.module_category_warehouse_management
@@ -12473,12 +12473,12 @@ msgstr ""
 #. module: base
 #: model:ir.model,name:base.model_base_module_update
 msgid "Update Module"
-msgstr ""
+msgstr "ปรับปรุง โมดูล"
 
 #. module: base
 #: view:ir.model.fields:0
 msgid "Translate"
-msgstr ""
+msgstr "แปล"
 
 #. module: base
 #: model:ir.module.module,description:base.module_users_ldap
@@ -12576,7 +12576,7 @@ msgstr ""
 #. module: base
 #: field:res.request.history,body:0
 msgid "Body"
-msgstr ""
+msgstr "เนื้อความ HTML"
 
 #. module: base
 #: code:addons/base/ir/ir_mail_server.py:221
@@ -12605,7 +12605,7 @@ msgstr ""
 #. module: base
 #: selection:base.language.export,state:0
 msgid "choose"
-msgstr ""
+msgstr "เลือก"
 
 #. module: base
 #: help:ir.model,osv_memory:0
@@ -12625,7 +12625,7 @@ msgstr ""
 #. module: base
 #: view:ir.attachment:0
 msgid "Filter on my documents"
-msgstr ""
+msgstr "กรองเอกสารของฉัน"
 
 #. module: base
 #: help:ir.actions.server,code:0
@@ -12639,7 +12639,7 @@ msgstr ""
 #: model:ir.ui.menu,name:base.menu_procurement_management_supplier_name
 #: view:res.partner:0
 msgid "Suppliers"
-msgstr ""
+msgstr "ผู้จำหน่าย"
 
 #. module: base
 #: view:publisher_warranty.contract.wizard:0
@@ -12659,7 +12659,7 @@ msgstr ""
 #. module: base
 #: model:res.country,name:base.ga
 msgid "Gabon"
-msgstr ""
+msgstr "กาบอน"
 
 #. module: base
 #: model:res.groups,name:base.group_multi_company
@@ -12673,12 +12673,12 @@ msgstr ""
 #: model:res.groups,name:base.group_erp_manager
 #: view:res.users:0
 msgid "Access Rights"
-msgstr ""
+msgstr "สิทธิ์การเข้าใช้งาน"
 
 #. module: base
 #: model:res.country,name:base.gl
 msgid "Greenland"
-msgstr ""
+msgstr "กรีนแลนด์"
 
 #. module: base
 #: model:res.groups,name:base.group_sale_salesman_all_leads
@@ -12689,7 +12689,7 @@ msgstr ""
 #: view:res.partner.bank:0
 #: field:res.partner.bank,acc_number:0
 msgid "Account Number"
-msgstr ""
+msgstr "หมายเลขบัญชี"
 
 #. module: base
 #: view:ir.rule:0
@@ -12706,7 +12706,7 @@ msgstr ""
 #. module: base
 #: view:res.lang:0
 msgid "1.  %c              ==> Fri Dec  5 18:25:20 2008"
-msgstr ""
+msgstr "1.  %c  ==> ศุกร์ ธันวา  5 18:25:20 2008"
 
 #. module: base
 #: model:res.country,name:base.nc
@@ -12737,14 +12737,14 @@ msgstr ""
 #. module: base
 #: model:res.country,name:base.cy
 msgid "Cyprus"
-msgstr ""
+msgstr "ไซปรัส"
 
 #. module: base
 #: field:ir.actions.server,subject:0
 #: field:res.request,name:0
 #: view:res.request.link:0
 msgid "Subject"
-msgstr ""
+msgstr "ชื่อเรื่อง"
 
 #. module: base
 #: selection:res.currency,position:0
@@ -12755,12 +12755,12 @@ msgstr ""
 #: field:res.request,act_from:0
 #: field:res.request.history,act_from:0
 msgid "From"
-msgstr ""
+msgstr "จาก"
 
 #. module: base
 #: view:res.users:0
 msgid "Preferences"
-msgstr ""
+msgstr "ตั้งค่าใช้งาน"
 
 #. module: base
 #: model:res.partner.category,name:base.res_partner_category_consumers0
@@ -12805,7 +12805,7 @@ msgstr ""
 #: view:ir.ui.view:0
 #: selection:ir.ui.view,type:0
 msgid "Kanban"
-msgstr ""
+msgstr "Kanban"
 
 #. module: base
 #: code:addons/base/ir/ir_model.py:291
@@ -12829,7 +12829,7 @@ msgstr ""
 #: view:ir.actions.report.xml:0
 #: view:res.currency:0
 msgid "Miscellaneous"
-msgstr ""
+msgstr "เบ็ดเตล็ด"
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_ir_mail_server_list
@@ -12841,7 +12841,7 @@ msgstr ""
 #. module: base
 #: model:res.country,name:base.cn
 msgid "China"
-msgstr ""
+msgstr "จีน"
 
 #. module: base
 #: help:ir.actions.server,wkf_model_id:0
@@ -12860,7 +12860,7 @@ msgstr ""
 #. module: base
 #: model:res.country,name:base.eh
 msgid "Western Sahara"
-msgstr ""
+msgstr "ซาฮาราตะวันตก"
 
 #. module: base
 #: model:ir.module.category,name:base.module_category_account_voucher
@@ -12877,7 +12877,7 @@ msgstr ""
 #. module: base
 #: model:res.country,name:base.id
 msgid "Indonesia"
-msgstr ""
+msgstr "อินโดนีเซีย"
 
 #. module: base
 #: view:base.update.translations:0
@@ -12944,7 +12944,7 @@ msgstr ""
 #. module: base
 #: model:res.country,name:base.bg
 msgid "Bulgaria"
-msgstr ""
+msgstr "บัลแกเรีย"
 
 #. module: base
 #: view:publisher_warranty.contract.wizard:0
@@ -12959,7 +12959,7 @@ msgstr "แองโกลา"
 #. module: base
 #: model:res.country,name:base.tf
 msgid "French Southern Territories"
-msgstr ""
+msgstr "เขตปกครองเฟรนช์เซาเทิร์น"
 
 #. module: base
 #: model:ir.model,name:base.model_res_currency
@@ -12970,7 +12970,7 @@ msgstr ""
 #: field:res.currency,name:0
 #: field:res.currency.rate,currency_id:0
 msgid "Currency"
-msgstr ""
+msgstr "สกุลเงิน"
 
 #. module: base
 #: view:res.lang:0
@@ -12980,7 +12980,7 @@ msgstr ""
 #. module: base
 #: model:res.partner.title,shortcut:base.res_partner_title_ltd
 msgid "ltd"
-msgstr ""
+msgstr "จำกัด"
 
 #. module: base
 #: field:res.log,res_id:0
@@ -12995,17 +12995,17 @@ msgstr ""
 #. module: base
 #: model:ir.module.category,name:base.module_category_administration
 msgid "Administration"
-msgstr ""
+msgstr "ผู้ดูแลระบบ"
 
 #. module: base
 #: view:base.module.update:0
 msgid "Click on Update below to start the process..."
-msgstr ""
+msgstr "คลิกที่ปรับปรุงด้านล่างเพื่อเริ่มต้นกระบวนการ ..."
 
 #. module: base
 #: model:res.country,name:base.ir
 msgid "Iran"
-msgstr ""
+msgstr "อิหร่าน"
 
 #. module: base
 #: model:ir.actions.act_window,name:base.res_widget_user_act_window
@@ -13025,12 +13025,12 @@ msgstr ""
 #: field:res.partner,has_image:0
 #: field:res.users,user_email:0
 msgid "unknown"
-msgstr ""
+msgstr "ไม่ทราบ"
 
 #. module: base
 #: field:res.currency,symbol:0
 msgid "Symbol"
-msgstr ""
+msgstr "สัญลักษณ์"
 
 #. module: base
 #: help:res.users,login:0
@@ -13067,7 +13067,7 @@ msgstr ""
 #: view:res.partner.bank:0
 #: field:res.partner.bank,bank_name:0
 msgid "Bank Name"
-msgstr ""
+msgstr "ชื่อธนาคาร"
 
 #. module: base
 #: model:res.country,name:base.ki
@@ -13077,14 +13077,14 @@ msgstr ""
 #. module: base
 #: model:res.country,name:base.iq
 msgid "Iraq"
-msgstr ""
+msgstr "อิรัก"
 
 #. module: base
 #: model:ir.module.category,name:base.module_category_association
 #: model:ir.ui.menu,name:base.menu_association
 #: model:ir.ui.menu,name:base.menu_report_association
 msgid "Association"
-msgstr ""
+msgstr "การเชื่อมโยง"
 
 #. module: base
 #: model:ir.module.module,description:base.module_stock_no_autopicking
@@ -13136,12 +13136,12 @@ msgstr ""
 #. module: base
 #: model:ir.model,name:base.model_ir_sequence_type
 msgid "ir.sequence.type"
-msgstr ""
+msgstr "ir.sequence.type"
 
 #. module: base
 #: selection:base.language.export,format:0
 msgid "CSV File"
-msgstr ""
+msgstr "ไฟล์ CSV"
 
 #. module: base
 #: code:addons/base/res/res_company.py:154
@@ -13186,7 +13186,7 @@ msgstr ""
 #. module: base
 #: field:res.company,vat:0
 msgid "Tax ID"
-msgstr ""
+msgstr "เลขประจำตัวผู้เสียภาษี"
 
 #. module: base
 #: field:ir.model.fields,field_description:0
@@ -13226,7 +13226,7 @@ msgstr ""
 #. module: base
 #: model:res.country,name:base.zr
 msgid "Zaire"
-msgstr ""
+msgstr "ซาอีร์"
 
 #. module: base
 #: field:ir.attachment,res_id:0
@@ -13239,7 +13239,7 @@ msgstr ""
 #: view:ir.cron:0
 #: field:ir.model,info:0
 msgid "Information"
-msgstr ""
+msgstr "ข้อมูลรายละเอียด"
 
 #. module: base
 #: view:res.widget.user:0
@@ -13258,7 +13258,7 @@ msgstr ""
 #: view:res.users:0
 #, python-format
 msgid "Other"
-msgstr ""
+msgstr "อื่นๆ"
 
 #. module: base
 #: view:res.request:0
@@ -13300,7 +13300,7 @@ msgstr ""
 #: model:ir.ui.menu,name:base.menu_workflow_activity
 #: field:workflow,activities:0
 msgid "Activities"
-msgstr ""
+msgstr "กิจกรรม"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_product
@@ -13310,7 +13310,7 @@ msgstr ""
 #. module: base
 #: field:ir.actions.act_window,auto_refresh:0
 msgid "Auto-Refresh"
-msgstr ""
+msgstr "รีเฟรชอัตโนมัติ"
 
 #. module: base
 #: code:addons/base/ir/ir_model.py:85
@@ -13336,7 +13336,7 @@ msgstr ""
 #. module: base
 #: model:res.country,name:base.wf
 msgid "Wallis and Futuna Islands"
-msgstr ""
+msgstr "หมู่เกาะวาลลิสและหมู่เกาะฟุตูนา"
 
 #. module: base
 #: help:multi_company.default,name:0
@@ -13373,7 +13373,7 @@ msgstr ""
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_event
 msgid "Events Organisation"
-msgstr ""
+msgstr "การจัดการกิจกรรม"
 
 #. module: base
 #: model:ir.actions.act_window,name:base.ir_sequence_actions
@@ -13381,12 +13381,12 @@ msgstr ""
 #: model:ir.ui.menu,name:base.next_id_6
 #: view:workflow.activity:0
 msgid "Actions"
-msgstr ""
+msgstr "การดำเนินการ"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_delivery
 msgid "Delivery Costs"
-msgstr ""
+msgstr "ค่าจัดส่ง"
 
 #. module: base
 #: code:addons/base/ir/ir_cron.py:263
@@ -13416,7 +13416,7 @@ msgstr ""
 #: view:base.language.export:0
 #: field:ir.exports.line,export_id:0
 msgid "Export"
-msgstr ""
+msgstr "ส่งออก"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_l10n_nl
@@ -13479,7 +13479,7 @@ msgstr ""
 #: code:addons/orm.py:3961
 #, python-format
 msgid "Error"
-msgstr ""
+msgstr "ผิดพลาด"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_base_crypt
@@ -13516,7 +13516,7 @@ msgstr ""
 #: view:base.module.upgrade:0
 #: view:base.update.translations:0
 msgid "Update"
-msgstr ""
+msgstr "อัปเดต"
 
 #. module: base
 #: model:ir.actions.report.xml,name:base.ir_module_reference_print
@@ -13531,7 +13531,7 @@ msgstr ""
 #. module: base
 #: model:res.country,name:base.tz
 msgid "Tanzania"
-msgstr ""
+msgstr "แทนซาเนีย"
 
 #. module: base
 #: selection:base.language.install,lang:0
@@ -13546,7 +13546,7 @@ msgstr ""
 #. module: base
 #: model:res.country,name:base.cx
 msgid "Christmas Island"
-msgstr ""
+msgstr "เกาะคริสมาสต์"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_web_livechat
@@ -13579,7 +13579,7 @@ msgstr ""
 #. module: base
 #: view:res.config.installer:0
 msgid "Install Modules"
-msgstr ""
+msgstr "ติดตั้ง โมดูล"
 
 #. module: base
 #: view:ir.ui.view:0
@@ -13623,7 +13623,7 @@ msgstr ""
 #. module: base
 #: model:ir.model,name:base.model_res_request_history
 msgid "res.request.history"
-msgstr ""
+msgstr "res.request.history"
 
 #. module: base
 #: model:ir.model,name:base.model_multi_company_default
@@ -13658,7 +13658,7 @@ msgstr ""
 #. module: base
 #: field:ir.translation,src:0
 msgid "Source"
-msgstr ""
+msgstr "ที่มา"
 
 #. module: base
 #: help:res.partner.address,partner_id:0
@@ -13668,7 +13668,7 @@ msgstr ""
 #. module: base
 #: model:res.country,name:base.vu
 msgid "Vanuatu"
-msgstr ""
+msgstr "วานูอาตู"
 
 #. module: base
 #: view:res.company:0
@@ -13678,7 +13678,7 @@ msgstr ""
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_crm
 msgid "CRM"
-msgstr ""
+msgstr "CRM"
 
 #. module: base
 #: code:addons/base/module/wizard/base_export_language.py:59
@@ -13726,7 +13726,7 @@ msgstr ""
 #. module: base
 #: model:res.country,name:base.do
 msgid "Dominican Republic"
-msgstr ""
+msgstr "สาธารณรัฐโดมินิกัน"
 
 #. module: base
 #: selection:base.language.install,lang:0
@@ -13744,7 +13744,7 @@ msgstr ""
 #. module: base
 #: selection:ir.mail_server,smtp_encryption:0
 msgid "TLS (STARTTLS)"
-msgstr ""
+msgstr "TLS (STARTTLS)"
 
 #. module: base
 #: help:ir.actions.act_window,usage:0
@@ -13754,7 +13754,7 @@ msgstr ""
 #. module: base
 #: model:res.country,name:base.sa
 msgid "Saudi Arabia"
-msgstr ""
+msgstr "ซาอุดิอาระเบีย"
 
 #. module: base
 #: help:res.company,rml_header1:0
@@ -13788,7 +13788,7 @@ msgstr ""
 #: code:addons/base/module/wizard/base_module_configuration.py:38
 #, python-format
 msgid "System Configuration done"
-msgstr ""
+msgstr "ระบบการกำหนดค่าเสร็จแล้ว"
 
 #. module: base
 #: view:ir.actions.server:0
@@ -13832,17 +13832,17 @@ msgstr ""
 #. module: base
 #: model:res.country,name:base.gn
 msgid "Guinea"
-msgstr ""
+msgstr "กินี"
 
 #. module: base
 #: model:res.country,name:base.lu
 msgid "Luxembourg"
-msgstr ""
+msgstr "ลักเซมเบิร์ก"
 
 #. module: base
 #: selection:res.request,priority:0
 msgid "Low"
-msgstr ""
+msgstr "ต่ำ"
 
 #. module: base
 #: code:addons/base/ir/ir_ui_menu.py:379
@@ -13879,7 +13879,7 @@ msgstr ""
 #: field:res.partner,phone:0
 #, python-format
 msgid "Phone"
-msgstr ""
+msgstr "โทร"
 
 #. module: base
 #: field:res.groups,menu_access:0
@@ -13889,7 +13889,7 @@ msgstr ""
 #. module: base
 #: model:res.country,name:base.th
 msgid "Thailand"
-msgstr ""
+msgstr "ประเทศไทย"
 
 #. module: base
 #: model:ir.module.module,description:base.module_base_report_creator
@@ -13914,7 +13914,7 @@ msgstr ""
 #: model:ir.module.module,shortdesc:base.module_contacts
 #: model:ir.ui.menu,name:base.menu_config_address_book
 msgid "Address Book"
-msgstr ""
+msgstr "สมุดรายชื่อ"
 
 #. module: base
 #: model:ir.module.module,description:base.module_l10n_ma
@@ -13957,7 +13957,7 @@ msgstr ""
 #: selection:workflow.activity,join_mode:0
 #: selection:workflow.activity,split_mode:0
 msgid "And"
-msgstr ""
+msgstr "และ"
 
 #. module: base
 #: help:ir.values,res_id:0
@@ -13978,18 +13978,18 @@ msgstr ""
 #. module: base
 #: view:ir.rule:0
 msgid "General"
-msgstr ""
+msgstr "ทั่วไป"
 
 #. module: base
 #: model:res.country,name:base.uz
 msgid "Uzbekistan"
-msgstr ""
+msgstr "อุซเบกิสถาน"
 
 #. module: base
 #: model:ir.model,name:base.model_ir_actions_act_window
 #: selection:ir.ui.menu,action:0
 msgid "ir.actions.act_window"
-msgstr ""
+msgstr "ir.actions.act_window"
 
 #. module: base
 #: field:ir.rule,perm_create:0
@@ -14004,12 +14004,12 @@ msgstr ""
 #. module: base
 #: model:res.country,name:base.tw
 msgid "Taiwan"
-msgstr ""
+msgstr "ไต้หวัน"
 
 #. module: base
 #: model:ir.model,name:base.model_res_currency_rate
 msgid "Currency Rate"
-msgstr ""
+msgstr "อัตราแลกเปลี่ยน"
 
 #. module: base
 #: field:workflow,osv:0
@@ -14021,7 +14021,7 @@ msgstr ""
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_crm_helpdesk
 msgid "Helpdesk"
-msgstr ""
+msgstr "ฝ่ายช่วยเหลือ"
 
 #. module: base
 #: model:ir.actions.act_window,help:base.grant_menu_access
@@ -14058,7 +14058,7 @@ msgstr ""
 #. module: base
 #: model:ir.model,name:base.model_workflow_workitem
 msgid "workflow.workitem"
-msgstr ""
+msgstr "workflow.workitem"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_profile_tools
@@ -14105,7 +14105,7 @@ msgstr ""
 #. module: base
 #: report:ir.module.reference:0
 msgid "View :"
-msgstr ""
+msgstr "มุมมอง :"
 
 #. module: base
 #: field:ir.model.fields,view_load:0
@@ -14141,7 +14141,7 @@ msgstr ""
 #. module: base
 #: model:ir.ui.menu,name:base.menu_view_base_module_upgrade
 msgid "Apply Scheduled Upgrades"
-msgstr ""
+msgstr "ใช้อัปเกรดตามกำหนดการ"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_sale_journal
@@ -14193,7 +14193,7 @@ msgstr ""
 #. module: base
 #: model:ir.model,name:base.model_base_module_configuration
 msgid "base.module.configuration"
-msgstr ""
+msgstr "base.module.configuration"
 
 #. module: base
 #: model:ir.module.module,description:base.module_web
@@ -14219,7 +14219,7 @@ msgstr ""
 #: field:ir.model,access_ids:0
 #: view:ir.model.access:0
 msgid "Access"
-msgstr ""
+msgstr "เข้าถึง"
 
 #. module: base
 #: model:res.country,name:base.sk
@@ -14245,7 +14245,7 @@ msgstr ""
 #. module: base
 #: model:res.country,name:base.ar
 msgid "Argentina"
-msgstr ""
+msgstr "อาร์เจนตินา"
 
 #. module: base
 #: model:ir.module.module,description:base.module_project_issue
@@ -14264,12 +14264,12 @@ msgstr ""
 #. module: base
 #: field:res.groups,full_name:0
 msgid "Group Name"
-msgstr ""
+msgstr "ชื่อกลุ่ม"
 
 #. module: base
 #: model:res.country,name:base.bh
 msgid "Bahrain"
-msgstr ""
+msgstr "บาห์เรน"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_web
@@ -14283,7 +14283,7 @@ msgstr ""
 #: field:res.partner,fax:0
 #, python-format
 msgid "Fax"
-msgstr ""
+msgstr "โทรสาร"
 
 #. module: base
 #: model:ir.module.module,description:base.module_l10n_nl
@@ -14345,7 +14345,7 @@ msgstr ""
 #: view:res.users:0
 #: field:res.users,company_id:0
 msgid "Company"
-msgstr ""
+msgstr "บริษัท"
 
 #. module: base
 #: model:ir.module.category,name:base.module_category_report_designer
@@ -14361,7 +14361,7 @@ msgstr "หน้าต่างใหม่"
 #. module: base
 #: model:ir.model,name:base.model_ir_model_data
 msgid "ir.model.data"
-msgstr ""
+msgstr "ir.model.data"
 
 #. module: base
 #: view:publisher_warranty.contract:0
@@ -14386,7 +14386,7 @@ msgstr ""
 #. module: base
 #: view:ir.actions.todo:0
 msgid "Launch"
-msgstr ""
+msgstr "เรียก"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_caldav
@@ -14396,7 +14396,7 @@ msgstr ""
 #. module: base
 #: field:ir.actions.act_window,limit:0
 msgid "Limit"
-msgstr ""
+msgstr "จำกัด"
 
 #. module: base
 #: help:workflow.transition,group_id:0
@@ -14413,12 +14413,12 @@ msgstr ""
 #. module: base
 #: model:res.country,name:base.jm
 msgid "Jamaica"
-msgstr ""
+msgstr "จาไมก้า"
 
 #. module: base
 #: field:res.partner,color:0
 msgid "Color Index"
-msgstr ""
+msgstr "ดัชนีสี"
 
 #. module: base
 #: model:ir.actions.act_window,help:base.action_partner_category_form
@@ -14432,7 +14432,7 @@ msgstr ""
 #. module: base
 #: model:res.country,name:base.az
 msgid "Azerbaijan"
-msgstr ""
+msgstr "อาร์เซอร์ไบจัน"
 
 #. module: base
 #: code:addons/base/ir/ir_mail_server.py:481
@@ -14441,7 +14441,7 @@ msgstr ""
 #: code:addons/base/res/res_partner.py:566
 #, python-format
 msgid "Warning"
-msgstr ""
+msgstr "แจ้งเตือน"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_edi
@@ -14462,12 +14462,12 @@ msgstr ""
 #: view:ir.property:0
 #: model:ir.ui.menu,name:base.menu_ir_property
 msgid "Parameters"
-msgstr ""
+msgstr "พารามิเตอร์"
 
 #. module: base
 #: model:res.country,name:base.pm
 msgid "Saint Pierre and Miquelon"
-msgstr ""
+msgstr "แซงปีแยร์และมีเกอลง"
 
 #. module: base
 #: model:ir.module.module,description:base.module_email_template
@@ -14538,7 +14538,7 @@ msgstr ""
 #. module: base
 #: model:res.country,name:base.rw
 msgid "Rwanda"
-msgstr ""
+msgstr "รวันดา"
 
 #. module: base
 #: model:ir.module.module,description:base.module_hr_timesheet
@@ -14573,7 +14573,7 @@ msgstr ""
 #. module: base
 #: model:res.country,name:base.ck
 msgid "Cook Islands"
-msgstr ""
+msgstr "หมู่เกาะคุ้ก"
 
 #. module: base
 #: field:ir.model.data,noupdate:0
@@ -14583,17 +14583,17 @@ msgstr ""
 #. module: base
 #: selection:base.language.install,lang:0
 msgid "Klingon"
-msgstr ""
+msgstr "คลิงออน"
 
 #. module: base
 #: model:res.country,name:base.sg
 msgid "Singapore"
-msgstr ""
+msgstr "สิงคโปร์"
 
 #. module: base
 #: selection:ir.actions.act_window,target:0
 msgid "Current Window"
-msgstr ""
+msgstr "หน้าปัจจุบัน"
 
 #. module: base
 #: model:ir.module.module,description:base.module_crm
@@ -14659,7 +14659,7 @@ msgstr ""
 #: field:res.partner.bank,country_id:0
 #: view:res.users:0
 msgid "Country"
-msgstr ""
+msgstr "ประเทศ"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_project_messages
@@ -14669,7 +14669,7 @@ msgstr ""
 #. module: base
 #: model:res.country,name:base.pn
 msgid "Pitcairn Island"
-msgstr ""
+msgstr "เกาะพิตแคร์น"
 
 #. module: base
 #: model:ir.module.module,description:base.module_web_tests
@@ -14729,12 +14729,12 @@ msgstr ""
 #. module: base
 #: field:ir.module.module,auto_install:0
 msgid "Automatic Installation"
-msgstr ""
+msgstr "การติดตั้งอัตโนมัติ"
 
 #. module: base
 #: model:res.country,name:base.jp
 msgid "Japan"
-msgstr ""
+msgstr "ญี่ปุ่น"
 
 #. module: base
 #: code:addons/base/ir/ir_model.py:418
@@ -14786,7 +14786,7 @@ msgstr ""
 #: selection:ir.actions.act_window.view,view_mode:0
 #: selection:ir.ui.view,type:0
 msgid "Graph"
-msgstr ""
+msgstr "กราฟ"
 
 #. module: base
 #: model:ir.model,name:base.model_ir_actions_server
@@ -14840,19 +14840,19 @@ msgstr ""
 #. module: base
 #: model:res.country,name:base.cl
 msgid "Chile"
-msgstr ""
+msgstr "ชิลี"
 
 #. module: base
 #: view:ir.cron:0
 msgid "Execution"
-msgstr ""
+msgstr "ประมวลผล"
 
 #. module: base
 #: field:ir.actions.server,condition:0
 #: view:ir.values:0
 #: field:workflow.transition,condition:0
 msgid "Condition"
-msgstr ""
+msgstr "เงื่อนไข"
 
 #. module: base
 #: help:res.currency,rate:0
@@ -14862,7 +14862,7 @@ msgstr ""
 #. module: base
 #: field:ir.ui.view,name:0
 msgid "View Name"
-msgstr ""
+msgstr "ชื่อ มุมมอง"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_document_ftp
@@ -14872,7 +14872,7 @@ msgstr ""
 #. module: base
 #: model:ir.model,name:base.model_res_groups
 msgid "Access Groups"
-msgstr ""
+msgstr "กลุ่มการเข้าถึง"
 
 #. module: base
 #: selection:base.language.install,lang:0
@@ -14894,7 +14894,7 @@ msgstr ""
 #. module: base
 #: model:res.country,name:base.hr
 msgid "Croatia"
-msgstr ""
+msgstr "โครเอเชีย"
 
 #. module: base
 #: field:ir.actions.server,mobile:0
@@ -14912,7 +14912,7 @@ msgstr ""
 #. module: base
 #: view:base.module.upgrade:0
 msgid "System Update"
-msgstr ""
+msgstr "การอัปเดตระบบ"
 
 #. module: base
 #: selection:ir.translation,type:0
@@ -14927,7 +14927,7 @@ msgstr ""
 #. module: base
 #: model:res.country,name:base.sc
 msgid "Seychelles"
-msgstr ""
+msgstr "เซเชลส์"
 
 #. module: base
 #: code:addons/base/res/res_company.py:173
@@ -14950,17 +14950,17 @@ msgstr ""
 #. module: base
 #: model:res.country,name:base.sl
 msgid "Sierra Leone"
-msgstr ""
+msgstr "เซียร์ราลีโอน"
 
 #. module: base
 #: view:res.company:0
 msgid "General Information"
-msgstr ""
+msgstr "ข้อมูลทั่วไป"
 
 #. module: base
 #: model:res.country,name:base.tc
 msgid "Turks and Caicos Islands"
-msgstr ""
+msgstr "หมู่เกาะเติกส์และหมู่เกาะเคคอส"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_fetchmail_project_issue
@@ -15004,7 +15004,7 @@ msgstr ""
 #. module: base
 #: selection:workflow.activity,kind:0
 msgid "Function"
-msgstr ""
+msgstr "ฟังก์ชั่น"
 
 #. module: base
 #: view:res.widget:0
@@ -15032,12 +15032,12 @@ msgstr ""
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_purchase_requisition
 msgid "Purchase Requisitions"
-msgstr ""
+msgstr "ใบขอซื้อ"
 
 #. module: base
 #: selection:ir.cron,interval_type:0
 msgid "Months"
-msgstr ""
+msgstr "เดือน"
 
 #. module: base
 #: view:workflow.instance:0
@@ -15048,19 +15048,19 @@ msgstr ""
 #: code:addons/base/res/res_partner.py:684
 #, python-format
 msgid "Partners: "
-msgstr ""
+msgstr "คู่ค้า: "
 
 #. module: base
 #: code:addons/base/res/res_company.py:173
 #: field:res.partner.bank,name:0
 #, python-format
 msgid "Bank Account"
-msgstr ""
+msgstr "บัญชีธนาคาร"
 
 #. module: base
 #: model:res.country,name:base.kp
 msgid "North Korea"
-msgstr ""
+msgstr "เกาหลีเหนือ"
 
 #. module: base
 #: selection:ir.actions.server,state:0
@@ -15085,7 +15085,7 @@ msgstr ""
 #. module: base
 #: model:res.partner.category,name:base.res_partner_category_2
 msgid "Prospect"
-msgstr ""
+msgstr "เป้าหมายลูกค้า/ลูกค้า"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_stock_invoice_directly
@@ -15156,7 +15156,7 @@ msgstr ""
 #. module: base
 #: model:res.country,name:base.lk
 msgid "Sri Lanka"
-msgstr ""
+msgstr "ศรีลังกา"
 
 #. module: base
 #: model:ir.module.module,description:base.module_base_module_record
