@@ -38,6 +38,7 @@ class groups(osv.osv):
     _name = "res.groups"
     _description = "Access Groups"
     _rec_name = 'full_name'
+    _order = 'name'
 
     def _get_full_name(self, cr, uid, ids, field, arg, context=None):
         res = {}
@@ -844,6 +845,7 @@ class users_view(osv.osv):
                     'string': app and app.name or _('Other'),
                     'selection': [(False, '')] + [(g.id, g.name) for g in gs],
                     'help': '\n'.join(tips),
+                    'exportable': False,
                 }
             else:
                 # boolean group fields
@@ -852,6 +854,7 @@ class users_view(osv.osv):
                         'type': 'boolean',
                         'string': g.name,
                         'help': g.comment,
+                        'exportable': False,
                     }
         return res
 
