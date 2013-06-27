@@ -267,6 +267,51 @@ class BoundStream(object):
 
         return data
 
+    def readline(self, size=-1):
+        nl = -1
+        data = ''
+        if self._fpos < 0 and self._lbuf:
+            if (0 - self._fpos) > len(self._lbuf):
+                raise EOFError("Cannot re-read at %d" % self._fpos)
+            nl = self._lbuf.find('\n', self._fpos)
+            if nl >= 0:
+                data = self._lbuf[self._fpos:nl+1]
+            else:
+                data = self._lbuf[self._fpos:]
+            if size >= 0:
+                data = data[:size]
+            self._fpos += len(data)
+            assert self._fpos <= 0
+            if nl >= 0:
+                return data
+
+        if not self._stream or self._fpos != 0L:
+            raise IOError(errno.EBADF, "read() without stream")
+
+        if self._rem_length < 0:
+            raise EOFError()
+
+        while (nl <= 0) and self._rem_length:
+            rsize = min(self._rem_length, self._chunk_size, 256)
+            ndata = self._stream.read(rsize)
+            self._rem_length -= len(ndata)
+            assert self._rem_length >= 0
+
+            nl = ndata.find('\n')
+            nl += 1
+            if nl > 0:
+                data += ndata[:nl]
+                self._lbuf = ndata[nl:]
+                self._fpos = 0 - len(self._lbuf) # rewind, so that _lbuf is read next
+            else:
+                data += ndata
+                self._lbuf = ndata[-32:]
+
+            if size >= 0 and len(data) >= size:
+                break
+
+        return data
+
     def tell(self):
         return self._fpos
 
