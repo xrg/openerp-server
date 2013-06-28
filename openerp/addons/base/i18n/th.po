@@ -14,8 +14,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-06-20 05:47+0000\n"
-"X-Generator: Launchpad (build 16673)\n"
+"X-Launchpad-Export-Date: 2013-06-28 06:14+0000\n"
+"X-Generator: Launchpad (build 16681)\n"
 
 #. module: base
 #: model:res.country,name:base.sh
@@ -8169,7 +8169,7 @@ msgstr ""
 #. module: base
 #: field:ir.actions.report.xml,attachment_use:0
 msgid "Reload from Attachment"
-msgstr ""
+msgstr "โหลดใหม่จากสิ่งที่แนบมา"
 
 #. module: base
 #: view:ir.module.module:0
