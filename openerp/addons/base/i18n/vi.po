@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: openobject-server\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2013-06-07 19:35+0000\n"
-"PO-Revision-Date: 2013-06-27 16:10+0000\n"
+"PO-Revision-Date: 2013-07-02 05:49+0000\n"
 "Last-Translator: Hung Tran <vanda6688@yahoo.com>\n"
 "Language-Team: Vietnamese <vi@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-06-28 06:31+0000\n"
-"X-Generator: Launchpad (build 16681)\n"
+"X-Launchpad-Export-Date: 2013-07-02 05:59+0000\n"
+"X-Generator: Launchpad (build 16692)\n"
 
 #. module: base
 #: model:ir.module.module,description:base.module_account_check_writing
@@ -25,6 +25,10 @@ msgid ""
 "================================================\n"
 "    "
 msgstr ""
+"\n"
+"Modun kiểm tra chính tả và kiểm tra in ấn.\n"
+"================================================\n"
+"    "
 
 #. module: base
 #: view:res.partner.bank:0
@@ -140,6 +144,9 @@ msgid ""
 "The module adds google user in res user.\n"
 "========================================\n"
 msgstr ""
+"\n"
+"Modun thêm người dùng google vào tài nguyên người dùng.\n"
+"========================================\n"
 
 #. module: base
 #: help:res.partner,employee:0
@@ -175,7 +182,7 @@ msgstr "Cửa sổ đích"
 #. module: base
 #: field:ir.actions.report.xml,report_rml:0
 msgid "Main Report File Path"
-msgstr ""
+msgstr "Đường dẫn tập tin báo cáo chính"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_sale_analytic_plans
@@ -306,6 +313,38 @@ msgid ""
 "launchpad:\n"
 " https://launchpad.net/openerp-swiss-localization\n"
 msgstr ""
+"\n"
+" Swiss localization :\n"
+" ====================\n"
+" **Multilang swiss STERCHI account chart and taxes**\n"
+"  **Author:** Camptocamp SA\n"
+"\n"
+"  **Financial contributors:** Prisme Solutions Informatique SA, Quod SA\n"
+"\n"
+"  **Translation contributors:** brain-tec AG, Agile Business Group\n"
+"\n"
+" **This release will introduce major changes to l10n_ch.**\n"
+"\n"
+" Due to important refactoring needs and the Switzerland adoption of new "
+"international payment standard during 2013-2014. We have reorganised the "
+"swiss localization addons this way:\n"
+"\n"
+" - **l10n_ch**: Multilang swiss STERCHI account chart and taxes (official "
+"addon)\n"
+" - **l10n_ch_base_bank**: Technical module that introduces a new and "
+"simplified version of bank type management\n"
+" - **l10n_ch_bank**: List of swiss banks\n"
+" - **l10n_ch_zip**: List of swiss postal zip\n"
+" - **l10n_ch_dta**: Support of dta payment protocol (will be deprecated end "
+"2014)\n"
+" - **l10n_ch_payment_slip**: Support of ESR/BVR payment slip report and "
+"reconciliation. Report refactored with easy element positioning.\n"
+" - **l10n_ch_sepa**: Alpha implementation of PostFinance SEPA/PAIN support "
+"will be completed during 2013/2014\n"
+"\n"
+" The modules will be soon available on OpenERP swiss localization on "
+"launchpad:\n"
+" https://launchpad.net/openerp-swiss-localization\n"
 
 #. module: base
 #: model:res.groups,name:base.group_multi_currency
@@ -322,6 +361,12 @@ msgid ""
 "\n"
 "    "
 msgstr ""
+"\n"
+"Chilean accounting chart and tax localization.\n"
+"==============================================\n"
+"Plan contable chileno e impuestos de acuerdo a disposiciones vigentes\n"
+"\n"
+"    "
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_sale
@@ -507,6 +552,7 @@ msgid ""
 "One of the records you are trying to modify has already been deleted "
 "(Document type: %s)."
 msgstr ""
+"Một trong những bảng ghi bạn muốn chỉnh sửa đã bị xóa (Loại tài liệu: %s)."
 
 #. module: base
 #: help:ir.actions.act_window,views:0
@@ -525,12 +571,12 @@ msgstr ""
 #. module: base
 #: view:ir.rule:0
 msgid "Create Access Right"
-msgstr ""
+msgstr "Tạo quyền truy cập"
 
 #. module: base
 #: model:res.country,name:base.tv
 msgid "Tuvalu"
-msgstr ""
+msgstr "Tuvalu"
 
 #. module: base
 #: field:ir.actions.configuration.wizard,note:0
@@ -550,7 +596,7 @@ msgstr ""
 #. module: base
 #: model:res.country,name:base.an
 msgid "Netherlands Antilles"
-msgstr ""
+msgstr "Netherlands Antilles"
 
 #. module: base
 #: code:addons/base/res/res_users.py:311
@@ -632,7 +678,7 @@ msgstr ""
 #. module: base
 #: model:res.country,name:base.ao
 msgid "Angola"
-msgstr ""
+msgstr "Angola"
 
 #. module: base
 #: selection:base.language.install,lang:0
@@ -692,7 +738,7 @@ msgstr "Bán hàng & Mua hàng"
 #. module: base
 #: view:res.partner:0
 msgid "Put an internal note..."
-msgstr ""
+msgstr "Điền lưu ý nội bộ ...."
 
 #. module: base
 #: view:ir.translation:0
@@ -726,7 +772,7 @@ msgstr "Các trường được tùy chỉnh phải có tên bắt đầu bằng
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_l10n_mx
 msgid "Mexico - Accounting"
-msgstr ""
+msgstr "Mexico - Accounting"
 
 #. module: base
 #: help:ir.actions.server,action_id:0
@@ -736,7 +782,7 @@ msgstr "Chọn cửa sổ hành động, Báo cáo, trình hỗ trợ để th�
 #. module: base
 #: sql_constraint:ir.config_parameter:0
 msgid "Key must be unique."
-msgstr ""
+msgstr "Khóa phải là duy nhất."
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_plugin_outlook
@@ -821,7 +867,7 @@ msgstr "Jordan"
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_l10n_hr
 msgid "Croatia - RRIF 2012 COA"
-msgstr ""
+msgstr "Croatia - RRIF 2012 COA"
 
 #. module: base
 #: help:ir.cron,nextcall:0
@@ -836,12 +882,12 @@ msgstr "ir.ui.view"
 #. module: base
 #: model:res.country,name:base.er
 msgid "Eritrea"
-msgstr ""
+msgstr "Eritrea"
 
 #. module: base
 #: sql_constraint:res.company:0
 msgid "The company name must be unique !"
-msgstr ""
+msgstr "Tên công ty phải là duy nhất !"
 
 #. module: base
 #: model:ir.ui.menu,name:base.menu_base_action_rule_admin
