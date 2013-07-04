@@ -384,9 +384,9 @@ class browse_record(object):
             # if the field is a classic one or a many2one, we'll fetch all classic and many2one fields
             if col._prefetch and (self._fields_only is not True):
                 # gen the list of "local" (ie not inherited) fields which are classic or many2one
-                fields_to_fetch = filter(lambda x: x[1]._classic_write, self._table._columns.items())
+                fields_to_fetch = filter(lambda x: x[1]._prefetch, self._table._columns.items())
                 # complete the field list with the inherited fields which are classic or many2one
-                fields_to_fetch += [ (x, xc[2]) for x, xc in self._table._inherit_fields.items() if xc[2]._classic_write]
+                fields_to_fetch += [ (x, xc[2]) for x, xc in self._table._inherit_fields.items() if xc[2]._prefetch]
                 # also, filter out the fields that we have already fetched
                 fields_to_fetch = filter(lambda f: f[0] not in self._data[self._id], fields_to_fetch)
                 if isinstance(self._fields_only, (tuple, list)):
