@@ -76,5 +76,8 @@ class ExecContext_orm(ExecContext):
             context[verb] = _pool_actor(verb=verb, parent=self)
 
 
+import amount_to_text
+import amount_to_text_en
+
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
 
