@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: OpenERP Server 5.0.4\n"
 "Report-Msgid-Bugs-To: support@openerp.com\n"
 "POT-Creation-Date: 2011-01-11 11:14+0000\n"
-"PO-Revision-Date: 2011-05-14 20:16+0000\n"
-"Last-Translator: Mariusz Wójtowicz <Unknown>\n"
+"PO-Revision-Date: 2013-07-20 11:21+0000\n"
+"Last-Translator: Michał Rzepiński <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-06-28 05:58+0000\n"
-"X-Generator: Launchpad (build 16681)\n"
+"X-Launchpad-Export-Date: 2013-07-22 05:49+0000\n"
+"X-Generator: Launchpad (build 16696)\n"
 
 #. module: base
 #: field:ir.filters,domain:0
@@ -583,6 +583,9 @@ msgid ""
 "Launchpad.net, our open source project management facility. We use their "
 "online interface to synchronize all translations efforts."
 msgstr ""
+"Tłumaczenia OpenERP (jądro, moduły, klient) są zarządzane poprzez "
+"Launchpad.net. Używamy ich interfejsu online by synchronizować wszelkie "
+"tłumaczenia."
 
 #. module: base
 #: field:res.partner,title:0
@@ -659,7 +662,7 @@ msgstr "Podstawowy partner"
 #. module: base
 #: report:ir.module.reference.graph:0
 msgid ","
-msgstr ""
+msgstr ","
 
 #. module: base
 #: view:res.partner:0
@@ -962,7 +965,7 @@ msgstr "Strona WWW"
 #. module: base
 #: model:res.country,name:base.gs
 msgid "S. Georgia & S. Sandwich Isls."
-msgstr ""
+msgstr "Georgia Południowa i Sandwich Południowy"
 
 #. module: base
 #: field:ir.actions.act_url,url:0
@@ -1103,7 +1106,7 @@ msgstr "%Y - Rok z czterocyfrowo"
 #. module: base
 #: report:ir.module.reference.graph:0
 msgid "-"
-msgstr ""
+msgstr "-"
 
 #. module: base
 #: view:publisher_warranty.contract.wizard:0
@@ -1333,7 +1336,7 @@ msgstr " (kopia)"
 #. module: base
 #: view:res.lang:0
 msgid "7.  %H:%M:%S      ==> 18:25:20"
-msgstr ""
+msgstr "7.  %H:%M:%S      ==> 18:25:20"
 
 #. module: base
 #: view:res.partner:0
@@ -1485,7 +1488,7 @@ msgstr "Utwórz / Zapisz / Kopiuj"
 #. module: base
 #: view:base.language.export:0
 msgid "https://help.launchpad.net/Translations"
-msgstr ""
+msgstr "https://help.launchpad.net/Translations"
 
 #. module: base
 #: field:ir.actions.act_window,view_mode:0
@@ -1725,7 +1728,7 @@ msgstr "Uproszczony"
 #. module: base
 #: model:res.country,name:base.st
 msgid "Saint Tome (Sao Tome) and Principe"
-msgstr ""
+msgstr "Wyspy Świętego Tomasza i Książęca"
 
 #. module: base
 #: selection:res.partner,type:0
@@ -1735,7 +1738,7 @@ msgstr "Faktura"
 #. module: base
 #: selection:base.language.install,lang:0
 msgid "Portugese (BR) / Português (BR)"
-msgstr ""
+msgstr "Portugalski (BR) / Português (BR)"
 
 #. module: base
 #: model:res.country,name:base.bb
@@ -2008,7 +2011,7 @@ msgstr ""
 #. module: base
 #: model:res.partner.category,name:base.res_partner_category_7
 msgid "Openstuff.net"
-msgstr ""
+msgstr "Openstuff.net"
 
 #. module: base
 #: model:res.country,name:base.nf
@@ -2050,7 +2053,7 @@ msgstr "Ważna"
 #. module: base
 #: selection:ir.translation,type:0
 msgid "XSL"
-msgstr ""
+msgstr "XSL"
 
 #. module: base
 #: code:addons/base/module/module.py:525
@@ -2071,7 +2074,7 @@ msgstr ""
 #. module: base
 #: model:res.widget,title:base.facebook_widget
 msgid "Facebook"
-msgstr ""
+msgstr "Facebook"
 
 #. module: base
 #: model:res.country,name:base.am
@@ -2316,7 +2319,7 @@ msgstr "Mapowanie pól"
 #. module: base
 #: selection:base.language.install,lang:0
 msgid "Portugese / Português"
-msgstr ""
+msgstr "Portugalski / Português"
 
 #. module: base
 #: model:res.partner.title,name:base.res_partner_title_sir
@@ -2600,7 +2603,7 @@ msgstr "GPL-2 lub wersja późniejsza"
 #. module: base
 #: model:res.partner.title,shortcut:base.res_partner_title_sir
 msgid "M."
-msgstr ""
+msgstr "M."
 
 #. module: base
 #: code:addons/base/module/module.py:644
@@ -2731,7 +2734,7 @@ msgstr "Certyfikat jakości"
 #. module: base
 #: view:res.lang:0
 msgid "6.  %d, %m         ==> 05, 12"
-msgstr ""
+msgstr "6.  %d, %m         ==> 05, 12"
 
 #. module: base
 #: field:res.config.users,date:0
@@ -2929,7 +2932,7 @@ msgstr "Plik .ZIP modułu"
 #. module: base
 #: field:ir.ui.view,xml_id:0
 msgid "XML ID"
-msgstr ""
+msgstr "XML ID"
 
 #. module: base
 #: model:res.partner.category,name:base.res_partner_category_17
@@ -3065,7 +3068,7 @@ msgstr "Autor"
 #. module: base
 #: model:res.country,name:base.mk
 msgid "FYROM"
-msgstr ""
+msgstr "FYROM"
 
 #. module: base
 #: view:res.lang:0
@@ -3157,7 +3160,7 @@ msgstr "Obiegi"
 #. module: base
 #: field:ir.translation,xml_id:0
 msgid "XML Id"
-msgstr ""
+msgstr "XML Id"
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_config_user_form
@@ -3263,7 +3266,7 @@ msgstr "Ustaw NULL"
 #. module: base
 #: model:res.country,name:base.bj
 msgid "Benin"
-msgstr ""
+msgstr "Benin"
 
 #. module: base
 #: code:addons/base/publisher_warranty/publisher_warranty.py:295
@@ -3413,7 +3416,7 @@ msgstr "Syria"
 #. module: base
 #: view:res.lang:0
 msgid "======================================================"
-msgstr ""
+msgstr "======================================================"
 
 #. module: base
 #: help:ir.actions.server,mobile:0
@@ -3471,6 +3474,7 @@ msgstr "Dotyczy usuwania"
 #, python-format
 msgid "Cannot rename column to %s, because that column already exists!"
 msgstr ""
+"Nie można zmienić nazwy kolumny na %s, ponieważ ta kolumna już istnieje!"
 
 #. module: base
 #: view:ir.attachment:0
@@ -3580,7 +3584,7 @@ msgstr "Wenezuela"
 #. module: base
 #: view:res.lang:0
 msgid "9.  %j              ==> 340"
-msgstr ""
+msgstr "9.  %j              ==> 340"
 
 #. module: base
 #: model:res.country,name:base.zm
@@ -3796,7 +3800,7 @@ msgstr "Pogrupuj wg"
 #. module: base
 #: view:res.config.installer:0
 msgid "title"
-msgstr ""
+msgstr "tytuł"
 
 #. module: base
 #: model:ir.model,name:base.model_base_language_install
@@ -3811,7 +3815,7 @@ msgstr "Tłumaczenie"
 #. module: base
 #: selection:res.request,state:0
 msgid "closed"
-msgstr ""
+msgstr "zamknięte"
 
 #. module: base
 #: selection:base.language.export,state:0
@@ -4421,7 +4425,7 @@ msgstr ""
 #: field:publisher_warranty.contract,name:0
 #: field:publisher_warranty.contract.wizard,name:0
 msgid "Serial Key"
-msgstr ""
+msgstr "Klucz seryjny"
 
 #. module: base
 #: selection:res.request,priority:0
@@ -4549,7 +4553,7 @@ msgstr "Podpis"
 #: code:addons/fields.py:664
 #, python-format
 msgid "Not Implemented"
-msgstr "Nie zaimplementowane"
+msgstr "Niezaimplementowane"
 
 #. module: base
 #: model:ir.model,name:base.model_res_widget_user
@@ -4641,7 +4645,7 @@ msgstr "Republika Czeska"
 #. module: base
 #: view:res.widget.wizard:0
 msgid "Widget Wizard"
-msgstr ""
+msgstr "Kreator widżetów"
 
 #. module: base
 #: model:ir.actions.act_window,help:base.act_ir_actions_todo_form
