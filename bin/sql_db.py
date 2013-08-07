@@ -241,10 +241,13 @@ class Cursor(object):
             self.__logger.exception("Postgres Operational error: %s", oe)
             self.status = False
             raise
-        except psycopg2.ProgrammingError, pe:
+        except psycopg2.DatabaseError, pe:
             self.__logger.error("Programming error: %s, in query %s" % (pe, query))
             self.__logger.error("bad query: %s" % query)
             self.__logger.error("params: %s" % (params,))
+            if debug or self.__logger.isEnabledFor(logging.DEBUG):
+                import traceback
+                self.__logger.debug("stack: %s", ''.join(traceback.format_stack(limit=15)))
             raise
         except Exception:
             self.__logger.exception("bad query: %s\nparams: %s" % (query,params))
