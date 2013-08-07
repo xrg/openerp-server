@@ -85,9 +85,7 @@ class id_field(integer):
                 if len(lefts) > 4:
                     raise eu.DomainLeftError(obj, lefts, operator, right)
 
-                if operator in ('=', '!=', '<>'):
-                    if not isinstance(right, basestring):
-                        raise eu.DomainRightError(obj, lefts, operator, right)
+                if isinstance(right, basestring):
                     if '.' in right:
                         module, name = right.split('.', 1)
                     elif module:
@@ -100,6 +98,22 @@ class id_field(integer):
 
                     domain += [('module', '=', module), ('name', '=', name),
                                 ('source', sop, source)]
+                elif (right is True) or (right is False):
+                    # meaning a reference exists or not
+                    # Specifying a module is optional, in this case
+                    if module:
+                        domain.append(('module', '=', module))
+                    elif context and 'module' in context:
+                        domain.append(('module', '=', context['module']))
+                    domain.append(('source', sop, source))
+                    if right is False:
+                        # invert the condition
+                        if operator == '=':
+                            lop = 'not inselect'
+                        elif operator in ('!=', '<>'):
+                            lop = 'inselect'
+                else:
+                    raise eu.DomainRightError(obj, lefts, operator, right)
 
                 imd_obj = obj.pool.get('ir.model.data')
                 qry = Query(tables=['"%s"' % imd_obj._table,])
