@@ -669,7 +669,7 @@ class one2many(_rel2many):
         if self._fields_id in dest_obj._columns:
             rev_column = dest_obj._columns[self._fields_id]
         else:
-            for diname in dest_obj.inherits:
+            for diname in dest_obj._inherits:
                 dobj2 = obj.pool.get(diname)
                 if self._fields_id in dobj2._columns:
                     rev_column = dobj2._columns[self._fields_id]
