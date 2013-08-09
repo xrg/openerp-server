@@ -21,7 +21,7 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with this program; if not, write to the Free Software
-# Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
 ###############################################################################
 
 #.apidoc title: HTTP Layer library (websrv_lib)
@@ -38,7 +38,7 @@ import errno
 import os
 import re
 import SocketServer
-from BaseHTTPServer import *
+from BaseHTTPServer import BaseHTTPRequestHandler, HTTPServer
 from SimpleHTTPServer import SimpleHTTPRequestHandler
 
 try:
@@ -46,6 +46,24 @@ try:
 except ImportError:
     class SSLError(socket.error):
         pass
+
+import datetime
+import calendar
+import time
+try:
+    # A little issue with dependencies: although 'time_lc' has the correct
+    # version of language-independent 'strptime()', we CANNOT have a hard
+    # dependency from F3-server to openerp_libclient.
+    from openerp_libclient.time_lc import strptime_time, strftime
+except ImportError:
+    # if we don't have openerp_libclient, we could use the stock strptime(),
+    # which /should/ work if the locale is 'C' or 'en_US'
+    def strptime_time(data_string, format, lang=None):
+        return time.strptime(data_string, format)
+
+    def strftime(format, stime, lang=None):
+        return time.strftime(format, stime)
+
 
 class AuthRequiredExc(Exception):
     def __init__(self,atype,realm):
@@ -128,7 +146,7 @@ class BasicAuthProxy(AuthProxy):
         auth_str = handler.headers.get('Authorization',False)
         if auth_str and auth_str.startswith('Basic '):
             auth_str=auth_str[len('Basic '):]
-            (user,passwd) = base64.decodestring(auth_str).split(':')
+            (user,passwd) = base64.decodestring(auth_str).split(':', 1)
             self.provider.log("Found user=\"%s\", passwd=\"%s\"" %(user,passwd))
             self.auth_creds = self.provider.authenticate(user,passwd,handler.client_address)
             if self.auth_creds:
@@ -139,8 +157,83 @@ class BasicAuthProxy(AuthProxy):
         self.auth_tries += 1
         raise AuthRequiredExc(atype = 'Basic', realm=self.provider.realm)
 
+class HTTPModified:
+    """ Mixin that helps use 'If-Modified-Since' http header
+    
+        This mixin will NOT override any handler methods, will not decode
+        the header by default. Instead, your code shall call the methods
+        provided here, whenever they could make any sense.
+    """
+    _expire_max_age = 3600 # one hour, enough for developers
 
-class HTTPHandler(SimpleHTTPRequestHandler):
+    def decode_if_modified(self):
+        """Locate and decode the 'If-Modified-Since' header, set attribute
+
+            We will parse the header and set `self._if_modified_since`, if
+            appropriate. Then, return True if the header has any content.
+        """
+        try:
+            if 'If-Modified-Since' not in self.headers:
+                self._if_modified_since = None
+                return False
+
+            # here, we assume that fromtimestamp() will convert from UTC to
+            # our local timestamp
+            self._if_modified_since = datetime.datetime.fromtimestamp(calendar.timegm(strptime_time( \
+                        self.headers['If-Modified-Since'], "%a, %d %b %Y %H:%M:%S GMT", lang="C")))
+            return True
+        except Exception, e:
+            raise
+            self.log_message("Cannot parse If-Modified-Since: %s %s", 
+                        self.headers['If-Modified-Since'], e)
+            self._if_modified_since = None
+            return False
+
+    def not_modified_since(self, edate):
+        """Check if the HTTP request already has the object at `edate`
+
+            We check for *equality*, not edate being less than If-Modified-Since
+
+            If the client is upt to date, send the 304 header and return True
+        """
+        if not edate:
+            return False
+        edate2 = edate.replace(microsecond=0)
+        if self.decode_if_modified() and self._if_modified_since == edate2:
+            self.send_response(304, "Not modified")
+            self.send_header('Connection', 'keep-alive')
+            self.send_header('Content-Length', 0)
+            self._send_expires(edate)
+            self.end_headers()
+            return True
+        return False
+
+    def _send_expires(self, edate):
+        """Send 'Expires' HTTP header, using heuristics 
+
+            @param edate the last modification date of the object
+
+            We are using a crude heuristic, that expiration must be half the
+            distance from now() to the objects last MT, but always less than
+            _expire_max_age in the future
+        """
+        expires = None
+        delta = datetime.datetime.now() - edate
+        if delta.total_seconds() < 0:
+            # something is wrong, we'd better expire just now
+            expires = datetime.datetime.now()
+        elif delta.total_seconds() > self._expire_max_age:
+            expires = datetime.datetime.now() + datetime.timedelta(seconds=self._expire_max_age)
+        else:
+            expires = datetime.datetime.now() + (delta / 2)
+        # Since `expires` is naive (no timezone), datetime itself cannot convert
+        # it to UTC. So, we use the time.gmtime() to assume local and convert it
+        # for us.
+        self.send_header('Expires', strftime("%a, %d %b %Y %H:%M:%S GMT", \
+                time.gmtime(time.mktime(expires.timetuple())), lang=False))
+
+
+class HTTPHandler(HTTPModified, SimpleHTTPRequestHandler):
     def __init__(self,request, client_address, server):
         SimpleHTTPRequestHandler.__init__(self,request,client_address,server)
         self.protocol_version = 'HTTP/1.1'
@@ -158,6 +251,55 @@ class HTTPHandler(SimpleHTTPRequestHandler):
 
     def setup(self):
         pass
+
+    def send_head(self):
+        """Common code for GET and HEAD commands.
+
+            Copied from python2.7 SimpleHTTPServer.py
+        """
+        path = self.translate_path(self.path)
+        f = None
+        if os.path.isdir(path):
+            if not self.path.endswith('/'):
+                # redirect browser - doing basically what apache does
+                self.send_response(301)
+                self.send_header("Location", self.path + "/")
+                self.end_headers()
+                return None
+            for index in "index.html", "index.htm":
+                index = os.path.join(path, index)
+                if os.path.exists(index):
+                    path = index
+                    break
+            else:
+                return self.list_directory(path)
+        try:
+            fs = os.stat(path)
+            mtime = datetime.datetime.fromtimestamp(fs.st_mtime)
+            if self.not_modified_since(mtime):
+                return None
+        except EnvironmentError:
+            self.send_error(404, "File not found")
+            return None
+
+        ctype = self.guess_type(path)
+        try:
+            # Always read in binary mode. Opening files in text mode may cause
+            # newline translations, making the actual size of the content
+            # transmitted *less* than the content-length!
+            f = open(path, 'rb')
+        except IOError:
+            self.send_error(404, "File not found")
+            return None
+
+        self.send_response(200)
+        self.send_header("Content-type", ctype)
+        self.send_header("Cache-Control", "public")
+        self.send_header("Content-Length", str(fs[6]))
+        self._send_expires(mtime)
+        self.send_header("Last-Modified", self.date_time_string(fs.st_mtime))
+        self.end_headers()
+        return f
 
 class HTTPDir:
     """ A dispatcher class, like a virtual folder in httpd

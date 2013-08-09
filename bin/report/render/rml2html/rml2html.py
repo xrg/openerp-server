@@ -1,25 +1,8 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
-#    
-#    OpenERP, Open Source Management Solution
-#    Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>).
 #
-#    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU Affero General Public License as
-#    published by the Free Software Foundation, either version 3 of the
-#    License, or (at your option) any later version.
-#
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU Affero General Public License for more details.
-#
-#    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.     
-#
-##############################################################################
-
 # Copyright (C) 2005, Fabien Pinckaers, UCL, FSA
+# Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>).
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -33,13 +16,15 @@
 #
 # You should have received a copy of the GNU Lesser General Public
 # License along with this library; if not, write to the Free Software
-# Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
+#
+##############################################################################
 
 import sys
 import cStringIO
 from lxml import etree
 import copy
-import utils
+# import utils
 from report.render.rml2pdf import utils
 
 class _flowable(object):
@@ -320,7 +305,7 @@ class _rml_template(object):
         return self.style
 
     def set_next_template(self):
-        self.template = self.template_order[(self.template_order.index(name)+1) % self.template_order]
+        self.template = self.template_order[(self.template_order.index(self.template)+1) % self.template_order]
         self.frame_pos = -1
 
     def set_template(self, name):

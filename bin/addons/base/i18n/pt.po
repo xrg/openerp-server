@@ -1,26 +1,25 @@
 # Translation of OpenERP Server.
 # This file contains the translation of the following modules:
-#	* base
+# 	* base
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: OpenERP Server 6.0.3\n"
-"Report-Msgid-Bugs-To: support@openerp.com\n"
-"POT-Creation-Date: 2011-01-11 11:14+0000\n"
-"PO-Revision-Date: 2012-05-31 14:55+0000\n"
-"Last-Translator: ThinkOpen Solutions <Unknown>\n"
-"Language-Team: \n"
+"Project-Id-Version: OpenERP-F3\n"
+"Report-Msgid-Bugs-To: xrg@hellug.gr\n"
+"POT-Creation-Date: 2012-09-16 11:37+0000\n"
+"PO-Revision-Date: 2013-04-17 18:30+0000\n"
+"Last-Translator: xrg <xrg@hellug.gr>\n"
+"Language-Team: Portuguese (http://www.transifex.com/projects/p/openerp-f3/"
+"language/pt/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-03-08 05:06+0000\n"
-"X-Generator: Launchpad (build 16523)\n"
+"Content-Transfer-Encoding: \n"
+"Language: pt\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: base
-#: field:ir.filters,domain:0
-#: field:ir.model.fields,domain:0
-#: field:ir.rule,domain:0
-#: field:ir.rule,domain_force:0
+#: field:ir.filters,domain:0 field:ir.model.fields,domain:0
+#: field:ir.rule,domain:0 field:ir.rule,domain_force:0
 #: field:res.partner.title,domain:0
 msgid "Domain"
 msgstr "Domínio"
@@ -51,14 +50,12 @@ msgstr ""
 "que não é um nome de tabela SQL válido."
 
 #. module: base
-#: view:ir.values:0
-#: field:ir.values,meta_unpickle:0
+#: view:ir.values:0 field:ir.values,meta_unpickle:0
 msgid "Metadata"
 msgstr "Metadados"
 
 #. module: base
-#: field:ir.ui.view,arch:0
-#: field:ir.ui.view.custom,arch:0
+#: field:ir.ui.view,arch:0 field:ir.ui.view.custom,arch:0
 msgid "View Architecture"
 msgstr "Arquitetura da vista"
 
@@ -68,11 +65,8 @@ msgid "Code (eg:en__US)"
 msgstr "Código (ex:pt__PT)"
 
 #. module: base
-#: view:workflow:0
-#: view:workflow.activity:0
-#: field:workflow.activity,wkf_id:0
-#: field:workflow.instance,wkf_id:0
-#: field:workflow.transition,wkf_id:0
+#: view:workflow:0 view:workflow.activity:0 field:workflow.activity,wkf_id:0
+#: field:workflow.instance,wkf_id:0 field:workflow.transition,wkf_id:0
 #: field:workflow.workitem,wkf_id:0
 msgid "Workflow"
 msgstr "Fluxo de Trabalho"
@@ -294,15 +288,13 @@ msgid "Credit Limit"
 msgstr "Limite de crédito"
 
 #. module: base
-#: field:ir.model.constraint,date_update:0
-#: field:ir.model.data,date_update:0
+#: field:ir.model.constraint,date_update:0 field:ir.model.data,date_update:0
 #: field:ir.model.relation,date_update:0
 msgid "Update Date"
 msgstr "Atualizar data"
 
 #. module: base
-#: view:ir.attachment:0
-#: field:ir.attachment,create_uid:0
+#: view:ir.attachment:0 field:ir.attachment,create_uid:0
 msgid "Owner"
 msgstr "Dono"
 
@@ -322,21 +314,17 @@ msgid "ir.ui.view_sc"
 msgstr "ir.ui.view_sc"
 
 #. module: base
-#: field:res.widget.user,widget_id:0
-#: field:res.widget.wizard,widgets_list:0
+#: field:res.widget.user,widget_id:0 field:res.widget.wizard,widgets_list:0
 msgid "Widget"
 msgstr "Widget"
 
 #. module: base
-#: view:ir.model.access:0
-#: field:ir.model.access,group_id:0
-#: view:res.groups:0
+#: view:ir.model.access:0 field:ir.model.access,group_id:0 view:res.groups:0
 msgid "Group"
 msgstr "Grupo"
 
 #. module: base
-#: field:ir.exports.line,name:0
-#: view:ir.model.fields:0
+#: field:ir.exports.line,name:0 view:ir.model.fields:0
 #: field:res.partner.bank.type.field,name:0
 msgid "Field Name"
 msgstr "Nome do campo"
@@ -363,8 +351,7 @@ msgid "Date Format"
 msgstr "Formato da data"
 
 #. module: base
-#: field:res.bank,email:0
-#: field:res.partner.address,email:0
+#: field:res.bank,email:0 field:res.partner.address,email:0
 msgid "E-Mail"
 msgstr "Email"
 
@@ -424,8 +411,7 @@ msgid "Your system will be updated."
 msgstr "O sistema será atualizado."
 
 #. module: base
-#: field:ir.actions.todo,note:0
-#: selection:ir.property,type:0
+#: field:ir.actions.todo,note:0 selection:ir.property,type:0
 msgid "Text"
 msgstr "Texto"
 
@@ -475,18 +461,15 @@ msgid "Untranslated"
 msgstr "Por traduzir"
 
 #. module: base
-#: help:ir.actions.act_window,context:0
-#: help:ir.actions.client,context:0
-msgid ""
-"Context dictionary as Python expression, empty by default (Default: {})"
+#: help:ir.actions.act_window,context:0 help:ir.actions.client,context:0
+msgid "Context dictionary as Python expression, empty by default (Default: {})"
 msgstr ""
 "Dicionário de contexto como expressão Python, por predefinição vazio "
 "(Default: { })"
 
 #. module: base
 #: model:ir.actions.act_window,name:base.ir_action_wizard
-#: view:ir.actions.wizard:0
-#: model:ir.ui.menu,name:base.menu_ir_action_wizard
+#: view:ir.actions.wizard:0 model:ir.ui.menu,name:base.menu_ir_action_wizard
 msgid "Wizards"
 msgstr "Assistentes"
 
@@ -517,8 +500,7 @@ msgid "Export done"
 msgstr "Exportação Concluida"
 
 #. module: base
-#: view:ir.model:0
-#: field:ir.model,name:0
+#: view:ir.model:0 field:ir.model,name:0
 msgid "Model Description"
 msgstr "Descrição do modelo"
 
@@ -550,8 +532,7 @@ msgid "Eritrea"
 msgstr "Eritreia"
 
 #. module: base
-#: view:res.config:0
-#: view:res.config.installer:0
+#: view:res.config:0 view:res.config.installer:0
 msgid "description"
 msgstr "descrição"
 
@@ -578,9 +559,9 @@ msgstr "Tipo de Evento"
 #. module: base
 #: view:base.language.export:0
 msgid ""
-"OpenERP translations (core, modules, clients) are managed through "
-"Launchpad.net, our open source project management facility. We use their "
-"online interface to synchronize all translations efforts."
+"OpenERP translations (core, modules, clients) are managed through Launchpad."
+"net, our open source project management facility. We use their online "
+"interface to synchronize all translations efforts."
 msgstr ""
 "As traduções do OpenERP (Servidor, módulos, clientes) são geridas no "
 "Launchpad.net, nosso gestor de projetos de código aberto. Nós usamos sua "
@@ -612,8 +593,7 @@ msgid "Cambodia, Kingdom of"
 msgstr "Camboja"
 
 #. module: base
-#: model:ir.actions.act_window,name:base.ir_sequence_form
-#: view:ir.sequence:0
+#: model:ir.actions.act_window,name:base.ir_sequence_form view:ir.sequence:0
 #: model:ir.ui.menu,name:base.menu_ir_sequence_form
 msgid "Sequences"
 msgstr "Sequências"
@@ -743,8 +723,7 @@ msgid "Other OSI Approved Licence"
 msgstr "Outra licença aprovada pela OSI"
 
 #. module: base
-#: help:res.config.users,context_lang:0
-#: help:res.users,context_lang:0
+#: help:res.config.users,context_lang:0 help:res.users,context_lang:0
 msgid ""
 "Sets the language for the user's user interface, when UI translations are "
 "available"
@@ -806,17 +785,11 @@ msgid "%B - Full month name."
 msgstr "%B - Nome completo do mês."
 
 #. module: base
-#: field:ir.actions.todo,type:0
-#: view:ir.attachment:0
-#: field:ir.attachment,type:0
-#: field:ir.model,state:0
-#: field:ir.model.fields,state:0
-#: field:ir.property,type:0
-#: field:ir.server.object.lines,type:0
-#: field:ir.translation,type:0
-#: view:ir.ui.view:0
-#: view:ir.values:0
-#: field:ir.values,key:0
+#: field:ir.actions.todo,type:0 view:ir.attachment:0
+#: field:ir.attachment,type:0 field:ir.model,state:0
+#: field:ir.model.fields,state:0 field:ir.property,type:0
+#: field:ir.server.object.lines,type:0 field:ir.translation,type:0
+#: view:ir.ui.view:0 view:ir.values:0 field:ir.values,key:0
 msgid "Type"
 msgstr "Tipo"
 
@@ -847,8 +820,7 @@ msgid "Setting empty passwords is not allowed for security reasons!"
 msgstr "Definir passwords em branco não é permitido por razões de segurança!"
 
 #. module: base
-#: selection:ir.actions.server,state:0
-#: selection:workflow.activity,kind:0
+#: selection:ir.actions.server,state:0 selection:workflow.activity,kind:0
 msgid "Dummy"
 msgstr "Teste"
 
@@ -954,10 +926,8 @@ msgstr ""
 "primeira segunda-feira é considerado como a semana 0."
 
 #. module: base
-#: code:addons/base/res/res_company.py:164
-#: field:ir.module.module,website:0
-#: field:res.company,website:0
-#: field:res.partner,website:0
+#: code:addons/base/res/res_company.py:164 field:ir.module.module,website:0
+#: field:res.company,website:0 field:res.partner,website:0
 #, python-format
 msgid "Website"
 msgstr "Página Web"
@@ -973,8 +943,7 @@ msgid "Action URL"
 msgstr "URL de ação"
 
 #. module: base
-#: field:base.module.import,module_name:0
-#: field:ir.module.module,shortdesc:0
+#: field:base.module.import,module_name:0 field:ir.module.module,shortdesc:0
 msgid "Module Name"
 msgstr "Nome do módulo"
 
@@ -995,8 +964,7 @@ msgid "Haiti"
 msgstr "Haiti"
 
 #. module: base
-#: view:ir.ui.view:0
-#: selection:ir.ui.view,type:0
+#: view:ir.ui.view:0 selection:ir.ui.view,type:0
 msgid "Search"
 msgstr "Pesquisar"
 
@@ -1018,8 +986,7 @@ msgstr ""
 #: view:ir.rule:0
 msgid ""
 "2. Group-specific rules are combined together with a logical AND operator"
-msgstr ""
-"Regras específicas do grupo são combinados com o operador lógico \"E\""
+msgstr "Regras específicas do grupo são combinados com o operador lógico \"E\""
 
 #. module: base
 #: code:addons/base/res/res_users.py:131
@@ -1064,8 +1031,7 @@ msgid "Version"
 msgstr "Versão"
 
 #. module: base
-#: view:ir.model.access:0
-#: field:ir.model.access,perm_read:0
+#: view:ir.model.access:0 field:ir.model.access,perm_read:0
 msgid "Read Access"
 msgstr "Direito de leitura"
 
@@ -1136,8 +1102,7 @@ msgid "Payment Term (short name)"
 msgstr "Termo de Pagamento (Abreviatura)"
 
 #. module: base
-#: model:ir.model,name:base.model_res_bank
-#: view:res.bank:0
+#: model:ir.model,name:base.model_res_bank view:res.bank:0
 #: field:res.partner.bank,bank:0
 msgid "Bank"
 msgstr "Banco"
@@ -1169,8 +1134,7 @@ msgid "Reports"
 msgstr "Relatórios"
 
 #. module: base
-#: help:ir.actions.act_window.view,multi:0
-#: help:ir.actions.report.xml,multi:0
+#: help:ir.actions.act_window.view,multi:0 help:ir.actions.report.xml,multi:0
 msgid ""
 "If set to true, the action will not be displayed on the right toolbar of a "
 "form view."
@@ -1326,8 +1290,8 @@ msgstr "Dias"
 #. module: base
 #: help:ir.actions.server,condition:0
 msgid ""
-"Condition that is to be tested before action is executed, e.g. "
-"object.list_price > object.cost_price"
+"Condition that is to be tested before action is executed, e.g. object."
+"list_price > object.cost_price"
 msgstr ""
 "Condição a ser testada antes da acção ser executada, ex: object.list_price > "
 "object.cost_price"
@@ -1344,8 +1308,7 @@ msgid "7.  %H:%M:%S      ==> 18:25:20"
 msgstr "7.  %H:%M:%S ==> 18:25:20"
 
 #. module: base
-#: view:res.partner:0
-#: field:res.partner.category,partner_ids:0
+#: view:res.partner:0 field:res.partner.category,partner_ids:0
 msgid "Partners"
 msgstr "Parceiros"
 
@@ -1363,11 +1326,11 @@ msgstr "Página Principal Widgets"
 #. module: base
 #: help:ir.actions.server,message:0
 msgid ""
-"Specify the message. You can use the fields from the object. e.g. `Dear [[ "
-"object.partner_id.name ]]`"
+"Specify the message. You can use the fields from the object. e.g. `Dear "
+"[[ object.partner_id.name ]]`"
 msgstr ""
-"Especifique a mensagem. Pode usar os campos do objeto. ex: `Querido [[ "
-"object.partner_id.name ]]`"
+"Especifique a mensagem. Pode usar os campos do objeto. ex: `Querido "
+"[[ object.partner_id.name ]]`"
 
 #. module: base
 #: field:ir.attachment,res_model:0
@@ -1390,10 +1353,8 @@ msgid "ir.model.access"
 msgstr "ir.model.access"
 
 #. module: base
-#: field:ir.cron,priority:0
-#: field:ir.mail_server,sequence:0
-#: field:res.request,priority:0
-#: field:res.request.link,priority:0
+#: field:ir.cron,priority:0 field:ir.mail_server,sequence:0
+#: field:res.request,priority:0 field:res.request.link,priority:0
 msgid "Priority"
 msgstr "Prioridade"
 
@@ -1426,8 +1387,7 @@ msgstr "Malawi"
 #. module: base
 #: code:addons/base/ir/ir_filters.py:36
 #: code:addons/base/res/res_partner.py:314
-#: code:addons/base/res/res_users.py:92
-#: code:addons/base/res/res_users.py:335
+#: code:addons/base/res/res_users.py:92 code:addons/base/res/res_users.py:335
 #: code:addons/base/res/res_users.py:337
 #, python-format
 msgid "%s (copy)"
@@ -1471,8 +1431,7 @@ msgstr "Finlândia"
 
 #. module: base
 #: selection:ir.actions.act_window,view_type:0
-#: selection:ir.actions.act_window.view,view_mode:0
-#: view:ir.ui.view:0
+#: selection:ir.actions.act_window.view,view_mode:0 view:ir.ui.view:0
 #: selection:ir.ui.view,type:0
 msgid "Tree"
 msgstr "Árvore"
@@ -1620,20 +1579,12 @@ msgstr ""
 #. module: base
 #: field:ir.actions.act_window,groups_id:0
 #: model:ir.actions.act_window,name:base.action_res_groups
-#: field:ir.actions.report.xml,groups_id:0
-#: view:ir.actions.todo:0
-#: field:ir.actions.todo,groups_id:0
-#: field:ir.actions.wizard,groups_id:0
-#: view:ir.model:0
-#: field:ir.model.fields,groups:0
-#: field:ir.rule,groups:0
-#: view:ir.ui.menu:0
-#: field:ir.ui.menu,groups_id:0
-#: model:ir.ui.menu,name:base.menu_action_res_groups
-#: view:ir.ui.view:0
-#: field:ir.ui.view,groups_id:0
-#: view:res.groups:0
-#: field:res.users,groups_id:0
+#: field:ir.actions.report.xml,groups_id:0 view:ir.actions.todo:0
+#: field:ir.actions.todo,groups_id:0 field:ir.actions.wizard,groups_id:0
+#: view:ir.model:0 field:ir.model.fields,groups:0 field:ir.rule,groups:0
+#: view:ir.ui.menu:0 field:ir.ui.menu,groups_id:0
+#: model:ir.ui.menu,name:base.menu_action_res_groups view:ir.ui.view:0
+#: field:ir.ui.view,groups_id:0 view:res.groups:0 field:res.users,groups_id:0
 msgid "Groups"
 msgstr "Grupos"
 
@@ -1712,10 +1663,8 @@ msgstr ""
 "`object.order_line`."
 
 #. module: base
-#: view:ir.model.fields:0
-#: field:ir.property,fields_id:0
-#: selection:ir.translation,type:0
-#: field:multi_company.default,field_id:0
+#: view:ir.model.fields:0 field:ir.property,fields_id:0
+#: selection:ir.translation,type:0 field:multi_company.default,field_id:0
 msgid "Field"
 msgstr "Campo"
 
@@ -1774,8 +1723,7 @@ msgid "Next Wizard"
 msgstr "Próximo assistente"
 
 #. module: base
-#: model:ir.actions.act_window,name:base.action_menu_admin
-#: view:ir.ui.menu:0
+#: model:ir.actions.act_window,name:base.action_menu_admin view:ir.ui.menu:0
 #: field:ir.ui.menu,name:0
 msgid "Menu"
 msgstr "Menu"
@@ -1851,8 +1799,7 @@ msgid "French (BE) / Français (BE)"
 msgstr "Francês (BE) / Français (BE)"
 
 #. module: base
-#: view:ir.actions.server:0
-#: field:workflow.activity,action_id:0
+#: view:ir.actions.server:0 field:workflow.activity,action_id:0
 msgid "Server Action"
 msgstr "Ação do servidor"
 
@@ -1908,19 +1855,18 @@ msgstr "Lituânia"
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_view_partner_clear_ids
-#: model:ir.model,name:base.model_partner_clear_ids
-#: view:partner.clear.ids:0
+#: model:ir.model,name:base.model_partner_clear_ids view:partner.clear.ids:0
 msgid "Clear IDs"
 msgstr "Limpar IDs"
 
 #. module: base
 #: help:ir.cron,model:0
 msgid ""
-"Name of object whose function will be called when this scheduler will run. "
-"e.g. 'res.partener'"
+"Name of object whose function will be called when this scheduler will run. e."
+"g. 'res.partener'"
 msgstr ""
-"Nome do objeto cuja função será chamada quando esse programa for executar. "
-"e.g. 'res.partener'"
+"Nome do objeto cuja função será chamada quando esse programa for executar. e."
+"g. 'res.partener'"
 
 #. module: base
 #: code:addons/orm.py:1040
@@ -1944,8 +1890,7 @@ msgid "Pakistan"
 msgstr "Paquistão"
 
 #. module: base
-#: code:addons/orm.py:2021
-#: code:addons/orm.py:2032
+#: code:addons/orm.py:2021 code:addons/orm.py:2032
 #, python-format
 msgid "Invalid Object Architecture!"
 msgstr "Arquitetura de objeto Inválida!"
@@ -1956,14 +1901,10 @@ msgid "Messages"
 msgstr "Mensagens"
 
 #. module: base
-#: code:addons/base/ir/ir_model.py:373
-#: code:addons/base/ir/ir_model.py:375
-#: code:addons/base/ir/ir_model.py:405
-#: code:addons/base/ir/ir_model.py:419
-#: code:addons/base/ir/ir_model.py:421
-#: code:addons/base/ir/ir_model.py:423
-#: code:addons/base/ir/ir_model.py:430
-#: code:addons/base/ir/ir_model.py:433
+#: code:addons/base/ir/ir_model.py:373 code:addons/base/ir/ir_model.py:375
+#: code:addons/base/ir/ir_model.py:405 code:addons/base/ir/ir_model.py:419
+#: code:addons/base/ir/ir_model.py:421 code:addons/base/ir/ir_model.py:423
+#: code:addons/base/ir/ir_model.py:430 code:addons/base/ir/ir_model.py:433
 #: code:addons/base/module/wizard/base_update_translations.py:39
 #, python-format
 msgid "Error!"
@@ -2036,8 +1977,7 @@ msgid "The technical name of the model this field belongs to"
 msgstr "O nome técnico do modelo a que este campo pertence"
 
 #. module: base
-#: field:ir.actions.server,action_id:0
-#: selection:ir.actions.server,state:0
+#: field:ir.actions.server,action_id:0 selection:ir.actions.server,state:0
 #: view:ir.values:0
 msgid "Client Action"
 msgstr "Ação de cliente"
@@ -2066,8 +2006,7 @@ msgstr "XSL"
 #: code:addons/base/module/module.py:525
 #, python-format
 msgid "Can not upgrade module '%s'. It is not installed."
-msgstr ""
-"Não é possível atualizar o módulo '%s' porque este não está instalado."
+msgstr "Não é possível atualizar o módulo '%s' porque este não está instalado."
 
 #. module: base
 #: model:res.country,name:base.cu
@@ -2118,8 +2057,7 @@ msgstr "Propriedade"
 
 #. module: base
 #: model:ir.model,name:base.model_res_partner_bank_type
-#: field:res.partner.bank,state:0
-#: view:res.partner.bank.type:0
+#: field:res.partner.bank,state:0 view:res.partner.bank.type:0
 msgid "Bank Account Type"
 msgstr "Tipo de conta bancária"
 
@@ -2145,8 +2083,7 @@ msgstr "Áustria"
 
 #. module: base
 #: selection:base.language.install,state:0
-#: selection:base.module.import,state:0
-#: selection:base.module.update,state:0
+#: selection:base.module.import,state:0 selection:base.module.update,state:0
 msgid "done"
 msgstr "Concluído"
 
@@ -2221,15 +2158,12 @@ msgid "Report Footer 2"
 msgstr "Rodapé do relatório 2"
 
 #. module: base
-#: view:ir.model.access:0
-#: view:res.groups:0
-#: field:res.groups,model_access:0
+#: view:ir.model.access:0 view:res.groups:0 field:res.groups,model_access:0
 msgid "Access Controls"
 msgstr "Controlos de acesso"
 
 #. module: base
-#: view:ir.module.module:0
-#: field:ir.module.module,dependencies_id:0
+#: view:ir.module.module:0 field:ir.module.module,dependencies_id:0
 msgid "Dependencies"
 msgstr "Dependências"
 
@@ -2371,24 +2305,17 @@ msgstr "Mapeamento de campos"
 
 #. module: base
 #: model:ir.model,name:base.model_ir_module_module
-#: field:ir.model.constraint,module:0
-#: view:ir.model.data:0
-#: field:ir.model.data,module:0
-#: field:ir.model.relation,module:0
-#: view:ir.module.module:0
-#: field:ir.module.module.dependency,module_id:0
-#: report:ir.module.reference:0
-#: field:ir.translation,module:0
+#: field:ir.model.constraint,module:0 view:ir.model.data:0
+#: field:ir.model.data,module:0 field:ir.model.relation,module:0
+#: view:ir.module.module:0 field:ir.module.module.dependency,module_id:0
+#: report:ir.module.reference:0 field:ir.translation,module:0
 msgid "Module"
 msgstr "Módulo"
 
 #. module: base
-#: view:ir.attachment:0
-#: field:ir.attachment,description:0
-#: field:ir.mail_server,name:0
-#: field:ir.module.category,description:0
-#: view:ir.module.module:0
-#: field:ir.module.module,description:0
+#: view:ir.attachment:0 field:ir.attachment,description:0
+#: field:ir.mail_server,name:0 field:ir.module.category,description:0
+#: view:ir.module.module:0 field:ir.module.module,description:0
 msgid "Description"
 msgstr "Descrição"
 
@@ -2462,8 +2389,7 @@ msgstr "Da direita para a esquerda"
 #. module: base
 #: view:ir.actions.act_window:0
 #: model:ir.actions.act_window,name:base.actions_ir_filters_view
-#: view:ir.filters:0
-#: model:ir.model,name:base.model_ir_filters
+#: view:ir.filters:0 model:ir.model,name:base.model_ir_filters
 msgid "Filters"
 msgstr "Filtros"
 
@@ -2474,15 +2400,13 @@ msgid "Please check that all your lines have %d columns."
 msgstr "Verifique que todas as suas linhas têm %d colunas."
 
 #. module: base
-#: model:ir.actions.act_window,name:base.ir_cron_act
-#: view:ir.cron:0
+#: model:ir.actions.act_window,name:base.ir_cron_act view:ir.cron:0
 #: model:ir.ui.menu,name:base.menu_ir_cron_act
 msgid "Scheduled Actions"
 msgstr "Ações agendadas"
 
 #. module: base
-#: field:res.partner,title:0
-#: field:res.partner.title,name:0
+#: field:res.partner,title:0 field:res.partner.title,name:0
 msgid "Title"
 msgstr "Título"
 
@@ -2658,8 +2582,7 @@ msgstr "ir.property"
 
 #. module: base
 #: selection:ir.actions.act_window,view_type:0
-#: selection:ir.actions.act_window.view,view_mode:0
-#: view:ir.ui.view:0
+#: selection:ir.actions.act_window.view,view_mode:0 view:ir.ui.view:0
 #: selection:ir.ui.view,type:0
 msgid "Form"
 msgstr "Formulário"
@@ -2670,14 +2593,12 @@ msgid "Montenegro"
 msgstr "Montenegro"
 
 #. module: base
-#: view:ir.cron:0
-#: view:ir.module.module:0
+#: view:ir.cron:0 view:ir.module.module:0
 msgid "Technical Data"
 msgstr "Dados técnicos"
 
 #. module: base
-#: view:res.partner:0
-#: field:res.partner,category_id:0
+#: view:res.partner:0 field:res.partner,category_id:0
 msgid "Categories"
 msgstr "Categorias"
 
@@ -2714,8 +2635,7 @@ msgid "Liechtenstein"
 msgstr "Liechtenstein"
 
 #. module: base
-#: model:ir.model,name:base.model_partner_sms_send
-#: view:partner.sms.send:0
+#: model:ir.model,name:base.model_partner_sms_send view:partner.sms.send:0
 msgid "Send SMS"
 msgstr "Enviar SMS"
 
@@ -2737,8 +2657,7 @@ msgstr "Portugal"
 
 #. module: base
 #: sql_constraint:ir.model.data:0
-msgid ""
-"You cannot have multiple records with the same id for the same module !"
+msgid "You cannot have multiple records with the same id for the same module !"
 msgstr "Não pode ter vários registos com o mesmo ID no mesmo módulo!"
 
 #. module: base
@@ -2752,20 +2671,15 @@ msgid "6.  %d, %m         ==> 05, 12"
 msgstr "6.  %d, %m ==> 05, 12"
 
 #. module: base
-#: field:res.config.users,date:0
-#: field:res.users,date:0
+#: field:res.config.users,date:0 field:res.users,date:0
 msgid "Last Connection"
 msgstr "Última ligação"
 
 #. module: base
-#: field:ir.actions.act_url,help:0
-#: field:ir.actions.act_window,help:0
-#: field:ir.actions.act_window_close,help:0
-#: field:ir.actions.actions,help:0
-#: field:ir.actions.client,help:0
-#: field:ir.actions.report.xml,help:0
-#: field:ir.actions.server,help:0
-#: field:ir.actions.wizard,help:0
+#: field:ir.actions.act_url,help:0 field:ir.actions.act_window,help:0
+#: field:ir.actions.act_window_close,help:0 field:ir.actions.actions,help:0
+#: field:ir.actions.client,help:0 field:ir.actions.report.xml,help:0
+#: field:ir.actions.server,help:0 field:ir.actions.wizard,help:0
 msgid "Action description"
 msgstr "Descrição da ação"
 
@@ -2777,8 +2691,7 @@ msgstr "Preencher esse campo se o parceiro for um cliente"
 #. module: base
 #: model:ir.actions.act_window,name:base.res_lang_act_window
 #: model:ir.model,name:base.model_res_lang
-#: model:ir.ui.menu,name:base.menu_res_lang_act_window
-#: view:res.lang:0
+#: model:ir.ui.menu,name:base.menu_res_lang_act_window view:res.lang:0
 msgid "Languages"
 msgstr "Idiomas"
 
@@ -2808,8 +2721,7 @@ msgstr ""
 #. module: base
 #: model:ir.actions.act_window,name:base.action_partner_customer_form
 #: model:ir.actions.act_window,name:base.action_partner_form
-#: model:ir.ui.menu,name:base.menu_partner_form
-#: view:res.partner:0
+#: model:ir.ui.menu,name:base.menu_partner_form view:res.partner:0
 msgid "Customers"
 msgstr "Clientes"
 
@@ -2855,8 +2767,7 @@ msgid "SXW content"
 msgstr "Conteúdos SXW"
 
 #. module: base
-#: field:change.password.user,wizard_id:0
-#: view:ir.actions.wizard:0
+#: field:change.password.user,wizard_id:0 view:ir.actions.wizard:0
 msgid "Wizard"
 msgstr "Assistente"
 
@@ -2874,20 +2785,17 @@ msgstr ""
 "utilizadores"
 
 #. module: base
-#: field:ir.model.constraint,name:0
-#: selection:ir.translation,type:0
+#: field:ir.model.constraint,name:0 selection:ir.translation,type:0
 msgid "Constraint"
 msgstr "Restrição"
 
 #. module: base
-#: selection:ir.values,key:0
-#: selection:res.partner,type:0
+#: selection:ir.values,key:0 selection:res.partner,type:0
 msgid "Default"
 msgstr "Por omissão"
 
 #. module: base
-#: view:ir.model.fields:0
-#: field:ir.model.fields,required:0
+#: view:ir.model.fields:0 field:ir.model.fields,required:0
 #: field:res.partner.bank.type.field,required:0
 msgid "Required"
 msgstr "Obrigatório"
@@ -2898,8 +2806,7 @@ msgid "Default Filters"
 msgstr "Filtros padrão"
 
 #. module: base
-#: field:ir.module.module,summary:0
-#: field:res.request.history,name:0
+#: field:ir.module.module,summary:0 field:res.request.history,name:0
 msgid "Summary"
 msgstr "Sumário"
 
@@ -2911,11 +2818,11 @@ msgstr "Expressão"
 #. module: base
 #: help:ir.actions.server,subject:0
 msgid ""
-"Specify the subject. You can use fields from the object, e.g. `Hello [[ "
-"object.partner_id.name ]]`"
+"Specify the subject. You can use fields from the object, e.g. `Hello "
+"[[ object.partner_id.name ]]`"
 msgstr ""
-"Especifique o assunto. Pode usar campos do objeto, ex. `Excelentissímo(a) [[ "
-"object.partner_id.name ]]`"
+"Especifique o assunto. Pode usar campos do objeto, ex. `Excelentissímo(a) "
+"[[ object.partner_id.name ]]`"
 
 #. module: base
 #: view:res.company:0
@@ -2923,14 +2830,10 @@ msgid "Header/Footer"
 msgstr "Cabeçalho/Rodapé"
 
 #. module: base
-#: help:ir.actions.act_url,help:0
-#: help:ir.actions.act_window,help:0
-#: help:ir.actions.act_window_close,help:0
-#: help:ir.actions.actions,help:0
-#: help:ir.actions.client,help:0
-#: help:ir.actions.report.xml,help:0
-#: help:ir.actions.server,help:0
-#: help:ir.actions.wizard,help:0
+#: help:ir.actions.act_url,help:0 help:ir.actions.act_window,help:0
+#: help:ir.actions.act_window_close,help:0 help:ir.actions.actions,help:0
+#: help:ir.actions.client,help:0 help:ir.actions.report.xml,help:0
+#: help:ir.actions.server,help:0 help:ir.actions.wizard,help:0
 msgid ""
 "Optional help text for the users with a description of the target view, such "
 "as its usage and purpose."
@@ -2969,8 +2872,7 @@ msgid "Current Activity"
 msgstr "Actividade corrente"
 
 #. module: base
-#: view:workflow.activity:0
-#: field:workflow.activity,in_transitions:0
+#: view:workflow.activity:0 field:workflow.activity,in_transitions:0
 msgid "Incoming Transitions"
 msgstr "Transações de entrada"
 
@@ -3028,15 +2930,10 @@ msgid "SQL Constraint"
 msgstr "Constrição SQL"
 
 #. module: base
-#: field:ir.actions.server,srcmodel_id:0
-#: view:ir.filters:0
-#: field:ir.filters,model_id:0
-#: view:ir.model:0
-#: field:ir.model,model:0
-#: field:ir.model.constraint,model:0
-#: field:ir.model.fields,model_id:0
-#: field:ir.model.relation,model:0
-#: view:ir.values:0
+#: field:ir.actions.server,srcmodel_id:0 view:ir.filters:0
+#: field:ir.filters,model_id:0 view:ir.model:0 field:ir.model,model:0
+#: field:ir.model.constraint,model:0 field:ir.model.fields,model_id:0
+#: field:ir.model.relation,model:0 view:ir.values:0
 msgid "Model"
 msgstr "Modelo"
 
@@ -3071,16 +2968,13 @@ msgid "Module Import"
 msgstr "Importar Módulo"
 
 #. module: base
-#: field:res.bank,zip:0
-#: field:res.company,zip:0
-#: field:res.partner,zip:0
+#: field:res.bank,zip:0 field:res.company,zip:0 field:res.partner,zip:0
 #: field:res.partner.bank,zip:0
 msgid "Zip"
 msgstr "Código Postal"
 
 #. module: base
-#: view:ir.module.module:0
-#: field:ir.module.module,author:0
+#: view:ir.module.module:0 field:ir.module.module,author:0
 msgid "Author"
 msgstr "Autor"
 
@@ -3129,21 +3023,16 @@ msgstr "Direção"
 #. module: base
 #: view:ir.actions.act_window:0
 #: model:ir.actions.act_window,name:base.action_ui_view
-#: field:ir.actions.act_window,view_ids:0
-#: field:ir.actions.act_window,views:0
-#: view:ir.model:0
-#: field:ir.model,view_ids:0
+#: field:ir.actions.act_window,view_ids:0 field:ir.actions.act_window,views:0
+#: view:ir.model:0 field:ir.model,view_ids:0
 #: field:ir.module.module,views_by_module:0
-#: model:ir.ui.menu,name:base.menu_action_ui_view
-#: view:ir.ui.view:0
-#: view:res.groups:0
-#: field:res.groups,view_access:0
+#: model:ir.ui.menu,name:base.menu_action_ui_view view:ir.ui.view:0
+#: view:res.groups:0 field:res.groups,view_access:0
 msgid "Views"
 msgstr "Vistas"
 
 #. module: base
-#: view:res.groups:0
-#: field:res.groups,rule_groups:0
+#: view:res.groups:0 field:res.groups,rule_groups:0
 msgid "Rules"
 msgstr "Regras"
 
@@ -3304,8 +3193,7 @@ msgid "Spanish (PY) / Español (PY)"
 msgstr "Espanhol (PY) / Español (PY)"
 
 #. module: base
-#: view:ir.config_parameter:0
-#: field:ir.config_parameter,key:0
+#: view:ir.config_parameter:0 field:ir.config_parameter,key:0
 msgid "Key"
 msgstr "Chave"
 
@@ -3340,8 +3228,7 @@ msgid "Full Access"
 msgstr "Acesso Total"
 
 #. module: base
-#: view:ir.actions.act_window:0
-#: view:ir.actions.report.xml:0
+#: view:ir.actions.act_window:0 view:ir.actions.report.xml:0
 #: model:ir.ui.menu,name:base.menu_security
 msgid "Security"
 msgstr "Segurança"
@@ -3357,8 +3244,7 @@ msgid "South Africa"
 msgstr "África do Sul"
 
 #. module: base
-#: view:ir.module.module:0
-#: selection:ir.module.module,state:0
+#: view:ir.module.module:0 selection:ir.module.module,state:0
 #: selection:ir.module.module.dependency,state:0
 msgid "Installed"
 msgstr "Instalado"
@@ -3420,8 +3306,7 @@ msgid "Spanish (PA) / Español (PA)"
 msgstr "Spanish (PA) / Español (PA)"
 
 #. module: base
-#: view:res.currency:0
-#: field:res.currency,rate_ids:0
+#: view:res.currency:0 field:res.currency,rate_ids:0
 msgid "Rates"
 msgstr "Taxas"
 
@@ -3457,10 +3342,8 @@ msgid "draft"
 msgstr "Rascunho"
 
 #. module: base
-#: selection:ir.property,type:0
-#: field:res.currency,date:0
-#: field:res.currency.rate,name:0
-#: field:res.partner,date:0
+#: selection:ir.property,type:0 field:res.currency,date:0
+#: field:res.currency.rate,name:0 field:res.partner,date:0
 #: field:res.request,date_sent:0
 msgid "Date"
 msgstr "Data"
@@ -3476,8 +3359,7 @@ msgid "Data"
 msgstr "Dados"
 
 #. module: base
-#: field:ir.ui.menu,parent_id:0
-#: field:wizard.ir.model.menu.create,menu_id:0
+#: field:ir.ui.menu,parent_id:0 field:wizard.ir.model.menu.create,menu_id:0
 msgid "Parent Menu"
 msgstr "Menu Ascendente"
 
@@ -3519,9 +3401,7 @@ msgstr ""
 "para criar, eliminar, visualizar e/ou alterar registos são definidas aqui."
 
 #. module: base
-#: view:ir.attachment:0
-#: view:res.partner:0
-#: field:res.request,history:0
+#: view:ir.attachment:0 view:res.partner:0 field:res.request,history:0
 msgid "History"
 msgstr "Histórico"
 
@@ -3533,10 +3413,10 @@ msgstr "Criador"
 #. module: base
 #: model:res.company,overdue_msg:base.main_company
 msgid ""
-"Please note that the following payments are now due. If your payment         "
-"                has been sent, kindly forward your payment details. If "
-"payment will be                         delayed further, please contact us "
-"to discuss.                         \n"
+"Please note that the following payments are now due. If your "
+"payment                         has been sent, kindly forward your payment "
+"details. If payment will be                         delayed further, please "
+"contact us to discuss.                         \n"
 "Would your payment have been carried out after this mail was sent, please "
 "consider the present one as void."
 msgstr ""
@@ -3668,37 +3548,20 @@ msgstr ""
 "para o parceiro certo."
 
 #. module: base
-#: field:ir.actions.act_window_close,name:0
-#: field:ir.actions.actions,name:0
-#: field:ir.actions.report.xml,name:0
-#: field:ir.actions.todo,name:0
-#: field:ir.cron,name:0
-#: field:ir.model.access,name:0
-#: field:ir.model.fields,name:0
-#: field:ir.module.category,name:0
-#: field:ir.module.module.dependency,name:0
-#: report:ir.module.reference:0
-#: view:ir.property:0
-#: field:ir.property,name:0
-#: field:ir.rule,name:0
-#: field:ir.sequence,name:0
-#: field:ir.sequence.type,name:0
-#: field:ir.values,name:0
-#: view:multi_company.default:0
-#: field:multi_company.default,name:0
-#: field:res.bank,name:0
-#: view:res.currency.rate.type:0
-#: field:res.currency.rate.type,name:0
-#: field:res.groups,name:0
-#: field:res.lang,name:0
-#: view:res.partner:0
-#: field:res.partner,name:0
-#: view:res.partner.bank:0
-#: field:res.partner.bank.type,name:0
-#: field:res.request.link,name:0
-#: view:res.users:0
-#: field:workflow,name:0
-#: field:workflow.activity,name:0
+#: field:ir.actions.act_window_close,name:0 field:ir.actions.actions,name:0
+#: field:ir.actions.report.xml,name:0 field:ir.actions.todo,name:0
+#: field:ir.cron,name:0 field:ir.model.access,name:0
+#: field:ir.model.fields,name:0 field:ir.module.category,name:0
+#: field:ir.module.module.dependency,name:0 report:ir.module.reference:0
+#: view:ir.property:0 field:ir.property,name:0 field:ir.rule,name:0
+#: field:ir.sequence,name:0 field:ir.sequence.type,name:0
+#: field:ir.values,name:0 view:multi_company.default:0
+#: field:multi_company.default,name:0 field:res.bank,name:0
+#: view:res.currency.rate.type:0 field:res.currency.rate.type,name:0
+#: field:res.groups,name:0 field:res.lang,name:0 view:res.partner:0
+#: field:res.partner,name:0 view:res.partner.bank:0
+#: field:res.partner.bank.type,name:0 field:res.request.link,name:0
+#: view:res.users:0 field:workflow,name:0 field:workflow.activity,name:0
 msgid "Name"
 msgstr "Nome"
 
@@ -3821,8 +3684,7 @@ msgid "ir.actions.wizard"
 msgstr "ir.actions.wizard"
 
 #. module: base
-#: view:ir.actions.act_window:0
-#: view:ir.actions.report.xml:0
+#: view:ir.actions.act_window:0 view:ir.actions.report.xml:0
 #: view:ir.actions.server:0
 msgid "Group By"
 msgstr "Agrupar por"
@@ -3936,8 +3798,7 @@ msgstr ""
 "contrato:"
 
 #. module: base
-#: view:workflow.activity:0
-#: field:workflow.activity,flow_start:0
+#: view:workflow.activity:0 field:workflow.activity,flow_start:0
 msgid "Flow Start"
 msgstr "Inicio do fluxo"
 
@@ -3959,8 +3820,7 @@ msgid "Client Actions Connections"
 msgstr "Conexões das ações do cliente"
 
 #. module: base
-#: field:ir.attachment,res_name:0
-#: field:ir.ui.view_sc,resource:0
+#: field:ir.attachment,res_name:0 field:ir.ui.view_sc,resource:0
 msgid "Resource Name"
 msgstr "Nome do Recurso"
 
@@ -3975,8 +3835,7 @@ msgid "Guadeloupe (French)"
 msgstr "Guadalupe"
 
 #. module: base
-#: code:addons/base/res/res_lang.py:185
-#: code:addons/base/res/res_lang.py:187
+#: code:addons/base/res/res_lang.py:185 code:addons/base/res/res_lang.py:187
 #: code:addons/base/res/res_lang.py:189
 #, python-format
 msgid "User Error"
@@ -4072,15 +3931,13 @@ msgstr "Selecione pacote do módulo a importar (ficheiro zip.)"
 #. module: base
 #: model:ir.actions.act_window,name:base.act_res_partner_event
 #: model:ir.ui.menu,name:base.menu_event_association
-#: field:res.partner,events:0
-#: field:res.partner.event,name:0
+#: field:res.partner,events:0 field:res.partner.event,name:0
 #: model:res.widget,title:base.events_widget
 msgid "Events"
 msgstr "Eventos"
 
 #. module: base
-#: model:ir.model,name:base.model_ir_actions_url
-#: selection:ir.ui.menu,action:0
+#: model:ir.model,name:base.model_ir_actions_url selection:ir.ui.menu,action:0
 msgid "ir.actions.url"
 msgstr "ir.actions.url"
 
@@ -4117,8 +3974,7 @@ msgid "Latvian / latviešu valoda"
 msgstr "Latvian / latviešu valoda"
 
 #. module: base
-#: view:res.config:0
-#: view:res.config.installer:0
+#: view:res.config:0 view:res.config.installer:0
 msgid "vsep"
 msgstr "vsep"
 
@@ -4145,10 +4001,8 @@ msgstr "Defina como \"a fazer\""
 
 #. module: base
 #: view:ir.actions.act_window:0
-#: field:ir.actions.act_window.view,act_window_id:0
-#: view:ir.actions.actions:0
-#: field:ir.actions.todo,action_id:0
-#: field:ir.ui.menu,action:0
+#: field:ir.actions.act_window.view,act_window_id:0 view:ir.actions.actions:0
+#: field:ir.actions.todo,action_id:0 field:ir.ui.menu,action:0
 #: selection:ir.values,key:0
 msgid "Action"
 msgstr "Ação"
@@ -4209,8 +4063,7 @@ msgid "Request History"
 msgstr "Requisitar histórico"
 
 #. module: base
-#: field:ir.module.module,menus_by_module:0
-#: view:res.groups:0
+#: field:ir.module.module,menus_by_module:0 view:res.groups:0
 msgid "Menus"
 msgstr "Menus"
 
@@ -4253,17 +4106,14 @@ msgstr "Relatório xml"
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_module_open_categ
-#: field:ir.module.category,module_ids:0
-#: view:ir.module.module:0
+#: field:ir.module.category,module_ids:0 view:ir.module.module:0
 #: model:ir.ui.menu,name:base.menu_management
 msgid "Modules"
 msgstr "Módulos"
 
 #. module: base
-#: view:workflow.activity:0
-#: selection:workflow.activity,kind:0
-#: field:workflow.activity,subflow_id:0
-#: field:workflow.workitem,subflow_id:0
+#: view:workflow.activity:0 selection:workflow.activity,kind:0
+#: field:workflow.activity,subflow_id:0 field:workflow.workitem,subflow_id:0
 msgid "Subflow"
 msgstr "Subflow"
 
@@ -4279,8 +4129,7 @@ msgstr "Sinal (nome do botão)"
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_res_bank_form
-#: model:ir.ui.menu,name:base.menu_action_res_bank_form
-#: view:res.bank:0
+#: model:ir.ui.menu,name:base.menu_action_res_bank_form view:res.bank:0
 #: field:res.partner,bank_ids:0
 msgid "Banks"
 msgstr "Bancos"
@@ -4486,8 +4335,7 @@ msgid "Select the object from the model on which the workflow will executed."
 msgstr "Selecione o objeto do modelo no qual o workflow será executado."
 
 #. module: base
-#: model:res.groups,name:base.group_user
-#: field:res.partner,employee:0
+#: model:res.groups,name:base.group_user field:res.partner,employee:0
 #: model:res.partner.category,name:base.res_partner_category_3
 msgid "Employee"
 msgstr "Funcionário"
@@ -4498,8 +4346,7 @@ msgid "Create Access"
 msgstr "Criar Acesso"
 
 #. module: base
-#: field:res.bank,state:0
-#: field:res.company,state_id:0
+#: field:res.bank,state:0 field:res.company,state_id:0
 #: field:res.partner.bank,state_id:0
 msgid "Fed. State"
 msgstr "Distrito"
@@ -4560,8 +4407,7 @@ msgid "Left-to-Right"
 msgstr "Da Esquerda para a Direita"
 
 #. module: base
-#: field:ir.model.fields,translate:0
-#: view:res.lang:0
+#: field:ir.model.fields,translate:0 view:res.lang:0
 #: field:res.lang,translatable:0
 msgid "Translatable"
 msgstr "Traduzível"
@@ -4577,12 +4423,9 @@ msgid "Signature"
 msgstr "Assinatura"
 
 #. module: base
-#: code:addons/fields.py:456
-#: code:addons/fields.py:654
-#: code:addons/fields.py:656
-#: code:addons/fields.py:658
-#: code:addons/fields.py:660
-#: code:addons/fields.py:662
+#: code:addons/fields.py:456 code:addons/fields.py:654
+#: code:addons/fields.py:656 code:addons/fields.py:658
+#: code:addons/fields.py:660 code:addons/fields.py:662
 #: code:addons/fields.py:664
 #, python-format
 msgid "Not Implemented"
@@ -4636,22 +4479,19 @@ msgid "On Multiple Doc."
 msgstr "Em múltiplos docs"
 
 #. module: base
-#: view:res.partner:0
-#: field:res.partner,user_id:0
+#: view:res.partner:0 field:res.partner,user_id:0
 msgid "Salesman"
 msgstr "Vendedor"
 
 #. module: base
-#: view:res.partner:0
-#: field:res.partner,child_ids:0
+#: view:res.partner:0 field:res.partner,child_ids:0
 msgid "Contacts"
 msgstr "Contatos"
 
 #. module: base
 #: code:addons/orm.py:3961
 #, python-format
-msgid ""
-"Unable to delete this document because it is used as a default property"
+msgid "Unable to delete this document because it is used as a default property"
 msgstr ""
 "Não foi possível excluir este documento porque ele é usado como uma "
 "propriedade padrão"
@@ -4688,10 +4528,9 @@ msgid ""
 "OpenERP. They are launched during the installation of new modules, but you "
 "can choose to restart some wizards manually from this menu."
 msgstr ""
-"Os assistentes da configuração são usados ​​para ajudar a configurar uma "
-"nova instância OpenERP. Eles são lançados durante a instalação de novos "
-"módulos, mas pode optar por reiniciar alguns assistentes manualmente neste "
-"menu."
+"Os assistentes da configuração são usados ​​para ajudar a configurar uma nova "
+"instância OpenERP. Eles são lançados durante a instalação de novos módulos, "
+"mas pode optar por reiniciar alguns assistentes manualmente neste menu."
 
 #. module: base
 #: code:addons/base/res/res_users.py:131
@@ -4769,10 +4608,8 @@ msgid "Burundi"
 msgstr "Burundi"
 
 #. module: base
-#: view:base.language.export:0
-#: view:base.language.install:0
-#: view:base.module.configuration:0
-#: view:base.module.update:0
+#: view:base.language.export:0 view:base.language.install:0
+#: view:base.module.configuration:0 view:base.module.update:0
 msgid "Close"
 msgstr "Fechar"
 
@@ -4832,8 +4669,7 @@ msgid "res.config.view"
 msgstr "res.config.view"
 
 #. module: base
-#: view:res.log:0
-#: field:res.log,read:0
+#: view:res.log:0 field:res.log,read:0
 msgid "Read"
 msgstr "Ler"
 
@@ -4863,18 +4699,14 @@ msgid "Saint Vincent & Grenadines"
 msgstr "São Vicente & Granadinas"
 
 #. module: base
-#: field:ir.mail_server,smtp_pass:0
-#: field:res.users,password:0
+#: field:ir.mail_server,smtp_pass:0 field:res.users,password:0
 msgid "Password"
 msgstr "Password"
 
 #. module: base
-#: model:ir.actions.act_window,name:base.action_model_fields
-#: view:ir.model:0
-#: field:ir.model,field_id:0
-#: model:ir.model,name:base.model_ir_model_fields
-#: view:ir.model.fields:0
-#: model:ir.ui.menu,name:base.ir_model_model_fields
+#: model:ir.actions.act_window,name:base.action_model_fields view:ir.model:0
+#: field:ir.model,field_id:0 model:ir.model,name:base.model_ir_model_fields
+#: view:ir.model.fields:0 model:ir.ui.menu,name:base.ir_model_model_fields
 msgid "Fields"
 msgstr "Campos"
 
@@ -4885,8 +4717,7 @@ msgstr "Funcionários"
 
 #. module: base
 #: help:res.log,read:0
-msgid ""
-"If this log item has been read, get() should not send it to the client"
+msgid "If this log item has been read, get() should not send it to the client"
 msgstr ""
 "Se este item do log  já foi lido, get() não deveria enviá-lo para o cliente"
 
@@ -4936,10 +4767,8 @@ msgid "Chinese (CN) / 简体中文"
 msgstr "Chinês (CN) / 简体中文"
 
 #. module: base
-#: field:res.bank,street:0
-#: field:res.company,street:0
-#: field:res.partner,street:0
-#: view:res.partner.bank:0
+#: field:res.bank,street:0 field:res.company,street:0
+#: field:res.partner,street:0 view:res.partner.bank:0
 #: field:res.partner.bank,street:0
 msgid "Street"
 msgstr "Rua"
@@ -5012,8 +4841,7 @@ msgstr "Ilhas Cocos"
 
 #. module: base
 #: selection:base.language.install,state:0
-#: selection:base.module.import,state:0
-#: selection:base.module.update,state:0
+#: selection:base.module.import,state:0 selection:base.module.update,state:0
 msgid "init"
 msgstr "init"
 
@@ -5156,10 +4984,8 @@ msgid "Integer Big"
 msgstr "Inteiro Grande"
 
 #. module: base
-#: view:res.partner:0
-#: selection:res.partner,type:0
-#: selection:res.partner.title,domain:0
-#: view:res.users:0
+#: view:res.partner:0 selection:res.partner,type:0
+#: selection:res.partner.title,domain:0 view:res.users:0
 msgid "Contact"
 msgstr "Contato"
 
@@ -5315,8 +5141,7 @@ msgstr "Conteúdo"
 #. module: base
 #: help:ir.rule,global:0
 msgid "If no group is specified the rule is global and applied to everyone"
-msgstr ""
-"Se nenhum grupo for especificado, a regra é global e aplicada a todos"
+msgstr "Se nenhum grupo for especificado, a regra é global e aplicada a todos"
 
 #. module: base
 #: model:res.country,name:base.td
@@ -5350,8 +5175,7 @@ msgstr "Dominica"
 
 #. module: base
 #: sql_constraint:publisher_warranty.contract:0
-msgid ""
-"Your publisher warranty contract is already subscribed in the system !"
+msgid "Your publisher warranty contract is already subscribed in the system !"
 msgstr ""
 
 #. module: base
@@ -5360,8 +5184,7 @@ msgid "Next planned execution date for this scheduler"
 msgstr "Próxima data de execução planejada para este agendador."
 
 #. module: base
-#: help:res.config.users,view:0
-#: help:res.users,view:0
+#: help:res.config.users,view:0 help:res.users,view:0
 msgid "Choose between the simplified interface and the extended one"
 msgstr "Escolha entre a interface simplificada ou a extendida"
 
@@ -5479,8 +5302,7 @@ msgid "Attachment Name"
 msgstr "Nome do Anexo"
 
 #. module: base
-#: field:base.language.export,data:0
-#: field:base.language.import,data:0
+#: field:base.language.export,data:0 field:base.language.import,data:0
 msgid "File"
 msgstr "Ficheiro"
 
@@ -5511,14 +5333,12 @@ msgid "Supplier"
 msgstr "Fornecedor"
 
 #. module: base
-#: view:ir.actions.server:0
-#: selection:ir.actions.server,state:0
+#: view:ir.actions.server:0 selection:ir.actions.server,state:0
 msgid "Multi Actions"
 msgstr "Multi Ações"
 
 #. module: base
-#: view:base.language.export:0
-#: view:base.language.import:0
+#: view:base.language.export:0 view:base.language.import:0
 #: view:wizard.ir.model.menu.create:0
 msgid "_Close"
 msgstr "_Fechar"
@@ -5569,8 +5389,7 @@ msgid "Request Link"
 msgstr "Ligação Requerida"
 
 #. module: base
-#: view:ir.attachment:0
-#: selection:ir.attachment,type:0
+#: view:ir.attachment:0 selection:ir.attachment,type:0
 #: field:ir.module.module,url:0
 msgid "URL"
 msgstr "URL"
@@ -5586,8 +5405,7 @@ msgid "Iteration"
 msgstr "Iteração"
 
 #. module: base
-#: code:addons/orm.py:4246
-#: code:addons/orm.py:4347
+#: code:addons/orm.py:4246 code:addons/orm.py:4347
 #, python-format
 msgid "UserError"
 msgstr "Erro do Utilizador"
@@ -5617,9 +5435,7 @@ msgstr ""
 "personalizado!"
 
 #. module: base
-#: view:ir.model.access:0
-#: view:ir.rule:0
-#: field:ir.rule,global:0
+#: view:ir.model.access:0 view:ir.rule:0 field:ir.rule,global:0
 msgid "Global"
 msgstr "Global"
 
@@ -5634,8 +5450,7 @@ msgid "Solomon Islands"
 msgstr "Ilhas Salomão"
 
 #. module: base
-#: code:addons/orm.py:4152
-#: code:addons/orm.py:4685
+#: code:addons/orm.py:4152 code:addons/orm.py:4685
 #, python-format
 msgid "AccessError"
 msgstr "Erro de Acesso"
@@ -5668,8 +5483,7 @@ msgid "Creation Date"
 msgstr "Data da Criação"
 
 #. module: base
-#: view:ir.translation:0
-#: model:ir.ui.menu,name:base.menu_translation
+#: view:ir.translation:0 model:ir.ui.menu,name:base.menu_translation
 msgid "Translations"
 msgstr "Traduções"
 
@@ -5719,8 +5533,7 @@ msgid "Mali"
 msgstr "Mali"
 
 #. module: base
-#: help:res.config.users,email:0
-#: help:res.users,email:0
+#: help:res.config.users,email:0 help:res.users,email:0
 msgid ""
 "If an email is provided, the user will be sent a message welcoming him.\n"
 "\n"
@@ -5759,10 +5572,8 @@ msgid "Brunei Darussalam"
 msgstr "Brunei"
 
 #. module: base
-#: view:ir.actions.act_window:0
-#: field:ir.actions.act_window,view_type:0
-#: field:ir.actions.act_window.view,view_mode:0
-#: field:ir.ui.view,type:0
+#: view:ir.actions.act_window:0 field:ir.actions.act_window,view_type:0
+#: field:ir.actions.act_window.view,view_mode:0 field:ir.ui.view,type:0
 msgid "View Type"
 msgstr "Tipo de Vista"
 
@@ -5818,12 +5629,9 @@ msgid "osv_memory.autovacuum"
 msgstr "osv_memory.autovacuum"
 
 #. module: base
-#: field:base.language.export,lang:0
-#: field:base.language.install,lang:0
-#: field:base.update.translations,lang:0
-#: field:ir.translation,lang:0
-#: view:res.lang:0
-#: field:res.partner,lang:0
+#: field:base.language.export,lang:0 field:base.language.install,lang:0
+#: field:base.update.translations,lang:0 field:ir.translation,lang:0
+#: view:res.lang:0 field:res.partner,lang:0
 msgid "Language"
 msgstr "Idioma"
 
@@ -5837,10 +5645,8 @@ msgstr "Gâmbia"
 #: model:ir.actions.act_window,name:base.company_normal_action_tree
 #: model:ir.model,name:base.model_res_company
 #: model:ir.ui.menu,name:base.menu_action_res_company_form
-#: model:ir.ui.menu,name:base.menu_res_company_global
-#: view:res.company:0
-#: view:res.partner:0
-#: field:res.users,company_ids:0
+#: model:ir.ui.menu,name:base.menu_res_company_global view:res.company:0
+#: view:res.partner:0 field:res.users,company_ids:0
 msgid "Companies"
 msgstr "Empresas"
 
@@ -5873,8 +5679,7 @@ msgid "Not implemented get_memory method !"
 msgstr "Não implementado método get_memory !"
 
 #. module: base
-#: view:ir.actions.server:0
-#: field:ir.actions.server,code:0
+#: view:ir.actions.server:0 field:ir.actions.server,code:0
 #: selection:ir.actions.server,state:0
 msgid "Python Code"
 msgstr "Código Python"
@@ -5891,17 +5696,11 @@ msgid "The kernel of OpenERP, needed for all installation."
 msgstr "O núcleo do OpenERP, necessário em todas as instalações."
 
 #. module: base
-#: view:base.language.export:0
-#: view:base.language.import:0
-#: view:base.language.install:0
-#: view:base.module.import:0
-#: view:base.module.update:0
-#: view:base.module.upgrade:0
-#: view:base.update.translations:0
-#: view:change.password.wizard:0
-#: view:ir.actions.configuration.wizard:0
-#: view:res.config:0
-#: view:res.users:0
+#: view:base.language.export:0 view:base.language.import:0
+#: view:base.language.install:0 view:base.module.import:0
+#: view:base.module.update:0 view:base.module.upgrade:0
+#: view:base.update.translations:0 view:change.password.wizard:0
+#: view:ir.actions.configuration.wizard:0 view:res.config:0 view:res.users:0
 #: view:wizard.ir.model.menu.create:0
 msgid "Cancel"
 msgstr "Cancelar"
@@ -5937,17 +5736,12 @@ msgid "Components Supplier"
 msgstr "Fornecedor de Componentes"
 
 #. module: base
-#: view:change.password.user:0
-#: field:change.password.wizard,user_ids:0
+#: view:change.password.user:0 field:change.password.wizard,user_ids:0
 #: model:ir.actions.act_window,name:base.action_res_users
-#: field:ir.default,uid:0
-#: model:ir.model,name:base.model_res_users
+#: field:ir.default,uid:0 model:ir.model,name:base.model_res_users
 #: model:ir.ui.menu,name:base.menu_action_res_users
-#: model:ir.ui.menu,name:base.menu_users
-#: view:res.groups:0
-#: field:res.groups,users:0
-#: field:res.partner,user_ids:0
-#: view:res.users:0
+#: model:ir.ui.menu,name:base.menu_users view:res.groups:0
+#: field:res.groups,users:0 field:res.partner,user_ids:0 view:res.users:0
 msgid "Users"
 msgstr "Utilizadores"
 
@@ -6047,8 +5841,7 @@ msgstr "Aplicar para Leitura"
 
 #. module: base
 #: help:ir.actions.server,model_id:0
-msgid ""
-"Select the object on which the action will work (read, write, create)."
+msgid "Select the object on which the action will work (read, write, create)."
 msgstr ""
 "Selecione o objeto sobre o qual a ação vai operar (ler, escrever, criar)."
 
@@ -6074,32 +5867,22 @@ msgid "Fields Description"
 msgstr "Descrições dos Campos"
 
 #. module: base
-#: view:ir.attachment:0
-#: view:ir.cron:0
-#: view:ir.filters:0
-#: view:ir.model.access:0
-#: view:ir.model.data:0
-#: view:ir.model.fields:0
-#: view:ir.module.module:0
-#: view:ir.ui.view:0
-#: view:ir.values:0
-#: view:res.partner:0
-#: view:workflow.activity:0
+#: view:ir.attachment:0 view:ir.cron:0 view:ir.filters:0
+#: view:ir.model.access:0 view:ir.model.data:0 view:ir.model.fields:0
+#: view:ir.module.module:0 view:ir.ui.view:0 view:ir.values:0
+#: view:res.partner:0 view:workflow.activity:0
 msgid "Group By..."
 msgstr "Agrupar por..."
 
 #. module: base
-#: view:ir.model.fields:0
-#: field:ir.model.fields,readonly:0
+#: view:ir.model.fields:0 field:ir.model.fields,readonly:0
 #: field:res.partner.bank.type.field,readonly:0
 msgid "Readonly"
 msgstr "Só de Leitura"
 
 #. module: base
-#: field:ir.actions.act_window.view,view_id:0
-#: field:ir.default,page:0
-#: selection:ir.translation,type:0
-#: view:ir.ui.view:0
+#: field:ir.actions.act_window.view,view_id:0 field:ir.default,page:0
+#: selection:ir.translation,type:0 view:ir.ui.view:0
 msgid "View"
 msgstr "Vista"
 
@@ -6119,8 +5902,7 @@ msgstr ""
 "executa a ação."
 
 #. module: base
-#: view:ir.model:0
-#: model:ir.module.module,shortdesc:base.module_base
+#: view:ir.model:0 model:ir.module.module,shortdesc:base.module_base
 #: field:res.currency,base:0
 msgid "Base"
 msgstr "Suporte"
@@ -6136,32 +5918,23 @@ msgid "Liberia"
 msgstr "Libéria"
 
 #. module: base
-#: view:ir.model:0
-#: model:ir.module.module,shortdesc:base.module_note
-#: view:res.groups:0
-#: field:res.partner,comment:0
+#: view:ir.model:0 model:ir.module.module,shortdesc:base.module_note
+#: view:res.groups:0 field:res.partner,comment:0
 msgid "Notes"
 msgstr "Notas"
 
 #. module: base
-#: field:ir.config_parameter,value:0
-#: field:ir.property,value_binary:0
-#: field:ir.property,value_datetime:0
-#: field:ir.property,value_float:0
-#: field:ir.property,value_integer:0
-#: field:ir.property,value_reference:0
-#: field:ir.property,value_text:0
-#: selection:ir.server.object.lines,type:0
-#: field:ir.server.object.lines,value:0
-#: field:ir.values,value:0
+#: field:ir.config_parameter,value:0 field:ir.property,value_binary:0
+#: field:ir.property,value_datetime:0 field:ir.property,value_float:0
+#: field:ir.property,value_integer:0 field:ir.property,value_reference:0
+#: field:ir.property,value_text:0 selection:ir.server.object.lines,type:0
+#: field:ir.server.object.lines,value:0 field:ir.values,value:0
 msgid "Value"
 msgstr "Valor"
 
 #. module: base
-#: view:base.language.import:0
-#: field:ir.sequence,code:0
-#: field:ir.sequence.type,code:0
-#: selection:ir.translation,type:0
+#: view:base.language.import:0 field:ir.sequence,code:0
+#: field:ir.sequence.type,code:0 selection:ir.translation,type:0
 #: field:res.partner.bank.type,code:0
 msgid "Code"
 msgstr "Código"
@@ -6182,15 +5955,13 @@ msgid "Minutes"
 msgstr "Minutos"
 
 #. module: base
-#: view:ir.actions.act_window:0
-#: selection:ir.translation,type:0
+#: view:ir.actions.act_window:0 selection:ir.translation,type:0
 msgid "Help"
 msgstr "Ajuda"
 
 #. module: base
 #: help:res.users,menu_id:0
-msgid ""
-"If specified, the action will replace the standard menu for this user."
+msgid "If specified, the action will replace the standard menu for this user."
 msgstr ""
 "Se especificada, a ação substituirá o menu padrão, para este utilizador."
 
@@ -6250,14 +6021,12 @@ msgid "res.log"
 msgstr "res.log"
 
 #. module: base
-#: help:ir.translation,module:0
-#: help:ir.translation,xml_id:0
+#: help:ir.translation,module:0 help:ir.translation,xml_id:0
 msgid "Maps to the ir_model_data for which this translation is provided."
 msgstr "Mapas para o ir_model_data para o qual esta tradução é fornecida."
 
 #. module: base
-#: view:workflow.activity:0
-#: field:workflow.activity,flow_stop:0
+#: view:workflow.activity:0 field:workflow.activity,flow_stop:0
 msgid "Flow Stop"
 msgstr "Parar Fluxo"
 
@@ -6300,10 +6069,8 @@ msgid "This method does not exist anymore"
 msgstr "Este método já não existe"
 
 #. module: base
-#: code:addons/base/res/res_company.py:162
-#: field:res.bank,fax:0
-#: field:res.company,fax:0
-#: field:res.partner,fax:0
+#: code:addons/base/res/res_company.py:162 field:res.bank,fax:0
+#: field:res.company,fax:0 field:res.partner,fax:0
 #, python-format
 msgid "Fax"
 msgstr "Fax"
@@ -6324,8 +6091,8 @@ msgid ""
 "Select the action that will be executed. Loop action will not be avaliable "
 "inside loop."
 msgstr ""
-"﻿Selecione a ação que vai ser executada. Ação loop não está disponível "
-"dentro de um loop."
+"﻿Selecione a ação que vai ser executada. Ação loop não está disponível dentro "
+"de um loop."
 
 #. module: base
 #: selection:base.language.install,lang:0
@@ -6372,8 +6139,7 @@ msgstr ""
 #. module: base
 #: constraint:res.users:0
 msgid "The chosen company is not in the allowed companies for this user"
-msgstr ""
-"A empresa escolhida não está entre as permitidas para este utilizador"
+msgstr "A empresa escolhida não está entre as permitidas para este utilizador"
 
 #. module: base
 #: model:res.country,name:base.gi
@@ -6399,8 +6165,7 @@ msgstr ""
 "Ctrl+R)"
 
 #. module: base
-#: model:ir.actions.act_window,name:base.action_rule
-#: view:ir.rule:0
+#: model:ir.actions.act_window,name:base.action_rule view:ir.rule:0
 #: model:ir.ui.menu,name:base.menu_action_rule
 msgid "Record Rules"
 msgstr "Gravar Regras"
@@ -6416,8 +6181,7 @@ msgid "Day of the year: %(doy)s"
 msgstr "Dia do ano: %(doy)s"
 
 #. module: base
-#: view:ir.model:0
-#: view:workflow.activity:0
+#: view:ir.model:0 view:workflow.activity:0
 msgid "Properties"
 msgstr "Propriedades"
 
@@ -6452,8 +6216,7 @@ msgstr "O código do idioma tem de ser único."
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_attachment
-#: view:ir.actions.report.xml:0
-#: view:ir.attachment:0
+#: view:ir.actions.report.xml:0 view:ir.attachment:0
 #: model:ir.ui.menu,name:base.menu_action_attachment
 msgid "Attachments"
 msgstr "Anexos"
@@ -6463,8 +6226,7 @@ msgstr "Anexos"
 #: model:ir.ui.menu,name:base.menu_base_partner
 #: model:ir.ui.menu,name:base.menu_sale_config
 #: model:ir.ui.menu,name:base.menu_sale_config_sales
-#: model:ir.ui.menu,name:base.menu_sales
-#: model:ir.ui.menu,name:base.next_id_64
+#: model:ir.ui.menu,name:base.menu_sales model:ir.ui.menu,name:base.next_id_64
 #: view:res.users:0
 msgid "Sales"
 msgstr "Vendas"
@@ -6486,8 +6248,7 @@ msgid "Miss"
 msgstr "Menina"
 
 #. module: base
-#: view:ir.model.access:0
-#: field:ir.model.access,perm_write:0
+#: view:ir.model.access:0 field:ir.model.access,perm_write:0
 msgid "Write Access"
 msgstr "Escreva Acesso"
 
@@ -6497,15 +6258,9 @@ msgid "%m - Month number [01,12]."
 msgstr "%m - número mês [01,12]."
 
 #. module: base
-#: view:res.bank:0
-#: field:res.bank,city:0
-#: view:res.company:0
-#: field:res.company,city:0
-#: view:res.partner:0
-#: field:res.partner,city:0
-#: view:res.partner.bank:0
-#: field:res.partner.bank,city:0
-#: view:res.users:0
+#: view:res.bank:0 field:res.bank,city:0 view:res.company:0
+#: field:res.company,city:0 view:res.partner:0 field:res.partner,city:0
+#: view:res.partner.bank:0 field:res.partner.bank,city:0 view:res.users:0
 msgid "City"
 msgstr "Cidade"
 
@@ -6520,8 +6275,7 @@ msgid "Italy"
 msgstr "Itália"
 
 #. module: base
-#: view:ir.actions.todo:0
-#: selection:ir.actions.todo,state:0
+#: view:ir.actions.todo:0 selection:ir.actions.todo,state:0
 msgid "To Do"
 msgstr "A Fazer"
 
@@ -6552,8 +6306,7 @@ msgstr "Inglês (EUA)"
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_model_data
-#: view:ir.model.data:0
-#: model:ir.ui.menu,name:base.ir_model_data_menu
+#: view:ir.model.data:0 model:ir.ui.menu,name:base.ir_model_data_menu
 msgid "Object Identifiers"
 msgstr "Identificadores de objeto"
 
@@ -6582,11 +6335,8 @@ msgstr ""
 "a um destes grupos:%s."
 
 #. module: base
-#: view:res.bank:0
-#: view:res.company:0
-#: view:res.partner:0
-#: view:res.partner.bank:0
-#: view:res.users:0
+#: view:res.bank:0 view:res.company:0 view:res.partner:0
+#: view:res.partner.bank:0 view:res.users:0
 msgid "Address"
 msgstr "Endereço"
 
@@ -6616,14 +6366,12 @@ msgid "Module update result"
 msgstr "Módulo de atualização de resultados"
 
 #. module: base
-#: view:workflow.activity:0
-#: field:workflow.workitem,act_id:0
+#: view:workflow.activity:0 field:workflow.workitem,act_id:0
 msgid "Activity"
 msgstr "Atividade"
 
 #. module: base
-#: view:res.partner:0
-#: view:res.partner.address:0
+#: view:res.partner:0 view:res.partner.address:0
 msgid "Postal Address"
 msgstr "Código Postal"
 
@@ -6703,21 +6451,18 @@ msgstr ""
 "objeto do campo."
 
 #. module: base
-#: view:ir.module.module:0
-#: selection:ir.module.module,state:0
+#: view:ir.module.module:0 selection:ir.module.module,state:0
 #: selection:ir.module.module.dependency,state:0
 msgid "Not Installed"
 msgstr "Não Instalado"
 
 #. module: base
-#: view:workflow.activity:0
-#: field:workflow.activity,out_transitions:0
+#: view:workflow.activity:0 field:workflow.activity,out_transitions:0
 msgid "Outgoing Transitions"
 msgstr "As transições de Saída"
 
 #. module: base
-#: field:ir.module.module,icon_image:0
-#: field:ir.ui.menu,icon:0
+#: field:ir.module.module,icon_image:0 field:ir.ui.menu,icon:0
 msgid "Icon"
 msgstr "Ícone"
 
@@ -6739,8 +6484,7 @@ msgstr "Tipos de Sequências"
 #. module: base
 #: model:ir.actions.act_window,name:base.res_request-act
 #: model:ir.ui.menu,name:base.menu_res_request_act
-#: model:ir.ui.menu,name:base.menu_resquest_ref
-#: view:res.request:0
+#: model:ir.ui.menu,name:base.menu_resquest_ref view:res.request:0
 msgid "Requests"
 msgstr "Pedidos"
 
@@ -6795,22 +6539,19 @@ msgid "Child IDs"
 msgstr "IDs Descendentes"
 
 #. module: base
-#: code:addons/base/ir/ir_actions.py:702
-#: code:addons/base/ir/ir_actions.py:705
+#: code:addons/base/ir/ir_actions.py:702 code:addons/base/ir/ir_actions.py:705
 #, python-format
 msgid "Problem in configuration `Record Id` in Server Action!"
 msgstr "Problema na configuração `Record Id` na ação do servidor!"
 
 #. module: base
-#: code:addons/orm.py:2807
-#: code:addons/orm.py:2817
+#: code:addons/orm.py:2807 code:addons/orm.py:2817
 #, python-format
 msgid "ValidateError"
 msgstr "Erro de Validação"
 
 #. module: base
-#: view:base.module.import:0
-#: view:base.module.update:0
+#: view:base.module.import:0 view:base.module.update:0
 msgid "Open Modules"
 msgstr "Abrir Módulos"
 
@@ -6844,12 +6585,9 @@ msgid "Laos"
 msgstr "Laos"
 
 #. module: base
-#: code:addons/base/res/res_company.py:163
-#: selection:ir.actions.server,state:0
-#: model:ir.ui.menu,name:base.menu_email
-#: field:res.bank,email:0
-#: field:res.company,email:0
-#: field:res.partner,email:0
+#: code:addons/base/res/res_company.py:163 selection:ir.actions.server,state:0
+#: model:ir.ui.menu,name:base.menu_email field:res.bank,email:0
+#: field:res.company,email:0 field:res.partner,email:0
 #, python-format
 msgid "Email"
 msgstr "Email"
@@ -7023,10 +6761,8 @@ msgid "Belarus"
 msgstr "Bielorrússia"
 
 #. module: base
-#: field:ir.actions.act_url,name:0
-#: field:ir.actions.act_window,name:0
-#: field:ir.actions.client,name:0
-#: field:ir.actions.server,name:0
+#: field:ir.actions.act_url,name:0 field:ir.actions.act_window,name:0
+#: field:ir.actions.client,name:0 field:ir.actions.server,name:0
 msgid "Action Name"
 msgstr "Nome da Ação"
 
@@ -7039,9 +6775,9 @@ msgid ""
 "specific access to the applications they need to use in the system."
 msgstr ""
 "Criar e gerir utilizadores que irão conetar-se ao sistema. utilizadores "
-"podem ser desativados caso haja um período de tempo durante o qual eles vão "
-"/ não devem conetar-se ao sistema. Pode atribuir-lhes os grupos, a fim de "
-"dar acesso específico para as aplicações que eles precisam para usar no "
+"podem ser desativados caso haja um período de tempo durante o qual eles "
+"vão / não devem conetar-se ao sistema. Pode atribuir-lhes os grupos, a fim "
+"de dar acesso específico para as aplicações que eles precisam para usar no "
 "sistema."
 
 #. module: base
@@ -7050,8 +6786,7 @@ msgid "Normal"
 msgstr "Normal"
 
 #. module: base
-#: field:res.bank,street2:0
-#: field:res.company,street2:0
+#: field:res.bank,street2:0 field:res.company,street2:0
 #: field:res.partner,street2:0
 msgid "Street2"
 msgstr "Rua2"
@@ -7068,16 +6803,11 @@ msgid "Following modules are not installed or unknown: %s"
 msgstr "Os seguintes módulos não são conhecidos: %s"
 
 #. module: base
-#: field:change.password.user,user_id:0
-#: view:ir.cron:0
-#: field:ir.cron,user_id:0
-#: view:ir.filters:0
-#: field:ir.filters,user_id:0
-#: field:ir.ui.view.custom,user_id:0
-#: field:ir.values,user_id:0
+#: field:change.password.user,user_id:0 view:ir.cron:0 field:ir.cron,user_id:0
+#: view:ir.filters:0 field:ir.filters,user_id:0
+#: field:ir.ui.view.custom,user_id:0 field:ir.values,user_id:0
 #: model:res.groups,name:base.group_document_user
-#: model:res.groups,name:base.group_tool_user
-#: view:res.users:0
+#: model:res.groups,name:base.group_tool_user view:res.users:0
 msgid "User"
 msgstr "Utilizador"
 
@@ -7143,8 +6873,7 @@ msgstr ""
 "Verdadeiro nome do novo utilizador, usado para pesquisar em mais listas"
 
 #. module: base
-#: code:addons/osv.py:172
-#: code:addons/osv.py:174
+#: code:addons/osv.py:172 code:addons/osv.py:174
 #, python-format
 msgid "Integrity Error"
 msgstr "Erro de integridade"
@@ -7181,8 +6910,7 @@ msgid "Update Terms"
 msgstr "Termos de atualização"
 
 #. module: base
-#: field:res.request,act_to:0
-#: field:res.request.history,act_to:0
+#: field:res.request,act_to:0 field:res.request.history,act_to:0
 msgid "To"
 msgstr "Para"
 
@@ -7240,8 +6968,7 @@ msgid "Short Description"
 msgstr "Descrição Breve"
 
 #. module: base
-#: field:ir.actions.act_window,context:0
-#: field:ir.actions.client,context:0
+#: field:ir.actions.act_window,context:0 field:ir.actions.client,context:0
 msgid "Context Value"
 msgstr "Valor do Contexto"
 
@@ -7272,17 +6999,11 @@ msgstr "Mês: %(month)s"
 
 #. module: base
 #: field:ir.actions.act_window.view,sequence:0
-#: field:ir.actions.server,sequence:0
-#: field:ir.actions.todo,sequence:0
-#: view:ir.cron:0
-#: field:ir.module.category,sequence:0
-#: field:ir.module.module,sequence:0
-#: view:ir.sequence:0
-#: field:ir.ui.menu,sequence:0
-#: view:ir.ui.view:0
-#: field:ir.ui.view,priority:0
-#: field:ir.ui.view_sc,sequence:0
-#: field:multi_company.default,sequence:0
+#: field:ir.actions.server,sequence:0 field:ir.actions.todo,sequence:0
+#: view:ir.cron:0 field:ir.module.category,sequence:0
+#: field:ir.module.module,sequence:0 view:ir.sequence:0
+#: field:ir.ui.menu,sequence:0 view:ir.ui.view:0 field:ir.ui.view,priority:0
+#: field:ir.ui.view_sc,sequence:0 field:multi_company.default,sequence:0
 #: field:res.partner.bank,sequence:0
 msgid "Sequence"
 msgstr "Sequência"
@@ -7306,8 +7027,7 @@ msgstr "Comores"
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_server_action
-#: view:ir.actions.server:0
-#: model:ir.ui.menu,name:base.menu_server_action
+#: view:ir.actions.server:0 model:ir.ui.menu,name:base.menu_server_action
 msgid "Server Actions"
 msgstr "Ações de servidor"
 
@@ -7352,8 +7072,7 @@ msgid "Fed. States"
 msgstr "Estados Federados"
 
 #. module: base
-#: view:ir.model:0
-#: view:res.groups:0
+#: view:ir.model:0 view:res.groups:0
 msgid "Access Rules"
 msgstr "Regras de Acesso"
 
@@ -7363,22 +7082,13 @@ msgid "Table Ref."
 msgstr "Tabela de Referência"
 
 #. module: base
-#: view:ir.actions.act_window:0
-#: field:ir.actions.report.xml,model:0
-#: field:ir.actions.server,model_id:0
-#: field:ir.actions.wizard,model:0
-#: field:ir.cron,model:0
-#: field:ir.default,field_tbl:0
-#: view:ir.model.access:0
-#: field:ir.model.access,model_id:0
-#: view:ir.model.data:0
-#: view:ir.model.fields:0
-#: field:ir.rule,model_id:0
-#: selection:ir.translation,type:0
-#: view:ir.ui.view:0
-#: field:ir.ui.view,model:0
-#: field:multi_company.default,object_id:0
-#: field:res.request.link,object:0
+#: view:ir.actions.act_window:0 field:ir.actions.report.xml,model:0
+#: field:ir.actions.server,model_id:0 field:ir.actions.wizard,model:0
+#: field:ir.cron,model:0 field:ir.default,field_tbl:0 view:ir.model.access:0
+#: field:ir.model.access,model_id:0 view:ir.model.data:0
+#: view:ir.model.fields:0 field:ir.rule,model_id:0
+#: selection:ir.translation,type:0 view:ir.ui.view:0 field:ir.ui.view,model:0
+#: field:multi_company.default,object_id:0 field:res.request.link,object:0
 #: field:workflow.triggers,model:0
 msgid "Object"
 msgstr "Objeto"
@@ -7460,8 +7170,7 @@ msgstr "Google Maps"
 #: model:ir.ui.menu,name:base.menu_lunch_survey_root
 #: model:ir.ui.menu,name:base.menu_marketing_config_association
 #: model:ir.ui.menu,name:base.menu_marketing_config_root
-#: model:ir.ui.menu,name:base.menu_reporting_config
-#: view:res.company:0
+#: model:ir.ui.menu,name:base.menu_reporting_config view:res.company:0
 #: view:res.config:0
 msgid "Configuration"
 msgstr "Configuração"
@@ -7492,8 +7201,7 @@ msgid "Gold Partner"
 msgstr "Parceiro Gold"
 
 #. module: base
-#: model:ir.model,name:base.model_res_partner
-#: field:res.company,partner_id:0
+#: model:ir.model,name:base.model_res_partner field:res.company,partner_id:0
 #: model:res.partner.category,name:base.res_partner_category_0
 #: selection:res.partner.title,domain:0
 #: model:res.request.link,name:base.req_link_partner
@@ -7516,18 +7224,13 @@ msgid "Lebanon"
 msgstr "Líbano"
 
 #. module: base
-#: view:ir.actions.report.xml:0
-#: field:ir.actions.report.xml,report_type:0
+#: view:ir.actions.report.xml:0 field:ir.actions.report.xml,report_type:0
 msgid "Report Type"
 msgstr "Tipo de Relatório"
 
 #. module: base
-#: view:res.bank:0
-#: view:res.company:0
-#: view:res.country.state:0
-#: view:res.partner:0
-#: field:res.partner,state_id:0
-#: view:res.partner.bank:0
+#: view:res.bank:0 view:res.company:0 view:res.country.state:0
+#: view:res.partner:0 field:res.partner,state_id:0 view:res.partner.bank:0
 #: view:res.users:0
 msgid "State"
 msgstr "Estado"
@@ -7629,16 +7332,11 @@ msgid "Report Header"
 msgstr "Cabeçalho do relatório"
 
 #. module: base
-#: field:ir.actions.act_url,type:0
-#: field:ir.actions.act_window,type:0
-#: field:ir.actions.act_window_close,type:0
-#: field:ir.actions.actions,type:0
-#: field:ir.actions.client,type:0
-#: field:ir.actions.report.xml,type:0
-#: view:ir.actions.server:0
-#: field:ir.actions.server,state:0
-#: field:ir.actions.server,type:0
-#: field:ir.actions.wizard,type:0
+#: field:ir.actions.act_url,type:0 field:ir.actions.act_window,type:0
+#: field:ir.actions.act_window_close,type:0 field:ir.actions.actions,type:0
+#: field:ir.actions.client,type:0 field:ir.actions.report.xml,type:0
+#: view:ir.actions.server:0 field:ir.actions.server,state:0
+#: field:ir.actions.server,type:0 field:ir.actions.wizard,type:0
 msgid "Action Type"
 msgstr "Tipo de Ação"
 
@@ -7665,21 +7363,18 @@ msgid "Type fields"
 msgstr "Tipo de Campos"
 
 #. module: base
-#: view:ir.module.module:0
-#: field:ir.module.module,category_id:0
+#: view:ir.module.module:0 field:ir.module.module,category_id:0
 msgid "Category"
 msgstr "Categoria"
 
 #. module: base
-#: view:ir.attachment:0
-#: selection:ir.attachment,type:0
+#: view:ir.attachment:0 selection:ir.attachment,type:0
 #: selection:ir.property,type:0
 msgid "Binary"
 msgstr "Binário"
 
 #. module: base
-#: field:ir.actions.server,sms:0
-#: selection:ir.actions.server,state:0
+#: field:ir.actions.server,sms:0 selection:ir.actions.server,state:0
 msgid "SMS"
 msgstr "SMS"
 
@@ -7700,8 +7395,7 @@ msgstr "Outros Parceiros"
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_currency_form
-#: model:ir.ui.menu,name:base.menu_action_currency_form
-#: view:res.currency:0
+#: model:ir.ui.menu,name:base.menu_action_currency_form view:res.currency:0
 msgid "Currencies"
 msgstr "Moedas"
 
@@ -7763,8 +7457,7 @@ msgid "Norwegian Bokmål / Norsk bokmål"
 msgstr "Norwegian Bokmål / Norsk bokmål"
 
 #. module: base
-#: help:res.config.users,new_password:0
-#: help:res.users,new_password:0
+#: help:res.config.users,new_password:0 help:res.users,new_password:0
 msgid ""
 "Only specify a value if you want to change the user password. This user will "
 "have to logout and login again!"
@@ -7854,8 +7547,7 @@ msgid "Malayalam / മലയാളം"
 msgstr "Malayalam / മലയാളം"
 
 #. module: base
-#: field:res.request,body:0
-#: field:res.request.history,req_id:0
+#: field:res.request,body:0 field:res.request.history,req_id:0
 msgid "Request"
 msgstr "Requisição"
 
@@ -7870,8 +7562,7 @@ msgid "Number of Calls"
 msgstr "Número de Chamadas"
 
 #. module: base
-#: view:base.module.upgrade:0
-#: field:base.module.upgrade,module_info:0
+#: view:base.module.upgrade:0 field:base.module.upgrade,module_info:0
 msgid "Modules to update"
 msgstr "Módulos para Atualizar"
 
@@ -7931,8 +7622,7 @@ msgid "Partner Category"
 msgstr "Categoria de Parceiros"
 
 #. module: base
-#: view:ir.actions.server:0
-#: selection:ir.actions.server,state:0
+#: view:ir.actions.server:0 selection:ir.actions.server,state:0
 msgid "Trigger"
 msgstr "Trigger"
 
@@ -7965,8 +7655,8 @@ msgstr "Menu Ação"
 #: help:ir.model.fields,selection:0
 msgid ""
 "List of options for a selection field, specified as a Python expression "
-"defining a list of (key, label) pairs. For example: "
-"[('blue','Blue'),('yellow','Yellow')]"
+"defining a list of (key, label) pairs. For example: [('blue','Blue'),"
+"('yellow','Yellow')]"
 msgstr ""
 "Lista de opções para um campo de seleção, especificado como uma expressão "
 "Python definir uma lista de (etiqueta da chave) pares. Por exemplo: "
@@ -8024,11 +7714,8 @@ msgid "ir.model.data"
 msgstr "ir.model.data"
 
 #. module: base
-#: view:ir.model:0
-#: view:ir.rule:0
-#: view:res.groups:0
-#: model:res.groups,name:base.group_erp_manager
-#: view:res.users:0
+#: view:ir.model:0 view:ir.rule:0 view:res.groups:0
+#: model:res.groups,name:base.group_erp_manager view:res.users:0
 msgid "Access Rights"
 msgstr "Permissões de Acesso"
 
@@ -8038,8 +7725,7 @@ msgid "Greenland"
 msgstr "Gronelândia"
 
 #. module: base
-#: view:res.partner.bank:0
-#: field:res.partner.bank,acc_number:0
+#: view:res.partner.bank:0 field:res.partner.bank,acc_number:0
 msgid "Account Number"
 msgstr "Número da Conta"
 
@@ -8070,15 +7756,13 @@ msgstr ""
 "padrão de interface para utilizadores e parceiros."
 
 #. module: base
-#: field:ir.actions.server,subject:0
-#: field:res.request,name:0
+#: field:ir.actions.server,subject:0 field:res.request,name:0
 #: view:res.request.link:0
 msgid "Subject"
 msgstr "Assunto"
 
 #. module: base
-#: field:res.request,act_from:0
-#: field:res.request.history,act_from:0
+#: field:res.request,act_from:0 field:res.request.history,act_from:0
 msgid "From"
 msgstr "De"
 
@@ -8093,8 +7777,7 @@ msgid "Consumers"
 msgstr "Consumidores"
 
 #. module: base
-#: view:res.config:0
-#: wizard_button:server.action.create,init,step_1:0
+#: view:res.config:0 wizard_button:server.action.create,init,step_1:0
 msgid "Next"
 msgstr "Próximo"
 
@@ -8116,8 +7799,7 @@ msgstr ""
 "Ao Selecionar a expressão Opções deve estar no[('key','Label'), ...] formato!"
 
 #. module: base
-#: view:ir.actions.report.xml:0
-#: view:res.currency:0
+#: view:ir.actions.report.xml:0 view:res.currency:0
 msgid "Miscellaneous"
 msgstr "Diversos"
 
@@ -8201,12 +7883,9 @@ msgid "French Southern Territories"
 msgstr "Terras Austrais Francesas"
 
 #. module: base
-#: model:ir.model,name:base.model_res_currency
-#: field:res.company,currency_id:0
-#: field:res.company,currency_ids:0
-#: field:res.country,currency_id:0
-#: view:res.currency:0
-#: field:res.currency,name:0
+#: model:ir.model,name:base.model_res_currency field:res.company,currency_id:0
+#: field:res.company,currency_ids:0 field:res.country,currency_id:0
+#: view:res.currency:0 field:res.currency,name:0
 #: field:res.currency.rate,currency_id:0
 msgid "Currency"
 msgstr "Moeda"
@@ -8263,10 +7942,8 @@ msgid "Slovak / Slovenský jazyk"
 msgstr "Slovak / Slovenský jazyk"
 
 #. module: base
-#: field:base.language.export,state:0
-#: field:ir.ui.menu,icon_pict:0
-#: field:res.partner,has_image:0
-#: field:res.users,user_email:0
+#: field:base.language.export,state:0 field:ir.ui.menu,icon_pict:0
+#: field:res.partner,has_image:0 field:res.users,user_email:0
 msgid "unknown"
 msgstr "Desconhecido"
 
@@ -8385,15 +8062,13 @@ msgid "Zaire"
 msgstr "Zaire"
 
 #. module: base
-#: field:ir.attachment,res_id:0
-#: field:workflow.instance,res_id:0
+#: field:ir.attachment,res_id:0 field:workflow.instance,res_id:0
 #: field:workflow.triggers,res_id:0
 msgid "Resource ID"
 msgstr "ID do recurso"
 
 #. module: base
-#: view:ir.cron:0
-#: field:ir.model,info:0
+#: view:ir.cron:0 field:ir.model,info:0
 msgid "Information"
 msgstr "Informação"
 
@@ -8408,10 +8083,8 @@ msgid "Update Module List"
 msgstr "Atualizar a lista de módulos"
 
 #. module: base
-#: code:addons/base/res/res_users.py:685
-#: code:addons/base/res/res_users.py:825
-#: selection:res.partner,type:0
-#: view:res.users:0
+#: code:addons/base/res/res_users.py:685 code:addons/base/res/res_users.py:825
+#: selection:res.partner,type:0 view:res.users:0
 #, python-format
 msgid "Other"
 msgstr "Outro"
@@ -8475,8 +8148,7 @@ msgstr "Organização de Eventos"
 #. module: base
 #: model:ir.actions.act_window,name:base.ir_sequence_actions
 #: model:ir.ui.menu,name:base.menu_ir_sequence_actions
-#: model:ir.ui.menu,name:base.next_id_6
-#: view:workflow.activity:0
+#: model:ir.ui.menu,name:base.next_id_6 view:workflow.activity:0
 msgid "Actions"
 msgstr "Ações"
 
@@ -8486,8 +8158,7 @@ msgid "High"
 msgstr "Alto"
 
 #. module: base
-#: view:base.language.export:0
-#: field:ir.exports.line,export_id:0
+#: view:base.language.export:0 field:ir.exports.line,export_id:0
 msgid "Export"
 msgstr "Exportar"
 
@@ -8497,8 +8168,7 @@ msgid "Croatia"
 msgstr "Croácia"
 
 #. module: base
-#: field:res.bank,bic:0
-#: field:res.partner.bank,bank_bic:0
+#: field:res.bank,bic:0 field:res.partner.bank,bank_bic:0
 msgid "Bank Identifier Code"
 msgstr "Código de Identifição Bancária"
 
@@ -8508,30 +8178,19 @@ msgid "Turkmenistan"
 msgstr "Turquemenistão"
 
 #. module: base
-#: code:addons/base/ir/ir_actions.py:606
-#: code:addons/base/ir/ir_actions.py:702
-#: code:addons/base/ir/ir_actions.py:705
-#: code:addons/base/ir/ir_model.py:165
-#: code:addons/base/ir/ir_model.py:277
-#: code:addons/base/ir/ir_model.py:291
-#: code:addons/base/ir/ir_model.py:321
-#: code:addons/base/ir/ir_model.py:340
-#: code:addons/base/ir/ir_model.py:345
-#: code:addons/base/ir/ir_model.py:348
+#: code:addons/base/ir/ir_actions.py:606 code:addons/base/ir/ir_actions.py:702
+#: code:addons/base/ir/ir_actions.py:705 code:addons/base/ir/ir_model.py:165
+#: code:addons/base/ir/ir_model.py:277 code:addons/base/ir/ir_model.py:291
+#: code:addons/base/ir/ir_model.py:321 code:addons/base/ir/ir_model.py:340
+#: code:addons/base/ir/ir_model.py:345 code:addons/base/ir/ir_model.py:348
 #: code:addons/base/ir/ir_translation.py:341
-#: code:addons/base/module/module.py:320
-#: code:addons/base/module/module.py:362
-#: code:addons/base/module/module.py:366
-#: code:addons/base/module/module.py:372
-#: code:addons/base/module/module.py:499
-#: code:addons/base/module/module.py:525
-#: code:addons/base/module/module.py:539
-#: code:addons/base/module/module.py:644
+#: code:addons/base/module/module.py:320 code:addons/base/module/module.py:362
+#: code:addons/base/module/module.py:366 code:addons/base/module/module.py:372
+#: code:addons/base/module/module.py:499 code:addons/base/module/module.py:525
+#: code:addons/base/module/module.py:539 code:addons/base/module/module.py:644
 #: code:addons/base/res/res_currency.py:193
-#: code:addons/base/res/res_users.py:98
-#: code:addons/custom.py:555
-#: code:addons/orm.py:787
-#: code:addons/orm.py:3961
+#: code:addons/base/res/res_users.py:98 code:addons/custom.py:555
+#: code:addons/orm.py:787 code:addons/orm.py:3961
 #, python-format
 msgid "Error"
 msgstr "Erro"
@@ -8552,8 +8211,7 @@ msgid "The destination activity."
 msgstr "A Atividade Destino"
 
 #. module: base
-#: view:base.module.update:0
-#: view:base.module.upgrade:0
+#: view:base.module.update:0 view:base.module.upgrade:0
 #: view:base.update.translations:0
 msgid "Update"
 msgstr "Update"
@@ -8683,8 +8341,7 @@ msgid "_Export"
 msgstr "_Exportar"
 
 #. module: base
-#: field:base.language.install,state:0
-#: field:base.module.import,state:0
+#: field:base.language.install,state:0 field:base.module.import,state:0
 #: field:base.module.update,state:0
 msgid "state"
 msgstr "Estado"
@@ -8751,8 +8408,7 @@ msgid "Destination Instance"
 msgstr "Instância de Destino"
 
 #. module: base
-#: field:ir.actions.act_window,multi:0
-#: field:ir.actions.wizard,multi:0
+#: field:ir.actions.act_window,multi:0 field:ir.actions.wizard,multi:0
 msgid "Action on Multiple Doc."
 msgstr "Ação em multiplos documentos."
 
@@ -8821,29 +8477,20 @@ msgid "El Salvador"
 msgstr "El Salvador"
 
 #. module: base
-#: code:addons/base/res/res_company.py:161
-#: field:res.bank,phone:0
-#: field:res.company,phone:0
-#: field:res.partner,phone:0
+#: code:addons/base/res/res_company.py:161 field:res.bank,phone:0
+#: field:res.company,phone:0 field:res.partner,phone:0
 #, python-format
 msgid "Phone"
 msgstr "Telefone"
 
 #. module: base
-#: field:ir.cron,active:0
-#: field:ir.mail_server,active:0
-#: field:ir.model.access,active:0
-#: field:ir.rule,active:0
-#: field:ir.sequence,active:0
-#: field:res.bank,active:0
-#: field:res.currency,active:0
-#: field:res.lang,active:0
-#: field:res.partner,active:0
-#: field:res.partner.category,active:0
-#: field:res.request,active:0
-#: field:res.users,active:0
-#: view:workflow.instance:0
-#: view:workflow.workitem:0
+#: field:ir.cron,active:0 field:ir.mail_server,active:0
+#: field:ir.model.access,active:0 field:ir.rule,active:0
+#: field:ir.sequence,active:0 field:res.bank,active:0
+#: field:res.currency,active:0 field:res.lang,active:0
+#: field:res.partner,active:0 field:res.partner.category,active:0
+#: field:res.request,active:0 field:res.users,active:0
+#: view:workflow.instance:0 view:workflow.workitem:0
 msgid "Active"
 msgstr "Ativo"
 
@@ -8935,14 +8582,10 @@ msgid "Child Field"
 msgstr "Campos Descendentes"
 
 #. module: base
-#: field:ir.actions.act_url,usage:0
-#: field:ir.actions.act_window,usage:0
-#: field:ir.actions.act_window_close,usage:0
-#: field:ir.actions.actions,usage:0
-#: field:ir.actions.client,usage:0
-#: field:ir.actions.report.xml,usage:0
-#: field:ir.actions.server,usage:0
-#: field:ir.actions.wizard,usage:0
+#: field:ir.actions.act_url,usage:0 field:ir.actions.act_window,usage:0
+#: field:ir.actions.act_window_close,usage:0 field:ir.actions.actions,usage:0
+#: field:ir.actions.client,usage:0 field:ir.actions.report.xml,usage:0
+#: field:ir.actions.server,usage:0 field:ir.actions.wizard,usage:0
 msgid "Action Usage"
 msgstr "Utilização da Ação"
 
@@ -9025,14 +8668,12 @@ msgid "base.module.configuration"
 msgstr "base.module.configuration"
 
 #. module: base
-#: field:base.language.export,name:0
-#: field:ir.attachment,datas_fname:0
+#: field:base.language.export,name:0 field:ir.attachment,datas_fname:0
 msgid "Filename"
 msgstr "Nome do Ficheiro"
 
 #. module: base
-#: field:ir.model,access_ids:0
-#: view:ir.model.access:0
+#: field:ir.model,access_ids:0 view:ir.model.access:0
 msgid "Access"
 msgstr "Acesso"
 
@@ -9072,19 +8713,12 @@ msgid "Segmentation"
 msgstr "Segmentação"
 
 #. module: base
-#: view:ir.attachment:0
-#: field:ir.attachment,company_id:0
-#: field:ir.default,company_id:0
-#: field:ir.property,company_id:0
-#: field:ir.sequence,company_id:0
-#: field:ir.values,company_id:0
-#: view:res.company:0
-#: field:res.currency,company_id:0
-#: view:res.partner:0
-#: field:res.partner,company_id:0
-#: field:res.partner.bank,company_id:0
-#: view:res.users:0
-#: field:res.users,company_id:0
+#: view:ir.attachment:0 field:ir.attachment,company_id:0
+#: field:ir.default,company_id:0 field:ir.property,company_id:0
+#: field:ir.sequence,company_id:0 field:ir.values,company_id:0
+#: view:res.company:0 field:res.currency,company_id:0 view:res.partner:0
+#: field:res.partner,company_id:0 field:res.partner.bank,company_id:0
+#: view:res.users:0 field:res.users,company_id:0
 msgid "Company"
 msgstr "Empresa"
 
@@ -9164,8 +8798,7 @@ msgid "Virgin Islands (British)"
 msgstr "Ilhas Virgens Britânicas"
 
 #. module: base
-#: view:ir.property:0
-#: model:ir.ui.menu,name:base.menu_ir_property
+#: view:ir.property:0 model:ir.ui.menu,name:base.menu_ir_property
 msgid "Parameters"
 msgstr "Parâmetros"
 
@@ -9244,18 +8877,11 @@ msgstr ""
 "pode mudar depois nas preferências do utilizador."
 
 #. module: base
-#: model:ir.model,name:base.model_res_country
-#: view:res.bank:0
-#: field:res.bank,country:0
-#: view:res.company:0
-#: field:res.company,country_id:0
-#: view:res.country:0
-#: field:res.country.state,country_id:0
-#: view:res.partner:0
-#: field:res.partner,country:0
-#: field:res.partner,country_id:0
-#: view:res.partner.bank:0
-#: field:res.partner.bank,country_id:0
+#: model:ir.model,name:base.model_res_country view:res.bank:0
+#: field:res.bank,country:0 view:res.company:0 field:res.company,country_id:0
+#: view:res.country:0 field:res.country.state,country_id:0 view:res.partner:0
+#: field:res.partner,country:0 field:res.partner,country_id:0
+#: view:res.partner.bank:0 field:res.partner.bank,country_id:0
 #: view:res.users:0
 msgid "Country"
 msgstr "País"
@@ -9353,10 +8979,8 @@ msgstr "ir.actions.server"
 
 #. module: base
 #: field:ir.actions.configuration.wizard,progress:0
-#: field:res.config,progress:0
-#: field:res.config.installer,progress:0
-#: field:res.config.users,progress:0
-#: field:res.config.view,progress:0
+#: field:res.config,progress:0 field:res.config.installer,progress:0
+#: field:res.config.users,progress:0 field:res.config.view,progress:0
 msgid "Configuration Progress"
 msgstr "Progresso da configuração"
 
@@ -9399,8 +9023,7 @@ msgid "Execution"
 msgstr "Execução"
 
 #. module: base
-#: field:ir.actions.server,condition:0
-#: view:ir.values:0
+#: field:ir.actions.server,condition:0 view:ir.values:0
 #: field:workflow.transition,condition:0
 msgid "Condition"
 msgstr "Condição"
@@ -9477,9 +9100,7 @@ msgstr "Seychelles"
 #: model:ir.actions.act_window,name:base.action_res_partner_bank_account_form
 #: model:ir.model,name:base.model_res_partner_bank
 #: model:ir.ui.menu,name:base.menu_action_res_partner_bank_form
-#: view:res.company:0
-#: field:res.company,bank_ids:0
-#: view:res.partner.bank:0
+#: view:res.company:0 field:res.company,bank_ids:0 view:res.partner.bank:0
 #, python-format
 msgid "Bank Accounts"
 msgstr "Contas Bancárias"
@@ -9516,8 +9137,7 @@ msgid "Homepage Widgets Management"
 msgstr "Gestão de Widgets da Homepage"
 
 #. module: base
-#: field:workflow,osv:0
-#: view:workflow.instance:0
+#: field:workflow,osv:0 view:workflow.instance:0
 #: field:workflow.instance,res_type:0
 msgid "Resource Object"
 msgstr "Recurso do Objeto"
@@ -9622,3 +9242,68 @@ msgstr "Sri Lanka"
 #: selection:base.language.install,lang:0
 msgid "Russian / русский язык"
 msgstr "Russo / русский язык"
+
+#. module: base
+#: model:ir.actions.act_window,name:0
+msgid "Wiki Groups"
+msgstr "Grupos  Wiki"
+
+#. module: base
+#: model:ir.model,name:0
+msgid "Wiki History"
+msgstr "Histórico Wiki"
+
+#. module: base
+#: model:ir.actions.act_window,name:0
+msgid "Wiki Pages"
+msgstr "Páginas Wiki"
+
+#. module: base
+#: model:ir.ui.menu,name:0
+msgid "Survey Requests"
+msgstr "Pedidos de inquérito"
+
+#. module: base
+#: view:ir.attachment:0
+msgid "Filter on my documents"
+msgstr "Filtro nos meus documentos"
+
+#. module: base
+#: field:res.roles,parent_id:0
+msgid "Parent"
+msgstr "Ascendente"
+
+#. module: base
+#: field:res.roles,child_id:0
+msgid "Children"
+msgstr "Descendentes"
+
+#. module: base
+#: model:ir.ui.menu,name:base.menu_project_management_time_tracking
+msgid "Time Tracking"
+msgstr "Registo de Tempo"
+
+#. module: base
+#: model:ir.ui.menu,name:0
+msgid "Answer a Survey"
+msgstr "Responder a um inquérito"
+
+#. module: base
+#: model:ir.ui.menu,name:0
+msgid "Survey Pages"
+msgstr "Páginas do inquérito"
+
+#. module: base
+#: field:ir.sequence,weight:0
+msgid "Weight"
+msgstr "Peso"
+
+#. module: base
+#: selection:ir.model.data,source:0
+msgid "Internal"
+msgstr "Interno"
+
+#. module: base
+#: model:ir.model,name:base.model_res_groups
+msgid "Access Groups"
+msgstr "Grupos de acesso"
