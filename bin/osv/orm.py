@@ -613,6 +613,8 @@ class orm_template(object):
 
     CONCURRENCY_CHECK_FIELD = '__last_update'
     def log(self, cr, uid, id, message, secondary=False, context=None):
+        """Insert a line in res.log about this ORM record
+        """
         try:
             if isinstance(id, (list, tuple)):
                 assert len(id) == 1, id
