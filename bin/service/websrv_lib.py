@@ -102,7 +102,7 @@ class BasicAuthProxy(AuthProxy):
         auth_str = handler.headers.get('Authorization',False)
         if auth_str and auth_str.startswith('Basic '):
             auth_str=auth_str[len('Basic '):]
-            (user,passwd) = base64.decodestring(auth_str).split(':')
+            (user,passwd) = base64.decodestring(auth_str).split(':', 1)
             self.provider.log("Found user=\"%s\", passwd=\"%s\"" %(user,passwd))
             self.auth_creds = self.provider.authenticate(user,passwd,handler.client_address)
             if self.auth_creds:
