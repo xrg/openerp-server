@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <grammar xmlns="http://relaxng.org/ns/structure/1.0"
-              datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
-  <!-- Handling of element overloading when inheriting from a base
-       template
-  -->
+            xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"
+            datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
   <define name="overload">
+      <a:documentation>Handling of element overloading when inheriting from a base
+       template
+        </a:documentation>
     <optional>
       <!--
           Alter matched element with content
@@ -46,15 +47,21 @@
 
 
    <define name="newline">
+       <a:documentation>Breaks the horizontal ordering of elements and places
+            the next one at a new line
+        </a:documentation>
        <element name="newline"><empty/>
        </element>
    </define>
    <define name="properties">
+       <a:documentation>Extra properties of a widget</a:documentation>
+       <!-- why empty? -->
        <element name="properties"><empty/>
        </element>
    </define>
 
   <define name="container">
+      <a:documentation>Group of form-view elements. ... do inherit from this.</a:documentation>
     <optional><attribute name="col"/></optional>
     <zeroOrMore>
       <choice>
@@ -78,6 +85,9 @@
 
     <define name="form">
         <element name="form">
+            <a:documentation>Definition of a Form view, a collection of widgets
+                that edit a single DB record, laid in a 2-D grid.
+            </a:documentation>
             <ref name="overload"/>
             <optional><attribute name="string"/></optional>
             <optional><attribute name="editable"/></optional>
@@ -185,6 +195,8 @@
 
     <define name="html">
         <element name="html">
+            <a:documentation>Free-form HTML embedded in parts of views
+            </a:documentation>
             <zeroOrMore>
                     <text/>
                     <ref name="any"/>
@@ -194,6 +206,10 @@
 
     <define name="label">
         <element name="label">
+            <a:documentation>A text label appearing among the form widgets
+                Note that in versions &lt;=6.0 the text is placed in the "string"
+                attribute, rather than directly inside the element.
+            </a:documentation>
             <ref name="overload"/>
             <optional><attribute name="align"/></optional>
             <optional><attribute name="nolabel"/></optional>
@@ -241,6 +257,8 @@
 
     <define name="gantt">
         <element name="gantt">
+            <a:documentation>Gantt (project timeline) view definition
+            </a:documentation>
             <optional><attribute name="mode">
               <choice>
                  <value>day</value>
@@ -299,6 +317,7 @@
 
     <define name="any">
         <element>
+            <a:documentation>Free-form XML, match any element</a:documentation>
             <anyName/>
             <zeroOrMore>
                 <choice>
@@ -314,6 +333,10 @@
 
     <define name="page">
         <element name="page">
+            <a:documentation>Page, "tab" inside the &lt;notebook&gt; group.
+                
+                Each page is a sub-form, containing elements. The "string" appears
+                as a tab title.</a:documentation>
             <ref name="overload"/>
             <ref name="access_rights"/>
             <optional><attribute name="string"/></optional>
@@ -343,6 +366,7 @@
 
     <define name="notebook">
         <element name="notebook">
+            <a:documentation>A collection of pages, (aka. tabs)</a:documentation>
             <ref name="overload"/>
             <optional><attribute name="colspan"/></optional>
             <optional><attribute name="tabpos"/></optional>
@@ -354,6 +378,7 @@
 
     <define name="separator">
         <element name="separator">
+            <a:documentation>A horizontal or vertical line, optionally having a text by it</a:documentation>
             <ref name="overload"/>
             <ref name="access_rights"/>
             <optional><attribute name="colspan"/></optional>
@@ -380,6 +405,13 @@
 
     <define name="xpath">
         <element name="xpath">
+            <a:documentation>XPath selector for inheriting views.
+
+                Rather than the "position" rough selector, this allows an
+                inheriting view dive precisely into the parent view's XML
+                structure. Useful when we cannot just override a &lt;field&gt;
+                but need to relative express the position.
+                </a:documentation>
             <optional><attribute name="expr"/></optional>
             <ref name="overload"/>
             <zeroOrMore>
@@ -417,13 +449,23 @@
 
     <define name="field">
         <element name="field">
+            <a:documentation>A field represents a widget with data from the active
+                record.
+                
+                It is used both as an input element, in form views, or just as a
+                read-only display (in non-editable tree views)
+                
+                Carries many properties to describe the widget etc.</a:documentation>
             <attribute name="name" />
             <ref name="overload"/>
             <ref name="access_rights"/>
             <optional><attribute name="editable"/></optional>
             <optional><attribute name="domain_filter"/></optional>
             <optional><attribute name="attrs"/></optional>
-            <optional><attribute name="string"/></optional>
+            <optional><attribute name="string">
+                <a:documentation>The text (label) by the field. Will be inhibited
+                    when the "nolabel" attribute is given.</a:documentation>
+            </attribute></optional>
             <optional><attribute name="completion"/></optional>
             <optional><attribute name="width"/></optional>
             <optional><attribute name="type"/></optional>
@@ -436,7 +478,11 @@
             <optional><attribute name="domain"/></optional>
             <optional><attribute name="filter_domain"/></optional>
             <optional><attribute name="invisible"/></optional>
-            <optional><attribute name="password"/></optional>
+            <optional><attribute name="password">
+                    <a:documentation>If true, characters in the input box 
+                        will be hidden/masked like a password field.
+                    </a:documentation>
+                </attribute></optional>
             <optional><attribute name="comparator"/></optional>
             <optional><attribute name="sum"/></optional>
             <optional><attribute name="bold"/></optional>
@@ -445,10 +491,17 @@
             <optional><attribute name="group"/></optional>
             <optional><attribute name="operator"/></optional>
             <optional><attribute name="colspan"/></optional>
-            <optional><attribute name="nolabel"/></optional>
+            <optional><attribute name="nolabel">
+                <a:documentation>Inhibit the display of field name (string)</a:documentation>
+                </attribute>
+            </optional>
             <optional><attribute name="default"/></optional>
             <optional><attribute name="default_get"/></optional>
-            <optional><attribute name="required"/></optional>
+            <optional><attribute name="required">
+                    <a:documentation>Prevents submission of the form, if this field is left empty/blank
+                    </a:documentation>
+                </attribute>
+            </optional>
             <optional><attribute name="readonly"/></optional>
             <optional><attribute name="view_mode"/></optional>
             <optional><attribute name="widget"/></optional>
