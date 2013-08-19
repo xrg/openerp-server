@@ -45,6 +45,14 @@
     </define>
 
 
+   <define name="newline">
+       <element name="newline"><empty/>
+       </element>
+   </define>
+   <define name="properties">
+       <element name="properties"><empty/>
+       </element>
+   </define>
 
   <define name="container">
     <optional><attribute name="col"/></optional>
@@ -62,8 +70,8 @@
         <ref name="vpaned"/>
         <ref name="filter"/>
         <ref name="html"/>
-        <element name="newline"><empty/></element>
-        <element name="properties"><empty/></element>
+        <ref name="newline"/>
+        <ref name="properties"/>
       </choice>
     </zeroOrMore>
   </define>
@@ -142,7 +150,7 @@
                     <ref name="button"/>
                     <ref name="filter"/>
                     <ref name="html"/>
-                    <element name="newline"><empty/></element>
+                    <ref name="newline"/>
                 </choice>
             </zeroOrMore>
         </element>
@@ -162,8 +170,8 @@
                     <ref name="separator"/>
                     <ref name="filter"/>
                     <ref name="search"/>
-                    <element name="newline"><empty/></element>
-                    <element name="properties"><empty/></element>
+                    <ref name="newline"/>
+                    <ref name="properties"/>
                 </choice>
             </zeroOrMore>
         </element>
@@ -210,8 +218,8 @@
                     <ref name="vpaned"/>
                     <ref name="filter"/>
                     <ref name="html"/>
-                    <element name="newline"><empty/></element>
-                    <element name="properties"><empty/></element>
+                    <ref name="newline"/>
+                    <ref name="properties"/>
                 </choice>
             </zeroOrMore>
         </element>
@@ -314,8 +322,8 @@
             <optional><attribute name="invisible"/></optional>
             <zeroOrMore>
                 <choice>
-                    <element name="newline"><empty/></element>
-                    <element name="properties"><empty/></element>
+                    <ref name="newline"/>
+                    <ref name="properties"/>
                     <ref name="label" />
                     <ref name="field"/>
                     <ref name="group"/>
@@ -363,8 +371,8 @@
                     <ref name="group" />
                     <ref name="filter"/>
                     <ref name="html"/>
-                    <element name="properties"><empty/></element>
-                    <element name="newline"><empty/></element>
+                    <ref name="properties"/>
+                    <ref name="newline"/>
                 </choice>
             </zeroOrMore>
         </element>
@@ -401,7 +409,7 @@
                     <ref name="filter"/>
                     <ref name="graph"/>
                     <ref name="html"/>
-                    <element name="newline"><empty/></element>
+                    <ref name="newline"/>
                 </choice>
             </zeroOrMore>
         </element>
@@ -478,7 +486,7 @@
                     <ref name="filter"/>
                     <ref name="notebook"/>
                     <ref name="html"/>
-                    <element name="newline"><empty/></element>
+                    <ref name="newline"/>
                 </choice>
             </zeroOrMore>
         </element>
@@ -573,8 +581,8 @@
                     <ref name="group"/>
                     <ref name="filter"/>
                     <ref name="html"/>
-                    <element name="properties"><empty/></element>
-                    <element name="newline"><empty/></element>
+                    <ref name="properties"/>
+                    <ref name="newline"/>
                 </choice>
             </zeroOrMore>
 
@@ -613,8 +621,8 @@
                     <ref name="button"/>
                     <ref name="filter"/>
                     <ref name="html"/>
-                    <element name="properties"><empty/></element>
-                    <element name="newline"><empty/></element>
+                    <ref name="properties"/>
+                    <ref name="newline"/>
                 </choice>
             </zeroOrMore>
 
