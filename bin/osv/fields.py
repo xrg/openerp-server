@@ -290,6 +290,8 @@ class _column(object):
         if obj_def is None:
             return None
         elif callable(obj_def):
+            if getattr(obj_def, 'no_auto', False):
+                return None
             ss = self._symbol_set
             query = 'UPDATE "%s" SET "%s"=%s WHERE "%s" is NULL' % (obj._table, name, ss[0], name)
             prepare_fn = lambda cr: (ss[1](obj_def(obj, cr, 1, context)),)
