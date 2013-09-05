@@ -722,7 +722,6 @@ class related(function):
         return res
 
     def __init__(self, *arg, **args):
-        self.arg = arg
         self._relations = []
         super(related, self).__init__(self._fnct_read, arg, self._fnct_write, fnct_inv_arg=arg, method=True, fnct_search=self._fnct_search, **args)
         if self.store is True:
@@ -733,8 +732,8 @@ class related(function):
         if self._relations:
             return
         obj_name = obj._name
-        for i in range(len(self._arg)):
-            f = obj.pool.get(obj_name).fields_get(cr, uid, [self._arg[i]], context=context)[self._arg[i]]
+        for i, sarg in enumerate(self._arg):
+            f = obj.pool.get(obj_name).fields_get(cr, uid, [sarg,], context=context)[sarg]
             self._relations.append({
                 'object': obj_name,
                 'type': f['type']
@@ -762,7 +761,6 @@ class dummy(function):
         return {}
 
     def __init__(self, *arg, **args):
-        self.arg = arg
         self._relations = []
         super(dummy, self).__init__(self._fnct_read, arg, self._fnct_write, fnct_inv_arg=arg, method=True, fnct_search=None, **args)
 
