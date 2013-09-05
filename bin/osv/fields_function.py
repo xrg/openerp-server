@@ -652,22 +652,22 @@ class related(function):
         for data in objlst:
             t_id = data.id
             t_data = data
-            for i in range(len(self.arg)):
+            for i, sarg in enumerate(self._arg):
                 if not t_data: break
                 field_detail = self._relations[i]
-                if not t_data[self.arg[i]]:
+                if not t_data[sarg]:
                     if self._type not in ('one2many', 'many2many'):
                         t_id = t_data['id']
                     t_data = False
                 elif field_detail['type'] in ('one2many', 'many2many'):
                     if self._type != "many2one":
                         t_id = t_data.id
-                        t_data = t_data[self.arg[i]][0]
+                        t_data = t_data[sarg][0]
                     else:
                         t_data = False
                 else:
                     t_id = t_data['id']
-                    t_data = t_data[self.arg[i]]
+                    t_data = t_data[sarg]
             else:
                 model = obj.pool.get(self._relations[-1]['object'])
                 model.write(cr, uid, [t_id], {args[-1]: values}, context=context)
@@ -686,19 +686,19 @@ class related(function):
             if not data:
                 continue
             t_data = data
-            for i in range(len(self.arg)):
+            for i, sarg in enumerate(self._arg):
                 field_detail = self._relations[i]
                 try:
-                    if not t_data[self.arg[i]]:
+                    if not t_data[sarg]:
                         t_data = False
                         break
                 except:
                     t_data = False
                     break
-                if field_detail['type'] in ('one2many', 'many2many') and i != len(self.arg) - 1:
-                    t_data = t_data[self.arg[i]][0]
+                if field_detail['type'] in ('one2many', 'many2many') and i != len(self._arg) - 1:
+                    t_data = t_data[sarg][0]
                 elif t_data:
-                    t_data = t_data[self.arg[i]]
+                    t_data = t_data[sarg]
             if type(t_data) == type(objlst[0]):
                 res[data.id] = t_data.id
             elif t_data:
