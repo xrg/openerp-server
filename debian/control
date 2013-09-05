@@ -1,12 +1,12 @@
 Source: openerp-server
 Section: net
 Priority: optional
-Maintainer: OpenERP SA. <xrg@openerp.com>
-Uploaders: Xrg <xrg@openerp.com>
+Maintainer: P. Christeas <xrg@hellug.gr>
+Uploaders: Xrg <xrg@hellug.gr>
 Build-Depends: debhelper (>= 7.0.50~), python
 Build-Depends-Indep:
  python-libxslt1, python-lxml, python-pychart, python-pydot, python-psycopg2,
- python-reportlab
+ python-reportlab, python-jinja2
 Standards-Version: 3.9.1
 Homepage: http://www.openerp.com/
 Vcs-Browser: http://git.hellug.gr/?p=xrg/openobject-server;a=summary
