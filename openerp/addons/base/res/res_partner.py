@@ -608,14 +608,15 @@ class res_partner(osv.osv, format_address):
             if operator in ('=ilike', '=like'):
                 operator = operator[1:]
             query_args = {'name': search_name}
-            limit_str = ''
+            query = ('''SELECT id FROM res_partner
+                         WHERE email ''' + operator + ''' %(name)s
+                            OR display_name ''' + operator + ''' %(name)s
+                      ORDER BY display_name
+                     ''')
             if limit:
-                limit_str = ' limit %(limit)s'
+                query += ' limit %(limit)s'
                 query_args['limit'] = limit
-            cr.execute('''SELECT partner.id FROM res_partner partner
-                          LEFT JOIN res_partner company ON partner.parent_id = company.id
-                          WHERE partner.email ''' + operator +''' %(name)s OR
-                                partner.display_name ''' + operator + ' %(name)s ' + limit_str, query_args)
+            cr.execute(query, query_args)
             ids = map(lambda x: x[0], cr.fetchall())
             ids = self.search(cr, uid, [('id', 'in', ids)] + args, limit=limit, context=context)
             if ids:
