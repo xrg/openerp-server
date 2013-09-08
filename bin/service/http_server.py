@@ -36,6 +36,10 @@
     configurable, of course). This "single" server then uses a `MultiHTTPHandler`
     to dispatch requests to the appropriate channel protocol, like the XML-RPC,
     static HTTP, DAV or other.
+
+    Note: since XML-RPCv1 does NOT expose the client address to the upper layer,
+    namely the "web services" one, the "client pit" will receive `None` and may
+    hence block the entire XML-RPCv1 upon an attack!
 """
 
 from websrv_lib import ConnThreadingMixIn, HTTPServer, HTTPDir, FixSendError, \
@@ -819,7 +823,7 @@ class OpenERPAuthProvider(AuthProvider):
 
     def authenticate(self, db, user, passwd, client_address):
         try:
-            uid = security.login(db,user,passwd)
+            uid = security.login(db, user, passwd, client_address)
             if uid is False:
                 return False
             return (user, passwd, db, uid)

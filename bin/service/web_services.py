@@ -68,7 +68,7 @@ class baseExportService(netsvc.ExportService):
 
         fn = getattr(self, 'exp_'+method)
         if domain == 'db':
-            u, p, db, uid = auth.auth_creds[auth.last_auth]
+            db, uid = auth.auth_creds[auth.last_auth][2:4]
             cr = pooler.get_db(db).cursor()
             try:
                 res = fn(cr, uid, *params)
@@ -1121,7 +1121,7 @@ class dbExportDispatch:
 
         fn = getattr(self, 'exp_'+method)
         if domain == 'db':
-            u, p, db, uid = auth.auth_creds[auth.last_auth]
+            db, uid = auth.auth_creds[auth.last_auth][2:4]
             res = fn(db, uid, *params)
             return res
         else:
