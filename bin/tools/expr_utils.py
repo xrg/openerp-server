@@ -49,24 +49,24 @@ class DomainError(ValueError):
 
 class DomainMsgError(DomainError):
     """Domain Error with specific message
-    
+
         Message should be translated already
     """
-    
+
     def __init__(self, msg):
         self.msg = msg
 
     def get_msg(self, cr, uid, context=None):
         return self.msg
-        
+
     def __str__(self):
         return self.msg
 
 class DomainExpressionError(DomainError):
     """ A parsing error in the domain expression (baseclass)
-    
+
         You can ommit the right part in several cases
-        
+
         These are predefined errors that have stock messages
     """
     def __init__(self, model, lefts, operator, right=None):
@@ -102,7 +102,7 @@ class DomainLeftError(DomainExpressionError):
 class DomainInvalidOperator(DomainExpressionError):
     """Meaning that this operator is not valid for that field
     """
-    
+
     def get_msg(self, cr, uid, context=None):
         return  _("Field %s.\"%s\" cannot use the %r operator") % \
             (self._model, '.'.join(self._lefts), self._operator)
@@ -156,7 +156,7 @@ class nested_expr(sub_expr):
 
         if self._dom == []:
             return 'TRUE', []
-            
+
         run_expr = [] #: string fragments to glue together into where_clause
         run_params = []
         stack = [] #: operand stack for Polish -> algebra notation
@@ -236,7 +236,7 @@ class function_expr(sub_expr):
         return expr, params
 
 class placeholder(object):
-    """ A dummy string, that will substitute the ids array in 
+    """ A dummy string, that will substitute the ids array in
         recursive queries.
         Since this is not a string, nor int, it won't be substituted
         in expression parsing.

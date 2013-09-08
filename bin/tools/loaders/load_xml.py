@@ -1040,22 +1040,22 @@ class _tag_value(_TagService):
 
     def eval_xml(self, cr, rec, parent_model=None, context=None):
         """
-        
+
             A value is computed by the following attributes, in that
             order:
-            
-                - search: 
-                - eval: 
+
+                - search:
+                - eval:
                 - ref
                 - file
-                
+
         """
         f_name = rec.get('name', False)
         f_model = rec.get("model", False)
         if (not f_model) and f_name and parent_model  \
                     and parent_model._columns.get(f_name,False):
             f_model = parent_model._columns[f_name]._obj
-            
+
         if rec.get('search'):
             q = self.eval(rec.get('search'))
             if not f_model:

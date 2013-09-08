@@ -650,7 +650,6 @@ class common(_ObjectService):
             log = logging.getLogger('web-service')
             log.info("login from '%s' using database '%s'" % (params[1], params[0].lower()))
             return acds[3]
-
         else:
             return super(common, self).new_dispatch(method, auth, params, auth_domain)
 
