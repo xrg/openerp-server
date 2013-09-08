@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
 #
-#    OpenERP, Open Source Management Solution
+#    OpenERP-F3, Open Source Management Solution
+#    Copyright (C) 2011-2013 P. Christeas <xrg@hellug.gr>
 #    Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>). All Rights Reserved
 #    The refactoring about the OpenSSL support come from Tryton
 #    Copyright (C) 2007-2009 Cédric Krier.
@@ -369,6 +370,8 @@ def init_logger():
     logger.addHandler(handler)
     logger.setLevel(int(tools.config['log_level'] or '0'))
 
+    if tools.config.get_misc('debug', 'warnings', False):
+        logging.captureWarnings(True)
 
 class Logger(object):
     def __init__(self):
