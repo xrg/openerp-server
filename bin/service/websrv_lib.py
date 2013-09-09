@@ -980,7 +980,7 @@ class ConnThreadingMixIn:
 
             if self.verify_request(request, client_address):
                 self.process_request(request, client_address)
-        except Exception, e:
+        except Exception:
             if request is not None:
                 try:
                     self.handle_error(request, client_address)
