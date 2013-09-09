@@ -124,6 +124,8 @@ class AuthProxy(object):
 
     def _get_addr_str(self, client_address):
         """ Convert IPv4 or IPv6 address into a readable string
+
+            String includes client address + port number
         """
         if client_address and len(client_address) == 4:
             return "[%s]:%s" % (client_address[:2])
@@ -131,6 +133,18 @@ class AuthProxy(object):
             return "%s:%s" % client_address
         else:
             return '?'
+
+    def _get_host_str(self, client_address):
+        """ Convert IPv4 or IPv6 address (only) into a readable string
+
+            String is only the IP of the client
+        """
+        if client_address and len(client_address) == 4:
+            return "[%s]" % client_address[0]
+        elif client_address:
+            return "%s" % client_address[0]
+        else:
+            return str(client_address)
 
 class BasicAuthProxy(AuthProxy):
     """ Require basic authentication..
