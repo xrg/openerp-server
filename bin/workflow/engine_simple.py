@@ -31,11 +31,11 @@ from workitem import WkfActivity, WkfTransition
 
 class WorkflowSimpleEngine(WorkflowEngine):
     """ Classic wkf engine. Keeps state data in wkf_* tables
-    
+
         The one used in versions <= 6.0 .
     """
     _logger = logging.getLogger('workflow.simple')
-    
+
     def __init__(self, parent_obj, wkf_id, wkf_name=''):
         """
             @param wkf_id   record id in the wkf table
@@ -50,7 +50,7 @@ class WorkflowSimpleEngine(WorkflowEngine):
         self._act_starters = []
         self._transitions = []
         self._wkf_name = wkf_name
-    
+
     def _reload(self, cr):
         """ reload?
         """
@@ -74,7 +74,7 @@ class WorkflowSimpleEngine(WorkflowEngine):
 
         # Transitions:
         self._transitions = []
-        cr.execute('SELECT * FROM wkf_transition WHERE act_from = ANY(%s)', 
+        cr.execute('SELECT * FROM wkf_transition WHERE act_from = ANY(%s)',
             (self._activities.keys(),), debug=self._debug)
         trids = []
         for tr in cr.dictfetchall():
@@ -85,7 +85,7 @@ class WorkflowSimpleEngine(WorkflowEngine):
             newtr = WkfTransition(self, tr)
             self._transitions.append(newtr)
             trids.append(tr['id'])
-        
+
         # Just check:
         cr.execute('SELECT id FROM wkf_transition WHERE act_to = ANY(%s) AND act_from != ALL(%s)',
             (self._activities.keys(), self._activities.keys()), debug=self._debug)
@@ -96,7 +96,7 @@ class WorkflowSimpleEngine(WorkflowEngine):
                 ','.join([str(r[0]) for r in res]))
 
         # end of reload()
-    
+
     def create(self, cr, uid, ids, context):
         ret = []
         for id in only_ids(ids):
@@ -119,28 +119,28 @@ class WorkflowSimpleEngine(WorkflowEngine):
         """
         inst_qry = "IN (SELECT id FROM wkf_instance " \
                 "WHERE res_id=ANY(%s) AND wkf_id=%s AND state='active')"
-        
+
         # TODO browse_cache?
         return self.__update(cr, uid, 'all_active', inst_qry, (only_ids(ids), self._id), context)
-    
+
     def __update(self, cr, uid, inst_name='', inst_qry='', inst_args=(), signal=None, \
                 force_running=False, context=None, results=None):
         """ Second part of write(), common with validate()
-        
+
             @param inst_qry An SQL expression matching wkf_instance.id
             @param inst_args Arguments to above query
             @param inst_name a **unique** name to distinguish `inst_qry`
             @param results if given, must be list where results will be appended
         """
         # TODO inst_name
-        
+
         if self._debug:
             self._logger.debug('Update of %s %s w. %r signal=%r', self._obj()._name, inst_name, inst_args, signal)
-            
+
         cr.execute("SELECT wi.*, ii.res_id FROM wkf_workitem AS wi, wkf_instance AS ii "
                 "WHERE wi.inst_id = ii.id AND wi.inst_id " + inst_qry,
                     inst_args, debug=self._debug)
-        
+
         if self._debug:
             self._logger.debug("workitems found: %d", cr.rowcount)
 
@@ -157,19 +157,19 @@ class WorkflowSimpleEngine(WorkflowEngine):
                     stack=stack, context=context)
             if pres and results is not None:
                 results.append(pres)
-        
+
         cr.execute("SELECT 1 WHERE ROW('complete', true) = ALL( " \
                 "SELECT state, flow_stop " \
                 "  FROM wkf_workitem w "\
                 "      LEFT JOIN wkf_activity a ON (a.id=w.act_id) " \
                 " WHERE w.inst_id = ANY(%s) );", (wi_ids,), debug=self._debug)
-                
+
         ok = cr.fetchone()
         if self._debug:
             self._logger.debug("Result: %r", ok)
         if not (ok and ok[0]):
             return False
-        
+
         if ok:
             cr.execute("SELECT DISTINCT a.name FROM wkf_activity a " \
                     "LEFT JOIN wkf_workitem w ON (a.id=w.act_id) " \
@@ -179,7 +179,7 @@ class WorkflowSimpleEngine(WorkflowEngine):
                     (wi_ids,), debug=self._debug)
             cr.execute("UPDATE wkf_workitem SET state='complete' WHERE subflow_id = ANY(%s) ",
                     (wi_ids,), debug=self._debug)
-            
+
             cr.execute("SELECT i.id, w.osv, i.res_id " \
                     "FROM wkf_instance i LEFT JOIN wkf w on (i.wkf_id=w.id) " \
                     "WHERE i.id IN (SELECT inst_id FROM wkf_workitem " \
@@ -191,19 +191,19 @@ class WorkflowSimpleEngine(WorkflowEngine):
                 for act_name in act_names:
                     obj._workflow.validate_byid(cr, uid, b_res_id, b_iid, \
                             signal='subflow.'+act_name[0], context=context)
-                    
+
         return ok
 
     def validate(self, cr, uid, id, signal, context):
         """ ?
         """
-        
+
         results = []
         inst_qry = "IN (SELECT id FROM wkf_instance " \
                 "WHERE res_id=%s AND wkf_id=%s AND state='active')"
         ok = self.__update(cr, uid, 'all_active2', inst_qry, (id, self._id), signal=signal, \
                 force_running=False,  context=context, results=results)
-        
+
         # TODO do we care about 'ok' (meaning wkf is complete) ?
         if results:
             return results[-1]
@@ -212,23 +212,23 @@ class WorkflowSimpleEngine(WorkflowEngine):
 
     def validate_byid(self, cr, uid, id, inst_id, signal=None, context=None, force_running=False):
         results = []
-        
+
         ok = self.__update(cr, uid, 'id', '= %s', (inst_id,),signal=signal, context=context,
                 force_running=force_running, results=results)
-        
+
         if results:
             return results[-1]
         else:
             return False
 
     def delete(self, cr, uid, ids, context):
-        cr.execute('DELETE FROM wkf_instance WHERE wkf_id = %s AND res_id =ANY(%s)', 
+        cr.execute('DELETE FROM wkf_instance WHERE wkf_id = %s AND res_id =ANY(%s)',
                 (self._id, ids), debug=self._debug)
 
     def redirect(self, cr, uid, old_id, new_id, context):
-        
+
         #CHECKME: shouldn't we get only active instances?
-        cr.execute("""UPDATE wkf_workitem SET subflow_id = wfi_new.id 
+        cr.execute("""UPDATE wkf_workitem SET subflow_id = wfi_new.id
                       FROM wkf_instance AS wfi_old, wkf_instance AS wfi_new
                      WHERE subflow_id = wfi_old.id
                         AND wfi_old.wkf_id = %s AND wfi_old.res_id = %s
