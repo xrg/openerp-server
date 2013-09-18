@@ -896,7 +896,7 @@ class OpenERPDispatcher2:
     
     @classmethod
     def _dbg_log(cls, title, params):
-        cls.logger.log(logging.DEBUG_RPC,'%s: %s', title, pformat(params))
+        cls._logger.log(logging.DEBUG_RPC,'%s: %s', title, pformat(params))
 
     @classmethod
     def _fake_log(cls, title, params):
