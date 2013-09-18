@@ -1284,7 +1284,7 @@ class orm_template(object):
 
         :param cr: database cursor
         :param user: current user id
-        :param ids: id or list of the ids of the records to read
+        :param domain: expression to search with
         :param fields: optional list of field names to return (default: all fields would be returned)
         :type fields: list (example ['field_name_1', ...])
         :param context: optional context dictionary. See read()
@@ -1294,7 +1294,11 @@ class orm_template(object):
                             * if user tries to bypass access rules for read on the requested object
 
         """
-        raise NotImplementedError(_('The search_read method is not implemented on this object !'))
+        ids = self.search(cr, user, domain, offset, limit, order, context)
+        if ids:
+            return self.read(cr, user, ids, fields, context, load)
+        else:
+            return []
 
     def get_invalid_fields(self, cr, uid):
         return list(self._invalids)
