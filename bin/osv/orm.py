@@ -1573,12 +1573,11 @@ class orm_template(object):
             if node.get('object'):
                 attrs = {}
                 views = {}
+                new_xml = etree.fromstring('<form/>')
                 xml = "<form>"
                 for f in node:
                     if f.tag in ('field'):
-                        xml += etree.tostring(f, encoding="utf-8")
-                xml += "</form>"
-                new_xml = etree.fromstring(encode(xml))
+                        new_xml.append(f)
                 ctx = context.copy()
                 ctx['base_model_name'] = self._name
                 xarch, xfields = self.pool.get(node.get('object')).__view_look_dom_arch(cr, user, new_xml, view_id, ctx)
