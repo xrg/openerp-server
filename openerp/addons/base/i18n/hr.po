@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: openobject-server\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2013-06-07 19:35+0000\n"
-"PO-Revision-Date: 2013-09-24 13:19+0000\n"
-"Last-Translator: Krešimir Jeđud <kresimir.jedud@infokom.hr>\n"
+"PO-Revision-Date: 2013-09-25 09:16+0000\n"
+"Last-Translator: Marko Carevic <Unknown>\n"
 "Language-Team: Croatian <hr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-09-25 05:48+0000\n"
+"X-Launchpad-Export-Date: 2013-09-26 05:54+0000\n"
 "X-Generator: Launchpad (build 16771)\n"
 
 #. module: base
@@ -425,6 +425,14 @@ msgid ""
 "invoices from picking, OpenERP is able to add and compute the shipping "
 "line.\n"
 msgstr ""
+"\n"
+"Omogućuje dodavanje metoda isporuke u prodajne naloge i skladišno.\n"
+"==============================================================\n"
+"\n"
+"Možete definirati svoje dostavljače i mreže isporuke za cijene. Kada se "
+"kreiraju \n"
+"računi iz skladišnih dokumenata, OpenERP je u mogućnosti dodati i izračunati "
+" troškove dostave .\n"
 
 #. module: base
 #: code:addons/base/ir/ir_filters.py:80
@@ -715,7 +723,7 @@ msgstr "Prodaja i Nabava"
 #. module: base
 #: view:res.partner:0
 msgid "Put an internal note..."
-msgstr ""
+msgstr "Stavite internu bilješku..."
 
 #. module: base
 #: view:ir.translation:0
@@ -1487,7 +1495,7 @@ msgstr "Testovi"
 #. module: base
 #: field:ir.actions.report.xml,attachment:0
 msgid "Save as Attachment Prefix"
-msgstr ""
+msgstr "Snimi kao prefiks priloga"
 
 #. module: base
 #: field:ir.ui.view_sc,res_id:0
@@ -8618,7 +8626,7 @@ msgstr "Hong Kong"
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_portal_sale
 msgid "Portal Sale"
-msgstr ""
+msgstr "Portal prodaje"
 
 #. module: base
 #: field:ir.default,ref_id:0
@@ -9858,7 +9866,7 @@ msgstr "Prilagođen"
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_sale_margin
 msgid "Margins in Sales Orders"
-msgstr ""
+msgstr "Marža u prodajnim nalozima"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_purchase
@@ -14965,7 +14973,7 @@ msgstr "Parametri"
 #. module: base
 #: view:res.partner:0
 msgid "e.g. Sales Director"
-msgstr ""
+msgstr "npr. direktor prodaje"
 
 #. module: base
 #: selection:base.language.install,lang:0
