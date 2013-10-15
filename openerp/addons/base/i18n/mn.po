@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: openobject-server\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2013-06-07 19:35+0000\n"
-"PO-Revision-Date: 2013-10-12 09:22+0000\n"
+"PO-Revision-Date: 2013-10-14 07:12+0000\n"
 "Last-Translator: gobi <Unknown>\n"
 "Language-Team: Mongolian <mn@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-10-13 05:37+0000\n"
+"X-Launchpad-Export-Date: 2013-10-15 05:17+0000\n"
 "X-Generator: Launchpad (build 16799)\n"
 
 #. module: base
@@ -13441,6 +13441,9 @@ msgid ""
 "(if you delete a native ACL, it will be re-created when you reload the "
 "module."
 msgstr ""
+"Идэвхтэй талбарыг сонгоогүй тохиолдолд ACL-г устгалгүйгээр идэвхгүй болгоно. "
+"(Анхны эх ACL-г устгасан байлаа ч модулийг ахин ачаалахад дахин шинээр "
+"үүсдэг)"
 
 #. module: base
 #: model:ir.model,name:base.model_ir_fields_converter
@@ -13483,6 +13486,17 @@ msgid ""
 "into mail.message with attachments.\n"
 "      "
 msgstr ""
+"\n"
+"Энэ модуль нь Outlook Залгаасыг өгдөг.\n"
+"=========================================\n"
+"\n"
+"Outlook залгаас нь MS Outlook дотороосоо имэйлдээ OpenERP обьекуудтыг \n"
+"сонгох хавсаргах боломжийг олгодог. Харилцагч, даалгавар, төсөл, "
+"шинжилгээний данс \n"
+"гэх мэт дуртай обьектоо сонгож имэйлдээ оруулж mail.message обьектот "
+"хавсралтын хамт\n"
+"архивладаг.\n"
+"      "
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_l10n_bo
