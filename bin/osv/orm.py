@@ -4121,9 +4121,9 @@ class orm(orm_template):
 
         # default element in context must be removed when call a one2many or many2many
         rel_context = context.copy()
-        for c in context.items():
-            if c[0].startswith('default_'):
-                del rel_context[c[0]]
+        for k in context:
+            if k.startswith('default_'):
+                del rel_context[k]
 
         for field in upd_todo:
             for id in ids:
