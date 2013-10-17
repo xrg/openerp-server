@@ -72,7 +72,11 @@ class ExecContext_orm(ExecContext):
         context['context'] = self._kwargs.get('context', {})
 
         context['browse'] = _pool_actor_browse(self)
-        for verb in ('search', 'read', 'search_read', 'create', 'write'):
+        # Hint: all base ORM methods that DON'T operate on [ids]
+        for verb in ('search', 'read', 'search_read', 'create', 'write',
+                    'default_get', 'get_last_modified', 'name_search',
+                    'name_get', 'read_group', 'merge_get_values',
+                    'merge_records'):
             context[verb] = _pool_actor(verb=verb, parent=self)
 
 
