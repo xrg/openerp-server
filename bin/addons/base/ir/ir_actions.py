@@ -205,7 +205,7 @@ class act_window(osv.osv):
             if act.search_view_id:
                 search_view_id = act.search_view_id.id
             elif act.view_mode == 'form':
-                pass # avoid search view for a form-only action
+                return res # avoid search view for a form-only action
             else:
                 res_view = self.pool.get('ir.ui.view').search(cr, uid, 
                         [('model','=',act.res_model),('type','=','search'),
