@@ -1632,7 +1632,14 @@ class orm_template(object):
                                 'fields': xfields
                             }
                     attrs = {'views': views}
-                    if node.get('widget') == 'selection':
+                    if node.get('widget') == 'selection' and node.get('selection'):
+                        # If we explicitly give the selection in the view xml, use that
+                        try:
+                                attrs['selection'] = eval(node.get('selection','[]'), {'uid':user, 'time':time})
+                        except Exception, e:
+                                _logger.error("Exception %s For domain %s" %(e, node.get('domain')))
+                                raise
+                    elif node.get('widget') == 'selection':
                         # Prepare the cached selection list for the client. This needs to be
                         # done even when the field is invisible to the current user, because
                         # other events could need to change its value to any of the selectable ones
