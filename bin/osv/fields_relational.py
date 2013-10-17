@@ -346,6 +346,7 @@ class many2one(_rel2one):
         return res
 
     def set(self, cr, obj_src, id, field, values, user=None, context=None):
+        # Inactive code! _classic_write == True means it won't be called
         if not context:
             context = {}
         obj = obj_src.pool.get(self._obj)
@@ -944,22 +945,30 @@ class many2many(_rel2many):
     def set_memory(self, cr, obj, id, name, values, user=None, context=None):
         if not values:
             return
+        inobj = obj.pool.get(self._obj)
+        if name not in obj.datas[id]:
+            obj.datas[id][name] = []
         for act in values:
             # TODO: use constants instead of these magic numbers
             if act[0] == 0:
-                raise _('Not Implemented')
+                idnew = inobj.create(cr, user, act[2], context=context)
+                obj.datas[id][name].append(idnew)
             elif act[0] == 1:
-                raise _('Not Implemented')
+                inobj.write(cr, user, [act[1]], act[2], context=context)
             elif act[0] == 2:
-                raise _('Not Implemented')
+                inobj.unlink(cr, user, [act[1]], context=context)
             elif act[0] == 3:
-                raise _('Not Implemented')
+                try:
+                    obj.datas[id][name].remove(act[1])
+                except ValueError:
+                    pass
             elif act[0] == 4:
-                raise _('Not Implemented')
+                if (act[1] not in obj.datas[id][name]):
+                    obj.datas[id][name].append(act[1])
             elif act[0] == 5:
-                raise _('Not Implemented')
+                obj.datas[id][name] = []
             elif act[0] == 6:
-                obj.datas[id][name] = act[2]
+                obj.datas[id][name] = list(act[2])
 
     def shallow_copy(self, cr, uid, obj, id, f, data, context):
         return [(6, 0, data[f])]
