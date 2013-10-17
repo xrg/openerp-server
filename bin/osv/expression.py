@@ -44,7 +44,9 @@ class expression(object):
     _implicit_fields = None
     _implicit_log_fields = None
     _browse_null_class = None
-    
+    __slots__ = ('__exp', '__field_tables', '__all_tables', '__joins',\
+                '__main_table', '__DUMMY_LEAF', '_debug', '_joined_fields')
+
     @classmethod
     def __load_implicit_fields(cls):
         """ Populate class variables, but late enough to avoid circular imports

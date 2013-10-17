@@ -151,6 +151,9 @@ class Cursor(object):
     IN_MAX = 1000 # decent limit on size of IN queries - guideline = Oracle limit
     __logger = logging.getLogger('db.cursor')
     __pgmode = None
+    __slots__ = ('sql_stats_log', 'sql_log', 'sql_log_count', '__closed', \
+               '__caller', '_pool', 'dbname', 'auth_proxy', '_serialized', \
+               '_cnx', '_obj', '_pgmode', 'fetchone', 'fetchmany', 'fetchall')
 
     def check(f):
         @wraps(f)
@@ -185,17 +188,18 @@ class Cursor(object):
         self.autocommit(False)
         if not hasattr(self._cnx,'_prepared'):
             self._cnx._prepared = []
-        if not self.__pgmode:
+        self._pgmode = self.__pgmode
+        if not self._pgmode:
             if self._cnx.server_version >= 90200:
-                self.__pgmode = 'pg92'
+                self._pgmode = 'pg92'
             elif self._cnx.server_version >= 90100:
-                self.__pgmode = 'pg91'
+                self._pgmode = 'pg91'
             elif self._cnx.server_version >= 90000:
-                self.__pgmode = 'pg90'
+                self._pgmode = 'pg90'
             elif self._cnx.server_version >= 80400:
-                self.__pgmode = 'pg84'
+                self._pgmode = 'pg84'
             else:
-                self.__pgmode = 'pgsql'
+                self._pgmode = 'pgsql'
 
         for verb in ('fetchone', 'fetchmany', 'fetchall'):
             # map the *bound* functions, bypass @check
@@ -240,7 +244,7 @@ class Cursor(object):
             res = self._obj.execute(query, params)
         except OperationalError, oe:
             self.__logger.exception("Postgres Operational error: %s", oe)
-            self.status = False
+            self._cnx.status = False
             raise
         except psycopg2.DatabaseError, pe:
             self.__logger.error("Programming error: %s", ustr(pe))
@@ -448,7 +452,7 @@ class Cursor(object):
         if name == 'server_version':
             return self._cnx.server_version
         elif name == 'pgmode':
-            return self.__pgmode
+            return self._pgmode
         return getattr(self._obj, name)
 
     @classmethod
@@ -699,6 +703,7 @@ class Connection(object):
     """ A lightweight instance of a connection to postgres
     """
     __logger = logging.getLogger('db.connection')
+    __slots__ = ('dbname', '_pool', '_temp')
 
     def __init__(self, pool, dbname, temp=False):
         self.dbname = dbname

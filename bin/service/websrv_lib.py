@@ -336,6 +336,8 @@ class HTTPDir:
 class noconnection(object):
     """ a class to use instead of the real connection
     """
+    __slots__ = ('__hidden_socket',)
+
     def __init__(self, realsocket=None):
         self.__hidden_socket = realsocket
 
@@ -362,6 +364,7 @@ def _quote_html(html):
 class BoundStream(object):
     """Wraps around a stream, reads a determined length of data
     """
+    __slots__ = ('_stream', '_rem_length', '_fpos', '_lbuf', '_chunk_size')
 
     def __init__(self, stream, length, chunk_size=None):
         self._stream = stream

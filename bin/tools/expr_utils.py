@@ -241,6 +241,8 @@ class placeholder(object):
         Since this is not a string, nor int, it won't be substituted
         in expression parsing.
     """
+    __slots__ = ('name', 'expr')
+
     def __init__(self, name, expr = None):
         self.name = name
         self.expr = expr

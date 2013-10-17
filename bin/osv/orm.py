@@ -185,6 +185,7 @@ _logger = logging.getLogger('orm')
 class browse_null(object):
     """ Readonly python database object browser
     """
+    __slots__ = ('id', '_id')
 
     def __init__(self):
         self.id = self._id = False
@@ -225,6 +226,7 @@ class browse_record_list(list):
         Such an instance will be returned when doing a ``browse([ids..])``
         and will be iterable, yielding browse() objects
     """
+    __slots__ = ('context',)
 
     def __init__(self, lst, context=None):
         if not context:
@@ -267,6 +269,9 @@ class browse_record(object):
             enough, so you can avoid using 'fields_only'.
     """
     __logger = logging.getLogger('orm.browse_record')
+    
+    __slots__ = ('_list_class', '_cr', '_uid', '_id', '_table', '_table_name', \
+               '_context', '_fields_process', '_fields_only', '_data', '_cache')
 
     def __init__(self, cr, uid, id, table, cache, context=None, list_class=None,
                 fields_process=None, fields_only=FIELDS_ONLY_DEFAULT):
