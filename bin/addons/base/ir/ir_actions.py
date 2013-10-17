@@ -190,11 +190,12 @@ class act_window(osv.osv):
 
     def _search_view(self, cr, uid, ids, name, arg, context=None):
         res = {}
+        _logger = logging.getLogger('orm.ir.actions')
         def encode(s):
             if isinstance(s, unicode):
                 return s.encode('utf8')
             return s
-        for act in self.browse(cr, uid, ids, fields_only=['res_model', 'search_view_id',], context=context):
+        for act in self.browse(cr, uid, ids, fields_only=['res_model', 'search_view_id', 'view_mode'], context=context):
             assert act.res_model, act.id
             act_model = self.pool.get(act.res_model)
             assert act_model, 'No model %s for action #%d %s' % \
@@ -203,6 +204,8 @@ class act_window(osv.osv):
             search_view_id = False
             if act.search_view_id:
                 search_view_id = act.search_view_id.id
+            elif act.view_mode == 'form':
+                pass # avoid search view for a form-only action
             else:
                 res_view = self.pool.get('ir.ui.view').search(cr, uid, 
                         [('model','=',act.res_model),('type','=','search'),
