@@ -26,12 +26,13 @@ html_parents = ['tr','body','div']
 sxw_parents = ['{http://openoffice.org/2000/table}table-row','{http://openoffice.org/2000/office}body','{http://openoffice.org/2000/text}section']
 odt_parents = ['{urn:oasis:names:tc:opendocument:xmlns:office:1.0}body','{urn:oasis:names:tc:opendocument:xmlns:table:1.0}table-row','{urn:oasis:names:tc:opendocument:xmlns:text:1.0}section']
 
+
 class report(object):
+    _regex1 = re.compile("\[\[(.*?)(repeatIn\(.*?\s*,\s*[\'\"].*?[\'\"]\s*(?:,\s*(.*?)\s*)?\s*\))(.*?)\]\]")
+    _regex11= re.compile("\[\[(.*?)(repeatIn\(.*?\s*\(.*?\s*[\'\"].*?[\'\"]\s*\),[\'\"].*?[\'\"](?:,\s*(.*?)\s*)?\s*\))(.*?)\]\]")
+    _regex2 = re.compile("\[\[(.*?)(removeParentNode\(\s*(?:['\"](.*?)['\"])\s*\))(.*?)\]\]")
+    _regex3 = re.compile("\[\[\s*(.*?setTag\(\s*['\"](.*?)['\"]\s*,\s*['\"].*?['\"]\s*(?:,.*?)?\).*?)\s*\]\]")
     def preprocess_rml(self, root_node,type='pdf'):
-        _regex1 = re.compile("\[\[(.*?)(repeatIn\(.*?\s*,\s*[\'\"].*?[\'\"]\s*(?:,\s*(.*?)\s*)?\s*\))(.*?)\]\]")
-        _regex11= re.compile("\[\[(.*?)(repeatIn\(.*?\s*\(.*?\s*[\'\"].*?[\'\"]\s*\),[\'\"].*?[\'\"](?:,\s*(.*?)\s*)?\s*\))(.*?)\]\]")
-        _regex2 = re.compile("\[\[(.*?)(removeParentNode\(\s*(?:['\"](.*?)['\"])\s*\))(.*?)\]\]")
-        _regex3 = re.compile("\[\[\s*(.*?setTag\(\s*['\"](.*?)['\"]\s*,\s*['\"].*?['\"]\s*(?:,.*?)?\).*?)\s*\]\]")
         for node in root_node:
             if node.tag == etree.Comment:
                 continue
@@ -71,11 +72,11 @@ class report(object):
                         n = n.getparent()
                     n.set('rml_loop', txt.group(2))
                     return '[['+txt.group(1)+"''"+txt.group(4)+']]'
-                t = _regex1.sub(_sub1, node.text or node.tail)
+                t = self._regex1.sub(_sub1, node.text or node.tail)
                 if t == " ":
-                    t = _regex11.sub(_sub1, node.text  or node.tail)
-                t = _regex3.sub(_sub3, t)
-                node.text = _regex2.sub(_sub2, t)
+                    t = self._regex11.sub(_sub1, node.text  or node.tail)
+                t = self._regex3.sub(_sub3, t)
+                node.text = self._regex2.sub(_sub2, t)
             self.preprocess_rml(node,type)
         return root_node
 
