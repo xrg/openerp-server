@@ -526,7 +526,10 @@ class users(osv.osv):
         """
         self.check(cr.dbname, uid, old_passwd)
         if new_passwd:
-            return self.write(cr, uid, uid, {'password': new_passwd})
+            ret = self.write(cr, uid, uid, {'password': new_passwd})
+            # log as admin, the event is to be seen by him
+            self.log(cr, 1, uid, _("Password changed"), context=context)
+            return ret
         raise osv.except_osv(_('Warning!'), _("Setting empty passwords is not allowed for security reasons!"))
 
 users()
