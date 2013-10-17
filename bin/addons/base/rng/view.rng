@@ -461,7 +461,13 @@
             <ref name="access_rights"/>
             <optional><attribute name="editable"/></optional>
             <optional><attribute name="domain_filter"/></optional>
-            <optional><attribute name="attrs"/></optional>
+            <optional><attribute name="attrs">
+                <a:documentation>A dictionary of possible attributes (as in the XML attributes allowed in this field)
+                        against a domain-expression on this record.
+                        eg. {'invisible': [('state', '!=', 'draft')] }
+                        Means that 'invisible="1"' will be set when `record.state` is not "draft"
+                    </a:documentation>
+                </attribute></optional>
             <optional><attribute name="string">
                 <a:documentation>The text (label) by the field. Will be inhibited
                     when the "nolabel" attribute is given.</a:documentation>
@@ -506,7 +512,11 @@
             <optional><attribute name="view_mode"/></optional>
             <optional><attribute name="widget"/></optional>
             <optional><attribute name="context"/></optional>
-            <optional><attribute name="states"/></optional>
+            <optional><attribute name="states">
+                <a:documentation>Comma-separated list of `state` values to check. If `record.state`
+                    is one of them, then (only) this field is visible.
+                </a:documentation>
+                </attribute></optional>
             <optional><attribute name="digits"/></optional>
             <optional><attribute name="icon"/></optional>
             <optional><attribute name="mode"/></optional>
