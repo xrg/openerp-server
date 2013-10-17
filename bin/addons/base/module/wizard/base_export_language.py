@@ -3,6 +3,7 @@
 #
 #    OpenERP, Open Source Management Solution
 #    Copyright (C) 2004-2010 Tiny SPRL (<http://tiny.be>).
+#    Copyright (C) 2013 P. Christeas <xrg@hellug.gr>
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -48,24 +49,25 @@ class base_language_export(osv.osv_memory):
         mods.sort()
         buf=cStringIO.StringIO()
         tools.trans_export(this.lang, mods, buf, this.format, cr)
+        wvals = {'state':'get', }
         if this.format == 'csv':
-            this.advice = _("Save this document to a .CSV file and open it with your favourite spreadsheet software. The file encoding is UTF-8. You have to translate the latest column before reimporting it.")
+            wvals['advice'] = _("Save this document to a .CSV file and open it with your favourite spreadsheet software. The file encoding is UTF-8. You have to translate the latest column before reimporting it.")
         elif this.format == 'po':
             if not this.lang:
-                this.format = 'pot'
-            this.advice = _("Save this document to a %s file and edit it with a specific software or a text editor. The file encoding is UTF-8.") % ('.'+this.format,)
+                wvals['format'] = 'pot'
+            wvals['advice'] = _("Save this document to a %s file and edit it with a specific software or a text editor. The file encoding is UTF-8.") % ('.'+this.format,)
         elif this.format == 'tgz':
             ext = this.lang and '.po' or '.pot'
-            this.advice = _('Save this document to a .tgz file. This archive containt UTF-8 %s files and may be uploaded to launchpad.') % (ext,)
+            wvals['advice'] = _('Save this document to a .tgz file. This archive containt UTF-8 %s files and may be uploaded to launchpad.') % (ext,)
         filename = _('new')
         if not this.lang and len(mods) == 1:
             filename = mods[0]
         if this.lang:
             filename = get_iso_codes(this.lang)
-        this.name = "%s.%s" % (filename, this.format)
-        out=base64.encodestring(buf.getvalue())
+        wvals['name'] = "%s.%s" % (filename, this.format)
+        wvals['data'] = base64.encodestring(buf.getvalue())
         buf.close()
-        return self.write(cr, uid, ids, {'state':'get', 'data':out, 'advice':this.advice, 'name':this.name}, context=context)
+        return self.write(cr, uid, ids, wvals, context=context)
 
     _name = "base.language.export"
     _inherit = "ir.wizard.screen"
