@@ -1356,6 +1356,11 @@ class orm_template(object):
                         If the ``__ignore_ir_values`` is passed and is positive, 
                         defaults will NOT be looked up in ir.values
         :return: dictionary of the default values (set on the object model class, through user preferences, or in the context)
+
+        `default_get()` returns values as in a `create()` or `write()` call, NOT like the
+        result of `read()` !  This means that many2one fields, for example, will be ID only,
+        not a (ID, name) pair.
+
         """
         # trigger view init hook
         self.view_init(cr, uid, fields_list, context)
