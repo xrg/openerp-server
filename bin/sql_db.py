@@ -66,6 +66,7 @@ psycopg2.extensions.register_type(psycopg2.extensions.new_type((1700,), 'float',
 
 import tools
 from tools.func import wraps, frame_codeinfo
+from tools.misc import ustr
 from netsvc import Agent, Server
 from datetime import datetime as mdt
 from datetime import timedelta
@@ -242,15 +243,14 @@ class Cursor(object):
             self.status = False
             raise
         except psycopg2.DatabaseError, pe:
-            self.__logger.error("Programming error: %s, in query %s" % (pe, query))
-            self.__logger.error("bad query: %s" % query)
-            self.__logger.error("params: %s" % (params,))
+            self.__logger.error("Programming error: %s", ustr(pe))
+            self.__logger.error("bad query: %s\nparams: %s", ustr(query), params)
             if debug or self.__logger.isEnabledFor(logging.DEBUG):
                 import traceback
                 self.__logger.debug("stack: %s", ''.join(traceback.format_stack(limit=15)))
             raise
         except Exception:
-            self.__logger.exception("bad query: %s\nparams: %s" % (query,params))
+            self.__logger.exception("bad query: %s\nparams: %s", ustr(query),params)
             raise
 
         if self.sql_log or debug:
