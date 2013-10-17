@@ -430,7 +430,12 @@ class report_sxw(report_rml, preprocess.report):
         report_xml_ids = ir_obj.search(cr, uid,
                 [('report_name', '=', self.name[7:])], context=context)
         if report_xml_ids:
-            report_xml = ir_obj.browse(cr, uid, report_xml_ids[0], context=context)
+            # Copy by attribute, so that 'report_xml' can have 'header' set on it.
+            irb = ir_obj.browse(cr, uid, report_xml_ids[0], context=context)
+            report_xml = tools.misc.attrob(dict(title=irb.name, header=irb.header,
+                            report_type=irb.report_type, report_rml_content=irb.report_rml_content,
+                            name=irb.name, attachment=irb.attachment, attachment_use=irb.attachment_use))
+            del irb
         else:
             title = ''
             report_file = tools.file_open(self.tmpl, subdir=None)
