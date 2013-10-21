@@ -719,7 +719,7 @@ class MultiHTTPHandler(FixSendError, HttpOptions, BaseHTTPRequestHandler):
                 self.send_error(400, "Bad request version (%r)" % version)
                 return False
             try:
-                base_version_number = version.split('/', 1)[1]
+                base_version_number = version[5:]
                 version_number = base_version_number.split(".")
                 # RFC 2145 section 3.1 says there can be only one "." and
                 #   - major and minor numbers MUST be treated as
