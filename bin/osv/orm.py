@@ -101,11 +101,6 @@ AUTO_SELECT_COLS = 4
 
 # not used yet AUTO_SELECT_WRAP = 1000000 # prevent integer overflow, wrap at that num.
 
-def last_day_of_current_month():
-    today = datetime.date.today()
-    last_day = str(calendar.monthrange(today.year, today.month)[1])
-    return time.strftime('%Y-%m-' + last_day)
-
 def intersect(la, lb):
     return filter(lambda x: x in lb, la)
 
