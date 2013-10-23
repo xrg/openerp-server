@@ -5542,7 +5542,7 @@ msgstr ""
 #: selection:ir.ui.view,type:0
 #: selection:wizard.ir.model.menu.create.line,view_type:0
 msgid "Calendar"
-msgstr "Créer un calendrier"
+msgstr "Calendrier"
 
 #. module: base
 #: model:ir.ui.menu,name:base.menu_crm_case_job_req_main
@@ -5556,7 +5556,7 @@ msgstr ""
 #. module: base
 #: model:ir.ui.menu,name:base.menu_crm_config_lead
 msgid "Leads & Opportunities"
-msgstr "Prospects & Opportunités"
+msgstr "Pistes et opportunités"
 
 #. module: base
 #: model:ir.ui.menu,name:base.menu_custom
@@ -6040,7 +6040,7 @@ msgstr "Suisse"
 #. module: base
 #: model:res.country,name:base.ci
 msgid "Ivory Coast (Cote D'Ivoire)"
-msgstr "Cote d'Ivoire"
+msgstr "Côte d'Ivoire"
 
 #. module: base
 #: model:res.country,name:base.ck
@@ -12063,12 +12063,8 @@ msgstr ""
 
 #. module: base
 #: selection:base.language.install,lang:0
-#, fuzzy
 msgid "Japanese / 日本語"
-msgstr ""
-"#-#-#-#-#  .merge_file_JIEKs3 (OpenERP Server 5.0.4)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_PE7OcV (OpenERP Server 5.0.4)  #-#-#-#-#\n"
-"Japanais / 日本語"
+msgstr "Japonais / 日本語"
 
 #. module: base
 #: selection:base.language.install,lang:0

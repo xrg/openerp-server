@@ -140,7 +140,7 @@ msgstr "Zielzeitraum"
 #: code:addons/base/res/res_user.py:507
 #, python-format
 msgid "Warning!"
-msgstr "Achtung!"
+msgstr "Warnung !"
 
 #. module: base
 #: code:addons/base/ir/ir_model.py:304

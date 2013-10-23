@@ -1354,7 +1354,7 @@ msgstr ""
 #: field:workflow.instance,state:0 field:workflow.workitem,state:0
 #: view:ir.module.module:0 view:res.country.state:0 view:res.request:0
 msgid "State"
-msgstr "状态"
+msgstr "省"
 
 #. module: base
 #: field:ir.actions.url,target:0
@@ -3210,14 +3210,10 @@ msgstr "如果要导出新语言，这里请不要选择语言"
 
 #. module: base
 #: help:base.language.install,overwrite:0
-#, fuzzy
 msgid ""
 "If you check this box, your customized translations will be overwritten and "
 "replaced by the official ones."
-msgstr ""
-"#-#-#-#-#  .merge_file_O5ynop (OpenERP Server 5.0.4)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_eKjW5O (OpenERP Server 5.0.4)  #-#-#-#-#\n"
-"如果勾上这个勾，数据库中的翻译将被服务器上的po文件中的翻译覆盖"
+msgstr "如果选定，则定制翻译会被系统翻译覆盖替换。"
 
 #. module: base
 #: help:ir.actions.act_window,auto_refresh:0
