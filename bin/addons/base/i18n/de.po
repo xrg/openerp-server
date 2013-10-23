@@ -5,18 +5,17 @@
 # Ferdinand Gassauer <f.gassauer@chricar.at>, 2010.
 msgid ""
 msgstr ""
-"Project-Id-Version: OpenERP-F3\n"
-"Report-Msgid-Bugs-To: xrg@hellug.gr\n"
-"POT-Creation-Date: 2012-09-16 11:37+0000\n"
-"PO-Revision-Date: 2013-05-13 11:00+0000\n"
-"Last-Translator: xrg <xrg@hellug.gr>\n"
-"Language-Team: German (http://www.transifex.com/projects/p/openerp-f3/"
-"language/de/)\n"
+"Project-Id-Version: OpenERP Server 5.0.4\n"
+"Report-Msgid-Bugs-To: support@openerp.com\n"
+"POT-Creation-Date: 2011-01-11 11:14+0000\n"
+"PO-Revision-Date: 2012-02-07 19:42+0000\n"
+"Last-Translator: Mustufa Rangwala (Open ERP) <mra@tinyerp.com>\n"
+"Language-Team: German <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: \n"
-"Language: de\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2012-02-17 05:18+0000\n"
+"X-Generator: Launchpad (build 14814)\n"
 
 #. module: base
 #: view:ir.filters:0 field:ir.model.fields,domain:0 field:ir.rule,domain:0
@@ -141,7 +140,7 @@ msgstr "Zielzeitraum"
 #: code:addons/base/res/res_user.py:507
 #, python-format
 msgid "Warning!"
-msgstr "Achtung!"
+msgstr "Warnung !"
 
 #. module: base
 #: code:addons/base/ir/ir_model.py:304
