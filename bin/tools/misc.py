@@ -1644,7 +1644,7 @@ def attrgetter(*items):
 
 class attrob(object):
     """An object with arbitrary attributes
-    
+
         It is used to behave like a browse record, offering 'self.foo' style
         attributes.
     """
@@ -1656,18 +1656,18 @@ class attrob(object):
 
 class TSValue(object):
     """ A threading-safe variable, with notify functionality.
-    
+
     This class merely holds one value at a variable, but makes sure
     writting or reading it is thread safe. It also provides a function
-    that will keep a thread waiting for some value 
+    that will keep a thread waiting for some value
     """
-    
+
     def __init__(self, value=None):
         self.__cond = threading.Condition()
         self.__cond.acquire()
         self.__value = value
         self.__cond.release()
-        
+
     def __getattr__(self, name):
         if name != 'value':
             return object.__getattr__(self, name)
@@ -1683,7 +1683,7 @@ class TSValue(object):
         self.__value = value
         self.__cond.notifyAll()
         self.__cond.release()
-        
+
     def waitFor(self, value):
         self.__cond.acquire()
         while self.__value != value:
