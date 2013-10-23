@@ -5,17 +5,18 @@
 # Ferdinand Gassauer <f.gassauer@chricar.at>, 2010.
 msgid ""
 msgstr ""
-"Project-Id-Version: OpenERP Server 5.0.4\n"
-"Report-Msgid-Bugs-To: support@openerp.com\n"
-"POT-Creation-Date: 2011-01-11 11:14+0000\n"
-"PO-Revision-Date: 2012-02-07 19:42+0000\n"
-"Last-Translator: Mustufa Rangwala (Open ERP) <mra@tinyerp.com>\n"
-"Language-Team: German <kde-i18n-doc@kde.org>\n"
+"Project-Id-Version: OpenERP-F3\n"
+"Report-Msgid-Bugs-To: xrg@hellug.gr\n"
+"POT-Creation-Date: 2012-09-16 11:37+0000\n"
+"PO-Revision-Date: 2013-05-21 09:20+0000\n"
+"Last-Translator: pantteri\n"
+"Language-Team: German (http://www.transifex.com/projects/p/openerp-f3/"
+"language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-02-17 05:18+0000\n"
-"X-Generator: Launchpad (build 14814)\n"
+"Content-Transfer-Encoding: \n"
+"Language: de\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: base
 #: view:ir.filters:0 field:ir.model.fields,domain:0 field:ir.rule,domain:0
@@ -9330,3 +9331,74 @@ msgstr "Umlagerung"
 #: model:ir.model,name:base.model_res_groups
 msgid "Access Groups"
 msgstr "Berechtigungsgruppen"
+
+#. module: base
+#: code:addons/base/module/wizard/base_language_install.py:55
+#, python-format
+msgid "Language Pack"
+msgstr "Sprachpaket"
+
+#. module: base
+#: code:addons/orm.py:3855
+#, python-format
+msgid "delete"
+msgstr "löschen"
+
+#. module: base
+#: code:addons/orm.py:2595
+#, python-format
+msgid "ID not found!"
+msgstr "ID konnte nicht gefunden werden!"
+
+#. module: base
+#: code:addons/orm.py:3854
+#, python-format
+msgid "write"
+msgstr "schreiben"
+
+#. module: base
+#: model:ir.model,name:base.model_res_roles
+msgid "res.roles"
+msgstr "res.roles"
+
+#. module: base
+#: field:res.partner.address,validity:0
+msgid "Validity"
+msgstr "Gültigkeit"
+
+#. module: base
+#: view:ir.module.module:0
+msgid "Upgrade"
+msgstr "Upgrade"
+
+#. module: base
+#: selection:res.partner.address,validity:0
+msgid "Verified"
+msgstr "Verifiziert"
+
+#. module: base
+#: view:ir.attachment:0
+msgid "Filter on my documents"
+msgstr "Meine Dokumente filtern"
+
+#. module: base
+#: code:addons/orm.py:3596 code:addons/orm.py:3854
+#, python-format
+msgid "read"
+msgstr "lesen"
+
+#. module: base
+#: code:addons/orm.py:3855
+#, python-format
+msgid "create"
+msgstr "erstellen"
+
+#. module: base
+#: selection:res.partner.address,validity:0
+msgid "Invalid"
+msgstr "Ungültig"
+
+#. module: base
+#: view:ir.attachment:0
+msgid "Creation Month"
+msgstr "Monat der Erstellung"
