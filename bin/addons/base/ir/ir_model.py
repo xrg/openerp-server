@@ -731,6 +731,10 @@ class ir_model_data(osv.osv):
 
         Your module(s) may define extra keys for `source`, but please don't
         abuse this selection field.
+
+        Note that as of base >= v1.6 , removed ORM records may REMAIN here,
+        having `res_id = 0` . This way, the remote end will know that these
+        records have been intentionally deleted on our side.
     """
     _name = 'ir.model.data'
     __logger = logging.getLogger('addons.base.'+_name)

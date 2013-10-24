@@ -4,6 +4,7 @@
 #    OpenERP, Open Source Management Solution
 #    Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>).
 #    Copyright (C) 2010 OpenERP s.a. (<http://openerp.com>).
+#    Copyright (C) 2011-2013 P. Christeas <xrg@hellug.gr>
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -23,7 +24,7 @@
 
 {
     'name': 'Base',
-    'version': '1.5',
+    'version': '1.6',
     'category': 'Generic Modules/Base',
     'description': """The kernel of OpenERP, needed for all installation.""",
     'author': 'OpenERP SA',
@@ -40,6 +41,7 @@
     ],
     'update_xml': [
         'base_update.xml',
+        'ir/ir_model_rule.sql',
         'ir/wizard/wizard_menu_view.xml',
         'ir/ir.xml',
         'ir/workflow/workflow_view.xml',

@@ -3937,13 +3937,15 @@ class orm(orm_template):
                        'WHERE id = ANY(%s)', (ids,), debug=self._debug)
 
 
-        # Removing the ir_model_data reference if the record being deleted is a record created by xml/csv file,
-        # as these are not connected with real database foreign keys, and would be dangling references.
-        # Step 1. Calling unlink of ir_model_data only for the affected IDS.
-        cr.execute('DELETE FROM "%s" WHERE model = %%s AND res_id = ANY(%%s)' \
-                    % pool_model_data._table,
+        # Mark this record as deleted (res_id: 0) in ir.model.data table
+        # If the reference is from an XML source, it will be deleted by
+        # the `ir_model_data_delete` SQL rule. Otherwise, it will be
+        # preserved, to indicate that a remote side needs to act, too.
+        cr.execute('UPDATE "' + pool_model_data._table + '" '\
+                    ' SET res_id = 0, date_update = now() ' \
+                    ' WHERE model = %s AND res_id = ANY(%s)',
                 (self._name, list(ids)), debug=self._debug)
-        
+
         cr.execute('DELETE FROM "%s" WHERE (model = %%s AND res_id = ANY(%%s) ) OR value = ANY(%%s)' \
                     % pool_ir_values._table,
                     (self._name, list(ids), ['%s,%s' % (self._name, sid) for sid in ids]),
