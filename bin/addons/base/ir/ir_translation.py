@@ -102,6 +102,7 @@ class ir_translation_import_cursor(object):
             FROM ir_model_data AS imd
             WHERE ti.res_id IS NULL
                 AND ti.imd_module IS NOT NULL AND ti.imd_name IS NOT NULL
+                AND imd.source = 'xml' AND imd.res_id != 0
 
                 AND ti.imd_module = imd.module AND ti.imd_name = imd.name
                 AND ti.imd_model = imd.model; """ % self._table_name,

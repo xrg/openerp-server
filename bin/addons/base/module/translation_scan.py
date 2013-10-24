@@ -54,13 +54,14 @@ class _IMD_method(_TScanWorker):
         logger, cr, uid = self._logger, self.parent.cr, self.parent.uid
         pool = self.parent.pool
         query = 'SELECT name, model, res_id, module' \
-            ' FROM ir_model_data WHERE %s ORDER BY module, model, name'
+            ' FROM ir_model_data WHERE source=\'xml\' AND res_id != 0 AND %s ' \
+            ' ORDER BY module, model, name'
 
         wc, wp = self._get_where_calc(modules)
         cr.execute(query % wc, wp)
 
         # we have to fetch everything into memory, because fetchall()
-        # is not reentrant, so cannot coincide with cr.execut() calls
+        # is not reentrant, so cannot coincide with cr.execute() calls
         # inside the loop.
         model_ids = defaultdict(list)
         for xml_name, model, res_id, module in cr.fetchall():
@@ -341,6 +342,7 @@ class _ORM_Model_method(_TScanWorker):
             ( SELECT DISTINCT ON(m.model) m.id, m.model, imd.module
             FROM ir_model AS m, ir_model_data AS imd
             WHERE m.id = imd.res_id AND imd.model = 'ir.model'
+                AND imd.source IN ('orm', 'xml') AND imd.res_id != 0
             ORDER BY m.model, imd.id) AS foo
              WHERE %s
              ORDER BY module, model

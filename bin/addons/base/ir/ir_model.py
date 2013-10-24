@@ -568,7 +568,7 @@ class ir_model_access(osv.osv):
         cr.execute_prepared('ima_check_groups2', 
                 "SELECT EXISTS (SELECT 1 FROM res_groups_users_rel AS ur, ir_model_data AS imd " \
                 " WHERE ur.uid=%s AND ur.gid = imd.res_id " \
-                " AND imd.model = 'res.groups' " \
+                " AND imd.model = 'res.groups' AND imd.source IN ('orm','xml') AND imd.res_id != 0 " \
                 " AND imd.module=%s AND imd.name=%s )", \
                 (uid, grouparr[0], grouparr[1],), debug=self._debug)
         return bool(cr.fetchone()[0])
@@ -757,7 +757,7 @@ class ir_model_data(osv.osv):
     def _get_id(self, cr, uid, module, xml_id, source=('orm', 'xml')):
         """Returns the id of the ir.model.data record corresponding to a given module and xml_id (cached) or raise a ValueError if not found"""
         ids = self.search(cr, uid, [('module','=',module), ('name','=', xml_id),
-                        ('source', 'in', source)])
+                        ('source', 'in', source), ('res_id', '!=', 0)])
         if not ids:
             raise ValueError('No references to %s.%s' % (module, xml_id))
         # the sql constraints ensure us we have only one result
@@ -783,7 +783,7 @@ class ir_model_data(osv.osv):
     @tools.cache()
     def get_object_reference(self, cr, uid, module, xml_id, source=('orm', 'xml')):
         """Returns (model, res_id) corresponding to a given module and xml_id (cached) or raise ValueError if not found"""
-        sedom = [('module','=',module), ('name','=', xml_id)]
+        sedom = [('module','=',module), ('name','=', xml_id), ('res_id', '!=', 0)]
         if source:
             sedom.append(('source', 'in', source))
         res = self.search_read(cr, uid, sedom, fields=['model', 'res_id'])
@@ -801,7 +801,7 @@ class ir_model_data(osv.osv):
             return False
         try:
             id = self.search_read(cr, uid, [('module','=', module),('name','=',xml_id),
-                                            ('source', 'in', ('orm', 'xml'))],
+                                            ('source', 'in', ('orm', 'xml'), ('res_id', '!=', 0))],
                                     fields=['res_id'])[0]['res_id']
             self.loads[(module,xml_id)] = (model,id)
         except Exception:
@@ -837,7 +837,7 @@ class ir_model_data(osv.osv):
                     'EXISTS(SELECT id FROM ' + model_obj._table +
                     '       WHERE id=ir_model_data.res_id AND %s = ir_model_data.model) AS is_valid '
                     'FROM ir_model_data '
-                    'WHERE module=%s AND name=%s AND source IN (\'orm\', \'xml\') ',
+                    'WHERE module=%s AND name=%s AND source IN (\'orm\', \'xml\') AND res_id != 0 ',
                     (model, module, xml_id), debug=self._debug)
             results = cr.fetchall()
             for action_id2, res_id2, model2, is_valid2 in results:
@@ -960,7 +960,7 @@ class ir_model_data(osv.osv):
         modules = list(modules)
         cr.execute('SELECT id, name, model, res_id, module '
                     'FROM ir_model_data '
-                    'WHERE module = ANY(%s) AND noupdate=%s AND source = \'xml\' ',
+                    'WHERE module = ANY(%s) AND noupdate=%s AND source = \'xml\' AND res_id != 0',
                     (modules, False), debug=self._debug)
         wkf_todo = []
         for (id, name, model, res_id,module) in cr.fetchall():

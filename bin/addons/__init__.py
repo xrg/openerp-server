@@ -1017,7 +1017,7 @@ def load_modules(db, force_demo=False, status=None, update_module=False, languag
                     # array_agg() appeared in 8.4, but does exactly the job we want
                     cr.execute('SELECT model, array_agg(res_id) FROM ir_model_data AS imd '
                             ' WHERE noupdate=%s AND module=%s AND model <> \'ir.module.module\' '
-                            '    AND source in (\'xml\', \'orm\') '
+                            '    AND source in (\'xml\', \'orm\') AND res_id != 0 '
                             '    AND NOT EXISTS (SELECT 1 FROM ir_model_data AS imd2, ir_module_module AS mo '
                                                 'WHERE mo.state != \'to remove\' AND mo.name = imd2.module '
                                                 '  AND imd2.model = imd.model AND imd2.res_id = imd.res_id) '
@@ -1027,7 +1027,7 @@ def load_modules(db, force_demo=False, status=None, update_module=False, languag
                     # We have to fetch distinct rows and aggregate them ourselves
                     cr.execute('SELECT model, res_id FROM ir_model_data AS imd '
                             'WHERE noupdate=%s AND module=%s AND model <> \'ir.module.module\' '
-                            '    AND source in (\'xml\', \'orm\') '
+                            '    AND source in (\'xml\', \'orm\') AND res_id !=0 '
                             '    AND NOT EXISTS (SELECT 1 FROM ir_model_data AS imd2, ir_module_module AS mo '
                                                 'WHERE mo.state != \'to remove\' AND mo.name = imd2.module '
                                                 '  AND imd2.model = imd.model AND imd2.res_id = imd.res_id) '

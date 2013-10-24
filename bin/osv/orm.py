@@ -688,7 +688,7 @@ class orm_template(object):
             name_id = 'model_'+self._name.replace('.','_')
             cr.execute('SELECT id FROM ir_model_data '
                 "WHERE name=%s AND model = 'ir.model' AND res_id=%s "
-                " AND module=%s",
+                " AND module=%s AND source = 'orm' ",
                 (name_id, model_id, context['module']))
 
             # We do allow multiple modules to have references to the same model
@@ -767,7 +767,7 @@ class orm_template(object):
                         break
 
         if new_imd_colnames and 'module' in context:
-            cr.execute("SELECT name FROM ir_model_data WHERE name = ANY(%s) AND module = %s",
+            cr.execute("SELECT name FROM ir_model_data WHERE name = ANY(%s) AND module = %s AND source = 'orm' ",
                             ([name1 for name1, id in new_imd_colnames], context['module']),
                             debug=self._debug)
             existing_names = [ name1 for name1, in cr.fetchall()]
@@ -937,7 +937,7 @@ class orm_template(object):
                         r = r['id']
                     elif f[i] == 'id':
                         model_data = self.pool.get('ir.model.data')
-                        data_ids = model_data.search(cr, uid, [('model','=',r._table_name), ('res_id','=',r['id'])])
+                        data_ids = model_data.search(cr, uid, [('model','=',r._table_name), ('res_id','=',r['id']), ('source', 'in', ('orm', 'xml'))])
                         if len(data_ids):
                             d = model_data.read(cr, uid, data_ids, ['name', 'module'])[0]
                             if d['module']:
@@ -1767,7 +1767,7 @@ class orm_template(object):
                 # we don't ask ir_model_data, but do queries in both cases, so
                 # that code looks symmetric.
                 cr.execute( "SELECT module || '.' || name FROM ir_model_data "
-                            "WHERE model = 'ir.ui.view' AND res_id = %s",
+                            "WHERE model = 'ir.ui.view' AND res_id = %s AND source='xml' AND res_id != 0",
                             (view_id,), debug=self._debug)
                 ref_res = cr.fetchone()
                 if ref_res:
@@ -1778,7 +1778,7 @@ class orm_template(object):
                 cr.execute('SELECT iv.name, iv.model, iv.id, '
                            " COALESCE(md.module || '.' || md.name, '') AS ref_name "
                            'FROM ir_ui_view AS iv LEFT JOIN ir_model_data AS md '
-                           " ON (iv.id = md.res_id AND md.model = 'ir.ui.view' )"
+                           " ON (iv.id = md.res_id AND md.model = 'ir.ui.view' AND md.source='xml')"
                             'WHERE (iv.id=%s OR iv.inherit_id=%s) AND iv.arch LIKE %s',
                             (view_id, view_id, '%%%s%%' % field), 
                             debug=self._debug)
@@ -1945,7 +1945,8 @@ class orm_template(object):
             module, view_ref = view_ref.split('.', 1)
             cr.execute("SELECT res_id FROM ir_model_data "
                         "WHERE model='ir.ui.view' AND module=%s "
-                        "AND name=%s", (module, view_ref), 
+                        " AND source = 'xml' AND res_id != 0 "
+                        " AND name=%s", (module, view_ref),
                         debug=self._debug)
             view_ref_res = cr.fetchone()
             if view_ref_res:
@@ -3810,7 +3811,7 @@ class orm(orm_template):
         fields_str = ",".join('"%s".%s'%(self._table, f) for f in fields)
         query = '''SELECT %(fields)s, imd.module, imd.name
                    FROM "%(table)s" LEFT JOIN ir_model_data imd
-                       ON ( imd.model = '%(model)s' AND imd.res_id = %(table)s.id)
+                       ON ( imd.model = '%(model)s' AND imd.res_id = %(table)s.id AND imd.source = 'xml')
                    WHERE "%(table)s".id = ANY(%%s) ''' % \
                     { 'fields': fields_str, 'table': self._table, 'model': self._name }
 
@@ -5139,7 +5140,7 @@ class orm(orm_template):
         Note: Pending deprecation!
         """
         model_data_obj = self.pool.get('ir.model.data')
-        data_ids = model_data_obj.search(cr, uid, [('model', '=', self._name), ('res_id', 'in', ids)])
+        data_ids = model_data_obj.search(cr, uid, [('model', '=', self._name), ('res_id', 'in', ids), ('source', '=', 'xml')])
         data_results = model_data_obj.read(cr, uid, data_ids, ['module', 'name', 'res_id'])
         result = {}
         for id in ids:

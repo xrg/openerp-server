@@ -63,7 +63,7 @@ class ir_module_reference_print(report_sxw.rml_parse):
         return res
 
     def _object_find(self, module):
-        ids2 = self.pool.get('ir.model.data').search(self.cr, self.uid, [('module','=',module), ('model','=','ir.model')])
+        ids2 = self.pool.get('ir.model.data').search(self.cr, self.uid, [('module','=',module), ('model','=','ir.model'), ('source','in',('orm', 'xml')), ('res_id', '!=', 0) ])
         ids = []
         for mod in self.pool.get('ir.model.data').browse(self.cr, self.uid, ids2):
             ids.append(mod.res_id)

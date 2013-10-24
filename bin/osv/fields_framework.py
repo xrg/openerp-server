@@ -115,6 +115,7 @@ class id_field(integer):
                 else:
                     raise eu.DomainRightError(obj, lefts, operator, right)
 
+                domain.append(('res_id', '!=', '0'))
                 imd_obj = obj.pool.get('ir.model.data')
                 qry = Query(tables=['"%s"' % imd_obj._table,])
                 e = expression.expression(domain, debug=imd_obj._debug)
