@@ -2450,13 +2450,17 @@ class orm_template(object):
             ids = only_ids(ids)
         
         self.write(cr, uid, ids[0], vals, context=context)
-        
+
+        imd_obj = self.pool.get('ir.model.data')
+
         # find all the reverse references
         self.pool.get('ir.model.fields')._merge_ids(cr, uid, self._name, ids[0], ids[1:], context=context)
+        # move *all* ir.model.data references (of all sources)
+        cr.execute('UPDATE ' + imd_obj._table + ' SET res_id = %s WHERE model = %s AND res_id = ANY(%s)',
+                (ids[0], self._name, ids[1:]), debug=self._debug)
         self.unlink(cr, uid, ids[1:], context=context)
         
         # Add a reference in ir.model.data for every id removed
-        imd_obj = self.pool.get('ir.model.data')
         for i in ids[1:]:
             imd_obj.create(cr, uid, dict(name='merged#%d' %i, model=self._name,
                             res_id=ids[0], noupdate=True, source='merged'),
