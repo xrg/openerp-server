@@ -309,7 +309,7 @@ class res_partner(osv.osv):
         ''' Return the id of the main partner
         '''
         model_data = self.pool.get('ir.model.data')
-        return model_data.browse(cr, uid, [('module','=','base'), ('name','=','main_partner')])[0].res_id
+        return model_data.get_object_reference(cr, uid, 'base','main_partner')[1]
 res_partner()
 
 class res_partner_address(osv.osv):

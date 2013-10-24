@@ -87,8 +87,7 @@ class groups(osv.osv):
 
     def get_extended_interface_group(self, cr, uid, context=None):
         data_obj = self.pool.get('ir.model.data')
-        extended_group_data_id = data_obj._get_id(cr, uid, 'base', 'group_extended')
-        return data_obj.browse(cr, uid, extended_group_data_id, context=context).res_id
+        return data_obj.get_object_reference(cr, uid, 'base', 'group_extended')[1]
 
     def check_user_groups(self, cr, user_id, group_ids, context=None):
         """ Checks if `user_id` belongs to *any* of `group_ids`.
@@ -318,9 +317,8 @@ class users(osv.osv):
 
     def _get_admin_id(self, cr):
         if self.__admin_ids.get(cr.dbname) is None:
-            ir_model_data_obj = self.pool.get('ir.model.data')
-            mdid = ir_model_data_obj._get_id(cr, 1, 'base', 'user_root')
-            self.__admin_ids[cr.dbname] = ir_model_data_obj.read(cr, 1, [mdid], ['res_id'])[0]['res_id']
+            mdid = self.pool.get('ir.model.data').get_object_reference(cr, 1, 'base', 'user_root')[1]
+            self.__admin_ids[cr.dbname] = mdid
         return self.__admin_ids[cr.dbname]
 
     def _get_company(self,cr, uid, context=None, uid2=False):
@@ -453,8 +451,7 @@ class users(osv.osv):
 
     def action_get(self, cr, uid, context=None):
         dataobj = self.pool.get('ir.model.data')
-        data_id = dataobj._get_id(cr, 1, 'base', 'action_res_users_my')
-        return dataobj.browse(cr, uid, data_id, context=context).res_id
+        return dataobj.get_object_reference(cr, 1, 'base', 'action_res_users_my')[1]
 
     def login(self, db, login, password):
         if not password:
