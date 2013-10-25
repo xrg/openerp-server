@@ -560,6 +560,15 @@ class xrBaseRequestHandler(FixSendError, HttpLogHandler, SimpleXMLRPCServer.Simp
             except EOFError:
                 pass
 
+            auth = getattr(self, 'auth_proxy', None)
+            if auth and getattr(auth, 'checkPepper', False):
+                pepper = ''
+                # FIXME : where will the pepper be in XML-RPC ?
+                # pepper = kwargs.get('__pepper', None)
+                if not auth.checkPepper(pepper):
+                    self.send_error(403, "Authorization failed")
+                    return
+
             # In previous versions of SimpleXMLRPCServer, _dispatch
             # could be overridden in this class, instead of in
             # SimpleXMLRPCDispatcher. To maintain backwards compatibility,
