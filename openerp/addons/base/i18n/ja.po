@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: openobject-server\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2013-06-07 19:35+0000\n"
-"PO-Revision-Date: 2013-10-19 05:45+0000\n"
+"PO-Revision-Date: 2013-10-24 10:54+0000\n"
 "Last-Translator: Yoshi Tashiro <yostashiro@gmail.com>\n"
 "Language-Team: Japanese <ja@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-10-20 05:04+0000\n"
-"X-Generator: Launchpad (build 16807)\n"
+"X-Launchpad-Export-Date: 2013-10-25 06:00+0000\n"
+"X-Generator: Launchpad (build 16810)\n"
 
 #. module: base
 #: model:ir.module.module,description:base.module_account_check_writing
@@ -67,7 +67,7 @@ msgstr "ビューアーキテクチャ"
 #. module: base
 #: model:ir.module.module,summary:base.module_sale_stock
 msgid "Quotation, Sale Orders, Delivery & Invoicing Control"
-msgstr "見積書、販売オーダ、出荷、請求書コントロール"
+msgstr "見積、受注、出荷、請求書コントロール"
 
 #. module: base
 #: selection:ir.sequence,implementation:0
@@ -140,11 +140,14 @@ msgid ""
 "The module adds google user in res user.\n"
 "========================================\n"
 msgstr ""
+"\n"
+"このモジュールはユーザマスタにGoogleユーザを追加します。\n"
+"========================================\n"
 
 #. module: base
 #: help:res.partner,employee:0
 msgid "Check this box if this contact is an Employee."
-msgstr ""
+msgstr "この連絡先が従業員である場合はチェック。"
 
 #. module: base
 #: help:ir.model.fields,domain:0
@@ -329,7 +332,7 @@ msgstr "販売管理"
 msgid ""
 "The internal user that is in charge of communicating with this contact if "
 "any."
-msgstr ""
+msgstr "この連絡先との連携を担当する内部ユーザ"
 
 #. module: base
 #: view:res.partner:0
