@@ -244,8 +244,11 @@ class Cursor(object):
             res = self._obj.execute(query, params)
         except OperationalError, oe:
             self.__logger.exception("Postgres Operational error: %s", oe)
-            self._cnx.status = False
-            raise
+            try:
+                self._cnx.status = False
+            except TypeError:
+                pass
+            raise oe
         except psycopg2.DatabaseError, pe:
             self.__logger.error("Programming error: %s", ustr(pe))
             self.__logger.error("bad query: %s\nparams: %s", ustr(query), params)
