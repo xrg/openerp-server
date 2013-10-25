@@ -1073,7 +1073,8 @@ class objects_proxy(baseExportService):
         if not auth:
             raise Exception("Not auth domain for object service")
         if auth.provider.domain not in self._auth_commands:
-            raise Exception("Invalid domain for object service")
+            from websrv_lib import AuthRejectedExc
+            raise AuthRejectedExc("Invalid domain for object service")
 
         if method not in self._auth_commands[auth.provider.domain]:
             raise Exception("Method not found: %s" % method)
