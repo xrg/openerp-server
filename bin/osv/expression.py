@@ -119,13 +119,13 @@ class expression(object):
                         domain expression, to be searched upon
                 @param parent the name of the "parent" field
                 @param left
-                @param prefix if we must disambiguate the table name, 
+                @param prefix if we must disambiguate the table name,
                         including the dot
                 @param null_too if specified, the expression would also stand 
                         for left = NULL
                 @return domain expression, in list of tuples
             """
-            if model._parent_store and (not model.pool._init): #and False:
+            if model._parent_store and (not model.pool._init):
                 # TODO: Improve where joins are implemented for many with '.', replace by:
                 # doms += ['&',(prefix+'.parent_left','<',o.parent_right),(prefix+'.parent_left','>=',o.parent_left)]
                 doms = []
