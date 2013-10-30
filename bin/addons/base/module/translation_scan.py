@@ -54,7 +54,7 @@ class _IMD_method(_TScanWorker):
         logger, cr, uid = self._logger, self.parent.cr, self.parent.uid
         pool = self.parent.pool
         query = 'SELECT name, model, res_id, module' \
-            ' FROM ir_model_data WHERE source=\'xml\' AND res_id != 0 AND %s ' \
+            ' FROM ir_model_data WHERE source IN(\'xml\', \'orm\') AND res_id != 0 AND %s ' \
             ' ORDER BY module, model, name'
 
         wc, wp = self._get_where_calc(modules)
