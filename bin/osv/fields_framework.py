@@ -49,15 +49,20 @@ class id_field(integer):
 
             or even, for external refs::
 
-                [('id.ref.magento', '=', 'foo.bar')]
+                [('id.ref.extref', '=', 'foo.bar')]
                 or
-                [('id.ref.magento.foo', '=', 'bar')]
+                [('id.ref.extref.foo', '=', 'bar')]
 
             A special syntax for synchronising records is also supported::
 
-                [('id.ref.somemodule', '=', False)] # meaning row is not in-sync
-                [('id.ref.somemodule', 'like', 'remote_')] # meaning in sync
+                [('id.ref.extref.somemodule', '=', False)] # meaning row is not in-sync
+                [('id.ref.extref.somemodule', 'like', 'remote_')] # meaning in sync
                                     # with some name like 'remote_123'
+
+            Under 'id.ref' the dots are interpreted as:
+                `id.ref[.<source>[.<module+>]]`
+            where `source` will match our source and `module` may contain more
+            dots.
         """
         if len(lefts) > 1:
             import expression
@@ -81,9 +86,7 @@ class id_field(integer):
                     sop = '='
                     source = lefts[2]
                 if len(lefts) > 3:
-                    module = lefts[3]
-                if len(lefts) > 4:
-                    raise eu.DomainLeftError(obj, lefts, operator, right)
+                    module = '.'.join(lefts[3:])
 
                 if isinstance(right, basestring):
                     if '.' in right:
