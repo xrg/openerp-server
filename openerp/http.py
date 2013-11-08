@@ -219,7 +219,7 @@ def route(route, type="http", auth="user"):
         configuration indicating the current database nor the current user.
     """
     assert type in ["http", "json"]
-    assert auth in auth_methods.keys()
+    assert auth in auth_methods
     def decorator(f):
         if isinstance(route, list):
             f.routes = route
@@ -418,7 +418,7 @@ class HttpRequest(WebRequest):
                 'message': "OpenERP Server Error",
                 'data': se
             }
-            r = werkzeug.exceptions.InternalServerError(cgi.escape(simplejson.dumps(error)))
+            r = werkzeug.exceptions.InternalServerError(simplejson.dumps(error))
         else:
             if not r:
                 r = werkzeug.wrappers.Response(status=204)  # no content
@@ -861,6 +861,23 @@ class ModelConverter(routing.BaseConverter):
     def to_url(self, value):
         return value.id
 
+class ModelsConverter(routing.BaseConverter):
+
+    def __init__(self, url_map, model=False):
+        super(ModelsConverter, self).__init__(url_map)
+        self.model = model
+        # TODO add support for slug in the form [A-Za-z0-9-] bla-bla-89 -> id 89
+        self.regex = '([0-9,]+)'
+
+    def to_python(self, value):
+        # TODO:
+        # - raise routing.ValidationError() if no browse record can be createdm
+        # - support slug
+        return request.registry[self.model].browse(request.cr, request.uid, [int(i) for i in value.split(',')], context=request.context)
+
+    def to_url(self, value):
+        return ",".join([i.id for i in value])
+
 class Root(object):
     """Root WSGI application for the OpenERP Web Client.
     """
@@ -982,7 +999,7 @@ class Root(object):
 
     def _build_router(self, db):
         _logger.info("Generating routing configuration for database %s" % db)
-        routing_map = routing.Map(strict_slashes=False, converters={'model': ModelConverter})
+        routing_map = routing.Map(strict_slashes=False, converters={'model': ModelConverter, 'models': ModelsConverter})
 
         def gen(modules, nodb_only):
             for module in modules:
@@ -1008,7 +1025,7 @@ class Root(object):
                                         url = url[: -1]
                                 routing_map.add(routing.Rule(url, endpoint=mv))
 
-        modules_set = set(controllers_per_module.keys()) - set(['', 'web'])
+        modules_set = set(controllers_per_module) - set(['', 'web'])
         # building all none methods
         gen(['', "web"] + sorted(modules_set), True)
         if not db:
