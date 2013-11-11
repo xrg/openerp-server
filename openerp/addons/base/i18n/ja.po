@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: openobject-server\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2013-06-07 19:35+0000\n"
-"PO-Revision-Date: 2013-11-10 03:15+0000\n"
+"PO-Revision-Date: 2013-11-10 14:41+0000\n"
 "Last-Translator: Yoshi Tashiro <yostashiro@gmail.com>\n"
 "Language-Team: Japanese <ja@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-11-10 06:43+0000\n"
+"X-Launchpad-Export-Date: 2013-11-11 05:38+0000\n"
 "X-Generator: Launchpad (build 16820)\n"
 
 #. module: base
@@ -99,7 +99,7 @@ msgstr "店舗用タッチスクリーン画面"
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_l10n_in_hr_payroll
 msgid "Indian Payroll"
-msgstr ""
+msgstr "インド給与管理"
 
 #. module: base
 #: help:ir.cron,model:0
@@ -177,7 +177,7 @@ msgstr "ターゲットウィンドウ"
 #. module: base
 #: field:ir.actions.report.xml,report_rml:0
 msgid "Main Report File Path"
-msgstr ""
+msgstr "メインレポートファイルパス"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_sale_analytic_plans
@@ -707,7 +707,7 @@ msgstr "未翻訳"
 #. module: base
 #: view:ir.mail_server:0
 msgid "Outgoing Mail Server"
-msgstr ""
+msgstr "送信メールサーバ"
 
 #. module: base
 #: help:ir.actions.act_window,context:0
@@ -905,7 +905,7 @@ msgstr "スウェーデン語 / svenska"
 #: field:base.language.export,name:0
 #: field:ir.attachment,datas_fname:0
 msgid "File Name"
-msgstr ""
+msgstr "ファイル名"
 
 #. module: base
 #: model:res.country,name:base.rs
@@ -3505,7 +3505,7 @@ msgid ""
 "Manage the contact titles you want to have available in your system and the "
 "way you want to print them in letters and other documents. Some example: "
 "Mr., Mrs. "
-msgstr "手紙や他のドキュメントの印刷において利用する際の適切な連絡先のタイトルを管理します。 幾つかの例：男子や夫人の敬称 "
+msgstr "手紙やその他のドキュメント印刷にて使用する連絡先敬称を管理します（例えば「様」、「御中」など）。 "
 
 #. module: base
 #: view:ir.model.access:0
@@ -3574,7 +3574,7 @@ msgstr "生年月日"
 #: model:ir.actions.act_window,name:base.action_partner_title_contact
 #: model:ir.ui.menu,name:base.menu_partner_title_contact
 msgid "Contact Titles"
-msgstr "役職"
+msgstr "連絡先敬称"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_product_manufacturer
@@ -3894,7 +3894,7 @@ msgstr "レポート"
 #: field:res.partner,title:0
 #: field:res.partner.title,name:0
 msgid "Title"
-msgstr "役職"
+msgstr "敬称"
 
 #. module: base
 #: help:ir.property,res_id:0
@@ -4592,7 +4592,7 @@ msgstr "モジュール .ZIPファイル"
 #. module: base
 #: model:res.partner.category,name:base.res_partner_category_17
 msgid "Telecom sector"
-msgstr "遠距離通信部門"
+msgstr "通信セクター"
 
 #. module: base
 #: field:workflow.transition,trigger_model:0
@@ -5099,7 +5099,7 @@ msgstr ""
 #. module: base
 #: model:res.partner.category,name:base.res_partner_category_7
 msgid "IT Services"
-msgstr ""
+msgstr "ITサービス"
 
 #. module: base
 #: model:ir.module.category,name:base.module_category_specific_industry_applications
@@ -5470,7 +5470,7 @@ msgstr "各モジュールは固有でなければなりません。"
 #: model:ir.module.category,name:base.module_category_localization
 #: model:ir.ui.menu,name:base.menu_localisation
 msgid "Localization"
-msgstr "ローカル化"
+msgstr "ローカライズ"
 
 #. module: base
 #: model:ir.module.module,description:base.module_web_api
@@ -5549,7 +5549,7 @@ msgstr ""
 #. module: base
 #: model:ir.ui.menu,name:base.menu_partner_category_form
 msgid "Partner Tags"
-msgstr ""
+msgstr "取引先タグ"
 
 #. module: base
 #: view:res.company:0
@@ -5845,7 +5845,7 @@ msgstr ""
 #: field:workflow,name:0
 #: field:workflow.activity,name:0
 msgid "Name"
-msgstr "名前"
+msgstr "名称"
 
 #. module: base
 #: help:ir.actions.act_window,multi:0
@@ -6074,7 +6074,7 @@ msgstr "インストール言語"
 #. module: base
 #: model:res.partner.category,name:base.res_partner_category_11
 msgid "Services"
-msgstr ""
+msgstr "サービス業"
 
 #. module: base
 #: view:ir.translation:0
@@ -7430,7 +7430,7 @@ msgstr "署名"
 #. module: base
 #: field:res.partner.category,complete_name:0
 msgid "Full Name"
-msgstr "氏名"
+msgstr "名称"
 
 #. module: base
 #: view:ir.attachment:0
@@ -7543,7 +7543,7 @@ msgstr "エクアドル - 会計"
 #. module: base
 #: field:res.partner.category,name:0
 msgid "Category Name"
-msgstr "分類名"
+msgstr "カテゴリ名"
 
 #. module: base
 #: model:res.country,name:base.mp
@@ -7633,7 +7633,7 @@ msgstr "コンテンツが別のデータ項目にある場合、メインレポ
 #. module: base
 #: model:res.partner.category,name:base.res_partner_category_14
 msgid "Manufacturer"
-msgstr ""
+msgstr "製造業"
 
 #. module: base
 #: help:res.users,company_id:0
@@ -8225,7 +8225,7 @@ msgstr "全ての x で繰り返す"
 #. module: base
 #: model:res.partner.bank.type,name:base.bank_normal
 msgid "Normal Bank Account"
-msgstr "通常の銀行口座"
+msgstr "普通口座"
 
 #. module: base
 #: field:change.password.user,wizard_id:0
@@ -8294,7 +8294,7 @@ msgstr "フランス語（スイス）/ Français (CH)"
 #. module: base
 #: model:res.partner.category,name:base.res_partner_category_13
 msgid "Distributor"
-msgstr ""
+msgstr "代理店"
 
 #. module: base
 #: help:ir.actions.server,subject:0
@@ -8456,7 +8456,7 @@ msgstr ""
 #. module: base
 #: field:res.partner.category,parent_id:0
 msgid "Parent Category"
-msgstr "親分類"
+msgstr "親カテゴリ"
 
 #. module: base
 #: model:res.country,name:base.fi
@@ -9215,12 +9215,12 @@ msgstr "このドキュメントはデフォルト属性として使用されて
 #. module: base
 #: model:res.partner.category,name:base.res_partner_category_5
 msgid "Silver"
-msgstr ""
+msgstr "シルバー"
 
 #. module: base
 #: field:res.partner.title,shortcut:0
 msgid "Abbreviation"
-msgstr ""
+msgstr "略称"
 
 #. module: base
 #: model:ir.ui.menu,name:base.menu_crm_case_job_req_main
@@ -11308,7 +11308,7 @@ msgstr "Eメール"
 #. module: base
 #: model:res.partner.category,name:base.res_partner_category_12
 msgid "Office Supplies"
-msgstr ""
+msgstr "オフィス用品"
 
 #. module: base
 #: field:ir.attachment,res_model:0
@@ -11474,7 +11474,7 @@ msgstr "マーケティングキャンペーン"
 #. module: base
 #: field:res.country.state,name:0
 msgid "State Name"
-msgstr "状態の名前"
+msgstr "州名"
 
 #. module: base
 #: help:ir.attachment,type:0
@@ -12003,7 +12003,7 @@ msgstr "トリガーのシグナル"
 #: model:ir.actions.act_window,name:base.action_country_state
 #: model:ir.ui.menu,name:base.menu_country_state_partner
 msgid "Fed. States"
-msgstr "連邦"
+msgstr "州"
 
 #. module: base
 #: view:ir.model:0
@@ -12204,7 +12204,7 @@ msgstr "ループ式"
 #. module: base
 #: model:res.partner.category,name:base.res_partner_category_16
 msgid "Retailer"
-msgstr ""
+msgstr "小売業"
 
 #. module: base
 #: view:ir.model.fields:0
@@ -12500,7 +12500,7 @@ msgstr "通貨"
 #. module: base
 #: model:res.partner.category,name:base.res_partner_category_8
 msgid "Consultancy Services"
-msgstr ""
+msgstr "コンサルティングサービス"
 
 #. module: base
 #: help:ir.values,value:0
@@ -12610,7 +12610,7 @@ msgstr "調達"
 #. module: base
 #: model:res.partner.category,name:base.res_partner_category_6
 msgid "Bronze"
-msgstr ""
+msgstr "ブロンズ"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_hr_payroll_account
@@ -13164,7 +13164,7 @@ msgstr "設定"
 #. module: base
 #: model:res.partner.category,name:base.res_partner_category_9
 msgid "Components Buyer"
-msgstr ""
+msgstr "部材バイヤー"
 
 #. module: base
 #: model:ir.module.module,description:base.module_web_tests_demo
@@ -15153,7 +15153,7 @@ msgstr "国"
 #. module: base
 #: model:res.partner.category,name:base.res_partner_category_15
 msgid "Wholesaler"
-msgstr ""
+msgstr "卸売業"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_base_vat
@@ -15472,7 +15472,7 @@ msgstr "クロアチア"
 msgid ""
 "Do you confirm the uninstallation of this module? This will permanently "
 "erase all data currently stored by the module!"
-msgstr ""
+msgstr "このモジュールを本当にアンインストールしてよいですか？このアクションにより、このモジュール依存のデータが全て消失します。"
 
 #. module: base
 #: field:ir.actions.server,mobile:0
@@ -15516,7 +15516,7 @@ msgstr "セーシェル"
 #. module: base
 #: model:res.partner.category,name:base.res_partner_category_4
 msgid "Gold"
-msgstr ""
+msgstr "ゴールド"
 
 #. module: base
 #: code:addons/base/res/res_company.py:173
@@ -15780,7 +15780,7 @@ msgstr ""
 #. module: base
 #: model:res.partner.category,name:base.res_partner_category_2
 msgid "Prospect"
-msgstr "見込み客"
+msgstr "見込客"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_stock_invoice_directly
