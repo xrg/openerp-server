@@ -190,16 +190,11 @@ class Cursor(object):
             self._cnx._prepared = []
         self._pgmode = self.__pgmode
         if not self._pgmode:
-            if self._cnx.server_version >= 90200:
-                self._pgmode = 'pg92'
-            elif self._cnx.server_version >= 90100:
-                self._pgmode = 'pg91'
-            elif self._cnx.server_version >= 90000:
-                self._pgmode = 'pg90'
-            elif self._cnx.server_version >= 80400:
-                self._pgmode = 'pg84'
+            if self._cnx.server_version >= 80400:
+                pv = self._cnx.server_version / 100
+                self._pgmode = 'pg%d%d' % ( pv/100, pv % 100)
             else:
-                self._pgmode = 'pgsql'
+                self._pgmode = 'pg00'
 
         for verb in ('fetchone', 'fetchmany', 'fetchall'):
             # map the *bound* functions, bypass @check

@@ -851,7 +851,7 @@ GNU Public Licence.
             The mode of operation affects usage of advanced Postgres features by the ORM.
             It can be changed in runtime, in order to test the older or newer algorithms.
         """
-        assert pgmode in ['old', 'sql', 'pgsql', 'pg84', 'pg90', 'pg91', 'pg92']
+        assert pgmode in ['old', 'sql', 'pg00', 'pg84', 'pg90', 'pg91', 'pg92', 'pg93', 'pg94']
         sql_db.Cursor.set_pgmode(pgmode)
         return True
 

@@ -70,7 +70,7 @@ from views import oo_view
 from query import Query
 import tools
 from tools.safe_eval import safe_eval as eval
-from tools.expr_utils import PG84_MODES, DomainError
+from tools.expr_utils import DomainError
 
 # List of etree._Element subclasses that we choose to ignore when parsing XML.
 from tools import SKIPPED_ELEMENT_TYPES
@@ -1954,7 +1954,7 @@ class orm_template(object):
             if view_ref_res:
                 view_id = view_ref_res[0]
 
-        ok = (cr.pgmode not in PG84_MODES)
+        ok = (cr.pgmode < 'pg84')
         model = True
         sql_res = False
         while ok:
@@ -2004,8 +2004,7 @@ class orm_template(object):
             result['name'] = sql_res[1]
             result['field_parent'] = sql_res[2] or False
 
-        if cr.pgmode in PG84_MODES:
-            
+        if cr.pgmode >= 'pg84':
             if view_id:
                 # If we had been asked for some particular view id, we have to
                 # recursively select the views down to the base one that view_id
@@ -2020,7 +2019,6 @@ class orm_template(object):
                         ' SELECT id FROM rcrs_view_in ' \
                         ' WHERE inher IS NULL LIMIT 1'
                 sql_in_parms = (view_id, self._name, self._name)
-                
             else:
                 sql_in = 'SELECT id FROM ir_ui_view ' \
                         'WHERE model=%s AND type=%s AND inherit_id IS NULL '\
@@ -5106,7 +5104,7 @@ class orm(orm_template):
             parent = self._parent_name
         if isinstance(ids, (long, int)):
             ids = [ids,]
-        if cr.pgmode in PG84_MODES:
+        if cr.pgmode >= 'pg84':
             # Recursive search, all inside postgres. The first part will fetch all
             # ids, the others will fetch parents, until some path contains the
             # id two times. Then, cycle -> True and not recurse further.

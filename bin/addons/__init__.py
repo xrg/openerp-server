@@ -4,7 +4,7 @@
 #    OpenERP, Open Source Management Solution
 #    Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>).
 #    Copyright (C) 2010-2011 OpenERP s.a. (<http://openerp.com>).
-#    Copyright (C) 2009,2011-2012 P.Christeas <xrg@hellug.gr>
+#    Copyright (C) 2009,2011-2013 P.Christeas <xrg@hellug.gr>
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -42,7 +42,6 @@ from tools import sql_model
 from tools.safe_eval import safe_eval as eval
 import pooler
 from tools.translate import _
-from tools.expr_utils import PG84_MODES
 
 from tools.data_loaders import DataLoader
 import tools.loaders
@@ -1013,7 +1012,7 @@ def load_modules(db, force_demo=False, status=None, update_module=False, languag
             for mod_id, mod_name in cr.fetchall():
                 logger.info("Removing module '%s' data",  mod_name)
                 mod_dict = {}
-                if cr.pgmode in PG84_MODES:
+                if cr.pgmode >= 'pg84':
                     # array_agg() appeared in 8.4, but does exactly the job we want
                     cr.execute('SELECT model, array_agg(res_id) FROM ir_model_data AS imd '
                             ' WHERE noupdate=%s AND module=%s AND model <> \'ir.module.module\' '

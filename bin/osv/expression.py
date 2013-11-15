@@ -89,7 +89,7 @@ class expression(object):
         
             Expression may behave differently according to cr.pgmode:
             with 'old', 'sql' the db will execute the expression.
-            At pgsql, pg84, pg90, sub-queries are allowed. At pg84, pg90+,
+            At pg00, pg84, pg90, sub-queries are allowed. At pg84, pg90+,
             recursive ones are used for 'child_of' expressions
         """
         # check if the expression is valid
@@ -141,7 +141,7 @@ class expression(object):
                 if null_too:
                     doms = ['|', (left, '=', None)] + doms
                 return doms
-            elif cr.pgmode in eu.PG84_MODES:
+            elif cr.pgmode >= 'pg84':
                 # print "Recursive expand for 8.4, for %s" % model._table
                 phname = prefix + model._table
                 phname = phname.replace('.', '_')
@@ -187,7 +187,7 @@ class expression(object):
                 if null_too:
                     return ['|', (left, '=', None), (left, 'inselect', (qry, qu2))]
                 return [(left, 'inselect', (qry, qu2))]
-            # elif self.__mode == 'pgsql':
+            # elif self.__mode == 'pg00':
             #  any way  to do that in pg8.3?
             else:
                 def rg(ids, model, parent):
