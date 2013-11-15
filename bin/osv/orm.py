@@ -587,6 +587,8 @@ class browse_record(object):
 
 orm_utils.browse_record = browse_record
 
+_import_id_re = re.compile(r'([a-z0-9A-Z_])\.id$')
+
 class orm_template(object):
     """ THE base of all ORM models
     """
@@ -1070,7 +1072,7 @@ class orm_template(object):
         if context is None:
             context = {}
         def _replace_field(x):
-            x = re.sub('([a-z0-9A-Z_])\\.id$', '\\1/.id', x)
+            x = _import_id_re.sub(r'\1/.id', x)
             return x.replace(':id','/id').split('/')
         fields = map(_replace_field, fields)
         logger = logging.getLogger('orm.import')
