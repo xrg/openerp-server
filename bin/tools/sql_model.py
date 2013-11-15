@@ -187,7 +187,7 @@ class Schema(object):
                             WHERE nspname = ANY(current_schemas(false)))
                       AND s.conrelid = ANY(%s)
                      """
-            if cr.pgmode not in ('pg92', 'pg91', 'pg90'):
+            if cr.pgmode < 'pg90':
                 # This column was added after pg 8.4 :(
                 qry = qry.replace('conindid AS idx_oid,','')
             cr.execute(qry,

@@ -664,7 +664,7 @@ class ir_model_access(osv.osv):
                 'unlink': _("You can not delete this document (%s) ! Be sure your user belongs to one of these groups: %s."),
             }
 
-            raise except_orm(_('AccessError'), msgs[mode] % (model_name, groups) )
+            raise except_orm('AccessError', msgs[mode] % (model_name, groups) )
         return r or False
 
     check = tools.cache()(check)

@@ -74,10 +74,13 @@ class Service(object):
         if callable(method):
             self._methods[method.__name__] = method
 
-    def abortResponse(self, error, description, origin, details):
+    def abortResponse(self, error, description, origin, details, do_traceback=True):
         if not tools.config['debug_mode']:
-            tb = sys.exc_info()
-            tb_s = "".join(traceback.format_exception(*tb))
+            if do_traceback:
+                tb = sys.exc_info()
+                tb_s = "".join(traceback.format_exception(*tb))
+            else:
+                tb_s = None
             raise OpenERPDispatcherException(description, origin=origin, 
                     details=details, faultCode=error, traceback=tb_s)
         else:
@@ -136,10 +139,13 @@ class ExportService(object):
     def new_dispatch(self,method,auth,params):
         raise NotImplementedError("stub dispatch at %s" % self.__name)
 
-    def abortResponse(self, error, description, origin, details):
+    def abortResponse(self, error, description, origin, details, do_traceback=True):
         if not tools.config['debug_mode']:
-            tb = sys.exc_info()
-            tb_s = "".join(traceback.format_exception(*tb))
+            if do_traceback:
+                tb = sys.exc_info()
+                tb_s = "".join(traceback.format_exception(*tb))
+            else:
+                tb_s = None
             raise OpenERPDispatcherException(description, origin=origin, 
                     details=details, faultCode=error, traceback=tb_s)
         else:

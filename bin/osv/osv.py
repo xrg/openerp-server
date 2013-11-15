@@ -129,7 +129,9 @@ class object_proxy(netsvc.Service):
             except orm.except_orm, inst:
                 if inst.name == 'AccessError':
                     self.logger.debug("AccessError", exc_info=True)
-                self.abortResponse(1, inst.name, 'warning', inst.value)
+                    self.abortResponse(1, _('Access Error'), 'warning', inst.value, do_traceback=False)
+                else:
+                    self.abortResponse(1, inst.name, 'warning', inst.value)
             except except_osv, inst:
                 self.abortResponse(1, inst.name, inst.exc_type, inst.value)
             except IntegrityError, inst:

@@ -2534,7 +2534,7 @@ class orm_memory(orm_template):
 
     def _check_access(self, uid, object_id, mode):
         if uid != 1 and self.datas[object_id]['internal.create_uid'] != uid:
-            raise except_orm(_('AccessError'), '%s access is only allowed on your own records for osv_memory objects except for the super-user' % mode.capitalize())
+            raise except_orm('AccessError', '%s access is only allowed on your own records for osv_memory objects except for the super-user' % mode.capitalize())
 
     def vaccum(self, cr, uid, force=False):
         """Run the vaccuum cleaning system, expiring and removing old records from the
@@ -3078,7 +3078,7 @@ class orm(orm_template):
         @param column  empty (for all columns), list or string of column to update
         """
         if uid != 1:
-            raise except_orm(_('AccessError'),
+            raise except_orm('AccessError',
                             _('Forced update of the stored fields is only permitted to the admin user!'))
         assert not ids, "force_update_store cannot be called for specific fields, yet"
         update_custom_fields = context and context.get('update_custom_fields', False)
@@ -3628,7 +3628,7 @@ class orm(orm_template):
                         sd = {}.fromkeys(ids)
                         _logger.debug("access error @%s  %d != %d " %(self._name, rc, len(sd)))
                         _logger.debug("len(%s) != len(%s)" % (cr.fetchall(), sd))
-                    raise except_orm(_('AccessError'),
+                    raise except_orm('AccessError',
                                          _('Operation prohibited by access rules, or performed on an already deleted document (Operation: %s, Document type: %s).')
                                          % ( _('read'), self._description,))
             res.extend(cr.dictfetchall())
@@ -3890,7 +3890,7 @@ class orm(orm_template):
 
                 opls = {'read': _('read'), 'write': _('write'),
                     'create': _('create'), 'unlink': _('delete')}
-                raise except_orm(_('AccessError'),
+                raise except_orm('AccessError',
                                 _('Operation prohibited by access rules, or performed on an already deleted document (Operation: %s, Document type: %s).')
                                 % (opls.get(operation, operation), self._description))
 
@@ -4034,7 +4034,7 @@ class orm(orm_template):
                     _logger.warning("Access error for %s.%s by user #%d: not in group %s",
                             self._name, field, user, groups)
                     _logger.debug("Value for field %s.%s: %r", self._name, field, vals[field])
-                    raise except_orm(_('AccessError'),
+                    raise except_orm('AccessError',
                                      _('You are not permitted to write into column %s.%s.') % (self._name, field))
 
         if not context:
@@ -4110,7 +4110,7 @@ class orm(orm_template):
             cr.execute('UPDATE "%s" SET %s WHERE id = ANY(%%s)' % (self._table, ','.join(upd0)),
                            upd1 + [ids,], debug=self._debug)
             if cr.rowcount != len(ids):
-                    raise except_orm(_('AccessError'),
+                    raise except_orm('AccessError',
                                      _('One of the records you are trying to modify has already been deleted (Document type: %s).') % self._description)
 
             if totranslate:
@@ -4276,7 +4276,7 @@ class orm(orm_template):
                     _logger.warning("Access error for %s.%s by user #%d: not in group %s",
                             self._name, field, user, list(self._field_group_acl[field]))
                     _logger.debug("Value for field %s.%s: %r", self._name, field, vals[field])
-                    raise except_orm(_('AccessError'),
+                    raise except_orm('AccessError',
                                      _('You are not permitted to create column %s.%s.') % (self._name, field))
 
         vals = self._add_missing_default_values(cr, user, vals, context)
@@ -4597,7 +4597,7 @@ class orm(orm_template):
 
     def _check_qorder(self, word):
         if not regex_order.match(word):
-            raise except_orm(_('AccessError'), _('Invalid "order" specified. A valid "order" specification is a comma-separated list of valid field names (optionally followed by asc/desc for the direction)'))
+            raise except_orm('AccessError', _('Invalid "order" specified. A valid "order" specification is a comma-separated list of valid field names (optionally followed by asc/desc for the direction)'))
         return True
 
     def _apply_ir_rules(self, cr, uid, query, mode='read', context=None):
