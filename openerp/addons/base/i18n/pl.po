@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: openobject-server\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2013-06-07 19:35+0000\n"
-"PO-Revision-Date: 2013-11-15 10:36+0000\n"
+"PO-Revision-Date: 2013-11-16 18:05+0000\n"
 "Last-Translator: Mirosław Bojanowicz <miroslaw.bojanowicz@gmail.com>\n"
 "Language-Team: Polish <pl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-11-16 06:25+0000\n"
+"X-Launchpad-Export-Date: 2013-11-17 05:44+0000\n"
 "X-Generator: Launchpad (build 16831)\n"
 
 #. module: base
@@ -26,14 +26,14 @@ msgid ""
 "    "
 msgstr ""
 "\n"
-"Moduł do wprowadzania i drukowania czeków.\n"
+"Moduł do wypisywania i drukowania czeków.\n"
 "================================================\n"
 "    "
 
 #. module: base
 #: view:res.partner.bank:0
 msgid "e.g. GEBABEBB"
-msgstr ""
+msgstr "np. GEBABEBB"
 
 #. module: base
 #: model:res.country,name:base.sh
@@ -2335,7 +2335,7 @@ msgstr "Korean (KP) / 한국어 (KP)"
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_l10n_vn
 msgid "Vietnam Chart of Accounts"
-msgstr ""
+msgstr "Wietnamski plan kont"
 
 #. module: base
 #: model:res.country,name:base.ax
@@ -2636,6 +2636,8 @@ msgid ""
 "View type: Tree type to use for the tree view, set to 'tree' for a "
 "hierarchical tree view, or 'form' for a regular list view"
 msgstr ""
+"Typ Widoku: Użyj typu tree do widoku drzewa, ustaw na 'tree' dla widoku "
+"drzewa hierarchicznego, lub 'form' dla zwykłego widoku listy"
 
 #. module: base
 #: sql_constraint:ir.ui.view_sc:0
@@ -2781,6 +2783,10 @@ msgid ""
 "==================================\n"
 "    "
 msgstr ""
+"\n"
+"Plan kont USA.\n"
+"==================================\n"
+"    "
 
 #. module: base
 #: field:ir.actions.act_url,target:0
@@ -2872,6 +2878,17 @@ msgid ""
 "        * Files by Partner (graph)\n"
 "        * Files Size by Month (graph)\n"
 msgstr ""
+"\n"
+"To jest kompletny system zarządzania dokumentami.\n"
+"==============================================\n"
+"    * Uwierzytelnienie użytkownika\n"
+"    * Indeksowanie dokumentów:- pliki .pptx i .docx nie są wspierane na "
+"platformie Windows.\n"
+"    * panel sterowania dokumentów zawiera:\n"
+"        * Nowe pliki (lista)\n"
+"        * Pliki według typu zasobu (wykres)\n"
+"        * Pliki według kontrahenta (wykres)\n"
+"        * Wielkość pliku według miesiąca (wykres)\n"
 
 #. module: base
 #: view:ir.actions.report.xml:0
@@ -2942,6 +2959,9 @@ msgid ""
 "Module to attach a google document to any model.\n"
 "================================================\n"
 msgstr ""
+"\n"
+"Moduł do załączenia dokumentu google to dowolnego modelu.\n"
+"================================================\n"
 
 #. module: base
 #: code:addons/base/ir/ir_fields.py:333
@@ -2977,7 +2997,7 @@ msgstr "Akcja serwera"
 #. module: base
 #: help:ir.actions.client,params:0
 msgid "Arguments sent to the client along withthe view tag"
-msgstr ""
+msgstr "Argumenty wysyłane do klienta wraz z znacznikiem widoku"
 
 #. module: base
 #: model:ir.module.module,summary:base.module_contacts
@@ -3324,7 +3344,7 @@ msgstr ""
 #. module: base
 #: view:res.company:0
 msgid "e.g. Global Business Solutions"
-msgstr ""
+msgstr "np. Global Business Solutions"
 
 #. module: base
 #: field:res.company,rml_header1:0
@@ -3608,7 +3628,7 @@ msgstr "Główna firma"
 #. module: base
 #: field:ir.ui.menu,web_icon_hover:0
 msgid "Web Icon File (hover)"
-msgstr ""
+msgstr "Internetowa ikona pliku"
 
 #. module: base
 #: help:res.currency,name:0
@@ -3654,7 +3674,7 @@ msgstr "Producenci produktu"
 #: code:addons/base/ir/ir_mail_server.py:240
 #, python-format
 msgid "SMTP-over-SSL mode unavailable"
-msgstr ""
+msgstr "Tryb SMTP-na-SSL niedostępny"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_survey
@@ -4440,6 +4460,9 @@ msgid ""
 "its dependencies are satisfied. If the module has no dependency, it is "
 "always installed."
 msgstr ""
+"Automatycznie instalowany moduł jest instalowany przez system kiedy "
+"wszystkie jego zależności są spełnione. Jeśli moduł nie ma wpisanych "
+"zależności, to zawsze jest instalowany."
 
 #. module: base
 #: model:ir.actions.act_window,name:base.res_lang_act_window
@@ -4506,6 +4529,14 @@ msgid ""
 "\n"
 "    "
 msgstr ""
+"\n"
+"Ten moduł pomaga konfigurować system podczas instalacji nowej bazy danych.\n"
+"============================================================================="
+"===\n"
+"\n"
+"Pokazuje listę funkcji aplikacji do zainstalowania.\n"
+"\n"
+"    "
 
 #. module: base
 #: model:ir.model,name:base.model_res_config
@@ -4730,6 +4761,10 @@ msgid ""
 "==========================\n"
 "\n"
 msgstr ""
+"\n"
+"Widok kalendarza internetowego OpenERP.\n"
+"==========================\n"
+"\n"
 
 #. module: base
 #: selection:base.language.install,lang:0
@@ -4910,7 +4945,7 @@ msgstr "Gwinea Równikowa"
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_web_api
 msgid "OpenERP Web API"
-msgstr ""
+msgstr "Interfejs internetowy OpenERP"
 
 #. module: base
 #: model:ir.module.module,description:base.module_l10n_fr_rib
@@ -5007,6 +5042,8 @@ msgid ""
 "Next number that will be used. This number can be incremented frequently so "
 "the displayed value might already be obsolete"
 msgstr ""
+"Następny numer, który zostanie użyty. Ten numer może być często zwiększany "
+"więc wyświetlana wartość może być już przestarzała."
 
 #. module: base
 #: model:ir.module.category,description:base.module_category_marketing
@@ -5037,7 +5074,7 @@ msgstr "Kierunek"
 #: code:addons/orm.py:4815
 #, python-format
 msgid "Sorting field %s not found on model %s"
-msgstr ""
+msgstr "Pole sortowania %s nie odnalezione w modelu %s"
 
 #. module: base
 #: view:ir.actions.act_window:0
@@ -5116,6 +5153,9 @@ msgid ""
 "the same values as those available in the condition field, e.g. `Dear [[ "
 "object.partner_id.name ]]`"
 msgstr ""
+"Zawartość emaila, może zawierać wyrażenie zamknięte w podwójnych nawiasach "
+"kwadratowych bazujących na wartościach jak te w polu warunkowym, np. 'Dear "
+"[[ object.partner_id.name ]]'"
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_workflow_form
@@ -5142,7 +5182,7 @@ msgstr ""
 #. module: base
 #: view:base.language.export:0
 msgid "This file was generated using the universal"
-msgstr ""
+msgstr "Ten plik został wygenerowany poprzez uniwersalny"
 
 #. module: base
 #: model:res.partner.category,name:base.res_partner_category_7
@@ -5162,7 +5202,7 @@ msgstr "Integracja z Google Docs"
 #. module: base
 #: help:ir.attachment,res_model:0
 msgid "The database object this attachment will be attached to"
-msgstr ""
+msgstr "Załącznik obiektu bazy danych zostanie załączony do"
 
 #. module: base
 #: code:addons/base/ir/ir_fields.py:327
@@ -5224,7 +5264,7 @@ msgstr "Lesoto"
 #. module: base
 #: view:base.language.export:0
 msgid ", or your preferred text editor"
-msgstr ""
+msgstr ", lub twój preferowany edytor tekstowy"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_crm_partner_assign
@@ -5389,7 +5429,7 @@ msgstr "Portuguese / Português"
 #: code:addons/base/ir/ir_model.py:372
 #, python-format
 msgid "Changing the storing system for field \"%s\" is not allowed."
-msgstr ""
+msgstr "Zmiana systemu przechowywania dla pola \"%s\" jest niedozwolona."
 
 #. module: base
 #: help:res.partner.bank,company_id:0
@@ -5400,7 +5440,7 @@ msgstr "Tylko, jeśli to konto bankowe nalezy do twojej firmy"
 #: code:addons/base/ir/ir_fields.py:337
 #, python-format
 msgid "Unknown sub-field '%s'"
-msgstr ""
+msgstr "Nieznane podpole '%s'"
 
 #. module: base
 #: model:res.country,name:base.za
@@ -5439,6 +5479,12 @@ msgid ""
 "Collects web application usage with Google Analytics.\n"
 "    "
 msgstr ""
+"\n"
+"Google Analytics.\n"
+"=================\n"
+"\n"
+"Kolekcjonuje dane wykorzystania aplikacji web poprzez Google Analytics.\n"
+"    "
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_hr_recruitment
@@ -5516,6 +5562,10 @@ msgid ""
 "================\n"
 "\n"
 msgstr ""
+"\n"
+"Interfejs internetowy OpenERP.\n"
+"================\n"
+"\n"
 
 #. module: base
 #: selection:res.request,state:0
@@ -5624,7 +5674,7 @@ msgstr "Separator dziesiętny"
 #: code:addons/orm.py:5319
 #, python-format
 msgid "Missing required value for the field '%s'."
-msgstr ""
+msgstr "Brakuje wymaganej wartości dla pola '%s'."
 
 #. module: base
 #: view:ir.rule:0
@@ -5683,7 +5733,7 @@ msgstr "Bouvet Island"
 #. module: base
 #: field:ir.model.constraint,type:0
 msgid "Constraint Type"
-msgstr ""
+msgstr "Rodzaj ogranicznika"
 
 #. module: base
 #: field:res.company,child_ids:0
@@ -6241,6 +6291,9 @@ msgid ""
 "deleting it (if you delete a native record rule, it may be re-created when "
 "you reload the module."
 msgstr ""
+"Jeśli odznaczysz aktywne pole, to zdeaktywuje regułę rekordu bez kasowania "
+"(jeśli skasujesz natywną regułę rekordu, to może zostać odtworzona kiedy "
+"przeładujesz moduł)."
 
 #. module: base
 #: selection:base.language.install,lang:0
@@ -6272,7 +6325,7 @@ msgstr "USA Minor Outlying Islands"
 #. module: base
 #: view:base.language.import:0
 msgid "e.g. English"
-msgstr ""
+msgstr "np. Angielski"
 
 #. module: base
 #: help:ir.cron,numbercall:0
@@ -6280,6 +6333,8 @@ msgid ""
 "How many times the method is called,\n"
 "a negative number indicates no limit."
 msgstr ""
+"Ilekroć metoda jest wywoływana,\n"
+"ujemna liczba wskazuje brak limitu."
 
 #. module: base
 #: field:res.partner.bank.type.field,bank_type_id:0
@@ -6320,6 +6375,8 @@ msgstr "Gujarati / ગુજરાતી"
 msgid ""
 "Unable to process module \"%s\" because an external dependency is not met: %s"
 msgstr ""
+"Nie można przetworzyć modułu \"%s\" ponieważ zewnętrzna zależność jest "
+"niespełniona: %s"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_l10n_be_hr_payroll
@@ -6362,7 +6419,7 @@ msgstr "Jest firmą"
 #: view:res.partner:0
 #: view:res.users:0
 msgid "e.g. www.openerp.com"
-msgstr ""
+msgstr "np. www.openerp.com"
 
 #. module: base
 #: selection:ir.cron,interval_type:0
@@ -6406,6 +6463,10 @@ msgid ""
 "========================\n"
 "\n"
 msgstr ""
+"\n"
+"Widok kanban OpenERP web.\n"
+"========================\n"
+"\n"
 
 #. module: base
 #: code:addons/base/ir/ir_fields.py:182
@@ -6432,12 +6493,12 @@ msgstr "Nazwy filtrów muszą być unikalne"
 #. module: base
 #: help:multi_company.default,object_id:0
 msgid "Object affected by this rule"
-msgstr ""
+msgstr "Obiekt dotknięty tę zasadą"
 
 #. module: base
 #: selection:ir.actions.act_window,target:0
 msgid "Inline View"
-msgstr ""
+msgstr "Wewnętrzny podgląd"
 
 #. module: base
 #: field:ir.filters,is_default:0
@@ -6679,6 +6740,7 @@ msgstr "Cape Verde"
 #: model:res.groups,comment:base.group_sale_salesman
 msgid "the user will have access to his own data in the sales application."
 msgstr ""
+"użytkownik będzie miał dostęp do jego własnych danych w aplikacji sprzedaży."
 
 #. module: base
 #: model:res.groups,comment:base.group_user
@@ -6686,12 +6748,15 @@ msgid ""
 "the user will be able to manage his own human resources stuff (leave "
 "request, timesheets, ...), if he is linked to an employee in the system."
 msgstr ""
+"użytkownik będzie w stanie zarządzać jego własnymi zadaniami kadrowymi "
+"(wnioski urlopowe, ewidencja czasu pracy, ...), jeśli jest przypisany w "
+"systemie do pracownika."
 
 #. module: base
 #: code:addons/orm.py:2247
 #, python-format
 msgid "There is no view of type '%s' defined for the structure!"
-msgstr ""
+msgstr "Nie ma widoku typu '%s' zdefiniowanego dla struktury!"
 
 #. module: base
 #: help:ir.values,key:0
@@ -6740,7 +6805,7 @@ msgstr "Budżetowanie"
 #. module: base
 #: field:workflow.triggers,workitem_id:0
 msgid "Workitem"
-msgstr ""
+msgstr "Element roboczy"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_anonymization
@@ -6750,7 +6815,7 @@ msgstr "Anonimizacja bazy"
 #. module: base
 #: field:res.partner,commercial_partner_id:0
 msgid "Commercial Entity"
-msgstr ""
+msgstr "Podmiot gospodarczy"
 
 #. module: base
 #: selection:ir.mail_server,smtp_encryption:0
@@ -6813,7 +6878,7 @@ msgstr ""
 #. module: base
 #: model:ir.ui.menu,name:base.menu_sales_followup
 msgid "Payment Follow-up"
-msgstr ""
+msgstr "Obserwacje płatności"
 
 #. module: base
 #: model:res.country,name:base.cw
@@ -6828,7 +6893,7 @@ msgstr "Bieżący rok dwucyfrowo: %(y)s"
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_l10n_es
 msgid "Spanish Charts of Accounts (PGCE 2008)"
-msgstr ""
+msgstr "Hiszpański plan kont (PGCE 2008)"
 
 #. module: base
 #: help:ir.actions.client,tag:0
@@ -6869,13 +6934,13 @@ msgstr "Rozmiar"
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_audittrail
 msgid "Audit Trail"
-msgstr ""
+msgstr "ścieżka audytu"
 
 #. module: base
 #: code:addons/base/ir/ir_fields.py:264
 #, python-format
 msgid "Value '%s' not found in selection field '%%(field)s'"
-msgstr ""
+msgstr "Wartość '%s' nie znaleziona w wybranych polach '%%(field)s'"
 
 #. module: base
 #: model:res.country,name:base.sd
@@ -6897,6 +6962,8 @@ msgid ""
 "You cannot delete the language which is Active!\n"
 "Please de-activate the language first."
 msgstr ""
+"Nie możesz skasować języka który jest aktywny!\n"
+"Proszę najpierw deaktywować język."
 
 #. module: base
 #: model:ir.module.module,description:base.module_l10n_fr
@@ -6949,7 +7016,7 @@ msgstr "Menu"
 #. module: base
 #: selection:ir.actions.todo,type:0
 msgid "Launch Manually Once"
-msgstr ""
+msgstr "Uruchom ręcznie raz"
 
 #. module: base
 #: view:workflow:0
@@ -6975,7 +7042,7 @@ msgstr "Izrael"
 #: code:addons/base/res/res_config.py:475
 #, python-format
 msgid "Cannot duplicate configuration!"
-msgstr ""
+msgstr "Nie można zdublikować konfiguracji!"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_l10n_syscohada
