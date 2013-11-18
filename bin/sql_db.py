@@ -284,6 +284,40 @@ class Cursor(object):
                     self.__logger.warning("Stray query: %r", query)
         return res
 
+    def execute_safe(self, query, params=None, debug=False):
+        """ Execute some SQL command, do NOT log the query params
+
+            Used for password operations, avoids logging the sensitive params
+
+            @param debug   Verbosely log the query being sent (not results, yet)
+        """
+        if self.__closed:
+            self.__logger.debug("closed cursor: %r", self)
+            raise psycopg2.OperationalError('Unable to use the cursor after having closed it')
+
+        # The core of query execution
+        try:
+            params = params or None
+            res = self._obj.execute(query, params)
+        except OperationalError, oe:
+            self.__logger.exception("Postgres Operational error: %s", oe)
+            try:
+                self._cnx.status = False
+            except TypeError:
+                pass
+            raise oe
+        except psycopg2.DatabaseError, pe:
+            self.__logger.error("Programming error: %s", ustr(pe))
+            self.__logger.error("bad query: %s", ustr(query))
+            if debug or self.__logger.isEnabledFor(logging.DEBUG):
+                import traceback
+                self.__logger.debug("stack: %s", ''.join(traceback.format_stack(limit=15)))
+            raise
+        except Exception:
+            self.__logger.exception("bad query: %s", ustr(query))
+            raise
+
+        return res
 
     def split_for_in_conditions(self, ids):
         """Split a list of identifiers into one or more smaller tuples
