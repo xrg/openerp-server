@@ -23,6 +23,7 @@ import ConfigParser
 import optparse
 import os
 import sys
+import re
 import netsvc
 import logging
 import release
@@ -39,6 +40,7 @@ def check_ssl():
         return False
 
 class configmanager(object):
+    _db_sec_re = re.compile(r'(\w+) "(\w+)"')
     def __init__(self, fname=None):
         self.options = {
             'db_host': False,
@@ -104,6 +106,7 @@ class configmanager(object):
         
         self.blacklist_for_save = set(["publisher_warranty_url", "load_language"])
         self.misc = {}
+        self.db_misc = {}
         self.config_file = fname
         self.has_ssl = check_ssl()
 
@@ -458,14 +461,18 @@ class configmanager(object):
             for sec in p.sections():
                 if sec == 'options':
                     continue
-                if not self.misc.has_key(sec):
-                    self.misc[sec]= {}
+                dsec = None
+                mm = self._db_sec_re.match(sec)
+                if mm:
+                    dsec = self.db_misc.setdefault(mm.group(2),{}).setdefault(mm.group(1), {})
+                else:
+                    dsec = self.misc.setdefault(sec, {})
                 for (name, value) in p.items(sec):
                     if value=='True' or value=='true':
                         value = True
                     if value=='False' or value=='false':
                         value = False
-                    self.misc[sec][name] = value
+                    dsec[name] = value
         except IOError:
             pass
         except ConfigParser.NoSectionError:
@@ -492,6 +499,13 @@ class configmanager(object):
             for opt in sorted(self.misc[sec].keys()):
                 p.set(sec,opt,self.misc[sec][opt])
 
+        for db in sorted(self.db_misc.keys()):
+            ddic = self.db_misc[db]
+            for dsec in sorted(ddic.keys()):
+                sec = '%s "%s"' %(dsec, db)
+                for opt in sorted(ddic[dsec].keys()):
+                    p.set(sec, opt, ddic[dsec][opt])
+
         # try to create the directories and write the file
         try:
             rc_exists = os.path.exists(self.rcfile)
@@ -514,6 +528,13 @@ class configmanager(object):
     def get_misc(self, sect, key, default=None):
         return self.misc.get(sect,{}).get(key, default)
 
+    def get_misc_db(self, dbname, sect, key, default=None):
+        ret = self.db_misc.get(dbname, {}).get(sect, {}).get(key, None)
+        if ret is not None:
+            return ret
+        else:
+            return self.misc.get(sect,{}).get(key, default)
+
     def __setitem__(self, key, value):
         self.options[key] = value
 
@@ -533,6 +554,11 @@ else:
             In particular, for *.enable it will return False
         """
         def get_misc(self, a, b, c=None):
+            if b == 'enable':
+                return False
+            return c
+
+        def get_misc_db(self, a, b, c=None):
             if b == 'enable':
                 return False
             return c
