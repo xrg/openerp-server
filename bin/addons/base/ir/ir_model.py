@@ -63,15 +63,20 @@ def _re_init_model(obj, cr, context):
         and the steps of this one are needed instead
     """
     schema = sql_model.Schema()
+    todo = []
     schema.hints['tables'].append('res_users')
     obj._auto_init_prefetch(schema, context=context)
     schema.load_from_db(cr)
     obj._field_model2db(cr, context=context)
-    obj._auto_init_sql(schema, context=context)
+    result = obj._auto_init_sql(schema, context=context)
+    if result:
+        todo += result
     if not (getattr(obj._auto_init, 'deferrable', False)):
         logging.getLogger('init').debug("Commit schema before %s._auto_init()", obj._name)
         schema.commit_to_db(cr)
-    todo = obj._auto_init(cr, context=context)
+    result = obj._auto_init(cr, context=context)
+    if result:
+        todo += result
     schema.commit_to_db(cr)
     if todo:
         todo.sort()

@@ -457,8 +457,10 @@ def init_module_objects(cr, module_name, obj_list):
             context = {'module': module_name} # is it safe to move up?
             # should we have a savepoint ?
             obj._field_model2db(cr, context=context)
-            obj._auto_init_sql(schema, context=context)
-            
+            result = obj._auto_init_sql(schema, context=context)
+            if result:
+                todo += result
+
             # we need only commit the sql model if the object overrides
             # its _auto_init (compatibility mode)
             if not (getattr(obj._auto_init, 'deferrable', False)):
