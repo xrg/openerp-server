@@ -761,7 +761,6 @@ class ir_model_data(osv.osv):
     }
     _defaults = {
         'date_init': fields.datetime.now,
-        'date_update': fields.datetime.now,
         'noupdate': False,
         'module': '',
         'source': 'xml',
