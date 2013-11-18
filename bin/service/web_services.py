@@ -237,7 +237,8 @@ class db(baseExportService):
         logger = logging.getLogger('web-services')
         template_dbs = tools.config.get_misc('databases', 'template','').split(' ')
         no_copy_dbs = tools.config.get_misc('databases', 'no_copy','').split(' ')
-        if (source_db_name in no_copy_dbs) or (not self._check_db_allowed(source_db_name) \
+        if (source_db_name in no_copy_dbs) or ('*' in no_copy_dbs) \
+                or (not self._check_db_allowed(source_db_name) \
                 and source_db_name not in template_dbs):
             logger.critical("Asked to copy forbidden source database: %s", source_db_name)
             raise Exception("Database %s is not allowed to be copied!" % source_db_name)
