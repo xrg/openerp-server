@@ -1494,8 +1494,6 @@ class orm_template(object):
         all_selectable = False
         if getattr(self, '_fallback_search', False) == True:
             all_selectable = True
-        elif config.get_misc('orm', 'fallback_search', None) == True:
-            all_selectable = True
 
         if self._columns.keys():
             for f in self._columns.keys():
@@ -3322,6 +3320,9 @@ class orm(orm_template):
             # if not access is not specify, it is the same value as _auto
             self._log_access = getattr(self, "_auto", True)
 
+        if config.get_misc_db(cr.dbname, 'orm', 'fallback_search', None) == True:
+            self._fallback_search = True
+
         self._columns = self._columns.copy() # AAArrgh!
 
         self._load_manual_fields(cr)
@@ -4720,8 +4721,6 @@ class orm(orm_template):
                         do_fallback = None
                         if hasattr(self, '_fallback_search'):
                             do_fallback = self._fallback_search
-                        else:
-                            do_fallback = config.get_misc('orm', 'fallback_search', None)
                         if do_fallback is None:
                             continue # ignore non-readable or "non-joinable" fields
                         elif do_fallback is True:
@@ -4748,8 +4747,6 @@ class orm(orm_template):
                             do_fallback = self._fallback_search
                         elif hasattr(parent_obj, '_fallback_search'):
                             do_fallback = parent_obj._fallback_search
-                        else:
-                            do_fallback = config.get_misc('orm', 'fallback_search', None)
                         if do_fallback is None:
                             continue # ignore non-readable or "non-joinable" fields
                         elif do_fallback is True:
