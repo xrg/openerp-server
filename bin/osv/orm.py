@@ -826,7 +826,7 @@ class orm_template(object):
             self._description = self._name
         if not self._table:
             self._table = self._name.replace('.', '_')
-        self._debug = config.get_misc('logging_orm', self._name, False)
+        self._debug = config.get_misc_db(cr.dbname, 'logging_orm', self._name, False)
         self._workflow = None
 
         # Keep statistics of fields access
