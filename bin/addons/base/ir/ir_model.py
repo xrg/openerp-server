@@ -282,7 +282,7 @@ class ir_model_fields(osv.osv):
 
         if not check:
                 raise except_orm(_('Error'),
-                    _("The Selection Options expression is must be in the [('key','Label'), ...] format!"))
+                    _("The Selection Options expression must be in the [('key','Label'), ...] format!"))
         return True
 
     def _size_gt_zero_msg(self, cr, user, ids, context=None):
