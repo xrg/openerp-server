@@ -1317,6 +1317,7 @@
             <field name="type">search</field>
             <field name="arch" type="xml">
                 <search string="Translations">
+                    <group>
                     <filter icon="terp-gdu-smart-failing"
                         string="Untranslated"
                         domain="['|',('value', '=', False),('value','=','')]"/>
@@ -1324,6 +1325,12 @@
                     <field name="lang" select="1"/>
                     <field name="src" select="1"/>
                     <field name="value" select="1"/>
+                    </group>
+                    <newline/>
+                    <group string="Advanced..." expand="0" groups="base.group_extended">
+                        <field name="type"/>
+                        <field name="name"/>
+                     </group>
                 </search>
             </field>
         </record>
