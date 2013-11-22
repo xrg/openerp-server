@@ -152,10 +152,10 @@
         </record>
         <record id="res_partner_seagate" model="res.partner">
             <field name="name">Seagate</field>
-            <field eval="5000.00" name="credit_limit"/>
+            <field eval="5000.0" name="credit_limit"/>
             <field name="user_id" ref="user_demo"/>
             <field eval="[(6, 0, [ref('res_partner_category_9')])]" name="category_id"/>
-            <field name="supplier">1</field>
+            <field name="supplier" eval="True"></field>
         </record>
         <record id="res_partner_8" model="res.partner">
             <field name="website">http://mediapole.net</field>
