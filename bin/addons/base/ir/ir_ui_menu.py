@@ -250,6 +250,17 @@ class ir_ui_menu(osv.osv):
                     res[menu.id]['web_icon_data'] = self.read_image(menu.web_icon)
         return res
 
+    def get_icon_definitions(self, cr, uid, ids, key=False, context=None):
+        """Retrieve mapping from "stock" icon names to string and path
+
+            Image definitions are like { 'icon-name': ('Human name', <icon-path>) }
+        """
+        from tools.icon_definitions import icon_definitions
+        if key:
+            return {key: icon_definitions[key]}
+        else:
+            return icon_definitions
+
     _columns = {
         'name': fields.char('Menu', size=64, required=True, translate=True),
         'sequence': fields.integer('Sequence'),
