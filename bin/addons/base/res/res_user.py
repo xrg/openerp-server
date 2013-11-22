@@ -478,10 +478,14 @@ class users(osv.osv):
         return result
 
     def action_get(self, cr, uid, context=None):
+        """Return the action-id for setting user's preferences
+        """
         dataobj = self.pool.get('ir.model.data')
         return dataobj.get_object_reference(cr, 1, 'base', 'action_res_users_my')[1]
 
     def login(self, db, login, password):
+        """Check password and mark the user as logged-in
+        """
         if not password:
             return False
         cr = pooler.get_db(db).cursor()
@@ -500,6 +504,8 @@ class users(osv.osv):
     login.is_plain = True # mark the plaintext version
 
     def check_super(self, passwd):
+        """Verify the super-user password
+        """
         if passwd == tools.config['admin_passwd']:
             return True
         else:
