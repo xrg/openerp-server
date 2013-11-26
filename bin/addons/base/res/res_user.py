@@ -29,7 +29,7 @@ import pytz
 import pooler
 from tools.translate import _
 from service import security
-#import logging
+import logging
 
 class groups(osv.osv):
     _name = "res.groups"
@@ -562,6 +562,7 @@ class users(osv.osv):
             ret = self.write(cr, uid, uid, {'password': new_passwd}, ctx)
             # log as admin, the event is to be seen by him
             self.log(cr, 1, uid, _("Password changed"), context=context)
+            logging.getLogger('orm').info("%s: password change for user #%d", self._name, uid)
             uic_db = self._uid_cache.get(cr.dbname, False)
             if uic_db:
                 uic_db.pop(uid, None)
