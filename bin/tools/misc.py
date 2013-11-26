@@ -1286,7 +1286,8 @@ def debug(what):
 
 def icons(*a, **kw):
     from icon_definitions import icon_definitions
-    return sorted([(k, v[0]) for k,v in icon_definitions.items() ])
+    #return sorted([(k, v[0]) for k,v in icon_definitions.items() ])
+    return sorted([(k, k) for k in icon_definitions.keys() ])
 
 def extract_zip_file(zip_file, outdirectory):
     zf = zipfile.ZipFile(zip_file, 'r')
