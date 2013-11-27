@@ -53,6 +53,7 @@ class _IMD_method(_TScanWorker):
     def scan(self, modules):
         logger, cr, uid = self._logger, self.parent.cr, self.parent.uid
         pool = self.parent.pool
+        context = {'ir.ui.menu.full_list': True, 'ir.translation.export': True}
         query = 'SELECT name, model, res_id, module' \
             ' FROM ir_model_data WHERE source IN(\'xml\', \'orm\') AND res_id != 0 AND %s ' \
             ' ORDER BY module, model, name'
@@ -75,7 +76,7 @@ class _IMD_method(_TScanWorker):
                 continue
 
             id2name = dict(model_ids[(module, model)])
-            real_ids = obj_model.search(cr, uid, [('id', 'in', id2name.keys())])
+            real_ids = obj_model.search(cr, uid, [('id', 'in', id2name.keys())], context=context)
             if not real_ids:
                 continue
 
