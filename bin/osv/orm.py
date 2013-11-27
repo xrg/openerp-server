@@ -4902,6 +4902,8 @@ class orm(orm_template):
             copying_fields.append(f)
             if f not in default:
                 read_fields.append(f)
+            elif callable(default[f]):
+                read_fields.append(f)
 
         if self._vtable:
             copying_fields.append('_vptr')
@@ -4928,10 +4930,18 @@ class orm(orm_template):
                 # TODO: shall we also copy inherited children, from virtual table?
             else:
                 raise KeyError(f) # how did a column end up here?
-            
+
             copy_fn = getattr(field_col, 'copy_data', False)
             if f in default:
-                data[f] = default[f]
+                if callable(default[f]):
+                    # it's a copying function! Same API as `copy_data` one..
+                    res = default[f](cr, uid, obj=self, id=id, f=f, data=data, context=context)
+                    if res is not None:
+                        data[f] = res
+                    else:
+                        del data[f]
+                else:
+                    data[f] = default[f]
             elif copy_fn:
                 if isinstance(copy_fn, basestring):
                     copy_fn = getattr(field_col, copy_fn)
