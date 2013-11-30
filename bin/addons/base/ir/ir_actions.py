@@ -212,38 +212,13 @@ class act_window(osv.osv):
                         ('inherit_id','=',False)], context=context)
                 if res_view:
                     search_view_id = res_view[0]
-            if search_view_id:
-                field_get = act_model.fields_view_get(cr, uid, search_view_id, 
+            if True:
+                field_get = act_model.fields_view_get(cr, uid, search_view_id or False, 
                             'search', context)
                 fields_from_fields_get.update(field_get['fields'])
                 field_get['fields'] = fields_from_fields_get
                 res[act.id] = str(field_get) # TODO: remove str() after client has adapted
-            else:
-                def process_child(node, new_node, doc):
-                    for child in node.childNodes:
-                        if child.localName=='field' and child.hasAttribute('select') \
-                                and child.getAttribute('select')=='1':
-                            if child.childNodes:
-                                fld = doc.createElement('field')
-                                for attr in child.attributes.keys():
-                                    fld.setAttribute(attr, child.getAttribute(attr))
-                                new_node.appendChild(fld)
-                            else:
-                                new_node.appendChild(child)
-                        elif child.localName in ('page','group','notebook'):
-                            process_child(child, new_node, doc)
-
-                form_arch = act_model.fields_view_get(cr, uid, False, 'form', context)
-                dom_arc = dom.minidom.parseString(encode(form_arch['arch']))
-                new_node = copy.deepcopy(dom_arc)
-                for child_node in new_node.childNodes[0].childNodes:
-                    if child_node.nodeType == child_node.ELEMENT_NODE:
-                        new_node.childNodes[0].removeChild(child_node)
-                process_child(dom_arc.childNodes[0],new_node.childNodes[0],dom_arc)
-
-                form_arch['arch'] = new_node.toxml()
-                form_arch['fields'].update(fields_from_fields_get)
-                res[act.id] = str(form_arch) # TODO: remove str()
+            
         return res
 
     def _get_help_status(self, cr, uid, ids, name, arg, context=None):
