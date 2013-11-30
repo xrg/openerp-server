@@ -925,7 +925,7 @@ class ir_model_data(osv.osv):
                             'source': 'xml',
                             },context=context)
         else:
-            if mode=='init' or (mode=='update' and xml_id):
+            if mode=='init' or (xml_id and (mode in ('update', 'test'))):
                 res_id = model_obj.create(cr, uid, values, context=context)
                 if xml_id:
                     self.create(cr, uid, {

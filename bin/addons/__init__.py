@@ -828,7 +828,7 @@ def load_module_graph(cr, graph, status=None, perform_checks=True, skip_modules=
                     """
                     cr.commit()
                     try:
-                        mLoader.process_files(cr, package.data.get('test',[]), mode, noupdate=True)
+                        mLoader.process_files(cr, package.data.get('test',[]), 'test')
                     except Exception, e:
                         if tools.config.get_misc('tests', 'nonfatal', False):
                             logger.warn(e)
