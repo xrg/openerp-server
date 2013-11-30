@@ -831,13 +831,27 @@ class ir_model_data(osv.osv):
         if not xml_id:
             return False
         try:
-            id = self.search_read(cr, uid, [('module','=', module),('name','=',xml_id),
+            if uid == 1:
+                # avoid all the overhead of ORM, assume a straightforward case
+                cr.execute("""SELECT res_id FROM ir_model_data
+                                WHERE module = %s AND name = %s
+                                  AND source IN ('orm', 'xml') AND res_id != 0;
+                           """,
+                           (module, xml_id), debug=self._debug)
+                res = cr.fetchall()
+            else:
+                res = self.search_read(cr, uid, [('module','=', module),
+                                            ('name','=',xml_id),
                                             ('source', 'in', ('orm', 'xml'), ('res_id', '!=', 0))],
-                                    fields=['res_id'])[0]['res_id']
-            self.loads[(module,xml_id)] = (model,id)
+                                    fields=['res_id'])
+            if res:
+                rid = res[0]['res_id']
+                self.loads[(module,xml_id)] = (model,rid)
+            else:
+                return False
         except Exception:
-            id = False
-        return id
+            rid = False
+        return rid
 
     def unlink(self, cr, uid, ids, context=None):
         """ Regular unlink method, but make sure to clear the caches. """
