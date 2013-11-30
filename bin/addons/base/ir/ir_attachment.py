@@ -145,6 +145,8 @@ class ir_attachment(osv.osv):
             res_id = attachment.res_id
             if model_object and res_id:
                 model_pool = self.pool.get(model_object)
+                if not model_pool:
+                    continue
                 res = model_pool.name_get(cr,uid,[res_id],context)
                 res_name = res and res[0][1] or False
                 if res_name:
