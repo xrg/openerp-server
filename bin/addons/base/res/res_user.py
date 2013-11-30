@@ -400,6 +400,9 @@ class users(osv.osv):
     def write(self, cr, uid, ids, values, context=None):
         if not hasattr(ids, '__iter__'):
             ids = [ids]
+        if ('password' in values) and not tools.server_bool.in_context(context, 'set_password', True):
+            self.log(cr, 1, uid, _("Attempt to reset password, through prohibited API!"), context=context)
+            raise security.ExceptionNoTb("Access Denied")
         if ids == [uid]:
             for key in values.keys():
                 if not (key in self.SELF_WRITEABLE_FIELDS or key.startswith('context_')):
@@ -409,10 +412,6 @@ class users(osv.osv):
                     if not (values['company_id'] in self.read(cr, 1, uid, ['company_ids'], context=context)['company_ids']):
                         del values['company_id']
                 uid = 1 # safe fields only, so we write as super-user to bypass access rights
-
-        if ('password' in values) and not tools.server_bool.in_context(context, 'set_password', True):
-            self.log(cr, 1, uid, _("Attempt to reset password, through prohibited API!"), context=context)
-            raise security.ExceptionNoTb("Access Denied")
 
         res = super(users, self).write(cr, uid, ids, values, context=context)
 
