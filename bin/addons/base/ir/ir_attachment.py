@@ -3,6 +3,7 @@
 #
 #    OpenERP, Open Source Management Solution
 #    Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>).
+#    Copyright (C) 2008-2009, 2011-2013 P. Christeas <xrg@hellug.gr>
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -22,7 +23,9 @@
 import itertools
 
 from osv import fields, osv, index
-# from osv.orm import except_orm
+from collections import defaultdict
+from osv.orm import except_orm
+from tools.translate import _
 
 class ir_attachment(osv.osv):
     def check(self, cr, uid, ids, mode, context=None, values=None):
@@ -30,26 +33,31 @@ class ir_attachment(osv.osv):
         In the 'document' module, it is overriden to relax this hard rule, since
         more complex ones apply there.
         """
-        if not ids:
+        if (not ids) or uid == 1:
             return
         ima = self.pool.get('ir.model.access')
-        res_ids = {}
+        res_ids = defaultdict(set)
         if ids:
             if isinstance(ids, (int, long)):
                 ids = [ids]
-            cr.execute('SELECT DISTINCT res_model, res_id FROM ir_attachment WHERE id = ANY (%s)', (ids,), self._debug)
+            cr.execute('SELECT DISTINCT res_model, res_id FROM ir_attachment WHERE id = ANY (%s) ' \
+                    'AND res_model IS NOT NULL AND res_id IS NOT NULL', (ids,), self._debug)
             for rmod, rid in cr.fetchall():
-                if not (rmod and rid):
-                    continue
-                res_ids.setdefault(rmod,set()).add(rid)
+                res_ids[rmod].add(rid)
         if values:
             if 'res_model' in values and 'res_id' in values:
-                res_ids.setdefault(values['res_model'],set()).add(values['res_id'])
+                res_ids[values['res_model']].add(values['res_id'])
 
         for model, mids in res_ids.items():
             # ignore attachments that are not attached to a resource anymore when checking access rights
             # (resource was deleted but attachment was not)
-            cr.execute('select id from '+self.pool.get(model)._table+' where id in %s', (tuple(mids),))
+            mod_obj = self.pool.get(model)
+            if not mod_obj:
+                raise except_orm('AccessError',
+                                _('You are not allowed to access attachments of removed model %s. Please contact your administrator') \
+                                % model)
+
+            cr.execute('SELECT id FROM %s WHERE id = ANY(%%s)' % mod_obj._table, (list(mids),), debug=self._debug)
             mids = [x[0] for x in cr.fetchall()]
             ima.check(cr, uid, model, mode, context=context)
             self.pool.get(model).check_access_rule(cr, uid, mids, mode, context=context)
