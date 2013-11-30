@@ -1020,7 +1020,9 @@ class _tag_record(_subtag_Mixin, _TagService):
         rlist = []
         for node in rec:
             rtag = self._get_subtag(node)
-            rlist.append(rtag.eval_xml(cr, node, parent_model=model, context=rec_context))
+            rval = rtag.eval_xml(cr, node, parent_model=model, context=rec_context)
+            if rval:
+                rlist.append(rval)
 
         new_id = self.parent.make_record(cr, rec_model, dict(rlist), rec_id, context=rec_context)
         return rec_model, new_id
@@ -1166,6 +1168,8 @@ class _tag_field(_TagService):
     _inherit = 'val.value'
 
     def eval_xml(self, cr, rec, parent_model=None, context=None):
+        if nodeattr2bool(rec, "noupdate", False) and self.parent.mode != 'init':
+            return None
         f_name = rec.get("name",'')
         res = super(_tag_field, self).eval_xml(cr, rec, parent_model, context)
         return (f_name, res)
