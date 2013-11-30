@@ -278,6 +278,12 @@ class float(_column):
             self.digits = t
             self._sql_type = 'numeric'
 
+    def digits_change(self, cr):
+        if self.digits_compute:
+            t = self.digits_compute(cr)
+            self._symbol_set=('%s', lambda x: ('%.'+str(t[1])+'f') % (__builtin__.float(x or 0.0),))
+            self.digits = t
+
 
 class date(_column):
     _type = 'date'
