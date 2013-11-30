@@ -483,9 +483,13 @@ def init_module_objects(cr, module_name, obj_list):
     # print "TODO(last):"
     # print schema._dump_todo()
     schema.commit_to_db(cr)
-    todo.sort()
-    for t in todo:
-        t[1](cr, *t[2])
+    if todo:
+        if not wf_engine:
+            wf_engine = osv.osv.netsvc.LocalService('workflow')
+        wf_engine.thaw_dummy(cr)
+        todo.sort()
+        for t in todo:
+            t[1](cr, *t[2])
     cr.commit()
 
 
