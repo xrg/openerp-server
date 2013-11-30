@@ -171,10 +171,10 @@ class _LoaderExecContext(ExecContext):
         super(_LoaderExecContext, self).prepare_context(context)
         if 'ref' in context:
             context['_ref'] = context['ref']
-        
+
 class YamlInterpreter(DataLoader):
     _name = 'yml'
-    
+
     def __init__(self,*args, **kwargs):
         super(YamlInterpreter, self).__init__(*args, **kwargs)
         self.assert_report = TestReport()
@@ -394,6 +394,7 @@ class YamlInterpreter(DataLoader):
                     self.module_name, record_dict, record.id, noupdate=self.isnoupdate(record), mode=self.mode, context=context)
             if model._debug:
                 self.logger.debug("RECORD_DICT %s: #%r %s" % ( record.id, id, record_dict))
+            assert id, "bad ID for %s/%s: %r" %( record.model, record.id, id)
             self.idref[record.id] = int(id)
 
     def _create_record(self, cr, model, fields):
