@@ -49,6 +49,7 @@ import datetime
 import logging
 import warnings
 from operator import itemgetter
+from collections import defaultdict
 import itertools
 import pickle
 import re
@@ -3035,32 +3036,31 @@ class orm(orm_template):
         ss = self._columns[k]._symbol_set
         update_query = 'UPDATE "%s" SET "%s"=%s WHERE id = ANY(%%s)' % (self._table, k, ss[0])
 
-        upd_vals = [] # list of tuples with (value, id) *in that order*
+        upd_vals = defaultdict(list) # value: [id,...] map *in that order*
         def __flush():
-            upd_vals.sort() # values first, ids next
-            while upd_vals:
-                val, id = upd_vals.pop(0)
-                upd_ids = [id,]
-                while upd_vals and (upd_vals[0][0] is val):
-                    upd_ids.append(upd_vals.pop(0)[1])
+            for val, upd_ids in upd_vals.iteritems():
                 cr.execute(update_query, (val, upd_ids), debug=self._debug)
+            upd_vals.clear()
 
         cr.execute('select id from '+self._table, debug=self._debug)
         ids_lst = map(itemgetter(0), cr.fetchall())
+        count = 0
         while ids_lst:
             iids = ids_lst[:100]
             ids_lst = ids_lst[100:]
             res = f.get(cr, self, iids, k, 1, {})
             for key,val in res.items():
                 if f._multi:
-                    val = val[k]
+                    val = val.get(k, False)
                 # if val is a many2one, just write the ID
                 if isinstance(val, tuple):
                     val = val[0]
                 if (val is not False) or f._type == 'boolean':
-                    upd_vals.append((ss[1](val), key))
-                if len(upd_vals) >= 1000:
+                    upd_vals[ss[1](val)].append(key)
+                    count += 1
+                if count >= 1000:
                     __flush()
+                    count = 0
         __flush()
 
     def force_update_store(self, cr, uid, ids=False, column=False, context=None):
