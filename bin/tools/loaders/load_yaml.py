@@ -385,7 +385,7 @@ class YamlInterpreter(DataLoader):
                     self.idref[record] = int(id)
                     return None
                 else:
-                    if not self._coerce_bool(record.forcecreate, (self.mode == 'test')):
+                    if not self._coerce_bool(record.forcecreate, True):
                         return None
 
             record_dict = self._create_record(cr, model, fields)

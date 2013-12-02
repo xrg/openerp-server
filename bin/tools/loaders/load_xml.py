@@ -1009,7 +1009,7 @@ class _tag_record(_subtag_Mixin, _TagService):
                     return None
                 else:
                     # if the resource didn't exist
-                    if not nodeattr2bool(rec, 'forcecreate', (self.parent.mode == 'test')):
+                    if not nodeattr2bool(rec, 'forcecreate', True):
                         # we don't want to create it, so we skip it
                         return None
                     # else, we let the record to be created
