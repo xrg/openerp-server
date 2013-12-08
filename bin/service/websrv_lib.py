@@ -233,10 +233,10 @@ class HTTPModified:
         """
         expires = None
         delta = datetime.datetime.now() - edate
-        if delta.total_seconds() < 0:
+        if delta < datetime.timedelta(0):
             # something is wrong, we'd better expire just now
             expires = datetime.datetime.now()
-        elif delta.total_seconds() > self._expire_max_age:
+        elif delta > datetime.timedelta(seconds=self._expire_max_age):
             expires = datetime.datetime.now() + datetime.timedelta(seconds=self._expire_max_age)
         else:
             expires = datetime.datetime.now() + (delta / 2)
