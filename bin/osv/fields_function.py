@@ -335,20 +335,9 @@ class function(_column):
             if type=='binary':
                 self._symbol_get=lambda x:x and str(x)
 
-        if type == 'float':
-            self._symbol_c = float._symbol_c
-            self._symbol_f = float._symbol_f
-            self._symbol_set = float._symbol_set
-
-        if type == 'boolean':
-            self._symbol_c = boolean._symbol_c
-            self._symbol_f = boolean._symbol_f
-            self._symbol_set = boolean._symbol_set
-
-        if type in ['integer','integer_big']:
-            self._symbol_c = integer._symbol_c
-            self._symbol_f = integer._symbol_f
-            self._symbol_set = integer._symbol_set
+        self._symbol_c = self._shadow._symbol_c
+        self._symbol_f = self._shadow._symbol_f
+        self._symbol_set = self._shadow._symbol_set
 
     def digits_change(self, cr):
         self._shadow.digits_change(cr)
