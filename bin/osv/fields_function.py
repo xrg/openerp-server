@@ -294,6 +294,7 @@ class function(_column):
                 synonym for `obj` for historical reasons. Please prefer to
                 use `obj` instead in new code
         """
+        digits = args.pop('digits', None)
         _column.__init__(self, **args)
         self._obj = obj
         self._method = method
@@ -303,9 +304,6 @@ class function(_column):
         self._multi = multi
         if 'relation' in args: # unfortunate old API
             self._obj = args['relation']
-
-        self.digits = args.get('digits', (16,2)) # FIXME: use shadow
-        self.digits_compute = args.get('digits_compute', None)
 
         self._fnct_inv_arg = fnct_inv_arg
         if not fnct_inv:
@@ -325,6 +323,8 @@ class function(_column):
             args['fields_id'] = False
         elif self._type == 'char':
             args.setdefault('size', 16)
+        if digits is not None:
+            args['digits'] = digits # put it back
         self._shadow = get_field_class(self._type)(obj=self._obj, shadow=True, **args)
 
         if store:
@@ -351,11 +351,11 @@ class function(_column):
             self._symbol_set = integer._symbol_set
 
     def digits_change(self, cr):
-        # FIXME Remove after using shadow everywhere
-        if self.digits_compute:
-            t = self.digits_compute(cr)
-            self._symbol_set=('%s', lambda x: ('%.'+str(t[1])+'f') % (__builtin__.float(x or 0.0),))
-            self.digits = t
+        self._shadow.digits_change(cr)
+
+    @property
+    def digits(self):
+        return self._shadow.digits
 
     def post_init(self, cr, name, obj):
 
