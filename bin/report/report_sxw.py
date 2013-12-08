@@ -308,12 +308,6 @@ class rml_parse(object):
         if (isinstance(value, (str, unicode)) or date or date_time) and not value:
             return ''
 
-        if digits is None:
-            if dp:
-                digits = self.get_digits(dp=dp)
-            else:
-                digits = self.get_digits(value)
-
         if not self.lang_dict_called:
             self._get_lang_dict()
             self.lang_dict_called = True
@@ -336,8 +330,15 @@ class rml_parse(object):
                     parse_format = DT_FORMAT
                 date = datetime.strptime(value, parse_format)
             return date.strftime(date_format)
+        else:
+            if digits is None:
+                if dp:
+                    digits = self.get_digits(dp=dp)
+                else:
+                    digits = self.get_digits(value)
 
-        return self.lang_dict['lang_obj'].format('%.' + str(digits) + 'f', value, grouping=grouping, monetary=monetary)
+            return self.lang_dict['lang_obj'].format('%.' + str(digits) + 'f',
+                                    value, grouping=grouping, monetary=monetary)
 
     def repeatIn(self, lst, name,nodes_parent=False):
         ret_lst = []
