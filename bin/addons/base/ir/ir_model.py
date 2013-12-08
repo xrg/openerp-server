@@ -838,7 +838,7 @@ class ir_model_data(osv.osv):
                                   AND source IN ('orm', 'xml') AND res_id != 0;
                            """,
                            (module, xml_id), debug=self._debug)
-                res = cr.fetchall()
+                res = cr.dictfetchall()
             else:
                 res = self.search_read(cr, uid, [('module','=', module),
                                             ('name','=',xml_id),
@@ -850,6 +850,7 @@ class ir_model_data(osv.osv):
             else:
                 return False
         except Exception:
+            logging.getLogger('orm').exception("ir.model.data: Cannot resolve: %s", xml_id)
             rid = False
         return rid
 
