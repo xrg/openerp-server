@@ -16,7 +16,7 @@
 
         <record id="user_demo" model="res.users">
             <field name="login">demo</field>
-            <field name="password">demo</field>
+            <field name="password" noupdate="1">demo</field>
             <field name="name">Demo User</field>
             <field name="signature">Mr Demo</field>
             <field name="address_id" ref="demo_address"/>
