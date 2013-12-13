@@ -1462,12 +1462,12 @@ DATETIME_FORMATS_MAP = {
         '%G': '%Y',
         '%h': '%b',
         '%k': '%H',
-        '%l': '%I',
+        '%l': '%H',
         '%n': '\n',
         '%O': '', # special modifier
         '%P': '%p',
         '%R': '%H:%M',
-        '%r': '%I:%M:%S %p',
+        '%r': '%H:%M:%S',
         '%s': '', #num of seconds since epoch
         '%T': '%H:%M:%S',
         '%t': ' ', # tab
