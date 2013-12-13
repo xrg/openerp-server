@@ -85,7 +85,7 @@ class AuthRedirectExc(Exception):
         self.target = target
         self.extra_headers = extra_headers or []
 
-class AuthProvider:
+class AuthProvider(object):
     """A provider object is persistent, sets up the "proxy" for each handler
     
         There is just one provider per service, per authentication domain
