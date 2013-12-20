@@ -31,6 +31,7 @@ from fields import _column, _symbol_set_long, _symbol_set_integer, \
 
 import datetime as DT
 import tools
+import re
 from tools.translate import _
 import __builtin__
 from tools import expr_utils as eu
@@ -237,6 +238,17 @@ class char(_string_field):
         """ Copies this string as "old-val (copy)"
         """
         return _("%s (copy)") % data[f]
+
+    _copy_numbered_re = re.compile(r'\(([0-9]+)\) *$')
+
+    def copy_numbered(self, cr, uid, obj, id, f, data, context):
+        m = self._copy_numbered_re.search(data[f])
+        if m:
+            num = int(m.group(1))
+            s,e = m.span(1)
+            return m.string[:s] + str(num+1) + m.string[e:]
+        else:
+            return data[f] + ' (1)'
 
 class text(_string_field):
     _type = 'text'
