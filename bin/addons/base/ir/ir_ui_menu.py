@@ -165,25 +165,18 @@ class ir_ui_menu(osv.osv):
         else:
             datas['name']=datas['name']+'(1)'
         self.write(cr,uid,[res],{'name':datas['name']})
-        ids = ir_values_obj.search(cr, uid, [
-            ('model', '=', 'ir.ui.menu'),
-            ('res_id', '=', id),
-            ])
-        for iv in ir_values_obj.browse(cr, uid, ids):
-            ir_values_obj.copy(cr, uid, iv.id, default={'res_id': res},
-                               context=context)
+        for ivid in ir_values_obj.search(cr, uid, [ ('model', '=', 'ir.ui.menu'), ('res_id', '=', id)], context=context):
+            ir_values_obj.copy(cr, uid, ivid, default={'res_id': res}, context=context)
         return res
 
-    def _action(self, cursor, user, ids, name, arg, context=None):
+    def _action(self, cr, uid, ids, name, arg, context=None):
         res = {}
         values_obj = self.pool.get('ir.values')
-        value_ids = values_obj.search(cursor, user, [
-            ('model', '=', self._name), ('key', '=', 'action'),
-            ('key2', '=', 'tree_but_open'), ('res_id', 'in', ids)],
-            context=context)
         values_action = {}
-        for value in values_obj.browse(cursor, user, value_ids, context=context):
-            values_action[value.res_id] = value.value
+        for res in values_obj.search_read(cr, uid, [('model', '=', self._name),
+                        ('key', '=', 'action'), ('key2', '=', 'tree_but_open'),
+                        ('res_id', 'in', ids)], fields=['res_id', 'value',], context=context):
+            values_action[res['res_id']] = res['value']
         for menu_id in ids:
             res[menu_id] = values_action.get(menu_id, False)
         return res
