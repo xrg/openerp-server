@@ -449,6 +449,8 @@ class many2one(_rel2one):
                 ids2 = [x[0] for x in field_obj.name_search(cr, uid, right, [], 'like', limit=None)]
             elif isinstance(right, (int, long)):
                 ids2 = list([right])
+            elif not right:
+                ids2 = [] # most likely to yield empty result set
             else:
                 # Here, right can still contain tuples, which make it a
                 # nested domain expression
