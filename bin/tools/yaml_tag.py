@@ -1,7 +1,7 @@
 import yaml
 import logging
 from date_eval import date_eval
-from misc import DEFAULT_SERVER_DATE_FORMAT, DEFAULT_SERVER_DATETIME_FORMAT
+# from misc import DEFAULT_SERVER_DATE_FORMAT, DEFAULT_SERVER_DATETIME_FORMAT
 
 class YamlTag(object):
     """
@@ -163,13 +163,11 @@ def eval_constructor(loader, node):
 
 def date_constructor(loader, node):
     expression = loader.construct_scalar(node)
-    # TODO return a datetime.date object, not string
-    return date_eval(expression).strftime(DEFAULT_SERVER_DATE_FORMAT)
+    return date_eval(expression).date()
 
 def datetime_constructor(loader, node):
     expression = loader.construct_scalar(node)
-    # TODO return a datetime.datetime object
-    return date_eval(expression).strftime(DEFAULT_SERVER_DATETIME_FORMAT)
+    return date_eval(expression)
 
 def ref_constructor(loader, tag_suffix, node):
     if tag_suffix == "id":

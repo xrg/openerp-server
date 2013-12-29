@@ -28,7 +28,7 @@
                     <group col="2" colspan="2">
                         <separator string="Values for Event Type" colspan="2"/>
                         <label string="client_action_multi, client_action_relate" colspan="2"/>
-                        <label string="tree_but_action, client_print_multi"  colspan="2"/>
+                        <label string="tree_but_action, client_print_multi" colspan="2"/>
                     </group>
                     <group col="2" colspan="2">
                         <separator colspan="2" string="Value"/>
@@ -176,8 +176,8 @@
                         <field name="padding"/>
                         <field name="number_increment"/>
                         <field name="number_next"/>
-			<field name="weight" />
-			<field name="condition" colspan="4" />
+			<field name="weight"/>
+			<field name="condition" colspan="4"/>
                         <separator colspan="4" string="Legend (for prefix, suffix)"/>
                         <group col="8" colspan="4">
                             <group>
@@ -192,8 +192,8 @@
                                 <label colspan="4" string="Day of the week (0:Monday): %%(weekday)s"/>
                             </group>
                             <group>
-                                <label colspan="4" string="Hour 00->24: %%(h24)s"/>
-                                <label colspan="4" string="Hour 00->12: %%(h12)s"/>
+                                <label colspan="4" string="Hour 00-&gt;24: %%(h24)s"/>
+                                <label colspan="4" string="Hour 00-&gt;12: %%(h12)s"/>
                                 <label colspan="4" string="Minute: %%(min)s"/>
                                 <label colspan="4" string="Seconde: %%(sec)s"/>
                             </group>
@@ -353,14 +353,14 @@
             <field name="type">form</field>
             <field name="arch" type="xml">
                 <form string="Filters">
-                    <group colspan="4" col="6" >
+                    <group colspan="4" col="6">
                         <field name="name"/>
                         <field name="model_id"/>
                         <field name="user_id"/>
                     </group>
                     <group col="4" expand="1">
-                        <separator string="Domain" colspan="2" />
-                        <separator string="Context" colspan="2" />
+                        <separator string="Domain" colspan="2"/>
+                        <separator string="Context" colspan="2"/>
                         <field name="domain" nolabel="1" colspan="2"/>
                         <field name="context" nolabel="1" colspan="2"/>
                     </group>
@@ -443,8 +443,8 @@
                             <group col="2" colspan="2">
                                 <separator string="RML Report" colspan="2"/>
                                 <field name="header"/>
-                                <field name="report_rml" groups="base.group_extended" />
-                                <field name="report_rml_content" groups="base.group_extended" />
+                                <field name="report_rml" groups="base.group_extended"/>
+                                <field name="report_rml_content" groups="base.group_extended"/>
                             </group>
                             <group col="2" colspan="2">
                                 <separator string="XML Report" colspan="2"/>
@@ -582,8 +582,8 @@
                             </group>
                         </page>
                         <page string="Security">
-                            <separator colspan="4" string="Select Groups" />
-                            <field name="groups_id" nolabel="1" colspan="4" />
+                            <separator colspan="4" string="Select Groups"/>
+                            <field name="groups_id" nolabel="1" colspan="4"/>
                         </page>
                     </notebook>
                 </form>
@@ -907,7 +907,7 @@
             <field name="arch" type="xml">
                 <form string="Attachments">
                     <group colspan="4" col="6">
-                        <field name="name" />
+                        <field name="name"/>
                         <field name="type"/>
                         <field name="company_id" groups="base.group_multi_company" widget="selection"/>
                     </group>
@@ -915,7 +915,7 @@
                     <page string="Attachment">
                     <group col="4" colspan="4">
                         <separator string="Data" colspan="4"/>
-                        <newline />
+                        <newline/>
                         <group col="2" colspan="4" attrs="{'invisible':[('type','=','url')]}">
                             <field name="datas" filename="datas_fname"/>
                             <field name="datas_fname" select="1"/>
@@ -987,7 +987,7 @@
                     <newline/>
                     <group expand="0" string="Group By...">
                         <filter string="Owner" icon="terp-personal" domain="[]" context="{'group_by':'create_uid'}"/>
-                        <filter string="Type" icon="terp-stock_symbol-selection" domain="[]" context="{'group_by':'type'}"  groups="base.group_extended"/>
+                        <filter string="Type" icon="terp-stock_symbol-selection" domain="[]" context="{'group_by':'type'}" groups="base.group_extended"/>
                         <filter string="Company" icon="terp-gtk-home" domain="[]" context="{'group_by':'company_id'}" groups="base.group_multi_company"/>
                         <separator orientation="vertical"/>
                         <filter string="Month" help="Creation Month" icon="terp-go-month" domain="[]" context="{'group_by':'create_date'}"/>
@@ -1142,7 +1142,7 @@
             <field name="arch" type="xml">
                 <form string="Fields">
                     <group colspan="4" col="6">
-                        <field name="name" select="1" />
+                        <field name="name" select="1"/>
                         <field name="model_id" attrs="{'readonly': [('state','!=', 'manual')]}"/>
                         <field name="field_description"/>
                         <field name="state"/>
@@ -1236,8 +1236,8 @@
                     <field name="res_id"/>
                     <field name="noupdate"/>
                     <newline/>
-                    <field name="date_update" />
-                    <field name="date_init" />
+                    <field name="date_update"/>
+                    <field name="date_init"/>
                 </form>
             </field>
         </record>
@@ -1317,6 +1317,7 @@
             <field name="type">search</field>
             <field name="arch" type="xml">
                 <search string="Translations">
+                    <group>
                     <filter icon="terp-gdu-smart-failing"
                         string="Untranslated"
                         domain="['|',('value', '=', False),('value','=','')]"/>
@@ -1324,6 +1325,12 @@
                     <field name="lang" select="1"/>
                     <field name="src" select="1"/>
                     <field name="value" select="1"/>
+                    </group>
+                    <newline/>
+                    <group string="Advanced..." expand="0" groups="base.group_extended">
+                        <field name="type"/>
+                        <field name="name"/>
+                     </group>
                 </search>
             </field>
         </record>
@@ -1422,17 +1429,17 @@
             <field name="arch" type="xml">
                 <form string="Menu">
                     <group col="6">
-                        <field name="name" string="Menu" />
+                        <field name="name" string="Menu"/>
                         <field name="parent_id" colspan="2" context="{'ir.ui.menu.full_list':True}"/>
                         <field name="sequence" colspan="2"/>
 
                         <field name="complete_name" string="Full Path" colspan="2"/>
-                        <field name="action" colspan="2" />
-                        <field name="icon"  colspan="2"/>
+                        <field name="action" colspan="2"/>
+                        <field name="icon" colspan="2"/>
 
                         <group col="4" colspan="6" groups="base.group_extended">
-                            <field name="web_icon" groups="base.group_extended" />
-                            <field name="web_icon_hover" groups="base.group_extended" />
+                            <field name="web_icon" groups="base.group_extended"/>
+                            <field name="web_icon_hover" groups="base.group_extended"/>
                             <field name="web_icon_data" widget="image" groups="base.group_extended"/>
                             <field name="web_icon_hover_data" widget="image" groups="base.group_extended"/>
                         </group>
@@ -1452,7 +1459,7 @@
             <field name="type">search</field>
             <field name="arch" type="xml">
                 <search string="Menu">
-                    <field name="name" string="Menu" />
+                    <field name="name" string="Menu"/>
                     <field name="parent_id"/>
                 </search>
             </field>
@@ -1499,8 +1506,8 @@
                 <form string="Scheduled Actions">
                     <field name="name"/>
                     <field name="active"/>
-                    <field name="user_id" />
-                    <field name="priority" />
+                    <field name="user_id"/>
+                    <field name="priority"/>
                     <notebook colspan="4">
                     <page string="Information">
                         <field name="interval_number"/>
@@ -1564,7 +1571,7 @@
             <field name="view_id" ref="ir_cron_view_tree"/>
         </record>
 
-        <menuitem id="next_id_10" name="Scheduler" parent="base.menu_config"  groups="base.group_extended"/>
+        <menuitem id="next_id_10" name="Scheduler" parent="base.menu_config" groups="base.group_extended"/>
         <menuitem action="ir_cron_act" id="menu_ir_cron_act" parent="next_id_10"/>
 
 
@@ -1936,12 +1943,12 @@
 
 
         <record model="ir.cron" id="cronjob_osv_memory_autovacuum">
-            <field name='name'>AutoVacuum osv_memory objects</field>
-            <field name='interval_number'>30</field>
-            <field name='interval_type'>minutes</field>
+            <field name="name">AutoVacuum osv_memory objects</field>
+            <field name="interval_number">30</field>
+            <field name="interval_type">minutes</field>
             <field name="numbercall">-1</field>
             <field name="active">True</field>
-            <field name="doall" eval="False" />
+            <field name="doall" eval="False"/>
             <field name="model">osv_memory.autovacuum</field>
             <field name="function">power_on</field>
             <field name="args">()</field>

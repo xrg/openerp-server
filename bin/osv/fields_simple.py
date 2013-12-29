@@ -4,7 +4,7 @@
 #    OpenERP, Open Source Management Solution
 #    Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>).
 #    Copyright (C) 2010-2011 OpenERP SA. (www.openerp.com)
-#    Copyright (C) 2008-2012 P. Christeas <xrg@hellug.gr>
+#    Copyright (C) 2008-2013 P. Christeas <xrg@hellug.gr>
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -31,16 +31,18 @@ from fields import _column, _symbol_set_long, _symbol_set_integer, \
 
 import datetime as DT
 import tools
+import re
 from tools.translate import _
 import __builtin__
 from tools import expr_utils as eu
+from tools.misc import to_date, to_datetime, to_time
 from tools.date_eval import lazy_date_eval
 
 class boolean(_column):
     _type = 'boolean'
     _sql_type = 'bool'
     _symbol_c = '%s'
-    _symbol_f = lambda x: x and 'True' or 'False'
+    _symbol_f = lambda x: x and True or False
     _symbol_set = (_symbol_c, _symbol_f)
     merge_op = 'eq'
 
@@ -237,6 +239,17 @@ class char(_string_field):
         """
         return _("%s (copy)") % data[f]
 
+    _copy_numbered_re = re.compile(r'\(([0-9]+)\) *$')
+
+    def copy_numbered(self, cr, uid, obj, id, f, data, context):
+        m = self._copy_numbered_re.search(data[f])
+        if m:
+            num = int(m.group(1))
+            s,e = m.span(1)
+            return m.string[:s] + str(num+1) + m.string[e:]
+        else:
+            return data[f] + ' (1)'
+
 class text(_string_field):
     _type = 'text'
     _sql_type = 'text'
@@ -266,14 +279,39 @@ class float(_column):
         super(float, self).post_init(cr, name, obj)
         if self.digits_compute:
             t = self.digits_compute(cr)
-            self._symbol_set=('%s', lambda x: ('%.'+str(t[1])+'f') % (__builtin__.float(x or 0.0),))
+            def __sset(x):
+                if x is None or x is False:
+                    return None
+                # TODO Decimal
+                if isinstance(x, basestring):
+                    x = __builtin__.float(x)
+                return __builtin__.round(x, t[1])
+            self._symbol_set=('%s', __sset)
             self.digits = t
             self._sql_type = 'numeric'
+
+    def digits_change(self, cr):
+        if self.digits_compute:
+            t = self.digits_compute(cr)
+            def __sset(x):
+                if x is None or x is False:
+                    return None
+                # TODO Decimal
+                if isinstance(x, basestring):
+                    x = __builtin__.float(x)
+                return __builtin__.round(x, t[1])
+            self._symbol_set=('%s', __sset)
+            self.digits = t
+
 
 class date(_column):
     _type = 'date'
     _sql_type = 'date'
     merge_op = '|eq'
+    _symbol_c = '%s'
+    _symbol_f = to_date
+    _symbol_set = (_symbol_c, _symbol_f)
+
 
     @staticmethod
     def today(*args):
@@ -283,8 +321,7 @@ class date(_column):
         This method should be provided as is to the _defaults dict, it
         should not be called.
         """
-        return DT.date.today().strftime(
-            tools.DEFAULT_SERVER_DATE_FORMAT)
+        return DT.date.today()
 
     @staticmethod
     def lazy_eval(estr):
@@ -294,12 +331,31 @@ class date(_column):
 
                 _defaults = { 'date': lazy_eval('yesterday'), }
         """
-        return lazy_date_eval(estr, out_fmt='date_str')
+        return lazy_date_eval(estr, out_fmt='date')
+
 
 class datetime(_column):
     _type = 'datetime'
     _sql_type = 'timestamp'
     merge_op = '|eq'
+    _symbol_c = '%s'
+    _symbol_f = to_datetime
+    _symbol_set = (_symbol_c, _symbol_f)
+
+    _part_fns = {
+            'day': 'extract(DAY FROM %s)',
+            'decade': 'extract(DECADE FROM %s)',
+            'dow': 'extract(DOW FROM %s)',
+            'doy': 'extract(DOY FROM %s)',
+            'epoch': 'extract(EPOCH FROM %s)',
+            'hour': 'extract(HOUR FROM %s)',
+            'milliseconds': 'extract(MILLISECONDS FROM %s)',
+            'month': 'extract(MONTH FROM %s)',
+            'minute': 'extract(MINUTE FROM %s)',
+            'second': 'extract(SECOND FROM %s)',
+            'week': 'extract(WEEK FROM %s)',
+            'year': 'extract(YEAR FROM %s)',
+        }
 
     @staticmethod
     def now(*args):
@@ -309,8 +365,7 @@ class datetime(_column):
         This method should be provided as is to the _defaults dict, it
         should not be called.
         """
-        return DT.datetime.now().strftime(
-            tools.DEFAULT_SERVER_DATETIME_FORMAT)
+        return DT.datetime.now()
 
     @staticmethod
     def lazy_eval(estr):
@@ -320,18 +375,33 @@ class datetime(_column):
 
                 _defaults = { 'cur_tstamp': lazy_eval('now -5min'), }
         """
-        return lazy_date_eval(estr, out_fmt='datetime_str')
+        return lazy_date_eval(estr)
 
     def expr_eval(self, cr, uid, obj, lefts, operator, right, pexpr, context):
         """ In order to keep the 5.0/6.0 convention, we consider timestamps
             to match the full day of some date, eg:
                 ( '2011-05-30 13:30:00' < '2011-05-30')
+
+            Since the datetime API, also supports lefts like .month, .day etc!
         """
-        
-        assert len(lefts) == 1, lefts
-        if right and len(right) < 11:
+        left = None
+        if len(lefts) == 2:
+            fn = self._part_fns.get(lefts[1], None)
+            if fn is None:
+                raise eu.DomainLeftError(obj, lefts, operator, right)
+            if operator not in ('=', '!=', '<>'):
+                raise eu.DomainInvalidOperator(obj, lefts, operator, right)
+            return  eu.function_expr(fn, lefts[0], operator, right)
+        elif len(lefts) == 1:
+            pass
+        else:
+            raise eu.DomainLeftError(obj, lefts, operator, right)
+
+        if right and isinstance(right, basestring) and len(right) < 11:
             if operator in ('<', '<='):
                 return (lefts[0], operator, right + ' 23:59:59')
+            elif operator in ('>', '>='):
+                return (lefts[0], operator, right + ' 00:00:00')
         elif right is False:
             if operator not in ('=', '!=', '<>'):
                 raise eu.DomainInvalidOperator(obj, lefts, operator, right)
@@ -343,6 +413,9 @@ class time(_column):
     _type = 'time'
     _sql_type = 'time'
     merge_op = '|eq'
+    _symbol_c = '%s'
+    _symbol_f = to_time
+    _symbol_set = (_symbol_c, _symbol_f)
 
     @staticmethod
     def now( *args):
@@ -352,8 +425,7 @@ class time(_column):
         This method should be proivided as is to the _defaults dict,
         it should not be called.
         """
-        return DT.datetime.now().strftime(
-            tools.DEFAULT_SERVER_TIME_FORMAT)
+        return DT.datetime.now().time()
 
     @staticmethod
     def lazy_eval(estr):
@@ -363,7 +435,7 @@ class time(_column):
 
                 _defaults = { 'dtime': lazy_eval('-1hour'), }
         """
-        return lazy_date_eval(estr, out_fmt='time_str')
+        return lazy_date_eval(estr, out_fmt='time')
 
 register_field_classes(boolean, integer, integer_big, char, text,
         float, date, datetime, time)

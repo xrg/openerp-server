@@ -3,6 +3,7 @@
 #
 #    OpenERP, Open Source Management Solution
 #    Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>).
+#    Copyright (C) 2013 P. Christeas <xrg@hellug.gr>
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -23,6 +24,8 @@ import StringIO
 import cStringIO
 import base64
 from datetime import datetime
+from datetime import date as date_DT
+from datetime import time as time_DT
 import os
 import re
 import time
@@ -33,6 +36,7 @@ import pooler
 import tools
 import zipfile
 import common
+from tools.misc import to_date, to_datetime
 from osv.fields import float as float_class, function as function_class
 from osv.orm import browse_record
 
@@ -68,11 +72,13 @@ rml2sxw = {
 }
 
 class _format(object):
+    lang_obj = None
+
     def set_value(self, cr, uid, name, object, field, lang_obj):
         self.object = object
         self._field = field
-        self.name = name
         self.lang_obj = lang_obj
+        assert name is self, name
 
 class _float_format(float, _format):
     def __init__(self, value):
@@ -83,12 +89,14 @@ class _float_format(float, _format):
         digits = 2
         if hasattr(self,'_field') and getattr(self._field, 'digits', None):
             digits = self._field.digits[1]
-        if getattr(self, 'lang_obj', False):
-            return self.lang_obj.format('%.' + str(digits) + 'f', self.name, True)
-        elif getattr(self, 'name', False):
-            return ('%.' + str(digits) + 'f') % self.name
+        if self.lang_obj is not None:
+            return self.lang_obj.format('%.' + str(digits) + 'f', self.val, True)
+        elif getattr(self, '_field', False):
+            return ('%.' + str(digits) + 'f') % self.val
         elif isinstance(self.val, basestring):
             return self.val
+        elif self.val:
+            return str(self.val)
         else:
             # if there is no number, "0.0" is not appropriate. We'd better
             # return an empty string to indicate NULL data
@@ -97,44 +105,47 @@ class _float_format(float, _format):
 class _int_format(int, _format):
     def __init__(self,value):
         super(_int_format, self).__init__()
-        self.val = value and str(value) or str(0)
+        self.val = value
 
     def __str__(self):
-        if getattr(self,'lang_obj', False):
-            return self.lang_obj.format('%.d', self.name, True)
-        return self.val
+        if self.lang_obj is not None:
+            return self.lang_obj.format('%.d', self.val, True)
+        elif isinstance(self.val, (int, long)):
+            return str(self.val)
+        else:
+            return self.val or ''
 
 class _date_format(str, _format):
     def __init__(self,value):
         super(_date_format, self).__init__()
-        self.val = value and str(value) or ''
+        self.val = value or None
 
     def __str__(self):
         if self.val:
-            if getattr(self,'name', None):
-                date = datetime.strptime(self.name, DT_FORMAT)
-                if getattr(self, 'lang_obj', False):
-                    return date.strftime(str(self.lang_obj.date_format))
-                else:
-                    return date.strftime(tools.DEFAULT_SERVER_DATE_FORMAT)
-        return self.val
+            if self.lang_obj is not None:
+                dfmt = self.lang_obj.date_format
+            else:
+                dfmt = tools.DEFAULT_SERVER_DATE_FORMAT
+            return to_date(self.val).strftime(dfmt)
+        else:
+            return ''
 
 class _dttime_format(str, _format):
     def __init__(self,value):
         super(_dttime_format, self).__init__()
-        self.val = value and str(value) or ''
+        self.val = value or None
+        if isinstance(self.val, basestring) and len(self.val) > 19:
+            raise ValueError("Long basestring: %s" % value)
 
     def __str__(self):
-        if self.val and getattr(self,'name', None):
-            if getattr(self, 'lang_obj', False):
-                return datetime.strptime(self.name, DHM_FORMAT)\
-                   .strftime("%s %s"%(str(self.lang_obj.date_format),
-                                      str(self.lang_obj.time_format)))
+        if self.val:
+            if self.lang_obj is not None:
+                dfmt = self.lang_obj.date_format + ' ' + self.lang_obj.time_format
             else:
-                return datetime.strptime(self.name, DHM_FORMAT)\
-                   .strftime(tools.DEFAULT_SERVER_DATETIME_FORMAT)
-        return self.val
-
+                dfmt = tools.DEFAULT_SERVER_DATETIME_FORMAT
+            return to_datetime(self.val).strftime(dfmt)
+        else:
+            return ''
 
 _fields_process = {
     'float': _float_format,
@@ -291,16 +302,10 @@ class rml_parse(object):
                 formatLang(value, dp='Account') -> digits=3
                 formatLang(value, digits=5, dp='Account') -> digits=5
         """
-        if digits is None:
-            if dp:
-                digits = self.get_digits(dp=dp)
-            else:
-                digits = self.get_digits(value)
-
-        if isinstance(value, (str, unicode)) and not value:
+        if value is None:
             return ''
 
-        if value is None:
+        if (isinstance(value, (str, unicode)) or date or date_time) and not value:
             return ''
 
         if not self.lang_dict_called:
@@ -308,23 +313,32 @@ class rml_parse(object):
             self.lang_dict_called = True
 
         if date or date_time:
-            if not str(value):
-                return ''
-
             date_format = self.lang_dict['date_format']
-            parse_format = DT_FORMAT
             if date_time:
-                value=value.split('.')[0]
                 date_format = date_format + " " + self.lang_dict['time_format']
-                parse_format = DHM_FORMAT
-            if not isinstance(value, time.struct_time):
-                return time.strftime(date_format, time.strptime(value, parse_format))
-
-            else:
+            if isinstance(value, time.struct_time):
                 date = datetime(*value.timetuple()[:6])
+            elif isinstance(value, (datetime, date_DT)):
+                date = value
+            elif isinstance(value, (_dttime_format, _date_format)):
+                return str(value)
+            else:
+                if date_time:
+                    value=value.split('.')[0]
+                    parse_format = DHM_FORMAT
+                else:
+                    parse_format = DT_FORMAT
+                date = datetime.strptime(value, parse_format)
             return date.strftime(date_format)
+        else:
+            if digits is None:
+                if dp:
+                    digits = self.get_digits(dp=dp)
+                else:
+                    digits = self.get_digits(value)
 
-        return self.lang_dict['lang_obj'].format('%.' + str(digits) + 'f', value, grouping=grouping, monetary=monetary)
+            return self.lang_dict['lang_obj'].format('%.' + str(digits) + 'f',
+                                    value, grouping=grouping, monetary=monetary)
 
     def repeatIn(self, lst, name,nodes_parent=False):
         ret_lst = []
@@ -417,7 +431,12 @@ class report_sxw(report_rml, preprocess.report):
         report_xml_ids = ir_obj.search(cr, uid,
                 [('report_name', '=', self.name[7:])], context=context)
         if report_xml_ids:
-            report_xml = ir_obj.browse(cr, uid, report_xml_ids[0], context=context)
+            # Copy by attribute, so that 'report_xml' can have 'header' set on it.
+            irb = ir_obj.browse(cr, uid, report_xml_ids[0], context=context)
+            report_xml = tools.misc.attrob(dict(title=irb.name, header=irb.header,
+                            report_type=irb.report_type, report_rml_content=irb.report_rml_content,
+                            name=irb.name, attachment=irb.attachment, attachment_use=irb.attachment_use))
+            del irb
         else:
             title = ''
             report_file = tools.file_open(self.tmpl, subdir=None)

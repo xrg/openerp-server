@@ -74,57 +74,8 @@ class publisher_warranty_contract(osv.osv):
     def send(self, cr, uid, tb, explanations, remarks=None, issue_name=None):
         """ Method called by the client to send a problem to the publisher warranty server. """
 
-        if not remarks:
-            remarks = ""
-
-        valid_contracts = self._get_valid_contracts(cr, uid)
-        valid_contract = valid_contracts[0]
-
-        try:
-            origin = 'client'
-            dbuuid = self.pool.get('ir.config_parameter').get_param(cr, uid, 'database.uuid')
-            db_create_date = self.pool.get('ir.config_parameter').get_param(cr, uid, 'database.create_date')
-            user = self.pool.get("res.users").browse(cr, uid, uid)
-            user_name = user.name
-            email = user.email
-
-            msg = {'contract_name': valid_contract.name,
-                'tb': tb,
-                'explanations': explanations,
-                'remarks': remarks,
-                'origin': origin,
-                'dbname': cr.dbname,
-                'dbuuid': dbuuid,
-                'db_create_date': db_create_date,
-                'issue_name': issue_name,
-                'email': email,
-                'user_name': user_name,
-            }
-
-
-            add_arg = {"timeout":30} if sys.version_info >= (2,6) else {}
-            uo = urllib2.urlopen(config.get("publisher_warranty_url"),
-                                    urllib.urlencode({'arg0': msg, "action": "send",}),**add_arg)
-            try:
-                submit_result = uo.read()
-            finally:
-                uo.close()
-
-            result = safe_eval(submit_result)
-
-            crm_case_id = result
-
-            if not crm_case_id:
-                return False
-
-        except osv.except_osv:
-            raise
-        except Exception:
-            _logger.warning("Error sending problem report", exc_info=1)
-            raise osv.except_osv(_("Error"),
-                                 _("Error during communication with the publisher warranty server."))
-
-        return True
+        raise osv.except_osv(_("Not Available"),
+                                 _("Publisher warranty functionality has been removed from this version"))
 
     def check_validity(self, cr, uid, ids, context=None):
         """
@@ -136,11 +87,7 @@ class publisher_warranty_contract(osv.osv):
         state = contract.state
         validated = state != "unvalidated"
 
-        self.get_logs(cr, uid, ids, cron_mode=False, context=context)
-
-        contract = self.browse(cr, uid, contract_id)
-        validated2 = contract.state != "unvalidated"
-        if not validated and not validated2:
+        if not validated:
             raise osv.except_osv(_("Contract validation error"),
                                  _("Please verify your publisher warranty serial number and validity."))
         return True
@@ -153,61 +100,8 @@ class publisher_warranty_contract(osv.osv):
         @param cron_mode: If true, catch all exceptions (appropriate for usage in a cron).
         @type cron_mode: boolean
         """
-        try:
-            try:
-                result = get_sys_logs(cr, uid)
-            except Exception:
-                if cron_mode: # we don't want to see any stack trace in cron
-                    return False
-                _logger.debug("Exception while sending a get logs messages", exc_info=1)
-                raise osv.except_osv(_("Error"), _("Error during communication with the publisher warranty server."))
-
-            contracts = result["contracts"]
-            for contract in contracts:
-                c_id = self.search(cr, uid, [("name","=",contract)])[0]
-                # for backward compatibility
-                if type(contracts[contract]) == tuple:
-                    self.write(cr, uid, c_id, {
-                        "date_start": contracts[contract][0],
-                        "date_stop": contracts[contract][1],
-                        "state": contracts[contract][2],
-                        "check_support": False,
-                        "check_opw": False,
-                        "kind": "",
-                    })
-                else:
-                    self.write(cr, uid, c_id, {
-                        "date_start": contracts[contract]["date_from"],
-                        "date_stop": contracts[contract]["date_to"],
-                        "state": contracts[contract]["state"],
-                        "check_support": contracts[contract]["check_support"],
-                        "check_opw": contracts[contract]["check_opw"],
-                        "kind": contracts[contract]["kind"],
-                    })
-
-
-            limit_date = (datetime.datetime.now() - _PREVIOUS_LOG_CHECK).strftime(misc.DEFAULT_SERVER_DATETIME_FORMAT)
-            for message in result["messages"]:
-                ids = self.pool.get("res.log").search(cr, uid, [("res_model", "=", "publisher_warranty.contract"),
-                                                          ("create_date", ">=", limit_date),
-                                                          ("name", "=", message)])
-                if ids:
-                    continue
-                self.pool.get('res.log').create(cr, uid,
-                        {
-                            'name': message,
-                            'res_model': "publisher_warranty.contract",
-                            "read": True,
-                            "user_id": False,
-                        },
-                        context=context
-                )
-        except Exception:
-            if cron_mode:
-                return False # we don't want to see any stack trace in cron
-            else:
-                raise
-        return True
+        raise osv.except_osv(_("Not Available"),
+                                 _("Publisher warranty functionality has been removed from this version"))
 
     def get_last_user_messages(self, cr, uid, limit, context=None):
         """
@@ -283,80 +177,10 @@ class publisher_warranty_contract_wizard(osv.osv_memory):
     }
 
     def action_validate(self, cr, uid, ids, context=None):
-        if not ids:
-            return False
-
-        wiz = self.browse(cr, uid, ids[0])
-        c_name = wiz.name
-
-        contract_osv = self.pool.get("publisher_warranty.contract")
-        contracts = contract_osv.search(cr, uid, [("name","=",c_name)])
-        if contracts:
-            raise osv.except_osv(_("Error"), _("That contract is already registered in the system."))
-
-        contract_id = contract_osv.create(cr, uid, {
-            "name": c_name,
-            "state": "unvalidated",
-        })
-
-        contract_osv.check_validity(cr, uid, [contract_id])
-
-        self.write(cr, uid, ids, {"state": "finished"})
-
-        # We should return an action ?
-        return True
-
+        raise osv.except_osv(_("Not Available"),
+                                 _("Publisher warranty functionality has been removed from this version"))
 
 publisher_warranty_contract_wizard()
-
-def get_sys_logs(cr, uid):
-    """
-    Utility method to send a publisher warranty get logs messages.
-    """
-    pool = pooler.get_pool(cr.dbname)
-
-    dbuuid = pool.get('ir.config_parameter').get_param(cr, uid, 'database.uuid')
-    db_create_date = pool.get('ir.config_parameter').get_param(cr, uid, 'database.create_date')
-    limit_date = datetime.datetime.now()
-    limit_date = limit_date - datetime.timedelta(15)
-    limit_date_str = limit_date.strftime(misc.DEFAULT_SERVER_DATETIME_FORMAT)
-    nbr_users = pool.get("res.users").search(cr, uid, [], count=True)
-    nbr_active_users = pool.get("res.users").search(cr, uid, [("date", ">=", limit_date_str)], count=True)
-    nbr_share_users = False
-    nbr_active_share_users = False
-    if "share" in pool.get("res.users")._columns \
-            or "share" in pool.get("res.users")._inherit_fields:
-        nbr_share_users = pool.get("res.users").search(cr, uid, [("share", "=", True)], count=True)
-        nbr_active_share_users = pool.get("res.users").search(cr, uid, [("share", "=", True), ("date", ">=", limit_date_str)], count=True)
-    contractosv = pool.get('publisher_warranty.contract')
-    contracts = contractosv.browse(cr, uid, contractosv.search(cr, uid, []))
-    user = pool.get("res.users").browse(cr, uid, uid)
-    msg = {
-        "dbuuid": dbuuid,
-        "nbr_users": nbr_users,
-        "nbr_active_users": nbr_active_users,
-        "nbr_share_users": nbr_share_users,
-        "nbr_active_share_users": nbr_active_share_users,
-        "dbname": cr.dbname,
-        "db_create_date": db_create_date,
-        "version": release.version,
-        "contracts": [c.name for c in contracts],
-        "language": user.context_lang,
-    }
-
-    add_arg = {"timeout":30} if sys.version_info >= (2,6) else {}
-    arguments = {'arg0': msg, "action": "update",}
-    arguments_raw = urllib.urlencode(arguments)
-    url = config.get("publisher_warranty_url")
-    uo = urllib2.urlopen(url, arguments_raw, **add_arg)
-    try:
-        submit_result = uo.read()
-    finally:
-        uo.close()
-
-    result = safe_eval(submit_result) if submit_result else {}
-
-    return result
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
 

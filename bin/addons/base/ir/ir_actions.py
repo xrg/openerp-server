@@ -190,11 +190,12 @@ class act_window(osv.osv):
 
     def _search_view(self, cr, uid, ids, name, arg, context=None):
         res = {}
+        _logger = logging.getLogger('orm.ir.actions')
         def encode(s):
             if isinstance(s, unicode):
                 return s.encode('utf8')
             return s
-        for act in self.browse(cr, uid, ids, fields_only=['res_model', 'search_view_id',], context=context):
+        for act in self.browse(cr, uid, ids, fields_only=['res_model', 'search_view_id', 'view_mode'], context=context):
             assert act.res_model, act.id
             act_model = self.pool.get(act.res_model)
             assert act_model, 'No model %s for action #%d %s' % \
@@ -203,44 +204,21 @@ class act_window(osv.osv):
             search_view_id = False
             if act.search_view_id:
                 search_view_id = act.search_view_id.id
+            elif act.view_mode == 'form':
+                return res # avoid search view for a form-only action
             else:
                 res_view = self.pool.get('ir.ui.view').search(cr, uid, 
                         [('model','=',act.res_model),('type','=','search'),
                         ('inherit_id','=',False)], context=context)
                 if res_view:
                     search_view_id = res_view[0]
-            if search_view_id:
-                field_get = act_model.fields_view_get(cr, uid, search_view_id, 
+            if True:
+                field_get = act_model.fields_view_get(cr, uid, search_view_id or False, 
                             'search', context)
                 fields_from_fields_get.update(field_get['fields'])
                 field_get['fields'] = fields_from_fields_get
                 res[act.id] = str(field_get) # TODO: remove str() after client has adapted
-            else:
-                def process_child(node, new_node, doc):
-                    for child in node.childNodes:
-                        if child.localName=='field' and child.hasAttribute('select') \
-                                and child.getAttribute('select')=='1':
-                            if child.childNodes:
-                                fld = doc.createElement('field')
-                                for attr in child.attributes.keys():
-                                    fld.setAttribute(attr, child.getAttribute(attr))
-                                new_node.appendChild(fld)
-                            else:
-                                new_node.appendChild(child)
-                        elif child.localName in ('page','group','notebook'):
-                            process_child(child, new_node, doc)
-
-                form_arch = act_model.fields_view_get(cr, uid, False, 'form', context)
-                dom_arc = dom.minidom.parseString(encode(form_arch['arch']))
-                new_node = copy.deepcopy(dom_arc)
-                for child_node in new_node.childNodes[0].childNodes:
-                    if child_node.nodeType == child_node.ELEMENT_NODE:
-                        new_node.childNodes[0].removeChild(child_node)
-                process_child(dom_arc.childNodes[0],new_node.childNodes[0],dom_arc)
-
-                form_arch['arch'] = new_node.toxml()
-                form_arch['fields'].update(fields_from_fields_get)
-                res[act.id] = str(form_arch) # TODO: remove str()
+            
         return res
 
     def _get_help_status(self, cr, uid, ids, name, arg, context=None):
@@ -304,10 +282,11 @@ class act_window(osv.osv):
         :param xml_id: the namespace-less id of the action (the @id
                        attribute from the XML file)
         :return: A read() view of the ir.actions.act_window
+
+        Deprecated! you can use the generic [('id.ref', '=', ...)] domain instead.
         """
         dataobj = self.pool.get('ir.model.data')
-        data_id = dataobj._get_id (cr, 1, module, xml_id)
-        res_id = dataobj.browse(cr, uid, data_id, context).res_id
+        model, res_id = dataobj.get_object_reference(cr, 1, module, xml_id)
         return self.read(cr, uid, res_id, [], context)
 
 act_window()

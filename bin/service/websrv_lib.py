@@ -85,7 +85,7 @@ class AuthRedirectExc(Exception):
         self.target = target
         self.extra_headers = extra_headers or []
 
-class AuthProvider:
+class AuthProvider(object):
     """A provider object is persistent, sets up the "proxy" for each handler
     
         There is just one provider per service, per authentication domain
@@ -124,6 +124,8 @@ class AuthProxy(object):
 
     def _get_addr_str(self, client_address):
         """ Convert IPv4 or IPv6 address into a readable string
+
+            String includes client address + port number
         """
         if client_address and len(client_address) == 4:
             return "[%s]:%s" % (client_address[:2])
@@ -131,6 +133,18 @@ class AuthProxy(object):
             return "%s:%s" % client_address
         else:
             return '?'
+
+    def _get_host_str(self, client_address):
+        """ Convert IPv4 or IPv6 address (only) into a readable string
+
+            String is only the IP of the client
+        """
+        if client_address and len(client_address) == 4:
+            return "[%s]" % client_address[0]
+        elif client_address:
+            return "%s" % client_address[0]
+        else:
+            return str(client_address)
 
 class BasicAuthProxy(AuthProxy):
     """ Require basic authentication..
@@ -219,10 +233,10 @@ class HTTPModified:
         """
         expires = None
         delta = datetime.datetime.now() - edate
-        if delta.total_seconds() < 0:
+        if delta < datetime.timedelta(0):
             # something is wrong, we'd better expire just now
             expires = datetime.datetime.now()
-        elif delta.total_seconds() > self._expire_max_age:
+        elif delta > datetime.timedelta(seconds=self._expire_max_age):
             expires = datetime.datetime.now() + datetime.timedelta(seconds=self._expire_max_age)
         else:
             expires = datetime.datetime.now() + (delta / 2)
@@ -322,6 +336,8 @@ class HTTPDir:
 class noconnection(object):
     """ a class to use instead of the real connection
     """
+    __slots__ = ('__hidden_socket',)
+
     def __init__(self, realsocket=None):
         self.__hidden_socket = realsocket
 
@@ -348,6 +364,7 @@ def _quote_html(html):
 class BoundStream(object):
     """Wraps around a stream, reads a determined length of data
     """
+    __slots__ = ('_stream', '_rem_length', '_fpos', '_lbuf', '_chunk_size')
 
     def __init__(self, stream, length, chunk_size=None):
         self._stream = stream
@@ -406,6 +423,51 @@ class BoundStream(object):
         else:
             self._lbuf += data
             self._lbuf = self._lbuf[-32:]
+
+        return data
+
+    def readline(self, size=-1):
+        nl = -1
+        data = ''
+        if self._fpos < 0 and self._lbuf:
+            if (0 - self._fpos) > len(self._lbuf):
+                raise EOFError("Cannot re-read at %d" % self._fpos)
+            nl = self._lbuf.find('\n', self._fpos)
+            if nl >= 0:
+                data = self._lbuf[self._fpos:nl+1]
+            else:
+                data = self._lbuf[self._fpos:]
+            if size >= 0:
+                data = data[:size]
+            self._fpos += len(data)
+            assert self._fpos <= 0
+            if nl >= 0:
+                return data
+
+        if not self._stream or self._fpos != 0L:
+            raise IOError(errno.EBADF, "read() without stream")
+
+        if self._rem_length < 0:
+            raise EOFError()
+
+        while (nl <= 0) and self._rem_length:
+            rsize = min(self._rem_length, self._chunk_size, 256)
+            ndata = self._stream.read(rsize)
+            self._rem_length -= len(ndata)
+            assert self._rem_length >= 0
+
+            nl = ndata.find('\n')
+            nl += 1
+            if nl > 0:
+                data += ndata[:nl]
+                self._lbuf = ndata[nl:]
+                self._fpos = 0 - len(self._lbuf) # rewind, so that _lbuf is read next
+            else:
+                data += ndata
+                self._lbuf = ndata[-32:]
+
+            if size >= 0 and len(data) >= size:
+                break
 
         return data
 
@@ -516,7 +578,7 @@ class MultiHTTPHandler(FixSendError, HttpOptions, BaseHTTPRequestHandler):
     default_request_version = "HTTP/1.1"    # compatibility with py2.5
 
     auth_required_msg = """<html><head><title>Authorization required</title></head>
-    <body>You must authenticate to use this service</body><html>\r\r"""
+    <body>You must authenticate to use this service</body></html>\r\r"""
 
     def __init__(self, request, client_address, server):
         self.in_handlers = {}
@@ -657,7 +719,7 @@ class MultiHTTPHandler(FixSendError, HttpOptions, BaseHTTPRequestHandler):
                 self.send_error(400, "Bad request version (%r)" % version)
                 return False
             try:
-                base_version_number = version.split('/', 1)[1]
+                base_version_number = version[5:]
                 version_number = base_version_number.split(".")
                 # RFC 2145 section 3.1 says there can be only one "." and
                 #   - major and minor numbers MUST be treated as
@@ -803,6 +865,7 @@ class MultiHTTPHandler(FixSendError, HttpOptions, BaseHTTPRequestHandler):
                 if vdir.auth_provider:
                     vdir.auth_provider.setupAuth(self, self.in_handlers[p])
             hnd = self.in_handlers[p]
+            hnd.super_path = p # the part that matched
             hnd.rfile = self.rfile
             hnd.wfile = self.wfile
             self.rlpath = self.raw_requestline
@@ -934,7 +997,7 @@ class ConnThreadingMixIn:
 
             if self.verify_request(request, client_address):
                 self.process_request(request, client_address)
-        except Exception, e:
+        except Exception:
             if request is not None:
                 try:
                     self.handle_error(request, client_address)

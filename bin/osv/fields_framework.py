@@ -49,15 +49,20 @@ class id_field(integer):
 
             or even, for external refs::
 
-                [('id.ref.magento', '=', 'foo.bar')]
+                [('id.ref.extref', '=', 'foo.bar')]
                 or
-                [('id.ref.magento.foo', '=', 'bar')]
+                [('id.ref.extref.foo', '=', 'bar')]
 
             A special syntax for synchronising records is also supported::
 
-                [('id.ref.somemodule', '=', False)] # meaning row is not in-sync
-                [('id.ref.somemodule', 'like', 'remote_')] # meaning in sync
+                [('id.ref.extref.somemodule', '=', False)] # meaning row is not in-sync
+                [('id.ref.extref.somemodule', 'like', 'remote_')] # meaning in sync
                                     # with some name like 'remote_123'
+
+            Under 'id.ref' the dots are interpreted as:
+                `id.ref[.<source>[.<module+>]]`
+            where `source` will match our source and `module` may contain more
+            dots.
         """
         if len(lefts) > 1:
             import expression
@@ -81,13 +86,9 @@ class id_field(integer):
                     sop = '='
                     source = lefts[2]
                 if len(lefts) > 3:
-                    module = lefts[3]
-                if len(lefts) > 4:
-                    raise eu.DomainLeftError(obj, lefts, operator, right)
+                    module = '.'.join(lefts[3:])
 
-                if operator in ('=', '!=', '<>'):
-                    if not isinstance(right, basestring):
-                        raise eu.DomainRightError(obj, lefts, operator, right)
+                if isinstance(right, basestring):
                     if '.' in right:
                         module, name = right.split('.', 1)
                     elif module:
@@ -100,7 +101,24 @@ class id_field(integer):
 
                     domain += [('module', '=', module), ('name', '=', name),
                                 ('source', sop, source)]
+                elif (right is True) or (right is False):
+                    # meaning a reference exists or not
+                    # Specifying a module is optional, in this case
+                    if module:
+                        domain.append(('module', '=', module))
+                    elif context and 'module' in context:
+                        domain.append(('module', '=', context['module']))
+                    domain.append(('source', sop, source))
+                    if right is False:
+                        # invert the condition
+                        if operator == '=':
+                            lop = 'not inselect'
+                        elif operator in ('!=', '<>'):
+                            lop = 'inselect'
+                else:
+                    raise eu.DomainRightError(obj, lefts, operator, right)
 
+                domain.append(('res_id', '!=', '0'))
                 imd_obj = obj.pool.get('ir.model.data')
                 qry = Query(tables=['"%s"' % imd_obj._table,])
                 e = expression.expression(domain, debug=imd_obj._debug)

@@ -29,7 +29,7 @@ import pytz
 import pooler
 from tools.translate import _
 from service import security
-#import logging
+import logging
 
 class groups(osv.osv):
     _name = "res.groups"
@@ -48,7 +48,7 @@ class groups(osv.osv):
     ]
 
     _groups_cache = {} #: db/uid cache of groups
-    
+
     def copy(self, cr, uid, id, default=None, context=None):
         group_name = self.read(cr, uid, [id], ['name'])[0]['name']
         default.update({'name': _('%s (copy)')%group_name})
@@ -80,15 +80,14 @@ class groups(osv.osv):
             if aid:
                 aid.write({'groups_id': [(4, gid)]})
         return gid
-        
+
     def unlink(self, cr, uid, ids, context=None):
         self._groups_cache[cr.dbname] = {}
         return super(groups, self).unlink(cr, uid, ids, context=context)
 
     def get_extended_interface_group(self, cr, uid, context=None):
         data_obj = self.pool.get('ir.model.data')
-        extended_group_data_id = data_obj._get_id(cr, uid, 'base', 'group_extended')
-        return data_obj.browse(cr, uid, extended_group_data_id, context=context).res_id
+        return data_obj.get_object_reference(cr, uid, 'base', 'group_extended')[1]
 
     def check_user_groups(self, cr, user_id, group_ids, context=None):
         """ Checks if `user_id` belongs to *any* of `group_ids`.
@@ -115,7 +114,7 @@ groups()
 
 class roles(orm_deprecated, osv.osv):
     """ DEPRECATED: user roles.
-    
+
         Kept here just for API compatibility with older installations. Please update
         your ORM objects!
     """
@@ -183,7 +182,7 @@ class users(osv.osv):
         """
         group_obj = self.pool.get('res.groups')
         extended_gid = group_obj.get_extended_interface_group(cr, uid, context=context)
-        
+
         res = {}
         for ubr in self.browse(cr, uid, ids, context=context):
             res[ubr.id] = 'simple'
@@ -223,8 +222,10 @@ class users(osv.osv):
             # so that the new password is immediately used for further RPC requests, otherwise the user
             # will face unexpected 'Access Denied' exceptions.
             raise osv.except_osv(_('Operation Canceled'), _('Please use the change password wizard (in User Preferences or User menu) to change your own password.'))
-        self.write(cr, uid, id, {'password': value})
-    
+        ctx = (context or {}).copy()
+        ctx['set_password'] = tools.server_bool(True)
+        self.write(cr, uid, id, {'password': value}, ctx)
+
     def _get_password(self, cr, uid, ids, arg, karg, context=None):
         return dict.fromkeys(ids, '')
 
@@ -272,6 +273,8 @@ class users(osv.osv):
         'date': fields.datetime('Last Connection', readonly=True),
     }
 
+    _read_filters_mask = { 'password': '********' }
+
     def on_change_company_id(self, cr, uid, ids, company_id):
         return {
                 'warning' : {
@@ -280,21 +283,38 @@ class users(osv.osv):
                 }
         }
 
-    def read(self,cr, uid, ids, fields=None, context=None, load='_classic_read'):
-        def override_password(o):
-            if 'password' in o and ( 'id' not in o or o['id'] != uid ):
-                o['password'] = '********'
-            return o
+    def _get_read_filters(self, fields=None):
+        """ Return a function that masks read() result with secure values
 
+            For example, it will set outgoing 'password' to a dummy value.
+        """
+        rdic = self._read_filters_mask
+        if fields is not None:
+            rdic = {}
+            for f in fields:
+                if f in self._read_filters_mask:
+                    rdic[f] = self._read_filters_mask[f]
+        def fn(res):
+            res.update(rdic)
+            return res
+        return fn
+
+    def read(self,cr, uid, ids, fields=None, context=None, load='_classic_read'):
         result = super(users, self).read(cr, uid, ids, fields, context, load)
-        canwrite = self.pool.get('ir.model.access').check(cr, uid, 'res.users', 'write', raise_exception=False)
-        if not canwrite:
-            if isinstance(ids, (int, float)):
-                result = override_password(result)
-            else:
-                result = map(override_password, result)
+        _read_filter = self._get_read_filters(fields)
+        if isinstance(ids, (int, long)):
+            result = _read_filter(result)
+        else:
+            result = map(_read_filter, result)
         return result
 
+    def search_read(self, cr, uid, domain, offset=0, limit=None, order=None,
+                    fields=None, context=None, load='_classic_read'):
+        result = super(users, self).search_read(cr, uid, domain, offset=offset, limit=limit, order=order,
+                    fields=fields, context=context, load=load)
+        _read_filter = self._get_read_filters(fields)
+        result = map(_read_filter, result)
+        return result
 
     def _check_company(self, cr, uid, ids, context=None):
         return all(((this.company_id in this.company_ids) or not this.company_ids) for this in self.browse(cr, uid, ids, context))
@@ -318,9 +338,8 @@ class users(osv.osv):
 
     def _get_admin_id(self, cr):
         if self.__admin_ids.get(cr.dbname) is None:
-            ir_model_data_obj = self.pool.get('ir.model.data')
-            mdid = ir_model_data_obj._get_id(cr, 1, 'base', 'user_root')
-            self.__admin_ids[cr.dbname] = ir_model_data_obj.read(cr, 1, [mdid], ['res_id'])[0]['res_id']
+            mdid = self.pool.get('ir.model.data').get_object_reference(cr, 1, 'base', 'user_root')[1]
+            self.__admin_ids[cr.dbname] = mdid
         return self.__admin_ids[cr.dbname]
 
     def _get_company(self,cr, uid, context=None, uid2=False):
@@ -381,6 +400,9 @@ class users(osv.osv):
     def write(self, cr, uid, ids, values, context=None):
         if not hasattr(ids, '__iter__'):
             ids = [ids]
+        if ('password' in values) and not tools.server_bool.in_context(context, 'set_password', True):
+            self.log(cr, 1, uid, _("Attempt to reset password, through prohibited API!"), context=context)
+            raise security.ExceptionNoTb("Access Denied")
         if ids == [uid]:
             for key in values.keys():
                 if not (key in self.SELF_WRITEABLE_FIELDS or key.startswith('context_')):
@@ -399,10 +421,10 @@ class users(osv.osv):
         clear = partial(self.pool.get('ir.rule').clear_cache, cr)
         map(clear, ids)
         db = cr.dbname
-        if db in self._uid_cache:
+        uic_db = self._uid_cache.get(db, False)
+        if uic_db:
             for id in ids:
-                if id in self._uid_cache[db]:
-                    del self._uid_cache[db][id]
+                uic_db.pop(id, None)
 
         return res
 
@@ -410,10 +432,11 @@ class users(osv.osv):
         if 1 in ids:
             raise osv.except_osv(_('Can not remove root user!'), _('You can not remove the admin user as it is used internally for resources created by OpenERP (updates, module installation, ...)'))
         db = cr.dbname
-        if db in self._uid_cache:
+        uic_db = self._uid_cache.get(db, False)
+        if uic_db:
             for id in ids:
-                if id in self._uid_cache[db]:
-                    del self._uid_cache[db][id]
+                uic_db.pop(id, None)
+
         return super(users, self).unlink(cr, uid, ids, context=context)
 
     def name_search(self, cr, user, name='', args=None, operator='ilike', context=None, limit=100):
@@ -429,6 +452,8 @@ class users(osv.osv):
         return self.name_get(cr, user, ids)
 
     def copy(self, cr, uid, id, default=None, context=None):
+        """ Most of res.users fields are sensitive; only copy from whitelist
+        """
         user2copy = self.read(cr, uid, [id], ['login','name'])[0]
         if default is None:
             default = {}
@@ -452,17 +477,19 @@ class users(osv.osv):
         return result
 
     def action_get(self, cr, uid, context=None):
+        """Return the action-id for setting user's preferences
+        """
         dataobj = self.pool.get('ir.model.data')
-        data_id = dataobj._get_id(cr, 1, 'base', 'action_res_users_my')
-        return dataobj.browse(cr, uid, data_id, context=context).res_id
-
+        return dataobj.get_object_reference(cr, 1, 'base', 'action_res_users_my')[1]
 
     def login(self, db, login, password):
+        """Check password and mark the user as logged-in
+        """
         if not password:
             return False
         cr = pooler.get_db(db).cursor()
         try:
-            cr.execute('UPDATE res_users SET date=now() WHERE login=%s AND password=%s AND active RETURNING id',
+            cr.execute_safe('UPDATE res_users SET date=now() WHERE login=%s AND password=%s AND active RETURNING id',
                     (tools.ustr(login), tools.ustr(password)))
             res = cr.fetchone()
             cr.commit()
@@ -473,7 +500,11 @@ class users(osv.osv):
         finally:
             cr.close()
 
+    login.is_plain = True # mark the plaintext version
+
     def check_super(self, passwd):
+        """Verify the super-user password
+        """
         if passwd == tools.config['admin_passwd']:
             return True
         else:
@@ -489,26 +520,24 @@ class users(osv.osv):
             return True
         cr = pooler.get_db(db).cursor()
         try:
-            cr.execute('SELECT COUNT(1) FROM res_users WHERE id=%s AND password=%s AND active=%s',
+            cr.execute_safe('SELECT COUNT(1) FROM res_users WHERE id=%s AND password=%s AND active=%s',
                         (int(uid), passwd, True))
             res = cr.fetchone()
             if not (res and res[0]):
                 raise security.ExceptionNoTb('AccessDenied')
-            if self._uid_cache.has_key(db):
-                ulist = self._uid_cache[db]
-                ulist[uid] = passwd
-            else:
-                self._uid_cache[db] = {uid:passwd}
+            self._uid_cache.setdefault(db, {})[uid] = passwd
             return True
         finally:
             cr.close()
+
+    check.is_plain = True
 
     def access(self, db, uid, passwd, sec_level, ids):
         if not passwd:
             return False
         cr = pooler.get_db(db).cursor()
         try:
-            cr.execute('SELECT id FROM res_users WHERE id=%s AND password=%s', (uid, passwd))
+            cr.execute_safe('SELECT id FROM res_users WHERE id=%s AND password=%s', (uid, passwd))
             res = cr.fetchone()
             if not res:
                 raise security.ExceptionNoTb('Bad username or password')
@@ -525,9 +554,18 @@ class users(osv.osv):
         :raise: security.ExceptionNoTb when old password is wrong
         :raise: except_osv when new password is not set or empty
         """
+        ctx = (context or {}).copy()
+        ctx['set_password'] = tools.server_bool(True)
         self.check(cr.dbname, uid, old_passwd)
         if new_passwd:
-            return self.write(cr, uid, uid, {'password': new_passwd})
+            ret = self.write(cr, uid, uid, {'password': new_passwd}, ctx)
+            # log as admin, the event is to be seen by him
+            self.log(cr, 1, uid, _("Password changed"), context=context)
+            logging.getLogger('orm').info("%s: password change for user #%d", self._name, uid)
+            uic_db = self._uid_cache.get(cr.dbname, False)
+            if uic_db:
+                uic_db.pop(uid, None)
+            return ret
         raise osv.except_osv(_('Warning!'), _("Setting empty passwords is not allowed for security reasons!"))
 
 users()
@@ -586,7 +624,7 @@ class config_users(osv.osv_memory):
             }
 config_users()
 
-class groups2(osv.osv): 
+class groups2(osv.osv):
     # Class appended here, to workaround order of instantiation.
     _inherit = 'res.groups'
     _columns = {
@@ -600,7 +638,7 @@ class groups2(osv.osv):
             if record['users']:
                 group_names.append(record['name'])
                 group_users.extend(record['users'])
-        
+
         if group_users:
             user_names = [user.name for user in self.pool.get('res.users').browse(cr, uid, group_users, context=context)]
             if len(user_names) >= 5:

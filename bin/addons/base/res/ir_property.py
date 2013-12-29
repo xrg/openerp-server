@@ -153,7 +153,7 @@ class ir_property(osv.osv):
         elif record.type == 'date':
             if not record.value_datetime:
                 return False
-            return time.strftime('%Y-%m-%d', time.strptime(record.value_datetime, '%Y-%m-%d %H:%M:%S'))
+            return record.value_datetime.date()
         return False
 
     def get(self, cr, uid, name, model, res_id=False, context=None):

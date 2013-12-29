@@ -294,6 +294,7 @@ class function(_column):
                 synonym for `obj` for historical reasons. Please prefer to
                 use `obj` instead in new code
         """
+        digits = args.pop('digits', None)
         _column.__init__(self, **args)
         self._obj = obj
         self._method = method
@@ -303,9 +304,6 @@ class function(_column):
         self._multi = multi
         if 'relation' in args: # unfortunate old API
             self._obj = args['relation']
-
-        self.digits = args.get('digits', (16,2)) # FIXME: use shadow
-        self.digits_compute = args.get('digits_compute', None)
 
         self._fnct_inv_arg = fnct_inv_arg
         if not fnct_inv:
@@ -325,6 +323,8 @@ class function(_column):
             args['fields_id'] = False
         elif self._type == 'char':
             args.setdefault('size', 16)
+        if digits is not None:
+            args['digits'] = digits # put it back
         self._shadow = get_field_class(self._type)(obj=self._obj, shadow=True, **args)
 
         if store:
@@ -335,27 +335,16 @@ class function(_column):
             if type=='binary':
                 self._symbol_get=lambda x:x and str(x)
 
-        if type == 'float':
-            self._symbol_c = float._symbol_c
-            self._symbol_f = float._symbol_f
-            self._symbol_set = float._symbol_set
-
-        if type == 'boolean':
-            self._symbol_c = boolean._symbol_c
-            self._symbol_f = boolean._symbol_f
-            self._symbol_set = boolean._symbol_set
-
-        if type in ['integer','integer_big']:
-            self._symbol_c = integer._symbol_c
-            self._symbol_f = integer._symbol_f
-            self._symbol_set = integer._symbol_set
+        self._symbol_c = self._shadow._symbol_c
+        self._symbol_f = self._shadow._symbol_f
+        self._symbol_set = self._shadow._symbol_set
 
     def digits_change(self, cr):
-        # FIXME Remove after using shadow everywhere
-        if self.digits_compute:
-            t = self.digits_compute(cr)
-            self._symbol_set=('%s', lambda x: ('%.'+str(t[1])+'f') % (__builtin__.float(x or 0.0),))
-            self.digits = t
+        self._shadow.digits_change(cr)
+
+    @property
+    def digits(self):
+        return self._shadow.digits
 
     def post_init(self, cr, name, obj):
 
@@ -652,22 +641,22 @@ class related(function):
         for data in objlst:
             t_id = data.id
             t_data = data
-            for i in range(len(self.arg)):
+            for i, sarg in enumerate(self._arg):
                 if not t_data: break
                 field_detail = self._relations[i]
-                if not t_data[self.arg[i]]:
+                if not t_data[sarg]:
                     if self._type not in ('one2many', 'many2many'):
                         t_id = t_data['id']
                     t_data = False
                 elif field_detail['type'] in ('one2many', 'many2many'):
                     if self._type != "many2one":
                         t_id = t_data.id
-                        t_data = t_data[self.arg[i]][0]
+                        t_data = t_data[sarg][0]
                     else:
                         t_data = False
                 else:
                     t_id = t_data['id']
-                    t_data = t_data[self.arg[i]]
+                    t_data = t_data[sarg]
             else:
                 model = obj.pool.get(self._relations[-1]['object'])
                 model.write(cr, uid, [t_id], {args[-1]: values}, context=context)
@@ -686,19 +675,19 @@ class related(function):
             if not data:
                 continue
             t_data = data
-            for i in range(len(self.arg)):
+            for i, sarg in enumerate(self._arg):
                 field_detail = self._relations[i]
                 try:
-                    if not t_data[self.arg[i]]:
+                    if not t_data[sarg]:
                         t_data = False
                         break
                 except:
                     t_data = False
                     break
-                if field_detail['type'] in ('one2many', 'many2many') and i != len(self.arg) - 1:
-                    t_data = t_data[self.arg[i]][0]
+                if field_detail['type'] in ('one2many', 'many2many') and i != len(self._arg) - 1:
+                    t_data = t_data[sarg][0]
                 elif t_data:
-                    t_data = t_data[self.arg[i]]
+                    t_data = t_data[sarg]
             if type(t_data) == type(objlst[0]):
                 res[data.id] = t_data.id
             elif t_data:
@@ -722,7 +711,6 @@ class related(function):
         return res
 
     def __init__(self, *arg, **args):
-        self.arg = arg
         self._relations = []
         super(related, self).__init__(self._fnct_read, arg, self._fnct_write, fnct_inv_arg=arg, method=True, fnct_search=self._fnct_search, **args)
         if self.store is True:
@@ -733,8 +721,8 @@ class related(function):
         if self._relations:
             return
         obj_name = obj._name
-        for i in range(len(self._arg)):
-            f = obj.pool.get(obj_name).fields_get(cr, uid, [self._arg[i]], context=context)[self._arg[i]]
+        for i, sarg in enumerate(self._arg):
+            f = obj.pool.get(obj_name).fields_get(cr, uid, [sarg,], context=context)[sarg]
             self._relations.append({
                 'object': obj_name,
                 'type': f['type']
@@ -762,7 +750,6 @@ class dummy(function):
         return {}
 
     def __init__(self, *arg, **args):
-        self.arg = arg
         self._relations = []
         super(dummy, self).__init__(self._fnct_read, arg, self._fnct_write, fnct_inv_arg=arg, method=True, fnct_search=None, **args)
 

@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
 #
-#    OpenERP, Open Source Management Solution
+#    OpenERP-F3, Open Source Management Solution
+#    Copyright (C) 2011-2013 P. Christeas <xrg@hellug.gr>
 #    Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>). All Rights Reserved
 #    The refactoring about the OpenSSL support come from Tryton
 #    Copyright (C) 2007-2009 Cédric Krier.
@@ -73,10 +74,13 @@ class Service(object):
         if callable(method):
             self._methods[method.__name__] = method
 
-    def abortResponse(self, error, description, origin, details):
+    def abortResponse(self, error, description, origin, details, do_traceback=True):
         if not tools.config['debug_mode']:
-            tb = sys.exc_info()
-            tb_s = "".join(traceback.format_exception(*tb))
+            if do_traceback:
+                tb = sys.exc_info()
+                tb_s = "".join(traceback.format_exception(*tb))
+            else:
+                tb_s = None
             raise OpenERPDispatcherException(description, origin=origin, 
                     details=details, faultCode=error, traceback=tb_s)
         else:
@@ -135,10 +139,13 @@ class ExportService(object):
     def new_dispatch(self,method,auth,params):
         raise NotImplementedError("stub dispatch at %s" % self.__name)
 
-    def abortResponse(self, error, description, origin, details):
+    def abortResponse(self, error, description, origin, details, do_traceback=True):
         if not tools.config['debug_mode']:
-            tb = sys.exc_info()
-            tb_s = "".join(traceback.format_exception(*tb))
+            if do_traceback:
+                tb = sys.exc_info()
+                tb_s = "".join(traceback.format_exception(*tb))
+            else:
+                tb_s = None
             raise OpenERPDispatcherException(description, origin=origin, 
                     details=details, faultCode=error, traceback=tb_s)
         else:
@@ -369,6 +376,8 @@ def init_logger():
     logger.addHandler(handler)
     logger.setLevel(int(tools.config['log_level'] or '0'))
 
+    if tools.config.get_misc('debug', 'warnings', False):
+        logging.captureWarnings(True)
 
 class Logger(object):
     def __init__(self):
@@ -893,7 +902,7 @@ class OpenERPDispatcher2:
     
     @classmethod
     def _dbg_log(cls, title, params):
-        cls.logger.log(logging.DEBUG_RPC,'%s: %s', title, pformat(params))
+        cls._logger.log(logging.DEBUG_RPC,'%s: %s', title, pformat(params))
 
     @classmethod
     def _fake_log(cls, title, params):

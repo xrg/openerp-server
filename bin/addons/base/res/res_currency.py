@@ -3,6 +3,7 @@
 #
 #    OpenERP, Open Source Management Solution
 #    Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>).
+#    Copyright (C) 2013 P. Christeas <xrg@hellug.gr>
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -18,12 +19,13 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
+
 import time
 import netsvc
 from osv import fields, osv
 import ir
 
-from tools.misc import currency
+from tools.misc import currency, to_date
 from tools.translate import _
 
 class res_currency(osv.osv):
@@ -31,18 +33,15 @@ class res_currency(osv.osv):
         if context is None:
             context = {}
         res = {}
-        if 'date' in context:
-            date = context['date']
-        else:
-            date = time.strftime('%Y-%m-%d')
-        date = date or time.strftime('%Y-%m-%d')
+        date = to_date(context.get('date', None)) or fields.date.today()
         for id in ids:
             cr.execute("SELECT currency_id, rate FROM res_currency_rate WHERE currency_id = %s AND name <= %s ORDER BY name desc LIMIT 1" ,(id, date))
             if cr.rowcount:
                 id, rate = cr.fetchone()
                 res[id] = rate
             else:
-                res[id] = 0
+                # should we return anything at all?
+                res[id] = False
         return res
 
     def _check_rounding(self, cr, uid, ids, context=None):
@@ -69,10 +68,11 @@ class res_currency(osv.osv):
 
     }
     _defaults = {
-        'active': lambda *a: 1,
+        'active': True,
         'company_id': lambda self,cr,uid,c: self.pool.get('res.company')._company_default_get(cr, uid, 'res.currency', context=c),
         'rounding': 0.01,
     }
+
     _sql_constraints = [
         ('currency_name_uniq', 'unique (name, company_id)', 'The currency code must be unique !'),
     ]
@@ -111,14 +111,14 @@ class res_currency(osv.osv):
         if context is None:
             context = {}
         if from_currency['rate'] == 0 or to_currency['rate'] == 0:
-            date = context.get('date', time.strftime('%Y-%m-%d'))
+            date = to_date(context.get('date', fields.date.today()))
             if from_currency['rate'] == 0:
                 currency_symbol = from_currency.symbol
             else:
                 currency_symbol = to_currency.symbol
             raise osv.except_osv(_('Error'), _('No rate found \n' \
                     'for the currency: %s \n' \
-                    'at the date: %s') % (currency_symbol, date))
+                    'at the date: %s') % (currency_symbol, str(date))) # TODO: l18n date format
         return to_currency.rate/from_currency.rate
 
     def compute(self, cr, uid, from_currency_id, to_currency_id, from_amount, round=True, context=None):
@@ -160,7 +160,7 @@ class res_currency_rate(osv.osv):
         'currency_id': fields.many2one('res.currency', 'Currency', readonly=True),
     }
     _defaults = {
-        'name': lambda *a: time.strftime('%Y-%m-%d'),
+        'name': fields.date.today,
     }
     _order = "name desc"
 res_currency_rate()

@@ -25,7 +25,7 @@ import module
 import res
 import publisher_warranty
 
-from tools.service_meta import _ServiceMeta, abstractmethod
+from tools.safe_eval import ExecContext
 
 class _pool_actor(object):
     """ Helper that exposes ORM verbs within an ExecContext sandbox
@@ -64,33 +64,7 @@ class _pool_actor_browse(object):
             kwargs['cache'] = bro_cache
         return obj.browse(self._parent.cr, self._parent.uid, *args, **kwargs)
 
-class ExecContext(object):
-    """Intermediate object which will prepare an eval() context
-
-        A generic implementation of an interface class from pythonic functions to
-        the (sandboxed) context for a safe_eval().
-    """
-    __metaclass__ = _ServiceMeta
-
-    def __init__(self, **kwargs):
-        """ Keep unsafe `kwargs` in this object, let it be used by our methods
-        """
-        self._kwargs = kwargs
-
-    def update(self, *args, **kwargs):
-        """ Update, as if this class were a dict()
-        """
-        self._kwargs.update(*args, **kwargs)
-
-    def __getattr__(self, name):
-        if not name in self._kwargs:
-            raise AttributeError(name)
-        return self._kwargs[name]
-
-    @abstractmethod
-    def prepare_context(self, context):
-        pass
-
+class ExecContext_orm(ExecContext):
     def _prepare_orm(self, context):
         """Call this from your class if you want ORM methods within the context
         """
@@ -98,14 +72,16 @@ class ExecContext(object):
         context['context'] = self._kwargs.get('context', {})
 
         context['browse'] = _pool_actor_browse(self)
-        for verb in ('search', 'read', 'search_read', 'create', 'write'):
+        # Hint: all base ORM methods that DON'T operate on [ids]
+        for verb in ('search', 'read', 'search_read', 'create', 'write',
+                    'default_get', 'get_last_modified', 'name_search',
+                    'name_get', 'read_group', 'merge_get_values',
+                    'merge_records'):
             context[verb] = _pool_actor(verb=verb, parent=self)
 
-    def _prepare_logger(self, context):
-        """ Put a logger in the context, from this class'es `_logger_name`
-        """
-        import logging
-        context['log'] = logging.getLogger(self._logger_name)
+
+import amount_to_text
+import amount_to_text_en
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
 

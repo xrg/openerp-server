@@ -3,7 +3,7 @@
 #
 #    OpenERP, Open Source Management Solution
 #    Copyright (C) 2004-TODAY OpenERP S.A. <http://www.openerp.com>
-#    Copyright (C) 2008-2009, 2011 P. Christeas <xrg@hellug.gr>
+#    Copyright (C) 2008-2009, 2011-2013 P. Christeas <xrg@hellug.gr>
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -21,7 +21,7 @@
 ##############################################################################
 
 name = 'openerp-server'
-version = '6.9.0'
+version = '6.9.2'
 major_version = '6.9'
 description = 'OpenERP-F3 Server'
 long_desc = '''OpenERP is a complete ERP and CRM. The main features are accounting (analytic
@@ -65,9 +65,10 @@ api_options = [
         'fields-inherit',
         'many2many-auto',
         'date_eval',
-        'cdatetime',
+        'cdatetime', 'ndatetime',
         'struct-field',
         'auth-in-cr',
+        'loaders-service',
         ]
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

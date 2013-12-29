@@ -64,11 +64,19 @@ class WkfAntiCacheEngine(WorkflowEngine):
             else:
                 search_again()
     """
-    
+
     def __init__(self, parent_obj):
         WorkflowEngine.__init__(self, parent_obj)
         self._items = {} # weakrefs, by id
         self._ecounter = 0
+
+    def __del__(self):
+        """If this engine is killed, all cached objects must expire
+        """
+        for it in self._items.values():
+            if it():
+                it().expire()
+        self._items = None # dereference
 
     def __clear_ids(self, ids):
         for id in ids:
@@ -96,7 +104,7 @@ class WkfAntiCacheEngine(WorkflowEngine):
     @classmethod
     def get_expiry(cls, mobj, ids):
         """Return expiry object for ids of `mobj`
-        
+
             The expiry object can be tied to a set of ids (not just one).
             You are responsible of releasing the object at your own code,
             when it's no longer needed.

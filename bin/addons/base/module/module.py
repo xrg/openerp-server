@@ -166,7 +166,8 @@ class module(osv.osv):
             imd_models = dict( [(m,[]) for m in dmodels])
 
             for imd_res in model_data_obj.search_read(cr, uid,
-                    [('module','=', module_rec.name), ('model','in',tuple(dmodels))],
+                    [('module','=', module_rec.name), ('model','in',tuple(dmodels)),
+                     ('source', '=', 'xml'), ('res_id', '!=', 0)],
                     fields=['model', 'res_id'], context=context):
                 imd_models[imd_res['model']].append(imd_res['res_id'])
 
@@ -283,7 +284,7 @@ class module(osv.osv):
                         _('You try to remove a module that is installed or will be installed'))
             mod_names.append(mod['name'])
         #Removing the entry from ir_model_data
-        ids_meta = self.pool.get('ir.model.data').search(cr, uid, [('name', '=', 'module_meta_information'), ('module', 'in', mod_names)])
+        ids_meta = self.pool.get('ir.model.data').search(cr, uid, [('name', '=', 'module_meta_information'), ('module', 'in', mod_names), ('source', '=', 'xml')])
 
         if ids_meta:
             self.pool.get('ir.model.data').unlink(cr, uid, ids_meta, context)

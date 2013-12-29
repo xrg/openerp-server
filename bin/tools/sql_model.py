@@ -93,11 +93,11 @@ class Schema(object):
 
     def load_from_db(self, cr):
         """ Load the relations from the database into element structures
-            
+
             @return dict (tables, indices, views, ...), each of them being
                 a collection of elements
         """
-        
+
         self.tables.set_state(AT_SQL)
         try:
             self._load_from_db2(cr)
@@ -107,17 +107,17 @@ class Schema(object):
             self.epoch += 1
             self.tables.get_depends() # quick cleanup
             self.commands.get_depends()
-    
+
     def _load_from_db2(self, cr):
         # Load tables from db
         relnames = self.hints.pop('tables')
         if self._debug:
             self._logger.debug("Fetching %s tables from db", ', '.join(relnames))
-        
+
         cr.execute("""SELECT c.relname, c.oid, c.relkind
             FROM pg_class c
             WHERE c.relname = ANY(%s) AND relkind IN ('r','v')
-                  AND c.relnamespace IN (SELECT oid from pg_namespace 
+                  AND c.relnamespace IN (SELECT oid from pg_namespace
                         WHERE nspname = ANY(current_schemas(false)))""",
                 (relnames,), debug=self._debug)
 
@@ -132,7 +132,7 @@ class Schema(object):
                 # need to analyze any further?
             else:
                 raise NotImplementedError(r['relkind'])
-            
+
         if tbl_reloids and True:
             # Scan columns
             cr.execute("""SELECT a.attrelid AS reloid, a.attname AS name,
@@ -157,7 +157,7 @@ class Schema(object):
                         i.indrelid AS reloid, indisprimary, indkey
                     FROM pg_index AS i, pg_class AS c
                     WHERE i.indexrelid = c.oid
-                      AND c.relnamespace IN (SELECT oid from pg_namespace 
+                      AND c.relnamespace IN (SELECT oid from pg_namespace
                             WHERE nspname = ANY(current_schemas(false)))
                       AND i.indrelid = ANY(%s) """,
                       (tbl_reloids.keys(),), debug=self._debug)
@@ -170,24 +170,24 @@ class Schema(object):
                 #    column index?
                 else:
                     tbl.indices.append(Index(colnames=idx_cols,state=tbl.indices._state, **idx))
-        
+
         if tbl_reloids and True:
             # Scan constraints
             qry = """SELECT conname AS name, conrelid AS reloid,
                         contype, conindid AS idx_oid,
                         confupdtype, confdeltype, conkey, fc.relname AS fcname,
                         (SELECT array_agg(attname) FROM (SELECT attname FROM pg_attribute
-                                                    WHERE attrelid = fc.oid 
+                                                    WHERE attrelid = fc.oid
                                                       AND attnum = ANY(confkey)) AS foocols)
                                     AS fc_colnames,
                         pg_get_constraintdef(s.oid) AS definition
                     FROM pg_constraint AS s
                         LEFT JOIN pg_class AS fc ON (s.confrelid = fc.oid)
-                    WHERE s.connamespace IN (SELECT oid from pg_namespace 
+                    WHERE s.connamespace IN (SELECT oid from pg_namespace
                             WHERE nspname = ANY(current_schemas(false)))
                       AND s.conrelid = ANY(%s)
                      """
-            if cr.pgmode not in ('pg92', 'pg91', 'pg90'):
+            if cr.pgmode < 'pg90':
                 # This column was added after pg 8.4 :(
                 qry = qry.replace('conindid AS idx_oid,','')
             cr.execute(qry,
@@ -246,11 +246,11 @@ class Schema(object):
 
     def commit_to_db(self, cr, dry_run=False):
         """ Apply the changes of schema on the database
-        
+
             @param schema is the dictionary returned by load_from_db(), modified
                 as needed
         """
-        
+
         logger = self._logger
 
         need_more = True
@@ -264,7 +264,7 @@ class Schema(object):
                 logger.info("Actions remaining, please fix them manually!\n%r",
                         self._dump_todo())
                 raise RuntimeError("Cannot update schema")
-        
+
             logger.debug("Creating or updating, epoch %d", self.epoch)
             # Section 1: tables
             for tbl in self.tables:
@@ -272,19 +272,19 @@ class Schema(object):
                     continue
                 tstate = tbl._state # make a copy
                 need_more = True
-                
+
                 if not tbl.get_depends():
                     continue
-                
+
                 sql = args = None
                 logger.debug("Working on relation %s", tbl._name)
-                
+
                 try:
                     if tstate in (CREATE, ALTER, DROP):
                         sql, args = tbl.pop_sql(epoch=self.epoch, partial=False)
                     else:
                         logger.error("What is %s state?", _state_names[tbl._state])
-                    
+
                     if not sql:
                         continue
 
@@ -295,7 +295,7 @@ class Schema(object):
                         cr.execute('SAVEPOINT "full_%s";' % _state_names[tstate])
                         cr.execute(sql, args)
                         cr.execute('RELEASE SAVEPOINT "full_%s";' % _state_names[tstate])
-                    
+
                     done_actions = True
                     tbl.commit_state()
                     if self._does_debug(tbl._name):
@@ -339,7 +339,7 @@ class Schema(object):
                     failed_actions = True
 
             # TODO: here go indices etc..
-            
+
             if done_actions:
                 # move on with other elements that can fully proceed
                 self.epoch += 1
@@ -352,7 +352,7 @@ class Schema(object):
                     continue
                 tstate = tbl._state # make a copy
                 need_more = True
-                
+
                 if not tbl.get_depends(partial=True):
                     if self._does_debug(tbl._name):
                         logger.debug("skip table %s because of partial depends", tbl._name)
@@ -360,13 +360,13 @@ class Schema(object):
 
                 sql = args = None
                 logger.debug("Working on relation %s", tbl._name)
-                
+
                 try:
                     if tstate in (CREATE, ALTER, DROP):
                         sql, args = tbl.pop_sql(epoch=self.epoch, partial=True)
                     else:
                         logger.error("What is %s state?", _state_names[tbl._state])
-                    
+
                     if not sql:
                         continue
 
@@ -377,7 +377,7 @@ class Schema(object):
                         cr.execute('SAVEPOINT "partial_%s";' % _state_names[tstate])
                         cr.execute(sql, args)
                         cr.execute('RELEASE SAVEPOINT "partial_%s";' % _state_names[tstate])
-                    
+
                     done_actions = True
                     tbl.commit_state()
                 except DatabaseError:
@@ -386,7 +386,7 @@ class Schema(object):
                     logger.debug("Object: %s", pretty_print(tbl))
                     tbl.commit_state(failed=True)
                     failed_actions = True
-            
+
             # TODO indices, constraints etc. components (partial)
 
             if need_more and not (done_actions or failed_actions):
@@ -398,16 +398,16 @@ class Schema(object):
         if not dry_run:
             cr.commit()
         return not need_more
-        
+
     def _dump_todo(self):
         """ Dump all pending database actions in a single SQL-like string
         """
         return self.pretty_print(todo_only=True)
-        
+
     def pretty_print(self, todo_only=False):
         ret = "--- Tables: %d \n" % len(self.tables)
         for tbl in self.tables:
-            r2 = pretty_print(tbl, todo_only=todo_only) 
+            r2 = pretty_print(tbl, todo_only=todo_only)
             if r2:
                 ret += r2 + '\n'
         if self.commands:
@@ -442,7 +442,7 @@ def pretty_print(elem, indent=0, todo_only=False):
             r2 = pretty_print(e2, indent+4, todo_only=todo_only)
             if r2:
                 ret += '\n' + r2
-        
+
         ret += '\n' +(' ' * indent) + '}'
     elif isinstance(elem, Relation):
         if indent > 80:
@@ -463,7 +463,7 @@ def pretty_print(elem, indent=0, todo_only=False):
                 r2 = pretty_print(e2, indent+4, todo_only=todo_only)
                 if r2:
                     ret += '\n' + r2
-            
+
             if not elem.constraints.is_idle():
                 ret += '\n'+ (' ' * indent) + 'constraints: %s' % _state_names[elem.constraints._state]
             if len(elem.constraints):
@@ -473,19 +473,19 @@ def pretty_print(elem, indent=0, todo_only=False):
                         ret += '\n' + r2
 
         ret += '\n' +(' ' * indent) + '}'
-    
+
     return ret
 
 class _element(object):
     """ mostly for tracing
-    
+
         @attribute _state will mark the phase in which that element was last
             modified. Used to distinguish ones that are already in the SQL
             db from ones that need to be CREATEd/ALTERed
         @attribute _depends a list of weak references to other elements
             on which we depend
     """
-    
+
     _elem_attrs = [] #: names of our attributes, which are elements (see: Column, Relation)
     _wait_depends = True #: unlock ourself one epoch later than our dependencies
     _wait_for_me = True #: this element can block parents depends
@@ -506,9 +506,9 @@ class _element(object):
 
     def _sub_elems(self):
         return [getattr(self, e) for e in self._elem_attrs]
-    
+
     def parent_schema(self):
-        
+
         par = self.parent()
         while par:
             if isinstance(par, Schema):
@@ -517,9 +517,9 @@ class _element(object):
                 raise ValueError("No parent for %s", par)
             else:
                 par = par.parent()
-        
+
         raise ValueError("No parent schema for %r" % self)
-        
+
     def set_state(self, state):
         """ setter, overridable
         """
@@ -533,7 +533,7 @@ class _element(object):
 
     def mark(self):
         """Set the state as DONE, so that we know we need this element
-        
+
             Used to distinguish the elements which are redundant in the
             database and need to be dropped.
         """
@@ -610,7 +610,7 @@ class _element(object):
 
     def set_depends(self, other, on_alter=False):
         """ self depends on other
-        
+
             @param other an element
             @param on_alter fire even if the other is at ALTER, aka. just
                     after it has been created
@@ -619,7 +619,7 @@ class _element(object):
         if other.is_idle():
             # we can depend on that right now, not bother about epochs
             return
-        
+
         if on_alter and other._state == ALTER:
             return
         self._depends.append(weakref.ref(other))
@@ -648,7 +648,7 @@ class _element(object):
                     pass
                 else:
                     return False
-        
+
         for e in self._sub_elems():
             if isinstance(e, collection) and len(e) == 0 and not e.is_idle():
                 # fix empty collections being non-idle
@@ -675,10 +675,10 @@ class _element(object):
 
 class collection(_element):
     """ hybrid dict/unordered list
-    
+
         No setitem, use the append()
     """
-    
+
     def __init__(self, name, klass, parent):
         """
             @param klass all elements of this collection should be instances
@@ -690,13 +690,13 @@ class collection(_element):
         self._d = {}
         assert issubclass(klass, _element), klass
         self._baseclass = klass
-    
+
     def __getitem__(self, name):
         return self._d[name]
-    
+
     def __iter__(self):
         return self._d.itervalues()
-        
+
     def __len__(self):
         return len(self._d)
 
@@ -718,7 +718,7 @@ class collection(_element):
         return elem
 
     def commit_state(self, failed=False):
-        
+
         has_changes = False
         need_alter = False
         if self._state < AT_STATE:
@@ -729,7 +729,7 @@ class collection(_element):
                 has_changes = True
             if not e.is_idle():
                 need_alter = True
-        
+
         if _element.commit_state(self, failed=(failed and not has_changes)):
             has_changes = True
         if (self._state in (SQL, DONE)) and need_alter:
@@ -740,7 +740,7 @@ class collection(_element):
         #    has_changes = True
 
         return has_changes
-        
+
     def cleanup(self):
         """ remove DROPPED elements
         """
@@ -750,13 +750,13 @@ class collection(_element):
 
     def rename(self, oldname, newname):
         """Rename element `oldname` to `newname`
-        
+
             The element will shift its name, take `newname` as its `_name`
             immediately.
-            
+
             @return element
         """
-        
+
         assert oldname in self._d, oldname
         assert self._d[oldname]._state not in (DROPPED, DROP, SKIPPED, RENAME), \
             "%s element %s is already in %s state" % \
@@ -768,17 +768,17 @@ class collection(_element):
         elem._state = RENAME # use the shallow setter, not set_state()
         self._d[newname] = elem
         return elem
-        
+
     def rollback_state(self):
         _element.rollback_state(self)
         for elem in self:
             elem.rollback_state()
-    
+
     def get_depends(self, partial=False):
         clear = super(collection, self).get_depends(partial=partial)
         if not clear:
             return False
-        
+
         if partial:
             # Just look for one element that would be able to proceed
             clear = True
@@ -802,7 +802,7 @@ class collection(_element):
 class Column(_element):
     """ represents a table/view column, with all its properties
     """
-    
+
     _elem_attrs = ['constraints',]
 
     class now(object):
@@ -816,7 +816,7 @@ class Column(_element):
             return not isinstance(other, self.__class__)
 
     # TODO perhaps more functions
-    
+
     def __init__(self, name, ctype, num=None, size=None, has_def=None,
                 not_null=None, default=None, primary_key=None, constraint=None):
         _element.__init__(self, name)
@@ -835,8 +835,8 @@ class Column(_element):
 
     _common_constants = {
         'NULL': None,
-        'true': 'True', # match the _symbol_set of booleans
-        'false': 'False',
+        'true': True, # match the _symbol_set of booleans
+        'false': False,
         'now()': now(),
     }
 
@@ -944,7 +944,7 @@ class Column(_element):
 
         for t in [True,]:
             # one time loop, allows us to break from it
-        
+
             if 'default' in self._todo_attrs:
                 val = self._todo_attrs.pop('default')
                 if val is None:
@@ -956,7 +956,7 @@ class Column(_element):
                     args.append(val)
             if ret and partial:
                 break
-                
+
             if 'not_null' in self._todo_attrs:
                 if self._todo_attrs.pop('not_null'):
                     alter_column('SET NOT NULL')
@@ -972,14 +972,14 @@ class Column(_element):
                     alter_column('TYPE %s(%s)' % (newtype, newsize or 16))
                 else:
                     alter_column('TYPE %s' % newtype)
-            
+
             if ret and partial:
                 break
-            
+
         if ret and not dry_run:
             self._state = AT_STATE + self._state
             self.last_epoch = epoch
-        
+
         if not self.constraints.is_idle():
             for con in self.constraints:
                 if con.is_idle() or not con.get_depends():
@@ -998,7 +998,7 @@ class Column(_element):
                     con._state = AT_STATE + con._state
                 if partial:
                     break
-            
+
             if ret and not dry_run:
                 if self._state < AT_STATE:
                     self._state = AT_STATE + self._state
@@ -1015,7 +1015,7 @@ class Relation(_element):
         @attr name
         @attr kind
     """
-    
+
     _elem_attrs = ['columns', ]
     def __init__(self, name, oid=None, comment=None):
         _element.__init__(self, name=name)
@@ -1053,7 +1053,7 @@ class ColumnConstraint(_element):
 
     def _to_table_constraint(self, colname, args):
         """ reformat this constraint as a table-wide expression
-        
+
             When we add this constraint late, we cannot write the same
             expression as the column shorthand.
             @param colname name of column
@@ -1062,7 +1062,7 @@ class ColumnConstraint(_element):
 
     def commit_state(self, failed=False):
         """ Column constraints go from @alter -> create
-        
+
         """
         if self._state < AT_STATE:
             return False
@@ -1084,7 +1084,7 @@ class UniqueColumnConstraint(ColumnConstraint):
 
     def _to_create_sql(self, args):
         return 'UNIQUE'
-    
+
     def _to_table_constraint(self, colname, args):
         return 'UNIQUE("%s")' % colname
 
@@ -1123,7 +1123,7 @@ class FkColumnConstraint(ColumnConstraint):
 
 class NotNullColumnConstraint(ColumnConstraint):
     """ Special, transient element for the NOT NULL constraint
-    
+
         This is mostly covered through the 'not_null' attribute of the
         Column, but sometimes this is not possible to apply until the
         data are updated with default values. Then, use this element
@@ -1137,11 +1137,11 @@ class NotNullColumnConstraint(ColumnConstraint):
 
     def commit_state(self, failed=False):
         """ Column constraints go from @alter -> create
-        
+
         """
         if self._state < AT_STATE:
             return False
-        
+
         if failed:
             self._state = FAILED
         elif self._state == AT_CREATE:
@@ -1154,9 +1154,9 @@ class NotNullColumnConstraint(ColumnConstraint):
 class Table(Relation):
     """ Represents a regular SQL table
     """
-    
+
     _elem_attrs = ['columns', 'constraints', 'indices']
-    
+
     def __init__(self, name, **kwargs):
         Relation.__init__(self, name=name, **kwargs)
         self.indices = collection('indices', Index, self)
@@ -1167,13 +1167,13 @@ class Table(Relation):
             size=None, default=None, select=None, comment=None,
             do_create=True, do_alter=True, do_reset=True):
         """ Checks if colname is among our columns, repairs if needed
-        
+
             Note: this function only works for plain columns
-            
+
             @param colname the name of the column
             @param ctype the column type, in "create table" format
             @param references a dict for the foreign key. It shall
-                be like {'table': fk_table, ['column': 'id' (default),] 
+                be like {'table': fk_table, ['column': 'id' (default),]
                         ['on_delete': 'set null',] ['on_update': ...'] }
             @param size for char/varchar fields
             @param default Default value expression
@@ -1183,10 +1183,10 @@ class Table(Relation):
             @param do_ater If different, alter column
             @param do_reset if cannot match, move the old column away and
                 create new one
-            
+
             @return Boolean, if all actions were feasible
         """
-        
+
         can_do = True
         moved_col = None
         casts = { 'text': ('char', 'varchar'),
@@ -1237,7 +1237,7 @@ class Table(Relation):
             if references:
                 new_name = "%s_%s_fkey" %(self._name, colname)
                 newcol.constraints.append(FkColumnConstraint(new_name, references['table'],
-                        references.get('column', 'id'), 
+                        references.get('column', 'id'),
                         on_delete=references.get('on_delete', None),
                         on_update=references.get('on_update', None)))
                 if references['table'] in self.parent():
@@ -1252,7 +1252,7 @@ class Table(Relation):
                 else:
                     self._logger.warning("Column %s.%s set to reference %s(%s), but the latter table is not known",
                             self._name, colname, references['table'], references.get('column', 'id'))
-            
+
             if self._state != CREATE and isinstance(default, Command):
                 # We need to execute the command (to update defaults) _after_
                 # the column has been added, and then enforce the NOT NULL constraint
@@ -1265,7 +1265,7 @@ class Table(Relation):
                 idx = self.indices.append(Index('%s_%s_idx' % (self._name, colname),
                                             colnames=[colname], state=CREATE))
                 idx.set_depends(newcol)
-            
+
             assert newcol._state == CREATE, "%s %s" % (newcol._state, self._state)
             if self._state < NON_IDLE_STATE:
                 self._state = ALTER
@@ -1307,8 +1307,9 @@ class Table(Relation):
                             i += 1
                             if i > 3:
                                 break
+                        del i
                         new_con = col.constraints.append(FkColumnConstraint(new_name, references['table'],
-                                references.get('column', 'id'), 
+                                references.get('column', 'id'),
                                 on_delete=references.get('on_delete', None),
                                 on_update=references.get('on_update', None)))
                         if references['table'] in self.parent():
@@ -1354,8 +1355,8 @@ class Table(Relation):
                         nnc = col.constraints.append(NotNullColumnConstraint())
                         nnc.set_depends(default)
             if select is not None:
-                found_indices = [ i for i in self.indices \
-                        if len(i.columns) == 1 and colname in i.columns]
+                found_indices = [ ix for ix in self.indices \
+                        if len(ix.columns) == 1 and colname in ix.columns]
                 if select:
                     # add index, if needed
                     if not found_indices:
@@ -1372,16 +1373,16 @@ class Table(Relation):
                             continue
                         idx.drop()
                     self.indices.cleanup()
-            
+
             if col._state not in (CREATE, RENAME) and col._todo_attrs:
                 col._state = ALTER
             else:
                 col.mark()
-        
+
             if col._state >= NON_IDLE_STATE and self._state < NON_IDLE_STATE:
                 self._state = ALTER
         return can_do
-    
+
     def check_constraint(self, conname, obj, condef):
         """ verify or create an sql constraint
 
@@ -1401,11 +1402,11 @@ class Table(Relation):
 
     def column_or_renamed(self, colname, oldname=None):
         """ Retrieve the named column, or `oldname` through a rename
-        
+
             @return a column reference, if either of the names match,
                 or None
         """
-        
+
         if colname in self.columns:
             return colname
         elif oldname and oldname in self.columns:
@@ -1415,10 +1416,10 @@ class Table(Relation):
 
     def pop_sql(self, epoch, partial=False, dry_run=False):
         """ Return the SQL command (string) for this table
-            
+
             This function is stateful. It will also mark the elements
             as 'in process'.
-            
+
             @param dry_run For testing purposes, don't alter any state
         """
         ret = ''
@@ -1427,7 +1428,7 @@ class Table(Relation):
 
         if self._state == CREATE:
             ret = 'CREATE TABLE %s (' % self._name
-                
+
             ret_col = []
             for col in self.columns:
                 if col._state != CREATE:
@@ -1444,7 +1445,7 @@ class Table(Relation):
                     col.set_state(AT_STATE + col._state)
                     col.last_epoch = epoch
                     do_columns = True
-            
+
             for con in self.constraints:
                 if con._state != CREATE:
                     self._logger.warning("Table Constraint: %s.%s: what is state %s when table is not created yet?",
@@ -1459,7 +1460,7 @@ class Table(Relation):
                     con._state = AT_STATE + con._state
                     con.last_epoch = epoch
                     do_constraints = True
-            
+
             if not ret_col:
                 raise RuntimeError("Why can't we %s create anything at epoch %d? %r" % (\
                     partial and 'partially' or '', epoch, \
@@ -1467,11 +1468,11 @@ class Table(Relation):
                             for c in self.columns]))
 
             ret += ',\n\t'.join(ret_col)
-            
+
             ret += ');\n'
         elif self._state == ALTER:
             ret += 'ALTER TABLE %s ' % self._name
-            
+
             ret_col = []
             for col in self.columns:
                 if col.is_idle():
@@ -1519,7 +1520,7 @@ class Table(Relation):
                     do_columns = True
                 if partial:
                     break
-            
+
             if not (partial and ret_col):
                 for con in self.constraints:
                     if con.is_idle():
@@ -1552,7 +1553,7 @@ class Table(Relation):
                         continue
                     elif partial and idx.last_epoch == epoch:
                         continue
-                    
+
                     if idx._state == CREATE:
                         ret = idx._to_create_sql(self._name, args)
                     elif idx._state == DROP and idx.indirect:
@@ -1575,7 +1576,7 @@ class Table(Relation):
                         idx.last_epoch = epoch
                     # shortcut: only return this index, as a separate SQL command
                     return ret + ';', args
-            
+
             if not ret_col:
                 self._logger.debug( "Why can't we %s alter anything on %s %s? %r ", \
                     partial and 'partially' or '', self._name, epoch, \
@@ -1584,11 +1585,11 @@ class Table(Relation):
                 raise RuntimeError("Table %s marked as ALTER but cannot proceed at epoch %d" % \
                         (self._name, epoch))
                 # return '', []
-            
+
             ret += ',\n\t'.join(ret_col)
-            
+
             ret += ';\n'
-    
+
         elif self._state == DROP:
             if drop_guard:
                 self._logger.warning("Table %s would be dropped, but drop_guard saved it", self._name)
@@ -1615,10 +1616,10 @@ class View(Relation):
     #    depends_on[]
 
 class Index(Relation):
-    
+
     _wait_depends = False
     _elem_attrs = [] # We don't want to recurse into our 'columns'
-    
+
     def __init__(self, name, colnames, state, is_unique=False, reloid=None, indisprimary=False):
         Relation.__init__(self, name=name)
         self.is_unique = False
@@ -1693,7 +1694,7 @@ class OtherTableConstraint(TableConstraint):
     def __init__(self, name, **kwargs): # TODO
         _element.__init__(self, name)
         self.__dict__.update(kwargs) #dirty
-        
+
     def _to_create_sql(self, args):
         ret = '"%s" %s' % (self._name, self.definition)
         return ret

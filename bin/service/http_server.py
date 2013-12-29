@@ -36,33 +36,47 @@
     configurable, of course). This "single" server then uses a `MultiHTTPHandler`
     to dispatch requests to the appropriate channel protocol, like the XML-RPC,
     static HTTP, DAV or other.
+
+    Note: since XML-RPCv1 does NOT expose the client address to the upper layer,
+    namely the "web services" one, the "client pit" will receive `None` and may
+    hence block the entire XML-RPCv1 upon an attack!
 """
 
-from websrv_lib import *
+from websrv_lib import ConnThreadingMixIn, HTTPServer, HTTPDir, FixSendError, \
+            MultiHTTPHandler, SecureMultiHTTPHandler, dummyconn, BoundStream, \
+            AuthProxy, AuthRejectedExc, AuthRequiredExc, AuthProvider, \
+            HttpOptions, HTTPHandler
 import netsvc
 import logging
 import errno
+import base64
 import threading
 import tools
 import posixpath
 import urllib
 import os
+import sys
 import select
 import socket
 import re
 import xmlrpclib
 import StringIO
 import weakref
+from decimal import Decimal
+import datetime
+from types import NoneType
 
 from SimpleXMLRPCServer import SimpleXMLRPCDispatcher
 
 try:
     import fcntl
+    __hush_pyflakes = [fcntl,]
 except ImportError:
     fcntl = None
 
 try:
     from ssl import SSLError
+    __hush_pyflakes = [SSLError,]
 except ImportError:
     class SSLError(Exception): pass
 
@@ -71,7 +85,88 @@ if os.name == 'posix':
 else:
     WRITE_BUFFER_SIZE = 0
 
-class ThreadedHTTPServer(ConnThreadingMixIn, SimpleXMLRPCDispatcher, HTTPServer):
+
+class OERPMarshaller(xmlrpclib.Marshaller):
+    """ Convert data to XML, like the v1,v2 protocols of XML-RPC used to do
+    """
+    dispatch = xmlrpclib.Marshaller.dispatch.copy()
+
+    def dump_none(self, value, write):
+        write("<value><boolean>0</boolean></value>")
+    dispatch[NoneType] = dump_none
+
+    def dump_datetime2str(self, value, write):
+        if value.tzinfo is not None:
+            # we must convert to server's tz
+            raise NotImplementedError
+
+        write("<value><string>")
+        write(value.strftime('%Y-%m-%d %H:%M:%S'))
+        write("</string></value>\n")
+
+    dispatch[datetime.datetime] = dump_datetime2str
+
+    def dump_date2str(self, value, write):
+        write("<value><string>")
+        write(value.strftime('%Y-%m-%d'))
+        write("</string></value>\n")
+    dispatch[datetime.date] = dump_date2str
+
+    def dump_decimal(self, value, write):
+        write("<value><double>")
+        write(str(value))
+        write("</double></value>\n")
+    dispatch[Decimal] = dump_decimal
+
+class OerpXMLRPCDispatcher(SimpleXMLRPCDispatcher):
+    _marshaller_class = OERPMarshaller
+    def _marshaled_dispatch(self, data, dispatch_method = None, path = None):
+        """Dispatches an XML-RPC method from marshalled (XML) data.
+
+            copied from the base class
+        """
+        try:
+            # begin replacement of xmlrpclib.loads()
+            p, u = xmlrpclib.getparser() # use_datetime=1
+            p.feed(data)
+            p.close()
+            params = u.close()
+            method = u.getmethodname()
+            del p
+            del u
+            # end replacement
+
+            # generate response
+            if dispatch_method is not None:
+                response = dispatch_method(method, params)
+            else:
+                response = self._dispatch(method, params)
+
+            # begin replacement of dumps
+            m = self._marshaller_class('utf-8', self.allow_none)
+
+            response = ''.join([
+                "<?xml version='1.0'?>\n" # utf-8 is default
+                "<methodResponse>\n",
+                m.dumps((response,)),
+                "</methodResponse>\n"
+                ])
+            # end replacement
+        except xmlrpclib.Fault, fault:
+            response = xmlrpclib.dumps(fault, allow_none=self.allow_none,
+                                       encoding=self.encoding)
+        except:
+            # report exception back to server
+            exc_type, exc_value, exc_tb = sys.exc_info()
+            response = xmlrpclib.dumps(
+                xmlrpclib.Fault(1, "%s:%s" % (exc_type, exc_value)),
+                encoding=self.encoding, allow_none=self.allow_none,
+                )
+
+        return response
+
+
+class ThreadedHTTPServer(ConnThreadingMixIn, OerpXMLRPCDispatcher, HTTPServer):
     """ A threaded httpd server, with all the necessary functionality for us.
 
         It also inherits the xml-rpc dispatcher, so that some xml-rpc functions
@@ -88,7 +183,7 @@ class ThreadedHTTPServer(ConnThreadingMixIn, SimpleXMLRPCDispatcher, HTTPServer)
                  logRequests=True, allow_none=False, encoding=None, bind_and_activate=True):
         self.logRequests = logRequests
 
-        SimpleXMLRPCDispatcher.__init__(self, allow_none, encoding)
+        OerpXMLRPCDispatcher.__init__(self)
         HTTPServer.__init__(self, addr, requestHandler)
 
         self.proto = proto
@@ -465,6 +560,15 @@ class xrBaseRequestHandler(FixSendError, HttpLogHandler, SimpleXMLRPCServer.Simp
             except EOFError:
                 pass
 
+            auth = getattr(self, 'auth_proxy', None)
+            if auth and getattr(auth, 'checkPepper', False):
+                pepper = ''
+                # FIXME : where will the pepper be in XML-RPC ?
+                # pepper = kwargs.get('__pepper', None)
+                if not auth.checkPepper(pepper):
+                    self.send_error(403, "Authorization failed")
+                    return
+
             # In previous versions of SimpleXMLRPCServer, _dispatch
             # could be overridden in this class, instead of in
             # SimpleXMLRPCDispatcher. To maintain backwards compatibility,
@@ -728,7 +832,7 @@ class OpenERPAuthProvider(AuthProvider):
 
     def authenticate(self, db, user, passwd, client_address):
         try:
-            uid = security.login(db,user,passwd)
+            uid = security.login(db, user, passwd, client_address)
             if uid is False:
                 return False
             return (user, passwd, db, uid)

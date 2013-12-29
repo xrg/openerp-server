@@ -68,7 +68,7 @@ class baseExportService(netsvc.ExportService):
 
         fn = getattr(self, 'exp_'+method)
         if domain == 'db':
-            u, p, db, uid = auth.auth_creds[auth.last_auth]
+            db, uid = auth.auth_creds[auth.last_auth][2:4]
             cr = pooler.get_db(db).cursor()
             try:
                 res = fn(cr, uid, *params)
@@ -237,7 +237,8 @@ class db(baseExportService):
         logger = logging.getLogger('web-services')
         template_dbs = tools.config.get_misc('databases', 'template','').split(' ')
         no_copy_dbs = tools.config.get_misc('databases', 'no_copy','').split(' ')
-        if (source_db_name in no_copy_dbs) or (not self._check_db_allowed(source_db_name) \
+        if (source_db_name in no_copy_dbs) or ('*' in no_copy_dbs) \
+                or (not self._check_db_allowed(source_db_name) \
                 and source_db_name not in template_dbs):
             logger.critical("Asked to copy forbidden source database: %s", source_db_name)
             raise Exception("Database %s is not allowed to be copied!" % source_db_name)
@@ -650,7 +651,6 @@ class common(_ObjectService):
             log = logging.getLogger('web-service')
             log.info("login from '%s' using database '%s'" % (params[1], params[0].lower()))
             return acds[3]
-
         else:
             return super(common, self).new_dispatch(method, auth, params, auth_domain)
 
@@ -852,7 +852,7 @@ GNU Public Licence.
             The mode of operation affects usage of advanced Postgres features by the ORM.
             It can be changed in runtime, in order to test the older or newer algorithms.
         """
-        assert pgmode in ['old', 'sql', 'pgsql', 'pg84', 'pg90', 'pg91', 'pg92']
+        assert pgmode in ['old', 'sql', 'pg00', 'pg84', 'pg90', 'pg91', 'pg92', 'pg93', 'pg94']
         sql_db.Cursor.set_pgmode(pgmode)
         return True
 
@@ -1074,7 +1074,8 @@ class objects_proxy(baseExportService):
         if not auth:
             raise Exception("Not auth domain for object service")
         if auth.provider.domain not in self._auth_commands:
-            raise Exception("Invalid domain for object service")
+            from websrv_lib import AuthRejectedExc
+            raise AuthRejectedExc("Invalid domain for object service")
 
         if method not in self._auth_commands[auth.provider.domain]:
             raise Exception("Method not found: %s" % method)
@@ -1121,7 +1122,7 @@ class dbExportDispatch:
 
         fn = getattr(self, 'exp_'+method)
         if domain == 'db':
-            u, p, db, uid = auth.auth_creds[auth.last_auth]
+            db, uid = auth.auth_creds[auth.last_auth][2:4]
             res = fn(db, uid, *params)
             return res
         else:

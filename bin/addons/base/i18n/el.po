@@ -1,29 +1,30 @@
 # This file contains the translation of the following modules:
 # P. Christeas <p_christ@hol.gr>, 2010, 2011.
-# P. Christeas <xrg@linux.gr>, 2011.
+# P. Christeas <xrg@linux.gr>, 2011, 2013.
 msgid ""
 msgstr ""
 "Project-Id-Version: OpenERP-F3\n"
 "Report-Msgid-Bugs-To: xrg@hellug.gr\n"
-"POT-Creation-Date: 2012-09-16 11:37+0000\n"
-"PO-Revision-Date: 2012-10-14 16:54+0000\n"
-"Last-Translator: Georgios Pap <georgios.pap@gmx.de>\n"
-"Language-Team: Greek (http://www.transifex.com/projects/p/openerp-f3/"
-"language/el/)\n"
+"POT-Creation-Date: 2013-11-27 14:16+0000\n"
+"PO-Revision-Date: 2013-11-27 16:23+0200\n"
+"Last-Translator: P. Christeas <xrg@linux.gr>\n"
+"Language-Team: Greek <openerp@lists.hellug.gr>\n"
+"Language: el\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: el\n"
+"language/el/)\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Lokalize 1.2\n"
 
 #. module: base
-#: code:addons/__init__.py:859
+#: code:addons/__init__.py:921
 #, python-format
 msgid "Could not load base module"
 msgstr "Δεν μπορεί να φορτωθεί το βασικό άρθρωμα"
 
 #. module: base
-#: code:addons/__init__.py:859
+#: code:addons/__init__.py:921
 #, python-format
 msgid "module base cannot be loaded! (hint: verify addons-path)"
 msgstr ""
@@ -31,65 +32,63 @@ msgstr ""
 "προθέτων)"
 
 #. module: base
-#: code:addons/base/ir/ir_actions.py:169
+#: code:addons/base/ir/ir_actions.py:170
 #, python-format
 msgid "Invalid model name in the action definition."
 msgstr "Λανθασμένο όνομα μοντέλου στην δήλωση ενέργειας"
 
 #. module: base
-#: code:addons/base/ir/ir_actions.py:604 code:addons/base/ir/ir_actions.py:636
-#: code:addons/base/ir/ir_actions.py:720 code:addons/base/ir/ir_actions.py:723
-#: code:addons/base/ir/ir_model.py:143 code:addons/base/ir/ir_model.py:235
-#: code:addons/base/ir/ir_model.py:249 code:addons/base/ir/ir_model.py:263
-#: code:addons/base/ir/ir_model.py:281 code:addons/base/ir/ir_model.py:287
-#: code:addons/base/ir/ir_model.py:290 code:addons/base/module/module.py:220
-#: code:addons/base/module/module.py:263 code:addons/base/module/module.py:267
-#: code:addons/base/module/module.py:273 code:addons/base/module/module.py:305
-#: code:addons/base/module/module.py:323 code:addons/base/module/module.py:338
-#: code:addons/base/module/module.py:466 code:addons/base/module/module.py:569
-#: code:addons/base/publisher_warranty/publisher_warranty.py:124
-#: code:addons/base/publisher_warranty/publisher_warranty.py:163
-#: code:addons/base/publisher_warranty/publisher_warranty.py:295
-#: code:addons/base/res/res_currency.py:101
-#: code:addons/base/res/res_user.py:57 code:addons/base/res/res_user.py:66
-#: code:addons/custom.py:558 code:addons/orm.py:413 code:addons/orm.py:3962
+#: code:addons/base/ir/ir_actions.py:584 code:addons/base/ir/ir_actions.py:616
+#: code:addons/base/ir/ir_actions.py:700 code:addons/base/ir/ir_actions.py:703
+#: code:addons/base/ir/ir_model.py:174 code:addons/base/ir/ir_model.py:270
+#: code:addons/base/ir/ir_model.py:284 code:addons/base/ir/ir_model.py:307
+#: code:addons/base/ir/ir_model.py:323 code:addons/base/ir/ir_model.py:329
+#: code:addons/base/ir/ir_model.py:332 code:addons/base/module/module.py:283
+#: code:addons/base/module/module.py:381 code:addons/base/module/module.py:385
+#: code:addons/base/module/module.py:391 code:addons/base/module/module.py:423
+#: code:addons/base/module/module.py:441 code:addons/base/module/module.py:456
+#: code:addons/base/module/module.py:584
+#: code:addons/base/res/res_currency.py:119
+#: code:addons/base/res/res_user.py:60 code:addons/base/res/res_user.py:70
+#: code:osv/fields_relational.py:87 code:osv/orm.py:3933
+#: code:report/custom.py:558
 #, python-format
 msgid "Error"
 msgstr "Σφάλμα"
 
 #. module: base
-#: code:addons/base/ir/ir_actions.py:604
+#: code:addons/base/ir/ir_actions.py:584
 #, python-format
 msgid "Please specify an action to launch !"
 msgstr "Παρακαλώ επιλέξτε ενέργειας προς εκτέλεση!"
 
 #. module: base
-#: code:addons/base/ir/ir_actions.py:636
+#: code:addons/base/ir/ir_actions.py:616
 #, python-format
 msgid "Please specify server option --email-from !"
 msgstr "Παρακαλώ καθορίστε την επιλογή διακομιστή --smtp-from !"
 
 #. module: base
-#: code:addons/base/ir/ir_actions.py:720 code:addons/base/ir/ir_actions.py:723
+#: code:addons/base/ir/ir_actions.py:700 code:addons/base/ir/ir_actions.py:703
 #, python-format
 msgid "Problem in configuration `Record Id` in Server Action!"
 msgstr "Problem in configuration `Record Id` in Server Action!"
 
 #. module: base
-#: code:addons/base/ir/ir_model.py:76
+#: code:addons/base/ir/ir_model.py:104
 #, python-format
 msgid "Invalid search criterions"
 msgstr "Λάθος κριτήρια αναζήτησης"
 
 #. module: base
-#: code:addons/base/ir/ir_model.py:76
+#: code:addons/base/ir/ir_model.py:104
 #, python-format
 msgid "The osv_memory field can only be compared with = and != operator."
 msgstr ""
 "Ένα πεδίο από osv_memory μπορεί να συγκριθεί μόνο με τους τελεστές = ή != ."
 
 #. module: base
-#: code:addons/base/ir/ir_model.py:118
+#: code:addons/base/ir/ir_model.py:146
 #, python-format
 msgid ""
 "The Object name must start with x_ and not contain any special character !"
@@ -97,132 +96,146 @@ msgstr ""
 "Το όνομα πρέπει να ξεκινάει με x_ και να μην περιέχει ειδικούς χαρακτήρες!"
 
 #. module: base
-#: code:addons/base/ir/ir_model.py:124
+#: code:addons/base/ir/ir_model.py:153
 #, python-format
 msgid "Object must be unique"
 msgstr "Το αντικείμενο πρέπει να είναι μοναδικό!"
 
 #. module: base
-#: code:addons/base/ir/ir_model.py:143
+#: code:addons/base/ir/ir_model.py:174
 #, python-format
 msgid "You can not remove the model '%s' !"
 msgstr "Δεν μπορείτε να διαγράψετε το μοντέλο '%s' !"
 
 #. module: base
-#: code:addons/base/ir/ir_model.py:236
+#: code:addons/base/ir/ir_model.py:271
 #, python-format
 msgid ""
 "The Selection Options expression is not a valid Pythonic expression.Please "
 "provide an expression in the [('key','Label'), ...] format."
 msgstr ""
+"Οι επιλογές πρέπει να είναι έγκυρη έκφραση Python. Να έχουν τη μορφή "
+"[('key','Label'), ...]"
 
 #. module: base
-#: code:addons/base/ir/ir_model.py:250
+#: code:addons/base/ir/ir_model.py:285
 #, python-format
 msgid ""
-"The Selection Options expression is must be in the [('key','Label'), ...] "
+"The Selection Options expression must be in the [('key','Label'), ...] "
 "format!"
-msgstr ""
+msgstr "Οι επιλογές πρέπει να έχουν τη μορφή [('key','Label'), ...]"
 
 #. module: base
-#: code:addons/base/ir/ir_model.py:254
+#: code:addons/base/ir/ir_model.py:289
 #, python-format
 msgid "Size of the field can never be less than 1 !"
 msgstr "Το μέγεθος του πεδίου δεν μπορεί να είναι μικρότερο από 1!"
 
 #. module: base
-#: code:addons/base/ir/ir_model.py:263
+#: code:addons/base/ir/ir_model.py:307
 #, python-format
-msgid "You cannot remove the field '%s' !"
-msgstr "Δεν μπορείτε να διαγράψετε το πεδίο '%s' !"
+msgid "You cannot remove the field '%s.%s' !"
+msgstr "Δεν μπορείτε να διαγράψετε το πεδίο '%s.%s' !"
 
 #. module: base
-#: code:addons/base/ir/ir_model.py:281
+#: code:addons/base/ir/ir_model.py:323
 #, python-format
 msgid "For selection fields, the Selection Options must be given!"
-msgstr ""
+msgstr "Για πεδία επιλογής, πρέπει να δοθεί και η λίστα των επιλογών!"
 
 #. module: base
-#: code:addons/base/ir/ir_model.py:287
+#: code:addons/base/ir/ir_model.py:329
 #, python-format
 msgid "Custom fields must have a name that starts with 'x_' !"
 msgstr "Τα ειδικά πεδία πρέπει να έχουν όνομα που ξεκινάει από 'x_' !"
 
 #. module: base
-#: code:addons/base/ir/ir_model.py:290
+#: code:addons/base/ir/ir_model.py:332
 #, python-format
 msgid "Model %s does not exist!"
 msgstr "Το μοντέλο %s δεν υπάρχει!"
 
 #. module: base
-#: code:addons/base/ir/ir_model.py:346 code:addons/base/ir/ir_model.py:360
-#: code:addons/base/ir/ir_model.py:362 code:addons/base/ir/ir_model.py:364
-#: code:addons/base/ir/ir_model.py:371 code:addons/base/ir/ir_model.py:374
+#: code:addons/base/ir/ir_model.py:390 code:addons/base/ir/ir_model.py:404
+#: code:addons/base/ir/ir_model.py:406 code:addons/base/ir/ir_model.py:408
+#: code:addons/base/ir/ir_model.py:415 code:addons/base/ir/ir_model.py:418
 #: code:addons/base/module/wizard/base_update_translations.py:39
-#: code:addons/base/res/res_amount_to_text.py:73 code:addons/orm.py:4733
+#: code:osv/orm.py:4738 code:osv/orm.py:4764 code:osv/orm.py:4768
 #, python-format
 msgid "Error!"
 msgstr "Σφάλμα!"
 
 #. module: base
-#: code:addons/base/ir/ir_model.py:347
+#: code:addons/base/ir/ir_model.py:391
 #, python-format
 msgid ""
 "Properties of base fields cannot be set here! Please modify them through "
 "Python code, preferably through a custom addon!"
 msgstr ""
+"Οι ιδιότητες των βασικών πεδίων δεν μπορούν να αλλάξουν από εδώ! Για να τις "
+"τροποποιήσετε πρέπει να γράψετε λίγη Python, κατά προτίμηση σε ένα δικό σας "
+"άρθρωμα."
 
 #. module: base
-#: code:addons/base/ir/ir_model.py:360
+#: code:addons/base/ir/ir_model.py:404
 #, python-format
 msgid "Can only rename one column at a time!"
-msgstr ""
+msgstr "Μόνο μια στήλη μπορεί να μετονομαστεί κάθε φορά!"
 
 #. module: base
-#: code:addons/base/ir/ir_model.py:362
+#: code:addons/base/ir/ir_model.py:406
 #, python-format
 msgid "Cannot rename column to %s, because that column already exists!"
 msgstr ""
+"Δεν μπορεί να μετονομαστεί η στήλη σε %s, γιατί υπάρχει ήδη τέτοια στήλη!"
 
 #. module: base
-#: code:addons/base/ir/ir_model.py:364
+#: code:addons/base/ir/ir_model.py:408
 #, python-format
 msgid ""
 "New column name must still start with x_ , because it is a custom field!"
 msgstr ""
+"Το όνομα της νέας στήλης πρέπει να ξεκινάει με x_ (λατινικό), γιατί είναι "
+"προσαρμοσμένο πεδίο!"
 
 #. module: base
-#: code:addons/base/ir/ir_model.py:371
+#: code:addons/base/ir/ir_model.py:415
 #, python-format
 msgid "Changing the model of a field is forbidden!"
-msgstr ""
+msgstr "Δεν επιτρέπεται να αλλάξει το μοντέλο ενός πεδίου!"
 
 #. module: base
-#: code:addons/base/ir/ir_model.py:374
+#: code:addons/base/ir/ir_model.py:418
 #, python-format
 msgid ""
 "Changing the type of a column is not yet supported. Please drop it and "
 "create it again!"
 msgstr ""
+"Η αλλαγή τύπου για μία στήλη δεν υποστηρίζεται ακόμα. Παρακαλώ διαγράψτε την "
+"και δημιουργήστε πάλι νέα με τον επιθυμητό τύπο."
 
 #. module: base
-#: code:addons/base/ir/ir_model.py:568
+#: code:addons/base/ir/ir_model.py:667
 #, python-format
 msgid ""
 "You can not read this document (%s) ! Be sure your user belongs to one of "
 "these groups: %s."
 msgstr ""
+"Δεν μπορείτε να διαβάσετε την εγγραφή (%s) ! Βεβαιωθείτε ότι ο χρήστης "
+"ανήκει σε κάποια από τις παρακάτω ομάδες: %s ."
 
 #. module: base
-#: code:addons/base/ir/ir_model.py:569
+#: code:addons/base/ir/ir_model.py:668
 #, python-format
 msgid ""
 "You can not write in this document (%s) ! Be sure your user belongs to one "
 "of these groups: %s."
 msgstr ""
+"Δεν μπορείτε να γράψετε στην εγγραφή (%s) ! Βεβαιωθείτε ότι ο χρήστης ανήκει "
+"σε κάποια από τις παρακάτω ομάδες: %s ."
 
 #. module: base
-#: code:addons/base/ir/ir_model.py:570
+#: code:addons/base/ir/ir_model.py:669
 #, python-format
 msgid ""
 "You can not create this document (%s) ! Be sure your user belongs to one of "
@@ -232,23 +245,17 @@ msgstr ""
 "ανήκει σε κάποια από τις παρακάτω ομάδες: %s ."
 
 #. module: base
-#: code:addons/base/ir/ir_model.py:571
+#: code:addons/base/ir/ir_model.py:670
 #, python-format
 msgid ""
 "You can not delete this document (%s) ! Be sure your user belongs to one of "
 "these groups: %s."
 msgstr ""
+"Δεν μπορείτε να διαγράψετε την εγγραφή (%s) ! Βεβαιωθείτε ότι ο χρήστης "
+"ανήκει σε κάποια από τις παρακάτω ομάδες: %s ."
 
 #. module: base
-#: code:addons/base/ir/ir_model.py:574 code:addons/orm.py:2365
-#: code:addons/orm.py:2849 code:addons/orm.py:3693 code:addons/orm.py:3928
-#: code:addons/orm.py:4139 code:addons/orm.py:4614
-#, python-format
-msgid "AccessError"
-msgstr "Πρόβλημα πρόσβασης"
-
-#. module: base
-#: code:addons/base/ir/ir_model.py:714
+#: code:addons/base/ir/ir_model.py:859
 #, python-format
 msgid ""
 "'%s' contains too many dots. XML ids should not contain dots ! These are "
@@ -259,31 +266,31 @@ msgstr ""
 "όπως στο module.reference_id"
 
 #. module: base
-#: code:addons/base/ir/ir_ui_menu.py:281
+#: code:addons/base/ir/ir_ui_menu.py:292
 #, python-format
 msgid "Error ! You can not create recursive Menu."
 msgstr "Σφάλμα! Δεν επιτρέπονται αναδρομικά Μενού."
 
 #. module: base
-#: code:addons/base/ir/ir_ui_view.py:92
+#: code:addons/base/ir/ir_ui_view.py:72
 #, python-format
 msgid "Invalid XML for View Architecture!"
 msgstr "Άκυρο XML για Αρχιτεκτονική Όψης!"
 
 #. module: base
-#: code:addons/base/module/module.py:203
+#: code:addons/base/module/module.py:266
 #, python-format
 msgid "The name of the module must be unique !"
 msgstr "Το όνομα του αρθρώματος πρέπει να είναι μοναδικό !"
 
 #. module: base
-#: code:addons/base/module/module.py:205
+#: code:addons/base/module/module.py:268
 #, python-format
 msgid "The certificate ID of the module must be unique !"
 msgstr "Το πιστοποιητικό του αρθρώματος πρέπει να είναι μοναδικό !"
 
 #. module: base
-#: code:addons/base/module/module.py:221
+#: code:addons/base/module/module.py:284
 #, python-format
 msgid "You try to remove a module that is installed or will be installed"
 msgstr ""
@@ -291,7 +298,7 @@ msgstr ""
 "να εγκατασταθεί"
 
 #. module: base
-#: code:addons/base/module/module.py:258
+#: code:addons/base/module/module.py:376
 #, python-format
 msgid ""
 "Unable to install module \"%s\" because an external dependency is not met: %s"
@@ -300,7 +307,7 @@ msgstr ""
 "ικανοποιείται: %s"
 
 #. module: base
-#: code:addons/base/module/module.py:260
+#: code:addons/base/module/module.py:378
 #, python-format
 msgid ""
 "Unable to upgrade module \"%s\" because an external dependency is not met: %s"
@@ -309,7 +316,7 @@ msgstr ""
 "δεν ικανοποιείται: %s"
 
 #. module: base
-#: code:addons/base/module/module.py:262
+#: code:addons/base/module/module.py:380
 #, python-format
 msgid ""
 "Unable to process module \"%s\" because an external dependency is not met: %s"
@@ -318,13 +325,13 @@ msgstr ""
 "ικανοποιείται: %s"
 
 #. module: base
-#: code:addons/base/module/module.py:267
+#: code:addons/base/module/module.py:385
 #, python-format
 msgid "Recursion error in modules dependencies !"
 msgstr "Αναδρομή στις εξαρτήσεις αρθρωμάτων!"
 
 #. module: base
-#: code:addons/base/module/module.py:273
+#: code:addons/base/module/module.py:391
 #, python-format
 msgid ""
 "You try to install module '%s' that depends on module '%s'.\n"
@@ -335,7 +342,7 @@ msgstr ""
 "αλλά αυτό δεν είναι διαθέσιμο στο σύστημα σας."
 
 #. module: base
-#: code:addons/base/module/module.py:305
+#: code:addons/base/module/module.py:423
 #, python-format
 msgid ""
 "Some installed modules depend on the module you plan to Uninstall :\n"
@@ -345,7 +352,7 @@ msgstr ""
 " %s"
 
 #. module: base
-#: code:addons/base/module/module.py:324
+#: code:addons/base/module/module.py:442
 #, python-format
 msgid "Can not upgrade module '%s'. It is not installed."
 msgstr ""
@@ -353,7 +360,7 @@ msgstr ""
 "εγκατεστημένο."
 
 #. module: base
-#: code:addons/base/module/module.py:338
+#: code:addons/base/module/module.py:456
 #, python-format
 msgid ""
 "You try to upgrade a module that depends on the module: %s.\n"
@@ -364,7 +371,7 @@ msgstr ""
 "Αυτό όμως δεν είναι διαθέσιμο στο σύστημά σας."
 
 #. module: base
-#: code:addons/base/module/module.py:466
+#: code:addons/base/module/module.py:584
 #, python-format
 msgid ""
 "Can not create the module file:\n"
@@ -374,13 +381,7 @@ msgstr ""
 " %s"
 
 #. module: base
-#: code:addons/base/module/module.py:569
-#, python-format
-msgid "Module %s: Invalid Quality Certificate"
-msgstr "Άρθρωμα %s: Άκυρο Πιστοποιητικό Ποιότητας"
-
-#. module: base
-#: code:addons/base/module/wizard/base_export_language.py:52
+#: code:addons/base/module/wizard/base_export_language.py:54
 #, python-format
 msgid ""
 "Save this document to a .CSV file and open it with your favourite "
@@ -392,7 +393,7 @@ msgstr ""
 "UTF-8. Πρέπει να μεταφράσετε την τελευταία στήλη πριν το επανεισάγετε."
 
 #. module: base
-#: code:addons/base/module/wizard/base_export_language.py:56
+#: code:addons/base/module/wizard/base_export_language.py:58
 #, python-format
 msgid ""
 "Save this document to a %s file and edit it with a specific software or a "
@@ -403,7 +404,7 @@ msgstr ""
 "UTF-8."
 
 #. module: base
-#: code:addons/base/module/wizard/base_export_language.py:59
+#: code:addons/base/module/wizard/base_export_language.py:61
 #, python-format
 msgid ""
 "Save this document to a .tgz file. This archive containt UTF-8 %s files and "
@@ -413,7 +414,7 @@ msgstr ""
 "να σταλούν στο launchpad."
 
 #. module: base
-#: code:addons/base/module/wizard/base_export_language.py:60
+#: code:addons/base/module/wizard/base_export_language.py:62
 #, python-format
 msgid "new"
 msgstr "νέο"
@@ -461,43 +462,37 @@ msgid "No language with code \"%s\" exists"
 msgstr "Δεν υπάρχει γλώσσα με τον κωδικό \"%s\"."
 
 #. module: base
-#: code:addons/base/publisher_warranty/publisher_warranty.py:125
-#: code:addons/base/publisher_warranty/publisher_warranty.py:163
+#: code:addons/base/publisher_warranty/publisher_warranty.py:77
+#: code:addons/base/publisher_warranty/publisher_warranty.py:103
+#: code:addons/base/publisher_warranty/publisher_warranty.py:180
 #, python-format
-msgid "Error during communication with the publisher warranty server."
-msgstr ""
+msgid "Not Available"
+msgstr "Μη Διαθέσιμο"
 
 #. module: base
-#: code:addons/base/publisher_warranty/publisher_warranty.py:144
+#: code:addons/base/publisher_warranty/publisher_warranty.py:78
+#: code:addons/base/publisher_warranty/publisher_warranty.py:104
+#: code:addons/base/publisher_warranty/publisher_warranty.py:181
+#, python-format
+msgid "Publisher warranty functionality has been removed from this version"
+msgstr ""
+"Η λειτουργία \"Συμβολαίου Εγγύησης\" έχει αφαιρεθεί από αυτή την έκδοση."
+
+#. module: base
+#: code:addons/base/publisher_warranty/publisher_warranty.py:91
 #, python-format
 msgid "Contract validation error"
 msgstr "Σφάλμα Επικύρωσης Συμβολαίου"
 
 #. module: base
-#: code:addons/base/publisher_warranty/publisher_warranty.py:145
-#, fuzzy, python-format
+#: code:addons/base/publisher_warranty/publisher_warranty.py:92
+#, python-format
 msgid "Please verify your publisher warranty serial number and validity."
 msgstr ""
-"#-#-#-#-#  .merge_file_VmQZX5 (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_dUINMl (OpenERP-F3)  #-#-#-#-#\n"
 "Παρακαλώ επικυρώστε τον σειριακό αριθμό εγγύησης του εκδότη και την ισχύ του."
 
 #. module: base
-#: code:addons/base/publisher_warranty/publisher_warranty.py:295
-#: sql_constraint:publisher_warranty.contract:0
-#, python-format
-msgid "That contract is already registered in the system."
-msgstr "Το συμβόλαιο έχει ήδη καταχωρηθεί στο σύστημα."
-
-#. module: base
-#: code:addons/base/res/partner/partner.py:156
-#: code:addons/base/res/res_company.py:67
-#, python-format
-msgid " (copy)"
-msgstr " (αντίγραφο)"
-
-#. module: base
-#: code:addons/base/res/partner/partner.py:251
+#: code:addons/base/res/partner/partner.py:297
 #, python-format
 msgid ""
 "Couldn't generate the next id because some partners have an alphabetic id !"
@@ -506,32 +501,31 @@ msgstr ""
 "αλφαβητικό id!"
 
 #. module: base
-#: code:addons/base/res/partner/partner.py:251
+#: code:addons/base/res/partner/partner.py:297
 #, python-format
 msgid "Warning"
 msgstr "Προσοχή"
 
 #. module: base
-#: code:addons/base/res/partner/partner.py:262
+#: code:addons/base/res/partner/partner.py:308
 #, python-format
 msgid "Partners: "
 msgstr "Συνεργάτες: "
 
 #. module: base
-#: code:addons/base/res/res_amount_to_text.py:73
+#: code:addons/base/res/res_company.py:67
 #, python-format
-msgid "Cannot convert amount to %s, no language function present!"
-msgstr ""
-"Δεν μπορώ να μετατρέψω το μέγεθος σε %s, δεν υπάρχει συνάρτηση για τη γλώσσα!"
+msgid " (copy)"
+msgstr " (αντίγραφο)"
 
 #. module: base
-#: code:addons/base/res/res_config.py:93
+#: code:addons/base/res/res_config.py:98
 #, python-format
 msgid "Couldn't find previous ir.actions.todo"
 msgstr "Δεν υπάρχει προηγούμενο ir.actions.todo"
 
 #. module: base
-#: code:addons/base/res/res_config.py:381
+#: code:addons/base/res/res_config.py:387
 #, python-format
 msgid ""
 "\n"
@@ -543,7 +537,7 @@ msgstr ""
 "Το άρθρωμα αυτό είναι ήδη εγκατεστημένο."
 
 #. module: base
-#: code:addons/base/res/res_config.py:420
+#: code:addons/base/res/res_config.py:426
 #, python-format
 msgid "Click 'Continue' to configure the next addon..."
 msgstr ""
@@ -551,7 +545,7 @@ msgstr ""
 "πρόσθετο ..."
 
 #. module: base
-#: code:addons/base/res/res_config.py:421
+#: code:addons/base/res/res_config.py:427
 #, python-format
 msgid ""
 "Your database is now fully configured.\n"
@@ -563,7 +557,7 @@ msgstr ""
 "Κάντε κλικ στο κουμπί «Συνέχεια» και απολαύστε την OpenERP εμπειρία σας ..."
 
 #. module: base
-#: code:addons/base/res/res_currency.py:101
+#: code:addons/base/res/res_currency.py:119
 #, python-format
 msgid ""
 "No rate found \n"
@@ -575,27 +569,27 @@ msgstr ""
 "την ημερομηνία: %s"
 
 #. module: base
-#: code:addons/base/res/res_lang.py:174
+#: code:addons/base/res/res_lang.py:181
 #, python-format
 msgid "Base Language 'en_US' can not be deleted !"
 msgstr "Η βασική γλώσσα en_US δεν μπορεί να αφαιρεθεί."
 
 #. module: base
-#: code:addons/base/res/res_lang.py:174 code:addons/base/res/res_lang.py:176
-#: code:addons/base/res/res_lang.py:178
+#: code:addons/base/res/res_lang.py:181 code:addons/base/res/res_lang.py:183
+#: code:addons/base/res/res_lang.py:185
 #, python-format
 msgid "User Error"
 msgstr "Σφάλμα Χρήστη"
 
 #. module: base
-#: code:addons/base/res/res_lang.py:176
+#: code:addons/base/res/res_lang.py:183
 #, python-format
 msgid "You cannot delete the language which is User's Preferred Language !"
 msgstr ""
 "Δεν μπορείτε να διαγράψετε τη γλώσσα που είναι επιλεγμένη από τον χρήστη!"
 
 #. module: base
-#: code:addons/base/res/res_lang.py:178
+#: code:addons/base/res/res_lang.py:185
 #, python-format
 msgid ""
 "You cannot delete the language which is Active !\n"
@@ -605,41 +599,26 @@ msgstr ""
 "Παρακαλούμε να απενεργοποιήσετε τη γλώσσα πρώτα."
 
 #. module: base
-#: code:addons/base/res/res_user.py:51 code:addons/base/res/res_user.py:442
+#: code:addons/base/res/res_user.py:54 code:addons/base/res/res_user.py:461
+#: code:osv/fields_simple.py:239
 #, python-format
 msgid "%s (copy)"
 msgstr "%s (αντίγραφο)"
 
 #. module: base
-#: code:addons/base/res/res_user.py:58 code:addons/base/res/res_user.py:67
+#: code:addons/base/res/res_user.py:61 code:addons/base/res/res_user.py:71
 #, python-format
 msgid "The name of the group can not start with \"-\""
 msgstr "Το όνομα της ομάδας δεν μπορεί να ξεκινάει με \"-\""
 
 #. module: base
-#: code:addons/base/res/res_user.py:154
-#, python-format
-msgid "\"smtp_server\" needs to be set to send mails to users"
-msgstr ""
-"Οι \"smtp servers\" πρέπει να οριστούν για να στείλετε email σε άλλους "
-"χρήστες"
-
-#. module: base
-#: code:addons/base/res/res_user.py:157
-#, python-format
-msgid "\"email_from\" needs to be set to send welcome mails to users"
-msgstr ""
-"Όταν ρυθμισθεί το \"email_from\" θα στέλνονται μηνύματα καλωσορίσματος στους "
-"χρήστες"
-
-#. module: base
-#: code:addons/base/res/res_user.py:235
+#: code:addons/base/res/res_user.py:224
 #, python-format
 msgid "Operation Canceled"
 msgstr "Η Λειτουργία ακυρώθηκε"
 
 #. module: base
-#: code:addons/base/res/res_user.py:235
+#: code:addons/base/res/res_user.py:224
 #, python-format
 msgid ""
 "Please use the change password wizard (in User Preferences or User menu) to "
@@ -649,13 +628,13 @@ msgstr ""
 "Ρυθμίσεων Χρήστη) αν θέλετε να αλλάξετε τον κωδικό σας."
 
 #. module: base
-#: code:addons/base/res/res_user.py:285
+#: code:addons/base/res/res_user.py:281
 #, python-format
 msgid "Company Switch Warning"
 msgstr "Προειδοποίηση αλλαγής εταιρίας"
 
 #. module: base
-#: code:addons/base/res/res_user.py:286
+#: code:addons/base/res/res_user.py:282
 #, python-format
 msgid ""
 "Please keep in mind that documents currently displayed may not be relevant "
@@ -665,13 +644,19 @@ msgid ""
 msgstr ""
 
 #. module: base
-#: code:addons/base/res/res_user.py:418
+#: code:addons/base/res/res_user.py:414
+#, python-format
+msgid "Attempt to reset password, through prohibited API!"
+msgstr "Απόπειρα να αλλάξει ο κωδικός, με μέθοδο που απαγορεύεται!"
+
+#. module: base
+#: code:addons/base/res/res_user.py:434
 #, python-format
 msgid "Can not remove root user!"
 msgstr "Ο αρχικός χρήστης δεν μπορεί να διαγραφεί."
 
 #. module: base
-#: code:addons/base/res/res_user.py:418
+#: code:addons/base/res/res_user.py:434
 #, python-format
 msgid ""
 "You can not remove the admin user as it is used internally for resources "
@@ -681,20 +666,26 @@ msgstr ""
 "εγγραφές του OpenERP."
 
 #. module: base
-#: code:addons/base/res/res_user.py:536
+#: code:addons/base/res/res_user.py:566
+#, python-format
+msgid "Password changed"
+msgstr "Ο κωδικός πρόσβασης άλλαξε"
+
+#. module: base
+#: code:addons/base/res/res_user.py:572
 #, python-format
 msgid "Setting empty passwords is not allowed for security reasons!"
 msgstr ""
 "Για λόγους ασφαλείας, δεν επιτρέπεται να ορίσετε έναν κενό κωδικό πρόσβασης!"
 
 #. module: base
-#: code:addons/base/res/res_user.py:536
+#: code:addons/base/res/res_user.py:572
 #, python-format
 msgid "Warning!"
 msgstr "Προειδοποίηση!"
 
 #. module: base
-#: code:addons/base/res/res_user.py:545
+#: code:addons/base/res/res_user.py:583
 #, python-format
 msgid ""
 "--\n"
@@ -704,63 +695,121 @@ msgstr ""
 "%(name)s %(email)s\n"
 
 #. module: base
-#: code:addons/base/res/res_user.py:610
+#: code:addons/base/res/res_user.py:650
 #, python-format
 msgid "Warning !"
 msgstr "Προειδοποίηση !"
 
 #. module: base
-#: code:addons/base/res/res_user.py:611
+#: code:addons/base/res/res_user.py:651
 #, python-format
 msgid ""
-"Group(s) cannot be deleted, because some user(s) still belong to them: %s !"
+"Group(s) %s cannot be deleted, because some user(s) still belong to them: "
+"%s !"
 msgstr ""
+"Οι ομάδες %s δεν μπορούν να διαγραφούν, γιατί ακόμα ανήκουν σε αυτές οι "
+"χρήστες: %s !"
 
 #. module: base
-#: code:addons/custom.py:558
+#: code:osv/expression.py:345
 #, python-format
-msgid ""
-"The sum of the data (2nd field) is null.\n"
-"We can't draw a pie chart !"
-msgstr ""
-"Το άθροισμα των δεδομένων στο 2ο πεδίο είναι μηδενικό.\n"
-"Αδύνατη η δημιουργία κυκλικού διαγράμματος !"
+msgid "Invalid domain expression, too many operators: %r"
+msgstr "Λανθασμένη έκφραση, πολλοί τελεστές: %r"
 
 #. module: base
-#: code:addons/fields.py:131
+#: code:osv/fields.py:200
 #, python-format
 msgid "Not implemented %s.%s.set_memory method !"
 msgstr "Δεν έχει υλοποιηθεί η %s.%s.set_memory !"
 
 #. module: base
-#: code:addons/fields.py:134
+#: code:osv/fields.py:203
 #, python-format
 msgid "Not implemented %s.%s.get_memory method !"
 msgstr "Δεν έχει υλοποιηθεί η %s.%s.get_memory !"
 
 #. module: base
-#: code:addons/fields.py:137
+#: code:osv/fields.py:206
 #, python-format
 msgid "undefined %s.%s.get method ! (%s)"
 msgstr "δεν ορίστηκε η %s.%s.get ! (%s)"
 
 #. module: base
-#: code:addons/fields.py:145
-#, fuzzy, python-format
+#: code:osv/fields.py:214
+#, python-format
 msgid "Not implemented %s.%s.search_memory method !"
-msgstr "Not implemented search_memory method !"
+msgstr "Η μέθοδος '%s.%s.search_memory' δεν έχει υλοποιηθεί!"
 
 #. module: base
-#: code:addons/fields.py:540 code:addons/fields.py:758
-#: code:addons/fields.py:760 code:addons/fields.py:762
-#: code:addons/fields.py:764 code:addons/fields.py:766
-#: code:addons/fields.py:768
+#: code:osv/fields.py:409 code:osv/fields.py:412
+#, python-format
+msgid "Cannot merge a record when %s = %r"
+msgstr "Δεν μπορούν να συγχωνευτούν εγγραφές όταν %s = %r"
+
+#. module: base
+#: code:osv/fields.py:426
+#, python-format
+msgid "Cannot merge %s, because %s field cannot merge"
+msgstr "Δεν μπορεί να συγχωνευτεί το %s, γιατί το πεδίο %s δε συγχωνεύεται"
+
+#. module: base
+#: code:osv/fields.py:430 code:osv/fields_simple.py:71
+#, python-format
+msgid "Cannot merge because field %s is not empty."
+msgstr "Δεν γίνεται η συγχώνευση, γιατί το πεδίο %s δεν είναι άδειο."
+
+#. module: base
+#: code:osv/fields.py:440 code:osv/fields_simple.py:81
+#, python-format
+msgid "Must have at least one value in field %s to proceed with merge of %s."
+msgstr ""
+"Πρέπει να υπάρχει τουλάχιστον μία τιμή στο πεδίο %s για να συγχωνευτεί το %s."
+
+#. module: base
+#: code:osv/fields.py:476 code:osv/fields.py:486
+#, python-format
+msgid "All records must have an equal %s, in order to merge"
+msgstr ""
+"Όλες οι εγγραφές πρέπει να έχουν την ίδια τιμή \"%s\", για να συγχωνευτούν."
+
+#. module: base
+#: code:osv/fields_framework.py:100
+#, python-format
+msgid "Ref Id does not define module, cannot decode: %s"
+msgstr "Το αναγνωριστικό δεν καθορίζει συγκεκριμένο άρθρωμα: %s"
+
+#. module: base
+#: code:osv/fields_framework.py:241
+#, python-format
+msgid "Cannot locate model \"%s\" for virtual resolution"
+msgstr ""
+
+#. module: base
+#: code:osv/fields_framework.py:244
+#, python-format
+msgid "Model \"%s\" does not seem to inherit %s"
+msgstr "Το μοντέλο %s δεν φαίνεται να κληρονομεί το %s"
+
+#. module: base
+#: code:osv/fields_function.py:569
+#, python-format
+msgid "Cannot fallback with operator \"%s\" !"
+msgstr ""
+
+#. module: base
+#: code:osv/fields_relational.py:87
+#, python-format
+msgid "%s: ORM model %s cannot be found for %s field!"
+msgstr "%s: Το μοντέλο ORM %s δεν μπορεί να βρεθεί για το πεδίο %s!"
+
+#. module: base
+#: code:osv/fields_relational.py:586
 #, python-format
 msgid "Not Implemented"
 msgstr "Μη ενεργοποιημένο"
 
 #. module: base
-#: code:addons/fields.py:635
+#: code:osv/fields_relational.py:799
 #, python-format
 msgid ""
 "The second argument of the many2many field %s must be a SQL table !You used "
@@ -770,20 +819,20 @@ msgstr ""
 "%s που δεν είναι έγκυρο όνομα πίνακα SQL."
 
 #. module: base
-#: code:addons/orm.py:216
+#: code:osv/orm.py:298
 #, python-format
 msgid "Wrong ID for the %s browse record, got %r, expected an integer."
 msgstr ""
 "Εσφαλμένο ID για εγγραφή περιήγησης %s, είναι %r ενώ χρειάζεται ακέραιος."
 
 #. module: base
-#: code:addons/orm.py:218
+#: code:osv/orm.py:300
 #, python-format
 msgid "Object %s does not exists"
 msgstr "Το μοντέλο %s δεν υπάρχει!"
 
 #. module: base
-#: code:addons/orm.py:346
+#: code:osv/orm.py:429
 #, python-format
 msgid ""
 "Language with code \"%s\" is not defined in your system !\n"
@@ -791,19 +840,13 @@ msgid ""
 msgstr ""
 
 #. module: base
-#: code:addons/orm.py:371
+#: code:osv/orm.py:470
 #, python-format
 msgid "Unknown attribute %s in %s "
 msgstr "Άγνωστη ιδιότητα %s στο %s "
 
 #. module: base
-#: code:addons/orm.py:413
-#, python-format
-msgid "%s: ORM model %s cannot be found for %s field!"
-msgstr "%s: Το μοντέλο ORM %s δεν μπορεί να βρεθεί για το πεδίο %s!"
-
-#. module: base
-#: code:addons/orm.py:591
+#: code:osv/orm.py:644
 #, python-format
 msgid "The read_group method is not implemented on this object !"
 msgstr ""
@@ -811,77 +854,72 @@ msgstr ""
 "το αντικείμενο!"
 
 #. module: base
-#: code:addons/orm.py:976
+#: code:osv/orm.py:1091
 #, python-format
 msgid "Database ID doesn't exist: %s : %s"
 msgstr "Το ID της βάσης δεν υπάρχει: %s : %s"
 
 #. module: base
-#: code:addons/orm.py:1016
-#, fuzzy, python-format
+#: code:osv/orm.py:1131
+#, python-format
 msgid ""
 "Please check that all your lines have %d columns.Stopped around line %d "
 "having %d columns."
-msgstr "Παρακαλώ ελέγξτε ότι όλες οι γραμμές σας έχουν %d στήλες."
+msgstr ""
+"Παρακαλώ ελέγξτε ότι όλες οι γραμμές σας έχουν %d στήλες. Η διαδικασία "
+"σταμάτησε περίπου "
+"στη γραμμή %d που είχε %d στήλες."
 
 #. module: base
-#: code:addons/orm.py:1098
+#: code:osv/orm.py:1213
 #, python-format
 msgid "key '%s' not found in selection field '%s'"
 msgstr "το κλειδί '%s' δεν είναι στις επιλογές του '%s'"
 
 #. module: base
-#: code:addons/orm.py:1100
+#: code:osv/orm.py:1215
 #, python-format
 msgid "Key/value '%s' not found in selection field '%s'"
 msgstr "Το κλειδί '%s' δεν είναι στις επιλογές του πεδίου '%s'"
 
 #. module: base
-#: code:addons/orm.py:1166
+#: code:osv/orm.py:1281
 #, python-format
 msgid "The read method is not implemented on this object !"
 msgstr "Η μέθοδος ανάγνωσης δεν έχει αναπτυχθεί για αυτό το αντικείμενο!"
 
 #. module: base
-#: code:addons/orm.py:1184
-#, python-format
-msgid "The search_read method is not implemented on this object !"
-msgstr ""
-"Η μέθοδος αναζήτησης (search_read) δεν έχει αναπτυχθεί σε αυτό το "
-"αντικείμενο!"
-
-#. module: base
-#: code:addons/orm.py:1211
+#: code:osv/orm.py:1332
 #, python-format
 msgid "Error occurred while validating the field(s) %s: %s"
 msgstr "Σφάλμα κατά την επικύρωση των πεδίων %s: %s"
 
 #. module: base
-#: code:addons/orm.py:1322
+#: code:osv/orm.py:1467
 #, python-format
 msgid "The perm_read method is not implemented on this object !"
 msgstr "The perm_read method is not implemented on this object !"
 
 #. module: base
-#: code:addons/orm.py:1325
+#: code:osv/orm.py:1470
 #, python-format
 msgid "The unlink method is not implemented on this object !"
 msgstr "Η μέθοδος αποσύνδεσης δεν έχει αναπτυχθεί σε αυτό το αντικείμενο!"
 
 #. module: base
-#: code:addons/orm.py:1328
+#: code:osv/orm.py:1473
 #, python-format
 msgid "The write method is not implemented on this object !"
 msgstr "Η μέθοδος εγγραφής δεν έχει αναπτυχθεί σε αυτό το αντικείμενο!"
 
 #. module: base
-#: code:addons/orm.py:1331
+#: code:osv/orm.py:1476
 #, python-format
 msgid "The create method is not implemented on this object !"
 msgstr "The create method is not implemented on this object !"
 
 #. module: base
-#: code:addons/orm.py:1641
+#: code:osv/orm.py:1762
 #, python-format
 msgid ""
 "Can't find view for field '%s' in view parts of object model '%s':\n"
@@ -891,7 +929,7 @@ msgstr ""
 "Παρακαλώ ορίσετε προβολή για το πεδίο αυτό."
 
 #. module: base
-#: code:addons/orm.py:1670
+#: code:osv/orm.py:1791
 #, python-format
 msgid ""
 "\n"
@@ -901,7 +939,7 @@ msgstr ""
 " %s για το %s (id: %d %s)"
 
 #. module: base
-#: code:addons/orm.py:1672
+#: code:osv/orm.py:1793
 #, python-format
 msgid ""
 "\n"
@@ -911,7 +949,7 @@ msgstr ""
 " <δεν βρέθηκε προβολή>"
 
 #. module: base
-#: code:addons/orm.py:1673
+#: code:osv/orm.py:1794
 #, python-format
 msgid ""
 "Can't find field '%s' in the following view parts composing the view #%d%s "
@@ -929,80 +967,68 @@ msgstr ""
 "προβολές που αναφέρονται δεν συμφωνούν με τα μοντέλα δεδομένων."
 
 #. module: base
-#: code:addons/orm.py:1698
-#, python-format
-msgid "Insufficient fields for Calendar View!"
-msgstr ""
-
-#. module: base
-#: code:addons/orm.py:1698
-#, python-format
-msgid "Invalid Object Architecture!"
-msgstr "Άκυρη Αρχιτεκτονική Αντικειμένου!"
-
-#. module: base
-#: code:addons/orm.py:1858
+#: code:osv/orm.py:1907
 #, python-format
 msgid "Unknown position \"%s\" in inherited view %s !"
 msgstr "Άγνωστη θέση \"%s\" για παράγωγη προβολή %s!γτ"
 
 #. module: base
-#: code:addons/orm.py:1883
+#: code:osv/orm.py:1932
 #, python-format
 msgid "Couldn't find tag '%s' of #%d %s in parent view %s %s!"
 msgstr ""
 "Αδύνατη η εύρεση της ετικέτας '%s' της #%d %s στη μητρική προβολή %s %s!"
 
 #. module: base
-#: code:addons/orm.py:2048
+#: code:osv/orm.py:2071
 #, python-format
 msgid "Invalid Architecture!"
 msgstr "Άκυρη Αρχιτεκτονική!"
 
 #. module: base
-#: code:addons/orm.py:2048
+#: code:osv/orm.py:2071
 #, python-format
 msgid "There is no view of type '%s' defined for the structure!"
 msgstr "Δεν έχει οριστεί προβολή τύπου %s για το αντικείμενο αυτό."
 
 #. module: base
-#: code:addons/orm.py:2170
+#: code:osv/orm.py:2207
 #, python-format
 msgid "The search method is not implemented on this object !"
 msgstr "Η μέθοδος αναζήτησης δεν έχει αναπτυχθεί σε αυτό το αντικείμενο!"
 
 #. module: base
-#: code:addons/orm.py:2229
+#: code:osv/orm.py:2270
 #, python-format
 msgid "The copy method is not implemented on this object !"
 msgstr "The copy method is not implemented on this object !"
 
 #. module: base
-#: code:addons/orm.py:2232
+#: code:osv/orm.py:2273
 #, python-format
 msgid "The exists method is not implemented on this object !"
 msgstr "Η μέθοδος \"exists\" δεν έχει αναπτυχθεί σε αυτό το αντικείμενο!"
 
 #. module: base
-#: code:addons/orm.py:2444 code:addons/orm.py:2492
+#: code:osv/orm.py:2616 code:osv/orm.py:2666
 #, python-format
 msgid "Integrity Error!"
 msgstr "Σφάλμα Ακεραιότητας !"
 
 #. module: base
-#: code:addons/orm.py:2445 code:addons/orm.py:2493
+#: code:osv/orm.py:2617 code:osv/orm.py:2667
 #, python-format
 msgid "Empty value at required %s column of %s is not permitted!"
 msgstr "Η στήλη %s του %s δεν επιτρέπεται να είναι άδεια!"
 
 #. module: base
-#: code:addons/orm.py:2457
+#: code:osv/orm.py:2631
 #, python-format
 msgid "ID not found!"
 msgstr "Δεν βρέθηκε το ID!"
 
 #. module: base
-#: code:addons/orm.py:2458
+#: code:osv/orm.py:2632
 #, python-format
 msgid "Id #%d of %s object not found, you may need to repeat the operation!"
 msgstr ""
@@ -1010,19 +1036,19 @@ msgstr ""
 "διαδικασία!"
 
 #. module: base
-#: code:addons/orm.py:2507 code:addons/orm.py:4434
+#: code:osv/orm.py:2681 code:osv/orm.py:4419
 #, python-format
 msgid "created."
 msgstr "δημιουργήθηκε"
 
 #. module: base
-#: code:addons/orm.py:2691
+#: code:osv/orm.py:2906
 #, python-format
 msgid "Invalid group_by"
 msgstr "Λάθος ομαδοποίηση"
 
 #. module: base
-#: code:addons/orm.py:2692
+#: code:osv/orm.py:2907
 #, python-format
 msgid ""
 "Invalid group_by specification: \"%s\".\n"
@@ -1030,33 +1056,37 @@ msgid ""
 msgstr ""
 
 #. module: base
-#: code:addons/orm.py:2850
+#: code:osv/orm.py:3083
 #, python-format
 msgid "Forced update of the stored fields is only permitted to the admin user!"
 msgstr ""
+"Η έκτακτη ανανέωση των αποθηκευμένων πεδίων επιτρέπεται μόνο στον "
+"διαχειριστή!"
 
 #. module: base
-#: code:addons/orm.py:2893 code:addons/orm.py:2903
+#: code:osv/orm.py:3126 code:osv/orm.py:3136
 #, python-format
 msgid "ValidateError"
 msgstr "ValidateError"
 
 #. module: base
-#: code:addons/orm.py:2894
+#: code:osv/orm.py:3127
 #, python-format
 msgid ""
 "Invalid value for reference field \"%s\" (last part must be a non-zero "
 "integer): \"%s\""
 msgstr ""
+"Λάθος τιμή για πεδίο αναφοράς: \"%s\" (το τελευταίο τμήμα πρέπει να είναι "
+"θετικός ακέραιος): %s"
 
 #. module: base
-#: code:addons/orm.py:2904
+#: code:osv/orm.py:3137
 #, python-format
 msgid "The value \"%s\" for the field \"%s\" is not in the selection"
 msgstr "Η τιμή  \"%s\" για οτ πεδίο \"%s\" δεν είναι επιλεγμένη!"
 
 #. module: base
-#: code:addons/orm.py:3694 code:addons/orm.py:3929
+#: code:osv/orm.py:3636 code:osv/orm.py:3898
 #, python-format
 msgid ""
 "Operation prohibited by access rules, or performed on an already deleted "
@@ -1066,43 +1096,49 @@ msgstr ""
 "αντικείμενο που έχει διαγραφεί στο μεταξύ. (Ενέργεια: %s, Αντικείμενο: %s)"
 
 #. module: base
-#: code:addons/orm.py:3695 code:addons/orm.py:3926
+#: code:osv/orm.py:3637 code:osv/orm.py:3895
 #, python-format
 msgid "read"
 msgstr "ανάγνωση"
 
 #. module: base
-#: code:addons/orm.py:3908
+#: code:osv/orm.py:3863
 #, python-format
 msgid "A document was modified since you last viewed it (%s:%d)"
 msgstr "Η εγγραφή τροποποιήθηκε από την τελευταία προβολή (%s: %d)"
 
 #. module: base
-#: code:addons/orm.py:3926
+#: code:osv/orm.py:3895
 #, python-format
 msgid "write"
 msgstr "εγγραφή"
 
 #. module: base
-#: code:addons/orm.py:3927
+#: code:osv/orm.py:3896
 #, python-format
 msgid "create"
 msgstr "δημιουργία"
 
 #. module: base
-#: code:addons/orm.py:3927
+#: code:osv/orm.py:3896
 #, python-format
 msgid "delete"
 msgstr "διαγραφή"
 
 #. module: base
-#: code:addons/orm.py:3962
+#: code:osv/orm.py:3933
 #, python-format
 msgid "Unable to delete this document because it is used as a default property"
 msgstr ""
 
 #. module: base
-#: code:addons/orm.py:4140
+#: code:osv/orm.py:4042
+#, fuzzy, python-format
+msgid "You are not permitted to write into column %s.%s."
+msgstr "Δεν μπορείτε να επέμβετε στο έγγραφο! (%s)"
+
+#. module: base
+#: code:osv/orm.py:4118
 #, python-format
 msgid ""
 "One of the records you are trying to modify has already been deleted "
@@ -1112,25 +1148,31 @@ msgstr ""
 "(Αντικείμενο: %s)"
 
 #. module: base
-#: code:addons/orm.py:4232
+#: code:osv/orm.py:4210
 #, python-format
 msgid "Recursivity Detected."
 msgstr "Εντοπίστηκε αναδρομή."
 
 #. module: base
-#: code:addons/orm.py:4232
+#: code:osv/orm.py:4210
 #, python-format
 msgid "UserError"
 msgstr "Σφάλμα Χρήστη"
 
 #. module: base
-#: code:addons/orm.py:4570
+#: code:osv/orm.py:4285
+#, python-format
+msgid "You are not permitted to create column %s.%s."
+msgstr ""
+
+#. module: base
+#: code:osv/orm.py:4564
 #, python-format
 msgid "This method does not exist anymore"
 msgstr "Αυτή η μέθοδος δε χρησιμοποιείται πια"
 
 #. module: base
-#: code:addons/orm.py:4614
+#: code:osv/orm.py:4605
 #, python-format
 msgid ""
 "Invalid \"order\" specified. A valid \"order\" specification is a comma-"
@@ -1139,25 +1181,37 @@ msgid ""
 msgstr ""
 
 #. module: base
-#: code:addons/orm.py:4733
+#: code:osv/orm.py:4739 code:osv/orm.py:4765
+#, fuzzy, python-format
+msgid "Object model %s does not support order by function field \"%s\"!"
+msgstr "Το μοντέλο αντικειμένου δεν υποστηρίζει ταξινόμηση ανά \"%s\"!"
+
+#. module: base
+#: code:osv/orm.py:4768
 #, python-format
 msgid "Object model does not support order by \"%s\"!"
 msgstr "Το μοντέλο αντικειμένου δεν υποστηρίζει ταξινόμηση ανά \"%s\"!"
 
 #. module: base
-#: code:addons/orm.py:4861
+#: code:osv/orm.py:4920
 #, python-format
 msgid "Record #%d of %s not found, cannot copy!"
 msgstr "Η εγγραφή #%d του %s δε βρέθηκε, δεν γίνεται αντίγραφο!"
 
 #. module: base
-#: code:addons/osv.py:136
+#: code:osv/osv.py:132
+#, fuzzy, python-format
+msgid "Access Error"
+msgstr "Πρόβλημα πρόσβασης"
+
+#. module: base
+#: code:osv/osv.py:141
 #, python-format
 msgid "Constraint Error"
 msgstr "Σφάλμα Συνθήκης"
 
 #. module: base
-#: code:addons/osv.py:140
+#: code:osv/osv.py:145
 #, python-format
 msgid ""
 "The operation cannot be completed, probably due to the following:\n"
@@ -1171,7 +1225,7 @@ msgstr ""
 "- στην δημιουργία/ενημέρωση: ένα υποχρεωτικό πεδίο δεν έχει οριστεί."
 
 #. module: base
-#: code:addons/osv.py:152
+#: code:osv/osv.py:157
 #, python-format
 msgid ""
 "\n"
@@ -1183,10 +1237,85 @@ msgstr ""
 "[αντικείμενο με αναφορά: %s - %s]"
 
 #. module: base
-#: code:addons/osv.py:155 code:addons/osv.py:157
+#: code:osv/osv.py:160 code:osv/osv.py:162
 #, python-format
 msgid "Integrity Error"
 msgstr "Σφάλμα ακεραιότητας!"
+
+#. module: base
+#: code:osv/views_classic.py:33 selection:ir.actions.act_window,view_type:0
+#: selection:ir.actions.act_window.view,view_mode:0
+#: selection:wizard.ir.model.menu.create.line,view_type:0 view:ir.ui.view:0
+#, python-format
+msgid "Tree"
+msgstr "Δέντρο"
+
+#. module: base
+#: code:osv/views_classic.py:53 selection:ir.actions.act_window,view_type:0
+#: selection:ir.actions.act_window.view,view_mode:0
+#: selection:wizard.ir.model.menu.create.line,view_type:0 view:ir.ui.view:0
+#, python-format
+msgid "Form"
+msgstr "Φόρμα"
+
+#. module: base
+#: code:osv/views_classic.py:76 view:ir.ui.view:0
+#, python-format
+msgid "Search"
+msgstr "Αναζήτηση"
+
+#. module: base
+#: code:osv/views_classic.py:110
+#: selection:ir.actions.act_window.view,view_mode:0
+#: selection:wizard.ir.model.menu.create.line,view_type:0
+#, python-format
+msgid "Graph"
+msgstr "Γράφημα"
+
+#. module: base
+#: code:osv/views_classic.py:122
+#: model:ir.ui.menu,name:base.menu_calendar_configuration
+#: selection:ir.actions.act_window.view,view_mode:0
+#: selection:wizard.ir.model.menu.create.line,view_type:0
+#, python-format
+msgid "Calendar"
+msgstr "Ημερολόγιο"
+
+#. module: base
+#: code:osv/views_classic.py:157
+#, python-format
+msgid "Insufficient fields for Calendar View!"
+msgstr ""
+
+#. module: base
+#: code:osv/views_classic.py:157 code:osv/views_classic.py:168
+#, python-format
+msgid "Invalid Object Architecture!"
+msgstr "Άκυρη Αρχιτεκτονική Αντικειμένου!"
+
+#. module: base
+#: code:osv/views_classic.py:175
+#, python-format
+msgid "Diagram"
+msgstr "Διάγραμμα"
+
+#. module: base
+#: code:osv/views_classic.py:187
+#: selection:ir.actions.act_window.view,view_mode:0
+#: selection:wizard.ir.model.menu.create.line,view_type:0
+#, python-format
+msgid "Gantt"
+msgstr "Gantt"
+
+#. module: base
+#: code:report/custom.py:558
+#, python-format
+msgid ""
+"The sum of the data (2nd field) is null.\n"
+"We can't draw a pie chart !"
+msgstr ""
+"Το άθροισμα των δεδομένων στο 2ο πεδίο είναι μηδενικό.\n"
+"Αδύνατη η δημιουργία κυκλικού διαγράμματος !"
 
 #. module: base
 #: constraint:ir.cron:0
@@ -1207,6 +1336,11 @@ msgstr "Σφάλμα! Δεν επιτρέπονται αναδρομικές ε�
 #: constraint:res.config.users:0 constraint:res.users:0
 msgid "The chosen company is not in the allowed companies for this user"
 msgstr "Η επιλεγμένη επιχείρηση δεν είναι στις επιτρεπόμενες του χρήστη."
+
+#. module: base
+#: constraint:res.currency:0
+msgid "The rounding factor cannot be 0 !"
+msgstr ""
 
 #. module: base
 #: constraint:res.lang:0
@@ -1278,12 +1412,15 @@ msgid "Filename"
 msgstr "Όνομα Αρχείου"
 
 #. module: base
-#: field:base.language.export,state:0 field:ir.ui.menu,icon_pict:0
-#: field:publisher_warranty.contract.wizard,state:0
-#: field:res.amount_to_text,en:0 field:res.amount_to_text,fr:0
-#: field:res.amount_to_text,nl:0
-msgid "unknown"
-msgstr "άγνωστο"
+#: field:base.language.export,state:0 field:ir.actions.todo,state:0
+#: field:ir.module.module,state:0 field:ir.module.module.dependency,state:0
+#: field:publisher_warranty.contract,state:0
+#: field:publisher_warranty.contract.wizard,state:0 field:res.bank,state:0
+#: field:res.partner.bank,state_id:0 field:res.request,state:0
+#: field:workflow.instance,state:0 field:workflow.workitem,state:0
+#: view:ir.module.module:0 view:res.country.state:0 view:res.request:0
+msgid "State"
+msgstr "Κατάσταση"
 
 #. module: base
 #: field:base.language.import,code:0
@@ -1396,9 +1533,9 @@ msgid "Action on Multiple Doc."
 msgstr "Ενέργεια σε πολλαπλές εγγραφές"
 
 #. module: base
-#: field:ir.actions.act_window,name:0 field:ir.actions.act_window_close,name:0
-#: field:ir.actions.actions,name:0 field:ir.actions.server,name:0
-#: field:ir.actions.url,name:0 field:ir.filters,name:0
+#: field:ir.actions.act_window,name:0 field:ir.actions.actions,name:0
+#: field:ir.actions.server,name:0 field:ir.actions.url,name:0
+#: field:ir.filters,name:0
 msgid "Action Name"
 msgstr "Όνομα Ενέργειας"
 
@@ -1438,17 +1575,15 @@ msgid "Target Window"
 msgstr "Παράθυρο - Στόχος"
 
 #. module: base
-#: field:ir.actions.act_window,type:0 field:ir.actions.act_window_close,type:0
-#: field:ir.actions.actions,type:0 field:ir.actions.report.xml,type:0
-#: field:ir.actions.server,state:0 field:ir.actions.server,type:0
-#: field:ir.actions.url,type:0 field:ir.actions.wizard,type:0
-#: view:ir.actions.server:0
+#: field:ir.actions.act_window,type:0 field:ir.actions.actions,type:0
+#: field:ir.actions.report.xml,type:0 field:ir.actions.server,state:0
+#: field:ir.actions.server,type:0 field:ir.actions.url,type:0
+#: field:ir.actions.wizard,type:0 view:ir.actions.server:0
 msgid "Action Type"
 msgstr "Τύπος Ενέργειας"
 
 #. module: base
-#: field:ir.actions.act_window,usage:0
-#: field:ir.actions.act_window_close,usage:0 field:ir.actions.actions,usage:0
+#: field:ir.actions.act_window,usage:0 field:ir.actions.actions,usage:0
 #: field:ir.actions.report.xml,usage:0 field:ir.actions.server,usage:0
 #: field:ir.actions.wizard,usage:0
 msgid "Action Usage"
@@ -1721,16 +1856,6 @@ msgid "Restart"
 msgstr "Επανέναρξη"
 
 #. module: base
-#: field:ir.actions.todo,state:0 field:ir.module.module,state:0
-#: field:ir.module.module.dependency,state:0
-#: field:publisher_warranty.contract,state:0 field:res.bank,state:0
-#: field:res.partner.bank,state_id:0 field:res.request,state:0
-#: field:workflow.instance,state:0 field:workflow.workitem,state:0
-#: view:ir.module.module:0 view:res.country.state:0 view:res.request:0
-msgid "State"
-msgstr "Κατάσταση"
-
-#. module: base
 #: field:ir.actions.url,target:0
 msgid "Action Target"
 msgstr "Στόχος Ενέργειας"
@@ -1828,8 +1953,7 @@ msgstr "Κλειδί"
 #: field:ir.property,value_integer:0 field:ir.property,value_reference:0
 #: field:ir.property,value_text:0 field:ir.server.object.lines,value:0
 #: field:ir.values,value:0 field:ir.values,value_unpickle:0
-#: field:res.amount_to_text,name:0 selection:ir.server.object.lines,type:0
-#: view:ir.values:0
+#: selection:ir.server.object.lines,type:0 view:ir.values:0
 msgid "Value"
 msgstr "Τιμή"
 
@@ -2043,6 +2167,12 @@ msgid "Resource ID"
 msgstr "Αριθμός Πόρου"
 
 #. module: base
+#: field:ir.model.data,source:0
+#, fuzzy
+msgid "Source Domain"
+msgstr "Επιβολή Τομέα"
+
+#. module: base
 #: field:ir.model.fields,complete_name:0 field:ir.ui.menu,complete_name:0
 msgid "Complete Name"
 msgstr "Πλήρες Όνομα"
@@ -2099,7 +2229,7 @@ msgstr "Επιλέξιμο"
 #. module: base
 #: field:ir.model.fields,selection:0
 msgid "Selection Options"
-msgstr ""
+msgstr "Δυνατές Επιλογές"
 
 #. module: base
 #: field:ir.model.fields,size:0
@@ -2318,6 +2448,11 @@ msgid "Icon"
 msgstr "Εικονίδιο"
 
 #. module: base
+#: field:ir.ui.menu,icon_pict:0
+msgid "unknown"
+msgstr "άγνωστο"
+
+#. module: base
 #: field:ir.ui.menu,name:0
 #: model:ir.actions.act_window,name:base.action_menu_admin view:ir.ui.menu:0
 msgid "Menu"
@@ -2469,7 +2604,7 @@ msgstr "Εmail αποστολέα"
 #. module: base
 #: field:publisher_warranty.contract,check_opw:0
 msgid "OPW"
-msgstr ""
+msgstr "OPW"
 
 #. module: base
 #: field:publisher_warranty.contract,check_support:0
@@ -2496,14 +2631,6 @@ msgstr "Είδος"
 #: field:publisher_warranty.contract.wizard,name:0
 msgid "Serial Key"
 msgstr "Σειριακό Κλειδί"
-
-#. module: base
-#: field:res.amount_to_text,currency_id:0 field:res.company,currency_id:0
-#: field:res.company,currency_ids:0 field:res.currency,name:0
-#: field:res.currency.rate,currency_id:0
-#: model:ir.model,name:base.model_res_currency view:res.currency:0
-msgid "Currency"
-msgstr "Νόμισμα"
 
 #. module: base
 #: field:res.bank,bic:0
@@ -2567,6 +2694,13 @@ msgstr "Αρ. Λογαριασμού"
 #: field:res.company,child_ids:0
 msgid "Child Companies"
 msgstr "Θυγατρικές Εταιρείες"
+
+#. module: base
+#: field:res.company,currency_id:0 field:res.company,currency_ids:0
+#: field:res.currency,name:0 field:res.currency.rate,currency_id:0
+#: model:ir.model,name:base.model_res_currency view:res.currency:0
+msgid "Currency"
+msgstr "Νόμισμα"
 
 #. module: base
 #: field:res.company,logo:0
@@ -2977,6 +3111,12 @@ msgid "Address Type"
 msgstr "Τύπος Διεύθυνσης"
 
 #. module: base
+#: field:res.partner.address,validity:0
+#, fuzzy
+msgid "Validity"
+msgstr "Έγκυρο"
+
+#. module: base
 #: field:res.partner.bank,acc_number:0
 msgid "Account Number"
 msgstr "Αριθμός Λογαριασμού"
@@ -3242,13 +3382,8 @@ msgstr "Workitem"
 
 #. module: base
 #: field:workflow.workitem,act_id:0 view:workflow.activity:0
-#, fuzzy
 msgid "Activity"
-msgstr ""
-"#-#-#-#-#  .merge_file_vWlUIs (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"Ενέργεια\n"
-"#-#-#-#-#  .merge_file_EkNPwK (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"Δραστηριότητα"
+msgstr "Ενέργεια"
 
 #. module: base
 #: field:workflow.workitem,inst_id:0
@@ -3566,14 +3701,15 @@ msgstr "Δυαδικό Αρχείο ή εξωτερικό URL"
 #. module: base
 #: help:ir.cron,args:0
 msgid "Arguments to be passed to the method. e.g. (uid,)"
-msgstr ""
+msgstr "Παράμετροι που θα δοθούν στη συνάρτηση. πχ. (uid,)"
 
 #. module: base
 #: help:ir.cron,doall:0
+#, fuzzy
 msgid ""
 "Enable this if you want to execute missed occurences as soon as the server "
 "restarts."
-msgstr ""
+msgstr "Ενεργοποιήστε αυτό αν θέλετε να εκτελούνται "
 
 #. module: base
 #: help:ir.cron,function:0
@@ -3599,7 +3735,7 @@ msgstr ""
 #. module: base
 #: help:ir.cron,nextcall:0
 msgid "Next planned execution date for this scheduler"
-msgstr ""
+msgstr "Επόμενη Ημερομηνία Εκτέλεσης"
 
 #. module: base
 #: help:ir.cron,numbercall:0
@@ -3607,6 +3743,8 @@ msgid ""
 "Number of time the function is called,\n"
 "a negative number indicates no limit"
 msgstr ""
+"Πόσες φορές θα κληθεί η λειτουργία,\n"
+"αρνητικός αριθμός σημαίνει πως θα καλείται απεριόριστα"
 
 #. module: base
 #: help:ir.cron,priority:0
@@ -3632,6 +3770,13 @@ msgstr ""
 msgid ""
 "Indicates whether this object model lives in memory only, i.e. is not "
 "persisted (osv.osv_memory)"
+msgstr ""
+
+#. module: base
+#: help:ir.model.data,source:0
+msgid ""
+"Specifies where this record has come from. Used to coordinate "
+"synchronization algorithms."
 msgstr ""
 
 #. module: base
@@ -3811,11 +3956,8 @@ msgstr "Έκφραση, πρέπει να είναι Αληθής για ισό�
 
 #. module: base
 #: help:multi_company.default,field_id:0
-#, fuzzy
 msgid "Select field property"
-msgstr ""
-"Επιλέξτε την ιδιότητα του πεδίου\n"
-"#-#-#-#-#  .merge_file_IJStut (OpenERP Server 5.0.0)  #-#-#-#-#\n"
+msgstr "Επιλέξτε την ιδιότητα του πεδίου"
 
 #. module: base
 #: help:multi_company.default,name:0
@@ -3840,11 +3982,6 @@ msgstr ""
 msgid ""
 "Your OpenERP Publisher's Warranty Contract unique key, also called serial "
 "number."
-msgstr ""
-
-#. module: base
-#: help:res.amount_to_text,currency_id:0
-msgid "If specified, the value is amount of that currency"
 msgstr ""
 
 #. module: base
@@ -3920,7 +4057,7 @@ msgid ""
 msgstr ""
 
 #. module: base
-#: help:res.config.users,password:0
+#: help:res.config.users,password:0 help:res.users,password:0
 msgid ""
 "Keep empty if you don't want the user to be able to connect on the system."
 msgstr "Αφήστε το κενό αν δεν επιθυμείτε ο χρήστης να συνδέεται στο σύστημα."
@@ -3952,7 +4089,7 @@ msgstr "Ο κωδικός κατάστασης με 3 χαρακτήρες\n"
 #. module: base
 #: help:res.currency,name:0
 msgid "Currency Code (ISO 4217)"
-msgstr ""
+msgstr "Κωδικός Νομίσματος (ISO 4217)"
 
 #. module: base
 #: help:res.currency,rate:0 help:res.currency.rate,rate:0
@@ -3998,11 +4135,8 @@ msgstr "Το μήνυμα σύνδεσης."
 
 #. module: base
 #: help:res.log,read:0
-#, fuzzy
 msgid "If this log item has been read, get() should not send it to the client"
 msgstr ""
-"#-#-#-#-#  .merge_file_Ex5g4M (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_lMWKuI (OpenERP Server 5.0.0)  #-#-#-#-#\n"
 "Αν αυτό το αντικείμενο καταγραφής είναι αναγνωσμένο, η get() δεν θα πρέπει "
 "να το στέλνει στον πελάτη."
 
@@ -4084,6 +4218,11 @@ msgid ""
 msgstr ""
 "Χρησιμοποιείται για την αυτόματη επιλογή της σωστής διεύθυνσης με βάση τις "
 "ρυθμίσεις στα έγγραφα αγορών και πωλήσεων"
+
+#. module: base
+#: help:res.partner.address,validity:0
+msgid "Has this address been verified?"
+msgstr "Έχει επιβεβαιωθεί αυτή η διεύθυνση;"
 
 #. module: base
 #: help:res.partner.category,active:0
@@ -4211,14 +4350,11 @@ msgstr ""
 
 #. module: base
 #: model:ir.actions.act_window,help:base.action_partner_title_contact
-#, fuzzy
 msgid ""
 "Manage the contact titles you want to have available in your system and the "
 "way you want to print them in letters and other documents. Some example: "
 "Mr., Mrs. "
 msgstr ""
-"#-#-#-#-#  .merge_file_tNflwt (OpenERP Server 5.0.0)  #-#-#-#-#\n"
-"#-#-#-#-#  .merge_file_nfOTYj (OpenERP Server 5.0.0)  #-#-#-#-#\n"
 "Διαχείριση των τίτλων των επαφών που θέλετε να υπάρχουν διαθέσιμοι στο "
 "σύστημά σας και ο τρόπος που επιθυμείτε να εκτυπώνονται σε γράμματα και άλλα "
 "έγγραφα. Μερικά παραδείγματα: Κος, Κα "
@@ -4477,16 +4613,7 @@ msgid "Payment term"
 msgstr "Όροι Πληρωμής"
 
 #. module: base
-#: model:ir.actions.act_window,name:base.action_publisher_warranty_contract_add_wizard
-#: model:ir.ui.menu,name:base.menu_publisher_warranty_contract_add
-#: view:publisher_warranty.contract.wizard:0
-#, fuzzy
-msgid "Register a Contract"
-msgstr "Συμβόλαιο Συντήρησης"
-
-#. module: base
 #: model:ir.actions.act_window,name:base.action_publisher_warranty_contract_form
-#: model:ir.ui.menu,name:base.menu_publisher_warranty_contract
 msgid "Contracts"
 msgstr "Συμβάσεις"
 
@@ -4746,7 +4873,7 @@ msgstr "Τεχνικός οδηγός"
 #. module: base
 #: model:ir.actions.report.xml,name:base.report_ir_model_overview
 msgid "Model Overview"
-msgstr ""
+msgstr "Περίληψη Μοντέλου"
 
 #. module: base
 #: model:ir.actions.report.xml,name:base.res_partner_address_report
@@ -5001,11 +5128,6 @@ msgid "publisher_warranty.contract.wizard"
 msgstr "publisher_warranty.contract.wizard"
 
 #. module: base
-#: model:ir.model,name:base.model_res_amount_to_text
-msgid "Convert amount to text"
-msgstr ""
-
-#. module: base
 #: model:ir.model,name:base.model_res_config
 msgid "res.config"
 msgstr "res.config"
@@ -5220,24 +5342,11 @@ msgid "Configuration"
 msgstr "Ρυθμίσεις"
 
 #. module: base
-#: model:ir.ui.menu,name:base.menu_base_config_plugins
-msgid "Plugins"
-msgstr "Πρόσθετα"
-
-#. module: base
 #: model:ir.ui.menu,name:base.menu_base_partner
 #: model:ir.ui.menu,name:base.menu_sale_config_sales
 #: model:ir.ui.menu,name:base.menu_sales
 msgid "Sales"
 msgstr "Πωλήσεις"
-
-#. module: base
-#: model:ir.ui.menu,name:base.menu_calendar_configuration
-#: selection:ir.actions.act_window.view,view_mode:0
-#: selection:ir.ui.view,type:0
-#: selection:wizard.ir.model.menu.create.line,view_type:0
-msgid "Calendar"
-msgstr "Ημερολόγιο"
 
 #. module: base
 #: model:ir.ui.menu,name:base.menu_crm_case_job_req_main
@@ -5265,13 +5374,7 @@ msgid "Custom Reports"
 msgstr "Ειδικές Αναφορές"
 
 #. module: base
-#: model:ir.ui.menu,name:base.menu_email_gateway_form
-msgid "Messages"
-msgstr "Μηνύματα"
-
-#. module: base
 #: model:ir.ui.menu,name:base.menu_emails
-#: model:ir.ui.menu,name:base.menu_mail_gateway
 msgid "Emails"
 msgstr "Emails"
 
@@ -5415,11 +5518,6 @@ msgstr "Τεχνικά Αντικείμενα"
 #: model:ir.ui.menu,name:base.next_id_9
 msgid "Database Structure"
 msgstr "Δομή Βάσης Δεδομένων"
-
-#. module: base
-#: model:ir.ui.menu,name:base.publisher_warranty
-msgid "Publisher Warranty"
-msgstr "Εγγύηση Εκδότη"
 
 #. module: base
 #: model:res.company,follow_up_msg:base.main_company
@@ -7362,36 +7460,6 @@ msgid "New Window"
 msgstr "Νέο Παράθυρο"
 
 #. module: base
-#: selection:ir.actions.act_window,view_type:0
-#: selection:ir.actions.act_window.view,view_mode:0
-#: selection:ir.ui.view,type:0
-#: selection:wizard.ir.model.menu.create.line,view_type:0 view:ir.ui.view:0
-msgid "Form"
-msgstr "Φόρμα"
-
-#. module: base
-#: selection:ir.actions.act_window,view_type:0
-#: selection:ir.actions.act_window.view,view_mode:0
-#: selection:ir.ui.view,type:0
-#: selection:wizard.ir.model.menu.create.line,view_type:0 view:ir.ui.view:0
-msgid "Tree"
-msgstr "Δέντρο"
-
-#. module: base
-#: selection:ir.actions.act_window.view,view_mode:0
-#: selection:ir.ui.view,type:0
-#: selection:wizard.ir.model.menu.create.line,view_type:0
-msgid "Gantt"
-msgstr "Gantt"
-
-#. module: base
-#: selection:ir.actions.act_window.view,view_mode:0
-#: selection:ir.ui.view,type:0
-#: selection:wizard.ir.model.menu.create.line,view_type:0
-msgid "Graph"
-msgstr "Γράφημα"
-
-#. module: base
 #: selection:ir.actions.server,state:0
 msgid "Copy Object"
 msgstr "Αντιγραφή Αντικειμένου"
@@ -7513,9 +7581,48 @@ msgid "Custom Object"
 msgstr "Εδικό Αντικείμενο"
 
 #. module: base
+#: selection:ir.model.data,source:0 view:ir.model:0
+msgid "Custom"
+msgstr "Προσαρμοσμένο"
+
+#. module: base
+#: selection:ir.model.data,source:0
+#, fuzzy
+msgid "Document Sync."
+msgstr "Document Link"
+
+#. module: base
+#: selection:ir.model.data,source:0
+#, fuzzy
+msgid "Ext. Data"
+msgstr "Εξαγωγή Δεδομένων"
+
+#. module: base
+#: selection:ir.model.data,source:0
+#, fuzzy
+msgid "Internal"
+msgstr "Εσωτερικό όνομα"
+
+#. module: base
+#: selection:ir.model.data,source:0
+msgid "Merged records"
+msgstr "Συγχωνευμένες εγγραφές"
+
+#. module: base
+#: selection:ir.model.data,source:0
+#, fuzzy
+msgid "XML data"
+msgstr "XML path"
+
+#. module: base
 #: selection:ir.model.fields,on_delete:0
 msgid "Cascade"
 msgstr "Ανάλυση"
+
+#. module: base
+#: selection:ir.model.fields,on_delete:0
+msgid "Restrict"
+msgstr "Περιορισμός"
 
 #. module: base
 #: selection:ir.model.fields,on_delete:0
@@ -7551,6 +7658,21 @@ msgstr "Ειδικό Πεδίο"
 #: selection:ir.module.module,license:0
 msgid "Affero GPL-3"
 msgstr "Affero GPL-3"
+
+#. module: base
+#: selection:ir.module.module,license:0
+msgid "All rights reserved"
+msgstr "Με επιφύλαξη κάθε δικαιώματος"
+
+#. module: base
+#: selection:ir.module.module,license:0
+msgid "GNU Lesser Public License v2"
+msgstr "GNU Lesser Public License v2"
+
+#. module: base
+#: selection:ir.module.module,license:0
+msgid "GNU Lesser Public License v3"
+msgstr "GNU Lesser Public License v3"
 
 #. module: base
 #: selection:ir.module.module,license:0
@@ -7624,6 +7746,7 @@ msgstr "Δεν εγκαθίσταται"
 
 #. module: base
 #: selection:ir.module.module.dependency,state:0
+#: selection:res.partner.address,validity:0
 msgid "Unknown"
 msgstr "Άγνωστο"
 
@@ -7679,6 +7802,11 @@ msgstr "Βοήθεια"
 
 #. module: base
 #: selection:ir.translation,type:0
+msgid "Jinja2"
+msgstr ""
+
+#. module: base
+#: selection:ir.translation,type:0
 msgid "RML  (deprecated - use Report)"
 msgstr "RML  (παρωχημένο - χρησιμοποιήστε Αναφορά)"
 
@@ -7716,21 +7844,6 @@ msgstr "Προβολή Αυτόματου Οδηγού"
 #: selection:ir.translation,type:0
 msgid "XSL"
 msgstr "XSL"
-
-#. module: base
-#: selection:ir.ui.view,type:0
-msgid "Diagram"
-msgstr "Διάγραμμα"
-
-#. module: base
-#: selection:ir.ui.view,type:0 view:ir.ui.view:0
-msgid "Search"
-msgstr "Αναζήτηση"
-
-#. module: base
-#: selection:ir.ui.view,type:0
-msgid "mdx"
-msgstr "mdx"
 
 #. module: base
 #: selection:ir.values,key:0 selection:res.partner.address,type:0
@@ -7809,6 +7922,28 @@ msgstr "Τιμολόγιο"
 #: selection:res.partner.address,type:0
 msgid "Other"
 msgstr "Άλλο"
+
+#. module: base
+#: selection:res.partner.address,validity:0
+#, fuzzy
+msgid "Deprecated"
+msgstr "Ημερ/νία Δημιουργίας"
+
+#. module: base
+#: selection:res.partner.address,validity:0
+msgid "Invalid"
+msgstr "Μη έγκυρο"
+
+#. module: base
+#: selection:res.partner.address,validity:0
+msgid "Preferred"
+msgstr "Προτιμώμενο"
+
+#. module: base
+#: selection:res.partner.address,validity:0
+#, fuzzy
+msgid "Verified"
+msgstr "Πιστοποιημένο"
 
 #. module: base
 #: selection:res.request,priority:0
@@ -7891,9 +8026,25 @@ msgstr ""
 "Ο κανόνας πρέπει να έχει τουλάχιστον ένα επιλεγμένο δικαίωμα πρόσβασης !"
 
 #. module: base
+#: sql_constraint:ir.translation:0
+msgid "Language code of translation item must be among known languages"
+msgstr ""
+
+#. module: base
 #: sql_constraint:ir.ui.view_sc:0
 msgid "Shortcut for this menu already exists!"
 msgstr "Υπάρχει ήδη συντόμευση για αυτό το μενού!"
+
+#. module: base
+#: sql_constraint:publisher_warranty.contract:0
+msgid "That contract is already registered in the system."
+msgstr "Το συμβόλαιο έχει ήδη καταχωρηθεί στο σύστημα."
+
+#. module: base
+#: sql_constraint:res.company:0
+#, fuzzy
+msgid "The company name must be unique !"
+msgstr "Το όνομα του φακέλου θα πρέπει να είναι μοναδικό!"
 
 #. module: base
 #: sql_constraint:res.config.users:0 sql_constraint:res.users:0
@@ -7908,12 +8059,18 @@ msgstr "Τα αρχικά ΑΦΜ ανά χώρα πρέπει να είναι μ
 #. module: base
 #: sql_constraint:res.country:0
 msgid "The code of the country must be unique !"
-msgstr ""
+msgstr "Ο κωδικός χώρας πρέπει να είναι μοναδικός!"
 
 #. module: base
 #: sql_constraint:res.country:0
 msgid "The name of the country must be unique !"
 msgstr "Το όνομα χώρας πρέπει να είναι μοναδικό !"
+
+#. module: base
+#: sql_constraint:res.currency:0
+#, fuzzy
+msgid "The currency code must be unique !"
+msgstr "Το όνομα του αρθρώματος πρέπει να είναι μοναδικό !"
 
 #. module: base
 #: sql_constraint:res.groups:0
@@ -8051,15 +8208,14 @@ msgstr "Ει_σαγωγή"
 #: view:base.language.install:0 view:base.module.import:0
 #: view:base.module.update:0 view:base.module.upgrade:0
 #: view:base.update.translations:0 view:partner.clear.ids:0
-#: view:partner.sms.send:0 view:partner.wizard.spam:0
-#: view:publisher_warranty.contract.wizard:0 view:res.widget.wizard:0
+#: view:partner.sms.send:0 view:partner.wizard.spam:0 view:res.widget.wizard:0
 msgid "Cancel"
 msgstr "Ακύρωση"
 
 #. module: base
 #: view:base.language.install:0 view:base.module.import:0
-#: view:base.module.update:0 view:publisher_warranty.contract.wizard:0
-#: view:res.request:0 wizard_button:server.action.create,init,end:0
+#: view:base.module.update:0 view:res.request:0
+#: wizard_button:server.action.create,init,end:0
 #: wizard_button:server.action.create,step_1,end:0
 msgid "Close"
 msgstr "Κλείσιμο"
@@ -8510,11 +8666,6 @@ msgstr "Δημιουργία Μενού"
 
 #. module: base
 #: view:ir.model:0
-msgid "Custom"
-msgstr "Προσαρμοσμένο"
-
-#. module: base
-#: view:ir.model:0
 msgid "Fields Description"
 msgstr "Περιγραφή Πεδίων"
 
@@ -8609,6 +8760,12 @@ msgid "Uninstall (beta)"
 msgstr "Απεγκατάσταση (beta)"
 
 #. module: base
+#: view:ir.module.module:0
+#, fuzzy
+msgid "Upgrade"
+msgstr "Έναρξη Αναβάθμισης"
+
+#. module: base
 #: view:ir.property:0
 msgid "Field Information"
 msgstr "Πληροφορίες πεδίου"
@@ -8684,37 +8841,44 @@ msgstr "Καταχώρηση κανόνων"
 
 #. module: base
 #: view:ir.sequence:0
-msgid "Current Year with Century: %(year)s"
+#, fuzzy
+msgid "Current Year with Century: %%(year)s"
 msgstr "Έτος με τον αιώνα: %(year)s"
 
 #. module: base
 #: view:ir.sequence:0
-msgid "Current Year without Century: %(y)s"
+#, fuzzy
+msgid "Current Year without Century: %%(y)s"
 msgstr "Τρέχον έτος χωρίς τον αιώνα: %(y)s"
 
 #. module: base
 #: view:ir.sequence:0
-msgid "Day of the week (0:Monday): %(weekday)s"
+#, fuzzy
+msgid "Day of the week (0:Monday): %%(weekday)s"
 msgstr "Ημέρα Εβδομάδας(0:Δευτέρα): %(ημέρες)"
 
 #. module: base
 #: view:ir.sequence:0
-msgid "Day of the year: %(doy)s"
+#, fuzzy
+msgid "Day of the year: %%(doy)s"
 msgstr "Ημέρα του χρόνου: %(day)s"
 
 #. module: base
 #: view:ir.sequence:0
-msgid "Day: %(day)s"
+#, fuzzy
+msgid "Day: %%(day)s"
 msgstr "Ημέρα: %(day)s"
 
 #. module: base
 #: view:ir.sequence:0
-msgid "Hour 00->12: %(h12)s"
+#, fuzzy
+msgid "Hour 00->12: %%(h12)s"
 msgstr "Ώρα 00->12: %(h12)s"
 
 #. module: base
 #: view:ir.sequence:0
-msgid "Hour 00->24: %(h24)s"
+#, fuzzy
+msgid "Hour 00->24: %%(h24)s"
 msgstr "Ώρα 00->24: %(h24)s"
 
 #. module: base
@@ -8724,22 +8888,26 @@ msgstr "Υπόμνημα (για προθέματα, επιθήματα)"
 
 #. module: base
 #: view:ir.sequence:0
-msgid "Minute: %(min)s"
+#, fuzzy
+msgid "Minute: %%(min)s"
 msgstr "Λεπτά: %(min)s"
 
 #. module: base
 #: view:ir.sequence:0
-msgid "Month: %(month)s"
+#, fuzzy
+msgid "Month: %%(month)s"
 msgstr "Μήνας: %(month)s"
 
 #. module: base
 #: view:ir.sequence:0
-msgid "Seconde: %(sec)s"
+#, fuzzy
+msgid "Seconde: %%(sec)s"
 msgstr "Δευτερόλεπτο: %(sec)s"
 
 #. module: base
 #: view:ir.sequence:0
-msgid "Week of the year: %(woy)s"
+#, fuzzy
+msgid "Week of the year: %%(woy)s"
 msgstr "Εβδομάδα του χρόνου: %(woy)s"
 
 #. module: base
@@ -8751,6 +8919,12 @@ msgstr "Τύπος Ακολουθίας"
 #: view:ir.sequence.type:0
 msgid "Sequences Type"
 msgstr "Τύπος Ακολουθιών"
+
+#. module: base
+#: view:ir.translation:0
+#, fuzzy
+msgid "Advanced..."
+msgstr "Προχωρημένο"
 
 #. module: base
 #: view:ir.translation:0
@@ -8790,7 +8964,7 @@ msgstr "Επιπλέον Πληροφορίες"
 #. module: base
 #: view:ir.ui.view.custom:0
 msgid "Customized Architecture"
-msgstr ""
+msgstr "Προσαρμοσμένη Δομή"
 
 #. module: base
 #: view:ir.values:0
@@ -8897,32 +9071,6 @@ msgstr "Ανανέωση Ημερομηνιών Επικύρωσης"
 #, fuzzy
 msgid "Validate"
 msgstr "Επικύρωση"
-
-#. module: base
-#: view:publisher_warranty.contract.wizard:0
-msgid "Please enter the serial key provided in your contract document:"
-msgstr "Παρακαλώ εισάγετε το σειριακό αριθμό που σας δόθηκε στο συμβόλαιό σας:"
-
-#. module: base
-#: view:publisher_warranty.contract.wizard:0
-msgid "Publisher warranty contract successfully registered!"
-msgstr "Το Συμβόλαιο Εγγύησης Εκδότη καταχωρήθηκε επιτυχώς!"
-
-#. module: base
-#: view:publisher_warranty.contract.wizard:0
-msgid "Register"
-msgstr "Εγγραφή"
-
-#. module: base
-#: view:publisher_warranty.contract.wizard:0
-msgid ""
-"This wizard helps you register a publisher warranty contract in your OpenERP "
-"system. After the contract has been registered, you will be able to send "
-"issues directly to OpenERP."
-msgstr ""
-"Ο οδηγός αυτός σας βοηθά να εισάγετε ένα συμβόλαιο εγγύησης εκδότη στο "
-"σύστημα του OpenERP σας. Με την καταχώρηση αυτή, μπορείτε να κάνετε απ' "
-"ευθείας αιτήματα στην OpenERP για υποστήριξη."
 
 #. module: base
 #: view:res.bank:0 view:res.partner:0 view:res.partner.address:0
@@ -9050,38 +9198,44 @@ msgstr "Ακρίβεια τιμών"
 
 #. module: base
 #: view:res.lang:0
-msgid "%A - Full weekday name."
+#, fuzzy
+msgid "%%A - Full weekday name."
 msgstr "%A - Πλήρες όνομα ημέρας εβδομάδας"
 
 #. module: base
 #: view:res.lang:0
-msgid "%B - Full month name."
+#, fuzzy
+msgid "%%B - Full month name."
 msgstr "%B - Πλήρες όνομα μήνα."
 
 #. module: base
 #: view:res.lang:0
-msgid "%H - Hour (24-hour clock) [00,23]."
+#, fuzzy
+msgid "%%H - Hour (24-hour clock) [00,23]."
 msgstr "%H - Η Ώρα (24ωρη μορφή) [00, 23]."
 
 #. module: base
 #: view:res.lang:0
-msgid "%I - Hour (12-hour clock) [01,12]."
+msgid "%%I - Hour (12-hour clock) [01,12]."
 msgstr "%I - Η Ώρα (12ωρο)  [01, 12]."
 
 #. module: base
 #: view:res.lang:0
-msgid "%M - Minute [00,59]."
+#, fuzzy
+msgid "%%M - Minute [00,59]."
 msgstr "%M - Τα λεπτά της ώρας [00, 59]."
 
 #. module: base
 #: view:res.lang:0
-msgid "%S - Seconds [00,61]."
+#, fuzzy
+msgid "%%S - Seconds [00,61]."
 msgstr "%S - Δευτερόλεπτα [00, 60]."
 
 #. module: base
 #: view:res.lang:0
+#, fuzzy
 msgid ""
-"%U - Week number of the year (Sunday as the first day of the week) as a "
+"%%U - Week number of the year (Sunday as the first day of the week) as a "
 "decimal number [00,53]. All days in a new year preceding the first Sunday "
 "are considered to be in week 0."
 msgstr ""
@@ -9091,8 +9245,9 @@ msgstr ""
 
 #. module: base
 #: view:res.lang:0
+#, fuzzy
 msgid ""
-"%W - Week number of the year (Monday as the first day of the week) as a "
+"%%W - Week number of the year (Monday as the first day of the week) as a "
 "decimal number [00,53]. All days in a new year preceding the first Monday "
 "are considered to be in week 0."
 msgstr ""
@@ -9102,122 +9257,146 @@ msgstr ""
 
 #. module: base
 #: view:res.lang:0
-msgid "%X - Appropriate time representation."
+#, fuzzy
+msgid "%%X - Appropriate time representation."
 msgstr "%X - Ορθή μορφή ώρας."
 
 #. module: base
 #: view:res.lang:0
-msgid "%Y - Year with century."
+#, fuzzy
+msgid "%%Y - Year with century."
 msgstr "%Y - Το έτος (με αιώνες)."
 
 #. module: base
 #: view:res.lang:0
-msgid "%a - Abbreviated weekday name."
+#, fuzzy
+msgid "%%a - Abbreviated weekday name."
 msgstr "%a - Συντομο όνομα ημέρας"
 
 #. module: base
 #: view:res.lang:0
-msgid "%b - Abbreviated month name."
+#, fuzzy
+msgid "%%b - Abbreviated month name."
 msgstr "%b - Σύντομο όνομα μήνα."
 
 #. module: base
 #: view:res.lang:0
-msgid "%c - Appropriate date and time representation."
+#, fuzzy
+msgid "%%c - Appropriate date and time representation."
 msgstr "%c - Ορθή εμφάνιση ημερ/νίας και ώρας"
 
 #. module: base
 #: view:res.lang:0
-msgid "%d - Day of the month [01,31]."
+#, fuzzy
+msgid "%%d - Day of the month [01,31]."
 msgstr "%d - Η ημέρα του μήνα [01, 31]."
 
 #. module: base
 #: view:res.lang:0
-msgid "%j - Day of the year [001,366]."
+#, fuzzy
+msgid "%%j - Day of the year [001,366]."
 msgstr "%j - Ημέρα του χρόνου [001,366]."
 
 #. module: base
 #: view:res.lang:0
-msgid "%m - Month number [01,12]."
+#, fuzzy
+msgid "%%m - Month number [01,12]."
 msgstr "%m - Ο μήνας [01,12]"
 
 #. module: base
 #: view:res.lang:0
-msgid "%p - Equivalent of either AM or PM."
+#, fuzzy
+msgid "%%p - Equivalent of either AM or PM."
 msgstr "%p - Ένδειξη π.μ ή μ.μ."
 
 #. module: base
 #: view:res.lang:0
-msgid "%w - Weekday number [0(Sunday),6]."
+#, fuzzy
+msgid "%%w - Weekday number [0(Sunday),6]."
 msgstr "%w - Η ημέρα της εβδομάδας [0 Κυριακή, 1 Δευτέρα... 6 Σάββατο]."
 
 #. module: base
 #: view:res.lang:0
-msgid "%x - Appropriate date representation."
+#, fuzzy
+msgid "%%x - Appropriate date representation."
 msgstr "%x - Ορθή αναπαράσταση ημερ/νίας"
 
 #. module: base
 #: view:res.lang:0
-msgid "%y - Year without century [00,99]."
+#, fuzzy
+msgid "%%y - Year without century [00,99]."
 msgstr "%y - Χρονολογία χωρίς τον αιώνα [00, 99]."
 
 #. module: base
 #: view:res.lang:0
-msgid "1.  %c              ==> Fri Dec  5 18:25:20 2008"
+#, fuzzy
+msgid "1.  %%c              ==> Fri Dec  5 18:25:20 2008"
 msgstr "1.  %c              ==> Παρ Δεκ 5 18:25:20 2008"
 
 #. module: base
 #: view:res.lang:0
-msgid "10. %S              ==> 20"
+#, fuzzy
+msgid "10. %%S              ==> 20"
 msgstr "10. %S              ==> 20"
 
 #. module: base
 #: view:res.lang:0
-msgid "11. %U or %W       ==> 48 (49th week)"
+#, fuzzy
+msgid "11. %%U or %%W       ==> 48 (49th week)"
 msgstr "11. %U or %W       ==> 48 (49η εβδομάδα)"
 
 #. module: base
 #: view:res.lang:0
-msgid "12. %w              ==> 5 ( Friday is the 6th day)"
+#, fuzzy
+msgid "12. %%w              ==> 5 ( Friday is the 6th day)"
 msgstr "12. %w              ==> 5 (Η Παρασκευή είναι η 6η ημέρα)"
 
 #. module: base
 #: view:res.lang:0
-msgid "2.  %a ,%A         ==> Fri, Friday"
+#, fuzzy
+msgid "2.  %%a ,%%A         ==> Fri, Friday"
 msgstr "2.  %a ,%A         ==> Παρ, Παρασκευή"
 
 #. module: base
 #: view:res.lang:0
-msgid "3.  %x ,%X         ==> 12/05/08, 18:25:20"
+#, fuzzy
+msgid "3.  %%x ,%%X         ==> 12/05/08, 18:25:20"
 msgstr "3.  %x ,%X         ==> 12/05/08, 18:25:20"
 
 #. module: base
 #: view:res.lang:0
-msgid "4.  %b, %B         ==> Dec, December"
+#, fuzzy
+msgid "4.  %%b, %%B         ==> Dec, December"
 msgstr "4.  %b, %B         ==> Δεκ, Δεκέμβριος"
 
 #. module: base
 #: view:res.lang:0
-msgid "5.  %y, %Y         ==> 08, 2008"
+#, fuzzy
+msgid "5.  %%y, %%Y         ==> 08, 2008"
 msgstr "5.  %y, %Y         ==> 08, 2008"
 
 #. module: base
 #: view:res.lang:0
-msgid "6.  %d, %m         ==> 05, 12"
+#, fuzzy
+msgid "6.  %%d, %%m         ==> 05, 12"
 msgstr "6.  %d, %m         ==> 05, 12"
 
 #. module: base
 #: view:res.lang:0
-msgid "7.  %H:%M:%S      ==> 18:25:20"
+#, fuzzy
+msgid "7.  %%H:%%M:%%S      ==> 18:25:20"
 msgstr "7.  %H:%M:%S      ==> 18:25:20"
 
 #. module: base
 #: view:res.lang:0
-msgid "8.  %I:%M:%S %p  ==> 06:25:20 PM"
+#, fuzzy
+msgid "8.  %%I:%%M:%%S %%p  ==> 06:25:20 PM"
 msgstr "8.  %I:%M:%S %p  ==> 06:25:20 μ.μ."
 
 #. module: base
 #: view:res.lang:0
-msgid "9.  %j              ==> 340"
+#, fuzzy
+msgid "9.  %%j              ==> 340"
 msgstr "9.  %j              ==> 340"
 
 #. module: base
@@ -9440,6 +9619,11 @@ msgid "Workflow Editor"
 msgstr "Επεξεργαστής  Ροής"
 
 #. module: base
+#: view:workflow:0
+msgid "['signal','condition']"
+msgstr "['signal','condition']"
+
+#. module: base
 #: view:workflow.activity:0
 msgid "Conditions"
 msgstr "Συνθήκες"
@@ -9480,6 +9664,64 @@ msgstr "Επιλογή Τύπου Ενέργειας"
 #: wizard_view:server.action.create,step_1:0
 msgid "Select Report"
 msgstr "Επιλογή Αναφοράς"
+
+#~ msgid "Module %s: Invalid Quality Certificate"
+#~ msgstr "Άρθρωμα %s: Άκυρο Πιστοποιητικό Ποιότητας"
+
+#~ msgid "Cannot convert amount to %s, no language function present!"
+#~ msgstr ""
+#~ "Δεν μπορώ να μετατρέψω το μέγεθος σε %s, δεν υπάρχει συνάρτηση για τη "
+#~ "γλώσσα!"
+
+#~ msgid "\"smtp_server\" needs to be set to send mails to users"
+#~ msgstr ""
+#~ "Οι \"smtp servers\" πρέπει να οριστούν για να στείλετε email σε άλλους "
+#~ "χρήστες"
+
+#~ msgid "\"email_from\" needs to be set to send welcome mails to users"
+#~ msgstr ""
+#~ "Όταν ρυθμισθεί το \"email_from\" θα στέλνονται μηνύματα καλωσορίσματος "
+#~ "στους χρήστες"
+
+#~ msgid "The search_read method is not implemented on this object !"
+#~ msgstr ""
+#~ "Η μέθοδος αναζήτησης (search_read) δεν έχει αναπτυχθεί σε αυτό το "
+#~ "αντικείμενο!"
+
+#, fuzzy
+#~ msgid "Register a Contract"
+#~ msgstr "Συμβόλαιο Συντήρησης"
+
+#~ msgid "Plugins"
+#~ msgstr "Πρόσθετα"
+
+#~ msgid "Messages"
+#~ msgstr "Μηνύματα"
+
+#~ msgid "Publisher Warranty"
+#~ msgstr "Εγγύηση Εκδότη"
+
+#~ msgid "mdx"
+#~ msgstr "mdx"
+
+#~ msgid "Please enter the serial key provided in your contract document:"
+#~ msgstr ""
+#~ "Παρακαλώ εισάγετε το σειριακό αριθμό που σας δόθηκε στο συμβόλαιό σας:"
+
+#~ msgid "Publisher warranty contract successfully registered!"
+#~ msgstr "Το Συμβόλαιο Εγγύησης Εκδότη καταχωρήθηκε επιτυχώς!"
+
+#~ msgid "Register"
+#~ msgstr "Εγγραφή"
+
+#~ msgid ""
+#~ "This wizard helps you register a publisher warranty contract in your "
+#~ "OpenERP system. After the contract has been registered, you will be able "
+#~ "to send issues directly to OpenERP."
+#~ msgstr ""
+#~ "Ο οδηγός αυτός σας βοηθά να εισάγετε ένα συμβόλαιο εγγύησης εκδότη στο "
+#~ "σύστημα του OpenERP σας. Με την καταχώρηση αυτή, μπορείτε να κάνετε απ' "
+#~ "ευθείας αιτήματα στην OpenERP για υποστήριξη."
 
 #~ msgid ""
 #~ "Would your payment have been carried out after this mail was sent, please "
@@ -9591,9 +9833,6 @@ msgstr "Επιλογή Αναφοράς"
 #~ msgid "Automatic XSL:RML"
 #~ msgstr "Αυτόματο XSL:RML"
 
-#~ msgid "Internal Name"
-#~ msgstr "Εσωτερικό όνομα"
-
 #~ msgid "RML path"
 #~ msgstr "Διαδρομή RML"
 
@@ -9668,9 +9907,6 @@ msgstr "Επιλογή Αναφοράς"
 
 #~ msgid "Fixed Width"
 #~ msgstr "Σταθερό Πλάτος"
-
-#~ msgid "Force Domain"
-#~ msgstr "Επιβολή Τομέα"
 
 #~ msgid "Operand"
 #~ msgstr "Παράμετρος"
@@ -10639,9 +10875,6 @@ msgstr "Επιλογή Αναφοράς"
 #~ msgid "Partner Address"
 #~ msgstr "Διεύθυνση Συνεργάτη"
 
-#~ msgid "Document Link"
-#~ msgstr "Document Link"
-
 #~ msgid "Partner State of Mind"
 #~ msgstr "Προδιάθεση Συνεργάτη"
 
@@ -10674,9 +10907,6 @@ msgstr "Επιλογή Αναφοράς"
 #~ msgstr ""
 #~ "Οι ρόλοι χρησιμοποιούνται σε καθορισμένες ενέργειες που προκύπτουν από "
 #~ "τις ροές εργασίας."
-
-#~ msgid "Export Data"
-#~ msgstr "Εξαγωγή Δεδομένων"
 
 #~ msgid "Export language"
 #~ msgstr "Εξαγωγή Γλώσσας"
@@ -10734,9 +10964,6 @@ msgstr "Επιλογή Αναφοράς"
 
 #~ msgid "Check new modules"
 #~ msgstr "Έλγχος νέων Αρθρωμάτων"
-
-#~ msgid "Start Upgrade"
-#~ msgstr "Έναρξη Αναβάθμισης"
 
 #~ msgid "Language name"
 #~ msgstr "Όνομα Γλώσσας"
@@ -10969,9 +11196,6 @@ msgstr "Επιλογή Αναφοράς"
 
 #~ msgid "Could you check your contract information ?"
 #~ msgstr "Παρακαλώ ελέγξτε τα στοιχεία σας"
-
-#~ msgid "Unvalid"
-#~ msgstr "Άκυρο"
 
 #~ msgid "Partial"
 #~ msgstr "Μερικό"
@@ -11222,9 +11446,6 @@ msgstr "Επιλογή Αναφοράς"
 
 #~ msgid "No Partner!"
 #~ msgstr "Δεν υπάρχει Συνεργάτης!"
-
-#~ msgid "No Data Available"
-#~ msgstr "Δεν υπάρχει διαθέσιμη πληροφορία"
 
 #~ msgid ""
 #~ "No fiscal year defined for this date !\n"
@@ -11565,9 +11786,6 @@ msgstr "Επιλογή Αναφοράς"
 
 #~ msgid "Free Reference"
 #~ msgstr "Ελεύθερη Παραπομπή"
-
-#~ msgid "Directory name must be unique!"
-#~ msgstr "Το όνομα του φακέλου θα πρέπει να είναι μοναδικό!"
 
 #~ msgid "You could not publish a module that is not installed!"
 #~ msgstr ""
@@ -12079,9 +12297,6 @@ msgstr "Επιλογή Αναφοράς"
 
 #~ msgid "You can not create this kind of document! (%s)"
 #~ msgstr "Δεν μπορείτε να δημιουργήσετε τέτοιο έγγραφο! (%s)"
-
-#~ msgid "You can not write in this document! (%s)"
-#~ msgstr "Δεν μπορείτε να επέμβετε στο έγγραφο! (%s)"
 
 #~ msgid "You can not read this document! (%s)"
 #~ msgstr "Δεν μπορείτε να διαβάσετε αυτό το έγγραφο! (%s)"

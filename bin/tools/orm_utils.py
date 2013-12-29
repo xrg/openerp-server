@@ -168,7 +168,9 @@ class ORM_stat_fields(object):
     def extend(self, other):
         """ Needed for osv.createInstance(), take values of `other`
         """
-        assert not self.flds, self.flds
+        if not other.flds:
+            return
+        assert not self.flds, '%r %r' %(self.flds, other.flds)
         self.flds = other.flds
         other.flds = None # don't let it be used again
 

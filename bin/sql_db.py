@@ -61,13 +61,12 @@ def undecimalize(symb, cr):
     if symb is None: return None
     return float(symb)
 
-for name, typeoid in types_mapping.items():
-    psycopg2.extensions.register_type(psycopg2.extensions.new_type(typeoid, name, lambda x, cr: x))
-psycopg2.extensions.register_type(psycopg2.extensions.new_type((700, 701, 1700,), 'float', undecimalize))
+psycopg2.extensions.register_type(psycopg2.extensions.new_type((1700,), 'float', undecimalize))
 
 
 import tools
 from tools.func import wraps, frame_codeinfo
+from tools.misc import ustr
 from netsvc import Agent, Server
 from datetime import datetime as mdt
 from datetime import timedelta
@@ -152,6 +151,9 @@ class Cursor(object):
     IN_MAX = 1000 # decent limit on size of IN queries - guideline = Oracle limit
     __logger = logging.getLogger('db.cursor')
     __pgmode = None
+    __slots__ = ('sql_stats_log', 'sql_log', 'sql_log_count', '__closed', \
+               '__caller', '_pool', 'dbname', 'auth_proxy', '_serialized', \
+               '_cnx', '_obj', '_pgmode', 'fetchone', 'fetchmany', 'fetchall')
 
     def check(f):
         @wraps(f)
@@ -186,17 +188,13 @@ class Cursor(object):
         self.autocommit(False)
         if not hasattr(self._cnx,'_prepared'):
             self._cnx._prepared = []
-        if not self.__pgmode:
-            if self._cnx.server_version >= 90200:
-                self.__pgmode = 'pg92'
-            elif self._cnx.server_version >= 90100:
-                self.__pgmode = 'pg91'
-            elif self._cnx.server_version >= 90000:
-                self.__pgmode = 'pg90'
-            elif self._cnx.server_version >= 80400:
-                self.__pgmode = 'pg84'
+        self._pgmode = self.__pgmode
+        if not self._pgmode:
+            if self._cnx.server_version >= 80400:
+                pv = self._cnx.server_version / 100
+                self._pgmode = 'pg%d%d' % ( pv/100, pv % 100)
             else:
-                self.__pgmode = 'pgsql'
+                self._pgmode = 'pg00'
 
         for verb in ('fetchone', 'fetchmany', 'fetchall'):
             # map the *bound* functions, bypass @check
@@ -241,15 +239,20 @@ class Cursor(object):
             res = self._obj.execute(query, params)
         except OperationalError, oe:
             self.__logger.exception("Postgres Operational error: %s", oe)
-            self.status = False
-            raise
-        except psycopg2.ProgrammingError, pe:
-            self.__logger.error("Programming error: %s, in query %s" % (pe, query))
-            self.__logger.error("bad query: %s" % query)
-            self.__logger.error("params: %s" % (params,))
+            try:
+                self._cnx.status = False
+            except TypeError:
+                pass
+            raise oe
+        except psycopg2.DatabaseError, pe:
+            self.__logger.error("Programming error: %s", ustr(pe))
+            self.__logger.error("bad query: %s\nparams: %s", ustr(query), params)
+            if debug or self.__logger.isEnabledFor(logging.DEBUG):
+                import traceback
+                self.__logger.debug("stack: %s", ''.join(traceback.format_stack(limit=15)))
             raise
         except Exception:
-            self.__logger.exception("bad query: %s\nparams: %s" % (query,params))
+            self.__logger.exception("bad query: %s\nparams: %s", ustr(query),params)
             raise
 
         if self.sql_log or debug:
@@ -281,6 +284,40 @@ class Cursor(object):
                     self.__logger.warning("Stray query: %r", query)
         return res
 
+    def execute_safe(self, query, params=None, debug=False):
+        """ Execute some SQL command, do NOT log the query params
+
+            Used for password operations, avoids logging the sensitive params
+
+            @param debug   Verbosely log the query being sent (not results, yet)
+        """
+        if self.__closed:
+            self.__logger.debug("closed cursor: %r", self)
+            raise psycopg2.OperationalError('Unable to use the cursor after having closed it')
+
+        # The core of query execution
+        try:
+            params = params or None
+            res = self._obj.execute(query, params)
+        except OperationalError, oe:
+            self.__logger.exception("Postgres Operational error: %s", oe)
+            try:
+                self._cnx.status = False
+            except TypeError:
+                pass
+            raise oe
+        except psycopg2.DatabaseError, pe:
+            self.__logger.error("Programming error: %s", ustr(pe))
+            self.__logger.error("bad query: %s", ustr(query))
+            if debug or self.__logger.isEnabledFor(logging.DEBUG):
+                import traceback
+                self.__logger.debug("stack: %s", ''.join(traceback.format_stack(limit=15)))
+            raise
+        except Exception:
+            self.__logger.exception("bad query: %s", ustr(query))
+            raise
+
+        return res
 
     def split_for_in_conditions(self, ids):
         """Split a list of identifiers into one or more smaller tuples
@@ -447,7 +484,7 @@ class Cursor(object):
         if name == 'server_version':
             return self._cnx.server_version
         elif name == 'pgmode':
-            return self.__pgmode
+            return self._pgmode
         return getattr(self._obj, name)
 
     @classmethod
@@ -501,7 +538,12 @@ class ConnectionPool(threading.Thread, Server):
         self._debug_pool = tools.config.get_misc('debug', 'db_pool', False)
         self.sql_stats = {}
         self.daemon = True # for the thread, we can stop at any time
-        self._cursor_factory = psycopg2.extensions.cursor
+        if tools.config.get_misc('postgres', 'binary_cursor', False):
+            # Binary cursor, experimental
+            self._cursor_factory = psycopg2.extensions.cursor_bin
+        else:
+            # default, compatible one, using ASCII SQL expansion
+            self._cursor_factory = psycopg2.extensions.cursor
         if pgmode: # not None or False
             Cursor.set_pgmode(pgmode)
         if 'dfc' in psycopg2.__version__:
@@ -693,6 +735,7 @@ class Connection(object):
     """ A lightweight instance of a connection to postgres
     """
     __logger = logging.getLogger('db.connection')
+    __slots__ = ('dbname', '_pool', '_temp')
 
     def __init__(self, pool, dbname, temp=False):
         self.dbname = dbname

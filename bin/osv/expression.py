@@ -44,7 +44,9 @@ class expression(object):
     _implicit_fields = None
     _implicit_log_fields = None
     _browse_null_class = None
-    
+    __slots__ = ('__exp', '__field_tables', '__all_tables', '__joins',\
+                '__main_table', '__DUMMY_LEAF', '_debug', '_joined_fields')
+
     @classmethod
     def __load_implicit_fields(cls):
         """ Populate class variables, but late enough to avoid circular imports
@@ -87,7 +89,7 @@ class expression(object):
         
             Expression may behave differently according to cr.pgmode:
             with 'old', 'sql' the db will execute the expression.
-            At pgsql, pg84, pg90, sub-queries are allowed. At pg84, pg90+,
+            At pg00, pg84, pg90, sub-queries are allowed. At pg84, pg90+,
             recursive ones are used for 'child_of' expressions
         """
         # check if the expression is valid
@@ -117,13 +119,13 @@ class expression(object):
                         domain expression, to be searched upon
                 @param parent the name of the "parent" field
                 @param left
-                @param prefix if we must disambiguate the table name, 
+                @param prefix if we must disambiguate the table name,
                         including the dot
                 @param null_too if specified, the expression would also stand 
                         for left = NULL
                 @return domain expression, in list of tuples
             """
-            if model._parent_store and (not model.pool._init): #and False:
+            if model._parent_store and (not model.pool._init):
                 # TODO: Improve where joins are implemented for many with '.', replace by:
                 # doms += ['&',(prefix+'.parent_left','<',o.parent_right),(prefix+'.parent_left','>=',o.parent_left)]
                 doms = []
@@ -139,7 +141,7 @@ class expression(object):
                 if null_too:
                     doms = ['|', (left, '=', None)] + doms
                 return doms
-            elif cr.pgmode in eu.PG84_MODES:
+            elif cr.pgmode >= 'pg84':
                 # print "Recursive expand for 8.4, for %s" % model._table
                 phname = prefix + model._table
                 phname = phname.replace('.', '_')
@@ -185,7 +187,7 @@ class expression(object):
                 if null_too:
                     return ['|', (left, '=', None), (left, 'inselect', (qry, qu2))]
                 return [(left, 'inselect', (qry, qu2))]
-            # elif self.__mode == 'pgsql':
+            # elif self.__mode == 'pg00':
             #  any way  to do that in pg8.3?
             else:
                 def rg(ids, model, parent):
@@ -308,7 +310,7 @@ class expression(object):
                             # whole thing would blow up otherwise.
                         else:
                             new_exp.append(e)
-                    exp = eu.sub_expr(new_exp)
+                    exp = eu.nested_expr(new_exp)
 
             # Now, exp, perhaps modified, needs to be converted to sql
             if exp is True:

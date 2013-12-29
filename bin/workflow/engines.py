@@ -31,9 +31,9 @@ _loadables = [] # set of subclasses that need to be called on reload_models()
 
 class WorkflowEngine(object):
     """A workflow definition, for a particular ORM object
-    
+
         An instance of this class corresponds to (one) record of the `wkf` table
-        
+
         This class is the 'dummy' engine, which defaults to a NoOp for any of
         the API calls.
     """
@@ -42,12 +42,12 @@ class WorkflowEngine(object):
         """
             @param parent_obj The ORM object holding this engine. May keep it in weakref
         """
-    
+
         self._debug = config.get_misc('debug', 'workflows', False)
 
     def _reload(self, cr):
         """Called when the ir model has any changes
-        
+
             Will NOT work if the workflow has changed base type
         """
         pass
@@ -102,7 +102,7 @@ class WorkflowEngine(object):
 
     def get_instance(self, klass):
         """Get `self` or any contained engine, of `klass` type
-        
+
             Useful when checking if an ORM model already contains some
             workflow definition. First use this function to obtain the
             object instance, then use class-specific functions to check
@@ -148,7 +148,7 @@ class WorkflowEngine(object):
 
 class WorkflowCompositeEngine(WorkflowEngine):
     """ Binds >1 Engines to one ORM object
-    
+
         Should rarely be used. Useful to combine engines.
     """
     def __init__(self, parent_obj, engs):
@@ -159,12 +159,12 @@ class WorkflowCompositeEngine(WorkflowEngine):
 
     def _reload(self, cr):
         """Called when the ir model has any changes
-        
+
             Will NOT work if the workflow has changed base type
         """
         super(WorkflowCompositeEngine, self)._reload(cr)
         # TODO check base type
-        
+
         for e in self._engines:
             e._reload(cr)
 

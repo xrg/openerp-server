@@ -42,7 +42,7 @@ class _server_modifier:
         if not isinstance(left, cls):
             raise TypeError("Left side is not %s" % cls.__name__)
         return True
-        
+
     @classmethod
     def in_context(cls, context, name, value=None, raise_error=False):
         """See if dict `context` contains a server type `name` with that value

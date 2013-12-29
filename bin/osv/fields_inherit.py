@@ -62,7 +62,10 @@ class inherit(object):
             elif kw == 'context':
                 field._context = val
             elif kw == 'selection_extend':
-                field.selection.extend(val)
+                old_keys = set([v[0] for v in field.selection])
+                for kv in val:
+                    if kv[0] not in old_keys:
+                        field.selection.append(kv)
             elif isinstance(field, function) \
                     and kw in ('old', 'method', 'fnct', 'fnct_inv', 'arg',
                                 'multi', 'fnct_inv_arg', 'type', 'fnct_search'):

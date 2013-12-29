@@ -4,7 +4,7 @@
 #    OpenERP, Open Source Management Solution
 #    Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>).
 #    Copyright (C) 2010-2011 OpenERP s.a. (<http://openerp.com>).
-#    Copyright (C) 2009,2011-2012 P.Christeas <xrg@hellug.gr>
+#    Copyright (C) 2009,2011-2013 P.Christeas <xrg@hellug.gr>
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -42,7 +42,9 @@ from tools import sql_model
 from tools.safe_eval import safe_eval as eval
 import pooler
 from tools.translate import _
-from tools.expr_utils import PG84_MODES
+
+from tools.data_loaders import DataLoader
+import tools.loaders
 
 import zipfile
 import release
@@ -455,8 +457,10 @@ def init_module_objects(cr, module_name, obj_list):
             context = {'module': module_name} # is it safe to move up?
             # should we have a savepoint ?
             obj._field_model2db(cr, context=context)
-            obj._auto_init_sql(schema, context=context)
-            
+            result = obj._auto_init_sql(schema, context=context)
+            if result:
+                todo += result
+
             # we need only commit the sql model if the object overrides
             # its _auto_init (compatibility mode)
             if not (getattr(obj._auto_init, 'deferrable', False)):
@@ -479,9 +483,13 @@ def init_module_objects(cr, module_name, obj_list):
     # print "TODO(last):"
     # print schema._dump_todo()
     schema.commit_to_db(cr)
-    todo.sort()
-    for t in todo:
-        t[1](cr, *t[2])
+    if todo:
+        if not wf_engine:
+            wf_engine = osv.osv.netsvc.LocalService('workflow')
+        wf_engine.thaw_dummy(cr)
+        todo.sort()
+        for t in todo:
+            t[1](cr, *t[2])
     cr.commit()
 
 
@@ -665,7 +673,56 @@ class MigrationManager(object):
                         if mod:
                             del mod
 
-log = logging.getLogger('init')
+class ModuleDataLoader(object):
+    """ Context-holding engine for all data file formats
+    """
+    def __init__(self, pool, uid, module_name, context=None, kwargs=None):
+        self.idref = {}
+        self.pool = pool
+        self.uid = uid
+        self.module_name = module_name
+        self.context = context or {'__ignore_ir_values': True}
+        self.kwargs = kwargs
+
+    def process_files(self, cr, file_list, mode, noupdate=False):
+        """
+            @param file_list is the one like 'init_xml', 'update_xml' etc.
+                from `__openerp__.py`
+        """
+        if not file_list: # this also handles non-list values
+            return
+        _formats = {}
+        for filename in file_list:
+            logger.info('module %s: loading %s' % (self.module_name, filename))
+            b, ext = os.path.splitext(filename)
+            if not ext.startswith('.'):
+                logger.error('module %s: cannot load %s because its extension is not recognized!',
+                            self.module_name, filename)
+                continue
+            ext = ext[1:]
+            if ext not in _formats:
+                try:
+                    _formats[ext] = DataLoader[ext](self.pool, self.uid,
+                                self.module_name, self.idref, mode, noupdate,
+                                self.context, **(self.kwargs))
+                except TypeError:
+                    logger.error('module %s: cannot load %s because its format is not recognized!',
+                            self.module_name, filename)
+                    continue
+                except Exception:
+                    logger.error('module %s: cannot load %s , parser failed',
+                            self.module_name, filename, exc_info=True)
+                    continue
+            parser = _formats[ext]
+            fp = tools.file_open(opj(self.module_name, filename))
+            try:
+                parser.parse(cr, filename, fp)
+            except Exception:
+                cr.rollback()
+                tools.cache.clean_caches_for_db(cr.dbname)
+                raise
+            finally:
+                fp.close()
 
 def load_module_graph(cr, graph, status=None, perform_checks=True, skip_modules=None, **kwargs):
     """ Migrates+Updates or Installs all module nodes from ``graph``
@@ -677,116 +734,6 @@ def load_module_graph(cr, graph, status=None, perform_checks=True, skip_modules=
        :param skip_modules: optional list of module names (packages) which have previously been loaded and can be skipped
        :return: list of modules that were installed or updated
     """
-    def process_sql_file(cr, fp):
-        """ Load a pure SQL file onto the database
-        
-            This function uploads the *full* contents of the SQL file,
-            unmodified, in one cr.execute() call. That's because we cannot
-            safely split at ';' boundaries (may appear within a quoted view
-            segment) or parse the '--' comments.
-        """
-        query = fp.read()
-        cr.execute(query)
-
-    def load_init_update_xml(cr, m, idref, mode, kind):
-        for filename in package.data.get('%s_xml' % kind, []):
-            logger.info('module %s: loading %s' % (m, filename))
-            _, ext = os.path.splitext(filename)
-            fp = tools.file_open(opj(m, filename))
-            try:
-                if ext == '.csv':
-                    noupdate = (kind == 'init')
-                    tools.convert_csv_import(cr, m, os.path.basename(filename),
-                            fp.read(), idref, mode=mode, noupdate=noupdate,
-                            context={'__ignore_ir_values': True})
-                elif ext == '.sql':
-                    process_sql_file(cr, fp)
-                elif ext == '.yml':
-                    tools.convert_yaml_import(cr, m, fp, idref, mode=mode,
-                            context={'__ignore_ir_values': True}, **kwargs)
-                else:
-                    tools.convert_xml_import(cr, m, fp, idref, mode=mode,
-                            context={'__ignore_ir_values': True}, **kwargs)
-            finally:
-                fp.close()
-
-    def load_demo_xml(cr, m, idref, mode):
-        for xml in package.data.get('demo_xml', []):
-            name, ext = os.path.splitext(xml)
-            logger.info('module %s: loading %s' % (m, xml))
-            fp = tools.file_open(opj(m, xml))
-            try:
-                if ext == '.csv':
-                    tools.convert_csv_import(cr, m, os.path.basename(xml),
-                            fp.read(), idref, mode=mode, noupdate=True,
-                            context=kwargs.get('context', {}))
-                elif ext == '.yml':
-                    tools.convert_yaml_import(cr, m, fp, idref, mode=mode,
-                            noupdate=True, context={'__ignore_ir_values': True},
-                            **kwargs)
-                else:
-                    tools.convert_xml_import(cr, m, fp, idref, mode=mode,
-                            noupdate=True,context={'__ignore_ir_values': True},
-                            **kwargs)
-            finally:
-                fp.close()
-
-    def load_data(cr, module_name, id_map, mode):
-        _load_data(cr, module_name, id_map, mode, 'data')
-
-    def load_demo(cr, module_name, id_map, mode):
-        _load_data(cr, module_name, id_map, mode, 'demo')
-
-    def load_test(cr, module_name, id_map, mode):
-        """ Load and execute install-time tests.
-
-            Normally, all that data should never be committed into the
-            db, so this fn will almost be a no-op (except that it commits
-            the cursor).
-        """
-        cr.commit()
-        if not tools.config.get_misc('tests','enable',True):
-            return
-        
-        try:
-                _load_data(cr, module_name, id_map, mode, 'test')
-        except Exception, e:
-            if tools.config.get_misc('tests', 'nonfatal', False):
-                log.warn(e)
-                pass
-            else:
-                raise
-        finally:
-            if tools.config.get_misc('tests','rollback', True):
-                cr.rollback()
-            else:
-                cr.commit()
-
-    def _load_data(cr, module_name, id_map, mode, kind):
-        for filename in package.data.get(kind, []):
-            noupdate = (kind == 'demo')
-            _, ext = os.path.splitext(filename)
-            log.info("module %s: loading %s", module_name, filename)
-            pathname = os.path.join(module_name, filename)
-            fp = tools.file_open(pathname)
-            try:
-                if ext == '.sql':
-                    process_sql_file(cr, file)
-                elif ext == '.csv':
-                    noupdate = (kind == 'init')
-                    tools.convert_csv_import(cr, module_name, pathname,
-                            fp.read(), id_map, mode, noupdate,
-                            context={ '__ignore_ir_values': True })
-                elif ext == '.yml':
-                    tools.convert_yaml_import(cr, module_name, fp,
-                            id_map, mode, noupdate,
-                            context = { '__ignore_ir_values': True })
-                else:
-                    tools.convert_xml_import(cr, module_name, fp,
-                            id_map, mode, noupdate,
-                            context={ '__ignore_ir_values': True })
-            finally:
-                fp.close()
 
     # **kwargs is passed directly to convert_xml_import
     if not status:
@@ -843,33 +790,56 @@ def load_module_graph(cr, graph, status=None, perform_checks=True, skip_modules=
         if modobj and perform_checks:
             modobj.check(cr, 1, [mid])
 
-        idref = {}
         status['progress'] = (float(statusi)+0.4) / len(graph)
 
         mode = 'update'
         if hasattr(package, 'init') or package.state == 'to install':
             mode = 'init'
 
-        if hasattr(package, 'init') or hasattr(package, 'update') or package.state in ('to install', 'to upgrade'):
+        if hasattr(package, 'init') or hasattr(package, 'update') \
+                    or package.state in ('to install', 'to upgrade'):
             wf_engine.thaw_dummy(cr)
+            mLoader = ModuleDataLoader(pool, uid=1, module_name=m, kwargs=kwargs)
             for kind in ('init', 'update'):
                 if package.state == 'to upgrade':
                     # upgrading the module information
                     modobj.write(cr, 1, [mid], modobj.get_values_from_terp(package.data))
-                load_init_update_xml(cr, m, idref, mode, kind)
-            load_data(cr, m, idref, mode)
+                mLoader.process_files(cr,package.data.get('%s_xml' % kind, []), mode, noupdate=False)
+            mLoader.process_files(cr, package.data.get('data', []), mode, noupdate=False)
+
             if hasattr(package, 'demo') or (package.dbdemo and package.state != 'installed'):
                 status['progress'] = (float(statusi)+0.75) / len(graph)
                 wf_engine.thaw(cr) # activate workflows, before we put any data
-                load_demo_xml(cr, m, idref, mode)
-                load_demo(cr, m, idref, mode)
+                demo_files = package.data.get('demo', [])
+                demo_files += package.data.get('demo_xml', [])
+                mLoader.process_files(cr, demo_files, mode, noupdate=True)
                 cr.execute('update ir_module_module set demo=%s where id=%s', (True, mid))
 
                 # launch tests only in demo mode, as most tests will depend
                 # on demo data. Other tests can be added into the regular
                 # 'data' section, but should probably not alter the data,
                 # as there is no rollback.
-                load_test(cr, m, idref, mode)
+                if tools.config.get_misc('tests','enable',True):
+                    """ Load and execute install-time tests.
+
+                        Normally, all that data should never be committed into the
+                        db, so this fn will almost be a no-op (except that it commits
+                        the cursor).
+                    """
+                    cr.commit()
+                    try:
+                        mLoader.process_files(cr, package.data.get('test',[]), 'test')
+                    except Exception, e:
+                        if tools.config.get_misc('tests', 'nonfatal', False):
+                            logger.warn(e)
+                            pass
+                        else:
+                            raise
+                    finally:
+                        if tools.config.get_misc('tests','rollback', True):
+                            cr.rollback()
+                        else:
+                            cr.commit()
                 wf_engine.freeze(cr)
 
             processed_modules.append(package.name)
@@ -892,6 +862,7 @@ def load_module_graph(cr, graph, status=None, perform_checks=True, skip_modules=
 
         statusi += 1
 
+    DataLoader.unload_all()
     wf_engine.thaw(cr)
     cr.commit()
 
@@ -940,7 +911,7 @@ def load_modules(db, force_demo=False, status=None, update_module=False, languag
 
     try:
         processed_modules = []
-        report = tools.assertion_report()
+        report = tools.convert.assertion_report()
         # NOTE: Try to also load the modules that have been marked as uninstallable previously...
         STATES_TO_LOAD = ['installed', 'to upgrade', 'uninstallable']
         if 'base' in tools.config['update'] or 'all' in tools.config['update']:
@@ -1047,11 +1018,11 @@ def load_modules(db, force_demo=False, status=None, update_module=False, languag
             for mod_id, mod_name in cr.fetchall():
                 logger.info("Removing module '%s' data",  mod_name)
                 mod_dict = {}
-                if cr.pgmode in PG84_MODES:
+                if cr.pgmode >= 'pg84':
                     # array_agg() appeared in 8.4, but does exactly the job we want
                     cr.execute('SELECT model, array_agg(res_id) FROM ir_model_data AS imd '
                             ' WHERE noupdate=%s AND module=%s AND model <> \'ir.module.module\' '
-                            '    AND source in (\'xml\', \'orm\') '
+                            '    AND source in (\'xml\', \'orm\') AND res_id != 0 '
                             '    AND NOT EXISTS (SELECT 1 FROM ir_model_data AS imd2, ir_module_module AS mo '
                                                 'WHERE mo.state != \'to remove\' AND mo.name = imd2.module '
                                                 '  AND imd2.model = imd.model AND imd2.res_id = imd.res_id) '
@@ -1061,7 +1032,7 @@ def load_modules(db, force_demo=False, status=None, update_module=False, languag
                     # We have to fetch distinct rows and aggregate them ourselves
                     cr.execute('SELECT model, res_id FROM ir_model_data AS imd '
                             'WHERE noupdate=%s AND module=%s AND model <> \'ir.module.module\' '
-                            '    AND source in (\'xml\', \'orm\') '
+                            '    AND source in (\'xml\', \'orm\') AND res_id !=0 '
                             '    AND NOT EXISTS (SELECT 1 FROM ir_model_data AS imd2, ir_module_module AS mo '
                                                 'WHERE mo.state != \'to remove\' AND mo.name = imd2.module '
                                                 '  AND imd2.model = imd.model AND imd2.res_id = imd.res_id) '

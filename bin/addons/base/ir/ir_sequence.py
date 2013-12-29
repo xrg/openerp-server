@@ -3,6 +3,7 @@
 #
 #    OpenERP, Open Source Management Solution
 #    Copyright (C) 2004-TODAY OpenERP S.A. <http://www.openerp.com>
+#    Copyright (C) 2009, 2011-2013 P. Christeas <xrg@hellug.gr>
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -92,6 +93,12 @@ class ir_sequence(osv.osv):
         return _irs_tests[test]
     
     def get_id(self, cr, uid, sequence_id, test='id', context=None):
+        """Obtain/Produce next sequence number
+        
+            @params test+sequence_id determine the sequence to use. They can either
+                be a db. ID of the sequence (test=='id') or the short-code of it
+                (test=='code')
+        """
         if not context:
             context = {}
         log = logging.getLogger('orm')
@@ -150,6 +157,8 @@ class ir_sequence(osv.osv):
         return False
 
     def get(self, cr, uid, code, context=None):
+        """A shorthand for `get_id(code, test='code',...)`
+        """
         return self.get_id(cr, uid, code, test='code',context=context)
 ir_sequence()
 

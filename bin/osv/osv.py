@@ -85,7 +85,7 @@ class object_proxy(netsvc.Service):
                 # We open a *new* cursor here, one reason is that failed SQL
                 # queries (as in IntegrityError) will invalidate the current one.
                 cr = False
-                
+
                 if hasattr(src, '__call__'):
                     # callable. We need to find the right parameters to call
                     # the  orm._sql_message(self, cr, uid, ids, context) function,
@@ -104,7 +104,7 @@ class object_proxy(netsvc.Service):
                         pass
                     finally:
                         if cr: cr.close()
-                   
+
                     return False # so that the original SQL error will
                                  # be returned, it is the best we have.
 
@@ -129,7 +129,9 @@ class object_proxy(netsvc.Service):
             except orm.except_orm, inst:
                 if inst.name == 'AccessError':
                     self.logger.debug("AccessError", exc_info=True)
-                self.abortResponse(1, inst.name, 'warning', inst.value)
+                    self.abortResponse(1, _('Access Error'), 'warning', inst.value, do_traceback=False)
+                else:
+                    self.abortResponse(1, inst.name, 'warning', inst.value)
             except except_osv, inst:
                 self.abortResponse(1, inst.name, inst.exc_type, inst.value)
             except IntegrityError, inst:
@@ -236,7 +238,7 @@ class object_proxy(netsvc.Service):
             kwargs = {}
         elif not isinstance(kwargs, dict):
             raise ValueError("exec_dict() must be called with (args:list, kwargs: dict)")
-        
+
         cr = self._get_cr_auth(db, kw)
         try:
             if method.startswith('_'):
@@ -331,7 +333,7 @@ class object_proxy(netsvc.Service):
                 ctype = 'non-standard'
             elif argspec.args[:3] == ['self', 'cr', 'uid'] \
                     or argspec.args[:3] == ['self', 'cr', 'user']:
-                
+
                 args3 = (len(argspec.args) > 3  and argspec.args[3]) or False
                 if args3 == 'id' and argspec.args[-1] == 'context':
                     ctype = 'record-context'

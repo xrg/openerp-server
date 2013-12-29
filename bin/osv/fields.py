@@ -50,9 +50,10 @@ from tools import orm_utils # must be the full module, not contents
 def _symbol_set(symb):
     if symb is None or symb is False:
         return None
-    elif isinstance(symb, unicode):
-        return symb.encode('utf-8')
-    return str(symb)
+    #elif isinstance(symb, unicode):
+    #    return symb.encode('utf-8')
+    #return str(symb)
+    return symb
 
 
 def _symbol_set_float(symb):
@@ -289,6 +290,8 @@ class _column(object):
         if obj_def is None:
             return None
         elif callable(obj_def):
+            if getattr(obj_def, 'no_auto', False):
+                return None
             ss = self._symbol_set
             query = 'UPDATE "%s" SET "%s"=%s WHERE "%s" is NULL' % (obj._table, name, ss[0], name)
             prepare_fn = lambda cr: (ss[1](obj_def(obj, cr, 1, context)),)
@@ -321,7 +324,6 @@ class _column(object):
 
     def _browse2val(self, bro, name):
         """ Convert browse value to scalar one
-
         """
         return bro
 
@@ -527,6 +529,7 @@ def sanitize_binary_value(dict_item):
     # just a safety mechanism (in these cases base64 data or
     # xmlrpc.Binary values should be used instead)
     return index, tools.ustr(value)
+
 def register_field_classes(*args):
     """ register another module's class as if it were defined here, in fields.py
 

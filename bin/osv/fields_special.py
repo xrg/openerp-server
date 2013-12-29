@@ -32,8 +32,8 @@ from tools.safe_eval import safe_eval as eval
 class binary(_column):
     _type = 'binary'
     _sql_type = 'bytea'
-    _symbol_c = '%s'
     _symbol_f = lambda symb: symb and Binary(str(symb)) or None
+    _symbol_c = '%s::BYTEA'
     _symbol_set = (_symbol_c, _symbol_f)
     _symbol_get = lambda self, x: x and str(x)
 
