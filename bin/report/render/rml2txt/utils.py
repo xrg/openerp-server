@@ -3,6 +3,8 @@
 #    
 #    OpenERP, Open Source Management Solution
 #    Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>).
+#    Copyright (C) 2009-2010 OpenERP SA.
+#    Copyright (C) 2008-2014 P. Christeas <xrg@hellug.gr>
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -22,8 +24,31 @@
 import re
 import reportlab
 import reportlab.lib.units
-from tools import copy
-from tools.safe_eval import safe_eval as eval
+import copy
+import sys
+
+if 'openerp-server' in sys.modules['__main__'].__file__:
+    from tools.safe_eval import safe_eval
+    from tools import ustr
+else:
+    def ustr(value):
+        if isinstance(value, unicode):
+            return value
+
+        if not isinstance(value, basestring):
+            try:
+                return unicode(value)
+            except Exception:
+                raise UnicodeError('unable to convert %r' % (value,))
+
+        try:
+            return unicode(value, 'utf-8')
+        except Exception:
+            pass
+        raise UnicodeError('unable to convert %r' % (value,))
+
+    def safe_eval(expr, globals_dict=None, locals_dict=None, mode="eval", nocopy=False):
+        return eval(expr, globals_dict, locals_dict)
 
 _regex = re.compile('\[\[(.+?)\]\]')
 
