@@ -1,7 +1,7 @@
 #!/bin/env python
 # -*- coding: utf-8 -*-
 ##############################################################################
-#    
+#
 #    OpenERP, Open Source Management Solution
 #    Copyright (C) 2004-2009, P. Christeas, Tiny SPRL (<http://tiny.be>).
 #
@@ -16,7 +16,7 @@
 #    GNU Affero General Public License for more details.
 #
 #    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.     
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
 
@@ -45,21 +45,21 @@ class textbox(object):
         self.lines = []
         self.curline = ''
         self.endspace = False
-     
+
     def newline(self):
         if isinstance(self.curline, textbox):
             self.lines.extend(self.curline.renderlines())
         else:
             self.lines.append(self.curline)
         self.curline = ''
-    
+
     def fline(self):
         if isinstance(self.curline, textbox):
             self.lines.extend(self.curline.renderlines())
         elif len(self.curline):
             self.lines.append(self.curline)
         self.curline = ''
-    
+
     def appendtxt(self,txt):
         """Append some text to the current line.
            Mimic the HTML behaviour, where all whitespace evaluates to
@@ -88,7 +88,7 @@ class textbox(object):
         for l in self.lines:
             result += lineoff+ l +"\n"
         return result
-    
+
     def renderlines(self,pad=0):
         """Returns a list of lines, from the current object
         pad: all lines must be at least pad characters.
@@ -106,17 +106,17 @@ class textbox(object):
         return result
 
     def haplines(self,arr,offset,cc= ''):
-        """ Horizontaly append lines 
+        """ Horizontaly append lines
         """
         while (len(self.lines) < len(arr)):
             self.lines.append("")
-        
+
         for i in range(len(self.lines)):
             if (len(self.lines[i]) < offset):
                 self.lines[i] += " " * int(offset - len(self.lines[i]))
         for i in range(len(arr)):
-            self.lines[i] += cc +arr[i] 
-        
+            self.lines[i] += cc +arr[i]
+
 
 class _flowable(object):
     def __init__(self, template, doc,localcontext):
@@ -142,7 +142,7 @@ class _flowable(object):
         if tag not in self.nitags:
             self._log.warning("Unknown tag \"%s\", please implement it.", tag)
             self.nitags.append(tag)
-    
+
     def _tag_page_break(self, node):
         return "\f"
 
@@ -182,7 +182,7 @@ class _flowable(object):
                         self.tb = None
                 if len(tds):
                     trs.append(tds)
-        
+
         if not sizes:
             self._log.debug("computing table sizes..")
         for tds in trs:
@@ -195,7 +195,7 @@ class _flowable(object):
                 off += sizes[i]/Font_size + 1
             saved_tb.curline = trt
             saved_tb.fline()
-        
+
         self.tb = saved_tb
         return
 
@@ -457,7 +457,7 @@ class _rml_template(object):
 
     def start(self):
         return ''
-    
+
     def end(self):
         return "template end\n"
         result = ''
@@ -523,7 +523,7 @@ def parseString(rml, localcontext = {},fout=None, images=None, path='.',title=No
         return fp.getvalue()
 
 def trml2pdf_help():
-    print 'Usage: rml2txt input.rml >output.html'
+    print 'Usage: rml2txt input.rml > output.txt'
     print 'Render the standard input (RML) and output an TXT file'
     sys.exit(0)
 
@@ -534,8 +534,7 @@ if __name__=="__main__":
         logging.basicConfig(level=logging.DEBUG)
         print parseString(file(sys.argv[1], 'r').read()).encode('iso8859-7')
     else:
-        print 'Usage: trml2txt input.rml >output.pdf'
+        print 'Usage: trml2txt input.rml >output.txt'
         print 'Try \'trml2txt --help\' for more information.'
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
-
