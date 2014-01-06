@@ -881,9 +881,11 @@ class ir_model_data(osv.osv):
         if xml_id:
             cr.execute('SELECT id, res_id, model, '
                     'EXISTS(SELECT id FROM ' + model_obj._table +
-                    '       WHERE id=ir_model_data.res_id AND %s = ir_model_data.model) AS is_valid '
+                    '       WHERE id=ir_model_data.res_id  '
+                    '         AND ir_model_data.res_id != 0 '
+                    '         AND %s = ir_model_data.model) AS is_valid '
                     'FROM ir_model_data '
-                    'WHERE module=%s AND name=%s AND source IN (\'orm\', \'xml\') AND res_id != 0 ',
+                    'WHERE module=%s AND name=%s AND source IN (\'orm\', \'xml\') ',
                     (model, module, xml_id), debug=self._debug)
             results = cr.fetchall()
             for action_id2, res_id2, model2, is_valid2 in results:
@@ -891,6 +893,9 @@ class ir_model_data(osv.osv):
                 # be unique
                 if res_id2 and is_valid2:
                     res_id,action_id = res_id2, action_id2
+                elif (res_id2 is 0):
+                    res_id = 0
+                    action_id = False
                 else:
                     self._get_id.clear_cache(cr.dbname, uid, module, xml_id)
                     self.get_object_reference.clear_cache(cr.dbname, uid, module, xml_id)
@@ -925,6 +930,10 @@ class ir_model_data(osv.osv):
                             'noupdate': noupdate,
                             'source': 'xml',
                             },context=context)
+        elif res_id is 0:
+            # This means the resource has manually been deleted by the user,
+            # we shall NOT create it again
+            pass
         else:
             if mode=='init' or (xml_id and (mode in ('update', 'test'))):
                 res_id = model_obj.create(cr, uid, values, context=context)
