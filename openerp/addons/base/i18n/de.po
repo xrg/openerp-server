@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: openobject-server\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2013-06-07 19:35+0000\n"
-"PO-Revision-Date: 2014-01-18 10:28+0000\n"
+"PO-Revision-Date: 2014-01-19 19:42+0000\n"
 "Last-Translator: Ralf Hilgenstock <rh@dialoge.info>\n"
 "Language-Team: German <de@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-01-19 05:58+0000\n"
+"X-Launchpad-Export-Date: 2014-01-20 05:58+0000\n"
 "X-Generator: Launchpad (build 16901)\n"
 
 #. module: base
@@ -79,12 +79,12 @@ msgstr "Lückenlos"
 #. module: base
 #: selection:base.language.install,lang:0
 msgid "Hungarian / Magyar"
-msgstr "Hungarian / Magyar"
+msgstr "Ungarisch / Magyar"
 
 #. module: base
 #: selection:base.language.install,lang:0
 msgid "Spanish (PY) / Español (PY)"
-msgstr "Spanish (PY) / Español (PY)"
+msgstr "Spanisch (PY) / Español (PY)"
 
 #. module: base
 #: model:ir.module.category,description:base.module_category_project_management
@@ -606,7 +606,7 @@ msgstr "Tuvalu"
 #. module: base
 #: field:ir.actions.configuration.wizard,note:0
 msgid "Next Wizard"
-msgstr "Nächster Wizard"
+msgstr "Nächster Assistent"
 
 #. module: base
 #: field:res.lang,date_format:0
@@ -732,7 +732,7 @@ msgstr "Angola"
 #. module: base
 #: selection:base.language.install,lang:0
 msgid "Spanish (VE) / Español (VE)"
-msgstr "Spanish (VE) / Español (VE)"
+msgstr "Spanisch (VE) / Español (VE)"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_hr_timesheet_invoice
@@ -1028,7 +1028,7 @@ msgstr "Webkalender"
 #. module: base
 #: selection:base.language.install,lang:0
 msgid "Swedish / svenska"
-msgstr "Swedish / svenska"
+msgstr "Schwedisch / svenska"
 
 #. module: base
 #: field:base.language.export,name:0
@@ -1120,7 +1120,7 @@ msgstr ""
 #. module: base
 #: selection:base.language.install,lang:0
 msgid "Albanian / Shqip"
-msgstr "Albanian / Shqip"
+msgstr "Albanisch / Shqip"
 
 #. module: base
 #: model:ir.ui.menu,name:base.menu_crm_config_opportunity
@@ -1209,7 +1209,7 @@ msgstr "PLZ"
 #. module: base
 #: selection:base.language.install,lang:0
 msgid "Spanish (UY) / Español (UY)"
-msgstr "Spanish (UY) / Español (UY)"
+msgstr "Spanisch (UY) / Español (UY)"
 
 #. module: base
 #: field:res.partner,mobile:0
@@ -1574,7 +1574,7 @@ msgstr "Einstellungsmenu öffnen"
 #. module: base
 #: selection:base.language.install,lang:0
 msgid "Spanish (AR) / Español (AR)"
-msgstr "Spanish (AR) / Español (AR)"
+msgstr "Spanisch (AR) / Español (AR)"
 
 #. module: base
 #: model:res.country,name:base.ug
@@ -1604,12 +1604,12 @@ msgstr "Bosnien-Herzegowina"
 #. module: base
 #: selection:ir.translation,type:0
 msgid "Wizard Field"
-msgstr "Wizardfeld"
+msgstr "Assistent.Datenfeld"
 
 #. module: base
 #: selection:base.language.install,lang:0
 msgid "Spanish (GT) / Español (GT)"
-msgstr "Spanish (GT) / Español (GT)"
+msgstr "Spanisch (GT) / Español (GT)"
 
 #. module: base
 #: field:ir.mail_server,smtp_port:0
@@ -2335,16 +2335,16 @@ msgstr ""
 "Dieses Modul erweitert OpenERP um Freigabewerkzeuge.\n"
 "==================================================\n"
 "\n"
-"Es wird eine spezifische \"Freigeben\"- Schaltfläche hinzugefügt, die im Web-"
+"Es wird ein spezifischer \"Freigeben\"- Button hinzugefügt, der im Web-"
 "Client verfügbar ist,\n"
-"und die Freigabe beliebiger Arten von OpenERP Daten für Kollegen, Kunden, "
+"und die Freigabe beliebiger Arten von OpenERP Daten mit Kollegen, Kunden, "
 "Freunden ermöglicht.\n"
 "\n"
-"Ad-hoc können im System neue Benutzer und Gruppen angelegt werden, wobei "
+"Ad-Hoc können im System neue Benutzer und Gruppen angelegt werden, wobei "
 "durch\n"
-"die Kombination der entsprechenden Zugriffsrechte und Regeln sichergestellt "
-"wird, dass\n"
-"den freigegebenen Benutzernauch nur Zugriff auf die Daten gegeben wird, die "
+"durch die Kombination der entsprechenden Zugriffsrechte und Regeln "
+"sichergestellt wird, dass\n"
+"die freigegebenen Benutzer auch nur Zugriff auf die Daten gegeben wird, die "
 "ihnen freigegeben wurden.  \n"
 "\n"
 "Dies ist für das gemeinsame Arbeiten, Wissensaustausch und die "
@@ -2608,12 +2608,12 @@ msgstr ""
 #. module: base
 #: selection:base.language.install,lang:0
 msgid "Spanish / Español"
-msgstr "Spanish / Español"
+msgstr "Spanisch / Español"
 
 #. module: base
 #: selection:base.language.install,lang:0
 msgid "Korean (KP) / 한국어 (KP)"
-msgstr "Korean (KP) / 한국어 (KP)"
+msgstr "Koreanisch (KP) / 한국어 (KP)"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_l10n_vn
@@ -2703,7 +2703,7 @@ msgstr "Passwortverschlüsselung"
 #. module: base
 #: view:workflow.activity:0
 msgid "Workflow Activity"
-msgstr "Arbeitsfluss Aktivität"
+msgstr "Workflow-Aktivität"
 
 #. module: base
 #: model:ir.module.module,description:base.module_hr_timesheet_sheet
@@ -2813,7 +2813,7 @@ msgstr "Gruppen"
 #. module: base
 #: selection:base.language.install,lang:0
 msgid "Spanish (CL) / Español (CL)"
-msgstr "Spanish (CL) / Español (CL)"
+msgstr "Spanisch (CL) / Español (CL)"
 
 #. module: base
 #: model:res.country,name:base.bz
@@ -2899,7 +2899,7 @@ msgstr "Ein Beleg wurde seit der letzten Ansicht geändert (%s:%d)"
 #. module: base
 #: view:workflow:0
 msgid "Workflow Editor"
-msgstr "Arbeitsfluss-Editor"
+msgstr "Workflow-Editor"
 
 #. module: base
 #: selection:ir.module.module,state:0
@@ -3779,7 +3779,7 @@ msgstr "Norfolk Insel"
 #. module: base
 #: selection:base.language.install,lang:0
 msgid "Korean (KR) / 한국어 (KR)"
-msgstr "Korean (KR) / 한국어 (KR)"
+msgstr "Koreanisch (KR) / 한국어 (KR)"
 
 #. module: base
 #: help:ir.model.fields,model:0
@@ -4215,7 +4215,7 @@ msgstr "Umfrage"
 #. module: base
 #: selection:base.language.install,lang:0
 msgid "Spanish (DO) / Español (DO)"
-msgstr "Spanish (DO) / Español (DO)"
+msgstr "Spanisch (DO) / Español (DO)"
 
 #. module: base
 #: model:ir.model,name:base.model_workflow_activity
@@ -4263,7 +4263,7 @@ msgstr "Prefix"
 #. module: base
 #: selection:base.language.install,lang:0
 msgid "German / Deutsch"
-msgstr "German / Deutsch"
+msgstr "Deutsch / Deutsch"
 
 #. module: base
 #: view:ir.actions.server:0
@@ -5453,7 +5453,7 @@ msgstr ""
 #. module: base
 #: selection:base.language.install,lang:0
 msgid "Spanish (HN) / Español (HN)"
-msgstr "Spanish (HN) / Español (HN)"
+msgstr "Spanisch (HN) / Español (HN)"
 
 #. module: base
 #: view:ir.sequence.type:0
@@ -5506,8 +5506,8 @@ msgstr ""
 "Sie können eine Abfrage schreiben, um Plausibilitätsprüfungen zu erstellen "
 "und erhalten das Ergebnis der Prüfung\n"
 "im PDF-Format, auf die Sie über das o.a. Menü zugreifen können. Dort wählen "
-"Sie dann den Test aus und drucken den Bericht durch Klick auf die "
-"Schaltfläche Drucken im Kopfbereich.\n"
+"Sie dann den Test aus und drucken den Bericht durch Klick auf den Button "
+"'Drucken' im Kopfbereich.\n"
 
 #. module: base
 #: field:ir.module.module,license:0
@@ -5858,7 +5858,7 @@ msgstr "Die gewählten Module wurden aktualisiert / installiert."
 #. module: base
 #: selection:base.language.install,lang:0
 msgid "Spanish (PR) / Español (PR)"
-msgstr "Spanish (PR) / Español (PR)"
+msgstr "Spanisch (PR) / Español (PR)"
 
 #. module: base
 #: model:ir.module.module,description:base.module_crm_profiling
@@ -6021,7 +6021,7 @@ msgstr ""
 "Dieses ist eine Ansicht auf 'Arbeitsaufträge' Positionen eines "
 "Fertigungsauftrags.\n"
 "\n"
-"Neue Schaltflächen in der Formularansicht des Fertigungsauftrags im "
+"Neuer Button in der Formularansicht des Fertigungsauftrags im "
 "\"Arbeitsaufträge\" Aktenreiter:\n"
 "-----------------------------------------------------------------------------"
 "-----------------------------------------------------------------------------"
@@ -6082,7 +6082,7 @@ msgstr "Übersetzte Begriffe"
 #. module: base
 #: selection:base.language.install,lang:0
 msgid "Abkhazian / аҧсуа"
-msgstr "Abkhazian / аҧсуа"
+msgstr "Abchasisch / аҧсуа"
 
 #. module: base
 #: view:base.module.configuration:0
@@ -6268,7 +6268,7 @@ msgstr "Installiert"
 #. module: base
 #: selection:base.language.install,lang:0
 msgid "Ukrainian / українська"
-msgstr "Ukrainian / українська"
+msgstr "Ukrainisch / українська"
 
 #. module: base
 #: model:res.country,name:base.sn
@@ -6330,7 +6330,7 @@ msgstr "Ausdruck der gültig sein muss, wenn die Transition erfolgen soll."
 #. module: base
 #: selection:base.language.install,lang:0
 msgid "Spanish (PA) / Español (PA)"
-msgstr "Spanish (PA) / Español (PA)"
+msgstr "Spanisch (PA) / Español (PA)"
 
 #. module: base
 #: view:res.currency:0
@@ -6619,7 +6619,7 @@ msgstr ""
 #. module: base
 #: selection:ir.translation,type:0
 msgid "Wizard Button"
-msgstr "Wizard-Button"
+msgstr "Assistent-Button"
 
 #. module: base
 #: view:ir.model.fields:0
@@ -6652,7 +6652,7 @@ msgstr "Sambia"
 #. module: base
 #: view:ir.actions.todo:0
 msgid "Launch Configuration Wizard"
-msgstr "Starte Konfigurationswizard"
+msgstr "Starte Konfigurationsassistenten"
 
 #. module: base
 #: model:ir.module.module,summary:base.module_mrp
@@ -6914,7 +6914,7 @@ msgstr "Englisch (UK)"
 #. module: base
 #: selection:base.language.install,lang:0
 msgid "Japanese / 日本語"
-msgstr "Japanese / 日本語"
+msgstr "Japanisch / 日本語"
 
 #. module: base
 #: model:ir.model,name:base.model_base_language_import
@@ -7307,7 +7307,7 @@ msgstr ""
 #. module: base
 #: selection:base.language.install,lang:0
 msgid "Spanish (BO) / Español (BO)"
-msgstr "Spanish (BO) / Español (BO)"
+msgstr "Spanisch (BO) / Español (BO)"
 
 #. module: base
 #: model:ir.module.module,description:base.module_board
@@ -7461,9 +7461,9 @@ msgid ""
 "form, signal tests the name of the pressed button. If signal is NULL, no "
 "button is necessary to validate this transition."
 msgstr ""
-"Wenn der Transition durch eine Schaltfläche im Anwendungsprogramm ausgelöst "
-"wird, wird der Name der gedrückten Schaltfläche getestet. Wenn das Signal "
-"NULL ist, dann ist keine Schaltfläche für die Validierung notwendig."
+"Wenn der Transition durch einen Button im Anwendungsprogramm ausgelöst wird, "
+"wird der Name des gedrückten Buttons getestet. Wenn das Signal NULL ist, "
+"dann ist kein Button für die Validierung notwendig."
 
 #. module: base
 #: field:ir.ui.view.custom,ref_id:0
@@ -7846,12 +7846,12 @@ msgstr "Preis Dezimalstellen"
 #. module: base
 #: selection:base.language.install,lang:0
 msgid "Latvian / latviešu valoda"
-msgstr "Latvian / latviešu valoda"
+msgstr "Lettisch / latviešu valoda"
 
 #. module: base
 #: selection:base.language.install,lang:0
 msgid "French / Français"
-msgstr "French / Français"
+msgstr "Französisch / Français"
 
 #. module: base
 #: view:ir.module.module:0
@@ -8396,7 +8396,7 @@ msgstr "Betrag danach"
 #. module: base
 #: selection:base.language.install,lang:0
 msgid "Lithuanian / Lietuvių kalba"
-msgstr "Lithuanian / Lietuvių kalba"
+msgstr "Littauisch / Lietuvių kalba"
 
 #. module: base
 #: help:ir.actions.server,record_id:0
@@ -9062,7 +9062,7 @@ msgstr "Schließen"
 #. module: base
 #: selection:base.language.install,lang:0
 msgid "Spanish (MX) / Español (MX)"
-msgstr "Spanish (MX) / Español (MX)"
+msgstr "Spanisch (MX) / Español (MX)"
 
 #. module: base
 #: view:ir.actions.todo:0
@@ -9286,7 +9286,7 @@ msgstr "Liste der Module, in denen ein Feld definiert ist."
 #. module: base
 #: selection:base.language.install,lang:0
 msgid "Chinese (CN) / 简体中文"
-msgstr "Chinese (CN) / 简体中文"
+msgstr "Chinesisch (CN) / 简体中文"
 
 #. module: base
 #: field:ir.model.fields,selection:0
@@ -9552,7 +9552,7 @@ msgstr "Verbindungstest fehlgeschlagen!"
 #. module: base
 #: selection:base.language.install,lang:0
 msgid "Dutch / Nederlands"
-msgstr "Dutch / Nederlands"
+msgstr "Niederländisch / Nederlands"
 
 #. module: base
 #: selection:res.company,paper_format:0
@@ -9687,7 +9687,7 @@ msgstr "Objektfeld"
 #. module: base
 #: selection:base.language.install,lang:0
 msgid "Spanish (PE) / Español (PE)"
-msgstr "Spanish (PE) / Español (PE)"
+msgstr "Spanisch (PE) / Español (PE)"
 
 #. module: base
 #: selection:base.language.install,lang:0
@@ -10434,7 +10434,7 @@ msgstr "Weiter"
 #. module: base
 #: selection:base.language.install,lang:0
 msgid "Thai / ภาษาไทย"
-msgstr "Thailand / ภาษาไทย"
+msgstr "Thailändisch / ภาษาไทย"
 
 #. module: base
 #: model:ir.module.module,description:base.module_l10n_bo
@@ -10455,7 +10455,7 @@ msgstr "%j - Tag des Jahres [001,366]."
 #. module: base
 #: selection:base.language.install,lang:0
 msgid "Slovenian / slovenščina"
-msgstr "Slovenian / slovenščina"
+msgstr "Slovenisch / slovenščina"
 
 #. module: base
 #: field:res.currency,position:0
@@ -10632,7 +10632,7 @@ msgstr "Standard-Mandant"
 #. module: base
 #: selection:base.language.install,lang:0
 msgid "Spanish (EC) / Español (EC)"
-msgstr "Spanish (EC) / Español (EC)"
+msgstr "Spanisch (EC) / Español (EC)"
 
 #. module: base
 #: help:ir.ui.view,xml_id:0
@@ -11202,12 +11202,12 @@ msgstr "Stufen"
 #. module: base
 #: selection:base.language.install,lang:0
 msgid "Flemish (BE) / Vlaams (BE)"
-msgstr "Flemish (BE) / Vlaams (BE)"
+msgstr "Flämisch (BE) / Vlaams (BE)"
 
 #. module: base
 #: selection:base.language.install,lang:0
 msgid "Vietnamese / Tiếng Việt"
-msgstr "Vietnamese / Tiếng Việt"
+msgstr "Vietnameseisch / Tiếng Việt"
 
 #. module: base
 #: field:ir.cron,interval_number:0
@@ -12219,7 +12219,7 @@ msgstr "Sequenzcode"
 #. module: base
 #: selection:base.language.install,lang:0
 msgid "Spanish (CO) / Español (CO)"
-msgstr "Spanish (CO) / Español (CO)"
+msgstr "Spanisch (CO) / Español (CO)"
 
 #. module: base
 #: view:base.module.configuration:0
@@ -12360,7 +12360,7 @@ msgstr "Vertragsverwaltung"
 #. module: base
 #: selection:base.language.install,lang:0
 msgid "Chinese (TW) / 正體字"
-msgstr "Chinese (TW) / 正體字"
+msgstr "Chinesisch (TW) / 正體字"
 
 #. module: base
 #: model:ir.model,name:base.model_res_request
@@ -12706,7 +12706,7 @@ msgstr "Portal HR Mitarbeiter"
 #. module: base
 #: selection:base.language.install,lang:0
 msgid "Estonian / Eesti keel"
-msgstr "Estonian / Eesti keel"
+msgstr "Estnisch / Eesti keel"
 
 #. module: base
 #: help:ir.actions.server,write_id:0
@@ -12921,7 +12921,7 @@ msgstr "ir.mail_server"
 #. module: base
 #: selection:base.language.install,lang:0
 msgid "Spanish (CR) / Español (CR)"
-msgstr "Spanish (CR) / Español (CR)"
+msgstr "Spanisch (CR) / Español (CR)"
 
 #. module: base
 #: view:ir.rule:0
@@ -13808,7 +13808,7 @@ msgstr "z.B. +49.4471.84090000"
 #. module: base
 #: selection:base.language.install,lang:0
 msgid "Spanish (NI) / Español (NI)"
-msgstr "Spanish (NI) / Español (NI)"
+msgstr "Spanisch (NI) / Español (NI)"
 
 #. module: base
 #: model:ir.module.module,description:base.module_pad_project
@@ -14404,7 +14404,7 @@ msgstr ""
 #. module: base
 #: selection:base.language.install,lang:0
 msgid "Sinhalese / සිංහල"
-msgstr "Sinhalese / සිංහල"
+msgstr "Sinhalesisch / සිංහල"
 
 #. module: base
 #: selection:res.request,state:0
@@ -14839,7 +14839,7 @@ msgstr ""
 #. module: base
 #: selection:base.language.install,lang:0
 msgid "Occitan (FR, post 1500) / Occitan"
-msgstr "Occitan (FR, post 1500) / Okzitan"
+msgstr "Occitanisch (FR, post 1500) / Okzitan"
 
 #. module: base
 #: code:addons/base/ir/ir_mail_server.py:215
@@ -14973,9 +14973,9 @@ msgstr ""
 "Soziales Netzwerk für Unternehmen\n"
 "=================================\n"
 "Die Anwendung Soziales Netzwerk ermöglicht allen Anwendungen in OpenERP die "
-"Nutzung eines voll integrierten E-Mail- und Nachrichtenmanagement-Systems "
-"und realisiert damit eine einheitliche, übergreifende und zusätzliche "
-"generische Kommunikationsplattform für alle OpenERP Anwendungen. \n"
+"Nutzung eines voll integrierten E-Mail und Nachrichten Managementsystem und "
+"realisiert damit eine einheitliche, übergreifende und zusätzliche generische "
+"Kommunikationsplattform für alle OpenERP Anwendungen. \n"
 "\n"
 "Es ermöglicht dem Benutzer Nachrichten ebenso wie E-Mails zu lesen und zu "
 "senden. Weiterhin bietet es eine zentrale Feeds-Seite gemeinsam mit einem "
@@ -14985,20 +14985,20 @@ msgstr ""
 "\n"
 "Wesentliche Funktionen:\n"
 "-----------------------------------\n"
-"* Verbesserte Kommunikations-Historie für OpenERP Geschäftsvorfälle, die "
-"auch Thema einer E-Mail sein können\n"
-"* Abonnement-Mechanismus, um über neue Nachrichten zu interessanten "
-"Vorfällen auf dem Laufenden gehalten zu  werden\n"
-"* Einheitliche und zentrale Feeds-Seite, um die neuesten Nachrichten und "
+"* Verbesserte Kommunikations-Historie für OpenERP-Geschäftsvorfälle, die "
+"auch Thema einer EMail sein können\n"
+"* Abonnement-Mechanismus, um über neue Nachrichten zu interessanten Fällen "
+"auf dem Laufenden gehalten zu  werden\n"
+"* Einheitlichte und zentrale Feeds-Seite, um die neusten Nachrichten und "
 "Aktivitäten in Echtzeit zu empfangen\n"
-"* Benutzer-Mailversand über die  zentrale Startseite\n"
+"* Benutzer Mailversand über die  zentrale Startseite\n"
 "* Mailversand im Kontext von Geschäftsvorfällen\n"
-"* Nutzung des globalen Postausgangsservers - ein integriertes E-Mail-"
-"Management-System - das die koordinierte Steuerung des E-Mail-Versands in "
+"* Nutzung des globalen Postausgangsserver - ein integriertes E-Mail-"
+"Management-System - das die koordinierte Steuerung des E-Mail Versands in "
 "vordefinierten Zeitabständen ermöglicht\n"
-"* Benutzerfreundlicher und einfacher E-Mail-Editor,  der auch als "
-"Konfigurationsassistent für Marketing-E-Mail-Aktivitäten genutzt werden kann "
-"und fähig ist, die Interpretation von einfachen *Platzhalter Ausdrücken* mit "
+"* Benutzerfreundlicher und einfacher E-Mail Editor,  der auch als "
+"Konfigurationsassistent für Marketing-E-Mail Aktivitäten genutzt werden kann "
+"und fähig ist, die Interpretation von einfachen *Platzhalterausdrücken* mit "
 "dynamischen Daten aus OpenERP zu ersetzen, sobald Mails tatsächlich durch "
 "Kampagnen gesendet werden.\n"
 "    "
@@ -15036,7 +15036,7 @@ msgstr "Auslösedatum"
 #. module: base
 #: selection:base.language.install,lang:0
 msgid "Croatian / hrvatski jezik"
-msgstr "Kroatien / hrvatski jezik"
+msgstr "Kroatisch / hrvatski jezik"
 
 #. module: base
 #: model:ir.module.module,description:base.module_l10n_uy
@@ -15983,7 +15983,7 @@ msgstr "Andere"
 #. module: base
 #: selection:base.language.install,lang:0
 msgid "Turkish / Türkçe"
-msgstr "Turkish / Türkçe"
+msgstr "Türkisch / Türkçe"
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_workflow_activity_form
@@ -16861,7 +16861,7 @@ msgstr "Guernsey"
 #. module: base
 #: selection:base.language.install,lang:0
 msgid "Romanian / română"
-msgstr "Romänisch / română"
+msgstr "Rumänisch / română"
 
 #. module: base
 #: model:ir.module.module,description:base.module_l10n_mx
@@ -17804,8 +17804,7 @@ msgid ""
 "If set to true, the wizard will not be displayed on the right toolbar of a "
 "form view."
 msgstr ""
-"Wenn aktiviert, dann wird der Wizard nicht im Werkzeugbereich (rechts) "
-"angezeigt."
+"Wenn aktiviert, wird der Assistent nicht im rechten Werkzeugkasten angezeigt."
 
 #. module: base
 #: view:ir.values:0
@@ -17848,7 +17847,7 @@ msgstr "%X - Angebrachte Zeitpräsentation."
 #. module: base
 #: selection:base.language.install,lang:0
 msgid "Spanish (SV) / Español (SV)"
-msgstr "Spanish (SV) / Español (SV)"
+msgstr "Spanisch (SV) / Español (SV)"
 
 #. module: base
 #: help:res.lang,grouping:0
@@ -18129,7 +18128,7 @@ msgstr "Berechtigungsgruppen"
 #. module: base
 #: selection:base.language.install,lang:0
 msgid "Italian / Italiano"
-msgstr "Italian / Italiano"
+msgstr "Italienisch / Italiano"
 
 #. module: base
 #: view:ir.actions.server:0
