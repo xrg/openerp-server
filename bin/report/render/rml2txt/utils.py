@@ -96,17 +96,20 @@ def _process_text(self, txt):
             return ''
         result = ''
         sps = _regex.split(txt)
+        trans_fn = self.localcontext.get('translate', lambda x:x)
         while sps:
             # This is a simple text to translate
-            result += self.localcontext.get('translate', lambda x:x)(sps.pop(0))
+            result += trans_fn(sps.pop(0))
             if sps:
                 try:
                     txt2 = eval(sps.pop(0),self.localcontext)
                 except Exception:
                     txt2 = ''
-                if type(txt2) == type(0) or type(txt2) == type(0.0):
+                if isinstance(txt2, (int, long, float)):
                     txt2 = str(txt2)
-                if type(txt2)==type('') or type(txt2)==type(u''):
+                elif isinstance(txt2, str):
+                    txt2 = ustr(txt2)
+                if isinstance(txt2, basestring):
                     result += txt2
         return result
 
@@ -151,7 +154,7 @@ def attr_get(node, attrs, dict=None):
     for key in dict:
         if node.get(key):
             if dict[key]=='str':
-                res[key] = str(node.get(key))
+                res[key] = ustr(node.get(key))
             elif dict[key]=='bool':
                 res[key] = bool_get(node.get(key))
             elif dict[key]=='int':
