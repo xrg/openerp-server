@@ -159,7 +159,7 @@ class Registry(Mapping):
     @classmethod
     def setup_multi_process_signaling(cls, cr):
         if not openerp.multi_process:
-            return
+            return None, None
 
         # Inter-process signaling:
         # The `base_registry_signaling` sequence indicates the whole registry
@@ -172,6 +172,16 @@ class Registry(Mapping):
             cr.execute("""SELECT nextval('base_registry_signaling')""")
             cr.execute("""CREATE SEQUENCE base_cache_signaling INCREMENT BY 1 START WITH 1""")
             cr.execute("""SELECT nextval('base_cache_signaling')""")
+        
+        cr.execute("""
+                    SELECT base_registry_signaling.last_value,
+                           base_cache_signaling.last_value
+                    FROM base_registry_signaling, base_cache_signaling""")
+        r, c = cr.fetchone()
+        _logger.debug("Multiprocess load registry signaling: [Registry: # %s] "\
+                    "[Cache: # %s]",
+                    r, c)
+        return r, c
 
     @contextmanager
     def cursor(self, auto_commit=True):
@@ -229,6 +239,10 @@ class RegistryManager(object):
             cls.delete(db_name)
             cls.registries[db_name] = registry
             try:
+                with registry.cursor() as cr:
+                    seq_registry, seq_cache = Registry.setup_multi_process_signaling(cr)
+                    registry.base_registry_signaling_sequence = seq_registry
+                    registry.base_cache_signaling_sequence = seq_cache
                 # This should be a method on Registry
                 openerp.modules.load_modules(registry.db, force_demo, status, update_module)
             except Exception:
@@ -242,7 +256,6 @@ class RegistryManager(object):
 
             cr = registry.db.cursor()
             try:
-                Registry.setup_multi_process_signaling(cr)
                 registry.do_parent_store(cr)
                 cr.commit()
             finally:
