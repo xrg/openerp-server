@@ -38,6 +38,7 @@ rel_units = { 'yr' : 'Y',
 
 re_dateeval = re.compile(r"(?P<abs>" + '|'.join(re_abstimes) +")"
         r"|(?:(?P<rel>(?:\+|-)[0-9]+)(?P<rel_unit>" + '|'.join(rel_units)+ "))"
+        r"|(?: ?\bon (?P<date_last>last))"
         r"|(?: ?\bon ?(?P<date>[0-9]{1,2}(?:/[0-9]{1,2}(?:/[0-9]{2,4})?)?))"
         r"|(?: ?\bat ?(?P<time>[0-9]{1,2}(?::[0-9]{2}(?::[0-9]{2})?)?))"
         r"| +", re.I)
@@ -119,13 +120,15 @@ def date_eval(rstr, cur_time=None):
                 drel = mrel * datetime.timedelta(seconds=mun)
 
             cur_time = cur_time + drel
+        elif m.group('date_last'):
+            cur_time = cur_time + relativedelta(day=31)
         elif m.group('date'):
             dli = map(int, m.group('date').split('/'))
             if len(dli) == 2:
                 dli += [cur_time.year,]
             elif len(dli) == 1:
                 dli += [cur_time.month, cur_time.year]
-            cur_time = datetime.datetime.combine(datetime.date(dli[2],dli[1],dli[0]), cur_time.time())
+            cur_time = cur_time + relativedelta(day=dli[0], month=dli[1], year=dli[2])
         elif m.group('time'):
             dli = map(int, m.group('time').split(':'))
             if len(dli) == 2:
@@ -163,6 +166,8 @@ def lazy_date_eval(rstr, out_fmt='datetime'):
             else:
                 drel = mrel * datetime.timedelta(seconds=mun)
             steps.append(('rel', drel))
+        elif m.group('date_last'):
+            steps.append(('date_last', ()))
         elif m.group('date'):
             dli = map(int, m.group('date').split('/'))
             steps.append(('date', dli))
@@ -183,13 +188,15 @@ def lazy_date_eval(rstr, out_fmt='datetime'):
                     cur_time = datetime.datetime.fromordinal(cur_time.toordinal())
             elif r1 == 'rel':
                 cur_time = cur_time + r2
+            elif r1 == 'date_last':
+                cur_time = cur_time + relativedelta(day=31)
             elif r1 == 'date':
                 dli = list(r2) # copy it!
                 if len(dli) == 2:
                     dli += [cur_time.year,]
                 elif len(dli) == 1:
                     dli += [cur_time.month, cur_time.year]
-                cur_time = datetime.datetime.combine(datetime.date(dli[2],dli[1],dli[0]), cur_time.time())
+                cur_time = cur_time + relativedelta(day=dli[0], month=dli[1], year=dli[2])
             elif  r1 == 'time':
                 dli = list(r2)
                 if len(dli) == 2:
