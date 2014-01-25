@@ -405,7 +405,7 @@ class _rml_template(object):
     _log = logging.getLogger('render.rml2txt')
     _page_size_re = re.compile(r'\(([^,]+),([^,]+)\)')
 
-    def __init__(self, localcontext, node, out_fp, images=None, path='.', title=None):
+    def __init__(self, localcontext, node, out_fp, images=None, path='.', title=None, page_limit=False):
         self.localcontext = localcontext
         self.out_fp = out_fp
         self.frame_pos = -1
@@ -416,6 +416,7 @@ class _rml_template(object):
         self._font_aspect = 0.53
         self._font_size = None
         self._set_font_size(10.0)
+        self.page_limit = page_limit
 
         if node.get('pageSize'):
             m = self._page_size_re.match(node.get('pageSize'))
@@ -481,6 +482,8 @@ class _rml_template(object):
             self.cur_page = []
             self.frame_pos = -1
             self.page_no += 1
+            if self.page_limit and self.page_no > self.page_limit:
+                raise RuntimeError("Tried to start page %d > %d" % (self.page, self.page_limit))
             for frame in self.page_template[self.template]:
                 new_tb = frame.get_tb(self)
                 if not new_tb:
@@ -525,15 +528,16 @@ class _rml_template(object):
 
 class _rml_doc(object):
     _log = logging.getLogger('render.rml2txt')
-    def __init__(self, node, localcontext, images=None, path='.', title=None):
+    def __init__(self, node, localcontext, images=None, path='.', title=None, page_limit=None):
         self.localcontext = localcontext
         self.etree = node
         self.filename = self.etree.get('filename')
         self.templates = []
+        self.page_limit = page_limit
 
     def render(self, out_fp):
         for tmpl in self.etree.findall('template'):
-            self.templates.append( _rml_template(self.localcontext, tmpl, out_fp))
+            self.templates.append( _rml_template(self.localcontext, tmpl, out_fp, page_limit=self.page_limit))
 
         for story in utils._child_get(self.etree, self, 'story'):
             self.tick()
@@ -547,11 +551,11 @@ class _rml_doc(object):
         if ct and getattr(ct, 'must_stop', False):
             raise KeyboardInterrupt
 
-def parseNode(rml, localcontext = {},fout=None, images=None, path='.',title=None):
+def parseNode(rml, localcontext = {},fout=None, images=None, path='.',title=None, page_limit=None):
     if images is None:
         images = {}
     node = etree.XML(rml)
-    r = _rml_doc(node, localcontext, images, path, title=title)
+    r = _rml_doc(node, localcontext, images, path, title=title, page_limit=page_limit)
     fp = StringIO.StringIO()
     r.render(fp)
     return fp.getvalue()
