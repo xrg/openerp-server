@@ -342,6 +342,7 @@ class _rml_tmpl_frame(_rml_tmpl_tag):
         """
         self.posx, self.posy = parent._conv_unit_pos(node.get('x1'), node.get('y1'))
         self.width, self.height = parent._conv_unit_size(node.get('width'), node.get('height'))
+        self.posy -= self.height
 
     def get_tb(self, parent):
         return textbox(self.posx, self.posy, self.width, self.height)
@@ -353,6 +354,7 @@ class _rml_tmpl_draw_string(_rml_tmpl_tag):
 
     def __init__(self, parent, node):
         posx, posy = parent._conv_unit_pos(node.get('x'), node.get('y'))
+        posy -= 1 # height is always 1, 'y' is at bottom of line
         text = utils.text_get(node).strip()
         if not text:
             self.tb = False
@@ -370,7 +372,8 @@ class _rml_tmpl_draw_string(_rml_tmpl_tag):
             raise ValueError("Invelid draw string tag: %s" % node.tag)
 
         self.tb = textbox(posx, posy, width=len(text), height=1)
-        self.tb.appendtxt(text)
+        res = self.tb.appendtxt(text)
+        assert not res, "Remainder in drawString"
         self.tb.fline()
 
     def get_tb(self, parent):
@@ -507,9 +510,16 @@ class _rml_template(object):
 
     def page_stop(self):
         self.cur_page.sort(key=lambda t: (t.posy, t.posx))
+        line_no = 0
         for tb in self.cur_page:
+            if line_no < tb.posy:
+                n = int(tb.posy - line_no)
+                self.out_fp.write('\n' * n)
+                line_no += n
             for line in tb.renderlines():
                 self.out_fp.write(line+'\n')
+                line_no += 1
+        self.out_fp.write('\f')
         self.cur_page = None
         self.frame_pos = -1
 
