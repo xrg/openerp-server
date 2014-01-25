@@ -80,7 +80,7 @@ class textbox(object):
     def appendtxt(self,txt):
         """Append some text to the current line.
            Mimic the HTML behaviour, where all whitespace evaluates to
-           a single space 
+           a single space
 
            @return remaining text, that does not fit this textbox
         """
@@ -336,7 +336,7 @@ class _rml_tmpl_frame(_rml_tmpl_tag):
 
     def get_tb(self, parent):
         return textbox(self.posx, self.posy, self.width, self.height)
-    
+
     def __repr__(self):
         return "Frame <%f, %f, %f, %f>" % (self.posx, self.posy, self.width, self.height)
 
@@ -359,7 +359,7 @@ class _rml_tmpl_draw_string(_rml_tmpl_tag):
             posx -= len(text) / 2.0
         else:
             raise ValueError("Invelid draw string tag: %s" % node.tag)
-        
+
         self.tb = textbox(posx, posy, width=len(text), height=1)
         self.tb.appendtxt(text)
         self.tb.fline()
@@ -486,13 +486,13 @@ class _rml_template(object):
     def frame_stop(self):
         if not self.cur_page:
             return
-            
+
         self.frame_pos += 1
-        
+
         while self.frame_pos < len(self.cur_page) \
                     and self.cur_page[self.frame_pos].full:
             self.frame_pos += 1
-        
+
         if self.frame_pos >= len(self.cur_page):
             self.page_stop()
 
