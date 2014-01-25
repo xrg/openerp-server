@@ -222,6 +222,12 @@ class _flowable(object):
         self.tb = self.template.frame_start()
         assert self.tb, "No textbox for template!"
 
+    def _reserve_flines(self, nlines):
+        assert self.tb, "No textbox!"
+        if self.tb.height and (self.tb.height - len(self.tb.lines)) < nlines:
+            self.template.frame_stop()
+            self.tb = self.template.frame_start()
+
     def _tag_spacer(self, node):
         length = 1+int(utils.unit_get(node.get('length')))/35
         for n in range(length):
@@ -238,6 +244,7 @@ class _flowable(object):
             self._log.debug("computing table sizes..")
             raise NotImplementedError
         trs = []
+
         for n in utils._child_get(node, self):
             if n.tag == 'tr':
                 tds = []
@@ -263,6 +270,8 @@ class _flowable(object):
             else:
                 self.warn_nitag(n.tag)
 
+        self.tb = saved_tb
+
         for tds in trs:
             trt = textbox()
             off=0
@@ -270,10 +279,10 @@ class _flowable(object):
                 trl = td.renderlines(pad=td.width)
                 trt.haplines(trl,off)
                 off += td.width + 1
-            saved_tb.curline = trt
-            saved_tb.fline()
+            self._reserve_flines(len(trt.lines))
+            self.tb.curline = trt
+            self.tb.fline()
 
-        self.tb = saved_tb
         return
 
     def _tag_para(self, node):
