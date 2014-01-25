@@ -196,11 +196,15 @@ class _flowable(object):
             'blockTable': self._tag_table,
             'pageBreak': self._tag_page_break,
             'setNextTemplate': self._tag_next_template,
+            'pto': self._tag_pto,
+            'pto_header': self._tag_noop,
+            'condPageBreak': self._tag_condPageBreak,
         }
         self.parent_doc = parent_doc
         self.localcontext = parent_doc.localcontext
         self.template = parent_doc.templates[0]
         self.nitags = []
+        self._pto_header = None
 
     def warn_nitag(self,tag):
         if tag not in self.nitags:
@@ -212,6 +216,11 @@ class _flowable(object):
         self.tb = self.template.frame_start()
         assert self.tb, "No textbox for template!"
 
+    def _tag_condPageBreak(self, node):
+        height = self.template._conv_unit_height(node.get('height'))
+        if height:
+            self._reserve_flines(height)
+
     def _tag_next_template(self, node=False):
         self.template.set_next_template()
         self.tb = self.template.frame_start()
@@ -221,6 +230,8 @@ class _flowable(object):
         self.template.frame_stop()
         self.tb = self.template.frame_start()
         assert self.tb, "No textbox for template!"
+        if self._pto_header:
+            self.rec_render_cnodes(self._pto_header)
 
     def _reserve_flines(self, nlines):
         assert self.tb, "No textbox!"
@@ -293,6 +304,17 @@ class _flowable(object):
     def _tag_text(self, node):
         """We do ignore fonts.."""
         self.rec_render_cnodes(node)
+
+    def _tag_pto(self, node):
+        if self._pto_header:
+            raise RuntimeError("PTO tag inside pto!")
+        ph = node.find('pto_header')
+        self._pto_header = ph
+        self.rec_render_cnodes(node)
+        self._pto_header = None
+
+    def _tag_noop(self, node):
+        pass
 
     def render_text(self, text):
         while text:
@@ -462,6 +484,9 @@ class _rml_template(object):
 
     def _conv_unit_width(self, x):
         return utils.unit_get(x) / self._font_size[0]
+
+    def _conv_unit_height(self, y):
+        return utils.unit_get(y) / self._font_size[1]
 
     def set_next_template(self):
         self.template = self.template_order[(self.template_order.index(self.template)+1) % self.template_order]
