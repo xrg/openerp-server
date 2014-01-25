@@ -27,25 +27,43 @@ import StringIO
 from lxml import etree
 # import base64
 import logging
+import threading
+import re
 
 import utils
 
 Font_size= 8.0
 
-def verbose(text):
-    logging.getLogger('report.rml2txt').debug(text)
+ws_re = re.compile(r'\s+')
+
 
 class textbox(object):
     """A box containing plain text.
     It can have an offset, in chars.
     Lines can be either text strings, or textbox'es, recursively.
     """
-    def __init__(self,x=0, y=0):
+    def __init__(self,x=0, y=0, width=False, height=False):
         self.posx = x
         self.posy = y
+        self.width = width
+        self.height = height
         self.lines = []
         self.curline = ''
         self.endspace = False
+        # size!
+        self.wordwrap = False
+        if self.width:
+            self.wordwrap = min(int(self.width / 10), 5)
+
+    def __copy__(self):
+        n = self.__class__(self.posx, self.posy, self.width, self.height)
+        n.lines = self.lines[:]
+        n.curline = self.curline
+        n.endspace = self.endspace
+
+    @property
+    def full(self):
+        return bool(self.height and len(self.lines) >= self.height)
 
     def newline(self):
         if isinstance(self.curline, textbox):
@@ -64,20 +82,58 @@ class textbox(object):
     def appendtxt(self,txt):
         """Append some text to the current line.
            Mimic the HTML behaviour, where all whitespace evaluates to
-           a single space """
+           a single space 
+
+           @return remaining text, that does not fit this textbox
+        """
         if not txt:
             return
-        bs = es = False
-        if txt[0].isspace():
-            bs = True
-        if txt[len(txt)-1].isspace():
-            es = True
-        if bs and not self.endspace:
-            self.curline += " "
-        self.curline += txt.strip().replace("\n"," ").replace("\t"," ")
-        if es:
-            self.curline += " "
-        self.endspace = es
+        remainder = ws_re.sub(' ', txt)
+
+        if self.endspace and remainder[0] == ' ':
+            # already had space from previous op
+            remainder = remainder[1:]
+
+        while remainder:
+            self.tick()
+            if self.height and len(self.lines) >= self.height:
+                break
+            endpos = False
+            if not self.width:
+                self.curline += remainder
+                remainder = ''
+                continue
+            if len(self.curline) >= self.width:
+                # safeguard, should not happen
+                self.newline()
+
+            if (len(remainder) + len(self.curline)) > self.width:
+                # text-wrapping algorithm:
+                endpos = int(self.width - len(self.curline))
+
+            if self.wordwrap and (endpos is not False):
+                # word wrapping
+                ep2 = 0
+                while ep2 < self.wordwrap:
+                    if remainder[endpos - ep2] == ' ':
+                        endpos -= ep2
+                        break
+                    else:
+                        ep2 += 1
+            if endpos is False or endpos > len(remainder):
+                self.curline += remainder
+                remainder = ''
+            else:
+                self.curline += remainder[:endpos]
+                self.newline()
+                if remainder[endpos] == ' ':
+                    endpos += 1
+                remainder = remainder[endpos:]
+
+        if remainder.isspace():
+            return False
+        else:
+            return remainder
 
     def rendertxt(self,xoffset=0):
         result = ''
@@ -118,51 +174,60 @@ class textbox(object):
         for i in range(len(arr)):
             self.lines[i] += cc +arr[i]
 
+    def tick(self):
+        """Inform upstream that the process is running, cancel it if needed
+        """
+        ct = threading.currentThread()
+        if ct and getattr(ct, 'must_stop', False):
+            raise KeyboardInterrupt
+
 
 class _flowable(object):
-    def __init__(self, template, doc,localcontext):
+    """ A (main?) flowable, where free text is rendered into
+    """
+    _log = logging.getLogger('render.rml2txt')
+
+    def __init__(self, parent_doc):
         self._tags = {
-            '1title': self._tag_title,
-            '1spacer': self._tag_spacer,
+            'title': self._tag_para,
+            'spacer': self._tag_spacer,
             'para': self._tag_para,
-            'font': self._tag_font,
-            'section': self._tag_section,
-            '1nextFrame': self._tag_next_frame,
+            'font': self._tag_text,
+            'section': self._tag_para,
+            'nextFrame': self._tag_next_frame,
             'blockTable': self._tag_table,
-            '1pageBreak': self._tag_page_break,
-            '1setNextTemplate': self._tag_next_template,
+            'pageBreak': self._tag_page_break,
+            'setNextTemplate': self._tag_next_template,
         }
-        self.template = template
-        self.doc = doc
-        self._log = logging.getLogger('render.rml2txt')
-        self.localcontext = localcontext
+        self.parent_doc = parent_doc
+        self.localcontext = parent_doc.localcontext
+        self.template = parent_doc.templates[0]
         self.nitags = []
-        self.tbox = None
 
     def warn_nitag(self,tag):
         if tag not in self.nitags:
             self._log.warning("Unknown tag \"%s\", please implement it.", tag)
             self.nitags.append(tag)
 
-    def _tag_page_break(self, node):
-        return "\f"
+    def _tag_page_break(self, node=False):
+        self.template.page_stop()
+        self.tb = self.template.frame_start()
+        assert self.tb, "No textbox for template!"
 
-    def _tag_next_template(self, node):
-        return ''
+    def _tag_next_template(self, node=False):
+        self.template.set_next_template()
+        self.tb = self.template.frame_start()
+        assert self.tb, "No textbox for template!"
 
-    def _tag_next_frame(self, node):
-        result=self.template.frame_stop()
-        result+='\n'
-        result+=self.template.frame_start()
-        return result
-
-    def _tag_title(self, node):
-        node.tagName='h1'
-        return node.toxml()
+    def _tag_next_frame(self, node=False):
+        self.template.frame_stop()
+        self.tb = self.template.frame_start()
+        assert self.tb, "No textbox for template!"
 
     def _tag_spacer(self, node):
         length = 1+int(utils.unit_get(node.get('length')))/35
-        return "\n"*length
+        for n in range(length):
+            self.tb.newline()
 
     def _tag_table(self, node):
         self.tb.fline()
@@ -205,20 +270,21 @@ class _flowable(object):
         self.rec_render_cnodes(node)
         self.tb.newline()
 
-    def _tag_section(self, node):
-        #TODO: styles
-        self.rec_render_cnodes(node)
-        self.tb.newline()
-
-    def _tag_font(self, node):
+    def _tag_text(self, node):
         """We do ignore fonts.."""
         self.rec_render_cnodes(node)
 
-    def rec_render_cnodes(self,node):
-        self.tb.appendtxt(utils._process_text(self, node.text or ''))
+    def render_text(self, text):
+        while text:
+            text = self.tb.appendtxt(text)
+            if self.tb.full:
+                self._tag_next_frame()
+
+    def rec_render_cnodes(self, node):
+        self.render_text(utils._process_text(self, node.text or ''))
         for n in utils._child_get(node,self):
             self.rec_render(n)
-        self.tb.appendtxt(utils._process_text(self, node.tail or ''))
+        self.render_text(utils._process_text(self, node.tail or ''))
 
     def rec_render(self,node):
         """ Recursive render: fill outarr with text of current node
@@ -232,272 +298,221 @@ class _flowable(object):
                 self.warn_nitag(node.tag)
 
     def render(self, node):
-        self.tb= textbox()
-        #result = self.template.start()
-        #result += self.template.frame_start()
+        self._tag_next_frame(None)
         self.rec_render_cnodes(node)
-        #result += self.template.frame_stop()
-        #result += self.template.end()
-        result = self.tb.rendertxt()
-        del self.tb
-        return result
+        self.template.page_stop()
 
 class _rml_tmpl_tag(object):
-    def __init__(self, *args):
-        pass
-    def tag_start(self):
-        return ''
-    def tag_end(self):
-        return False
-    def tag_stop(self):
-        return ''
-    def tag_mergeable(self):
-        return True
+    _log = logging.getLogger('render.rml2txt')
+    def __init__(self, parent, node):
+        self.posx = False
+        self.posy = False
+
+    def get_tb(self, parent):
+        """ Returns a textbox for this tag, that is either full or can be
+            fed with more story text
+
+            Shall only be called once per page!
+        """
+        raise NotImplementedError(self.__class__.__name__)
 
 class _rml_tmpl_frame(_rml_tmpl_tag):
-    def __init__(self, posx, width):
-        self.width = width
-        self.posx = posx
-    def tag_start(self):
-        return "frame start"
-        return '<table border="0" width="%d"><tr><td width="%d">&nbsp;</td><td>' % (self.width+self.posx,self.posx)
-    def tag_end(self):
-        return True
-    def tag_stop(self):
-        return "frame stop"
-        return '</td></tr></table><br/>'
-    def tag_mergeable(self):
-        return False
+    def __init__(self, parent, node):
+        """ sizes are in points
+        """
+        self.posx, self.posy = parent._conv_unit_pos(node.get('x1'), node.get('y1'))
+        self.width, self.height = parent._conv_unit_size(node.get('width'), node.get('height'))
 
-    # An awfull workaround since I don't really understand the semantic behind merge.
-    def merge(self, frame):
-        pass
+    def get_tb(self, parent):
+        return textbox(self.posx, self.posy, self.width, self.height)
+    
+    def __repr__(self):
+        return "Frame <%f, %f, %f, %f>" % (self.posx, self.posy, self.width, self.height)
 
 class _rml_tmpl_draw_string(_rml_tmpl_tag):
-    def __init__(self, node, style):
-        self.posx = utils.unit_get(node.get('x'))
-        self.posy =  utils.unit_get(node.get('y'))
-        aligns = {
-            'drawString': 'left',
-            'drawRightString': 'right',
-            'drawCentredString': 'center'
-        }
-        align = aligns[node.localName]
-        self.pos = [(self.posx, self.posy, align, utils.text_get(node), style.get('td'), style.font_size_get('td'))]
 
-    def tag_start(self):
-        return "draw string \"%s\" @(%d,%d)..\n" %("txt",self.posx,self.posy)
-        self.pos.sort()
-        res = '\\table ...'
-        posx = 0
-        i = 0
-        for (x,y,align,txt, style, fs) in self.pos:
-            if align=="left":
-                pos2 = len(txt)*fs
-                res+='<td width="%d"></td><td style="%s" width="%d">%s</td>' % (x - posx, style, pos2, txt)
-                posx = x+pos2
-            if align=="right":
-                res+='<td width="%d" align="right" style="%s">%s</td>' % (x - posx, style, txt)
-                posx = x
-            if align=="center":
-                res+='<td width="%d" align="center" style="%s">%s</td>' % ((x - posx)*2, style, txt)
-                posx = 2*x-posx
-            i+=1
-        res+='\\table end'
-        return res
-    def merge(self, ds):
-        self.pos+=ds.pos
-
-class _rml_tmpl_draw_lines(_rml_tmpl_tag):
-    def __init__(self, node, style):
-        coord = [utils.unit_get(x) for x in utils.text_get(node).split(' ')]
-        self.ok = False
-        self.posx = coord[0]
-        self.posy = coord[1]
-        self.width = coord[2]-coord[0]
-        self.ok = coord[1]==coord[3]
-        self.style = style
-        self.style = style.get('hr')
-
-    def tag_start(self):
-        return "draw lines..\n"
-        if self.ok:
-            return '<table border="0" cellpadding="0" cellspacing="0" width="%d"><tr><td width="%d"></td><td><hr width="100%%" style="margin:0px; %s"></td></tr></table>' % (self.posx+self.width,self.posx,self.style)
+    def __init__(self, parent, node):
+        posx, posy = parent._conv_unit_pos(node.get('x'), node.get('y'))
+        text = utils.text_get(node).strip()
+        if not text:
+            self.tb = False
+            return
+        if node.tag == 'drawString':
+            # left-aligned
+            pass
+        elif node.tag == 'drawRightString':
+            # right-aligned
+            posx -= len(text)
+        elif node.tag == 'drawCentredString':
+            # centered
+            posx -= len(text) / 2.0
         else:
-            return ''
+            raise ValueError("Invelid draw string tag: %s" % node.tag)
+        
+        self.tb = textbox(posx, posy, width=len(text), height=1)
+        self.tb.appendtxt(text)
+        self.tb.newline()
 
-class _rml_stylesheet(object):
-    def __init__(self, stylesheet, doc):
-        self.doc = doc
-        self.attrs = {}
-        self._tags = {
-            'fontSize': lambda x: ('font-size',str(utils.unit_get(x))+'px'),
-            'alignment': lambda x: ('text-align',str(x))
-        }
-        result = ''
-        for ps in stylesheet.findall('paraStyle'):
-            attr = {}
-            attrs = ps.attributes
-            for i in range(attrs.length):
-                 name = attrs.item(i).localName
-                 attr[name] = ps.get(name)
-            attrs = []
-            for a in attr:
-                if a in self._tags:
-                    attrs.append("%s:%s" % self._tags[a](attr[a]))
-            if len(attrs):
-                result += "p."+attr['name']+" {"+'; '.join(attrs)+"}\n"
-        self.result = result
+    def get_tb(self, parent):
+        return self.tb
 
-    def render(self):
-        return ''
+    def __repr__(self):
+        if self.tb:
+            return "DrawString < %d,%d, \"%s\">" % (self.tb.posx, self.tb.posy, self.tb.lines)
+        else:
+            return "DrawString <empty>"
 
-class _rml_draw_style(object):
-    def __init__(self):
-        self.style = {}
-        self._styles = {
-            'fill': lambda x: {'td': {'color':x.get('color')}},
-            'setFont': lambda x: {'td': {'font-size':x.get('size')+'px'}},
-            'stroke': lambda x: {'hr': {'color':x.get('color')}},
-        }
-    def update(self, node):
-        if node.localName in self._styles:
-            result = self._styles[node.localName](node)
-            for key in result:
-                if key in self.style:
-                    self.style[key].update(result[key])
-                else:
-                    self.style[key] = result[key]
-    def font_size_get(self,tag):
-        size  = utils.unit_get(self.style.get('td', {}).get('font-size','16'))
-        return size
+class _rml_no_op(_rml_tmpl_tag):
+    def get_tb(self, parent):
+        return False
 
-    def get(self,tag):
-        if not tag in self.style:
-            return ""
-        return ';'.join(['%s:%s' % (x[0],x[1]) for x in self.style[tag].items()])
+    def __repr__(self):
+        return "No-Op"
 
 class _rml_template(object):
-    def __init__(self, localcontext, out, node, doc, images=None, path='.', title=None):
-        self.localcontext = localcontext
-        self.frame_pos = -1
-        self.frames = []
-        self.template_order = []
-        self.page_template = {}
-        self.loop = 0
-        self._tags = {
+    _tags = {
             'drawString': _rml_tmpl_draw_string,
             'drawRightString': _rml_tmpl_draw_string,
             'drawCentredString': _rml_tmpl_draw_string,
-            'lines': _rml_tmpl_draw_lines
+            'lines': _rml_no_op,
+            'fill': _rml_no_op,
+            'stroke': _rml_no_op,
+            'setFont': _rml_no_op, # TODO check size
         }
-        self.style = _rml_draw_style()
+    _log = logging.getLogger('render.rml2txt')
+    _page_size_re = re.compile(r'\(([^,]+),([^,]+)\)')
+
+    def __init__(self, localcontext, node, out_fp, images=None, path='.', title=None):
+        self.localcontext = localcontext
+        self.out_fp = out_fp
+        self.frame_pos = -1
+        self.template_order = []
+        self.page_template = {}
+        self.loop = 0
+        self.page_size = (595.0,842.0)
+        self._font_aspect = 0.53
+        self._font_size = None
+        self._set_font_size(10.0)
+
+        if node.get('pageSize'):
+            m = self._page_size_re.match(node.get('pageSize'))
+            if m:
+                self.page_size = (utils.unit_get(m.group(1)), utils.unit_get(m.group(2)))
+            else:
+                self._log.warning("Page size \"%s\" cannot be parsed", node.get('pageSize'))
+
         for pt in node.findall('pageTemplate'):
             frames = {}
-            id = pt.get('id')
-            self.template_order.append(id)
-            for tmpl in pt.findall('frame'):
-                posy = int(utils.unit_get(tmpl.get('y1'))) #+utils.unit_get(tmpl.get('height')))
-                posx = int(utils.unit_get(tmpl.get('x1')))
-                frames[(posy,posx,tmpl.get('id'))] = _rml_tmpl_frame(posx, utils.unit_get(tmpl.get('width')))
-            for tmpl in node.findall('pageGraphics'):
+            tid = pt.get('id') or True
+            self.template_order.append(tid)
+            frames = self.page_template[tid] = []
+            for n in pt.findall('frame'):
+                frames.append(_rml_tmpl_frame(self, n))
+            for tmpl in pt.findall('pageGraphics'):
                 for n in tmpl.getchildren():
-                    if n.nodeType==n.ELEMENT_NODE:
-                        if n.localName in self._tags:
-                            t = self._tags[n.localName](n, self.style)
-                            frames[(t.posy,t.posx,n.localName)] = t
-                        else:
-                            self.style.update(n)
-            keys = frames.keys()
-            keys.sort()
-            keys.reverse()
-            self.page_template[id] = []
-            for key in range(len(keys)):
-                if key>0 and keys[key-1][0] == keys[key][0]:
-                    if type(self.page_template[id][-1]) == type(frames[keys[key]]):
-                        if self.page_template[id][-1].tag_mergeable():
-                            self.page_template[id][-1].merge(frames[keys[key]])
+                    if n.tag == etree.Comment:
                         continue
-                self.page_template[id].append(frames[keys[key]])
+                    elif n.tag in self._tags:
+                        frames.append(self._tags[n.tag](self, n))
+                    else:
+                        self._log.debug("Not handled in pageTemplate: %s", node.tag)
         self.template = self.template_order[0]
+        self.page_no = 0
+        self.cur_page = None
 
-    def _get_style(self):
-        return self.style
+    def _set_font_size(self, points):
+        self._font_size = (points * self._font_aspect, points)
+
+    def _conv_point_pos(self, x, y):
+        return x / self._font_size[0], (self.page_size[1] - y) / self._font_size[1]
+
+    def _conv_point_size(self, x, y):
+        return x / self._font_size[0], y / self._font_size[1]
+
+    def _conv_unit_pos(self, x, y):
+        return utils.unit_get(x) / self._font_size[0], \
+                    (self.page_size[1] - utils.unit_get(y)) / self._font_size[1]
+
+    def _conv_unit_size(self, x, y):
+        return utils.unit_get(x) / self._font_size[0], utils.unit_get(y) / self._font_size[1]
 
     def set_next_template(self):
         self.template = self.template_order[(self.template_order.index(self.template)+1) % self.template_order]
         self.frame_pos = -1
+        if self.cur_page:
+            self.page_stop()
+        self.frame_start()
 
     def set_template(self, name):
         self.template = name
         self.frame_pos = -1
+        if self.cur_page:
+            self.page_stop()
+        self.frame_start()
 
     def frame_start(self):
-        result = ''
-        frames = self.page_template[self.template]
-        ok = True
-        while ok:
-            self.frame_pos += 1
-            if self.frame_pos>=len(frames):
-                self.frame_pos=0
-                self.loop=1
-                ok = False
-                continue
-            f = frames[self.frame_pos]
-            result+=f.tag_start()
-            ok = not f.tag_end()
-            if ok:
-                result+=f.tag_stop()
-        return result
+        if not self.cur_page:
+            self.cur_page = []
+            self.frame_pos = -1
+            self.page_no += 1
+            for frame in self.page_template[self.template]:
+                new_tb = frame.get_tb(self)
+                if not new_tb:
+                    continue
+                if (self.frame_pos < 0 ) and not new_tb.full:
+                    self.frame_pos = len(self.cur_page)
+                self.cur_page.append(new_tb)
+
+        if self.frame_pos < 0:
+            # There must be at least one frame to write story into
+            raise ValueError("No writable frame found in page template!")
+
+        return self.cur_page[self.frame_pos]
 
     def frame_stop(self):
-        frames = self.page_template[self.template]
-        f = frames[self.frame_pos]
-        result=f.tag_stop()
-        return result
+        if not self.cur_page:
+            return
+            
+        self.frame_pos += 1
+        
+        while self.frame_pos < len(self.cur_page) \
+                    and self.cur_page[self.frame_pos].full:
+            self.frame_pos += 1
+        
+        if self.frame_pos >= len(self.cur_page):
+            self.page_stop()
 
-    def start(self):
-        return ''
-
-    def end(self):
-        return "template end\n"
-        result = ''
-        while not self.loop:
-            result += self.frame_start()
-            result += self.frame_stop()
-        return result
+    def page_stop(self):
+        self.cur_page.sort(key=lambda t: (t.posy, t.posx))
+        for tb in self.cur_page:
+            for line in tb.renderlines():
+                self.out_fp.write(line+'\n')
+        self.cur_page = None
+        self.frame_pos = -1
 
 class _rml_doc(object):
+    _log = logging.getLogger('render.rml2txt')
     def __init__(self, node, localcontext, images=None, path='.', title=None):
         self.localcontext = localcontext
         self.etree = node
         self.filename = self.etree.get('filename')
-        self.result = ''
-        self._log = logging.getLogger('render.rml2txt')
+        self.templates = []
 
-    def render(self, out):
-        #el = self.etree.findall('docinit')
-        #if el:
-            #self.docinit(el)
+    def render(self, out_fp):
+        for tmpl in self.etree.findall('template'):
+            self.templates.append( _rml_template(self.localcontext, tmpl, out_fp))
 
-        #el = self.etree.findall('stylesheet')
-        #self.styles = _rml_styles(el,self.localcontext)
+        for story in utils._child_get(self.etree, self, 'story'):
+            self.tick()
+            fable = _flowable(self)
+            fable.render(story)
 
-        el = self.etree.findall('template')
-        self.result =""
-        if len(el):
-            pt_obj = _rml_template(self.localcontext, out, el[0], self)
-            stories = utils._child_get(self.etree, self, 'story')
-            for story in stories:
-                if self.result:
-                    self.result += '\f'
-                f = _flowable(pt_obj,story,self.localcontext)
-                self.result += f.render(story)
-                del f
-        else:
-            self.result = "<cannot render w/o template>"
-        self.result += '\n'
-        out.write( self.result)
+    def tick(self):
+        """Inform upstream that the process is running, cancel it if needed
+        """
+        ct = threading.currentThread()
+        if ct and getattr(ct, 'must_stop', False):
+            raise KeyboardInterrupt
 
 def parseNode(rml, localcontext = {},fout=None, images=None, path='.',title=None):
     if images is None:
