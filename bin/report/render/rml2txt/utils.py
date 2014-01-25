@@ -55,20 +55,20 @@ _regex = re.compile('\[\[(.+?)\]\]')
 def _child_get(node, self=None, tagname=None):
     for n in node:
         if self and self.localcontext and n.get('rml_loop', False):
-            oldctx = self.localcontext
-            for ctx in eval(n.get('rml_loop'),{}, self.localcontext):
-                self.localcontext.update(ctx)
+            localcontext = self.localcontext.copy()
+            for ctx in eval(n.get('rml_loop'),{}, localcontext):
+                localcontext.update(ctx)
                 if (tagname is None) or (n.tag==tagname):
                     if n.get('rml_except', False):
                         try:
-                            eval(n.get('rml_except'), {}, self.localcontext)
+                            eval(n.get('rml_except'), {}, localcontext)
                         except GeneratorExit:
                             continue
                         except Exception:
                             continue
                     if n.get('rml_tag'):
                         try:
-                            (tag,attr) = eval(n.get('rml_tag'),{}, self.localcontext)
+                            (tag,attr) = eval(n.get('rml_tag'),{}, localcontext)
                             n2 = copy.copy(n)
                             n2.tag = tag
                             n2.attrib.update(attr)
@@ -77,7 +77,6 @@ def _child_get(node, self=None, tagname=None):
                             yield n
                     else:
                         yield n
-            self.localcontext = oldctx
             continue
         if self and self.localcontext and n.get('rml_except', False):
             try:
@@ -114,9 +113,10 @@ def _process_text(self, txt):
         return result
 
 def text_get(node):
-    rc = ''
-    for node in node.getchildren():
-            rc = rc + node.text
+    rc = node.text or ''
+    for n in node.getchildren():
+        rc += text_get(n)
+    rc += node.tail or ''
     return rc
 
 units = [
