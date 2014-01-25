@@ -32,8 +32,6 @@ import re
 
 import utils
 
-Font_size= 8.0
-
 ws_re = re.compile(r'\s+')
 
 
@@ -235,30 +233,43 @@ class _flowable(object):
         self.tb = None
         sizes = None
         if node.get('colWidths'):
-            sizes = map(lambda x: utils.unit_get(x), node.get('colWidths').split(','))
-        trs = []
-        for n in utils._child_get(node,self):
-            if n.tag == 'tr':
-                tds = []
-                for m in utils._child_get(n,self):
-                    if m.tag == 'td':
-                        self.tb = textbox()
-                        self.rec_render_cnodes(m)
-                        tds.append(self.tb)
-                        self.tb = None
-                if len(tds):
-                    trs.append(tds)
-
+            sizes = map(self.template._conv_unit_width, node.get('colWidths').split(','))
         if not sizes:
             self._log.debug("computing table sizes..")
+            raise NotImplementedError
+        trs = []
+        for n in utils._child_get(node, self):
+            if n.tag == 'tr':
+                tds = []
+                tdi = 0
+                for m in utils._child_get(n, self):
+                    if m.tag == 'td':
+                        colspan = int(m.get('colspan') or 1)
+                        width = 0
+                        if tdi + colspan > len(sizes):
+                            raise ValueError("Table cell %d exceeds %d columns" % (tdi+colspan, len(sizes)))
+                        for x in range(colspan):
+                            width += sizes[tdi]
+                            tdi += 1
+                        self.tb = textbox(0,0, width)
+                        self.rec_render_cnodes(m)
+                        self.tb.fline()
+                        tds.append(self.tb)
+                        self.tb = None
+                    else:
+                        self.warn_nitag(m.tag)
+                if len(tds):
+                    trs.append(tds)
+            else:
+                self.warn_nitag(n.tag)
+
         for tds in trs:
             trt = textbox()
             off=0
-            for i in range(len(tds)):
-                p = int(sizes[i]/Font_size)
-                trl = tds[i].renderlines(pad=p)
+            for td in tds:
+                trl = td.renderlines(pad=td.width)
                 trt.haplines(trl,off)
-                off += sizes[i]/Font_size + 1
+                off += td.width + 1
             saved_tb.curline = trt
             saved_tb.fline()
 
@@ -268,7 +279,7 @@ class _flowable(object):
     def _tag_para(self, node):
         #TODO: styles
         self.rec_render_cnodes(node)
-        self.tb.newline()
+        self.tb.fline()
 
     def _tag_text(self, node):
         """We do ignore fonts.."""
@@ -351,7 +362,7 @@ class _rml_tmpl_draw_string(_rml_tmpl_tag):
         
         self.tb = textbox(posx, posy, width=len(text), height=1)
         self.tb.appendtxt(text)
-        self.tb.newline()
+        self.tb.fline()
 
     def get_tb(self, parent):
         return self.tb
@@ -435,6 +446,9 @@ class _rml_template(object):
 
     def _conv_unit_size(self, x, y):
         return utils.unit_get(x) / self._font_size[0], utils.unit_get(y) / self._font_size[1]
+
+    def _conv_unit_width(self, x):
+        return utils.unit_get(x) / self._font_size[0]
 
     def set_next_template(self):
         self.template = self.template_order[(self.template_order.index(self.template)+1) % self.template_order]
