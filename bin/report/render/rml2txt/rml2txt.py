@@ -186,20 +186,6 @@ class _flowable(object):
     _log = logging.getLogger('render.rml2txt')
 
     def __init__(self, parent_doc):
-        self._tags = {
-            'title': self._tag_para,
-            'spacer': self._tag_spacer,
-            'para': self._tag_para,
-            'font': self._tag_text,
-            'section': self._tag_para,
-            'nextFrame': self._tag_next_frame,
-            'blockTable': self._tag_table,
-            'pageBreak': self._tag_page_break,
-            'setNextTemplate': self._tag_next_template,
-            'pto': self._tag_pto,
-            'pto_header': self._tag_noop,
-            'condPageBreak': self._tag_condPageBreak,
-        }
         self.parent_doc = parent_doc
         self.localcontext = parent_doc.localcontext
         self.template = parent_doc.templates[0]
@@ -210,34 +196,6 @@ class _flowable(object):
         if tag not in self.nitags:
             self._log.warning("Unknown tag \"%s\", please implement it.", tag)
             self.nitags.append(tag)
-
-    def _tag_page_break(self, node=False):
-        self.template.page_stop()
-        self.tb = self.template.frame_start()
-        assert self.tb, "No textbox for template!"
-
-    def _tag_condPageBreak(self, node):
-        height = self.template._conv_unit_height(node.get('height'))
-        if height:
-            self._reserve_flines(height)
-
-    def _tag_next_template(self, node=False):
-        self.template.set_next_template()
-        self.tb = self.template.frame_start()
-        assert self.tb, "No textbox for template!"
-
-    def _tag_next_frame(self, node=False):
-        self.template.frame_stop()
-        self.tb = self.template.frame_start()
-        assert self.tb, "No textbox for template!"
-        if self._pto_header:
-            self.rec_render_cnodes(self._pto_header)
-
-    def _reserve_flines(self, nlines):
-        assert self.tb, "No textbox!"
-        if self.tb.height and (self.tb.height - len(self.tb.lines)) < nlines:
-            self.template.frame_stop()
-            self.tb = self.template.frame_start()
 
     def _tag_spacer(self, node):
         length = 1+int(utils.unit_get(node.get('length')))/35
@@ -297,30 +255,34 @@ class _flowable(object):
         return
 
     def _tag_para(self, node):
-        #TODO: styles
         self.rec_render_cnodes(node)
         self.tb.fline()
+
+    def _tag_section(self, node):
+        return self._tag_para(node)
+
+    _tag_title = _tag_para
 
     def _tag_text(self, node):
         """We do ignore fonts.."""
         self.rec_render_cnodes(node)
 
-    def _tag_pto(self, node):
-        if self._pto_header:
-            raise RuntimeError("PTO tag inside pto!")
-        ph = node.find('pto_header')
-        self._pto_header = ph
-        self.rec_render_cnodes(node)
-        self._pto_header = None
+    def _tag_font(self, node):
+        return self._tag_text(node)
 
     def _tag_noop(self, node):
         pass
+
+    _tag_pto_header = _tag_noop
+
+    def _tag_nextFrame(node=False):
+        raise NotImplementedError
 
     def render_text(self, text):
         while text:
             text = self.tb.appendtxt(text)
             if self.tb.full:
-                self._tag_next_frame()
+                self._tag_nextFrame()
 
     def rec_render_cnodes(self, node):
         self.render_text(utils._process_text(self, node.text or ''))
@@ -333,16 +295,103 @@ class _flowable(object):
         """
         if node.tag != None:
             if node.tag == etree.Comment:
-                pass
-            elif node.tag in self._tags:
-                self._tags[node.tag](node)
-            else:
+                return
+            tag_fn = getattr(self, '_tag_' + node.tag, None)
+            if tag_fn is None:
                 self.warn_nitag(node.tag)
+            else:
+                tag_fn(node)
 
     def render(self, node):
-        self._tag_next_frame(None)
+        self._tag_nextFrame(None)
         self.rec_render_cnodes(node)
+
+class _flowable_doc(_flowable):
+    """Master flowable, able to continue on next frames
+    """
+    def __init__(self, parent_doc):
+        super(_flowable_doc, self).__init__(parent_doc)
+        self.nextFrameName = None
+
+    def _tag_pto(self, node):
+        if self._pto_header:
+            raise RuntimeError("PTO tag inside pto!")
+        ph = node.find('pto_header')
+        self._pto_header = ph
+        self.rec_render_cnodes(node)
+        self._pto_header = None
+
+    def _tag_condPageBreak(self, node):
+        height = self.template._conv_unit_height(node.get('height'))
+        if height:
+            self._reserve_flines(height)
+
+    def _tag_pageBreak(self, node=False):
         self.template.page_stop()
+        self.tb = self.template.frame_start()
+        assert self.tb, "No textbox for template!"
+
+    def _tag_setNextTemplate(self, node=False):
+        self.template.set_next_template()
+        self.tb = self.template.frame_start()
+        assert self.tb, "No textbox for template!"
+
+    def _tag_nextFrame(self, node=False):
+        self.template.frame_stop()
+        self.tb = self.template.frame_start(self.nextFrameName)
+        assert self.tb, "No textbox for template!"
+        if self._pto_header:
+            self.rec_render_cnodes(self._pto_header)
+
+    def _tag_setNextFrame(self, node):
+        self.nextFrameName = node.get('name')
+
+    def _tag_storyPlace(self, node):
+        posx, posy = self.template._conv_unit_pos(node.get('x'), node.get('y'))
+        width, height = self.template._conv_unit_size(node.get('width'), node.get('height'))
+        posy -= height
+        fl = _flowable_child(self, posx, posy, width, height)
+        tb = fl.render(node)
+        self.template.push_tb(tb)
+
+    def _reserve_flines(self, nlines):
+        assert self.tb, "No textbox!"
+        if self.tb.height and (self.tb.height - len(self.tb.lines)) < nlines:
+            self.template.frame_stop()
+            self.tb = self.template.frame_start()
+
+    def render(self, node):
+        super(_flowable_doc, self).render(node)
+        self.template.frame_stop()
+
+class _flowable_child(_flowable):
+    def __init__(self, parent, posx, posy, width, height):
+        super(_flowable_child, self).__init__(parent.parent_doc)
+        self.tb = None
+        self.posx = posx
+        self.posy = posy
+        self.width = width
+        self.height = height
+
+    def _tag_nextFrame(self, node=False):
+        if node:
+            raise RuntimeError("nextFrame not allowed in flowable child")
+        if self.tb:
+            raise RuntimeError("Frame overflow for flowable child")
+        self.tb = textbox(self.posx, self.posy, self.width, self.height)
+
+    def render(self, node):
+        super(_flowable_child, self).render(node)
+        if not self.tb.full:
+            # ensure it's full, so that algo won't append to it
+            self.tb.height = len(self.tb.lines)
+        return self.tb
+
+    def _reserve_flines(self, nlines):
+        assert self.tb, "No textbox!"
+        if self.tb.height and (self.tb.height - len(self.tb.lines)) < nlines:
+            raise RuntimeError("Not enough space for %d lines, flowable child has %d " \
+                    %(nlines,self.tb.height - len(self.tb.lines)) )
 
 class _rml_tmpl_tag(object):
     _log = logging.getLogger('render.rml2txt')
@@ -358,6 +407,9 @@ class _rml_tmpl_tag(object):
         """
         raise NotImplementedError(self.__class__.__name__)
 
+    def getID(self):
+        return False
+
 class _rml_tmpl_frame(_rml_tmpl_tag):
     def __init__(self, parent, node):
         """ sizes are in points
@@ -365,12 +417,16 @@ class _rml_tmpl_frame(_rml_tmpl_tag):
         self.posx, self.posy = parent._conv_unit_pos(node.get('x1'), node.get('y1'))
         self.width, self.height = parent._conv_unit_size(node.get('width'), node.get('height'))
         self.posy -= self.height
+        self.frame_id = node.get('id')
 
     def get_tb(self, parent):
         return textbox(self.posx, self.posy, self.width, self.height)
 
     def __repr__(self):
-        return "Frame <%f, %f, %f, %f>" % (self.posx, self.posy, self.width, self.height)
+        return "Frame <%s (%f,%f), (%fx%f)>" % (self.frame_id, self.posx, self.posy, self.width, self.height)
+
+    def getID(self):
+        return self.frame_id
 
 class _rml_tmpl_draw_string(_rml_tmpl_tag):
 
@@ -427,11 +483,27 @@ class _rml_no_op(_rml_tmpl_tag):
     def __repr__(self):
         return "No-Op"
 
+class _rml_tmpl_place(_rml_tmpl_tag):
+    def __init__(self, parent, node):
+        self.posx, self.posy = parent._conv_unit_pos(node.get('x'), node.get('y'))
+        self.width, self.height = parent._conv_unit_size(node.get('width'), node.get('height'))
+        self.posy -= self.height
+        self.localcontext = parent.localcontext
+        self.node = node
+    
+    def __repr__(self):
+        return "Place <(%s,%s), %sx%s>" % (self.posx, self.posy, self.width, self.height)
+
+    def get_tb(self, parent):
+        fl = _flowable_child(self, self.posx, self.posy, self.width, self.height)
+        return fl.render(self.node)
+
 class _rml_template(object):
     _tags = {
             'drawString': _rml_tmpl_draw_string,
             'drawRightString': _rml_tmpl_draw_string,
             'drawCentredString': _rml_tmpl_draw_string,
+            'place': _rml_tmpl_place,
             'lines': _rml_no_op,
             'fill': _rml_no_op,
             'stroke': _rml_no_op,
@@ -475,6 +547,7 @@ class _rml_template(object):
                         frames.append(self._tags[n.tag](self, n))
                     else:
                         self._log.debug("Not handled in pageTemplate: %s", node.tag)
+
         self.template = self.template_order[0]
         self.page_no = 0
         self.cur_page = None
@@ -515,8 +588,8 @@ class _rml_template(object):
             self.page_stop()
         self.frame_start()
 
-    def frame_start(self):
-        if not self.cur_page:
+    def frame_start(self, frame_id=None):
+        if self.cur_page is None:
             self.cur_page = []
             self.frame_pos = -1
             self.page_no += 1
@@ -526,7 +599,8 @@ class _rml_template(object):
                 new_tb = frame.get_tb(self)
                 if not new_tb:
                     continue
-                if (self.frame_pos < 0 ) and not new_tb.full:
+                if (self.frame_pos < 0) and not new_tb.full \
+                        and (frame_id is None or frame_id == frame.getID()):
                     self.frame_pos = len(self.cur_page)
                 self.cur_page.append(new_tb)
 
@@ -548,6 +622,16 @@ class _rml_template(object):
 
         if self.frame_pos >= len(self.cur_page):
             self.page_stop()
+
+    def push_tb(self, tb):
+        """Push a textbox in current page, above current one
+
+            Used by child flowables
+        """
+        if self.cur_page is None:
+            raise RuntimeError("Child textbox before page start")
+        self.cur_page.insert(self.frame_pos, tb)
+        self.frame_pos += 1
 
     def page_stop(self):
         self.cur_page.sort(key=lambda t: (t.posy, t.posx))
@@ -579,7 +663,7 @@ class _rml_doc(object):
 
         for story in utils._child_get(self.etree, self, 'story'):
             self.tick()
-            fable = _flowable(self)
+            fable = _flowable_doc(self)
             fable.render(story)
 
     def tick(self):
