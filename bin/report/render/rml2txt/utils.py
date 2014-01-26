@@ -55,20 +55,21 @@ _regex = re.compile('\[\[(.+?)\]\]')
 def _child_get(node, self=None, tagname=None):
     for n in node:
         if self and self.localcontext and n.get('rml_loop', False):
-            localcontext = self.localcontext.copy()
-            for ctx in eval(n.get('rml_loop'),{}, localcontext):
-                localcontext.update(ctx)
+            oldctx = self.localcontext # save stack
+            self.localcontext = self.localcontext.copy()
+            for ctx in eval(n.get('rml_loop'),{}, self.localcontext):
+                self.localcontext.update(ctx)
                 if (tagname is None) or (n.tag==tagname):
                     if n.get('rml_except', False):
                         try:
-                            eval(n.get('rml_except'), {}, localcontext)
+                            eval(n.get('rml_except'), {}, self.localcontext)
                         except GeneratorExit:
                             continue
                         except Exception:
                             continue
                     if n.get('rml_tag'):
                         try:
-                            (tag,attr) = eval(n.get('rml_tag'),{}, localcontext)
+                            (tag,attr) = eval(n.get('rml_tag'),{}, self.localcontext)
                             n2 = copy.copy(n)
                             n2.tag = tag
                             n2.attrib.update(attr)
@@ -77,6 +78,7 @@ def _child_get(node, self=None, tagname=None):
                             yield n
                     else:
                         yield n
+            self.localcontext = oldctx # pop stack
             continue
         if self and self.localcontext and n.get('rml_except', False):
             try:
