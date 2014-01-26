@@ -655,6 +655,41 @@ class _rml_Illustration(platypus.flowables.Flowable):
         drw = _rml_draw(self.localcontext ,self.node,self.styles, images=self.self2.images, path=self.self2.path, title=self.self2.title)
         drw.render(self.canv, None)
 
+class _rml_storyPlace(platypus.flowables.Flowable):
+    def __init__(self, node, localcontext, styles, parent):
+        self.localcontext = (localcontext or {}).copy()
+        self.node = node
+        self.styles = styles
+        self.parent = parent # flowable
+        self.origin = node.get('origin') or 'local'
+        if self.origin != 'page':
+            raise NotImplementedError("origin: %s" % self.origin)
+
+    def wrap(self, *args):
+        return (0.0, 0.0)
+
+    def draw(self):
+        self.canv.saveState()
+        if self.origin == 'page':
+            self.canv.resetTransforms()
+        flows = _rml_flowable(self.parent.doc, self.localcontext,
+                                images=self.parent.images, path=self.parent.path,
+                                title=self.parent.title)\
+                            .render(self.node)
+        infos = utils.attr_get(self.node, ['x','y','width','height'])
+
+        infos['y']+=infos['height']
+        for flow in flows:
+            w,h = flow.wrap(infos['width'], infos['height'])
+            if w <= infos['width'] and h <= infos['height']:
+                infos['y']-=h
+                flow.drawOn(self.canv,infos['x'],infos['y'])
+                infos['height']-=h
+            else:
+                raise ValueError("Not enough space: (%f, %f) in storyPlace(%s,%s)" \
+                                % (w, h, infos['width'], infos['height']))
+        self.canv.restoreState()
+
 class _rml_flowable(object):
     def __init__(self, doc, localcontext, images=None, path='.', title=None):
         if images is None:
@@ -905,6 +940,8 @@ class _rml_flowable(object):
             thickness_hr=node.get('thickness') or 1
             lineCap_hr=node.get('lineCap') or 'round'
             return platypus.flowables.HRFlowable(width=width_hr,color=color.get(color_hr),thickness=float(thickness_hr),lineCap=str(lineCap_hr))
+        elif node.tag == 'storyPlace':
+            return _rml_storyPlace(node, self.localcontext, self.styles, self)
         else:
             self._logger.warning('flowable not yet implemented: %s !', (node.tag,))
             return None
