@@ -375,9 +375,27 @@ class _rml_tmpl_frame(_rml_tmpl_tag):
 class _rml_tmpl_draw_string(_rml_tmpl_tag):
 
     def __init__(self, parent, node):
-        posx, posy = parent._conv_unit_pos(node.get('x'), node.get('y'))
-        posy -= 1 # height is always 1, 'y' is at bottom of line
-        text = utils.text_get(node).strip()
+        self.posx, self.posy = parent._conv_unit_pos(node.get('x'), node.get('y'))
+        self.posy -= 1 # height is always 1, 'y' is at bottom of line
+        self.localcontext = parent.localcontext
+        self.node = node
+
+    def rec_render(self, node):
+        txts = []
+        t = node.text
+        if t:
+            txts.append(utils._process_text(self, t))
+        for n in utils._child_get(node, self):
+            txts += self.rec_render(n)
+        t = node.tail
+        if t:
+            txts.append(utils._process_text(self, t))
+        return txts
+
+    def get_tb(self, parent):
+        node = self.node
+        text = u''.join(self.rec_render(node)).strip()
+        posx, posy = self.posx, self.posy # copy!
         if not text:
             self.tb = False
             return
@@ -391,21 +409,16 @@ class _rml_tmpl_draw_string(_rml_tmpl_tag):
             # centered
             posx -= len(text) / 2.0
         else:
-            raise ValueError("Invelid draw string tag: %s" % node.tag)
+            raise ValueError("Invalid draw string tag: %s" % node.tag)
 
-        self.tb = textbox(posx, posy, width=len(text), height=1)
-        res = self.tb.appendtxt(text)
+        tb = textbox(posx, posy, width=len(text), height=1)
+        res = tb.appendtxt(text)
         assert not res, "Remainder in drawString"
-        self.tb.fline()
-
-    def get_tb(self, parent):
-        return self.tb
+        tb.fline()
+        return tb
 
     def __repr__(self):
-        if self.tb:
-            return "DrawString < %d,%d, \"%s\">" % (self.tb.posx, self.tb.posy, self.tb.lines)
-        else:
-            return "DrawString <empty>"
+        return "DrawString < %d,%d >" % (self.posx, self.posy)
 
 class _rml_no_op(_rml_tmpl_tag):
     def get_tb(self, parent):
