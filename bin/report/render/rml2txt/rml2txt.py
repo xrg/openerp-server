@@ -202,7 +202,7 @@ class _flowable(object):
         for n in range(length):
             self.tb.newline()
 
-    def _tag_table(self, node):
+    def _tag_blockTable(self, node):
         self.tb.fline()
         saved_tb = self.tb
         self.tb = None
