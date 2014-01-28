@@ -101,6 +101,14 @@ class AuthProvider(object):
     def authenticate(self, user, passwd, client_address):
         return False
 
+    def check_again(self, stored_creds, new_creds, handler):
+        """Check that `new_creds` of a subsequent request are still same as `stored_creds`
+
+            @return True if they are still valid, in which case auth. will shortcut
+                to proxied session
+        """
+        return False
+
     def log(self, msg, lvl=None):
         print msg
 
@@ -155,12 +163,12 @@ class BasicAuthProxy(AuthProxy):
         self.auth_tries = 0
 
     def checkRequest(self,handler,path = '/'):
-        if self.auth_creds:
-            return True
         auth_str = handler.headers.get('Authorization',False)
         if auth_str and auth_str.startswith('Basic '):
             auth_str=auth_str[len('Basic '):]
             (user,passwd) = base64.decodestring(auth_str).split(':', 1)
+            if self.provider.check_again(self.auth_creds, (user, passwd), handler):
+                return True
             self.provider.log("Found user=\"%s\", passwd=\"%s\"" %(user,passwd))
             self.auth_creds = self.provider.authenticate(user,passwd,handler.client_address)
             if self.auth_creds:

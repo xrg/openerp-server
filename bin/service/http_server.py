@@ -764,13 +764,15 @@ class OerpAuthProxy(AuthProxy):
                 self.provider.log("Wrong path: %s, failing auth" %path)
                 raise AuthRejectedExc("Authorization failed. Wrong sub-path.")
 
-        if db in self.auth_creds and not (self.auth_creds[db] is False):
-            return True
         auth_str = handler.headers.get('Authorization',False)
 
         if auth_str and auth_str.startswith('Basic '):
             auth_str=auth_str[len('Basic '):]
             (user,passwd) = base64.decodestring(auth_str).split(':',1)
+            if db in self.auth_creds and not (self.auth_creds[db] is False):
+                if self.provider.check_again(self.auth_creds[db], (user, passwd), handler):
+                    return True
+        
             try:
                 acd = self.provider.authenticate(db,user,passwd,handler.client_address)
                 addr_str = self._get_addr_str(handler.client_address)
@@ -841,6 +843,16 @@ class OpenERPAuthProvider(AuthProvider):
             return False
         return False
 
+    def check_again(self, auth_creds, new_creds, handler):
+        try:
+            if auth_creds and isinstance(auth_creds, tuple) \
+                    and new_creds and len(new_creds) >= 2:
+                if auth_creds[:2] == new_creds[:2] :
+                    return True
+        except Exception, e:
+            logging.getLogger("auth").debug("Fail auth: %s", e )
+        return False
+
     def log(self, msg, lvl=logging.INFO):
         logging.getLogger("auth").log(lvl,msg)
 
@@ -853,6 +865,10 @@ class OpenERPRootProvider(OpenERPAuthProvider):
                 return True
         except security.ExceptionNoTb:
             return False
+        return False
+
+    def check_again(self, auth_creds, new_creds, handler):
+        # always trigger a full check
         return False
 
 #eof
