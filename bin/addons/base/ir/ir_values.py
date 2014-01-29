@@ -207,6 +207,8 @@ class ir_values(osv.osv):
                 continue
             if x[3]:
                 model,id = x[2].split(',')
+                if id == 'False' or not id.isdigit():
+                    continue
                 # FIXME: It might be a good idea to opt-in that kind of stuff
                 # FIXME: instead of arbitrarily removing random fields
                 if model not in fields_by_model:
