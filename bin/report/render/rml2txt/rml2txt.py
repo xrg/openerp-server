@@ -594,7 +594,8 @@ class _rml_template(object):
         if self.cur_page is None:
             self.cur_page = []
             self.frame_pos = -1
-            self.page_no += 1
+            if self.page_no > 0:
+                self.out_fp.write('\f')
             if self.page_limit and self.page_no > self.page_limit:
                 raise RuntimeError("Tried to start page %d > %d" % (self.page, self.page_limit))
             for frame in self.page_template[self.template]:
@@ -646,9 +647,9 @@ class _rml_template(object):
             for line in tb.renderlines():
                 self.out_fp.write(line+'\n')
                 line_no += 1
-        self.out_fp.write('\f')
         self.cur_page = None
         self.frame_pos = -1
+        self.page_no += 1
 
 class _rml_doc(object):
     _log = logging.getLogger('render.rml2txt')
