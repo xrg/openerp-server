@@ -868,7 +868,15 @@ class OpenERPRootProvider(OpenERPAuthProvider):
         return False
 
     def check_again(self, auth_creds, new_creds, handler):
-        # always trigger a full check
+        """ Same check as `authenticate()`, but silent at logging
+        """
+        try:
+            if auth_creds is True and new_creds and len(new_creds) >= 2 \
+                    and new_creds[0] == 'root':
+                if security.check_super(new_creds[1]):
+                    return True
+        except security.ExceptionNoTb:
+            return False
         return False
 
 #eof
