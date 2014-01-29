@@ -26,6 +26,7 @@ import StringIO
 # import copy
 from lxml import etree
 # import base64
+import math
 import logging
 import threading
 import re
@@ -198,8 +199,8 @@ class _flowable(object):
             self.nitags.append(tag)
 
     def _tag_spacer(self, node):
-        length = 1+int(utils.unit_get(node.get('length')))/35
-        for n in range(length):
+        length = self.template._conv_unit_size(0, node.get('length'))[1]
+        for n in range(int(math.ceil(length))):
             self.tb.newline()
 
     def _tag_blockTable(self, node):
