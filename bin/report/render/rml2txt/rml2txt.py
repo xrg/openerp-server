@@ -186,10 +186,9 @@ class _flowable(object):
     """
     _log = logging.getLogger('render.rml2txt')
 
-    def __init__(self, parent_doc):
-        self.parent_doc = parent_doc
-        self.localcontext = parent_doc.localcontext
-        self.template = parent_doc.templates[0]
+    def __init__(self, template, localcontext):
+        self.localcontext = localcontext
+        self.template = template
         self.nitags = []
         self._pto_header = None
 
@@ -311,7 +310,7 @@ class _flowable_doc(_flowable):
     """Master flowable, able to continue on next frames
     """
     def __init__(self, parent_doc):
-        super(_flowable_doc, self).__init__(parent_doc)
+        super(_flowable_doc, self).__init__(template=parent_doc.templates[0], localcontext=parent_doc.localcontext)
         self.nextFrameName = None
 
     def _tag_pto(self, node):
@@ -367,7 +366,8 @@ class _flowable_doc(_flowable):
 
 class _flowable_child(_flowable):
     def __init__(self, parent, posx, posy, width, height):
-        super(_flowable_child, self).__init__(parent.parent_doc)
+        assert isinstance(parent, _flowable), "parent is %s" % type(parent)
+        super(_flowable_child, self).__init__(parent.template, parent.localcontext)
         self.tb = None
         self.posx = posx
         self.posy = posy
@@ -491,12 +491,13 @@ class _rml_tmpl_place(_rml_tmpl_tag):
         self.posy -= self.height
         self.localcontext = parent.localcontext
         self.node = node
+        self.fl_parent = _flowable(parent, parent.localcontext) # pseudo-parent
     
     def __repr__(self):
         return "Place <(%s,%s), %sx%s>" % (self.posx, self.posy, self.width, self.height)
 
     def get_tb(self, parent):
-        fl = _flowable_child(self, self.posx, self.posy, self.width, self.height)
+        fl = _flowable_child(self.fl_parent, self.posx, self.posy, self.width, self.height)
         return fl.render(self.node)
 
 class _rml_template(object):
