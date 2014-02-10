@@ -11,7 +11,6 @@ function waitFor (ready, callback, timeout, timeoutMessageCallback) {
             if(!condition) {
                 var message = timeoutMessageCallback ? timeoutMessageCallback() : "Timeout after "+timeout+" ms";
                 console.log(message);
-                console.log("Waiting for " + ready);
                 console.log("error");
                 phantom.exit(1);
             } else {
@@ -106,18 +105,18 @@ function PhantomTest() {
         var url = self.origin + url_path;
         self.page.open(url, function(status) {
             if (status !== 'success') {
-                self.error("failed to load " + url)
+                self.error("failed to load " + url);
             } else {
                 console.log('loaded', url, status);
                 // process ready
                 waitFor(function() {
-                    return self.page.evaluate(function (ready) { 
+                    return self.page.evaluate(function (ready) {
                         var r = false;
                         try {
                             r = !!eval(ready);
                         } catch(ex) {
-                            console.log("waiting for page " + ready)
-                        };
+                            console.log("waiting for: " + ready);
+                        }
                         return r;
                     }, ready);
                 // run test

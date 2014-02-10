@@ -165,9 +165,11 @@ class HttpCase(TransactionCase):
                 line, buf = buf.split('\n', 1)
                 _logger.info("phantomjs: %s", line)
                 if line == "ok":
+                    phantom.exit(0);
                     _logger.info("phantomjs test successful")
                     return
                 if line == "error":
+                    phantom.exit(1);
                     raise Exception("phantomjs test failed")
 
     def phantom_run(self, cmd, timeout):
