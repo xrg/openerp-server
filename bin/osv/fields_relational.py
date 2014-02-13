@@ -619,7 +619,17 @@ class one2many(_rel2many):
         for act in values:
             if act[0] == 0:
                 act[2][self._fields_id] = id
-                id_new = obj.create(cr, user, act[2], context=context)
+                if act[2].get('_vptr', False):
+                    obj_v = obj.pool.get(act[2]['_vptr'])
+                    obj_col = obj_v._inherits.get(self._obj, False)
+                    if not obj_col:
+                        raise ValueError("Data for %s came, which does not inherit %s" % (act[2]['_vptr'], self._obj))
+                    vals_cpy = act[2].copy()
+                    vals_cpy.pop('_vptr')
+                    id_v_new = obj_v.create(cr, user, vals_cpy, context=context)
+                    id_new = obj_v.read(cr, user, id_v_new, fields=[obj_col], load='_classic_write')[obj_col]
+                else:
+                    id_new = obj.create(cr, user, act[2], context=context)
                 result += obj._store_get_values(cr, user, [id_new], act[2].keys(), context)
             elif act[0] == 1:
                 obj.write(cr, user, [act[1]], act[2], context=context)
@@ -904,7 +914,17 @@ class many2many(_rel2many):
             if not (isinstance(act, (list, tuple)) and act):
                 continue
             if act[0] == 0:
-                idnew = obj.create(cr, user, act[2], context=context)
+                if act[2].get('_vptr', False):
+                    obj_v = obj.pool.get(act[2]['_vptr'])
+                    obj_col = obj_v._inherits.get(self._obj, False)
+                    if not obj_col:
+                        raise ValueError("Data for %s came, which does not inherit %s" % (act[2]['_vptr'], self._obj))
+                    vals_cpy = act[2].copy()
+                    vals_cpy.pop('_vptr')
+                    id_v_new = obj_v.create(cr, user, vals_cpy, context=context)
+                    idnew = obj_v.read(cr, user, id_v_new, fields=[obj_col], load='_classic_write')[obj_col]
+                else:
+                    idnew = obj.create(cr, user, act[2], context=context)
                 cr.execute('insert into '+rel+' ('+id1+','+id2+') values (%s,%s)', (id, idnew), debug=obj._debug)
             elif act[0] == 1:
                 obj.write(cr, user, [act[1]], act[2], context=context)
