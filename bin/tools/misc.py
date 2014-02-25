@@ -1614,7 +1614,12 @@ class attrob(object):
         """Initialize and fill with dict
         """
         super(attrob, self).__init__()
-        self.__dict__.update(adict)
+        self.__attrs = adict
+
+    def __getattr__(self, name):
+        if name not in self.__attrs:
+            raise AttributeError(name)
+        return self.__attrs[name]
 
 class TSValue(object):
     """ A threading-safe variable, with notify functionality.
