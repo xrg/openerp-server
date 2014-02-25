@@ -54,7 +54,7 @@ def copy_value(value):
     """Use this default value. Will yield a function"""
     return lambda *a, **kw: value
 
-def copy_default(self, cr, uid, obj, id, f, data, context):
+def copy_default(cr, uid, obj, id, f, data, context):
     """Use the default value at copying
     
         So far, this method uses *only* the value of _defaults. It does
