@@ -73,9 +73,10 @@ class WkfAntiCacheEngine(WorkflowEngine):
     def __del__(self):
         """If this engine is killed, all cached objects must expire
         """
-        for it in self._items.values():
-            if it():
-                it().expire()
+        for vs in self._items.values():
+            for it in vs:
+                if it():
+                    it().expire()
         self._items = None # dereference
 
     def __clear_ids(self, ids):
