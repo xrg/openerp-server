@@ -91,13 +91,23 @@ class ir_sequence(osv.osv):
         if test not in _irs_tests:
             raise Exception('The test "%s" is not valid for ir.sequence.get_id()' % test)
         return _irs_tests[test]
-    
+
     def get_id(self, cr, uid, sequence_id, test='id', context=None):
         """Obtain/Produce next sequence number
-        
+
             @params test+sequence_id determine the sequence to use. They can either
                 be a db. ID of the sequence (test=='id') or the short-code of it
                 (test=='code')
+
+            Algorithm will try all matching ir.sequence records, by descending order
+            of `weight`. (ie. greater weight will be tried first)
+            Sequences will have their `condition` evaluated against `context`
+            and `this` will contain the fields of the sequence record itself.
+
+            eg. "product_id == 4" will check that context['product_id'] equals to 4,
+            will also skip this sequence if no 'product_id' is set in the context.
+            eg. "this.number_next < 100" means it will stop using this sequence
+            after number 99
         """
         if not context:
             context = {}
