@@ -48,7 +48,6 @@ class textbox(object):
         self.height = height
         self.lines = []
         self.curline = ''
-        self.endspace = False
         # size!
         self.wordwrap = False
         if self.width:
@@ -58,7 +57,6 @@ class textbox(object):
         n = self.__class__(self.posx, self.posy, self.width, self.height)
         n.lines = self.lines[:]
         n.curline = self.curline
-        n.endspace = self.endspace
 
     @property
     def full(self):
@@ -89,8 +87,8 @@ class textbox(object):
             return
         remainder = ws_re.sub(' ', txt)
 
-        if self.endspace and remainder[0] == ' ':
-            # already had space from previous op
+        if remainder[0] == ' ' and not self.curline:
+            # already rendered space from previous op
             remainder = remainder[1:]
 
         while remainder:
