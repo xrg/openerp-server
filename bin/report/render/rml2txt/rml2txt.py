@@ -52,7 +52,7 @@ class textbox(object):
         # size!
         self.wordwrap = False
         if self.width:
-            self.wordwrap = min(int(self.width / 10), 5)
+            self.wordwrap = min(int(self.width / 5), 8)
 
     def __copy__(self):
         n = self.__class__(self.posx, self.posy, self.width, self.height)
