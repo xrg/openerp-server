@@ -578,7 +578,7 @@ class function(_column):
                                 # workaround the str() of fields.function.get() :(
                                 rval = int(rval)
                             elif self._type == 'float':
-                                assert isinstance(rval, float), "%s: %r" %(type(rval), rval)
+                                assert isinstance(rval, __builtin__.float), "%s: %r" %(type(rval), rval)
                                 if self.digits:
                                     rval = round(rval, self.digits[1]) # TODO: shadow!
 
