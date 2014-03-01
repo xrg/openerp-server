@@ -707,8 +707,13 @@ if __name__=="__main__":
     if len(sys.argv)>1:
         if sys.argv[1]=='--help':
             trml2pdf_help()
+        args = sys.argv[1:]
+        out_encoding = 'iso8859-7'
+        if args[0] == '-u':
+            out_encoding = 'utf-8'
+            args.pop(0)
         logging.basicConfig(level=logging.DEBUG)
-        print parseString(file(sys.argv[1], 'r').read()).encode('iso8859-7')
+        print parseString(file(args[0], 'r').read()).encode(out_encoding)
     else:
         print 'Usage: trml2txt input.rml >output.txt'
         print 'Try \'trml2txt --help\' for more information.'
