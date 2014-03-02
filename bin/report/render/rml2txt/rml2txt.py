@@ -521,9 +521,9 @@ class _rml_template(object):
         self.loop = 0
         self.page_size = (595.0,842.0)
         self.margin_left = self.margin_top = 0
-        self._font_aspect = 0.53
+        self._font_aspect = 0.55
         self._font_size = None
-        self._set_font_size(10.0)
+        self._set_font_size(10.1)
         self._set_margins_pt(28.0, 28.0)
         self.page_limit = page_limit
 
