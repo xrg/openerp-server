@@ -724,7 +724,7 @@ if __name__=="__main__":
             out_encoding = 'utf-8'
             args.pop(0)
         logging.basicConfig(level=logging.DEBUG)
-        print parseString(file(args[0], 'r').read()).encode(out_encoding)
+        print parseString(file(args[0], 'r').read()).encode(out_encoding),
     else:
         print 'Usage: trml2txt input.rml >output.txt'
         print 'Try \'trml2txt --help\' for more information.'
