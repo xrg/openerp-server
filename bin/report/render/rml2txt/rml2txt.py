@@ -520,9 +520,11 @@ class _rml_template(object):
         self.page_template = {}
         self.loop = 0
         self.page_size = (595.0,842.0)
+        self.margin_left = self.margin_top = 0
         self._font_aspect = 0.53
         self._font_size = None
         self._set_font_size(10.0)
+        self._set_margins_pt(28.0, 28.0)
         self.page_limit = page_limit
 
         if node.get('pageSize'):
@@ -573,6 +575,9 @@ class _rml_template(object):
 
     def _conv_unit_height(self, y):
         return utils.unit_get(y) / self._font_size[1]
+
+    def _set_margins_pt(self, left, top):
+        self.margin_left, self.margin_top = self._conv_point_size(left, top)
 
     def set_next_template(self):
         self.template = self.template_order[(self.template_order.index(self.template)+1) % self.template_order]
@@ -636,8 +641,14 @@ class _rml_template(object):
 
     def page_stop(self):
         self.cur_page.sort(key=lambda t: (t.posy, t.posx))
-        line_no = 0
+        line_no = self.margin_top or 0
         for tb in self.cur_page:
+            if self.margin_left:
+                if tb.posx < self.margin_left:
+                    raise RuntimeError("Frame at %d,%d less than left margin of %d",
+                                    tb.posx, tb.posy, self.margin_left)
+                tb.posx -= self.margin_left
+
             if line_no < tb.posy:
                 n = int(tb.posy - line_no)
                 self.out_fp.write('\n' * n)
