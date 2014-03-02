@@ -137,7 +137,7 @@ class textbox(object):
         lineoff = ""
         if self.posy:
             result += "\n"  * int(self.posy)
-        if (self.posx+xoffset):
+        if (self.posx + xoffset):
             lineoff += " " * int(self.posx+xoffset)
         for l in self.lines:
             result += lineoff+ l +"\n"
