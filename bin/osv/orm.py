@@ -3323,7 +3323,9 @@ class orm(orm_template):
         if config.get_misc_db(cr.dbname, 'orm', 'fallback_search', None) == True:
             self._fallback_search = True
 
-        self._columns = self._columns.copy() # AAArrgh!
+        # Make shallow copy of _columns, some of them may be deep-copied
+        # during post_init()
+        self._columns = self._columns.copy()
 
         self._load_manual_fields(cr)
 
@@ -3365,9 +3367,10 @@ class orm(orm_template):
                 klass = fields.get_field_class(field['ttype'])
                 self._columns[field['name']] = klass.from_manual(field, attrs)
 
-        for name, field in self._columns.items():
-            field.post_init(cr, name, self)
-
+        for name in self._columns:
+            nf = self._columns[name].post_init(cr, name, self)
+            if nf:
+                self._columns[name] = nf
 
     def _reload_field_acls(self, cr):
         self._field_group_acl = {}

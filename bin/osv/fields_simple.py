@@ -4,7 +4,7 @@
 #    OpenERP, Open Source Management Solution
 #    Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>).
 #    Copyright (C) 2010-2011 OpenERP SA. (www.openerp.com)
-#    Copyright (C) 2008-2013 P. Christeas <xrg@hellug.gr>
+#    Copyright (C) 2008-2014 P. Christeas <xrg@hellug.gr>
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -274,21 +274,24 @@ class float(_column):
             self._sql_type = 'numeric'
         self.digits_compute = digits_compute
 
+    def copy(self):
+        kw = {}
+        for k, v in self.__dict__.items():
+            if k.startswith('__'):
+                continue
+            if k.startswith('_'):
+                kw[k[1:]] = v
+            else:
+                kw[k] = v
+        return self.__class__(**kw)
 
     def post_init(self, cr, name, obj):
         super(float, self).post_init(cr, name, obj)
         if self.digits_compute:
-            t = self.digits_compute(cr)
-            def __sset(x):
-                if x is None or x is False:
-                    return None
-                # TODO Decimal
-                if isinstance(x, basestring):
-                    x = __builtin__.float(x)
-                return __builtin__.round(x, t[1])
-            self._symbol_set=('%s', __sset)
-            self.digits = t
-            self._sql_type = 'numeric'
+            nf = self.copy()
+            nf._sql_type = 'numeric'
+            nf.digits_change(cr)
+            return nf
 
     def digits_change(self, cr):
         if self.digits_compute:

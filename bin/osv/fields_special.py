@@ -4,7 +4,7 @@
 #    OpenERP, Open Source Management Solution
 #    Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>).
 #    Copyright (C) 2010-2011 OpenERP SA. (www.openerp.com)
-#    Copyright (C) 2008-2011 P. Christeas <xrg@hellug.gr>
+#    Copyright (C) 2008-2014 P. Christeas <xrg@hellug.gr>
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -280,23 +280,32 @@ class property(function):
 
 
     def _field_get(self, cr, uid, model_name, prop):
-        if not self.field_id.get(cr.dbname):
+        if not self.field_id:
             cr.execute('SELECT id \
                     FROM ir_model_fields \
                     WHERE name=%s AND model=%s', (prop, model_name))
             res = cr.fetchone()
-            self.field_id[cr.dbname] = res and res[0]
-        return self.field_id[cr.dbname]
+            self.field_id = res and res[0]
+        return self.field_id
 
-    def __init__(self, obj_prop, **args):
+    def __init__(self, obj_prop=None, **args):
         # TODO remove obj_prop parameter (use many2one type)
-        self.field_id = {}
+        self.field_id = False
+        if obj_prop is not None:
+            args['fnct_inv_arg'] = obj_prop
+        args.pop('fnct', None)
+        args.pop('arg', None)
+        args.pop('fnct_inv', None)
+        args.pop('multi', None)
         function.__init__(self, self._fnct_read, False, self._fnct_write,
-                          obj_prop, multi='properties', **args)
+                          multi='properties', **args)
 
     def post_init(self, cr, name, obj):
-        super(property, self).post_init(cr, name, obj)
-        self.field_id = {}
+        # always copy, this field is db-specific
+        nf = self.copy()
+        super(property, nf).post_init(cr, name, obj)
+        nf.field_id = False
+        return nf
 
 register_field_classes(binary, selection, serialized, struct, property)
 

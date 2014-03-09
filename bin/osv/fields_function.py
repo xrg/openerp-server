@@ -4,7 +4,7 @@
 #    OpenERP, Open Source Management Solution
 #    Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>).
 #    Copyright (C) 2010-2011 OpenERP SA. (www.openerp.com)
-#    Copyright (C) 2008-2011 P. Christeas <xrg@hellug.gr>
+#    Copyright (C) 2008-2014 P. Christeas <xrg@hellug.gr>
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -287,7 +287,9 @@ class function(_column):
             'not in': lambda a, b: (not a) or bool(a[1] not in b),
             }
 
-    def __init__(self, fnct, arg=None, fnct_inv=None, fnct_inv_arg=None, type='float', fnct_search=None, obj=None, method=False, store=False, multi=False, **args):
+    def __init__(self, fnct, arg=None, fnct_inv=None, fnct_inv_arg=None,
+                type='float', fnct_search=None, obj=None, method=False,
+                store=False, multi=False, **args):
         """
             @param multi compute several fields in one call
             @param relation name of ORM model for relational functions,
@@ -325,7 +327,9 @@ class function(_column):
             args.setdefault('size', 16)
         if digits is not None:
             args['digits'] = digits # put it back
-        self._shadow = get_field_class(self._type)(obj=self._obj, shadow=True, **args)
+        self._shadow = args.pop('_shadow', None)
+        if self._shadow is None:
+            self._shadow = get_field_class(self._type)(obj=self._obj, shadow=True, **args)
 
         if store:
             if self._type != 'many2one':
@@ -339,8 +343,25 @@ class function(_column):
         self._symbol_f = self._shadow._symbol_f
         self._symbol_set = self._shadow._symbol_set
 
+    def copy(self, shadow=None):
+        """ Make a copy of this field
+
+            Non-trivial, since we need to construct a valid instance, copy the
+            dict and adjust shadow field
+        """
+        kw = {}
+        for k, v in self.__dict__.items():
+            if k.startswith('__') or k in ('_symbol_c', '_symbol_f', \
+                        '_symbol_get', '_symbol_set', '_shadow'):
+                continue
+            if k.startswith('_'):
+                kw[k[1:]] = v
+            else:
+                kw[k] = v
+        return self.__class__(_shadow=shadow, **kw)
+
     def digits_change(self, cr):
-        self._shadow.digits_change(cr)
+        return self._shadow.digits_change(cr)
 
     @property
     def digits(self):
@@ -349,7 +370,12 @@ class function(_column):
     def post_init(self, cr, name, obj):
 
         super(function, self).post_init(cr, name, obj)
-        self._shadow.post_init(cr, name, obj)
+        snf = self._shadow.post_init(cr, name, obj)
+        if snf:
+            # we need to clone ourselves, too
+            nf = self.copy(shadow=snf)
+        else:
+            nf = None
         if not self.store:
             return
         if self.store is True:
@@ -379,6 +405,8 @@ class function(_column):
                 pool_fnstore[object].append( (obj._name, name, fnct, fields2, order, length))
                 pool_fnstore[object].sort(lambda x,y: cmp(x[4],y[4]))
 
+        # will be a clone of self or None
+        return nf
 
     def search(self, cr, uid, obj, name, args, context=None):
         """ Perform partial search for 'args' within a greater query
@@ -711,8 +739,15 @@ class related(function):
         return res
 
     def __init__(self, *arg, **args):
-        self._relations = []
+        if 'arg' in args and not arg:
+            arg = args.pop('arg', None)
+        args.pop('fnct', None)
+        args.pop('fnct_inv', None)
+        args.pop('fnct_inv_arg', None)
+        args.pop('method', None)
+        args.pop('fnct_search', None)
         super(related, self).__init__(self._fnct_read, arg, self._fnct_write, fnct_inv_arg=arg, method=True, fnct_search=self._fnct_search, **args)
+        self._relations = []
         if self.store is True:
             # TODO: improve here to change self.store = {...} according to related objects
             pass
