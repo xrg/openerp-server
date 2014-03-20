@@ -207,6 +207,7 @@ class _string_field(_column):
                         return b_dest[name] + delim + b_src[name]
         return super(_string_field, self).calc_merge(cr, uid, obj, name, b_dest=b_dest, b_src=b_src, context=context)
 
+
 class char(_string_field):
     """ Limited characters string type
         Like text, but have a size bound
@@ -387,7 +388,6 @@ class datetime(_column):
 
             Since the datetime API, also supports lefts like .month, .day etc!
         """
-        left = None
         if len(lefts) == 2:
             fn = self._part_fns.get(lefts[1], None)
             if fn is None:

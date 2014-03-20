@@ -20,7 +20,6 @@
 #
 ##############################################################################
 
-from tools import reverse_enumerate
 import logging
 from tools import expr_utils as eu
 from tools.translate import _

@@ -76,6 +76,8 @@ from tools.expr_utils import DomainError
 # List of etree._Element subclasses that we choose to ignore when parsing XML.
 from tools import SKIPPED_ELEMENT_TYPES
 
+__hush_pyflakes = [ netsvc, IntegrityError, DatabaseError, DomainError]
+
 regex_order = re.compile('^(([a-z0-9_]+|"[a-z0-9_]+")( *desc| *asc)?( *, *|))+$', re.I)
 
 FIELDS_ONLY_DEFAULT = 'auto'
@@ -1035,7 +1037,6 @@ class orm_template(object):
             if x=='.id': return [x]
             return x.replace(':id','/id').replace('.id','/.id').split('/')
         fields_to_export = map(fsplit, fields_to_export)
-        fields_export = fields_to_export + []
         warning = ''
         warning_fields = []
         datas = []
@@ -1146,7 +1147,7 @@ class orm_template(object):
                 if field[len(prefix)]=='id':
                     try:
                         data_res_id = _get_id(model_name, line[i], current_module, 'id')
-                    except ValueError, e:
+                    except ValueError:
                         pass
                     xml_id = line[i]
                     continue
@@ -1226,7 +1227,6 @@ class orm_template(object):
 
         if config.get('import_partial', False) and filename:
             data = pickle.load(file(config.get('import_partial')))
-            original_value = data.get(filename, 0)
 
         position = 0
         while position<len(datas):
@@ -1239,7 +1239,7 @@ class orm_template(object):
                 return (-1, res, 'Line ' + str(position) +' : ' + '!\n'.join(warning), '')
 
             try:
-                id = ir_model_data_obj._update(cr, uid, self._name,
+                ir_model_data_obj._update(cr, uid, self._name,
                      current_module, res, mode=mode, xml_id=xml_id,
                      noupdate=noupdate, res_id=res_id, context=context)
             except Exception, e:
@@ -2209,12 +2209,8 @@ class orm_template(object):
     def name_get(self, cr, user, ids, context=None):
         """
 
-        :param cr: database cursor
-        :param user: current user id
-        :type user: integer
         :param ids: list of ids
         :param context: context arguments, like lang, time zone
-        :type context: dictionary
         :return: tuples with the text representation of requested objects for to-many relationships
 
         """
@@ -2688,7 +2684,7 @@ class orm_memory(orm_template):
         args = args[:]
         res=[]
         # if the object has a field named 'active', filter out all inactive
-        # records unless they were explicitely asked for
+        # records unless they were explicitly asked for
         if 'active' in self._columns and (active_test and context.get('active_test', True)):
             if args:
                 active_in_args = False
@@ -3166,7 +3162,6 @@ class orm(orm_template):
     def _auto_init_sql(self, schema, context=None):
         if context is None:
             context = {}
-        store_compute =  False
         create = False
         todo_end = []
 
@@ -3231,7 +3226,6 @@ class orm(orm_template):
             # self._check_removed_columns(cr, log=False) TODO
 
             # iterate on the "object columns"
-            todo_update_store = []
             update_custom_fields = context.get('update_custom_fields', False)
 
             for k in self._columns:
@@ -4021,7 +4015,6 @@ class orm(orm_template):
 
         """
         for field in vals.keys():
-            fobj = None
             if field == '_vptr':
                 continue
 
@@ -4264,7 +4257,6 @@ class orm(orm_template):
         self.pool.get('ir.model.access').check(cr, user, self._name, 'create', context=context)
 
         for field in vals.keys():
-            fobj = None
             if field == '_vptr':
                 continue
             if self._field_group_acl.get(field, False):
@@ -4574,7 +4566,7 @@ class orm(orm_template):
             context = {}
         domain = domain[:]
         # if the object has a field named 'active', filter out all inactive
-        # records unless they were explicitely asked for
+        # records unless they were explicitly asked for
         if 'active' in (self._columns.keys() + self._inherit_fields.keys()) and (active_test and context.get('active_test', True)):
             if domain:
                 active_in_args = False

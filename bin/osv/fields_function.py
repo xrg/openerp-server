@@ -33,7 +33,7 @@ from fields import _column, get_nice_size, sanitize_binary_value, \
 #from tools.translate import _
 import logging
 import __builtin__
-from fields_simple import boolean, integer, float
+# from fields_simple import boolean, integer, float
 from tools import config
 from tools import sql_model
 from tools.translate import _
