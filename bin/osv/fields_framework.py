@@ -190,12 +190,20 @@ class id_field(integer):
             return None # as-is
 
     def calc_group(self, cr, uid, obj, lefts, right, context):
+        """Expose 'id' to aggregate rows
+
+            In fact, we do NEED an 'id' column for each row of group results.
+            That id, must be unique, or else the clients won't be able to tell
+            those rows apart. If we consider that a record of the main table
+            can never participate in two aggregate groups (when GROUP BY is used)
+            then MIN(id) or MAX(id) may be our unique id.
+        """
         if len(lefts) > 1:
             raise NotImplementedError("Cannot use %s yet" % ('.'.join(lefts)))
         full_field = '"%s".%s' % (obj._table, lefts[0])
         if right is True:
             aggregate = 'MIN(%s)' % lefts[0]
-        elif isinstance(right, basestring) and right.lower() in ('min', 'max', 'count'):
+        elif isinstance(right, basestring) and right.lower() in ('min', 'max'):
             aggregate = '%s(%s)' % (right.upper(), lefts[0])
         else:
             raise ValueError("Invalid aggregate function: %r", right)
