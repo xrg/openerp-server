@@ -236,7 +236,7 @@ class expression(object):
                 cur_model = self._joined_fields[fargs[0]]
                 continue
             elif fargs[0] in cur_model._inherit_fields:
-                next_model = cur_model.pool.get(model._inherit_fields[fargs[0]][0])
+                next_model = cur_model.pool.get(cur_model._inherit_fields[fargs[0]][0])
                 # join that model and try to find the field there..
                 query.join((cur_model._table, next_model._table,
                                 cur_model._inherits[next_model._name],'id'),
