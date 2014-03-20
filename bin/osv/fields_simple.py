@@ -95,7 +95,21 @@ class integer(_column):
     _symbol_set = (_symbol_c, _symbol_f)
     _symbol_get = lambda self,x: x or 0
 
-class integer_big(_column):
+    def calc_group(self, cr, uid, obj, lefts, right, context):
+        if len(lefts) > 1:
+            raise NotImplementedError("Cannot use %s yet" % ('.'.join(lefts)))
+        full_field = '"%s".%s' % (obj._table, lefts[0])
+        if right is True:
+            right = self.group_operator or 'sum'
+        if isinstance(right, basestring) and right.lower() in ('min', 'max', 'sum', 'avg', 'count', 'stddev', 'variance'):
+            aggregate = '%s(%s)' % (right.upper(), lefts[0])
+        else:
+            raise ValueError("Invalid aggregate function: %r", right)
+        return '.'.join(lefts), { 'group_by': full_field, 'order_by': full_field,
+                'field_expr': full_field, 'field_aggr': aggregate }
+
+
+class integer_big(integer):
     _type = 'integer_big'
     _sql_type = 'bigint'
     # do not reference the _symbol_* of integer class, as that would possibly
@@ -207,7 +221,18 @@ class _string_field(_column):
                         return b_dest[name] + delim + b_src[name]
         return super(_string_field, self).calc_merge(cr, uid, obj, name, b_dest=b_dest, b_src=b_src, context=context)
 
-
+    def calc_group(self, cr, uid, obj, lefts, right, context):
+        if len(lefts) > 1:
+            raise NotImplementedError("Cannot use %s yet" % ('.'.join(lefts)))
+        full_field = '"%s".%s' % (obj._table, lefts[0])
+        if right is True:
+            right = self.group_operator or 'count'
+        if isinstance(right, basestring) and right.lower() in ('min', 'max', 'array_agg', 'count'):
+            aggregate = '%s(%s)' % (right.upper(), lefts[0])
+        else:
+            raise ValueError("Invalid aggregate function: %r", right)
+        return '.'.join(lefts), { 'group_by': full_field, 'order_by': full_field,
+                'field_expr': full_field, 'field_aggr': aggregate }
 class char(_string_field):
     """ Limited characters string type
         Like text, but have a size bound
@@ -307,6 +332,18 @@ class float(_column):
             self._symbol_set=('%s', __sset)
             self.digits = t
 
+    def calc_group(self, cr, uid, obj, lefts, right, context):
+        if len(lefts) > 1:
+            raise NotImplementedError("Cannot use %s yet" % ('.'.join(lefts)))
+        full_field = '"%s".%s' % (obj._table, lefts[0])
+        if right is True:
+            right = self.group_operator or 'sum'
+        if isinstance(right, basestring) and right.lower() in ('min', 'max', 'sum', 'avg', 'count', 'stddev', 'variance'):
+            aggregate = '%s(%s)' % (right.upper(), lefts[0])
+        else:
+            raise ValueError("Invalid aggregate function: %r", right)
+        return '.'.join(lefts), { 'group_by': full_field, 'order_by': full_field,
+                'field_expr': full_field, 'field_aggr': aggregate }
 
 class date(_column):
     _type = 'date'
@@ -336,6 +373,19 @@ class date(_column):
                 _defaults = { 'date': lazy_eval('yesterday'), }
         """
         return lazy_date_eval(estr, out_fmt='date')
+
+    def calc_group(self, cr, uid, obj, lefts, right, context):
+        if len(lefts) > 1:
+            raise NotImplementedError("Cannot use %s yet" % ('.'.join(lefts)))
+        full_field = '"%s".%s' % (obj._table, lefts[0])
+        if right is True:
+            right = self.group_operator or 'min'
+        if isinstance(right, basestring) and right.lower() in ('min', 'max'):
+            aggregate = '%s(%s)' % (right.upper(), lefts[0])
+        else:
+            raise ValueError("Invalid aggregate function: %r", right)
+        return '.'.join(lefts), { 'group_by': full_field, 'order_by': full_field,
+                'field_expr': full_field, 'field_aggr': aggregate }
 
 
 class datetime(_column):

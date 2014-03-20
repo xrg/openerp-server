@@ -3,7 +3,7 @@
 #
 #    OpenERP, Open Source Management Solution
 #    Copyright (C) 2004-2010 Tiny SPRL (<http://tiny.be>).
-#    Copyright (C) 2009,2011-2013 P. Christeas <xrg@hellug.gr>
+#    Copyright (C) 2009,2011-2014 P. Christeas <xrg@hellug.gr>
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -2822,16 +2822,21 @@ class orm(orm_template):
     _protected = ['read','write','create','default_get','perm_read','unlink','fields_get','fields_view_get','search','name_get','distinct_field_get','name_search','copy','import_data','search_count', 'exists']
     __logger = logging.getLogger('orm')
     __schema = NotImplemented   # please don't use this logger
-    
+
     def read_group(self, cr, uid, domain, fields, groupby, offset=0, limit=None, context=None, orderby=False):
         """
         Get the list of records in list view grouped by the given ``groupby`` fields
 
-        :param cr: database cursor
-        :param uid: current user id
-        :param domain: list specifying search criteria [['field_name', 'operator', 'value'], ...]
-        :param fields: list of fields present in the list view specified on the object
-        :param groupby: list of fields on which to groupby the records
+        :param domain: search criteria selecting the subset of data we are aggregating
+        :param fields: list or dictionary of fields to use/return. When a list is
+                provided, the 6.0 API is inferred and default aggregate functions
+                are selected for each of these fields. With a dictionary, keys are
+                the fields and values the "function expression" that selects which
+                aggregate function will be used. Value `True` means to use the
+                default function.
+        :param groupby: list of fields on which to groupby the records. On 6.0
+                API, the first one is used, others are transferred to 'group_by'
+                of the resulting context.
         :type fields_list: list (example ['field_name_1', ...])
         :param offset: optional number of records to skip
         :param limit: optional max number of records to return
@@ -2839,21 +2844,37 @@ class orm(orm_template):
         :param order: optional ``order by`` specification, for overriding the natural
                       sort ordering of the groups, see also :py:meth:`~osv.osv.osv.search`
                       (supported only for many2one fields currently)
-        :return: list of dictionaries(one dictionary for each record) containing:
+        :return: 6.0 API: list of dictionaries(one dictionary for each record) containing:
 
                     * the values of fields grouped by the fields in ``groupby`` argument
                     * __domain: list of tuples specifying the search criteria
                     * __context: dictionary with argument like ``groupby``
+                F3 API: list of dictionaries, each for each level of grouping:
+                    * group_level
+                    * __context To be used for all records in `values`
+                    * values: list of dicts, each for each value, appended with
+                        a `__domain` key, as above
         :rtype: [{'field_name_1': value, ...]
         :raise AccessError: * if user has no read rights on the requested object
                             * if user tries to bypass access rules for read on the requested object
 
         """
-        context = context or {}
+        from expression import expression
+        if context:
+            context = context.copy()
+        else:
+            context = {}
         self.pool.get('ir.model.access').check(cr, uid, self._name, 'read', context=context)
-        if not fields:
-            fields = self._columns.keys()
 
+        auto_fields = False
+        if not fields:
+            auto_fields = True
+            if isinstance(fields, dict):
+                fields = dict.fromkeys(self._columns.keys(), True)
+            else:
+                fields = self._columns.keys()
+
+        expression([]) # load a dummy one, so that implicit fields are loaded
         query = self._where_calc(cr, uid, domain, context=context)
         self._apply_ir_rules(cr, uid, query, 'read', context=context)
 
@@ -2861,22 +2882,178 @@ class orm(orm_template):
             _logger.debug("%s.read_group(%r, fields=%r, groupby=%r)", 
                     self._name, domain, fields, groupby)
 
+        if isinstance(groupby, basestring):
+            groupby = [groupby,]
+        elif not isinstance(groupby, (list, tuple)):
+            raise TypeError("read_group() groupby must be a list, not %s" % type(groupby))
 
-        # Take care of adding join(s) if groupby is an '_inherits'ed field
-        groupby_list = groupby
-        if groupby:
-            if isinstance(groupby, list):
-                groupby = groupby[0]
-            self._inherits_join_calc(groupby, query)
+        mode_API = context.get('mode_API', 'F3')
 
-        if groupby:
-            assert not groupby or groupby in fields, "Fields in 'groupby' must appear in the list of fields to read (perhaps it's missing in the list view?)"
-            groupby_def = self._columns.get(groupby) or (self._inherit_fields.get(groupby) and self._inherit_fields.get(groupby)[2])
-            assert groupby_def and groupby_def._classic_write, "Fields in 'groupby' must be regular database-persisted fields (no function or related fields), or function fields with store=True"
+        if isinstance(fields, list):
+            mode_API = '6.0'
+            fields = dict.fromkeys(fields, True)
 
-        fget = self.fields_get(cr, uid, fields, context=context)
-        float_int_fields = filter(lambda x: fget[x]['type'] in ('float','integer'), fields)
-        flist = ''
+        context['mode_API'] = mode_API
+
+        if 'id' not in fields:
+            # always include the "id" field, `fields.id_field()` class will do the rest
+            fields['id'] = True
+
+        # check that groupby is in our fields definitions
+        for g in groupby:
+            if g not in fields:
+                raise KeyError("Fields in 'groupby' must appear in the list of fields to read (perhaps it's missing in the list view?)")
+
+        joined_models = []
+        group_fields = defaultdict(dict)
+        for field_expr, field_afn  in fields.items():
+            fargs = field_expr.split('.')
+
+            # get the field, dive into inherited models:
+            cur_model = self
+            field = None
+            fargs0 = fargs[0]
+            while not field:
+                # code mostly copied from expression.__cleanup()
+                if fargs0 in cur_model._columns:
+                    field = cur_model._columns[fargs0]
+                elif fargs0 in expression._implicit_fields:
+                    field = expression._implicit_fields[fargs0]
+                elif cur_model._log_access and fargs0 in expression._implicit_log_fields:
+                    field = expression._implicit_log_fields[fargs0]
+                elif fargs0 in joined_models:
+                    cur_model = joined_models[fargs0]
+                elif fargs0 in cur_model._inherit_fields:
+                    next_model = self.pool.get(cur_model._inherit_fields[fargs0][0])
+                    # join that model and try to find the field there..
+                    query.join((cur_model._table, next_model._table,
+                                    cur_model._inherits[next_model._name],'id'),
+                                outer=False)
+                    joined_models[fargs0] = next_model
+                    cur_model = next_model
+                else:
+                    raise KeyError("No field \"%s\" in model \"%s\"" % (fargs0, cur_model._name))
+
+            k, d = field.calc_group(cr, uid, cur_model, fargs, field_afn, context)
+            if k:
+                group_fields[k].update(d)
+
+        if mode_API == '6.0':
+            # we only group by one level in 6.0
+            group_level = 1
+            max_group_level = 1
+        else:
+            # All F3-related modes
+            group_level = context.get('min_group_level', 0)
+            max_group_level = context.get('max_group_level', len(groupby))
+
+        # these will be used for all subsequent queries
+        from_clause, where_clause, where_clause_params = query.get_sql()
+
+        r_results = []
+        while group_level <= max_group_level:
+            group_by_now = groupby[:group_level]
+
+            select_fields = []
+            query_params = []
+            domain_fns = []
+
+            has_aggregate = ('id' not in group_by_now)
+            if has_aggregate:
+                if mode_API != '6.0' or (not group_by_now) \
+                        or (len(group_by_now) < 2 or context.get('group_by_no_leaf')):
+                    field_alias = '__count'
+                else:
+                    field_alias = '%s_count' % (group_by_now[0])
+                select_fields.append('COUNT("%s".id) AS "%s"' %(self._table, field_alias))
+
+            for field_expr in fields:
+                gfield = group_fields.get(field_expr, False)
+                if not gfield:
+                    if auto_fields or mode_API == "6.0":
+                        # auto-skip fields not explicitly requested
+                        continue
+                    else:
+                        # some field didn't register into 'group_fields',
+                        # this is reserved for future tricks
+                        raise NotImplementedError("Cannot handle field \"%s\" in %s.read_group()" % (field_expr, self._name))
+
+                if (field_expr in group_by_now) or not has_aggregate:
+                    # straight clause, we are groupped
+                    select_fields.append('%s AS "%s"' % ( gfield['field_expr'], field_expr))
+                    field_params = gfield.get('field_expr_params', False)
+                    if field_params is not False:
+                        query_params.append(field_params)
+                else: # has_aggregate
+                    field_aggr = gfield.get('field_aggr', None)
+                    if field_aggr is None and not auto_fields:
+                        raise KeyError("Field %s.\"%s\" cannot be aggregated" % (self._name, field_expr))
+                    elif field_aggr:
+                        select_fields.append('%s AS "%s"' % (field_aggr, field_expr))
+                        field_params = gfield.get('field_expr_params', False)
+                        if field_params is not False:
+                            query_params.append(field_params)
+
+            query = 'SELECT %s FROM %s'  %( ', '.join(select_fields), from_clause)
+            if where_clause:
+                query += ' WHERE ' + where_clause
+                query_params += where_clause_params
+
+            if has_aggregate:
+                group_exprs = []
+                def identity_dom(d):
+                    return lambda row: [(d, '=', row[d])]
+                for g in group_by_now:
+                    gfield = group_fields.get(g, False)
+                    if not gfield:
+                        raise except_orm(_('Invalid group_by'),
+                                 _('Invalid group_by specification: "%s".\n'
+                                    'A group_by specification must be a list of valid fields.') % \
+                                    (g,))
+                    group_exprs.append(gfield['group_by'])
+                    domain_fns.append(gfield.get('domain_fn', identity_dom(g)))
+
+                if group_exprs:
+                    query += ' GROUP BY %s' % ( ', '.join(group_exprs))
+                del group_exprs
+
+            our_result = {'group_level': group_level }
+            if group_level < len(groupby):
+                our_result['__context'] = {'group_by':groupby[group_level:]}
+            cr.execute(query, query_params, debug=self._debug)
+
+            our_result['values'] = []
+            # Query is expected to return values directly usable as an RPC
+            # result. We may only map None (aka. SQL NULL) to False.
+
+            for row in cr.dictfetchall():
+                for k in row:
+                    if row[k] is None:
+                        row[k] = False
+                if domain_fns:
+                    domain = []
+                    for dfn in domain_fns:
+                        domain += dfn(row)
+                    row['__domain'] = domain
+                our_result['values'].append(row)
+
+            r_results.append(our_result)
+            group_level += 1
+            # end while
+
+        if mode_API == '6.0':
+            assert len(r_results) == 1, "Strange: %d results for 6.0 API" % len(r_results)
+            ret = r_results[0]['values']
+            ctx2 = r_results[0].get('__context', False)
+            if ctx2:
+                # embed context in each row of results
+                for r in ret:
+                    r['__context'] = ctx2
+            return ret
+        else:
+            return r_results
+
+        
         group_count = group_by = groupby
         if groupby:
             if fget.get(groupby):
@@ -2894,49 +3071,7 @@ class orm(orm_template):
                 else:
                     groupby = ftbl+groupby
                     flist = groupby
-            else:
-                # Don't allow arbitrary values, as this would be a SQL injection vector!
-                raise except_orm(_('Invalid group_by'),
-                                 _('Invalid group_by specification: "%s".\n'
-                                    'A group_by specification must be a list of valid fields.') % \
-                                    (groupby,))
 
-
-        fields_pre = [f for f in float_int_fields if
-                   f == self.CONCURRENCY_CHECK_FIELD
-                or (f in self._columns and getattr(self._columns[f], '_classic_write'))]
-        for f in fields_pre:
-            if f not in ['id','sequence']:
-                oper = fget[f].get('group_operator','sum')
-                if flist:
-                    flist += ', '
-                ftbl = ''
-                if f in self._columns:
-                    ftbl = '"%s".' % self._table
-                elif f in self._inherit_fields:
-                    ftbl = '"%s".' % self.pool.get(self._inherit_fields[f][0])._table
-                flist += '%s(%s%s) AS %s' % (oper, ftbl, f, f)
-
-        gb = groupby and (' GROUP BY '+groupby) or ''
-
-        from_clause, where_clause, where_clause_params = query.get_sql()
-        where_clause = where_clause and ' WHERE ' + where_clause
-        limit_str = limit and ' LIMIT %d' % limit or ''
-        offset_str = offset and ' OFFSET %d' % offset or ''
-        if len(groupby_list) < 2 and context.get('group_by_no_leaf'):
-            group_count = '_'
-        cr.execute('SELECT min(%s.id) AS id, count(%s.id) AS  %s_count ' % \
-                    (self._table, self._table, group_count) + \
-                    (flist and ',') + \
-                    flist + ' FROM ' + from_clause + where_clause + gb + \
-                    limit_str + offset_str, where_clause_params, debug=self._debug)
-        alldata = {}
-        groupby = group_by
-        for r in cr.dictfetchall():
-            for fld,val in r.items():
-                if val == None:r[fld] = False
-            alldata[r['id']] = r
-            del r['id']
 
         data_ids = self.search(cr, uid, [('id', 'in', alldata.keys())],
                                     order=orderby or groupby, context=context)

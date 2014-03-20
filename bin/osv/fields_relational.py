@@ -4,7 +4,7 @@
 #    OpenERP, Open Source Management Solution
 #    Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>).
 #    Copyright (C) 2010-2011 OpenERP SA. (www.openerp.com)
-#    Copyright (C) 2008-2012 P. Christeas <xrg@hellug.gr>
+#    Copyright (C) 2008-2014 P. Christeas <xrg@hellug.gr>
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -114,6 +114,19 @@ class _rel2one(_relational):
                 (obj._table, name, name),
                 (dest_id, list(src_ids)), debug=obj._debug)
         return None
+
+    def calc_group(self, cr, uid, obj, lefts, right, context):
+        if len(lefts) > 1:
+            raise NotImplementedError("Cannot use %s yet" % ('.'.join(lefts)))
+        full_field = '"%s".%s' % (obj._table, lefts[0])
+        if right is True:
+            right = self.group_operator or 'count'
+        if isinstance(right, basestring) and right.lower() in ('min', 'max', 'count'):
+            aggregate = '%s(%s)' % (right.upper(), lefts[0])
+        else:
+            raise ValueError("Invalid aggregate function: %r", right)
+        return '.'.join(lefts), { 'group_by': full_field, 'order_by': full_field,
+                'field_expr': full_field, 'field_aggr': aggregate }
 
 class _rel2many(_relational):
     """ common baseclass for -2many relation fields

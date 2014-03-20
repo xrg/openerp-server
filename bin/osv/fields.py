@@ -492,6 +492,27 @@ class _column(object):
                 raise NotImplementedError("Why does %s need to merge as %s?"  % \
                     (self.__class__.__name__, self.merge_op))
 
+    def calc_group(self, cr, uid, obj, lefts, right, context):
+        """ Calculate SQL columns for read_group()
+
+            @param obj the parent model
+            @param lefts list of strings for the left part, like in `expr_eval()`
+            @param right string, aggregate function expression. It is entirely up
+                    to this field to parse it
+
+            @return (key, dict)
+                [* table: table string] in expression
+                * group_by: group-by expression
+                * order_by: ORDER BY expression
+                * field_expr : SQL field expression (display)
+                * field_aggr : SQL aggregate expression
+                * field_post: field post-processing python function
+                * group_post: groupped aggregate post-processing function
+                * domain_fn: function on data row, returning domain for that
+                        cumulative group
+        """
+        return None, None
+
 def get_nice_size(a):
     (x,y) = a
     if isinstance(y, (int,long)):

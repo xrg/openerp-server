@@ -125,6 +125,18 @@ class selection(_column):
             # call the 'dynamic selection' function
             ret['selection'] = self.selection(obj, cr, uid, context)
 
+    def calc_group(self, cr, uid, obj, lefts, right, context):
+        if len(lefts) > 1:
+            raise NotImplementedError("Cannot use %s yet" % ('.'.join(lefts)))
+        full_field = '"%s".%s' % (obj._table, lefts[0])
+        if right is True:
+            right = self.group_operator or 'count'
+        if isinstance(right, basestring) and right.lower() in ('count', 'array_agg'):
+            aggregate = '%s(%s)' % (right.upper(), lefts[0])
+        else:
+            raise ValueError("Invalid aggregate function: %r", right)
+        return '.'.join(lefts), { 'group_by': full_field, 'order_by': full_field,
+                'field_expr': full_field, 'field_aggr': aggregate }
 
 class serialized(_column):
     """Serialized fields

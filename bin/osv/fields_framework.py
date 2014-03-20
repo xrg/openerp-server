@@ -2,7 +2,7 @@
 ##############################################################################
 #
 #    OpenERP-f3, Open Source Management Solution
-#    Copyright (C) 2008-2011 P. Christeas <xrg@hellug.gr>
+#    Copyright (C) 2008-2014 P. Christeas <xrg@hellug.gr>
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -189,6 +189,18 @@ class id_field(integer):
                 return (lefts[0], operator, None)
             return None # as-is
 
+    def calc_group(self, cr, uid, obj, lefts, right, context):
+        if len(lefts) > 1:
+            raise NotImplementedError("Cannot use %s yet" % ('.'.join(lefts)))
+        full_field = '"%s".%s' % (obj._table, lefts[0])
+        if right is True:
+            aggregate = 'MIN(%s)' % lefts[0]
+        elif isinstance(right, basestring) and right.lower() in ('min', 'max', 'count'):
+            aggregate = '%s(%s)' % (right.upper(), lefts[0])
+        else:
+            raise ValueError("Invalid aggregate function: %r", right)
+        return '.'.join(lefts), { 'group_by': full_field, 'order_by': full_field,
+                'field_expr': full_field, 'field_aggr': aggregate }
 
 class vptr_field(_column):
     """Pseydo-field for the implicit _vptr column
