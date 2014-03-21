@@ -3039,10 +3039,10 @@ class orm(orm_template):
                     if row[k] is None:
                         row[k] = False
                 if domain_fns:
-                    domain = []
+                    dom2 = []
                     for dfn in domain_fns:
-                        domain += dfn(row)
-                    row['__domain'] = domain
+                        dom2 += dfn(row)
+                    row['__domain'] = dom2 + domain
                 our_result['values'].append(row)
                 ids.append(row['id'])
 
