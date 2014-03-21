@@ -342,20 +342,21 @@ class many2one(_rel2one):
             values = {}
 
         res = {}
+        our_ids = set()
         for r in values:
-            res[r['id']] = r[name]
+            v = res[r['id']] = r[name]
+            if isinstance(v, (int, long)) and v:
+                our_ids.add(v)
         for id in ids:
-            res.setdefault(id, '')
+            res.setdefault(id, False)
         obj = obj.pool.get(self._obj)
 
         # build a dictionary of the form {'id_of_distant_resource': name_of_distant_resource}
         # we use uid=1 because the visibility of a many2one field value (just id and name)
         # must be the access right of the parent form and not the linked object itself.
-        records = dict(obj.name_get(cr, 1,
-                                    list(set([x for x in res.values() if isinstance(x, (int,long))])),
-                                    context=context))
+        records = dict(obj.name_get(cr, 1, list(our_ids), context=context))
         for id in res:
-            if res[id] in records:
+            if res[id] and (res[id] in records):
                 res[id] = (res[id], records[res[id]])
             else:
                 res[id] = False
