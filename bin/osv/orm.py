@@ -2962,7 +2962,7 @@ class orm(orm_template):
             has_aggregate = ('id' not in group_by_now)
             if has_aggregate:
                 if mode_API != '6.0' or (not group_by_now) \
-                        or (len(group_by_now) < 2 or context.get('group_by_no_leaf')):
+                        or (len(group_by_now) < 2 and context.get('group_by_no_leaf')):
                     field_alias = '__count'
                 else:
                     field_alias = '%s_count' % (group_by_now[0])
