@@ -344,13 +344,49 @@ class float(_column):
         return '.'.join(lefts), { 'group_by': full_field, 'order_by': full_field,
                 'field_expr': full_field, 'field_aggr': aggregate }
 
-class date(_column):
+def _date_domain(field_expr, group_trunc, out_fmt):
+    leval = lazy_date_eval(' +1%s' % group_trunc)
+    return lambda row: [(field_expr, '>=', row[field_expr]), \
+                        (field_expr, '<', leval(cur_time=row[field_expr]))]
+
+class _date_column_mixin:
+    def calc_group(self, cr, uid, obj, lefts, right, context):
+        """ Calculate aggregates for date/time fields
+        """
+        group_trunc = 'day'
+        if len(lefts) > 2:
+            raise NotImplementedError("Cannot use %s yet" % ('.'.join(lefts)))
+        elif len(lefts) == 2:
+            group_trunc = lefts[1]
+        else:
+            if context.get('mode_API') == '6.0':
+                group_trunc = 'month'
+        full_field = '"%s".%s' % (obj._table, lefts[0])
+        if right is True:
+            right = self.group_operator or 'min'
+        if isinstance(right, basestring) and right.lower() in ('min', 'max'):
+            aggregate = '%s(%s)' % (right.upper(), lefts[0])
+        else:
+            raise ValueError("Invalid aggregate function: %r" % right)
+        ret = {'order_by': full_field, 'field_aggr': aggregate}
+        ret_key = '.'.join(lefts)
+        if group_trunc in self._group_trunc_periods:
+            ret['group_by'] = "date_trunc('%s', %s) " % (group_trunc, full_field)
+            ret['field_expr'] = ret['group_by'] + (':: %s' % self._sql_type)
+            ret['domain_fn'] = _date_domain(ret_key, group_trunc, self._type)
+        else:
+            raise ValueError("Invalid group period: %s" % group_trunc)
+        return ret_key, ret
+
+
+class date(_date_column_mixin, _column):
     _type = 'date'
     _sql_type = 'date'
     merge_op = '|eq'
     _symbol_c = '%s'
     _symbol_f = to_date
     _symbol_set = (_symbol_c, _symbol_f)
+    _group_trunc_periods = ('day', 'week', 'month', 'quarter', 'year', 'decade', 'century')
 
 
     @staticmethod
@@ -373,27 +409,16 @@ class date(_column):
         """
         return lazy_date_eval(estr, out_fmt='date')
 
-    def calc_group(self, cr, uid, obj, lefts, right, context):
-        if len(lefts) > 1:
-            raise NotImplementedError("Cannot use %s yet" % ('.'.join(lefts)))
-        full_field = '"%s".%s' % (obj._table, lefts[0])
-        if right is True:
-            right = self.group_operator or 'min'
-        if isinstance(right, basestring) and right.lower() in ('min', 'max'):
-            aggregate = '%s(%s)' % (right.upper(), lefts[0])
-        else:
-            raise ValueError("Invalid aggregate function: %r", right)
-        return '.'.join(lefts), { 'group_by': full_field, 'order_by': full_field,
-                'field_expr': full_field, 'field_aggr': aggregate }
 
-
-class datetime(_column):
+class datetime(_date_column_mixin, _column):
     _type = 'datetime'
     _sql_type = 'timestamp'
     merge_op = '|eq'
     _symbol_c = '%s'
     _symbol_f = to_datetime
     _symbol_set = (_symbol_c, _symbol_f)
+    _group_trunc_periods = ('second', 'minute', 'hour', 'day', 'week',
+                            'month', 'quarter', 'year', 'decade', 'century')
 
     _part_fns = {
             'day': 'extract(DAY FROM %s)',
