@@ -64,17 +64,19 @@ except ImportError:
     def strftime(format, stime, lang=None):
         return time.strftime(format, stime)
 
+class HttpSrvException(Exception):
+    pass
 
-class AuthRequiredExc(Exception):
+class AuthRequiredExc(HttpSrvException):
     def __init__(self,atype,realm):
         Exception.__init__(self)
         self.atype = atype
         self.realm = realm
 
-class AuthRejectedExc(Exception):
+class AuthRejectedExc(HttpSrvException):
     pass
 
-class AuthRedirectExc(Exception):
+class AuthRedirectExc(HttpSrvException):
     """Redirect (302) response instead of content
     
         We also keep a few `extra_headers` so that additional info (such as Cookies)
@@ -664,7 +666,8 @@ class MultiHTTPHandler(FixSendError, HttpOptions, BaseHTTPRequestHandler):
         method = getattr(fore, mname)
         try:
             method()
-        except (AuthRejectedExc, AuthRequiredExc):
+        except HttpSrvException:
+            # propagate to base handler, this will know how to handle
             raise
         except Exception, e:
             if hasattr(self, 'log_exception'):
