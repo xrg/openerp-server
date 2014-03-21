@@ -117,7 +117,6 @@ class integer_big(integer):
     _symbol_c = '%s'
     _symbol_f = _symbol_set_integer
     _symbol_set = (_symbol_c, _symbol_f)
-    _symbol_get = lambda self,x: x or 0
 
 class _string_field(_column):
     """ Common baseclass for char and text fields
