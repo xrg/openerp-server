@@ -120,8 +120,10 @@ class _rel2one(_relational):
             raise NotImplementedError("Cannot use %s yet" % ('.'.join(lefts)))
         full_field = '"%s".%s' % (obj._table, lefts[0])
         if right is True:
-            right = self.group_operator or 'count'
-        if isinstance(right, basestring) and right.lower() in ('min', 'max', 'count'):
+            right = self.group_operator or 'count distinct'
+        if isinstance(right, basestring) and right == 'count distinct':
+            aggregate = 'COUNT(DISTINCT %s)' % full_field
+        elif isinstance(right, basestring) and right.lower() in ('min', 'max', 'count'):
             aggregate = '%s(%s)' % (right.upper(), full_field)
         else:
             raise ValueError("Invalid aggregate function: %r", right)
