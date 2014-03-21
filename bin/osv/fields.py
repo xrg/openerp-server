@@ -507,7 +507,7 @@ class _column(object):
                 * field_expr : SQL field expression (display)
                 * field_aggr : SQL aggregate expression
                 * field_post: field post-processing python function
-                * group_post: groupped aggregate post-processing function
+                * field_aggr_post: groupped aggregate post-processing function
                 * domain_fn: function on data row, returning domain for that
                         cumulative group
         """

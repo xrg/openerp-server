@@ -122,11 +122,12 @@ class _rel2one(_relational):
         if right is True:
             right = self.group_operator or 'count'
         if isinstance(right, basestring) and right.lower() in ('min', 'max', 'count'):
-            aggregate = '%s(%s)' % (right.upper(), lefts[0])
+            aggregate = '%s(%s)' % (right.upper(), full_field)
         else:
             raise ValueError("Invalid aggregate function: %r", right)
         return '.'.join(lefts), { 'group_by': full_field, 'order_by': full_field,
-                'field_expr': full_field, 'field_aggr': aggregate }
+                'field_expr': full_field, 'field_aggr': aggregate,
+                'field_post': self.get} # 'field_aggr_post' self.get
 
 class _rel2many(_relational):
     """ common baseclass for -2many relation fields

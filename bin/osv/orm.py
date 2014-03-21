@@ -2957,6 +2957,7 @@ class orm(orm_template):
             select_fields = []
             query_params = []
             domain_fns = []
+            post_fns = {}        # post-processing functions, per field expression
 
             has_aggregate = ('id' not in group_by_now)
             if has_aggregate:
@@ -2984,6 +2985,9 @@ class orm(orm_template):
                     field_params = gfield.get('field_expr_params', False)
                     if field_params is not False:
                         query_params.append(field_params)
+                    post_fn = gfield.get('field_post', False)
+                    if post_fn:
+                        post_fns[field_expr] = post_fn
                 else: # has_aggregate
                     field_aggr = gfield.get('field_aggr', None)
                     if field_aggr is None and not auto_fields:
@@ -2993,6 +2997,9 @@ class orm(orm_template):
                         field_params = gfield.get('field_expr_params', False)
                         if field_params is not False:
                             query_params.append(field_params)
+                        post_fn = gfield.get('field_aggr_post', False)
+                        if post_fn:
+                            post_fns[field_expr] = post_fn
 
             query = 'SELECT %s FROM %s'  %( ', '.join(select_fields), from_clause)
             if where_clause:
@@ -3026,6 +3033,7 @@ class orm(orm_template):
             # Query is expected to return values directly usable as an RPC
             # result. We may only map None (aka. SQL NULL) to False.
 
+            ids = []
             for row in cr.dictfetchall():
                 for k in row:
                     if row[k] is None:
@@ -3036,6 +3044,23 @@ class orm(orm_template):
                         domain += dfn(row)
                     row['__domain'] = domain
                 our_result['values'].append(row)
+                ids.append(row['id'])
+
+            if post_fns:
+                rev_map = {}
+                # build a single id => result line map for all post functions
+                for n, v in enumerate(our_result['values']):
+                    rev_map[v['id']] = n
+                for field_expr, post_fn in post_fns.items():
+                    res = post_fn(cr, self, ids, field_expr, user=uid, context=context,
+                                    values=our_result['values'])
+                    # res now holds id:value pairs
+                    for rid, val in res.items():
+                        n = rev_map.get(rid, False)
+                        if n is not False:
+                            our_result['values'][n][field_expr] = val
+                    del res
+                del rev_map
 
             r_results.append(our_result)
             group_level += 1
