@@ -3078,54 +3078,6 @@ class orm(orm_template):
         else:
             return r_results
 
-        
-        group_count = group_by = groupby
-        if groupby:
-            if fget.get(groupby):
-                ftbl = ''
-                if groupby in self._columns:
-                    ftbl = '"%s".' % self._table
-                elif groupby in self._inherit_fields:
-                    ftbl = '"%s".' % self.pool.get(self._inherit_fields[groupby][0])._table
-
-                # TODO: refactor
-                if fget[groupby]['type'] in ('date', 'datetime'):
-                    flist = "to_char(%s%s,'yyyy-mm') as %s " % ( ftbl, groupby,groupby)
-                    groupby = "to_char(%s%s,'yyyy-mm')" % (ftbl, groupby)
-                    qualified_groupby_field = groupby
-                else:
-                    groupby = ftbl+groupby
-                    flist = groupby
-
-
-        data_ids = self.search(cr, uid, [('id', 'in', alldata.keys())],
-                                    order=orderby or groupby, context=context)
-        data_ids += filter(lambda x:x not in data_ids, alldata.keys())
-        data = self.read(cr, uid, data_ids, groupby and [groupby] or ['id'], context=context)
-        # restore order of the search as read() uses the default _order 
-        # (this is only for groups, so the size of data_read shoud be small):
-        data.sort(key=lambda x: data_ids.index(x['id']))
-
-        for d in data:
-            if groupby:
-                # If you get a KeyError here, it means search() is yielding duplicate ids
-                d['__domain'] = [(groupby,'=',alldata[d['id']][groupby] or False)] + domain
-                if not isinstance(groupby_list,(str, unicode)):
-                    if groupby or not context.get('group_by_no_leaf', False):
-                        d['__context'] = {'group_by':groupby_list[1:]}
-            if groupby and groupby in fget:
-                # TODO: refactor
-                if d[groupby] and fget[groupby]['type'] in ('date','datetime'):
-                    dt = datetime.datetime.strptime(alldata[d['id']][groupby][:7],'%Y-%m')
-                    days = calendar.monthrange(dt.year, dt.month)[1]
-
-                    d[groupby] = datetime.datetime.strptime(d[groupby][:10],'%Y-%m-%d').strftime('%B %Y')
-                    d['__domain'] = [(groupby,'>=',alldata[d['id']][groupby] and datetime.datetime.strptime(alldata[d['id']][groupby][:7] + '-01','%Y-%m-%d').strftime('%Y-%m-%d') or False),\
-                                     (groupby,'<=',alldata[d['id']][groupby] and datetime.datetime.strptime(alldata[d['id']][groupby][:7] + '-' + str(days),'%Y-%m-%d').strftime('%Y-%m-%d') or False)] + domain
-                del alldata[d['id']][groupby]
-            d.update(alldata[d['id']])
-            del d['id']
-        return data
 
     def _inherits_join_add(self, parent_model_name, query):
         """
