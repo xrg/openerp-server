@@ -559,6 +559,7 @@ class xrBaseRequestHandler(FixSendError, HttpLogHandler, SimpleXMLRPCServer.Simp
                     data += chunk
             except EOFError:
                 pass
+            del rbuffer
 
             auth = getattr(self, 'auth_proxy', None)
             if auth and getattr(auth, 'checkPepper', False):
@@ -596,16 +597,18 @@ class xrBaseRequestHandler(FixSendError, HttpLogHandler, SimpleXMLRPCServer.Simp
             self.send_header("Content-type", "text/xml")
 
             if self.can_send_gzip(response):
-                buffer = StringIO.StringIO()
-                output = gzip.GzipFile(mode='wb', fileobj=buffer)
+                sbuffer = StringIO.StringIO()
+                output = gzip.GzipFile(mode='wb', fileobj=sbuffer)
                 if isinstance(response, (str, unicode)):
                     output.write(response)
                 else:
                     for buf in response:
                         output.write(buf)
                 output.close()
-                buffer.seek(0)
-                response = buffer.getvalue()
+                del output
+                sbuffer.seek(0)
+                response = sbuffer.getvalue()
+                del sbuffer
                 self.send_header('Content-Encoding', 'gzip')
 
             self.send_header("Content-length", str(len(response)))
