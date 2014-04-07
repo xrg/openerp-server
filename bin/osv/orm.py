@@ -2840,7 +2840,17 @@ class orm(orm_template):
         :type fields_list: list (example ['field_name_1', ...])
         :param offset: optional number of records to skip
         :param limit: optional max number of records to return
-        :param context: context arguments, like lang, time zone
+        :param context: context arguments, standard ORM ones plus:
+                - mode_API: API mode to operate at. F3 is the new, '6.0' forces
+                        the old-style results. If not specified, it is inferred
+                        by the type of `fields_list` argument.
+                - min_group_level: integer, minimum slice of the `groupby` list
+                        to use in results (F3 mode). If 0, then result includes
+                        a total sum of all criteria (like [:0] => [] in groupby)
+                        If 1, starts from groupby[:1] etc.
+                - max_group_level: integer, maximum slice to group by. Used when
+                        you want partial results (not the last level of grouping,
+                        for example)
         :param order: optional ``order by`` specification, for overriding the natural
                       sort ordering of the groups, see also :py:meth:`~osv.osv.osv.search`
                       (supported only for many2one fields currently)
