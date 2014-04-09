@@ -54,11 +54,10 @@ def login(db, login, password, client_address=None):
 def check_super(passwd, client_address=None):
     wkr = client_pit.get(client_address)
     try:
-        if passwd == tools.config['admin_passwd']:
+        if passwd and passwd == tools.config['admin_passwd']:
             wkr.good()
             return True
         else:
-            wkr.bad()
             raise ExceptionNoTb('AccessDenied: Invalid super administrator password.')
     except Exception:
         wkr.bad()

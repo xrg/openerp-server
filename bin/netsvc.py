@@ -921,7 +921,7 @@ class OpenERPDispatcher2:
             log('params', params)
             auth = getattr(self, 'auth_proxy', None)
             if not auth:
-                self._logger.debug("No Authentication!")
+                self._logger.debug("No Authentication for: %s %s", service_name, method)
             result = ExportService.getService(service_name).new_dispatch(method, auth, params)
             log('result', result)
             # We shouldn't marshall None,

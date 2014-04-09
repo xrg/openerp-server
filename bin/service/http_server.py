@@ -774,15 +774,12 @@ class OerpAuthProxy(AuthProxy):
             (user,passwd) = base64.decodestring(auth_str).split(':',1)
             if db in self.auth_creds and not (self.auth_creds[db] is False):
                 if self.provider.check_again(self.auth_creds[db], (user, passwd), handler):
+                    self.auth_tries = 0
                     return True
         
             try:
                 acd = self.provider.authenticate(db,user,passwd,handler.client_address)
                 addr_str = self._get_addr_str(handler.client_address)
-                if acd:
-                    self.provider.log("Auth user=\"%s@%s\" from %s" %(user, db, addr_str), lvl=logging.INFO)
-                else:
-                    self.provider.log("Auth FAILED for user=\"%s@%s\" from %s" %(user, db, addr_str), lvl=logging.WARNING)
 
             except AuthRequiredExc:
                 # sometimes the provider.authenticate may raise, so that
@@ -790,21 +787,28 @@ class OerpAuthProxy(AuthProxy):
                 if self.auth_tries > 5:
                     raise AuthRejectedExc("Authorization failed.")
                 else:
+                    self.auth_tries += 1
                     raise
             if acd:
+                self.provider.log("Auth user=\"%s@%s\" from %s" %(user, db, addr_str), lvl=logging.INFO)
                 if db:
                     # we only cache the credentials if the db is specified.
                     # the True value gets cached, too, for the super-admin
                     self.auth_creds[db] = acd
                     self.last_auth=db
                     self.last_address = addr_str
+                self.auth_tries = 0
                 return True
+            else:
+                self.provider.log("Auth FAILED for user=\"%s@%s\" from %s" %(user, db, addr_str), lvl=logging.WARNING)
+
         else:    # no auth string
             if db is False:
                 # in a special case, we ask the provider to allow us to
                 # skip authentication for the "False" db
                 acd = self.provider.authenticate(db, None, None, handler.client_address)
                 if acd:
+                    self.provider.log("Public connection from %s" % (addr_str), lvl=logging.INFO)
                     return True
 
         if self.auth_tries > 5:
