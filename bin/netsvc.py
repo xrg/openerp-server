@@ -2,7 +2,7 @@
 ##############################################################################
 #
 #    OpenERP-F3, Open Source Management Solution
-#    Copyright (C) 2011-2013 P. Christeas <xrg@hellug.gr>
+#    Copyright (C) 2011-2014 P. Christeas <xrg@hellug.gr>
 #    Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>). All Rights Reserved
 #    The refactoring about the OpenSSL support come from Tryton
 #    Copyright (C) 2007-2009 Cédric Krier.
@@ -569,11 +569,62 @@ class Agent(object):
             return ', '.join(oout)
 
     @classmethod
+    def _args_match(cls, cumulative, args1, kwargs1, args2, kwargs2):
+        """ Check that (*args1, **kwargs1) == (*args2, **kwargs2) , but ommit "cumulative" arg.
+
+            If cumulative is an integer, it means it is position in "args",
+            or if it is a string, it is keyword
+        """
+        if (len(args1) != len(args2)) or (len(kwargs1) != len(kwargs2)):
+            return False
+
+        if isinstance(cumulative, int):
+            if kwargs1 != kwargs2:
+                return False
+
+            for n, val in enumerate(args1):
+                if n == cumulative:
+                    continue
+                if val != args2[cumulative]:
+                    return False
+            return True
+        elif isinstance(cumulative, basestring):
+            if args1 != args2:
+                return False
+            for k, val in kwargs1.items():
+                if k == cumulative:
+                    continue
+                if val != kwargs2[k]:
+                    return False
+            return True
+        else:
+            return False
+
+    @classmethod
     def setAlarm(cls, function, timestamp, db_name, *args, **kwargs):
         cls._lock.acquire()
-        task = [timestamp, db_name, function, args, kwargs]
-        heapq.heappush(cls.__tasks, task)
-        cls.__tasks_by_db.setdefault(db_name, []).append(task)
+        found_task = False
+        cumulative = getattr(function, '_cumulative_on', None)
+        if cumulative is not None:
+            for t in cls.__tasks_by_db.get(db_name, []):
+                # Check if there is already some task for function() pending,
+                # with same arguments and kwargs (apart from the "cumulative" one)
+                if t[0] <= timestamp and t[2] == function \
+                        and cls._args_match(cumulative, t[3], t[4], args, kwargs):
+                    if isinstance(cumulative, int):
+                        t[3][cumulative] += args[cumulative]
+                        found_task = True
+                    elif isinstance(cumulative, basestring):
+                        t[4][cumulative] += kwargs[cumulative]
+                        found_task = True
+                    else:
+                        # We cannot use that kind of cumulative argument
+                        continue
+                    break
+        if not found_task:
+            task = [timestamp, db_name, function, args, kwargs]
+            heapq.heappush(cls.__tasks, task)
+            cls.__tasks_by_db.setdefault(db_name, []).append(task)
         cls._lock.notify_all()
         cls._lock.release()
 
