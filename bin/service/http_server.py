@@ -155,8 +155,8 @@ class OerpXMLRPCDispatcher(SimpleXMLRPCDispatcher):
         except xmlrpclib.Fault, fault:
             response = xmlrpclib.dumps(fault, allow_none=self.allow_none,
                                        encoding=self.encoding)
-        except:
-            # report exception back to server
+        except Exception:
+            # report exception back to client
             exc_type, exc_value, exc_tb = sys.exc_info()
             response = xmlrpclib.dumps(
                 xmlrpclib.Fault(1, "%s:%s" % (exc_type, exc_value)),
@@ -626,7 +626,7 @@ class XMLRPCRequestHandler(netsvc.OpenERPDispatcher,xrBaseRequestHandler):
             service_name = self.path.split("/")[-1]
             return self.dispatch(service_name, method, params)
         except netsvc.OpenERPDispatcherException, e:
-            raise xmlrpclib.Fault(e.compat_string(), e.traceback)
+            raise xmlrpclib.Fault(e.compat_string(), e.traceback or "")
 
 class XMLRPCRequestHandler2_Pub(netsvc.OpenERPDispatcher2,xrBaseRequestHandler):
     """ New-style xml-rpc dispatcher, Global methods
