@@ -461,7 +461,6 @@ class Cursor(object):
     def __build_cols(self):
         return map(itemgetter(0), self._obj.description)
 
-    # check
     def _dictfetchone_compat(self):
         """Fetch one row in a dict, compatible with psycopg 2.x versions
         """
@@ -471,7 +470,6 @@ class Cursor(object):
         else:
             return row
 
-    # check
     def _dictfetchone_Caccel(self):
         """C-accelerated version of dictfetchone()
         """
@@ -480,20 +478,17 @@ class Cursor(object):
         self._obj.row_factory = None
         return row
 
-    # check
     def _dictfetchmany_compat(self, size):
         rows = self._obj.fetchmany(size)
         cols = self.__build_cols()
         return [ dict(zip(cols, row)) for row in rows]
 
-    # check
     def _dictfetchmany_Caccel(self, size):
         self._obj.row_factory = dict
         rows = self._obj.fetchmany(size)
         self._obj.row_factory = None
         return rows
 
-    # check
     def _dictfetchall_compat(self):
         """Fetch in dict, compatible with all psycopg 2.x versions
         """
