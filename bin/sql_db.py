@@ -4,7 +4,7 @@
 #    OpenERP, Open Source Management Solution
 #    Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>).
 #    Copyright (C) 2010-2011 OpenERP s.a. (<http://openerp.com>).
-#    Copyright (C) 2011-2012 P. Christeas <xrg@hellug.gr>
+#    Copyright (C) 2011-2014 P. Christeas <xrg@hellug.gr>
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -153,7 +153,8 @@ class Cursor(object):
     __pgmode = None
     __slots__ = ('sql_stats_log', 'sql_log', 'sql_log_count', '__closed', \
                '__caller', '_pool', 'dbname', 'auth_proxy', '_serialized', \
-               '_cnx', '_obj', '_pgmode', 'fetchone', 'fetchmany', 'fetchall')
+               '_cnx', '_obj', '_pgmode', 'fetchone', 'fetchmany', 'fetchall', \
+               '_todos')
 
     def check(f):
         @wraps(f)
@@ -185,6 +186,7 @@ class Cursor(object):
         self._serialized = serialized
         self._cnx, self._obj = pool.borrow(dsn(dbname), True, temp=temp)
         self.__closed = False   # real initialisation value
+        self._todos = []
         self.autocommit(False)
         if not hasattr(self._cnx,'_prepared'):
             self._cnx._prepared = []
@@ -420,13 +422,41 @@ class Cursor(object):
     def commit(self):
         """ Perform an SQL `COMMIT`
         """
-        return self._cnx.commit()
+        ret = self._cnx.commit()
+        for t in self._todos:
+            try:
+                t.on_commit()
+            except Exception:
+                self.__logger.warn("Error at on_commit of %r:", t, exc_info=True)
+        self._todos = []
+        return ret
 
     @check
     def rollback(self):
         """ Perform an SQL `ROLLBACK`
         """
-        return self._cnx.rollback()
+        ret = self._cnx.rollback()
+        for t in self._todos:
+            try:
+                t.on_rollback()
+            except Exception:
+                self.__logger.warn("Error at on_rollback of %r:", t, exc_info=True)
+        self._todos = []
+        return ret
+
+    def post_commit(self, todo):
+        """Schedule an action to be performed after cursor commit/rollback
+
+            @param todo must be an instance of a `PostCommit` object
+
+            Cursor will call `todo.on_commit()` or `todo.on_rollback()` after
+            such an event.
+        """
+        if self.__closed:
+            raise RuntimeError("Unable to set post commit todo on a closed cursor")
+        if not isinstance(todo, PostCommit):
+            raise TypeError("Todo object must be a PostCommit, not %s" % type(todo))
+        self._todos.append(todo)
 
     def __build_cols(self):
         return map(itemgetter(0), self._obj.description)
@@ -761,6 +791,32 @@ class Connection(object):
         except Exception:
             return False
 
+class PostCommit(object):
+    """Base (dummy) class of post-commit objects
+
+        These can be scheduled using the `Cursor.post_commit()` method, they
+        will be called and destroyed after a commit/rollback event.
+
+        Cursor does clear the list of "todos" after an event, thus it is impossible
+        that `on_commit()` or `on_rollback()` will be called twice.
+    """
+    def __init__(self):
+        pass
+
+    def on_commit(self):
+        """ Called after a cursor commit
+
+            Use this to perform *non-DB* actions after data has been stored in the
+            database. I repeat, it is *forbidden* to use the cursor inside this fn()
+        """
+        pass
+
+    def on_rollback(self):
+        """ Called after a cursor rollback
+
+            See `on_commit()`
+        """
+        pass
 
 _dsn = ''
 for p in ('host', 'port', 'user', 'password'):
