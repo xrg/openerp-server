@@ -454,8 +454,6 @@ class Cursor(object):
         """
         if self.__closed:
             raise RuntimeError("Unable to set post commit todo on a closed cursor")
-        if not isinstance(todo, PostCommit):
-            raise TypeError("Todo object must be a PostCommit, not %s" % type(todo))
         self._todos.append(todo)
 
     def __build_cols(self):

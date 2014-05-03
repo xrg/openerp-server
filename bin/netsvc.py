@@ -569,6 +569,45 @@ class Agent(object):
             return ', '.join(oout)
 
     @classmethod
+    def setAlarm(cls, function, timestamp, db_name, *args, **kwargs):
+        cls._lock.acquire()
+        task = [timestamp, db_name, function, args, kwargs]
+        heapq.heappush(cls.__tasks, task)
+        cls.__tasks_by_db.setdefault(db_name, []).append(task)
+        cls._lock.notify_all()
+        cls._lock.release()
+
+    @classmethod
+    def _setAlarmNow(cls, function, timestamp, dbname, args, kwargs):
+        """ companion to `_alarm_later.on_commit()` , set an alarm, even cumulative
+        """
+        cls._lock.acquire()
+        found_task = False
+        cumulative = getattr(function, '_cumulative_on', None)
+        if cumulative is not None:
+            for t in cls.__tasks_by_db.get(dbname, []):
+                # Check if there is already some task for function() pending,
+                # with same arguments and kwargs (apart from the "cumulative" one)
+                if t[0] <= timestamp and t[2] == function \
+                        and cls._args_match(cumulative, t[3], t[4], args, kwargs):
+                    if isinstance(cumulative, int):
+                        t[3][cumulative] += args[cumulative]
+                        found_task = True
+                    elif isinstance(cumulative, basestring):
+                        t[4][cumulative] += kwargs[cumulative]
+                        found_task = True
+                    else:
+                        # We cannot use that kind of cumulative argument
+                        continue
+                    break
+        if not found_task:
+            task = [timestamp, dbname, function, args, kwargs]
+            heapq.heappush(cls.__tasks, task)
+            cls.__tasks_by_db.setdefault(dbname, []).append(task)
+        cls._lock.notify_all()
+        cls._lock.release()
+
+    @classmethod
     def _args_match(cls, cumulative, args1, kwargs1, args2, kwargs2):
         """ Check that (*args1, **kwargs1) == (*args2, **kwargs2) , but ommit "cumulative" arg.
 
@@ -600,33 +639,23 @@ class Agent(object):
         else:
             return False
 
+    class _alarm_later(object):
+        def __init__(self, dbname, function, timestamp, args, kwargs):
+            self.dbname = dbname
+            self.function = function
+            self.timestamp = timestamp
+            self.args = args
+            self.kwargs = kwargs
+
+        def on_commit(self):
+            Agent._setAlarmNow(self.function, self.timestamp, self.dbname, self.args, self.kwargs)
+
+        def on_rollback(self):
+            pass
+
     @classmethod
-    def setAlarm(cls, function, timestamp, db_name, *args, **kwargs):
-        cls._lock.acquire()
-        found_task = False
-        cumulative = getattr(function, '_cumulative_on', None)
-        if cumulative is not None:
-            for t in cls.__tasks_by_db.get(db_name, []):
-                # Check if there is already some task for function() pending,
-                # with same arguments and kwargs (apart from the "cumulative" one)
-                if t[0] <= timestamp and t[2] == function \
-                        and cls._args_match(cumulative, t[3], t[4], args, kwargs):
-                    if isinstance(cumulative, int):
-                        t[3][cumulative] += args[cumulative]
-                        found_task = True
-                    elif isinstance(cumulative, basestring):
-                        t[4][cumulative] += kwargs[cumulative]
-                        found_task = True
-                    else:
-                        # We cannot use that kind of cumulative argument
-                        continue
-                    break
-        if not found_task:
-            task = [timestamp, db_name, function, args, kwargs]
-            heapq.heappush(cls.__tasks, task)
-            cls.__tasks_by_db.setdefault(db_name, []).append(task)
-        cls._lock.notify_all()
-        cls._lock.release()
+    def setAlarmLater(cls, function, timestamp, cr, *args, **kwargs):
+        cr.post_commit(cls._alarm_later(cr.dbname, function, timestamp, args, kwargs))
 
     @classmethod
     def cancel(cls, db_name):
@@ -674,7 +703,7 @@ class Agent(object):
                 time.sleep(1)
                 thr = None
                 cls._lock.acquire()
-            
+
             # This line must have the lock in acquired state
             wtime = 600.0
             if cls.__tasks:
