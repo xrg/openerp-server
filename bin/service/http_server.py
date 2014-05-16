@@ -768,6 +768,7 @@ class OerpAuthProxy(AuthProxy):
                 raise AuthRejectedExc("Authorization failed. Wrong sub-path.")
 
         auth_str = handler.headers.get('Authorization',False)
+        addr_str = self._get_addr_str(handler.client_address)
 
         if auth_str and auth_str.startswith('Basic '):
             auth_str=auth_str[len('Basic '):]
@@ -779,7 +780,6 @@ class OerpAuthProxy(AuthProxy):
         
             try:
                 acd = self.provider.authenticate(db,user,passwd,handler.client_address)
-                addr_str = self._get_addr_str(handler.client_address)
 
             except AuthRequiredExc:
                 # sometimes the provider.authenticate may raise, so that
