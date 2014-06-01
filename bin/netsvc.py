@@ -590,10 +590,14 @@ class Agent(object):
                 # with same arguments and kwargs (apart from the "cumulative" one)
                 if t[0] <= timestamp and t[2] == function \
                         and cls._args_match(cumulative, t[3], t[4], args, kwargs):
-                    if isinstance(cumulative, int):
+                    if isinstance(cumulative, int) \
+                            and isinstance(t[3][cumulative], (list, set)) \
+                            and isinstance(args[cumulative], (list, set)):
                         t[3][cumulative] += args[cumulative]
                         found_task = True
-                    elif isinstance(cumulative, basestring):
+                    elif isinstance(cumulative, basestring) \
+                            and isinstance(t[4][cumulative], (list, set)) \
+                            and isinstance(kwargs[cumulative], (list, set)):
                         t[4][cumulative] += kwargs[cumulative]
                         found_task = True
                     else:
