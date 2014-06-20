@@ -121,6 +121,11 @@ class integer_big(integer):
 class _string_field(_column):
     """ Common baseclass for char and text fields
     """
+    STRING_OPS = ('=', '!=', '<>', '<', '<=', '>', '>=', '=?',
+                    '~', '!~',
+                    'like', 'ilike', 'not like', 'not ilike',
+                    '=like', '=ilike',
+                    'in', 'not in')
 
     def _ext_length(self, cr, uid, obj, lefts, operator, right):
         if len(lefts) != 2:
@@ -130,7 +135,7 @@ class _string_field(_column):
         return eu.function_expr('char_length(%s)', lefts[0], operator, right)
 
     def _ext_chgcase(self, cr, uid, obj, lefts, operator, right):
-        if operator not in ('=', '!=', '<>', 'like', '=like'):
+        if operator not in ('=', '!=', '<>', 'like', '=like', '~', '!~'):
             raise eu.DomainInvalidOperator(obj, lefts, operator, right)
         if operator == 'like':
             right = '%%%s%%' % right
@@ -154,6 +159,8 @@ class _string_field(_column):
                 right = '%%%s%%' % right
             elif operator in ('=like', '=ilike'):
                 operator = operator[1:]
+            elif operator not in self.STRING_OPS:
+                raise eu.DomainInvalidOperator(obj, lefts, operator, right)
 
             query1 = '( SELECT res_id'          \
                         '    FROM ir_translation'  \
@@ -195,6 +202,8 @@ class _string_field(_column):
                 if operator not in ('=', '!=', '<>'):
                     raise eu.DomainInvalidOperator(obj, lefts, operator, right)
                 return (lefts[0], operator, None)
+            if operator not in self.STRING_OPS:
+                raise eu.DomainInvalidOperator(obj, lefts, operator, right)
             return None
 
     def calc_merge(self, cr, uid, obj, name, b_dest, b_src, context):
@@ -232,6 +241,7 @@ class _string_field(_column):
             raise ValueError("Invalid aggregate function: %r", right)
         return '.'.join(lefts), { 'group_by': full_field, 'order_by': full_field,
                 'field_expr': full_field, 'field_aggr': aggregate }
+
 class char(_string_field):
     """ Limited characters string type
         Like text, but have a size bound

@@ -70,12 +70,6 @@ class expression(object):
     def _is_operator(self, element):
         return isinstance(element, (str, unicode)) and element in ('&', '|', '!')
 
-    def _is_leaf_old(self, element, internal=False):
-        return (isinstance(element, tuple) or isinstance(element, list)) \
-           and len(element) == 3 \
-           and (((not internal) and element[1] in self.OPS) \
-                or (internal and element[1] in self.INTERNAL_OPS))
-
     def _is_leaf(self, element):
         return isinstance(element, (list, tuple)) \
                 and len(element) == 3 \
