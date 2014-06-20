@@ -4,7 +4,7 @@
 #    OpenERP, Open Source Management Solution
 #    Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>).
 #    Copyright (C) 2010 OpenERP s.a. (<http://openerp.com>).
-#    Copyright (C) 2011-2013 P. Christeas <xrg@hellug.gr>
+#    Copyright (C) 2011-2014 P. Christeas <xrg@hellug.gr>
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -24,12 +24,12 @@
 
 {
     'name': 'Base',
-    'version': '1.6',
+    'version': '1.7',
     'category': 'Generic Modules/Base',
     'description': """The kernel of OpenERP, needed for all installation.""",
     'author': 'OpenERP SA',
     'maintainer': 'P. Christeas <xrg@hellug.gr>',
-    'website': 'http://www.openerp.com',
+    'website': 'http://openerp.hellug.gr',
     'depends': [],
     'init_xml': [
         'base_data.xml',
@@ -103,6 +103,5 @@
     ],
     'installable': True,
     'active': True,
-    'certificate': '0076807797149',
 }
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
