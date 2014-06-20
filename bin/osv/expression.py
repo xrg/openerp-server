@@ -217,7 +217,6 @@ class expression(object):
         operator = operator.lower()
         if isinstance(right, self._browse_null_class):
             right = None
-            exp = (left, operator, right) # rewrite anyway
         cur_model = model
         fargs = left.split('.')
 
@@ -251,10 +250,10 @@ class expression(object):
 
         nex = field.expr_eval(cr, uid, cur_model, fargs, operator, right,
                             self, context=context)
-        if nex is not None:
+        if nex is None:
+            exp = (left, operator, right) # rewrite anyway
+        else:
             exp = nex
-        elif isinstance(exp, list):
-            exp = tuple(exp) # normalize it from RPC
 
         return field, cur_model, exp
 
