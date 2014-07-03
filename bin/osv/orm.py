@@ -352,7 +352,7 @@ class browse_record(object):
                     # some future optimisation.
                     bro = vobj.browse(self._cr, self._uid, [(vobj._inherits[self._table._name],'=', self._id) ],
                                 context=self._context, fields_process=self._fields_process,
-                                fields_only=self._fields_only)
+                                fields_only=self._fields_only, cache=self._cache)
                     # bro must now be a browse_list instance..
                     
                     assert len(bro) == 1, "Virtual object %s[%s=%s] has %s instances " % \
@@ -430,7 +430,7 @@ class browse_record(object):
                     lang_obj_ids = self.pool.get('res.lang').search(self._cr, self._uid, [('code','=',lang)])
                     if not lang_obj_ids:
                         raise Exception(_('Language with code "%s" is not defined in your system !\nDefine it through the Administration menu.') % (lang,))
-                    lang_obj = self.pool.get('res.lang').browse(self._cr, self._uid, lang_obj_ids[0])
+                    lang_obj = self.pool.get('res.lang').browse(self._cr, self._uid, lang_obj_ids[0], cache=self._cache)
 
                 for field_name, field_column in fields_to_fetch:
                     if field_column._type in self._fields_process:
@@ -1496,7 +1496,7 @@ class orm_template(object):
         if getattr(self, '_fallback_search', False) == True:
             all_selectable = True
 
-        if self._columns.keys():
+        if self._columns:
             for f in self._columns.keys():
                 field_col = self._columns[f]
                 if allfields and f not in allfields:
