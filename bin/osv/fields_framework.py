@@ -282,6 +282,9 @@ class vptr_field(_column):
             # The result should match our side
         raise eu.DomainLeftError(obj, lefts, operator, right)
 
+    def copy_data(self, cr, uid, obj, id, f, data, context):
+        return None
+
 class vptr_name(_column):
     """ Exposes the human readable name of the associated class
 
@@ -333,6 +336,9 @@ class vptr_name(_column):
         #    pass
 
     def _auto_init_sql(self, name, obj, schema_table, context=None):
+        return None
+
+    def copy_data(self, cr, uid, obj, id, f, data, context):
         return None
 
 register_field_classes(id_field, vptr_field, vptr_name)
