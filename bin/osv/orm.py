@@ -4256,25 +4256,29 @@ class orm(orm_template):
             for id in ids:
                 result += self._columns[field].set(cr, self, id, field, vals[field], user, context=rel_context) or []
 
+        upd_by_inherit = defaultdict(dict)
+        for fld in updend:
+            ihf = self._inherit_fields.get(fld, None)
+            if ihf:
+                upd_by_inherit[ihf[0]][fld] = vals[fld]
+
         for table in self._inherits:
             col = self._inherits[table]
-            nids = []
-            cr.execute('SELECT DISTINCT "'+col+'" FROM "'+self._table+'" ' \
-                           'WHERE id = ANY(%s)', (ids,), debug=self._debug)
-            nids.extend([x[0] for x in cr.fetchall()])
-            v = {}
-            for val in updend:
-                if self._inherit_fields[val][0] == table:
-                    v[val] = vals[val]
-
+            v = upd_by_inherit[table]
             # we update the parent object, if the column has been written to.
             # note that the old table._vptr will still hold a wrong ref
             # to this record
             if col in vals and self.pool.get(table)._vtable:
                 v['_vptr'] = self._name
+            if not v:
+                # no values to update at that parent table
+                continue
 
-            if v:
-                self.pool.get(table).write(cr, user, nids, v, context)
+            nids = []
+            cr.execute('SELECT DISTINCT "'+col+'" FROM "'+self._table+'" ' \
+                           'WHERE id = ANY(%s)', (ids,), debug=self._debug)
+            nids.extend([x[0] for x in cr.fetchall()])
+            self.pool.get(table).write(cr, user, nids, v, context)
 
         self._validate(cr, user, ids, context)
 
