@@ -31,6 +31,7 @@ from psycopg2 import IntegrityError, errorcodes
 from tools.func import wraps
 from tools.translate import translate
 from tools import expr_utils, config
+import time
 
 module_list = []
 module_class_list = {}
@@ -637,6 +638,46 @@ class osv_abstract(osv_base, orm.orm_abstract):
         return obj
 
     createInstance = classmethod(createInstance)
+
+def defer(func, delay=0.1, cumulative_on=False):
+    """Create a deferred version of an ORM function
+    
+       The returned function will have the same footprint, like:
+           func(cr, uid, ... )
+       but, instead of running immediately, it will trigger an Agent
+       run in a separate thread+transaction, after some delay.
+       
+       If cumulative_on is specified, multiple calls to deferred() will
+       accumulate into single `func()` calls
+    """
+    
+    def deferred(self, dbname, uid, *args, **kwargs):
+        log = logging.getLogger('osv')
+        try:
+            cr = None
+            db, pool = pooler.get_db_and_pool(dbname)
+            cr = db.cursor()
+            # log.debug("Running %r for %s", func, dbname)
+            func(self, cr, uid, *args, **kwargs)
+            cr.commit()
+
+        except Exception:
+            log.exception("Failed")
+            if cr:
+                cr.rollback()
+        finally:
+            if cr:
+                cr.close()
+
+    if cumulative_on:
+        deferred._cumulative_on = cumulative_on
+
+    def trigger(self, cr, uid, *args, **kwargs):
+        netsvc.Agent.setAlarmLater(deferred, time.time() + delay,
+                cr, self, cr.dbname, uid, *args, **kwargs)
+        return True
+
+    return trigger
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
 
