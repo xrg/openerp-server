@@ -19,8 +19,8 @@
 #
 ##############################################################################
 
-import partner_sms_send
-import partner_wizard_spam
+#import partner_sms_send
+#import partner_wizard_spam
 import partner_clear_ids
 import partner_wizard_ean_check
 
