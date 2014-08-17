@@ -1230,6 +1230,7 @@
             <field name="type">form</field>
             <field name="arch" type="xml">
                 <form string="Object Identifiers">
+                    <field name="source"/>
                     <field name="name"/>
                     <field name="module"/>
                     <field name="model"/>
@@ -1250,6 +1251,7 @@
                 <tree string="Object Identifiers">
                     <field name="module"/>
                     <field name="name"/>
+                    <field name="source"/>
                     <field name="model"/>
                     <field name="res_id"/>
                 </tree>
@@ -1268,6 +1270,7 @@
                     <separator orientation="vertical"/>
                     <field name="module"/>
                     <field name="name"/>
+                    <field name="source"/>
                     <field name="model"/>
                     <field name="res_id"/>
                     <field name="noupdate"/>
