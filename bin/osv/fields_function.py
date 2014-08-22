@@ -626,6 +626,13 @@ class function(_column):
 
         raise RuntimeError("unreachable code")
 
+    def calc_group(self, cr, uid, obj, lefts, right, context):
+        if self.store:
+            return self._shadow.calc_group(cr, uid, obj, lefts, right, context)
+        else:
+            # Cannot group pythonic fields, yet
+            return None, None
+
     def _move_refs(self, cr, uid, obj, name, dest_id, src_ids, context):
         # Would we ever need to act when moving records (for merge)?
         return None
