@@ -397,7 +397,17 @@ class date(_date_column_mixin, _column):
     _symbol_f = to_date
     _symbol_set = (_symbol_c, _symbol_f)
     _group_trunc_periods = ('day', 'week', 'month', 'quarter', 'year', 'decade', 'century')
-
+    _part_fns = {
+            'day': 'extract(DAY FROM %s)',
+            'decade': 'extract(DECADE FROM %s)',
+            'dow': 'extract(DOW FROM %s)',
+            'doy': 'extract(DOY FROM %s)',
+            'epoch': 'extract(EPOCH FROM %s)',
+            'month': 'extract(MONTH FROM %s)',
+            'second': 'extract(SECOND FROM %s)',
+            'week': 'extract(WEEK FROM %s)',
+            'year': 'extract(YEAR FROM %s)',
+        }
 
     @staticmethod
     def today(*args):
@@ -419,6 +429,29 @@ class date(_date_column_mixin, _column):
         """
         return lazy_date_eval(estr, out_fmt='date')
 
+    def expr_eval(self, cr, uid, obj, lefts, operator, right, pexpr, context):
+        """ Adds less-than, greater-than support
+        
+            Since the datetime API, also supports lefts like .month, .day etc!
+        """
+        if len(lefts) == 2:
+            fn = self._part_fns.get(lefts[1], None)
+            if fn is None:
+                raise eu.DomainLeftError(obj, lefts, operator, right)
+            if operator not in ('=', '!=', '<>'):
+                raise eu.DomainInvalidOperator(obj, lefts, operator, right)
+            return  eu.function_expr(fn, lefts[0], operator, right)
+        elif len(lefts) == 1:
+            if right is False:
+                if operator not in ('=', '!=', '<>'):
+                    raise eu.DomainInvalidOperator(obj, lefts, operator, right)
+                return (lefts[0], operator, None)
+            elif operator not in self._SCALAR_OPS:
+                raise eu.DomainInvalidOperator(obj, lefts, operator, right)
+            else:
+                return None
+        else:
+            raise eu.DomainLeftError(obj, lefts, operator, right)
 
 class datetime(_date_column_mixin, _column):
     _type = 'datetime'
@@ -480,21 +513,21 @@ class datetime(_date_column_mixin, _column):
                 raise eu.DomainInvalidOperator(obj, lefts, operator, right)
             return  eu.function_expr(fn, lefts[0], operator, right)
         elif len(lefts) == 1:
-            pass
+            if right and isinstance(right, basestring) and len(right) < 11:
+                if operator in ('<', '<='):
+                    return (lefts[0], operator, right + ' 23:59:59')
+                elif operator in ('>', '>='):
+                    return (lefts[0], operator, right + ' 00:00:00')
+            elif right is False:
+                if operator not in ('=', '!=', '<>'):
+                    raise eu.DomainInvalidOperator(obj, lefts, operator, right)
+                return (lefts[0], operator, None)
+            elif operator not in self._SCALAR_OPS:
+                raise eu.DomainInvalidOperator(obj, lefts, operator, right)
+            else:
+                return None
         else:
             raise eu.DomainLeftError(obj, lefts, operator, right)
-
-        if right and isinstance(right, basestring) and len(right) < 11:
-            if operator in ('<', '<='):
-                return (lefts[0], operator, right + ' 23:59:59')
-            elif operator in ('>', '>='):
-                return (lefts[0], operator, right + ' 00:00:00')
-        elif right is False:
-            if operator not in ('=', '!=', '<>'):
-                raise eu.DomainInvalidOperator(obj, lefts, operator, right)
-            return (lefts[0], operator, None)
-
-        return None # or the same expression
 
 class time(_column):
     _type = 'time'

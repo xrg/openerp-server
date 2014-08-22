@@ -187,6 +187,9 @@ class id_field(integer):
                 if operator not in ('=', '!=', '<>'):
                     raise eu.DomainInvalidOperator(obj, lefts, operator, right)
                 return (lefts[0], operator, None)
+            elif (operator not in self._SCALAR_OPS) \
+                    and operator not in ('inselect', 'not inselect'):
+                raise eu.DomainInvalidOperator(obj, lefts, operator, right)
             return None # as-is
 
     def calc_group(self, cr, uid, obj, lefts, right, context):

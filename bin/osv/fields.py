@@ -121,6 +121,7 @@ class _column(object):
     _symbol_get = None
     merge_op = False
     merge_param = None
+    _SCALAR_OPS = ('=', '!=', '<>', '<', '<=', '>', '>=', 'in', 'not in')
 
     @classmethod
     def from_manual(cls, field_dict, attrs):
@@ -367,6 +368,8 @@ class _column(object):
             if operator not in ('=', '!=', '<>'):
                 raise eu.DomainInvalidOperator(obj, lefts, operator, right)
             return (lefts[0], operator, None)
+        elif operator not in self._SCALAR_OPS:
+            raise eu.DomainInvalidOperator(obj, lefts, operator, right)
         return None # as-is
 
     def _verify_model(self, dcol, mname, cname):
