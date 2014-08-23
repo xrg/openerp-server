@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
 #
-#    OpenERP, Open Source Management Solution
-#    Copyright (C) 2004-TODAY OpenERP S.A. <http://www.openerp.com>
+#    OpenERP-F3, Open Source Management Solution
+#    Copyright (C) 2004-2011 OpenERP S.A. <http://www.openerp.com>
+#    Copyright (C) 2011-2014 P. Christeas <xrg@hellug.gr>
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -156,21 +157,18 @@ class ir_cron(osv.osv, netsvc.Agent):
             cr.close()
 
     def restart(self, dbname):
-        self.cancel(dbname)
+        self.cancel(dbname, self._poolJobs)
         # Reschedule cron processing job asap, but not in the current thread
         self.setAlarm(self._poolJobs, time.time(), dbname, dbname)
 
     def update_running_cron(self, cr):
-        # Verify whether the server is already started and thus whether we need to commit
-        # immediately our changes and restart the cron agent in order to apply the change
-        # immediately. The commit() is needed because as soon as the cron is (re)started it
-        # will query the database with its own cursor, possibly before the end of the
-        # current transaction.
-        # This commit() is not an issue in most cases, but we must absolutely avoid it
-        # when the server is only starting or loading modules (hence the test on pool._init).
+        """Stop and restart ir.cron on this db+cursor
+
+            Cancels all current jobs (immediately), schedule restart after cr.commit()
+        """
+        self.cancel(cr.dbname, self._poolJobs)
         if not self.pool._init:
-            cr.commit()
-            self.restart(cr.dbname)
+            self.setAlarmLater(self._poolJobs, time.time(), cr, cr.dbname)
 
     def create(self, cr, uid, vals, context=None):
         res = super(ir_cron, self).create(cr, uid, vals, context=context)
