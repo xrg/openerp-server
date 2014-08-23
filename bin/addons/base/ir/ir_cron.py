@@ -87,15 +87,17 @@ class ir_cron(osv.osv, netsvc.Agent):
     ]
 
     def _callback(self, cr, uid, model, func, args):
-        args = str2tuple(args)
         m = self.pool.get(model)
         if m and hasattr(m, func):
             f = getattr(m, func)
             try:
+                args = str2tuple(args)
                 f(cr, uid, *args)
             except Exception, e:
                 cr.rollback()
                 self._logger.exception("Job call of self.pool.get('%s').%s(cr, uid, *%r) failed" % (model, func, args))
+        else:
+            self._logger.error("Model '%s.%s()' method does not exist for cron job", model, func)
 
 
     def _poolJobs(self, db_name, check=False):
