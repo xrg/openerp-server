@@ -669,9 +669,9 @@ class Agent(object):
         cr.post_commit(cls._alarm_later(cr.dbname, function, timestamp, args, kwargs))
 
     @classmethod
-    def cancel(cls, db_name):
+    def cancel(cls, db_name, function=None):
         """Cancel all tasks for a given database. If None is passed, all tasks are cancelled"""
-        cls._logger.debug("Cancel timers for %s db", db_name or 'all')
+        cls._logger.debug("Cancel timers for %s.* db", db_name or 'all', function or '*')
         cls._lock.acquire()
         try:
             if db_name is None:
@@ -679,7 +679,8 @@ class Agent(object):
             else:
                 if db_name in cls.__tasks_by_db:
                     for task in cls.__tasks_by_db[db_name]:
-                        task[0] = 0
+                        if (function is None) or function is task[2]:
+                            task[0] = 0
         finally:
             cls._lock.notify_all()
             cls._lock.release()
