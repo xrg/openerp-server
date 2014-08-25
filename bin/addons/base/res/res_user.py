@@ -4,7 +4,7 @@
 #    OpenERP, Open Source Management Solution
 #    Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>).
 #    Copyright (C) 2010-2011 OpenERP s.a. (<http://openerp.com>).
-#    Copyright (C) 2012-2013 P. Christeas <xrg@hellug.gr>
+#    Copyright (C) 2012-2014 P. Christeas <xrg@hellug.gr>
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -567,6 +567,47 @@ class users(osv.osv):
                 uic_db.pop(uid, None)
             return ret
         raise osv.except_osv(_('Warning!'), _("Setting empty passwords is not allowed for security reasons!"))
+
+    def sudo(self, cr, uid, user, model, function, args=None, kwargs=None, context=None):
+        """ Run an ORM method as some other user
+
+            Trivial here, but we can do more checks some day.
+        """
+        if uid != 1:
+            raise security.ExceptionNoTb('User #%d is not a sudoer' % uid)
+
+        if isinstance(user, (int, long)):
+            suid = user
+        elif isinstance(user, basestring):
+            r = self.search(cr, uid, [('login', '=', user)], context=context)
+            if r:
+                suid = r[0]
+            else:
+                raise osv.except_osv(_('Error!'), _("User '%s' not found") % user)
+        else:
+            raise security.ExceptionNoTb('Invalid user')
+
+        assert isinstance(model, basestring), type(model)
+        assert isinstance(function, basestring), type(model)
+        assert args is None or isinstance(args, (tuple, list))
+        assert kwargs is None or isinstance(kwargs, dict)
+
+        if function.startswith('_'):
+            raise security.ExceptionNoTb('Cannot sudo to private functions')
+
+        obj = self.pool.get(model)
+        if obj is None:
+            raise KeyError("No such model: %s" % model)
+        fn = getattr(obj, function)
+        if not callable(fn):
+            raise KeyError("No such method: %s.%s()" % (model, function))
+        if args is None:
+            args = ()
+        if kwargs is None:
+            kwargs = {'context': context}
+
+        logging.getLogger('orm').info("%s: sudo call from uid=%d to %s.%s(user=%s, ...)", self._name, uid, model, function, user)
+        return fn(cr, suid, *args, **kwargs)
 
 users()
 
