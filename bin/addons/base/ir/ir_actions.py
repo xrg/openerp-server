@@ -51,7 +51,7 @@ actions()
 
 class report_xml(osv.osv):
     _function_field_browse = True
-    
+
     def _report_content(self, cursor, user, ids, name, arg, context=None):
         res = {}
         for report in self.browse(cursor, user, ids, context=context):
@@ -167,7 +167,7 @@ class act_window(osv.osv):
 
     def _invalid_model_msg(self, cr, uid, ids, context=None):
         return _('Invalid model name in the action definition.')
-    
+
     _constraints = [
         (_check_model, _invalid_model_msg, ['res_model','src_model'])
     ]
@@ -190,7 +190,6 @@ class act_window(osv.osv):
 
     def _search_view(self, cr, uid, ids, name, arg, context=None):
         res = {}
-        _logger = logging.getLogger('orm.ir.actions')
         def encode(s):
             if isinstance(s, unicode):
                 return s.encode('utf8')
@@ -207,18 +206,18 @@ class act_window(osv.osv):
             elif act.view_mode == 'form':
                 return res # avoid search view for a form-only action
             else:
-                res_view = self.pool.get('ir.ui.view').search(cr, uid, 
+                res_view = self.pool.get('ir.ui.view').search(cr, uid,
                         [('model','=',act.res_model),('type','=','search'),
                         ('inherit_id','=',False)], context=context)
                 if res_view:
                     search_view_id = res_view[0]
             if True:
-                field_get = act_model.fields_view_get(cr, uid, search_view_id or False, 
+                field_get = act_model.fields_view_get(cr, uid, search_view_id or False,
                             'search', context)
                 fields_from_fields_get.update(field_get['fields'])
                 field_get['fields'] = fields_from_fields_get
                 res[act.id] = str(field_get) # TODO: remove str() after client has adapted
-            
+
         return res
 
     def _get_help_status(self, cr, uid, ids, name, arg, context=None):
