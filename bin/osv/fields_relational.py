@@ -651,7 +651,22 @@ class one2many(_rel2many):
                     id_new = obj.create(cr, user, act[2], context=context)
                 result += obj._store_get_values(cr, user, [id_new], act[2].keys(), context)
             elif act[0] == 1:
-                obj.write(cr, user, [act[1]], act[2], context=context)
+                if act[2].get('_vptr', False):
+                    # When "_vptr" is specified in list of values, redirect
+                    # the write() operation to the virtual model
+                    obj_v = obj.pool.get(act[2]['_vptr'])
+                    obj_col = obj_v._inherits.get(self._obj, False)
+                    if not obj_col:
+                        raise ValueError("Data for %s came, which does not inherit %s" % (act[2]['_vptr'], self._obj))
+                    vals_cpy = act[2].copy()
+                    id_vs = obj_v.search(cr, user, [(obj_col, '=', act[1])], context=context)
+                    if len(id_vs) != 1:
+                        raise ValueError("Data for %s[#%d] specifies _vptr=%s , in which this record does not exist.",
+                                        obj._name, act[1], vals_cpy['_vptr'])
+                    vals_cpy.pop('_vptr')
+                    obj_v.write(cr, user, id_vs, vals_cpy, context=context)
+                else:
+                    obj.write(cr, user, [act[1]], act[2], context=context)
             elif act[0] == 2:
                 obj.unlink(cr, user, [act[1]], context=context)
             elif act[0] == 3:
@@ -946,7 +961,23 @@ class many2many(_rel2many):
                     idnew = obj.create(cr, user, act[2], context=context)
                 cr.execute('insert into '+rel+' ('+id1+','+id2+') values (%s,%s)', (id, idnew), debug=obj._debug)
             elif act[0] == 1:
-                obj.write(cr, user, [act[1]], act[2], context=context)
+                if act[2].get('_vptr', False):
+                    # When "_vptr" is specified in list of values, redirect
+                    # the write() operation to the virtual model
+                    obj_v = obj.pool.get(act[2]['_vptr'])
+                    obj_col = obj_v._inherits.get(self._obj, False)
+                    if not obj_col:
+                        raise ValueError("Data for %s came, which does not inherit %s" % (act[2]['_vptr'], self._obj))
+                    vals_cpy = act[2].copy()
+
+                    id_vs = obj_v.search(cr, user, [(obj_col, '=', act[1])], context=context)
+                    if len(id_vs) != 1:
+                        raise ValueError("Data for %s[#%d] specifies _vptr=%s , in which this record does not exist.",
+                                        obj._name, act[1], vals_cpy['_vptr'])
+                    vals_cpy.pop('_vptr')
+                    obj_v.write(cr, user, id_vs, vals_cpy, context=context)
+                else:
+                    obj.write(cr, user, [act[1]], act[2], context=context)
             elif act[0] == 2:
                 obj.unlink(cr, user, [act[1]], context=context)
             elif act[0] == 3:
