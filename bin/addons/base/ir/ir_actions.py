@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
 #
-#    OpenERP, Open Source Management Solution
+#    OpenERP/F3, Open Source Management Solution
 #    Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>).
+#    Copyright (C) 2011-2014 P. Christeas <xrg@hellug.gr>
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -20,19 +21,22 @@
 ##############################################################################
 
 from osv import fields,osv
-from tools.safe_eval import safe_eval as eval
+from tools.safe_eval import safe_eval, ExecContext
 import tools
 import time
-from tools.config import config
+# from tools.config import config
 from tools.translate import _
 import netsvc
 import logging
-import re
-import copy
 import os
-from xml import dom
+from tools.date_eval import date_eval
 from report.report_sxw import report_sxw, report_rml
 from tools.orm_utils import only_ids
+
+
+def eval(*args, **kwargs):
+    "We must always use safe_eval() here"
+    raise RuntimeError()
 
 class actions(osv.osv):
     _name = 'ir.actions.actions'
@@ -392,6 +396,20 @@ class server_object_lines(osv.osv):
     }
 server_object_lines()
 
+class ActionsExecContext(ExecContext):
+    _name = 'ir.actions'
+    _logger_name = 'orm.ir.actions.exec'
+
+    def prepare_context(self, context):
+        self._prepare_orm(context)
+        self._prepare_logger(context)
+        context['obj'] = self.obj
+        context['dbname'] = self.cr.dbname
+        context['date_eval'] = date_eval
+        context['id'] = id
+        context['hash'] = hash
+        context['hex'] = hex
+
 ##
 # Actions that are run on the server side
 #
@@ -440,8 +458,8 @@ class actions_server(osv.osv):
             ('loop','Iteration'),
             ('code','Python Code'),
             ('trigger','Trigger'),
-            ('email','Email'),
-            ('sms','SMS'),
+            ('email','Email (obsolete)'),
+            ('sms','SMS (obsolete)'),
             ('object_create','Create Object'),
             ('object_copy','Copy Object'),
             ('object_write','Write Object'),
@@ -454,10 +472,10 @@ class actions_server(osv.osv):
         'trigger_name': fields.selection(_select_signals, string='Trigger Name', size=128, help="Select the Signal name that is to be used as the trigger."),
         'wkf_model_id': fields.many2one('ir.model', 'Workflow On', help="Workflow to be executed on this model."),
         'trigger_obj_id': fields.many2one('ir.model.fields','Trigger On', help="Select the object from the model on which the workflow will executed."),
-        'email': fields.char('Email Address', size=512, help="Provides the fields that will be used to fetch the email address, e.g. when you select the invoice, then `object.invoice_address_id.email` is the field which gives the correct address"),
-        'subject': fields.char('Subject', size=1024, translate=True, help="Specify the subject. You can use fields from the object, e.g. `Hello [[ object.partner_id.name ]]`"),
-        'message': fields.text('Message', translate=True, help="Specify the message. You can use the fields from the object. e.g. `Dear [[ object.partner_id.name ]]`"),
-        'mobile': fields.char('Mobile No', size=512, help="Provides fields that be used to fetch the mobile number, e.g. you select the invoice, then `object.invoice_address_id.mobile` is the field which gives the correct mobile number"),
+        'email': fields.char('Email Address', size=512),
+        'subject': fields.char('Subject', size=1024, translate=True),
+        'message': fields.text('Message', translate=True),
+        'mobile': fields.char('Mobile No', size=512, ),
         'sms': fields.char('SMS', size=160, translate=True),
         'child_ids': fields.many2many('ir.actions.server', 'rel_server_actions', 'server_id', 'action_id', 'Other Actions'),
         'usage': fields.char('Action Usage', size=32),
@@ -485,273 +503,204 @@ class actions_server(osv.osv):
 """,
     }
 
-    def get_email(self, cr, uid, action, context):
-        logger = logging.getLogger('Workflow')
-        obj_pool = self.pool.get(action.model_id.model)
-        id = context.get('active_id')
-        obj = obj_pool.browse(cr, uid, id)
-
-        fields = None
-
-        if '/' in action.email.complete_name:
-            fields = action.email.complete_name.split('/')
-        elif '.' in action.email.complete_name:
-            fields = action.email.complete_name.split('.')
-
-        for field in fields:
-            try:
-                obj = getattr(obj, field)
-            except Exception:
-                logger.exception('Failed to parse: %s', field)
-
-        return obj
-
-    def get_mobile(self, cr, uid, action, context):
-        logger = logging.getLogger('Workflow')
-        obj_pool = self.pool.get(action.model_id.model)
-        id = context.get('active_id')
-        obj = obj_pool.browse(cr, uid, id)
-
-        fields = None
-
-        if '/' in action.mobile.complete_name:
-            fields = action.mobile.complete_name.split('/')
-        elif '.' in action.mobile.complete_name:
-            fields = action.mobile.complete_name.split('.')
-
-        for field in fields:
-            try:
-                obj = getattr(obj, field)
-            except Exception:
-                logger.exception('Failed to parse: %s', field)
-
-        return obj
-
-    def merge_message(self, cr, uid, keystr, action, context=None):
-        if context is None:
-            context = {}
-        def merge(match):
-            obj_pool = self.pool.get(action.model_id.model)
-            id = context.get('active_id')
-            obj = obj_pool.browse(cr, uid, id)
-            exp = str(match.group()[2:-2]).strip()
-            result = eval(exp,
-                          {
-                            'object': obj,
-                            'context': dict(context), # copy context to prevent side-effects of eval
-                            'time': time,
-                          })
-            if result in (None, False):
-                return str("--------")
-            return tools.ustr(result)
-
-        com = re.compile('(\[\[.+?\]\])')
-        message = com.sub(merge, keystr)
-
-        return message
-
-    # Context should contains:
+    # Context should contain:
     #   ids : original ids
     #   id  : current id of the object
     # OUT:
-    #   False : Finnished correctly
+    #   False : Finished correctly
     #   ACTION_ID : Action to launch
 
-    # FIXME: refactor all the eval() calls in run()!
     def run(self, cr, uid, ids, context=None):
-        logger = logging.getLogger(self._name)
         if context is None:
             context = {}
+        eval_ctx = ActionsExecContext.new(cr=cr, uid=uid, pool=self.pool, context=context)
+
         for action in self.browse(cr, uid, ids, context):
-            obj_pool = self.pool.get(action.model_id.model)
-            obj = obj_pool.browse(cr, uid, context['active_id'], context=context)
-            cxt = {
-                'context': dict(context), # copy context to prevent side-effects of eval
-                'object': obj,
-                'time':time,
-                'cr': cr,
-                'pool' : self.pool,
-                'uid' : uid
-            }
-            expr = eval(str(action.condition), cxt)
-            if not expr:
-                continue
-
-            if action.state=='client_action':
-                if not action.action_id:
-                    raise osv.except_osv(_('Error'), _("Please specify an action to launch !"))
-                return self.pool.get(action.action_id.type)\
-                    .read(cr, uid, action.action_id.id, context=context)
-
-            if action.state=='code':
-                localdict = {
-                    'self': self.pool.get(action.model_id.model),
-                    'context': dict(context), # copy context to prevent side-effects of eval
-                    'time': time,
-                    'ids': ids,
-                    'cr': cr,
-                    'uid': uid,
-                    'object':obj,
-                    'obj': obj,
-                }
-                eval(action.code, localdict, mode="exec", nocopy=True) # nocopy allows to return 'action'
-                if 'action' in localdict:
-                    return localdict['action']
-
-            if action.state == 'email':
-                user = config['email_from']
-                address = str(action.email)
-                try:
-                    address =  eval(str(action.email), cxt)
-                except:
-                    pass
-
-                if not address:
-                    logger.info('Partner Email address not Specified!')
+            if context.get('active_id') \
+                    and context.get('active_model', False) == action.model_id.model:
+                model_obj = self.pool.get(action.model_id.model)
+                eval_ctx.update(obj=model_obj.browse(cr, uid, context['active_id'], context=context, cache=action._cache))
+            else:
+                model_obj = None
+                eval_ctx.update(obj=None)
+            if action.condition and action.condition != 'True':
+                ctx = {}
+                eval_ctx.prepare_context(ctx)
+                if not safe_eval(str(action.condition), ctx):
                     continue
-                if not user:
-                    logger.info('Email-From address not Specified at server!')
-                    raise osv.except_osv(_('Error'), _("Please specify server option --email-from !"))
 
-                subject = self.merge_message(cr, uid, action.subject, action, context)
-                body = self.merge_message(cr, uid, action.message, action, context)
+            action_fn = getattr(self, '_run_'+action.state) # will raise exception
 
-                if tools.email_send(user, [address], subject, body, debug=False, subtype='html') == True:
-                    logger.info('Email successfully sent to: %s', address)
-                else:
-                    logger.warning('Failed to send email to: %s', address)
-
-            if action.state == 'trigger':
-                wf_service = netsvc.LocalService("workflow")
-                model = action.wkf_model_id.model
-                obj_pool = self.pool.get(action.model_id.model)
-                res_id = self.pool.get(action.model_id.model).read(cr, uid, [context.get('active_id')], [action.trigger_obj_id.name])
-                id = res_id [0][action.trigger_obj_id.name]
-                wf_service.trg_validate(uid, model, int(id), action.trigger_name, cr)
-
-            if action.state == 'sms':
-                #TODO: set the user and password from the system
-                # for the sms gateway user / password
-                # USE smsclient module from extra-addons
-                logger.warning('SMS Facility has not been implemented yet. Use smsclient module!')
-
-            if action.state == 'other':
-                res = []
-                for act in action.child_ids:
-                    context['active_id'] = context['active_ids'][0]
-                    result = self.run(cr, uid, [act.id], context)
-                    if result:
-                        res.append(result)
-
+            res = action_fn(cr, uid, action, model_obj, eval_ctx, context)
+            if res is not None:
                 return res
 
-            if action.state == 'loop':
-                obj_pool = self.pool.get(action.model_id.model)
-                obj = obj_pool.browse(cr, uid, context['active_id'], context=context)
+        return False
+
+    def _run_client_action(self, cr, uid, action, model_obj, eval_ctx, context):
+        if not action.action_id:
+            raise osv.except_osv(_('Error'), _("Please specify an action to launch !"))
+        return self.pool.get(action.action_id.type) \
+                    .read(cr, uid, action.action_id.id, context=context)
+
+    def _run_code(self, cr, uid, action, model_obj, eval_ctx, context):
+        localdict = {
+            'self': self.pool.get(action.model_id.model),
+            'context': dict(context), # copy context to prevent side-effects of eval
+            'time': time,
+            'cr': cr,
+            'uid': uid,
+            'object': eval_ctx.obj,
+            'obj': eval_ctx.obj,
+            }
+        safe_eval(action.code, localdict, mode="exec", nocopy=True) # nocopy allows to return 'action'
+        if 'action' in localdict:
+            return localdict['action']
+
+    def _run_email(self, cr, uid, action, model_obj, eval_ctx, context):
+        raise NotImplementedError("Email actions must be replaced by 'base_messaging' commands")
+
+    def _run_trigger(self, cr, uid, action, model_obj, eval_ctx, context):
+        wf_service = netsvc.LocalService("workflow")
+        model = action.wkf_model_id.model
+        res_id = model_obj.read(cr, uid, [context.get('active_id')], [action.trigger_obj_id.name])
+        id = res_id [0][action.trigger_obj_id.name]
+        wf_service.trg_validate(uid, model, int(id), action.trigger_name, cr)
+
+    def _run_sms(self, cr, uid, action, model_obj, eval_ctx, context):
+        raise NotImplementedError("SMS actions must be replaced by 'base_messaging' commands")
+
+    def _run_other(self, cr, uid, action, model_obj, eval_ctx, context):
+        res = []
+        for act in action.child_ids:
+            context['active_id'] = context['active_ids'][0]
+            result = self.run(cr, uid, [act.id], context)
+            if result:
+                res.append(result)
+        return res
+
+    def _run_loop(self, cr, uid, action, model_obj, eval_ctx, context):
+        cxt = {
+            'context': dict(context), # copy context to prevent side-effects of eval
+            'object': eval_ctx.obj,
+            'time': time,
+            'cr': cr,
+            'pool' : self.pool,
+            'uid' : uid
+            }
+        expr = safe_eval(str(action.expression), cxt)
+        context['object'] = eval_ctx.obj
+        ret = []
+        for i in expr:
+            context['active_id'] = i.id
+            r = self.run(cr, uid, [action.loop_action.id], context)
+            if r:
+                ret.append(r)
+        if ret:
+            # last result
+            return ret[-1]
+
+    def _run_object_write(self, cr, uid, action, model_obj, eval_ctx, context):
+        res = {}
+        for exp in action.fields_lines:
+            euq = exp.value
+            if exp.type == 'equation':
+                obj = eval_ctx.obj
                 cxt = {
                     'context': dict(context), # copy context to prevent side-effects of eval
                     'object': obj,
                     'time': time,
-                    'cr': cr,
-                    'pool' : self.pool,
-                    'uid' : uid
                 }
-                expr = eval(str(action.expression), cxt)
-                context['object'] = obj
-                for i in expr:
-                    context['active_id'] = i.id
-                    result = self.run(cr, uid, [action.loop_action.id], context)
+                expr = safe_eval(euq, cxt)
+            else:
+                expr = exp.value
+            res[exp.col1.name] = expr
 
-            if action.state == 'object_write':
-                res = {}
-                for exp in action.fields_lines:
-                    euq = exp.value
-                    if exp.type == 'equation':
-                        obj_pool = self.pool.get(action.model_id.model)
-                        obj = obj_pool.browse(cr, uid, context['active_id'], context=context)
-                        cxt = {
-                            'context': dict(context), # copy context to prevent side-effects of eval
-                            'object': obj,
-                            'time': time,
-                        }
-                        expr = eval(euq, cxt)
-                    else:
-                        expr = exp.value
-                    res[exp.col1.name] = expr
-
-                if not action.write_id:
-                    if not action.srcmodel_id:
-                        obj_pool = self.pool.get(action.model_id.model)
-                        obj_pool.write(cr, uid, [context.get('active_id')], res)
-                    else:
-                        write_id = context.get('active_id')
-                        obj_pool = self.pool.get(action.srcmodel_id.model)
-                        obj_pool.write(cr, uid, [write_id], res)
-
-                elif action.write_id:
-                    obj_pool = self.pool.get(action.srcmodel_id.model)
-                    rec = self.pool.get(action.model_id.model).browse(cr, uid, context.get('active_id'))
-                    id = eval(action.write_id, {'object': rec})
-                    try:
-                        id = int(id)
-                    except:
-                        raise osv.except_osv(_('Error'), _("Problem in configuration `Record Id` in Server Action!"))
-
-                    if type(id) != type(1):
-                        raise osv.except_osv(_('Error'), _("Problem in configuration `Record Id` in Server Action!"))
-                    write_id = id
-                    obj_pool.write(cr, uid, [write_id], res)
-
-            if action.state == 'object_create':
-                res = {}
-                for exp in action.fields_lines:
-                    euq = exp.value
-                    if exp.type == 'equation':
-                        obj_pool = self.pool.get(action.model_id.model)
-                        obj = obj_pool.browse(cr, uid, context['active_id'], context=context)
-                        expr = eval(euq,
-                                    {
-                                        'context': dict(context), # copy context to prevent side-effects of eval
-                                        'object': obj,
-                                        'time': time,
-                                    })
-                    else:
-                        expr = exp.value
-                    res[exp.col1.name] = expr
-
-                obj_pool = None
-                res_id = False
+        if not action.write_id:
+            if not action.srcmodel_id:
+                model_obj.write(cr, uid, [context.get('active_id')], res)
+            else:
+                write_id = context.get('active_id')
                 obj_pool = self.pool.get(action.srcmodel_id.model)
-                res_id = obj_pool.create(cr, uid, res)
-                if action.record_id:
-                    self.pool.get(action.model_id.model).write(cr, uid, [context.get('active_id')], {action.record_id.name:res_id})
+                obj_pool.write(cr, uid, [write_id], res)
 
-            if action.state == 'object_copy':
-                res = {}
-                for exp in action.fields_lines:
-                    euq = exp.value
-                    if exp.type == 'equation':
-                        obj_pool = self.pool.get(action.model_id.model)
-                        obj = obj_pool.browse(cr, uid, context['active_id'], context=context)
-                        expr = eval(euq,
-                                    {
-                                        'context': dict(context), # copy context to prevent side-effects of eval
-                                        'object': obj,
-                                        'time': time,
-                                    })
-                    else:
-                        expr = exp.value
-                    res[exp.col1.name] = expr
+        elif action.write_id:
+            obj_pool = self.pool.get(action.srcmodel_id.model)
+            id = safe_eval(action.write_id, {'object': eval_ctx.obj})
+            try:
+                id = int(id)
+            except:
+                raise osv.except_osv(_('Error'), _("Problem in configuration `Record Id` in Server Action!"))
 
-                obj_pool = None
-                res_id = False
+            if type(id) != type(1):
+                raise osv.except_osv(_('Error'), _("Problem in configuration `Record Id` in Server Action!"))
+            write_id = id
+            obj_pool.write(cr, uid, [write_id], res)
 
-                model = action.copy_object.split(',')[0]
-                cid = action.copy_object.split(',')[1]
-                obj_pool = self.pool.get(model)
-                res_id = obj_pool.copy(cr, uid, int(cid), res)
+    def _run_object_create(self, cr, uid, action, model_obj, eval_ctx, context):
+        res = {}
+        for exp in action.fields_lines:
+            euq = exp.value
+            if exp.type == 'equation':
+                obj = eval_ctx.obj
+                expr = safe_eval(euq, { 'context': dict(context), 'object': obj, 'time': time, })
+            else:
+                expr = exp.value
+            res[exp.col1.name] = expr
 
-        return False
+        obj_pool = None
+        res_id = False
+        obj_pool = self.pool.get(action.srcmodel_id.model)
+        res_id = obj_pool.create(cr, uid, res)
+        if action.record_id:
+            model_obj.write(cr, uid, [context.get('active_id')], {action.record_id.name:res_id})
+
+    def _run_object_copy(self, cr, uid, action, model_obj, eval_ctx, context):
+        res = {}
+        for exp in action.fields_lines:
+            euq = exp.value
+            if exp.type == 'equation':
+                expr = safe_eval(euq, { 'context': dict(context), 'object': eval_ctx.obj, 'time': time, })
+            else:
+                expr = exp.value
+            res[exp.col1.name] = expr
+
+        obj_pool = None
+        res_id = False
+
+        model, cid = action.copy_object.split(',', 1)
+        obj_pool = self.pool.get(model)
+        res_id = obj_pool.copy(cr, uid, int(cid), res)
+        if action.record_id:
+            model_obj.write(cr, uid, [context.get('active_id')], {action.record_id.name:res_id})
+
+    def write(self, cr, user, ids, vals, context=None):
+        """Hard-code a restriction for potentially privilege-escalating actions
+
+            This is not done through ir.rules or ACLs, because it must apply to
+            all databases, all time.
+        """
+        if user != 1:
+            state = vals.get('state', False)
+            if state:
+                states = [state,]
+            else:
+                if isinstance(ids, (int, long)):
+                    ids2 = [ids]
+                else:
+                    ids2 = ids
+                states = [x['state'] for x in self.read(cr, user, ids2, fields=['state'], context=context)]
+
+            for state in states:
+                if state not in ('scode', 'dummy', 'client_action'):
+                    raise osv.orm.except_orm(_('Permission Error!'), _('Only the admin user is allowed to write server actions of advanced type!'))
+
+        return super(actions_server, self).write(cr, user, ids, vals, context=context)
+
+    def create(self, cr, uid, vals, context=None):
+        if uid != 1 and vals.get('state', 'dummy') not in ('scode', 'dummy', 'client_action'):
+            raise osv.orm.except_orm(_('Permission Error!'), _('Only the admin user is allowed to create server actions of advanced type!'))
+        return super(actions_server, self).create(cr, uid, vals, context=context)
 
 actions_server()
 
