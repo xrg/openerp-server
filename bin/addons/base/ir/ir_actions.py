@@ -457,6 +457,7 @@ class actions_server(osv.osv):
             ('dummy','Dummy'),
             ('loop','Iteration'),
             ('code','Python Code'),
+            ('scode', 'Secure code'),
             ('trigger','Trigger'),
             ('email','Email (obsolete)'),
             ('sms','SMS (obsolete)'),
@@ -496,8 +497,8 @@ class actions_server(osv.osv):
         'code': """# You can use the following variables
 #    - object or obj
 #    - time
-#    - cr
-#    - uid
+#    - cr (Insecure only)
+#    - uid (Insecure only)
 #    - ids
 # If you plan to return an action, assign: action = {...}
 """,
@@ -555,6 +556,16 @@ class actions_server(osv.osv):
             }
         safe_eval(action.code, localdict, mode="exec", nocopy=True) # nocopy allows to return 'action'
         if 'action' in localdict:
+            return localdict['action']
+
+    def _run_scode(self, cr, uid, action, model_obj, eval_ctx, context):
+        localdict = {}
+        eval_ctx.prepare_context(localdict)
+        if 'active_ids' in context:
+            localdict['objs'] = model_obj.browse(cr, uid, context['active_ids'], context=context)
+
+        safe_eval(action.code, localdict, mode="exec", nocopy=True) # nocopy allows to return 'action'
+        if localdict.get('action', None) is not None:
             return localdict['action']
 
     def _run_email(self, cr, uid, action, model_obj, eval_ctx, context):
