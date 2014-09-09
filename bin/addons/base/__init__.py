@@ -20,11 +20,6 @@
 #
 ##############################################################################
 
-import ir
-import module
-import res
-import publisher_warranty
-
 from tools.safe_eval import ExecContext
 
 class _pool_actor(object):
@@ -79,6 +74,10 @@ class ExecContext_orm(ExecContext):
                     'merge_records'):
             context[verb] = _pool_actor(verb=verb, parent=self)
 
+import ir
+import module
+import res
+import publisher_warranty
 
 import amount_to_text
 import amount_to_text_en
