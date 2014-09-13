@@ -2458,8 +2458,9 @@ class orm_template(object):
         
         # Add a reference in ir.model.data for every id removed
         for i in ids[1:]:
-            imd_obj.create(cr, uid, dict(name='merged#%d' %i, model=self._name,
-                            res_id=ids[0], noupdate=True, source='merged'),
+            imd_obj.create(cr, uid, dict(name='merged#%d' %i, module=self._name,
+                            model=self._name, res_id=ids[0],
+                            noupdate=True, source='merged'),
                         context=context)
         
         return ids[0]
