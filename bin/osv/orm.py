@@ -367,10 +367,13 @@ class browse_record(object):
                         return ret
 
                 # else fetch the old way..
+            from expression import expression
 
             # fetch the definition of the field which was asked for
             if name in self._table._columns:
                 col = self._table._columns[name]
+            elif name in expression._implicit_fields:
+                col = expression._implicit_fields[name]
             elif name in self._table._inherit_fields:
                 col = self._table._inherit_fields[name][2]
             elif hasattr(self._table, str(name)):
@@ -453,6 +456,7 @@ class browse_record(object):
             # Prefetch logic: When we fetch the IDs of some relational field,
             # preset these IDs in the browse_cache. Then, any read() of the
             # remote object will fetch *all* these IDs on the first query.
+            rn = rc = None
             for rn, rc in fields_to_fetch:
                 if isinstance(rc, fields_relational._rel2many):
                     rcache = self._cache.setdefault(rc._obj, {})
