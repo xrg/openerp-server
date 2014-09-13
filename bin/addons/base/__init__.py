@@ -59,6 +59,18 @@ class _pool_actor_browse(object):
             kwargs['cache'] = bro_cache
         return obj.browse(self._parent.cr, self._parent.uid, *args, **kwargs)
 
+class _actor_ref:
+    def __init__(self, parent):
+        self._parent = parent
+
+    def __call__(self, xml_ref, model=False):
+        module, name = xml_ref.split('.', 1)
+        res = self._parent.pool.get('ir.model.data').get_object_reference(self._parent.cr, self._parent.uid, module, name)
+        if model and res[0] != model:
+            raise ValueError("Model reference for %s.%s is '%s' instead of '%s'" % \
+                                (module, name, res[0], model))
+        return res[1]
+
 class ExecContext_orm(ExecContext):
     def _prepare_orm(self, context):
         """Call this from your class if you want ORM methods within the context
@@ -82,6 +94,9 @@ class ExecContext_orm(ExecContext):
                     'name_get', 'read_group', 'merge_get_values',
                     'merge_records'):
             context[verb] = _pool_actor(verb=verb, parent=self)
+
+        context['ref'] = _actor_ref(self)
+
 
 import ir
 import module
