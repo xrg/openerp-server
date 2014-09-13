@@ -232,6 +232,8 @@ class _rel2many(_relational):
                 operator = 'in'
             elif operator in ('!=', '<>', 'not in'):
                 operator = 'not in'
+            elif operator in ('child_of', '|child_of'):
+                pass
             else:
                 raise eu.DomainInvalidOperator(obj, lefts, operator)
             right_expr = right
