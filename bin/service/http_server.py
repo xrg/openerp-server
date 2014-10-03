@@ -666,6 +666,11 @@ class XMLRPCRequestHandler2_Db(netsvc.OpenERPDispatcher2,xrBaseRequestHandler):
         return db
 
 def init_xmlrpc():
+    # late init of browse-object marshaller, after module has been loaded
+    from tools.orm_utils import browse_null
+    if browse_null is not None:
+        OERPMarshaller.dispatch[browse_null] = OERPMarshaller.dump_none
+    
     if tools.config.get_misc('xmlrpc','enable', True):
         sso = tools.config.get_misc('xmlrpc','ssl_require', False)
         if reg_http_service(HTTPDir('/xmlrpc/',XMLRPCRequestHandler), secure_only=sso):

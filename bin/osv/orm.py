@@ -192,7 +192,9 @@ class browse_null(object):
         return None
 
     def __getattr__(self, name):
-        return None  # XXX: return self ?
+        """ All attributes of a `browse_null` object will be falsy, but no exception
+        """
+        return browse_null()
 
     def __int__(self):
         return False
@@ -239,6 +241,7 @@ only_ids = orm_utils.only_ids # take it from there..
 orm_utils.browse_record_list = browse_record_list # ..put that one back
 orm_utils.browse_null = browse_null
 orm_utils.except_orm = except_orm
+
 
 class browse_record(object):
     """ An object that behaves like a row of an object's table.
