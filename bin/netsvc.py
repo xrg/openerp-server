@@ -581,37 +581,40 @@ class Agent(object):
     def _setAlarmNow(cls, function, timestamp, dbname, args, kwargs):
         """ companion to `_alarm_later.on_commit()` , set an alarm, even cumulative
         """
-        cls._lock.acquire()
-        found_task = False
-        cumulative = getattr(function, '_cumulative_on', None)
-        if cumulative is not None:
-            for t in cls.__tasks_by_db.get(dbname, []):
-                # Check if there is already some task for function() pending,
-                # with same arguments and kwargs (apart from the "cumulative" one)
-                if t[0] <= timestamp and t[2] == function \
-                        and cls._args_match(cumulative, t[3], t[4], args, kwargs):
-                    if cumulative is True:
-                        found_task = True
-                    elif isinstance(cumulative, int) \
-                            and isinstance(t[3][cumulative], (list, set)) \
-                            and isinstance(args[cumulative], (list, set)):
-                        t[3][cumulative] += args[cumulative]
-                        found_task = True
-                    elif isinstance(cumulative, basestring) \
-                            and isinstance(t[4][cumulative], (list, set)) \
-                            and isinstance(kwargs[cumulative], (list, set)):
-                        t[4][cumulative] += kwargs[cumulative]
-                        found_task = True
-                    else:
-                        # We cannot use that kind of cumulative argument
-                        continue
-                    break
-        if not found_task:
-            task = [timestamp, dbname, function, args, kwargs]
-            heapq.heappush(cls.__tasks, task)
-            cls.__tasks_by_db.setdefault(dbname, []).append(task)
-        cls._lock.notify_all()
-        cls._lock.release()
+        with cls._lock:
+            found_task = False
+            cumulative = getattr(function, '_cumulative_on', None)
+            try:
+                if cumulative is not None:
+                    for t in cls.__tasks_by_db.get(dbname, []):
+                        # Check if there is already some task for function() pending,
+                        # with same arguments and kwargs (apart from the "cumulative" one)
+                        if t[0] <= timestamp and t[2] == function \
+                                and cls._args_match(cumulative, t[3], t[4], args, kwargs):
+                            if cumulative is True:
+                                found_task = True
+                            elif isinstance(cumulative, int) \
+                                    and isinstance(t[3][cumulative], (list, set)) \
+                                    and isinstance(args[cumulative], (list, set)):
+                                t[3][cumulative] += args[cumulative]
+                                found_task = True
+                            elif isinstance(cumulative, basestring) \
+                                    and isinstance(t[4][cumulative], (list, set)) \
+                                    and isinstance(kwargs[cumulative], (list, set)):
+                                t[4][cumulative] += kwargs[cumulative]
+                                found_task = True
+                            else:
+                                # We cannot use that kind of cumulative argument
+                                continue
+                            break
+            except Exception:
+                cls._logger.exception("Cannot compute cumulative arguments for %r:", function)
+                # but, continue.. Release the lock!
+            if not found_task:
+                task = [timestamp, dbname, function, args, kwargs]
+                heapq.heappush(cls.__tasks, task)
+                cls.__tasks_by_db.setdefault(dbname, []).append(task)
+            cls._lock.notify_all()
 
     @classmethod
     def _args_match(cls, cumulative, args1, kwargs1, args2, kwargs2):
@@ -623,38 +626,42 @@ class Agent(object):
         if (len(args1) != len(args2)) or (len(kwargs1) != len(kwargs2)):
             return False
 
-        if cumulative is True:
-            if args1 == args2 and kwargs1 == kwargs2:
-                return True
-            else:
-                return False
-        elif isinstance(cumulative, int):
-            if kwargs1 != kwargs2:
-                return False
+        try:
+            if cumulative is True:
+                if args1 == args2 and kwargs1 == kwargs2:
+                    return True
+                else:
+                    return False
+            elif isinstance(cumulative, int):
+                if kwargs1 != kwargs2:
+                    return False
 
-            for n, val in enumerate(args1):
-                if n == cumulative:
-                    continue
-                if val != args2[cumulative]:
+                for n, val in enumerate(args1):
+                    if n == cumulative:
+                        continue
+                    if val != args2[cumulative]:
+                        return False
+                return True
+            elif isinstance(cumulative, basestring):
+                if args1 != args2:
                     return False
-            return True
-        elif isinstance(cumulative, basestring):
-            if args1 != args2:
-                return False
-            for k, val in kwargs1.items():
-                if k == cumulative:
-                    continue
-                if val != kwargs2[k]:
-                    return False
-            return True
-        else:
-            return False
+                for k, val in kwargs1.items():
+                    if k == cumulative:
+                        continue
+                    if val != kwargs2[k]:
+                        return False
+                return True
+        except TypeError:
+            pass
+        return False
 
     class _alarm_later(object):
         def __init__(self, dbname, function, timestamp, args, kwargs):
             self.dbname = dbname
             self.function = function
             self.timestamp = timestamp
+            assert isinstance(args, tuple), repr(args)
+            assert isinstance(kwargs, dict), repr(kwargs)
             self.args = args
             self.kwargs = kwargs
 
