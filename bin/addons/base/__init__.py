@@ -90,6 +90,7 @@ class ExecContext_orm(ExecContext):
         context['browse'] = _pool_actor_browse(self)
         # Hint: all base ORM methods that DON'T operate on [ids]
         for verb in ('search', 'read', 'search_read', 'create', 'write',
+                    'unlink',
                     'default_get', 'get_last_modified', 'name_search',
                     'name_get', 'read_group', 'merge_get_values',
                     'merge_records'):
