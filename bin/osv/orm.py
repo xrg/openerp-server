@@ -896,7 +896,7 @@ class orm_template(object):
             # TODO: this quick hack must be re-written to end up in one
             # real query, as one would expect.
             if len(select) and \
-                ( isinstance(select[0], tuple) or select[0] is True \
+                ( isinstance(select[0], (tuple, list)) or select[0] is True \
                     or select[0] == '|' or select[0] == '&' or select[0] == '!'):
                 if select[0] is True:
                     select = []
