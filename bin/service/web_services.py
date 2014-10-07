@@ -901,6 +901,8 @@ GNU Public Licence.
         res = "OpenERP server: %d threads\n" % threading.active_count()
         res += netsvc.Server.allStats()
         res += "\n"
+        res += netsvc.Agent.stats()
+        res += "\n"
         res += netsvc.ExportService.allStats()
         try:
             import gc

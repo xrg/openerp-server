@@ -736,6 +736,15 @@ class Agent(object):
             cls._lock.release()
         cls._logger.debug("thread ended")
 
+    @classmethod
+    def stats(cls):
+        ret = []
+        with cls._lock:
+            ret.append("agent: %d tasks pending" % len(cls.__tasks))
+            for timestamp, dbname, function, args, kwargs in cls.__tasks[:10]:
+                ret.append('    %ld %s %s' %( timestamp, dbname, cls.pretty_repr(function, args, kwargs, 120)))
+        return '\n'.join(ret)
+
 agent_runner = threading.Thread(target=Agent.runner, name="netsvc.Agent.runner")
 # the agent runner is a typical daemon thread, that will never quit and must be
 # terminated when the main process exits - with no consequence
