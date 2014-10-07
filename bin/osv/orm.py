@@ -270,6 +270,7 @@ class browse_record(object):
             enough, so you can avoid using 'fields_only'.
     """
     __logger = logging.getLogger('orm.browse_record')
+    _missing_fields = defaultdict(dict)
     
     __slots__ = ('_list_class', '_cr', '_uid', '_id', '_table', '_table_name', \
                '_context', '_fields_process', '_fields_only', '_data', '_cache')
@@ -387,7 +388,10 @@ class browse_record(object):
                 else:
                     return attr
             else:
-                self.__logger.warning( "Field '%s' does not exist in object '%s'.", name, self._table_name )
+                missing_per_object = self._missing_fields[self._cr.dbname].setdefault(self._table_name, {})
+                if name not in missing_per_object:
+                    missing_per_object[name] = True
+                    self.__logger.warning( "Field '%s' does not exist in object '%s'.", name, self._table_name )
                 raise KeyError("Field '%s' does not exist in object '%s'" % ( name, self._table_name))
 
             # if the field is a classic one or a many2one, we'll fetch all classic and many2one fields
