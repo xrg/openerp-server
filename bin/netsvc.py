@@ -719,7 +719,7 @@ class Agent(object):
                 thr = threading.Thread(target=function, args=args, kwargs=kwargs)
                 thr.setDaemon(True)
                 thr.start()
-                time.sleep(1)
+                time.sleep(0.05)
                 thr = None
                 cls._lock.acquire()
 
