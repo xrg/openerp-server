@@ -28,7 +28,7 @@
 """
 
 browse_record_list = None # MUST be set by orm.py!
-browse_record_null = None
+browse_null = None
 browse_record = None
 except_orm = None
 
