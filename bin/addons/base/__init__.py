@@ -22,7 +22,7 @@
 
 from tools.safe_eval import ExecContext
 
-class _pool_actor(object):
+class _pool_actor:
     """ Helper that exposes ORM verbs within an ExecContext sandbox
 
         A requirement is that the ExecContext instance has been launched
@@ -42,7 +42,7 @@ class _pool_actor(object):
             kwargs['context'] = self._parent.context
         return fn(self._parent.cr, self._parent.uid, *args, **kwargs)
 
-class _pool_actor_browse(object):
+class _pool_actor_browse:
     """ Actor for the `orm.browse()` verb, that also preserves the cache
     """
     def __init__(self, parent):
