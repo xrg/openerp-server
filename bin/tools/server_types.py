@@ -81,6 +81,16 @@ class server_bool(_server_modifier):
     def __getattr__(self, name):
         return getattr(self.__val, name)
 
+    def __eq__(self, other):
+        if isinstance(other, server_bool):
+            other = other.__val
+        return self.__val == other
+
+    def __ne__(self, other):
+        if isinstance(other, server_bool):
+            other = other.__val
+        return self.__val != other
+
 class server_int(_server_modifier, int):
     pass
 
