@@ -66,11 +66,74 @@ openerp_isrunning = tools.misc.TSValue(False)
 
 server_logger = logging.getLogger('server')
 server_logger.info("OpenERP version - %s" % release.version )
+
+class _SdNotify:
+    """ Support for sd_notify(3) status report to parent systemd
+
+        Some of this code was inspired/copied from:
+        https://github.com/kirelagin/pysystemd-daemon/
+    """
+    def __init__(self):
+        global server_logger
+        self._sock_e = None
+        try:
+            e = os.environ.get('NOTIFY_SOCKET', None)
+            if not e:
+                return
+
+            if e[0] not in ('@', '/') or len(e) == 1:
+                raise RuntimeError("Bad socket specification: %s" % e)
+
+            if e[0] == '@':
+                e = '\0' + e[1:]
+
+            # unset environment, hide it from any child processes
+            del os.environ['NOTIFY_SOCKET']
+            self._sock_e = e
+            server_logger.debug("Speaking to parent systemd")
+
+        except Exception, e:
+            server_logger.info("Cannot speak to parent systemd: %s", e)
+
+    def has_systemd(self):
+        return bool(self._sock_e)
+
+    def notify(self, message, status=None, errno=None):
+        global server_logger
+        import socket
+        server_logger.info(message)
+        if not self._sock_e:
+            return
+        try:
+            sock = None
+            sock = socket.socket(socket.AF_UNIX, socket.SOCK_DGRAM)
+            mstr = 'STATUS=%s' % message
+            if status:
+                mstr += '\n%s=1' % status.upper()
+            if errno:
+                mstr += '\nERRNO=%d' % errno
+            if isinstance(mstr, unicode):
+                mstr = mstr.encode('utf-8')
+            if sock.sendto(mstr, self._sock_e) < 0:
+                server_logger.debug("Failed to notify systemd")
+        except Exception, e:
+            server_logger.debug("Failed to notify systemd: %s", e)
+        finally:
+            try:
+                if sock:
+                    sock.close()
+            except Exception:
+                pass
+
+sd_notifier = _SdNotify()
+
 for name, value in [('addons_path', tools.config['addons_path']),
                     ('database hostname', tools.config['db_host'] or 'localhost'),
                     ('database port', tools.config['db_port'] or '5432'),
                     ('database user', tools.config['db_user'])]:
     server_logger.info("%s - %s", name, value )
+
+sd_notifier.notify("Starting up server")
 
 # Don't allow if the connection to PostgreSQL done by postgres user
 if tools.config['db_user'] == 'postgres':
@@ -186,6 +249,7 @@ if tools.config.get_misc('modules', 'preload', False):
 if tools.config['db_name']:
     for dbname in tools.config['db_name'].split(','):
         _langs = []
+        sd_notifier.notify("Loading database %s..." % dbname)
         if tools.config.get('lang'):
             _langs.append(tools.config['lang'])
         if tools.config.get('load_language'):
@@ -225,6 +289,7 @@ if tools.config["translate_out"]:
     buf.close()
 
     init_logger.info('translation file written successfully')
+    sd_notifier.notify("Exit after exporting translation file")
     sys.exit(0)
 
 if tools.config["translate_in"]:
@@ -237,6 +302,7 @@ if tools.config["translate_in"]:
                      context=context)
     cr.commit()
     cr.close()
+    sd_notifier.notify("Exit after importing translation")
     sys.exit(0)
 
 #----------------------------------------------------------------------------------
@@ -276,6 +342,7 @@ if tools.config['pidfile']:
 
 netsvc.Server.startAll()
 logging.getLogger("web-services").info('the server is running, waiting for connections...')
+sd_notifier.notify("Server is ready", "READY")
 
 try:
     openerp_isrunning.waitFor(False)
@@ -283,7 +350,7 @@ except:
     # catch *all exceptions*
     pass
 
-server_logger.info("Shutting down Server!")
+sd_notifier.notify("Shutting down Server!", "STOPPING")
 netsvc.Agent.quit()
 nrem = netsvc.Server.quitAll()
 server_logger.debug("Server is finished!")

@@ -327,6 +327,7 @@ class Logger_db(logging.Logger):
 def init_logger():
     from tools.translate import resetlocale
     resetlocale()
+    has_systemd = bool(os.environ.get('NOTIFY_SOCKET', None))
 
     if tools.config.get_misc('debug', 'compat_logger', False):
         logging.setLoggerClass(Logger_compat)
@@ -343,7 +344,10 @@ def init_logger():
             handler = logging.handlers.NTEventLogHandler("%s %s" % (release.description, release.version))
         else:
             handler = logging.handlers.SysLogHandler('/dev/log')
-        format = '%s %s' % (release.description, release.version) \
+        if has_systemd:
+            format = '%(name)s:%(message)s'
+        else:
+            format = '%s %s' % (release.description, release.version) \
                + ':%(levelname)s:%(name)s:%(message)s'
 
     elif tools.config['logfile']:
@@ -365,6 +369,8 @@ def init_logger():
     else:
         # Normal Handler on standard output
         handler = logging.StreamHandler(sys.stdout)
+        if has_systemd:
+            format = '[%(asctime)s] %(levelname)s:%(name)s%(at_dbname)s:%(message)s'
 
     if isinstance(handler, logging.StreamHandler) and os.isatty(handler.stream.fileno()):
         formatter = ColoredFormatter(format, '%Y-%m-%d %H:%M:%S')
