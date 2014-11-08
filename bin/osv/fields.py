@@ -419,7 +419,7 @@ class _column(object):
                         (name, b_src[name]))
             return None
 
-        if not b_dest:
+        if not (b_dest and b_dest.get('id', False)):
             # the first iteration, save values and continue
             return b_src[name]
 

@@ -2390,24 +2390,36 @@ class orm_template(object):
             record. *By default* ids[0] is the one that will be preserved,
             while ids[1:] will be merged and discarded.
 
+            For models with `_inherits`, values will contain a full dictionary
+            of recursive `merge_get_values()` for each `inherits` field. This
+            will be used to merge the related parents.
+
             May raise an exception if records cannot be merged.
         """
 
-        if not ids:
-            # Make sure the user never sees this!
-            raise ValueError("ids must be at least 2")
-
-        if self._inherits:
-            raise NotImplementedError # TODO
-
-        if len(ids) < 2:
+        if (not ids) or len(ids) < 2:
             raise ValueError("ids must be at least 2")
 
         vals = {}
         touched = set()
         if fields_ignore is None:
             fields_ignore = []
-        for bres in self.browse(cr, uid, ids, context=context):
+
+        # keep a single cache, we are read-only, anyway
+        brecords = self.browse(cr, uid, ids, context=context)
+
+        if self._inherits:
+            fields_ignore_orig = fields_ignore
+            fields_ignore = fields_ignore[:] # copy
+            for imodel, icol in self._inherits.items():
+                obj = self.pool.get(imodel)
+                iids = [ b[icol].id for b in brecords]
+                ivals = obj.merge_get_values(cr, uid, iids, fields_ignore_orig, context)
+                ivals['id'] = iids # store in non-mergeable 'id' field
+                fields_ignore.append(icol)
+                vals[icol] = ivals
+
+        for bres in brecords:
             upd = {}
             if not 'id' in vals:
                 # must happen at the end of first record
@@ -2418,12 +2430,15 @@ class orm_template(object):
                 rv = col.calc_merge(cr, uid, self, cname, vals, bres, context=context)
                 if rv is not None:
                     upd[cname] = rv
-                    if vals:
+                    if vals and 'id' in vals:
                         touched.add(cname)
 
             vals.update(upd)
 
         ret = {}
+        for col in self._inherits.values():
+            ret[col] = vals[col]
+
         for fld in touched:
             ret[fld] = self._columns[fld]._browse2val(vals[fld], fld)
 
@@ -2436,26 +2451,29 @@ class orm_template(object):
             @param fields_ignore Skip these fields ( `as in merge_get_values()` )
             @param vals if given, pre-computed values from `merge_get_values()`
         """
-        if not ids:
-            # Make sure the user never sees this!
-            raise ValueError("ids must be at least 2")
-
-        if self._inherits:
-            raise NotImplementedError # TODO
-
-        if len(ids) < 2:
+        if (not ids) or len(ids) < 2:
             raise ValueError("ids must be at least 2")
 
         if self._debug:
             _logger.debug("%s: merge records %s into %s", only_ids(ids[1:]), only_ids(ids[:1])[0])
         if vals is None:
             vals = self.merge_get_values(cr, uid, ids, fields_ignore=fields_ignore, context=context)
-        
+        else:
+            vals = vals.copy()
+
         # Switch to read/write part
         if isinstance(ids, browse_record_list):
             ids[0]._invalidate_others(ids, model=self._name)
             ids = only_ids(ids)
-        
+
+        # merge parent records
+        for imodel, icol in self._inherits.items():
+            obj = self.pool.get(imodel)
+            mvals = vals.pop(icol)
+            mids = mvals.pop('id')
+            new_id = obj.merge_records(cr, uid, mids, fields_ignore, mvals, context)
+            if new_id != mids[0]:
+                vals[icol] = new_id
         self.write(cr, uid, ids[0], vals, context=context)
 
         imd_obj = self.pool.get('ir.model.data')
