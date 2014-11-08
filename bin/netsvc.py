@@ -512,12 +512,17 @@ class Agent(object):
             the timestamp to 0.
           - A heapq is used to store tasks, so we don't need to sort
             tasks ourself.
+          - There is a limit of `_max_active_tasks` to run at each moment,
+            as not to exchaust the pool of db connections. This means that
+            task functions MUST end at a reasonable time.
+            Functions used in `setAlarm()` MUST NOT sleep nor remain persistent.
     """
     __tasks = []
     __tasks_by_db = {}
     _logger = logging.getLogger('netsvc.agent')
     _lock = threading.Condition()
     _alive = True
+    _max_active_tasks = 10
 
     class pretty_repr(object):
         """ The representation of a function
@@ -709,9 +714,12 @@ class Agent(object):
            checks every 60 seconds tasks to run. TODO: make configurable
         """
 
+        active_tasks = []
+
         while cls._alive:
             cls._lock.acquire()
-            while cls.__tasks and cls.__tasks[0][0] < time.time():
+            while len(active_tasks) < cls._max_active_tasks \
+                    and cls.__tasks and cls.__tasks[0][0] < time.time():
                 task = heapq.heappop(cls.__tasks)
                 timestamp, dbname, function, args, kwargs = task
                 # dbname will be picked by the logger's stack inspection
@@ -725,7 +733,8 @@ class Agent(object):
                 thr = threading.Thread(target=function, args=args, kwargs=kwargs)
                 thr.setDaemon(True)
                 thr.start()
-                time.sleep(0.05)
+                time.sleep(0.01)
+                active_tasks.append(thr)
                 thr = None
                 cls._lock.acquire()
 
@@ -733,13 +742,15 @@ class Agent(object):
             wtime = 600.0
             if cls.__tasks:
                 wtime = cls.__tasks[0][0] - time.time()
-                if wtime < 1.0:
-                    wtime = 1.0
+                if wtime < 0.25:
+                    wtime = 0.25
                 elif wtime > 600.0:
                     wtime = 600.0
             cls._logger.debug("sleeping for %.3f seconds", wtime)
             cls._lock.wait(wtime)
             cls._lock.release()
+            active_tasks = filter(lambda t: t.is_alive(), active_tasks)
+
         cls._logger.debug("thread ended")
 
     @classmethod
