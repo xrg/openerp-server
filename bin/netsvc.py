@@ -678,7 +678,7 @@ class Agent(object):
     @classmethod
     def cancel(cls, db_name, function=None):
         """Cancel all tasks for a given database. If None is passed, all tasks are cancelled"""
-        cls._logger.debug("Cancel timers for %s.* db", db_name or 'all', function or '*')
+        cls._logger.debug("Cancel timers for %s.%s", db_name or 'all', function or '*')
         cls._lock.acquire()
         try:
             if db_name is None:
