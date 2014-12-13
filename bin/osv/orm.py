@@ -1083,6 +1083,9 @@ class orm_template(object):
             order_line/product_uom_qty,
             order_line/product_uom/id    (=xml_id)
         """
+        # This function remains here just as an aid to "load_csv". Otherwise,
+        # a more elaborate implementation shall be used.
+
         if context is None:
             context = {}
         def _replace_field(x):
@@ -2497,14 +2500,14 @@ class orm_template(object):
         cr.execute('UPDATE ' + imd_obj._table + ' SET res_id = %s WHERE model = %s AND res_id = ANY(%s)',
                 (ids[0], self._name, ids[1:]), debug=self._debug)
         self.unlink(cr, uid, ids[1:], context=context)
-        
+
         # Add a reference in ir.model.data for every id removed
         for i in ids[1:]:
             imd_obj.create(cr, uid, dict(name='merged#%d' %i, module=self._name,
                             model=self._name, res_id=ids[0],
                             noupdate=True, source='merged'),
                         context=context)
-        
+
         return ids[0]
 
 class orm_memory(orm_template):
