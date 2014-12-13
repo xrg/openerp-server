@@ -554,7 +554,8 @@ class actions_server(osv.osv):
             'object': eval_ctx.obj,
             'obj': eval_ctx.obj,
             }
-        safe_eval(action.code, localdict, mode="exec", nocopy=True) # nocopy allows to return 'action'
+        fname = "%s#%d" % (self._name, action.id)
+        safe_eval(action.code or '', localdict, mode="exec", nocopy=True, filename=fname) # nocopy allows to return 'action'
         if 'action' in localdict:
             return localdict['action']
 
