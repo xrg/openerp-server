@@ -2447,7 +2447,20 @@ class orm_template(object):
     def merge_records(self, cr, uid, ids, fields_ignore=[], vals=None, context=None):
         """ Merge these records into a common one
 
-            TODO: doc
+            Helps resolve these cases where we have entered multiple records for
+            a single logical entity. Eg. from data entry, we may have the same
+            partner, or product, or mail thread, many times.
+
+            Provided we have located the duplicates, we feed them into this
+            function and have the first one `ids[0]` updated, while all others
+            `ids[1:]` are in fact removed.
+
+            See `merge_get_values()` for details on how data is merged/preserved.
+
+            After calling `merge_get_values()` to compute the values, this fn.
+            will apply the resulting values, then remove records `ids[1:]` and
+            update `ir.model.data` entries pointing to the merged records.
+
             @param fields_ignore Skip these fields ( `as in merge_get_values()` )
             @param vals if given, pre-computed values from `merge_get_values()`
         """
