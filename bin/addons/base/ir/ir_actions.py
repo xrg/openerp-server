@@ -27,7 +27,7 @@ import time
 # from tools.config import config
 from tools.translate import _
 import netsvc
-import logging
+# import logging
 import os
 from tools.date_eval import date_eval
 from report.report_sxw import report_sxw, report_rml
