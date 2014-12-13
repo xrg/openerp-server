@@ -205,9 +205,9 @@ class id_field(integer):
             raise NotImplementedError("Cannot use %s yet" % ('.'.join(lefts)))
         full_field = '"%s".%s' % (obj._table, lefts[0])
         if right is True:
-            aggregate = 'MIN(%s)' % lefts[0]
+            aggregate = 'MIN(%s)' % full_field
         elif isinstance(right, basestring) and right.lower() in ('min', 'max'):
-            aggregate = '%s(%s)' % (right.upper(), lefts[0])
+            aggregate = '%s(%s)' % (right.upper(), full_field)
         else:
             raise ValueError("Invalid aggregate function: %r", right)
         return '.'.join(lefts), { 'group_by': full_field, 'order_by': full_field,
