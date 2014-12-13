@@ -1,3 +1,16 @@
+openerp-server (6.9.2-30) testing; urgency=low
+
+  [ P. Christeas ]
+  * orm_utils: browse_null object rename
+  * openerp-server: update copyright years
+  * openerp-server: adapt to "systemd", transparently
+  * netsvc: limit the number of active Agent tasks
+  * netsvc: fix bad logger line
+
+  [ panos ]
+
+ -- panos <panos@xrg-debbuild.pefnos>  Fri, 28 Nov 2014 20:51:17 +0200
+
 openerp-server (6.0.4-0) testing; urgency=low
 
   * Using upstream version 6.0.4
