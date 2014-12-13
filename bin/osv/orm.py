@@ -2961,7 +2961,7 @@ class orm(orm_template):
             if g not in fields:
                 raise KeyError("Fields in 'groupby' must appear in the list of fields to read (perhaps it's missing in the list view?)")
 
-        joined_models = []
+        joined_models = {}
         group_fields = defaultdict(dict)
         for field_expr, field_afn  in fields.items():
             fargs = field_expr.split('.')
