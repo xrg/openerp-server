@@ -714,6 +714,27 @@ class actions_server(osv.osv):
             raise osv.orm.except_orm(_('Permission Error!'), _('Only the admin user is allowed to create server actions of advanced type!'))
         return super(actions_server, self).create(cr, uid, vals, context=context)
 
+    def set_client_action(self, cr, uid, ids, context=None, mode='multi'):
+        """Register these actions in 'ir.values' as 'client_action[_multi|_relate]'
+        
+            @param mode [multi,relate] kind of action to create
+        """
+        ir_values_obj = self.pool.get('ir.values')
+        action_key2 = None
+        if mode == 'multi':
+            action_key2 = 'client_action_multi'
+        elif mode == 'relate':
+            action_key2 = 'client_action_relate'
+        else:
+            raise ValueError("Invalid mode: %s" % mode)
+        for act in self.browse(cr, uid, ids, context=context):
+            ir_values_obj.set(cr, uid, 'action', action_key2,
+                              name=act.name, models=[act.model_id.model,],
+                              value='%s,%d' % (self._name, act.id),
+                              replace=True, isobject=True, meta=False,
+                              preserve_user=False, company=False)
+        return { 'nodestroy': True }
+
 actions_server()
 
 class act_window_close(osv.osv):

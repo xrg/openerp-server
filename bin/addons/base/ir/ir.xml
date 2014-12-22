@@ -1827,6 +1827,7 @@
                         </page>
                     </notebook>
                     <field name="type" readonly="1"/>
+                    <button type="object" name="set_client_action" string="Set Model Action"/>
                 </form>
             </field>
         </record>
