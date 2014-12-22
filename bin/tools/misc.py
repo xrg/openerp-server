@@ -52,6 +52,7 @@ from itertools import islice, izip
 from lxml import etree
 from which import which
 from threading import local
+import xmlrpclib
 
 try:
     from html2text import html2text
@@ -1225,6 +1226,8 @@ def to_datetime(dt):
         return dt
     elif isinstance(dt, date_DT):
         return datetime.combine(dt, time_DT())
+    elif isinstance(dt, xmlrpclib.DateTime):
+        return datetime.strptime(dt.value, "%Y%m%dT%H:%M:%S")
     else:
         return datetime.strptime(dt[:19], DEFAULT_SERVER_DATETIME_FORMAT)
 
@@ -1235,6 +1238,8 @@ def to_date(dt):
         return dt.date()
     elif isinstance(dt, date_DT):
         return dt
+    elif isinstance(dt, xmlrpclib.DateTime):
+        return datetime.strptime(dt.value, "%Y%m%dT%H:%M:%S").date()
     else:
         return datetime.strptime(dt[:10], DEFAULT_SERVER_DATE_FORMAT).date()
 
