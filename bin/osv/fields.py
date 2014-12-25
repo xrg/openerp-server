@@ -44,8 +44,9 @@ import tools
 from tools.translate import _
 from tools import expr_utils as eu
 import __builtin__
-from tools import sql_model
+from tools import sql_model, config
 from tools import orm_utils # must be the full module, not contents
+
 
 def _symbol_set(symb):
     if symb is None or symb is False:
@@ -312,6 +313,11 @@ class _column(object):
                     'filters'):
             if getattr(self, arg, False):
                 ret[arg] = getattr(self, arg)
+
+        if context.get('detailed', False) and (uid == 1) \
+                    and config.get_misc('debug', 'introspection', False):
+            for arg in ('merge_op', 'group_operator', '_sql_type'): # _split_op
+                ret[arg] = getattr(self, arg, False)
 
     def _val2browse(self, val, name, parent_bro):
         """ Convert raw value to browse_record() format

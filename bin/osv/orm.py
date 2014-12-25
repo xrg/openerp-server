@@ -1500,6 +1500,9 @@ class orm_template(object):
     # returns the definition of each field in the object
     # the optional fields parameter can limit the result to some fields
     def fields_get(self, cr, user, allfields=None, context=None, write_access=True):
+        """
+            @param context may contain "detailed=True" for further introspection of fields
+        """
         if context is None:
             context = {}
         res = {}

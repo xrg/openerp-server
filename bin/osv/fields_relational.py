@@ -24,7 +24,7 @@
 from fields import _column, register_field_classes
 from tools.translate import _
 import warnings
-from tools import sql_model
+from tools import sql_model, config
 from tools import expr_utils as eu
 from tools import orm_utils
 from operator import itemgetter
@@ -51,6 +51,10 @@ class _relational(_column):
         ret['relation'] = self._obj
         ret['domain'] = self._domain
         ret['context'] = self._context
+
+        if context.get('detailed', False) and (uid == 1) \
+                and config.get_misc('debug', 'introspection', False):
+            ret['ondelete'] = self.ondelete
 
     def _auto_init_prefetch(self, name, obj, prefetch_schema, context=None):
         _column._auto_init_prefetch(self, name, obj, prefetch_schema, context=context)
