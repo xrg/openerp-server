@@ -376,16 +376,16 @@ class many2one(_rel2one):
         self._table = obj_src.pool.get(self._obj)._table
         if isinstance(values, list):
             for act in values:
-                if act[0] == 0:
+                if act[0] in (0, 'create'):
                     id_new = obj.create(cr, act[2])
                     cr.execute('update '+obj_src._table+' set '+field+'=%s where id=%s', (id_new, id), debug=obj_src._debug)
-                elif act[0] == 1:
+                elif act[0] in (1, 'update'):
                     obj.write(cr, [act[1]], act[2], context=context)
-                elif act[0] == 2:
+                elif act[0] in (2, 'delete'):
                     cr.execute('delete from '+self._table+' where id=%s', (act[1],), debug=obj_src._debug)
-                elif act[0] == 3 or act[0] == 5:
+                elif act[0] in (3, 'unlink', 5, 'unlink_all'):
                     cr.execute('update '+obj_src._table+' set '+field+'=null where id=%s', (id,), debug=obj_src._debug)
-                elif act[0] == 4:
+                elif act[0] in (4, 'link'):
                     cr.execute('update '+obj_src._table+' set '+field+'=%s where id=%s', (act[1], id), debug=obj_src._debug)
         else:
             if values:
@@ -584,22 +584,22 @@ class one2many(_rel2many):
             return
         obj = obj.pool.get(self._obj)
         for act in values:
-            if act[0] == 0:
+            if act[0] in (0, 'create'):
                 act[2][self._fields_id] = id
                 obj.create(cr, user, act[2], context=context)
-            elif act[0] == 1:
+            elif act[0] in (1, 'update'):
                 obj.write(cr, user, [act[1]], act[2], context=context)
-            elif act[0] == 2:
+            elif act[0] in (2, 'delete'):
                 obj.unlink(cr, user, [act[1]], context=context)
-            elif act[0] == 3:
+            elif act[0] in (3, 'unlink'):
                 obj.datas[act[1]][self._fields_id] = False
-            elif act[0] == 4:
+            elif act[0] in (4, 'link'):
                 obj.datas[act[1]][self._fields_id] = id
-            elif act[0] == 5:
+            elif act[0] in (5, 'unlink all'):
                 for o in obj.datas.values():
                     if o[self._fields_id] == id:
                         o[self._fields_id] = False
-            elif act[0] == 6:
+            elif act[0] in (6, 'set'):
                 for id2 in (act[2] or []):
                     obj.datas[id2][self._fields_id] = id
 
@@ -640,7 +640,7 @@ class one2many(_rel2many):
         _table = obj.pool.get(self._obj)._table
         obj = obj.pool.get(self._obj)
         for act in values:
-            if act[0] == 0:
+            if act[0] in (0, 'create'):
                 act[2][self._fields_id] = id
                 if act[2].get('_vptr', False):
                     obj_v = obj.pool.get(act[2]['_vptr'])
@@ -654,7 +654,7 @@ class one2many(_rel2many):
                 else:
                     id_new = obj.create(cr, user, act[2], context=context)
                 result += obj._store_get_values(cr, user, [id_new], act[2].keys(), context)
-            elif act[0] == 1:
+            elif act[0] in (1, 'update'):
                 if act[2].get('_vptr', False):
                     # When "_vptr" is specified in list of values, redirect
                     # the write() operation to the virtual model
@@ -671,15 +671,15 @@ class one2many(_rel2many):
                     obj_v.write(cr, user, id_vs, vals_cpy, context=context)
                 else:
                     obj.write(cr, user, [act[1]], act[2], context=context)
-            elif act[0] == 2:
+            elif act[0] in (2, 'delete'):
                 obj.unlink(cr, user, [act[1]], context=context)
-            elif act[0] == 3:
+            elif act[0] in (3, 'unlink'):
                 cr.execute('update '+_table+' set '+self._fields_id+'=null where id=%s', (act[1],), debug=obj._debug)
-            elif act[0] == 4:
+            elif act[0] in (4, 'link'):
                 cr.execute('update '+_table+' set '+self._fields_id+'=%s where id=%s', (id, act[1]), debug=obj._debug)
-            elif act[0] == 5:
+            elif act[0] in (5, 'unlink_all'):
                 cr.execute('update '+_table+' set '+self._fields_id+'=null where '+self._fields_id+'=%s', (id,), debug=obj._debug)
-            elif act[0] == 6:
+            elif act[0] in (6, 'set'):
                 obj.write(cr, user, act[2], {self._fields_id:id}, context=context or {})
                 ids2 = act[2] or [0]
                 cr.execute('select id from '+_table+' where '+self._fields_id+'=%s and id <> ALL (%s)', (id,ids2), debug=obj._debug)
@@ -951,7 +951,7 @@ class many2many(_rel2many):
         for act in values:
             if not (isinstance(act, (list, tuple)) and act):
                 continue
-            if act[0] == 0:
+            if act[0] in (0, 'create'):
                 if act[2].get('_vptr', False):
                     obj_v = obj.pool.get(act[2]['_vptr'])
                     obj_col = obj_v._inherits.get(self._obj, False)
@@ -964,7 +964,7 @@ class many2many(_rel2many):
                 else:
                     idnew = obj.create(cr, user, act[2], context=context)
                 cr.execute('insert into '+rel+' ('+id1+','+id2+') values (%s,%s)', (id, idnew), debug=obj._debug)
-            elif act[0] == 1:
+            elif act[0] in (1, 'update'):
                 if act[2].get('_vptr', False):
                     # When "_vptr" is specified in list of values, redirect
                     # the write() operation to the virtual model
@@ -982,18 +982,18 @@ class many2many(_rel2many):
                     obj_v.write(cr, user, id_vs, vals_cpy, context=context)
                 else:
                     obj.write(cr, user, [act[1]], act[2], context=context)
-            elif act[0] == 2:
+            elif act[0] in (2, 'delete'):
                 obj.unlink(cr, user, [act[1]], context=context)
-            elif act[0] == 3:
+            elif act[0] in (3, 'unlink'):
                 cr.execute('delete from '+rel+' where ' + id1 + '=%s and '+ id2 + '=%s', (id, act[1]), debug=obj._debug)
-            elif act[0] == 4:
+            elif act[0] in (4, 'link'):
                 # following queries are in the same transaction - so should be relatively safe
                 cr.execute('SELECT 1 FROM '+rel+' WHERE '+id1+' = %s and '+id2+' = %s', (id, act[1]), debug=obj._debug)
                 if not cr.fetchone():
                     cr.execute('insert into '+rel+' ('+id1+','+id2+') values (%s,%s)', (id, act[1]), debug=obj._debug)
-            elif act[0] == 5:
+            elif act[0] in (5, 'unlink_all'):
                 cr.execute('delete from '+rel+' where ' + id1 + ' = %s', (id,), debug=obj._debug)
-            elif act[0] == 6:
+            elif act[0] in (6, 'set'):
 
                 # FIXME: it is safer to call _apply_ir_rules() than domain_get()
                 d1, d2,tables = obj.pool.get('ir.rule').domain_get(cr, user, obj._name, context=context)
@@ -1025,25 +1025,24 @@ class many2many(_rel2many):
         if name not in obj.datas[id]:
             obj.datas[id][name] = []
         for act in values:
-            # TODO: use constants instead of these magic numbers
-            if act[0] == 0:
+            if act[0] in (0, 'create'):
                 idnew = inobj.create(cr, user, act[2], context=context)
                 obj.datas[id][name].append(idnew)
-            elif act[0] == 1:
+            elif act[0] in (1, 'update'):
                 inobj.write(cr, user, [act[1]], act[2], context=context)
-            elif act[0] == 2:
+            elif act[0] in (2, 'delete'):
                 inobj.unlink(cr, user, [act[1]], context=context)
-            elif act[0] == 3:
+            elif act[0] in (3, 'unlink'):
                 try:
                     obj.datas[id][name].remove(act[1])
                 except ValueError:
                     pass
-            elif act[0] == 4:
+            elif act[0] in (4, 'link'):
                 if (act[1] not in obj.datas[id][name]):
                     obj.datas[id][name].append(act[1])
-            elif act[0] == 5:
+            elif act[0] in (5, 'unlink_all'):
                 obj.datas[id][name] = []
-            elif act[0] == 6:
+            elif act[0] in (6, 'set'):
                 obj.datas[id][name] = list(act[2])
 
     def shallow_copy(self, cr, uid, obj, id, f, data, context):

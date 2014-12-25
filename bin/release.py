@@ -53,6 +53,7 @@ server_options = [ 'base6.0',
         'fallback-search',
         'root-obj_list',
         'report-job',
+        'relational-words',
         ]
 
 # In addition to server_options, some details about the API used
