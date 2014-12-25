@@ -2414,6 +2414,7 @@ class orm_template(object):
 
             May raise an exception if records cannot be merged.
         """
+        from expression import expression
 
         if (not ids) or len(ids) < 2:
             raise ValueError("ids must be at least 2")
@@ -2444,6 +2445,9 @@ class orm_template(object):
                 upd['id'] = bres.id
             for cname, col in self._columns.items():
                 if cname in fields_ignore:
+                    continue
+                if cname in expression._implicit_log_fields \
+                        or cname in expression._implicit_fields:
                     continue
                 rv = col.calc_merge(cr, uid, self, cname, vals, bres, context=context)
                 if rv is not None:
