@@ -2323,11 +2323,12 @@ class orm_template(object):
         """
         self.pool.get('ir.model.access').check(cr, uid, 'ir.translation', 'write', context=context)
         #FIXME: try to only call the translation in one SQL
-        for lang in langs:
-            for field in vals:
-                if field in self._columns:
-                    src = self._columns[field].string
-                    self.pool.get('ir.translation')._set_ids(cr, uid, self._name+','+field, 'field', lang, [0], vals[field], src)
+        trans_obj = self.pool.get('ir.translation')
+        for field, txval in vals.items():
+            if field in self._columns:
+                src = self._columns[field].string
+                for lang in langs:
+                    trans_obj._set_ids(cr, uid, self._name+','+field, 'field', lang, [0], txval, src)
         for table in self._inherits:
             cols = intersect(self._inherit_fields.keys(), vals)
             if cols:
