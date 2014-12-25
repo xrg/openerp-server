@@ -2284,6 +2284,11 @@ class orm_template(object):
         raise NotImplementedError(_('The exists method is not implemented on this object !'))
 
     def read_string(self, cr, uid, id, langs, fields=None, context=None):
+        """Read multiple translations for some fields' values
+        
+            @param langs list of language identifiers
+            @param fields list of fields to fetch values for
+        """
         res = {}
         res2 = {}
         self.pool.get('ir.model.access').check(cr, uid, 'ir.translation', 'read', context=context)
@@ -2310,6 +2315,12 @@ class orm_template(object):
         return res
 
     def write_string(self, cr, uid, id, langs, vals, context=None):
+        """Write translated string for some field (name of field)
+        
+            @param id Not used
+            @param langs list of language identifiers (all of them will receive the same translation!)
+            @param vals dictionary of `field:translation` strings
+        """
         self.pool.get('ir.model.access').check(cr, uid, 'ir.translation', 'write', context=context)
         #FIXME: try to only call the translation in one SQL
         for lang in langs:
