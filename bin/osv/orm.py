@@ -4290,15 +4290,30 @@ class orm(orm_template):
                                      _('One of the records you are trying to modify has already been deleted (Document type: %s).') % self._description)
 
             if totranslate:
-                # TODO: optimize
+                translation_obj = self.pool.get('ir.translation')
+                fetch_cols = []
                 for f in direct:
                     if self._columns[f].translate:
-                        src_trans = self.pool.get(self._name).read(cr,user,ids,[f])[0][f]
-                        if not src_trans:
-                            src_trans = vals[f]
-                            # Inserting value to DB
-                            self.write(cr, user, ids, {f:vals[f]})
-                        self.pool.get('ir.translation')._set_ids(cr, user, self._name+','+f, 'model', context['lang'], ids, vals[f], src_trans)
+                        fetch_cols.append(f)
+
+                src_trans_res = {} # by id, in ids
+                if fetch_cols:
+                    for fres in self.read(cr, user, ids, fetch_cols):
+                        src_trans_res[fres['id']] = fres
+
+                    for id in ids:
+                        # horizontally amend records not having source translations
+                        fvals = {}
+                        fres = src_trans_res.get(id, {})
+                        for f in fetch_cols:
+                            if not fres.get(f, False):
+                                fvals[f] = vals[f]
+                        if fvals:
+                            self.write(cr, user, [id], fvals) # strictly, no context!
+
+                    for f in fetch_cols:
+                        src_trans = src_trans_res.get(ids[0], {}).get(f, vals[f])
+                        translation_obj._set_ids(cr, user, self._name+','+f, 'model', context['lang'], ids, vals[f], src_trans)
 
 
         # call the 'set' method of fields which are not classic_write
