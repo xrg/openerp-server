@@ -215,7 +215,7 @@ class _string_field(_column):
             if self.merge_op == 'join':
                 if not b_src[name]:
                     return None
-                elif not b_dest[name]:
+                elif not b_dest.get(name, False):
                     return b_src[name]
                 else:
                     if isinstance(self.merge_param, basestring):
