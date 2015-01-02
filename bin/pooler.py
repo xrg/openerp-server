@@ -83,7 +83,9 @@ def restart_pool(db_name, force_demo=False, status=None, update_module=False, la
     
         @return db,pool as in `get_db_and_pool()`
     """
+    from netsvc import Agent
     if db_name in pool_dic:
+        Agent.cancel(db_name)
         del pool_dic[db_name]
     return get_db_and_pool(db_name, force_demo, status, update_module=update_module, languages=languages)
 
