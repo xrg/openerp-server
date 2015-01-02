@@ -3,7 +3,7 @@
 #
 #    OpenERP/F3, Open Source Management Solution
 #    Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>).
-#    Copyright (C) 2011-2014 P. Christeas <xrg@hellug.gr>
+#    Copyright (C) 2011-2015 P. Christeas <xrg@hellug.gr>
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -358,19 +358,6 @@ class act_url(osv.osv):
     }
 act_url()
 
-def model_get(self, cr, uid, context=None):
-    wkf_pool = self.pool.get('workflow')
-    osvs = wkf_pool.search_read(cr, uid, [], ['osv'])
-
-    res = []
-    mpool = self.pool.get('ir.model')
-    for osv in osvs:
-        model = osv.get('osv')
-        name = mpool.search_read(cr, uid, [('model','=',model)])[0]['name']
-        res.append((model, name))
-
-    return res
-
 class ir_model_fields(osv.osv):
     _inherit = 'ir.model.fields'
     _rec_name = 'field_description'
@@ -410,10 +397,12 @@ class ActionsExecContext(ExecContext):
         context['hash'] = hash
         context['hex'] = hex
 
-##
-# Actions that are run on the server side
-#
 class actions_server(osv.osv):
+    """ Actions that are run on the server side
+    
+        This model can take several modes, according to its `state` value, that
+        will be executed through `_run_<state>()` methods.
+    """
 
     def _select_signals(self, cr, uid, context=None):
         cr.execute_prepared('actions_server_sel_signals', "SELECT distinct w.osv, t.signal FROM wkf w, wkf_activity a, wkf_transition t \
