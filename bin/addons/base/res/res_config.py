@@ -400,6 +400,8 @@ class res_config_installer(osv.osv_memory):
         # committed now.
         cr.commit()
         new_db, self.pool = pooler.restart_pool(cr.dbname, update_module=True)
+        return True
+
 res_config_installer()
 
 DEPRECATION_MESSAGE = 'You are using an addon using old-style configuration '\
