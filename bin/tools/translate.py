@@ -543,7 +543,8 @@ def trans_load_data(cr, fileobj, fileformat, lang, lang_name=None, verbose=True,
             except locale.Error:
                 pass
         # Here we try to reset the locale regardless.
-        locale.setlocale(locale.LC_ALL, str(lc + '.' + encoding))
+        if lc:
+            locale.setlocale(locale.LC_ALL, str(lc + '.' + encoding))
 
 
         # now, the serious things: we read the language file
