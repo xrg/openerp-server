@@ -91,7 +91,7 @@ if [ -n "$SUCMD"  ] ; then
     if [ -n "$DB_PASSWORD" ] ; then
 	CMD="$CMD -W $DB_PASSWORD"
     fi
-    su $PG_ROOT -c "$CMD" || "$?"
+    su $PG_ROOT -c "$CMD" || exit "$?"
     
     if [ -z "$DEVEL_MODE" ] ; then
 	touch "/var/run/openerp-server-checked"
