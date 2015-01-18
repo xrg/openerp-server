@@ -70,6 +70,8 @@ class report_xml(osv.osv):
                 finally:
                     if fp:
                         fp.close()
+            if name == 'report_sxw_content' and isinstance(data, str):
+                data = buffer(data)
             res[report.id] = data
         return res
 
