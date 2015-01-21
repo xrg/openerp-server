@@ -71,6 +71,70 @@ class _actor_ref:
                                 (module, name, res[0], model))
         return res[1]
 
+class _pool_actor_orm:
+    """ Helper that exposes ORM objects within an ExecContext sandbox
+
+        A requirement is that the ExecContext instance has been launched
+        like `ectx = ExecContext(cr=cr, uid=uid, pool=self.pool, context=context, ...)`
+    """
+    def __init__(self, parent):
+        self._parent = parent
+
+    def __call__(self, model):
+        return _pool_actor_orm._ORMProxy(self._parent, model)
+
+    class _ORMProxy:
+        def __init__(self, parent, model):
+            """Dummy object representing an ORM model.
+            
+                Unlike the 'osv' instances, this is also bound to parent context
+                so that (cr, uid, context) are passed to called methods.
+                
+                It will *only* expose methods without underscore prefix.
+            """
+            self.__parent = parent
+            obj = parent.pool.get(model)
+            if not obj:
+                raise KeyError("No such model: %s" % model)
+            self.__obj = obj
+
+        def __getattr__(self, name):
+            if name.startswith('_'):
+                raise RuntimeError("Cannot expose \"%s\" to sandbox" % name)
+            if name == 'browse':
+                return _pool_actor_orm._ORM_browseproxy(self.__obj, self.__parent)
+            else:
+                return _pool_actor_orm._ORM_fnproxy(self.__obj, self.__parent, name)
+
+    class _ORM_fnproxy:
+        def __init__(self, obj, parent, fnname):
+            self.__fn = getattr(obj, fnname)
+            if not callable(self.__fn):
+                raise AttributeError("%s.%s is not a function", obj._name, fnname)
+            self.__cr = parent.cr
+            self.__uid = parent.uid
+            self.__context = parent.context
+
+        def __call__(self, *args, **kwargs):
+            if 'context' not in kwargs:
+                kwargs['context'] = self.__context
+            return self.__fn(self.__cr, self.__uid, *args, **kwargs)
+
+    class _ORM_browseproxy:
+        def __init__(self, obj, parent):
+            self.__fn = obj.browse
+            self.__cr = parent.cr
+            self.__uid = parent.uid
+            self.__context = parent.context
+            self.__browse_cache = getattr(parent, 'browse_cache', None)
+
+        def __call__(self, *args, **kwargs):
+            if 'context' not in kwargs:
+                kwargs['context'] = self.__context
+            if self.__browse_cache is not None:
+                kwargs['cache'] = self.__browse_cache
+            return self.__fn(self.__cr, self.__uid, *args, **kwargs)
+
 class ExecContext_orm(ExecContext):
     def _prepare_orm(self, context):
         """Call this from your class if you want ORM methods within the context
@@ -87,6 +151,7 @@ class ExecContext_orm(ExecContext):
         context['uid'] = self._kwargs['uid']
         context['context'] = self._kwargs.get('context', {})
 
+        context['orm'] = _pool_actor_orm(self)
         context['browse'] = _pool_actor_browse(self)
         # Hint: all base ORM methods that DON'T operate on [ids]
         for verb in ('search', 'read', 'search_read', 'create', 'write',
@@ -106,6 +171,9 @@ import publisher_warranty
 
 import amount_to_text
 import amount_to_text_en
+
+
+__all__ = ['ir', 'module', 'res', 'amount_to_text', 'ExecContext']
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
 
