@@ -5412,7 +5412,7 @@ class orm(orm_template):
                     where_clause_params,
                     debug=self._debug)
         res = cr.fetchall()
-        return res[0][0]
+        return res[0][0] or False
 
 class orm_deprecated(object):
     """ Mix-in for deprecated models.
