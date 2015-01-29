@@ -63,9 +63,9 @@ class _actor_ref:
     def __init__(self, parent):
         self._parent = parent
 
-    def __call__(self, xml_ref, model=False):
+    def __call__(self, xml_ref, model=False, source='xml'):
         module, name = xml_ref.split('.', 1)
-        res = self._parent.pool.get('ir.model.data').get_object_reference(self._parent.cr, self._parent.uid, module, name)
+        res = self._parent.pool.get('ir.model.data').get_object_reference(self._parent.cr, self._parent.uid, module, name, source=(source,))
         if model and res[0] != model:
             raise ValueError("Model reference for %s.%s is '%s' instead of '%s'" % \
                                 (module, name, res[0], model))
