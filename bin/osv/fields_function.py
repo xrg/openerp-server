@@ -447,13 +447,6 @@ class function(_column):
                     if res[r] and res[r] in dict_names:
                         res[r] = (res[r], dict_names[res[r]])
 
-        if self._type == 'binary':
-            if context.get('bin_size', False):
-                # client requests only the size of binary fields
-                res = dict(map(get_nice_size, res.items()))
-            else:
-                res = dict(map(sanitize_binary_value, res.items()))
-
         if self._type == "integer":
             for r in res.keys():
                 # Converting value into string so that it does not affect XML-RPC Limits
