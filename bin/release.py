@@ -54,6 +54,7 @@ server_options = [ 'base6.0',
         'root-obj_list',
         'report-job',
         'relational-words',
+        'create_or_update',
         ]
 
 # In addition to server_options, some details about the API used

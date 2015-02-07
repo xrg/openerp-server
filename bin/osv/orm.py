@@ -4617,6 +4617,46 @@ class orm(orm_template):
         self._workflow.create(cr, user, [id_new,], context)
         return id_new
 
+    def create_or_update(self, cr, uid, cattempts, context=None):
+        """Create-or-update algorithm
+
+            @param cattempts a list of (key, domain, vals) data
+            @return ID of updated or created record
+
+            This tries, in turn, each of cattempts, in order to create
+            or update records.
+
+            key can be one of 'id', _inherits keys or '*' for new record
+            domain is a domain expression, which will be tried in order
+                   to match (and update) existing records
+            vals is a dict of values for `create()`
+        """
+        for key, cdomain, cvals in cattempts:
+            if key == 'id':
+                sids = self.search(cr, uid, cdomain, limit=1, context=context)
+                if sids:
+                    if cvals:
+                        self.write(cr, uid, sids[:1], cvals, context=context)
+                    return sids[0]
+            elif key in self._inherits.values():
+                model = False
+                for model, col in self._inherits.items():
+                    if col == key:
+                        break
+                else:
+                    raise RuntimeError("Cannot reach here") # because values() was checked
+                obj = self.pool.get(model)
+                tids = obj.search(cr, uid, cdomain, limit=1, context=context)
+                if tids:
+                    cvals2 = {key: tids[0]}
+                    cvals2.update(cvals)
+                    return self.create(cr, uid, cvals2, context=context)
+            elif key == '*':
+                return self.create(cr, uid, cvals, context=context)
+            else:
+                raise ValueError("Key to create_or_update() cannot be \"%s\"" % key)
+        return False
+
     def _store_get_values(self, cr, uid, ids, fields, context):
         """Returns an ordered list of fields.functions to call due to
            an update operation on ``fields`` of records with ``ids``,
