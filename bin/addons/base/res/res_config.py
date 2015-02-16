@@ -400,7 +400,7 @@ class res_config_installer(osv.osv_memory):
         # committed now.
         cr.commit()
         new_db, self.pool = pooler.restart_pool(cr.dbname, update_module=True)
-        return True
+        return False
 
 res_config_installer()
 
