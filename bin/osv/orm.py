@@ -3,7 +3,7 @@
 #
 #    OpenERP, Open Source Management Solution
 #    Copyright (C) 2004-2010 Tiny SPRL (<http://tiny.be>).
-#    Copyright (C) 2009,2011-2014 P. Christeas <xrg@hellug.gr>
+#    Copyright (C) 2009,2011-2015 P. Christeas <xrg@hellug.gr>
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -30,14 +30,14 @@
      * Constraints consistency, validations
      * Object meta Data depends on its status
      * Optimised processing by complex query (multiple actions at once)
-     * Default fields value
+     * Default field values
      * Permissions optimisation
-     * Persistant object: DB postgresql
-     * Datas conversions
+     * Persistent object: DB postgresql
+     * Data conversions
      * Multi-level caching system
-     * 2 different inheritancies
-     * Fields:
-          - classicals (varchar, integer, boolean, ...)
+     * 2 different modes of inheritance
+     * Fields (modular):
+          - scalar (varchar, integer, boolean, ...)
           - relations (one2many, many2one, many2many)
           - functions
  
@@ -4626,10 +4626,13 @@ class orm(orm_template):
             This tries, in turn, each of cattempts, in order to create
             or update records.
 
-            key can be one of 'id', _inherits keys or '*' for new record
-            domain is a domain expression, which will be tried in order
+            `key` can be one of 'id', _inherits keys or '*' for new record
+            `domain` is a domain expression, which will be tried in order
                    to match (and update) existing records
-            vals is a dict of values for `create()`
+            `vals` is a dict of values for `create()`
+            
+            `vals` may contain "id.ref" field (tuple), which will be written
+                   to ir.model.data as (source, module, name)
         """
         for key, cdomain, cvals in cattempts:
             if key == 'id':
