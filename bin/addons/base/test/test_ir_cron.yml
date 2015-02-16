@@ -1,0 +1,17 @@
+-
+  I will try to write ir.cron several times and check running agents
+-
+  !python {model: ir.cron}: |
+    import netsvc
+    from time import sleep
+    stats = netsvc.Agent.stats().split('\n', 1)[0]
+    log("Stats before write(): %s", stats)
+    for x in range(5):
+        self.write(cr, uid, [ref('base.cronjob_osv_memory_autovacuum')],  {'active': True})
+        cr.commit()
+        sleep(0.1)
+    stats2 = netsvc.Agent.stats().split('\n', 1)[0]
+    assert stats == stats2, stats2
+    #for i in range(0, 3):
+    #        seq = self.get_id(cr, uid, 'ir.sequence.test-type', 'code', context={'var_id': 3})
+    #        assert seq.startswith('TS3'), "Invalid sequence chosen: %s" % seq
