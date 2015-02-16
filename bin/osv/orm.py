@@ -4634,12 +4634,37 @@ class orm(orm_template):
             `vals` may contain "id.ref" field (tuple), which will be written
                    to ir.model.data as (source, module, name)
         """
+        def _set_imd_val(ref, res_id):
+            if isinstance(ref, basestring):
+                ref = ref.split('.', 3)
+            if not (isinstance(ref, (list,tuple)) and len(ref) >=3):
+                # Greater-than is for future compatibility
+                raise ValueError("id.ref must be tuple of (source,module,name)")
+            imd_obj = self.pool.get('ir.model.data')
+            iids = imd_obj.search_read(cr, uid, [('source', '=', ref[0]), ('module', '=', ref[1]), 
+                                            ('name', '=', ref[2]),],
+                                    fields=['model', 'res_id'], limit=1, context=context)
+            if iids:
+                if iids[0]['model'] != self._name:
+                    raise ValueError("Reference %s %s.%s belongs to other model: %s (instead of %s)" %\
+                                        (ref[0], ref[1], ref[2], iids[0]['model'], self._name))
+                if iids[0]['res_id'] != res_id:
+                    imd_obj.write(cr, uid, iids[0]['id'], {'res_id': res_id}, context=context)
+            else:
+                imd_obj.create(cr, uid, {'source': ref[0], 'module': ref[1], 'name': ref[2],
+                                         'model': self._name, 'res_id': res_id}, context=context)
+
         for key, cdomain, cvals in cattempts:
             if key == 'id':
                 sids = self.search(cr, uid, cdomain, limit=1, context=context)
                 if sids:
                     if cvals:
-                        self.write(cr, uid, sids[:1], cvals, context=context)
+                        cvals2 = cvals.copy()
+                        imd_ref = cvals2.pop('id.ref', None)
+                        if cvals2:
+                            self.write(cr, uid, sids[:1], cvals, context=context)
+                        if imd_ref is not None:
+                            _set_imd_val(imd_ref, sids[0])
                     return sids[0]
             elif key in self._inherits.values():
                 model = False
@@ -4653,7 +4678,11 @@ class orm(orm_template):
                 if tids:
                     cvals2 = {key: tids[0]}
                     cvals2.update(cvals)
-                    return self.create(cr, uid, cvals2, context=context)
+                    imd_ref = cvals2.pop('id.ref', None)
+                    new_id = self.create(cr, uid, cvals2, context=context)
+                    if imd_ref is not None:
+                        _set_imd_val(imd_ref, new_id)
+                    return new_id
             elif key == '*':
                 return self.create(cr, uid, cvals, context=context)
             else:
