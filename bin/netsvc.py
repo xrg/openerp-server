@@ -697,7 +697,7 @@ class Agent(object):
             else:
                 if db_name in cls.__tasks_by_db:
                     for task in cls.__tasks_by_db[db_name]:
-                        if (function is None) or function is task[2]:
+                        if (function is None) or function == task[2]:
                             task[0] = 0
         finally:
             cls._lock.notify_all()
