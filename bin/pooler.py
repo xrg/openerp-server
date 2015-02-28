@@ -26,9 +26,9 @@ pool_dic = {}
 
 def get_db_and_pool(db_name, force_demo=False, status=None, update_module=False, pooljobs=True, languages=False):
     """Get an active Database and its pool of objects
-    
+
         May *load* the database, if it is not active.
-        
+
         @return db,pool
     """
     if not status:
@@ -53,7 +53,7 @@ def get_db_and_pool(db_name, force_demo=False, status=None, update_module=False,
                 raise AttributeError('Illegal database: %s'% db_name)
 
         log.info("Starting pooler of database: %s" % db_name)
-        
+
         pool = osv.osv.osv_pool()
         pool_dic[db_name] = pool
 
@@ -80,7 +80,7 @@ def get_db_and_pool(db_name, force_demo=False, status=None, update_module=False,
 
 def restart_pool(db_name, force_demo=False, status=None, update_module=False, languages=False):
     """ Unload and reload a Database
-    
+
         @return db,pool as in `get_db_and_pool()`
     """
     from netsvc import Agent
