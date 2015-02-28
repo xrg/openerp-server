@@ -43,14 +43,15 @@ def get_db_and_pool(db_name, force_demo=False, status=None, update_module=False,
         import osv.osv
         import logging
         from tools import config
-        
+        from service.websrv_lib import AuthRejectedExc
+
         log = logging.getLogger('pooler')
         allowed_res = config.get_misc('databases', 'allowed')
         if allowed_res:
             dbs_allowed = [ x.strip() for x in allowed_res.split(' ')]
             if db_name not in dbs_allowed:
                 log.critical('Illegal database requested: %s', db_name)
-                raise AttributeError('Illegal database: %s'% db_name)
+                raise AuthRejectedExc('Illegal database: %s'% db_name)
 
         log.info("Starting pooler of database: %s" % db_name)
 
