@@ -1251,7 +1251,7 @@ def to_time(dt):
     elif isinstance(dt, datetime):
         return dt.time()
     else:
-        return time_DT.strptime(dt, DEFAULT_SERVER_TIME_FORMAT).time()
+        return datetime.strptime(dt, DEFAULT_SERVER_TIME_FORMAT).time()
 
 def split_every(n, iterable, piece_maker=tuple):
     """Splits an iterable into length-n pieces. The last piece will be shorter
