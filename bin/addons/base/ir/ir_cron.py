@@ -102,9 +102,15 @@ class ir_cron(osv.osv, netsvc.Agent):
 
 
     def _poolJobs(self, db_name, check=False):
+        """Run all cron jobs for some database, schedule next run
+
+            Note: a new cursor will be opened for the database. Within that cursor,
+            jobs will be run and one `cr.commit()` called per `ir.cron.id` . In cases
+            of jobs with `doall=True` , commit will only happen at end of all calls.
+        """
         try:
             db, pool = pooler.get_db_and_pool(db_name)
-        except:
+        except Exception:
             return False
         cr = db.cursor()
         try:
