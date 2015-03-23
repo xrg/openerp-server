@@ -157,13 +157,27 @@ class serialized(_column):
 
 try:
     import json
+    from tools import server_types
+
+    class JsonEncoder3(json.JSONEncoder):
+        _browse_null_type = type(None)
+
+        def default(self, obj):
+            if isinstance(obj, (server_types.server_bool, server_types.server_int,
+                                server_types.server_str, server_types.server_unicode,
+                                server_types.server_dict, server_types.server_list)):
+                return None
+            else:
+                return super(JsonEncoder3, self).default(obj)
+
     def _symbol_set_struct(val):
-        return json.dumps(val)
+        return json.dumps(val, cls=JsonEncoder3)
 
     def _symbol_get_struct(self, val):
         if not val:
             return None
         return json.loads(val)
+
 except ImportError:
     def _symbol_set_struct(val):
         raise NotImplementedError
