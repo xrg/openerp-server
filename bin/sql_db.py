@@ -241,6 +241,11 @@ class Cursor(object):
             res = self._obj.execute(query, params)
         except OperationalError, oe:
             self.__logger.exception("Postgres Operational error: %s", oe)
+            if getattr(oe.diag, 'sqlstate', False) == psycopg2.errorcodes.DEADLOCK_DETECTED:
+                self.__logger.error("Deadlock at %s", ustr(query))
+                if debug or self.__logger.isEnabledFor(logging.WARNING):
+                    import traceback
+                    self.__logger.warning("stack: %s", ''.join(traceback.format_stack(limit=15)))
             try:
                 self._cnx.status = False
             except TypeError:
