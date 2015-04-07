@@ -581,12 +581,11 @@ class Agent(object):
 
     @classmethod
     def setAlarm(cls, function, timestamp, db_name, *args, **kwargs):
-        cls._lock.acquire()
-        task = [timestamp, db_name, function, args, kwargs]
-        heapq.heappush(cls.__tasks, task)
-        cls.__tasks_by_db.setdefault(db_name, []).append(task)
-        cls._lock.notify_all()
-        cls._lock.release()
+        with cls._lock:
+            task = [timestamp, db_name, function, args, kwargs]
+            heapq.heappush(cls.__tasks, task)
+            cls.__tasks_by_db.setdefault(db_name, []).append(task)
+            cls._lock.notify_all()
 
     @classmethod
     def _setAlarmNow(cls, function, timestamp, dbname, args, kwargs):
@@ -690,18 +689,23 @@ class Agent(object):
     def cancel(cls, db_name, function=None):
         """Cancel all tasks for a given database. If None is passed, all tasks are cancelled"""
         cls._logger.debug("Cancel timers for %s.%s", db_name or 'all', function or '*')
-        cls._lock.acquire()
-        try:
-            if db_name is None:
-                cls.__tasks, cls.__tasks_by_db = [], {}
+        for ntry in range(5):
+            if cls._lock.acquire(False):
+                try:
+                    if db_name is None:
+                        cls.__tasks, cls.__tasks_by_db = [], {}
+                    else:
+                        if db_name in cls.__tasks_by_db:
+                            for task in cls.__tasks_by_db[db_name]:
+                                if (function is None) or function == task[2]:
+                                    task[0] = 0
+                finally:
+                    cls._lock.notify_all()
+                    cls._lock.release()
+                break
             else:
-                if db_name in cls.__tasks_by_db:
-                    for task in cls.__tasks_by_db[db_name]:
-                        if (function is None) or function == task[2]:
-                            task[0] = 0
-        finally:
-            cls._lock.notify_all()
-            cls._lock.release()
+                cls._logger.debug("Wait timers to settle until we can cancel them")
+                time.sleep(0.1) # 100ms
 
     @classmethod
     def quit(cls):
@@ -717,49 +721,61 @@ class Agent(object):
         active_tasks = []
 
         while cls._alive:
-            cls._lock.acquire()
-            while len(active_tasks) < cls._max_active_tasks \
-                    and cls.__tasks and cls.__tasks[0][0] < time.time():
-                task = heapq.heappop(cls.__tasks)
-                timestamp, dbname, function, args, kwargs = task
-                # dbname will be picked by the logger's stack inspection
-                cls.__tasks_by_db[dbname].remove(task)
-
-                if not timestamp:
-                    # null timestamp -> cancelled task
-                    continue
-                cls._lock.release()
-                cls._logger.debug("Run %s", cls.pretty_repr(function, args, kwargs, 120))
-                thr = threading.Thread(target=function, args=args, kwargs=kwargs)
-                thr.setDaemon(True)
-                thr.start()
-                time.sleep(0.01)
-                active_tasks.append(thr)
-                thr = None
+            try:
                 cls._lock.acquire()
+                while len(active_tasks) < cls._max_active_tasks \
+                        and cls.__tasks and cls.__tasks[0][0] < time.time():
+                    task = heapq.heappop(cls.__tasks)
+                    timestamp, dbname, function, args, kwargs = task
+                    # dbname will be picked by the logger's stack inspection
+                    cls.__tasks_by_db[dbname].remove(task)
 
-            # This line must have the lock in acquired state
-            wtime = 600.0
-            if cls.__tasks:
-                wtime = cls.__tasks[0][0] - time.time()
-                if wtime < 0.25:
-                    wtime = 0.25
-                elif wtime > 600.0:
-                    wtime = 600.0
-            cls._logger.debug("sleeping for %.3f seconds", wtime)
-            cls._lock.wait(wtime)
-            cls._lock.release()
-            active_tasks = filter(lambda t: t.is_alive(), active_tasks)
+                    if not timestamp:
+                        # null timestamp -> cancelled task
+                        continue
+                    cls._lock.release()
+                    cls._logger.debug("Run %s", cls.pretty_repr(function, args, kwargs, 120))
+                    thr = threading.Thread(target=function, args=args, kwargs=kwargs)
+                    thr.setDaemon(True)
+                    thr.start()
+                    time.sleep(0.01)
+                    active_tasks.append(thr)
+                    thr = None
+                    cls._lock.acquire()
+
+                # This line must have the lock in acquired state
+                wtime = 600.0
+                if cls.__tasks:
+                    wtime = cls.__tasks[0][0] - time.time()
+                    if wtime < 0.25:
+                        wtime = 0.25
+                    elif wtime > 600.0:
+                        wtime = 600.0
+                cls._logger.debug("sleeping for %.3f seconds", wtime)
+                cls._lock.wait(wtime)
+                cls._lock.release()
+                active_tasks = filter(lambda t: t.is_alive(), active_tasks)
+            except Exception:
+                cls._logger.exception("Runner in trouble:")
+                try:
+                    cls._lock.release()
+                except Exception:
+                    pass
+                # but, continue, anyway
+                time.sleep(10.0) # prevent a flood if our __tasks are corrupt
 
         cls._logger.debug("thread ended")
 
     @classmethod
     def stats(cls):
         ret = []
-        with cls._lock:
-            ret.append("agent: %d tasks pending" % len(cls.__tasks))
-            for timestamp, dbname, function, args, kwargs in cls.__tasks[:10]:
-                ret.append('    %ld %s %s' %( timestamp, dbname, cls.pretty_repr(function, args, kwargs, 120)))
+        if cls._alive:
+            with cls._lock:
+                ret.append("agent: %d tasks pending" % len(cls.__tasks))
+                for timestamp, dbname, function, args, kwargs in cls.__tasks[:10]:
+                    ret.append('    %ld %s %s' %( timestamp, dbname, cls.pretty_repr(function, args, kwargs, 120)))
+        else:
+            ret.append("agent: dead with %d tasks" % len(cls.__tasks))
         return '\n'.join(ret)
 
 agent_runner = threading.Thread(target=Agent.runner, name="netsvc.Agent.runner")
