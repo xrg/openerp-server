@@ -118,6 +118,11 @@ class OERPMarshaller(xmlrpclib.Marshaller):
         write("</double></value>\n")
     dispatch[Decimal] = dump_decimal
 
+    def dump_binbuffer(self, value, write):
+        self.dump_instance(xmlrpclib.Binary(value), write)
+
+    dispatch[buffer] = dump_binbuffer
+
 class OerpXMLRPCDispatcher(SimpleXMLRPCDispatcher):
     _marshaller_class = OERPMarshaller
     def _marshaled_dispatch(self, data, dispatch_method = None, path = None):
