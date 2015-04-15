@@ -663,10 +663,10 @@ def defer(func, delay=0.1, cumulative_on=False):
 
         except Exception:
             log.exception("Failed")
-            if cr:
+            if cr is not None:
                 cr.rollback()
         finally:
-            if cr:
+            if cr is not None:
                 cr.close()
 
     if cumulative_on:
