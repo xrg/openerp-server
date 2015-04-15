@@ -444,7 +444,6 @@
                                 <separator string="RML Report" colspan="2"/>
                                 <field name="header"/>
                                 <field name="report_rml" groups="base.group_extended"/>
-                                <field name="report_rml_content" groups="base.group_extended"/>
                             </group>
                             <group col="2" colspan="2">
                                 <separator string="XML Report" colspan="2"/>
@@ -461,6 +460,9 @@
                                 <field name="multi"/>
                                 <field name="auto"/>
                             </group>
+                        </page>
+                        <page string="RML content" groups="base.group_extended">
+                                <field name="report_rml_content" widget="text" nolabel="1" colspan="4"/>
                         </page>
                         <page string="Security">
                             <separator string="Groups" colspan="4"/>
