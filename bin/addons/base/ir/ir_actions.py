@@ -59,17 +59,21 @@ class report_xml(osv.osv):
         res = {}
         for report in self.browse(cursor, user, ids, context=context):
             data = report[name + '_data']
-            if not data and report[name[:-8]]:
+            fname = report[name[:-8]]
+            if not data and fname:
                 fp = None
                 try:
-                    fp = tools.file_open(report[name[:-8]], mode='rb')
+                    fp = tools.file_open(fname, mode='rb')
                     data = fp.read()
                 except Exception:
                     data = False
                 finally:
                     if fp:
                         fp.close()
-            if name == 'report_sxw_content' and isinstance(data, str):
+            # Ugly workaround: the is "base.report_ir_model_overview", on all old dbs,
+            # which abuses the "report_rml" field for a sxw path :(
+            if (name == 'report_sxw_content' or (fname and fname.endswith('.sxw'))) \
+                        and isinstance(data, str):
                 data = buffer(data)
             res[report.id] = data
         return res
