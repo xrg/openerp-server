@@ -612,6 +612,8 @@ class MultiHTTPHandler(FixSendError, HttpOptions, BaseHTTPRequestHandler):
             return
 
         self.request_version = fore.request_version
+        fore.client_ip = self._parse_client_address(self.client_address, fore)
+
         if auth_provider and auth_provider.realm:
             try:
                 self.sec_realms[auth_provider.realm].checkRequest(fore,path)
@@ -909,6 +911,24 @@ class MultiHTTPHandler(FixSendError, HttpOptions, BaseHTTPRequestHandler):
             got = fore.rfile.read(chunk_size)
             size_remaining -= len(got)
 
+
+    def _parse_client_address(self, client_address, handler=None):
+        """Resolve client IP address, into string.
+        
+            Hook for proxy-aware decoding.
+            @param client_address tuple of (IP, port, ...) as in `__init__()`
+            @param handler foreign hander, after `parse_request()` has decoded
+                its `headers` attribute
+        """
+        if client_address and len(client_address) == 4:
+            # IPv6 tuple
+            return "[%s]" % client_address[0]
+        elif client_address:
+            # classic, IPv4 case
+            return "%s" % client_address[0]
+        else:
+            # arbitrary tuple, convert to string as is
+            return str(client_address)
 
 class SecureMultiHTTPHandler(MultiHTTPHandler):
     def getcert_fnames(self):
