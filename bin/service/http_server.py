@@ -262,6 +262,7 @@ class HttpLogHandler:
     Please define self._logger at each class that is derived from this
     """
     _logger = None
+    _trusted_http_proxies = None
 
     def log_message(self, format, *args):
         self._logger.debug(format % args) # todo: perhaps other level
@@ -275,6 +276,41 @@ class HttpLogHandler:
     def log_request(self, code='-', size='-'):
         self._logger.log(netsvc.logging.DEBUG_RPC, '"%s" %s %s',
                         self.requestline, str(code), str(size))
+
+    def _parse_client_address(self, client_address, handler=None):
+        """Resolve client IP address from HTTP handler, proxy aware
+
+            Stores client address as `self.client_ip`
+            This shall be called after `self.parse_request()` that decodes
+            HTTP headers.
+
+            It is a common (and recommended) practice to put this ERP behind
+            HTTP servers acting as a proxy. Then, we need to use the real IP
+            of the client (browser) connecting to us for logging etc.
+            The HTTP proxy (eg. apache's `mod_proxy`) will provide us with a
+            "X-Forwarded-For" header, BUT we have to check that the client IP
+            really comes from our own proxies. Otherwise, any client would be
+            able to spoof its origin by supplying the header itself.
+
+            http://en.wikipedia.org/wiki/X-Forwarded-For
+        """
+
+        caddr = MultiHTTPHandler._parse_client_address(self, client_address, handler)
+
+        if HttpLogHandler._trusted_http_proxies is None:
+            tps = HttpLogHandler._trusted_http_proxies = set()
+            for entry in tools.config.get_misc('httpd', 'trusted_proxies', '').split(','):
+                entry = entry.strip()
+                if not entry:
+                    continue
+                tps.add(entry)
+
+        if (handler is not None) and caddr in HttpLogHandler._trusted_http_proxies :
+            fwd = handler.headers.get('X-Forwarded-For', False)
+            if fwd:
+                return fwd.split(',', 1)[0].strip() # first entry, if multiple hops
+        return caddr
+
 
 class MultiHandler2(HttpLogHandler, MultiHTTPHandler):
     _logger = logging.getLogger('http')
@@ -778,7 +814,9 @@ class OerpAuthProxy(AuthProxy):
                 raise AuthRejectedExc("Authorization failed. Wrong sub-path.")
 
         auth_str = handler.headers.get('Authorization',False)
-        addr_str = self._get_addr_str(handler.client_address)
+        addr_str = getattr(handler, 'client_ip', None)
+        if not addr_str:
+            addr_str = self._get_addr_str(handler.client_address)
 
         if auth_str and auth_str.startswith('Basic '):
             auth_str=auth_str[len('Basic '):]
@@ -789,7 +827,7 @@ class OerpAuthProxy(AuthProxy):
                     return True
         
             try:
-                acd = self.provider.authenticate(db,user,passwd,handler.client_address)
+                acd = self.provider.authenticate(db,user,passwd, addr_str)
 
             except AuthRequiredExc:
                 # sometimes the provider.authenticate may raise, so that
@@ -816,7 +854,7 @@ class OerpAuthProxy(AuthProxy):
             if db is False:
                 # in a special case, we ask the provider to allow us to
                 # skip authentication for the "False" db
-                acd = self.provider.authenticate(db, None, None, handler.client_address)
+                acd = self.provider.authenticate(db, None, None, addr_str)
                 if acd:
                     self.provider.log("Public connection from %s" % (addr_str), lvl=logging.INFO)
                     return True
