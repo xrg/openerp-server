@@ -358,7 +358,7 @@ class act_url(osv.osv):
         )
     }
     _defaults = {
-        'type': 'ir.actions.act_url',
+        'type': 'ir.actions.url',
         'target': 'new'
     }
 act_url()
