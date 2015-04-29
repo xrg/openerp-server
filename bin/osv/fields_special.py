@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
 #
-#    OpenERP, Open Source Management Solution
+#    OpenERP-F3, Open Source Management Solution
 #    Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>).
 #    Copyright (C) 2010-2011 OpenERP SA. (www.openerp.com)
 #    Copyright (C) 2008-2014 P. Christeas <xrg@hellug.gr>
@@ -28,6 +28,7 @@ import tools
 from psycopg2 import Binary
 from fields_function import function
 from tools.safe_eval import safe_eval as eval
+import base64
 
 class binary(_column):
     _type = 'binary'
@@ -158,6 +159,7 @@ class serialized(_column):
 try:
     import json
     from tools import server_types
+    import datetime
 
     class JsonEncoder3(json.JSONEncoder):
         _browse_null_type = type(None)
@@ -167,8 +169,27 @@ try:
                                 server_types.server_str, server_types.server_unicode,
                                 server_types.server_dict, server_types.server_list)):
                 return None
+            elif isinstance(obj, self._browse_null_type):
+                return False
+            elif isinstance(obj, datetime.datetime):
+                return obj.strftime('%Y-%m-%d %H:%M:%S')
+            elif isinstance(obj, datetime.date):
+                return obj.strftime('%Y-%m-%d')
+            elif isinstance(obj, datetime.time):
+                return obj.strftime('%H:%M:%S')
+            elif isinstance(obj, buffer):
+                return { '__binary__': True, 'payload': base64.encodestring(obj)}
             else:
                 return super(JsonEncoder3, self).default(obj)
+
+    def _json_hook(dct):
+        if '__binary__' in dct:
+            if 'payload' in dct:
+                return base64.decodestring(dct['payload'])
+            else:
+                return ValueError("JSON: binary objects must have a payload")
+        else:
+            return dct
 
     def _symbol_set_struct(val):
         return json.dumps(val, cls=JsonEncoder3)
@@ -176,7 +197,7 @@ try:
     def _symbol_get_struct(self, val):
         if not val:
             return None
-        return json.loads(val)
+        return json.loads(val, object_hook=_json_hook)
 
 except ImportError:
     def _symbol_set_struct(val):
