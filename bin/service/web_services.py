@@ -3,7 +3,7 @@
 #
 #    OpenERP, Open Source Management Solution
 #    Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>).
-#    Copyright (C) 2009-2010, 2011-2012 P. Christeas <xrg@hellug.gr>
+#    Copyright (C) 2009-2010, 2011-2015 P. Christeas <xrg@hellug.gr>
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -679,12 +679,15 @@ class common(_ObjectService):
 
         info = _('''
 
-OpenERP is an ERP+CRM program for small and medium businesses.
+OpenERP/F3 is an ERP+CRM program for small and medium businesses.
 
 The whole source code is distributed under the terms of the
 GNU Public Licence.
 
-(c) 2003-TODAY, Fabien Pinckaers - Tiny sprl''')
+(c) 2003-2009, Fabien Pinckaers - Tiny sprl
+(c) 2009-2011, OpenERP SA.
+(c) 2009, 2011-2015, P. Christeas
+''')
 
         if extended:
             return info, release.version
