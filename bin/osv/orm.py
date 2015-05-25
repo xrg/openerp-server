@@ -1097,32 +1097,27 @@ class orm_template(object):
 
         # mode: id (XML id) or .id (database id) or False for name_get
         def _get_id(model_name, id, current_module=False, mode='id'):
+            ctx = context.copy()
+            ctx['active_test'] = False
+            obj_model = self.pool.get(model_name)
             if mode=='.id':
-                id = int(id)
-                obj_model = self.pool.get(model_name)
-                dom = [('id', '=', id)]
-                if obj_model._columns.get('active'):
-                    dom.append(('active', 'in', ['True','False']))
-                ids = obj_model.search(cr, uid, dom, context=context)
+                ids = obj_model.search(cr, uid, [('id', '=', int(id))], context=context)
                 if not len(ids):
                     raise Exception(_("Database ID doesn't exist: %s : %s") %(model_name, id))
             elif mode=='id':
                 if '.' in id:
-                    module, xml_id = id.rsplit('.', 1)
+                    xml_id = id
                 else:
-                    module, xml_id = current_module, id
-                record_id = ir_model_data_obj._get_id(cr, uid, module, xml_id)
-                ir_model_data = ir_model_data_obj.read(cr, uid, [record_id], ['res_id'], context=context)
-                if not ir_model_data:
-                    raise ValueError('No references to %s.%s' % (module, xml_id))
-                id = ir_model_data[0]['res_id']
+                    xml_id = '%s.%s' % (current_module, id)
+                ids = obj_model.search(cr, uid, [('id.ref', '=', xml_id)], context=context)
+                if not ids:
+                    raise ValueError('No references to %s' % xml_id)
             else:
-                obj_model = self.pool.get(model_name)
                 ids = obj_model.name_search(cr, uid, id, operator='=', context=context)
                 if not ids:
                     raise ValueError('No record found for %s' % (id,))
-                id = ids[0][0]
-            return id
+                ids = [ids[0][0]]
+            return ids[0]
 
         # IN:
         #   datas: a list of records, each record is defined by a list of values
