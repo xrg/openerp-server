@@ -784,7 +784,7 @@ class orm_template(object):
 
         if new_imd_colnames and 'module' in context:
             cr.execute("SELECT name FROM ir_model_data WHERE name = ANY(%s) AND module = %s AND source = 'orm' ",
-                            ([name1 for name1, id in new_imd_colnames], context['module']),
+                            ([name1 for name1, nid in new_imd_colnames], context['module']),
                             debug=self._debug)
             existing_names = [ name1 for name1, in cr.fetchall()]
             
@@ -1049,8 +1049,6 @@ class orm_template(object):
             if x=='.id': return [x]
             return x.replace(':id','/id').replace('.id','/.id').split('/')
         fields_to_export = map(fsplit, fields_to_export)
-        warning = ''
-        warning_fields = []
         datas = []
         for row in self.browse(cr, uid, ids, context):
             datas += self.__export_row(cr, uid, row, fields_to_export, context)
