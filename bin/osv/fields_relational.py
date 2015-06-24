@@ -28,6 +28,7 @@ from tools import sql_model, config
 from tools import expr_utils as eu
 from tools import orm_utils
 from operator import itemgetter
+from tools.safe_eval import safe_eval
 import logging
 
 #.apidoc title: Relational fields
@@ -1172,7 +1173,7 @@ class reference(_column):
 
     @classmethod
     def from_manual(cls, field_dict, attrs):
-        return cls(selection=eval(field_dict['selection']), **attrs)
+        return cls(selection=safe_eval(field_dict['selection']), **attrs)
 
     def __init__(self, string, selection, size=64, **args):
         _column.__init__(self, string=string, size=size, selection=selection, **args)
