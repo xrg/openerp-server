@@ -958,9 +958,12 @@ class SecureMultiHTTPHandler(MultiHTTPHandler):
             elif self.client_address:
                 addr_str = '%s:%s' % self.client_address
             self.log_message("Secure %s connection from %s",ciph_str,addr_str)
-        except Exception:
-            self.request.shutdown(socket.SHUT_RDWR)
-            raise
+        except Exception, e:
+            try:
+                self.request.shutdown(socket.SHUT_RDWR)
+            except socket.error:
+                pass
+            raise e
 
     def finish(self):
         # With ssl connections, closing the filehandlers alone may not
