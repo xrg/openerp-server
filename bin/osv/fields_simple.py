@@ -357,7 +357,7 @@ class float(_column):
 def _date_domain(field_expr, group_trunc, out_fmt):
     leval = lazy_date_eval(' +1%s' % group_trunc)
     return lambda row: [(field_expr, '>=', row[field_expr]), \
-                        (field_expr, '<', leval(cur_time=row[field_expr]))]
+                        (field_expr, '<', leval(cur_time=to_datetime(row[field_expr])))]
 
 class _date_column_mixin:
     def calc_group(self, cr, uid, obj, lefts, right, context):
