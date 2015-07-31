@@ -1,3 +1,9 @@
+openerp-server (6.9.2-33) testing; urgency=low
+
+  [ panos ]
+
+ -- panos <panos@xrg-debbuild.pefnos>  Thu, 30 Jul 2015 23:55:00 +0300
+
 openerp-server (6.9.2-30) testing; urgency=low
 
   [ P. Christeas ]
