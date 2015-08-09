@@ -561,7 +561,7 @@ class one2many(_rel2many):
     def get_memory(self, cr, obj, ids, name, user=None, offset=0, context=None, values=None):
         if context is None:
             context = {}
-        if self._context:
+        if self._context and not isinstance(self._context, basestring):
             context = context.copy()
             context.update(self._context)
         if not values:
@@ -578,9 +578,9 @@ class one2many(_rel2many):
     def set_memory(self, cr, obj, id, field, values, user=None, context=None):
         if not context:
             context = {}
-        if self._context:
+        if self._context and not isinstance(self._context, basestring):
             context = context.copy()
-        context.update(self._context)
+            context.update(self._context)
         if not values:
             return
         obj = obj.pool.get(self._obj)
@@ -610,9 +610,9 @@ class one2many(_rel2many):
     def get(self, cr, obj, ids, name, user=None, offset=0, context=None, values=None):
         if context is None:
             context = {}
-        if self._context:
+        if self._context and not isinstance(self._context, basestring):
             context = context.copy()
-        context.update(self._context)
+            context.update(self._context)
         if values is None:
             values = {}
 
@@ -632,9 +632,9 @@ class one2many(_rel2many):
         result = []
         if not context:
             context = {}
-        if self._context:
+        if self._context and not isinstance(self._context, basestring):
             context = context.copy()
-        context.update(self._context)
+            context.update(self._context)
         context['no_store_function'] = True
         if not values:
             return
