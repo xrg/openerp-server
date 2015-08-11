@@ -403,6 +403,10 @@ class ActionsExecContext(ExecContext):
         context['hex'] = hex
         context['int'] = int
         context['range'] = range
+        context['args'] = self.run_args
+        for k, v in self.run_kwargs.items():
+            if k not in context and k not in ('cr', 'uid', 'self', 'context', 'time'):
+                context[k] = v
 
 class actions_server(osv.osv):
     """ Actions that are run on the server side
@@ -508,18 +512,38 @@ class actions_server(osv.osv):
     #   ACTION_ID : Action to launch
 
     def run(self, cr, uid, ids, context=None):
+        """Launch the action (6.0 compatible method)
+        """
+        return self.runk(cr, uid, ids, context=context);
+
+    def runk(self, cr, uid, ids, *args, **kwargs):
+        """Launch the action, also pass extra arguments etc. to eval context
+
+            @param args will appear in execution context as 'args'
+            @param kwargs May contain `context` (passed as context),
+                        `obj` = (model, id) that will evaluate to browse record
+                        All other kwargs will be passed by key to eval context
+        """
+        context = kwargs.pop('context', None)
+        kobj = kwargs.pop('obj', None)
         if context is None:
             context = {}
-        eval_ctx = ActionsExecContext.new(cr=cr, uid=uid, pool=self.pool, context=context)
+        if isinstance(ids, (int, long)):
+            ids = [ids,]
+        eval_ctx = ActionsExecContext.new(cr=cr, uid=uid, pool=self.pool,
+                                          run_args=args, run_kwargs=kwargs, context=context)
 
         for action in self.browse(cr, uid, ids, context):
             if context.get('active_id') \
                     and context.get('active_model', False) == action.model_id.model:
                 model_obj = self.pool.get(action.model_id.model)
                 eval_ctx.update(obj=model_obj.browse(cr, uid, context['active_id'], context=context, cache=action._cache))
+            elif kobj and isinstance(kobj, tuple) and len(kobj) == 2:
+                model_obj = self.pool.get(kobj[0])
+                eval_ctx.update(obj=model_obj.browse(cr, uid, kobj[1], context=context, cache=action._cache))
             else:
                 model_obj = None
-                eval_ctx.update(obj=None)
+                eval_ctx.update(obj=kobj)
             if action.condition and action.condition != 'True':
                 ctx = {}
                 eval_ctx.prepare_context(ctx)
