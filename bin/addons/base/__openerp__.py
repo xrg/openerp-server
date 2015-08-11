@@ -24,7 +24,7 @@
 
 {
     'name': 'Base',
-    'version': '1.9',
+    'version': '1.10',
     'category': 'Generic Modules/Base',
     'description': """The kernel of OpenERP, needed for all installation.""",
     'author': 'OpenERP SA',
@@ -98,6 +98,7 @@
         #                       it can't be run until the db is loaded
         'test/test_sequence.yml',
         'test/base_domain_exprs.yml',
+        'test/test_browse_list_methods.yml',
     ],
     'installable': True,
     'active': True,

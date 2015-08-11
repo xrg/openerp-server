@@ -1,0 +1,32 @@
+-
+  Testing that 'res.partner' model is browsable
+-
+  !python {model: ir.model}: |
+        bro = self.browse(cr,uid, [('model', '=', 'res.partner')])[0]
+        assert bro.model == 'res.partner'
+        assert len(bro.field_id) > 20, "res.partner usually has 40+ fields, now only %d" % len(bro.field_id)
+-
+  Testing that a browse x2many field yields browse objects
+-
+  !python {model: ir.model}: |
+        bro = self.browse(cr,uid, [('model', '=', 'res.partner')])[0]
+        for fld in bro.field_id:
+            assert fld._table_name == 'ir.model.fields', fld._table_name
+-
+  Testing that browse x2many fields are filterable
+-
+  !python {model: ir.model}: |
+        bro = self.browse(cr,uid, [('model', '=', 'res.partner')])[0]
+        all_len = len(bro.field_id)
+        required = bro.field_id.filter([('required', '=', True)])
+        assert len(required) < all_len, 'Filtered length must be smaller than full set'
+        for r in required:
+            assert r.name, "empty record? %r" % r
+-
+  Testing browse x2many fields can have methods called
+-
+  !python {model: ir.model}: |
+        bro = self.browse(cr,uid, [('model', '=', 'res.partner')])[0]
+        res = bro.field_id.name_get()
+        assert isinstance(res, list), type(res)
+        assert len(res) == len(bro.field_id)

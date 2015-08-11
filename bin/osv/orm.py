@@ -237,6 +237,43 @@ class browse_record_list(list):
     def __add__(self, y):
         return browse_record_list(list.__add__(self, y), context=self.context)
 
+    def filter(self, domain):
+        """Return a smaller list, items of this one satisfying 'domain' filter
+
+            @param domain an expression like [(lhs, op, rhs),...]
+        """
+        if len(self):
+            ids = only_ids(self)
+            b = self[0]
+            return b._table.browse(b._cr, b._uid, [('id', 'in', ids)] + domain, context=self.context, cache=b._cache)
+        else:
+            return browse_record_list([], context=self.context)
+
+    def __getattr__(self, method):
+        """Create a callable for all objects in this list
+        """
+        if method.startswith('_'):
+            raise AttributeError("Not allowed: " + method)
+        if not len(self):
+            return lambda *a, **kw: False
+
+        b = self[0]
+        mfn = getattr(b._table, method)
+        if not callable(mfn):
+            raise AttributeError("Not callable: " + method)
+        cr = b._cr
+        uid = b._uid
+        # define a callable that will imply (cr, uid, ids, ... , context=self.context)
+        def c(*args, **kwargs):
+            kwargs.setdefault('context', self.context)
+            # TODO: auto._invalidate on write(), unlink() etc. ?
+            return mfn(cr, uid, only_ids(self), *args, **kwargs)
+
+        return c
+
+    def browse(self, *args, **kwargs):
+        raise NotImplementedError("You may not call browse() on a browse list, use filter() instead!")
+
 only_ids = orm_utils.only_ids # take it from there..
 orm_utils.browse_record_list = browse_record_list # ..put that one back
 orm_utils.browse_null = browse_null

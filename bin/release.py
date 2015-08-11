@@ -64,6 +64,7 @@ server_options = [ 'base6.0',
 api_options = [
         'fields_only',
         'browse-browse', 'function_field_browse',
+        'browse-list-methods',
         'fields-inherit',
         'many2many-auto',
         'date_eval',
