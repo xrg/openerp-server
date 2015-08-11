@@ -410,7 +410,7 @@ class ActionsExecContext(ExecContext):
 
 class actions_server(osv.osv):
     """ Actions that are run on the server side
-    
+
         This model can take several modes, according to its `state` value, that
         will be executed through `_run_<state>()` methods.
     """
@@ -736,7 +736,7 @@ class actions_server(osv.osv):
 
     def set_client_action(self, cr, uid, ids, context=None, mode='multi'):
         """Register these actions in 'ir.values' as 'client_action[_multi|_relate]'
-        
+
             @param mode [multi,relate] kind of action to create
         """
         ir_values_obj = self.pool.get('ir.values')
@@ -811,4 +811,3 @@ class ir_actions_todo(osv.osv):
 ir_actions_todo()
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
-
