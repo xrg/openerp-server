@@ -401,6 +401,8 @@ class ActionsExecContext(ExecContext):
         context['id'] = id
         context['hash'] = hash
         context['hex'] = hex
+        context['int'] = int
+        context['range'] = range
 
 class actions_server(osv.osv):
     """ Actions that are run on the server side
