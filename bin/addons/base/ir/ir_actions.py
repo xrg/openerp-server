@@ -538,7 +538,7 @@ class actions_server(osv.osv):
                     and context.get('active_model', False) == action.model_id.model:
                 model_obj = self.pool.get(action.model_id.model)
                 eval_ctx.update(obj=model_obj.browse(cr, uid, context['active_id'], context=context, cache=action._cache))
-            elif kobj and isinstance(kobj, tuple) and len(kobj) == 2:
+            elif kobj and isinstance(kobj, (tuple, list)) and len(kobj) == 2:
                 model_obj = self.pool.get(kobj[0])
                 eval_ctx.update(obj=model_obj.browse(cr, uid, kobj[1], context=context, cache=action._cache))
             else:
