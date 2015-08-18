@@ -35,7 +35,7 @@ class res_partner_canal(osv.osv):
         'active': fields.boolean('Active'),
     }
     _defaults = {
-        'active': lambda *a: 1,
+        'active': True,
     }
 res_partner_canal()
 
@@ -54,9 +54,10 @@ class res_partner_event(osv.osv):
         'date': fields.datetime('Date', size=16),
         'user_id': fields.many2one('res.users', 'User'),
     }
+
     _order = 'date desc'
     _defaults = {
-        'date': lambda *a: time.strftime('%Y-%m-%d %H:%M:%S'),
+        'date': fields.datetime.now,
         'user_id': lambda self, cr, uid, context: uid,
     }
 res_partner_event()
