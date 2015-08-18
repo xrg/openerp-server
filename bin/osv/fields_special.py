@@ -28,6 +28,7 @@ import tools
 from psycopg2 import Binary
 from fields_function import function
 from tools.safe_eval import safe_eval as eval
+from collections import defaultdict
 import base64
 
 class binary(_column):
@@ -232,7 +233,7 @@ class property(function):
         prop = obj.pool.get('ir.property')
         domain = [('fields_id.model', '=', obj._name), ('fields_id.name','in',prop_name), ('res_id','=',False)]
         ids = prop.search(cr, uid, domain, context=context)
-        replaces = {}
+        replaces = defaultdict(dict)
         default_value = {}.fromkeys(prop_name, False)
         for prop_rec in prop.browse(cr, uid, ids, context=context):
             if default_value.get(prop_rec.fields_id.name, False):
@@ -240,7 +241,6 @@ class property(function):
             value = prop.get_by_record(cr, uid, prop_rec, context=context) or False
             default_value[prop_rec.fields_id.name] = value
             if value and (prop_rec.type == 'many2one'):
-                replaces.setdefault(value._name, {})
                 replaces[value._name][value.id] = True
         return default_value, replaces
 
@@ -307,21 +307,24 @@ class property(function):
             value = properties.get_by_record(cr, uid, prop, context=context)
             res[prop.res_id.id][prop.fields_id.name] = value or False
             if value and (prop.type == 'many2one'):
-                record_exists = obj.pool.get(value._name).exists(cr, uid, value.id)
-                if record_exists:
-                    replaces.setdefault(value._name, {})
-                    replaces[value._name][value.id] = True
-                else:
-                    res[prop.res_id.id][prop.fields_id.name] = False
+                replaces[value._name][value.id] = True
 
-        for rep in replaces:
-            nids = obj.pool.get(rep).search(cr, uid, [('id','in',replaces[rep].keys())], context=context)
-            replaces[rep] = dict(obj.pool.get(rep).name_get(cr, uid, nids, context=context))
+        for rep, kids in replaces.items():
+            rmodel = obj.pool.get(rep)
+            # this search() will remove any ids that don't exist,
+            # so replaces[rep] will only contain valid ids
+            nids = rmodel.search(cr, uid, [('id','in',kids.keys())], context=context)
+            replaces[rep] = dict(rmodel.name_get(cr, uid, nids, context=context))
 
         for prop in prop_name:
-            for id in ids:
-                if res[id][prop] and hasattr(res[id][prop], '_name'):
-                    res[id][prop] = (res[id][prop].id , replaces[res[id][prop]._name].get(res[id][prop].id, False))
+            for id in only_ids(ids):
+                val = res[id][prop]
+                if val and hasattr(val, '_name'):
+                    repl = replaces[val._name] # model-specific
+                    if val.id in repl:
+                        res[id][prop] = (val.id, repl[val.id])
+                    else:
+                        res[id][prop] = False
 
         return res
 
