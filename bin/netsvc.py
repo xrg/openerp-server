@@ -323,6 +323,7 @@ class Logger_db(logging.Logger):
         record = self.makeRecord(self.name, level, fn, lno, msg, args, exc_info, func, extra)
         self.handle(record)
 
+import tools
 
 def init_logger():
     from tools.translate import resetlocale
@@ -338,7 +339,7 @@ def init_logger():
     # create a format for log messages and dates
     format = '[%(asctime)s] %(levelname)s:%(name)s%(at_dbname)s:%(message)s'
 
-    if tools.config['syslog']:
+    if tools.config['syslog'] or (has_systemd and not tools.config['logfile']):
         # SysLog Handler
         if os.name == 'nt':
             handler = logging.handlers.NTEventLogHandler("%s %s" % (release.description, release.version))
@@ -490,10 +491,6 @@ class Logger(object):
             log = logging.getLogger()
         
         return log.level or False
-
-import tools
-if getattr(tools, 'config', {}).get('log_level', None) is not None:
-    init_logger()
 
 class Agent(object):
     """ Singleton that keeps track of cancellable tasks to run at a given

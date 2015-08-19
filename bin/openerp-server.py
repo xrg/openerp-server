@@ -62,6 +62,8 @@ import netsvc
 #-----------------------------------------------------------------------
 import tools
 
+netsvc.init_logger()
+
 openerp_isrunning = tools.misc.TSValue(False)
 
 server_logger = logging.getLogger('server')
