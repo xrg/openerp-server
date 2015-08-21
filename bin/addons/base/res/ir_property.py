@@ -3,6 +3,7 @@
 #    
 #    OpenERP, Open Source Management Solution
 #    Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>).
+#    Copyright (C) 2015 P. Christeas <xrg@hellug.gr>
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -19,7 +20,7 @@
 #
 ##############################################################################
 
-from osv import osv,fields
+from osv import osv,fields, index
 from tools.misc import attrgetter
 import time
 
@@ -47,11 +48,11 @@ class ir_property(osv.osv):
 
 
     _columns = {
-        'name': fields.char('Name', size=128, select=1),
+        'name': fields.char('Name', size=128),
 
         'res_id': fields.reference('Resource', selection=_models_get, size=128,
-                                   help="If not set, acts as a default value for new resources", select=1),
-        'company_id': fields.many2one('res.company', 'Company', select=1),
+                                   help="If not set, acts as a default value for new resources"),
+        'company_id': fields.many2one('res.company', 'Company'),
         'fields_id': fields.many2one('ir.model.fields', 'Field', ondelete='cascade', required=True, select=1),
 
         'value_float' : fields.float('Value'),
@@ -73,12 +74,16 @@ class ir_property(osv.osv):
                                    ('datetime', 'DateTime'),
                                   ],
                                   'Type',
-                                  required=True,
-                                  select=1),
+                                  required=True),
     }
 
     _defaults = {
         'type': 'many2one',
+    }
+
+    _indices = {
+        # res_id also has one, to be used by admin user (w/o company_id rule)
+        'res_value_idx': index.plain('res_id', 'value_reference'),
     }
 
     def _update_values(self, cr, uid, ids, values):
