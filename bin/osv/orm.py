@@ -4153,9 +4153,32 @@ class orm(orm_template):
         self.check_access_rule(cr, uid, ids, 'unlink', context=context)
         pool_model_data = self.pool.get('ir.model.data')
         pool_ir_values = self.pool.get('ir.values')
+
+        parent_inh_ids = {}
+        if self._inherits and self._vtable:
+            parent_inh_ids = dict.fromkeys(self._inherits.keys(), [])
+            # fetch parent-ids of inherited tables
+            cr.execute('SELECT %s FROM "%s" WHERE id = ANY(%%s)' % (','.join(self._inherits.values()), self._table),
+                       (ids,), debug=self._debug)
+
+            # construct mapping of parent-inherits models to break _vptr at
+            for row in cr.dictfetchall():
+                for itable, ifield in self._inherits.items():
+                    if row[ifield]:
+                        parent_inh_ids[itable].append(row[ifield])
+
         cr.execute('DELETE FROM ' + self._table + ' ' \
                        'WHERE id = ANY(%s)', (ids,), debug=self._debug)
 
+        if parent_inh_ids:
+            for imodel_name, iids in parent_inh_ids.items():
+                imodel = self.pool.get(imodel_name)
+                if not iids:
+                    continue
+                if not imodel._vtable:
+                    continue
+                cr.execute('UPDATE "%s" SET _vptr = NULL WHERE _vptr = %%s AND id = ANY(%%s)' % imodel._table,
+                           (self._name, iids), debug=self._debug or imodel._debug)
 
         # Mark this record as deleted (res_id: 0) in ir.model.data table
         # If the reference is from an XML source, it will be deleted by
