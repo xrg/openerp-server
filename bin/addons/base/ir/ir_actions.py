@@ -585,7 +585,8 @@ class actions_server(osv.osv):
         if 'active_ids' in context:
             localdict['objs'] = model_obj.browse(cr, uid, context['active_ids'], context=context)
 
-        safe_eval(action.code, localdict, mode="exec", nocopy=True) # nocopy allows to return 'action'
+        fname = "%s#%d" % (self._name, action.id)
+        safe_eval(action.code, localdict, mode="exec", nocopy=True, filename=fname) # nocopy allows to return 'action'
         if localdict.get('action', None) is not None:
             return localdict['action']
 
