@@ -4171,13 +4171,13 @@ class orm(orm_template):
                     (self._name, list(ids), ['%s,%s' % (self._name, sid) for sid in ids]),
                     debug=self._debug)
 
-        for order, object, store_ids, fields in result_store:
+        for order, object, store_ids, rfields in result_store:
             if object != self._name:
                 obj =  self.pool.get(object)
                 cr.execute('SELECT id FROM '+obj._table+' WHERE id = ANY(%s)', (store_ids,))
                 rids = map(itemgetter(0), cr.fetchall())
                 if rids:
-                    obj._store_set_values(cr, uid, rids, fields, context)
+                    obj._store_set_values(cr, uid, rids, rfields, context)
 
         return True
 
