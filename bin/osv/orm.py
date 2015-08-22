@@ -3439,7 +3439,7 @@ class orm(orm_template):
                 schema_table.check_column('write_date', ctype='TIMESTAMP')
 
             if self._vtable:
-                schema_table.check_column('_vptr', ctype='VARCHAR', size=64)
+                schema_table.check_column('_vptr', ctype='VARCHAR', size=64, select=True)
 
             # self._check_removed_columns(cr, log=False) TODO
 

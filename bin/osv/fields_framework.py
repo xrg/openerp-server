@@ -280,7 +280,7 @@ class vptr_field(_column):
             from_clause, where_clause, qry_args = qry.get_sql()
             qry = "SELECT %s FROM %s WHERE %s" % (inh_field, from_clause, where_clause)
 
-            return ('id', "inselect", (qry, qry_args))
+            return eu.nested_expr([('_vptr', '=', model), ('id', "inselect", (qry, qry_args))])
 
             # The result should match our side
         raise eu.DomainLeftError(obj, lefts, operator, right)
