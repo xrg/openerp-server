@@ -1136,12 +1136,11 @@ class many2many(_rel2many):
 
     def calc_merge(self, cr, uid, obj, name, b_dest, b_src, context):
         if b_dest and self.merge_op == 'join':
-            if not b_dest[name]:
+            if not b_dest.get(name, False):
                 return b_src[name]
             elif not b_src[name]:
                 return None
             else:
-                # print "type:", type(b_dest[name]), type(b_src[name])
                 return b_dest[name] + b_src[name]
         return super(many2many, self).calc_merge(cr, uid, obj, name, b_dest=b_dest, b_src=b_src, context=context)
 
