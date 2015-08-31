@@ -2451,6 +2451,8 @@ class orm_template(object):
 
         vals = {}
         touched = set()
+        all_excs = []
+        value_excs = []
         if fields_ignore is None:
             fields_ignore = []
 
@@ -2463,10 +2465,13 @@ class orm_template(object):
             for imodel, icol in self._inherits.items():
                 obj = self.pool.get(imodel)
                 iids = [ b[icol].id for b in brecords]
-                ivals = obj.merge_get_values(cr, uid, iids, fields_ignore_orig, context)
-                ivals['id'] = iids # store in non-mergeable 'id' field
-                fields_ignore.append(icol)
-                vals[icol] = ivals
+                try:
+                    ivals = obj.merge_get_values(cr, uid, iids, fields_ignore_orig, context)
+                    ivals['id'] = iids # store in non-mergeable 'id' field
+                    fields_ignore.append(icol)
+                    vals[icol] = ivals
+                except ValueError, e:
+                    value_excs.append(e)
 
         for bres in brecords:
             upd = {}
@@ -2479,13 +2484,27 @@ class orm_template(object):
                 if cname in expression._implicit_log_fields \
                         or cname in expression._implicit_fields:
                     continue
-                rv = col.calc_merge(cr, uid, self, cname, vals, bres, context=context)
-                if rv is not None:
-                    upd[cname] = rv
-                    if vals and 'id' in vals:
-                        touched.add(cname)
+                try:
+                    rv = col.calc_merge(cr, uid, self, cname, vals, bres, context=context)
+                    if rv is not None:
+                        upd[cname] = rv
+                        if vals and 'id' in vals:
+                            touched.add(cname)
+                except ValueError, e:
+                    value_excs.append(e)
+                except Exception, e:
+                    all_excs.append(e)
 
             vals.update(upd)
+
+        if all_excs:
+            for ae in all_excs:
+                _logger.warning("Cannot merge %s: %s", self._name, ae)
+            raise all_excs[0]
+        elif value_excs:
+            for e in value_excs:
+                _logger.warning("Cannot merge %s: %s", self._name, e)
+            raise ValueError( '. '.join([e.message for e in value_excs]))
 
         ret = {}
         for col in self._inherits.values():
