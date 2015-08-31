@@ -4196,8 +4196,21 @@ class orm(orm_template):
                     continue
                 if not imodel._vtable:
                     continue
-                cr.execute('UPDATE "%s" SET _vptr = NULL WHERE _vptr = %%s AND id = ANY(%%s)' % imodel._table,
-                           (self._name, iids), debug=self._debug or imodel._debug)
+
+                # Still, there is a chance that another record in our table
+                # references that parent record. This is generally not
+                # desirable in F3, but happens during merge_records().
+                # In that case, we shall not reset parent `_vptr`
+                cr.execute('''UPDATE "%(par_table)s" SET _vptr = NULL WHERE _vptr = %%s
+                        AND id = ANY(%%s)
+                        AND NOT EXISTS (SELECT 1 FROM "%(our_table)s" 
+                                          WHERE "%(our_table)s".%(inh_column)s = "%(par_table)s".id
+                                            AND "%(our_table)s".id != ANY(%%s))
+                        ''' % { 'par_table': imodel._table,
+                               'our_table': self._table, 
+                               'inh_column': self._inherits[imodel_name]
+                               },
+                           (self._name, iids, ids), debug=self._debug or imodel._debug)
 
         # Mark this record as deleted (res_id: 0) in ir.model.data table
         # If the reference is from an XML source, it will be deleted by
