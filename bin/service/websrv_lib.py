@@ -906,7 +906,7 @@ class MultiHTTPHandler(FixSendError, HttpOptions, BaseHTTPRequestHandler):
         max_chunk_size = 10*1024*1024
         size_remaining = int(fore.headers["content-length"])
         got = ''
-        while size_remaining:
+        while size_remaining > 0:
             chunk_size = min(size_remaining, max_chunk_size)
             got = fore.rfile.read(chunk_size)
             size_remaining -= len(got)
