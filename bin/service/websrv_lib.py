@@ -799,9 +799,10 @@ class MultiHTTPHandler(FixSendError, HttpOptions, BaseHTTPRequestHandler):
             except socket.timeout:
                 pass
             except SSLError, err:
-                if err.errno in (errno.ETIMEDOUT, errno.ECONNRESET,
-                                errno.ECONNABORTED):
-                    pass
+                if err.errno == errno.ETIMEDOUT:
+                    break
+                elif err.errno in (errno.ECONNRESET, errno.ECONNABORTED):
+                    break
                 elif isinstance(err.args, (list, tuple)) \
                         and 'timed out' in err.args[0] or '[Errno 110]' in err.args[0]:
                     # sadly, the SSLError does not have some code or errno
@@ -813,7 +814,9 @@ class MultiHTTPHandler(FixSendError, HttpOptions, BaseHTTPRequestHandler):
                 self.request.close()
                 return None
             except socket.error, err:
-                if err.errno in (errno.EBADF, errno.ECONNABORTED, errno.ECONNRESET):
+                if err.errno == errno.ETIMEDOUT:
+                    break
+                elif err.errno in (errno.EBADF, errno.ECONNABORTED, errno.ECONNRESET):
                     self.rfile.close()
                     self.wfile.close()
                     return None
