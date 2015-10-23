@@ -577,6 +577,14 @@ class Agent(object):
             return ', '.join(oout)
 
     @classmethod
+    def _make_task_name(cls, dbname, function):
+        name = cls.__name__ + ':' + str(dbname) + ':'
+        if hasattr(function, 'im_class'):
+            name += function.im_class.__name__ + '.'
+        name += function.func_name
+        return name
+
+    @classmethod
     def setAlarm(cls, function, timestamp, db_name, *args, **kwargs):
         with cls._lock:
             task = [timestamp, db_name, function, args, kwargs]
@@ -720,10 +728,21 @@ class Agent(object):
         while cls._alive:
             try:
                 cls._lock.acquire()
+                skipped_tasks = []
                 while len(active_tasks) < cls._max_active_tasks \
                         and cls.__tasks and cls.__tasks[0][0] < time.time():
                     task = heapq.heappop(cls.__tasks)
                     timestamp, dbname, function, args, kwargs = task
+                    task_name = cls._make_task_name(dbname, function)
+                    if not getattr(function, '_reentrant', False):
+                        for act in active_tasks:
+                            if act.name == task_name:
+                                skipped_tasks.append(task)
+                                task = None
+                                break
+                    if task is None:
+                        continue
+
                     # dbname will be picked by the logger's stack inspection
                     cls.__tasks_by_db[dbname].remove(task)
 
@@ -739,6 +758,12 @@ class Agent(object):
                     active_tasks.append(thr)
                     thr = None
                     cls._lock.acquire()
+
+                # After the first "while", we may have emptied "cls.__tasks"
+                # but filled some "skipped_tasks". Put them back in
+                for stask in skipped_tasks:
+                    heapq.heappush(cls.__tasks, stask)
+                del skipped_tasks
 
                 # This line must have the lock in acquired state
                 wtime = 600.0

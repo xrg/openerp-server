@@ -902,6 +902,8 @@ GNU Public Licence.
         """
         import threading
         res = "OpenERP server: %d threads\n" % threading.active_count()
+        for thr in threading.enumerate():
+            res += "    %s\n" % thr.name
         res += netsvc.Server.allStats()
         res += "\n"
         res += netsvc.Agent.stats()
