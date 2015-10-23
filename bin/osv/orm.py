@@ -281,7 +281,8 @@ orm_utils.except_orm = except_orm
 
 
 class browse_record(object):
-    """ An object that behaves like a row of an object's table.
+    """ An active object that behaves like a row of an object's table.
+
         It has attributes after the columns of the corresponding object.
         
         If 'fields_only' is specified in the initializer, then only the
@@ -3946,7 +3947,7 @@ class orm(orm_template):
             browse_cache = {self._name: {} }
             for r in res:
                 # pre-fill the cache with all data we have so far
-                browse_cache[self._name][r['id']] = r
+                browse_cache[self._name][r['id']] = r.copy()
             browse_records = browse_record_list( [ \
                     browse_record(cr, user, id, table=self, cache=browse_cache, context=context, fields_only=True)
                     for id in ids ])
@@ -3985,6 +3986,12 @@ class orm(orm_template):
                             record[f] = res2[record['id']]
                         else:
                             record[f] = []
+
+        reset_flds = [ f for f in self._inherits.values() if f not in fields_to_read]
+        if reset_flds:
+            for r in res:
+                for f in reset_flds:
+                    r.pop(f, None)
 
         if s_query and isinstance(order_by, pythonOrderBy):
             while order_by.needs_more():
