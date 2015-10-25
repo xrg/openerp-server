@@ -183,10 +183,10 @@ class object_proxy(netsvc.Service):
 
         return cr
 
-    def execute_cr(self, cr, uid, obj, method, *args, **kw):
-        object = pooler.get_pool(cr.dbname).get(obj)
+    def execute_cr(self, cr, uid, model_obj, method, *args, **kw):
+        object = pooler.get_pool(cr.dbname).get(model_obj)
         if not object:
-            raise except_osv('Object Error', 'Object %s doesn\'t exist' % str(obj))
+            raise except_osv('Object Error', 'Object %s doesn\'t exist' % str(model_obj))
         try:
             return getattr(object, method)(cr, uid, *args, **kw)
         except expr_utils.DomainError, err:
@@ -211,14 +211,14 @@ class object_proxy(netsvc.Service):
             raise
 
     @check
-    def execute(self, db, uid, obj, method, *args, **kw):
+    def execute(self, db, uid, model_obj, method, *args, **kw):
         cr = self._get_cr_auth(db, kw)
         try:
             if method.startswith('_'):
                 raise except_osv('Access Denied', 'Private methods (such as %s) cannot be called remotely.' % (method,))
-            res = self.execute_cr(cr, uid, obj, method, *args, **kw)
+            res = self.execute_cr(cr, uid, model_obj, method, *args, **kw)
             if res is None:
-                self.logger.warning('Method %s.%s can not return a None value (crash in XML-RPC)', obj, method)
+                self.logger.warning('Method %s.%s can not return a None value (crash in XML-RPC)', model_obj, method)
             cr.commit()
         except Exception:
             cr.rollback()
