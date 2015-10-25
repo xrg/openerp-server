@@ -558,6 +558,8 @@ class actions_server(osv.osv):
 
         return False
 
+    run_later = osv.defer(runk)
+
     def _run_client_action(self, cr, uid, action, model_obj, eval_ctx, context):
         if not action.action_id:
             raise osv.except_osv(_('Error'), _("Please specify an action to launch !"))
