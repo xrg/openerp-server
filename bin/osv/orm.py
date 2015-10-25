@@ -252,6 +252,8 @@ class browse_record_list(list):
     def __getattr__(self, method):
         """Create a callable for all objects in this list
         """
+        if method == '_ids':
+            return only_ids(self)
         if method.startswith('_'):
             raise AttributeError("Not allowed: " + method)
         if not len(self):
