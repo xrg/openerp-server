@@ -4,7 +4,7 @@
 #
 #    OpenERP, Open Source Management Solution
 #    Copyright (C) 2004-2009, Tiny SPRL (<http://tiny.be>).
-#    Copyright (C) 2008-2014, P. Christeas <xrg@hellug.gr>
+#    Copyright (C) 2008-2015, P. Christeas <xrg@hellug.gr>
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
