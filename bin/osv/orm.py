@@ -217,6 +217,13 @@ class browse_null(object):
         """
         return _psycopg.AsIs('NULL')
 
+    def __getstate__(self):
+        return {}
+
+    def __setstate__(self, dic):
+        """ There is no state, this object always has id=False
+        """
+        self.id = self._id = False
 #
 # TODO: execute an object method on browse_record_list
 #
