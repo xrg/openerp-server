@@ -211,7 +211,7 @@ class report_rml(report_int):
         obj = render.rml2txt(rml, localcontext, self.bin_datas)
         obj.set_page_limit(self._page_limit)
         obj.render()
-        return obj.get().encode('utf-8')
+        return obj.get().encode(tools.config.get_misc('rml2txt', 'encoding', 'utf-8'))
 
     def create_html2html(self, rml, localcontext = None, logo=None, title=None):
         obj = render.html2html(rml, localcontext, self.bin_datas)
