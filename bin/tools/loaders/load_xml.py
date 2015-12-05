@@ -1054,9 +1054,13 @@ class _tag_value(_TagService):
         """
         f_name = rec.get('name', False)
         f_model = rec.get("model", False)
-        if (not f_model) and f_name and parent_model  \
-                    and parent_model._columns.get(f_name,False):
-            f_model = parent_model._columns[f_name]._obj
+        f_col = None
+        if parent_model:
+            f_col = parent_model._columns.get(f_name, None)
+            if f_col is None:
+                f_col = parent_model._inherit_fields.get(f_name, (None, None, None))[2]
+            if (not f_model) and f_name and f_col:
+                f_model = f_col._obj
 
         if rec.get('search'):
             q = self.eval(rec.get('search'))
@@ -1071,8 +1075,12 @@ class _tag_value(_TagService):
             _cols = parent_model._columns
             f_use = rec.get('use', 'id')
             f_val = False
+            if not f_col:
+                self.parent.logger.warn("Value for non-existent field %s.%s specified", parent_model._name, f_name)
+            elif f_col.required and not len(s):
+                raise ValueError("No values found for %s.%s: %s=%r" %(parent_model._name, f_name, f_model, q))
             # if the current field is many2many
-            if (f_name in _cols) and _cols[f_name]._type=='many2many':
+            elif f_col and f_col._type=='many2many':
                 f_val = [(6, 0, map(lambda x: x[f_use], s))]
             elif len(s):
                 # otherwise (we are probably in a many2one field),
@@ -1084,8 +1092,7 @@ class _tag_value(_TagService):
             if f_ref == "null":
                 return False
             else:
-                if f_name in parent_model._columns \
-                            and parent_model._columns[f_name]._type == 'reference':
+                if f_col and f_col._type == 'reference':
                     val = self.parent.model_id_get(cr, f_ref)
                     return val[0] + ',' + str(val[1])
                 else:
