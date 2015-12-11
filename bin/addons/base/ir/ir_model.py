@@ -29,11 +29,16 @@ import ir
 import netsvc
 from osv.orm import except_orm, browse_record
 import tools
-from tools.safe_eval import safe_eval as eval
+from tools.safe_eval import safe_eval
 from tools import config
 from tools.translate import _
 from tools import sql_model
 import pooler
+
+def eval2(expr):
+    if not expr:
+        return False
+    return safe_eval(expr)
 
 def _get_fields_type(self, cr, uid, context=None):
     cr.execute('SELECT DISTINCT ttype,ttype FROM ir_model_fields')
@@ -264,7 +269,7 @@ class ir_model_fields(osv.osv):
 
     def _check_selection(self, cr, uid, selection, context=None):
         try:
-            selection_list = eval(selection)
+            selection_list = eval2(selection)
         except Exception:
             logging.getLogger('ir.model').warning('Invalid selection list definition for fields.selection', exc_info=True)
             raise except_orm(_('Error'),
@@ -362,14 +367,14 @@ class ir_model_fields(osv.osv):
             ('field_description', 'string', str),
             ('required', 'required', bool),
             ('readonly', 'readonly', bool),
-            ('domain', '_domain', eval),
+            ('domain', '_domain', eval2),
             ('size', 'size', int),
             ('on_delete', 'ondelete', str),
             ('translate', 'translate', bool),
             ('view_load', 'view_load', bool),
             ('selectable', 'selectable', bool),
             ('select_level', 'select', int),
-            ('selection', 'selection', eval),
+            ('selection', 'selection', eval2),
             ]
 
         if vals and ids:
@@ -385,7 +390,15 @@ class ir_model_fields(osv.osv):
                     for prop in ['name', 'model_id', 'ttype', 'relation', 'relation_field',
                         'size', 'selection', 'required', 'readonly', 'translate', 
                         'domain']:
-                            if prop in vals and getattr(item, prop) != vals[prop]:
+                            if not prop in vals:
+                                continue
+                            if (not vals[prop]) and not getattr(item, prop):
+                                # any Fals-y values should match!
+                                del vals[prop]
+                                continue
+                            if getattr(item, prop) != vals[prop]:
+                                logging.getLogger('init').warning("Trying to change field %s.%s / %s: %r=>%r",
+                                                                item.model, item.name, prop, getattr(item, prop), vals[prop])
                                 raise except_orm(_('Error!'),
                                     _('Properties of base fields cannot be set here! '
                                       'Please modify them through Python code, '
@@ -432,7 +445,7 @@ class ir_model_fields(osv.osv):
                     for vname, fprop, set_fn in model_props:
                         if vname in vals:
                             prop_val = set_fn(vals[vname])
-                            if getattr(obj._columns[item.name], fprop) != prop_val:
+                            if getattr(obj._columns[item.name], fprop, False) != prop_val:
                                 models[obj._name][1].append((final_name, fprop, prop_val))
                         # our dict is ready here, but no properties are changed so far
 

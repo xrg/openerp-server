@@ -794,6 +794,9 @@ class orm_template(object):
                 elif k in cols:
                     vals['select_level'] = cols[k]['select_level']
 
+            if vals['select_level'] is True or vals['select_level'] == 'True':
+                vals['select_level'] = '1'
+
             if k not in cols:
                 cr.execute("""INSERT INTO ir_model_fields (
                         model_id, model, name, field_description, ttype,
