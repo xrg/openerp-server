@@ -80,6 +80,7 @@ class ir_cron(osv.osv, netsvc.Agent):
             for this in self.browse(cr, uid, ids, context):
                 str2tuple(this.args)
         except Exception:
+            self._logger.debug("Cannot decode args string:", exc_info=True)
             return False
         return True
 
@@ -111,6 +112,7 @@ class ir_cron(osv.osv, netsvc.Agent):
         try:
             db, pool = pooler.get_db_and_pool(db_name)
         except Exception:
+            self._logger.warning("Cannot open database \"%s\", cron.poolJobs aborted", db_name)
             return False
         cr = db.cursor()
         try:
