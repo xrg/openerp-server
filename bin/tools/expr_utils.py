@@ -31,7 +31,7 @@
 from tools.translate import _
 import logging
 
-PG_MODES = ('pg94', 'pg93', 'pg92', 'pg91', 'pg90', 'pg84', 'pg00')
+PG_MODES = ('pg95', 'pg94', 'pg93', 'pg92', 'pg91', 'pg90', 'pg84', 'pg00')
 #PG84_MODES = ('pg93', 'pg92', 'pg91', 'pg90', 'pg84')
 #PG90_MODES = ('pg93', 'pg92', 'pg91', 'pg90')
 
