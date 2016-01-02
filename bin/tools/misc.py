@@ -1228,6 +1228,8 @@ def to_datetime(dt):
         return datetime.combine(dt, time_DT())
     elif isinstance(dt, xmlrpclib.DateTime):
         return datetime.strptime(dt.value, "%Y%m%dT%H:%M:%S")
+    elif dt == 'now':
+        return datetime.now()
     else:
         return datetime.strptime(dt[:19], DEFAULT_SERVER_DATETIME_FORMAT)
 
@@ -1240,6 +1242,8 @@ def to_date(dt):
         return dt
     elif isinstance(dt, xmlrpclib.DateTime):
         return datetime.strptime(dt.value, "%Y%m%dT%H:%M:%S").date()
+    elif dt == 'today':
+        return date_DT.today()
     else:
         return datetime.strptime(dt[:10], DEFAULT_SERVER_DATE_FORMAT).date()
 
