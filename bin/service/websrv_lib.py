@@ -805,7 +805,7 @@ class MultiHTTPHandler(FixSendError, HttpOptions, BaseHTTPRequestHandler):
                     break
                 elif isinstance(err.args, (list, tuple)) \
                         and isinstance(err.args[0], basestring) \
-                        and 'timed out' in err.args[0] or '[Errno 110]' in err.args[0]:
+                        and ('timed out' in err.args[0] or '[Errno 110]' in err.args[0]):
                     # sadly, the SSLError does not have some code or errno
                     pass
                 else:
