@@ -998,28 +998,8 @@ class ir_model_data(osv.osv):
         return True
 
     def ir_set(self, cr, uid, key, key2, name, models, value, replace=True, isobject=False, meta=None, xml_id=False):
-        if type(models[0])==type([]) or type(models[0])==type(()):
-            model,res_id = models[0]
-        else:
-            res_id=None
-            model = models[0]
-
-        if res_id:
-            where = ' and res_id=%s' % (res_id,)
-        else:
-            where = ' and (res_id is null)'
-
-        if key2:
-            where += ' and key2=\'%s\'' % (key2,)
-        else:
-            where += ' and (key2 is null)'
-
-        cr.execute('SELECT * FROM ir_values WHERE model=%s AND key=%s AND name=%s'+where,(model, key, name))
-        res = cr.fetchone()
-        if not res:
-            res = ir.ir_set(cr, uid, key, key2, name, models, value, replace, isobject, meta)
-        elif xml_id:
-            cr.execute('UPDATE ir_values set value=%s WHERE model=%s and key=%s and name=%s'+where,(value, model, key, name))
+        ir_values_obj = self.pool.get('ir.values')
+        ir_values_obj.set(cr, uid, key, key2, name, models, value, replace, isobject, meta)
         return True
 
     def _process_end(self, cr, uid, modules):
