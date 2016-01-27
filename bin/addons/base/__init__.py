@@ -142,12 +142,13 @@ class ExecContext_orm(ExecContext):
         # local import, don't influence module's import sequence
         from tools.date_eval import date_eval
         from datetime import timedelta
-        from tools.misc import to_date, to_datetime
+        from tools.misc import to_date, to_datetime, ustr
 
         context['date_eval'] = date_eval
         context['timedelta'] = timedelta
         context['to_date'] = to_date
         context['to_datetime'] = to_datetime
+        context['ustr'] = ustr
         context['uid'] = self._kwargs['uid']
         context['context'] = self._kwargs.get('context', {})
 
