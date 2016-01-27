@@ -219,7 +219,6 @@ class vptr_field(_column):
         This will expose some helper functions that allow smart operations on
         the _vptr.
     """
-    pass
 
     def _auto_init_sql(self, name, obj, schema_table, context=None):
         return None
