@@ -21,7 +21,7 @@
 
 from osv import osv,fields,index
 from osv.orm import except_orm
-import pickle
+from tools.misc import pickle
 from tools.translate import _
 
 EXCLUDED_FIELDS = set((

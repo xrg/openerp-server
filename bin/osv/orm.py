@@ -51,7 +51,6 @@ import warnings
 from operator import itemgetter
 from collections import defaultdict
 import itertools
-import pickle
 import re
 import time
 import types
@@ -72,6 +71,7 @@ from query import Query
 import tools
 from tools.safe_eval import safe_eval as eval
 from tools.expr_utils import DomainError
+from tools.misc import pickle
 
 # List of etree._Element subclasses that we choose to ignore when parsing XML.
 from tools import SKIPPED_ELEMENT_TYPES

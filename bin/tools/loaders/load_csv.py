@@ -21,12 +21,11 @@
 ##############################################################################
 
 import csv
-import pickle
 import os.path
 
 from tools.data_loaders import DataLoader
 from tools import config
-from tools.misc import ustr
+from tools.misc import ustr, pickle
 from tools.translate import _
 
 #.apidoc title: CSV data loader
