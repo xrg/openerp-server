@@ -83,6 +83,14 @@ class _pool_actor_orm:
     def __call__(self, model):
         return _pool_actor_orm._ORMProxy(self._parent, model)
 
+    def error(self, title, msg, *args):
+        """Explicitly raise exception from sandbox
+        """
+        from osv import orm
+        if args:
+            msg = msg % args
+        raise orm.except_orm(title, msg)
+
     class _ORMProxy:
         def __init__(self, parent, model):
             """Dummy object representing an ORM model.
