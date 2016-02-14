@@ -1230,6 +1230,8 @@ def to_datetime(dt):
         return datetime.strptime(dt.value, "%Y%m%dT%H:%M:%S")
     elif dt == 'now':
         return datetime.now()
+    elif isinstance(dt, (int, long)):
+        return datetime.fromtimestamp(dt)
     else:
         return datetime.strptime(dt[:19], DEFAULT_SERVER_DATETIME_FORMAT)
 
